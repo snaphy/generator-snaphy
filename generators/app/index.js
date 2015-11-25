@@ -7,7 +7,7 @@ var util = require('util');
 var mkdirp = require('mkdirp');
 
 module.exports = yeoman.generators.Base.extend({
-  prompting: function () {
+  prompting: function() {
     var done = this.async();
 
     // Have Yeoman greet the user.
@@ -19,44 +19,53 @@ module.exports = yeoman.generators.Base.extend({
       type: 'input',
       name: 'applicationName',
       message: 'What will be the name of your Application?',
-      default: "snaphyDemo"
-      validate: function(input){
+      default: "snaphyDemo",
+      validate: function(input) {
+        // Declare function as asynchronous, and save the done callback
+        var done = this.async();
         //trim the input
         input = input.trim();
-        var validationRule = /^\S{3,}$/;
-        validationRule.trim
-      
-      }//validate
-    },
-    {
+        var validationRule = /^[a-zA-Z_0-9]{3,}$/;
+        var response = validationRule.test(input);
+        if (response) {
+          done(true);
+        } else {
+          done(chalk.red('Error:') + ' Spaces and special characters are not allowed!');
+        }
+      } //validate
+    }, {
       type: 'input',
       name: 'applicationTitle',
       message: 'A short title for your Application',
       default: "Welcome to Snaphy"
     }];
 
-    this.prompt(prompts, function (props) {
+    this.prompt(prompts, function(props) {
       this.props = props;
       // To access props later use this.props.someOption;
-      //Now create a folder based
+      //Now create a folder 
+      mkdirp(this.props.applicationName);
+      var elementDir = process.cwd() + '/' + this.props.applicationName;
+      process.chdir(elementDir);
+      console.info('\nDone! \nNow type ' + chalk.red('$ cd ' + this.props.applicationName + ' && slc run' ) + ' to start the application\n\n');
 
       done();
     }.bind(this));
   },
 
-  writing: function () {
+  /* writing: function () {
     this.fs.copy(
       this.templatePath('dummyfile.txt'),
       this.destinationPath('dummyfile.txt')
     );
-  },
+  },*/
 
   projectfiles: function() {
     this.copy('_package.json', 'package.json');
     this.copy('_Gruntfile.js', 'Gruntfile.js');
     //Copy all of the bower specific files.
-    this.copy('bowerrc', '.bowerrc');
-    this.copy('_bower.json', 'bower.json');
+    //this.copy('bowerrc', '.bowerrc');
+    //this.copy('_bower.json', 'bower.json');
     //Copy all files that handle code editing.
     this.copy('editorconfig', '.editorconfig');
     this.copy('jshintrc', '.jshintrc');
@@ -66,7 +75,7 @@ module.exports = yeoman.generators.Base.extend({
     //Copy files for Travis CI.
     this.copy('travis.yml', '.travis.yml');
   },
-  
+
   app: function() {
     mkdirp('server');
     mkdirp('common');
@@ -75,7 +84,7 @@ module.exports = yeoman.generators.Base.extend({
     mkdirp('common/helper');
     mkdirp('common/models');
     mkdirp('common/plugins');
-
+    
     this.copy('server/config.json', 'server/config.json');
     this.copy('server/datasources.json', 'server/datasources.json');
     this.copy('server/middleware.json', 'server/middleware.json');
@@ -89,7 +98,7 @@ module.exports = yeoman.generators.Base.extend({
     this.copy('common/helper/index.js', 'common/helper/index.js');
   },
 
-  install: function () {
+  install: function() {
     this.installDependencies();
   }
 });
