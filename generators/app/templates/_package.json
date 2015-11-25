@@ -1,7 +1,7 @@
 {
-  "name": "snaphyBackend",
-  "title": "Snaphy Demo website",
-  "angularModuleName": "templateAdminApp",
+  "name": "<%= props.applicationName %>",
+  "title": "<%= props.applicationTitle %>",
+  "angularModuleName": "<%= props.applicationName %>",
   "author": "Robins Gupta",
   "version": "1.0.0",
   "main": "server/server.js",
@@ -29,5 +29,5 @@
     "type": "",
     "url": ""
   },
-  "description": "snaphyBackend"
+  "description": "<%= props.applicationTitle %>"
 }
