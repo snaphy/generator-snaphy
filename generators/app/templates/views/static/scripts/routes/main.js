@@ -5,10 +5,9 @@
 
 angular.module($snaphy.getModuleName())
 
-.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider', 'cfpLoadingBarProvider',
-    function ($locationProvider, $stateProvider, $urlRouterProvider, $httpProvider, cfpLoadingBarProvider) {
+.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider',
+    function ($locationProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
   $locationProvider.html5Mode(false);
-  cfpLoadingBarProvider.includeSpinner = false;
 
   $urlRouterProvider.otherwise('/');
 
@@ -17,7 +16,7 @@ angular.module($snaphy.getModuleName())
     .state('home', {
         url: '/',
         templateUrl: 'static/views/main.html',
-        controller: 'MainCtrl',
+        controller: 'MainCtrl'
 
     });
 
