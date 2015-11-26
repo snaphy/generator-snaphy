@@ -5,7 +5,7 @@ module.exports = function(server) {
 
 
   //Now setting up the static files..
-  server.use('/static', loopback.static(__dirname + '/../../.views/app/static'));
+  server.use('/static', loopback.static(__dirname + '/../../.views/static'));
   // set the view engine to ejs
   server.set('view engine', 'ejs');
 
@@ -79,9 +79,9 @@ module.exports = function(server) {
     };
     data = loadPluginsData(data);
     data = loadAppData(data);
-    console.log( data);
+    //console.log( data);
 
-    res.render('app/index', data);
+    res.render('index', data);
   });
 
 
