@@ -2,7 +2,10 @@
 
 module.exports = function(server) {
   var loopback = require('loopback');
-  var MAIN_PLUGIN_FOLDER = __dirname + "/../plugins";
+  //Getting the main root package file of the server..
+  var mainPackageObj = require(__dirname + '/../../package.json');
+  //Now getting the plugin path with respect to package.json
+  var MAIN_PLUGIN_FOLDER = __dirname + "/../../" + mainPackageObj.pluginPath;
   var helper = {};
 
 	var fs = require('fs'),

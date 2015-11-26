@@ -1,0 +1,34 @@
+{
+  "name": "<%= props.pluginName %>",
+  "version": "1.0.0",
+  "description": "<%= props.pluginTitle %>",
+  "author": "<%= props.authorName %>",
+  "authorEmail": "<%= props.authorEmail %>",
+  "routeExposure": "<%= props.routeExposure %>",
+  "staticFiles": {
+    "css": [],
+    "js": []
+  },
+  "moduleDependencies": [
+   
+  ],
+  "defaultTemplate": "<%= props.defaultTemplate %>",
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [],
+    "headerHook": []
+  },
+  "databases": {
+  },
+  "activate": true,
+  "services": {},
+  "dependencies": {},
+  "optionalDependencies": {},
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "devDependencies": {
+   
+  }
+}

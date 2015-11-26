@@ -135,4 +135,7 @@ module.exports = yeoman.generators.Base.extend({
   install: function() {
     this.installDependencies();
   }
+
+
+  //TODO Write test for the generator.
 });

@@ -30,5 +30,6 @@
     "type": "",
     "url": ""
   },
-  "description": "<%= props.applicationTitle %>"
+  "description": "<%= props.applicationTitle %>",
+  "pluginPath": "common/plugins"
 }
