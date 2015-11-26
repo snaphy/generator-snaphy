@@ -11,6 +11,7 @@
   "files": [
     "generators"
   ],
+  "preferGlobal": true,
   "main": "generators/index.js",
   "keywords": [
     "yeoman-generator"
