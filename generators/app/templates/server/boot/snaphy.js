@@ -1,7 +1,9 @@
 'use strict';
 module.exports = function(server) {
+  var chalk = require('chalk');
   var loopback = require('loopback');
   var helper   = require(__dirname + '/../../common/helper')(server);
+  var config   = require(__dirname + '/../config.json');
 
 
   //Now setting up the static files..
@@ -64,7 +66,7 @@ module.exports = function(server) {
 
   //Now render the index page..
   // index page
-  server.get('/admin', function(req, res) {
+  server.get(config.adminApiRoot, function(req, res) {
     //Read the main package file..
     var data = {
       title: 'SNAPHY ADMIN CONSOLE',
@@ -82,9 +84,8 @@ module.exports = function(server) {
     //console.log( data);
 
     res.render('index', data);
+
   });
-
-
-
+  console.log("Explore admin console at " + chalk.red( config.host + '' + config.adminApiRoot));
 
 };
