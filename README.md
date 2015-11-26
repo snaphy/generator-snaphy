@@ -1,4 +1,4 @@
-# generator-snaphy [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# generator-snaphy [![NPM version][npm-image]][npm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 > Web application framework written in Node.js for rapid prototyping of web backend console.
 
 ## Installation
@@ -23,4 +23,7 @@ Yeoman has a heart of gold. He&#39;s a person with feelings and opinions, but he
 ## License
 
 MIT © [Robins Gupta]()
-
+[npm-image]: https://badge.fury.io/js/generator-snaphy.svg
+[npm-url]: https://npmjs.org/package/generator-snaphy
+[coveralls-image]: https://coveralls.io/repos/snaphy/generator-snaphy/badge.svg
+[coveralls-url]: https://coveralls.io/r/snaphy/generator-snaphy
