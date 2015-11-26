@@ -24,8 +24,3 @@ Yeoman has a heart of gold. He&#39;s a person with feelings and opinions, but he
 
 MIT © [Robins Gupta]()
 
-
-[npm-image]: https://badge.fury.io/js/generator-snaphy.svg
-[npm-url]: https://npmjs.org/package/generator-snaphy
-[coveralls-image]: https://coveralls.io/repos/snaphy/generator-snaphy/badge.svg
-[coveralls-url]: https://coveralls.io/r/snaphy/generator-snaphy
