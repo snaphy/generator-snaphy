@@ -86,6 +86,9 @@ module.exports = function(server) {
     res.render('index', data);
 
   });
-  console.log("Explore admin console at " + chalk.cyan("http://" +  config.host + ':' + config.port + config.adminApiRoot));
+ server.once('started', function() {
+    console.log("Explore admin console at " + chalk.cyan("http://" +  config.host + ':' + config.port + config.adminApiRoot));
+  });
+ 
 
 };
