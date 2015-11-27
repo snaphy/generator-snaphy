@@ -48,9 +48,10 @@ module.exports = function(server) {
             //data.pluginScripts = data.pluginScripts.concat(packageObj.staticFiles.js);
           }
 
+        
           //Load module dependencies..
-          if(packageObj.moduleDependencies){
-            data.moduleDependencies = concatObject(packageObj.moduleDependencies, data.moduleDependencies);
+          if(packageObj.staticFiles.moduleDependencies){
+            data.moduleDependencies = concatObject(packageObj.staticFiles.moduleDependencies, data.moduleDependencies);
             //OLD Method
             //data.moduleDependencies = data.moduleDependencies.concat(packageObj.moduleDependencies);
           }

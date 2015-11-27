@@ -266,13 +266,13 @@
             'ui.router'
 
             /*Adding the runtime modules added from plugins*/
-            <% if(moduleDependencies.length){ %>
-	            <% for (var angularModules in moduleDependencies) {
-				  if (moduleDependencies.hasOwnProperty(angularModules)) { %>
-				   ,'<%=   angularModules   %>'
-				  <%}
-				}%>
-			 <%} %>
+            
+            <% for (var angularModules in moduleDependencies) {
+			  if (moduleDependencies.hasOwnProperty(angularModules)) { %>
+			   ,'<%=   angularModules   %>'
+			  <%}
+			}%>
+		 
           ]);
 
         //TODO Move this to seperate file include file of EJS template later.
