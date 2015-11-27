@@ -132,23 +132,27 @@ module.exports = yeoman.generators.Base.extend({
     ];
 
     this.prompt(prompts, function (props) {
-    	this.props = props;
-    	   //console.log("Main plugin paths");
-         //console.log(rootPath);
-         //console.log(rootPath + '/' +this.props.pluginName);
-      	//Now create a the plugins folder 
-      	mkdirp(this.props.pluginName);
-      	process.chdir(rootPath + '/' + this.props.pluginName);
-        //console.log(this.props.pluginName);
+  	   this.props = props;
+  	   //console.log("Main plugin paths");
+       //console.log(rootPath);
+       //console.log(rootPath + '/' +this.props.pluginName);
+    	//Now create a the plugins folder 
+    	var that = this;
+      mkdirp(this.props.pluginName, function (err) {
+        if (err) throw err;
+        process.chdir(rootPath + '/' + that.props.pluginName);
+        console.info('\nDone! \nUse ' + chalk.red('' + that.props.pluginName + '/client') + ' folder to design the User Interface.\nUse ' + chalk.red('' + that.props.pluginName + '/backend') + ' folder to write the backend logic!.\n\n' );
+        done();
+      });
+    	
+      //console.log(this.props.pluginName);
       /*	try{
-      		
-      	}catch(err){
-      		//Do nothing
-      	}*/
-      	
-      	console.info('\nDone! \nUse ' + chalk.red('' + this.props.pluginName + '/client') + ' folder to design the User Interface.\nUse ' + chalk.red('' + this.props.pluginName + '/backend') + ' folder to write the backend logic!.\n\n' );
-
-      	done();
+    		
+    	}catch(err){
+    		//Do nothing
+    	}*/
+    	
+    	
     }.bind(this));
   },
 
