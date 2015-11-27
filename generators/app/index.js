@@ -55,20 +55,20 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   writing: function() {
-    mkdirp('server');
-    mkdirp('common');
-    mkdirp('.views');
-    mkdirp('server/boot');
-    mkdirp('common/helper');
-    mkdirp('common/models');
-    mkdirp('common/plugins');
+    mkdirp.sync('server');
+    mkdirp.sync('common');
+    mkdirp.sync('.views');
+    mkdirp.sync('server/boot');
+    mkdirp.sync('common/helper');
+    mkdirp.sync('common/models');
+    mkdirp.sync('common/plugins');
 
-    mkdirp('.views/static');
-    mkdirp('.views/static/assets');
-    mkdirp('.views/static/audio');
-    mkdirp('.views/static/images');
-    mkdirp('.views/static/scripts');
-    mkdirp('.views/static/views');
+    mkdirp.sync('.views/static');
+    mkdirp.sync('.views/static/assets');
+    mkdirp.sync('.views/static/audio');
+    mkdirp.sync('.views/static/images');
+    mkdirp.sync('.views/static/scripts');
+    mkdirp.sync('.views/static/views');
 
 
     //This is the new way..
@@ -106,6 +106,7 @@ module.exports = yeoman.generators.Base.extend({
 
     this.copy('common/helper/index.js', 'common/helper/index.js');
 
+
   },
 
   projectfiles: function() {
@@ -122,6 +123,7 @@ module.exports = yeoman.generators.Base.extend({
     this.copy('gitattributes', '.gitattributes');
     //Copy files for Travis CI.
     this.copy('travis.yml', '.travis.yml');
+    this.copy('README.md', 'README.md');
   },
 
 

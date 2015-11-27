@@ -163,29 +163,34 @@ module.exports = yeoman.generators.Base.extend({
       this.destinationPath('backend')
     );
 
-    mkdirp('client');
-    //Now add folders to client based ..
-    //This is the new way..
-    this.fs.copy(
-      this.templatePath('client/style'),
-      this.destinationPath('client/style')
-    );
+    mkdirp('client', function(){
+      //Now add folders to client based ..
+      //This is the new way..
+      this.fs.copy(
+        this.templatePath('client/style'),
+        this.destinationPath('client/style')
+      );
 
-    //Copying with templating..
-    this.directory('client/scripts', 'client/scripts')
-    this.directory('client/views', 'client/views')
-    
+      this.fs.copy(
+        this.templatePath('database-format'),
+        this.destinationPath('database-format')
+      );
 
-    console.info(chalk.red('TODO') + ' Work needs to be done for default Template.' );
-    //Now choose the scaffolding according to the defaultTemplate option
-    if(this.props.defaultTemplate){
-    	//Use hooks here
+      //Copying with templating..
+      this.directory('client/scripts', 'client/scripts')
+      this.directory('client/views', 'client/views')
+      
 
-    }else{
-    	//Provide the angular scaffolding here..
+      console.info(chalk.red('TODO') + ' Work needs to be done for default Template.' );
+      //Now choose the scaffolding according to the defaultTemplate option
+      if(this.props.defaultTemplate){
+        //Use hooks here
 
-    }
+      }else{
+        //Provide the angular scaffolding here..
 
+      }
+    });//mkdirp
   },
 
   projectfiles: function() {
