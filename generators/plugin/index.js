@@ -133,18 +133,18 @@ module.exports = yeoman.generators.Base.extend({
 
     this.prompt(prompts, function (props) {
     	this.props = props;
-    	   console.log("Main plugin paths");
-         console.log(rootPath);
-         console.log(rootPath + '/' +this.props.pluginName);
+    	   //console.log("Main plugin paths");
+         //console.log(rootPath);
+         //console.log(rootPath + '/' +this.props.pluginName);
       	//Now create a the plugins folder 
       	mkdirp(this.props.pluginName);
       	process.chdir(rootPath + '/' + this.props.pluginName);
         //console.log(this.props.pluginName);
-      	try{
+      /*	try{
       		
       	}catch(err){
       		//Do nothing
-      	}
+      	}*/
       	
       	console.info('\nDone! \nUse ' + chalk.red('' + this.props.pluginName + '/client') + ' folder to design the User Interface.\nUse ' + chalk.red('' + this.props.pluginName + '/backend') + ' folder to write the backend logic!.\n\n' );
 
@@ -160,7 +160,6 @@ module.exports = yeoman.generators.Base.extend({
     );
 
     mkdirp('client');
-    mkdirp('views');
     //Now add folders to client based ..
     //This is the new way..
     this.fs.copy(

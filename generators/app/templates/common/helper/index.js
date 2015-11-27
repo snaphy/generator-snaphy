@@ -2,14 +2,14 @@
 
 module.exports = function(server) {
   var loopback = require('loopback');
+  var chalk     = require('chalk');
   //Getting the main root package file of the server..
   var mainPackageObj = require(__dirname + '/../../package.json');
   //Now getting the plugin path with respect to package.json
   var MAIN_PLUGIN_FOLDER = __dirname + "/../../" + mainPackageObj.pluginPath;
   var helper = {};
-
-	var fs = require('fs'),
-		path = require('path');
+  var fs = require('fs'),
+    path = require('path');
 
   /**
     * Method for getting all the directores
@@ -17,10 +17,10 @@ module.exports = function(server) {
     * @return {array}           [Array of directories names retrived]
     */
    function getDirectories(srcpath) {
-		return fs.readdirSync(srcpath).filter(function(file) {
-			return fs.statSync(path.join(srcpath, file)).isDirectory();
-		});
-	}
+    return fs.readdirSync(srcpath).filter(function(file) {
+      return fs.statSync(path.join(srcpath, file)).isDirectory();
+    });
+  }
 
 
   /**
@@ -89,14 +89,14 @@ module.exports = function(server) {
     var packageObj = readPackageJsonFile(pluginPath);
     if( packageObj.activate ){
       try{
-        if(packageObj.staticFiles.css.length || packageObj.staticFiles.js.length || packageObj.moduleDependencies.length){
+        if(packageObj.staticFiles.css || packageObj.staticFiles.js || packageObj.moduleDependencies){
           var rootExposure =  packageObj.routeExposure || packageObj.name;
           //Now load it static route..
           setStaticRoute(server, rootExposure, packageObj.name, pluginContainerPath);
         }
       }catch (err){
         //Do nothing in this case
-        console.log("Error occured in the exposing plugin " + pluginName + " . Please edit info in package.json for property staticFiles carefully");
+        console.log(chalk.red(" >> Error: ") + "In exposing plugin " + pluginName + " . Please edit info in package.json for property staticFiles carefully");
       }
 
 
@@ -116,6 +116,7 @@ module.exports = function(server) {
 
   //This function is called on function load.
   var loadPlugins = function(){
+    console.log("Loading this plugin");
     var pluginContainerPath = MAIN_PLUGIN_FOLDER;
     var pluginList = getDirectories(pluginContainerPath);
     var i;
