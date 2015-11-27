@@ -54,8 +54,8 @@
         <!-- build:css(.tmp) styles/main.css -->
         <!-- MY STYLE PLACED HERE-->
         <!--Now loop to get all required plugins css from the server.-->
-        <% pluginStyles.forEach(function(pluginStyle) { %>
-        <link rel="stylesheet"  href="<%= pluginStyle %>">
+        <% pluginStyles.forEach(function(style) { %>
+        <link rel="stylesheet"  href="<%= pluginStyles[style] %>">
         <% }); %>
 
 
@@ -242,7 +242,7 @@
 
         <!--Adding the runtime angular depedencies scripts added at runtime-->
         <% moduleDependencies.forEach(function(angularModules) { %>
-        <script src="<%= angularModules.moduleLink %>"></script>
+        <script src="<%= moduleDependencies[angularModules] %>"></script>
         <% }); %>
 
         <script>
@@ -264,7 +264,7 @@
             /*Adding the runtime modules added from plugins*/
             <% if(moduleDependencies.length){ %>
             <%   moduleDependencies.forEach(function(angularModules) { %>
-              ,'<%=   angularModules.moduleName   %>'
+              ,'<%=   angularModules   %>'
             <% });%>
             <%  } %>
           ]);
@@ -289,8 +289,8 @@
         <script src="static/scripts/routes/main.js"></script>
         <script src="static/scripts/controllers/main.js"></script>
         <script src="static/scripts/directives/templateLoad.js"></script>
-        <% pluginScript.forEach(function(pluginScript) { %>
-        <script src="<%= pluginScript %>"></script>
+        <% pluginScripts.forEach(function(script) { %>
+        <script src="<%= pluginScripts[script] %>"></script>
         <% }); %>
         <!-- endbuild -->
     </body>

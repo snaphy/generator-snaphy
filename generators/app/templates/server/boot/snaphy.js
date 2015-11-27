@@ -11,6 +11,19 @@ module.exports = function(server) {
   // set the view engine to ejs
   server.set('view engine', 'ejs');
 
+
+  //Adding properties to an object..
+  var concatObject = function(targetObj, containerObj){
+    for (var property in targetObj) {
+        if (targetObj.hasOwnProperty(property)) {
+            // do stuff
+            //Add its property and its values..
+            containerObj[property] = targetObj[property];
+        }
+    }
+    return containerObj;
+  }
+
   //Load the required plugins script and styles in the memory..
   var loadPluginsData = function(data){
     var i;
@@ -24,18 +37,22 @@ module.exports = function(server) {
         //If the plugin has declared staticFiles
         if(packageObj.staticFiles) {
           if (packageObj.staticFiles.css) {
-            var pluginStylesObj = {};
-            
-            data.pluginStyles = data.pluginStyles.concat(packageObj.staticFiles.css);
+            data.pluginStyles = concatObject(packageObj.staticFiles.css, data.pluginStyles);
+            //OLD METHOD
+            //data.pluginStyles = data.pluginStyles.concat(packageObj.staticFiles.css);
           }
 
           if (packageObj.staticFiles.js) {
-            data.pluginScript = data.pluginScript.concat(packageObj.staticFiles.js);
+            data.pluginScripts = concatObject(packageObj.staticFiles.js, data.pluginScripts);
+            //OLD METHOD
+            //data.pluginScripts = data.pluginScripts.concat(packageObj.staticFiles.js);
           }
 
           //Load module dependencies..
-          if(packageObj.moduleDependencies.length){
-            data.moduleDependencies = data.moduleDependencies.concat(packageObj.moduleDependencies);
+          if(packageObj.moduleDependencies){
+            data.moduleDependencies = concatObject(packageObj.moduleDependencies, data.moduleDependencies);
+            //OLD Method
+            //data.moduleDependencies = data.moduleDependencies.concat(packageObj.moduleDependencies);
           }
 
           //Now getting the html templates...hooks..
@@ -71,12 +88,12 @@ module.exports = function(server) {
   server.get(config.adminApiRoot, function(req, res) {
     //Read the main package file..
     var data = {
-      title: 'SNAPHY ADMIN CONSOLE',
-      author: 'ROBINS GUPTA',
-      description: 'Console by Snaphy',
-      pluginStyles:[],
-      pluginScript: [],
-      moduleDependencies:[],
+      title: '',
+      author: '',
+      description: '',
+      pluginStyles:{},
+      pluginScripts: {},
+      moduleDependencies:{},
       asidebarHook:[],
       sidebarHook:[],
       headerHook:[]
