@@ -136,9 +136,14 @@ module.exports = yeoman.generators.Base.extend({
     	
       	//Now create a the plugins folder 
       	mkdirp(this.props.pluginName);
-      	//console.log(this.props.pluginName);
-      	process.chdir(this.props.pluginName);
-      	console.info('\nDone! \nUse ' + chalk.red('' + this.props.pluginName + '/client') + ' folder to design the User Interface.\nUse ' + chalk.red('' + this.props.pluginName + '/backend') + ' folder to write the backend logic!.' );
+      	console.log(this.props.pluginName);
+      	try{
+      		process.chdir(this.props.pluginName);
+      	}catch(err){
+      		//Do nothing
+      	}
+      	
+      	console.info('\nDone! \nUse ' + chalk.red('' + this.props.pluginName + '/client') + ' folder to design the User Interface.\nUse ' + chalk.red('' + this.props.pluginName + '/backend') + ' folder to write the backend logic!.\n\n' );
 
       	done();
     }.bind(this));
