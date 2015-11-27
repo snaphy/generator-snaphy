@@ -163,34 +163,35 @@ module.exports = yeoman.generators.Base.extend({
       this.destinationPath('backend')
     );
 
+    var that = this;
     mkdirp('client', function(){
       //Now add folders to client based ..
       //This is the new way..
-      this.fs.copy(
-        this.templatePath('client/style'),
-        this.destinationPath('client/style')
+      that.fs.copy(
+        that.templatePath('client/style'),
+        that.destinationPath('client/style')
       );
 
-      this.fs.copy(
-        this.templatePath('database-format'),
-        this.destinationPath('database-format')
+      that.fs.copy(
+        that.templatePath('database-format'),
+        that.destinationPath('database-format')
       );
 
-      //Copying with templating..
-      this.directory('client/scripts', 'client/scripts')
-      this.directory('client/views', 'client/views')
+        //Copying with templating..
+      that.directory('client/scripts', 'client/scripts')
+      that.directory('client/views', 'client/views')
       
 
-      console.info(chalk.red('TODO') + ' Work needs to be done for default Template.' );
+        console.info(chalk.red('TODO') + ' Work needs to be done for default Template.' );
       //Now choose the scaffolding according to the defaultTemplate option
-      if(this.props.defaultTemplate){
-        //Use hooks here
+      if(that.props.defaultTemplate){
+        //Us e hooks here
 
-      }else{
+       }else{
         //Provide the angular scaffolding here..
 
       }
-    });//mkdirp
+    });//mkdirp function..
   },
 
   projectfiles: function() {

@@ -44,7 +44,7 @@ module.exports = yeoman.generators.Base.extend({
       this.props = props;
       // To access props later use this.props.someOption;
       //Now create a folder 
-      mkdirp(this.props.applicationName);
+      mkdirp.sync(this.props.applicationName);
       var elementDir = process.cwd() + '/' + this.props.applicationName;
       process.chdir(elementDir);
 
