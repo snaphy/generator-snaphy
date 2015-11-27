@@ -24,6 +24,8 @@ module.exports = function(server) {
         //If the plugin has declared staticFiles
         if(packageObj.staticFiles) {
           if (packageObj.staticFiles.css) {
+            var pluginStylesObj = {};
+            
             data.pluginStyles = data.pluginStyles.concat(packageObj.staticFiles.css);
           }
 

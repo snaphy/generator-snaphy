@@ -121,12 +121,14 @@ module.exports = yeoman.generators.Base.extend({
         } else {
           done(chalk.red('Error:') + ' please provide a correct email!');
         }
+       }//validate function
       },
       {
       type: 'confirm',
       name: 'defaultTemplate',
       message: 'Should we proceed with the ' + chalk.red('default template') +  ' design? ',
       default: true
+      }
     ];
 
     this.prompt(prompts, function (props) {
@@ -134,8 +136,9 @@ module.exports = yeoman.generators.Base.extend({
     	
       	//Now create a the plugins folder 
       	mkdirp(this.props.pluginName);
-      	process.chdir(rootPath + this.props.pluginName);
-      	console.info('\nDone! \nNow use ' + chalk.red('' + this.props.pluginName + '/client') + ' folder to design the User Interface.\n Use ' + chalk.red('' + this.props.pluginName + '/backend') + ' folder to write the backend logic!.' );
+      	//console.log(this.props.pluginName);
+      	process.chdir(this.props.pluginName);
+      	console.info('\nDone! \nUse ' + chalk.red('' + this.props.pluginName + '/client') + ' folder to design the User Interface.\nUse ' + chalk.red('' + this.props.pluginName + '/backend') + ' folder to write the backend logic!.' );
 
       	done();
     }.bind(this));
@@ -159,7 +162,7 @@ module.exports = yeoman.generators.Base.extend({
 
     //Copying with templating..
     this.directory('client/scripts', 'client/scripts')
-    this.directory('client/views/example.html', 'client/views/example.html')
+    this.directory('client/views', 'client/views')
     
 
     console.info(chalk.red('TODO') + ' Work needs to be done for default Template.' );
