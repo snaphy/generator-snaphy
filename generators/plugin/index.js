@@ -10,6 +10,42 @@ function validateEmail(email) {
     return re.test(email);
 }
 
+//Check the path of the main file..
+var checkFilePath = function(path){
+	return fs.existsSync(rootPath)
+}
+
+
+var rootPath = process.cwd() + '/' ;
+
+function checkDirectory(){
+  	var packageObj;
+  	//TODO Run a loop to facilitate running of plugin from any folder.
+  	if(!checkFilePath(rootPath + "package.json")){
+  		//Traverse back a little..
+  		rootPath = process.cwd() + '/../' ;
+  		if(!checkFilePath(rootPath + "package.json")){
+  			throw chalk.red('>>Error:') + ' Cannot found the main ' + chalk.cyan('package.json') + ' file. \nPlease run it from the main root directory';
+  		}
+  	}//if
+
+	//Now check if the package has pluginPath set..
+	packageObj = require(rootPath +  "package.json");
+	if(!packageObj.pluginPath){
+		throw chalk.red('>>Error:') + ' Cannot found the `pluginPath` entry in  ' + chalk.cyan('package.json') + ' file.\nPlease run it from the main root directory';
+	
+	}
+
+  	//Now change the directory to the pluginPath
+  	rootPath = rootPath + packageObj.pluginPath;
+  	process.chdir(rootPath);
+}
+
+
+//Exectue the function
+checkDirectory();
+		
+
 module.exports = yeoman.generators.Base.extend({
   prompting: function () {
     var done = this.async();
@@ -96,45 +132,56 @@ module.exports = yeoman.generators.Base.extend({
     this.prompt(prompts, function (props) {
     	this.props = props;
     	
-
-      	//Now create a folder 
+      	//Now create a the plugins folder 
       	mkdirp(this.props.pluginName);
-      	var rootPath = process.cwd() + '/' ;
-      	//Check the path of the main file..
-      	var checkFilePath = function(path){
-      		return fs.existsSync(rootPath)
-      	}
-
-      	//TODO Run a loop to facilitate running of plugin from any folder.
-      	if(!checkFilePath(rootPath + "package.json")){
-      		//Traverse back a little..
-      		rootPath = process.cwd() + '/../' ;
-      		if(!checkFilePath(rootPath + "package.json")){
-      			console.error(chalk.red('>>Error:') + ' Cannot found the root directory. Please run it from the main root directory');
-      		}else{
-      			//Now check if the package has pluginPath set..
-      			var packageObj = require(rootPath +  "package.json");
-      		}
-      	}
-
-
-
-
-
-
-      	process.chdir(elementDir);
-
-      	this.log(yosay('\nDone! \nNow type ' + chalk.red('$ cd ' + this.props.applicationName + ' && slc run') + ' to start the application\n\n'));
+      	process.chdir(rootPath + this.props.pluginName);
+      	console.info('\nDone! \nNow use ' + chalk.red('' + this.props.pluginName + '/client') + ' folder to design the User Interface.\n Use ' + chalk.red('' + this.props.pluginName + '/backend') + ' folder to write the backend logic!.' );
 
       	done();
     }.bind(this));
   },
 
   writing: function () {
+    //This is the new way..
     this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
+      this.templatePath('backend'),
+      this.destinationPath('backend')
     );
+
+    mkdirp('client');
+    mkdirp('views');
+    //Now add folders to client based ..
+    //This is the new way..
+    this.fs.copy(
+      this.templatePath('client/style'),
+      this.destinationPath('client/style')
+    );
+
+    //Copying with templating..
+    this.directory('client/scripts', 'client/scripts')
+    this.directory('client/views/example.html', 'client/views/example.html')
+    
+
+    console.info(chalk.red('TODO') + ' Work needs to be done for default Template.' );
+    //Now choose the scaffolding according to the defaultTemplate option
+    if(this.props.defaultTemplate){
+    	//Use hooks here
+
+    }else{
+    	//Provide the angular scaffolding here..
+
+    }
+
+  },
+
+  projectfiles: function() {
+    this.copy('_package.json', 'package.json');
+    //Copy all of the bower specific files.
+    this.copy('bowerrc', '.bowerrc');
+    this.copy('_bower.json', 'bower.json');
+    //Copy all files that handle git repositorys
+    this.copy('gitignore', '.gitignore');
+    this.copy('readMe.md', 'readMe.md');
   },
 
   install: function () {

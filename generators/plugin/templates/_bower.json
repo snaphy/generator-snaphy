@@ -1,5 +1,5 @@
 {
-  "name": "<%= props.applicationName %>",
+  "name": "<%= props.pluginName %>",
   "version": "1.0.0",
   "dependencies": {
   
@@ -8,5 +8,5 @@
     
   },
   "appPath": "client",
-  "moduleName": "<%= props.applicationName %>"
+  "moduleName": "<%= props.pluginName %>"
 }
