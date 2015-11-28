@@ -22,7 +22,8 @@
   "bodystructure": {
     "asidebarHook": [],
     "sidebarHook": [],
-    "headerHook": []
+    "headerHook": [],
+    "footerHook":[]
   },
   "databases": {
   },
