@@ -8,11 +8,11 @@
   "routeExposure": "/dashboard",
   "staticFiles": {
     "css": {
-        "exampleCss" : "/dashboard/style/example.css"
+        "exampleCss" : "/dashboard/style/dashboard.css"
       },
     "js": {
       "dashboardRoute": "/dashboard/scripts/routes/dashboard.js",
-      "dashboardController": "/dashboard/scripts/controllers/exampleController.js"
+      "dashboardController": "/dashboard/scripts/controllers/dashboard.js"
     },
     "moduleDependencies":{
 

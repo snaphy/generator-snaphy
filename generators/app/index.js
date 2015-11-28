@@ -71,10 +71,11 @@ module.exports = yeoman.generators.Base.extend({
     mkdirp.sync('.views/static/views');
 
 
+
     //This is the new way..
     this.fs.copy(
-      this.templatePath('views/static/views'),
-      this.destinationPath('.views/static/views')
+      this.templatePath('common/plugins'),
+      this.destinationPath('common/plugins')
     );
 
     this.fs.copy(
@@ -100,7 +101,6 @@ module.exports = yeoman.generators.Base.extend({
 
     this.directory('views/static/assets', '.views/static/assets'); // script is folder name
     this.directory('views/static/audio', '.views/static/audio');
-    this.directory('views/static/images', '.views/static/images');
     this.copy('views/robots.txt', '.views/robots.txt');
 
     this.copy('server/config.json', 'server/config.json');
