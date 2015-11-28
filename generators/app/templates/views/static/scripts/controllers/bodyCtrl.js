@@ -9,6 +9,12 @@
  */
 angular.module($snaphy.getModuleName())
   .controller('bodyCtrl', ['$scope', '$window', function($scope, $window){
-    $scope.defaultTemplate = $window.$snaphy.template;
+    //Set the default true value..
+    $scope.defaultTemplate = true;
+
+    $scope.templateEnabled = function(){
+    	$scope.defaultTemplate = $window.$snaphy.template;
+    	return $scope.defaultTemplate ;
+    }
 
   }]); //controller..

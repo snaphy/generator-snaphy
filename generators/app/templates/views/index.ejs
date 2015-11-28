@@ -58,7 +58,7 @@
     <body ng-app="<%= module %>" ng-controller="bodyCtrl" >
         <!--Load Page Container only if `defaultTemplate` variable is true-->
         <!-- Page Container -->
-        <div ng-if="defaultTemplate" id="page-container"  snaphy-load-template class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+        <div ng-if="templateEnabled()" id="page-container"  snaphy-load-template class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
         	<!-- Side Overlay-->
           <aside id="side-overlay" snaphy-load-template>
             <!-- Side Overlay Scroll Container -->
@@ -194,8 +194,8 @@
         <!-- END Page Container -->
 
         <!--ONLY load this template if the default template is not needed for-example for login plugin..-->
-        <div ui-view ng-if="!defaultTemplate">
-            This is the blank template..
+        <div ui-view ng-if="!templateEnabled()">
+           <!--  This is the the template without designs. -->
         </div>
 
 
