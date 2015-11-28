@@ -88,6 +88,11 @@ module.exports = yeoman.generators.Base.extend({
     );
 
     this.fs.copy(
+      this.templatePath('views/partials'),
+      this.destinationPath('.views/partials')
+    );
+
+    this.fs.copy(
       this.templatePath('server/boot'),
       this.destinationPath('server/boot')
     );
