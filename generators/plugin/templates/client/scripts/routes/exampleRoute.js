@@ -6,7 +6,7 @@ angular.module($snaphy.getModuleName())
   .config(['$locationProvider', '$stateProvider', '$urlRouterProvider',
     function ($locationProvider, $stateProvider, $urlRouterProvider) {
       $locationProvider.html5Mode(false);
-      $urlRouterProvider.otherwise('/');
+      //$urlRouterProvider.otherwise('/');
 
       $stateProvider
         //Provide routes in this way..
