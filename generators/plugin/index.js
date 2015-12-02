@@ -202,6 +202,7 @@ module.exports = yeoman.generators.Base.extend({
     //Copy all files that handle git repositorys
     this.copy('gitignore', '.gitignore');
     this.copy('readMe.md', 'readMe.md');
+    this.copy('client/settings.js', 'client/settings.js');
   },
 
   install: function () {
