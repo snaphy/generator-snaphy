@@ -7,13 +7,13 @@
  * # MainCtrl
  * Controller of the templateAdminApp
  */
-angular.module($snaphy().getModuleName())
+angular.module($snaphy.getModuleName())
   .controller('bodyCtrl', ['$scope', '$window', function($scope, $window){
     //Set the default true value..
     $scope.defaultTemplate = true;
 
     $scope.templateEnabled = function(){
-    	$scope.defaultTemplate = $window.$snaphy().getDefaultTemplate();
+    	$scope.defaultTemplate = $window.$snaphy.getDefaultTemplate();
     	return $scope.defaultTemplate;
     }
 

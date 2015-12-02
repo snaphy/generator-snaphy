@@ -24,7 +24,7 @@
 
 
     //Defining a gloabl protected method for client side global objects and settings...
-    var $snaphy = function(){
+    var $snaphy = (function(){
 
         var moduleName = '<%= module %>',
         //Global objects for adding settings..
@@ -81,10 +81,10 @@
             loadSettings : loadSettings
         }
 
-    }//$snaphy function..
+    })();//$snaphy function..
 
 
-    angular.module($snaphy().getModuleName())
+    angular.module($snaphy.getModuleName())
     //Define a service for fetching database..
     .factory('Database', ['$injector', function($injector){
         //Contain plugin name with the database object..

@@ -1,4 +1,4 @@
 'use strict';
 
-angular.module($snaphy().getModuleName())
+angular.module($snaphy.getModuleName())
 //Define your services here..
