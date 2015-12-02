@@ -177,7 +177,7 @@ module.exports = yeoman.generators.Base.extend({
         that.destinationPath('database-format')
       );
 
-        //Copying with templating..
+      //Copying with templating..
       that.directory('client/scripts', 'client/scripts')
       that.directory('client/views', 'client/views')
       

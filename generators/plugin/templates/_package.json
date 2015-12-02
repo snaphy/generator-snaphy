@@ -16,7 +16,8 @@
     },
     "moduleDependencies":{
 
-    }
+    },
+    "settings": "<%= props.routeExposure %>/settings.js"
   },
   "defaultTemplate": "<%= props.defaultTemplate %>",
   "bodystructure": {
