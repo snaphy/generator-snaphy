@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module($snaphy.getModuleName())
+angular.module($snaphy().getModuleName())
 
 
   .directive('snaphyLoadTemplate', [function () {
@@ -12,4 +12,4 @@ angular.module($snaphy.getModuleName())
 
         }
       };
-    }])
+    }]);

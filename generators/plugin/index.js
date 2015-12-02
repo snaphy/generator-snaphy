@@ -33,7 +33,6 @@ function checkDirectory(){
 	packageObj = require(rootPath +  "package.json");
 	if(!packageObj.pluginPath){
 		throw chalk.red('>>Error:') + ' Cannot found the `pluginPath` entry in  ' + chalk.cyan('package.json') + ' file.\nPlease run it from the main root directory';
-	
 	}
 
   	//Now change the directory to the pluginPath
@@ -156,6 +155,7 @@ module.exports = yeoman.generators.Base.extend({
     }.bind(this));
   },
 
+  
   writing: function () {
     //This is the new way..
     this.fs.copy(
