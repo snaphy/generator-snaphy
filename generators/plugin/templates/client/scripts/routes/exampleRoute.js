@@ -12,7 +12,7 @@ angular.module($snaphy.getModuleName())
         //Provide routes in this way..
         .state('<%= props.pluginName %>', {
           url: '/<%= props.pluginName %>',
-          templateUrl: '<%= props.routeExposure %>/views/example.html',
+          templateUrl: '<%= props.routeExposure %>/views/<%= props.pluginName %>.html',
           controller: '<%= props.pluginName %>Control'
         });
 

@@ -11,8 +11,8 @@
         "exampleCss" : "<%= props.routeExposure %>/style/example.css"
       },
     "js": {
-      "exampleRoute": "<%= props.routeExposure %>/scripts/routes/exampleRoute.js",
-      "exampleController": "<%= props.routeExposure %>/scripts/controllers/exampleController.js"
+      "<%= props.pluginName %>Route": "<%= props.routeExposure %>/scripts/routes/<%= props.pluginName %>.js",
+      "<%= props.pluginName %>Controller": "<%= props.routeExposure %>/scripts/controllers/<%= props.pluginName %>.js"
     },
     "moduleDependencies":{
 

@@ -177,9 +177,26 @@ module.exports = yeoman.generators.Base.extend({
         that.destinationPath('database-format')
       );
 
+      //Creating directories first..
+      mkdirp.sync( 'client/scripts');
+      mkdirp.sync( 'client/scripts/controllers');
+      mkdirp.sync( 'client/scripts/directives');
+      mkdirp.sync( 'client/scripts/filters');
+      mkdirp.sync( 'client/scripts/routes');
+      mkdirp.sync( 'client/scripts/services');
+      mkdirp.sync( 'client/views');
+      mkdirp.sync('client/scripts/directives');
+
+
       //Copying with templating..
-      that.directory('client/scripts', 'client/scripts')
-      that.directory('client/views', 'client/views')
+      that.copy('client/scripts/controllers/exampleController.js', 'client/scripts/controllers/'  + that.props.pluginName + '.js')
+      that.copy('client/scripts/filters/exampleFilter.js', 'client/scripts/filters/'  + that.props.pluginName + '.js')
+      that.copy('client/scripts/routes/exampleRoute.js', 'client/scripts/routes/'  + that.props.pluginName + '.js')
+      that.copy('client/scripts/services/exampleServices.js', 'client/scripts/services/'  + that.props.pluginName + '.js')
+      that.copy('client/scripts/directives/exampleDirectives.js', 'client/scripts/directives/'  + that.props.pluginName + '.js')
+      
+      that.copy('client/scripts/settings.js', 'client/scripts/settings.js')
+      that.copy('client/views/example.html', 'client/views/' + that.props.pluginName + '.html');
       
 
         console.info(chalk.red('TODO') + ' Work needs to be done for default Template.' );
