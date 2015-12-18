@@ -195,7 +195,7 @@ module.exports = yeoman.generators.Base.extend({
       that.copy('client/scripts/services/exampleServices.js', 'client/scripts/services/'  + that.props.pluginName + '.js')
       that.copy('client/scripts/directives/exampleDirectives.js', 'client/scripts/directives/'  + that.props.pluginName + '.js')
       
-      that.copy('client/scripts/settings.js', 'client/scripts/settings.js')
+      that.copy('client/settings.js', 'client/settings.js')
       that.copy('client/views/example.html', 'client/views/' + that.props.pluginName + '.html');
       
 

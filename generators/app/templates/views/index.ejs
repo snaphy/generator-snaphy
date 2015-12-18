@@ -36,8 +36,6 @@
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
         <!-- Page JS Plugins CSS go here -->
 
-        <!-- OneUI CSS framework -->
-        <link rel="stylesheet" id="css-main" href="<%= staticRoute %>/assets/css/oneui.min.css">
 
         <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
         <!-- <link rel="stylesheet" id="css-theme" href="static/assets/css/themes/flat.min.css"> -->
@@ -52,6 +50,9 @@
       <%}
     }%>
         <!-- endbuild -->
+
+        <!-- OneUI CSS framework -->
+        <link rel="stylesheet" id="css-main" href="<%= staticRoute %>/assets/css/oneui.min.css">
     </head>
 
     <body ng-app="<%= module %>" ng-controller="bodyCtrl" >
@@ -185,10 +186,11 @@
           </header>
           <!-- END Header -->
 
-          <div ui-view>
+           <!-- Main Container -->
+           <main ui-view  id="main-container">
 
-          </div>
-
+           </main>
+           <!-- END Main Container -->
 
           <footer id="page-footer" class="content-mini content-mini-full font-s12 bg-gray-lighter clearfix" >
             <!-- Footer hook -->
@@ -229,7 +231,9 @@
 
         <!-- build:js(.) scripts/vendor.js -->
         <!-- bower:js -->
+        <script src="<%= staticRoute %>/bower_components/api-check/dist/api-check.js"></script>
         <script src="<%= staticRoute %>/bower_components/angular/angular.js"></script>
+        <script src="<%= staticRoute %>/bower_components/angular-formly/dist/formly.min.js"></script>
         <script src="<%= staticRoute %>/bower_components/angular-animate/angular-animate.js"></script>
         <script src="<%= staticRoute %>/bower_components/angular-messages/angular-messages.js"></script>
         <script src="<%= staticRoute %>/bower_components/angular-resource/angular-resource.js"></script>
@@ -257,6 +261,7 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="<%= staticRoute %>/scripts/controllers/bodyCtrl.js"></script>
         <script src="<%= staticRoute %>/scripts/directives/templateLoad.js"></script>
+        <script src="<%= staticRoute %>/scripts/config/config.js"></script>
         <% for (var script in pluginScripts) {
           if (pluginScripts.hasOwnProperty(script)) { %>
             <script src="<%= pluginScripts[script] %>"></script>
