@@ -137,6 +137,7 @@ module.exports = yeoman.generators.Base.extend({
        //console.log(rootPath + '/' +this.props.pluginName);
     	//Now create a the plugins folder 
     	var that = this;
+    	this.props.pluginName = this.props.pluginName.trim();
       mkdirp(this.props.pluginName, function (err) {
         if (err) throw err;
         process.chdir(rootPath + '/' + that.props.pluginName);
