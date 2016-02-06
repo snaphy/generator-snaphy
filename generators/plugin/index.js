@@ -12,8 +12,8 @@ function validateEmail(email) {
 
 //Check the path of the main file..
 var checkFilePath = function(path){
-	return fs.existsSync(rootPath)
-}
+	return fs.existsSync(rootPath);
+};
 
 
 var rootPath = process.cwd() + '/' ;
@@ -43,7 +43,7 @@ function checkDirectory(){
 
 //Exectue the function
 checkDirectory();
-		
+
 
 module.exports = yeoman.generators.Base.extend({
   prompting: function () {
@@ -84,7 +84,7 @@ module.exports = yeoman.generators.Base.extend({
         //trim the input
         input = input.trim();
         var patt = /^\/[A-Z_0-9a-z]{0}/;
-        var response = patt.test(input)
+        var response = patt.test(input);
         if (response) {
           done(true);
         } else {
@@ -135,7 +135,7 @@ module.exports = yeoman.generators.Base.extend({
   	   //console.log("Main plugin paths");
        //console.log(rootPath);
        //console.log(rootPath + '/' +this.props.pluginName);
-    	//Now create a the plugins folder 
+    	//Now create a the plugins folder
     	var that = this;
     	this.props.pluginName = this.props.pluginName.trim();
       mkdirp(this.props.pluginName, function (err) {
@@ -144,19 +144,19 @@ module.exports = yeoman.generators.Base.extend({
         console.info('\nDone! \nUse ' + chalk.red('' + that.props.pluginName + '/client') + ' folder to design the User Interface.\nUse ' + chalk.red('' + that.props.pluginName + '/backend') + ' folder to write the backend logic!.\n\n' );
         done();
       });
-    	
+
       //console.log(this.props.pluginName);
       /*	try{
-    		
+
     	}catch(err){
     		//Do nothing
     	}*/
-    	
-    	
+
+
     }.bind(this));
   },
 
-  
+
   writing: function () {
     //This is the new way..
     this.fs.copy(
@@ -190,17 +190,17 @@ module.exports = yeoman.generators.Base.extend({
 
 
       //Copying with templating..
-      that.copy('client/scripts/controllers/exampleController.js', 'client/scripts/controllers/'  + that.props.pluginName + '.js')
-      that.copy('client/scripts/filters/exampleFilter.js', 'client/scripts/filters/'  + that.props.pluginName + '.js')
-      that.copy('client/scripts/routes/exampleRoute.js', 'client/scripts/routes/'  + that.props.pluginName + '.js')
-      that.copy('client/scripts/services/exampleServices.js', 'client/scripts/services/'  + that.props.pluginName + '.js')
-      that.copy('client/scripts/directives/exampleDirectives.js', 'client/scripts/directives/'  + that.props.pluginName + '.js')
-      
-      that.copy('client/settings.js', 'client/settings.js')
-      that.copy('client/views/example.html', 'client/views/' + that.props.pluginName + '.html');
-      
+      that.copy('client/scripts/controllers/exampleController.js', 'client/scripts/controllers/'  + that.props.pluginName + '.js');
+      that.copy('client/scripts/filters/exampleFilter.js', 'client/scripts/filters/'  + that.props.pluginName + '.js');
+      that.copy('client/scripts/routes/exampleRoute.js', 'client/scripts/routes/'  + that.props.pluginName + '.js');
+      that.copy('client/scripts/services/exampleServices.js', 'client/scripts/services/'  + that.props.pluginName + '.js');
+      that.copy('client/scripts/directives/exampleDirectives.js', 'client/scripts/directives/'  + that.props.pluginName + '.js');
 
-        console.info(chalk.red('TODO') + ' Work needs to be done for default Template.' );
+      that.copy('client/settings.js', 'client/settings.js');
+      that.copy('client/views/example.html', 'client/views/' + that.props.pluginName + '.html');
+
+
+      console.info(chalk.red('TODO') + ' Work needs to be done for default Template.' );
       //Now choose the scaffolding according to the defaultTemplate option
       if(that.props.defaultTemplate){
         //Us e hooks here

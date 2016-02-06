@@ -4,5 +4,7 @@
 
 module.exports = {
     //Write all the constants used here.
-    serverPath :  "./server/server.js"
+    serverPath :  "./server/server",
+    androidMainPath: "./templates/SnaphySdk/app/src/main/java/com/androidsdk/snaphy/snaphysdk",
+    javaTemplates: "./javaTemplates"
 };
