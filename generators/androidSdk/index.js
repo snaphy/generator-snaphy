@@ -20,31 +20,36 @@ var startServer = function(){
 
 
 var generateModels = function(app){
+
     for(var modelName in app.models){
         if(app.models.hasOwnProperty(modelName)){
             var modelObj = app.models[modelName];
+
             var modelProperties = modelObj.definition.rawProperties;
+            //Print all the model def
+            /*fs.writeFileSync(
+                "/home/robins/models/" + modelName +".js" ,
+                JSON.stringify( modelObj.definition),
+                'utf8'
+            );*/
             var model = {
                 name : modelName,
-                properties: modelProperties
+                properties: modelProperties,
+                base: modelObj.definition.settings.base
             };
             //Now compile the ejs template..
-            var ModelTemplatePath = "./" + path.join(constants.javaTemplates, "ModelTemplate.ejs");
-            var AndroidModelPath  = "./" + path.join(constants.androidMainPath, "models");
-            console.log(require.resolve("./templates") );
-            AndroidModelPath = require.resolve(AndroidModelPath);
-
-            console.log(AndroidModelPath);
+            var ModelTemplatePath = path.join(__dirname, constants.javaTemplates, "ModelTemplate.ejs");
+            var AndroidModelPath  = path.join(__dirname, constants.androidMainPath, "models");
 
             //Now compile each models and start writing it to the models directory..
             //First read the template file
             var modelTemplate = fs.readFileSync(
-               require.resolve(ModelTemplatePath),
+               ModelTemplatePath,
                { encoding: 'utf-8' }
             );
 
             var formattedModel = ejs.render(modelTemplate, {model: model});
-            console.log(chalk.blue("Compiling Model Class -> " + helper.capitalizeFirstLetter(modelName) ));
+            console.log(chalk.blue("\nCompiling Model Class -> " + helper.capitalizeFirstLetter(modelName) ));
             //Now writing it to file and saving to model folder..
 
             fs.writeFileSync(
@@ -94,6 +99,7 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   install: function () {
-    this.installDependencies();
+    //this.installDependencies();
+    process.exit();
   }
 });

@@ -1,6 +1,11 @@
-package com.androidsdk.snaphy.snaphysdk;
+package com.androidsdk.snaphy.snaphysdk.models;
 
+
+<% if(model.base === "User"){ %>
+import com.strongloop.android.loopback.User;
+<% } else { %>
 import com.strongloop.android.loopback.Model;
+<% } %>
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +18,12 @@ import java.util.HashMap;
         var modelName = capitalizeFirstLetter(model.name);
     %>
 
-public class <%= modelName %> extends Model {
+<% if(model.base === "User"){ %>
+public class <%- modelName %> extends User {
+<% } else { %>
+public class <%- modelName %> extends Model {
+<% } %>
+
 
     <% for( var property in model.properties) { %>
         <% if(model.properties.hasOwnProperty(property)){
@@ -30,61 +40,61 @@ public class <%= modelName %> extends Model {
                     listType = "ArrayList<String>";
                 }
                 else if (typeName === "number") {
-                    listType = "ArrayList<Integer>";
+                    listType = "ArrayList<Double>";
                 }
                 else if(true){
                     listType = "ArrayList<Object>";
                 }
             %>
 
-                private <%= listType %> <%= property %>;
+                private <%- listType %> <%- property %>;
                 /* Adding Getter and Setter methods */
-                private <%= listType %> get<%= capitalPropertyName %>(){
-                    return <%= property %>;
+                public <%- listType %> get<%- capitalPropertyName %>(){
+                    return <%- property %>;
                 }
 
                 /* Adding Getter and Setter methods */
-                private void set<%= capitalPropertyName %>(<%= listType %> <%= property %>){
-                    this.<%= property %> = <%= property %>;
-                }
-
-            <% } %>
-            <%else if(model.properties[property].type === "string" || model.properties[property].type === "date") {%>
-                private String <%= property %>;
-                /* Adding Getter and Setter methods */
-                private String get<%= capitalPropertyName %>(){
-                    return <%= property %>;
-                }
-
-                /* Adding Getter and Setter methods */
-                private void set<%= capitalPropertyName %>(String <%= property %>){
-                    this.<%= property %> = <%= property %>;
+                public void set<%- capitalPropertyName %>(<%- listType %> <%- property %>){
+                    this.<%- property %> = <%- property %>;
                 }
 
             <% } %>
-            <% else if(model.properties[property].type === "integer") {%>
-                private int <%= property %>;
+            <% if( (model.properties[property].type === "string" || model.properties[property].type === "date") && property !== "id") { %>
+                private String <%- property %>;
                 /* Adding Getter and Setter methods */
-                private int get<%= capitalPropertyName %>(){
-                    return <%= property %>;
+                public String get<%- capitalPropertyName %>(){
+                    return <%- property %>;
                 }
 
                 /* Adding Getter and Setter methods */
-                private void set<%= capitalPropertyName %>(int <%= property %>){
-                    this.<%= property %> = <%= property %>;
+                public void set<%- capitalPropertyName %>(String <%- property %>){
+                    this.<%- property %> = <%- property %>;
                 }
 
             <% } %>
-            <% else if(model.properties[property].type === "object") {%>
-                private HashMap<String, Object> <%= property %>;
+            <% if( (model.properties[property].type === "number" )&& property !== "id") { %>
+                private Double <%- property %>;
                 /* Adding Getter and Setter methods */
-                private HashMap<String, Object> get<%= capitalPropertyName %>(){
-                    return <%= property %>;
+                public Double get<%- capitalPropertyName %>(){
+                    return <%- property %>;
                 }
 
                 /* Adding Getter and Setter methods */
-                private void set<%= capitalPropertyName %>(HashMap<String, Object> <%= property %>){
-                    this.<%= property %> = <%= property %>;
+                public void set<%- capitalPropertyName %>(Double <%- property %>){
+                    this.<%- property %> = <%- property %>;
+                }
+
+            <% } %>
+            <% if( model.properties[property].type === "object" && property !== "id") { %>
+                private HashMap<String, Object> <%- property %>;
+                /* Adding Getter and Setter methods */
+                public HashMap<String, Object> get<%- capitalPropertyName %>(){
+                    return <%- property %>;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void set<%- capitalPropertyName %>(HashMap<String, Object> <%- property %>){
+                    this.<%- property %> = <%- property %>;
                 }
 
             <% } %>
