@@ -10,6 +10,7 @@ var constants = require("./constants");
 var helper = require("./helper");
 var ejs = require('ejs');
 var path = require('path');
+var rimraf = require('rimraf');
 
 //Returns the app object..
 var startServer = function(){
@@ -18,8 +19,30 @@ var startServer = function(){
 };
 
 
+//Generate Repository Class file in java..
+var generateRepository = function(app){
+    //Now compile the ejs template..
+    var ModelTemplatePath      = path.join(__dirname, constants.javaTemplates, "ModelTemplate.ejs");
+    var AndroidModelPath       = path.join(__dirname, constants.androidMainPath, "models");
+    var AndroidRepositoryPath  = path.join(__dirname, constants.androidMainPath, "repository");
 
+    //Clean Repository folder and rebuild..
+    rimraf.sync(AndroidRepositoryPath);
+    mkdirp.sync(AndroidRepositoryPath);
+};
+
+
+//Generate models class file in java..
 var generateModels = function(app){
+    //Now compile the ejs template..
+    var ModelTemplatePath      = path.join(__dirname, constants.javaTemplates, "ModelTemplate.ejs");
+    var AndroidModelPath       = path.join(__dirname, constants.androidMainPath, "models");
+    var AndroidRepositoryPath  = path.join(__dirname, constants.androidMainPath, "repository");
+
+    //Clean model folder and add new dir.
+    rimraf.sync(AndroidModelPath);
+    mkdirp.sync(AndroidModelPath);
+
 
     for(var modelName in app.models){
         if(app.models.hasOwnProperty(modelName)){
@@ -35,11 +58,10 @@ var generateModels = function(app){
             var model = {
                 name : modelName,
                 properties: modelProperties,
-                base: modelObj.definition.settings.base
+                base: modelObj.definition.settings.base,
+                relations: modelObj.definition.settings.relations
             };
-            //Now compile the ejs template..
-            var ModelTemplatePath = path.join(__dirname, constants.javaTemplates, "ModelTemplate.ejs");
-            var AndroidModelPath  = path.join(__dirname, constants.androidMainPath, "models");
+
 
             //Now compile each models and start writing it to the models directory..
             //First read the template file
@@ -89,8 +111,8 @@ module.exports = yeoman.generators.Base.extend({
   writing: function () {
     //This is the new way..
     this.fs.copy(
-      this.templatePath('SnaphySdk'),
-      this.destinationPath('SnaphySdk')
+      this.templatePath('snaphyandroidsdk'),
+      this.destinationPath('snaphyandroidsdk')
     );
   },
 
