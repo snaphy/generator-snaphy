@@ -23,6 +23,11 @@ import java.util.HashMap;
 public class AdminEmail extends Model {
 
 
+    private AdminEmail that ;
+
+    public AdminEmail (){
+        that = this;
+    }
 
     
         

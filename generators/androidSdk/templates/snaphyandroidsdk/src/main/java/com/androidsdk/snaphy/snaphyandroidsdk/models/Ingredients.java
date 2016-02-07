@@ -33,6 +33,11 @@ import java.util.HashMap;
 public class Ingredients extends Model {
 
 
+    private Ingredients that ;
+
+    public Ingredients (){
+        that = this;
+    }
 
     
         
@@ -174,7 +179,7 @@ public class Ingredients extends Model {
                 }
 
                 //Adding related model automatically in case of include statement from server..
-                public void setIngredientCategory(HashMap<String, Object> lowercaseRelatedModelName) {
+                public void setIngredientCategory(HashMap<String, Object> ingredientCategory) {
                     //First create a dummy Repo class object for customer.
                     IngredientCategoryRepository ingredientCategoryRepository = new IngredientCategoryRepository();
                     IngredientCategory ingredientCategory1 = ingredientCategoryRepository.createObject(ingredientCategory);
@@ -191,12 +196,45 @@ public class Ingredients extends Model {
                 
 
                 
-                                //Write the methods here..
-                                public void get__ingredientCategory( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<IngredientCategory> callback) {
-                                    //Define methods here..
+
+                //Write the method here..
+                public void get__ingredientCategory( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<IngredientCategory> callback) {
+                    //Define methods here..
+                    final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
+                    
 
 
-                                }
+                    
+
+                    
+
+                    ingredientsRepo.get__ingredientCategory(that.id, refresh,  new ObjectCallback<IngredientCategory> (){
+                        
+
+                        
+                            @Override
+                            public void onSuccess(IngredientCategory object) {
+                                //now add relation to this recipe.
+                                addRelation(object);
+                                //Also add relation to child type for two way communication..
+                                object.addRelation(that);
+                                callback.onSuccess(object);
+                            }
+                        
+
+
+                        
+
+                        @Override
+                        public void onError(Throwable t) {
+                            //Now calling the callback
+                            callback.onError(t);
+                        }
+
+                    });
+                } //method def ends here.
+
+
                             
                         
                     
@@ -254,7 +292,7 @@ public class Ingredients extends Model {
                     
                     
                     
-                     
+                
 
             
             

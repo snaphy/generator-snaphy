@@ -33,6 +33,11 @@ import java.util.HashMap;
 public class RecipeIngredients extends Model {
 
 
+    private RecipeIngredients that ;
+
+    public RecipeIngredients (){
+        that = this;
+    }
 
     
         
@@ -121,7 +126,7 @@ public class RecipeIngredients extends Model {
                 }
 
                 //Adding related model automatically in case of include statement from server..
-                public void setRecipe(HashMap<String, Object> lowercaseRelatedModelName) {
+                public void setRecipe(HashMap<String, Object> recipe) {
                     //First create a dummy Repo class object for customer.
                     RecipeRepository recipeRepository = new RecipeRepository();
                     Recipe recipe1 = recipeRepository.createObject(recipe);
@@ -138,12 +143,45 @@ public class RecipeIngredients extends Model {
                 
 
                 
-                                //Write the methods here..
-                                public void get__recipe( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
-                                    //Define methods here..
+
+                //Write the method here..
+                public void get__recipe( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
+                    //Define methods here..
+                    final RecipeIngredientsRepository  recipeIngredientsRepo = restAdapter.createRepository(RecipeIngredientsRepository.class);
+                    
 
 
-                                }
+                    
+
+                    
+
+                    recipeIngredientsRepo.get__recipe(that.id, refresh,  new ObjectCallback<Recipe> (){
+                        
+
+                        
+                            @Override
+                            public void onSuccess(Recipe object) {
+                                //now add relation to this recipe.
+                                addRelation(object);
+                                //Also add relation to child type for two way communication..
+                                object.addRelation(that);
+                                callback.onSuccess(object);
+                            }
+                        
+
+
+                        
+
+                        @Override
+                        public void onError(Throwable t) {
+                            //Now calling the callback
+                            callback.onError(t);
+                        }
+
+                    });
+                } //method def ends here.
+
+
                             
                         
                     
@@ -163,7 +201,7 @@ public class RecipeIngredients extends Model {
                     
                     
                     
-                     
+                
 
             
             
@@ -184,7 +222,7 @@ public class RecipeIngredients extends Model {
                 }
 
                 //Adding related model automatically in case of include statement from server..
-                public void setIngredients(HashMap<String, Object> lowercaseRelatedModelName) {
+                public void setIngredients(HashMap<String, Object> ingredients) {
                     //First create a dummy Repo class object for customer.
                     IngredientsRepository ingredientsRepository = new IngredientsRepository();
                     Ingredients ingredients1 = ingredientsRepository.createObject(ingredients);
@@ -203,12 +241,45 @@ public class RecipeIngredients extends Model {
                 
                         
                     
-                                //Write the methods here..
-                                public void get__ingredients( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Ingredients> callback) {
-                                    //Define methods here..
+
+                //Write the method here..
+                public void get__ingredients( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Ingredients> callback) {
+                    //Define methods here..
+                    final RecipeIngredientsRepository  recipeIngredientsRepo = restAdapter.createRepository(RecipeIngredientsRepository.class);
+                    
 
 
-                                }
+                    
+
+                    
+
+                    recipeIngredientsRepo.get__ingredients(that.id, refresh,  new ObjectCallback<Ingredients> (){
+                        
+
+                        
+                            @Override
+                            public void onSuccess(Ingredients object) {
+                                //now add relation to this recipe.
+                                addRelation(object);
+                                //Also add relation to child type for two way communication..
+                                object.addRelation(that);
+                                callback.onSuccess(object);
+                            }
+                        
+
+
+                        
+
+                        @Override
+                        public void onError(Throwable t) {
+                            //Now calling the callback
+                            callback.onError(t);
+                        }
+
+                    });
+                } //method def ends here.
+
+
                             
                         
                     
@@ -226,7 +297,7 @@ public class RecipeIngredients extends Model {
                     
                     
                     
-                     
+                
 
             
             

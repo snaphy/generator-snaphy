@@ -63,6 +63,11 @@ import java.util.HashMap;
 public class Recipe extends Model {
 
 
+    private Recipe that ;
+
+    public Recipe (){
+        that = this;
+    }
 
     
         
@@ -313,7 +318,7 @@ public class Recipe extends Model {
                 }
 
                 //Adding related model automatically in case of include statement from server..
-                public void setCustomer(HashMap<String, Object> lowercaseRelatedModelName) {
+                public void setCustomer(HashMap<String, Object> customer) {
                     //First create a dummy Repo class object for customer.
                     CustomerRepository customerRepository = new CustomerRepository();
                     Customer customer1 = customerRepository.createObject(customer);
@@ -330,12 +335,45 @@ public class Recipe extends Model {
                 
 
                 
-                                //Write the methods here..
-                                public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
-                                    //Define methods here..
+
+                //Write the method here..
+                public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
+                    //Define methods here..
+                    final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
+                    
 
 
-                                }
+                    
+
+                    
+
+                    recipeRepo.get__customer(that.id, refresh,  new ObjectCallback<Customer> (){
+                        
+
+                        
+                            @Override
+                            public void onSuccess(Customer object) {
+                                //now add relation to this recipe.
+                                addRelation(object);
+                                //Also add relation to child type for two way communication..
+                                object.addRelation(that);
+                                callback.onSuccess(object);
+                            }
+                        
+
+
+                        
+
+                        @Override
+                        public void onError(Throwable t) {
+                            //Now calling the callback
+                            callback.onError(t);
+                        }
+
+                    });
+                } //method def ends here.
+
+
                             
                         
                     
@@ -545,7 +583,7 @@ public class Recipe extends Model {
                     
                     
                     
-                     
+                
 
             
             
@@ -575,7 +613,7 @@ public class Recipe extends Model {
                 }
 
                 //Adding related model automatically in case of include statement from server..
-                public void setPriority(HashMap<String, Object> lowercaseRelatedModelName) {
+                public void setPriority(HashMap<String, Object> priority) {
                     //First create a dummy Repo class object for customer.
                     PriorityRepository priorityRepository = new PriorityRepository();
                     Priority priority1 = priorityRepository.createObject(priority);
@@ -606,39 +644,167 @@ public class Recipe extends Model {
                     
                         
                     
-                                //Write the methods here..
-                                public void get__priorities( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Priority> callback) {
-                                    //Define methods here..
+
+                //Write the method here..
+                public void get__priorities( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Priority> callback) {
+                    //Define methods here..
+                    final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
+                    
 
 
-                                }
+                    
+
+                    
+
+                    recipeRepo.get__priorities(that.id, refresh,  new ObjectCallback<Priority> (){
+                        
+
+                        
+                            @Override
+                            public void onSuccess(Priority object) {
+                                //now add relation to this recipe.
+                                addRelation(object);
+                                //Also add relation to child type for two way communication..
+                                object.addRelation(that);
+                                callback.onSuccess(object);
+                            }
+                        
+
+
+                        
+
+                        @Override
+                        public void onError(Throwable t) {
+                            //Now calling the callback
+                            callback.onError(t);
+                        }
+
+                    });
+                } //method def ends here.
+
+
                             
                         
                     
-                                //Write the methods here..
-                                public void create__priorities( Priority data,  RestAdapter restAdapter, final ObjectCallback<Priority> callback) {
-                                    //Define methods here..
+
+                //Write the method here..
+                public void create__priorities( Priority data,  RestAdapter restAdapter, final ObjectCallback<Priority> callback) {
+                    //Define methods here..
+                    final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
+                    
 
 
-                                }
+                    
+
+                    
+
+                    recipeRepo.create__priorities(that.id, data,  new ObjectCallback<Priority> (){
+                        
+
+                        
+                            @Override
+                            public void onSuccess(Priority object) {
+                                //now add relation to this recipe.
+                                addRelation(object);
+                                //Also add relation to child type for two way communication..
+                                object.addRelation(that);
+                                callback.onSuccess(object);
+                            }
+                        
+
+
+                        
+
+                        @Override
+                        public void onError(Throwable t) {
+                            //Now calling the callback
+                            callback.onError(t);
+                        }
+
+                    });
+                } //method def ends here.
+
+
                             
                         
                     
-                                //Write the methods here..
-                                public void update__priorities( Priority data,  RestAdapter restAdapter, final ObjectCallback<Priority> callback) {
-                                    //Define methods here..
+
+                //Write the method here..
+                public void update__priorities( Priority data,  RestAdapter restAdapter, final ObjectCallback<Priority> callback) {
+                    //Define methods here..
+                    final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
+                    
 
 
-                                }
+                    
+
+                    
+
+                    recipeRepo.update__priorities(that.id, data,  new ObjectCallback<Priority> (){
+                        
+
+                        
+                            @Override
+                            public void onSuccess(Priority object) {
+                                //now add relation to this recipe.
+                                addRelation(object);
+                                //Also add relation to child type for two way communication..
+                                object.addRelation(that);
+                                callback.onSuccess(object);
+                            }
+                        
+
+
+                        
+
+                        @Override
+                        public void onError(Throwable t) {
+                            //Now calling the callback
+                            callback.onError(t);
+                        }
+
+                    });
+                } //method def ends here.
+
+
                             
                         
                     
-                                //Write the methods here..
-                                public void destroy__priorities( RestAdapter restAdapter, final VoidCallback callback) {
-                                    //Define methods here..
+
+                //Write the method here..
+                public void destroy__priorities( RestAdapter restAdapter, final VoidCallback callback) {
+                    //Define methods here..
+                    final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
+                    
 
 
-                                }
+                    
+
+                    
+
+                    recipeRepo.destroy__priorities(that.id,  new VoidCallback (){
+                        
+                            @Override
+                            public void onSuccess() {
+                                callback.onSuccess();
+                            }
+                        
+
+                        
+
+
+                        
+
+                        @Override
+                        public void onError(Throwable t) {
+                            //Now calling the callback
+                            callback.onError(t);
+                        }
+
+                    });
+                } //method def ends here.
+
+
                             
                         
                     
@@ -828,7 +994,7 @@ public class Recipe extends Model {
                     
                     
                     
-                     
+                
 
             
             

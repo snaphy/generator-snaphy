@@ -28,6 +28,11 @@ import java.util.HashMap;
 public class User extends Model {
 
 
+    private User that ;
+
+    public User (){
+        that = this;
+    }
 
     
         

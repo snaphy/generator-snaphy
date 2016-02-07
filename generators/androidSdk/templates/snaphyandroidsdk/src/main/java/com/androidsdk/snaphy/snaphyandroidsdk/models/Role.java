@@ -28,6 +28,11 @@ import java.util.HashMap;
 public class Role extends Model {
 
 
+    private Role that ;
+
+    public Role (){
+        that = this;
+    }
 
     
         

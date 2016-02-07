@@ -23,6 +23,11 @@ import java.util.HashMap;
 public class ACL extends Model {
 
 
+    private ACL that ;
+
+    public ACL (){
+        that = this;
+    }
 
     
         

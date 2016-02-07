@@ -23,6 +23,11 @@ import java.util.HashMap;
 public class Container extends Model {
 
 
+    private Container that ;
+
+    public Container (){
+        that = this;
+    }
 
     
         

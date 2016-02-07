@@ -23,6 +23,11 @@ import java.util.HashMap;
 public class EmailInfo extends Model {
 
 
+    private EmailInfo that ;
+
+    public EmailInfo (){
+        that = this;
+    }
 
     
         

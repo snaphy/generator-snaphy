@@ -28,6 +28,35 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
         }
     }
 
+    //isInternalArgument function function for finding if an argument is internal or not..
+    function  isInternalArgument(argumentObj, argumentName, method){
+        var argumentSource = argumentObj.http.source;
+        var internalArgument = false;
+        //Now check if the argument is the internal argument..
+        if(argumentSource === "path"){
+            //Now check if the argument does not belongs to related mode data..
+            if(method.hasResourceParams){
+                var argumentFound = false;
+                for(var i=0; i< method.resourceParams.length; i++){
+                    var resourceArgObj = method.resourceParams[i];
+                    if(resourceArgObj.arg === argumentName){
+                        argumentFound = true;
+                        break;
+                    }
+                } //forloop ends
+                if(argumentFound){
+                    internalArgument = false;
+                }else{
+                    internalArgument = true;
+                }
+            }else{
+                //Argument is internal argument..
+                internalArgument = true;
+            }
+        } //if path
+        return internalArgument;
+    }
+
     var modelName = capitalizeFirstLetter(model.name);
 %>
 
@@ -64,6 +93,11 @@ public class <%- modelName %> extends User {
 public class <%- modelName %> extends Model {
 <% } %>
 
+    private <%- modelName %> that ;
+
+    public <%- modelName %> (){
+        that = this;
+    }
 
     <% for( var property in model.properties) { %>
         <% if(model.properties.hasOwnProperty(property)){
@@ -207,6 +241,39 @@ public class <%- modelName %> extends Model {
                     1) Find the searched model definition first..
                     2) Find the method obj.
                     2) Find the relation name from the model relation obj.
+                    //Now start adding server fetching data relations..
+                        /*{
+                            "fullName": "Recipe.prototype.__get__customer",
+                            "name": "prototype.__get__customer",
+                            "accepts": [{
+                                "arg": "id",
+                                "type": "any",
+                                "required": true,
+                                "http": {
+                                    "source": "path"
+                                },
+                                "description": "PersistedModel id"
+                            }, {
+                                "arg": "refresh",
+                                "type": "boolean",
+                                "http": {
+                                    "source": "query"
+                                }
+                            }],
+                            "returns": [{
+                                "arg": "customer",
+                                "type": "Customer",
+                                "root": true
+                            }],
+                            "errors": [],
+                            "description": "Fetches belongsTo relation customer.",
+                            "documented": true,
+                            "routes": [{
+                                "path": "/:id/customer",
+                                "verb": "get"
+                            }],
+                            "internal": "Use Recipe.customer() instead."
+                        }*/
                 %>
 
                 <%
@@ -238,30 +305,11 @@ public class <%- modelName %> extends Model {
                                         if(argumentType === "any"){
                                             argumentType = "string";
                                         }
+
                                         var argumentSource = argumentObj.http.source;
-                                        var internalArgument = false;
-                                        //Now check if the argument is the internal argument..
-                                        if(argumentSource === "path"){
-                                            //Now check if the argument does not belongs to related mode data..
-                                            if(argumentObj.hasResourceParams){
-                                                var argumentFound = false;
-                                                for(var i=0; i< argumentObj.resourceParams.length; i++){
-                                                    var resourceArgObj = argumentObj.resourceParams[i];
-                                                    if(resourceArgObj.arg === argumentName){
-                                                        argumentFound = true;
-                                                        break;
-                                                    }
-                                                } //forloop ends
-                                                if(argumentFound){
-                                                    internalArgument = false;
-                                                }else{
-                                                    internalArgument = true;
-                                                }
-                                            }else{
-                                                //Argument is internal argument..
-                                                internalArgument = true;
-                                            }
-                                        } //if path
+                                        //Checking if the argument is internal or not..
+                                        var internalArgument = isInternalArgument(argumentObj, argumentName, method);
+
 
                                         if(!internalArgument ){
                                             if(argumentType  instanceof Array){
@@ -274,30 +322,141 @@ public class <%- modelName %> extends Model {
                                             methodString = methodString + " " +argumentType + " " + argumentName +", ";
                                         }
                                     });//arguments loop ends..
-
+                                    var callback ;
+                                    var returnType;
+                                    var callbackType;
+                                    var type;
                                     if(method.returns.length){
                                         if(method.returns[0].type instanceof Array){
-                                            var type = convertType(method.returns[0].type[0]);
+                                            type = convertType(method.returns[0].type[0]);
+                                            returnType = "ArrayList<" + type + ">";
                                             methodString = methodString + " " + "RestAdapter restAdapter" + ", " +  "final ListCallback<" + type + "> callback)";
+                                            callback = "ListCallback<" + type + "> ";
+                                            callbackType = "ListCallback";
                                         }else{
-                                            var type = convertType(method.returns[0].type);
+                                            type = convertType(method.returns[0].type);
+                                            returnType = type;
                                             methodString = methodString + " " + "RestAdapter restAdapter" + ", " +  "final ObjectCallback<" + type + "> callback)";
+                                            callback = "ObjectCallback<" + type + "> ";
+                                            callbackType = "ObjectCallback";
                                         }
                                     }else{
                                         methodString = methodString + " " + "RestAdapter restAdapter" + ", " +  "final VoidCallback callback)";
+                                        callback = "VoidCallback ";
+                                        //returnType = type;
+                                        callbackType = "VoidCallback";
                                     }
 
                 %>
-                                //Write the methods here..
-                                <%- methodString %> {
-                                    //Define methods here..
+
+                //Write the method here..
+                <%- methodString %> {
+                    //Define methods here..
+                    final <%- modelName %>Repository  <%- lowercaseFirstLetter(modelName) %>Repo = restAdapter.createRepository(<%- modelName %>Repository.class);
+                    <%#
+                        recipeRepo.get__customer(id, new ObjectCallback<Customer>() {
+                            @Override
+                            public void onSuccess(Customer object) {
+                                //now add relation to this recipe.
+                                addRelation(object);
+                                callback.onSuccess(object);
+                            }
+
+                            @Override
+                            public void onError(Throwable t) {
+                                //Now calling the callback
+                                callback.onError(t);
+                            }
+
+                        });
+                    %>
 
 
+                    <%#
+                        1)Now fetch the argumments list. The argument that is internal add "ObjectValue.argument" and for other simply add argument.
+                    %>
+
+                    <%
+                        var methodArguments = "";
+                        //Now run a loop of arguments..
+                        method.accepts.forEach(function(argumentObj, index){
+                            var argumentName   = argumentObj.arg;
+                            var argumentType   = argumentObj.type;
+                            if(argumentType === "any"){
+                                argumentType = "string";
+                            }
+
+                            var argumentSource = argumentObj.http.source;
+                            //Checking if the argument is internal or not..
+                            var internalArgument = isInternalArgument(argumentObj, argumentName, method);
+
+
+                            if(!internalArgument ){
+                                if(argumentType  instanceof Array){
+                                    argumentType = "ArrayList<" + convertType(argumentType[0]) + ">" ;
                                 }
+                                else {
+                                    argumentType = convertType(argumentType);
+                                }
+
+                                methodArguments = methodArguments + argumentName + ", ";
+                            }else{
+                                //Add internal arguments here..
+                                methodArguments = methodArguments + "that." +  argumentName + ", ";
+                            }
+                        });//arguments loop ends..
+
+
+                    %>
+
+                    <%- lowercaseFirstLetter(modelName) %>Repo.<%- methodName %>(<%- methodArguments %> new <%- callback %>(){
+                        <% if(callbackType === "VoidCallback"){ %>
+                            @Override
+                            public void onSuccess() {
+                                callback.onSuccess();
+                            }
+                        <% } %>
+
+                        <% if(callbackType === "ObjectCallback"){ %>
+                            @Override
+                            public void onSuccess(<%- returnType %> object) {
+                                //now add relation to this recipe.
+                                addRelation(object);
+                                //Also add relation to child type for two way communication..
+                                object.addRelation(that);
+                                callback.onSuccess(object);
+                            }
+                        <% } %>
+
+
+                        <% if(callbackType === "ListCallback"){ %>
+                            @Override
+                            public void onSuccess(<%- returnType %> object) {
+                                //now add relation to this recipe.
+                                addRelation(object);
+                                for (<%- type %> obj : object) {
+                                    //Also add relation to child type for two way communication..
+                                    obj.addRelation(that);
+                                }
+
+                                callback.onSuccess(object);
+                            }
+                        <% } %>
+
+                        @Override
+                        public void onError(Throwable t) {
+                            //Now calling the callback
+                            callback.onError(t);
+                        }
+
+                    });
+                } //method def ends here.
+
+
                             <% } %>
                         <% } %>
                     <% }); %>
-                    <% } %>
+                <% } %>
 
             <% } %>
             <% if(model.relations[relation].type === "hasMany" || model.relations[relation].type === "hasManyThrough") { %>

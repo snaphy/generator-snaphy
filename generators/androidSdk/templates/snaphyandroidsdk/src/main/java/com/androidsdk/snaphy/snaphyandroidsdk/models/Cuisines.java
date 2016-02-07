@@ -28,6 +28,11 @@ import java.util.HashMap;
 public class Cuisines extends Model {
 
 
+    private Cuisines that ;
+
+    public Cuisines (){
+        that = this;
+    }
 
     
         

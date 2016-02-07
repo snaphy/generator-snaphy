@@ -28,6 +28,11 @@ import java.util.HashMap;
 public class RecipeTag extends Model {
 
 
+    private RecipeTag that ;
+
+    public RecipeTag (){
+        that = this;
+    }
 
     
         

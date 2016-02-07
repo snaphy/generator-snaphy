@@ -28,6 +28,11 @@ import java.util.HashMap;
 public class RoleMapping extends Model {
 
 
+    private RoleMapping that ;
+
+    public RoleMapping (){
+        that = this;
+    }
 
     
         
@@ -96,7 +101,7 @@ public class RoleMapping extends Model {
                 }
 
                 //Adding related model automatically in case of include statement from server..
-                public void setRole(HashMap<String, Object> lowercaseRelatedModelName) {
+                public void setRole(HashMap<String, Object> role) {
                     //First create a dummy Repo class object for customer.
                     RoleRepository roleRepository = new RoleRepository();
                     Role role1 = roleRepository.createObject(role);
@@ -112,7 +117,7 @@ public class RoleMapping extends Model {
                 //Now add instance methods to fetch the related belongsTo Model..
                 
 
-                 
+                
 
             
             

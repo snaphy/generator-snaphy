@@ -28,6 +28,11 @@ import java.util.HashMap;
 public class AccessToken extends Model {
 
 
+    private AccessToken that ;
+
+    public AccessToken (){
+        that = this;
+    }
 
     
         
@@ -96,7 +101,7 @@ public class AccessToken extends Model {
                 }
 
                 //Adding related model automatically in case of include statement from server..
-                public void setUser(HashMap<String, Object> lowercaseRelatedModelName) {
+                public void setUser(HashMap<String, Object> user) {
                     //First create a dummy Repo class object for customer.
                     UserRepository userRepository = new UserRepository();
                     User user1 = userRepository.createObject(user);
@@ -112,7 +117,7 @@ public class AccessToken extends Model {
                 //Now add instance methods to fetch the related belongsTo Model..
                 
 
-                 
+                
 
             
             
