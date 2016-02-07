@@ -110,7 +110,7 @@ public class UserRepository extends com.strongloop.android.loopback.UserReposito
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DEL"), "User.deleteById");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "User.deleteById");
             
         
             
@@ -122,15 +122,9 @@ public class UserRepository extends com.strongloop.android.loopback.UserReposito
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/change-stream", "POST"), "User.createChangeStream");
-            
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/login", "POST"), "User.login");
-            
         
-            
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/logout", "ALL"), "User.logout");
             
         
             
@@ -142,11 +136,9 @@ public class UserRepository extends com.strongloop.android.loopback.UserReposito
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "ALL"), "User.getSchema");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "User.getSchema");
             
         
-            
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/save", "ALL"), "User.save");
             
         
         return contract;
@@ -721,8 +713,8 @@ public class UserRepository extends com.strongloop.android.loopback.UserReposito
         
     
         
-            //Method prototype.updateAttributes definition
-            public void prototype.updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<User> callback){
+            //Method updateAttributes definition
+            public void updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<User> callback){
                 
 
 
@@ -747,7 +739,7 @@ public class UserRepository extends com.strongloop.android.loopback.UserReposito
 
                 
 
-            }//Method prototype.updateAttributes definition ends here..
+            }//Method updateAttributes definition ends here..
 
             
 
@@ -847,36 +839,6 @@ public class UserRepository extends com.strongloop.android.loopback.UserReposito
 
         
     
-        
-            //Method save definition
-            public void save(  HashMap<String, Object> data,  HashMap<String, Object> schema, final ObjectCallback<HashMap<String, Object>> callback){
-                
-
-
-                
-                    invokeStaticMethod("save", ImmutableMap.of("data", data, "schema", schema), new Adapter.JsonObjectCallback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                //If error happens then change it to Object type..
-                                Map<String, HashMap<String, Object>> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method save definition ends here..
-
-            
-
         
     
 

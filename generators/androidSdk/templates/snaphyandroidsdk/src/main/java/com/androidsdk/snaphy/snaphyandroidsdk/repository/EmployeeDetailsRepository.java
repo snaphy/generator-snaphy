@@ -98,7 +98,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DEL"), "EmployeeDetails.deleteById");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "EmployeeDetails.deleteById");
             
         
             
@@ -110,15 +110,11 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/change-stream", "POST"), "EmployeeDetails.createChangeStream");
-            
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "ALL"), "EmployeeDetails.getSchema");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "EmployeeDetails.getSchema");
             
         
-            
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/save", "ALL"), "EmployeeDetails.save");
             
         
             
@@ -603,8 +599,8 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
         
     
         
-            //Method prototype.updateAttributes definition
-            public void prototype.updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<EmployeeDetails> callback){
+            //Method updateAttributes definition
+            public void updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<EmployeeDetails> callback){
                 
 
 
@@ -629,7 +625,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
 
                 
 
-            }//Method prototype.updateAttributes definition ends here..
+            }//Method updateAttributes definition ends here..
 
             
 
@@ -669,36 +665,6 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
 
         
     
-        
-            //Method save definition
-            public void save(  HashMap<String, Object> data,  HashMap<String, Object> schema, final ObjectCallback<HashMap<String, Object>> callback){
-                
-
-
-                
-                    invokeStaticMethod("save", ImmutableMap.of("data", data, "schema", schema), new Adapter.JsonObjectCallback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                //If error happens then change it to Object type..
-                                Map<String, HashMap<String, Object>> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method save definition ends here..
-
-            
-
         
     
         

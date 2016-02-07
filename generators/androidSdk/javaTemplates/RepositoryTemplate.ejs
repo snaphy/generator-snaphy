@@ -1,7 +1,7 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 <%
     function capitalizeFirstLetter(string) {
-        
+
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
@@ -117,9 +117,22 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
         RestContract contract = super.createContract();
         <% model.restDefinition.methods.forEach(function(restMethodObj){
             var patt = new RegExp("^" + model.name + "\\..+");
+            var routeMethod = restMethodObj.routes[0].verb.toUpperCase();
+            if(routeMethod === "DEL"){
+                routeMethod = "DELETE"
+            }
+            if(routeMethod === "ALL"){
+                routeMethod = "POST"
+            }
         %>
-            <% if(restMethodObj.fullName && patt.test(restMethodObj.fullName)){ %>
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "<%- restMethodObj.routes[0].path %>", "<%- restMethodObj.routes[0].verb.toUpperCase() %>"), "<%- restMethodObj.fullName %>");
+            <% if(restMethodObj.fullName
+                && patt.test(restMethodObj.fullName)
+                && restMethodObj.name !== "createChangeStream"
+                && restMethodObj.name !== "login"
+                && restMethodObj.name !== "logout"
+                && restMethodObj.name !== "save" ){
+            %>
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "<%- restMethodObj.routes[0].path %>", "<%- routeMethod %>"), "<%- restMethodObj.fullName %>");
             <% } %>
         <% });%>
         return contract;
@@ -166,13 +179,14 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
     <% model.restDefinition.methods.forEach(function(restMethodObj){
         var patt = new RegExp("^" + model.name + "\\..+");
         //metch prototype.__
-        var methodPatt = /prototype\.\_\_/;
+        var methodPatt = /prototype\.\_?\_?/;
     %>
         <% if(restMethodObj.fullName
             && patt.test(restMethodObj.fullName)
             && restMethodObj.name !== "createChangeStream"
             && restMethodObj.name !== "login"
-            && restMethodObj.name !== "logout" ){
+            && restMethodObj.name !== "logout"
+            && restMethodObj.name !== "save" ){
 
             var restMethodName = restMethodObj.name.replace(methodPatt, "");
             var methodString = "public void ";
@@ -287,7 +301,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                                 ArrayList<<%- type %>> result = JsonUtil.fromJson(response);
                                 callback.onSuccess(result);
                             <% }else{ %>
-                                <%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
+                                
                                 //Now converting jsonObject to list
                                 List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
                                 List<<%- type %>> <%- lowercaseFirstLetter(type) %>List = new ArrayList<<%- type %>>();

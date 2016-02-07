@@ -143,7 +143,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DEL"), "Wishlist.deleteById");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Wishlist.deleteById");
             
         
             
@@ -155,15 +155,11 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/change-stream", "POST"), "Wishlist.createChangeStream");
-            
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "ALL"), "Wishlist.getSchema");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Wishlist.getSchema");
             
         
-            
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/save", "ALL"), "Wishlist.save");
             
         
             
@@ -989,8 +985,8 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
         
     
         
-            //Method prototype.updateAttributes definition
-            public void prototype.updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<Wishlist> callback){
+            //Method updateAttributes definition
+            public void updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<Wishlist> callback){
                 
 
 
@@ -1015,7 +1011,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
 
                 
 
-            }//Method prototype.updateAttributes definition ends here..
+            }//Method updateAttributes definition ends here..
 
             
 
@@ -1055,36 +1051,6 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
 
         
     
-        
-            //Method save definition
-            public void save(  HashMap<String, Object> data,  HashMap<String, Object> schema, final ObjectCallback<HashMap<String, Object>> callback){
-                
-
-
-                
-                    invokeStaticMethod("save", ImmutableMap.of("data", data, "schema", schema), new Adapter.JsonObjectCallback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                //If error happens then change it to Object type..
-                                Map<String, HashMap<String, Object>> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method save definition ends here..
-
-            
-
         
     
         

@@ -95,7 +95,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DEL"), "RecipeIngredients.deleteById");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "RecipeIngredients.deleteById");
             
         
             
@@ -107,15 +107,11 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/change-stream", "POST"), "RecipeIngredients.createChangeStream");
-            
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "ALL"), "RecipeIngredients.getSchema");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "RecipeIngredients.getSchema");
             
         
-            
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/save", "ALL"), "RecipeIngredients.save");
             
         
         return contract;
@@ -529,8 +525,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         
     
         
-            //Method prototype.updateAttributes definition
-            public void prototype.updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<RecipeIngredients> callback){
+            //Method updateAttributes definition
+            public void updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<RecipeIngredients> callback){
                 
 
 
@@ -555,7 +551,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
 
                 
 
-            }//Method prototype.updateAttributes definition ends here..
+            }//Method updateAttributes definition ends here..
 
             
 
@@ -595,36 +591,6 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
 
         
     
-        
-            //Method save definition
-            public void save(  HashMap<String, Object> data,  HashMap<String, Object> schema, final ObjectCallback<HashMap<String, Object>> callback){
-                
-
-
-                
-                    invokeStaticMethod("save", ImmutableMap.of("data", data, "schema", schema), new Adapter.JsonObjectCallback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                //If error happens then change it to Object type..
-                                Map<String, HashMap<String, Object>> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method save definition ends here..
-
-            
-
         
     
 

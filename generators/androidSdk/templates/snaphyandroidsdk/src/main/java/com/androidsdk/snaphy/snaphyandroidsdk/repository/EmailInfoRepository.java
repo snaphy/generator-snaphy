@@ -77,7 +77,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DEL"), "EmailInfo.deleteById");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "EmailInfo.deleteById");
             
         
             
@@ -89,15 +89,11 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/change-stream", "POST"), "EmailInfo.createChangeStream");
-            
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "ALL"), "EmailInfo.getSchema");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "EmailInfo.getSchema");
             
         
-            
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/save", "ALL"), "EmailInfo.save");
             
         
         return contract;
@@ -445,8 +441,8 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
         
     
         
-            //Method prototype.updateAttributes definition
-            public void prototype.updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<EmailInfo> callback){
+            //Method updateAttributes definition
+            public void updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<EmailInfo> callback){
                 
 
 
@@ -471,7 +467,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
 
                 
 
-            }//Method prototype.updateAttributes definition ends here..
+            }//Method updateAttributes definition ends here..
 
             
 
@@ -511,36 +507,6 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
 
         
     
-        
-            //Method save definition
-            public void save(  HashMap<String, Object> data,  HashMap<String, Object> schema, final ObjectCallback<HashMap<String, Object>> callback){
-                
-
-
-                
-                    invokeStaticMethod("save", ImmutableMap.of("data", data, "schema", schema), new Adapter.JsonObjectCallback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                //If error happens then change it to Object type..
-                                Map<String, HashMap<String, Object>> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method save definition ends here..
-
-            
-
         
     
 
