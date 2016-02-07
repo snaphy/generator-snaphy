@@ -2,14 +2,37 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 
 
 
+
 import com.strongloop.android.loopback.Model;
+
+
+import com.strongloop.android.loopback.Model;
+import com.strongloop.android.loopback.RestAdapter;
+import com.strongloop.android.loopback.callbacks.ListCallback;
+import com.strongloop.android.loopback.callbacks.ObjectCallback;
+import com.strongloop.android.loopback.callbacks.VoidCallback;
+
+//Now import repository of related models..
+
+    
+        import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeRepository;
+
+    
+
+    
+        import com.androidsdk.snaphy.snaphyandroidsdk.repository.CommentsRepository;
+
+    
+
+    
+        import com.androidsdk.snaphy.snaphyandroidsdk.repository.WishlistRepository;
+
+    
 
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
-    
 
 
 public class Customer extends Model {
@@ -173,4 +196,154 @@ public class Customer extends Model {
 
         
     
+
+
+    
+
+
+
+    //Now adding relations between related models
+    
+        
+            
+            
+                //Define hasMany, hasManyThrough method here..
+
+            
+            
+        
+    
+        
+            
+            
+                //Define hasMany, hasManyThrough method here..
+
+            
+            
+        
+    
+        
+            
+                //Define belongsTo relation method here..
+                private Wishlist  wishlist ;
+
+                public Wishlist getWishlist() {
+                    return wishlist;
+                }
+
+                public void setWishlist(Wishlist wishlist) {
+                    this.wishlist = wishlist;
+                }
+
+                //Adding related model automatically in case of include statement from server..
+                public void setWishlist(HashMap<String, Object> lowercaseRelatedModelName) {
+                    //First create a dummy Repo class object for customer.
+                    WishlistRepository wishlistRepository = new WishlistRepository();
+                    Wishlist wishlist1 = wishlistRepository.createObject(wishlist);
+                    setWishlist(wishlist1);
+                }
+
+                //Adding relation method..
+                public void addRelation(Wishlist wishlist) {
+                    this.setCustomer(wishlist);
+                }
+
+
+                //Now add instance methods to fetch the related belongsTo Model..
+                
+
+                
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                                //Write the methods here..
+                                public void get__wishlists( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Wishlist> callback) {
+                                    //Define methods here..
+
+
+                                }
+                            
+                        
+                    
+                                //Write the methods here..
+                                public void create__wishlists( Wishlist data,  RestAdapter restAdapter, final ObjectCallback<Wishlist> callback) {
+                                    //Define methods here..
+
+
+                                }
+                            
+                        
+                    
+                                //Write the methods here..
+                                public void update__wishlists( Wishlist data,  RestAdapter restAdapter, final ObjectCallback<Wishlist> callback) {
+                                    //Define methods here..
+
+
+                                }
+                            
+                        
+                    
+                                //Write the methods here..
+                                public void destroy__wishlists( RestAdapter restAdapter, final VoidCallback callback) {
+                                    //Define methods here..
+
+
+                                }
+                            
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                     
+
+            
+            
+            
+        
+    
+
 }

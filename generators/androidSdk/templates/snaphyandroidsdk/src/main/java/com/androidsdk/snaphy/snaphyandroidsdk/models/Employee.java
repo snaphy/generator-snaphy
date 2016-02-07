@@ -2,14 +2,32 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 
 
 
+
 import com.strongloop.android.loopback.User;
+
+
+import com.strongloop.android.loopback.Model;
+import com.strongloop.android.loopback.RestAdapter;
+import com.strongloop.android.loopback.callbacks.ListCallback;
+import com.strongloop.android.loopback.callbacks.ObjectCallback;
+import com.strongloop.android.loopback.callbacks.VoidCallback;
+
+//Now import repository of related models..
+
+    
+        import com.androidsdk.snaphy.snaphyandroidsdk.repository.AccessTokenRepository;
+
+    
+
+    
+        import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeDetailsRepository;
+
+    
 
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
-    
 
 
 public class Employee extends User {
@@ -217,4 +235,134 @@ public class Employee extends User {
 
         
     
+
+
+    
+
+
+
+    //Now adding relations between related models
+    
+        
+            
+            
+                //Define hasMany, hasManyThrough method here..
+
+            
+            
+        
+    
+        
+            
+                //Define belongsTo relation method here..
+                private EmployeeDetails  employeeDetails ;
+
+                public EmployeeDetails getEmployeeDetails() {
+                    return employeeDetails;
+                }
+
+                public void setEmployeeDetails(EmployeeDetails employeeDetails) {
+                    this.employeeDetails = employeeDetails;
+                }
+
+                //Adding related model automatically in case of include statement from server..
+                public void setEmployeeDetails(HashMap<String, Object> lowercaseRelatedModelName) {
+                    //First create a dummy Repo class object for customer.
+                    EmployeeDetailsRepository employeeDetailsRepository = new EmployeeDetailsRepository();
+                    EmployeeDetails employeeDetails1 = employeeDetailsRepository.createObject(employeeDetails);
+                    setEmployeeDetails(employeeDetails1);
+                }
+
+                //Adding relation method..
+                public void addRelation(EmployeeDetails employeeDetails) {
+                    this.setCustomer(employeeDetails);
+                }
+
+
+                //Now add instance methods to fetch the related belongsTo Model..
+                
+
+                
+                        
+                    
+                        
+                    
+                        
+                    
+                                //Write the methods here..
+                                public void get__employeeDetails( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<EmployeeDetails> callback) {
+                                    //Define methods here..
+
+
+                                }
+                            
+                        
+                    
+                                //Write the methods here..
+                                public void create__employeeDetails( EmployeeDetails data,  RestAdapter restAdapter, final ObjectCallback<EmployeeDetails> callback) {
+                                    //Define methods here..
+
+
+                                }
+                            
+                        
+                    
+                                //Write the methods here..
+                                public void update__employeeDetails( EmployeeDetails data,  RestAdapter restAdapter, final ObjectCallback<EmployeeDetails> callback) {
+                                    //Define methods here..
+
+
+                                }
+                            
+                        
+                    
+                                //Write the methods here..
+                                public void destroy__employeeDetails( RestAdapter restAdapter, final VoidCallback callback) {
+                                    //Define methods here..
+
+
+                                }
+                            
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                     
+
+            
+            
+            
+        
+    
+
 }

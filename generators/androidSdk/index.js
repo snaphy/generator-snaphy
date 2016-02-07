@@ -33,7 +33,7 @@ var generateRepository = function(app){
 
 
 //Generate models class file in java..
-var generateModels = function(app){
+var generateModels = function(app, modelsRestDefinition){
     //Now compile the ejs template..
     var ModelTemplatePath      = path.join(__dirname, constants.javaTemplates, "ModelTemplate.ejs");
     var AndroidModelPath       = path.join(__dirname, constants.androidMainPath, "models");
@@ -59,8 +59,10 @@ var generateModels = function(app){
                 name : modelName,
                 properties: modelProperties,
                 base: modelObj.definition.settings.base,
-                relations: modelObj.definition.settings.relations
+                relations: modelObj.definition.settings.relations,
+                restDefinition: modelsRestDefinition
             };
+            //console.log(modelsRestDefinition);
 
 
             //Now compile each models and start writing it to the models directory..
@@ -91,7 +93,7 @@ var init  = function(){
     //Now get the description of the models..
     var modelsRestDefinition = helper.describeModels(app);
     //Now generate the models..
-    generateModels(app);
+    generateModels(app, modelsRestDefinition);
 
 };
 
