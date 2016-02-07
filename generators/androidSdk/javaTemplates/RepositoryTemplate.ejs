@@ -1,0 +1,334 @@
+package com.androidsdk.snaphy.snaphyandroidsdk.repository;
+<%
+    function capitalizeFirstLetter(string) {
+        
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    function lowercaseFirstLetter(string) {
+
+        return string.charAt(0).toLowerCase() + string.slice(1);
+    }
+
+    //convert javascript to java type
+    function convertType(type){
+        if(type === "string" || type === "any"){
+            return "String";
+        }
+        else if (type === "number") {
+            return "Double";
+        }
+        else if (type === "object") {
+            return "HashMap<String, Object>"
+        }
+        else if (type === "boolean") {
+            return "Boolean"
+        }
+        else {
+            return capitalizeFirstLetter(type);
+        }
+    }
+
+    //isInternalArgument function function for finding if an argument is internal or not..
+    function  isInternalArgument(argumentObj, argumentName, method){
+        var argumentSource = argumentObj.http.source;
+        var internalArgument = false;
+        //Now check if the argument is the internal argument..
+        if(argumentSource === "path"){
+            //Now check if the argument does not belongs to related mode data..
+            if(method.hasResourceParams){
+                var argumentFound = false;
+                for(var i=0; i< method.resourceParams.length; i++){
+                    var resourceArgObj = method.resourceParams[i];
+                    if(resourceArgObj.arg === argumentName){
+                        argumentFound = true;
+                        break;
+                    }
+                } //forloop ends
+                if(argumentFound){
+                    internalArgument = false;
+                }else{
+                    internalArgument = true;
+                }
+            }else{
+                //Argument is internal argument..
+                internalArgument = true;
+            }
+        } //if path
+        return internalArgument;
+    }
+
+    var modelName = capitalizeFirstLetter(model.name);
+%>
+
+
+import com.google.common.collect.ImmutableMap;
+import com.strongloop.android.loopback.ModelRepository;
+import com.strongloop.android.loopback.callbacks.ListCallback;
+import com.strongloop.android.loopback.callbacks.ObjectCallback;
+import com.strongloop.android.loopback.callbacks.VoidCallback;
+import com.strongloop.android.remoting.JsonUtil;
+import com.strongloop.android.remoting.adapters.Adapter;
+import com.strongloop.android.remoting.adapters.RestContract;
+import com.strongloop.android.remoting.adapters.RestContractItem;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+
+<% if(model.base === "User" || modelName === "User"){ %>
+import com.strongloop.android.loopback.UserRepository;
+<% } else { %>
+import com.strongloop.android.loopback.ModelRepository;
+<% } %>
+
+import org.json.JSONObject;
+
+
+//Now import model of related models..
+<% for(relation in model.relations) { %>
+    <% if(model.relations.hasOwnProperty(relation)) {
+        var relatedModelName = model.relations[relation].model;
+        var modelName_ = capitalizeFirstLetter(relatedModelName) ;
+    %>
+        import com.androidsdk.snaphy.snaphyandroidsdk.models.<%- modelName_ %>;
+
+    <% } %>
+<% } %>
+
+
+
+<% if(model.base === "User" || modelName === "User"){ %>
+public class <%- modelName %>Repository extends com.strongloop.android.loopback.UserRepository<<%- modelName %>> {
+<% } else { %>
+public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>> {
+<% } %>
+
+    public <%- modelName %>Repository(){
+        super("<%- modelName %>", null, <%- modelName %>.class);
+    }
+
+
+
+
+
+    public RestContract createContract() {
+        RestContract contract = super.createContract();
+        <% model.restDefinition.methods.forEach(function(restMethodObj){
+            var patt = new RegExp("^" + model.name + "\\..+");
+        %>
+            <% if(restMethodObj.fullName && patt.test(restMethodObj.fullName)){ %>
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "<%- restMethodObj.routes[0].path %>", "<%- restMethodObj.routes[0].verb.toUpperCase() %>"), "<%- restMethodObj.fullName %>");
+            <% } %>
+        <% });%>
+        return contract;
+    }
+
+
+
+    <%#{
+        "fullName": "Recipe.prototype.__get__customer",
+        "name": "prototype.__get__customer",
+        "accepts": [{
+            "arg": "id",
+            "type": "any",
+            "required": true,
+            "http": {
+                "source": "path"
+            },
+            "description": "PersistedModel id"
+        }, {
+            "arg": "refresh",
+            "type": "boolean",
+            "http": {
+                "source": "query"
+            }
+        }],
+        "returns": [{
+            "arg": "customer",
+            "type": "Customer",
+            "root": true
+        }],
+        "errors": [],
+        "description": "Fetches belongsTo relation customer.",
+        "documented": true,
+        "routes": [{
+            "path": "/:id/customer",
+            "verb": "get"
+        }],
+        "internal": "Use Recipe.customer() instead."
+      } %>
+
+
+
+
+    <% model.restDefinition.methods.forEach(function(restMethodObj){
+        var patt = new RegExp("^" + model.name + "\\..+");
+        //metch prototype.__
+        var methodPatt = /prototype\.\_\_/;
+    %>
+        <% if(restMethodObj.fullName
+            && patt.test(restMethodObj.fullName)
+            && restMethodObj.name !== "createChangeStream"
+            && restMethodObj.name !== "login"
+            && restMethodObj.name !== "logout" ){
+
+            var restMethodName = restMethodObj.name.replace(methodPatt, "");
+            var methodString = "public void ";
+            methodString = methodString + restMethodName + "( ";
+            //ImmutableMap string concatenation..
+            var mapString = "ImmutableMap.of(";
+
+            //Now loop through all the required arguments..
+            restMethodObj.accepts.forEach(function(requiredArgumentObj, index){
+                var type            = requiredArgumentObj.type;
+                var argumentName    = requiredArgumentObj.arg;
+                if(type instanceof Array){
+                    type = "ArrayList<" + convertType(type[0]) + ">" ;
+                }else{
+                    type = convertType(type);
+                }
+
+                //ImmutableMap of mapping data..
+                if(index === 0){
+                    mapString = mapString + '"' + argumentName + '"' +  ', ' + argumentName ;
+                }else{
+                    mapString = mapString + ', "' + argumentName + '"' +  ', ' + argumentName ;
+                }
+                methodString = methodString + " " + type + " " + argumentName + ", ";
+            });
+
+            //Wrapup ImmutableMap data..
+            mapString  = mapString + ")";
+
+            //Now get the return type....
+            var callback ;
+            var returnType;
+            var callbackType;
+            //Type name like String etc..
+            var type;
+            var method = restMethodObj;
+            if(method.returns.length && Object.keys(method.returns[0]).length !== 0){
+                if(method.returns[0].type instanceof Array){
+
+                    type = convertType(method.returns[0].type[0]);
+                    returnType = "ArrayList<" + type + ">";
+                    methodString = methodString  +  "final ListCallback<" + type + "> callback)";
+                    callback = "ListCallback<" + type + "> ";
+                    callbackType = "ListCallback";
+                }else{
+
+                    type = convertType(method.returns[0].type);
+                    returnType = type;
+                    methodString = methodString  +  "final ObjectCallback<" + type + "> callback)";
+                    callback = "ObjectCallback<" + type + "> ";
+                    callbackType = "ObjectCallback";
+                }
+            }else{
+                methodString = methodString  +  "final VoidCallback callback)";
+                callback = "VoidCallback ";
+                //returnType = type;
+                callbackType = "VoidCallback";
+            }
+
+        %>
+            //Method <%- restMethodName %> definition
+            <%- methodString %>{
+                <% if(callbackType === "VoidCallback") {%>
+                    invokeStaticMethod("<%- restMethodObj.name %>", <%- mapString %>, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                        }
+                    });
+                <% } %>
+
+
+                <% if(callbackType === "ObjectCallback") {%>
+                    invokeStaticMethod("<%- restMethodObj.name %>", <%- mapString %>, new Adapter.JsonObjectCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            <% if(model.allModels[type] === undefined) { %>
+                                //If error happens then change it to Object type..
+                                Map<String, <%- type %>> result = JsonUtil.fromJson(response);
+                                callback.onSuccess(result);
+                            <% }else{ %>
+                                <%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
+                                Map<String, Object> result = JsonUtil.fromJson(response);
+                                <%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(result);
+                                callback.onSuccess(<%- lowercaseFirstLetter(type) %>);
+                            <% } %>
+                        }
+                    });
+                <% } %>
+
+                <% if(callbackType === "ListCallback") {%>
+                    invokeStaticMethod("<%- restMethodObj.name %>", <%- mapString %>, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            <% if(model.allModels[type] === undefined) { %>
+                                //If error happens then change it to Object type..
+                                ArrayList<<%- type %>> result = JsonUtil.fromJson(response);
+                                callback.onSuccess(result);
+                            <% }else{ %>
+                                <%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
+                                //Now converting jsonObject to list
+                                List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                List<<%- type %>> <%- lowercaseFirstLetter(type) %>List = new ArrayList<<%- type %>>();
+                                <%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
+
+                                for (Map<String, Object> obj : result) {
+                                    <%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(obj);
+                                    <%- lowercaseFirstLetter(type) %>List.add(<%- lowercaseFirstLetter(type) %>);
+                                }
+                                callback.onSuccess(<%- lowercaseFirstLetter(type) %>List);
+                            <% } %>
+                        }
+                    });
+                <% } %>
+
+            }//Method <%- restMethodName %> definition ends here..
+
+            <%# //Now add methods for each restMethods..
+            public void get__customer(String id, final ObjectCallback<Customer> callback) {
+                invokeStaticMethod("prototype.__get__customer", ImmutableMap.of("id", id), new Adapter.JsonObjectCallback() {
+                    @Override
+                    public void onSuccess(JSONObject response) {
+                        CustomerRepository responseCustomerRepository = new CustomerRepository();
+                        Customer  customer = response != null
+                                ? responseCustomerRepository.createObject(JsonUtil.fromJson(response))
+                                : null;
+                        //List<Order> customerList ;
+                        callback.onSuccess(customer);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        callback.onError(t);
+                    }
+                });
+
+            }%>
+
+        <% } %>
+    <% });%>
+
+
+
+}

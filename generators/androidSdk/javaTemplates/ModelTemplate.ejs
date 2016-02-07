@@ -60,13 +60,12 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
     var modelName = capitalizeFirstLetter(model.name);
 %>
 
-<% if(model.base === "User"){ %>
+<% if(model.base === "User" || modelName === "User"){ %>
 import com.strongloop.android.loopback.User;
 <% } else { %>
 import com.strongloop.android.loopback.Model;
 <% } %>
 
-import com.strongloop.android.loopback.Model;
 import com.strongloop.android.loopback.RestAdapter;
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
@@ -87,8 +86,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-<% if(model.base === "User"){ %>
-public class <%- modelName %> extends User {
+<% if(model.base === "User" || modelName === "User"){ %>
+public class <%- modelName %> extends com.strongloop.android.loopback.User {
 <% } else { %>
 public class <%- modelName %> extends Model {
 <% } %>

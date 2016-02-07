@@ -6,7 +6,6 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 import com.strongloop.android.loopback.User;
 
 
-import com.strongloop.android.loopback.Model;
 import com.strongloop.android.loopback.RestAdapter;
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
@@ -30,7 +29,7 @@ import java.util.HashMap;
 
 
 
-public class Employee extends User {
+public class Employee extends com.strongloop.android.loopback.User {
 
 
     private Employee that ;

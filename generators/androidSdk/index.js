@@ -20,15 +20,50 @@ var startServer = function(){
 
 
 //Generate Repository Class file in java..
-var generateRepository = function(app){
+var generateRepository = function(app, modelsRestDefinition){
     //Now compile the ejs template..
     var ModelTemplatePath      = path.join(__dirname, constants.javaTemplates, "ModelTemplate.ejs");
+    var RepositoryTemplatePath      = path.join(__dirname, constants.javaTemplates, "RepositoryTemplate.ejs");
     var AndroidModelPath       = path.join(__dirname, constants.androidMainPath, "models");
     var AndroidRepositoryPath  = path.join(__dirname, constants.androidMainPath, "repository");
 
     //Clean Repository folder and rebuild..
     rimraf.sync(AndroidRepositoryPath);
     mkdirp.sync(AndroidRepositoryPath);
+
+    //Loop through def..
+    for(var modelName in modelsRestDefinition){
+        if(modelsRestDefinition.hasOwnProperty(modelName)){
+            var modelObj = app.models[modelName];
+            var modelProperties = modelObj.definition.rawProperties;
+
+            var model = {
+                name : modelName,
+                restDefinition: modelsRestDefinition[modelName],
+                properties: modelProperties,
+                base: modelObj.definition.settings.base,
+                relations: modelObj.definition.settings.relations,
+                allModels: app.models
+            };
+
+            //Now compile each Repository and start writing it to the Repository directory..
+            //First read the template file
+            var repoTemplate = fs.readFileSync(
+               RepositoryTemplatePath,
+               { encoding: 'utf-8' }
+            );
+
+            var formattedRepo = ejs.render(repoTemplate, {model: model});
+            console.log(chalk.red("\nCompiling Repository Class -> " + helper.capitalizeFirstLetter(modelName) + "Repository.java" ));
+            //Now writing it to file and saving to model folder..
+
+            fs.writeFileSync(
+                path.join(AndroidRepositoryPath, helper.capitalizeFirstLetter(modelName) + "Repository.java") ,
+                formattedRepo,
+                'utf8'
+            );
+        }
+    }
 };
 
 
@@ -47,7 +82,6 @@ var generateModels = function(app, modelsRestDefinition){
     for(var modelName in app.models){
         if(app.models.hasOwnProperty(modelName)){
             var modelObj = app.models[modelName];
-
             var modelProperties = modelObj.definition.rawProperties;
             //Print all the model def
             /*fs.writeFileSync(
@@ -55,35 +89,38 @@ var generateModels = function(app, modelsRestDefinition){
                 JSON.stringify( modelObj.definition),
                 'utf8'
             );*/
-            var model = {
-                name : modelName,
-                properties: modelProperties,
-                base: modelObj.definition.settings.base,
-                relations: modelObj.definition.settings.relations,
-                restDefinition: modelsRestDefinition
-            };
-            //console.log(modelsRestDefinition);
+            // if(modelsRestDefinition[modelName] !== undefined){
+                var model = {
+                    name : modelName,
+                    properties: modelProperties,
+                    base: modelObj.definition.settings.base,
+                    relations: modelObj.definition.settings.relations,
+                    restDefinition: modelsRestDefinition
+                };
+                //console.log(modelsRestDefinition);
 
 
-            //Now compile each models and start writing it to the models directory..
-            //First read the template file
-            var modelTemplate = fs.readFileSync(
-               ModelTemplatePath,
-               { encoding: 'utf-8' }
-            );
+                //Now compile each models and start writing it to the models directory..
+                //First read the template file
+                var modelTemplate = fs.readFileSync(
+                   ModelTemplatePath,
+                   { encoding: 'utf-8' }
+                );
 
-            var formattedModel = ejs.render(modelTemplate, {model: model});
-            console.log(chalk.blue("\nCompiling Model Class -> " + helper.capitalizeFirstLetter(modelName) ));
-            //Now writing it to file and saving to model folder..
+                var formattedModel = ejs.render(modelTemplate, {model: model});
+                console.log(chalk.blue("\nCompiling Model Class -> " + helper.capitalizeFirstLetter(modelName) +".java"));
+                //Now writing it to file and saving to model folder..
 
-            fs.writeFileSync(
-                path.join(AndroidModelPath, helper.capitalizeFirstLetter(modelName) + ".java") ,
-                formattedModel,
-                'utf8'
-            );
+                fs.writeFileSync(
+                    path.join(AndroidModelPath, helper.capitalizeFirstLetter(modelName) + ".java") ,
+                    formattedModel,
+                    'utf8'
+                );
+            // }
         }
     }
 };
+
 
 
 //Now creating a constructor..
@@ -94,6 +131,7 @@ var init  = function(){
     var modelsRestDefinition = helper.describeModels(app);
     //Now generate the models..
     generateModels(app, modelsRestDefinition);
+    generateRepository(app, modelsRestDefinition);
 
 };
 
