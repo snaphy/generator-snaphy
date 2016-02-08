@@ -132,6 +132,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.<%- modelName %>Reposit
             <% if( model.relations[relation].through) {
                 var throughModel = model.relations[relation].through;
             %>
+                import com.androidsdk.snaphy.snaphyandroidsdk.models.<%- throughModel %>;
                 import com.androidsdk.snaphy.snaphyandroidsdk.repository.<%- throughModel %>Repository;
             <% } %>
 
@@ -354,8 +355,50 @@ public class <%- modelName %> extends Model {
                         }
                     }
 
+                    <%
+                    //Now checking for hasManyThrough relationship..
+                    if(model.relations[relation].through){
+                        var capitalcaseRelatedModelName = capitalizeFirstLetter(model.relations[relation].through);
+                        var throughRelation = lowercaseFirstLetter(model.relations[relation].through);
+                    %>
+                        //Write hasManyThrough def too..
+                        private List<<%- capitalcaseRelatedModelName %>>  <%- throughRelation %> ;
+
+                        public List<<%- capitalcaseRelatedModelName %>> get<%- capitalcaseRelatedModelName %>() {
+                            return <%- throughRelation %>;
+                        }
+
+                        public void set<%- capitalcaseRelatedModelName %>(List<<%- capitalcaseRelatedModelName %>> <%- throughRelation %>) {
+                            this.<%- throughRelation %> = <%- throughRelation %>;
+                        }
+
+                        //Adding throughRelation method..
+                        //Add a dummy class Name object to seperate data..
+                        public void addRelation(List<<%- capitalcaseRelatedModelName %>> <%- throughRelation %>, <%- capitalcaseRelatedModelName %> dummyClassInstance) {
+                            that.set<%- capitalcaseRelatedModelName %>(<%- throughRelation %>);
+
+                        }
+
+                        //Adding throughRelation method..
+                        //This will add a new data to the list throughRelation object..
+                        public void addRelation(<%- capitalcaseRelatedModelName %> <%- throughRelation %>) {
+                            try{
+                                that.get<%- capitalcaseRelatedModelName %>().add(<%- throughRelation %>);
+                            }catch(Exception e){
+                                List< <%- capitalcaseRelatedModelName %>> <%- throughRelation %>1 = new ArrayList();
+                                //Now add this item to list..
+                                <%- throughRelation %>1.add(<%- throughRelation %>);
+                                //Now set data....
+                                that.set<%- capitalcaseRelatedModelName %>(<%- throughRelation %>1);
+                            }
+                        }
+
+
+                    <% } %>
+
+
                 <% } %>
-                <% if (model.relations[relation].type === "hasManyThrough" || model.relations[relation].type === "hasAndBelongsToMany") { %>
+                <% if (model.relations[relation].type === "hasAndBelongsToMany") { %>
                     //TODO ADD BACKWARD COMPATIBILITY FOR hasManyThrough relationship..warning backward compatibility may leads to cyclic error..
                     //Define belongsTo relation method here..
                     private List<<%- capitalcaseRelatedModelName %>>  <%- relation %> ;

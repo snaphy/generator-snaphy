@@ -32,6 +32,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.IngredientsRepository;
     
             import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeRepository;
             
+                import com.androidsdk.snaphy.snaphyandroidsdk.models.RecipeIngredients;
                 import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeIngredientsRepository;
             
 
@@ -385,6 +386,43 @@ public class Ingredients extends Model {
                             that.setRecipes(recipes1);
                         }
                     }
+
+                    
+                        //Write hasManyThrough def too..
+                        private List<RecipeIngredients>  recipeIngredients ;
+
+                        public List<RecipeIngredients> getRecipeIngredients() {
+                            return recipeIngredients;
+                        }
+
+                        public void setRecipeIngredients(List<RecipeIngredients> recipeIngredients) {
+                            this.recipeIngredients = recipeIngredients;
+                        }
+
+                        //Adding throughRelation method..
+                        //Add a dummy class Name object to seperate data..
+                        public void addRelation(List<RecipeIngredients> recipeIngredients, RecipeIngredients dummyClassInstance) {
+                            that.setRecipeIngredients(recipeIngredients);
+
+                        }
+
+                        //Adding throughRelation method..
+                        //This will add a new data to the list throughRelation object..
+                        public void addRelation(RecipeIngredients recipeIngredients) {
+                            try{
+                                that.getRecipeIngredients().add(recipeIngredients);
+                            }catch(Exception e){
+                                List< RecipeIngredients> recipeIngredients1 = new ArrayList();
+                                //Now add this item to list..
+                                recipeIngredients1.add(recipeIngredients);
+                                //Now set data....
+                                that.setRecipeIngredients(recipeIngredients1);
+                            }
+                        }
+
+
+                    
+
 
                 
                 
