@@ -95,6 +95,7 @@ import com.strongloop.android.loopback.User;
 import com.strongloop.android.loopback.Model;
 <% } %>
 
+import java.util.List;
 import com.strongloop.android.loopback.RestAdapter;
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
@@ -248,32 +249,84 @@ public class <%- modelName %> extends Model {
         <% if(model.relations.hasOwnProperty(relation)) {
             var lowercaseRelatedModelName = lowercaseFirstLetter( model.relations[relation].model );
             var capitalcaseRelatedModelName = capitalizeFirstLetter(model.relations[relation].model);
+            var capitalcaseRelationName = capitalizeFirstLetter(relation);
             if(model.restDefinition[model.relations[relation].model] !== undefined){
         %>
                 <% if(model.relations[relation].type === "belongsTo" || model.relations[relation].type === "hasOne"){ %>
                     //Define belongsTo relation method here..
-                    private <%- capitalcaseRelatedModelName %>  <%- lowercaseRelatedModelName %> ;
+                    private <%- capitalcaseRelatedModelName %>  <%- relation %> ;
 
-                    public <%- capitalcaseRelatedModelName %> get<%- capitalcaseRelatedModelName %>() {
-                        return <%- lowercaseRelatedModelName %>;
+                    public <%- capitalcaseRelatedModelName %> get<%- capitalcaseRelationName %>() {
+                        return <%- relation %>;
                     }
 
-                    public void set<%- capitalcaseRelatedModelName %>(<%- capitalcaseRelatedModelName %> <%- lowercaseRelatedModelName %>) {
-                        this.<%- lowercaseRelatedModelName %> = <%- lowercaseRelatedModelName %>;
+                    public void set<%- capitalcaseRelationName %>(<%- capitalcaseRelatedModelName %> <%- relation %>) {
+                        this.<%- relation %> = <%- relation %>;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void set<%- capitalcaseRelatedModelName %>(HashMap<String, Object> <%- lowercaseRelatedModelName %>) {
+                    public void set<%- capitalcaseRelationName %>(HashMap<String, Object> <%- relation %>) {
                         //First create a dummy Repo class object for customer.
-                        <%- capitalcaseRelatedModelName %>Repository <%- lowercaseRelatedModelName %>Repository = new <%- capitalcaseRelatedModelName %>Repository();
-                        <%- capitalcaseRelatedModelName %> <%- lowercaseRelatedModelName %>1 = <%- lowercaseRelatedModelName %>Repository.createObject(<%- lowercaseRelatedModelName %>);
-                        set<%- capitalcaseRelatedModelName %>(<%- lowercaseRelatedModelName %>1);
+                        <%- capitalcaseRelatedModelName %>Repository <%- relation %>Repository = new <%- capitalcaseRelatedModelName %>Repository();
+                        <%- capitalcaseRelatedModelName %> <%- relation %>1 = <%- relation %>Repository.createObject(<%- relation %>);
+                        set<%- capitalcaseRelatedModelName %>(<%- relation %>1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(<%- capitalcaseRelatedModelName %> <%- lowercaseRelatedModelName %>) {
-                        that.set<%- capitalcaseRelatedModelName %>(<%- lowercaseRelatedModelName %>);
+                    public void addRelation(<%- capitalcaseRelatedModelName %> <%- relation %>) {
+                        that.set<%- capitalcaseRelationName %>(<%- relation %>);
                     }
+
+                <% }%>
+                <% else if (model.relations[relation].type === "hasMany") { %>
+                    <%# In case of hasMany || hasManyThrough || hasAndBelongsToMany %>
+                    //Define belongsTo relation method here..
+                    private List<<%- capitalcaseRelatedModelName %>>  <%- relation %> ;
+
+                    public List<<%- capitalcaseRelatedModelName %>> get<%- capitalcaseRelationName %>() {
+                        return <%- relation %>;
+                    }
+
+                    public void set<%- capitalcaseRelationName %>(List<<%- capitalcaseRelatedModelName %>> <%- relation %>) {
+                        this.<%- relation %> = <%- relation %>;
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void set<%- capitalcaseRelationName %>(List<HashMap<String, Object>> <%- relation %>) {
+                        //First create a dummy Repo class object for ..
+                        <%- capitalcaseRelatedModelName %>Repository <%- relation %>Repository = new <%- capitalcaseRelatedModelName %>Repository();
+                        List<<%- capitalcaseRelatedModelName %>> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : <%- relation %>) {
+                            //Also add relation to child type for two way communication..
+                            <%- capitalcaseRelatedModelName %> <%- obj %>1 = <%- relation %>Repository.createObject(obj);
+                            result.add(<%- obj %>1);
+                        }
+                        set<%- capitalcaseRelatedModelName %>(result);
+                    }
+
+
+                    //Adding relation method..
+                    public void addRelation(List<<%- capitalcaseRelatedModelName %>> <%- relation %>) {
+                        that.set<%- capitalcaseRelationName %>(<%- relation %>);
+                        //Now add backward compatibility for the relation belongsTo for hasMany..
+                        for (<%- capitalcaseRelatedModelName %> obj : <%- relation %>) {
+                            obj.addRelation(that)
+                        }
+                    }
+
+                <% } %>
+                <% else if (model.relations[relation].type === "hasManyThrough") { %>
+                    //TODO ADD BACKWARD COMPATIBILITY FOR hasManyThrough relationship..
+
+                <% } %>
+                <% else if (model.relations[relation].type === "hasAndBelongsToMany") { %>
+                    //TODO ADD BACKWARD COMPATIBILITY FOR hasManyThrough relationship..
+
+                <% } %>
+
+
+
+
 
 
                     //Now add instance methods to fetch the related belongsTo Model..
@@ -520,7 +573,8 @@ public class <%- modelName %> extends Model {
                         <% }); %>
                     <% } %>
 
-                <% } %>
+                <%# removed section.. if for belongsTo checking belongsTo method if %>
+
                 <% if(model.relations[relation].type === "hasMany" || model.relations[relation].type === "hasManyThrough") { %>
                     //Define hasMany, hasManyThrough method here..
 
