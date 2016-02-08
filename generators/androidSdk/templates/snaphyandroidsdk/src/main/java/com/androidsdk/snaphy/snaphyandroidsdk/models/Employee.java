@@ -6,6 +6,10 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 import com.strongloop.android.loopback.User;
 
 
+
+import org.json.JSONObject;
+import org.json.JSONArray;
+
 import java.util.List;
 import com.strongloop.android.loopback.RestAdapter;
 import com.strongloop.android.loopback.callbacks.ListCallback;
@@ -281,6 +285,8 @@ public class Employee extends com.strongloop.android.loopback.User {
                         that.setEmployeeDetails(employeeDetails);
                     }
 
+
+
                 
                 
                 
@@ -318,13 +324,15 @@ public class Employee extends com.strongloop.android.loopback.User {
 
                                             
                                                 @Override
-                                                public void onSuccess(EmployeeDetails object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                
+                                                    public void onSuccess(EmployeeDetails object) {
+                                                        //now add relation to this recipe.
+                                                        addRelation(object);
+                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                        //object.addRelation(that);
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
 
@@ -358,13 +366,15 @@ public class Employee extends com.strongloop.android.loopback.User {
 
                                             
                                                 @Override
-                                                public void onSuccess(EmployeeDetails object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                
+                                                    public void onSuccess(EmployeeDetails object) {
+                                                        //now add relation to this recipe.
+                                                        addRelation(object);
+                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                        //object.addRelation(that);
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
 
@@ -398,13 +408,15 @@ public class Employee extends com.strongloop.android.loopback.User {
 
                                             
                                                 @Override
-                                                public void onSuccess(EmployeeDetails object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                
+                                                    public void onSuccess(EmployeeDetails object) {
+                                                        //now add relation to this recipe.
+                                                        addRelation(object);
+                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                        //object.addRelation(that);
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
 

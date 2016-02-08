@@ -451,14 +451,14 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method link__recipes definition
-            public void link__recipes(  String id,  String fk,  Recipe data, final Adapter.JsonObjectCallback  callback ){
+            public void link__recipes(  String id,  String fk,  Recipe data, final ObjectCallback<Recipe> callback){
                 
 
 
                 
+                    
                     
                     invokeStaticMethod("prototype.__link__recipes", ImmutableMap.of("id", id, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
-                    
                     
                         @Override
                         public void onError(Throwable t) {
@@ -468,7 +468,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                callback.onSuccess(response);
+                                RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                Map<String, Object> result = JsonUtil.fromJson(response);
+                                Recipe recipe = recipeRepo.createObject(result);
+                                callback.onSuccess(recipe);
                             
                         }
                     });

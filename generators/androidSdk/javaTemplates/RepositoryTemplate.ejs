@@ -11,7 +11,7 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
     }
 
     //convert javascript to java type
-    function convertType(type){
+    function convertType(type, model){
         if(type === "string" || type === "any"){
             return "String";
         }
@@ -25,9 +25,38 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
             return "Boolean"
         }
         else {
-            return capitalizeFirstLetter(type);
+
+            return capitalizeFirstLetter(checkTypeConversion(type, model));
         }
     }
+
+    //check special type conversion for models with hasAndBelongsToMany relations ..
+    function checkTypeConversion(type, model){
+
+        //Convert type for hasAndBelongsToMany type like type CategoryRecipe  = Recipe or Category <--- type remove which belongs to current model. of the repo
+        if(model.allDef[type] === undefined){
+            //Check by removing the model..
+            var patt = new RegExp("^" + capitalizeFirstLetter(model.name) );
+            var newType = type.replace(patt, "");
+
+            if(model.allDef[newType] !== undefined){
+                //Then add this model to new type..
+                type = newType;
+            }else{
+                //Check by removing the model..
+                var patt = new RegExp(capitalizeFirstLetter(model.name) + "$" );
+                newType = type.replace(patt, "");
+                if(model.allDef[newType] !== undefined){
+                    //Then add this model to new type..
+                    type = newType;
+                }
+            }
+            return type;
+        }else{
+            return type;
+        }
+    }
+
 
     //isInternalArgument function function for finding if an argument is internal or not..
     function  isInternalArgument(argumentObj, argumentName, method){
@@ -213,9 +242,9 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                 var type            = requiredArgumentObj.type;
                 var argumentName    = requiredArgumentObj.arg;
                 if(type instanceof Array){
-                    type = "ArrayList<" + convertType(type[0]) + ">" ;
+                    type = "List<" + convertType(type[0], model) + ">" ;
                 }else{
-                    type = convertType(type);
+                    type = convertType(type, model);
                 }
 
                 //Convert type for hasAndBelongsToMany type like type CategoryRecipe  = Recipe or Category <--- type remove which belongs to current model. of the repo
@@ -267,9 +296,9 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
             var method = restMethodObj;
             if(method.returns.length && Object.keys(method.returns[0]).length !== 0){
                 if(method.returns[0].type instanceof Array){
-                    type = convertType(method.returns[0].type[0]);
+                    type = convertType(method.returns[0].type[0], model);
                     if(model.allModels[type] !== undefined){
-                        returnType = "ArrayList<" + type + ">";
+                        returnType = "List<" + type + ">";
                         methodString = methodString  +  "final ListCallback<" + type + "> callback)";
                         callback = "ListCallback<" + type + "> ";
                         callbackType = "ListCallback";
@@ -282,7 +311,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                     }
                 }else{
 
-                    type = convertType(method.returns[0].type);
+                    type = convertType(method.returns[0].type, model);
                     if(model.allModels[type] !== undefined){
                         returnType = type;
                         methodString = methodString  +  "final ObjectCallback<" + type + "> callback)";
@@ -290,6 +319,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                         callbackType = "ObjectCallback";
                     }else{
                         returnType = type;
+
                         methodString = methodString + "final Adapter.JsonObjectCallback  callback )";
                         //methodString = methodString  +  "final ObjectCallback<" + type + "> callback)";
                         callback = "new Adapter.JsonObjectCallback()";

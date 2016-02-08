@@ -6,6 +6,10 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 import com.strongloop.android.loopback.Model;
 
 
+
+import org.json.JSONObject;
+import org.json.JSONArray;
+
 import java.util.List;
 import com.strongloop.android.loopback.RestAdapter;
 import com.strongloop.android.loopback.callbacks.ListCallback;
@@ -133,14 +137,14 @@ public class Ingredients extends Model {
         
             
 
-                private ArrayList<HashMap<String, Object>> tags;
+                private List<HashMap<String, Object>> tags;
                 /* Adding Getter and Setter methods */
-                public ArrayList<HashMap<String, Object>> getTags(){
+                public List<HashMap<String, Object>> getTags(){
                     return tags;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setTags(ArrayList<HashMap<String, Object>> tags){
+                public void setTags(List<HashMap<String, Object>> tags){
                     this.tags = tags;
                 }
 
@@ -201,6 +205,8 @@ public class Ingredients extends Model {
                         that.setIngredientCategory(ingredientCategory);
                     }
 
+
+
                 
                 
                 
@@ -232,13 +238,15 @@ public class Ingredients extends Model {
 
                                             
                                                 @Override
-                                                public void onSuccess(IngredientCategory object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                
+                                                    public void onSuccess(IngredientCategory object) {
+                                                        //now add relation to this recipe.
+                                                        addRelation(object);
+                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                        //object.addRelation(that);
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
 
@@ -322,7 +330,7 @@ public class Ingredients extends Model {
                 
                 
                     
-                    //Define belongsTo relation method here..
+                    //Define hasMany relation method here..
                     private List<Recipe>  recipes ;
 
                     public List<Recipe> getRecipes() {
@@ -331,10 +339,13 @@ public class Ingredients extends Model {
 
                     public void setRecipes(List<Recipe> recipes) {
                         this.recipes = recipes;
+                        //Disabling backend compatibility for cyclic error
+                        /*
                         //Now add backward compatibility for the relation belongsTo for hasMany..
                         for (Recipe obj : recipes) {
                             obj.addRelation(that);
                         }
+                        */
                     }
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
@@ -345,18 +356,34 @@ public class Ingredients extends Model {
                         for (HashMap<String, Object> obj : recipes) {
                             //Also add relation to child type for two way communication..
                             Recipe obj1 = recipesRepository.createObject(obj);
-                            //Now add backward compatibility for the relation belongsTo for hasMany..
-                            obj1.addRelation(that);
+                            //Disabling backend compatibility for cyclic error
+                            /*//Now add backward compatibility for the relation belongsTo for hasMany..
+                            obj1.addRelation(that);*/
                             result.add(obj1);
                         }
-                        setRecipe(result);
+                        setRecipes(result);
                     }
 
 
                     //Adding relation method..
-                    public void addRelation(List<Recipe> recipes) {
+                    //Add a dummy class Name object to seperate data..
+                    public void addRelation(List<Recipe> recipes, Recipe dummyClassInstance) {
                         that.setRecipes(recipes);
 
+                    }
+
+                    //Adding relation method..
+                    //This will add a new data to the list relation object..
+                    public void addRelation(Recipe recipes) {
+                        try{
+                            that.getRecipes().add(recipes);
+                        }catch(Exception e){
+                            List< Recipe> recipes1 = new ArrayList();
+                            //Now add this item to list..
+                            recipes1.add(recipes);
+                            //Now set data....
+                            that.setRecipes(recipes1);
+                        }
                     }
 
                 
@@ -391,13 +418,15 @@ public class Ingredients extends Model {
 
                                             
                                                 @Override
-                                                public void onSuccess(Recipe object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                
+                                                    public void onSuccess(Recipe object) {
+                                                        //now add relation to this recipe.
+                                                        addRelation(object);
+                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                        //object.addRelation(that);
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
 
@@ -467,13 +496,15 @@ public class Ingredients extends Model {
 
                                             
                                                 @Override
-                                                public void onSuccess(Recipe object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                
+                                                    public void onSuccess(Recipe object) {
+                                                        //now add relation to this recipe.
+                                                        addRelation(object);
+                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                        //object.addRelation(that);
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
 
@@ -507,13 +538,15 @@ public class Ingredients extends Model {
 
                                             
                                                 @Override
-                                                public void onSuccess(RecipeIngredients object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                
+                                                    public void onSuccess(RecipeIngredients object) {
+                                                        //now add relation to this recipe.
+                                                        addRelation(object);
+                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                        //object.addRelation(that);
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
 
@@ -583,13 +616,11 @@ public class Ingredients extends Model {
 
                                             
                                                 @Override
-                                                public void onSuccess(Boolean object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
 
@@ -626,18 +657,21 @@ public class Ingredients extends Model {
 
                                             
                                                 @Override
-                                                public void onSuccess(ArrayList<Recipe> object) {
+                                                
+                                                    public void onSuccess(List<Recipe> object) {
 
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Disabling two way communication for cyclic error..
-                                                    /*for (Recipe obj : object) {
-                                                        //Also add relation to child type for two way communication..
-                                                        obj.addRelation(that);
-                                                    }*/
+                                                        //now add relation to this recipe.
+                                                        Recipe obj = new Recipe();
+                                                        addRelation(object, obj);
+                                                        //Disabling two way communication for cyclic error..
+                                                        /*for (Recipe obj : object) {
+                                                            //Also add relation to child type for two way communication..
+                                                            obj.addRelation(that);
+                                                        }*/
 
-                                                    callback.onSuccess(object);
-                                                }
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
                                             @Override
@@ -668,13 +702,15 @@ public class Ingredients extends Model {
 
                                             
                                                 @Override
-                                                public void onSuccess(Recipe object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                
+                                                    public void onSuccess(Recipe object) {
+                                                        //now add relation to this recipe.
+                                                        addRelation(object);
+                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                        //object.addRelation(that);
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
 
@@ -744,13 +780,11 @@ public class Ingredients extends Model {
 
                                             
                                                 @Override
-                                                public void onSuccess(Double object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
 

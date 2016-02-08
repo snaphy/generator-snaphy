@@ -114,7 +114,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
     
         
             //Method sendMail definition
-            public void sendMail(  ArrayList<String> to,  String subject,  String html, final Adapter.JsonObjectCallback  callback ){
+            public void sendMail(  List<String> to,  String subject,  String html, final Adapter.JsonObjectCallback  callback ){
                 
 
 
@@ -147,7 +147,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
     
         
             //Method sendNotice definition
-            public void sendNotice(  ArrayList<String> to,  String subject,  HashMap<String, Object> templateOptions, final Adapter.JsonObjectCallback  callback ){
+            public void sendNotice(  List<String> to,  String subject,  HashMap<String, Object> templateOptions, final Adapter.JsonObjectCallback  callback ){
                 
 
 

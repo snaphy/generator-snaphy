@@ -6,6 +6,10 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 import com.strongloop.android.loopback.Model;
 
 
+
+import org.json.JSONObject;
+import org.json.JSONArray;
+
 import java.util.List;
 import com.strongloop.android.loopback.RestAdapter;
 import com.strongloop.android.loopback.callbacks.ListCallback;
@@ -123,13 +127,15 @@ public class EmployeeDetails extends Model {
                         //First create a dummy Repo class object for customer.
                         EmployeeRepository employeesRepository = new EmployeeRepository();
                         Employee employees1 = employeesRepository.createObject(employees);
-                        setEmployee(employees1);
+                        setEmployees(employees1);
                     }
 
                     //Adding relation method..
                     public void addRelation(Employee employees) {
                         that.setEmployees(employees);
                     }
+
+
 
                 
                 
@@ -162,13 +168,15 @@ public class EmployeeDetails extends Model {
 
                                             
                                                 @Override
-                                                public void onSuccess(Employee object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                
+                                                    public void onSuccess(Employee object) {
+                                                        //now add relation to this recipe.
+                                                        addRelation(object);
+                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                        //object.addRelation(that);
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
 
@@ -202,13 +210,15 @@ public class EmployeeDetails extends Model {
 
                                             
                                                 @Override
-                                                public void onSuccess(Employee object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                
+                                                    public void onSuccess(Employee object) {
+                                                        //now add relation to this recipe.
+                                                        addRelation(object);
+                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                        //object.addRelation(that);
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
 
@@ -242,13 +252,15 @@ public class EmployeeDetails extends Model {
 
                                             
                                                 @Override
-                                                public void onSuccess(Employee object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                
+                                                    public void onSuccess(Employee object) {
+                                                        //now add relation to this recipe.
+                                                        addRelation(object);
+                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                        //object.addRelation(that);
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
 

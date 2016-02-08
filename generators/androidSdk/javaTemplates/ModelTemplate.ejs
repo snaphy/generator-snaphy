@@ -106,6 +106,10 @@ import com.strongloop.android.loopback.User;
 import com.strongloop.android.loopback.Model;
 <% } %>
 
+
+import org.json.JSONObject;
+import org.json.JSONArray;
+
 import java.util.List;
 import com.strongloop.android.loopback.RestAdapter;
 import com.strongloop.android.loopback.callbacks.ListCallback;
@@ -160,16 +164,16 @@ public class <%- modelName %> extends Model {
                 var typeName = model.properties[property].type[0];
                 var listType;
                 if(typeName === "object"){
-                    listType = "ArrayList<HashMap<String, Object>>";
+                    listType = "List<HashMap<String, Object>>";
                 }
                 else if (typeName === "string" || typeName === "date") {
-                    listType = "ArrayList<String>";
+                    listType = "List<String>";
                 }
                 else if (typeName === "number") {
-                    listType = "ArrayList<Double>";
+                    listType = "List<Double>";
                 }
                 else if(true){
-                    listType = "ArrayList<Object>";
+                    listType = "List<Object>";
                 }
             %>
 
@@ -281,7 +285,7 @@ public class <%- modelName %> extends Model {
                         //First create a dummy Repo class object for customer.
                         <%- capitalcaseRelatedModelName %>Repository <%- relation %>Repository = new <%- capitalcaseRelatedModelName %>Repository();
                         <%- capitalcaseRelatedModelName %> <%- relation %>1 = <%- relation %>Repository.createObject(<%- relation %>);
-                        set<%- capitalcaseRelatedModelName %>(<%- relation %>1);
+                        set<%- capitalcaseRelationName %>(<%- relation %>1);
                     }
 
                     //Adding relation method..
@@ -289,10 +293,12 @@ public class <%- modelName %> extends Model {
                         that.set<%- capitalcaseRelationName %>(<%- relation %>);
                     }
 
+
+
                 <% }%>
                 <% if (model.relations[relation].type === "hasMany") { %>
                     <%# In case of hasMany || hasManyThrough || hasAndBelongsToMany %>
-                    //Define belongsTo relation method here..
+                    //Define hasMany relation method here..
                     private List<<%- capitalcaseRelatedModelName %>>  <%- relation %> ;
 
                     public List<<%- capitalcaseRelatedModelName %>> get<%- capitalcaseRelationName %>() {
@@ -323,14 +329,29 @@ public class <%- modelName %> extends Model {
                             obj1.addRelation(that);*/
                             result.add(obj1);
                         }
-                        set<%- capitalcaseRelatedModelName %>(result);
+                        set<%- capitalcaseRelationName %>(result);
                     }
 
 
                     //Adding relation method..
-                    public void addRelation(List<<%- capitalcaseRelatedModelName %>> <%- relation %>) {
+                    //Add a dummy class Name object to seperate data..
+                    public void addRelation(List<<%- capitalcaseRelatedModelName %>> <%- relation %>, <%- capitalcaseRelatedModelName %> dummyClassInstance) {
                         that.set<%- capitalcaseRelationName %>(<%- relation %>);
 
+                    }
+
+                    //Adding relation method..
+                    //This will add a new data to the list relation object..
+                    public void addRelation(<%- capitalcaseRelatedModelName %> <%- relation %>) {
+                        try{
+                            that.get<%- capitalcaseRelationName %>().add(<%- relation %>);
+                        }catch(Exception e){
+                            List< <%- capitalcaseRelatedModelName %>> <%- relation %>1 = new ArrayList();
+                            //Now add this item to list..
+                            <%- relation %>1.add(<%- relation %>);
+                            //Now set data....
+                            that.set<%- capitalcaseRelationName %>(<%- relation %>1);
+                        }
                     }
 
                 <% } %>
@@ -357,13 +378,28 @@ public class <%- modelName %> extends Model {
                             <%- capitalcaseRelatedModelName %> obj1 = <%- relation %>Repository.createObject(obj);
                             result.add(obj1);
                         }
-                        set<%- capitalcaseRelatedModelName %>(result);
+                        set<%- capitalcaseRelationName %>(result);
                     }
 
 
                     //Adding relation method..
-                    public void addRelation(List<<%- capitalcaseRelatedModelName %>> <%- relation %>) {
+                    public void addRelation(List<<%- capitalcaseRelatedModelName %>> <%- relation %>, <%- capitalcaseRelatedModelName %> dummyClassInstance) {
                         that.set<%- capitalcaseRelationName %>(<%- relation %>);
+                    }
+
+
+                    //Adding relation method..
+                    //This will add a new data to the list relation object..
+                    public void addRelation(<%- capitalcaseRelatedModelName %> <%- relation %>) {
+                        try{
+                            that.get<%- capitalcaseRelationName %>().add(<%- relation %>);
+                        }catch(Exception e){
+                            List< <%- capitalcaseRelatedModelName %>> <%- relation %>1 = new ArrayList();
+                            //Now add this item to list..
+                            <%- relation %>1.add(<%- relation %>);
+                            //Now set data....
+                            that.set<%- capitalcaseRelationName %>(<%- relation %>1);
+                        }
                     }
 
                 <% } %>
@@ -459,7 +495,7 @@ public class <%- modelName %> extends Model {
 
                                             if(!internalArgument ){
                                                 if(argumentType  instanceof Array){
-                                                    argumentType = "ArrayList<" + convertType(argumentType[0], model) + ">" ;
+                                                    argumentType = "List<" + convertType(argumentType[0], model) + ">" ;
                                                 }
                                                 else {
                                                     argumentType = convertType(argumentType, model);
@@ -479,7 +515,7 @@ public class <%- modelName %> extends Model {
                                             if(method.returns[0].type instanceof Array){
                                                 type = convertType(method.returns[0].type[0], model);
                                                 if(model.allModels[type] !== undefined){
-                                                    returnType = "ArrayList<" + type + ">";
+                                                    returnType = "List<" + type + ">";
                                                     methodString = methodString + " " + "RestAdapter restAdapter" + ", " +  "final ListCallback<" + type + "> callback)";
                                                     callback = "ListCallback<" + type + "> ";
                                                     callbackType = "ListCallback";
@@ -568,7 +604,7 @@ public class <%- modelName %> extends Model {
 
                                                 if(!internalArgument ){
                                                     if(argumentType  instanceof Array){
-                                                        argumentType = "ArrayList<" + convertType(argumentType[0], model) + ">" ;
+                                                        argumentType = "List<" + convertType(argumentType[0], model) + ">" ;
                                                     }
                                                     else {
                                                         argumentType = convertType(argumentType, model);
@@ -594,30 +630,43 @@ public class <%- modelName %> extends Model {
 
                                             <% if(callbackType === "ObjectCallback"){ %>
                                                 @Override
-                                                public void onSuccess(<%- returnType %> object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                <% if(callback !== "Adapter.JsonObjectCallback" ) { %>
+                                                    public void onSuccess(<%- returnType %> object) {
+                                                        //now add relation to this recipe.
+                                                        addRelation(object);
+                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                        //object.addRelation(that);
+                                                        callback.onSuccess(object);
+                                                    }
+                                                <% }else{ %>
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                    }
+                                                <% } %>
                                             <% } %>
 
 
                                             <% if(callbackType === "ListCallback"){ %>
                                                 @Override
-                                                public void onSuccess(<%- returnType %> object) {
+                                                <% if( callback !== "Adapter.JsonArrayCallback" ) {%>
+                                                    public void onSuccess(<%- returnType %> object) {
 
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Disabling two way communication for cyclic error..
-                                                    /*for (<%- type %> obj : object) {
-                                                        //Also add relation to child type for two way communication..
-                                                        obj.addRelation(that);
-                                                    }*/
+                                                        //now add relation to this recipe.
+                                                        <%- type %> obj = new <%- type %>();
+                                                        addRelation(object, obj);
+                                                        //Disabling two way communication for cyclic error..
+                                                        /*for (<%- type %> obj : object) {
+                                                            //Also add relation to child type for two way communication..
+                                                            obj.addRelation(that);
+                                                        }*/
 
-                                                    callback.onSuccess(object);
-                                                }
+                                                        callback.onSuccess(object);
+                                                    }
+                                                <% }else{ %>
+                                                    public void onSuccess(JSONArray object) {
+                                                        callback.onSuccess(object);
+                                                    }
+                                                <% } %>
                                             <% } %>
 
                                             @Override

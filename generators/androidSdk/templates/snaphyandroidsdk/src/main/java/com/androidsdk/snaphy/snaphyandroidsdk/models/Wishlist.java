@@ -6,6 +6,10 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 import com.strongloop.android.loopback.Model;
 
 
+
+import org.json.JSONObject;
+import org.json.JSONArray;
+
 import java.util.List;
 import com.strongloop.android.loopback.RestAdapter;
 import com.strongloop.android.loopback.callbacks.ListCallback;
@@ -90,13 +94,15 @@ public class Wishlist extends Model {
                         //First create a dummy Repo class object for customer.
                         CustomerRepository customersRepository = new CustomerRepository();
                         Customer customers1 = customersRepository.createObject(customers);
-                        setCustomer(customers1);
+                        setCustomers(customers1);
                     }
 
                     //Adding relation method..
                     public void addRelation(Customer customers) {
                         that.setCustomers(customers);
                     }
+
+
 
                 
                 
@@ -129,13 +135,15 @@ public class Wishlist extends Model {
 
                                             
                                                 @Override
-                                                public void onSuccess(Customer object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                
+                                                    public void onSuccess(Customer object) {
+                                                        //now add relation to this recipe.
+                                                        addRelation(object);
+                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                        //object.addRelation(that);
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
 
@@ -169,13 +177,15 @@ public class Wishlist extends Model {
 
                                             
                                                 @Override
-                                                public void onSuccess(Customer object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                
+                                                    public void onSuccess(Customer object) {
+                                                        //now add relation to this recipe.
+                                                        addRelation(object);
+                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                        //object.addRelation(that);
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
 
@@ -209,13 +219,15 @@ public class Wishlist extends Model {
 
                                             
                                                 @Override
-                                                public void onSuccess(Customer object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                
+                                                    public void onSuccess(Customer object) {
+                                                        //now add relation to this recipe.
+                                                        addRelation(object);
+                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                        //object.addRelation(that);
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
 
@@ -353,13 +365,28 @@ public class Wishlist extends Model {
                             Recipe obj1 = recipesRepository.createObject(obj);
                             result.add(obj1);
                         }
-                        setRecipe(result);
+                        setRecipes(result);
                     }
 
 
                     //Adding relation method..
-                    public void addRelation(List<Recipe> recipes) {
+                    public void addRelation(List<Recipe> recipes, Recipe dummyClassInstance) {
                         that.setRecipes(recipes);
+                    }
+
+
+                    //Adding relation method..
+                    //This will add a new data to the list relation object..
+                    public void addRelation(Recipe recipes) {
+                        try{
+                            that.getRecipes().add(recipes);
+                        }catch(Exception e){
+                            List< Recipe> recipes1 = new ArrayList();
+                            //Now add this item to list..
+                            recipes1.add(recipes);
+                            //Now set data....
+                            that.setRecipes(recipes1);
+                        }
                     }
 
                 
@@ -399,13 +426,15 @@ public class Wishlist extends Model {
 
                                             
                                                 @Override
-                                                public void onSuccess(Recipe object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                
+                                                    public void onSuccess(Recipe object) {
+                                                        //now add relation to this recipe.
+                                                        addRelation(object);
+                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                        //object.addRelation(that);
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
 
@@ -475,13 +504,15 @@ public class Wishlist extends Model {
 
                                             
                                                 @Override
-                                                public void onSuccess(Recipe object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                
+                                                    public void onSuccess(Recipe object) {
+                                                        //now add relation to this recipe.
+                                                        addRelation(object);
+                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                        //object.addRelation(that);
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
 
@@ -515,13 +546,15 @@ public class Wishlist extends Model {
 
                                             
                                                 @Override
-                                                public void onSuccess(Recipe object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                
+                                                    public void onSuccess(Recipe object) {
+                                                        //now add relation to this recipe.
+                                                        addRelation(object);
+                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                        //object.addRelation(that);
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
 
@@ -591,13 +624,11 @@ public class Wishlist extends Model {
 
                                             
                                                 @Override
-                                                public void onSuccess(Boolean object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
 
@@ -634,18 +665,21 @@ public class Wishlist extends Model {
 
                                             
                                                 @Override
-                                                public void onSuccess(ArrayList<Recipe> object) {
+                                                
+                                                    public void onSuccess(List<Recipe> object) {
 
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Disabling two way communication for cyclic error..
-                                                    /*for (Recipe obj : object) {
-                                                        //Also add relation to child type for two way communication..
-                                                        obj.addRelation(that);
-                                                    }*/
+                                                        //now add relation to this recipe.
+                                                        Recipe obj = new Recipe();
+                                                        addRelation(object, obj);
+                                                        //Disabling two way communication for cyclic error..
+                                                        /*for (Recipe obj : object) {
+                                                            //Also add relation to child type for two way communication..
+                                                            obj.addRelation(that);
+                                                        }*/
 
-                                                    callback.onSuccess(object);
-                                                }
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
                                             @Override
@@ -676,13 +710,15 @@ public class Wishlist extends Model {
 
                                             
                                                 @Override
-                                                public void onSuccess(Recipe object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                
+                                                    public void onSuccess(Recipe object) {
+                                                        //now add relation to this recipe.
+                                                        addRelation(object);
+                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                        //object.addRelation(that);
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
 
@@ -752,13 +788,11 @@ public class Wishlist extends Model {
 
                                             
                                                 @Override
-                                                public void onSuccess(Double object) {
-                                                    //now add relation to this recipe.
-                                                    addRelation(object);
-                                                    //Also add relation to child type for two way communication..
-                                                    object.addRelation(that);
-                                                    callback.onSuccess(object);
-                                                }
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
                                             
 
 

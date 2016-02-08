@@ -696,14 +696,14 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method link__cuisines definition
-            public void link__cuisines(  String id,  String fk,  Cuisines data, final Adapter.JsonObjectCallback  callback ){
+            public void link__cuisines(  String id,  String fk,  Cuisines data, final ObjectCallback<Cuisines> callback){
                 
 
 
                 
+                    
                     
                     invokeStaticMethod("prototype.__link__cuisines", ImmutableMap.of("id", id, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
-                    
                     
                         @Override
                         public void onError(Throwable t) {
@@ -713,7 +713,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                callback.onSuccess(response);
+                                CuisinesRepository cuisinesRepo = getRestAdapter().createRepository(CuisinesRepository.class);
+                                Map<String, Object> result = JsonUtil.fromJson(response);
+                                Cuisines cuisines = cuisinesRepo.createObject(result);
+                                callback.onSuccess(cuisines);
                             
                         }
                     });
@@ -1026,14 +1029,14 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method link__category definition
-            public void link__category(  String id,  String fk,  Category data, final Adapter.JsonObjectCallback  callback ){
+            public void link__category(  String id,  String fk,  Category data, final ObjectCallback<Category> callback){
                 
 
 
                 
+                    
                     
                     invokeStaticMethod("prototype.__link__category", ImmutableMap.of("id", id, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
-                    
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1043,7 +1046,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                callback.onSuccess(response);
+                                CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
+                                Map<String, Object> result = JsonUtil.fromJson(response);
+                                Category category = categoryRepo.createObject(result);
+                                callback.onSuccess(category);
                             
                         }
                     });
@@ -1320,14 +1326,14 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method link__recipeTags definition
-            public void link__recipeTags(  String id,  String fk,  RecipeTag data, final Adapter.JsonObjectCallback  callback ){
+            public void link__recipeTags(  String id,  String fk,  RecipeTag data, final ObjectCallback<RecipeTag> callback){
                 
 
 
                 
+                    
                     
                     invokeStaticMethod("prototype.__link__recipeTags", ImmutableMap.of("id", id, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
-                    
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1337,7 +1343,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                callback.onSuccess(response);
+                                RecipeTagRepository recipeTagRepo = getRestAdapter().createRepository(RecipeTagRepository.class);
+                                Map<String, Object> result = JsonUtil.fromJson(response);
+                                RecipeTag recipeTag = recipeTagRepo.createObject(result);
+                                callback.onSuccess(recipeTag);
                             
                         }
                     });
@@ -1711,14 +1720,14 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method link__wishlists definition
-            public void link__wishlists(  String id,  String fk,  Wishlist data, final Adapter.JsonObjectCallback  callback ){
+            public void link__wishlists(  String id,  String fk,  Wishlist data, final ObjectCallback<Wishlist> callback){
                 
 
 
                 
+                    
                     
                     invokeStaticMethod("prototype.__link__wishlists", ImmutableMap.of("id", id, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
-                    
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1728,7 +1737,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                callback.onSuccess(response);
+                                WishlistRepository wishlistRepo = getRestAdapter().createRepository(WishlistRepository.class);
+                                Map<String, Object> result = JsonUtil.fromJson(response);
+                                Wishlist wishlist = wishlistRepo.createObject(result);
+                                callback.onSuccess(wishlist);
                             
                         }
                     });
