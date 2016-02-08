@@ -59,7 +59,18 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 
     //isInternalArgument function function for finding if an argument is internal or not..
     function  isInternalArgument(argumentObj, argumentName, method){
-        var argumentSource = argumentObj.http.source;
+
+        var argumentSource;
+        if(argumentObj.http !== undefined){
+            argumentSource = argumentObj.http.source;
+        }else{
+            argumentSource = null;
+        }
+
+        if(argumentSource === null){
+            return false;
+        }
+
         var internalArgument = false;
         //Now check if the argument is the internal argument..
         if(argumentSource === "path"){
@@ -100,6 +111,7 @@ import com.strongloop.android.loopback.RestAdapter;
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
+import com.strongloop.android.remoting.adapters.Adapter;
 
 //Import self repository..
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.<%- modelName %>Repository;
@@ -278,8 +290,52 @@ public class <%- modelName %> extends Model {
                     }
 
                 <% }%>
-                <% else if (model.relations[relation].type === "hasMany") { %>
+                <% if (model.relations[relation].type === "hasMany") { %>
                     <%# In case of hasMany || hasManyThrough || hasAndBelongsToMany %>
+                    //Define belongsTo relation method here..
+                    private List<<%- capitalcaseRelatedModelName %>>  <%- relation %> ;
+
+                    public List<<%- capitalcaseRelatedModelName %>> get<%- capitalcaseRelationName %>() {
+                        return <%- relation %>;
+                    }
+
+                    public void set<%- capitalcaseRelationName %>(List<<%- capitalcaseRelatedModelName %>> <%- relation %>) {
+                        this.<%- relation %> = <%- relation %>;
+                        //Disabling backend compatibility for cyclic error
+                        /*
+                        //Now add backward compatibility for the relation belongsTo for hasMany..
+                        for (<%- capitalcaseRelatedModelName %> obj : <%- relation %>) {
+                            obj.addRelation(that);
+                        }
+                        */
+                    }
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void set<%- capitalcaseRelationName %>1(List<HashMap<String, Object>> <%- relation %>) {
+                        //First create a dummy Repo class object for ..
+                        <%- capitalcaseRelatedModelName %>Repository <%- relation %>Repository = new <%- capitalcaseRelatedModelName %>Repository();
+                        List<<%- capitalcaseRelatedModelName %>> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : <%- relation %>) {
+                            //Also add relation to child type for two way communication..
+                            <%- capitalcaseRelatedModelName %> obj1 = <%- relation %>Repository.createObject(obj);
+                            //Disabling backend compatibility for cyclic error
+                            /*//Now add backward compatibility for the relation belongsTo for hasMany..
+                            obj1.addRelation(that);*/
+                            result.add(obj1);
+                        }
+                        set<%- capitalcaseRelatedModelName %>(result);
+                    }
+
+
+                    //Adding relation method..
+                    public void addRelation(List<<%- capitalcaseRelatedModelName %>> <%- relation %>) {
+                        that.set<%- capitalcaseRelationName %>(<%- relation %>);
+
+                    }
+
+                <% } %>
+                <% if (model.relations[relation].type === "hasManyThrough" || model.relations[relation].type === "hasAndBelongsToMany") { %>
+                    //TODO ADD BACKWARD COMPATIBILITY FOR hasManyThrough relationship..warning backward compatibility may leads to cyclic error..
                     //Define belongsTo relation method here..
                     private List<<%- capitalcaseRelatedModelName %>>  <%- relation %> ;
 
@@ -292,14 +348,14 @@ public class <%- modelName %> extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void set<%- capitalcaseRelationName %>(List<HashMap<String, Object>> <%- relation %>) {
+                    public void set<%- capitalcaseRelationName %>1(List<HashMap<String, Object>> <%- relation %>) {
                         //First create a dummy Repo class object for ..
                         <%- capitalcaseRelatedModelName %>Repository <%- relation %>Repository = new <%- capitalcaseRelatedModelName %>Repository();
                         List<<%- capitalcaseRelatedModelName %>> result = new ArrayList<>();
                         for (HashMap<String, Object> obj : <%- relation %>) {
                             //Also add relation to child type for two way communication..
-                            <%- capitalcaseRelatedModelName %> <%- obj %>1 = <%- relation %>Repository.createObject(obj);
-                            result.add(<%- obj %>1);
+                            <%- capitalcaseRelatedModelName %> obj1 = <%- relation %>Repository.createObject(obj);
+                            result.add(obj1);
                         }
                         set<%- capitalcaseRelatedModelName %>(result);
                     }
@@ -308,21 +364,10 @@ public class <%- modelName %> extends Model {
                     //Adding relation method..
                     public void addRelation(List<<%- capitalcaseRelatedModelName %>> <%- relation %>) {
                         that.set<%- capitalcaseRelationName %>(<%- relation %>);
-                        //Now add backward compatibility for the relation belongsTo for hasMany..
-                        for (<%- capitalcaseRelatedModelName %> obj : <%- relation %>) {
-                            obj.addRelation(that)
-                        }
                     }
 
                 <% } %>
-                <% else if (model.relations[relation].type === "hasManyThrough") { %>
-                    //TODO ADD BACKWARD COMPATIBILITY FOR hasManyThrough relationship..
 
-                <% } %>
-                <% else if (model.relations[relation].type === "hasAndBelongsToMany") { %>
-                    //TODO ADD BACKWARD COMPATIBILITY FOR hasManyThrough relationship..
-
-                <% } %>
 
 
 
@@ -400,7 +445,14 @@ public class <%- modelName %> extends Model {
                                                 argumentType = "string";
                                             }
 
-                                            var argumentSource = argumentObj.http.source;
+                                            var argumentSource;
+                                            if(argumentObj.http !== undefined){
+                                                argumentSource = argumentObj.http.source;
+                                            }else{
+                                                argumentSource = null;
+                                            }
+
+
                                             //Checking if the argument is internal or not..
                                             var internalArgument = isInternalArgument(argumentObj, argumentName, method);
 
@@ -435,7 +487,7 @@ public class <%- modelName %> extends Model {
                                                     returnType = type;
                                                     methodString = methodString  + " " + " RestAdapter restAdapter" + ", " +  "final Adapter.JsonArrayCallback callback)";
                                                     //methodString = methodString  +  "final ObjectCallback<" + type + "> callback)";
-                                                    callback = "new Adapter.JsonArrayCallback()";
+                                                    callback = "Adapter.JsonArrayCallback";
                                                     callbackType = "ListCallback";
                                                 }
                                             }else{
@@ -451,7 +503,7 @@ public class <%- modelName %> extends Model {
                                                     returnType = type;
                                                     methodString = methodString + " RestAdapter restAdapter" + ", " + "final Adapter.JsonObjectCallback  callback )";
                                                     //methodString = methodString  +  "final ObjectCallback<" + type + "> callback)";
-                                                    callback = "new Adapter.JsonObjectCallback()";
+                                                    callback = "Adapter.JsonObjectCallback";
                                                     //callback = "ObjectCallback<" + type + "> ";
                                                     callbackType = "ObjectCallback";
                                                 }
@@ -503,7 +555,13 @@ public class <%- modelName %> extends Model {
                                                     argumentType = "string";
                                                 }
 
-                                                var argumentSource = argumentObj.http.source;
+
+                                                var argumentSource;
+                                                if(argumentObj.http !== undefined){
+                                                    argumentSource = argumentObj.http.source;
+                                                }else{
+                                                    argumentSource = null;
+                                                }
                                                 //Checking if the argument is internal or not..
                                                 var internalArgument = isInternalArgument(argumentObj, argumentName, method);
 
@@ -549,12 +607,14 @@ public class <%- modelName %> extends Model {
                                             <% if(callbackType === "ListCallback"){ %>
                                                 @Override
                                                 public void onSuccess(<%- returnType %> object) {
+
                                                     //now add relation to this recipe.
                                                     addRelation(object);
-                                                    for (<%- type %> obj : object) {
+                                                    //Disabling two way communication for cyclic error..
+                                                    /*for (<%- type %> obj : object) {
                                                         //Also add relation to child type for two way communication..
                                                         obj.addRelation(that);
-                                                    }
+                                                    }*/
 
                                                     callback.onSuccess(object);
                                                 }

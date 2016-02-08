@@ -6,10 +6,12 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 import com.strongloop.android.loopback.Model;
 
 
+import java.util.List;
 import com.strongloop.android.loopback.RestAdapter;
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
+import com.strongloop.android.remoting.adapters.Adapter;
 
 //Import self repository..
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeDetailsRepository;
@@ -106,28 +108,37 @@ public class EmployeeDetails extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private Employee  employee ;
+                    private Employee  employees ;
 
-                    public Employee getEmployee() {
-                        return employee;
+                    public Employee getEmployees() {
+                        return employees;
                     }
 
-                    public void setEmployee(Employee employee) {
-                        this.employee = employee;
+                    public void setEmployees(Employee employees) {
+                        this.employees = employees;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setEmployee(HashMap<String, Object> employee) {
+                    public void setEmployees(HashMap<String, Object> employees) {
                         //First create a dummy Repo class object for customer.
-                        EmployeeRepository employeeRepository = new EmployeeRepository();
-                        Employee employee1 = employeeRepository.createObject(employee);
-                        setEmployee(employee1);
+                        EmployeeRepository employeesRepository = new EmployeeRepository();
+                        Employee employees1 = employeesRepository.createObject(employees);
+                        setEmployee(employees1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Employee employee) {
-                        that.setEmployee(employee);
+                    public void addRelation(Employee employees) {
+                        that.setEmployees(employees);
                     }
+
+                
+                
+                
+
+
+
+
+
 
 
                     //Now add instance methods to fetch the related belongsTo Model..
@@ -312,6 +323,7 @@ public class EmployeeDetails extends Model {
                     
 
                 
+
                  
                  
              

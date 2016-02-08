@@ -6,10 +6,12 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 import com.strongloop.android.loopback.Model;
 
 
+import java.util.List;
 import com.strongloop.android.loopback.RestAdapter;
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
+import com.strongloop.android.remoting.adapters.Adapter;
 
 //Import self repository..
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeIngredientsRepository;
@@ -144,6 +146,15 @@ public class RecipeIngredients extends Model {
                         that.setRecipe(recipe);
                     }
 
+                
+                
+                
+
+
+
+
+
+
 
                     //Now add instance methods to fetch the related belongsTo Model..
                     
@@ -208,6 +219,7 @@ public class RecipeIngredients extends Model {
                     
 
                 
+
                  
                  
              
@@ -238,6 +250,15 @@ public class RecipeIngredients extends Model {
                     public void addRelation(Ingredients ingredients) {
                         that.setIngredients(ingredients);
                     }
+
+                
+                
+                
+
+
+
+
+
 
 
                     //Now add instance methods to fetch the related belongsTo Model..
@@ -303,6 +324,7 @@ public class RecipeIngredients extends Model {
                     
 
                 
+
                  
                  
              

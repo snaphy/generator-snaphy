@@ -6,10 +6,12 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 import com.strongloop.android.loopback.Model;
 
 
+import java.util.List;
 import com.strongloop.android.loopback.RestAdapter;
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
+import com.strongloop.android.remoting.adapters.Adapter;
 
 //Import self repository..
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.CommentsRepository;
@@ -184,6 +186,15 @@ public class Comments extends Model {
                         that.setCustomer(customer);
                     }
 
+                
+                
+                
+
+
+
+
+
+
 
                     //Now add instance methods to fetch the related belongsTo Model..
                     
@@ -264,6 +275,7 @@ public class Comments extends Model {
                     
 
                 
+
                  
                  
              
@@ -294,6 +306,15 @@ public class Comments extends Model {
                     public void addRelation(Recipe recipe) {
                         that.setRecipe(recipe);
                     }
+
+                
+                
+                
+
+
+
+
+
 
 
                     //Now add instance methods to fetch the related belongsTo Model..
@@ -375,6 +396,7 @@ public class Comments extends Model {
                     
 
                 
+
                  
                  
              

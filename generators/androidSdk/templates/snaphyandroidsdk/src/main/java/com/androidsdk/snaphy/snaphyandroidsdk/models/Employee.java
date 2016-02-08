@@ -6,10 +6,12 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 import com.strongloop.android.loopback.User;
 
 
+import java.util.List;
 import com.strongloop.android.loopback.RestAdapter;
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
+import com.strongloop.android.remoting.adapters.Adapter;
 
 //Import self repository..
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeRepository;
@@ -279,6 +281,15 @@ public class Employee extends com.strongloop.android.loopback.User {
                         that.setEmployeeDetails(employeeDetails);
                     }
 
+                
+                
+                
+
+
+
+
+
+
 
                     //Now add instance methods to fetch the related belongsTo Model..
                     
@@ -481,6 +492,7 @@ public class Employee extends com.strongloop.android.loopback.User {
                     
 
                 
+
                  
                  
              

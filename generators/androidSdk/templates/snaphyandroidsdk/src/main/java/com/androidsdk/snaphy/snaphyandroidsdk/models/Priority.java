@@ -6,10 +6,12 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 import com.strongloop.android.loopback.Model;
 
 
+import java.util.List;
 import com.strongloop.android.loopback.RestAdapter;
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
+import com.strongloop.android.remoting.adapters.Adapter;
 
 //Import self repository..
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.PriorityRepository;
@@ -106,28 +108,37 @@ public class Priority extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private Recipe  recipe ;
+                    private Recipe  recipes ;
 
-                    public Recipe getRecipe() {
-                        return recipe;
+                    public Recipe getRecipes() {
+                        return recipes;
                     }
 
-                    public void setRecipe(Recipe recipe) {
-                        this.recipe = recipe;
+                    public void setRecipes(Recipe recipes) {
+                        this.recipes = recipes;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setRecipe(HashMap<String, Object> recipe) {
+                    public void setRecipes(HashMap<String, Object> recipes) {
                         //First create a dummy Repo class object for customer.
-                        RecipeRepository recipeRepository = new RecipeRepository();
-                        Recipe recipe1 = recipeRepository.createObject(recipe);
-                        setRecipe(recipe1);
+                        RecipeRepository recipesRepository = new RecipeRepository();
+                        Recipe recipes1 = recipesRepository.createObject(recipes);
+                        setRecipe(recipes1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Recipe recipe) {
-                        that.setRecipe(recipe);
+                    public void addRelation(Recipe recipes) {
+                        that.setRecipes(recipes);
                     }
+
+                
+                
+                
+
+
+
+
+
 
 
                     //Now add instance methods to fetch the related belongsTo Model..
@@ -312,6 +323,7 @@ public class Priority extends Model {
                     
 
                 
+
                  
                  
              
