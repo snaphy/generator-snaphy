@@ -135,167 +135,159 @@ public class Priority extends Model {
 
                     
 
-                    //Write the method here..
-                    public void get__recipes( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
-                        //Define methods here..
-                        final PriorityRepository  priorityRepo = restAdapter.createRepository(PriorityRepository.class);
-                        
+                                    //Write the method here..
+                                    public void get__recipes( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
+                                        //Define methods here..
+                                        final PriorityRepository  priorityRepo = restAdapter.createRepository(PriorityRepository.class);
+                                        
 
 
-                        
+                                        
 
-                        
+                                        
 
-                        priorityRepo.get__recipes( (String)that.getId(), refresh,  new ObjectCallback<Recipe> (){
-                            
+                                        priorityRepo.get__recipes( (String)that.getId(), refresh,  new ObjectCallback<Recipe> (){
+                                            
 
-                            
-                                @Override
-                                public void onSuccess(Recipe object) {
-                                    //now add relation to this recipe.
-                                    addRelation(object);
-                                    //Also add relation to child type for two way communication..
-                                    object.addRelation(that);
-                                    callback.onSuccess(object);
-                                }
-                            
-
-
-                            
-
-                            @Override
-                            public void onError(Throwable t) {
-                                //Now calling the callback
-                                callback.onError(t);
-                            }
-
-                        });
-                    } //method def ends here.
+                                            
+                                                @Override
+                                                public void onSuccess(Recipe object) {
+                                                    //now add relation to this recipe.
+                                                    addRelation(object);
+                                                    //Also add relation to child type for two way communication..
+                                                    object.addRelation(that);
+                                                    callback.onSuccess(object);
+                                                }
+                                            
 
 
-                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
                             
                         
 
-                    //Write the method here..
-                    public void create__recipes( Recipe data,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
-                        //Define methods here..
-                        final PriorityRepository  priorityRepo = restAdapter.createRepository(PriorityRepository.class);
-                        
+                                    //Write the method here..
+                                    public void create__recipes( Recipe data,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
+                                        //Define methods here..
+                                        final PriorityRepository  priorityRepo = restAdapter.createRepository(PriorityRepository.class);
+                                        
 
 
-                        
+                                        
 
-                        
+                                        
 
-                        priorityRepo.create__recipes( (String)that.getId(), data,  new ObjectCallback<Recipe> (){
-                            
+                                        priorityRepo.create__recipes( (String)that.getId(), data,  new ObjectCallback<Recipe> (){
+                                            
 
-                            
-                                @Override
-                                public void onSuccess(Recipe object) {
-                                    //now add relation to this recipe.
-                                    addRelation(object);
-                                    //Also add relation to child type for two way communication..
-                                    object.addRelation(that);
-                                    callback.onSuccess(object);
-                                }
-                            
-
-
-                            
-
-                            @Override
-                            public void onError(Throwable t) {
-                                //Now calling the callback
-                                callback.onError(t);
-                            }
-
-                        });
-                    } //method def ends here.
+                                            
+                                                @Override
+                                                public void onSuccess(Recipe object) {
+                                                    //now add relation to this recipe.
+                                                    addRelation(object);
+                                                    //Also add relation to child type for two way communication..
+                                                    object.addRelation(that);
+                                                    callback.onSuccess(object);
+                                                }
+                                            
 
 
-                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
                             
                         
 
-                    //Write the method here..
-                    public void update__recipes( Recipe data,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
-                        //Define methods here..
-                        final PriorityRepository  priorityRepo = restAdapter.createRepository(PriorityRepository.class);
-                        
+                                    //Write the method here..
+                                    public void update__recipes( Recipe data,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
+                                        //Define methods here..
+                                        final PriorityRepository  priorityRepo = restAdapter.createRepository(PriorityRepository.class);
+                                        
 
 
-                        
+                                        
 
-                        
+                                        
 
-                        priorityRepo.update__recipes( (String)that.getId(), data,  new ObjectCallback<Recipe> (){
-                            
+                                        priorityRepo.update__recipes( (String)that.getId(), data,  new ObjectCallback<Recipe> (){
+                                            
 
-                            
-                                @Override
-                                public void onSuccess(Recipe object) {
-                                    //now add relation to this recipe.
-                                    addRelation(object);
-                                    //Also add relation to child type for two way communication..
-                                    object.addRelation(that);
-                                    callback.onSuccess(object);
-                                }
-                            
-
-
-                            
-
-                            @Override
-                            public void onError(Throwable t) {
-                                //Now calling the callback
-                                callback.onError(t);
-                            }
-
-                        });
-                    } //method def ends here.
+                                            
+                                                @Override
+                                                public void onSuccess(Recipe object) {
+                                                    //now add relation to this recipe.
+                                                    addRelation(object);
+                                                    //Also add relation to child type for two way communication..
+                                                    object.addRelation(that);
+                                                    callback.onSuccess(object);
+                                                }
+                                            
 
 
-                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
                             
                         
 
-                    //Write the method here..
-                    public void destroy__recipes( RestAdapter restAdapter, final VoidCallback callback) {
-                        //Define methods here..
-                        final PriorityRepository  priorityRepo = restAdapter.createRepository(PriorityRepository.class);
-                        
+                                    //Write the method here..
+                                    public void destroy__recipes( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Define methods here..
+                                        final PriorityRepository  priorityRepo = restAdapter.createRepository(PriorityRepository.class);
+                                        
 
 
-                        
+                                        
 
-                        
+                                        
 
-                        priorityRepo.destroy__recipes( (String)that.getId(),  new VoidCallback (){
-                            
-                                @Override
-                                public void onSuccess() {
-                                    callback.onSuccess();
-                                }
-                            
+                                        priorityRepo.destroy__recipes( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                }
+                                            
 
-                            
-
-
-                            
-
-                            @Override
-                            public void onError(Throwable t) {
-                                //Now calling the callback
-                                callback.onError(t);
-                            }
-
-                        });
-                    } //method def ends here.
+                                            
 
 
-                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
                             
                         
                         
@@ -320,10 +312,10 @@ public class Priority extends Model {
                     
 
                 
-                
-                
-            
-        
-    
+                 
+                 
+             
+          
+      
 
 }

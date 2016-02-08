@@ -47,6 +47,6 @@ public class EmailInfo extends Model {
 
 
     //Now adding relations between related models
-    
+      
 
 }

@@ -77,13 +77,13 @@ public class Cuisines extends Model {
     
         
                 
-                
+                 
                 
                     //Define hasAndBelongsToMany..
 
-                
-            
-        
-    
+                 
+             
+          
+      
 
 }

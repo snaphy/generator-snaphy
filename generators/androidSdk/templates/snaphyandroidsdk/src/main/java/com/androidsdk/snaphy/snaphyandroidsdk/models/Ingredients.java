@@ -205,65 +205,63 @@ public class Ingredients extends Model {
 
                     
 
-                    //Write the method here..
-                    public void get__ingredientCategory( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<IngredientCategory> callback) {
-                        //Define methods here..
-                        final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
-                        
+                                    //Write the method here..
+                                    public void get__ingredientCategory( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<IngredientCategory> callback) {
+                                        //Define methods here..
+                                        final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
+                                        
 
 
-                        
+                                        
 
-                        
+                                        
 
-                        ingredientsRepo.get__ingredientCategory( (String)that.getId(), refresh,  new ObjectCallback<IngredientCategory> (){
-                            
+                                        ingredientsRepo.get__ingredientCategory( (String)that.getId(), refresh,  new ObjectCallback<IngredientCategory> (){
+                                            
 
-                            
-                                @Override
-                                public void onSuccess(IngredientCategory object) {
-                                    //now add relation to this recipe.
-                                    addRelation(object);
-                                    //Also add relation to child type for two way communication..
-                                    object.addRelation(that);
-                                    callback.onSuccess(object);
-                                }
-                            
-
-
-                            
-
-                            @Override
-                            public void onError(Throwable t) {
-                                //Now calling the callback
-                                callback.onError(t);
-                            }
-
-                        });
-                    } //method def ends here.
+                                            
+                                                @Override
+                                                public void onSuccess(IngredientCategory object) {
+                                                    //now add relation to this recipe.
+                                                    addRelation(object);
+                                                    //Also add relation to child type for two way communication..
+                                                    object.addRelation(that);
+                                                    callback.onSuccess(object);
+                                                }
+                                            
 
 
-                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
                             
-                        
+                         
                             
-                        
+                         
                             
-                        
+                         
                             
-                        
+                         
                             
-                        
+                         
                             
-                        
+                         
                             
-                        
+                         
                             
-                        
+                         
                             
-                        
+                         
                             
-                        
+                         
                             
                         
                         
@@ -303,20 +301,20 @@ public class Ingredients extends Model {
                     
 
                 
-                
-                
-            
-        
+                 
+                 
+             
+          
     
         
                 
                 
                     //Define hasMany, hasManyThrough method here..
 
-                
-                
-            
-        
-    
+                 
+                 
+             
+          
+      
 
 }

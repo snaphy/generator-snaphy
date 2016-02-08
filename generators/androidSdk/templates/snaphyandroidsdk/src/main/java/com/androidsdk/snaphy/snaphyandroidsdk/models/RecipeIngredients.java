@@ -150,47 +150,45 @@ public class RecipeIngredients extends Model {
 
                     
 
-                    //Write the method here..
-                    public void get__recipe( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
-                        //Define methods here..
-                        final RecipeIngredientsRepository  recipeIngredientsRepo = restAdapter.createRepository(RecipeIngredientsRepository.class);
-                        
+                                    //Write the method here..
+                                    public void get__recipe( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
+                                        //Define methods here..
+                                        final RecipeIngredientsRepository  recipeIngredientsRepo = restAdapter.createRepository(RecipeIngredientsRepository.class);
+                                        
 
 
-                        
+                                        
 
-                        
+                                        
 
-                        recipeIngredientsRepo.get__recipe( (String)that.getId(), refresh,  new ObjectCallback<Recipe> (){
+                                        recipeIngredientsRepo.get__recipe( (String)that.getId(), refresh,  new ObjectCallback<Recipe> (){
+                                            
+
+                                            
+                                                @Override
+                                                public void onSuccess(Recipe object) {
+                                                    //now add relation to this recipe.
+                                                    addRelation(object);
+                                                    //Also add relation to child type for two way communication..
+                                                    object.addRelation(that);
+                                                    callback.onSuccess(object);
+                                                }
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
                             
-
-                            
-                                @Override
-                                public void onSuccess(Recipe object) {
-                                    //now add relation to this recipe.
-                                    addRelation(object);
-                                    //Also add relation to child type for two way communication..
-                                    object.addRelation(that);
-                                    callback.onSuccess(object);
-                                }
-                            
-
-
-                            
-
-                            @Override
-                            public void onError(Throwable t) {
-                                //Now calling the callback
-                                callback.onError(t);
-                            }
-
-                        });
-                    } //method def ends here.
-
-
-                                
-                            
-                        
+                         
                             
                         
                         
@@ -210,10 +208,10 @@ public class RecipeIngredients extends Model {
                     
 
                 
-                
-                
-            
-        
+                 
+                 
+             
+          
     
         
                 
@@ -245,49 +243,47 @@ public class RecipeIngredients extends Model {
                     //Now add instance methods to fetch the related belongsTo Model..
                     
 
-                    
+                     
                             
                         
 
-                    //Write the method here..
-                    public void get__ingredients( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Ingredients> callback) {
-                        //Define methods here..
-                        final RecipeIngredientsRepository  recipeIngredientsRepo = restAdapter.createRepository(RecipeIngredientsRepository.class);
-                        
+                                    //Write the method here..
+                                    public void get__ingredients( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Ingredients> callback) {
+                                        //Define methods here..
+                                        final RecipeIngredientsRepository  recipeIngredientsRepo = restAdapter.createRepository(RecipeIngredientsRepository.class);
+                                        
 
 
-                        
+                                        
 
-                        
+                                        
 
-                        recipeIngredientsRepo.get__ingredients( (String)that.getId(), refresh,  new ObjectCallback<Ingredients> (){
-                            
+                                        recipeIngredientsRepo.get__ingredients( (String)that.getId(), refresh,  new ObjectCallback<Ingredients> (){
+                                            
 
-                            
-                                @Override
-                                public void onSuccess(Ingredients object) {
-                                    //now add relation to this recipe.
-                                    addRelation(object);
-                                    //Also add relation to child type for two way communication..
-                                    object.addRelation(that);
-                                    callback.onSuccess(object);
-                                }
-                            
-
-
-                            
-
-                            @Override
-                            public void onError(Throwable t) {
-                                //Now calling the callback
-                                callback.onError(t);
-                            }
-
-                        });
-                    } //method def ends here.
+                                            
+                                                @Override
+                                                public void onSuccess(Ingredients object) {
+                                                    //now add relation to this recipe.
+                                                    addRelation(object);
+                                                    //Also add relation to child type for two way communication..
+                                                    object.addRelation(that);
+                                                    callback.onSuccess(object);
+                                                }
+                                            
 
 
-                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
                             
                         
                         
@@ -307,10 +303,10 @@ public class RecipeIngredients extends Model {
                     
 
                 
-                
-                
-            
-        
-    
+                 
+                 
+             
+          
+      
 
 }

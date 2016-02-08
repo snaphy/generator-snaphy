@@ -190,47 +190,45 @@ public class Comments extends Model {
 
                     
 
-                    //Write the method here..
-                    public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
-                        //Define methods here..
-                        final CommentsRepository  commentsRepo = restAdapter.createRepository(CommentsRepository.class);
-                        
+                                    //Write the method here..
+                                    public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
+                                        //Define methods here..
+                                        final CommentsRepository  commentsRepo = restAdapter.createRepository(CommentsRepository.class);
+                                        
 
 
-                        
+                                        
 
-                        
+                                        
 
-                        commentsRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
+                                        commentsRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
+                                            
+
+                                            
+                                                @Override
+                                                public void onSuccess(Customer object) {
+                                                    //now add relation to this recipe.
+                                                    addRelation(object);
+                                                    //Also add relation to child type for two way communication..
+                                                    object.addRelation(that);
+                                                    callback.onSuccess(object);
+                                                }
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
                             
-
-                            
-                                @Override
-                                public void onSuccess(Customer object) {
-                                    //now add relation to this recipe.
-                                    addRelation(object);
-                                    //Also add relation to child type for two way communication..
-                                    object.addRelation(that);
-                                    callback.onSuccess(object);
-                                }
-                            
-
-
-                            
-
-                            @Override
-                            public void onError(Throwable t) {
-                                //Now calling the callback
-                                callback.onError(t);
-                            }
-
-                        });
-                    } //method def ends here.
-
-
-                                
-                            
-                        
+                         
                             
                         
                         
@@ -266,10 +264,10 @@ public class Comments extends Model {
                     
 
                 
-                
-                
-            
-        
+                 
+                 
+             
+          
     
         
                 
@@ -301,49 +299,47 @@ public class Comments extends Model {
                     //Now add instance methods to fetch the related belongsTo Model..
                     
 
-                    
+                     
                             
                         
 
-                    //Write the method here..
-                    public void get__recipe( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
-                        //Define methods here..
-                        final CommentsRepository  commentsRepo = restAdapter.createRepository(CommentsRepository.class);
-                        
+                                    //Write the method here..
+                                    public void get__recipe( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
+                                        //Define methods here..
+                                        final CommentsRepository  commentsRepo = restAdapter.createRepository(CommentsRepository.class);
+                                        
 
 
-                        
+                                        
 
-                        
+                                        
 
-                        commentsRepo.get__recipe( (String)that.getId(), refresh,  new ObjectCallback<Recipe> (){
-                            
+                                        commentsRepo.get__recipe( (String)that.getId(), refresh,  new ObjectCallback<Recipe> (){
+                                            
 
-                            
-                                @Override
-                                public void onSuccess(Recipe object) {
-                                    //now add relation to this recipe.
-                                    addRelation(object);
-                                    //Also add relation to child type for two way communication..
-                                    object.addRelation(that);
-                                    callback.onSuccess(object);
-                                }
-                            
-
-
-                            
-
-                            @Override
-                            public void onError(Throwable t) {
-                                //Now calling the callback
-                                callback.onError(t);
-                            }
-
-                        });
-                    } //method def ends here.
+                                            
+                                                @Override
+                                                public void onSuccess(Recipe object) {
+                                                    //now add relation to this recipe.
+                                                    addRelation(object);
+                                                    //Also add relation to child type for two way communication..
+                                                    object.addRelation(that);
+                                                    callback.onSuccess(object);
+                                                }
+                                            
 
 
-                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
                             
                         
                         
@@ -379,10 +375,10 @@ public class Comments extends Model {
                     
 
                 
-                
-                
-            
-        
-    
+                 
+                 
+             
+          
+      
 
 }

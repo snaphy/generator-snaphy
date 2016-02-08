@@ -77,13 +77,13 @@ public class RecipeTag extends Model {
     
         
                 
-                
+                 
                 
                     //Define hasAndBelongsToMany..
 
-                
-            
-        
-    
+                 
+             
+          
+      
 
 }

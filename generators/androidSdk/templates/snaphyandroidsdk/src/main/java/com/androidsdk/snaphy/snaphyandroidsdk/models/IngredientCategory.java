@@ -80,10 +80,10 @@ public class IngredientCategory extends Model {
                 
                     //Define hasMany, hasManyThrough method here..
 
-                
-                
-            
-        
-    
+                 
+                 
+             
+          
+      
 
 }

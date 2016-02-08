@@ -217,15 +217,13 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                 }else{
                     type = convertType(type);
                 }
-                console.log("===========================================================================");
-                console.log(type);
+
                 //Convert type for hasAndBelongsToMany type like type CategoryRecipe  = Recipe or Category <--- type remove which belongs to current model. of the repo
                 if(model.allModels[type] === undefined){
                     //Check by removing the model..
                     var patt = new RegExp("^" + capitalizeFirstLetter(model.name) );
                     var newType = type.replace(patt, "");
 
-                    console.log(newType);
                     if(model.allModels[newType] !== undefined){
                         //Then add this model to new type..
                         type = newType;

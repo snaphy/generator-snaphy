@@ -100,6 +100,7 @@ var generateModels = function(app, modelsRestDefinition){
                     properties: modelProperties,
                     base: modelObj.definition.settings.base,
                     relations: modelObj.definition.settings.relations,
+                    allModels: app.models,
                     restDefinition: modelsRestDefinition
                 };
                 //console.log(modelsRestDefinition);

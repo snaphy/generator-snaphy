@@ -77,13 +77,13 @@ public class Category extends Model {
     
         
                 
-                
+                 
                 
                     //Define hasAndBelongsToMany..
 
-                
-            
-        
-    
+                 
+             
+          
+      
 
 }

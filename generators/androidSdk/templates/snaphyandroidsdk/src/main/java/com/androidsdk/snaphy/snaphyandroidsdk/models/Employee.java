@@ -250,8 +250,8 @@ public class Employee extends com.strongloop.android.loopback.User {
 
     //Now adding relations between related models
     
-        
-        
+         
+          
     
         
                 
@@ -283,183 +283,175 @@ public class Employee extends com.strongloop.android.loopback.User {
                     //Now add instance methods to fetch the related belongsTo Model..
                     
 
-                    
+                     
                             
-                        
+                         
                             
-                        
-                            
-                        
-
-                    //Write the method here..
-                    public void get__employeeDetails( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<EmployeeDetails> callback) {
-                        //Define methods here..
-                        final EmployeeRepository  employeeRepo = restAdapter.createRepository(EmployeeRepository.class);
-                        
-
-
-                        
-
-                        
-
-                        employeeRepo.get__employeeDetails( (String)that.getId(), refresh,  new ObjectCallback<EmployeeDetails> (){
-                            
-
-                            
-                                @Override
-                                public void onSuccess(EmployeeDetails object) {
-                                    //now add relation to this recipe.
-                                    addRelation(object);
-                                    //Also add relation to child type for two way communication..
-                                    object.addRelation(that);
-                                    callback.onSuccess(object);
-                                }
-                            
-
-
-                            
-
-                            @Override
-                            public void onError(Throwable t) {
-                                //Now calling the callback
-                                callback.onError(t);
-                            }
-
-                        });
-                    } //method def ends here.
-
-
-                                
+                         
                             
                         
 
-                    //Write the method here..
-                    public void create__employeeDetails( EmployeeDetails data,  RestAdapter restAdapter, final ObjectCallback<EmployeeDetails> callback) {
-                        //Define methods here..
-                        final EmployeeRepository  employeeRepo = restAdapter.createRepository(EmployeeRepository.class);
-                        
+                                    //Write the method here..
+                                    public void get__employeeDetails( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<EmployeeDetails> callback) {
+                                        //Define methods here..
+                                        final EmployeeRepository  employeeRepo = restAdapter.createRepository(EmployeeRepository.class);
+                                        
 
 
-                        
+                                        
 
-                        
+                                        
 
-                        employeeRepo.create__employeeDetails( (String)that.getId(), data,  new ObjectCallback<EmployeeDetails> (){
-                            
+                                        employeeRepo.get__employeeDetails( (String)that.getId(), refresh,  new ObjectCallback<EmployeeDetails> (){
+                                            
 
-                            
-                                @Override
-                                public void onSuccess(EmployeeDetails object) {
-                                    //now add relation to this recipe.
-                                    addRelation(object);
-                                    //Also add relation to child type for two way communication..
-                                    object.addRelation(that);
-                                    callback.onSuccess(object);
-                                }
-                            
-
-
-                            
-
-                            @Override
-                            public void onError(Throwable t) {
-                                //Now calling the callback
-                                callback.onError(t);
-                            }
-
-                        });
-                    } //method def ends here.
+                                            
+                                                @Override
+                                                public void onSuccess(EmployeeDetails object) {
+                                                    //now add relation to this recipe.
+                                                    addRelation(object);
+                                                    //Also add relation to child type for two way communication..
+                                                    object.addRelation(that);
+                                                    callback.onSuccess(object);
+                                                }
+                                            
 
 
-                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
                             
                         
 
-                    //Write the method here..
-                    public void update__employeeDetails( EmployeeDetails data,  RestAdapter restAdapter, final ObjectCallback<EmployeeDetails> callback) {
-                        //Define methods here..
-                        final EmployeeRepository  employeeRepo = restAdapter.createRepository(EmployeeRepository.class);
-                        
+                                    //Write the method here..
+                                    public void create__employeeDetails( EmployeeDetails data,  RestAdapter restAdapter, final ObjectCallback<EmployeeDetails> callback) {
+                                        //Define methods here..
+                                        final EmployeeRepository  employeeRepo = restAdapter.createRepository(EmployeeRepository.class);
+                                        
 
 
-                        
+                                        
 
-                        
+                                        
 
-                        employeeRepo.update__employeeDetails( (String)that.getId(), data,  new ObjectCallback<EmployeeDetails> (){
-                            
+                                        employeeRepo.create__employeeDetails( (String)that.getId(), data,  new ObjectCallback<EmployeeDetails> (){
+                                            
 
-                            
-                                @Override
-                                public void onSuccess(EmployeeDetails object) {
-                                    //now add relation to this recipe.
-                                    addRelation(object);
-                                    //Also add relation to child type for two way communication..
-                                    object.addRelation(that);
-                                    callback.onSuccess(object);
-                                }
-                            
-
-
-                            
-
-                            @Override
-                            public void onError(Throwable t) {
-                                //Now calling the callback
-                                callback.onError(t);
-                            }
-
-                        });
-                    } //method def ends here.
+                                            
+                                                @Override
+                                                public void onSuccess(EmployeeDetails object) {
+                                                    //now add relation to this recipe.
+                                                    addRelation(object);
+                                                    //Also add relation to child type for two way communication..
+                                                    object.addRelation(that);
+                                                    callback.onSuccess(object);
+                                                }
+                                            
 
 
-                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
                             
                         
 
-                    //Write the method here..
-                    public void destroy__employeeDetails( RestAdapter restAdapter, final VoidCallback callback) {
-                        //Define methods here..
-                        final EmployeeRepository  employeeRepo = restAdapter.createRepository(EmployeeRepository.class);
-                        
+                                    //Write the method here..
+                                    public void update__employeeDetails( EmployeeDetails data,  RestAdapter restAdapter, final ObjectCallback<EmployeeDetails> callback) {
+                                        //Define methods here..
+                                        final EmployeeRepository  employeeRepo = restAdapter.createRepository(EmployeeRepository.class);
+                                        
 
 
-                        
+                                        
 
-                        
+                                        
 
-                        employeeRepo.destroy__employeeDetails( (String)that.getId(),  new VoidCallback (){
-                            
-                                @Override
-                                public void onSuccess() {
-                                    callback.onSuccess();
-                                }
-                            
+                                        employeeRepo.update__employeeDetails( (String)that.getId(), data,  new ObjectCallback<EmployeeDetails> (){
+                                            
 
-                            
-
-
-                            
-
-                            @Override
-                            public void onError(Throwable t) {
-                                //Now calling the callback
-                                callback.onError(t);
-                            }
-
-                        });
-                    } //method def ends here.
+                                            
+                                                @Override
+                                                public void onSuccess(EmployeeDetails object) {
+                                                    //now add relation to this recipe.
+                                                    addRelation(object);
+                                                    //Also add relation to child type for two way communication..
+                                                    object.addRelation(that);
+                                                    callback.onSuccess(object);
+                                                }
+                                            
 
 
-                                
-                            
-                        
-                            
-                        
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
                             
                         
+
+                                    //Write the method here..
+                                    public void destroy__employeeDetails( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Define methods here..
+                                        final EmployeeRepository  employeeRepo = restAdapter.createRepository(EmployeeRepository.class);
+                                        
+
+
+                                        
+
+                                        
+
+                                        employeeRepo.destroy__employeeDetails( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
                             
-                        
+                         
+                            
+                         
+                            
+                         
+                            
+                         
                             
                         
                         
@@ -489,10 +481,10 @@ public class Employee extends com.strongloop.android.loopback.User {
                     
 
                 
-                
-                
-            
-        
-    
+                 
+                 
+             
+          
+      
 
 }
