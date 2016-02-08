@@ -3,7 +3,6 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 import com.google.common.collect.ImmutableMap;
-import com.strongloop.android.loopback.ModelRepository;
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
@@ -15,25 +14,34 @@ import com.strongloop.android.remoting.adapters.RestContractItem;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 
 
 import com.strongloop.android.loopback.ModelRepository;
 
 
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+//Import its models too.
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Wishlist;
 
 //Now import model of related models..
 
     
-        import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
-
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
+            
+        
     
 
     
-        import com.androidsdk.snaphy.snaphyandroidsdk.models.Recipe;
-
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Recipe;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeRepository;
+            
+        
     
 
 
@@ -212,7 +220,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
 
 
                 
+                    
+                    
                     invokeStaticMethod("prototype.__get__customers", ImmutableMap.of("id", id, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -245,7 +256,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
 
 
                 
+                    
+                    
                     invokeStaticMethod("prototype.__create__customers", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -278,7 +292,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
 
 
                 
+                    
+                    
                     invokeStaticMethod("prototype.__update__customers", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -339,7 +356,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
 
 
                 
+                    
+                    
                     invokeStaticMethod("prototype.__findById__recipes", ImmutableMap.of("id", id, "fk", fk), new Adapter.JsonObjectCallback() {
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -400,7 +420,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
 
 
                 
+                    
+                    
                     invokeStaticMethod("prototype.__updateById__recipes", ImmutableMap.of("id", id, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -428,12 +451,15 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method link__recipes definition
-            public void link__recipes(  String id,  String fk,  WishlistRecipe data, final ObjectCallback<WishlistRecipe> callback){
+            public void link__recipes(  String id,  String fk,  Recipe data, final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
+                    
                     invokeStaticMethod("prototype.__link__recipes", ImmutableMap.of("id", id, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
+                    
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -442,9 +468,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                //If error happens then change it to Object type..
-                                Map<String, WishlistRecipe> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
+                                callback.onSuccess(response);
                             
                         }
                     });
@@ -488,12 +512,15 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method exists__recipes definition
-            public void exists__recipes(  String id,  String fk, final ObjectCallback<Boolean> callback){
+            public void exists__recipes(  String id,  String fk, final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
+                    
                     invokeStaticMethod("prototype.__exists__recipes", ImmutableMap.of("id", id, "fk", fk), new Adapter.JsonObjectCallback() {
+                    
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -502,9 +529,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                //If error happens then change it to Object type..
-                                Map<String, Boolean> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
+                                callback.onSuccess(response);
                             
                         }
                     });
@@ -536,7 +561,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
                         @Override
                         public void onSuccess(JSONArray response) {
                             
-                                RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+
                                 //Now converting jsonObject to list
                                 List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
                                 List<Recipe> recipeList = new ArrayList<Recipe>();
@@ -565,7 +590,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
 
 
                 
+                    
+                    
                     invokeStaticMethod("prototype.__create__recipes", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -621,12 +649,15 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method count__recipes definition
-            public void count__recipes(  String id,  HashMap<String, Object> where, final ObjectCallback<Double> callback){
+            public void count__recipes(  String id,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
+                    
                     invokeStaticMethod("prototype.__count__recipes", ImmutableMap.of("id", id, "where", where), new Adapter.JsonObjectCallback() {
+                    
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -635,9 +666,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                //If error happens then change it to Object type..
-                                Map<String, Double> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
+                                callback.onSuccess(response);
                             
                         }
                     });
@@ -658,7 +687,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
 
 
                 
+                    
+                    
                     invokeStaticMethod("create", ImmutableMap.of("data", data), new Adapter.JsonObjectCallback() {
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -691,7 +723,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
 
 
                 
+                    
+                    
                     invokeStaticMethod("createMany", ImmutableMap.of("data", data), new Adapter.JsonObjectCallback() {
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -724,7 +759,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
 
 
                 
+                    
+                    
                     invokeStaticMethod("upsert", ImmutableMap.of("data", data), new Adapter.JsonObjectCallback() {
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -752,12 +790,15 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method exists definition
-            public void exists(  String id, final ObjectCallback<Boolean> callback){
+            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
+                    
                     invokeStaticMethod("exists", ImmutableMap.of("id", id), new Adapter.JsonObjectCallback() {
+                    
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -766,9 +807,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                //If error happens then change it to Object type..
-                                Map<String, Boolean> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
+                                callback.onSuccess(response);
                             
                         }
                     });
@@ -789,7 +828,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
 
 
                 
+                    
+                    
                     invokeStaticMethod("findById", ImmutableMap.of("id", id, "filter", filter), new Adapter.JsonObjectCallback() {
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -833,7 +875,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
                         @Override
                         public void onSuccess(JSONArray response) {
                             
-                                WishlistRepository wishlistRepo = getRestAdapter().createRepository(WishlistRepository.class);
+
                                 //Now converting jsonObject to list
                                 List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
                                 List<Wishlist> wishlistList = new ArrayList<Wishlist>();
@@ -862,7 +904,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
 
 
                 
+                    
+                    
                     invokeStaticMethod("findOne", ImmutableMap.of("filter", filter), new Adapter.JsonObjectCallback() {
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -890,12 +935,15 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method updateAll definition
-            public void updateAll(  HashMap<String, Object> where,  HashMap<String, Object> data, final ObjectCallback<HashMap<String, Object>> callback){
+            public void updateAll(  HashMap<String, Object> where,  HashMap<String, Object> data, final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
+                    
                     invokeStaticMethod("updateAll", ImmutableMap.of("where", where, "data", data), new Adapter.JsonObjectCallback() {
+                    
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -904,9 +952,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                //If error happens then change it to Object type..
-                                Map<String, HashMap<String, Object>> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
+                                callback.onSuccess(response);
                             
                         }
                     });
@@ -922,12 +968,15 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method deleteById definition
-            public void deleteById(  String id, final ObjectCallback<HashMap<String, Object>> callback){
+            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
+                    
                     invokeStaticMethod("deleteById", ImmutableMap.of("id", id), new Adapter.JsonObjectCallback() {
+                    
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -936,9 +985,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                //If error happens then change it to Object type..
-                                Map<String, HashMap<String, Object>> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
+                                callback.onSuccess(response);
                             
                         }
                     });
@@ -954,12 +1001,15 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method count definition
-            public void count(  HashMap<String, Object> where, final ObjectCallback<Double> callback){
+            public void count(  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
+                    
                     invokeStaticMethod("count", ImmutableMap.of("where", where), new Adapter.JsonObjectCallback() {
+                    
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -968,9 +1018,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                //If error happens then change it to Object type..
-                                Map<String, Double> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
+                                callback.onSuccess(response);
                             
                         }
                     });
@@ -991,7 +1039,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
 
 
                 
+                    
+                    
                     invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1021,12 +1072,15 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method getSchema definition
-            public void getSchema( final ObjectCallback<HashMap<String, Object>> callback){
+            public void getSchema( final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
-                    invokeStaticMethod("getSchema", ImmutableMap.of(), new Adapter.JsonObjectCallback() {
+                    
+                    invokeStaticMethod("getSchema", null, new Adapter.JsonObjectCallback() {
+                    
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1035,9 +1089,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                //If error happens then change it to Object type..
-                                Map<String, HashMap<String, Object>> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
+                                callback.onSuccess(response);
                             
                         }
                     });

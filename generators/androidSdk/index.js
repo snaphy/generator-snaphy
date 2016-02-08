@@ -34,34 +34,38 @@ var generateRepository = function(app, modelsRestDefinition){
     //Loop through def..
     for(var modelName in modelsRestDefinition){
         if(modelsRestDefinition.hasOwnProperty(modelName)){
-            var modelObj = app.models[modelName];
-            var modelProperties = modelObj.definition.rawProperties;
+            //TODO THIS LATER FOR EXCLUDING USER REPO FROM LIST
+            if(modelName !== "User"){
+                var modelObj = app.models[modelName];
+                var modelProperties = modelObj.definition.rawProperties;
 
-            var model = {
-                name : modelName,
-                restDefinition: modelsRestDefinition[modelName],
-                properties: modelProperties,
-                base: modelObj.definition.settings.base,
-                relations: modelObj.definition.settings.relations,
-                allModels: app.models
-            };
+                var model = {
+                    name : modelName,
+                    restDefinition: modelsRestDefinition[modelName],
+                    properties: modelProperties,
+                    base: modelObj.definition.settings.base,
+                    relations: modelObj.definition.settings.relations,
+                    allModels: app.models,
+                    allDef: modelsRestDefinition
+                };
 
-            //Now compile each Repository and start writing it to the Repository directory..
-            //First read the template file
-            var repoTemplate = fs.readFileSync(
-               RepositoryTemplatePath,
-               { encoding: 'utf-8' }
-            );
+                //Now compile each Repository and start writing it to the Repository directory..
+                //First read the template file
+                var repoTemplate = fs.readFileSync(
+                   RepositoryTemplatePath,
+                   { encoding: 'utf-8' }
+                );
 
-            var formattedRepo = ejs.render(repoTemplate, {model: model});
-            console.log(chalk.red("\nCompiling Repository Class -> " + helper.capitalizeFirstLetter(modelName) + "Repository.java" ));
-            //Now writing it to file and saving to model folder..
+                var formattedRepo = ejs.render(repoTemplate, {model: model});
+                console.log(chalk.red("\nCompiling Repository Class -> " + helper.capitalizeFirstLetter(modelName) + "Repository.java" ));
+                //Now writing it to file and saving to model folder..
 
-            fs.writeFileSync(
-                path.join(AndroidRepositoryPath, helper.capitalizeFirstLetter(modelName) + "Repository.java") ,
-                formattedRepo,
-                'utf8'
-            );
+                fs.writeFileSync(
+                    path.join(AndroidRepositoryPath, helper.capitalizeFirstLetter(modelName) + "Repository.java") ,
+                    formattedRepo,
+                    'utf8'
+                );
+            }
         }
     }
 };
@@ -89,7 +93,8 @@ var generateModels = function(app, modelsRestDefinition){
                 JSON.stringify( modelObj.definition),
                 'utf8'
             );*/
-            // if(modelsRestDefinition[modelName] !== undefined){
+            //TODO THIS LATER FOR EXCLUDING USER FROM LIST
+            if(modelsRestDefinition[modelName] !== undefined && modelName !== "User"){
                 var model = {
                     name : modelName,
                     properties: modelProperties,
@@ -116,7 +121,7 @@ var generateModels = function(app, modelsRestDefinition){
                     formattedModel,
                     'utf8'
                 );
-            // }
+            }
         }
     }
 };

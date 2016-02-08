@@ -71,14 +71,25 @@ import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
 
+//Import self repository..
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.<%- modelName %>Repository;
+
 //Now import repository of related models..
 <% for(relation in model.relations) { %>
     <% if(model.relations.hasOwnProperty(relation)) {
-        var relatedModelName = model.relations[relation].model;
-        var repoName = capitalizeFirstLetter(relatedModelName) + "Repository";
-    %>
-        import com.androidsdk.snaphy.snaphyandroidsdk.repository.<%- repoName %>;
+        if(model.restDefinition[model.name] !== undefined && model.relations[relation].model !== "AccessToken"){
+            var relatedModelName = model.relations[relation].model;
+            var repoName = capitalizeFirstLetter(relatedModelName) + "Repository";
 
+    %>
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.<%- repoName %>;
+            <% if( model.relations[relation].through) {
+                var throughModel = model.relations[relation].through;
+            %>
+                import com.androidsdk.snaphy.snaphyandroidsdk.repository.<%- throughModel %>Repository;
+            <% } %>
+
+        <% } %>
     <% } %>
 <% } %>
 
@@ -208,158 +219,240 @@ public class <%- modelName %> extends Model {
         <% if(model.relations.hasOwnProperty(relation)) {
             var lowercaseRelatedModelName = lowercaseFirstLetter( model.relations[relation].model );
             var capitalcaseRelatedModelName = capitalizeFirstLetter(model.relations[relation].model);
+            if(model.restDefinition[model.relations[relation].model] !== undefined){
         %>
-            <% if(model.relations[relation].type === "belongsTo" || model.relations[relation].type === "hasOne"){ %>
-                //Define belongsTo relation method here..
-                private <%- capitalcaseRelatedModelName %>  <%- lowercaseRelatedModelName %> ;
+                <% if(model.relations[relation].type === "belongsTo" || model.relations[relation].type === "hasOne"){ %>
+                    //Define belongsTo relation method here..
+                    private <%- capitalcaseRelatedModelName %>  <%- lowercaseRelatedModelName %> ;
 
-                public <%- capitalcaseRelatedModelName %> get<%- capitalcaseRelatedModelName %>() {
-                    return <%- lowercaseRelatedModelName %>;
-                }
+                    public <%- capitalcaseRelatedModelName %> get<%- capitalcaseRelatedModelName %>() {
+                        return <%- lowercaseRelatedModelName %>;
+                    }
 
-                public void set<%- capitalcaseRelatedModelName %>(<%- capitalcaseRelatedModelName %> <%- lowercaseRelatedModelName %>) {
-                    this.<%- lowercaseRelatedModelName %> = <%- lowercaseRelatedModelName %>;
-                }
+                    public void set<%- capitalcaseRelatedModelName %>(<%- capitalcaseRelatedModelName %> <%- lowercaseRelatedModelName %>) {
+                        this.<%- lowercaseRelatedModelName %> = <%- lowercaseRelatedModelName %>;
+                    }
 
-                //Adding related model automatically in case of include statement from server..
-                public void set<%- capitalcaseRelatedModelName %>(HashMap<String, Object> <%- lowercaseRelatedModelName %>) {
-                    //First create a dummy Repo class object for customer.
-                    <%- capitalcaseRelatedModelName %>Repository <%- lowercaseRelatedModelName %>Repository = new <%- capitalcaseRelatedModelName %>Repository();
-                    <%- capitalcaseRelatedModelName %> <%- lowercaseRelatedModelName %>1 = <%- lowercaseRelatedModelName %>Repository.createObject(<%- lowercaseRelatedModelName %>);
-                    set<%- capitalcaseRelatedModelName %>(<%- lowercaseRelatedModelName %>1);
-                }
+                    //Adding related model automatically in case of include statement from server..
+                    public void set<%- capitalcaseRelatedModelName %>(HashMap<String, Object> <%- lowercaseRelatedModelName %>) {
+                        //First create a dummy Repo class object for customer.
+                        <%- capitalcaseRelatedModelName %>Repository <%- lowercaseRelatedModelName %>Repository = new <%- capitalcaseRelatedModelName %>Repository();
+                        <%- capitalcaseRelatedModelName %> <%- lowercaseRelatedModelName %>1 = <%- lowercaseRelatedModelName %>Repository.createObject(<%- lowercaseRelatedModelName %>);
+                        set<%- capitalcaseRelatedModelName %>(<%- lowercaseRelatedModelName %>1);
+                    }
 
-                //Adding relation method..
-                public void addRelation(<%- capitalcaseRelatedModelName %> <%- lowercaseRelatedModelName %>) {
-                    this.setCustomer(<%- lowercaseRelatedModelName %>);
-                }
-
-
-                //Now add instance methods to fetch the related belongsTo Model..
-                <%#
-                    1) Find the searched model definition first..
-                    2) Find the method obj.
-                    2) Find the relation name from the model relation obj.
-                    //Now start adding server fetching data relations..
-                        /*{
-                            "fullName": "Recipe.prototype.__get__customer",
-                            "name": "prototype.__get__customer",
-                            "accepts": [{
-                                "arg": "id",
-                                "type": "any",
-                                "required": true,
-                                "http": {
-                                    "source": "path"
-                                },
-                                "description": "PersistedModel id"
-                            }, {
-                                "arg": "refresh",
-                                "type": "boolean",
-                                "http": {
-                                    "source": "query"
-                                }
-                            }],
-                            "returns": [{
-                                "arg": "customer",
-                                "type": "Customer",
-                                "root": true
-                            }],
-                            "errors": [],
-                            "description": "Fetches belongsTo relation customer.",
-                            "documented": true,
-                            "routes": [{
-                                "path": "/:id/customer",
-                                "verb": "get"
-                            }],
-                            "internal": "Use Recipe.customer() instead."
-                        }*/
-                %>
-
-                <%
-                    var modelDef  = model.restDefinition[modelName];
-                        //console.log(model.restDefinition);
-                    if(modelDef){
-                        var restMethods = model.restDefinition[modelName].methods;
-                        var modelRelationName = relation;
-                        //Now run a loop and find the prototype model definition with same name..
-                        restMethods.forEach(function(method){
-                            //Str is like prototype.__get__priorities
-                            //match prototype.__get__
-                            var patt = /prototype\.\_\_[a-zA-Z]+\_\_/;
-                            //match prototype.__get__priorities
-                            var patt1 = /prototype\.\_\_[a-zA-Z]+\_\_.+/;
-                            //match prototype.__
-                            var methodPatt = /prototype\.\_\_/;
-
-                            if(patt1.test(method.name)){
-                                //Now get the new str.
-                                var searchRelationName = method.name.replace(patt, "");
-                                if(searchRelationName === modelRelationName){
-                                    var methodName = method.name.replace(methodPatt, "");
-                                    var methodString = "public void " + methodName + "(";
-                                    //Now run a loop of arguments..
-                                    method.accepts.forEach(function(argumentObj, index){
-                                        var argumentName   = argumentObj.arg;
-                                        var argumentType   = argumentObj.type;
-                                        if(argumentType === "any"){
-                                            argumentType = "string";
-                                        }
-
-                                        var argumentSource = argumentObj.http.source;
-                                        //Checking if the argument is internal or not..
-                                        var internalArgument = isInternalArgument(argumentObj, argumentName, method);
+                    //Adding relation method..
+                    public void addRelation(<%- capitalcaseRelatedModelName %> <%- lowercaseRelatedModelName %>) {
+                        that.set<%- capitalcaseRelatedModelName %>(<%- lowercaseRelatedModelName %>);
+                    }
 
 
-                                        if(!internalArgument ){
-                                            if(argumentType  instanceof Array){
-                                                argumentType = "ArrayList<" + convertType(argumentType[0]) + ">" ;
-                                            }
-                                            else {
-                                                argumentType = convertType(argumentType);
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    <%#
+                        1) Find the searched model definition first..
+                        2) Find the method obj.
+                        2) Find the relation name from the model relation obj.
+                        //Now start adding server fetching data relations..
+                            /*{
+                                "fullName": "Recipe.prototype.__get__customer",
+                                "name": "prototype.__get__customer",
+                                "accepts": [{
+                                    "arg": "id",
+                                    "type": "any",
+                                    "required": true,
+                                    "http": {
+                                        "source": "path"
+                                    },
+                                    "description": "PersistedModel id"
+                                }, {
+                                    "arg": "refresh",
+                                    "type": "boolean",
+                                    "http": {
+                                        "source": "query"
+                                    }
+                                }],
+                                "returns": [{
+                                    "arg": "customer",
+                                    "type": "Customer",
+                                    "root": true
+                                }],
+                                "errors": [],
+                                "description": "Fetches belongsTo relation customer.",
+                                "documented": true,
+                                "routes": [{
+                                    "path": "/:id/customer",
+                                    "verb": "get"
+                                }],
+                                "internal": "Use Recipe.customer() instead."
+                            }*/
+                    %>
+
+                    <%
+                        var modelDef  = model.restDefinition[modelName];
+                            //console.log(model.restDefinition);
+                        if(modelDef){
+                            var restMethods = model.restDefinition[modelName].methods;
+                            var modelRelationName = relation;
+                            //Now run a loop and find the prototype model definition with same name..
+                            restMethods.forEach(function(method){
+                                //Str is like prototype.__get__priorities
+                                //match prototype.__get__
+                                var patt = /prototype\.\_\_[a-zA-Z]+\_\_/;
+                                //match prototype.__get__priorities
+                                var patt1 = /prototype\.\_\_[a-zA-Z]+\_\_.+/;
+                                //match prototype.__
+                                var methodPatt = /prototype\.\_\_/;
+
+                                if(patt1.test(method.name)){
+                                    //Now get the new str.
+                                    var searchRelationName = method.name.replace(patt, "");
+                                    if(searchRelationName === modelRelationName){
+                                        var methodName = method.name.replace(methodPatt, "");
+                                        var methodString = "public void " + methodName + "(";
+                                        //Now run a loop of arguments..
+                                        method.accepts.forEach(function(argumentObj, index){
+                                            var argumentName   = argumentObj.arg;
+                                            var argumentType   = argumentObj.type;
+                                            if(argumentType === "any"){
+                                                argumentType = "string";
                                             }
 
-                                            methodString = methodString + " " +argumentType + " " + argumentName +", ";
-                                        }
-                                    });//arguments loop ends..
-                                    var callback ;
-                                    var returnType;
-                                    var callbackType;
-                                    var type;
-                                    if(method.returns.length){
-                                        if(method.returns[0].type instanceof Array){
-                                            type = convertType(method.returns[0].type[0]);
-                                            returnType = "ArrayList<" + type + ">";
-                                            methodString = methodString + " " + "RestAdapter restAdapter" + ", " +  "final ListCallback<" + type + "> callback)";
-                                            callback = "ListCallback<" + type + "> ";
-                                            callbackType = "ListCallback";
+                                            var argumentSource = argumentObj.http.source;
+                                            //Checking if the argument is internal or not..
+                                            var internalArgument = isInternalArgument(argumentObj, argumentName, method);
+
+
+                                            if(!internalArgument ){
+                                                if(argumentType  instanceof Array){
+                                                    argumentType = "ArrayList<" + convertType(argumentType[0]) + ">" ;
+                                                }
+                                                else {
+                                                    argumentType = convertType(argumentType);
+                                                }
+
+                                                methodString = methodString + " " +argumentType + " " + argumentName +", ";
+                                            }
+                                        });//arguments loop ends..
+                                        var callback ;
+                                        var returnType;
+                                        var callbackType;
+                                        var type;
+                                        if(method.returns.length){
+                                            if(method.returns[0].type instanceof Array){
+                                                type = convertType(method.returns[0].type[0]);
+                                                returnType = "ArrayList<" + type + ">";
+                                                methodString = methodString + " " + "RestAdapter restAdapter" + ", " +  "final ListCallback<" + type + "> callback)";
+                                                callback = "ListCallback<" + type + "> ";
+                                                callbackType = "ListCallback";
+                                            }else{
+                                                type = convertType(method.returns[0].type);
+                                                returnType = type;
+                                                methodString = methodString + " " + "RestAdapter restAdapter" + ", " +  "final ObjectCallback<" + type + "> callback)";
+                                                callback = "ObjectCallback<" + type + "> ";
+                                                callbackType = "ObjectCallback";
+                                            }
                                         }else{
-                                            type = convertType(method.returns[0].type);
-                                            returnType = type;
-                                            methodString = methodString + " " + "RestAdapter restAdapter" + ", " +  "final ObjectCallback<" + type + "> callback)";
-                                            callback = "ObjectCallback<" + type + "> ";
-                                            callbackType = "ObjectCallback";
+                                            methodString = methodString + " " + "RestAdapter restAdapter" + ", " +  "final VoidCallback callback)";
+                                            callback = "VoidCallback ";
+                                            //returnType = type;
+                                            callbackType = "VoidCallback";
                                         }
-                                    }else{
-                                        methodString = methodString + " " + "RestAdapter restAdapter" + ", " +  "final VoidCallback callback)";
-                                        callback = "VoidCallback ";
-                                        //returnType = type;
-                                        callbackType = "VoidCallback";
+
+                    %>
+
+                    //Write the method here..
+                    <%- methodString %> {
+                        //Define methods here..
+                        final <%- modelName %>Repository  <%- lowercaseFirstLetter(modelName) %>Repo = restAdapter.createRepository(<%- modelName %>Repository.class);
+                        <%#
+                            recipeRepo.get__customer(id, new ObjectCallback<Customer>() {
+                                @Override
+                                public void onSuccess(Customer object) {
+                                    //now add relation to this recipe.
+                                    addRelation(object);
+                                    callback.onSuccess(object);
+                                }
+
+                                @Override
+                                public void onError(Throwable t) {
+                                    //Now calling the callback
+                                    callback.onError(t);
+                                }
+
+                            });
+                        %>
+
+
+                        <%#
+                            1)Now fetch the argumments list. The argument that is internal add "ObjectValue.argument" and for other simply add argument.
+                        %>
+
+                        <%
+                            var methodArguments = "";
+                            //Now run a loop of arguments..
+                            method.accepts.forEach(function(argumentObj, index){
+                                var argumentName   = argumentObj.arg;
+                                var argumentType   = argumentObj.type;
+                                if(argumentType === "any"){
+                                    argumentType = "string";
+                                }
+
+                                var argumentSource = argumentObj.http.source;
+                                //Checking if the argument is internal or not..
+                                var internalArgument = isInternalArgument(argumentObj, argumentName, method);
+
+
+                                if(!internalArgument ){
+                                    if(argumentType  instanceof Array){
+                                        argumentType = "ArrayList<" + convertType(argumentType[0]) + ">" ;
+                                    }
+                                    else {
+                                        argumentType = convertType(argumentType);
                                     }
 
-                %>
+                                    methodArguments = methodArguments + argumentName + ", ";
+                                }else{
+                                    //Add internal arguments here..
+                                    methodArguments = methodArguments + " (String)that." + "get" + capitalizeFirstLetter(argumentName) + "(), ";
+                                }
+                            });//arguments loop ends..
 
-                //Write the method here..
-                <%- methodString %> {
-                    //Define methods here..
-                    final <%- modelName %>Repository  <%- lowercaseFirstLetter(modelName) %>Repo = restAdapter.createRepository(<%- modelName %>Repository.class);
-                    <%#
-                        recipeRepo.get__customer(id, new ObjectCallback<Customer>() {
-                            @Override
-                            public void onSuccess(Customer object) {
-                                //now add relation to this recipe.
-                                addRelation(object);
-                                callback.onSuccess(object);
-                            }
+
+                        %>
+
+                        <%- lowercaseFirstLetter(modelName) %>Repo.<%- methodName %>(<%- methodArguments %> new <%- callback %>(){
+                            <% if(callbackType === "VoidCallback"){ %>
+                                @Override
+                                public void onSuccess() {
+                                    callback.onSuccess();
+                                }
+                            <% } %>
+
+                            <% if(callbackType === "ObjectCallback"){ %>
+                                @Override
+                                public void onSuccess(<%- returnType %> object) {
+                                    //now add relation to this recipe.
+                                    addRelation(object);
+                                    //Also add relation to child type for two way communication..
+                                    object.addRelation(that);
+                                    callback.onSuccess(object);
+                                }
+                            <% } %>
+
+
+                            <% if(callbackType === "ListCallback"){ %>
+                                @Override
+                                public void onSuccess(<%- returnType %> object) {
+                                    //now add relation to this recipe.
+                                    addRelation(object);
+                                    for (<%- type %> obj : object) {
+                                        //Also add relation to child type for two way communication..
+                                        obj.addRelation(that);
+                                    }
+
+                                    callback.onSuccess(object);
+                                }
+                            <% } %>
 
                             @Override
                             public void onError(Throwable t) {
@@ -368,103 +461,23 @@ public class <%- modelName %> extends Model {
                             }
 
                         });
-                    %>
+                    } //method def ends here.
 
 
-                    <%#
-                        1)Now fetch the argumments list. The argument that is internal add "ObjectValue.argument" and for other simply add argument.
-                    %>
-
-                    <%
-                        var methodArguments = "";
-                        //Now run a loop of arguments..
-                        method.accepts.forEach(function(argumentObj, index){
-                            var argumentName   = argumentObj.arg;
-                            var argumentType   = argumentObj.type;
-                            if(argumentType === "any"){
-                                argumentType = "string";
-                            }
-
-                            var argumentSource = argumentObj.http.source;
-                            //Checking if the argument is internal or not..
-                            var internalArgument = isInternalArgument(argumentObj, argumentName, method);
-
-
-                            if(!internalArgument ){
-                                if(argumentType  instanceof Array){
-                                    argumentType = "ArrayList<" + convertType(argumentType[0]) + ">" ;
-                                }
-                                else {
-                                    argumentType = convertType(argumentType);
-                                }
-
-                                methodArguments = methodArguments + argumentName + ", ";
-                            }else{
-                                //Add internal arguments here..
-                                methodArguments = methodArguments + "that." +  argumentName + ", ";
-                            }
-                        });//arguments loop ends..
-
-
-                    %>
-
-                    <%- lowercaseFirstLetter(modelName) %>Repo.<%- methodName %>(<%- methodArguments %> new <%- callback %>(){
-                        <% if(callbackType === "VoidCallback"){ %>
-                            @Override
-                            public void onSuccess() {
-                                callback.onSuccess();
-                            }
-                        <% } %>
-
-                        <% if(callbackType === "ObjectCallback"){ %>
-                            @Override
-                            public void onSuccess(<%- returnType %> object) {
-                                //now add relation to this recipe.
-                                addRelation(object);
-                                //Also add relation to child type for two way communication..
-                                object.addRelation(that);
-                                callback.onSuccess(object);
-                            }
-                        <% } %>
-
-
-                        <% if(callbackType === "ListCallback"){ %>
-                            @Override
-                            public void onSuccess(<%- returnType %> object) {
-                                //now add relation to this recipe.
-                                addRelation(object);
-                                for (<%- type %> obj : object) {
-                                    //Also add relation to child type for two way communication..
-                                    obj.addRelation(that);
-                                }
-
-                                callback.onSuccess(object);
-                            }
-                        <% } %>
-
-                        @Override
-                        public void onError(Throwable t) {
-                            //Now calling the callback
-                            callback.onError(t);
-                        }
-
-                    });
-                } //method def ends here.
-
-
+                                <% } %>
                             <% } %>
-                        <% } %>
-                    <% }); %>
+                        <% }); %>
+                    <% } %>
+
                 <% } %>
+                <% if(model.relations[relation].type === "hasMany" || model.relations[relation].type === "hasManyThrough") { %>
+                    //Define hasMany, hasManyThrough method here..
 
-            <% } %>
-            <% if(model.relations[relation].type === "hasMany" || model.relations[relation].type === "hasManyThrough") { %>
-                //Define hasMany, hasManyThrough method here..
+                <% } %>
+                <% if(model.relations[relation].type === "hasAndBelongsToMany") { %>
+                    //Define hasAndBelongsToMany..
 
-            <% } %>
-            <% if(model.relations[relation].type === "hasAndBelongsToMany") { %>
-                //Define hasAndBelongsToMany..
-
+                <% } %>
             <% } %>
         <% } %>
     <% } %>

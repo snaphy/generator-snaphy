@@ -11,11 +11,16 @@ import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
 
+//Import self repository..
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.IngredientCategoryRepository;
+
 //Now import repository of related models..
 
     
-        import com.androidsdk.snaphy.snaphyandroidsdk.repository.IngredientsRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.IngredientsRepository;
+            
 
+        
     
 
 
@@ -71,11 +76,12 @@ public class IngredientCategory extends Model {
     //Now adding relations between related models
     
         
-            
-            
-                //Define hasMany, hasManyThrough method here..
+                
+                
+                    //Define hasMany, hasManyThrough method here..
 
-            
+                
+                
             
         
     

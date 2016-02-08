@@ -3,7 +3,6 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 import com.google.common.collect.ImmutableMap;
-import com.strongloop.android.loopback.ModelRepository;
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
@@ -15,14 +14,19 @@ import com.strongloop.android.remoting.adapters.RestContractItem;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 
 
 import com.strongloop.android.loopback.ModelRepository;
 
 
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+//Import its models too.
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Container;
 
 //Now import model of related models..
 
@@ -99,14 +103,14 @@ public class ContainerRepository extends ModelRepository<Container> {
     
         
             //Method getContainers definition
-            public void getContainers( final ListCallback<String> callback){
+            public void getContainers( final Adapter.JsonArrayCallback callback){
                 
 
 
                 
 
                 
-                    invokeStaticMethod("getContainers", ImmutableMap.of(), new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("getContainers", null, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -115,9 +119,7 @@ public class ContainerRepository extends ModelRepository<Container> {
                         @Override
                         public void onSuccess(JSONArray response) {
                             
-                                //If error happens then change it to Object type..
-                                ArrayList<String> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
+                                callback.onSuccess(response);
                             
                         }
                     });
@@ -131,12 +133,15 @@ public class ContainerRepository extends ModelRepository<Container> {
     
         
             //Method createContainer definition
-            public void createContainer(  HashMap<String, Object> options, final ObjectCallback<HashMap<String, Object>> callback){
+            public void createContainer(  HashMap<String, Object> options, final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
+                    
                     invokeStaticMethod("createContainer", ImmutableMap.of("options", options), new Adapter.JsonObjectCallback() {
+                    
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -145,9 +150,7 @@ public class ContainerRepository extends ModelRepository<Container> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                //If error happens then change it to Object type..
-                                Map<String, HashMap<String, Object>> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
+                                callback.onSuccess(response);
                             
                         }
                     });
@@ -191,12 +194,15 @@ public class ContainerRepository extends ModelRepository<Container> {
     
         
             //Method getContainer definition
-            public void getContainer(  String container, final ObjectCallback<HashMap<String, Object>> callback){
+            public void getContainer(  String container, final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
+                    
                     invokeStaticMethod("getContainer", ImmutableMap.of("container", container), new Adapter.JsonObjectCallback() {
+                    
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -205,9 +211,7 @@ public class ContainerRepository extends ModelRepository<Container> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                //If error happens then change it to Object type..
-                                Map<String, HashMap<String, Object>> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
+                                callback.onSuccess(response);
                             
                         }
                     });
@@ -223,7 +227,7 @@ public class ContainerRepository extends ModelRepository<Container> {
     
         
             //Method getFiles definition
-            public void getFiles(  String container, final ListCallback<String> callback){
+            public void getFiles(  String container, final Adapter.JsonArrayCallback callback){
                 
 
 
@@ -239,9 +243,7 @@ public class ContainerRepository extends ModelRepository<Container> {
                         @Override
                         public void onSuccess(JSONArray response) {
                             
-                                //If error happens then change it to Object type..
-                                ArrayList<String> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
+                                callback.onSuccess(response);
                             
                         }
                     });
@@ -255,12 +257,15 @@ public class ContainerRepository extends ModelRepository<Container> {
     
         
             //Method getFile definition
-            public void getFile(  String container,  String file, final ObjectCallback<HashMap<String, Object>> callback){
+            public void getFile(  String container,  String file, final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
+                    
                     invokeStaticMethod("getFile", ImmutableMap.of("container", container, "file", file), new Adapter.JsonObjectCallback() {
+                    
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -269,9 +274,7 @@ public class ContainerRepository extends ModelRepository<Container> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                //If error happens then change it to Object type..
-                                Map<String, HashMap<String, Object>> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
+                                callback.onSuccess(response);
                             
                         }
                     });
@@ -315,12 +318,15 @@ public class ContainerRepository extends ModelRepository<Container> {
     
         
             //Method upload definition
-            public void upload(  HashMap<String, Object> req,  HashMap<String, Object> res, final ObjectCallback<HashMap<String, Object>> callback){
+            public void upload(  HashMap<String, Object> req,  HashMap<String, Object> res, final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
+                    
                     invokeStaticMethod("upload", ImmutableMap.of("req", req, "res", res), new Adapter.JsonObjectCallback() {
+                    
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -329,9 +335,7 @@ public class ContainerRepository extends ModelRepository<Container> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                //If error happens then change it to Object type..
-                                Map<String, HashMap<String, Object>> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
+                                callback.onSuccess(response);
                             
                         }
                     });
@@ -375,12 +379,15 @@ public class ContainerRepository extends ModelRepository<Container> {
     
         
             //Method getSchema definition
-            public void getSchema( final ObjectCallback<HashMap<String, Object>> callback){
+            public void getSchema( final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
-                    invokeStaticMethod("getSchema", ImmutableMap.of(), new Adapter.JsonObjectCallback() {
+                    
+                    invokeStaticMethod("getSchema", null, new Adapter.JsonObjectCallback() {
+                    
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -389,9 +396,7 @@ public class ContainerRepository extends ModelRepository<Container> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                //If error happens then change it to Object type..
-                                Map<String, HashMap<String, Object>> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
+                                callback.onSuccess(response);
                             
                         }
                     });

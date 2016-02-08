@@ -3,7 +3,6 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 import com.google.common.collect.ImmutableMap;
-import com.strongloop.android.loopback.ModelRepository;
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
@@ -15,14 +14,19 @@ import com.strongloop.android.remoting.adapters.RestContractItem;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 
 
 import com.strongloop.android.loopback.ModelRepository;
 
 
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+//Import its models too.
+import com.androidsdk.snaphy.snaphyandroidsdk.models.AdminEmail;
 
 //Now import model of related models..
 
@@ -75,12 +79,15 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
     
         
             //Method getSchema definition
-            public void getSchema( final ObjectCallback<HashMap<String, Object>> callback){
+            public void getSchema( final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
-                    invokeStaticMethod("getSchema", ImmutableMap.of(), new Adapter.JsonObjectCallback() {
+                    
+                    invokeStaticMethod("getSchema", null, new Adapter.JsonObjectCallback() {
+                    
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -89,9 +96,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                //If error happens then change it to Object type..
-                                Map<String, HashMap<String, Object>> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
+                                callback.onSuccess(response);
                             
                         }
                     });
@@ -109,12 +114,15 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
     
         
             //Method sendMail definition
-            public void sendMail(  ArrayList<String> to,  String subject,  String html, final ObjectCallback<String> callback){
+            public void sendMail(  ArrayList<String> to,  String subject,  String html, final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
+                    
                     invokeStaticMethod("sendMail", ImmutableMap.of("to", to, "subject", subject, "html", html), new Adapter.JsonObjectCallback() {
+                    
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -123,9 +131,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                //If error happens then change it to Object type..
-                                Map<String, String> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
+                                callback.onSuccess(response);
                             
                         }
                     });
@@ -141,12 +147,15 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
     
         
             //Method sendNotice definition
-            public void sendNotice(  ArrayList<String> to,  String subject,  HashMap<String, Object> templateOptions, final ObjectCallback<String> callback){
+            public void sendNotice(  ArrayList<String> to,  String subject,  HashMap<String, Object> templateOptions, final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
+                    
                     invokeStaticMethod("sendNotice", ImmutableMap.of("to", to, "subject", subject, "templateOptions", templateOptions), new Adapter.JsonObjectCallback() {
+                    
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -155,9 +164,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                //If error happens then change it to Object type..
-                                Map<String, String> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
+                                callback.onSuccess(response);
                             
                         }
                     });
@@ -173,12 +180,15 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
     
         
             //Method getMailSchema definition
-            public void getMailSchema( final ObjectCallback<HashMap<String, Object>> callback){
+            public void getMailSchema( final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
-                    invokeStaticMethod("getMailSchema", ImmutableMap.of(), new Adapter.JsonObjectCallback() {
+                    
+                    invokeStaticMethod("getMailSchema", null, new Adapter.JsonObjectCallback() {
+                    
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -187,9 +197,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                //If error happens then change it to Object type..
-                                Map<String, HashMap<String, Object>> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
+                                callback.onSuccess(response);
                             
                         }
                     });

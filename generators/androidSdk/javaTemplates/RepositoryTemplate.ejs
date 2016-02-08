@@ -63,7 +63,6 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 import com.google.common.collect.ImmutableMap;
-import com.strongloop.android.loopback.ModelRepository;
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
@@ -75,25 +74,40 @@ import com.strongloop.android.remoting.adapters.RestContractItem;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 
 <% if(model.base === "User" || modelName === "User"){ %>
 import com.strongloop.android.loopback.UserRepository;
+import com.strongloop.android.loopback.AccessTokenRepository;
+import com.strongloop.android.loopback.AccessToken;
 <% } else { %>
 import com.strongloop.android.loopback.ModelRepository;
 <% } %>
 
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+//Import its models too.
+import com.androidsdk.snaphy.snaphyandroidsdk.models.<%- modelName %>;
 
 //Now import model of related models..
 <% for(relation in model.relations) { %>
     <% if(model.relations.hasOwnProperty(relation)) {
-        var relatedModelName = model.relations[relation].model;
-        var modelName_ = capitalizeFirstLetter(relatedModelName) ;
+        if(model.allDef[model.relations[relation].model] !== undefined){
+            var relatedModelName = model.relations[relation].model;
+            var modelName_ = capitalizeFirstLetter(relatedModelName) ;
     %>
-        import com.androidsdk.snaphy.snaphyandroidsdk.models.<%- modelName_ %>;
-
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.<%- modelName_ %>;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.<%- modelName_ %>Repository;
+            <% if( model.relations[relation].through) {
+                var throughModel = model.relations[relation].through;
+            %>
+                import com.androidsdk.snaphy.snaphyandroidsdk.models.<%- throughModel %>;
+                import com.androidsdk.snaphy.snaphyandroidsdk.repository.<%- throughModel %>Repository;
+            <% } %>
+        <% } %>
     <% } %>
 <% } %>
 
@@ -193,7 +207,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
             methodString = methodString + restMethodName + "( ";
             //ImmutableMap string concatenation..
             var mapString = "ImmutableMap.of(";
-
+            var totalArgument = 0;
             //Now loop through all the required arguments..
             restMethodObj.accepts.forEach(function(requiredArgumentObj, index){
                 var type            = requiredArgumentObj.type;
@@ -203,7 +217,30 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                 }else{
                     type = convertType(type);
                 }
+                console.log("===========================================================================");
+                console.log(type);
+                //Convert type for hasAndBelongsToMany type like type CategoryRecipe  = Recipe or Category <--- type remove which belongs to current model. of the repo
+                if(model.allModels[type] === undefined){
+                    //Check by removing the model..
+                    var patt = new RegExp("^" + capitalizeFirstLetter(model.name) );
+                    var newType = type.replace(patt, "");
 
+                    console.log(newType);
+                    if(model.allModels[newType] !== undefined){
+                        //Then add this model to new type..
+                        type = newType;
+                    }else{
+                        //Check by removing the model..
+                        var patt = new RegExp(capitalizeFirstLetter(model.name) + "$" );
+                        newType = type.replace(patt, "");
+                        if(model.allModels[newType] !== undefined){
+                            //Then add this model to new type..
+                            type = newType;
+                        }
+                    }
+                }
+
+                totalArgument ++;
                 //ImmutableMap of mapping data..
                 if(index === 0){
                     mapString = mapString + '"' + argumentName + '"' +  ', ' + argumentName ;
@@ -213,8 +250,15 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                 methodString = methodString + " " + type + " " + argumentName + ", ";
             });
 
-            //Wrapup ImmutableMap data..
-            mapString  = mapString + ")";
+            //If no argument is required then add null type..
+            if(totalArgument !== 0){
+                //Wrapup ImmutableMap data..
+                mapString  = mapString + ")";
+            }else{
+                mapString  = "null";
+            }
+
+
 
             //Now get the return type....
             var callback ;
@@ -225,19 +269,36 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
             var method = restMethodObj;
             if(method.returns.length && Object.keys(method.returns[0]).length !== 0){
                 if(method.returns[0].type instanceof Array){
-
                     type = convertType(method.returns[0].type[0]);
-                    returnType = "ArrayList<" + type + ">";
-                    methodString = methodString  +  "final ListCallback<" + type + "> callback)";
-                    callback = "ListCallback<" + type + "> ";
-                    callbackType = "ListCallback";
+                    if(model.allModels[type] !== undefined){
+                        returnType = "ArrayList<" + type + ">";
+                        methodString = methodString  +  "final ListCallback<" + type + "> callback)";
+                        callback = "ListCallback<" + type + "> ";
+                        callbackType = "ListCallback";
+                    }else{
+                        returnType = type;
+                        methodString = methodString  +  "final Adapter.JsonArrayCallback callback)";
+                        //methodString = methodString  +  "final ObjectCallback<" + type + "> callback)";
+                        callback = "new Adapter.JsonArrayCallback()";
+                        callbackType = "ListCallback";
+                    }
                 }else{
 
                     type = convertType(method.returns[0].type);
-                    returnType = type;
-                    methodString = methodString  +  "final ObjectCallback<" + type + "> callback)";
-                    callback = "ObjectCallback<" + type + "> ";
-                    callbackType = "ObjectCallback";
+                    if(model.allModels[type] !== undefined){
+                        returnType = type;
+                        methodString = methodString  +  "final ObjectCallback<" + type + "> callback)";
+                        callback = "ObjectCallback<" + type + "> ";
+                        callbackType = "ObjectCallback";
+                    }else{
+                        returnType = type;
+                        methodString = methodString + "final Adapter.JsonObjectCallback  callback )";
+                        //methodString = methodString  +  "final ObjectCallback<" + type + "> callback)";
+                        callback = "new Adapter.JsonObjectCallback()";
+                        //callback = "ObjectCallback<" + type + "> ";
+                        callbackType = "ObjectCallback";
+                    }
+
                 }
             }else{
                 methodString = methodString  +  "final VoidCallback callback)";
@@ -265,7 +326,12 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
 
                 <% if(callbackType === "ObjectCallback") {%>
+                    <% if(model.allModels[type] === undefined) { %>
                     invokeStaticMethod("<%- restMethodObj.name %>", <%- mapString %>, new Adapter.JsonObjectCallback() {
+                    <% } %>
+                    <% if(model.allModels[type] !== undefined) { %>
+                    invokeStaticMethod("<%- restMethodObj.name %>", <%- mapString %>, new Adapter.JsonObjectCallback() {
+                    <% } %>
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -274,9 +340,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                         @Override
                         public void onSuccess(JSONObject response) {
                             <% if(model.allModels[type] === undefined) { %>
-                                //If error happens then change it to Object type..
-                                Map<String, <%- type %>> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
+                                callback.onSuccess(response);
                             <% }else{ %>
                                 <%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
                                 Map<String, Object> result = JsonUtil.fromJson(response);
@@ -297,11 +361,9 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                         @Override
                         public void onSuccess(JSONArray response) {
                             <% if(model.allModels[type] === undefined) { %>
-                                //If error happens then change it to Object type..
-                                ArrayList<<%- type %>> result = JsonUtil.fromJson(response);
-                                callback.onSuccess(result);
+                                callback.onSuccess(response);
                             <% }else{ %>
-                                
+
                                 //Now converting jsonObject to list
                                 List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
                                 List<<%- type %>> <%- lowercaseFirstLetter(type) %>List = new ArrayList<<%- type %>>();
