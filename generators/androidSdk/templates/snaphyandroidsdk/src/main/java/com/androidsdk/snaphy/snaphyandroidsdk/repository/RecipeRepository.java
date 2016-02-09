@@ -577,10 +577,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Customer customer = customerRepo.createObject(result);
-                                callback.onSuccess(customer);
+                                if(responce != null){
+                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Customer customer = customerRepo.createObject(result);
+                                    callback.onSuccess(customer);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -613,10 +618,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                CuisinesRepository cuisinesRepo = getRestAdapter().createRepository(CuisinesRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Cuisines cuisines = cuisinesRepo.createObject(result);
-                                callback.onSuccess(cuisines);
+                                if(responce != null){
+                                    CuisinesRepository cuisinesRepo = getRestAdapter().createRepository(CuisinesRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Cuisines cuisines = cuisinesRepo.createObject(result);
+                                    callback.onSuccess(cuisines);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -677,10 +687,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                CuisinesRepository cuisinesRepo = getRestAdapter().createRepository(CuisinesRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Cuisines cuisines = cuisinesRepo.createObject(result);
-                                callback.onSuccess(cuisines);
+                                if(responce != null){
+                                    CuisinesRepository cuisinesRepo = getRestAdapter().createRepository(CuisinesRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Cuisines cuisines = cuisinesRepo.createObject(result);
+                                    callback.onSuccess(cuisines);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -713,10 +728,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                CuisinesRepository cuisinesRepo = getRestAdapter().createRepository(CuisinesRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Cuisines cuisines = cuisinesRepo.createObject(result);
-                                callback.onSuccess(cuisines);
+                                if(responce != null){
+                                    CuisinesRepository cuisinesRepo = getRestAdapter().createRepository(CuisinesRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Cuisines cuisines = cuisinesRepo.createObject(result);
+                                    callback.onSuccess(cuisines);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -810,10 +830,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Priority priority = priorityRepo.createObject(result);
-                                callback.onSuccess(priority);
+                                if(responce != null){
+                                    PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Priority priority = priorityRepo.createObject(result);
+                                    callback.onSuccess(priority);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -846,10 +871,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Priority priority = priorityRepo.createObject(result);
-                                callback.onSuccess(priority);
+                                if(responce != null){
+                                    PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Priority priority = priorityRepo.createObject(result);
+                                    callback.onSuccess(priority);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -882,10 +912,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Priority priority = priorityRepo.createObject(result);
-                                callback.onSuccess(priority);
+                                if(responce != null){
+                                    PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Priority priority = priorityRepo.createObject(result);
+                                    callback.onSuccess(priority);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -946,10 +981,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Category category = categoryRepo.createObject(result);
-                                callback.onSuccess(category);
+                                if(responce != null){
+                                    CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Category category = categoryRepo.createObject(result);
+                                    callback.onSuccess(category);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -1010,10 +1050,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Category category = categoryRepo.createObject(result);
-                                callback.onSuccess(category);
+                                if(responce != null){
+                                    CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Category category = categoryRepo.createObject(result);
+                                    callback.onSuccess(category);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -1046,10 +1091,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Category category = categoryRepo.createObject(result);
-                                callback.onSuccess(category);
+                                if(responce != null){
+                                    CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Category category = categoryRepo.createObject(result);
+                                    callback.onSuccess(category);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -1143,10 +1193,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Comments comments = commentsRepo.createObject(result);
-                                callback.onSuccess(comments);
+                                if(responce != null){
+                                    CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Comments comments = commentsRepo.createObject(result);
+                                    callback.onSuccess(comments);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -1207,10 +1262,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Comments comments = commentsRepo.createObject(result);
-                                callback.onSuccess(comments);
+                                if(responce != null){
+                                    CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Comments comments = commentsRepo.createObject(result);
+                                    callback.onSuccess(comments);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -1243,10 +1303,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                RecipeTagRepository recipeTagRepo = getRestAdapter().createRepository(RecipeTagRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                RecipeTag recipeTag = recipeTagRepo.createObject(result);
-                                callback.onSuccess(recipeTag);
+                                if(responce != null){
+                                    RecipeTagRepository recipeTagRepo = getRestAdapter().createRepository(RecipeTagRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    RecipeTag recipeTag = recipeTagRepo.createObject(result);
+                                    callback.onSuccess(recipeTag);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -1307,10 +1372,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                RecipeTagRepository recipeTagRepo = getRestAdapter().createRepository(RecipeTagRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                RecipeTag recipeTag = recipeTagRepo.createObject(result);
-                                callback.onSuccess(recipeTag);
+                                if(responce != null){
+                                    RecipeTagRepository recipeTagRepo = getRestAdapter().createRepository(RecipeTagRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    RecipeTag recipeTag = recipeTagRepo.createObject(result);
+                                    callback.onSuccess(recipeTag);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -1343,10 +1413,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                RecipeTagRepository recipeTagRepo = getRestAdapter().createRepository(RecipeTagRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                RecipeTag recipeTag = recipeTagRepo.createObject(result);
-                                callback.onSuccess(recipeTag);
+                                if(responce != null){
+                                    RecipeTagRepository recipeTagRepo = getRestAdapter().createRepository(RecipeTagRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    RecipeTag recipeTag = recipeTagRepo.createObject(result);
+                                    callback.onSuccess(recipeTag);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -1440,10 +1515,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Ingredients ingredients = ingredientsRepo.createObject(result);
-                                callback.onSuccess(ingredients);
+                                if(responce != null){
+                                    IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Ingredients ingredients = ingredientsRepo.createObject(result);
+                                    callback.onSuccess(ingredients);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -1504,10 +1584,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Ingredients ingredients = ingredientsRepo.createObject(result);
-                                callback.onSuccess(ingredients);
+                                if(responce != null){
+                                    IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Ingredients ingredients = ingredientsRepo.createObject(result);
+                                    callback.onSuccess(ingredients);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -1540,10 +1625,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
-                                callback.onSuccess(recipeIngredients);
+                                if(responce != null){
+                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
+                                    callback.onSuccess(recipeIngredients);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -1637,10 +1727,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                WishlistRepository wishlistRepo = getRestAdapter().createRepository(WishlistRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Wishlist wishlist = wishlistRepo.createObject(result);
-                                callback.onSuccess(wishlist);
+                                if(responce != null){
+                                    WishlistRepository wishlistRepo = getRestAdapter().createRepository(WishlistRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Wishlist wishlist = wishlistRepo.createObject(result);
+                                    callback.onSuccess(wishlist);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -1701,10 +1796,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                WishlistRepository wishlistRepo = getRestAdapter().createRepository(WishlistRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Wishlist wishlist = wishlistRepo.createObject(result);
-                                callback.onSuccess(wishlist);
+                                if(responce != null){
+                                    WishlistRepository wishlistRepo = getRestAdapter().createRepository(WishlistRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Wishlist wishlist = wishlistRepo.createObject(result);
+                                    callback.onSuccess(wishlist);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -1737,10 +1837,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                WishlistRepository wishlistRepo = getRestAdapter().createRepository(WishlistRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Wishlist wishlist = wishlistRepo.createObject(result);
-                                callback.onSuccess(wishlist);
+                                if(responce != null){
+                                    WishlistRepository wishlistRepo = getRestAdapter().createRepository(WishlistRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Wishlist wishlist = wishlistRepo.createObject(result);
+                                    callback.onSuccess(wishlist);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -1833,17 +1938,20 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONArray response) {
                             
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    List<Cuisines> cuisinesList = new ArrayList<Cuisines>();
+                                    CuisinesRepository cuisinesRepo = getRestAdapter().createRepository(CuisinesRepository.class);
 
-                                //Now converting jsonObject to list
-                                List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                List<Cuisines> cuisinesList = new ArrayList<Cuisines>();
-                                CuisinesRepository cuisinesRepo = getRestAdapter().createRepository(CuisinesRepository.class);
-
-                                for (Map<String, Object> obj : result) {
-                                    Cuisines cuisines = cuisinesRepo.createObject(obj);
-                                    cuisinesList.add(cuisines);
+                                    for (Map<String, Object> obj : result) {
+                                        Cuisines cuisines = cuisinesRepo.createObject(obj);
+                                        cuisinesList.add(cuisines);
+                                    }
+                                    callback.onSuccess(cuisinesList);
+                                }else{
+                                    callback.onSuccess(null);
                                 }
-                                callback.onSuccess(cuisinesList);
                             
                         }
                     });
@@ -1874,10 +1982,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                CuisinesRepository cuisinesRepo = getRestAdapter().createRepository(CuisinesRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Cuisines cuisines = cuisinesRepo.createObject(result);
-                                callback.onSuccess(cuisines);
+                                if(responce != null){
+                                    CuisinesRepository cuisinesRepo = getRestAdapter().createRepository(CuisinesRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Cuisines cuisines = cuisinesRepo.createObject(result);
+                                    callback.onSuccess(cuisines);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -1970,17 +2083,20 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONArray response) {
                             
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    List<Category> categoryList = new ArrayList<Category>();
+                                    CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
 
-                                //Now converting jsonObject to list
-                                List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                List<Category> categoryList = new ArrayList<Category>();
-                                CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
-
-                                for (Map<String, Object> obj : result) {
-                                    Category category = categoryRepo.createObject(obj);
-                                    categoryList.add(category);
+                                    for (Map<String, Object> obj : result) {
+                                        Category category = categoryRepo.createObject(obj);
+                                        categoryList.add(category);
+                                    }
+                                    callback.onSuccess(categoryList);
+                                }else{
+                                    callback.onSuccess(null);
                                 }
-                                callback.onSuccess(categoryList);
                             
                         }
                     });
@@ -2011,10 +2127,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Category category = categoryRepo.createObject(result);
-                                callback.onSuccess(category);
+                                if(responce != null){
+                                    CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Category category = categoryRepo.createObject(result);
+                                    callback.onSuccess(category);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -2107,17 +2228,20 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONArray response) {
                             
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    List<Comments> commentsList = new ArrayList<Comments>();
+                                    CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
 
-                                //Now converting jsonObject to list
-                                List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                List<Comments> commentsList = new ArrayList<Comments>();
-                                CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
-
-                                for (Map<String, Object> obj : result) {
-                                    Comments comments = commentsRepo.createObject(obj);
-                                    commentsList.add(comments);
+                                    for (Map<String, Object> obj : result) {
+                                        Comments comments = commentsRepo.createObject(obj);
+                                        commentsList.add(comments);
+                                    }
+                                    callback.onSuccess(commentsList);
+                                }else{
+                                    callback.onSuccess(null);
                                 }
-                                callback.onSuccess(commentsList);
                             
                         }
                     });
@@ -2148,10 +2272,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Comments comments = commentsRepo.createObject(result);
-                                callback.onSuccess(comments);
+                                if(responce != null){
+                                    CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Comments comments = commentsRepo.createObject(result);
+                                    callback.onSuccess(comments);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -2244,17 +2373,20 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONArray response) {
                             
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    List<RecipeTag> recipeTagList = new ArrayList<RecipeTag>();
+                                    RecipeTagRepository recipeTagRepo = getRestAdapter().createRepository(RecipeTagRepository.class);
 
-                                //Now converting jsonObject to list
-                                List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                List<RecipeTag> recipeTagList = new ArrayList<RecipeTag>();
-                                RecipeTagRepository recipeTagRepo = getRestAdapter().createRepository(RecipeTagRepository.class);
-
-                                for (Map<String, Object> obj : result) {
-                                    RecipeTag recipeTag = recipeTagRepo.createObject(obj);
-                                    recipeTagList.add(recipeTag);
+                                    for (Map<String, Object> obj : result) {
+                                        RecipeTag recipeTag = recipeTagRepo.createObject(obj);
+                                        recipeTagList.add(recipeTag);
+                                    }
+                                    callback.onSuccess(recipeTagList);
+                                }else{
+                                    callback.onSuccess(null);
                                 }
-                                callback.onSuccess(recipeTagList);
                             
                         }
                     });
@@ -2285,10 +2417,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                RecipeTagRepository recipeTagRepo = getRestAdapter().createRepository(RecipeTagRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                RecipeTag recipeTag = recipeTagRepo.createObject(result);
-                                callback.onSuccess(recipeTag);
+                                if(responce != null){
+                                    RecipeTagRepository recipeTagRepo = getRestAdapter().createRepository(RecipeTagRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    RecipeTag recipeTag = recipeTagRepo.createObject(result);
+                                    callback.onSuccess(recipeTag);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -2381,17 +2518,20 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONArray response) {
                             
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    List<Ingredients> ingredientsList = new ArrayList<Ingredients>();
+                                    IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
 
-                                //Now converting jsonObject to list
-                                List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                List<Ingredients> ingredientsList = new ArrayList<Ingredients>();
-                                IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
-
-                                for (Map<String, Object> obj : result) {
-                                    Ingredients ingredients = ingredientsRepo.createObject(obj);
-                                    ingredientsList.add(ingredients);
+                                    for (Map<String, Object> obj : result) {
+                                        Ingredients ingredients = ingredientsRepo.createObject(obj);
+                                        ingredientsList.add(ingredients);
+                                    }
+                                    callback.onSuccess(ingredientsList);
+                                }else{
+                                    callback.onSuccess(null);
                                 }
-                                callback.onSuccess(ingredientsList);
                             
                         }
                     });
@@ -2422,10 +2562,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Ingredients ingredients = ingredientsRepo.createObject(result);
-                                callback.onSuccess(ingredients);
+                                if(responce != null){
+                                    IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Ingredients ingredients = ingredientsRepo.createObject(result);
+                                    callback.onSuccess(ingredients);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -2518,17 +2663,20 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONArray response) {
                             
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    List<Wishlist> wishlistList = new ArrayList<Wishlist>();
+                                    WishlistRepository wishlistRepo = getRestAdapter().createRepository(WishlistRepository.class);
 
-                                //Now converting jsonObject to list
-                                List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                List<Wishlist> wishlistList = new ArrayList<Wishlist>();
-                                WishlistRepository wishlistRepo = getRestAdapter().createRepository(WishlistRepository.class);
-
-                                for (Map<String, Object> obj : result) {
-                                    Wishlist wishlist = wishlistRepo.createObject(obj);
-                                    wishlistList.add(wishlist);
+                                    for (Map<String, Object> obj : result) {
+                                        Wishlist wishlist = wishlistRepo.createObject(obj);
+                                        wishlistList.add(wishlist);
+                                    }
+                                    callback.onSuccess(wishlistList);
+                                }else{
+                                    callback.onSuccess(null);
                                 }
-                                callback.onSuccess(wishlistList);
                             
                         }
                     });
@@ -2559,10 +2707,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                WishlistRepository wishlistRepo = getRestAdapter().createRepository(WishlistRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Wishlist wishlist = wishlistRepo.createObject(result);
-                                callback.onSuccess(wishlist);
+                                if(responce != null){
+                                    WishlistRepository wishlistRepo = getRestAdapter().createRepository(WishlistRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Wishlist wishlist = wishlistRepo.createObject(result);
+                                    callback.onSuccess(wishlist);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -2656,10 +2809,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Recipe recipe = recipeRepo.createObject(result);
-                                callback.onSuccess(recipe);
+                                if(responce != null){
+                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Recipe recipe = recipeRepo.createObject(result);
+                                    callback.onSuccess(recipe);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -2692,10 +2850,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Recipe recipe = recipeRepo.createObject(result);
-                                callback.onSuccess(recipe);
+                                if(responce != null){
+                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Recipe recipe = recipeRepo.createObject(result);
+                                    callback.onSuccess(recipe);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -2728,10 +2891,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Recipe recipe = recipeRepo.createObject(result);
-                                callback.onSuccess(recipe);
+                                if(responce != null){
+                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Recipe recipe = recipeRepo.createObject(result);
+                                    callback.onSuccess(recipe);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -2797,10 +2965,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Recipe recipe = recipeRepo.createObject(result);
-                                callback.onSuccess(recipe);
+                                if(responce != null){
+                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Recipe recipe = recipeRepo.createObject(result);
+                                    callback.onSuccess(recipe);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -2832,17 +3005,20 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONArray response) {
                             
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    List<Recipe> recipeList = new ArrayList<Recipe>();
+                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
 
-                                //Now converting jsonObject to list
-                                List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                List<Recipe> recipeList = new ArrayList<Recipe>();
-                                RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
-
-                                for (Map<String, Object> obj : result) {
-                                    Recipe recipe = recipeRepo.createObject(obj);
-                                    recipeList.add(recipe);
+                                    for (Map<String, Object> obj : result) {
+                                        Recipe recipe = recipeRepo.createObject(obj);
+                                        recipeList.add(recipe);
+                                    }
+                                    callback.onSuccess(recipeList);
+                                }else{
+                                    callback.onSuccess(null);
                                 }
-                                callback.onSuccess(recipeList);
                             
                         }
                     });
@@ -2873,10 +3049,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Recipe recipe = recipeRepo.createObject(result);
-                                callback.onSuccess(recipe);
+                                if(responce != null){
+                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Recipe recipe = recipeRepo.createObject(result);
+                                    callback.onSuccess(recipe);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -3008,10 +3189,15 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Recipe recipe = recipeRepo.createObject(result);
-                                callback.onSuccess(recipe);
+                                if(responce != null){
+                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Recipe recipe = recipeRepo.createObject(result);
+                                    callback.onSuccess(recipe);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });

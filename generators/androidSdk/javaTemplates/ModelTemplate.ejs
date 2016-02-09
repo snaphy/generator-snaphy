@@ -675,11 +675,16 @@ public class <%- modelName %> extends Model {
                                                 @Override
                                                 <% if(callback !== "Adapter.JsonObjectCallback" ) { %>
                                                     public void onSuccess(<%- returnType %> object) {
-                                                        //now add relation to this recipe.
-                                                        addRelation(object);
-                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                        //object.addRelation(that);
-                                                        callback.onSuccess(object);
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
                                                     }
                                                 <% }else{ %>
                                                     public void onSuccess(JSONObject object) {
@@ -693,17 +698,21 @@ public class <%- modelName %> extends Model {
                                                 @Override
                                                 <% if( callback !== "Adapter.JsonArrayCallback" ) {%>
                                                     public void onSuccess(<%- returnType %> object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            <%- type %> obj = new <%- type %>();
+                                                            addRelation(object, obj);
+                                                            //Disabling two way communication for cyclic error..
+                                                            /*for (<%- type %> obj : object) {
+                                                                //Also add relation to child type for two way communication..
+                                                                obj.addRelation(that);
+                                                            }*/
 
-                                                        //now add relation to this recipe.
-                                                        <%- type %> obj = new <%- type %>();
-                                                        addRelation(object, obj);
-                                                        //Disabling two way communication for cyclic error..
-                                                        /*for (<%- type %> obj : object) {
-                                                            //Also add relation to child type for two way communication..
-                                                            obj.addRelation(that);
-                                                        }*/
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
 
-                                                        callback.onSuccess(object);
                                                     }
                                                 <% }else{ %>
                                                     public void onSuccess(JSONArray object) {

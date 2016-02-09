@@ -167,10 +167,15 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Ingredients ingredients = ingredientsRepo.createObject(result);
-                                callback.onSuccess(ingredients);
+                                if(responce != null){
+                                    IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Ingredients ingredients = ingredientsRepo.createObject(result);
+                                    callback.onSuccess(ingredients);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -231,10 +236,15 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Ingredients ingredients = ingredientsRepo.createObject(result);
-                                callback.onSuccess(ingredients);
+                                if(responce != null){
+                                    IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Ingredients ingredients = ingredientsRepo.createObject(result);
+                                    callback.onSuccess(ingredients);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -266,17 +276,20 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                         @Override
                         public void onSuccess(JSONArray response) {
                             
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    List<Ingredients> ingredientsList = new ArrayList<Ingredients>();
+                                    IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
 
-                                //Now converting jsonObject to list
-                                List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                List<Ingredients> ingredientsList = new ArrayList<Ingredients>();
-                                IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
-
-                                for (Map<String, Object> obj : result) {
-                                    Ingredients ingredients = ingredientsRepo.createObject(obj);
-                                    ingredientsList.add(ingredients);
+                                    for (Map<String, Object> obj : result) {
+                                        Ingredients ingredients = ingredientsRepo.createObject(obj);
+                                        ingredientsList.add(ingredients);
+                                    }
+                                    callback.onSuccess(ingredientsList);
+                                }else{
+                                    callback.onSuccess(null);
                                 }
-                                callback.onSuccess(ingredientsList);
                             
                         }
                     });
@@ -307,10 +320,15 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Ingredients ingredients = ingredientsRepo.createObject(result);
-                                callback.onSuccess(ingredients);
+                                if(responce != null){
+                                    IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Ingredients ingredients = ingredientsRepo.createObject(result);
+                                    callback.onSuccess(ingredients);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -404,10 +422,15 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                IngredientCategoryRepository ingredientCategoryRepo = getRestAdapter().createRepository(IngredientCategoryRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                IngredientCategory ingredientCategory = ingredientCategoryRepo.createObject(result);
-                                callback.onSuccess(ingredientCategory);
+                                if(responce != null){
+                                    IngredientCategoryRepository ingredientCategoryRepo = getRestAdapter().createRepository(IngredientCategoryRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    IngredientCategory ingredientCategory = ingredientCategoryRepo.createObject(result);
+                                    callback.onSuccess(ingredientCategory);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -440,10 +463,15 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                IngredientCategoryRepository ingredientCategoryRepo = getRestAdapter().createRepository(IngredientCategoryRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                IngredientCategory ingredientCategory = ingredientCategoryRepo.createObject(result);
-                                callback.onSuccess(ingredientCategory);
+                                if(responce != null){
+                                    IngredientCategoryRepository ingredientCategoryRepo = getRestAdapter().createRepository(IngredientCategoryRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    IngredientCategory ingredientCategory = ingredientCategoryRepo.createObject(result);
+                                    callback.onSuccess(ingredientCategory);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -476,10 +504,15 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                IngredientCategoryRepository ingredientCategoryRepo = getRestAdapter().createRepository(IngredientCategoryRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                IngredientCategory ingredientCategory = ingredientCategoryRepo.createObject(result);
-                                callback.onSuccess(ingredientCategory);
+                                if(responce != null){
+                                    IngredientCategoryRepository ingredientCategoryRepo = getRestAdapter().createRepository(IngredientCategoryRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    IngredientCategory ingredientCategory = ingredientCategoryRepo.createObject(result);
+                                    callback.onSuccess(ingredientCategory);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -545,10 +578,15 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                IngredientCategoryRepository ingredientCategoryRepo = getRestAdapter().createRepository(IngredientCategoryRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                IngredientCategory ingredientCategory = ingredientCategoryRepo.createObject(result);
-                                callback.onSuccess(ingredientCategory);
+                                if(responce != null){
+                                    IngredientCategoryRepository ingredientCategoryRepo = getRestAdapter().createRepository(IngredientCategoryRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    IngredientCategory ingredientCategory = ingredientCategoryRepo.createObject(result);
+                                    callback.onSuccess(ingredientCategory);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -580,17 +618,20 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                         @Override
                         public void onSuccess(JSONArray response) {
                             
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    List<IngredientCategory> ingredientCategoryList = new ArrayList<IngredientCategory>();
+                                    IngredientCategoryRepository ingredientCategoryRepo = getRestAdapter().createRepository(IngredientCategoryRepository.class);
 
-                                //Now converting jsonObject to list
-                                List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                List<IngredientCategory> ingredientCategoryList = new ArrayList<IngredientCategory>();
-                                IngredientCategoryRepository ingredientCategoryRepo = getRestAdapter().createRepository(IngredientCategoryRepository.class);
-
-                                for (Map<String, Object> obj : result) {
-                                    IngredientCategory ingredientCategory = ingredientCategoryRepo.createObject(obj);
-                                    ingredientCategoryList.add(ingredientCategory);
+                                    for (Map<String, Object> obj : result) {
+                                        IngredientCategory ingredientCategory = ingredientCategoryRepo.createObject(obj);
+                                        ingredientCategoryList.add(ingredientCategory);
+                                    }
+                                    callback.onSuccess(ingredientCategoryList);
+                                }else{
+                                    callback.onSuccess(null);
                                 }
-                                callback.onSuccess(ingredientCategoryList);
                             
                         }
                     });
@@ -621,10 +662,15 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                IngredientCategoryRepository ingredientCategoryRepo = getRestAdapter().createRepository(IngredientCategoryRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                IngredientCategory ingredientCategory = ingredientCategoryRepo.createObject(result);
-                                callback.onSuccess(ingredientCategory);
+                                if(responce != null){
+                                    IngredientCategoryRepository ingredientCategoryRepo = getRestAdapter().createRepository(IngredientCategoryRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    IngredientCategory ingredientCategory = ingredientCategoryRepo.createObject(result);
+                                    callback.onSuccess(ingredientCategory);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -756,10 +802,15 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                IngredientCategoryRepository ingredientCategoryRepo = getRestAdapter().createRepository(IngredientCategoryRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                IngredientCategory ingredientCategory = ingredientCategoryRepo.createObject(result);
-                                callback.onSuccess(ingredientCategory);
+                                if(responce != null){
+                                    IngredientCategoryRepository ingredientCategoryRepo = getRestAdapter().createRepository(IngredientCategoryRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    IngredientCategory ingredientCategory = ingredientCategoryRepo.createObject(result);
+                                    callback.onSuccess(ingredientCategory);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });

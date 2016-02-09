@@ -212,10 +212,15 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                AccessToken accessToken = accessTokenRepo.createObject(result);
-                                callback.onSuccess(accessToken);
+                                if(responce != null){
+                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    AccessToken accessToken = accessTokenRepo.createObject(result);
+                                    callback.onSuccess(accessToken);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -276,10 +281,15 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                AccessToken accessToken = accessTokenRepo.createObject(result);
-                                callback.onSuccess(accessToken);
+                                if(responce != null){
+                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    AccessToken accessToken = accessTokenRepo.createObject(result);
+                                    callback.onSuccess(accessToken);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -312,10 +322,15 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                callback.onSuccess(employeeDetails);
+                                if(responce != null){
+                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
+                                    callback.onSuccess(employeeDetails);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -348,10 +363,15 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                callback.onSuccess(employeeDetails);
+                                if(responce != null){
+                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
+                                    callback.onSuccess(employeeDetails);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -384,10 +404,15 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                callback.onSuccess(employeeDetails);
+                                if(responce != null){
+                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
+                                    callback.onSuccess(employeeDetails);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -447,17 +472,20 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onSuccess(JSONArray response) {
                             
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    List<AccessToken> accessTokenList = new ArrayList<AccessToken>();
+                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
 
-                                //Now converting jsonObject to list
-                                List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                List<AccessToken> accessTokenList = new ArrayList<AccessToken>();
-                                AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
-
-                                for (Map<String, Object> obj : result) {
-                                    AccessToken accessToken = accessTokenRepo.createObject(obj);
-                                    accessTokenList.add(accessToken);
+                                    for (Map<String, Object> obj : result) {
+                                        AccessToken accessToken = accessTokenRepo.createObject(obj);
+                                        accessTokenList.add(accessToken);
+                                    }
+                                    callback.onSuccess(accessTokenList);
+                                }else{
+                                    callback.onSuccess(null);
                                 }
-                                callback.onSuccess(accessTokenList);
                             
                         }
                     });
@@ -488,10 +516,15 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                AccessToken accessToken = accessTokenRepo.createObject(result);
-                                callback.onSuccess(accessToken);
+                                if(responce != null){
+                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    AccessToken accessToken = accessTokenRepo.createObject(result);
+                                    callback.onSuccess(accessToken);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -585,10 +618,15 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Employee employee = employeeRepo.createObject(result);
-                                callback.onSuccess(employee);
+                                if(responce != null){
+                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Employee employee = employeeRepo.createObject(result);
+                                    callback.onSuccess(employee);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -621,10 +659,15 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Employee employee = employeeRepo.createObject(result);
-                                callback.onSuccess(employee);
+                                if(responce != null){
+                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Employee employee = employeeRepo.createObject(result);
+                                    callback.onSuccess(employee);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -657,10 +700,15 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Employee employee = employeeRepo.createObject(result);
-                                callback.onSuccess(employee);
+                                if(responce != null){
+                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Employee employee = employeeRepo.createObject(result);
+                                    callback.onSuccess(employee);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -726,10 +774,15 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Employee employee = employeeRepo.createObject(result);
-                                callback.onSuccess(employee);
+                                if(responce != null){
+                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Employee employee = employeeRepo.createObject(result);
+                                    callback.onSuccess(employee);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -761,17 +814,20 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onSuccess(JSONArray response) {
                             
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    List<Employee> employeeList = new ArrayList<Employee>();
+                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
 
-                                //Now converting jsonObject to list
-                                List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                List<Employee> employeeList = new ArrayList<Employee>();
-                                EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-
-                                for (Map<String, Object> obj : result) {
-                                    Employee employee = employeeRepo.createObject(obj);
-                                    employeeList.add(employee);
+                                    for (Map<String, Object> obj : result) {
+                                        Employee employee = employeeRepo.createObject(obj);
+                                        employeeList.add(employee);
+                                    }
+                                    callback.onSuccess(employeeList);
+                                }else{
+                                    callback.onSuccess(null);
                                 }
-                                callback.onSuccess(employeeList);
                             
                         }
                     });
@@ -802,10 +858,15 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Employee employee = employeeRepo.createObject(result);
-                                callback.onSuccess(employee);
+                                if(responce != null){
+                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Employee employee = employeeRepo.createObject(result);
+                                    callback.onSuccess(employee);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -937,10 +998,15 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Employee employee = employeeRepo.createObject(result);
-                                callback.onSuccess(employee);
+                                if(responce != null){
+                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Employee employee = employeeRepo.createObject(result);
+                                    callback.onSuccess(employee);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });

@@ -184,10 +184,15 @@ public class CommentsRepository extends ModelRepository<Comments> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Customer customer = customerRepo.createObject(result);
-                                callback.onSuccess(customer);
+                                if(responce != null){
+                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Customer customer = customerRepo.createObject(result);
+                                    callback.onSuccess(customer);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -220,10 +225,15 @@ public class CommentsRepository extends ModelRepository<Comments> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Recipe recipe = recipeRepo.createObject(result);
-                                callback.onSuccess(recipe);
+                                if(responce != null){
+                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Recipe recipe = recipeRepo.createObject(result);
+                                    callback.onSuccess(recipe);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -256,10 +266,15 @@ public class CommentsRepository extends ModelRepository<Comments> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Comments comments = commentsRepo.createObject(result);
-                                callback.onSuccess(comments);
+                                if(responce != null){
+                                    CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Comments comments = commentsRepo.createObject(result);
+                                    callback.onSuccess(comments);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -292,10 +307,15 @@ public class CommentsRepository extends ModelRepository<Comments> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Comments comments = commentsRepo.createObject(result);
-                                callback.onSuccess(comments);
+                                if(responce != null){
+                                    CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Comments comments = commentsRepo.createObject(result);
+                                    callback.onSuccess(comments);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -328,10 +348,15 @@ public class CommentsRepository extends ModelRepository<Comments> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Comments comments = commentsRepo.createObject(result);
-                                callback.onSuccess(comments);
+                                if(responce != null){
+                                    CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Comments comments = commentsRepo.createObject(result);
+                                    callback.onSuccess(comments);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -397,10 +422,15 @@ public class CommentsRepository extends ModelRepository<Comments> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Comments comments = commentsRepo.createObject(result);
-                                callback.onSuccess(comments);
+                                if(responce != null){
+                                    CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Comments comments = commentsRepo.createObject(result);
+                                    callback.onSuccess(comments);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -432,17 +462,20 @@ public class CommentsRepository extends ModelRepository<Comments> {
                         @Override
                         public void onSuccess(JSONArray response) {
                             
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    List<Comments> commentsList = new ArrayList<Comments>();
+                                    CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
 
-                                //Now converting jsonObject to list
-                                List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                List<Comments> commentsList = new ArrayList<Comments>();
-                                CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
-
-                                for (Map<String, Object> obj : result) {
-                                    Comments comments = commentsRepo.createObject(obj);
-                                    commentsList.add(comments);
+                                    for (Map<String, Object> obj : result) {
+                                        Comments comments = commentsRepo.createObject(obj);
+                                        commentsList.add(comments);
+                                    }
+                                    callback.onSuccess(commentsList);
+                                }else{
+                                    callback.onSuccess(null);
                                 }
-                                callback.onSuccess(commentsList);
                             
                         }
                     });
@@ -473,10 +506,15 @@ public class CommentsRepository extends ModelRepository<Comments> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Comments comments = commentsRepo.createObject(result);
-                                callback.onSuccess(comments);
+                                if(responce != null){
+                                    CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Comments comments = commentsRepo.createObject(result);
+                                    callback.onSuccess(comments);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -608,10 +646,15 @@ public class CommentsRepository extends ModelRepository<Comments> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Comments comments = commentsRepo.createObject(result);
-                                callback.onSuccess(comments);
+                                if(responce != null){
+                                    CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Comments comments = commentsRepo.createObject(result);
+                                    callback.onSuccess(comments);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });

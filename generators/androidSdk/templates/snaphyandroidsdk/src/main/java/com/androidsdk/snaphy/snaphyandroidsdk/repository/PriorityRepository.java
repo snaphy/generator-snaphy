@@ -163,10 +163,15 @@ public class PriorityRepository extends ModelRepository<Priority> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Recipe recipe = recipeRepo.createObject(result);
-                                callback.onSuccess(recipe);
+                                if(responce != null){
+                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Recipe recipe = recipeRepo.createObject(result);
+                                    callback.onSuccess(recipe);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -199,10 +204,15 @@ public class PriorityRepository extends ModelRepository<Priority> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Recipe recipe = recipeRepo.createObject(result);
-                                callback.onSuccess(recipe);
+                                if(responce != null){
+                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Recipe recipe = recipeRepo.createObject(result);
+                                    callback.onSuccess(recipe);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -235,10 +245,15 @@ public class PriorityRepository extends ModelRepository<Priority> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Recipe recipe = recipeRepo.createObject(result);
-                                callback.onSuccess(recipe);
+                                if(responce != null){
+                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Recipe recipe = recipeRepo.createObject(result);
+                                    callback.onSuccess(recipe);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -299,10 +314,15 @@ public class PriorityRepository extends ModelRepository<Priority> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Priority priority = priorityRepo.createObject(result);
-                                callback.onSuccess(priority);
+                                if(responce != null){
+                                    PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Priority priority = priorityRepo.createObject(result);
+                                    callback.onSuccess(priority);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -335,10 +355,15 @@ public class PriorityRepository extends ModelRepository<Priority> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Priority priority = priorityRepo.createObject(result);
-                                callback.onSuccess(priority);
+                                if(responce != null){
+                                    PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Priority priority = priorityRepo.createObject(result);
+                                    callback.onSuccess(priority);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -371,10 +396,15 @@ public class PriorityRepository extends ModelRepository<Priority> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Priority priority = priorityRepo.createObject(result);
-                                callback.onSuccess(priority);
+                                if(responce != null){
+                                    PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Priority priority = priorityRepo.createObject(result);
+                                    callback.onSuccess(priority);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -440,10 +470,15 @@ public class PriorityRepository extends ModelRepository<Priority> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Priority priority = priorityRepo.createObject(result);
-                                callback.onSuccess(priority);
+                                if(responce != null){
+                                    PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Priority priority = priorityRepo.createObject(result);
+                                    callback.onSuccess(priority);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -475,17 +510,20 @@ public class PriorityRepository extends ModelRepository<Priority> {
                         @Override
                         public void onSuccess(JSONArray response) {
                             
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    List<Priority> priorityList = new ArrayList<Priority>();
+                                    PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
 
-                                //Now converting jsonObject to list
-                                List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                List<Priority> priorityList = new ArrayList<Priority>();
-                                PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
-
-                                for (Map<String, Object> obj : result) {
-                                    Priority priority = priorityRepo.createObject(obj);
-                                    priorityList.add(priority);
+                                    for (Map<String, Object> obj : result) {
+                                        Priority priority = priorityRepo.createObject(obj);
+                                        priorityList.add(priority);
+                                    }
+                                    callback.onSuccess(priorityList);
+                                }else{
+                                    callback.onSuccess(null);
                                 }
-                                callback.onSuccess(priorityList);
                             
                         }
                     });
@@ -516,10 +554,15 @@ public class PriorityRepository extends ModelRepository<Priority> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Priority priority = priorityRepo.createObject(result);
-                                callback.onSuccess(priority);
+                                if(responce != null){
+                                    PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Priority priority = priorityRepo.createObject(result);
+                                    callback.onSuccess(priority);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -651,10 +694,15 @@ public class PriorityRepository extends ModelRepository<Priority> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Priority priority = priorityRepo.createObject(result);
-                                callback.onSuccess(priority);
+                                if(responce != null){
+                                    PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Priority priority = priorityRepo.createObject(result);
+                                    callback.onSuccess(priority);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });

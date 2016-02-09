@@ -130,10 +130,15 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                EmailInfo emailInfo = emailInfoRepo.createObject(result);
-                                callback.onSuccess(emailInfo);
+                                if(responce != null){
+                                    EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    EmailInfo emailInfo = emailInfoRepo.createObject(result);
+                                    callback.onSuccess(emailInfo);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -166,10 +171,15 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                EmailInfo emailInfo = emailInfoRepo.createObject(result);
-                                callback.onSuccess(emailInfo);
+                                if(responce != null){
+                                    EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    EmailInfo emailInfo = emailInfoRepo.createObject(result);
+                                    callback.onSuccess(emailInfo);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -202,10 +212,15 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                EmailInfo emailInfo = emailInfoRepo.createObject(result);
-                                callback.onSuccess(emailInfo);
+                                if(responce != null){
+                                    EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    EmailInfo emailInfo = emailInfoRepo.createObject(result);
+                                    callback.onSuccess(emailInfo);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -271,10 +286,15 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                EmailInfo emailInfo = emailInfoRepo.createObject(result);
-                                callback.onSuccess(emailInfo);
+                                if(responce != null){
+                                    EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    EmailInfo emailInfo = emailInfoRepo.createObject(result);
+                                    callback.onSuccess(emailInfo);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -306,17 +326,20 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                         @Override
                         public void onSuccess(JSONArray response) {
                             
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    List<EmailInfo> emailInfoList = new ArrayList<EmailInfo>();
+                                    EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
 
-                                //Now converting jsonObject to list
-                                List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                List<EmailInfo> emailInfoList = new ArrayList<EmailInfo>();
-                                EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
-
-                                for (Map<String, Object> obj : result) {
-                                    EmailInfo emailInfo = emailInfoRepo.createObject(obj);
-                                    emailInfoList.add(emailInfo);
+                                    for (Map<String, Object> obj : result) {
+                                        EmailInfo emailInfo = emailInfoRepo.createObject(obj);
+                                        emailInfoList.add(emailInfo);
+                                    }
+                                    callback.onSuccess(emailInfoList);
+                                }else{
+                                    callback.onSuccess(null);
                                 }
-                                callback.onSuccess(emailInfoList);
                             
                         }
                     });
@@ -347,10 +370,15 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                EmailInfo emailInfo = emailInfoRepo.createObject(result);
-                                callback.onSuccess(emailInfo);
+                                if(responce != null){
+                                    EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    EmailInfo emailInfo = emailInfoRepo.createObject(result);
+                                    callback.onSuccess(emailInfo);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -482,10 +510,15 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                EmailInfo emailInfo = emailInfoRepo.createObject(result);
-                                callback.onSuccess(emailInfo);
+                                if(responce != null){
+                                    EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    EmailInfo emailInfo = emailInfoRepo.createObject(result);
+                                    callback.onSuccess(emailInfo);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });

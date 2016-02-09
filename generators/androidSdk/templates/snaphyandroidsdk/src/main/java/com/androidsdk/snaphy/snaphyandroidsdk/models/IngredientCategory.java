@@ -176,11 +176,16 @@ public class IngredientCategory extends Model {
                                                 @Override
                                                 
                                                     public void onSuccess(Ingredients object) {
-                                                        //now add relation to this recipe.
-                                                        addRelation(object);
-                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                        //object.addRelation(that);
-                                                        callback.onSuccess(object);
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
                                                     }
                                                 
                                             
@@ -254,11 +259,16 @@ public class IngredientCategory extends Model {
                                                 @Override
                                                 
                                                     public void onSuccess(Ingredients object) {
-                                                        //now add relation to this recipe.
-                                                        addRelation(object);
-                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                        //object.addRelation(that);
-                                                        callback.onSuccess(object);
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
                                                     }
                                                 
                                             
@@ -299,17 +309,21 @@ public class IngredientCategory extends Model {
                                                 @Override
                                                 
                                                     public void onSuccess(List<Ingredients> object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            Ingredients obj = new Ingredients();
+                                                            addRelation(object, obj);
+                                                            //Disabling two way communication for cyclic error..
+                                                            /*for (Ingredients obj : object) {
+                                                                //Also add relation to child type for two way communication..
+                                                                obj.addRelation(that);
+                                                            }*/
 
-                                                        //now add relation to this recipe.
-                                                        Ingredients obj = new Ingredients();
-                                                        addRelation(object, obj);
-                                                        //Disabling two way communication for cyclic error..
-                                                        /*for (Ingredients obj : object) {
-                                                            //Also add relation to child type for two way communication..
-                                                            obj.addRelation(that);
-                                                        }*/
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
 
-                                                        callback.onSuccess(object);
                                                     }
                                                 
                                             
@@ -344,11 +358,16 @@ public class IngredientCategory extends Model {
                                                 @Override
                                                 
                                                     public void onSuccess(Ingredients object) {
-                                                        //now add relation to this recipe.
-                                                        addRelation(object);
-                                                        //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                        //object.addRelation(that);
-                                                        callback.onSuccess(object);
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
                                                     }
                                                 
                                             

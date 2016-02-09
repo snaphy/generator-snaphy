@@ -163,10 +163,15 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Employee employee = employeeRepo.createObject(result);
-                                callback.onSuccess(employee);
+                                if(responce != null){
+                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Employee employee = employeeRepo.createObject(result);
+                                    callback.onSuccess(employee);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -199,10 +204,15 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Employee employee = employeeRepo.createObject(result);
-                                callback.onSuccess(employee);
+                                if(responce != null){
+                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Employee employee = employeeRepo.createObject(result);
+                                    callback.onSuccess(employee);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -235,10 +245,15 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                Employee employee = employeeRepo.createObject(result);
-                                callback.onSuccess(employee);
+                                if(responce != null){
+                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Employee employee = employeeRepo.createObject(result);
+                                    callback.onSuccess(employee);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -299,10 +314,15 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                callback.onSuccess(employeeDetails);
+                                if(responce != null){
+                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
+                                    callback.onSuccess(employeeDetails);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -335,10 +355,15 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                callback.onSuccess(employeeDetails);
+                                if(responce != null){
+                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
+                                    callback.onSuccess(employeeDetails);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -371,10 +396,15 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                callback.onSuccess(employeeDetails);
+                                if(responce != null){
+                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
+                                    callback.onSuccess(employeeDetails);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -440,10 +470,15 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                callback.onSuccess(employeeDetails);
+                                if(responce != null){
+                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
+                                    callback.onSuccess(employeeDetails);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -475,17 +510,20 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         @Override
                         public void onSuccess(JSONArray response) {
                             
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    List<EmployeeDetails> employeeDetailsList = new ArrayList<EmployeeDetails>();
+                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
 
-                                //Now converting jsonObject to list
-                                List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                List<EmployeeDetails> employeeDetailsList = new ArrayList<EmployeeDetails>();
-                                EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
-
-                                for (Map<String, Object> obj : result) {
-                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(obj);
-                                    employeeDetailsList.add(employeeDetails);
+                                    for (Map<String, Object> obj : result) {
+                                        EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(obj);
+                                        employeeDetailsList.add(employeeDetails);
+                                    }
+                                    callback.onSuccess(employeeDetailsList);
+                                }else{
+                                    callback.onSuccess(null);
                                 }
-                                callback.onSuccess(employeeDetailsList);
                             
                         }
                     });
@@ -516,10 +554,15 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                callback.onSuccess(employeeDetails);
+                                if(responce != null){
+                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
+                                    callback.onSuccess(employeeDetails);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -651,10 +694,15 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                callback.onSuccess(employeeDetails);
+                                if(responce != null){
+                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
+                                    callback.onSuccess(employeeDetails);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });

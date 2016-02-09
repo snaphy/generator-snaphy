@@ -370,10 +370,15 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                             <% if(model.allModels[type] === undefined) { %>
                                 callback.onSuccess(response);
                             <% }else{ %>
-                                <%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
-                                Map<String, Object> result = JsonUtil.fromJson(response);
-                                <%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(result);
-                                callback.onSuccess(<%- lowercaseFirstLetter(type) %>);
+                                if(responce != null){
+                                    <%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    <%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(result);
+                                    callback.onSuccess(<%- lowercaseFirstLetter(type) %>);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             <% } %>
                         }
                     });
@@ -391,17 +396,20 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                             <% if(model.allModels[type] === undefined) { %>
                                 callback.onSuccess(response);
                             <% }else{ %>
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    List<<%- type %>> <%- lowercaseFirstLetter(type) %>List = new ArrayList<<%- type %>>();
+                                    <%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
 
-                                //Now converting jsonObject to list
-                                List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                List<<%- type %>> <%- lowercaseFirstLetter(type) %>List = new ArrayList<<%- type %>>();
-                                <%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
-
-                                for (Map<String, Object> obj : result) {
-                                    <%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(obj);
-                                    <%- lowercaseFirstLetter(type) %>List.add(<%- lowercaseFirstLetter(type) %>);
+                                    for (Map<String, Object> obj : result) {
+                                        <%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(obj);
+                                        <%- lowercaseFirstLetter(type) %>List.add(<%- lowercaseFirstLetter(type) %>);
+                                    }
+                                    callback.onSuccess(<%- lowercaseFirstLetter(type) %>List);
+                                }else{
+                                    callback.onSuccess(null);
                                 }
-                                callback.onSuccess(<%- lowercaseFirstLetter(type) %>List);
                             <% } %>
                         }
                     });
