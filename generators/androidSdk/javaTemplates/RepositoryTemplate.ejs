@@ -387,9 +387,9 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                         //Convert custom class to hashMap type first
                         //if array
                         if(isArray){
-                            methodString = methodString + " " + "List<hashMap<String, Object>>" + " " + argumentName + ", ";
+                            methodString = methodString + " " + "List<HashMap<String, Object>>" + " " + argumentName + ", ";
                         }else{
-                            methodString = methodString + " " + "hashMap<String, Object>" + " " + argumentName + ", ";
+                            methodString = methodString + " " + "HashMap<String, Object>" + " " + argumentName + ", ";
                         }
 
                     }else{
