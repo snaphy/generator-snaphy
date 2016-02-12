@@ -26,13 +26,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Priority;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Popularity;
 
 //Now import model of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Recipe;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Chef;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChefRepository;
             
         
     
@@ -41,11 +41,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Priority;
 
 
 
-public class PriorityRepository extends ModelRepository<Priority> {
+public class PopularityRepository extends ModelRepository<Popularity> {
 
 
-    public PriorityRepository(){
-        super("Priority", null, Priority.class);
+    public PopularityRepository(){
+        super("Popularity", null, Popularity.class);
     }
 
 
@@ -56,69 +56,69 @@ public class PriorityRepository extends ModelRepository<Priority> {
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipes", "GET"), "Priority.prototype.__get__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:popularityId/chefs", "GET"), "Popularity.prototype.__get__chefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipes", "POST"), "Priority.prototype.__create__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:popularityId/chefs", "POST"), "Popularity.prototype.__create__chefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipes", "PUT"), "Priority.prototype.__update__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:popularityId/chefs", "PUT"), "Popularity.prototype.__update__chefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipes", "DELETE"), "Priority.prototype.__destroy__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:popularityId/chefs", "DELETE"), "Popularity.prototype.__destroy__chefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Priority.create");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Popularity.create");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Priority.create");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Popularity.create");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Priority.upsert");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Popularity.upsert");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Priority.exists");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Popularity.exists");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Priority.findById");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Popularity.findById");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Priority.find");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Popularity.find");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Priority.findOne");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Popularity.findOne");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Priority.updateAll");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Popularity.updateAll");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Priority.deleteById");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Popularity.deleteById");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Priority.count");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Popularity.count");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "PUT"), "Priority.prototype.updateAttributes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:popularityId", "PUT"), "Popularity.prototype.updateAttributes");
             
         
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Priority.getSchema");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Popularity.getSchema");
             
         
             
@@ -145,15 +145,15 @@ public class PriorityRepository extends ModelRepository<Priority> {
 
     
         
-            //Method get__recipes definition
-            public void get__recipes(  String id,  Boolean refresh, final ObjectCallback<Recipe> callback){
+            //Method get__chefs definition
+            public void get__chefs(  String popularityId,  Boolean refresh, final ObjectCallback<Chef> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__recipes", ImmutableMap.of("id", id, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__chefs", ImmutableMap.of("popularityId", popularityId, "refresh", refresh), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -163,11 +163,11 @@ public class PriorityRepository extends ModelRepository<Priority> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
-                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                if(response != null){
+                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Recipe recipe = recipeRepo.createObject(result);
-                                    callback.onSuccess(recipe);
+                                    Chef chef = chefRepo.createObject(result);
+                                    callback.onSuccess(chef);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -179,22 +179,22 @@ public class PriorityRepository extends ModelRepository<Priority> {
 
                 
 
-            }//Method get__recipes definition ends here..
+            }//Method get__chefs definition ends here..
 
             
 
         
     
         
-            //Method create__recipes definition
-            public void create__recipes(  String id,  Recipe data, final ObjectCallback<Recipe> callback){
+            //Method create__chefs definition
+            public void create__chefs(  String popularityId,  hashMap<String, Object> data, final ObjectCallback<Chef> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__recipes", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__chefs", ImmutableMap.of("popularityId", popularityId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -204,11 +204,11 @@ public class PriorityRepository extends ModelRepository<Priority> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
-                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                if(response != null){
+                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Recipe recipe = recipeRepo.createObject(result);
-                                    callback.onSuccess(recipe);
+                                    Chef chef = chefRepo.createObject(result);
+                                    callback.onSuccess(chef);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -220,22 +220,22 @@ public class PriorityRepository extends ModelRepository<Priority> {
 
                 
 
-            }//Method create__recipes definition ends here..
+            }//Method create__chefs definition ends here..
 
             
 
         
     
         
-            //Method update__recipes definition
-            public void update__recipes(  String id,  Recipe data, final ObjectCallback<Recipe> callback){
+            //Method update__chefs definition
+            public void update__chefs(  String popularityId,  hashMap<String, Object> data, final ObjectCallback<Chef> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__update__recipes", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__update__chefs", ImmutableMap.of("popularityId", popularityId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -245,11 +245,11 @@ public class PriorityRepository extends ModelRepository<Priority> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
-                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                if(response != null){
+                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Recipe recipe = recipeRepo.createObject(result);
-                                    callback.onSuccess(recipe);
+                                    Chef chef = chefRepo.createObject(result);
+                                    callback.onSuccess(chef);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -261,17 +261,17 @@ public class PriorityRepository extends ModelRepository<Priority> {
 
                 
 
-            }//Method update__recipes definition ends here..
+            }//Method update__chefs definition ends here..
 
             
 
         
     
         
-            //Method destroy__recipes definition
-            public void destroy__recipes(  String id, final VoidCallback callback){
+            //Method destroy__chefs definition
+            public void destroy__chefs(  String popularityId, final VoidCallback callback){
                 
-                    invokeStaticMethod("prototype.__destroy__recipes", ImmutableMap.of("id", id), new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroy__chefs", ImmutableMap.of("popularityId", popularityId), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -289,7 +289,7 @@ public class PriorityRepository extends ModelRepository<Priority> {
 
                 
 
-            }//Method destroy__recipes definition ends here..
+            }//Method destroy__chefs definition ends here..
 
             
 
@@ -297,7 +297,7 @@ public class PriorityRepository extends ModelRepository<Priority> {
     
         
             //Method create definition
-            public void create(  HashMap<String, Object> data, final ObjectCallback<Priority> callback){
+            public void create(  HashMap<String, Object> data, final ObjectCallback<Popularity> callback){
                 
 
 
@@ -314,11 +314,11 @@ public class PriorityRepository extends ModelRepository<Priority> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
-                                    PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
+                                if(response != null){
+                                    PopularityRepository popularityRepo = getRestAdapter().createRepository(PopularityRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Priority priority = priorityRepo.createObject(result);
-                                    callback.onSuccess(priority);
+                                    Popularity popularity = popularityRepo.createObject(result);
+                                    callback.onSuccess(popularity);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -338,7 +338,7 @@ public class PriorityRepository extends ModelRepository<Priority> {
     
         
             //Method createMany definition
-            public void createMany(  HashMap<String, Object> data, final ObjectCallback<Priority> callback){
+            public void createMany(  HashMap<String, Object> data, final ObjectCallback<Popularity> callback){
                 
 
 
@@ -355,11 +355,11 @@ public class PriorityRepository extends ModelRepository<Priority> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
-                                    PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
+                                if(response != null){
+                                    PopularityRepository popularityRepo = getRestAdapter().createRepository(PopularityRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Priority priority = priorityRepo.createObject(result);
-                                    callback.onSuccess(priority);
+                                    Popularity popularity = popularityRepo.createObject(result);
+                                    callback.onSuccess(popularity);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -379,7 +379,7 @@ public class PriorityRepository extends ModelRepository<Priority> {
     
         
             //Method upsert definition
-            public void upsert(  HashMap<String, Object> data, final ObjectCallback<Priority> callback){
+            public void upsert(  HashMap<String, Object> data, final ObjectCallback<Popularity> callback){
                 
 
 
@@ -396,11 +396,11 @@ public class PriorityRepository extends ModelRepository<Priority> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
-                                    PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
+                                if(response != null){
+                                    PopularityRepository popularityRepo = getRestAdapter().createRepository(PopularityRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Priority priority = priorityRepo.createObject(result);
-                                    callback.onSuccess(priority);
+                                    Popularity popularity = popularityRepo.createObject(result);
+                                    callback.onSuccess(popularity);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -453,7 +453,7 @@ public class PriorityRepository extends ModelRepository<Priority> {
     
         
             //Method findById definition
-            public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<Priority> callback){
+            public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<Popularity> callback){
                 
 
 
@@ -470,11 +470,11 @@ public class PriorityRepository extends ModelRepository<Priority> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
-                                    PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
+                                if(response != null){
+                                    PopularityRepository popularityRepo = getRestAdapter().createRepository(PopularityRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Priority priority = priorityRepo.createObject(result);
-                                    callback.onSuccess(priority);
+                                    Popularity popularity = popularityRepo.createObject(result);
+                                    callback.onSuccess(popularity);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -494,7 +494,7 @@ public class PriorityRepository extends ModelRepository<Priority> {
     
         
             //Method find definition
-            public void find(  HashMap<String, Object> filter, final ListCallback<Priority> callback){
+            public void find(  HashMap<String, Object> filter, final ListCallback<Popularity> callback){
                 
 
 
@@ -513,14 +513,14 @@ public class PriorityRepository extends ModelRepository<Priority> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Priority> priorityList = new ArrayList<Priority>();
-                                    PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
+                                    List<Popularity> popularityList = new ArrayList<Popularity>();
+                                    PopularityRepository popularityRepo = getRestAdapter().createRepository(PopularityRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Priority priority = priorityRepo.createObject(obj);
-                                        priorityList.add(priority);
+                                        Popularity popularity = popularityRepo.createObject(obj);
+                                        popularityList.add(popularity);
                                     }
-                                    callback.onSuccess(priorityList);
+                                    callback.onSuccess(popularityList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -537,7 +537,7 @@ public class PriorityRepository extends ModelRepository<Priority> {
     
         
             //Method findOne definition
-            public void findOne(  HashMap<String, Object> filter, final ObjectCallback<Priority> callback){
+            public void findOne(  HashMap<String, Object> filter, final ObjectCallback<Popularity> callback){
                 
 
 
@@ -554,11 +554,11 @@ public class PriorityRepository extends ModelRepository<Priority> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
-                                    PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
+                                if(response != null){
+                                    PopularityRepository popularityRepo = getRestAdapter().createRepository(PopularityRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Priority priority = priorityRepo.createObject(result);
-                                    callback.onSuccess(priority);
+                                    Popularity popularity = popularityRepo.createObject(result);
+                                    callback.onSuccess(popularity);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -677,14 +677,14 @@ public class PriorityRepository extends ModelRepository<Priority> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<Priority> callback){
+            public void updateAttributes(  String popularityId,  HashMap<String, Object> data, final ObjectCallback<Popularity> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("popularityId", popularityId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -694,11 +694,11 @@ public class PriorityRepository extends ModelRepository<Priority> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
-                                    PriorityRepository priorityRepo = getRestAdapter().createRepository(PriorityRepository.class);
+                                if(response != null){
+                                    PopularityRepository popularityRepo = getRestAdapter().createRepository(PopularityRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Priority priority = priorityRepo.createObject(result);
-                                    callback.onSuccess(priority);
+                                    Popularity popularity = popularityRepo.createObject(result);
+                                    callback.onSuccess(popularity);
 
                                 }else{
                                     callback.onSuccess(null);

@@ -15,7 +15,7 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
             return "String";
         }
         else if (type === "number") {
-            return "Double";
+            return "double";
         }
         else if (type === "object") {
             return "HashMap<String, Object>"
@@ -26,6 +26,34 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
         else {
 
             return capitalizeFirstLetter(checkTypeConversion(type, model));
+        }
+    }
+
+
+    //Return if type belongs to like CustomerRecipe or RecipeCustomer
+    function checkHasAndBelongsToDataType(type, model){
+        var hasAndBelongsToMany = false;
+        if(model.restDefinition[type] === undefined){
+            //Check by removing the model..
+            var patt = new RegExp("^" + capitalizeFirstLetter(model.name) );
+            var newType = type.replace(patt, "");
+
+            if(model.restDefinition[newType] !== undefined){
+                //Then add this model to new type..
+                hasAndBelongsToMany = true;
+            }else{
+                //Check by removing the model..
+                var patt = new RegExp(capitalizeFirstLetter(model.name) + "$" );
+                newType = type.replace(patt, "");
+                if(model.restDefinition[newType] !== undefined){
+                    //Then add this model to new type..
+                    hasAndBelongsToMany = true;
+                }
+            }
+            return hasAndBelongsToMany;
+        }else{
+            hasAndBelongsToMany = false;
+            return hasAndBelongsToMany;
         }
     }
 
@@ -150,6 +178,18 @@ public class <%- modelName %> extends com.strongloop.android.loopback.User {
 public class <%- modelName %> extends Model {
 <% } %>
 
+    //For converting all model values to hashMap
+    private HashMap<String, Object> hashMap = new HashMap<>();
+
+    public HashMap<String, Object> convertHashMap(){
+        if(that.getId() != null){
+            return hashMap;
+        }else{
+            hashMap.put("id", that.getId());
+            return hashMap;
+        }
+    }
+
     private <%- modelName %> that ;
 
     public <%- modelName %> (){
@@ -187,6 +227,9 @@ public class <%- modelName %> extends Model {
                 /* Adding Getter and Setter methods */
                 public void set<%- capitalPropertyName %>(<%- listType %> <%- property %>){
                     this.<%- property %> = <%- property %>;
+
+                    //TODO change this to custom array with double quotes escaped if error occured when sending to server..
+                    hashMap.put("<%- property %>", <%- property %>);
                 }
 
             <% } %>
@@ -200,19 +243,23 @@ public class <%- modelName %> extends Model {
                 /* Adding Getter and Setter methods */
                 public void set<%- capitalPropertyName %>(String <%- property %>){
                     this.<%- property %> = <%- property %>;
+                    //Update hashMap value..
+                    hashMap.put("<%- property %>", <%- property %>);
                 }
 
             <% } %>
             <% if( (model.properties[property].type === "number" )&& property !== "id") { %>
-                private Double <%- property %>;
+                private double <%- property %>;
                 /* Adding Getter and Setter methods */
-                public Double get<%- capitalPropertyName %>(){
+                public double get<%- capitalPropertyName %>(){
                     return <%- property %>;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void set<%- capitalPropertyName %>(Double <%- property %>){
+                public void set<%- capitalPropertyName %>(double <%- property %>){
                     this.<%- property %> = <%- property %>;
+                    //Update hashMap value..
+                    hashMap.put("<%- property %>", <%- property %>);
                 }
 
             <% } %>
@@ -226,6 +273,8 @@ public class <%- modelName %> extends Model {
                 /* Adding Getter and Setter methods */
                 public void set<%- capitalPropertyName %>(HashMap<String, Object> <%- property %>){
                     this.<%- property %> = <%- property %>;
+                    //Update hashMap value..
+                    hashMap.put("<%- property %>", <%- property %>);
                 }
 
             <% } %>
@@ -251,6 +300,7 @@ public class <%- modelName %> extends Model {
         //First create a dummy Repo class object for customer.
         CustomerRepository customerRepository = new CustomerRepository();
         Customer customer1 = customerRepository.createObject(customer);
+        addRelation(Customer customer);
         setCustomer(customer1);
     }
 
@@ -325,12 +375,11 @@ public class <%- modelName %> extends Model {
                         for (HashMap<String, Object> obj : <%- relation %>) {
                             //Also add relation to child type for two way communication..
                             <%- capitalcaseRelatedModelName %> obj1 = <%- relation %>Repository.createObject(obj);
-                            //Disabling backend compatibility for cyclic error
-                            /*//Now add backward compatibility for the relation belongsTo for hasMany..
-                            obj1.addRelation(that);*/
                             result.add(obj1);
+
                         }
                         set<%- capitalcaseRelationName %>(result);
+
                     }
 
 
@@ -520,6 +569,7 @@ public class <%- modelName %> extends Model {
                                         method.accepts.forEach(function(argumentObj, index){
                                             var argumentName   = argumentObj.arg;
                                             var argumentType   = argumentObj.type;
+
                                             if(argumentType === "any"){
                                                 argumentType = "string";
                                             }
@@ -535,18 +585,31 @@ public class <%- modelName %> extends Model {
                                             //Checking if the argument is internal or not..
                                             var internalArgument = isInternalArgument(argumentObj, argumentName, method);
 
-
+                                            var type;
+                                            var hasAndBelongsToType;
                                             if(!internalArgument ){
                                                 if(argumentType  instanceof Array){
+                                                    hasAndBelongsToType = checkHasAndBelongsToDataType(argumentType[0], model);
                                                     argumentType = "List<" + convertType(argumentType[0], model) + ">" ;
+                                                    type = argumentType;
                                                 }
                                                 else {
+                                                    hasAndBelongsToType = checkHasAndBelongsToDataType(argumentType, model);
                                                     argumentType = convertType(argumentType, model);
+                                                    type = argumentType;
                                                 }
 
 
+                                                //console.log("Now checking hasAndBelongsTo type");
+                                                //Ignore hasAndBelongsToMany
+                                                if(hasAndBelongsToType === false){
+                                                    //console.log("i am here");
+                                                    //If type belongs to hasAndBelongsToMany then ignore the type and argument..
+                                                    //TODO RIGHT NOW I AM IGNORING TYPE LIKE RECIPECATEGORY which belongs to hasAndBelongsTo Many type in future you can add..
+                                                    //Add it later in else..
+                                                    methodString = methodString + " " +argumentType + " " + argumentName +", ";
+                                                }
 
-                                                methodString = methodString + " " +argumentType + " " + argumentName +", ";
                                             }
                                         });//arguments loop ends..
 
@@ -630,6 +693,7 @@ public class <%- modelName %> extends Model {
                                             method.accepts.forEach(function(argumentObj, index){
                                                 var argumentName   = argumentObj.arg;
                                                 var argumentType   = argumentObj.type;
+
                                                 if(argumentType === "any"){
                                                     argumentType = "string";
                                                 }
@@ -646,14 +710,20 @@ public class <%- modelName %> extends Model {
 
 
                                                 if(!internalArgument ){
+                                                    var hasAndBelongsToType;
                                                     if(argumentType  instanceof Array){
+                                                        hasAndBelongsToType = checkHasAndBelongsToDataType(argumentType[0], model);
                                                         argumentType = "List<" + convertType(argumentType[0], model) + ">" ;
                                                     }
                                                     else {
+                                                        hasAndBelongsToType = checkHasAndBelongsToDataType(argumentType, model);
                                                         argumentType = convertType(argumentType, model);
                                                     }
 
-                                                    methodArguments = methodArguments + argumentName + ", ";
+                                                    if(!hasAndBelongsToType){
+                                                        methodArguments = methodArguments + argumentName + ", ";
+                                                    }
+
                                                 }else{
                                                     //Add internal arguments here..
                                                     methodArguments = methodArguments + " (String)that." + "get" + capitalizeFirstLetter(argumentName) + "(), ";

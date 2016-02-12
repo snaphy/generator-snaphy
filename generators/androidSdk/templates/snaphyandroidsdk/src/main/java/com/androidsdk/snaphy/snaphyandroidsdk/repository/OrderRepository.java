@@ -26,13 +26,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.EmployeeDetails;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Order;
 
 //Now import model of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Employee;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
             
         
     
@@ -41,11 +41,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.EmployeeDetails;
 
 
 
-public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> {
+public class OrderRepository extends ModelRepository<Order> {
 
 
-    public EmployeeDetailsRepository(){
-        super("EmployeeDetails", null, EmployeeDetails.class);
+    public OrderRepository(){
+        super("Order", null, Order.class);
     }
 
 
@@ -56,69 +56,63 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeDetailsId/employees", "GET"), "EmployeeDetails.prototype.__get__employees");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId/customer", "GET"), "Order.prototype.__get__customer");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeDetailsId/employees", "POST"), "EmployeeDetails.prototype.__create__employees");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Order.create");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeDetailsId/employees", "PUT"), "EmployeeDetails.prototype.__update__employees");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Order.create");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeDetailsId/employees", "DELETE"), "EmployeeDetails.prototype.__destroy__employees");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Order.upsert");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "EmployeeDetails.create");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Order.exists");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "EmployeeDetails.create");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Order.findById");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "EmployeeDetails.upsert");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Order.find");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "EmployeeDetails.exists");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Order.findOne");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "EmployeeDetails.findById");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Order.updateAll");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "EmployeeDetails.find");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Order.deleteById");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "EmployeeDetails.findOne");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Order.count");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "EmployeeDetails.updateAll");
-            
-        
-            
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "EmployeeDetails.deleteById");
-            
-        
-            
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "EmployeeDetails.count");
-            
-        
-            
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeDetailsId", "PUT"), "EmployeeDetails.prototype.updateAttributes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId", "PUT"), "Order.prototype.updateAttributes");
             
         
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "EmployeeDetails.getSchema");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Order.getSchema");
+            
+        
+            
+        
+            
+        
             
         
             
@@ -145,15 +139,15 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
 
     
         
-            //Method get__employees definition
-            public void get__employees(  String employeeDetailsId,  Boolean refresh, final ObjectCallback<Employee> callback){
+            //Method get__customer definition
+            public void get__customer(  String orderId,  Boolean refresh, final ObjectCallback<Customer> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__employees", ImmutableMap.of("employeeDetailsId", employeeDetailsId, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__customer", ImmutableMap.of("orderId", orderId, "refresh", refresh), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -164,10 +158,10 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    Customer customer = customerRepo.createObject(result);
+                                    callback.onSuccess(customer);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -179,117 +173,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
 
                 
 
-            }//Method get__employees definition ends here..
-
-            
-
-        
-    
-        
-            //Method create__employees definition
-            public void create__employees(  String employeeDetailsId,  hashMap<String, Object> data, final ObjectCallback<Employee> callback){
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__create__employees", ImmutableMap.of("employeeDetailsId", employeeDetailsId, "data", data), new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method create__employees definition ends here..
-
-            
-
-        
-    
-        
-            //Method update__employees definition
-            public void update__employees(  String employeeDetailsId,  hashMap<String, Object> data, final ObjectCallback<Employee> callback){
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__update__employees", ImmutableMap.of("employeeDetailsId", employeeDetailsId, "data", data), new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method update__employees definition ends here..
-
-            
-
-        
-    
-        
-            //Method destroy__employees definition
-            public void destroy__employees(  String employeeDetailsId, final VoidCallback callback){
-                
-                    invokeStaticMethod("prototype.__destroy__employees", ImmutableMap.of("employeeDetailsId", employeeDetailsId), new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method destroy__employees definition ends here..
+            }//Method get__customer definition ends here..
 
             
 
@@ -297,7 +181,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
     
         
             //Method create definition
-            public void create(  HashMap<String, Object> data, final ObjectCallback<EmployeeDetails> callback){
+            public void create(  HashMap<String, Object> data, final ObjectCallback<Order> callback){
                 
 
 
@@ -315,10 +199,10 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                    callback.onSuccess(employeeDetails);
+                                    Order order = orderRepo.createObject(result);
+                                    callback.onSuccess(order);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -338,7 +222,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
     
         
             //Method createMany definition
-            public void createMany(  HashMap<String, Object> data, final ObjectCallback<EmployeeDetails> callback){
+            public void createMany(  HashMap<String, Object> data, final ObjectCallback<Order> callback){
                 
 
 
@@ -356,10 +240,10 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                    callback.onSuccess(employeeDetails);
+                                    Order order = orderRepo.createObject(result);
+                                    callback.onSuccess(order);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -379,7 +263,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
     
         
             //Method upsert definition
-            public void upsert(  HashMap<String, Object> data, final ObjectCallback<EmployeeDetails> callback){
+            public void upsert(  HashMap<String, Object> data, final ObjectCallback<Order> callback){
                 
 
 
@@ -397,10 +281,10 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                    callback.onSuccess(employeeDetails);
+                                    Order order = orderRepo.createObject(result);
+                                    callback.onSuccess(order);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -453,7 +337,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
     
         
             //Method findById definition
-            public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<EmployeeDetails> callback){
+            public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<Order> callback){
                 
 
 
@@ -471,10 +355,10 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                    callback.onSuccess(employeeDetails);
+                                    Order order = orderRepo.createObject(result);
+                                    callback.onSuccess(order);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -494,7 +378,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
     
         
             //Method find definition
-            public void find(  HashMap<String, Object> filter, final ListCallback<EmployeeDetails> callback){
+            public void find(  HashMap<String, Object> filter, final ListCallback<Order> callback){
                 
 
 
@@ -513,14 +397,14 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<EmployeeDetails> employeeDetailsList = new ArrayList<EmployeeDetails>();
-                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    List<Order> orderList = new ArrayList<Order>();
+                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(obj);
-                                        employeeDetailsList.add(employeeDetails);
+                                        Order order = orderRepo.createObject(obj);
+                                        orderList.add(order);
                                     }
-                                    callback.onSuccess(employeeDetailsList);
+                                    callback.onSuccess(orderList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -537,7 +421,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
     
         
             //Method findOne definition
-            public void findOne(  HashMap<String, Object> filter, final ObjectCallback<EmployeeDetails> callback){
+            public void findOne(  HashMap<String, Object> filter, final ObjectCallback<Order> callback){
                 
 
 
@@ -555,10 +439,10 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                    callback.onSuccess(employeeDetails);
+                                    Order order = orderRepo.createObject(result);
+                                    callback.onSuccess(order);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -677,14 +561,14 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String employeeDetailsId,  HashMap<String, Object> data, final ObjectCallback<EmployeeDetails> callback){
+            public void updateAttributes(  String orderId,  HashMap<String, Object> data, final ObjectCallback<Order> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("employeeDetailsId", employeeDetailsId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("orderId", orderId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -695,10 +579,10 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                    callback.onSuccess(employeeDetails);
+                                    Order order = orderRepo.createObject(result);
+                                    callback.onSuccess(order);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -749,6 +633,12 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
 
             
 
+        
+    
+        
+    
+        
+    
         
     
         

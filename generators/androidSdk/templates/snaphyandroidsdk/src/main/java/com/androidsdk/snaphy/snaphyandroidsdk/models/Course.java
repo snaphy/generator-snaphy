@@ -18,22 +18,19 @@ import com.strongloop.android.loopback.callbacks.VoidCallback;
 import com.strongloop.android.remoting.adapters.Adapter;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.IngredientsRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.CourseRepository;
 
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.IngredientCategoryRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChefRepository;
             
 
         
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeRepository;
-            
-                import com.androidsdk.snaphy.snaphyandroidsdk.models.RecipeIngredients;
-                import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeIngredientsRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ContactChefRepository;
             
 
         
@@ -45,7 +42,7 @@ import java.util.HashMap;
 
 
 
-public class Ingredients extends Model {
+public class Course extends Model {
 
 
     //For converting all model values to hashMap
@@ -60,9 +57,9 @@ public class Ingredients extends Model {
         }
     }
 
-    private Ingredients that ;
+    private Course that ;
 
-    public Ingredients (){
+    public Course (){
         that = this;
     }
 
@@ -92,17 +89,17 @@ public class Ingredients extends Model {
         
             
             
-                private String sellingMetrics;
+                private String description;
                 /* Adding Getter and Setter methods */
-                public String getSellingMetrics(){
-                    return sellingMetrics;
+                public String getDescription(){
+                    return description;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setSellingMetrics(String sellingMetrics){
-                    this.sellingMetrics = sellingMetrics;
+                public void setDescription(String description){
+                    this.description = description;
                     //Update hashMap value..
-                    hashMap.put("sellingMetrics", sellingMetrics);
+                    hashMap.put("description", description);
                 }
 
             
@@ -114,20 +111,20 @@ public class Ingredients extends Model {
         
             
             
-            
-                private double minimumQuantity;
+                private String courseDuration;
                 /* Adding Getter and Setter methods */
-                public double getMinimumQuantity(){
-                    return minimumQuantity;
+                public String getCourseDuration(){
+                    return courseDuration;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setMinimumQuantity(double minimumQuantity){
-                    this.minimumQuantity = minimumQuantity;
+                public void setCourseDuration(String courseDuration){
+                    this.courseDuration = courseDuration;
                     //Update hashMap value..
-                    hashMap.put("minimumQuantity", minimumQuantity);
+                    hashMap.put("courseDuration", courseDuration);
                 }
 
+            
             
             
 
@@ -136,20 +133,20 @@ public class Ingredients extends Model {
         
             
             
-            
-                private double price;
+                private String courseFees;
                 /* Adding Getter and Setter methods */
-                public double getPrice(){
-                    return price;
+                public String getCourseFees(){
+                    return courseFees;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setPrice(double price){
-                    this.price = price;
+                public void setCourseFees(String courseFees){
+                    this.courseFees = courseFees;
                     //Update hashMap value..
-                    hashMap.put("price", price);
+                    hashMap.put("courseFees", courseFees);
                 }
 
+            
             
             
 
@@ -158,18 +155,18 @@ public class Ingredients extends Model {
         
             
 
-                private List<HashMap<String, Object>> tags;
+                private List<String> courseRecipes;
                 /* Adding Getter and Setter methods */
-                public List<HashMap<String, Object>> getTags(){
-                    return tags;
+                public List<String> getCourseRecipes(){
+                    return courseRecipes;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setTags(List<HashMap<String, Object>> tags){
-                    this.tags = tags;
+                public void setCourseRecipes(List<String> courseRecipes){
+                    this.courseRecipes = courseRecipes;
 
                     //TODO change this to custom array with double quotes escaped if error occured when sending to server..
-                    hashMap.put("tags", tags);
+                    hashMap.put("courseRecipes", courseRecipes);
                 }
 
             
@@ -206,27 +203,27 @@ public class Ingredients extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private IngredientCategory  ingredientCategory ;
+                    private Chef  chef ;
 
-                    public IngredientCategory getIngredientCategory() {
-                        return ingredientCategory;
+                    public Chef getChef() {
+                        return chef;
                     }
 
-                    public void setIngredientCategory(IngredientCategory ingredientCategory) {
-                        this.ingredientCategory = ingredientCategory;
+                    public void setChef(Chef chef) {
+                        this.chef = chef;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setIngredientCategory(HashMap<String, Object> ingredientCategory) {
+                    public void setChef(HashMap<String, Object> chef) {
                         //First create a dummy Repo class object for customer.
-                        IngredientCategoryRepository ingredientCategoryRepository = new IngredientCategoryRepository();
-                        IngredientCategory ingredientCategory1 = ingredientCategoryRepository.createObject(ingredientCategory);
-                        setIngredientCategory(ingredientCategory1);
+                        ChefRepository chefRepository = new ChefRepository();
+                        Chef chef1 = chefRepository.createObject(chef);
+                        setChef(chef1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(IngredientCategory ingredientCategory) {
-                        that.setIngredientCategory(ingredientCategory);
+                    public void addRelation(Chef chef) {
+                        that.setChef(chef);
                     }
 
 
@@ -247,9 +244,9 @@ public class Ingredients extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__ingredientCategory( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<IngredientCategory> callback) {
+                                    public void get__chef( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Chef> callback) {
                                         //Define methods here..
-                                        final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
+                                        final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
                                         
 
 
@@ -257,13 +254,13 @@ public class Ingredients extends Model {
 
                                         
 
-                                        ingredientsRepo.get__ingredientCategory( (String)that.getId(), refresh,  new ObjectCallback<IngredientCategory> (){
+                                        courseRepo.get__chef( (String)that.getId(), refresh,  new ObjectCallback<Chef> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(IngredientCategory object) {
+                                                    public void onSuccess(Chef object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -305,23 +302,6 @@ public class Ingredients extends Model {
                             
                          
                             
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
                         
                         
                         
@@ -360,93 +340,59 @@ public class Ingredients extends Model {
                 
                     
                     //Define hasMany relation method here..
-                    private List<Recipe>  recipes ;
+                    private List<ContactChef>  contactChefs ;
 
-                    public List<Recipe> getRecipes() {
-                        return recipes;
+                    public List<ContactChef> getContactChefs() {
+                        return contactChefs;
                     }
 
-                    public void setRecipes(List<Recipe> recipes) {
-                        this.recipes = recipes;
+                    public void setContactChefs(List<ContactChef> contactChefs) {
+                        this.contactChefs = contactChefs;
                         //Disabling backend compatibility for cyclic error
                         /*
                         //Now add backward compatibility for the relation belongsTo for hasMany..
-                        for (Recipe obj : recipes) {
+                        for (ContactChef obj : contactChefs) {
                             obj.addRelation(that);
                         }
                         */
                     }
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setRecipes1(List<HashMap<String, Object>> recipes) {
+                    public void setContactChefs1(List<HashMap<String, Object>> contactChefs) {
                         //First create a dummy Repo class object for ..
-                        RecipeRepository recipesRepository = new RecipeRepository();
-                        List<Recipe> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : recipes) {
+                        ContactChefRepository contactChefsRepository = new ContactChefRepository();
+                        List<ContactChef> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : contactChefs) {
                             //Also add relation to child type for two way communication..
-                            Recipe obj1 = recipesRepository.createObject(obj);
+                            ContactChef obj1 = contactChefsRepository.createObject(obj);
                             result.add(obj1);
 
                         }
-                        setRecipes(result);
+                        setContactChefs(result);
 
                     }
 
 
                     //Adding relation method..
                     //Add a dummy class Name object to seperate data..
-                    public void addRelation(List<Recipe> recipes, Recipe dummyClassInstance) {
-                        that.setRecipes(recipes);
+                    public void addRelation(List<ContactChef> contactChefs, ContactChef dummyClassInstance) {
+                        that.setContactChefs(contactChefs);
 
                     }
 
                     //Adding relation method..
                     //This will add a new data to the list relation object..
-                    public void addRelation(Recipe recipes) {
+                    public void addRelation(ContactChef contactChefs) {
                         try{
-                            that.getRecipes().add(recipes);
+                            that.getContactChefs().add(contactChefs);
                         }catch(Exception e){
-                            List< Recipe> recipes1 = new ArrayList();
+                            List< ContactChef> contactChefs1 = new ArrayList();
                             //Now add this item to list..
-                            recipes1.add(recipes);
+                            contactChefs1.add(contactChefs);
                             //Now set data....
-                            that.setRecipes(recipes1);
+                            that.setContactChefs(contactChefs1);
                         }
                     }
-
-                    
-                        //Write hasManyThrough def too..
-                        private List<RecipeIngredients>  recipeIngredients ;
-
-                        public List<RecipeIngredients> getRecipeIngredients() {
-                            return recipeIngredients;
-                        }
-
-                        public void setRecipeIngredients(List<RecipeIngredients> recipeIngredients) {
-                            this.recipeIngredients = recipeIngredients;
-                        }
-
-                        //Adding throughRelation method..
-                        //Add a dummy class Name object to seperate data..
-                        public void addRelation(List<RecipeIngredients> recipeIngredients, RecipeIngredients dummyClassInstance) {
-                            that.setRecipeIngredients(recipeIngredients);
-
-                        }
-
-                        //Adding throughRelation method..
-                        //This will add a new data to the list throughRelation object..
-                        public void addRelation(RecipeIngredients recipeIngredients) {
-                            try{
-                                that.getRecipeIngredients().add(recipeIngredients);
-                            }catch(Exception e){
-                                List< RecipeIngredients> recipeIngredients1 = new ArrayList();
-                                //Now add this item to list..
-                                recipeIngredients1.add(recipeIngredients);
-                                //Now set data....
-                                that.setRecipeIngredients(recipeIngredients1);
-                            }
-                        }
-
 
                     
 
@@ -468,9 +414,9 @@ public class Ingredients extends Model {
                         
 
                                     //Write the method here..
-                                    public void findById__recipes( String fk,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
+                                    public void findById__contactChefs( String fk,  RestAdapter restAdapter, final ObjectCallback<ContactChef> callback) {
                                         //Define methods here..
-                                        final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
+                                        final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
                                         
 
 
@@ -478,13 +424,13 @@ public class Ingredients extends Model {
 
                                         
 
-                                        ingredientsRepo.findById__recipes( (String)that.getId(), fk,  new ObjectCallback<Recipe> (){
+                                        courseRepo.findById__contactChefs( (String)that.getId(), fk,  new ObjectCallback<ContactChef> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Recipe object) {
+                                                    public void onSuccess(ContactChef object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -515,9 +461,9 @@ public class Ingredients extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__recipes( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__contactChefs( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
                                         //Define methods here..
-                                        final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
+                                        final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
                                         
 
 
@@ -525,7 +471,7 @@ public class Ingredients extends Model {
 
                                         
 
-                                        ingredientsRepo.destroyById__recipes( (String)that.getId(), fk,  new VoidCallback (){
+                                        courseRepo.destroyById__contactChefs( (String)that.getId(), fk,  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -551,9 +497,9 @@ public class Ingredients extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__recipes( String fk,  Recipe data,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
+                                    public void updateById__contactChefs( String fk,  ContactChef data,  RestAdapter restAdapter, final ObjectCallback<ContactChef> callback) {
                                         //Define methods here..
-                                        final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
+                                        final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
                                         
 
 
@@ -561,13 +507,13 @@ public class Ingredients extends Model {
 
                                         
 
-                                        ingredientsRepo.updateById__recipes( (String)that.getId(), fk, data,  new ObjectCallback<Recipe> (){
+                                        courseRepo.updateById__contactChefs( (String)that.getId(), fk, data,  new ObjectCallback<ContactChef> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Recipe object) {
+                                                    public void onSuccess(ContactChef object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -598,9 +544,9 @@ public class Ingredients extends Model {
                         
 
                                     //Write the method here..
-                                    public void link__recipes( String fk,  RecipeIngredients data,  RestAdapter restAdapter, final ObjectCallback<RecipeIngredients> callback) {
+                                    public void get__contactChefs( HashMap<String, Object> filter,  RestAdapter restAdapter, final ListCallback<ContactChef> callback) {
                                         //Define methods here..
-                                        final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
+                                        final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
                                         
 
 
@@ -608,143 +554,22 @@ public class Ingredients extends Model {
 
                                         
 
-                                        ingredientsRepo.link__recipes( (String)that.getId(), fk, data,  new ObjectCallback<RecipeIngredients> (){
+                                        courseRepo.get__contactChefs( (String)that.getId(), filter,  new ListCallback<ContactChef> (){
                                             
+
+                                            
+
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(RecipeIngredients object) {
+                                                    public void onSuccess(List<ContactChef> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void unlink__recipes( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
-                                        //Define methods here..
-                                        final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
-                                        
-
-
-                                        
-
-                                        
-
-                                        ingredientsRepo.unlink__recipes( (String)that.getId(), fk,  new VoidCallback (){
-                                            
-                                                @Override
-                                                public void onSuccess() {
-                                                    callback.onSuccess();
-                                                }
-                                            
-
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void exists__recipes( String fk,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
-                                        //Define methods here..
-                                        final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
-                                        
-
-
-                                        
-
-                                        
-
-                                        ingredientsRepo.exists__recipes( (String)that.getId(), fk,  new Adapter.JsonObjectCallback(){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void get__recipes( HashMap<String, Object> filter,  RestAdapter restAdapter, final ListCallback<Recipe> callback) {
-                                        //Define methods here..
-                                        final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
-                                        
-
-
-                                        
-
-                                        
-
-                                        ingredientsRepo.get__recipes( (String)that.getId(), filter,  new ListCallback<Recipe> (){
-                                            
-
-                                            
-
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(List<Recipe> object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            Recipe obj = new Recipe();
+                                                            ContactChef obj = new ContactChef();
                                                             addRelation(object, obj);
                                                             //Disabling two way communication for cyclic error..
-                                                            /*for (Recipe obj : object) {
+                                                            /*for (ContactChef obj : object) {
                                                                 //Also add relation to child type for two way communication..
                                                                 obj.addRelation(that);
                                                             }*/
@@ -771,9 +596,9 @@ public class Ingredients extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__recipes( Recipe data,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
+                                    public void create__contactChefs( ContactChef data,  RestAdapter restAdapter, final ObjectCallback<ContactChef> callback) {
                                         //Define methods here..
-                                        final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
+                                        final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
                                         
 
 
@@ -781,13 +606,13 @@ public class Ingredients extends Model {
 
                                         
 
-                                        ingredientsRepo.create__recipes( (String)that.getId(), data,  new ObjectCallback<Recipe> (){
+                                        courseRepo.create__contactChefs( (String)that.getId(), data,  new ObjectCallback<ContactChef> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Recipe object) {
+                                                    public void onSuccess(ContactChef object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -818,9 +643,9 @@ public class Ingredients extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__recipes( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__contactChefs( RestAdapter restAdapter, final VoidCallback callback) {
                                         //Define methods here..
-                                        final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
+                                        final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
                                         
 
 
@@ -828,7 +653,7 @@ public class Ingredients extends Model {
 
                                         
 
-                                        ingredientsRepo.delete__recipes( (String)that.getId(),  new VoidCallback (){
+                                        courseRepo.delete__contactChefs( (String)that.getId(),  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -854,9 +679,9 @@ public class Ingredients extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__recipes( HashMap<String, Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__contactChefs( HashMap<String, Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
                                         //Define methods here..
-                                        final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
+                                        final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
                                         
 
 
@@ -864,7 +689,7 @@ public class Ingredients extends Model {
 
                                         
 
-                                        ingredientsRepo.count__recipes( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        courseRepo.count__contactChefs( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
                                             
 
                                             
@@ -889,17 +714,6 @@ public class Ingredients extends Model {
                                     } //method def ends here.
                                  
                             
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
                         
                         
                         

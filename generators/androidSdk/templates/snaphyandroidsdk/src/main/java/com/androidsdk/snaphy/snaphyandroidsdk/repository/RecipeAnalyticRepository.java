@@ -26,7 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.RecipeTag;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.RecipeAnalytic;
 
 //Now import model of related models..
 
@@ -41,11 +41,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.RecipeTag;
 
 
 
-public class RecipeTagRepository extends ModelRepository<RecipeTag> {
+public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
 
 
-    public RecipeTagRepository(){
-        super("RecipeTag", null, RecipeTag.class);
+    public RecipeAnalyticRepository(){
+        super("RecipeAnalytic", null, RecipeAnalytic.class);
     }
 
 
@@ -56,105 +56,69 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes/:fk", "GET"), "RecipeTag.prototype.__findById__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeAnalyticId/recipes", "GET"), "RecipeAnalytic.prototype.__get__recipes");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes/:fk", "DELETE"), "RecipeTag.prototype.__destroyById__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeAnalyticId/recipes", "POST"), "RecipeAnalytic.prototype.__create__recipes");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes/:fk", "PUT"), "RecipeTag.prototype.__updateById__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeAnalyticId/recipes", "PUT"), "RecipeAnalytic.prototype.__update__recipes");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes/rel/:fk", "PUT"), "RecipeTag.prototype.__link__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeAnalyticId/recipes", "DELETE"), "RecipeAnalytic.prototype.__destroy__recipes");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes/rel/:fk", "DELETE"), "RecipeTag.prototype.__unlink__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "RecipeAnalytic.create");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes/rel/:fk", "HEAD"), "RecipeTag.prototype.__exists__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "RecipeAnalytic.create");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes", "GET"), "RecipeTag.prototype.__get__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "RecipeAnalytic.upsert");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes", "POST"), "RecipeTag.prototype.__create__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "RecipeAnalytic.exists");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes", "DELETE"), "RecipeTag.prototype.__delete__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "RecipeAnalytic.findById");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId/recipes/count", "GET"), "RecipeTag.prototype.__count__recipes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "RecipeAnalytic.find");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "RecipeTag.create");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "RecipeAnalytic.findOne");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "RecipeTag.create");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "RecipeAnalytic.updateAll");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "RecipeTag.upsert");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "RecipeAnalytic.deleteById");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "RecipeTag.exists");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "RecipeAnalytic.count");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "RecipeTag.findById");
-            
-        
-            
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "RecipeTag.find");
-            
-        
-            
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "RecipeTag.findOne");
-            
-        
-            
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "RecipeTag.updateAll");
-            
-        
-            
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "RecipeTag.deleteById");
-            
-        
-            
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "RecipeTag.count");
-            
-        
-            
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeTagId", "PUT"), "RecipeTag.prototype.updateAttributes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeAnalyticId", "PUT"), "RecipeAnalytic.prototype.updateAttributes");
             
         
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "RecipeTag.getSchema");
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "RecipeAnalytic.getSchema");
             
         
             
@@ -181,252 +145,38 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
 
     
         
-            //Method findById__recipes definition
-            public void findById__recipes(  String recipeTagId,  String fk, final ObjectCallback<Recipe> callback){
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__findById__recipes", ImmutableMap.of("recipeTagId", recipeTagId, "fk", fk), new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Recipe recipe = recipeRepo.createObject(result);
-                                    callback.onSuccess(recipe);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method findById__recipes definition ends here..
-
-            
-
-        
-    
-        
-            //Method destroyById__recipes definition
-            public void destroyById__recipes(  String recipeTagId,  String fk, final VoidCallback callback){
-                
-                    invokeStaticMethod("prototype.__destroyById__recipes", ImmutableMap.of("recipeTagId", recipeTagId, "fk", fk), new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method destroyById__recipes definition ends here..
-
-            
-
-        
-    
-        
-            //Method updateById__recipes definition
-            public void updateById__recipes(  String recipeTagId,  String fk,  hashMap<String, Object> data, final ObjectCallback<Recipe> callback){
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__updateById__recipes", ImmutableMap.of("recipeTagId", recipeTagId, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Recipe recipe = recipeRepo.createObject(result);
-                                    callback.onSuccess(recipe);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method updateById__recipes definition ends here..
-
-            
-
-        
-    
-        
-            //Method link__recipes definition
-            public void link__recipes(  String recipeTagId,  String fk, final ObjectCallback<Recipe> callback){
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__link__recipes", ImmutableMap.of("recipeTagId", recipeTagId, "fk", fk), new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Recipe recipe = recipeRepo.createObject(result);
-                                    callback.onSuccess(recipe);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method link__recipes definition ends here..
-
-            
-
-        
-    
-        
-            //Method unlink__recipes definition
-            public void unlink__recipes(  String recipeTagId,  String fk, final VoidCallback callback){
-                
-                    invokeStaticMethod("prototype.__unlink__recipes", ImmutableMap.of("recipeTagId", recipeTagId, "fk", fk), new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method unlink__recipes definition ends here..
-
-            
-
-        
-    
-        
-            //Method exists__recipes definition
-            public void exists__recipes(  String recipeTagId,  String fk, final Adapter.JsonObjectCallback  callback ){
-                
-
-
-                
-                    
-                    invokeStaticMethod("prototype.__exists__recipes", ImmutableMap.of("recipeTagId", recipeTagId, "fk", fk), new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method exists__recipes definition ends here..
-
-            
-
-        
-    
-        
             //Method get__recipes definition
-            public void get__recipes(  String recipeTagId,  HashMap<String, Object> filter, final ListCallback<Recipe> callback){
+            public void get__recipes(  String recipeAnalyticId,  Boolean refresh, final ObjectCallback<Recipe> callback){
                 
 
 
                 
-
-                
-                    invokeStaticMethod("prototype.__get__recipes", ImmutableMap.of("recipeTagId", recipeTagId, "filter", filter), new Adapter.JsonArrayCallback() {
+                    
+                    
+                    invokeStaticMethod("prototype.__get__recipes", ImmutableMap.of("recipeAnalyticId", recipeAnalyticId, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
                         }
 
                         @Override
-                        public void onSuccess(JSONArray response) {
+                        public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //Now converting jsonObject to list
-                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Recipe> recipeList = new ArrayList<Recipe>();
                                     RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Recipe recipe = recipeRepo.createObject(result);
+                                    callback.onSuccess(recipe);
 
-                                    for (Map<String, Object> obj : result) {
-                                        Recipe recipe = recipeRepo.createObject(obj);
-                                        recipeList.add(recipe);
-                                    }
-                                    callback.onSuccess(recipeList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
                         }
                     });
+                
+
                 
 
             }//Method get__recipes definition ends here..
@@ -437,14 +187,14 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
     
         
             //Method create__recipes definition
-            public void create__recipes(  String recipeTagId,  hashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+            public void create__recipes(  String recipeAnalyticId,  hashMap<String, Object> data, final ObjectCallback<Recipe> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__recipes", ImmutableMap.of("recipeTagId", recipeTagId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__recipes", ImmutableMap.of("recipeAnalyticId", recipeAnalyticId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -477,10 +227,51 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
         
     
         
-            //Method delete__recipes definition
-            public void delete__recipes(  String recipeTagId, final VoidCallback callback){
+            //Method update__recipes definition
+            public void update__recipes(  String recipeAnalyticId,  hashMap<String, Object> data, final ObjectCallback<Recipe> callback){
                 
-                    invokeStaticMethod("prototype.__delete__recipes", ImmutableMap.of("recipeTagId", recipeTagId), new Adapter.Callback() {
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__update__recipes", ImmutableMap.of("recipeAnalyticId", recipeAnalyticId, "data", data), new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Recipe recipe = recipeRepo.createObject(result);
+                                    callback.onSuccess(recipe);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method update__recipes definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroy__recipes definition
+            public void destroy__recipes(  String recipeAnalyticId, final VoidCallback callback){
+                
+                    invokeStaticMethod("prototype.__destroy__recipes", ImmutableMap.of("recipeAnalyticId", recipeAnalyticId), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -498,40 +289,7 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
 
                 
 
-            }//Method delete__recipes definition ends here..
-
-            
-
-        
-    
-        
-            //Method count__recipes definition
-            public void count__recipes(  String recipeTagId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
-                
-
-
-                
-                    
-                    invokeStaticMethod("prototype.__count__recipes", ImmutableMap.of("recipeTagId", recipeTagId, "where", where), new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method count__recipes definition ends here..
+            }//Method destroy__recipes definition ends here..
 
             
 
@@ -539,7 +297,7 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
     
         
             //Method create definition
-            public void create(  HashMap<String, Object> data, final ObjectCallback<RecipeTag> callback){
+            public void create(  HashMap<String, Object> data, final ObjectCallback<RecipeAnalytic> callback){
                 
 
 
@@ -557,10 +315,10 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RecipeTagRepository recipeTagRepo = getRestAdapter().createRepository(RecipeTagRepository.class);
+                                    RecipeAnalyticRepository recipeAnalyticRepo = getRestAdapter().createRepository(RecipeAnalyticRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    RecipeTag recipeTag = recipeTagRepo.createObject(result);
-                                    callback.onSuccess(recipeTag);
+                                    RecipeAnalytic recipeAnalytic = recipeAnalyticRepo.createObject(result);
+                                    callback.onSuccess(recipeAnalytic);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -580,7 +338,7 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
     
         
             //Method createMany definition
-            public void createMany(  HashMap<String, Object> data, final ObjectCallback<RecipeTag> callback){
+            public void createMany(  HashMap<String, Object> data, final ObjectCallback<RecipeAnalytic> callback){
                 
 
 
@@ -598,10 +356,10 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RecipeTagRepository recipeTagRepo = getRestAdapter().createRepository(RecipeTagRepository.class);
+                                    RecipeAnalyticRepository recipeAnalyticRepo = getRestAdapter().createRepository(RecipeAnalyticRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    RecipeTag recipeTag = recipeTagRepo.createObject(result);
-                                    callback.onSuccess(recipeTag);
+                                    RecipeAnalytic recipeAnalytic = recipeAnalyticRepo.createObject(result);
+                                    callback.onSuccess(recipeAnalytic);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -621,7 +379,7 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
     
         
             //Method upsert definition
-            public void upsert(  HashMap<String, Object> data, final ObjectCallback<RecipeTag> callback){
+            public void upsert(  HashMap<String, Object> data, final ObjectCallback<RecipeAnalytic> callback){
                 
 
 
@@ -639,10 +397,10 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RecipeTagRepository recipeTagRepo = getRestAdapter().createRepository(RecipeTagRepository.class);
+                                    RecipeAnalyticRepository recipeAnalyticRepo = getRestAdapter().createRepository(RecipeAnalyticRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    RecipeTag recipeTag = recipeTagRepo.createObject(result);
-                                    callback.onSuccess(recipeTag);
+                                    RecipeAnalytic recipeAnalytic = recipeAnalyticRepo.createObject(result);
+                                    callback.onSuccess(recipeAnalytic);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -695,7 +453,7 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
     
         
             //Method findById definition
-            public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<RecipeTag> callback){
+            public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<RecipeAnalytic> callback){
                 
 
 
@@ -713,10 +471,10 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RecipeTagRepository recipeTagRepo = getRestAdapter().createRepository(RecipeTagRepository.class);
+                                    RecipeAnalyticRepository recipeAnalyticRepo = getRestAdapter().createRepository(RecipeAnalyticRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    RecipeTag recipeTag = recipeTagRepo.createObject(result);
-                                    callback.onSuccess(recipeTag);
+                                    RecipeAnalytic recipeAnalytic = recipeAnalyticRepo.createObject(result);
+                                    callback.onSuccess(recipeAnalytic);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -736,7 +494,7 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
     
         
             //Method find definition
-            public void find(  HashMap<String, Object> filter, final ListCallback<RecipeTag> callback){
+            public void find(  HashMap<String, Object> filter, final ListCallback<RecipeAnalytic> callback){
                 
 
 
@@ -755,14 +513,14 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<RecipeTag> recipeTagList = new ArrayList<RecipeTag>();
-                                    RecipeTagRepository recipeTagRepo = getRestAdapter().createRepository(RecipeTagRepository.class);
+                                    List<RecipeAnalytic> recipeAnalyticList = new ArrayList<RecipeAnalytic>();
+                                    RecipeAnalyticRepository recipeAnalyticRepo = getRestAdapter().createRepository(RecipeAnalyticRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        RecipeTag recipeTag = recipeTagRepo.createObject(obj);
-                                        recipeTagList.add(recipeTag);
+                                        RecipeAnalytic recipeAnalytic = recipeAnalyticRepo.createObject(obj);
+                                        recipeAnalyticList.add(recipeAnalytic);
                                     }
-                                    callback.onSuccess(recipeTagList);
+                                    callback.onSuccess(recipeAnalyticList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -779,7 +537,7 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
     
         
             //Method findOne definition
-            public void findOne(  HashMap<String, Object> filter, final ObjectCallback<RecipeTag> callback){
+            public void findOne(  HashMap<String, Object> filter, final ObjectCallback<RecipeAnalytic> callback){
                 
 
 
@@ -797,10 +555,10 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RecipeTagRepository recipeTagRepo = getRestAdapter().createRepository(RecipeTagRepository.class);
+                                    RecipeAnalyticRepository recipeAnalyticRepo = getRestAdapter().createRepository(RecipeAnalyticRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    RecipeTag recipeTag = recipeTagRepo.createObject(result);
-                                    callback.onSuccess(recipeTag);
+                                    RecipeAnalytic recipeAnalytic = recipeAnalyticRepo.createObject(result);
+                                    callback.onSuccess(recipeAnalytic);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -919,14 +677,14 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String recipeTagId,  HashMap<String, Object> data, final ObjectCallback<RecipeTag> callback){
+            public void updateAttributes(  String recipeAnalyticId,  HashMap<String, Object> data, final ObjectCallback<RecipeAnalytic> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("recipeTagId", recipeTagId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("recipeAnalyticId", recipeAnalyticId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -937,10 +695,10 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RecipeTagRepository recipeTagRepo = getRestAdapter().createRepository(RecipeTagRepository.class);
+                                    RecipeAnalyticRepository recipeAnalyticRepo = getRestAdapter().createRepository(RecipeAnalyticRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    RecipeTag recipeTag = recipeTagRepo.createObject(result);
-                                    callback.onSuccess(recipeTag);
+                                    RecipeAnalytic recipeAnalytic = recipeAnalyticRepo.createObject(result);
+                                    callback.onSuccess(recipeAnalytic);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -991,18 +749,6 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
 
             
 
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
         
     
         

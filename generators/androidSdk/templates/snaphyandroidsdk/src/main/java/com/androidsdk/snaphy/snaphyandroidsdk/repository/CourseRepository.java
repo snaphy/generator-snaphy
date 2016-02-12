@@ -18,9 +18,7 @@ import java.util.HashMap;
 
 
 
-import com.strongloop.android.loopback.UserRepository;
-import com.strongloop.android.loopback.AccessTokenRepository;
-import com.strongloop.android.loopback.AccessToken;
+import com.strongloop.android.loopback.ModelRepository;
 
 
 
@@ -28,16 +26,20 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Employee;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Course;
 
 //Now import model of related models..
 
     
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Chef;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChefRepository;
+            
+        
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.EmployeeDetails;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeDetailsRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.ContactChef;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ContactChefRepository;
             
         
     
@@ -46,11 +48,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Employee;
 
 
 
-public class EmployeeRepository extends com.strongloop.android.loopback.UserRepository<Employee> {
+public class CourseRepository extends ModelRepository<Course> {
 
 
-    public EmployeeRepository(){
-        super("Employee", null, Employee.class);
+    public CourseRepository(){
+        super("Course", null, Course.class);
     }
 
 
@@ -61,91 +63,85 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "GET"), "Employee.prototype.__findById__accessTokens");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/chef", "GET"), "Course.prototype.__get__chef");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "DELETE"), "Employee.prototype.__destroyById__accessTokens");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs/:fk", "GET"), "Course.prototype.__findById__contactChefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "PUT"), "Employee.prototype.__updateById__accessTokens");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs/:fk", "DELETE"), "Course.prototype.__destroyById__contactChefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/employeeDetails", "GET"), "Employee.prototype.__get__employeeDetails");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs/:fk", "PUT"), "Course.prototype.__updateById__contactChefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/employeeDetails", "POST"), "Employee.prototype.__create__employeeDetails");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs", "GET"), "Course.prototype.__get__contactChefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/employeeDetails", "PUT"), "Employee.prototype.__update__employeeDetails");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs", "POST"), "Course.prototype.__create__contactChefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/employeeDetails", "DELETE"), "Employee.prototype.__destroy__employeeDetails");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs", "DELETE"), "Course.prototype.__delete__contactChefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "GET"), "Employee.prototype.__get__accessTokens");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs/count", "GET"), "Course.prototype.__count__contactChefs");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "POST"), "Employee.prototype.__create__accessTokens");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Course.create");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "DELETE"), "Employee.prototype.__delete__accessTokens");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Course.create");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/count", "GET"), "Employee.prototype.__count__accessTokens");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Course.upsert");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Employee.create");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Course.exists");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Employee.create");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Course.findById");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Employee.upsert");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Course.find");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Employee.exists");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Course.findOne");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Employee.findById");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Course.updateAll");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Employee.find");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Course.deleteById");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Employee.findOne");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Course.count");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Employee.updateAll");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId", "PUT"), "Course.prototype.updateAttributes");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Employee.deleteById");
-            
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Employee.count");
-            
-        
-            
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId", "PUT"), "Employee.prototype.updateAttributes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Course.getSchema");
             
         
             
@@ -155,21 +151,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/confirm", "GET"), "Employee.confirm");
-            
         
-            
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/reset", "POST"), "Employee.resetPassword");
-            
-        
-            
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Employee.getSchema");
-            
-        
-            
-        
-            
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/isAdmin", "POST"), "Employee.isAdmin");
             
         
             
@@ -194,15 +176,15 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
 
     
         
-            //Method findById__accessTokens definition
-            public void findById__accessTokens(  String employeeId,  String fk, final ObjectCallback<AccessToken> callback){
+            //Method get__chef definition
+            public void get__chef(  String courseId,  Boolean refresh, final ObjectCallback<Chef> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__accessTokens", ImmutableMap.of("employeeId", employeeId, "fk", fk), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__chef", ImmutableMap.of("courseId", courseId, "refresh", refresh), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -213,10 +195,10 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    AccessToken accessToken = accessTokenRepo.createObject(result);
-                                    callback.onSuccess(accessToken);
+                                    Chef chef = chefRepo.createObject(result);
+                                    callback.onSuccess(chef);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -228,17 +210,58 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method findById__accessTokens definition ends here..
+            }//Method get__chef definition ends here..
 
             
 
         
     
         
-            //Method destroyById__accessTokens definition
-            public void destroyById__accessTokens(  String employeeId,  String fk, final VoidCallback callback){
+            //Method findById__contactChefs definition
+            public void findById__contactChefs(  String courseId,  String fk, final ObjectCallback<ContactChef> callback){
                 
-                    invokeStaticMethod("prototype.__destroyById__accessTokens", ImmutableMap.of("employeeId", employeeId, "fk", fk), new Adapter.Callback() {
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__findById__contactChefs", ImmutableMap.of("courseId", courseId, "fk", fk), new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    ContactChef contactChef = contactChefRepo.createObject(result);
+                                    callback.onSuccess(contactChef);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method findById__contactChefs definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__contactChefs definition
+            public void destroyById__contactChefs(  String courseId,  String fk, final VoidCallback callback){
+                
+                    invokeStaticMethod("prototype.__destroyById__contactChefs", ImmutableMap.of("courseId", courseId, "fk", fk), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -256,22 +279,22 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method destroyById__accessTokens definition ends here..
+            }//Method destroyById__contactChefs definition ends here..
 
             
 
         
     
         
-            //Method updateById__accessTokens definition
-            public void updateById__accessTokens(  String employeeId,  String fk,  hashMap<String, Object> data, final ObjectCallback<AccessToken> callback){
+            //Method updateById__contactChefs definition
+            public void updateById__contactChefs(  String courseId,  String fk,  hashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__accessTokens", ImmutableMap.of("employeeId", employeeId, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__contactChefs", ImmutableMap.of("courseId", courseId, "fk", fk, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -282,10 +305,10 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    AccessToken accessToken = accessTokenRepo.createObject(result);
-                                    callback.onSuccess(accessToken);
+                                    ContactChef contactChef = contactChefRepo.createObject(result);
+                                    callback.onSuccess(contactChef);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -297,173 +320,22 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method updateById__accessTokens definition ends here..
+            }//Method updateById__contactChefs definition ends here..
 
             
 
         
     
         
-            //Method get__employeeDetails definition
-            public void get__employeeDetails(  String employeeId,  Boolean refresh, final ObjectCallback<EmployeeDetails> callback){
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__employeeDetails", ImmutableMap.of("employeeId", employeeId, "refresh", refresh), new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                    callback.onSuccess(employeeDetails);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method get__employeeDetails definition ends here..
-
-            
-
-        
-    
-        
-            //Method create__employeeDetails definition
-            public void create__employeeDetails(  String employeeId,  hashMap<String, Object> data, final ObjectCallback<EmployeeDetails> callback){
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__create__employeeDetails", ImmutableMap.of("employeeId", employeeId, "data", data), new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                    callback.onSuccess(employeeDetails);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method create__employeeDetails definition ends here..
-
-            
-
-        
-    
-        
-            //Method update__employeeDetails definition
-            public void update__employeeDetails(  String employeeId,  hashMap<String, Object> data, final ObjectCallback<EmployeeDetails> callback){
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__update__employeeDetails", ImmutableMap.of("employeeId", employeeId, "data", data), new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                    callback.onSuccess(employeeDetails);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method update__employeeDetails definition ends here..
-
-            
-
-        
-    
-        
-            //Method destroy__employeeDetails definition
-            public void destroy__employeeDetails(  String employeeId, final VoidCallback callback){
-                
-                    invokeStaticMethod("prototype.__destroy__employeeDetails", ImmutableMap.of("employeeId", employeeId), new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
+            //Method get__contactChefs definition
+            public void get__contactChefs(  String courseId,  HashMap<String, Object> filter, final ListCallback<ContactChef> callback){
                 
 
 
                 
 
                 
-
-            }//Method destroy__employeeDetails definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__accessTokens definition
-            public void get__accessTokens(  String employeeId,  HashMap<String, Object> filter, final ListCallback<AccessToken> callback){
-                
-
-
-                
-
-                
-                    invokeStaticMethod("prototype.__get__accessTokens", ImmutableMap.of("employeeId", employeeId, "filter", filter), new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__contactChefs", ImmutableMap.of("courseId", courseId, "filter", filter), new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -475,14 +347,14 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<AccessToken> accessTokenList = new ArrayList<AccessToken>();
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    List<ContactChef> contactChefList = new ArrayList<ContactChef>();
+                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        AccessToken accessToken = accessTokenRepo.createObject(obj);
-                                        accessTokenList.add(accessToken);
+                                        ContactChef contactChef = contactChefRepo.createObject(obj);
+                                        contactChefList.add(contactChef);
                                     }
-                                    callback.onSuccess(accessTokenList);
+                                    callback.onSuccess(contactChefList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -491,22 +363,22 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                     });
                 
 
-            }//Method get__accessTokens definition ends here..
+            }//Method get__contactChefs definition ends here..
 
             
 
         
     
         
-            //Method create__accessTokens definition
-            public void create__accessTokens(  String employeeId,  hashMap<String, Object> data, final ObjectCallback<AccessToken> callback){
+            //Method create__contactChefs definition
+            public void create__contactChefs(  String courseId,  hashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__accessTokens", ImmutableMap.of("employeeId", employeeId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__contactChefs", ImmutableMap.of("courseId", courseId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -517,10 +389,10 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    AccessToken accessToken = accessTokenRepo.createObject(result);
-                                    callback.onSuccess(accessToken);
+                                    ContactChef contactChef = contactChefRepo.createObject(result);
+                                    callback.onSuccess(contactChef);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -532,17 +404,17 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method create__accessTokens definition ends here..
+            }//Method create__contactChefs definition ends here..
 
             
 
         
     
         
-            //Method delete__accessTokens definition
-            public void delete__accessTokens(  String employeeId, final VoidCallback callback){
+            //Method delete__contactChefs definition
+            public void delete__contactChefs(  String courseId, final VoidCallback callback){
                 
-                    invokeStaticMethod("prototype.__delete__accessTokens", ImmutableMap.of("employeeId", employeeId), new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__delete__contactChefs", ImmutableMap.of("courseId", courseId), new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -560,21 +432,21 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method delete__accessTokens definition ends here..
+            }//Method delete__contactChefs definition ends here..
 
             
 
         
     
         
-            //Method count__accessTokens definition
-            public void count__accessTokens(  String employeeId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            //Method count__contactChefs definition
+            public void count__contactChefs(  String courseId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
                 
 
 
                 
                     
-                    invokeStaticMethod("prototype.__count__accessTokens", ImmutableMap.of("employeeId", employeeId, "where", where), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__contactChefs", ImmutableMap.of("courseId", courseId, "where", where), new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -593,7 +465,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method count__accessTokens definition ends here..
+            }//Method count__contactChefs definition ends here..
 
             
 
@@ -601,7 +473,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method create definition
-            public void create(  HashMap<String, Object> data, final ObjectCallback<Employee> callback){
+            public void create(  HashMap<String, Object> data, final ObjectCallback<Course> callback){
                 
 
 
@@ -619,10 +491,10 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    Course course = courseRepo.createObject(result);
+                                    callback.onSuccess(course);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -642,7 +514,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method createMany definition
-            public void createMany(  HashMap<String, Object> data, final ObjectCallback<Employee> callback){
+            public void createMany(  HashMap<String, Object> data, final ObjectCallback<Course> callback){
                 
 
 
@@ -660,10 +532,10 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    Course course = courseRepo.createObject(result);
+                                    callback.onSuccess(course);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -683,7 +555,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method upsert definition
-            public void upsert(  HashMap<String, Object> data, final ObjectCallback<Employee> callback){
+            public void upsert(  HashMap<String, Object> data, final ObjectCallback<Course> callback){
                 
 
 
@@ -701,10 +573,10 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    Course course = courseRepo.createObject(result);
+                                    callback.onSuccess(course);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -757,7 +629,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method findById definition
-            public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<Employee> callback){
+            public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<Course> callback){
                 
 
 
@@ -775,10 +647,10 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    Course course = courseRepo.createObject(result);
+                                    callback.onSuccess(course);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -798,7 +670,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method find definition
-            public void find(  HashMap<String, Object> filter, final ListCallback<Employee> callback){
+            public void find(  HashMap<String, Object> filter, final ListCallback<Course> callback){
                 
 
 
@@ -817,14 +689,14 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Employee> employeeList = new ArrayList<Employee>();
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    List<Course> courseList = new ArrayList<Course>();
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Employee employee = employeeRepo.createObject(obj);
-                                        employeeList.add(employee);
+                                        Course course = courseRepo.createObject(obj);
+                                        courseList.add(course);
                                     }
-                                    callback.onSuccess(employeeList);
+                                    callback.onSuccess(courseList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -841,7 +713,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method findOne definition
-            public void findOne(  HashMap<String, Object> filter, final ObjectCallback<Employee> callback){
+            public void findOne(  HashMap<String, Object> filter, final ObjectCallback<Course> callback){
                 
 
 
@@ -859,10 +731,10 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    Course course = courseRepo.createObject(result);
+                                    callback.onSuccess(course);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -981,14 +853,14 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String employeeId,  HashMap<String, Object> data, final ObjectCallback<Employee> callback){
+            public void updateAttributes(  String courseId,  HashMap<String, Object> data, final ObjectCallback<Course> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("employeeId", employeeId, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("courseId", courseId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -999,10 +871,10 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    Course course = courseRepo.createObject(result);
+                                    callback.onSuccess(course);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1020,66 +892,6 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
 
         
     
-        
-    
-        
-    
-        
-    
-        
-            //Method confirm definition
-            public void confirm(  String uid,  String token,  String redirect, final VoidCallback callback){
-                
-                    invokeStaticMethod("confirm", ImmutableMap.of("uid", uid, "token", token, "redirect", redirect), new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method confirm definition ends here..
-
-            
-
-        
-    
-        
-            //Method resetPassword definition
-            public void resetPassword(  HashMap<String, Object> options, final VoidCallback callback){
-                
-                    invokeStaticMethod("resetPassword", ImmutableMap.of("options", options), new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method resetPassword definition ends here..
-
-            
-
         
     
         
@@ -1118,36 +930,11 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
     
         
-            //Method isAdmin definition
-            public void isAdmin( final Adapter.JsonObjectCallback  callback ){
-                
-
-
-                
-                    
-                    invokeStaticMethod("isAdmin", null, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method isAdmin definition ends here..
-
-            
-
+    
+        
+    
+        
+    
         
     
         

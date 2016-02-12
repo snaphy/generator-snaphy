@@ -3,7 +3,7 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 
 
 
-import com.strongloop.android.loopback.Model;
+import com.strongloop.android.loopback.User;
 
 
 
@@ -21,6 +21,9 @@ import com.strongloop.android.remoting.adapters.Adapter;
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
 
 //Now import repository of related models..
+
+    
+    
 
     
             import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeRepository;
@@ -43,14 +46,47 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChefRepository;
+            
+
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ContactChefRepository;
+            
+
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.OrderRepository;
+            
+
+        
+    
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 
 
-public class Customer extends Model {
+public class Customer extends com.strongloop.android.loopback.User {
 
+
+    //For converting all model values to hashMap
+    private HashMap<String, Object> hashMap = new HashMap<>();
+
+    public HashMap<String, Object> convertHashMap(){
+        if(that.getId() != null){
+            return hashMap;
+        }else{
+            hashMap.put("id", that.getId());
+            return hashMap;
+        }
+    }
 
     private Customer that ;
 
@@ -71,6 +107,8 @@ public class Customer extends Model {
                 /* Adding Getter and Setter methods */
                 public void setDate(String date){
                     this.date = date;
+                    //Update hashMap value..
+                    hashMap.put("date", date);
                 }
 
             
@@ -91,6 +129,8 @@ public class Customer extends Model {
                 /* Adding Getter and Setter methods */
                 public void setPhoneNumber(String phoneNumber){
                     this.phoneNumber = phoneNumber;
+                    //Update hashMap value..
+                    hashMap.put("phoneNumber", phoneNumber);
                 }
 
             
@@ -111,6 +151,8 @@ public class Customer extends Model {
                 /* Adding Getter and Setter methods */
                 public void setEmail(String email){
                     this.email = email;
+                    //Update hashMap value..
+                    hashMap.put("email", email);
                 }
 
             
@@ -131,6 +173,8 @@ public class Customer extends Model {
                 /* Adding Getter and Setter methods */
                 public void setFirstName(String firstName){
                     this.firstName = firstName;
+                    //Update hashMap value..
+                    hashMap.put("firstName", firstName);
                 }
 
             
@@ -151,6 +195,8 @@ public class Customer extends Model {
                 /* Adding Getter and Setter methods */
                 public void setLastName(String lastName){
                     this.lastName = lastName;
+                    //Update hashMap value..
+                    hashMap.put("lastName", lastName);
                 }
 
             
@@ -171,6 +217,8 @@ public class Customer extends Model {
                 /* Adding Getter and Setter methods */
                 public void setPassword(String password){
                     this.password = password;
+                    //Update hashMap value..
+                    hashMap.put("password", password);
                 }
 
             
@@ -193,8 +241,90 @@ public class Customer extends Model {
                 /* Adding Getter and Setter methods */
                 public void setProfilePic(HashMap<String, Object> profilePic){
                     this.profilePic = profilePic;
+                    //Update hashMap value..
+                    hashMap.put("profilePic", profilePic);
                 }
 
+            
+
+        
+    
+        
+            
+            
+            
+            
+
+        
+    
+        
+            
+            
+            
+            
+
+        
+    
+        
+            
+            
+            
+            
+
+        
+    
+        
+            
+            
+            
+            
+
+        
+    
+        
+            
+            
+            
+            
+
+        
+    
+        
+            
+            
+            
+            
+
+        
+    
+        
+            
+            
+            
+            
+
+        
+    
+        
+            
+            
+            
+            
+
+        
+    
+        
+            
+            
+            
+            
+
+        
+    
+        
+            
+            
+            
             
 
         
@@ -222,6 +352,9 @@ public class Customer extends Model {
 
 
     //Now adding relations between related models
+    
+         
+          
     
         
                 
@@ -253,12 +386,11 @@ public class Customer extends Model {
                         for (HashMap<String, Object> obj : recipes) {
                             //Also add relation to child type for two way communication..
                             Recipe obj1 = recipesRepository.createObject(obj);
-                            //Disabling backend compatibility for cyclic error
-                            /*//Now add backward compatibility for the relation belongsTo for hasMany..
-                            obj1.addRelation(that);*/
                             result.add(obj1);
+
                         }
                         setRecipes(result);
+
                     }
 
 
@@ -298,7 +430,13 @@ public class Customer extends Model {
                     //Now add instance methods to fetch the related belongsTo Model..
                     
 
-                    
+                     
+                            
+                         
+                            
+                         
+                            
+                        
 
                                     //Write the method here..
                                     public void findById__recipes( String fk,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
@@ -427,6 +565,34 @@ public class Customer extends Model {
                                         });
                                     } //method def ends here.
                                  
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
                             
                          
                             
@@ -623,6 +789,33 @@ public class Customer extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -687,12 +880,11 @@ public class Customer extends Model {
                         for (HashMap<String, Object> obj : comments) {
                             //Also add relation to child type for two way communication..
                             Comments obj1 = commentsRepository.createObject(obj);
-                            //Disabling backend compatibility for cyclic error
-                            /*//Now add backward compatibility for the relation belongsTo for hasMany..
-                            obj1.addRelation(that);*/
                             result.add(obj1);
+
                         }
                         setComments(result);
+
                     }
 
 
@@ -733,6 +925,12 @@ public class Customer extends Model {
                     
 
                      
+                            
+                         
+                            
+                         
+                            
+                         
                             
                          
                             
@@ -867,6 +1065,34 @@ public class Customer extends Model {
                                         });
                                     } //method def ends here.
                                  
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
                             
                          
                             
@@ -1057,6 +1283,33 @@ public class Customer extends Model {
                                     } //method def ends here.
                                  
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -1133,6 +1386,12 @@ public class Customer extends Model {
                     
 
                      
+                            
+                         
+                            
+                         
+                            
+                         
                             
                          
                             
@@ -1337,6 +1596,61 @@ public class Customer extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -1362,6 +1676,1332 @@ public class Customer extends Model {
                     
 
                 
+
+                 
+                 
+             
+          
+    
+        
+                
+                    //Define belongsTo relation method here..
+                    private Chef  chefs ;
+
+                    public Chef getChefs() {
+                        return chefs;
+                    }
+
+                    public void setChefs(Chef chefs) {
+                        this.chefs = chefs;
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setChefs(HashMap<String, Object> chefs) {
+                        //First create a dummy Repo class object for customer.
+                        ChefRepository chefsRepository = new ChefRepository();
+                        Chef chefs1 = chefsRepository.createObject(chefs);
+                        setChefs(chefs1);
+                    }
+
+                    //Adding relation method..
+                    public void addRelation(Chef chefs) {
+                        that.setChefs(chefs);
+                    }
+
+
+
+                
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__chefs( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Chef> callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+
+
+                                        
+
+                                        
+
+                                        customerRepo.get__chefs( (String)that.getId(), refresh,  new ObjectCallback<Chef> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Chef object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void create__chefs( Chef data,  RestAdapter restAdapter, final ObjectCallback<Chef> callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+
+
+                                        
+
+                                        
+
+                                        customerRepo.create__chefs( (String)that.getId(), data,  new ObjectCallback<Chef> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Chef object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void update__chefs( Chef data,  RestAdapter restAdapter, final ObjectCallback<Chef> callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+
+
+                                        
+
+                                        
+
+                                        customerRepo.update__chefs( (String)that.getId(), data,  new ObjectCallback<Chef> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Chef object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void destroy__chefs( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+
+
+                                        
+
+                                        
+
+                                        customerRepo.destroy__chefs( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                 
+                 
+             
+          
+    
+        
+                
+                
+                    
+                    //Define hasMany relation method here..
+                    private List<ContactChef>  contactChefs ;
+
+                    public List<ContactChef> getContactChefs() {
+                        return contactChefs;
+                    }
+
+                    public void setContactChefs(List<ContactChef> contactChefs) {
+                        this.contactChefs = contactChefs;
+                        //Disabling backend compatibility for cyclic error
+                        /*
+                        //Now add backward compatibility for the relation belongsTo for hasMany..
+                        for (ContactChef obj : contactChefs) {
+                            obj.addRelation(that);
+                        }
+                        */
+                    }
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setContactChefs1(List<HashMap<String, Object>> contactChefs) {
+                        //First create a dummy Repo class object for ..
+                        ContactChefRepository contactChefsRepository = new ContactChefRepository();
+                        List<ContactChef> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : contactChefs) {
+                            //Also add relation to child type for two way communication..
+                            ContactChef obj1 = contactChefsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setContactChefs(result);
+
+                    }
+
+
+                    //Adding relation method..
+                    //Add a dummy class Name object to seperate data..
+                    public void addRelation(List<ContactChef> contactChefs, ContactChef dummyClassInstance) {
+                        that.setContactChefs(contactChefs);
+
+                    }
+
+                    //Adding relation method..
+                    //This will add a new data to the list relation object..
+                    public void addRelation(ContactChef contactChefs) {
+                        try{
+                            that.getContactChefs().add(contactChefs);
+                        }catch(Exception e){
+                            List< ContactChef> contactChefs1 = new ArrayList();
+                            //Now add this item to list..
+                            contactChefs1.add(contactChefs);
+                            //Now set data....
+                            that.setContactChefs(contactChefs1);
+                        }
+                    }
+
+                    
+
+
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void findById__contactChefs( String fk,  RestAdapter restAdapter, final ObjectCallback<ContactChef> callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+
+
+                                        
+
+                                        
+
+                                        customerRepo.findById__contactChefs( (String)that.getId(), fk,  new ObjectCallback<ContactChef> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(ContactChef object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void destroyById__contactChefs( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+
+
+                                        
+
+                                        
+
+                                        customerRepo.destroyById__contactChefs( (String)that.getId(), fk,  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void updateById__contactChefs( String fk,  ContactChef data,  RestAdapter restAdapter, final ObjectCallback<ContactChef> callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+
+
+                                        
+
+                                        
+
+                                        customerRepo.updateById__contactChefs( (String)that.getId(), fk, data,  new ObjectCallback<ContactChef> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(ContactChef object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__contactChefs( HashMap<String, Object> filter,  RestAdapter restAdapter, final ListCallback<ContactChef> callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+
+
+                                        
+
+                                        
+
+                                        customerRepo.get__contactChefs( (String)that.getId(), filter,  new ListCallback<ContactChef> (){
+                                            
+
+                                            
+
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(List<ContactChef> object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            ContactChef obj = new ContactChef();
+                                                            addRelation(object, obj);
+                                                            //Disabling two way communication for cyclic error..
+                                                            /*for (ContactChef obj : object) {
+                                                                //Also add relation to child type for two way communication..
+                                                                obj.addRelation(that);
+                                                            }*/
+
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void create__contactChefs( ContactChef data,  RestAdapter restAdapter, final ObjectCallback<ContactChef> callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+
+
+                                        
+
+                                        
+
+                                        customerRepo.create__contactChefs( (String)that.getId(), data,  new ObjectCallback<ContactChef> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(ContactChef object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void delete__contactChefs( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+
+
+                                        
+
+                                        
+
+                                        customerRepo.delete__contactChefs( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void count__contactChefs( HashMap<String, Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+
+
+                                        
+
+                                        
+
+                                        customerRepo.count__contactChefs( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                
+                    //Define hasMany, hasManyThrough method here..
+
+                 
+                 
+             
+          
+    
+        
+                
+                
+                    
+                    //Define hasMany relation method here..
+                    private List<Order>  orders ;
+
+                    public List<Order> getOrders() {
+                        return orders;
+                    }
+
+                    public void setOrders(List<Order> orders) {
+                        this.orders = orders;
+                        //Disabling backend compatibility for cyclic error
+                        /*
+                        //Now add backward compatibility for the relation belongsTo for hasMany..
+                        for (Order obj : orders) {
+                            obj.addRelation(that);
+                        }
+                        */
+                    }
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setOrders1(List<HashMap<String, Object>> orders) {
+                        //First create a dummy Repo class object for ..
+                        OrderRepository ordersRepository = new OrderRepository();
+                        List<Order> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : orders) {
+                            //Also add relation to child type for two way communication..
+                            Order obj1 = ordersRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setOrders(result);
+
+                    }
+
+
+                    //Adding relation method..
+                    //Add a dummy class Name object to seperate data..
+                    public void addRelation(List<Order> orders, Order dummyClassInstance) {
+                        that.setOrders(orders);
+
+                    }
+
+                    //Adding relation method..
+                    //This will add a new data to the list relation object..
+                    public void addRelation(Order orders) {
+                        try{
+                            that.getOrders().add(orders);
+                        }catch(Exception e){
+                            List< Order> orders1 = new ArrayList();
+                            //Now add this item to list..
+                            orders1.add(orders);
+                            //Now set data....
+                            that.setOrders(orders1);
+                        }
+                    }
+
+                    
+
+
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void findById__orders( String fk,  RestAdapter restAdapter, final ObjectCallback<Order> callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+
+
+                                        
+
+                                        
+
+                                        customerRepo.findById__orders( (String)that.getId(), fk,  new ObjectCallback<Order> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Order object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void destroyById__orders( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+
+
+                                        
+
+                                        
+
+                                        customerRepo.destroyById__orders( (String)that.getId(), fk,  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void updateById__orders( String fk,  Order data,  RestAdapter restAdapter, final ObjectCallback<Order> callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+
+
+                                        
+
+                                        
+
+                                        customerRepo.updateById__orders( (String)that.getId(), fk, data,  new ObjectCallback<Order> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Order object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__orders( HashMap<String, Object> filter,  RestAdapter restAdapter, final ListCallback<Order> callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+
+
+                                        
+
+                                        
+
+                                        customerRepo.get__orders( (String)that.getId(), filter,  new ListCallback<Order> (){
+                                            
+
+                                            
+
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(List<Order> object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            Order obj = new Order();
+                                                            addRelation(object, obj);
+                                                            //Disabling two way communication for cyclic error..
+                                                            /*for (Order obj : object) {
+                                                                //Also add relation to child type for two way communication..
+                                                                obj.addRelation(that);
+                                                            }*/
+
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void create__orders( Order data,  RestAdapter restAdapter, final ObjectCallback<Order> callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+
+
+                                        
+
+                                        
+
+                                        customerRepo.create__orders( (String)that.getId(), data,  new ObjectCallback<Order> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Order object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void delete__orders( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+
+
+                                        
+
+                                        
+
+                                        customerRepo.delete__orders( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void count__orders( HashMap<String, Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+
+
+                                        
+
+                                        
+
+                                        customerRepo.count__orders( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                
+                    //Define hasMany, hasManyThrough method here..
 
                  
                  

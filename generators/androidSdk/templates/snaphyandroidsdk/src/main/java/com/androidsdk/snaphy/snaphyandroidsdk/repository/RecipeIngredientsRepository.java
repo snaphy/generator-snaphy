@@ -63,11 +63,11 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
         RestContract contract = super.createContract();
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/recipe", "GET"), "RecipeIngredients.prototype.__get__recipe");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeIngredientsId/recipe", "GET"), "RecipeIngredients.prototype.__get__recipe");
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/ingredients", "GET"), "RecipeIngredients.prototype.__get__ingredients");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeIngredientsId/ingredients", "GET"), "RecipeIngredients.prototype.__get__ingredients");
             
         
             
@@ -111,7 +111,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "PUT"), "RecipeIngredients.prototype.updateAttributes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeIngredientsId", "PUT"), "RecipeIngredients.prototype.updateAttributes");
             
         
             
@@ -135,14 +135,14 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
     
         
             //Method get__recipe definition
-            public void get__recipe(  String id,  Boolean refresh, final ObjectCallback<Recipe> callback){
+            public void get__recipe(  String recipeIngredientsId,  Boolean refresh, final ObjectCallback<Recipe> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__recipe", ImmutableMap.of("id", id, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__recipe", ImmutableMap.of("recipeIngredientsId", recipeIngredientsId, "refresh", refresh), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -152,7 +152,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
+                                if(response != null){
                                     RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
                                     Recipe recipe = recipeRepo.createObject(result);
@@ -176,14 +176,14 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
     
         
             //Method get__ingredients definition
-            public void get__ingredients(  String id,  Boolean refresh, final ObjectCallback<Ingredients> callback){
+            public void get__ingredients(  String recipeIngredientsId,  Boolean refresh, final ObjectCallback<Ingredients> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__ingredients", ImmutableMap.of("id", id, "refresh", refresh), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__ingredients", ImmutableMap.of("recipeIngredientsId", recipeIngredientsId, "refresh", refresh), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -193,7 +193,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
+                                if(response != null){
                                     IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
                                     Ingredients ingredients = ingredientsRepo.createObject(result);
@@ -234,7 +234,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
+                                if(response != null){
                                     RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
                                     RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
@@ -275,7 +275,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
+                                if(response != null){
                                     RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
                                     RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
@@ -316,7 +316,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
+                                if(response != null){
                                     RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
                                     RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
@@ -390,7 +390,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
+                                if(response != null){
                                     RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
                                     RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
@@ -474,7 +474,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
+                                if(response != null){
                                     RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
                                     RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
@@ -597,14 +597,14 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<RecipeIngredients> callback){
+            public void updateAttributes(  String recipeIngredientsId,  HashMap<String, Object> data, final ObjectCallback<RecipeIngredients> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("recipeIngredientsId", recipeIngredientsId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -614,7 +614,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
+                                if(response != null){
                                     RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
                                     RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);

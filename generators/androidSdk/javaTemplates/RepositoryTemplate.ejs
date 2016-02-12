@@ -16,7 +16,7 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
             return "String";
         }
         else if (type === "number") {
-            return "Double";
+            return "double";
         }
         else if (type === "object") {
             return "HashMap<String, Object>"
@@ -58,6 +58,35 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
     }
 
 
+
+    //Return if type belongs to like CustomerRecipe or RecipeCustomer
+    function checkHasAndBelongsToDataType(type, model){
+        var hasAndBelongsToMany = false;
+        if(model.allDef[type] === undefined){
+            //Check by removing the model..
+            var patt = new RegExp("^" + capitalizeFirstLetter(model.name) );
+            var newType = type.replace(patt, "");
+
+            if(model.allDef[newType] !== undefined){
+                //Then add this model to new type..
+                hasAndBelongsToMany = true;
+            }else{
+                //Check by removing the model..
+                var patt = new RegExp(capitalizeFirstLetter(model.name) + "$" );
+                newType = type.replace(patt, "");
+                if(model.allDef[newType] !== undefined){
+                    //Then add this model to new type..
+                    hasAndBelongsToMany = true;
+                }
+            }
+            return hasAndBelongsToMany;
+        }else{
+            hasAndBelongsToMany = false;
+            return hasAndBelongsToMany;
+        }
+    }
+
+
     //isInternalArgument function function for finding if an argument is internal or not..
     function  isInternalArgument(argumentObj, argumentName, method){
         var argumentSource = argumentObj.http.source;
@@ -87,7 +116,26 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
         return internalArgument;
     }
 
+
+    //Get new argument name to avoid consfusion.. of mismatching.. of id at server
+    var getNewArgumentName = function(argumentsObj){
+        var newArg = argumentsObj.arg;
+        if(argumentsObj.type === "any"){
+            if(argumentsObj.http){
+                if(argumentsObj.http.source === "path"){
+                    if(argumentsObj.arg === "id"){
+                        var oldArgumentName = argumentsObj.arg;
+                        newArg = lowercaseFirstLetter(model.restDefinition.name) + "" + capitalizeFirstLetter(oldArgumentName);
+                    }
+                }
+            }
+        }
+        return newArg;
+    };
+
     var modelName = capitalizeFirstLetter(model.name);
+
+
 %>
 
 
@@ -167,6 +215,26 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
             if(routeMethod === "ALL"){
                 routeMethod = "POST"
             }
+
+            //Convert path ids name to avoidConfusion..in case of related data name..
+            var methodPatt = /^prototype\.\_?\_?/;
+            //If method belongsTo a related Type data..
+            if(methodPatt.test(restMethodObj.name)){
+                //Now check if it accepts any id params..and change the path argument names.. to avoid confusion with server in case of id name..
+                if(restMethodObj.accepts){
+                    restMethodObj.accepts.forEach(function(argumentsObj, index){
+                        var newArg = getNewArgumentName(argumentsObj);
+                        //Now replace the path name..
+                        restMethodObj.routes[0].path = restMethodObj.routes[0].path.replace(":"+ argumentsObj.arg, ":" +newArg);
+                    });
+                }
+            }
+
+
+
+
+
+
         %>
             <% if(restMethodObj.fullName
                 && patt.test(restMethodObj.fullName)
@@ -237,14 +305,45 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
             //ImmutableMap string concatenation..
             var mapString = "ImmutableMap.of(";
             var totalArgument = 0;
+
             //Now loop through all the required arguments..
             restMethodObj.accepts.forEach(function(requiredArgumentObj, index){
                 var type            = requiredArgumentObj.type;
                 var argumentName    = requiredArgumentObj.arg;
+
+                //Change argumentName if possible to avoid confusion..
+                //Convert path ids name to avoidConfusion..in case of related data name.
+                if(methodPatt.test(restMethodObj.name)){
+                    argumentName = getNewArgumentName(requiredArgumentObj);
+
+                }
+
+
+                var hasAndBelongsToType ;
+                //boolean checking if the type is custom class type like recipe
+                var isCustomClass = false;
+                var customClassType;
+                var isArray = false;
                 if(type instanceof Array){
+                    hasAndBelongsToType = checkHasAndBelongsToDataType(type[0], model);
+                    isArray = true;
+                    //check for custom class
+                    if(model.allModels[type[0]] !== undefined){
+                        var isCustomClass = true;
+                        var customClassType = type[0];
+                    }
                     type = "List<" + convertType(type[0], model) + ">" ;
                 }else{
+                    hasAndBelongsToType = checkHasAndBelongsToDataType(type, model);
                     type = convertType(type, model);
+                    isArray = false;
+                    //check for custom class
+                    if(model.allModels[type] !== undefined){
+                        var isCustomClass = true;
+                        var customClassType = type[0];
+                        var isArray = false;
+                    }
+
                 }
 
                 //Convert type for hasAndBelongsToMany type like type CategoryRecipe  = Recipe or Category <--- type remove which belongs to current model. of the repo
@@ -267,15 +366,42 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                     }
                 }
 
-                totalArgument ++;
-                //ImmutableMap of mapping data..
-                if(index === 0){
-                    mapString = mapString + '"' + argumentName + '"' +  ', ' + argumentName ;
-                }else{
-                    mapString = mapString + ', "' + argumentName + '"' +  ', ' + argumentName ;
+
+
+
+                //Ignore hasAndBelongsToMany
+                if(hasAndBelongsToType === false){
+                    //If type belongs to hasAndBelongsToMany then ignore the type and argument..
+                    //TODO RIGHT NOW I AM IGNORING TYPE LIKE RECIPECATEGORY which belongs to hasAndBelongsTo Many type in future you can add..
+                    //Add it later in else..
+                    //ImmutableMap of mapping data..
+
+                    if(totalArgument === 0){
+                        mapString = mapString + '"' + argumentName + '"' +  ', ' + argumentName ;
+                    }else{
+                        mapString = mapString + ', "' + argumentName + '"' +  ', ' + argumentName ;
+                    }
+
+                    //Convert type of argument of it is a custom class type..
+                    if(isCustomClass){
+                        //Convert custom class to hashMap type first
+                        //if array
+                        if(isArray){
+                            methodString = methodString + " " + "List<hashMap<String, Object>>" + " " + argumentName + ", ";
+                        }else{
+                            methodString = methodString + " " + "hashMap<String, Object>" + " " + argumentName + ", ";
+                        }
+
+                    }else{
+                        methodString = methodString + " " + type + " " + argumentName + ", ";
+                    }
+
+
+                    //console.log(methodString);
+                    totalArgument ++;
                 }
-                methodString = methodString + " " + type + " " + argumentName + ", ";
-            });
+
+            }); //end of accept argument loop..
 
             //If no argument is required then add null type..
             if(totalArgument !== 0){
@@ -370,7 +496,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                             <% if(model.allModels[type] === undefined) { %>
                                 callback.onSuccess(response);
                             <% }else{ %>
-                                if(responce != null){
+                                if(response != null){
                                     <%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
                                     <%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(result);

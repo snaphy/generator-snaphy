@@ -18,12 +18,12 @@ import com.strongloop.android.loopback.callbacks.VoidCallback;
 import com.strongloop.android.remoting.adapters.Adapter;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeDetailsRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.PopularityRepository;
 
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChefRepository;
             
 
         
@@ -35,7 +35,7 @@ import java.util.HashMap;
 
 
 
-public class EmployeeDetails extends Model {
+public class Popularity extends Model {
 
 
     //For converting all model values to hashMap
@@ -50,56 +50,12 @@ public class EmployeeDetails extends Model {
         }
     }
 
-    private EmployeeDetails that ;
+    private Popularity that ;
 
-    public EmployeeDetails (){
+    public Popularity (){
         that = this;
     }
 
-    
-        
-            
-            
-                private String address;
-                /* Adding Getter and Setter methods */
-                public String getAddress(){
-                    return address;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setAddress(String address){
-                    this.address = address;
-                    //Update hashMap value..
-                    hashMap.put("address", address);
-                }
-
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-                private double contactNumber;
-                /* Adding Getter and Setter methods */
-                public double getContactNumber(){
-                    return contactNumber;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setContactNumber(double contactNumber){
-                    this.contactNumber = contactNumber;
-                    //Update hashMap value..
-                    hashMap.put("contactNumber", contactNumber);
-                }
-
-            
-            
-
-        
     
         
             
@@ -128,27 +84,27 @@ public class EmployeeDetails extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private Employee  employees ;
+                    private Chef  chefs ;
 
-                    public Employee getEmployees() {
-                        return employees;
+                    public Chef getChefs() {
+                        return chefs;
                     }
 
-                    public void setEmployees(Employee employees) {
-                        this.employees = employees;
+                    public void setChefs(Chef chefs) {
+                        this.chefs = chefs;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setEmployees(HashMap<String, Object> employees) {
+                    public void setChefs(HashMap<String, Object> chefs) {
                         //First create a dummy Repo class object for customer.
-                        EmployeeRepository employeesRepository = new EmployeeRepository();
-                        Employee employees1 = employeesRepository.createObject(employees);
-                        setEmployees(employees1);
+                        ChefRepository chefsRepository = new ChefRepository();
+                        Chef chefs1 = chefsRepository.createObject(chefs);
+                        setChefs(chefs1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Employee employees) {
-                        that.setEmployees(employees);
+                    public void addRelation(Chef chefs) {
+                        that.setChefs(chefs);
                     }
 
 
@@ -169,9 +125,9 @@ public class EmployeeDetails extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__employees( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Employee> callback) {
+                                    public void get__chefs( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Chef> callback) {
                                         //Define methods here..
-                                        final EmployeeDetailsRepository  employeeDetailsRepo = restAdapter.createRepository(EmployeeDetailsRepository.class);
+                                        final PopularityRepository  popularityRepo = restAdapter.createRepository(PopularityRepository.class);
                                         
 
 
@@ -179,13 +135,13 @@ public class EmployeeDetails extends Model {
 
                                         
 
-                                        employeeDetailsRepo.get__employees( (String)that.getId(), refresh,  new ObjectCallback<Employee> (){
+                                        popularityRepo.get__chefs( (String)that.getId(), refresh,  new ObjectCallback<Chef> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Employee object) {
+                                                    public void onSuccess(Chef object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -216,9 +172,9 @@ public class EmployeeDetails extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__employees( Employee data,  RestAdapter restAdapter, final ObjectCallback<Employee> callback) {
+                                    public void create__chefs( Chef data,  RestAdapter restAdapter, final ObjectCallback<Chef> callback) {
                                         //Define methods here..
-                                        final EmployeeDetailsRepository  employeeDetailsRepo = restAdapter.createRepository(EmployeeDetailsRepository.class);
+                                        final PopularityRepository  popularityRepo = restAdapter.createRepository(PopularityRepository.class);
                                         
 
 
@@ -226,13 +182,13 @@ public class EmployeeDetails extends Model {
 
                                         
 
-                                        employeeDetailsRepo.create__employees( (String)that.getId(), data,  new ObjectCallback<Employee> (){
+                                        popularityRepo.create__chefs( (String)that.getId(), data,  new ObjectCallback<Chef> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Employee object) {
+                                                    public void onSuccess(Chef object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -263,9 +219,9 @@ public class EmployeeDetails extends Model {
                         
 
                                     //Write the method here..
-                                    public void update__employees( Employee data,  RestAdapter restAdapter, final ObjectCallback<Employee> callback) {
+                                    public void update__chefs( Chef data,  RestAdapter restAdapter, final ObjectCallback<Chef> callback) {
                                         //Define methods here..
-                                        final EmployeeDetailsRepository  employeeDetailsRepo = restAdapter.createRepository(EmployeeDetailsRepository.class);
+                                        final PopularityRepository  popularityRepo = restAdapter.createRepository(PopularityRepository.class);
                                         
 
 
@@ -273,13 +229,13 @@ public class EmployeeDetails extends Model {
 
                                         
 
-                                        employeeDetailsRepo.update__employees( (String)that.getId(), data,  new ObjectCallback<Employee> (){
+                                        popularityRepo.update__chefs( (String)that.getId(), data,  new ObjectCallback<Chef> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Employee object) {
+                                                    public void onSuccess(Chef object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -310,9 +266,9 @@ public class EmployeeDetails extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroy__employees( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroy__chefs( RestAdapter restAdapter, final VoidCallback callback) {
                                         //Define methods here..
-                                        final EmployeeDetailsRepository  employeeDetailsRepo = restAdapter.createRepository(EmployeeDetailsRepository.class);
+                                        final PopularityRepository  popularityRepo = restAdapter.createRepository(PopularityRepository.class);
                                         
 
 
@@ -320,7 +276,7 @@ public class EmployeeDetails extends Model {
 
                                         
 
-                                        employeeDetailsRepo.destroy__employees( (String)that.getId(),  new VoidCallback (){
+                                        popularityRepo.destroy__chefs( (String)that.getId(),  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {

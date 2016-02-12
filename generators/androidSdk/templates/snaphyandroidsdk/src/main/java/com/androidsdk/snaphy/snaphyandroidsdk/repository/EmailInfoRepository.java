@@ -89,7 +89,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
             
         
             
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "PUT"), "EmailInfo.prototype.updateAttributes");
+                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:emailInfoId", "PUT"), "EmailInfo.prototype.updateAttributes");
             
         
             
@@ -130,7 +130,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
+                                if(response != null){
                                     EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
                                     EmailInfo emailInfo = emailInfoRepo.createObject(result);
@@ -171,7 +171,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
+                                if(response != null){
                                     EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
                                     EmailInfo emailInfo = emailInfoRepo.createObject(result);
@@ -212,7 +212,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
+                                if(response != null){
                                     EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
                                     EmailInfo emailInfo = emailInfoRepo.createObject(result);
@@ -286,7 +286,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
+                                if(response != null){
                                     EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
                                     EmailInfo emailInfo = emailInfoRepo.createObject(result);
@@ -370,7 +370,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
+                                if(response != null){
                                     EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
                                     EmailInfo emailInfo = emailInfoRepo.createObject(result);
@@ -493,14 +493,14 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String id,  HashMap<String, Object> data, final ObjectCallback<EmailInfo> callback){
+            public void updateAttributes(  String emailInfoId,  HashMap<String, Object> data, final ObjectCallback<EmailInfo> callback){
                 
 
 
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("id", id, "data", data), new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", ImmutableMap.of("emailInfoId", emailInfoId, "data", data), new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -510,7 +510,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(responce != null){
+                                if(response != null){
                                     EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
                                     EmailInfo emailInfo = emailInfoRepo.createObject(result);

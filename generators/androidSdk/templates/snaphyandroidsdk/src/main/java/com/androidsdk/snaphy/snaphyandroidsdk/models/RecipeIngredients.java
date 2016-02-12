@@ -45,6 +45,18 @@ import java.util.HashMap;
 public class RecipeIngredients extends Model {
 
 
+    //For converting all model values to hashMap
+    private HashMap<String, Object> hashMap = new HashMap<>();
+
+    public HashMap<String, Object> convertHashMap(){
+        if(that.getId() != null){
+            return hashMap;
+        }else{
+            hashMap.put("id", that.getId());
+            return hashMap;
+        }
+    }
+
     private RecipeIngredients that ;
 
     public RecipeIngredients (){
@@ -56,15 +68,17 @@ public class RecipeIngredients extends Model {
             
             
             
-                private Double quantity;
+                private double quantity;
                 /* Adding Getter and Setter methods */
-                public Double getQuantity(){
+                public double getQuantity(){
                     return quantity;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setQuantity(Double quantity){
+                public void setQuantity(double quantity){
                     this.quantity = quantity;
+                    //Update hashMap value..
+                    hashMap.put("quantity", quantity);
                 }
 
             
@@ -84,9 +98,33 @@ public class RecipeIngredients extends Model {
                 /* Adding Getter and Setter methods */
                 public void setRecipeMetric(String recipeMetric){
                     this.recipeMetric = recipeMetric;
+                    //Update hashMap value..
+                    hashMap.put("recipeMetric", recipeMetric);
                 }
 
             
+            
+            
+
+        
+    
+        
+            
+            
+            
+                private double requiredQuantity;
+                /* Adding Getter and Setter methods */
+                public double getRequiredQuantity(){
+                    return requiredQuantity;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setRequiredQuantity(double requiredQuantity){
+                    this.requiredQuantity = requiredQuantity;
+                    //Update hashMap value..
+                    hashMap.put("requiredQuantity", requiredQuantity);
+                }
+
             
             
 

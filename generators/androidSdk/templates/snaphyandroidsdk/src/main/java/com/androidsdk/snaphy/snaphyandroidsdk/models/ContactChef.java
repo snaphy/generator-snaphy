@@ -18,19 +18,26 @@ import com.strongloop.android.loopback.callbacks.VoidCallback;
 import com.strongloop.android.remoting.adapters.Adapter;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.CommentsRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.ContactChefRepository;
 
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChefRepository;
             
 
         
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CourseRepository;
+            
+
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
             
 
         
@@ -42,7 +49,7 @@ import java.util.HashMap;
 
 
 
-public class Comments extends Model {
+public class ContactChef extends Model {
 
 
     //For converting all model values to hashMap
@@ -57,9 +64,9 @@ public class Comments extends Model {
         }
     }
 
-    private Comments that ;
+    private ContactChef that ;
 
-    public Comments (){
+    public ContactChef (){
         that = this;
     }
 
@@ -67,17 +74,17 @@ public class Comments extends Model {
         
             
             
-                private String date;
+                private String message;
                 /* Adding Getter and Setter methods */
-                public String getDate(){
-                    return date;
+                public String getMessage(){
+                    return message;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setDate(String date){
-                    this.date = date;
+                public void setMessage(String message){
+                    this.message = message;
                     //Update hashMap value..
-                    hashMap.put("date", date);
+                    hashMap.put("message", message);
                 }
 
             
@@ -89,64 +96,6 @@ public class Comments extends Model {
         
             
             
-                private String status;
-                /* Adding Getter and Setter methods */
-                public String getStatus(){
-                    return status;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setStatus(String status){
-                    this.status = status;
-                    //Update hashMap value..
-                    hashMap.put("status", status);
-                }
-
-            
-            
-            
-
-        
-    
-        
-            
-            
-                private String comment;
-                /* Adding Getter and Setter methods */
-                public String getComment(){
-                    return comment;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setComment(String comment){
-                    this.comment = comment;
-                    //Update hashMap value..
-                    hashMap.put("comment", comment);
-                }
-
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-                private double rating;
-                /* Adding Getter and Setter methods */
-                public double getRating(){
-                    return rating;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setRating(double rating){
-                    this.rating = rating;
-                    //Update hashMap value..
-                    hashMap.put("rating", rating);
-                }
-
             
             
 
@@ -187,27 +136,27 @@ public class Comments extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private Customer  customer ;
+                    private Chef  chef ;
 
-                    public Customer getCustomer() {
-                        return customer;
+                    public Chef getChef() {
+                        return chef;
                     }
 
-                    public void setCustomer(Customer customer) {
-                        this.customer = customer;
+                    public void setChef(Chef chef) {
+                        this.chef = chef;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setCustomer(HashMap<String, Object> customer) {
+                    public void setChef(HashMap<String, Object> chef) {
                         //First create a dummy Repo class object for customer.
-                        CustomerRepository customerRepository = new CustomerRepository();
-                        Customer customer1 = customerRepository.createObject(customer);
-                        setCustomer(customer1);
+                        ChefRepository chefRepository = new ChefRepository();
+                        Chef chef1 = chefRepository.createObject(chef);
+                        setChef(chef1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Customer customer) {
-                        that.setCustomer(customer);
+                    public void addRelation(Chef chef) {
+                        that.setChef(chef);
                     }
 
 
@@ -228,9 +177,9 @@ public class Comments extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
+                                    public void get__chef( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Chef> callback) {
                                         //Define methods here..
-                                        final CommentsRepository  commentsRepo = restAdapter.createRepository(CommentsRepository.class);
+                                        final ContactChefRepository  contactChefRepo = restAdapter.createRepository(ContactChefRepository.class);
                                         
 
 
@@ -238,13 +187,155 @@ public class Comments extends Model {
 
                                         
 
-                                        commentsRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
+                                        contactChefRepo.get__chef( (String)that.getId(), refresh,  new ObjectCallback<Chef> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Customer object) {
+                                                    public void onSuccess(Chef object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                 
+                 
+             
+          
+    
+        
+                
+                    //Define belongsTo relation method here..
+                    private Course  course ;
+
+                    public Course getCourse() {
+                        return course;
+                    }
+
+                    public void setCourse(Course course) {
+                        this.course = course;
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setCourse(HashMap<String, Object> course) {
+                        //First create a dummy Repo class object for customer.
+                        CourseRepository courseRepository = new CourseRepository();
+                        Course course1 = courseRepository.createObject(course);
+                        setCourse(course1);
+                    }
+
+                    //Adding relation method..
+                    public void addRelation(Course course) {
+                        that.setCourse(course);
+                    }
+
+
+
+                
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__course( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Course> callback) {
+                                        //Define methods here..
+                                        final ContactChefRepository  contactChefRepo = restAdapter.createRepository(ContactChefRepository.class);
+                                        
+
+
+                                        
+
+                                        
+
+                                        contactChefRepo.get__course( (String)that.getId(), refresh,  new ObjectCallback<Course> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Course object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -305,6 +396,14 @@ public class Comments extends Model {
                         
                         
                         
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                     
 
                 
@@ -317,27 +416,27 @@ public class Comments extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private Recipe  recipe ;
+                    private Customer  customer ;
 
-                    public Recipe getRecipe() {
-                        return recipe;
+                    public Customer getCustomer() {
+                        return customer;
                     }
 
-                    public void setRecipe(Recipe recipe) {
-                        this.recipe = recipe;
+                    public void setCustomer(Customer customer) {
+                        this.customer = customer;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setRecipe(HashMap<String, Object> recipe) {
+                    public void setCustomer(HashMap<String, Object> customer) {
                         //First create a dummy Repo class object for customer.
-                        RecipeRepository recipeRepository = new RecipeRepository();
-                        Recipe recipe1 = recipeRepository.createObject(recipe);
-                        setRecipe(recipe1);
+                        CustomerRepository customerRepository = new CustomerRepository();
+                        Customer customer1 = customerRepository.createObject(customer);
+                        setCustomer(customer1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Recipe recipe) {
-                        that.setRecipe(recipe);
+                    public void addRelation(Customer customer) {
+                        that.setCustomer(customer);
                     }
 
 
@@ -357,12 +456,14 @@ public class Comments extends Model {
 
                      
                             
+                         
+                            
                         
 
                                     //Write the method here..
-                                    public void get__recipe( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
+                                    public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
                                         //Define methods here..
-                                        final CommentsRepository  commentsRepo = restAdapter.createRepository(CommentsRepository.class);
+                                        final ContactChefRepository  contactChefRepo = restAdapter.createRepository(ContactChefRepository.class);
                                         
 
 
@@ -370,13 +471,13 @@ public class Comments extends Model {
 
                                         
 
-                                        commentsRepo.get__recipe( (String)that.getId(), refresh,  new ObjectCallback<Recipe> (){
+                                        contactChefRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Recipe object) {
+                                                    public void onSuccess(Customer object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -404,6 +505,14 @@ public class Comments extends Model {
                                     } //method def ends here.
                                  
                             
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         

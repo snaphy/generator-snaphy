@@ -18,7 +18,7 @@ import com.strongloop.android.loopback.callbacks.VoidCallback;
 import com.strongloop.android.remoting.adapters.Adapter;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.PriorityRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeAnalyticRepository;
 
 //Now import repository of related models..
 
@@ -35,15 +35,137 @@ import java.util.HashMap;
 
 
 
-public class Priority extends Model {
+public class RecipeAnalytic extends Model {
 
 
-    private Priority that ;
+    //For converting all model values to hashMap
+    private HashMap<String, Object> hashMap = new HashMap<>();
 
-    public Priority (){
+    public HashMap<String, Object> convertHashMap(){
+        if(that.getId() != null){
+            return hashMap;
+        }else{
+            hashMap.put("id", that.getId());
+            return hashMap;
+        }
+    }
+
+    private RecipeAnalytic that ;
+
+    public RecipeAnalytic (){
         that = this;
     }
 
+    
+        
+            
+            
+            
+                private double totalViews;
+                /* Adding Getter and Setter methods */
+                public double getTotalViews(){
+                    return totalViews;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setTotalViews(double totalViews){
+                    this.totalViews = totalViews;
+                    //Update hashMap value..
+                    hashMap.put("totalViews", totalViews);
+                }
+
+            
+            
+
+        
+    
+        
+            
+            
+                private String added;
+                /* Adding Getter and Setter methods */
+                public String getAdded(){
+                    return added;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setAdded(String added){
+                    this.added = added;
+                    //Update hashMap value..
+                    hashMap.put("added", added);
+                }
+
+            
+            
+            
+
+        
+    
+        
+            
+            
+                private String lastModified;
+                /* Adding Getter and Setter methods */
+                public String getLastModified(){
+                    return lastModified;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setLastModified(String lastModified){
+                    this.lastModified = lastModified;
+                    //Update hashMap value..
+                    hashMap.put("lastModified", lastModified);
+                }
+
+            
+            
+            
+
+        
+    
+        
+            
+            
+            
+                private double averageRating;
+                /* Adding Getter and Setter methods */
+                public double getAverageRating(){
+                    return averageRating;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setAverageRating(double averageRating){
+                    this.averageRating = averageRating;
+                    //Update hashMap value..
+                    hashMap.put("averageRating", averageRating);
+                }
+
+            
+            
+
+        
+    
+        
+            
+            
+            
+                private double totalComment;
+                /* Adding Getter and Setter methods */
+                public double getTotalComment(){
+                    return totalComment;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setTotalComment(double totalComment){
+                    this.totalComment = totalComment;
+                    //Update hashMap value..
+                    hashMap.put("totalComment", totalComment);
+                }
+
+            
+            
+
+        
     
         
             
@@ -57,29 +179,11 @@ public class Priority extends Model {
                 /* Adding Getter and Setter methods */
                 public void setPriority(String priority){
                     this.priority = priority;
+                    //Update hashMap value..
+                    hashMap.put("priority", priority);
                 }
 
             
-            
-            
-
-        
-    
-        
-            
-            
-            
-                private Double totalViews;
-                /* Adding Getter and Setter methods */
-                public Double getTotalViews(){
-                    return totalViews;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setTotalViews(Double totalViews){
-                    this.totalViews = totalViews;
-                }
-
             
             
 
@@ -155,7 +259,7 @@ public class Priority extends Model {
                                     //Write the method here..
                                     public void get__recipes( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
                                         //Define methods here..
-                                        final PriorityRepository  priorityRepo = restAdapter.createRepository(PriorityRepository.class);
+                                        final RecipeAnalyticRepository  recipeAnalyticRepo = restAdapter.createRepository(RecipeAnalyticRepository.class);
                                         
 
 
@@ -163,7 +267,7 @@ public class Priority extends Model {
 
                                         
 
-                                        priorityRepo.get__recipes( (String)that.getId(), refresh,  new ObjectCallback<Recipe> (){
+                                        recipeAnalyticRepo.get__recipes( (String)that.getId(), refresh,  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -202,7 +306,7 @@ public class Priority extends Model {
                                     //Write the method here..
                                     public void create__recipes( Recipe data,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
                                         //Define methods here..
-                                        final PriorityRepository  priorityRepo = restAdapter.createRepository(PriorityRepository.class);
+                                        final RecipeAnalyticRepository  recipeAnalyticRepo = restAdapter.createRepository(RecipeAnalyticRepository.class);
                                         
 
 
@@ -210,7 +314,7 @@ public class Priority extends Model {
 
                                         
 
-                                        priorityRepo.create__recipes( (String)that.getId(), data,  new ObjectCallback<Recipe> (){
+                                        recipeAnalyticRepo.create__recipes( (String)that.getId(), data,  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -249,7 +353,7 @@ public class Priority extends Model {
                                     //Write the method here..
                                     public void update__recipes( Recipe data,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
                                         //Define methods here..
-                                        final PriorityRepository  priorityRepo = restAdapter.createRepository(PriorityRepository.class);
+                                        final RecipeAnalyticRepository  recipeAnalyticRepo = restAdapter.createRepository(RecipeAnalyticRepository.class);
                                         
 
 
@@ -257,7 +361,7 @@ public class Priority extends Model {
 
                                         
 
-                                        priorityRepo.update__recipes( (String)that.getId(), data,  new ObjectCallback<Recipe> (){
+                                        recipeAnalyticRepo.update__recipes( (String)that.getId(), data,  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -296,7 +400,7 @@ public class Priority extends Model {
                                     //Write the method here..
                                     public void destroy__recipes( RestAdapter restAdapter, final VoidCallback callback) {
                                         //Define methods here..
-                                        final PriorityRepository  priorityRepo = restAdapter.createRepository(PriorityRepository.class);
+                                        final RecipeAnalyticRepository  recipeAnalyticRepo = restAdapter.createRepository(RecipeAnalyticRepository.class);
                                         
 
 
@@ -304,7 +408,7 @@ public class Priority extends Model {
 
                                         
 
-                                        priorityRepo.destroy__recipes( (String)that.getId(),  new VoidCallback (){
+                                        recipeAnalyticRepo.destroy__recipes( (String)that.getId(),  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
