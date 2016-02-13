@@ -242,8 +242,15 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                 && restMethodObj.name !== "login"
                 && restMethodObj.name !== "logout"
                 && restMethodObj.name !== "save" ){
+                var testPlural = /[sS]$/;
             %>
-                contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "<%- restMethodObj.routes[0].path %>", "<%- routeMethod %>"), "<%- restMethodObj.fullName %>");
+
+                <% if (testPlural.test(model.name)){ %>
+                    contract.addItem(new RestContractItem("/" + "<%- capitalizeFirstLetter(model.name) %>"  + "<%- restMethodObj.routes[0].path %>", "<%- routeMethod %>"), "<%- restMethodObj.fullName %>");
+                <% } else { %>
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "<%- restMethodObj.routes[0].path %>", "<%- routeMethod %>"), "<%- restMethodObj.fullName %>");
+                <% } %>
+
             <% } %>
         <% });%>
         return contract;
