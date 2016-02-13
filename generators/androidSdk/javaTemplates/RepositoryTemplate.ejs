@@ -426,8 +426,6 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
                                 //Adding array argument to hash
                                 hashMapList.push( "hashMapObject.put(\"" + argumentName + "\", " + argumentName + ");" );
-
-
                         }else{
                             methodString = methodString + " " + "HashMap<String, Object>" + " " + argumentName + ", ";
                             //Adding array argument to hash
@@ -438,8 +436,13 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
                     }else{
                         methodString = methodString + " " + type + " " + argumentName + ", ";
-                        //Adding array argument to hash
-                        hashMapList.push( "hashMapObject.put(\"" + argumentName + "\", " + argumentName + ");" );
+                        if(type === "HashMap<String, Object>"){
+                            //Adding array argument to hash
+                            hashMapList.push( "hashMapObject.putAll(" + argumentName + ");" );
+                        }else{
+                            //Adding array argument to hash
+                            hashMapList.push( "hashMapObject.put(\"" + argumentName + "\", " + argumentName + ");" );
+                        }
                     }
 
 
