@@ -2618,7 +2618,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -2667,7 +2667,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -2716,7 +2716,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -2959,7 +2959,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                         hashMapObject.put("where", where);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -3084,7 +3084,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                         hashMapObject.put("customerId", customerId);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 

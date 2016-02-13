@@ -1432,7 +1432,7 @@ public class ChefRepository extends ModelRepository<Chef> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -1481,7 +1481,7 @@ public class ChefRepository extends ModelRepository<Chef> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -1530,7 +1530,7 @@ public class ChefRepository extends ModelRepository<Chef> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -1773,7 +1773,7 @@ public class ChefRepository extends ModelRepository<Chef> {
                 
                         hashMapObject.put("where", where);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -1898,7 +1898,7 @@ public class ChefRepository extends ModelRepository<Chef> {
                 
                         hashMapObject.put("chefId", chefId);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 

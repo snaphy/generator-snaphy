@@ -742,7 +742,7 @@ public class CategoryRepository extends ModelRepository<Category> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -791,7 +791,7 @@ public class CategoryRepository extends ModelRepository<Category> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -840,7 +840,7 @@ public class CategoryRepository extends ModelRepository<Category> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -1083,7 +1083,7 @@ public class CategoryRepository extends ModelRepository<Category> {
                 
                         hashMapObject.put("where", where);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -1208,7 +1208,7 @@ public class CategoryRepository extends ModelRepository<Category> {
                 
                         hashMapObject.put("categoryId", categoryId);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 

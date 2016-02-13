@@ -429,7 +429,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -478,7 +478,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -527,7 +527,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -770,7 +770,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                 
                         hashMapObject.put("where", where);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -895,7 +895,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                 
                         hashMapObject.put("employeeDetailsId", employeeDetailsId);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 

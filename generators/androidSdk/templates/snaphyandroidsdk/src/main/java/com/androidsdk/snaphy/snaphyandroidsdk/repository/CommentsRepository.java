@@ -353,7 +353,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -402,7 +402,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -451,7 +451,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -694,7 +694,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
                 
                         hashMapObject.put("where", where);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -819,7 +819,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
                 
                         hashMapObject.put("commentsId", commentsId);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 

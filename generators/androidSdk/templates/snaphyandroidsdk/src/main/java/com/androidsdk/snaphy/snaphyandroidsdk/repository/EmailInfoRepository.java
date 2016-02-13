@@ -176,7 +176,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -225,7 +225,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -274,7 +274,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -517,7 +517,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                 
                         hashMapObject.put("where", where);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -642,7 +642,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                 
                         hashMapObject.put("emailInfoId", emailInfoId);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 

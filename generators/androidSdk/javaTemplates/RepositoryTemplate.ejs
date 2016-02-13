@@ -414,9 +414,6 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                     }
 */
 
-
-
-
                     //Convert type of argument of it is a custom class type..
                     if(isCustomClass){
                         //Convert custom class to hashMap type first
@@ -431,18 +428,28 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                             //Adding array argument to hash
                             hashMapList.push( "hashMapObject.putAll(" + argumentName + ");" );
                         }
-
-
-
-                    }else{
+                    }else if(argumentName === "data"){
                         methodString = methodString + " " + type + " " + argumentName + ", ";
-                        if(type === "HashMap<String, Object>"){
-                            //Adding array argument to hash
-                            hashMapList.push( "hashMapObject.putAll(" + argumentName + ");" );
+                        //and argument source is body..
+                        if(requiredArgumentObj.http){
+                            if(requiredArgumentObj.http.source === "body"){
+                                //THen set putAll in hashMap mathod..
+                                //Adding array argument to hash
+                                hashMapList.push( "hashMapObject.putAll(" + argumentName + ");" );
+                            }else{
+                                //Adding array argument to hash
+                                hashMapList.push( "hashMapObject.put(\"" + argumentName + "\", " + argumentName + ");" );
+                            }
                         }else{
                             //Adding array argument to hash
                             hashMapList.push( "hashMapObject.put(\"" + argumentName + "\", " + argumentName + ");" );
                         }
+                    }else{
+
+                        methodString = methodString + " " + type + " " + argumentName + ", ";
+                        //Adding array argument to hash
+                        hashMapList.push( "hashMapObject.put(\"" + argumentName + "\", " + argumentName + ");" );
+
                     }
 
 

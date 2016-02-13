@@ -258,7 +258,7 @@ public class OrderRepository extends ModelRepository<Order> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -307,7 +307,7 @@ public class OrderRepository extends ModelRepository<Order> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -356,7 +356,7 @@ public class OrderRepository extends ModelRepository<Order> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -599,7 +599,7 @@ public class OrderRepository extends ModelRepository<Order> {
                 
                         hashMapObject.put("where", where);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -724,7 +724,7 @@ public class OrderRepository extends ModelRepository<Order> {
                 
                         hashMapObject.put("orderId", orderId);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 

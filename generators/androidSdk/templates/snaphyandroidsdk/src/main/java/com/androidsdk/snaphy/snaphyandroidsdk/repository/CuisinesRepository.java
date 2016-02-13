@@ -763,7 +763,7 @@ public class CuisinesRepository extends ModelRepository<Cuisines> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -812,7 +812,7 @@ public class CuisinesRepository extends ModelRepository<Cuisines> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -861,7 +861,7 @@ public class CuisinesRepository extends ModelRepository<Cuisines> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -1104,7 +1104,7 @@ public class CuisinesRepository extends ModelRepository<Cuisines> {
                 
                         hashMapObject.put("where", where);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -1229,7 +1229,7 @@ public class CuisinesRepository extends ModelRepository<Cuisines> {
                 
                         hashMapObject.put("cuisinesId", cuisinesId);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 

@@ -566,7 +566,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -615,7 +615,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -664,7 +664,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -907,7 +907,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                 
                         hashMapObject.put("where", where);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -1032,7 +1032,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                 
                         hashMapObject.put("ingredientCategoryId", ingredientCategoryId);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 

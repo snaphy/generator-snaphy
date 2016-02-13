@@ -414,7 +414,7 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -463,7 +463,7 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -512,7 +512,7 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -755,7 +755,7 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
                 
                         hashMapObject.put("where", where);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -880,7 +880,7 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
                 
                         hashMapObject.put("recipeAnalyticId", recipeAnalyticId);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 

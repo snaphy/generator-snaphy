@@ -648,7 +648,7 @@ public class CourseRepository extends ModelRepository<Course> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -697,7 +697,7 @@ public class CourseRepository extends ModelRepository<Course> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -746,7 +746,7 @@ public class CourseRepository extends ModelRepository<Course> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -989,7 +989,7 @@ public class CourseRepository extends ModelRepository<Course> {
                 
                         hashMapObject.put("where", where);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -1114,7 +1114,7 @@ public class CourseRepository extends ModelRepository<Course> {
                 
                         hashMapObject.put("courseId", courseId);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 

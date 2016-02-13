@@ -980,7 +980,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -1029,7 +1029,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -1078,7 +1078,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
                 HashMap<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -1321,7 +1321,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
                 
                         hashMapObject.put("where", where);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -1446,7 +1446,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
                 
                         hashMapObject.put("wishlistId", wishlistId);
                 
-                        hashMapObject.put("data", data);
+                        hashMapObject.putAll(data);
                 
 
                 
