@@ -235,6 +235,8 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
 
 
+
+
         %>
             <% if(restMethodObj.fullName
                 && patt.test(restMethodObj.fullName)
@@ -246,6 +248,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
             %>
 
                 <% if (testPlural.test(model.name)){ %>
+
                     contract.addItem(new RestContractItem("/" + "<%- capitalizeFirstLetter(model.name) %>"  + "<%- restMethodObj.routes[0].path %>", "<%- routeMethod %>"), "<%- restMethodObj.fullName %>");
                 <% } else { %>
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "<%- restMethodObj.routes[0].path %>", "<%- routeMethod %>"), "<%- restMethodObj.fullName %>");
@@ -254,6 +257,24 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
             <% } %>
         <% });%>
         return contract;
+    }
+
+
+    //override getNameForRestUrlMethod
+    public String  getNameForRestUrl() {
+        <%
+        var testPlural = /[sS]$/;
+        if (testPlural.test(model.name)){
+        %>
+            return "<%- capitalizeFirstLetter(model.name) %>";
+        <%
+        }else{
+        %>
+            //call super method instead..
+            return super.getNameForRestUrl();
+        <%
+        }
+        %>
     }
 
 
@@ -310,7 +331,10 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
             var methodString = "public void ";
             methodString = methodString + restMethodName + "( ";
             //ImmutableMap string concatenation..
-            var mapString = "ImmutableMap.of(";
+            //var mapString = "ImmutableMap.of(";
+            var hashMapList = [];
+
+
             var totalArgument = 0;
 
             //Now loop through all the required arguments..
@@ -383,11 +407,15 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                     //Add it later in else..
                     //ImmutableMap of mapping data..
 
-                    if(totalArgument === 0){
+                /*    if(totalArgument === 0){
                         mapString = mapString + '"' + argumentName + '"' +  ', ' + argumentName ;
                     }else{
                         mapString = mapString + ', "' + argumentName + '"' +  ', ' + argumentName ;
                     }
+*/
+
+
+
 
                     //Convert type of argument of it is a custom class type..
                     if(isCustomClass){
@@ -395,28 +423,39 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                         //if array
                         if(isArray){
                             methodString = methodString + " " + "List<HashMap<String, Object>>" + " " + argumentName + ", ";
+
+                                //Adding array argument to hash
+                                hashMapList.push( "hashMapObject.put(\"" + argumentName + "\", " + argumentName + ");" );
+
+
                         }else{
                             methodString = methodString + " " + "HashMap<String, Object>" + " " + argumentName + ", ";
+                            //Adding array argument to hash
+                            hashMapList.push( "hashMapObject.putAll(" + argumentName + ");" );
                         }
+
+
 
                     }else{
                         methodString = methodString + " " + type + " " + argumentName + ", ";
+                        //Adding array argument to hash
+                        hashMapList.push( "hashMapObject.put(\"" + argumentName + "\", " + argumentName + ");" );
                     }
 
 
                     //console.log(methodString);
-                    totalArgument ++;
+                    /*totalArgument ++;*/
                 }
 
             }); //end of accept argument loop..
 
-            //If no argument is required then add null type..
+            /*//If no argument is required then add null type..
             if(totalArgument !== 0){
                 //Wrapup ImmutableMap data..
                 mapString  = mapString + ")";
             }else{
                 mapString  = "null";
-            }
+            }*/
 
 
 
@@ -471,8 +510,20 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
         %>
             //Method <%- restMethodName %> definition
             <%- methodString %>{
+
+                //Definging hashMap for data conversion
+                HashMap<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                <%
+                    hashMapList.forEach(function(hasMapAddMethod){
+                %>
+                        <%- hasMapAddMethod %>
+                <%
+                    });
+                %>
+
                 <% if(callbackType === "VoidCallback") {%>
-                    invokeStaticMethod("<%- restMethodObj.name %>", <%- mapString %>, new Adapter.Callback() {
+                    invokeStaticMethod("<%- restMethodObj.name %>", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -488,10 +539,10 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
                 <% if(callbackType === "ObjectCallback") {%>
                     <% if(model.allModels[type] === undefined) { %>
-                    invokeStaticMethod("<%- restMethodObj.name %>", <%- mapString %>, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("<%- restMethodObj.name %>", hashMapObject, new Adapter.JsonObjectCallback() {
                     <% } %>
                     <% if(model.allModels[type] !== undefined) { %>
-                    invokeStaticMethod("<%- restMethodObj.name %>", <%- mapString %>, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("<%- restMethodObj.name %>", hashMapObject, new Adapter.JsonObjectCallback() {
                     <% } %>
                         @Override
                         public void onError(Throwable t) {
@@ -518,7 +569,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                 <% } %>
 
                 <% if(callbackType === "ListCallback") {%>
-                    invokeStaticMethod("<%- restMethodObj.name %>", <%- mapString %>, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("<%- restMethodObj.name %>", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
