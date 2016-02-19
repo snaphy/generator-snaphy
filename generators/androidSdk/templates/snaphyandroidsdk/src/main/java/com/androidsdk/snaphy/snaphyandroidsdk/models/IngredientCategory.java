@@ -32,6 +32,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.IngredientCategoryRepos
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -39,9 +40,9 @@ public class IngredientCategory extends Model {
 
 
     //For converting all model values to hashMap
-    private HashMap<String, Object> hashMap = new HashMap<>();
+    private Map<String, Object> hashMap = new HashMap<>();
 
-    public HashMap<String, Object> convertHashMap(){
+    public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
             return hashMap;
         }else{
@@ -118,11 +119,11 @@ public class IngredientCategory extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setIngredients1(List<HashMap<String, Object>> ingredients) {
+                    public void setIngredients1(List<Map<String, Object>> ingredients) {
                         //First create a dummy Repo class object for ..
                         IngredientsRepository ingredientsRepository = new IngredientsRepository();
                         List<Ingredients> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : ingredients) {
+                        for (Map<String, Object> obj : ingredients) {
                             //Also add relation to child type for two way communication..
                             Ingredients obj1 = ingredientsRepository.createObject(obj);
                             result.add(obj1);
@@ -271,7 +272,7 @@ public class IngredientCategory extends Model {
 
 
 
-                                        ingredientCategoryRepo.updateById__ingredients( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<Ingredients> (){
+                                        ingredientCategoryRepo.updateById__ingredients( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Ingredients> (){
                                             
 
                                             
@@ -308,7 +309,7 @@ public class IngredientCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__ingredients( HashMap<String, Object> filter,  RestAdapter restAdapter, final ListCallback<Ingredients> callback) {
+                                    public void get__ingredients( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Ingredients> callback) {
                                         //Define methods here..
                                         final IngredientCategoryRepository  ingredientCategoryRepo = restAdapter.createRepository(IngredientCategoryRepository.class);
                                         
@@ -372,7 +373,7 @@ public class IngredientCategory extends Model {
 
 
 
-                                        ingredientCategoryRepo.create__ingredients( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Ingredients> (){
+                                        ingredientCategoryRepo.create__ingredients( (String)that.getId(), data.convertMap(),  new ObjectCallback<Ingredients> (){
                                             
 
                                             
@@ -443,7 +444,7 @@ public class IngredientCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__ingredients( HashMap<String, Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__ingredients( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
                                         //Define methods here..
                                         final IngredientCategoryRepository  ingredientCategoryRepo = restAdapter.createRepository(IngredientCategoryRepository.class);
                                         

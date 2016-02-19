@@ -282,7 +282,7 @@ public class CategoryRepository extends ModelRepository<Category> {
             public void findById__recipes(  String categoryId,  String fk, final ObjectCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("categoryId", categoryId);
@@ -333,7 +333,7 @@ public class CategoryRepository extends ModelRepository<Category> {
             public void destroyById__recipes(  String categoryId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("categoryId", categoryId);
@@ -368,10 +368,10 @@ public class CategoryRepository extends ModelRepository<Category> {
     
         
             //Method updateById__recipes definition
-            public void updateById__recipes(  String categoryId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+            public void updateById__recipes(  String categoryId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("categoryId", categoryId);
@@ -424,7 +424,7 @@ public class CategoryRepository extends ModelRepository<Category> {
             public void link__recipes(  String categoryId,  String fk, final ObjectCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("categoryId", categoryId);
@@ -475,7 +475,7 @@ public class CategoryRepository extends ModelRepository<Category> {
             public void unlink__recipes(  String categoryId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("categoryId", categoryId);
@@ -513,7 +513,7 @@ public class CategoryRepository extends ModelRepository<Category> {
             public void exists__recipes(  String categoryId,  String fk, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("categoryId", categoryId);
@@ -553,10 +553,10 @@ public class CategoryRepository extends ModelRepository<Category> {
     
         
             //Method get__recipes definition
-            public void get__recipes(  String categoryId,  HashMap<String, Object> filter, final ListCallback<Recipe> callback){
+            public void get__recipes(  String categoryId,  Map<String,  ? extends Object> filter, final ListCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("categoryId", categoryId);
@@ -606,10 +606,10 @@ public class CategoryRepository extends ModelRepository<Category> {
     
         
             //Method create__recipes definition
-            public void create__recipes(  String categoryId,  HashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+            public void create__recipes(  String categoryId,  Map<String,  ? extends Object> data, final ObjectCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("categoryId", categoryId);
@@ -660,7 +660,7 @@ public class CategoryRepository extends ModelRepository<Category> {
             public void delete__recipes(  String categoryId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("categoryId", categoryId);
@@ -693,10 +693,10 @@ public class CategoryRepository extends ModelRepository<Category> {
     
         
             //Method count__recipes definition
-            public void count__recipes(  String categoryId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__recipes(  String categoryId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("categoryId", categoryId);
@@ -736,10 +736,10 @@ public class CategoryRepository extends ModelRepository<Category> {
     
         
             //Method create definition
-            public void create(  HashMap<String, Object> data, final ObjectCallback<Category> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Category> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -785,10 +785,10 @@ public class CategoryRepository extends ModelRepository<Category> {
     
         
             //Method createMany definition
-            public void createMany(  HashMap<String, Object> data, final ObjectCallback<Category> callback){
+            public void createMany(  Map<String,  ? extends Object> data, final ObjectCallback<Category> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -834,10 +834,10 @@ public class CategoryRepository extends ModelRepository<Category> {
     
         
             //Method upsert definition
-            public void upsert(  HashMap<String, Object> data, final ObjectCallback<Category> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Category> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -886,7 +886,7 @@ public class CategoryRepository extends ModelRepository<Category> {
             public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -924,10 +924,10 @@ public class CategoryRepository extends ModelRepository<Category> {
     
         
             //Method findById definition
-            public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<Category> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Category> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -975,10 +975,10 @@ public class CategoryRepository extends ModelRepository<Category> {
     
         
             //Method find definition
-            public void find(  HashMap<String, Object> filter, final ListCallback<Category> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Category> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("filter", filter);
@@ -1026,10 +1026,10 @@ public class CategoryRepository extends ModelRepository<Category> {
     
         
             //Method findOne definition
-            public void findOne(  HashMap<String, Object> filter, final ObjectCallback<Category> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Category> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("filter", filter);
@@ -1075,10 +1075,10 @@ public class CategoryRepository extends ModelRepository<Category> {
     
         
             //Method updateAll definition
-            public void updateAll(  HashMap<String, Object> where,  HashMap<String, Object> data, final Adapter.JsonObjectCallback  callback ){
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("where", where);
@@ -1121,7 +1121,7 @@ public class CategoryRepository extends ModelRepository<Category> {
             public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -1159,10 +1159,10 @@ public class CategoryRepository extends ModelRepository<Category> {
     
         
             //Method count definition
-            public void count(  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("where", where);
@@ -1200,10 +1200,10 @@ public class CategoryRepository extends ModelRepository<Category> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String categoryId,  HashMap<String, Object> data, final ObjectCallback<Category> callback){
+            public void updateAttributes(  String categoryId,  Map<String,  ? extends Object> data, final ObjectCallback<Category> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("categoryId", categoryId);
@@ -1256,7 +1256,7 @@ public class CategoryRepository extends ModelRepository<Category> {
             public void getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
 

@@ -19,7 +19,7 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
             return "double";
         }
         else if (type === "object") {
-            return "HashMap<String, Object>"
+            return "Map<String,  ? extends Object>"
         }
         else if (type === "boolean") {
             return "Boolean"
@@ -419,12 +419,12 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                         //Convert custom class to hashMap type first
                         //if array
                         if(isArray){
-                            methodString = methodString + " " + "List<HashMap<String, Object>>" + " " + argumentName + ", ";
+                            methodString = methodString + " " + "List<Map<String,  ? extends Object>>" + " " + argumentName + ", ";
 
                                 //Adding array argument to hash
                                 hashMapList.push( "hashMapObject.put(\"" + argumentName + "\", " + argumentName + ");" );
                         }else{
-                            methodString = methodString + " " + "HashMap<String, Object>" + " " + argumentName + ", ";
+                            methodString = methodString + " " + "Map<String,  ? extends Object>" + " " + argumentName + ", ";
                             //Adding array argument to hash
                             hashMapList.push( "hashMapObject.putAll(" + argumentName + ");" );
                         }
@@ -522,7 +522,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
             <%- methodString %>{
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 <%
                     hashMapList.forEach(function(hasMapAddMethod){

@@ -107,7 +107,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
             public void getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
 
@@ -148,7 +148,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
             public void sendMail(  List<String> to,  String subject,  String html, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("to", to);
@@ -190,10 +190,10 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
     
         
             //Method sendNotice definition
-            public void sendNotice(  List<String> to,  String subject,  HashMap<String, Object> templateOptions, final Adapter.JsonObjectCallback  callback ){
+            public void sendNotice(  List<String> to,  String subject,  Map<String,  ? extends Object> templateOptions, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("to", to);
@@ -238,7 +238,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
             public void getMailSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
 

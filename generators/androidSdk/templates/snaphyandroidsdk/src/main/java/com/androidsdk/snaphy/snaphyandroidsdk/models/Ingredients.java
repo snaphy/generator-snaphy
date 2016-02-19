@@ -42,6 +42,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.IngredientsRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -49,9 +50,9 @@ public class Ingredients extends Model {
 
 
     //For converting all model values to hashMap
-    private HashMap<String, Object> hashMap = new HashMap<>();
+    private Map<String, Object> hashMap = new HashMap<>();
 
-    public HashMap<String, Object> convertHashMap(){
+    public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
             return hashMap;
         }else{
@@ -158,14 +159,14 @@ public class Ingredients extends Model {
         
             
 
-                private List<HashMap<String, Object>> tags;
+                private List<Map<String, Object>> tags;
                 /* Adding Getter and Setter methods */
-                public List<HashMap<String, Object>> getTags(){
+                public List<Map<String, Object>> getTags(){
                     return tags;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setTags(List<HashMap<String, Object>> tags){
+                public void setTags(List<Map<String, Object>> tags){
                     this.tags = tags;
 
                     //TODO change this to custom array with double quotes escaped if error occured when sending to server..
@@ -217,7 +218,7 @@ public class Ingredients extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setIngredientCategory(HashMap<String, Object> ingredientCategory) {
+                    public void setIngredientCategory(Map<String, Object> ingredientCategory) {
                         //First create a dummy Repo class object for customer.
                         IngredientCategoryRepository ingredientCategoryRepository = new IngredientCategoryRepository();
                         IngredientCategory ingredientCategory1 = ingredientCategoryRepository.createObject(ingredientCategory);
@@ -379,11 +380,11 @@ public class Ingredients extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setRecipes1(List<HashMap<String, Object>> recipes) {
+                    public void setRecipes1(List<Map<String, Object>> recipes) {
                         //First create a dummy Repo class object for ..
                         RecipeRepository recipesRepository = new RecipeRepository();
                         List<Recipe> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : recipes) {
+                        for (Map<String, Object> obj : recipes) {
                             //Also add relation to child type for two way communication..
                             Recipe obj1 = recipesRepository.createObject(obj);
                             result.add(obj1);
@@ -568,7 +569,7 @@ public class Ingredients extends Model {
 
 
 
-                                        ingredientsRepo.updateById__recipes( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<Recipe> (){
+                                        ingredientsRepo.updateById__recipes( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -619,7 +620,7 @@ public class Ingredients extends Model {
 
 
 
-                                        ingredientsRepo.link__recipes( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<RecipeIngredients> (){
+                                        ingredientsRepo.link__recipes( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<RecipeIngredients> (){
                                             
 
                                             
@@ -732,7 +733,7 @@ public class Ingredients extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__recipes( HashMap<String, Object> filter,  RestAdapter restAdapter, final ListCallback<Recipe> callback) {
+                                    public void get__recipes( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Recipe> callback) {
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         
@@ -796,7 +797,7 @@ public class Ingredients extends Model {
 
 
 
-                                        ingredientsRepo.create__recipes( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Recipe> (){
+                                        ingredientsRepo.create__recipes( (String)that.getId(), data.convertMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -867,7 +868,7 @@ public class Ingredients extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__recipes( HashMap<String, Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__recipes( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
                                         //Define methods here..
                                         final IngredientsRepository  ingredientsRepo = restAdapter.createRepository(IngredientsRepository.class);
                                         

@@ -39,6 +39,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeIngredientsReposi
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -46,9 +47,9 @@ public class RecipeIngredients extends Model {
 
 
     //For converting all model values to hashMap
-    private HashMap<String, Object> hashMap = new HashMap<>();
+    private Map<String, Object> hashMap = new HashMap<>();
 
-    public HashMap<String, Object> convertHashMap(){
+    public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
             return hashMap;
         }else{
@@ -176,7 +177,7 @@ public class RecipeIngredients extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setRecipe(HashMap<String, Object> recipe) {
+                    public void setRecipe(Map<String, Object> recipe) {
                         //First create a dummy Repo class object for customer.
                         RecipeRepository recipeRepository = new RecipeRepository();
                         Recipe recipe1 = recipeRepository.createObject(recipe);
@@ -291,7 +292,7 @@ public class RecipeIngredients extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setIngredients(HashMap<String, Object> ingredients) {
+                    public void setIngredients(Map<String, Object> ingredients) {
                         //First create a dummy Repo class object for customer.
                         IngredientsRepository ingredientsRepository = new IngredientsRepository();
                         Ingredients ingredients1 = ingredientsRepository.createObject(ingredients);

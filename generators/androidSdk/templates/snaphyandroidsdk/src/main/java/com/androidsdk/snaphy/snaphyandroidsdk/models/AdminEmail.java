@@ -25,6 +25,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.AdminEmailRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -32,9 +33,9 @@ public class AdminEmail extends Model {
 
 
     //For converting all model values to hashMap
-    private HashMap<String, Object> hashMap = new HashMap<>();
+    private Map<String, Object> hashMap = new HashMap<>();
 
-    public HashMap<String, Object> convertHashMap(){
+    public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
             return hashMap;
         }else{

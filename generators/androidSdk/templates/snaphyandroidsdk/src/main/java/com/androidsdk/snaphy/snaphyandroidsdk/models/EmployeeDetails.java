@@ -32,6 +32,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeDetailsReposito
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -39,9 +40,9 @@ public class EmployeeDetails extends Model {
 
 
     //For converting all model values to hashMap
-    private HashMap<String, Object> hashMap = new HashMap<>();
+    private Map<String, Object> hashMap = new HashMap<>();
 
-    public HashMap<String, Object> convertHashMap(){
+    public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
             return hashMap;
         }else{
@@ -139,7 +140,7 @@ public class EmployeeDetails extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setEmployees(HashMap<String, Object> employees) {
+                    public void setEmployees(Map<String, Object> employees) {
                         //First create a dummy Repo class object for customer.
                         EmployeeRepository employeesRepository = new EmployeeRepository();
                         Employee employees1 = employeesRepository.createObject(employees);
@@ -228,7 +229,7 @@ public class EmployeeDetails extends Model {
 
 
 
-                                        employeeDetailsRepo.create__employees( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Employee> (){
+                                        employeeDetailsRepo.create__employees( (String)that.getId(), data.convertMap(),  new ObjectCallback<Employee> (){
                                             
 
                                             
@@ -276,7 +277,7 @@ public class EmployeeDetails extends Model {
 
 
 
-                                        employeeDetailsRepo.update__employees( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Employee> (){
+                                        employeeDetailsRepo.update__employees( (String)that.getId(), data.convertMap(),  new ObjectCallback<Employee> (){
                                             
 
                                             

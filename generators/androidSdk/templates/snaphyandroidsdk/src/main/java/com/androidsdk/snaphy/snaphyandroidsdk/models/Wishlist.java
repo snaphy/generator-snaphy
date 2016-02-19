@@ -39,6 +39,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.WishlistRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -46,9 +47,9 @@ public class Wishlist extends Model {
 
 
     //For converting all model values to hashMap
-    private HashMap<String, Object> hashMap = new HashMap<>();
+    private Map<String, Object> hashMap = new HashMap<>();
 
-    public HashMap<String, Object> convertHashMap(){
+    public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
             return hashMap;
         }else{
@@ -102,7 +103,7 @@ public class Wishlist extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setCustomers(HashMap<String, Object> customers) {
+                    public void setCustomers(Map<String, Object> customers) {
                         //First create a dummy Repo class object for customer.
                         CustomerRepository customersRepository = new CustomerRepository();
                         Customer customers1 = customersRepository.createObject(customers);
@@ -191,7 +192,7 @@ public class Wishlist extends Model {
 
 
 
-                                        wishlistRepo.create__customers( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Customer> (){
+                                        wishlistRepo.create__customers( (String)that.getId(), data.convertMap(),  new ObjectCallback<Customer> (){
                                             
 
                                             
@@ -239,7 +240,7 @@ public class Wishlist extends Model {
 
 
 
-                                        wishlistRepo.update__customers( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Customer> (){
+                                        wishlistRepo.update__customers( (String)that.getId(), data.convertMap(),  new ObjectCallback<Customer> (){
                                             
 
                                             
@@ -384,11 +385,11 @@ public class Wishlist extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setRecipes1(List<HashMap<String, Object>> recipes) {
+                    public void setRecipes1(List<Map<String, Object>> recipes) {
                         //First create a dummy Repo class object for ..
                         RecipeRepository recipesRepository = new RecipeRepository();
                         List<Recipe> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : recipes) {
+                        for (Map<String, Object> obj : recipes) {
                             //Also add relation to child type for two way communication..
                             Recipe obj1 = recipesRepository.createObject(obj);
                             result.add(obj1);
@@ -538,7 +539,7 @@ public class Wishlist extends Model {
 
 
 
-                                        wishlistRepo.updateById__recipes( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<Recipe> (){
+                                        wishlistRepo.updateById__recipes( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -702,7 +703,7 @@ public class Wishlist extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__recipes( HashMap<String, Object> filter,  RestAdapter restAdapter, final ListCallback<Recipe> callback) {
+                                    public void get__recipes( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Recipe> callback) {
                                         //Define methods here..
                                         final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
                                         
@@ -766,7 +767,7 @@ public class Wishlist extends Model {
 
 
 
-                                        wishlistRepo.create__recipes( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Recipe> (){
+                                        wishlistRepo.create__recipes( (String)that.getId(), data.convertMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -837,7 +838,7 @@ public class Wishlist extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__recipes( HashMap<String, Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__recipes( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
                                         //Define methods here..
                                         final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
                                         

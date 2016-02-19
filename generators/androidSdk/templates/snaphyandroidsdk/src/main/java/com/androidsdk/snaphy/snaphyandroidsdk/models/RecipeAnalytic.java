@@ -32,6 +32,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeAnalyticRepositor
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -39,9 +40,9 @@ public class RecipeAnalytic extends Model {
 
 
     //For converting all model values to hashMap
-    private HashMap<String, Object> hashMap = new HashMap<>();
+    private Map<String, Object> hashMap = new HashMap<>();
 
-    public HashMap<String, Object> convertHashMap(){
+    public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
             return hashMap;
         }else{
@@ -227,7 +228,7 @@ public class RecipeAnalytic extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setRecipes(HashMap<String, Object> recipes) {
+                    public void setRecipes(Map<String, Object> recipes) {
                         //First create a dummy Repo class object for customer.
                         RecipeRepository recipesRepository = new RecipeRepository();
                         Recipe recipes1 = recipesRepository.createObject(recipes);
@@ -316,7 +317,7 @@ public class RecipeAnalytic extends Model {
 
 
 
-                                        recipeAnalyticRepo.create__recipes( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Recipe> (){
+                                        recipeAnalyticRepo.create__recipes( (String)that.getId(), data.convertMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -364,7 +365,7 @@ public class RecipeAnalytic extends Model {
 
 
 
-                                        recipeAnalyticRepo.update__recipes( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Recipe> (){
+                                        recipeAnalyticRepo.update__recipes( (String)that.getId(), data.convertMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             

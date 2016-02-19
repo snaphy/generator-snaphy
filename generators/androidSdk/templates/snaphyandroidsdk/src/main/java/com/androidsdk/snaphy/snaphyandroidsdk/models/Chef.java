@@ -53,6 +53,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChefRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -60,9 +61,9 @@ public class Chef extends Model {
 
 
     //For converting all model values to hashMap
-    private HashMap<String, Object> hashMap = new HashMap<>();
+    private Map<String, Object> hashMap = new HashMap<>();
 
-    public HashMap<String, Object> convertHashMap(){
+    public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
             return hashMap;
         }else{
@@ -198,7 +199,7 @@ public class Chef extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setCustomers(HashMap<String, Object> customers) {
+                    public void setCustomers(Map<String, Object> customers) {
                         //First create a dummy Repo class object for customer.
                         CustomerRepository customersRepository = new CustomerRepository();
                         Customer customers1 = customersRepository.createObject(customers);
@@ -287,7 +288,7 @@ public class Chef extends Model {
 
 
 
-                                        chefRepo.create__customers( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Customer> (){
+                                        chefRepo.create__customers( (String)that.getId(), data.convertMap(),  new ObjectCallback<Customer> (){
                                             
 
                                             
@@ -335,7 +336,7 @@ public class Chef extends Model {
 
 
 
-                                        chefRepo.update__customers( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Customer> (){
+                                        chefRepo.update__customers( (String)that.getId(), data.convertMap(),  new ObjectCallback<Customer> (){
                                             
 
                                             
@@ -498,11 +499,11 @@ public class Chef extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setCourses1(List<HashMap<String, Object>> courses) {
+                    public void setCourses1(List<Map<String, Object>> courses) {
                         //First create a dummy Repo class object for ..
                         CourseRepository coursesRepository = new CourseRepository();
                         List<Course> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : courses) {
+                        for (Map<String, Object> obj : courses) {
                             //Also add relation to child type for two way communication..
                             Course obj1 = coursesRepository.createObject(obj);
                             result.add(obj1);
@@ -667,7 +668,7 @@ public class Chef extends Model {
 
 
 
-                                        chefRepo.updateById__courses( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<Course> (){
+                                        chefRepo.updateById__courses( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Course> (){
                                             
 
                                             
@@ -710,7 +711,7 @@ public class Chef extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__courses( HashMap<String, Object> filter,  RestAdapter restAdapter, final ListCallback<Course> callback) {
+                                    public void get__courses( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Course> callback) {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
@@ -774,7 +775,7 @@ public class Chef extends Model {
 
 
 
-                                        chefRepo.create__courses( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Course> (){
+                                        chefRepo.create__courses( (String)that.getId(), data.convertMap(),  new ObjectCallback<Course> (){
                                             
 
                                             
@@ -845,7 +846,7 @@ public class Chef extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__courses( HashMap<String, Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__courses( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
@@ -951,11 +952,11 @@ public class Chef extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setContactChefs1(List<HashMap<String, Object>> contactChefs) {
+                    public void setContactChefs1(List<Map<String, Object>> contactChefs) {
                         //First create a dummy Repo class object for ..
                         ContactChefRepository contactChefsRepository = new ContactChefRepository();
                         List<ContactChef> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : contactChefs) {
+                        for (Map<String, Object> obj : contactChefs) {
                             //Also add relation to child type for two way communication..
                             ContactChef obj1 = contactChefsRepository.createObject(obj);
                             result.add(obj1);
@@ -1126,7 +1127,7 @@ public class Chef extends Model {
 
 
 
-                                        chefRepo.updateById__contactChefs( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<ContactChef> (){
+                                        chefRepo.updateById__contactChefs( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<ContactChef> (){
                                             
 
                                             
@@ -1171,7 +1172,7 @@ public class Chef extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__contactChefs( HashMap<String, Object> filter,  RestAdapter restAdapter, final ListCallback<ContactChef> callback) {
+                                    public void get__contactChefs( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<ContactChef> callback) {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
@@ -1235,7 +1236,7 @@ public class Chef extends Model {
 
 
 
-                                        chefRepo.create__contactChefs( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<ContactChef> (){
+                                        chefRepo.create__contactChefs( (String)that.getId(), data.convertMap(),  new ObjectCallback<ContactChef> (){
                                             
 
                                             
@@ -1306,7 +1307,7 @@ public class Chef extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__contactChefs( HashMap<String, Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__contactChefs( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
                                         //Define methods here..
                                         final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
@@ -1395,7 +1396,7 @@ public class Chef extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setPopularities(HashMap<String, Object> popularities) {
+                    public void setPopularities(Map<String, Object> popularities) {
                         //First create a dummy Repo class object for customer.
                         PopularityRepository popularitiesRepository = new PopularityRepository();
                         Popularity popularities1 = popularitiesRepository.createObject(popularities);
@@ -1492,7 +1493,7 @@ public class Chef extends Model {
 
 
 
-                                        chefRepo.create__popularities( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Popularity> (){
+                                        chefRepo.create__popularities( (String)that.getId(), data.convertMap(),  new ObjectCallback<Popularity> (){
                                             
 
                                             
@@ -1540,7 +1541,7 @@ public class Chef extends Model {
 
 
 
-                                        chefRepo.update__popularities( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Popularity> (){
+                                        chefRepo.update__popularities( (String)that.getId(), data.convertMap(),  new ObjectCallback<Popularity> (){
                                             
 
                                             

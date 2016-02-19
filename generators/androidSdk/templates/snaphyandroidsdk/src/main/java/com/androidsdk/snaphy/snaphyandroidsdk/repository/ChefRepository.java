@@ -401,7 +401,7 @@ public class ChefRepository extends ModelRepository<Chef> {
             public void get__customers(  String chefId,  Boolean refresh, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -449,10 +449,10 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method create__customers definition
-            public void create__customers(  String chefId,  HashMap<String, Object> data, final ObjectCallback<Customer> callback){
+            public void create__customers(  String chefId,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -500,10 +500,10 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method update__customers definition
-            public void update__customers(  String chefId,  HashMap<String, Object> data, final ObjectCallback<Customer> callback){
+            public void update__customers(  String chefId,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -554,7 +554,7 @@ public class ChefRepository extends ModelRepository<Chef> {
             public void destroy__customers(  String chefId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -590,7 +590,7 @@ public class ChefRepository extends ModelRepository<Chef> {
             public void get__popularities(  String chefId,  Boolean refresh, final ObjectCallback<Popularity> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -638,10 +638,10 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method create__popularities definition
-            public void create__popularities(  String chefId,  HashMap<String, Object> data, final ObjectCallback<Popularity> callback){
+            public void create__popularities(  String chefId,  Map<String,  ? extends Object> data, final ObjectCallback<Popularity> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -689,10 +689,10 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method update__popularities definition
-            public void update__popularities(  String chefId,  HashMap<String, Object> data, final ObjectCallback<Popularity> callback){
+            public void update__popularities(  String chefId,  Map<String,  ? extends Object> data, final ObjectCallback<Popularity> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -743,7 +743,7 @@ public class ChefRepository extends ModelRepository<Chef> {
             public void destroy__popularities(  String chefId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -779,7 +779,7 @@ public class ChefRepository extends ModelRepository<Chef> {
             public void findById__courses(  String chefId,  String fk, final ObjectCallback<Course> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -830,7 +830,7 @@ public class ChefRepository extends ModelRepository<Chef> {
             public void destroyById__courses(  String chefId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -865,10 +865,10 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method updateById__courses definition
-            public void updateById__courses(  String chefId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Course> callback){
+            public void updateById__courses(  String chefId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Course> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -921,7 +921,7 @@ public class ChefRepository extends ModelRepository<Chef> {
             public void findById__contactChefs(  String chefId,  String fk, final ObjectCallback<ContactChef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -972,7 +972,7 @@ public class ChefRepository extends ModelRepository<Chef> {
             public void destroyById__contactChefs(  String chefId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -1007,10 +1007,10 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method updateById__contactChefs definition
-            public void updateById__contactChefs(  String chefId,  String fk,  HashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
+            public void updateById__contactChefs(  String chefId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -1060,10 +1060,10 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method get__courses definition
-            public void get__courses(  String chefId,  HashMap<String, Object> filter, final ListCallback<Course> callback){
+            public void get__courses(  String chefId,  Map<String,  ? extends Object> filter, final ListCallback<Course> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -1113,10 +1113,10 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method create__courses definition
-            public void create__courses(  String chefId,  HashMap<String, Object> data, final ObjectCallback<Course> callback){
+            public void create__courses(  String chefId,  Map<String,  ? extends Object> data, final ObjectCallback<Course> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -1167,7 +1167,7 @@ public class ChefRepository extends ModelRepository<Chef> {
             public void delete__courses(  String chefId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -1200,10 +1200,10 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method count__courses definition
-            public void count__courses(  String chefId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__courses(  String chefId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -1243,10 +1243,10 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method get__contactChefs definition
-            public void get__contactChefs(  String chefId,  HashMap<String, Object> filter, final ListCallback<ContactChef> callback){
+            public void get__contactChefs(  String chefId,  Map<String,  ? extends Object> filter, final ListCallback<ContactChef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -1296,10 +1296,10 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method create__contactChefs definition
-            public void create__contactChefs(  String chefId,  HashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
+            public void create__contactChefs(  String chefId,  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -1350,7 +1350,7 @@ public class ChefRepository extends ModelRepository<Chef> {
             public void delete__contactChefs(  String chefId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -1383,10 +1383,10 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method count__contactChefs definition
-            public void count__contactChefs(  String chefId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__contactChefs(  String chefId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -1426,10 +1426,10 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method create definition
-            public void create(  HashMap<String, Object> data, final ObjectCallback<Chef> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Chef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -1475,10 +1475,10 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method createMany definition
-            public void createMany(  HashMap<String, Object> data, final ObjectCallback<Chef> callback){
+            public void createMany(  Map<String,  ? extends Object> data, final ObjectCallback<Chef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -1524,10 +1524,10 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method upsert definition
-            public void upsert(  HashMap<String, Object> data, final ObjectCallback<Chef> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Chef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -1576,7 +1576,7 @@ public class ChefRepository extends ModelRepository<Chef> {
             public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -1614,10 +1614,10 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method findById definition
-            public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<Chef> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Chef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -1665,10 +1665,10 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method find definition
-            public void find(  HashMap<String, Object> filter, final ListCallback<Chef> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Chef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("filter", filter);
@@ -1716,10 +1716,10 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method findOne definition
-            public void findOne(  HashMap<String, Object> filter, final ObjectCallback<Chef> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Chef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("filter", filter);
@@ -1765,10 +1765,10 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method updateAll definition
-            public void updateAll(  HashMap<String, Object> where,  HashMap<String, Object> data, final Adapter.JsonObjectCallback  callback ){
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("where", where);
@@ -1811,7 +1811,7 @@ public class ChefRepository extends ModelRepository<Chef> {
             public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -1849,10 +1849,10 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method count definition
-            public void count(  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("where", where);
@@ -1890,10 +1890,10 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String chefId,  HashMap<String, Object> data, final ObjectCallback<Chef> callback){
+            public void updateAttributes(  String chefId,  Map<String,  ? extends Object> data, final ObjectCallback<Chef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("chefId", chefId);
@@ -1946,7 +1946,7 @@ public class ChefRepository extends ModelRepository<Chef> {
             public void getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
 

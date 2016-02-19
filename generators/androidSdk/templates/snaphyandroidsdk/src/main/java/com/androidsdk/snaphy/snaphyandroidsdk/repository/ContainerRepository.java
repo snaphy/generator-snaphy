@@ -155,7 +155,7 @@ public class ContainerRepository extends ModelRepository<Container> {
             public void getContainers( final Adapter.JsonArrayCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
 
@@ -188,10 +188,10 @@ public class ContainerRepository extends ModelRepository<Container> {
     
         
             //Method createContainer definition
-            public void createContainer(  HashMap<String, Object> options, final Adapter.JsonObjectCallback  callback ){
+            public void createContainer(  Map<String,  ? extends Object> options, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("options", options);
@@ -232,7 +232,7 @@ public class ContainerRepository extends ModelRepository<Container> {
             public void destroyContainer(  String container, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("container", container);
@@ -268,7 +268,7 @@ public class ContainerRepository extends ModelRepository<Container> {
             public void getContainer(  String container, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("container", container);
@@ -309,7 +309,7 @@ public class ContainerRepository extends ModelRepository<Container> {
             public void getFiles(  String container, final Adapter.JsonArrayCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("container", container);
@@ -347,7 +347,7 @@ public class ContainerRepository extends ModelRepository<Container> {
             public void getFile(  String container,  String file, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("container", container);
@@ -390,7 +390,7 @@ public class ContainerRepository extends ModelRepository<Container> {
             public void removeFile(  String container,  String file, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("container", container);
@@ -425,10 +425,10 @@ public class ContainerRepository extends ModelRepository<Container> {
     
         
             //Method upload definition
-            public void upload(  HashMap<String, Object> req,  HashMap<String, Object> res, final Adapter.JsonObjectCallback  callback ){
+            public void upload(  Map<String,  ? extends Object> req,  Map<String,  ? extends Object> res, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("req", req);
@@ -468,10 +468,10 @@ public class ContainerRepository extends ModelRepository<Container> {
     
         
             //Method download definition
-            public void download(  String container,  String file,  HashMap<String, Object> req,  HashMap<String, Object> res, final VoidCallback callback){
+            public void download(  String container,  String file,  Map<String,  ? extends Object> req,  Map<String,  ? extends Object> res, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("container", container);
@@ -513,7 +513,7 @@ public class ContainerRepository extends ModelRepository<Container> {
             public void getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
 

@@ -32,6 +32,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.PopularityRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -39,9 +40,9 @@ public class Popularity extends Model {
 
 
     //For converting all model values to hashMap
-    private HashMap<String, Object> hashMap = new HashMap<>();
+    private Map<String, Object> hashMap = new HashMap<>();
 
-    public HashMap<String, Object> convertHashMap(){
+    public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
             return hashMap;
         }else{
@@ -95,7 +96,7 @@ public class Popularity extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setChefs(HashMap<String, Object> chefs) {
+                    public void setChefs(Map<String, Object> chefs) {
                         //First create a dummy Repo class object for customer.
                         ChefRepository chefsRepository = new ChefRepository();
                         Chef chefs1 = chefsRepository.createObject(chefs);
@@ -184,7 +185,7 @@ public class Popularity extends Model {
 
 
 
-                                        popularityRepo.create__chefs( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Chef> (){
+                                        popularityRepo.create__chefs( (String)that.getId(), data.convertMap(),  new ObjectCallback<Chef> (){
                                             
 
                                             
@@ -232,7 +233,7 @@ public class Popularity extends Model {
 
 
 
-                                        popularityRepo.update__chefs( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Chef> (){
+                                        popularityRepo.update__chefs( (String)that.getId(), data.convertMap(),  new ObjectCallback<Chef> (){
                                             
 
                                             

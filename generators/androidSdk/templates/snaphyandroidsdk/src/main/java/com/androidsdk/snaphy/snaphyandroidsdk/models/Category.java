@@ -32,6 +32,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.CategoryRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -39,9 +40,9 @@ public class Category extends Model {
 
 
     //For converting all model values to hashMap
-    private HashMap<String, Object> hashMap = new HashMap<>();
+    private Map<String, Object> hashMap = new HashMap<>();
 
-    public HashMap<String, Object> convertHashMap(){
+    public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
             return hashMap;
         }else{
@@ -112,11 +113,11 @@ public class Category extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setRecipes1(List<HashMap<String, Object>> recipes) {
+                    public void setRecipes1(List<Map<String, Object>> recipes) {
                         //First create a dummy Repo class object for ..
                         RecipeRepository recipesRepository = new RecipeRepository();
                         List<Recipe> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : recipes) {
+                        for (Map<String, Object> obj : recipes) {
                             //Also add relation to child type for two way communication..
                             Recipe obj1 = recipesRepository.createObject(obj);
                             result.add(obj1);
@@ -258,7 +259,7 @@ public class Category extends Model {
 
 
 
-                                        categoryRepo.updateById__recipes( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<Recipe> (){
+                                        categoryRepo.updateById__recipes( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -422,7 +423,7 @@ public class Category extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__recipes( HashMap<String, Object> filter,  RestAdapter restAdapter, final ListCallback<Recipe> callback) {
+                                    public void get__recipes( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Recipe> callback) {
                                         //Define methods here..
                                         final CategoryRepository  categoryRepo = restAdapter.createRepository(CategoryRepository.class);
                                         
@@ -486,7 +487,7 @@ public class Category extends Model {
 
 
 
-                                        categoryRepo.create__recipes( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Recipe> (){
+                                        categoryRepo.create__recipes( (String)that.getId(), data.convertMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -557,7 +558,7 @@ public class Category extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__recipes( HashMap<String, Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__recipes( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
                                         //Define methods here..
                                         final CategoryRepository  categoryRepo = restAdapter.createRepository(CategoryRepository.class);
                                         

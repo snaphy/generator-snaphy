@@ -248,7 +248,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
             public void get__customer(  String commentsId,  Boolean refresh, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("commentsId", commentsId);
@@ -299,7 +299,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
             public void get__recipe(  String commentsId,  Boolean refresh, final ObjectCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("commentsId", commentsId);
@@ -347,10 +347,10 @@ public class CommentsRepository extends ModelRepository<Comments> {
     
         
             //Method create definition
-            public void create(  HashMap<String, Object> data, final ObjectCallback<Comments> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Comments> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -396,10 +396,10 @@ public class CommentsRepository extends ModelRepository<Comments> {
     
         
             //Method createMany definition
-            public void createMany(  HashMap<String, Object> data, final ObjectCallback<Comments> callback){
+            public void createMany(  Map<String,  ? extends Object> data, final ObjectCallback<Comments> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -445,10 +445,10 @@ public class CommentsRepository extends ModelRepository<Comments> {
     
         
             //Method upsert definition
-            public void upsert(  HashMap<String, Object> data, final ObjectCallback<Comments> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Comments> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -497,7 +497,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
             public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -535,10 +535,10 @@ public class CommentsRepository extends ModelRepository<Comments> {
     
         
             //Method findById definition
-            public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<Comments> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Comments> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -586,10 +586,10 @@ public class CommentsRepository extends ModelRepository<Comments> {
     
         
             //Method find definition
-            public void find(  HashMap<String, Object> filter, final ListCallback<Comments> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Comments> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("filter", filter);
@@ -637,10 +637,10 @@ public class CommentsRepository extends ModelRepository<Comments> {
     
         
             //Method findOne definition
-            public void findOne(  HashMap<String, Object> filter, final ObjectCallback<Comments> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Comments> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("filter", filter);
@@ -686,10 +686,10 @@ public class CommentsRepository extends ModelRepository<Comments> {
     
         
             //Method updateAll definition
-            public void updateAll(  HashMap<String, Object> where,  HashMap<String, Object> data, final Adapter.JsonObjectCallback  callback ){
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("where", where);
@@ -732,7 +732,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
             public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -770,10 +770,10 @@ public class CommentsRepository extends ModelRepository<Comments> {
     
         
             //Method count definition
-            public void count(  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("where", where);
@@ -811,10 +811,10 @@ public class CommentsRepository extends ModelRepository<Comments> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String commentsId,  HashMap<String, Object> data, final ObjectCallback<Comments> callback){
+            public void updateAttributes(  String commentsId,  Map<String,  ? extends Object> data, final ObjectCallback<Comments> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("commentsId", commentsId);
@@ -867,7 +867,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
             public void getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
 

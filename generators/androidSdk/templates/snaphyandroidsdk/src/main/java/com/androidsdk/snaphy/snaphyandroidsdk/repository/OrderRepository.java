@@ -204,7 +204,7 @@ public class OrderRepository extends ModelRepository<Order> {
             public void get__customer(  String orderId,  Boolean refresh, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("orderId", orderId);
@@ -252,10 +252,10 @@ public class OrderRepository extends ModelRepository<Order> {
     
         
             //Method create definition
-            public void create(  HashMap<String, Object> data, final ObjectCallback<Order> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Order> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -301,10 +301,10 @@ public class OrderRepository extends ModelRepository<Order> {
     
         
             //Method createMany definition
-            public void createMany(  HashMap<String, Object> data, final ObjectCallback<Order> callback){
+            public void createMany(  Map<String,  ? extends Object> data, final ObjectCallback<Order> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -350,10 +350,10 @@ public class OrderRepository extends ModelRepository<Order> {
     
         
             //Method upsert definition
-            public void upsert(  HashMap<String, Object> data, final ObjectCallback<Order> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Order> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -402,7 +402,7 @@ public class OrderRepository extends ModelRepository<Order> {
             public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -440,10 +440,10 @@ public class OrderRepository extends ModelRepository<Order> {
     
         
             //Method findById definition
-            public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<Order> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Order> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -491,10 +491,10 @@ public class OrderRepository extends ModelRepository<Order> {
     
         
             //Method find definition
-            public void find(  HashMap<String, Object> filter, final ListCallback<Order> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Order> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("filter", filter);
@@ -542,10 +542,10 @@ public class OrderRepository extends ModelRepository<Order> {
     
         
             //Method findOne definition
-            public void findOne(  HashMap<String, Object> filter, final ObjectCallback<Order> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Order> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("filter", filter);
@@ -591,10 +591,10 @@ public class OrderRepository extends ModelRepository<Order> {
     
         
             //Method updateAll definition
-            public void updateAll(  HashMap<String, Object> where,  HashMap<String, Object> data, final Adapter.JsonObjectCallback  callback ){
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("where", where);
@@ -637,7 +637,7 @@ public class OrderRepository extends ModelRepository<Order> {
             public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -675,10 +675,10 @@ public class OrderRepository extends ModelRepository<Order> {
     
         
             //Method count definition
-            public void count(  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("where", where);
@@ -716,10 +716,10 @@ public class OrderRepository extends ModelRepository<Order> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String orderId,  HashMap<String, Object> data, final ObjectCallback<Order> callback){
+            public void updateAttributes(  String orderId,  Map<String,  ? extends Object> data, final ObjectCallback<Order> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("orderId", orderId);
@@ -772,7 +772,7 @@ public class OrderRepository extends ModelRepository<Order> {
             public void getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
 

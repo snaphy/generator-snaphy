@@ -25,6 +25,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.AmazonImageRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -32,9 +33,9 @@ public class AmazonImage extends Model {
 
 
     //For converting all model values to hashMap
-    private HashMap<String, Object> hashMap = new HashMap<>();
+    private Map<String, Object> hashMap = new HashMap<>();
 
-    public HashMap<String, Object> convertHashMap(){
+    public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
             return hashMap;
         }else{
@@ -119,21 +120,21 @@ public class AmazonImage extends Model {
         
             
             
-                private String url;
+            
+            
+                private Map<String, Object> url;
                 /* Adding Getter and Setter methods */
-                public String getUrl(){
+                public Map<String, Object> getUrl(){
                     return url;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setUrl(String url){
+                public void setUrl(Map<String, Object> url){
                     this.url = url;
-                    //Update hashMap value..
+                    //Update Map value..
                     hashMap.put("url", url);
                 }
 
-            
-            
             
 
         

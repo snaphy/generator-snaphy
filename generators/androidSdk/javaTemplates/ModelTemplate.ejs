@@ -18,7 +18,7 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
             return "double";
         }
         else if (type === "object") {
-            return "HashMap<String, Object>"
+            return "Map<String,  ? extends Object>"
         }
         else if (type === "boolean") {
             return "Boolean"
@@ -170,6 +170,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.<%- modelName %>Reposit
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 <% if(model.base === "User" || modelName === "User"){ %>
@@ -179,9 +180,9 @@ public class <%- modelName %> extends Model {
 <% } %>
 
     //For converting all model values to hashMap
-    private HashMap<String, Object> hashMap = new HashMap<>();
+    private Map<String, Object> hashMap = new HashMap<>();
 
-    public HashMap<String, Object> convertHashMap(){
+    public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
             return hashMap;
         }else{
@@ -205,7 +206,7 @@ public class <%- modelName %> extends Model {
                 var typeName = model.properties[property].type[0];
                 var listType;
                 if(typeName === "object"){
-                    listType = "List<HashMap<String, Object>>";
+                    listType = "List<Map<String, Object>>";
                 }
                 else if (typeName === "string" || typeName === "date") {
                     listType = "List<String>";
@@ -264,16 +265,16 @@ public class <%- modelName %> extends Model {
 
             <% } %>
             <% if( model.properties[property].type === "object" && property !== "id") { %>
-                private HashMap<String, Object> <%- property %>;
+                private Map<String, Object> <%- property %>;
                 /* Adding Getter and Setter methods */
-                public HashMap<String, Object> get<%- capitalPropertyName %>(){
+                public Map<String, Object> get<%- capitalPropertyName %>(){
                     return <%- property %>;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void set<%- capitalPropertyName %>(HashMap<String, Object> <%- property %>){
+                public void set<%- capitalPropertyName %>(Map<String, Object> <%- property %>){
                     this.<%- property %> = <%- property %>;
-                    //Update hashMap value..
+                    //Update Map value..
                     hashMap.put("<%- property %>", <%- property %>);
                 }
 
@@ -332,7 +333,7 @@ public class <%- modelName %> extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void set<%- capitalcaseRelationName %>(HashMap<String, Object> <%- relation %>) {
+                    public void set<%- capitalcaseRelationName %>(Map<String, Object> <%- relation %>) {
                         //First create a dummy Repo class object for customer.
                         <%- capitalcaseRelatedModelName %>Repository <%- relation %>Repository = new <%- capitalcaseRelatedModelName %>Repository();
                         <%- capitalcaseRelatedModelName %> <%- relation %>1 = <%- relation %>Repository.createObject(<%- relation %>);
@@ -368,11 +369,11 @@ public class <%- modelName %> extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void set<%- capitalcaseRelationName %>1(List<HashMap<String, Object>> <%- relation %>) {
+                    public void set<%- capitalcaseRelationName %>1(List<Map<String, Object>> <%- relation %>) {
                         //First create a dummy Repo class object for ..
                         <%- capitalcaseRelatedModelName %>Repository <%- relation %>Repository = new <%- capitalcaseRelatedModelName %>Repository();
                         List<<%- capitalcaseRelatedModelName %>> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : <%- relation %>) {
+                        for (Map<String, Object> obj : <%- relation %>) {
                             //Also add relation to child type for two way communication..
                             <%- capitalcaseRelatedModelName %> obj1 = <%- relation %>Repository.createObject(obj);
                             result.add(obj1);
@@ -461,11 +462,11 @@ public class <%- modelName %> extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void set<%- capitalcaseRelationName %>1(List<HashMap<String, Object>> <%- relation %>) {
+                    public void set<%- capitalcaseRelationName %>1(List<Map<String, Object>> <%- relation %>) {
                         //First create a dummy Repo class object for ..
                         <%- capitalcaseRelatedModelName %>Repository <%- relation %>Repository = new <%- capitalcaseRelatedModelName %>Repository();
                         List<<%- capitalcaseRelatedModelName %>> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : <%- relation %>) {
+                        for (Map<String, Object> obj : <%- relation %>) {
                             //Also add relation to child type for two way communication..
                             <%- capitalcaseRelatedModelName %> obj1 = <%- relation %>Repository.createObject(obj);
                             result.add(obj1);
@@ -718,14 +719,14 @@ public class <%- modelName %> extends Model {
                                                         if(isCustomClass){
                                                             if(isArray){
                                         %>
-                                                                List<HashMap<String, Object>> objects = new ArrayList<>();
+                                                                List<Map<String, Object>> objects = new ArrayList<>();
                                                                 for(<%- argumentType[0] %> object : <%- argumentName %>){
-                                                                    objects.add(object.convertHashMap());
+                                                                    objects.add(object.convertMap());
                                                                 }
                                                                 //Add this converted hasMap to argument...
                                                                 <% methodArguments = methodArguments + " objects " + ", "; %>
                                         <%                  }else{
-                                                                methodArguments = methodArguments + argumentName + ".convertHashMap(), ";
+                                                                methodArguments = methodArguments + argumentName + ".convertMap(), ";
                                                             }
                                                         }else{
                                                             methodArguments = methodArguments + argumentName + ", ";

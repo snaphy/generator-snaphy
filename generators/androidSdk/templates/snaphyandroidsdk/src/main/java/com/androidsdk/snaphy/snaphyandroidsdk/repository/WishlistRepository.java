@@ -331,7 +331,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
             public void get__customers(  String wishlistId,  Boolean refresh, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("wishlistId", wishlistId);
@@ -379,10 +379,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method create__customers definition
-            public void create__customers(  String wishlistId,  HashMap<String, Object> data, final ObjectCallback<Customer> callback){
+            public void create__customers(  String wishlistId,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("wishlistId", wishlistId);
@@ -430,10 +430,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method update__customers definition
-            public void update__customers(  String wishlistId,  HashMap<String, Object> data, final ObjectCallback<Customer> callback){
+            public void update__customers(  String wishlistId,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("wishlistId", wishlistId);
@@ -484,7 +484,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
             public void destroy__customers(  String wishlistId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("wishlistId", wishlistId);
@@ -520,7 +520,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
             public void findById__recipes(  String wishlistId,  String fk, final ObjectCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("wishlistId", wishlistId);
@@ -571,7 +571,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
             public void destroyById__recipes(  String wishlistId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("wishlistId", wishlistId);
@@ -606,10 +606,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method updateById__recipes definition
-            public void updateById__recipes(  String wishlistId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+            public void updateById__recipes(  String wishlistId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("wishlistId", wishlistId);
@@ -662,7 +662,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
             public void link__recipes(  String wishlistId,  String fk, final ObjectCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("wishlistId", wishlistId);
@@ -713,7 +713,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
             public void unlink__recipes(  String wishlistId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("wishlistId", wishlistId);
@@ -751,7 +751,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
             public void exists__recipes(  String wishlistId,  String fk, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("wishlistId", wishlistId);
@@ -791,10 +791,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method get__recipes definition
-            public void get__recipes(  String wishlistId,  HashMap<String, Object> filter, final ListCallback<Recipe> callback){
+            public void get__recipes(  String wishlistId,  Map<String,  ? extends Object> filter, final ListCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("wishlistId", wishlistId);
@@ -844,10 +844,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method create__recipes definition
-            public void create__recipes(  String wishlistId,  HashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+            public void create__recipes(  String wishlistId,  Map<String,  ? extends Object> data, final ObjectCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("wishlistId", wishlistId);
@@ -898,7 +898,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
             public void delete__recipes(  String wishlistId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("wishlistId", wishlistId);
@@ -931,10 +931,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method count__recipes definition
-            public void count__recipes(  String wishlistId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__recipes(  String wishlistId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("wishlistId", wishlistId);
@@ -974,10 +974,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method create definition
-            public void create(  HashMap<String, Object> data, final ObjectCallback<Wishlist> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Wishlist> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -1023,10 +1023,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method createMany definition
-            public void createMany(  HashMap<String, Object> data, final ObjectCallback<Wishlist> callback){
+            public void createMany(  Map<String,  ? extends Object> data, final ObjectCallback<Wishlist> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -1072,10 +1072,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method upsert definition
-            public void upsert(  HashMap<String, Object> data, final ObjectCallback<Wishlist> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Wishlist> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -1124,7 +1124,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
             public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -1162,10 +1162,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method findById definition
-            public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<Wishlist> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Wishlist> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -1213,10 +1213,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method find definition
-            public void find(  HashMap<String, Object> filter, final ListCallback<Wishlist> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Wishlist> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("filter", filter);
@@ -1264,10 +1264,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method findOne definition
-            public void findOne(  HashMap<String, Object> filter, final ObjectCallback<Wishlist> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Wishlist> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("filter", filter);
@@ -1313,10 +1313,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method updateAll definition
-            public void updateAll(  HashMap<String, Object> where,  HashMap<String, Object> data, final Adapter.JsonObjectCallback  callback ){
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("where", where);
@@ -1359,7 +1359,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
             public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -1397,10 +1397,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method count definition
-            public void count(  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("where", where);
@@ -1438,10 +1438,10 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String wishlistId,  HashMap<String, Object> data, final ObjectCallback<Wishlist> callback){
+            public void updateAttributes(  String wishlistId,  Map<String,  ? extends Object> data, final ObjectCallback<Wishlist> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("wishlistId", wishlistId);
@@ -1494,7 +1494,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
             public void getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
 

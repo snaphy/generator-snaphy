@@ -868,7 +868,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void get__customer(  String recipeId,  Boolean refresh, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -919,7 +919,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void findById__cuisines(  String recipeId,  String fk, final ObjectCallback<Cuisines> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -970,7 +970,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void destroyById__cuisines(  String recipeId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -1005,10 +1005,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method updateById__cuisines definition
-            public void updateById__cuisines(  String recipeId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Cuisines> callback){
+            public void updateById__cuisines(  String recipeId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Cuisines> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -1061,7 +1061,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void link__cuisines(  String recipeId,  String fk, final ObjectCallback<Cuisines> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -1112,7 +1112,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void unlink__cuisines(  String recipeId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -1150,7 +1150,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void exists__cuisines(  String recipeId,  String fk, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -1193,7 +1193,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void findById__category(  String recipeId,  String fk, final ObjectCallback<Category> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -1244,7 +1244,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void destroyById__category(  String recipeId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -1279,10 +1279,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method updateById__category definition
-            public void updateById__category(  String recipeId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Category> callback){
+            public void updateById__category(  String recipeId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Category> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -1335,7 +1335,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void link__category(  String recipeId,  String fk, final ObjectCallback<Category> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -1386,7 +1386,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void unlink__category(  String recipeId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -1424,7 +1424,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void exists__category(  String recipeId,  String fk, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -1467,7 +1467,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void findById__comments(  String recipeId,  String fk, final ObjectCallback<Comments> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -1518,7 +1518,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void destroyById__comments(  String recipeId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -1553,10 +1553,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method updateById__comments definition
-            public void updateById__comments(  String recipeId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Comments> callback){
+            public void updateById__comments(  String recipeId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Comments> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -1609,7 +1609,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void findById__recipeTags(  String recipeId,  String fk, final ObjectCallback<RecipeTag> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -1660,7 +1660,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void destroyById__recipeTags(  String recipeId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -1695,10 +1695,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method updateById__recipeTags definition
-            public void updateById__recipeTags(  String recipeId,  String fk,  HashMap<String, Object> data, final ObjectCallback<RecipeTag> callback){
+            public void updateById__recipeTags(  String recipeId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<RecipeTag> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -1751,7 +1751,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void link__recipeTags(  String recipeId,  String fk, final ObjectCallback<RecipeTag> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -1802,7 +1802,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void unlink__recipeTags(  String recipeId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -1840,7 +1840,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void exists__recipeTags(  String recipeId,  String fk, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -1883,7 +1883,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void findById__ingredients(  String recipeId,  String fk, final ObjectCallback<Ingredients> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -1934,7 +1934,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void destroyById__ingredients(  String recipeId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -1969,10 +1969,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method updateById__ingredients definition
-            public void updateById__ingredients(  String recipeId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Ingredients> callback){
+            public void updateById__ingredients(  String recipeId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Ingredients> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -2022,10 +2022,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method link__ingredients definition
-            public void link__ingredients(  String recipeId,  String fk,  HashMap<String, Object> data, final ObjectCallback<RecipeIngredients> callback){
+            public void link__ingredients(  String recipeId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<RecipeIngredients> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -2078,7 +2078,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void unlink__ingredients(  String recipeId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -2116,7 +2116,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void exists__ingredients(  String recipeId,  String fk, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -2159,7 +2159,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void findById__wishlists(  String recipeId,  String fk, final ObjectCallback<Wishlist> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -2210,7 +2210,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void destroyById__wishlists(  String recipeId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -2245,10 +2245,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method updateById__wishlists definition
-            public void updateById__wishlists(  String recipeId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Wishlist> callback){
+            public void updateById__wishlists(  String recipeId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Wishlist> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -2301,7 +2301,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void link__wishlists(  String recipeId,  String fk, final ObjectCallback<Wishlist> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -2352,7 +2352,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void unlink__wishlists(  String recipeId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -2390,7 +2390,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void exists__wishlists(  String recipeId,  String fk, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -2433,7 +2433,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void get__recipeAnalytics(  String recipeId,  Boolean refresh, final ObjectCallback<RecipeAnalytic> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -2481,10 +2481,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method create__recipeAnalytics definition
-            public void create__recipeAnalytics(  String recipeId,  HashMap<String, Object> data, final ObjectCallback<RecipeAnalytic> callback){
+            public void create__recipeAnalytics(  String recipeId,  Map<String,  ? extends Object> data, final ObjectCallback<RecipeAnalytic> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -2532,10 +2532,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method update__recipeAnalytics definition
-            public void update__recipeAnalytics(  String recipeId,  HashMap<String, Object> data, final ObjectCallback<RecipeAnalytic> callback){
+            public void update__recipeAnalytics(  String recipeId,  Map<String,  ? extends Object> data, final ObjectCallback<RecipeAnalytic> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -2586,7 +2586,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void destroy__recipeAnalytics(  String recipeId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -2619,10 +2619,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method get__cuisines definition
-            public void get__cuisines(  String recipeId,  HashMap<String, Object> filter, final ListCallback<Cuisines> callback){
+            public void get__cuisines(  String recipeId,  Map<String,  ? extends Object> filter, final ListCallback<Cuisines> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -2672,10 +2672,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method create__cuisines definition
-            public void create__cuisines(  String recipeId,  HashMap<String, Object> data, final ObjectCallback<Cuisines> callback){
+            public void create__cuisines(  String recipeId,  Map<String,  ? extends Object> data, final ObjectCallback<Cuisines> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -2726,7 +2726,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void delete__cuisines(  String recipeId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -2759,10 +2759,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method count__cuisines definition
-            public void count__cuisines(  String recipeId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__cuisines(  String recipeId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -2802,10 +2802,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method get__category definition
-            public void get__category(  String recipeId,  HashMap<String, Object> filter, final ListCallback<Category> callback){
+            public void get__category(  String recipeId,  Map<String,  ? extends Object> filter, final ListCallback<Category> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -2855,10 +2855,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method create__category definition
-            public void create__category(  String recipeId,  HashMap<String, Object> data, final ObjectCallback<Category> callback){
+            public void create__category(  String recipeId,  Map<String,  ? extends Object> data, final ObjectCallback<Category> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -2909,7 +2909,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void delete__category(  String recipeId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -2942,10 +2942,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method count__category definition
-            public void count__category(  String recipeId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__category(  String recipeId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -2985,10 +2985,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method get__comments definition
-            public void get__comments(  String recipeId,  HashMap<String, Object> filter, final ListCallback<Comments> callback){
+            public void get__comments(  String recipeId,  Map<String,  ? extends Object> filter, final ListCallback<Comments> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -3038,10 +3038,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method create__comments definition
-            public void create__comments(  String recipeId,  HashMap<String, Object> data, final ObjectCallback<Comments> callback){
+            public void create__comments(  String recipeId,  Map<String,  ? extends Object> data, final ObjectCallback<Comments> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -3092,7 +3092,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void delete__comments(  String recipeId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -3125,10 +3125,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method count__comments definition
-            public void count__comments(  String recipeId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__comments(  String recipeId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -3168,10 +3168,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method get__recipeTags definition
-            public void get__recipeTags(  String recipeId,  HashMap<String, Object> filter, final ListCallback<RecipeTag> callback){
+            public void get__recipeTags(  String recipeId,  Map<String,  ? extends Object> filter, final ListCallback<RecipeTag> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -3221,10 +3221,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method create__recipeTags definition
-            public void create__recipeTags(  String recipeId,  HashMap<String, Object> data, final ObjectCallback<RecipeTag> callback){
+            public void create__recipeTags(  String recipeId,  Map<String,  ? extends Object> data, final ObjectCallback<RecipeTag> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -3275,7 +3275,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void delete__recipeTags(  String recipeId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -3308,10 +3308,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method count__recipeTags definition
-            public void count__recipeTags(  String recipeId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__recipeTags(  String recipeId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -3351,10 +3351,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method get__ingredients definition
-            public void get__ingredients(  String recipeId,  HashMap<String, Object> filter, final ListCallback<Ingredients> callback){
+            public void get__ingredients(  String recipeId,  Map<String,  ? extends Object> filter, final ListCallback<Ingredients> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -3404,10 +3404,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method create__ingredients definition
-            public void create__ingredients(  String recipeId,  HashMap<String, Object> data, final ObjectCallback<Ingredients> callback){
+            public void create__ingredients(  String recipeId,  Map<String,  ? extends Object> data, final ObjectCallback<Ingredients> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -3458,7 +3458,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void delete__ingredients(  String recipeId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -3491,10 +3491,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method count__ingredients definition
-            public void count__ingredients(  String recipeId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__ingredients(  String recipeId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -3534,10 +3534,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method get__wishlists definition
-            public void get__wishlists(  String recipeId,  HashMap<String, Object> filter, final ListCallback<Wishlist> callback){
+            public void get__wishlists(  String recipeId,  Map<String,  ? extends Object> filter, final ListCallback<Wishlist> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -3587,10 +3587,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method create__wishlists definition
-            public void create__wishlists(  String recipeId,  HashMap<String, Object> data, final ObjectCallback<Wishlist> callback){
+            public void create__wishlists(  String recipeId,  Map<String,  ? extends Object> data, final ObjectCallback<Wishlist> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -3641,7 +3641,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void delete__wishlists(  String recipeId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -3674,10 +3674,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method count__wishlists definition
-            public void count__wishlists(  String recipeId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__wishlists(  String recipeId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -3717,10 +3717,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method create definition
-            public void create(  HashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -3766,10 +3766,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method createMany definition
-            public void createMany(  HashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+            public void createMany(  Map<String,  ? extends Object> data, final ObjectCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -3815,10 +3815,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method upsert definition
-            public void upsert(  HashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -3867,7 +3867,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -3905,10 +3905,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method findById definition
-            public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<Recipe> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -3956,10 +3956,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method find definition
-            public void find(  HashMap<String, Object> filter, final ListCallback<Recipe> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("filter", filter);
@@ -4007,10 +4007,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method findOne definition
-            public void findOne(  HashMap<String, Object> filter, final ObjectCallback<Recipe> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("filter", filter);
@@ -4056,10 +4056,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method updateAll definition
-            public void updateAll(  HashMap<String, Object> where,  HashMap<String, Object> data, final Adapter.JsonObjectCallback  callback ){
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("where", where);
@@ -4102,7 +4102,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -4140,10 +4140,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method count definition
-            public void count(  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("where", where);
@@ -4181,10 +4181,10 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String recipeId,  HashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+            public void updateAttributes(  String recipeId,  Map<String,  ? extends Object> data, final ObjectCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeId", recipeId);
@@ -4237,7 +4237,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
             public void getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
 

@@ -612,7 +612,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void findById__accessTokens(  String customerId,  String fk, final ObjectCallback<AccessToken> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -663,7 +663,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void destroyById__accessTokens(  String customerId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -698,10 +698,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method updateById__accessTokens definition
-            public void updateById__accessTokens(  String customerId,  String fk,  HashMap<String, Object> data, final ObjectCallback<AccessToken> callback){
+            public void updateById__accessTokens(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -754,7 +754,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void findById__recipes(  String customerId,  String fk, final ObjectCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -805,7 +805,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void destroyById__recipes(  String customerId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -840,10 +840,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method updateById__recipes definition
-            public void updateById__recipes(  String customerId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+            public void updateById__recipes(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -896,7 +896,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void findById__comments(  String customerId,  String fk, final ObjectCallback<Comments> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -947,7 +947,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void destroyById__comments(  String customerId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -982,10 +982,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method updateById__comments definition
-            public void updateById__comments(  String customerId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Comments> callback){
+            public void updateById__comments(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Comments> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -1038,7 +1038,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void get__wishlists(  String customerId,  Boolean refresh, final ObjectCallback<Wishlist> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -1086,10 +1086,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method create__wishlists definition
-            public void create__wishlists(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Wishlist> callback){
+            public void create__wishlists(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Wishlist> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -1137,10 +1137,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method update__wishlists definition
-            public void update__wishlists(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Wishlist> callback){
+            public void update__wishlists(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Wishlist> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -1191,7 +1191,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void destroy__wishlists(  String customerId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -1227,7 +1227,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void get__chefs(  String customerId,  Boolean refresh, final ObjectCallback<Chef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -1275,10 +1275,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method create__chefs definition
-            public void create__chefs(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Chef> callback){
+            public void create__chefs(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Chef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -1326,10 +1326,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method update__chefs definition
-            public void update__chefs(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Chef> callback){
+            public void update__chefs(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Chef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -1380,7 +1380,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void destroy__chefs(  String customerId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -1416,7 +1416,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void findById__contactChefs(  String customerId,  String fk, final ObjectCallback<ContactChef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -1467,7 +1467,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void destroyById__contactChefs(  String customerId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -1502,10 +1502,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method updateById__contactChefs definition
-            public void updateById__contactChefs(  String customerId,  String fk,  HashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
+            public void updateById__contactChefs(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -1558,7 +1558,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void findById__orders(  String customerId,  String fk, final ObjectCallback<Order> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -1609,7 +1609,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void destroyById__orders(  String customerId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -1644,10 +1644,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method updateById__orders definition
-            public void updateById__orders(  String customerId,  String fk,  HashMap<String, Object> data, final ObjectCallback<Order> callback){
+            public void updateById__orders(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Order> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -1697,10 +1697,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method get__accessTokens definition
-            public void get__accessTokens(  String customerId,  HashMap<String, Object> filter, final ListCallback<AccessToken> callback){
+            public void get__accessTokens(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<AccessToken> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -1750,10 +1750,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method create__accessTokens definition
-            public void create__accessTokens(  String customerId,  HashMap<String, Object> data, final ObjectCallback<AccessToken> callback){
+            public void create__accessTokens(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -1804,7 +1804,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void delete__accessTokens(  String customerId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -1837,10 +1837,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method count__accessTokens definition
-            public void count__accessTokens(  String customerId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__accessTokens(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -1880,10 +1880,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method get__recipes definition
-            public void get__recipes(  String customerId,  HashMap<String, Object> filter, final ListCallback<Recipe> callback){
+            public void get__recipes(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -1933,10 +1933,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method create__recipes definition
-            public void create__recipes(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+            public void create__recipes(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -1987,7 +1987,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void delete__recipes(  String customerId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -2020,10 +2020,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method count__recipes definition
-            public void count__recipes(  String customerId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__recipes(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -2063,10 +2063,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method get__comments definition
-            public void get__comments(  String customerId,  HashMap<String, Object> filter, final ListCallback<Comments> callback){
+            public void get__comments(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<Comments> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -2116,10 +2116,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method create__comments definition
-            public void create__comments(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Comments> callback){
+            public void create__comments(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Comments> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -2170,7 +2170,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void delete__comments(  String customerId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -2203,10 +2203,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method count__comments definition
-            public void count__comments(  String customerId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__comments(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -2246,10 +2246,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method get__contactChefs definition
-            public void get__contactChefs(  String customerId,  HashMap<String, Object> filter, final ListCallback<ContactChef> callback){
+            public void get__contactChefs(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<ContactChef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -2299,10 +2299,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method create__contactChefs definition
-            public void create__contactChefs(  String customerId,  HashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
+            public void create__contactChefs(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -2353,7 +2353,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void delete__contactChefs(  String customerId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -2386,10 +2386,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method count__contactChefs definition
-            public void count__contactChefs(  String customerId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__contactChefs(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -2429,10 +2429,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method get__orders definition
-            public void get__orders(  String customerId,  HashMap<String, Object> filter, final ListCallback<Order> callback){
+            public void get__orders(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<Order> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -2482,10 +2482,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method create__orders definition
-            public void create__orders(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Order> callback){
+            public void create__orders(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Order> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -2536,7 +2536,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void delete__orders(  String customerId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -2569,10 +2569,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method count__orders definition
-            public void count__orders(  String customerId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__orders(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -2612,10 +2612,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method create definition
-            public void create(  HashMap<String, Object> data, final ObjectCallback<Customer> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -2661,10 +2661,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method createMany definition
-            public void createMany(  HashMap<String, Object> data, final ObjectCallback<Customer> callback){
+            public void createMany(  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -2710,10 +2710,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method upsert definition
-            public void upsert(  HashMap<String, Object> data, final ObjectCallback<Customer> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -2762,7 +2762,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -2800,10 +2800,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method findById definition
-            public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<Customer> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -2851,10 +2851,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method find definition
-            public void find(  HashMap<String, Object> filter, final ListCallback<Customer> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("filter", filter);
@@ -2902,10 +2902,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method findOne definition
-            public void findOne(  HashMap<String, Object> filter, final ObjectCallback<Customer> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("filter", filter);
@@ -2951,10 +2951,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method updateAll definition
-            public void updateAll(  HashMap<String, Object> where,  HashMap<String, Object> data, final Adapter.JsonObjectCallback  callback ){
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("where", where);
@@ -2997,7 +2997,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -3035,10 +3035,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method count definition
-            public void count(  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("where", where);
@@ -3076,10 +3076,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String customerId,  HashMap<String, Object> data, final ObjectCallback<Customer> callback){
+            public void updateAttributes(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("customerId", customerId);
@@ -3136,7 +3136,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void confirm(  String uid,  String token,  String redirect, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("uid", uid);
@@ -3173,10 +3173,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method resetPassword definition
-            public void resetPassword(  HashMap<String, Object> options, final VoidCallback callback){
+            public void resetPassword(  Map<String,  ? extends Object> options, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("options", options);
@@ -3212,7 +3212,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             public void getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
 

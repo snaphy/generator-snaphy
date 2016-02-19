@@ -46,6 +46,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.ContactChefRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -53,9 +54,9 @@ public class ContactChef extends Model {
 
 
     //For converting all model values to hashMap
-    private HashMap<String, Object> hashMap = new HashMap<>();
+    private Map<String, Object> hashMap = new HashMap<>();
 
-    public HashMap<String, Object> convertHashMap(){
+    public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
             return hashMap;
         }else{
@@ -147,7 +148,7 @@ public class ContactChef extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setChef(HashMap<String, Object> chef) {
+                    public void setChef(Map<String, Object> chef) {
                         //First create a dummy Repo class object for customer.
                         ChefRepository chefRepository = new ChefRepository();
                         Chef chef1 = chefRepository.createObject(chef);
@@ -288,7 +289,7 @@ public class ContactChef extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setCourse(HashMap<String, Object> course) {
+                    public void setCourse(Map<String, Object> course) {
                         //First create a dummy Repo class object for customer.
                         CourseRepository courseRepository = new CourseRepository();
                         Course course1 = courseRepository.createObject(course);
@@ -429,7 +430,7 @@ public class ContactChef extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setCustomer(HashMap<String, Object> customer) {
+                    public void setCustomer(Map<String, Object> customer) {
                         //First create a dummy Repo class object for customer.
                         CustomerRepository customerRepository = new CustomerRepository();
                         Customer customer1 = customerRepository.createObject(customer);

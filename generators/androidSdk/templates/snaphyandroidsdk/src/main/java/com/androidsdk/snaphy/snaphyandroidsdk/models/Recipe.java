@@ -84,6 +84,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -91,9 +92,9 @@ public class Recipe extends Model {
 
 
     //For converting all model values to hashMap
-    private HashMap<String, Object> hashMap = new HashMap<>();
+    private Map<String, Object> hashMap = new HashMap<>();
 
-    public HashMap<String, Object> convertHashMap(){
+    public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
             return hashMap;
         }else{
@@ -158,16 +159,16 @@ public class Recipe extends Model {
             
             
             
-                private HashMap<String, Object> mainImage;
+                private Map<String, Object> mainImage;
                 /* Adding Getter and Setter methods */
-                public HashMap<String, Object> getMainImage(){
+                public Map<String, Object> getMainImage(){
                     return mainImage;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setMainImage(HashMap<String, Object> mainImage){
+                public void setMainImage(Map<String, Object> mainImage){
                     this.mainImage = mainImage;
-                    //Update hashMap value..
+                    //Update Map value..
                     hashMap.put("mainImage", mainImage);
                 }
 
@@ -288,14 +289,14 @@ public class Recipe extends Model {
         
             
 
-                private List<HashMap<String, Object>> stepsImage;
+                private List<Map<String, Object>> stepsImage;
                 /* Adding Getter and Setter methods */
-                public List<HashMap<String, Object>> getStepsImage(){
+                public List<Map<String, Object>> getStepsImage(){
                     return stepsImage;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setStepsImage(List<HashMap<String, Object>> stepsImage){
+                public void setStepsImage(List<Map<String, Object>> stepsImage){
                     this.stepsImage = stepsImage;
 
                     //TODO change this to custom array with double quotes escaped if error occured when sending to server..
@@ -312,14 +313,14 @@ public class Recipe extends Model {
         
             
 
-                private List<HashMap<String, Object>> stepsDescription;
+                private List<Map<String, Object>> stepsDescription;
                 /* Adding Getter and Setter methods */
-                public List<HashMap<String, Object>> getStepsDescription(){
+                public List<Map<String, Object>> getStepsDescription(){
                     return stepsDescription;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setStepsDescription(List<HashMap<String, Object>> stepsDescription){
+                public void setStepsDescription(List<Map<String, Object>> stepsDescription){
                     this.stepsDescription = stepsDescription;
 
                     //TODO change this to custom array with double quotes escaped if error occured when sending to server..
@@ -379,7 +380,7 @@ public class Recipe extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setCustomer(HashMap<String, Object> customer) {
+                    public void setCustomer(Map<String, Object> customer) {
                         //First create a dummy Repo class object for customer.
                         CustomerRepository customerRepository = new CustomerRepository();
                         Customer customer1 = customerRepository.createObject(customer);
@@ -687,11 +688,11 @@ public class Recipe extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setCuisines1(List<HashMap<String, Object>> cuisines) {
+                    public void setCuisines1(List<Map<String, Object>> cuisines) {
                         //First create a dummy Repo class object for ..
                         CuisinesRepository cuisinesRepository = new CuisinesRepository();
                         List<Cuisines> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : cuisines) {
+                        for (Map<String, Object> obj : cuisines) {
                             //Also add relation to child type for two way communication..
                             Cuisines obj1 = cuisinesRepository.createObject(obj);
                             result.add(obj1);
@@ -835,7 +836,7 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.updateById__cuisines( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<Cuisines> (){
+                                        recipeRepo.updateById__cuisines( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Cuisines> (){
                                             
 
                                             
@@ -1061,7 +1062,7 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__cuisines( HashMap<String, Object> filter,  RestAdapter restAdapter, final ListCallback<Cuisines> callback) {
+                                    public void get__cuisines( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Cuisines> callback) {
                                         //Define methods here..
                                         final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
                                         
@@ -1125,7 +1126,7 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.create__cuisines( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Cuisines> (){
+                                        recipeRepo.create__cuisines( (String)that.getId(), data.convertMap(),  new ObjectCallback<Cuisines> (){
                                             
 
                                             
@@ -1196,7 +1197,7 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__cuisines( HashMap<String, Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__cuisines( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
                                         //Define methods here..
                                         final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
                                         
@@ -1386,11 +1387,11 @@ public class Recipe extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setCategory1(List<HashMap<String, Object>> category) {
+                    public void setCategory1(List<Map<String, Object>> category) {
                         //First create a dummy Repo class object for ..
                         CategoryRepository categoryRepository = new CategoryRepository();
                         List<Category> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : category) {
+                        for (Map<String, Object> obj : category) {
                             //Also add relation to child type for two way communication..
                             Category obj1 = categoryRepository.createObject(obj);
                             result.add(obj1);
@@ -1546,7 +1547,7 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.updateById__category( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<Category> (){
+                                        recipeRepo.updateById__category( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Category> (){
                                             
 
                                             
@@ -1768,7 +1769,7 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__category( HashMap<String, Object> filter,  RestAdapter restAdapter, final ListCallback<Category> callback) {
+                                    public void get__category( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Category> callback) {
                                         //Define methods here..
                                         final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
                                         
@@ -1832,7 +1833,7 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.create__category( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Category> (){
+                                        recipeRepo.create__category( (String)that.getId(), data.convertMap(),  new ObjectCallback<Category> (){
                                             
 
                                             
@@ -1903,7 +1904,7 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__category( HashMap<String, Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__category( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
                                         //Define methods here..
                                         final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
                                         
@@ -2091,11 +2092,11 @@ public class Recipe extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setComments1(List<HashMap<String, Object>> comments) {
+                    public void setComments1(List<Map<String, Object>> comments) {
                         //First create a dummy Repo class object for ..
                         CommentsRepository commentsRepository = new CommentsRepository();
                         List<Comments> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : comments) {
+                        for (Map<String, Object> obj : comments) {
                             //Also add relation to child type for two way communication..
                             Comments obj1 = commentsRepository.createObject(obj);
                             result.add(obj1);
@@ -2270,7 +2271,7 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.updateById__comments( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<Comments> (){
+                                        recipeRepo.updateById__comments( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Comments> (){
                                             
 
                                             
@@ -2367,7 +2368,7 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__comments( HashMap<String, Object> filter,  RestAdapter restAdapter, final ListCallback<Comments> callback) {
+                                    public void get__comments( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Comments> callback) {
                                         //Define methods here..
                                         final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
                                         
@@ -2431,7 +2432,7 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.create__comments( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Comments> (){
+                                        recipeRepo.create__comments( (String)that.getId(), data.convertMap(),  new ObjectCallback<Comments> (){
                                             
 
                                             
@@ -2502,7 +2503,7 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__comments( HashMap<String, Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__comments( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
                                         //Define methods here..
                                         final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
                                         
@@ -2676,11 +2677,11 @@ public class Recipe extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setRecipeTags1(List<HashMap<String, Object>> recipeTags) {
+                    public void setRecipeTags1(List<Map<String, Object>> recipeTags) {
                         //First create a dummy Repo class object for ..
                         RecipeTagRepository recipeTagsRepository = new RecipeTagRepository();
                         List<RecipeTag> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : recipeTags) {
+                        for (Map<String, Object> obj : recipeTags) {
                             //Also add relation to child type for two way communication..
                             RecipeTag obj1 = recipeTagsRepository.createObject(obj);
                             result.add(obj1);
@@ -2854,7 +2855,7 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.updateById__recipeTags( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<RecipeTag> (){
+                                        recipeRepo.updateById__recipeTags( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<RecipeTag> (){
                                             
 
                                             
@@ -3074,7 +3075,7 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__recipeTags( HashMap<String, Object> filter,  RestAdapter restAdapter, final ListCallback<RecipeTag> callback) {
+                                    public void get__recipeTags( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<RecipeTag> callback) {
                                         //Define methods here..
                                         final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
                                         
@@ -3138,7 +3139,7 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.create__recipeTags( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<RecipeTag> (){
+                                        recipeRepo.create__recipeTags( (String)that.getId(), data.convertMap(),  new ObjectCallback<RecipeTag> (){
                                             
 
                                             
@@ -3209,7 +3210,7 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__recipeTags( HashMap<String, Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__recipeTags( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
                                         //Define methods here..
                                         final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
                                         
@@ -3381,11 +3382,11 @@ public class Recipe extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setIngredients1(List<HashMap<String, Object>> ingredients) {
+                    public void setIngredients1(List<Map<String, Object>> ingredients) {
                         //First create a dummy Repo class object for ..
                         IngredientsRepository ingredientsRepository = new IngredientsRepository();
                         List<Ingredients> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : ingredients) {
+                        for (Map<String, Object> obj : ingredients) {
                             //Also add relation to child type for two way communication..
                             Ingredients obj1 = ingredientsRepository.createObject(obj);
                             result.add(obj1);
@@ -3612,7 +3613,7 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.updateById__ingredients( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<Ingredients> (){
+                                        recipeRepo.updateById__ingredients( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Ingredients> (){
                                             
 
                                             
@@ -3663,7 +3664,7 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.link__ingredients( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<RecipeIngredients> (){
+                                        recipeRepo.link__ingredients( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<RecipeIngredients> (){
                                             
 
                                             
@@ -3828,7 +3829,7 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__ingredients( HashMap<String, Object> filter,  RestAdapter restAdapter, final ListCallback<Ingredients> callback) {
+                                    public void get__ingredients( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Ingredients> callback) {
                                         //Define methods here..
                                         final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
                                         
@@ -3892,7 +3893,7 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.create__ingredients( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Ingredients> (){
+                                        recipeRepo.create__ingredients( (String)that.getId(), data.convertMap(),  new ObjectCallback<Ingredients> (){
                                             
 
                                             
@@ -3963,7 +3964,7 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__ingredients( HashMap<String, Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__ingredients( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
                                         //Define methods here..
                                         final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
                                         
@@ -4121,11 +4122,11 @@ public class Recipe extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setWishlists1(List<HashMap<String, Object>> wishlists) {
+                    public void setWishlists1(List<Map<String, Object>> wishlists) {
                         //First create a dummy Repo class object for ..
                         WishlistRepository wishlistsRepository = new WishlistRepository();
                         List<Wishlist> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : wishlists) {
+                        for (Map<String, Object> obj : wishlists) {
                             //Also add relation to child type for two way communication..
                             Wishlist obj1 = wishlistsRepository.createObject(obj);
                             result.add(obj1);
@@ -4323,7 +4324,7 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.updateById__wishlists( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<Wishlist> (){
+                                        recipeRepo.updateById__wishlists( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Wishlist> (){
                                             
 
                                             
@@ -4535,7 +4536,7 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__wishlists( HashMap<String, Object> filter,  RestAdapter restAdapter, final ListCallback<Wishlist> callback) {
+                                    public void get__wishlists( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Wishlist> callback) {
                                         //Define methods here..
                                         final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
                                         
@@ -4599,7 +4600,7 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.create__wishlists( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Wishlist> (){
+                                        recipeRepo.create__wishlists( (String)that.getId(), data.convertMap(),  new ObjectCallback<Wishlist> (){
                                             
 
                                             
@@ -4670,7 +4671,7 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__wishlists( HashMap<String, Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__wishlists( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
                                         //Define methods here..
                                         final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
                                         
@@ -4817,7 +4818,7 @@ public class Recipe extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setRecipeAnalytics(HashMap<String, Object> recipeAnalytics) {
+                    public void setRecipeAnalytics(Map<String, Object> recipeAnalytics) {
                         //First create a dummy Repo class object for customer.
                         RecipeAnalyticRepository recipeAnalyticsRepository = new RecipeAnalyticRepository();
                         RecipeAnalytic recipeAnalytics1 = recipeAnalyticsRepository.createObject(recipeAnalytics);
@@ -4974,7 +4975,7 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.create__recipeAnalytics( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<RecipeAnalytic> (){
+                                        recipeRepo.create__recipeAnalytics( (String)that.getId(), data.convertMap(),  new ObjectCallback<RecipeAnalytic> (){
                                             
 
                                             
@@ -5022,7 +5023,7 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.update__recipeAnalytics( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<RecipeAnalytic> (){
+                                        recipeRepo.update__recipeAnalytics( (String)that.getId(), data.convertMap(),  new ObjectCallback<RecipeAnalytic> (){
                                             
 
                                             

@@ -269,7 +269,7 @@ public class CourseRepository extends ModelRepository<Course> {
             public void get__chef(  String courseId,  Boolean refresh, final ObjectCallback<Chef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("courseId", courseId);
@@ -320,7 +320,7 @@ public class CourseRepository extends ModelRepository<Course> {
             public void findById__contactChefs(  String courseId,  String fk, final ObjectCallback<ContactChef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("courseId", courseId);
@@ -371,7 +371,7 @@ public class CourseRepository extends ModelRepository<Course> {
             public void destroyById__contactChefs(  String courseId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("courseId", courseId);
@@ -406,10 +406,10 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method updateById__contactChefs definition
-            public void updateById__contactChefs(  String courseId,  String fk,  HashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
+            public void updateById__contactChefs(  String courseId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("courseId", courseId);
@@ -459,10 +459,10 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method get__contactChefs definition
-            public void get__contactChefs(  String courseId,  HashMap<String, Object> filter, final ListCallback<ContactChef> callback){
+            public void get__contactChefs(  String courseId,  Map<String,  ? extends Object> filter, final ListCallback<ContactChef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("courseId", courseId);
@@ -512,10 +512,10 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method create__contactChefs definition
-            public void create__contactChefs(  String courseId,  HashMap<String, Object> data, final ObjectCallback<ContactChef> callback){
+            public void create__contactChefs(  String courseId,  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("courseId", courseId);
@@ -566,7 +566,7 @@ public class CourseRepository extends ModelRepository<Course> {
             public void delete__contactChefs(  String courseId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("courseId", courseId);
@@ -599,10 +599,10 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method count__contactChefs definition
-            public void count__contactChefs(  String courseId,  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count__contactChefs(  String courseId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("courseId", courseId);
@@ -642,10 +642,10 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method create definition
-            public void create(  HashMap<String, Object> data, final ObjectCallback<Course> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Course> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -691,10 +691,10 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method createMany definition
-            public void createMany(  HashMap<String, Object> data, final ObjectCallback<Course> callback){
+            public void createMany(  Map<String,  ? extends Object> data, final ObjectCallback<Course> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -740,10 +740,10 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method upsert definition
-            public void upsert(  HashMap<String, Object> data, final ObjectCallback<Course> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Course> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -792,7 +792,7 @@ public class CourseRepository extends ModelRepository<Course> {
             public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -830,10 +830,10 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method findById definition
-            public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<Course> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Course> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -881,10 +881,10 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method find definition
-            public void find(  HashMap<String, Object> filter, final ListCallback<Course> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Course> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("filter", filter);
@@ -932,10 +932,10 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method findOne definition
-            public void findOne(  HashMap<String, Object> filter, final ObjectCallback<Course> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Course> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("filter", filter);
@@ -981,10 +981,10 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method updateAll definition
-            public void updateAll(  HashMap<String, Object> where,  HashMap<String, Object> data, final Adapter.JsonObjectCallback  callback ){
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("where", where);
@@ -1027,7 +1027,7 @@ public class CourseRepository extends ModelRepository<Course> {
             public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -1065,10 +1065,10 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method count definition
-            public void count(  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("where", where);
@@ -1106,10 +1106,10 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String courseId,  HashMap<String, Object> data, final ObjectCallback<Course> callback){
+            public void updateAttributes(  String courseId,  Map<String,  ? extends Object> data, final ObjectCallback<Course> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("courseId", courseId);
@@ -1162,7 +1162,7 @@ public class CourseRepository extends ModelRepository<Course> {
             public void getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
 

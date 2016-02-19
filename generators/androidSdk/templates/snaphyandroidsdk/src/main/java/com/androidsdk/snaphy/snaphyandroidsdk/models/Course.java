@@ -39,6 +39,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.CourseRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -46,9 +47,9 @@ public class Course extends Model {
 
 
     //For converting all model values to hashMap
-    private HashMap<String, Object> hashMap = new HashMap<>();
+    private Map<String, Object> hashMap = new HashMap<>();
 
-    public HashMap<String, Object> convertHashMap(){
+    public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
             return hashMap;
         }else{
@@ -214,7 +215,7 @@ public class Course extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setChef(HashMap<String, Object> chef) {
+                    public void setChef(Map<String, Object> chef) {
                         //First create a dummy Repo class object for customer.
                         ChefRepository chefRepository = new ChefRepository();
                         Chef chef1 = chefRepository.createObject(chef);
@@ -359,11 +360,11 @@ public class Course extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setContactChefs1(List<HashMap<String, Object>> contactChefs) {
+                    public void setContactChefs1(List<Map<String, Object>> contactChefs) {
                         //First create a dummy Repo class object for ..
                         ContactChefRepository contactChefsRepository = new ContactChefRepository();
                         List<ContactChef> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : contactChefs) {
+                        for (Map<String, Object> obj : contactChefs) {
                             //Also add relation to child type for two way communication..
                             ContactChef obj1 = contactChefsRepository.createObject(obj);
                             result.add(obj1);
@@ -514,7 +515,7 @@ public class Course extends Model {
 
 
 
-                                        courseRepo.updateById__contactChefs( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<ContactChef> (){
+                                        courseRepo.updateById__contactChefs( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<ContactChef> (){
                                             
 
                                             
@@ -551,7 +552,7 @@ public class Course extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__contactChefs( HashMap<String, Object> filter,  RestAdapter restAdapter, final ListCallback<ContactChef> callback) {
+                                    public void get__contactChefs( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<ContactChef> callback) {
                                         //Define methods here..
                                         final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
                                         
@@ -615,7 +616,7 @@ public class Course extends Model {
 
 
 
-                                        courseRepo.create__contactChefs( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<ContactChef> (){
+                                        courseRepo.create__contactChefs( (String)that.getId(), data.convertMap(),  new ObjectCallback<ContactChef> (){
                                             
 
                                             
@@ -686,7 +687,7 @@ public class Course extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__contactChefs( HashMap<String, Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__contactChefs( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
                                         //Define methods here..
                                         final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
                                         

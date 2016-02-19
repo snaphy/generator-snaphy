@@ -70,6 +70,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -77,9 +78,9 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
     //For converting all model values to hashMap
-    private HashMap<String, Object> hashMap = new HashMap<>();
+    private Map<String, Object> hashMap = new HashMap<>();
 
-    public HashMap<String, Object> convertHashMap(){
+    public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
             return hashMap;
         }else{
@@ -232,16 +233,16 @@ public class Customer extends com.strongloop.android.loopback.User {
             
             
             
-                private HashMap<String, Object> profilePic;
+                private Map<String, Object> profilePic;
                 /* Adding Getter and Setter methods */
-                public HashMap<String, Object> getProfilePic(){
+                public Map<String, Object> getProfilePic(){
                     return profilePic;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setProfilePic(HashMap<String, Object> profilePic){
+                public void setProfilePic(Map<String, Object> profilePic){
                     this.profilePic = profilePic;
-                    //Update hashMap value..
+                    //Update Map value..
                     hashMap.put("profilePic", profilePic);
                 }
 
@@ -379,11 +380,11 @@ public class Customer extends com.strongloop.android.loopback.User {
                     }
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setRecipes1(List<HashMap<String, Object>> recipes) {
+                    public void setRecipes1(List<Map<String, Object>> recipes) {
                         //First create a dummy Repo class object for ..
                         RecipeRepository recipesRepository = new RecipeRepository();
                         List<Recipe> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : recipes) {
+                        for (Map<String, Object> obj : recipes) {
                             //Also add relation to child type for two way communication..
                             Recipe obj1 = recipesRepository.createObject(obj);
                             result.add(obj1);
@@ -538,7 +539,7 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
 
-                                        customerRepo.updateById__recipes( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<Recipe> (){
+                                        customerRepo.updateById__recipes( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -617,7 +618,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                         
 
                                     //Write the method here..
-                                    public void get__recipes( HashMap<String, Object> filter,  RestAdapter restAdapter, final ListCallback<Recipe> callback) {
+                                    public void get__recipes( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Recipe> callback) {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -681,7 +682,7 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
 
-                                        customerRepo.create__recipes( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Recipe> (){
+                                        customerRepo.create__recipes( (String)that.getId(), data.convertMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
@@ -752,7 +753,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                         
 
                                     //Write the method here..
-                                    public void count__recipes( HashMap<String, Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__recipes( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -880,11 +881,11 @@ public class Customer extends com.strongloop.android.loopback.User {
                     }
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setComments1(List<HashMap<String, Object>> comments) {
+                    public void setComments1(List<Map<String, Object>> comments) {
                         //First create a dummy Repo class object for ..
                         CommentsRepository commentsRepository = new CommentsRepository();
                         List<Comments> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : comments) {
+                        for (Map<String, Object> obj : comments) {
                             //Also add relation to child type for two way communication..
                             Comments obj1 = commentsRepository.createObject(obj);
                             result.add(obj1);
@@ -1045,7 +1046,7 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
 
-                                        customerRepo.updateById__comments( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<Comments> (){
+                                        customerRepo.updateById__comments( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Comments> (){
                                             
 
                                             
@@ -1126,7 +1127,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                         
 
                                     //Write the method here..
-                                    public void get__comments( HashMap<String, Object> filter,  RestAdapter restAdapter, final ListCallback<Comments> callback) {
+                                    public void get__comments( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Comments> callback) {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -1190,7 +1191,7 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
 
-                                        customerRepo.create__comments( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Comments> (){
+                                        customerRepo.create__comments( (String)that.getId(), data.convertMap(),  new ObjectCallback<Comments> (){
                                             
 
                                             
@@ -1261,7 +1262,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                         
 
                                     //Write the method here..
-                                    public void count__comments( HashMap<String, Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__comments( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -1372,7 +1373,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setWishlists(HashMap<String, Object> wishlists) {
+                    public void setWishlists(Map<String, Object> wishlists) {
                         //First create a dummy Repo class object for customer.
                         WishlistRepository wishlistsRepository = new WishlistRepository();
                         Wishlist wishlists1 = wishlistsRepository.createObject(wishlists);
@@ -1479,7 +1480,7 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
 
-                                        customerRepo.create__wishlists( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Wishlist> (){
+                                        customerRepo.create__wishlists( (String)that.getId(), data.convertMap(),  new ObjectCallback<Wishlist> (){
                                             
 
                                             
@@ -1527,7 +1528,7 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
 
-                                        customerRepo.update__wishlists( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Wishlist> (){
+                                        customerRepo.update__wishlists( (String)that.getId(), data.convertMap(),  new ObjectCallback<Wishlist> (){
                                             
 
                                             
@@ -1711,7 +1712,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setChefs(HashMap<String, Object> chefs) {
+                    public void setChefs(Map<String, Object> chefs) {
                         //First create a dummy Repo class object for customer.
                         ChefRepository chefsRepository = new ChefRepository();
                         Chef chefs1 = chefsRepository.createObject(chefs);
@@ -1826,7 +1827,7 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
 
-                                        customerRepo.create__chefs( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Chef> (){
+                                        customerRepo.create__chefs( (String)that.getId(), data.convertMap(),  new ObjectCallback<Chef> (){
                                             
 
                                             
@@ -1874,7 +1875,7 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
 
-                                        customerRepo.update__chefs( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Chef> (){
+                                        customerRepo.update__chefs( (String)that.getId(), data.convertMap(),  new ObjectCallback<Chef> (){
                                             
 
                                             
@@ -2059,11 +2060,11 @@ public class Customer extends com.strongloop.android.loopback.User {
                     }
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setContactChefs1(List<HashMap<String, Object>> contactChefs) {
+                    public void setContactChefs1(List<Map<String, Object>> contactChefs) {
                         //First create a dummy Repo class object for ..
                         ContactChefRepository contactChefsRepository = new ContactChefRepository();
                         List<ContactChef> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : contactChefs) {
+                        for (Map<String, Object> obj : contactChefs) {
                             //Also add relation to child type for two way communication..
                             ContactChef obj1 = contactChefsRepository.createObject(obj);
                             result.add(obj1);
@@ -2246,7 +2247,7 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
 
-                                        customerRepo.updateById__contactChefs( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<ContactChef> (){
+                                        customerRepo.updateById__contactChefs( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<ContactChef> (){
                                             
 
                                             
@@ -2313,7 +2314,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                         
 
                                     //Write the method here..
-                                    public void get__contactChefs( HashMap<String, Object> filter,  RestAdapter restAdapter, final ListCallback<ContactChef> callback) {
+                                    public void get__contactChefs( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<ContactChef> callback) {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -2377,7 +2378,7 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
 
-                                        customerRepo.create__contactChefs( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<ContactChef> (){
+                                        customerRepo.create__contactChefs( (String)that.getId(), data.convertMap(),  new ObjectCallback<ContactChef> (){
                                             
 
                                             
@@ -2448,7 +2449,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                         
 
                                     //Write the method here..
-                                    public void count__contactChefs( HashMap<String, Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__contactChefs( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -2560,11 +2561,11 @@ public class Customer extends com.strongloop.android.loopback.User {
                     }
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setOrders1(List<HashMap<String, Object>> orders) {
+                    public void setOrders1(List<Map<String, Object>> orders) {
                         //First create a dummy Repo class object for ..
                         OrderRepository ordersRepository = new OrderRepository();
                         List<Order> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : orders) {
+                        for (Map<String, Object> obj : orders) {
                             //Also add relation to child type for two way communication..
                             Order obj1 = ordersRepository.createObject(obj);
                             result.add(obj1);
@@ -2753,7 +2754,7 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
 
-                                        customerRepo.updateById__orders( (String)that.getId(), fk, data.convertHashMap(),  new ObjectCallback<Order> (){
+                                        customerRepo.updateById__orders( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Order> (){
                                             
 
                                             
@@ -2822,7 +2823,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                         
 
                                     //Write the method here..
-                                    public void get__orders( HashMap<String, Object> filter,  RestAdapter restAdapter, final ListCallback<Order> callback) {
+                                    public void get__orders( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Order> callback) {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         
@@ -2886,7 +2887,7 @@ public class Customer extends com.strongloop.android.loopback.User {
 
 
 
-                                        customerRepo.create__orders( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<Order> (){
+                                        customerRepo.create__orders( (String)that.getId(), data.convertMap(),  new ObjectCallback<Order> (){
                                             
 
                                             
@@ -2957,7 +2958,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                         
 
                                     //Write the method here..
-                                    public void count__orders( HashMap<String, Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__orders( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
                                         //Define methods here..
                                         final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
                                         

@@ -222,7 +222,7 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
             public void get__recipes(  String recipeAnalyticId,  Boolean refresh, final ObjectCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeAnalyticId", recipeAnalyticId);
@@ -270,10 +270,10 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
     
         
             //Method create__recipes definition
-            public void create__recipes(  String recipeAnalyticId,  HashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+            public void create__recipes(  String recipeAnalyticId,  Map<String,  ? extends Object> data, final ObjectCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeAnalyticId", recipeAnalyticId);
@@ -321,10 +321,10 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
     
         
             //Method update__recipes definition
-            public void update__recipes(  String recipeAnalyticId,  HashMap<String, Object> data, final ObjectCallback<Recipe> callback){
+            public void update__recipes(  String recipeAnalyticId,  Map<String,  ? extends Object> data, final ObjectCallback<Recipe> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeAnalyticId", recipeAnalyticId);
@@ -375,7 +375,7 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
             public void destroy__recipes(  String recipeAnalyticId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeAnalyticId", recipeAnalyticId);
@@ -408,10 +408,10 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
     
         
             //Method create definition
-            public void create(  HashMap<String, Object> data, final ObjectCallback<RecipeAnalytic> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<RecipeAnalytic> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -457,10 +457,10 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
     
         
             //Method createMany definition
-            public void createMany(  HashMap<String, Object> data, final ObjectCallback<RecipeAnalytic> callback){
+            public void createMany(  Map<String,  ? extends Object> data, final ObjectCallback<RecipeAnalytic> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -506,10 +506,10 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
     
         
             //Method upsert definition
-            public void upsert(  HashMap<String, Object> data, final ObjectCallback<RecipeAnalytic> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<RecipeAnalytic> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -558,7 +558,7 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
             public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -596,10 +596,10 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
     
         
             //Method findById definition
-            public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<RecipeAnalytic> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<RecipeAnalytic> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -647,10 +647,10 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
     
         
             //Method find definition
-            public void find(  HashMap<String, Object> filter, final ListCallback<RecipeAnalytic> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<RecipeAnalytic> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("filter", filter);
@@ -698,10 +698,10 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
     
         
             //Method findOne definition
-            public void findOne(  HashMap<String, Object> filter, final ObjectCallback<RecipeAnalytic> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<RecipeAnalytic> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("filter", filter);
@@ -747,10 +747,10 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
     
         
             //Method updateAll definition
-            public void updateAll(  HashMap<String, Object> where,  HashMap<String, Object> data, final Adapter.JsonObjectCallback  callback ){
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("where", where);
@@ -793,7 +793,7 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
             public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -831,10 +831,10 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
     
         
             //Method count definition
-            public void count(  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("where", where);
@@ -872,10 +872,10 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String recipeAnalyticId,  HashMap<String, Object> data, final ObjectCallback<RecipeAnalytic> callback){
+            public void updateAttributes(  String recipeAnalyticId,  Map<String,  ? extends Object> data, final ObjectCallback<RecipeAnalytic> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("recipeAnalyticId", recipeAnalyticId);
@@ -928,7 +928,7 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
             public void getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
 

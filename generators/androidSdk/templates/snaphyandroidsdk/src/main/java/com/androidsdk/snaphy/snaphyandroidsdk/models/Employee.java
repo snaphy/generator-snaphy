@@ -35,6 +35,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -42,9 +43,9 @@ public class Employee extends com.strongloop.android.loopback.User {
 
 
     //For converting all model values to hashMap
-    private HashMap<String, Object> hashMap = new HashMap<>();
+    private Map<String, Object> hashMap = new HashMap<>();
 
-    public HashMap<String, Object> convertHashMap(){
+    public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
             return hashMap;
         }else{
@@ -297,7 +298,7 @@ public class Employee extends com.strongloop.android.loopback.User {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setEmployeeDetails(HashMap<String, Object> employeeDetails) {
+                    public void setEmployeeDetails(Map<String, Object> employeeDetails) {
                         //First create a dummy Repo class object for customer.
                         EmployeeDetailsRepository employeeDetailsRepository = new EmployeeDetailsRepository();
                         EmployeeDetails employeeDetails1 = employeeDetailsRepository.createObject(employeeDetails);
@@ -392,7 +393,7 @@ public class Employee extends com.strongloop.android.loopback.User {
 
 
 
-                                        employeeRepo.create__employeeDetails( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<EmployeeDetails> (){
+                                        employeeRepo.create__employeeDetails( (String)that.getId(), data.convertMap(),  new ObjectCallback<EmployeeDetails> (){
                                             
 
                                             
@@ -440,7 +441,7 @@ public class Employee extends com.strongloop.android.loopback.User {
 
 
 
-                                        employeeRepo.update__employeeDetails( (String)that.getId(), data.convertHashMap(),  new ObjectCallback<EmployeeDetails> (){
+                                        employeeRepo.update__employeeDetails( (String)that.getId(), data.convertMap(),  new ObjectCallback<EmployeeDetails> (){
                                             
 
                                             

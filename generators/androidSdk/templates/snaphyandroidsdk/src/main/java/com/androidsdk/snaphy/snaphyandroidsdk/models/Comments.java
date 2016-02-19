@@ -39,6 +39,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.CommentsRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -46,9 +47,9 @@ public class Comments extends Model {
 
 
     //For converting all model values to hashMap
-    private HashMap<String, Object> hashMap = new HashMap<>();
+    private Map<String, Object> hashMap = new HashMap<>();
 
-    public HashMap<String, Object> convertHashMap(){
+    public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
             return hashMap;
         }else{
@@ -198,7 +199,7 @@ public class Comments extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setCustomer(HashMap<String, Object> customer) {
+                    public void setCustomer(Map<String, Object> customer) {
                         //First create a dummy Repo class object for customer.
                         CustomerRepository customerRepository = new CustomerRepository();
                         Customer customer1 = customerRepository.createObject(customer);
@@ -329,7 +330,7 @@ public class Comments extends Model {
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setRecipe(HashMap<String, Object> recipe) {
+                    public void setRecipe(Map<String, Object> recipe) {
                         //First create a dummy Repo class object for customer.
                         RecipeRepository recipeRepository = new RecipeRepository();
                         Recipe recipe1 = recipeRepository.createObject(recipe);

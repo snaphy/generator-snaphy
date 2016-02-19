@@ -151,7 +151,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/upload", "POST"), "AmazonImage.upload");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getUrl", "POST"), "AmazonImage.getUrl");
                 
 
             
@@ -178,10 +178,10 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
         
             //Method create definition
-            public void create(  HashMap<String, Object> data, final ObjectCallback<AmazonImage> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<AmazonImage> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -227,10 +227,10 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
         
             //Method createMany definition
-            public void createMany(  HashMap<String, Object> data, final ObjectCallback<AmazonImage> callback){
+            public void createMany(  Map<String,  ? extends Object> data, final ObjectCallback<AmazonImage> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -276,10 +276,10 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
         
             //Method upsert definition
-            public void upsert(  HashMap<String, Object> data, final ObjectCallback<AmazonImage> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<AmazonImage> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.putAll(data);
@@ -328,7 +328,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
             public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -366,10 +366,10 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
         
             //Method findById definition
-            public void findById(  String id,  HashMap<String, Object> filter, final ObjectCallback<AmazonImage> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<AmazonImage> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -417,10 +417,10 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
         
             //Method find definition
-            public void find(  HashMap<String, Object> filter, final ListCallback<AmazonImage> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<AmazonImage> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("filter", filter);
@@ -468,10 +468,10 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
         
             //Method findOne definition
-            public void findOne(  HashMap<String, Object> filter, final ObjectCallback<AmazonImage> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<AmazonImage> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("filter", filter);
@@ -517,10 +517,10 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
         
             //Method updateAll definition
-            public void updateAll(  HashMap<String, Object> where,  HashMap<String, Object> data, final Adapter.JsonObjectCallback  callback ){
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("where", where);
@@ -563,7 +563,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
             public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("id", id);
@@ -601,10 +601,10 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
         
             //Method count definition
-            public void count(  HashMap<String, Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("where", where);
@@ -642,10 +642,10 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String amazonImageId,  HashMap<String, Object> data, final ObjectCallback<AmazonImage> callback){
+            public void updateAttributes(  String amazonImageId,  Map<String,  ? extends Object> data, final ObjectCallback<AmazonImage> callback){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
                         hashMapObject.put("amazonImageId", amazonImageId);
@@ -698,7 +698,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
             public void getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
 
@@ -735,14 +735,16 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
         
     
         
-            //Method upload definition
-            public void upload(  HashMap<String, Object> ctx,  HashMap<String, Object> options, final Adapter.JsonObjectCallback  callback ){
+            //Method getUrl definition
+            public void getUrl(  String container,  String file,  Map<String,  ? extends Object> options, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
-                HashMap<String, Object> hashMapObject = new HashMap<>();
+                Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("ctx", ctx);
+                        hashMapObject.put("container", container);
+                
+                        hashMapObject.put("file", file);
                 
                         hashMapObject.put("options", options);
                 
@@ -752,7 +754,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
                     
-                    invokeStaticMethod("upload", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getUrl", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -771,7 +773,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
 
-            }//Method upload definition ends here..
+            }//Method getUrl definition ends here..
 
             
 
