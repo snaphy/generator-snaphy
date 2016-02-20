@@ -27,6 +27,9 @@
   },
   "databases": {
   },
+  "pluginDepedencies": {
+     
+  },
   "activate": true,
   "services": {},
   "dependencies": {},
@@ -36,6 +39,6 @@
     "url": ""
   },
   "devDependencies": {
-   
+
   }
 }

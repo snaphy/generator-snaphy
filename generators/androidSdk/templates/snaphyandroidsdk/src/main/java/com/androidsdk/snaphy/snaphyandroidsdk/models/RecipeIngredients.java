@@ -90,6 +90,28 @@ public class RecipeIngredients extends Model {
         
             
             
+                private String halfQuantity;
+                /* Adding Getter and Setter methods */
+                public String getHalfQuantity(){
+                    return halfQuantity;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setHalfQuantity(String halfQuantity){
+                    this.halfQuantity = halfQuantity;
+                    //Update hashMap value..
+                    hashMap.put("halfQuantity", halfQuantity);
+                }
+
+            
+            
+            
+
+        
+    
+        
+            
+            
                 private String recipeMetric;
                 /* Adding Getter and Setter methods */
                 public String getRecipeMetric(){
