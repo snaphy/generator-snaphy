@@ -373,7 +373,7 @@ public class <%- modelName %> extends Model {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class){
+                            }else if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
@@ -381,7 +381,7 @@ public class <%- modelName %> extends Model {
                         }
 
                         if(hashType){
-                            set<%- capitalcaseRelationName %>1(hashMaps)
+                            set<%- capitalcaseRelationName %>1(hashMaps);
                         }else{
                             this.<%- relation %> = <%- relation %>;
                         }
@@ -502,7 +502,7 @@ public class <%- modelName %> extends Model {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class){
+                            }else if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
@@ -510,7 +510,7 @@ public class <%- modelName %> extends Model {
                         }
 
                         if(hashType){
-                            set<%- capitalcaseRelationName %>1(hashMaps)
+                            set<%- capitalcaseRelationName %>1(hashMaps);
                         }else{
                             this.<%- relation %> = <%- relation %>;
                         }

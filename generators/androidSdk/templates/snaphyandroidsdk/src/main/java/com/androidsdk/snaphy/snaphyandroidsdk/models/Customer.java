@@ -383,7 +383,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class){
+                            }else if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
@@ -391,7 +391,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                         }
 
                         if(hashType){
-                            setRecipes1(hashMaps)
+                            setRecipes1(hashMaps);
                         }else{
                             this.recipes = recipes;
                         }
@@ -928,7 +928,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class){
+                            }else if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
@@ -936,7 +936,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                         }
 
                         if(hashType){
-                            setComments1(hashMaps)
+                            setComments1(hashMaps);
                         }else{
                             this.comments = comments;
                         }
@@ -2199,7 +2199,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class){
+                            }else if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
@@ -2207,7 +2207,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                         }
 
                         if(hashType){
-                            setContactChefs1(hashMaps)
+                            setContactChefs1(hashMaps);
                         }else{
                             this.contactChefs = contactChefs;
                         }
@@ -2744,7 +2744,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class){
+                            }else if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
@@ -2752,7 +2752,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                         }
 
                         if(hashType){
-                            setOrders1(hashMaps)
+                            setOrders1(hashMaps);
                         }else{
                             this.orders = orders;
                         }
@@ -3289,7 +3289,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class){
+                            }else if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
@@ -3297,7 +3297,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                         }
 
                         if(hashType){
-                            setCourses1(hashMaps)
+                            setCourses1(hashMaps);
                         }else{
                             this.courses = courses;
                         }

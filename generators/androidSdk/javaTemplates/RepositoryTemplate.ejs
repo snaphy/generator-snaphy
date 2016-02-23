@@ -264,11 +264,17 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
     public String  getNameForRestUrl() {
         <%
         var testPlural = /[sS]$/;
+        var testO = /[oO]$/;
         if (testPlural.test(model.name)){
         %>
             return "<%- capitalizeFirstLetter(model.name) %>";
         <%
-        }else{
+        }else if(testO.test(model.name)){
+            %>
+                return "<%- capitalizeFirstLetter(model.name) %>s";
+            <%
+        }
+        else{
         %>
             //call super method instead..
             return super.getNameForRestUrl();

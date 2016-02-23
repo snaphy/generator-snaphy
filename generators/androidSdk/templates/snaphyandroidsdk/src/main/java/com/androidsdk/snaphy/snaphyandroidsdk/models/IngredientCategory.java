@@ -115,7 +115,7 @@ public class IngredientCategory extends Model {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class){
+                            }else if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
@@ -123,7 +123,7 @@ public class IngredientCategory extends Model {
                         }
 
                         if(hashType){
-                            setIngredients1(hashMaps)
+                            setIngredients1(hashMaps);
                         }else{
                             this.ingredients = ingredients;
                         }

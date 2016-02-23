@@ -385,7 +385,7 @@ public class Ingredients extends Model {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class){
+                            }else if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
@@ -393,7 +393,7 @@ public class Ingredients extends Model {
                         }
 
                         if(hashType){
-                            setRecipes1(hashMaps)
+                            setRecipes1(hashMaps);
                         }else{
                             this.recipes = recipes;
                         }

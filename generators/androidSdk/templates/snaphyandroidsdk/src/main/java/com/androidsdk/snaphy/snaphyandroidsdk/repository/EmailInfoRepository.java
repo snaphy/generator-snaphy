@@ -163,9 +163,8 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
     //override getNameForRestUrlMethod
     public String  getNameForRestUrl() {
         
-            //call super method instead..
-            return super.getNameForRestUrl();
-        
+                return "EmailInfos";
+            
     }
 
 

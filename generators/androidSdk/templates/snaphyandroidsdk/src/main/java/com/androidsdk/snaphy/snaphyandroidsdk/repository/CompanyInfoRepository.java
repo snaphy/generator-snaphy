@@ -163,9 +163,8 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     //override getNameForRestUrlMethod
     public String  getNameForRestUrl() {
         
-            //call super method instead..
-            return super.getNameForRestUrl();
-        
+                return "CompanyInfos";
+            
     }
 
 

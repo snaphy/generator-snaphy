@@ -701,7 +701,7 @@ public class Recipe extends Model {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class){
+                            }else if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
@@ -709,7 +709,7 @@ public class Recipe extends Model {
                         }
 
                         if(hashType){
-                            setCuisines1(hashMaps)
+                            setCuisines1(hashMaps);
                         }else{
                             this.cuisines = cuisines;
                         }
@@ -1437,7 +1437,7 @@ public class Recipe extends Model {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class){
+                            }else if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
@@ -1445,7 +1445,7 @@ public class Recipe extends Model {
                         }
 
                         if(hashType){
-                            setCategory1(hashMaps)
+                            setCategory1(hashMaps);
                         }else{
                             this.category = category;
                         }
@@ -2171,7 +2171,7 @@ public class Recipe extends Model {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class){
+                            }else if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
@@ -2179,7 +2179,7 @@ public class Recipe extends Model {
                         }
 
                         if(hashType){
-                            setComments1(hashMaps)
+                            setComments1(hashMaps);
                         }else{
                             this.comments = comments;
                         }
@@ -2793,7 +2793,7 @@ public class Recipe extends Model {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class){
+                            }else if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
@@ -2801,7 +2801,7 @@ public class Recipe extends Model {
                         }
 
                         if(hashType){
-                            setRecipeTags1(hashMaps)
+                            setRecipeTags1(hashMaps);
                         }else{
                             this.recipeTags = recipeTags;
                         }
@@ -3527,7 +3527,7 @@ public class Recipe extends Model {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class){
+                            }else if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
@@ -3535,7 +3535,7 @@ public class Recipe extends Model {
                         }
 
                         if(hashType){
-                            setIngredients1(hashMaps)
+                            setIngredients1(hashMaps);
                         }else{
                             this.ingredients = ingredients;
                         }
@@ -4304,7 +4304,7 @@ public class Recipe extends Model {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class){
+                            }else if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
@@ -4312,7 +4312,7 @@ public class Recipe extends Model {
                         }
 
                         if(hashType){
-                            setWishlists1(hashMaps)
+                            setWishlists1(hashMaps);
                         }else{
                             this.wishlists = wishlists;
                         }
