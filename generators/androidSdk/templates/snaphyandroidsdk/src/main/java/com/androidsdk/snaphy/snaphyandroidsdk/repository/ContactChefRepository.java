@@ -31,20 +31,6 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.ContactChef;
 //Now import model of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Chef;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChefRepository;
-            
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Course;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CourseRepository;
-            
-        
-    
-
-    
             import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
             import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
             
@@ -68,22 +54,6 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
     public RestContract createContract() {
         RestContract contract = super.createContract();
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:contactChefId/chef", "GET"), "ContactChef.prototype.__get__chef");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:contactChefId/course", "GET"), "ContactChef.prototype.__get__course");
-                
-
-            
         
             
 
@@ -192,35 +162,11 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "ContactChef.getAbsoluteSchema");
+                
+
             
         
             
@@ -260,108 +206,6 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
 
 
-    
-        
-            //Method get__chef definition
-            public void get__chef(  String contactChefId,  Boolean refresh, final ObjectCallback<Chef> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("contactChefId", contactChefId);
-                
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__chef", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Chef chef = chefRepo.createObject(result);
-                                    callback.onSuccess(chef);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method get__chef definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__course definition
-            public void get__course(  String contactChefId,  Boolean refresh, final ObjectCallback<Course> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("contactChefId", contactChefId);
-                
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__course", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Course course = courseRepo.createObject(result);
-                                    callback.onSuccess(course);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method get__course definition ends here..
-
-            
-
-        
     
         
             //Method get__customer definition
@@ -971,35 +815,42 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
         
     
         
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
+            //Method getAbsoluteSchema definition
+            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method getAbsoluteSchema definition ends here..
+
+            
+
         
     
         

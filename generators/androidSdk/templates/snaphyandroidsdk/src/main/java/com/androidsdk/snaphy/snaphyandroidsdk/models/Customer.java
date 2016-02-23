@@ -67,6 +67,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CourseRepository;
+            
+
+        
+    
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -379,12 +386,29 @@ public class Customer extends com.strongloop.android.loopback.User {
                         */
                     }
 
-                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
                     public void setRecipes1(List<Map<String, Object>> recipes) {
                         //First create a dummy Repo class object for ..
                         RecipeRepository recipesRepository = new RecipeRepository();
                         List<Recipe> result = new ArrayList<>();
                         for (Map<String, Object> obj : recipes) {
+                            //Also add relation to child type for two way communication..
+                            Recipe obj1 = recipesRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setRecipes(result);
+
+                    }
+
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setRecipes1(List<HashMap<String, Object>> recipes) {
+                        //First create a dummy Repo class object for ..
+                        RecipeRepository recipesRepository = new RecipeRepository();
+                        List<Recipe> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : recipes) {
                             //Also add relation to child type for two way communication..
                             Recipe obj1 = recipesRepository.createObject(obj);
                             result.add(obj1);
@@ -572,6 +596,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         });
                                     } //method def ends here.
                                  
+                            
+                         
+                            
+                         
+                            
+                         
                             
                          
                             
@@ -813,6 +843,16 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -880,12 +920,29 @@ public class Customer extends com.strongloop.android.loopback.User {
                         */
                     }
 
-                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
                     public void setComments1(List<Map<String, Object>> comments) {
                         //First create a dummy Repo class object for ..
                         CommentsRepository commentsRepository = new CommentsRepository();
                         List<Comments> result = new ArrayList<>();
                         for (Map<String, Object> obj : comments) {
+                            //Also add relation to child type for two way communication..
+                            Comments obj1 = commentsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setComments(result);
+
+                    }
+
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setComments1(List<HashMap<String, Object>> comments) {
+                        //First create a dummy Repo class object for ..
+                        CommentsRepository commentsRepository = new CommentsRepository();
+                        List<Comments> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : comments) {
                             //Also add relation to child type for two way communication..
                             Comments obj1 = commentsRepository.createObject(obj);
                             result.add(obj1);
@@ -1124,6 +1181,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -1314,6 +1377,16 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -1374,6 +1447,14 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                     //Adding related model automatically in case of include statement from server..
                     public void setWishlists(Map<String, Object> wishlists) {
+                        //First create a dummy Repo class object for customer.
+                        WishlistRepository wishlistsRepository = new WishlistRepository();
+                        Wishlist wishlists1 = wishlistsRepository.createObject(wishlists);
+                        setWishlists(wishlists1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setWishlists(HashMap<String, Object> wishlists) {
                         //First create a dummy Repo class object for customer.
                         WishlistRepository wishlistsRepository = new WishlistRepository();
                         Wishlist wishlists1 = wishlistsRepository.createObject(wishlists);
@@ -1656,6 +1737,22 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -1713,6 +1810,14 @@ public class Customer extends com.strongloop.android.loopback.User {
 
                     //Adding related model automatically in case of include statement from server..
                     public void setChefs(Map<String, Object> chefs) {
+                        //First create a dummy Repo class object for customer.
+                        ChefRepository chefsRepository = new ChefRepository();
+                        Chef chefs1 = chefsRepository.createObject(chefs);
+                        setChefs(chefs1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setChefs(HashMap<String, Object> chefs) {
                         //First create a dummy Repo class object for customer.
                         ChefRepository chefsRepository = new ChefRepository();
                         Chef chefs1 = chefsRepository.createObject(chefs);
@@ -1995,6 +2100,22 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -2059,12 +2180,29 @@ public class Customer extends com.strongloop.android.loopback.User {
                         */
                     }
 
-                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
                     public void setContactChefs1(List<Map<String, Object>> contactChefs) {
                         //First create a dummy Repo class object for ..
                         ContactChefRepository contactChefsRepository = new ContactChefRepository();
                         List<ContactChef> result = new ArrayList<>();
                         for (Map<String, Object> obj : contactChefs) {
+                            //Also add relation to child type for two way communication..
+                            ContactChef obj1 = contactChefsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setContactChefs(result);
+
+                    }
+
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setContactChefs1(List<HashMap<String, Object>> contactChefs) {
+                        //First create a dummy Repo class object for ..
+                        ContactChefRepository contactChefsRepository = new ContactChefRepository();
+                        List<ContactChef> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : contactChefs) {
                             //Also add relation to child type for two way communication..
                             ContactChef obj1 = contactChefsRepository.createObject(obj);
                             result.add(obj1);
@@ -2112,6 +2250,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                     
 
                      
+                            
+                         
+                            
+                         
+                            
+                         
                             
                          
                             
@@ -2280,6 +2424,14 @@ public class Customer extends com.strongloop.android.loopback.User {
                                         });
                                     } //method def ends here.
                                  
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
                             
                          
                             
@@ -2526,6 +2678,8 @@ public class Customer extends com.strongloop.android.loopback.User {
                         
                         
                         
+                        
+                        
                     
 
                 
@@ -2560,12 +2714,29 @@ public class Customer extends com.strongloop.android.loopback.User {
                         */
                     }
 
-                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
                     public void setOrders1(List<Map<String, Object>> orders) {
                         //First create a dummy Repo class object for ..
                         OrderRepository ordersRepository = new OrderRepository();
                         List<Order> result = new ArrayList<>();
                         for (Map<String, Object> obj : orders) {
+                            //Also add relation to child type for two way communication..
+                            Order obj1 = ordersRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setOrders(result);
+
+                    }
+
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setOrders1(List<HashMap<String, Object>> orders) {
+                        //First create a dummy Repo class object for ..
+                        OrderRepository ordersRepository = new OrderRepository();
+                        List<Order> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : orders) {
                             //Also add relation to child type for two way communication..
                             Order obj1 = ordersRepository.createObject(obj);
                             result.add(obj1);
@@ -2613,6 +2784,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                     
 
                      
+                            
+                         
+                            
+                         
+                            
+                         
                             
                          
                             
@@ -2820,6 +2997,14 @@ public class Customer extends com.strongloop.android.loopback.User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -2994,6 +3179,542 @@ public class Customer extends com.strongloop.android.loopback.User {
                                     } //method def ends here.
                                  
                             
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                
+                    //Define hasMany, hasManyThrough method here..
+
+                 
+                 
+             
+          
+    
+        
+                
+                
+                    
+                    //Define hasMany relation method here..
+                    private List<Course>  courses ;
+
+                    public List<Course> getCourses() {
+                        return courses;
+                    }
+
+                    public void setCourses(List<Course> courses) {
+                        this.courses = courses;
+                        //Disabling backend compatibility for cyclic error
+                        /*
+                        //Now add backward compatibility for the relation belongsTo for hasMany..
+                        for (Course obj : courses) {
+                            obj.addRelation(that);
+                        }
+                        */
+                    }
+
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setCourses1(List<Map<String, Object>> courses) {
+                        //First create a dummy Repo class object for ..
+                        CourseRepository coursesRepository = new CourseRepository();
+                        List<Course> result = new ArrayList<>();
+                        for (Map<String, Object> obj : courses) {
+                            //Also add relation to child type for two way communication..
+                            Course obj1 = coursesRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setCourses(result);
+
+                    }
+
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setCourses1(List<HashMap<String, Object>> courses) {
+                        //First create a dummy Repo class object for ..
+                        CourseRepository coursesRepository = new CourseRepository();
+                        List<Course> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : courses) {
+                            //Also add relation to child type for two way communication..
+                            Course obj1 = coursesRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setCourses(result);
+
+                    }
+
+
+                    //Adding relation method..
+                    //Add a dummy class Name object to seperate data..
+                    public void addRelation(List<Course> courses, Course dummyClassInstance) {
+                        that.setCourses(courses);
+
+                    }
+
+                    //Adding relation method..
+                    //This will add a new data to the list relation object..
+                    public void addRelation(Course courses) {
+                        try{
+                            that.getCourses().add(courses);
+                        }catch(Exception e){
+                            List< Course> courses1 = new ArrayList();
+                            //Now add this item to list..
+                            courses1.add(courses);
+                            //Now set data....
+                            that.setCourses(courses1);
+                        }
+                    }
+
+                    
+
+
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void findById__courses( String fk,  RestAdapter restAdapter, final ObjectCallback<Course> callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.findById__courses( (String)that.getId(), fk,  new ObjectCallback<Course> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Course object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void destroyById__courses( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.destroyById__courses( (String)that.getId(), fk,  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void updateById__courses( String fk,  Course data,  RestAdapter restAdapter, final ObjectCallback<Course> callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.updateById__courses( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Course> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Course object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__courses( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Course> callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.get__courses( (String)that.getId(), filter,  new ListCallback<Course> (){
+                                            
+
+                                            
+
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(List<Course> object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            Course obj = new Course();
+                                                            addRelation(object, obj);
+                                                            //Disabling two way communication for cyclic error..
+                                                            /*for (Course obj : object) {
+                                                                //Also add relation to child type for two way communication..
+                                                                obj.addRelation(that);
+                                                            }*/
+
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void create__courses( Course data,  RestAdapter restAdapter, final ObjectCallback<Course> callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.create__courses( (String)that.getId(), data.convertMap(),  new ObjectCallback<Course> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Course object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void delete__courses( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+
+
+
+                                        customerRepo.delete__courses( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void count__courses( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                        //Define methods here..
+                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        customerRepo.count__courses( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         

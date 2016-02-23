@@ -235,6 +235,14 @@ public class RecipeAnalytic extends Model {
                         setRecipes(recipes1);
                     }
 
+                    //Adding related model automatically in case of include statement from server..
+                    public void setRecipes(HashMap<String, Object> recipes) {
+                        //First create a dummy Repo class object for customer.
+                        RecipeRepository recipesRepository = new RecipeRepository();
+                        Recipe recipes1 = recipesRepository.createObject(recipes);
+                        setRecipes(recipes1);
+                    }
+
                     //Adding relation method..
                     public void addRelation(Recipe recipes) {
                         that.setRecipes(recipes);
@@ -433,6 +441,7 @@ public class RecipeAnalytic extends Model {
                                     } //method def ends here.
                                  
                             
+                        
                         
                         
                         

@@ -23,20 +23,6 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.ContactChefRepository;
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChefRepository;
-            
-
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CourseRepository;
-            
-
-        
-    
-
-    
             import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
             
 
@@ -110,22 +96,6 @@ public class ContactChef extends Model {
 
         
     
-        
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-
-        
-    
 
 
     
@@ -133,288 +103,6 @@ public class ContactChef extends Model {
 
 
     //Now adding relations between related models
-    
-        
-                
-                    //Define belongsTo relation method here..
-                    private Chef  chef ;
-
-                    public Chef getChef() {
-                        return chef;
-                    }
-
-                    public void setChef(Chef chef) {
-                        this.chef = chef;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setChef(Map<String, Object> chef) {
-                        //First create a dummy Repo class object for customer.
-                        ChefRepository chefRepository = new ChefRepository();
-                        Chef chef1 = chefRepository.createObject(chef);
-                        setChef(chef1);
-                    }
-
-                    //Adding relation method..
-                    public void addRelation(Chef chef) {
-                        that.setChef(chef);
-                    }
-
-
-
-                
-                
-                
-
-
-
-
-
-
-
-                    //Now add instance methods to fetch the related belongsTo Model..
-                    
-
-                    
-
-                                    //Write the method here..
-                                    public void get__chef( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Chef> callback) {
-                                        //Define methods here..
-                                        final ContactChefRepository  contactChefRepo = restAdapter.createRepository(ContactChefRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        contactChefRepo.get__chef( (String)that.getId(), refresh,  new ObjectCallback<Chef> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(Chef object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                         
-                            
-                         
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    
-
-                
-
-                 
-                 
-             
-          
-    
-        
-                
-                    //Define belongsTo relation method here..
-                    private Course  course ;
-
-                    public Course getCourse() {
-                        return course;
-                    }
-
-                    public void setCourse(Course course) {
-                        this.course = course;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setCourse(Map<String, Object> course) {
-                        //First create a dummy Repo class object for customer.
-                        CourseRepository courseRepository = new CourseRepository();
-                        Course course1 = courseRepository.createObject(course);
-                        setCourse(course1);
-                    }
-
-                    //Adding relation method..
-                    public void addRelation(Course course) {
-                        that.setCourse(course);
-                    }
-
-
-
-                
-                
-                
-
-
-
-
-
-
-
-                    //Now add instance methods to fetch the related belongsTo Model..
-                    
-
-                     
-                            
-                        
-
-                                    //Write the method here..
-                                    public void get__course( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Course> callback) {
-                                        //Define methods here..
-                                        final ContactChefRepository  contactChefRepo = restAdapter.createRepository(ContactChefRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        contactChefRepo.get__course( (String)that.getId(), refresh,  new ObjectCallback<Course> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(Course object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                         
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    
-
-                
-
-                 
-                 
-             
-          
     
         
                 
@@ -431,6 +119,14 @@ public class ContactChef extends Model {
 
                     //Adding related model automatically in case of include statement from server..
                     public void setCustomer(Map<String, Object> customer) {
+                        //First create a dummy Repo class object for customer.
+                        CustomerRepository customerRepository = new CustomerRepository();
+                        Customer customer1 = customerRepository.createObject(customer);
+                        setCustomer(customer1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setCustomer(HashMap<String, Object> customer) {
                         //First create a dummy Repo class object for customer.
                         CustomerRepository customerRepository = new CustomerRepository();
                         Customer customer1 = customerRepository.createObject(customer);
@@ -457,11 +153,7 @@ public class ContactChef extends Model {
                     //Now add instance methods to fetch the related belongsTo Model..
                     
 
-                     
-                            
-                         
-                            
-                        
+                    
 
                                     //Write the method here..
                                     public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
@@ -509,21 +201,6 @@ public class ContactChef extends Model {
                                     } //method def ends here.
                                  
                             
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
                         
                         
                         

@@ -147,6 +147,14 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
             
         
             
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "EmailInfo.getAbsoluteSchema");
+                
+
+            
+        
+            
         
         return contract;
     }
@@ -719,6 +727,45 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                 
 
             }//Method getSchema definition ends here..
+
+            
+
+        
+    
+        
+            //Method getAbsoluteSchema definition
+            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method getAbsoluteSchema definition ends here..
 
             
 

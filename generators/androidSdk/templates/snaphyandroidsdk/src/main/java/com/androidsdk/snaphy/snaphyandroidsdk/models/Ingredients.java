@@ -225,6 +225,14 @@ public class Ingredients extends Model {
                         setIngredientCategory(ingredientCategory1);
                     }
 
+                    //Adding related model automatically in case of include statement from server..
+                    public void setIngredientCategory(HashMap<String, Object> ingredientCategory) {
+                        //First create a dummy Repo class object for customer.
+                        IngredientCategoryRepository ingredientCategoryRepository = new IngredientCategoryRepository();
+                        IngredientCategory ingredientCategory1 = ingredientCategoryRepository.createObject(ingredientCategory);
+                        setIngredientCategory(ingredientCategory1);
+                    }
+
                     //Adding relation method..
                     public void addRelation(IngredientCategory ingredientCategory) {
                         that.setIngredientCategory(ingredientCategory);
@@ -348,6 +356,7 @@ public class Ingredients extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -379,12 +388,29 @@ public class Ingredients extends Model {
                         */
                     }
 
-                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
                     public void setRecipes1(List<Map<String, Object>> recipes) {
                         //First create a dummy Repo class object for ..
                         RecipeRepository recipesRepository = new RecipeRepository();
                         List<Recipe> result = new ArrayList<>();
                         for (Map<String, Object> obj : recipes) {
+                            //Also add relation to child type for two way communication..
+                            Recipe obj1 = recipesRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setRecipes(result);
+
+                    }
+
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setRecipes1(List<HashMap<String, Object>> recipes) {
+                        //First create a dummy Repo class object for ..
+                        RecipeRepository recipesRepository = new RecipeRepository();
+                        List<Recipe> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : recipes) {
                             //Also add relation to child type for two way communication..
                             Recipe obj1 = recipesRepository.createObject(obj);
                             result.add(obj1);
@@ -904,6 +930,7 @@ public class Ingredients extends Model {
                                     } //method def ends here.
                                  
                             
+                        
                         
                         
                         

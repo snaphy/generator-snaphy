@@ -340,6 +340,14 @@ public class <%- modelName %> extends Model {
                         set<%- capitalcaseRelationName %>(<%- relation %>1);
                     }
 
+                    //Adding related model automatically in case of include statement from server..
+                    public void set<%- capitalcaseRelationName %>(HashMap<String, Object> <%- relation %>) {
+                        //First create a dummy Repo class object for customer.
+                        <%- capitalcaseRelatedModelName %>Repository <%- relation %>Repository = new <%- capitalcaseRelatedModelName %>Repository();
+                        <%- capitalcaseRelatedModelName %> <%- relation %>1 = <%- relation %>Repository.createObject(<%- relation %>);
+                        set<%- capitalcaseRelationName %>(<%- relation %>1);
+                    }
+
                     //Adding relation method..
                     public void addRelation(<%- capitalcaseRelatedModelName %> <%- relation %>) {
                         that.set<%- capitalcaseRelationName %>(<%- relation %>);
@@ -368,12 +376,29 @@ public class <%- modelName %> extends Model {
                         */
                     }
 
-                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
                     public void set<%- capitalcaseRelationName %>1(List<Map<String, Object>> <%- relation %>) {
                         //First create a dummy Repo class object for ..
                         <%- capitalcaseRelatedModelName %>Repository <%- relation %>Repository = new <%- capitalcaseRelatedModelName %>Repository();
                         List<<%- capitalcaseRelatedModelName %>> result = new ArrayList<>();
                         for (Map<String, Object> obj : <%- relation %>) {
+                            //Also add relation to child type for two way communication..
+                            <%- capitalcaseRelatedModelName %> obj1 = <%- relation %>Repository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        set<%- capitalcaseRelationName %>(result);
+
+                    }
+
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void set<%- capitalcaseRelationName %>1(List<HashMap<String, Object>> <%- relation %>) {
+                        //First create a dummy Repo class object for ..
+                        <%- capitalcaseRelatedModelName %>Repository <%- relation %>Repository = new <%- capitalcaseRelatedModelName %>Repository();
+                        List<<%- capitalcaseRelatedModelName %>> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : <%- relation %>) {
                             //Also add relation to child type for two way communication..
                             <%- capitalcaseRelatedModelName %> obj1 = <%- relation %>Repository.createObject(obj);
                             result.add(obj1);
@@ -461,12 +486,29 @@ public class <%- modelName %> extends Model {
                         this.<%- relation %> = <%- relation %>;
                     }
 
+                    /*
+
                     //Adding related model automatically in case of include statement from server..
                     public void set<%- capitalcaseRelationName %>1(List<Map<String, Object>> <%- relation %>) {
                         //First create a dummy Repo class object for ..
                         <%- capitalcaseRelatedModelName %>Repository <%- relation %>Repository = new <%- capitalcaseRelatedModelName %>Repository();
                         List<<%- capitalcaseRelatedModelName %>> result = new ArrayList<>();
                         for (Map<String, Object> obj : <%- relation %>) {
+                            //Also add relation to child type for two way communication..
+                            <%- capitalcaseRelatedModelName %> obj1 = <%- relation %>Repository.createObject(obj);
+                            result.add(obj1);
+                        }
+                        set<%- capitalcaseRelationName %>(result);
+                    }
+
+                    */
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void set<%- capitalcaseRelationName %>1(List<HashMap<String, Object>> <%- relation %>) {
+                        //First create a dummy Repo class object for ..
+                        <%- capitalcaseRelatedModelName %>Repository <%- relation %>Repository = new <%- capitalcaseRelatedModelName %>Repository();
+                        List<<%- capitalcaseRelatedModelName %>> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : <%- relation %>) {
                             //Also add relation to child type for two way communication..
                             <%- capitalcaseRelatedModelName %> obj1 = <%- relation %>Repository.createObject(obj);
                             result.add(obj1);

@@ -191,6 +191,15 @@ public class CommentsRepository extends ModelRepository<Comments> {
             
         
             
+
+                
+
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/getAbsoluteSchema", "POST"), "Comments.getAbsoluteSchema");
+                
+
+            
+        
+            
         
             
         
@@ -896,6 +905,45 @@ public class CommentsRepository extends ModelRepository<Comments> {
                 
 
             }//Method getSchema definition ends here..
+
+            
+
+        
+    
+        
+            //Method getAbsoluteSchema definition
+            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method getAbsoluteSchema definition ends here..
 
             
 

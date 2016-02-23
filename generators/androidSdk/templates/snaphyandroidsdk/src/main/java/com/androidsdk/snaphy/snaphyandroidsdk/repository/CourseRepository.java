@@ -31,15 +31,8 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Course;
 //Now import model of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Chef;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChefRepository;
-            
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.ContactChef;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ContactChefRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
             
         
     
@@ -65,63 +58,7 @@ public class CourseRepository extends ModelRepository<Course> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/chef", "GET"), "Course.prototype.__get__chef");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs/:fk", "GET"), "Course.prototype.__findById__contactChefs");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs/:fk", "DELETE"), "Course.prototype.__destroyById__contactChefs");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs/:fk", "PUT"), "Course.prototype.__updateById__contactChefs");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs", "GET"), "Course.prototype.__get__contactChefs");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs", "POST"), "Course.prototype.__create__contactChefs");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs", "DELETE"), "Course.prototype.__delete__contactChefs");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/contactChefs/count", "GET"), "Course.prototype.__count__contactChefs");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/customer", "GET"), "Course.prototype.__get__customer");
                 
 
             
@@ -225,6 +162,12 @@ public class CourseRepository extends ModelRepository<Course> {
             
         
             
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Course.getAbsoluteSchema");
+                
+
+            
         
             
         
@@ -265,8 +208,8 @@ public class CourseRepository extends ModelRepository<Course> {
 
     
         
-            //Method get__chef definition
-            public void get__chef(  String courseId,  Boolean refresh, final ObjectCallback<Chef> callback){
+            //Method get__customer definition
+            public void get__customer(  String courseId,  Boolean refresh, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -283,7 +226,7 @@ public class CourseRepository extends ModelRepository<Course> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__chef", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -294,10 +237,10 @@ public class CourseRepository extends ModelRepository<Course> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
+                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Chef chef = chefRepo.createObject(result);
-                                    callback.onSuccess(chef);
+                                    Customer customer = customerRepo.createObject(result);
+                                    callback.onSuccess(customer);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -309,332 +252,7 @@ public class CourseRepository extends ModelRepository<Course> {
 
                 
 
-            }//Method get__chef definition ends here..
-
-            
-
-        
-    
-        
-            //Method findById__contactChefs definition
-            public void findById__contactChefs(  String courseId,  String fk, final ObjectCallback<ContactChef> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("courseId", courseId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__findById__contactChefs", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method findById__contactChefs definition ends here..
-
-            
-
-        
-    
-        
-            //Method destroyById__contactChefs definition
-            public void destroyById__contactChefs(  String courseId,  String fk, final VoidCallback callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("courseId", courseId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-                    invokeStaticMethod("prototype.__destroyById__contactChefs", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method destroyById__contactChefs definition ends here..
-
-            
-
-        
-    
-        
-            //Method updateById__contactChefs definition
-            public void updateById__contactChefs(  String courseId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("courseId", courseId);
-                
-                        hashMapObject.put("fk", fk);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__updateById__contactChefs", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method updateById__contactChefs definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__contactChefs definition
-            public void get__contactChefs(  String courseId,  Map<String,  ? extends Object> filter, final ListCallback<ContactChef> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("courseId", courseId);
-                
-                        hashMapObject.put("filter", filter);
-                
-
-                
-
-
-                
-
-                
-                    invokeStaticMethod("prototype.__get__contactChefs", hashMapObject, new Adapter.JsonArrayCallback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONArray response) {
-                            
-                                if(response != null){
-                                    //Now converting jsonObject to list
-                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<ContactChef> contactChefList = new ArrayList<ContactChef>();
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
-
-                                    for (Map<String, Object> obj : result) {
-                                        ContactChef contactChef = contactChefRepo.createObject(obj);
-                                        contactChefList.add(contactChef);
-                                    }
-                                    callback.onSuccess(contactChefList);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-            }//Method get__contactChefs definition ends here..
-
-            
-
-        
-    
-        
-            //Method create__contactChefs definition
-            public void create__contactChefs(  String courseId,  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("courseId", courseId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__create__contactChefs", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method create__contactChefs definition ends here..
-
-            
-
-        
-    
-        
-            //Method delete__contactChefs definition
-            public void delete__contactChefs(  String courseId, final VoidCallback callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("courseId", courseId);
-                
-
-                
-                    invokeStaticMethod("prototype.__delete__contactChefs", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method delete__contactChefs definition ends here..
-
-            
-
-        
-    
-        
-            //Method count__contactChefs definition
-            public void count__contactChefs(  String courseId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("courseId", courseId);
-                
-                        hashMapObject.put("where", where);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("prototype.__count__contactChefs", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method count__contactChefs definition ends here..
+            }//Method get__customer definition ends here..
 
             
 
@@ -1196,6 +814,43 @@ public class CourseRepository extends ModelRepository<Course> {
 
         
     
+        
+            //Method getAbsoluteSchema definition
+            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method getAbsoluteSchema definition ends here..
+
+            
+
         
     
         

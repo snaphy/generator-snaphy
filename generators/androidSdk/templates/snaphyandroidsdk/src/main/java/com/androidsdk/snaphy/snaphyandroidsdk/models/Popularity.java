@@ -62,6 +62,28 @@ public class Popularity extends Model {
             
             
             
+                private double popularity;
+                /* Adding Getter and Setter methods */
+                public double getPopularity(){
+                    return popularity;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setPopularity(double popularity){
+                    this.popularity = popularity;
+                    //Update hashMap value..
+                    hashMap.put("popularity", popularity);
+                }
+
+            
+            
+
+        
+    
+        
+            
+            
+            
             
 
         
@@ -97,6 +119,14 @@ public class Popularity extends Model {
 
                     //Adding related model automatically in case of include statement from server..
                     public void setChefs(Map<String, Object> chefs) {
+                        //First create a dummy Repo class object for customer.
+                        ChefRepository chefsRepository = new ChefRepository();
+                        Chef chefs1 = chefsRepository.createObject(chefs);
+                        setChefs(chefs1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setChefs(HashMap<String, Object> chefs) {
                         //First create a dummy Repo class object for customer.
                         ChefRepository chefsRepository = new ChefRepository();
                         Chef chefs1 = chefsRepository.createObject(chefs);
@@ -301,6 +331,7 @@ public class Popularity extends Model {
                                     } //method def ends here.
                                  
                             
+                        
                         
                         
                         

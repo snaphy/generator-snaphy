@@ -77,6 +77,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Course;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CourseRepository;
+            
+        
+    
+
 
 
 
@@ -234,6 +241,30 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/courses/:fk", "GET"), "Customer.prototype.__findById__courses");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/courses/:fk", "DELETE"), "Customer.prototype.__destroyById__courses");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/courses/:fk", "PUT"), "Customer.prototype.__updateById__courses");
+                
+
+            
+        
+            
+
+                
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/contactChefs/:fk", "GET"), "Customer.prototype.__findById__contactChefs");
                 
 
@@ -371,6 +402,38 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/comments/count", "GET"), "Customer.prototype.__count__comments");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/courses", "GET"), "Customer.prototype.__get__courses");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/courses", "POST"), "Customer.prototype.__create__courses");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/courses", "DELETE"), "Customer.prototype.__delete__courses");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/courses/count", "GET"), "Customer.prototype.__count__courses");
                 
 
             
@@ -555,6 +618,16 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Customer.getSchema");
                 
 
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Customer.getAbsoluteSchema");
+                
+
+            
+        
             
         
             
@@ -1412,6 +1485,148 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
     
         
+            //Method findById__courses definition
+            public void findById__courses(  String customerId,  String fk, final ObjectCallback<Course> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__findById__courses", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Course course = courseRepo.createObject(result);
+                                    callback.onSuccess(course);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method findById__courses definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__courses definition
+            public void destroyById__courses(  String customerId,  String fk, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__courses", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__courses definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__courses definition
+            public void updateById__courses(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Course> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__updateById__courses", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Course course = courseRepo.createObject(result);
+                                    callback.onSuccess(course);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method updateById__courses definition ends here..
+
+            
+
+        
+    
+        
             //Method findById__contactChefs definition
             public void findById__contactChefs(  String customerId,  String fk, final ObjectCallback<ContactChef> callback){
 
@@ -2239,6 +2454,189 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
             }//Method count__comments definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__courses definition
+            public void get__courses(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<Course> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__courses", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    List<Course> courseList = new ArrayList<Course>();
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
+
+                                    for (Map<String, Object> obj : result) {
+                                        Course course = courseRepo.createObject(obj);
+                                        courseList.add(course);
+                                    }
+                                    callback.onSuccess(courseList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+            }//Method get__courses definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__courses definition
+            public void create__courses(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Course> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__courses", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Course course = courseRepo.createObject(result);
+                                    callback.onSuccess(course);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method create__courses definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__courses definition
+            public void delete__courses(  String customerId, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__courses", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__courses definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__courses definition
+            public void count__courses(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__courses", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method count__courses definition ends here..
 
             
 
@@ -3244,6 +3642,47 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
             
 
+        
+    
+        
+            //Method getAbsoluteSchema definition
+            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method getAbsoluteSchema definition ends here..
+
+            
+
+        
+    
         
     
         

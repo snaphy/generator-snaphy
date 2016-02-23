@@ -23,14 +23,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.CourseRepository;
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChefRepository;
-            
-
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ContactChefRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
             
 
         
@@ -134,20 +127,20 @@ public class Course extends Model {
         
             
             
-                private String courseFees;
+            
+                private double courseFees;
                 /* Adding Getter and Setter methods */
-                public String getCourseFees(){
+                public double getCourseFees(){
                     return courseFees;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setCourseFees(String courseFees){
+                public void setCourseFees(double courseFees){
                     this.courseFees = courseFees;
                     //Update hashMap value..
                     hashMap.put("courseFees", courseFees);
                 }
 
-            
             
             
 
@@ -204,27 +197,35 @@ public class Course extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private Chef  chef ;
+                    private Customer  customer ;
 
-                    public Chef getChef() {
-                        return chef;
+                    public Customer getCustomer() {
+                        return customer;
                     }
 
-                    public void setChef(Chef chef) {
-                        this.chef = chef;
+                    public void setCustomer(Customer customer) {
+                        this.customer = customer;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setChef(Map<String, Object> chef) {
+                    public void setCustomer(Map<String, Object> customer) {
                         //First create a dummy Repo class object for customer.
-                        ChefRepository chefRepository = new ChefRepository();
-                        Chef chef1 = chefRepository.createObject(chef);
-                        setChef(chef1);
+                        CustomerRepository customerRepository = new CustomerRepository();
+                        Customer customer1 = customerRepository.createObject(customer);
+                        setCustomer(customer1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setCustomer(HashMap<String, Object> customer) {
+                        //First create a dummy Repo class object for customer.
+                        CustomerRepository customerRepository = new CustomerRepository();
+                        Customer customer1 = customerRepository.createObject(customer);
+                        setCustomer(customer1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Chef chef) {
-                        that.setChef(chef);
+                    public void addRelation(Customer customer) {
+                        that.setCustomer(customer);
                     }
 
 
@@ -245,7 +246,7 @@ public class Course extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__chef( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Chef> callback) {
+                                    public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
                                         //Define methods here..
                                         final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
                                         
@@ -256,184 +257,13 @@ public class Course extends Model {
 
 
 
-                                        courseRepo.get__chef( (String)that.getId(), refresh,  new ObjectCallback<Chef> (){
+                                        courseRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Chef object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    
-
-                
-
-                 
-                 
-             
-          
-    
-        
-                
-                
-                    
-                    //Define hasMany relation method here..
-                    private List<ContactChef>  contactChefs ;
-
-                    public List<ContactChef> getContactChefs() {
-                        return contactChefs;
-                    }
-
-                    public void setContactChefs(List<ContactChef> contactChefs) {
-                        this.contactChefs = contactChefs;
-                        //Disabling backend compatibility for cyclic error
-                        /*
-                        //Now add backward compatibility for the relation belongsTo for hasMany..
-                        for (ContactChef obj : contactChefs) {
-                            obj.addRelation(that);
-                        }
-                        */
-                    }
-
-                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setContactChefs1(List<Map<String, Object>> contactChefs) {
-                        //First create a dummy Repo class object for ..
-                        ContactChefRepository contactChefsRepository = new ContactChefRepository();
-                        List<ContactChef> result = new ArrayList<>();
-                        for (Map<String, Object> obj : contactChefs) {
-                            //Also add relation to child type for two way communication..
-                            ContactChef obj1 = contactChefsRepository.createObject(obj);
-                            result.add(obj1);
-
-                        }
-                        setContactChefs(result);
-
-                    }
-
-
-                    //Adding relation method..
-                    //Add a dummy class Name object to seperate data..
-                    public void addRelation(List<ContactChef> contactChefs, ContactChef dummyClassInstance) {
-                        that.setContactChefs(contactChefs);
-
-                    }
-
-                    //Adding relation method..
-                    //This will add a new data to the list relation object..
-                    public void addRelation(ContactChef contactChefs) {
-                        try{
-                            that.getContactChefs().add(contactChefs);
-                        }catch(Exception e){
-                            List< ContactChef> contactChefs1 = new ArrayList();
-                            //Now add this item to list..
-                            contactChefs1.add(contactChefs);
-                            //Now set data....
-                            that.setContactChefs(contactChefs1);
-                        }
-                    }
-
-                    
-
-
-                
-                
-
-
-
-
-
-
-
-                    //Now add instance methods to fetch the related belongsTo Model..
-                    
-
-                     
-                            
-                        
-
-                                    //Write the method here..
-                                    public void findById__contactChefs( String fk,  RestAdapter restAdapter, final ObjectCallback<ContactChef> callback) {
-                                        //Define methods here..
-                                        final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        courseRepo.findById__contactChefs( (String)that.getId(), fk,  new ObjectCallback<ContactChef> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(ContactChef object) {
+                                                    public void onSuccess(Customer object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -462,268 +292,6 @@ public class Course extends Model {
                                  
                             
                         
-
-                                    //Write the method here..
-                                    public void destroyById__contactChefs( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
-                                        //Define methods here..
-                                        final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        courseRepo.destroyById__contactChefs( (String)that.getId(), fk,  new VoidCallback (){
-                                            
-                                                @Override
-                                                public void onSuccess() {
-                                                    callback.onSuccess();
-                                                }
-                                            
-
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void updateById__contactChefs( String fk,  ContactChef data,  RestAdapter restAdapter, final ObjectCallback<ContactChef> callback) {
-                                        //Define methods here..
-                                        final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        courseRepo.updateById__contactChefs( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<ContactChef> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(ContactChef object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void get__contactChefs( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<ContactChef> callback) {
-                                        //Define methods here..
-                                        final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        courseRepo.get__contactChefs( (String)that.getId(), filter,  new ListCallback<ContactChef> (){
-                                            
-
-                                            
-
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(List<ContactChef> object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            ContactChef obj = new ContactChef();
-                                                            addRelation(object, obj);
-                                                            //Disabling two way communication for cyclic error..
-                                                            /*for (ContactChef obj : object) {
-                                                                //Also add relation to child type for two way communication..
-                                                                obj.addRelation(that);
-                                                            }*/
-
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void create__contactChefs( ContactChef data,  RestAdapter restAdapter, final ObjectCallback<ContactChef> callback) {
-                                        //Define methods here..
-                                        final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        courseRepo.create__contactChefs( (String)that.getId(), data.convertMap(),  new ObjectCallback<ContactChef> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(ContactChef object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void delete__contactChefs( RestAdapter restAdapter, final VoidCallback callback) {
-                                        //Define methods here..
-                                        final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
-                                        
-                                        
-
-
-
-                                        courseRepo.delete__contactChefs( (String)that.getId(),  new VoidCallback (){
-                                            
-                                                @Override
-                                                public void onSuccess() {
-                                                    callback.onSuccess();
-                                                }
-                                            
-
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void count__contactChefs( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
-                                        //Define methods here..
-                                        final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        courseRepo.count__contactChefs( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
                         
                         
                         
@@ -750,9 +318,6 @@ public class Course extends Model {
                     
 
                 
-
-                
-                    //Define hasMany, hasManyThrough method here..
 
                  
                  

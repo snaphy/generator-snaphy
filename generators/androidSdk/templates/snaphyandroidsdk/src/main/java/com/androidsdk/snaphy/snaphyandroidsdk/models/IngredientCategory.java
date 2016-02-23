@@ -118,12 +118,29 @@ public class IngredientCategory extends Model {
                         */
                     }
 
-                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
                     public void setIngredients1(List<Map<String, Object>> ingredients) {
                         //First create a dummy Repo class object for ..
                         IngredientsRepository ingredientsRepository = new IngredientsRepository();
                         List<Ingredients> result = new ArrayList<>();
                         for (Map<String, Object> obj : ingredients) {
+                            //Also add relation to child type for two way communication..
+                            Ingredients obj1 = ingredientsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setIngredients(result);
+
+                    }
+
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setIngredients1(List<HashMap<String, Object>> ingredients) {
+                        //First create a dummy Repo class object for ..
+                        IngredientsRepository ingredientsRepository = new IngredientsRepository();
+                        List<Ingredients> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : ingredients) {
                             //Also add relation to child type for two way communication..
                             Ingredients obj1 = ingredientsRepository.createObject(obj);
                             result.add(obj1);
@@ -480,6 +497,7 @@ public class IngredientCategory extends Model {
                                     } //method def ends here.
                                  
                             
+                        
                         
                         
                         

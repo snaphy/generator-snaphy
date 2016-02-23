@@ -206,6 +206,14 @@ public class RecipeIngredients extends Model {
                         setRecipe(recipe1);
                     }
 
+                    //Adding related model automatically in case of include statement from server..
+                    public void setRecipe(HashMap<String, Object> recipe) {
+                        //First create a dummy Repo class object for customer.
+                        RecipeRepository recipeRepository = new RecipeRepository();
+                        Recipe recipe1 = recipeRepository.createObject(recipe);
+                        setRecipe(recipe1);
+                    }
+
                     //Adding relation method..
                     public void addRelation(Recipe recipe) {
                         that.setRecipe(recipe);
@@ -291,6 +299,7 @@ public class RecipeIngredients extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -315,6 +324,14 @@ public class RecipeIngredients extends Model {
 
                     //Adding related model automatically in case of include statement from server..
                     public void setIngredients(Map<String, Object> ingredients) {
+                        //First create a dummy Repo class object for customer.
+                        IngredientsRepository ingredientsRepository = new IngredientsRepository();
+                        Ingredients ingredients1 = ingredientsRepository.createObject(ingredients);
+                        setIngredients(ingredients1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setIngredients(HashMap<String, Object> ingredients) {
                         //First create a dummy Repo class object for customer.
                         IngredientsRepository ingredientsRepository = new IngredientsRepository();
                         Ingredients ingredients1 = ingredientsRepository.createObject(ingredients);
@@ -391,6 +408,7 @@ public class RecipeIngredients extends Model {
                                     } //method def ends here.
                                  
                             
+                        
                         
                         
                         

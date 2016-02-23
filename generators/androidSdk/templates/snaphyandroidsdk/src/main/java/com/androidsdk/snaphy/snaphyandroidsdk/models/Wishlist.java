@@ -110,6 +110,14 @@ public class Wishlist extends Model {
                         setCustomers(customers1);
                     }
 
+                    //Adding related model automatically in case of include statement from server..
+                    public void setCustomers(HashMap<String, Object> customers) {
+                        //First create a dummy Repo class object for customer.
+                        CustomerRepository customersRepository = new CustomerRepository();
+                        Customer customers1 = customersRepository.createObject(customers);
+                        setCustomers(customers1);
+                    }
+
                     //Adding relation method..
                     public void addRelation(Customer customers) {
                         that.setCustomers(customers);
@@ -359,6 +367,7 @@ public class Wishlist extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -384,12 +393,29 @@ public class Wishlist extends Model {
                         this.recipes = recipes;
                     }
 
+                    /*
+
                     //Adding related model automatically in case of include statement from server..
                     public void setRecipes1(List<Map<String, Object>> recipes) {
                         //First create a dummy Repo class object for ..
                         RecipeRepository recipesRepository = new RecipeRepository();
                         List<Recipe> result = new ArrayList<>();
                         for (Map<String, Object> obj : recipes) {
+                            //Also add relation to child type for two way communication..
+                            Recipe obj1 = recipesRepository.createObject(obj);
+                            result.add(obj1);
+                        }
+                        setRecipes(result);
+                    }
+
+                    */
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setRecipes1(List<HashMap<String, Object>> recipes) {
+                        //First create a dummy Repo class object for ..
+                        RecipeRepository recipesRepository = new RecipeRepository();
+                        List<Recipe> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : recipes) {
                             //Also add relation to child type for two way communication..
                             Recipe obj1 = recipesRepository.createObject(obj);
                             result.add(obj1);
@@ -874,6 +900,7 @@ public class Wishlist extends Model {
                                     } //method def ends here.
                                  
                             
+                        
                         
                         
                         

@@ -387,6 +387,14 @@ public class Recipe extends Model {
                         setCustomer(customer1);
                     }
 
+                    //Adding related model automatically in case of include statement from server..
+                    public void setCustomer(HashMap<String, Object> customer) {
+                        //First create a dummy Repo class object for customer.
+                        CustomerRepository customerRepository = new CustomerRepository();
+                        Customer customer1 = customerRepository.createObject(customer);
+                        setCustomer(customer1);
+                    }
+
                     //Adding relation method..
                     public void addRelation(Customer customer) {
                         that.setCustomer(customer);
@@ -662,6 +670,7 @@ public class Recipe extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -687,12 +696,29 @@ public class Recipe extends Model {
                         this.cuisines = cuisines;
                     }
 
+                    /*
+
                     //Adding related model automatically in case of include statement from server..
                     public void setCuisines1(List<Map<String, Object>> cuisines) {
                         //First create a dummy Repo class object for ..
                         CuisinesRepository cuisinesRepository = new CuisinesRepository();
                         List<Cuisines> result = new ArrayList<>();
                         for (Map<String, Object> obj : cuisines) {
+                            //Also add relation to child type for two way communication..
+                            Cuisines obj1 = cuisinesRepository.createObject(obj);
+                            result.add(obj1);
+                        }
+                        setCuisines(result);
+                    }
+
+                    */
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setCuisines1(List<HashMap<String, Object>> cuisines) {
+                        //First create a dummy Repo class object for ..
+                        CuisinesRepository cuisinesRepository = new CuisinesRepository();
+                        List<Cuisines> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : cuisines) {
                             //Also add relation to child type for two way communication..
                             Cuisines obj1 = cuisinesRepository.createObject(obj);
                             result.add(obj1);
@@ -1358,6 +1384,7 @@ public class Recipe extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -1386,12 +1413,29 @@ public class Recipe extends Model {
                         this.category = category;
                     }
 
+                    /*
+
                     //Adding related model automatically in case of include statement from server..
                     public void setCategory1(List<Map<String, Object>> category) {
                         //First create a dummy Repo class object for ..
                         CategoryRepository categoryRepository = new CategoryRepository();
                         List<Category> result = new ArrayList<>();
                         for (Map<String, Object> obj : category) {
+                            //Also add relation to child type for two way communication..
+                            Category obj1 = categoryRepository.createObject(obj);
+                            result.add(obj1);
+                        }
+                        setCategory(result);
+                    }
+
+                    */
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setCategory1(List<HashMap<String, Object>> category) {
+                        //First create a dummy Repo class object for ..
+                        CategoryRepository categoryRepository = new CategoryRepository();
+                        List<Category> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : category) {
                             //Also add relation to child type for two way communication..
                             Category obj1 = categoryRepository.createObject(obj);
                             result.add(obj1);
@@ -2057,6 +2101,7 @@ public class Recipe extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -2091,12 +2136,29 @@ public class Recipe extends Model {
                         */
                     }
 
-                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
                     public void setComments1(List<Map<String, Object>> comments) {
                         //First create a dummy Repo class object for ..
                         CommentsRepository commentsRepository = new CommentsRepository();
                         List<Comments> result = new ArrayList<>();
                         for (Map<String, Object> obj : comments) {
+                            //Also add relation to child type for two way communication..
+                            Comments obj1 = commentsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setComments(result);
+
+                    }
+
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setComments1(List<HashMap<String, Object>> comments) {
+                        //First create a dummy Repo class object for ..
+                        CommentsRepository commentsRepository = new CommentsRepository();
+                        List<Comments> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : comments) {
                             //Also add relation to child type for two way communication..
                             Comments obj1 = commentsRepository.createObject(obj);
                             result.add(obj1);
@@ -2648,6 +2710,7 @@ public class Recipe extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -2676,12 +2739,29 @@ public class Recipe extends Model {
                         this.recipeTags = recipeTags;
                     }
 
+                    /*
+
                     //Adding related model automatically in case of include statement from server..
                     public void setRecipeTags1(List<Map<String, Object>> recipeTags) {
                         //First create a dummy Repo class object for ..
                         RecipeTagRepository recipeTagsRepository = new RecipeTagRepository();
                         List<RecipeTag> result = new ArrayList<>();
                         for (Map<String, Object> obj : recipeTags) {
+                            //Also add relation to child type for two way communication..
+                            RecipeTag obj1 = recipeTagsRepository.createObject(obj);
+                            result.add(obj1);
+                        }
+                        setRecipeTags(result);
+                    }
+
+                    */
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setRecipeTags1(List<HashMap<String, Object>> recipeTags) {
+                        //First create a dummy Repo class object for ..
+                        RecipeTagRepository recipeTagsRepository = new RecipeTagRepository();
+                        List<RecipeTag> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : recipeTags) {
                             //Also add relation to child type for two way communication..
                             RecipeTag obj1 = recipeTagsRepository.createObject(obj);
                             result.add(obj1);
@@ -3347,6 +3427,7 @@ public class Recipe extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -3381,12 +3462,29 @@ public class Recipe extends Model {
                         */
                     }
 
-                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
                     public void setIngredients1(List<Map<String, Object>> ingredients) {
                         //First create a dummy Repo class object for ..
                         IngredientsRepository ingredientsRepository = new IngredientsRepository();
                         List<Ingredients> result = new ArrayList<>();
                         for (Map<String, Object> obj : ingredients) {
+                            //Also add relation to child type for two way communication..
+                            Ingredients obj1 = ingredientsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setIngredients(result);
+
+                    }
+
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setIngredients1(List<HashMap<String, Object>> ingredients) {
+                        //First create a dummy Repo class object for ..
+                        IngredientsRepository ingredientsRepository = new IngredientsRepository();
+                        List<Ingredients> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : ingredients) {
                             //Also add relation to child type for two way communication..
                             Ingredients obj1 = ingredientsRepository.createObject(obj);
                             result.add(obj1);
@@ -4093,6 +4191,7 @@ public class Recipe extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -4121,12 +4220,29 @@ public class Recipe extends Model {
                         this.wishlists = wishlists;
                     }
 
+                    /*
+
                     //Adding related model automatically in case of include statement from server..
                     public void setWishlists1(List<Map<String, Object>> wishlists) {
                         //First create a dummy Repo class object for ..
                         WishlistRepository wishlistsRepository = new WishlistRepository();
                         List<Wishlist> result = new ArrayList<>();
                         for (Map<String, Object> obj : wishlists) {
+                            //Also add relation to child type for two way communication..
+                            Wishlist obj1 = wishlistsRepository.createObject(obj);
+                            result.add(obj1);
+                        }
+                        setWishlists(result);
+                    }
+
+                    */
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setWishlists1(List<HashMap<String, Object>> wishlists) {
+                        //First create a dummy Repo class object for ..
+                        WishlistRepository wishlistsRepository = new WishlistRepository();
+                        List<Wishlist> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : wishlists) {
                             //Also add relation to child type for two way communication..
                             Wishlist obj1 = wishlistsRepository.createObject(obj);
                             result.add(obj1);
@@ -4792,6 +4908,7 @@ public class Recipe extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -4819,6 +4936,14 @@ public class Recipe extends Model {
 
                     //Adding related model automatically in case of include statement from server..
                     public void setRecipeAnalytics(Map<String, Object> recipeAnalytics) {
+                        //First create a dummy Repo class object for customer.
+                        RecipeAnalyticRepository recipeAnalyticsRepository = new RecipeAnalyticRepository();
+                        RecipeAnalytic recipeAnalytics1 = recipeAnalyticsRepository.createObject(recipeAnalytics);
+                        setRecipeAnalytics(recipeAnalytics1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setRecipeAnalytics(HashMap<String, Object> recipeAnalytics) {
                         //First create a dummy Repo class object for customer.
                         RecipeAnalyticRepository recipeAnalyticsRepository = new RecipeAnalyticRepository();
                         RecipeAnalytic recipeAnalytics1 = recipeAnalyticsRepository.createObject(recipeAnalytics);
@@ -5139,6 +5264,7 @@ public class Recipe extends Model {
                             
                          
                             
+                        
                         
                         
                         

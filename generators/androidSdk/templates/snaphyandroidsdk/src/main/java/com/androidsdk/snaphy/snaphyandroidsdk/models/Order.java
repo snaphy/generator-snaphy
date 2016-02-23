@@ -61,6 +61,28 @@ public class Order extends Model {
         
             
             
+                private String added;
+                /* Adding Getter and Setter methods */
+                public String getAdded(){
+                    return added;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setAdded(String added){
+                    this.added = added;
+                    //Update hashMap value..
+                    hashMap.put("added", added);
+                }
+
+            
+            
+            
+
+        
+    
+        
+            
+            
             
             
 
@@ -113,6 +135,36 @@ public class Order extends Model {
         
             
             
+                private String status;
+                /* Adding Getter and Setter methods */
+                public String getStatus(){
+                    return status;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setStatus(String status){
+                    this.status = status;
+                    //Update hashMap value..
+                    hashMap.put("status", status);
+                }
+
+            
+            
+            
+
+        
+    
+        
+            
+            
+            
+            
+
+        
+    
+        
+            
+            
             
             
 
@@ -149,6 +201,14 @@ public class Order extends Model {
 
                     //Adding related model automatically in case of include statement from server..
                     public void setCustomer(Map<String, Object> customer) {
+                        //First create a dummy Repo class object for customer.
+                        CustomerRepository customerRepository = new CustomerRepository();
+                        Customer customer1 = customerRepository.createObject(customer);
+                        setCustomer(customer1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setCustomer(HashMap<String, Object> customer) {
                         //First create a dummy Repo class object for customer.
                         CustomerRepository customerRepository = new CustomerRepository();
                         Customer customer1 = customerRepository.createObject(customer);
@@ -223,6 +283,7 @@ public class Order extends Model {
                                     } //method def ends here.
                                  
                             
+                        
                         
                         
                         

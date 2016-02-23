@@ -206,6 +206,14 @@ public class Comments extends Model {
                         setCustomer(customer1);
                     }
 
+                    //Adding related model automatically in case of include statement from server..
+                    public void setCustomer(HashMap<String, Object> customer) {
+                        //First create a dummy Repo class object for customer.
+                        CustomerRepository customerRepository = new CustomerRepository();
+                        Customer customer1 = customerRepository.createObject(customer);
+                        setCustomer(customer1);
+                    }
+
                     //Adding relation method..
                     public void addRelation(Customer customer) {
                         that.setCustomer(customer);
@@ -307,6 +315,7 @@ public class Comments extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -331,6 +340,14 @@ public class Comments extends Model {
 
                     //Adding related model automatically in case of include statement from server..
                     public void setRecipe(Map<String, Object> recipe) {
+                        //First create a dummy Repo class object for customer.
+                        RecipeRepository recipeRepository = new RecipeRepository();
+                        Recipe recipe1 = recipeRepository.createObject(recipe);
+                        setRecipe(recipe1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setRecipe(HashMap<String, Object> recipe) {
                         //First create a dummy Repo class object for customer.
                         RecipeRepository recipeRepository = new RecipeRepository();
                         Recipe recipe1 = recipeRepository.createObject(recipe);
@@ -407,6 +424,7 @@ public class Comments extends Model {
                                     } //method def ends here.
                                  
                             
+                        
                         
                         
                         

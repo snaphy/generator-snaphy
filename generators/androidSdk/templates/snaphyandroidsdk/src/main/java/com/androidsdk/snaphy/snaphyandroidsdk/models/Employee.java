@@ -305,6 +305,14 @@ public class Employee extends com.strongloop.android.loopback.User {
                         setEmployeeDetails(employeeDetails1);
                     }
 
+                    //Adding related model automatically in case of include statement from server..
+                    public void setEmployeeDetails(HashMap<String, Object> employeeDetails) {
+                        //First create a dummy Repo class object for customer.
+                        EmployeeDetailsRepository employeeDetailsRepository = new EmployeeDetailsRepository();
+                        EmployeeDetails employeeDetails1 = employeeDetailsRepository.createObject(employeeDetails);
+                        setEmployeeDetails(employeeDetails1);
+                    }
+
                     //Adding relation method..
                     public void addRelation(EmployeeDetails employeeDetails) {
                         that.setEmployeeDetails(employeeDetails);
@@ -517,6 +525,7 @@ public class Employee extends com.strongloop.android.loopback.User {
                             
                          
                             
+                        
                         
                         
                         

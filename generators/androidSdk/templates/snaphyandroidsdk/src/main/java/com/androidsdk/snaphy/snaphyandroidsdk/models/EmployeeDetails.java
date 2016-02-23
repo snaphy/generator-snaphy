@@ -147,6 +147,14 @@ public class EmployeeDetails extends Model {
                         setEmployees(employees1);
                     }
 
+                    //Adding related model automatically in case of include statement from server..
+                    public void setEmployees(HashMap<String, Object> employees) {
+                        //First create a dummy Repo class object for customer.
+                        EmployeeRepository employeesRepository = new EmployeeRepository();
+                        Employee employees1 = employeesRepository.createObject(employees);
+                        setEmployees(employees1);
+                    }
+
                     //Adding relation method..
                     public void addRelation(Employee employees) {
                         that.setEmployees(employees);
@@ -345,6 +353,7 @@ public class EmployeeDetails extends Model {
                                     } //method def ends here.
                                  
                             
+                        
                         
                         
                         
