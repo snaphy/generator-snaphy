@@ -378,14 +378,25 @@ public class Ingredients extends Model {
                     }
 
                     public void setRecipes(List<Recipe> recipes) {
-                        this.recipes = recipes;
-                        //Disabling backend compatibility for cyclic error
-                        /*
-                        //Now add backward compatibility for the relation belongsTo for hasMany..
-                        for (Recipe obj : recipes) {
-                            obj.addRelation(that);
+                        boolean hashType = false;
+                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        for(Object o: recipes){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }else if(o.getClass().equals(HashMap.class){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
                         }
-                        */
+
+                        if(hashType){
+                            setRecipes1(hashMaps)
+                        }else{
+                            this.recipes = recipes;
+                        }
                     }
 
                 /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..

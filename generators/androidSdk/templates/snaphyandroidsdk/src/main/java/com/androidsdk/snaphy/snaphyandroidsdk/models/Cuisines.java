@@ -108,8 +108,27 @@ public class Cuisines extends Model {
                         return recipes;
                     }
 
+
                     public void setRecipes(List<Recipe> recipes) {
-                        this.recipes = recipes;
+                        boolean hashType = false;
+                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        for(Object o: recipes){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }else if(o.getClass().equals(HashMap.class){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
+                        }
+
+                        if(hashType){
+                            setRecipes1(hashMaps)
+                        }else{
+                            this.recipes = recipes;
+                        }
                     }
 
                     /*

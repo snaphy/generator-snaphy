@@ -692,8 +692,27 @@ public class Recipe extends Model {
                         return cuisines;
                     }
 
+
                     public void setCuisines(List<Cuisines> cuisines) {
-                        this.cuisines = cuisines;
+                        boolean hashType = false;
+                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        for(Object o: cuisines){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }else if(o.getClass().equals(HashMap.class){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
+                        }
+
+                        if(hashType){
+                            setCuisines1(hashMaps)
+                        }else{
+                            this.cuisines = cuisines;
+                        }
                     }
 
                     /*
@@ -1409,8 +1428,27 @@ public class Recipe extends Model {
                         return category;
                     }
 
+
                     public void setCategory(List<Category> category) {
-                        this.category = category;
+                        boolean hashType = false;
+                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        for(Object o: category){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }else if(o.getClass().equals(HashMap.class){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
+                        }
+
+                        if(hashType){
+                            setCategory1(hashMaps)
+                        }else{
+                            this.category = category;
+                        }
                     }
 
                     /*
@@ -2126,14 +2164,25 @@ public class Recipe extends Model {
                     }
 
                     public void setComments(List<Comments> comments) {
-                        this.comments = comments;
-                        //Disabling backend compatibility for cyclic error
-                        /*
-                        //Now add backward compatibility for the relation belongsTo for hasMany..
-                        for (Comments obj : comments) {
-                            obj.addRelation(that);
+                        boolean hashType = false;
+                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        for(Object o: comments){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }else if(o.getClass().equals(HashMap.class){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
                         }
-                        */
+
+                        if(hashType){
+                            setComments1(hashMaps)
+                        }else{
+                            this.comments = comments;
+                        }
                     }
 
                 /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
@@ -2735,8 +2784,27 @@ public class Recipe extends Model {
                         return recipeTags;
                     }
 
+
                     public void setRecipeTags(List<RecipeTag> recipeTags) {
-                        this.recipeTags = recipeTags;
+                        boolean hashType = false;
+                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        for(Object o: recipeTags){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }else if(o.getClass().equals(HashMap.class){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
+                        }
+
+                        if(hashType){
+                            setRecipeTags1(hashMaps)
+                        }else{
+                            this.recipeTags = recipeTags;
+                        }
                     }
 
                     /*
@@ -3452,14 +3520,25 @@ public class Recipe extends Model {
                     }
 
                     public void setIngredients(List<Ingredients> ingredients) {
-                        this.ingredients = ingredients;
-                        //Disabling backend compatibility for cyclic error
-                        /*
-                        //Now add backward compatibility for the relation belongsTo for hasMany..
-                        for (Ingredients obj : ingredients) {
-                            obj.addRelation(that);
+                        boolean hashType = false;
+                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        for(Object o: ingredients){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }else if(o.getClass().equals(HashMap.class){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
                         }
-                        */
+
+                        if(hashType){
+                            setIngredients1(hashMaps)
+                        }else{
+                            this.ingredients = ingredients;
+                        }
                     }
 
                 /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
@@ -4216,8 +4295,27 @@ public class Recipe extends Model {
                         return wishlists;
                     }
 
+
                     public void setWishlists(List<Wishlist> wishlists) {
-                        this.wishlists = wishlists;
+                        boolean hashType = false;
+                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        for(Object o: wishlists){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }else if(o.getClass().equals(HashMap.class){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
+                        }
+
+                        if(hashType){
+                            setWishlists1(hashMaps)
+                        }else{
+                            this.wishlists = wishlists;
+                        }
                     }
 
                     /*

@@ -108,14 +108,25 @@ public class IngredientCategory extends Model {
                     }
 
                     public void setIngredients(List<Ingredients> ingredients) {
-                        this.ingredients = ingredients;
-                        //Disabling backend compatibility for cyclic error
-                        /*
-                        //Now add backward compatibility for the relation belongsTo for hasMany..
-                        for (Ingredients obj : ingredients) {
-                            obj.addRelation(that);
+                        boolean hashType = false;
+                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        for(Object o: ingredients){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }else if(o.getClass().equals(HashMap.class){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
                         }
-                        */
+
+                        if(hashType){
+                            setIngredients1(hashMaps)
+                        }else{
+                            this.ingredients = ingredients;
+                        }
                     }
 
                 /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..

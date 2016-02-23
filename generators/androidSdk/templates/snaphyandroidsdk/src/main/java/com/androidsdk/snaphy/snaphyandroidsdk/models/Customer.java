@@ -376,14 +376,25 @@ public class Customer extends com.strongloop.android.loopback.User {
                     }
 
                     public void setRecipes(List<Recipe> recipes) {
-                        this.recipes = recipes;
-                        //Disabling backend compatibility for cyclic error
-                        /*
-                        //Now add backward compatibility for the relation belongsTo for hasMany..
-                        for (Recipe obj : recipes) {
-                            obj.addRelation(that);
+                        boolean hashType = false;
+                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        for(Object o: recipes){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }else if(o.getClass().equals(HashMap.class){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
                         }
-                        */
+
+                        if(hashType){
+                            setRecipes1(hashMaps)
+                        }else{
+                            this.recipes = recipes;
+                        }
                     }
 
                 /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
@@ -910,14 +921,25 @@ public class Customer extends com.strongloop.android.loopback.User {
                     }
 
                     public void setComments(List<Comments> comments) {
-                        this.comments = comments;
-                        //Disabling backend compatibility for cyclic error
-                        /*
-                        //Now add backward compatibility for the relation belongsTo for hasMany..
-                        for (Comments obj : comments) {
-                            obj.addRelation(that);
+                        boolean hashType = false;
+                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        for(Object o: comments){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }else if(o.getClass().equals(HashMap.class){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
                         }
-                        */
+
+                        if(hashType){
+                            setComments1(hashMaps)
+                        }else{
+                            this.comments = comments;
+                        }
                     }
 
                 /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
@@ -2170,14 +2192,25 @@ public class Customer extends com.strongloop.android.loopback.User {
                     }
 
                     public void setContactChefs(List<ContactChef> contactChefs) {
-                        this.contactChefs = contactChefs;
-                        //Disabling backend compatibility for cyclic error
-                        /*
-                        //Now add backward compatibility for the relation belongsTo for hasMany..
-                        for (ContactChef obj : contactChefs) {
-                            obj.addRelation(that);
+                        boolean hashType = false;
+                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        for(Object o: contactChefs){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }else if(o.getClass().equals(HashMap.class){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
                         }
-                        */
+
+                        if(hashType){
+                            setContactChefs1(hashMaps)
+                        }else{
+                            this.contactChefs = contactChefs;
+                        }
                     }
 
                 /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
@@ -2704,14 +2737,25 @@ public class Customer extends com.strongloop.android.loopback.User {
                     }
 
                     public void setOrders(List<Order> orders) {
-                        this.orders = orders;
-                        //Disabling backend compatibility for cyclic error
-                        /*
-                        //Now add backward compatibility for the relation belongsTo for hasMany..
-                        for (Order obj : orders) {
-                            obj.addRelation(that);
+                        boolean hashType = false;
+                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        for(Object o: orders){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }else if(o.getClass().equals(HashMap.class){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
                         }
-                        */
+
+                        if(hashType){
+                            setOrders1(hashMaps)
+                        }else{
+                            this.orders = orders;
+                        }
                     }
 
                 /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
@@ -3238,14 +3282,25 @@ public class Customer extends com.strongloop.android.loopback.User {
                     }
 
                     public void setCourses(List<Course> courses) {
-                        this.courses = courses;
-                        //Disabling backend compatibility for cyclic error
-                        /*
-                        //Now add backward compatibility for the relation belongsTo for hasMany..
-                        for (Course obj : courses) {
-                            obj.addRelation(that);
+                        boolean hashType = false;
+                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        for(Object o: courses){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }else if(o.getClass().equals(HashMap.class){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
                         }
-                        */
+
+                        if(hashType){
+                            setCourses1(hashMaps)
+                        }else{
+                            this.courses = courses;
+                        }
                     }
 
                 /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
