@@ -70,6 +70,7 @@ public class CompanyInfo extends Model {
             
             
             
+            
 
         
     
@@ -89,6 +90,7 @@ public class CompanyInfo extends Model {
                     hashMap.put("html", html);
                 }
 
+            
             
             
             
@@ -114,10 +116,12 @@ public class CompanyInfo extends Model {
             
             
             
+            
 
         
     
         
+            
             
             
             

@@ -70,6 +70,7 @@ public class AmazonImage extends Model {
             
             
             
+            
 
         
     
@@ -89,6 +90,7 @@ public class AmazonImage extends Model {
                     hashMap.put("container", container);
                 }
 
+            
             
             
             
@@ -114,6 +116,7 @@ public class AmazonImage extends Model {
             
             
             
+            
 
         
     
@@ -136,10 +139,12 @@ public class AmazonImage extends Model {
                 }
 
             
+            
 
         
     
         
+            
             
             
             

@@ -26,27 +26,20 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.RecipeIngredients;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.OrderDetail;
 
 //Now import model of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Recipe;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Order;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.OrderRepository;
             
         
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Ingredients;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.IngredientsRepository;
-            
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.OrderDetail;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.OrderDetailRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.RecipeIngredients;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeIngredientsRepository;
             
         
     
@@ -55,11 +48,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.RecipeIngredients;
 
 
 
-public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredients> {
+public class OrderDetailRepository extends ModelRepository<OrderDetail> {
 
 
-    public RecipeIngredientsRepository(){
-        super("RecipeIngredients", null, RecipeIngredients.class);
+    public OrderDetailRepository(){
+        super("OrderDetail", null, OrderDetail.class);
     }
 
 
@@ -72,8 +65,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:recipeIngredientsId/recipe", "GET"), "RecipeIngredients.prototype.__get__recipe");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderDetailId/order", "GET"), "OrderDetail.prototype.__get__order");
                 
 
             
@@ -81,8 +73,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:recipeIngredientsId/ingredients", "GET"), "RecipeIngredients.prototype.__get__ingredients");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderDetailId/recipeIngredients", "GET"), "OrderDetail.prototype.__get__recipeIngredients");
                 
 
             
@@ -90,8 +81,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:recipeIngredientsId/orderDetails", "GET"), "RecipeIngredients.prototype.__get__orderDetails");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderDetailId/recipeIngredients", "POST"), "OrderDetail.prototype.__create__recipeIngredients");
                 
 
             
@@ -99,8 +89,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:recipeIngredientsId/orderDetails", "POST"), "RecipeIngredients.prototype.__create__orderDetails");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderDetailId/recipeIngredients", "PUT"), "OrderDetail.prototype.__update__recipeIngredients");
                 
 
             
@@ -108,8 +97,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:recipeIngredientsId/orderDetails", "PUT"), "RecipeIngredients.prototype.__update__orderDetails");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderDetailId/recipeIngredients", "DELETE"), "OrderDetail.prototype.__destroy__recipeIngredients");
                 
 
             
@@ -117,8 +105,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:recipeIngredientsId/orderDetails", "DELETE"), "RecipeIngredients.prototype.__destroy__orderDetails");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "OrderDetail.create");
                 
 
             
@@ -126,8 +113,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/", "POST"), "RecipeIngredients.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "OrderDetail.create");
                 
 
             
@@ -135,8 +121,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/", "POST"), "RecipeIngredients.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "OrderDetail.upsert");
                 
 
             
@@ -144,8 +129,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/", "PUT"), "RecipeIngredients.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "OrderDetail.exists");
                 
 
             
@@ -153,8 +137,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:id/exists", "GET"), "RecipeIngredients.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "OrderDetail.findById");
                 
 
             
@@ -162,8 +145,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:id", "GET"), "RecipeIngredients.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "OrderDetail.find");
                 
 
             
@@ -171,8 +153,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/", "GET"), "RecipeIngredients.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "OrderDetail.findOne");
                 
 
             
@@ -180,8 +161,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/findOne", "GET"), "RecipeIngredients.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "OrderDetail.updateAll");
                 
 
             
@@ -189,8 +169,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/update", "POST"), "RecipeIngredients.updateAll");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "OrderDetail.deleteById");
                 
 
             
@@ -198,8 +177,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:id", "DELETE"), "RecipeIngredients.deleteById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "OrderDetail.count");
                 
 
             
@@ -207,17 +185,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/count", "GET"), "RecipeIngredients.count");
-                
-
-            
-        
-            
-
-                
-
-                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:recipeIngredientsId", "PUT"), "RecipeIngredients.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderDetailId", "PUT"), "OrderDetail.prototype.updateAttributes");
                 
 
             
@@ -227,8 +195,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/getSchema", "POST"), "RecipeIngredients.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "OrderDetail.getSchema");
                 
 
             
@@ -236,10 +203,25 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/getAbsoluteSchema", "POST"), "RecipeIngredients.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "OrderDetail.getAbsoluteSchema");
                 
 
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -261,7 +243,8 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
     //override getNameForRestUrlMethod
     public String  getNameForRestUrl() {
         
-            return "RecipeIngredients";
+            //call super method instead..
+            return super.getNameForRestUrl();
         
     }
 
@@ -274,14 +257,14 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
 
     
         
-            //Method get__recipe definition
-            public void get__recipe(  String recipeIngredientsId,  Boolean refresh, final ObjectCallback<Recipe> callback){
+            //Method get__order definition
+            public void get__order(  String orderDetailId,  Boolean refresh, final ObjectCallback<Order> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("recipeIngredientsId", recipeIngredientsId);
+                        hashMapObject.put("orderDetailId", orderDetailId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -292,7 +275,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__recipe", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__order", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -303,10 +286,10 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Recipe recipe = recipeRepo.createObject(result);
-                                    callback.onSuccess(recipe);
+                                    Order order = orderRepo.createObject(result);
+                                    callback.onSuccess(order);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -318,21 +301,21 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
 
                 
 
-            }//Method get__recipe definition ends here..
+            }//Method get__order definition ends here..
 
             
 
         
     
         
-            //Method get__ingredients definition
-            public void get__ingredients(  String recipeIngredientsId,  Boolean refresh, final ObjectCallback<Ingredients> callback){
+            //Method get__recipeIngredients definition
+            public void get__recipeIngredients(  String orderDetailId,  Boolean refresh, final ObjectCallback<RecipeIngredients> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("recipeIngredientsId", recipeIngredientsId);
+                        hashMapObject.put("orderDetailId", orderDetailId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -343,7 +326,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__ingredients", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__recipeIngredients", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -354,10 +337,10 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
+                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Ingredients ingredients = ingredientsRepo.createObject(result);
-                                    callback.onSuccess(ingredients);
+                                    RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
+                                    callback.onSuccess(recipeIngredients);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -369,72 +352,21 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
 
                 
 
-            }//Method get__ingredients definition ends here..
+            }//Method get__recipeIngredients definition ends here..
 
             
 
         
     
         
-            //Method get__orderDetails definition
-            public void get__orderDetails(  String recipeIngredientsId,  Boolean refresh, final ObjectCallback<OrderDetail> callback){
+            //Method create__recipeIngredients definition
+            public void create__recipeIngredients(  String orderDetailId,  Map<String,  ? extends Object> data, final ObjectCallback<RecipeIngredients> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("recipeIngredientsId", recipeIngredientsId);
-                
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__orderDetails", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
-                                    callback.onSuccess(orderDetail);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method get__orderDetails definition ends here..
-
-            
-
-        
-    
-        
-            //Method create__orderDetails definition
-            public void create__orderDetails(  String recipeIngredientsId,  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("recipeIngredientsId", recipeIngredientsId);
+                        hashMapObject.put("orderDetailId", orderDetailId);
                 
                         hashMapObject.putAll(data);
                 
@@ -445,7 +377,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__orderDetails", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__recipeIngredients", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -456,10 +388,10 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
+                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
-                                    callback.onSuccess(orderDetail);
+                                    RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
+                                    callback.onSuccess(recipeIngredients);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -471,21 +403,21 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
 
                 
 
-            }//Method create__orderDetails definition ends here..
+            }//Method create__recipeIngredients definition ends here..
 
             
 
         
     
         
-            //Method update__orderDetails definition
-            public void update__orderDetails(  String recipeIngredientsId,  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
+            //Method update__recipeIngredients definition
+            public void update__recipeIngredients(  String orderDetailId,  Map<String,  ? extends Object> data, final ObjectCallback<RecipeIngredients> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("recipeIngredientsId", recipeIngredientsId);
+                        hashMapObject.put("orderDetailId", orderDetailId);
                 
                         hashMapObject.putAll(data);
                 
@@ -496,7 +428,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                 
                     
                     
-                    invokeStaticMethod("prototype.__update__orderDetails", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__update__recipeIngredients", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -507,10 +439,10 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
+                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
-                                    callback.onSuccess(orderDetail);
+                                    RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
+                                    callback.onSuccess(recipeIngredients);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -522,25 +454,25 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
 
                 
 
-            }//Method update__orderDetails definition ends here..
+            }//Method update__recipeIngredients definition ends here..
 
             
 
         
     
         
-            //Method destroy__orderDetails definition
-            public void destroy__orderDetails(  String recipeIngredientsId, final VoidCallback callback){
+            //Method destroy__recipeIngredients definition
+            public void destroy__recipeIngredients(  String orderDetailId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("recipeIngredientsId", recipeIngredientsId);
+                        hashMapObject.put("orderDetailId", orderDetailId);
                 
 
                 
-                    invokeStaticMethod("prototype.__destroy__orderDetails", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroy__recipeIngredients", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -558,7 +490,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
 
                 
 
-            }//Method destroy__orderDetails definition ends here..
+            }//Method destroy__recipeIngredients definition ends here..
 
             
 
@@ -566,7 +498,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<RecipeIngredients> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -592,10 +524,10 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
-                                    callback.onSuccess(recipeIngredients);
+                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
+                                    callback.onSuccess(orderDetail);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -615,7 +547,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
     
         
             //Method createMany definition
-            public void createMany(  Map<String,  ? extends Object> data, final ObjectCallback<RecipeIngredients> callback){
+            public void createMany(  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -641,10 +573,10 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
-                                    callback.onSuccess(recipeIngredients);
+                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
+                                    callback.onSuccess(orderDetail);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -664,7 +596,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
     
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<RecipeIngredients> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -690,10 +622,10 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
-                                    callback.onSuccess(recipeIngredients);
+                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
+                                    callback.onSuccess(orderDetail);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -754,7 +686,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<RecipeIngredients> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<OrderDetail> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -782,10 +714,10 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
-                                    callback.onSuccess(recipeIngredients);
+                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
+                                    callback.onSuccess(orderDetail);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -805,7 +737,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<RecipeIngredients> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<OrderDetail> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -832,14 +764,14 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<RecipeIngredients> recipeIngredientsList = new ArrayList<RecipeIngredients>();
-                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
+                                    List<OrderDetail> orderDetailList = new ArrayList<OrderDetail>();
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(obj);
-                                        recipeIngredientsList.add(recipeIngredients);
+                                        OrderDetail orderDetail = orderDetailRepo.createObject(obj);
+                                        orderDetailList.add(orderDetail);
                                     }
-                                    callback.onSuccess(recipeIngredientsList);
+                                    callback.onSuccess(orderDetailList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -856,7 +788,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<RecipeIngredients> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<OrderDetail> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -882,10 +814,10 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
-                                    callback.onSuccess(recipeIngredients);
+                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
+                                    callback.onSuccess(orderDetail);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1030,13 +962,13 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String recipeIngredientsId,  Map<String,  ? extends Object> data, final ObjectCallback<RecipeIngredients> callback){
+            public void updateAttributes(  String orderDetailId,  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("recipeIngredientsId", recipeIngredientsId);
+                        hashMapObject.put("orderDetailId", orderDetailId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1058,10 +990,10 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
-                                    callback.onSuccess(recipeIngredients);
+                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
+                                    callback.onSuccess(orderDetail);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1157,6 +1089,22 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
 
             
 
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
         

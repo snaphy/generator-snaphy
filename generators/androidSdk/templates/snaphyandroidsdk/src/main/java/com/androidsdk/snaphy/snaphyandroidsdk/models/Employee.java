@@ -80,6 +80,7 @@ public class Employee extends com.strongloop.android.loopback.User {
             
             
             
+            
 
         
     
@@ -99,6 +100,7 @@ public class Employee extends com.strongloop.android.loopback.User {
                     hashMap.put("firstName", firstName);
                 }
 
+            
             
             
             
@@ -124,6 +126,7 @@ public class Employee extends com.strongloop.android.loopback.User {
             
             
             
+            
 
         
     
@@ -143,6 +146,7 @@ public class Employee extends com.strongloop.android.loopback.User {
                     hashMap.put("date", date);
                 }
 
+            
             
             
             
@@ -168,6 +172,7 @@ public class Employee extends com.strongloop.android.loopback.User {
             
             
             
+            
 
         
     
@@ -190,26 +195,12 @@ public class Employee extends com.strongloop.android.loopback.User {
             
             
             
-
-        
-    
-        
-            
-            
-            
             
 
         
     
         
             
-            
-            
-            
-
-        
-    
-        
             
             
             
@@ -222,26 +213,12 @@ public class Employee extends com.strongloop.android.loopback.User {
             
             
             
-
-        
-    
-        
-            
-            
-            
             
 
         
     
         
             
-            
-            
-            
-
-        
-    
-        
             
             
             
@@ -254,6 +231,16 @@ public class Employee extends com.strongloop.android.loopback.User {
             
             
             
+            
+
+        
+    
+        
+            
+            
+            
+            
+            
 
         
     
@@ -262,10 +249,39 @@ public class Employee extends com.strongloop.android.loopback.User {
             
             
             
+            
 
         
     
         
+            
+            
+            
+            
+            
+
+        
+    
+        
+            
+            
+            
+            
+            
+
+        
+    
+        
+            
+            
+            
+            
+            
+
+        
+    
+        
+            
             
             
             

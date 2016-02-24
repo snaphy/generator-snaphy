@@ -77,6 +77,7 @@ public class Course extends Model {
             
             
             
+            
 
         
     
@@ -96,6 +97,7 @@ public class Course extends Model {
                     hashMap.put("description", description);
                 }
 
+            
             
             
             
@@ -121,6 +123,7 @@ public class Course extends Model {
             
             
             
+            
 
         
     
@@ -141,6 +144,7 @@ public class Course extends Model {
                     hashMap.put("courseFees", courseFees);
                 }
 
+            
             
             
 
@@ -167,18 +171,21 @@ public class Course extends Model {
             
             
             
-
-        
-    
-        
-            
-            
-            
             
 
         
     
         
+            
+            
+            
+            
+            
+
+        
+    
+        
+            
             
             
             

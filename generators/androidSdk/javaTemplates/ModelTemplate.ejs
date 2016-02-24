@@ -23,6 +23,9 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
         else if (type === "boolean") {
             return "Boolean"
         }
+        else if(type === "geopoint"){
+            return "Map<String, Object>"
+        }
         else {
 
             return capitalizeFirstLetter(checkTypeConversion(type, model));
@@ -205,7 +208,7 @@ public class <%- modelName %> extends Model {
             <% if(isArray) {
                 var typeName = model.properties[property].type[0];
                 var listType;
-                if(typeName === "object"){
+                if(typeName === "object" || typeName === "geopoint"){
                     listType = "List<Map<String, Object>>";
                 }
                 else if (typeName === "string" || typeName === "date") {
@@ -264,7 +267,7 @@ public class <%- modelName %> extends Model {
                 }
 
             <% } %>
-            <% if( model.properties[property].type === "object" && property !== "id") { %>
+            <% if( model.properties[property].type === "object" && property !== "id" ) { %>
                 private Map<String, Object> <%- property %>;
                 /* Adding Getter and Setter methods */
                 public Map<String, Object> get<%- capitalPropertyName %>(){
@@ -274,6 +277,47 @@ public class <%- modelName %> extends Model {
                 /* Adding Getter and Setter methods */
                 public void set<%- capitalPropertyName %>(Map<String, Object> <%- property %>){
                     this.<%- property %> = <%- property %>;
+                    //Update Map value..
+                    hashMap.put("<%- property %>", <%- property %>);
+                }
+
+            <% } %>
+            <% if( model.properties[property].type === "geopoint" ) { %>
+                private Map<String, Object> <%- property %> = new HashMap();
+                /* Adding Getter and Setter methods */
+                public Map<String, Object> get<%- capitalPropertyName %>(){
+                    return <%- property %>;
+                }
+                /* Adding Getter and Setter methods */
+                public double get<%- capitalPropertyName %>Latitide(){
+                    if(<%- property %> != null){
+                        return (Double)<%- property %>.get("lat");
+                    }else{
+                        return 0;
+                    }
+                }
+
+                /* Adding Getter and Setter methods */
+                public double get<%- capitalPropertyName %>Longitude(){
+                    if(<%- property %> != null){
+                        return (Double)<%- property %>.get("lng");
+                    }else{
+                        return 0;
+                    }
+
+                }
+
+                /* Adding Getter and Setter methods */
+                public void set<%- capitalPropertyName %>(Map<String, Object> <%- property %>){
+                    this.<%- property %>.putAll(<%- property %>);
+                    //Update Map value..
+                    hashMap.put("<%- property %>", <%- property %>);
+                }
+
+                /* Adding Getter and Setter methods */
+                public void set<%- capitalPropertyName %>(double lat, double lng){
+                    this.<%- property %>.put("lat", lat);
+                    this.<%- property %>.put("lng", lng);
                     //Update Map value..
                     hashMap.put("<%- property %>", <%- property %>);
                 }

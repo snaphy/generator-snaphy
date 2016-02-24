@@ -37,6 +37,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Order;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.OrderDetail;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.OrderDetailRepository;
+            
+        
+    
+
 
 
 
@@ -59,6 +66,62 @@ public class OrderRepository extends ModelRepository<Order> {
 
                 
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId/customer", "GET"), "Order.prototype.__get__customer");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId/orderDetails/:fk", "GET"), "Order.prototype.__findById__orderDetails");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId/orderDetails/:fk", "DELETE"), "Order.prototype.__destroyById__orderDetails");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId/orderDetails/:fk", "PUT"), "Order.prototype.__updateById__orderDetails");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId/orderDetails", "GET"), "Order.prototype.__get__orderDetails");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId/orderDetails", "POST"), "Order.prototype.__create__orderDetails");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId/orderDetails", "DELETE"), "Order.prototype.__delete__orderDetails");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId/orderDetails/count", "GET"), "Order.prototype.__count__orderDetails");
                 
 
             
@@ -187,6 +250,8 @@ public class OrderRepository extends ModelRepository<Order> {
         
             
         
+            
+        
         return contract;
     }
 
@@ -253,6 +318,331 @@ public class OrderRepository extends ModelRepository<Order> {
                 
 
             }//Method get__customer definition ends here..
+
+            
+
+        
+    
+        
+            //Method findById__orderDetails definition
+            public void findById__orderDetails(  String orderId,  String fk, final ObjectCallback<OrderDetail> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("orderId", orderId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__findById__orderDetails", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
+                                    callback.onSuccess(orderDetail);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method findById__orderDetails definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__orderDetails definition
+            public void destroyById__orderDetails(  String orderId,  String fk, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("orderId", orderId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__orderDetails", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__orderDetails definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__orderDetails definition
+            public void updateById__orderDetails(  String orderId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("orderId", orderId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__updateById__orderDetails", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
+                                    callback.onSuccess(orderDetail);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method updateById__orderDetails definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__orderDetails definition
+            public void get__orderDetails(  String orderId,  Map<String,  ? extends Object> filter, final ListCallback<OrderDetail> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("orderId", orderId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__orderDetails", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    List<OrderDetail> orderDetailList = new ArrayList<OrderDetail>();
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
+
+                                    for (Map<String, Object> obj : result) {
+                                        OrderDetail orderDetail = orderDetailRepo.createObject(obj);
+                                        orderDetailList.add(orderDetail);
+                                    }
+                                    callback.onSuccess(orderDetailList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+            }//Method get__orderDetails definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__orderDetails definition
+            public void create__orderDetails(  String orderId,  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("orderId", orderId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__orderDetails", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
+                                    callback.onSuccess(orderDetail);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method create__orderDetails definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__orderDetails definition
+            public void delete__orderDetails(  String orderId, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("orderId", orderId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__orderDetails", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__orderDetails definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__orderDetails definition
+            public void count__orderDetails(  String orderId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("orderId", orderId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__orderDetails", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method count__orderDetails definition ends here..
 
             
 
@@ -851,6 +1241,8 @@ public class OrderRepository extends ModelRepository<Order> {
 
             
 
+        
+    
         
     
         

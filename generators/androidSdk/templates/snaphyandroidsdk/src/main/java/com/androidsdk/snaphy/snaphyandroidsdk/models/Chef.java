@@ -84,6 +84,7 @@ public class Chef extends Model {
             
             
             
+            
 
         
     
@@ -91,6 +92,47 @@ public class Chef extends Model {
             
             
             
+            
+            
+                private Map<String, Object> geolocation = new HashMap();
+                /* Adding Getter and Setter methods */
+                public Map<String, Object> getGeolocation(){
+                    return geolocation;
+                }
+                /* Adding Getter and Setter methods */
+                public double getGeolocationLatitide(){
+                    if(geolocation != null){
+                        return (Double)geolocation.get("lat");
+                    }else{
+                        return 0;
+                    }
+                }
+
+                /* Adding Getter and Setter methods */
+                public double getGeolocationLongitude(){
+                    if(geolocation != null){
+                        return (Double)geolocation.get("lng");
+                    }else{
+                        return 0;
+                    }
+
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setGeolocation(Map<String, Object> geolocation){
+                    this.geolocation.putAll(geolocation);
+                    //Update Map value..
+                    hashMap.put("geolocation", geolocation);
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setGeolocation(double lat, double lng){
+                    this.geolocation.put("lat", lat);
+                    this.geolocation.put("lng", lng);
+                    //Update Map value..
+                    hashMap.put("geolocation", geolocation);
+                }
+
             
 
         
@@ -111,6 +153,7 @@ public class Chef extends Model {
                     hashMap.put("status", status);
                 }
 
+            
             
             
             
@@ -136,13 +179,6 @@ public class Chef extends Model {
             
             
             
-
-        
-    
-        
-            
-            
-            
             
 
         
@@ -152,10 +188,21 @@ public class Chef extends Model {
             
             
             
+            
 
         
     
         
+            
+            
+            
+            
+            
+
+        
+    
+        
+            
             
             
             

@@ -18,12 +18,19 @@ import com.strongloop.android.loopback.callbacks.VoidCallback;
 import com.strongloop.android.remoting.adapters.Adapter;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeAnalyticRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.OrderDetailRepository;
 
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.OrderRepository;
+            
+
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeIngredientsRepository;
             
 
         
@@ -36,7 +43,7 @@ import java.util.Map;
 
 
 
-public class RecipeAnalytic extends Model {
+public class OrderDetail extends Model {
 
 
     //For converting all model values to hashMap
@@ -51,9 +58,9 @@ public class RecipeAnalytic extends Model {
         }
     }
 
-    private RecipeAnalytic that ;
+    private OrderDetail that ;
 
-    public RecipeAnalytic (){
+    public OrderDetail (){
         that = this;
     }
 
@@ -62,17 +69,17 @@ public class RecipeAnalytic extends Model {
             
             
             
-                private double totalViews;
+                private double requiredQuantity;
                 /* Adding Getter and Setter methods */
-                public double getTotalViews(){
-                    return totalViews;
+                public double getRequiredQuantity(){
+                    return requiredQuantity;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setTotalViews(double totalViews){
-                    this.totalViews = totalViews;
+                public void setRequiredQuantity(double requiredQuantity){
+                    this.requiredQuantity = requiredQuantity;
                     //Update hashMap value..
-                    hashMap.put("totalViews", totalViews);
+                    hashMap.put("requiredQuantity", requiredQuantity);
                 }
 
             
@@ -83,112 +90,6 @@ public class RecipeAnalytic extends Model {
     
         
             
-            
-                private String added;
-                /* Adding Getter and Setter methods */
-                public String getAdded(){
-                    return added;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setAdded(String added){
-                    this.added = added;
-                    //Update hashMap value..
-                    hashMap.put("added", added);
-                }
-
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-                private String lastModified;
-                /* Adding Getter and Setter methods */
-                public String getLastModified(){
-                    return lastModified;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setLastModified(String lastModified){
-                    this.lastModified = lastModified;
-                    //Update hashMap value..
-                    hashMap.put("lastModified", lastModified);
-                }
-
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-                private double averageRating;
-                /* Adding Getter and Setter methods */
-                public double getAverageRating(){
-                    return averageRating;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setAverageRating(double averageRating){
-                    this.averageRating = averageRating;
-                    //Update hashMap value..
-                    hashMap.put("averageRating", averageRating);
-                }
-
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-                private double totalComment;
-                /* Adding Getter and Setter methods */
-                public double getTotalComment(){
-                    return totalComment;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setTotalComment(double totalComment){
-                    this.totalComment = totalComment;
-                    //Update hashMap value..
-                    hashMap.put("totalComment", totalComment);
-                }
-
-            
-            
-            
-
-        
-    
-        
-            
-            
-                private String priority;
-                /* Adding Getter and Setter methods */
-                public String getPriority(){
-                    return priority;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setPriority(String priority){
-                    this.priority = priority;
-                    //Update hashMap value..
-                    hashMap.put("priority", priority);
-                }
-
             
             
             
@@ -225,35 +126,35 @@ public class RecipeAnalytic extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private Recipe  recipes ;
+                    private Order  order ;
 
-                    public Recipe getRecipes() {
-                        return recipes;
+                    public Order getOrder() {
+                        return order;
                     }
 
-                    public void setRecipes(Recipe recipes) {
-                        this.recipes = recipes;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setRecipes(Map<String, Object> recipes) {
-                        //First create a dummy Repo class object for customer.
-                        RecipeRepository recipesRepository = new RecipeRepository();
-                        Recipe recipes1 = recipesRepository.createObject(recipes);
-                        setRecipes(recipes1);
+                    public void setOrder(Order order) {
+                        this.order = order;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setRecipes(HashMap<String, Object> recipes) {
+                    public void setOrder(Map<String, Object> order) {
                         //First create a dummy Repo class object for customer.
-                        RecipeRepository recipesRepository = new RecipeRepository();
-                        Recipe recipes1 = recipesRepository.createObject(recipes);
-                        setRecipes(recipes1);
+                        OrderRepository orderRepository = new OrderRepository();
+                        Order order1 = orderRepository.createObject(order);
+                        setOrder(order1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setOrder(HashMap<String, Object> order) {
+                        //First create a dummy Repo class object for customer.
+                        OrderRepository orderRepository = new OrderRepository();
+                        Order order1 = orderRepository.createObject(order);
+                        setOrder(order1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Recipe recipes) {
-                        that.setRecipes(recipes);
+                    public void addRelation(Order order) {
+                        that.setOrder(order);
                     }
 
 
@@ -274,9 +175,9 @@ public class RecipeAnalytic extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__recipes( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
+                                    public void get__order( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Order> callback) {
                                         //Define methods here..
-                                        final RecipeAnalyticRepository  recipeAnalyticRepo = restAdapter.createRepository(RecipeAnalyticRepository.class);
+                                        final OrderDetailRepository  orderDetailRepo = restAdapter.createRepository(OrderDetailRepository.class);
                                         
                                         
                                         
@@ -285,13 +186,158 @@ public class RecipeAnalytic extends Model {
 
 
 
-                                        recipeAnalyticRepo.get__recipes( (String)that.getId(), refresh,  new ObjectCallback<Recipe> (){
+                                        orderDetailRepo.get__order( (String)that.getId(), refresh,  new ObjectCallback<Order> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Recipe object) {
+                                                    public void onSuccess(Order object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                 
+                 
+             
+          
+    
+        
+                
+                    //Define belongsTo relation method here..
+                    private RecipeIngredients  recipeIngredients ;
+
+                    public RecipeIngredients getRecipeIngredients() {
+                        return recipeIngredients;
+                    }
+
+                    public void setRecipeIngredients(RecipeIngredients recipeIngredients) {
+                        this.recipeIngredients = recipeIngredients;
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setRecipeIngredients(Map<String, Object> recipeIngredients) {
+                        //First create a dummy Repo class object for customer.
+                        RecipeIngredientsRepository recipeIngredientsRepository = new RecipeIngredientsRepository();
+                        RecipeIngredients recipeIngredients1 = recipeIngredientsRepository.createObject(recipeIngredients);
+                        setRecipeIngredients(recipeIngredients1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setRecipeIngredients(HashMap<String, Object> recipeIngredients) {
+                        //First create a dummy Repo class object for customer.
+                        RecipeIngredientsRepository recipeIngredientsRepository = new RecipeIngredientsRepository();
+                        RecipeIngredients recipeIngredients1 = recipeIngredientsRepository.createObject(recipeIngredients);
+                        setRecipeIngredients(recipeIngredients1);
+                    }
+
+                    //Adding relation method..
+                    public void addRelation(RecipeIngredients recipeIngredients) {
+                        that.setRecipeIngredients(recipeIngredients);
+                    }
+
+
+
+                
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__recipeIngredients( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<RecipeIngredients> callback) {
+                                        //Define methods here..
+                                        final OrderDetailRepository  orderDetailRepo = restAdapter.createRepository(OrderDetailRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        orderDetailRepo.get__recipeIngredients( (String)that.getId(), refresh,  new ObjectCallback<RecipeIngredients> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(RecipeIngredients object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -322,9 +368,9 @@ public class RecipeAnalytic extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__recipes( Recipe data,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
+                                    public void create__recipeIngredients( RecipeIngredients data,  RestAdapter restAdapter, final ObjectCallback<RecipeIngredients> callback) {
                                         //Define methods here..
-                                        final RecipeAnalyticRepository  recipeAnalyticRepo = restAdapter.createRepository(RecipeAnalyticRepository.class);
+                                        final OrderDetailRepository  orderDetailRepo = restAdapter.createRepository(OrderDetailRepository.class);
                                         
                                         
                                         
@@ -333,13 +379,13 @@ public class RecipeAnalytic extends Model {
 
 
 
-                                        recipeAnalyticRepo.create__recipes( (String)that.getId(), data.convertMap(),  new ObjectCallback<Recipe> (){
+                                        orderDetailRepo.create__recipeIngredients( (String)that.getId(), data.convertMap(),  new ObjectCallback<RecipeIngredients> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Recipe object) {
+                                                    public void onSuccess(RecipeIngredients object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -370,9 +416,9 @@ public class RecipeAnalytic extends Model {
                         
 
                                     //Write the method here..
-                                    public void update__recipes( Recipe data,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
+                                    public void update__recipeIngredients( RecipeIngredients data,  RestAdapter restAdapter, final ObjectCallback<RecipeIngredients> callback) {
                                         //Define methods here..
-                                        final RecipeAnalyticRepository  recipeAnalyticRepo = restAdapter.createRepository(RecipeAnalyticRepository.class);
+                                        final OrderDetailRepository  orderDetailRepo = restAdapter.createRepository(OrderDetailRepository.class);
                                         
                                         
                                         
@@ -381,13 +427,13 @@ public class RecipeAnalytic extends Model {
 
 
 
-                                        recipeAnalyticRepo.update__recipes( (String)that.getId(), data.convertMap(),  new ObjectCallback<Recipe> (){
+                                        orderDetailRepo.update__recipeIngredients( (String)that.getId(), data.convertMap(),  new ObjectCallback<RecipeIngredients> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Recipe object) {
+                                                    public void onSuccess(RecipeIngredients object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -418,15 +464,15 @@ public class RecipeAnalytic extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroy__recipes( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroy__recipeIngredients( RestAdapter restAdapter, final VoidCallback callback) {
                                         //Define methods here..
-                                        final RecipeAnalyticRepository  recipeAnalyticRepo = restAdapter.createRepository(RecipeAnalyticRepository.class);
+                                        final OrderDetailRepository  orderDetailRepo = restAdapter.createRepository(OrderDetailRepository.class);
                                         
                                         
 
 
 
-                                        recipeAnalyticRepo.destroy__recipes( (String)that.getId(),  new VoidCallback (){
+                                        orderDetailRepo.destroy__recipeIngredients( (String)that.getId(),  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -449,6 +495,14 @@ public class RecipeAnalytic extends Model {
                                     } //method def ends here.
                                  
                             
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         

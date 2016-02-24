@@ -77,10 +77,12 @@ public class Cuisines extends Model {
             
             
             
+            
 
         
     
         
+            
             
             
             

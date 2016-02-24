@@ -122,6 +122,7 @@ public class Customer extends com.strongloop.android.loopback.User {
             
             
             
+            
 
         
     
@@ -141,6 +142,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                     hashMap.put("phoneNumber", phoneNumber);
                 }
 
+            
             
             
             
@@ -166,6 +168,7 @@ public class Customer extends com.strongloop.android.loopback.User {
             
             
             
+            
 
         
     
@@ -185,6 +188,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                     hashMap.put("firstName", firstName);
                 }
 
+            
             
             
             
@@ -210,6 +214,7 @@ public class Customer extends com.strongloop.android.loopback.User {
             
             
             
+            
 
         
     
@@ -229,6 +234,7 @@ public class Customer extends com.strongloop.android.loopback.User {
                     hashMap.put("password", password);
                 }
 
+            
             
             
             
@@ -254,26 +260,12 @@ public class Customer extends com.strongloop.android.loopback.User {
                 }
 
             
-
-        
-    
-        
-            
-            
-            
             
 
         
     
         
             
-            
-            
-            
-
-        
-    
-        
             
             
             
@@ -286,26 +278,12 @@ public class Customer extends com.strongloop.android.loopback.User {
             
             
             
-
-        
-    
-        
-            
-            
-            
             
 
         
     
         
             
-            
-            
-            
-
-        
-    
-        
             
             
             
@@ -318,13 +296,6 @@ public class Customer extends com.strongloop.android.loopback.User {
             
             
             
-
-        
-    
-        
-            
-            
-            
             
 
         
@@ -334,6 +305,16 @@ public class Customer extends com.strongloop.android.loopback.User {
             
             
             
+            
+
+        
+    
+        
+            
+            
+            
+            
+            
 
         
     
@@ -342,10 +323,48 @@ public class Customer extends com.strongloop.android.loopback.User {
             
             
             
+            
 
         
     
         
+            
+            
+            
+            
+            
+
+        
+    
+        
+            
+            
+            
+            
+            
+
+        
+    
+        
+            
+            
+            
+            
+            
+
+        
+    
+        
+            
+            
+            
+            
+            
+
+        
+    
+        
+            
             
             
             

@@ -129,6 +129,7 @@ public class Recipe extends Model {
             
             
             
+            
 
         
     
@@ -148,6 +149,7 @@ public class Recipe extends Model {
                     hashMap.put("description", description);
                 }
 
+            
             
             
             
@@ -173,6 +175,7 @@ public class Recipe extends Model {
                 }
 
             
+            
 
         
     
@@ -192,6 +195,7 @@ public class Recipe extends Model {
                     hashMap.put("recipeType", recipeType);
                 }
 
+            
             
             
             
@@ -217,6 +221,7 @@ public class Recipe extends Model {
 
             
             
+            
 
         
     
@@ -236,6 +241,7 @@ public class Recipe extends Model {
                     hashMap.put("added", added);
                 }
 
+            
             
             
             
@@ -261,6 +267,7 @@ public class Recipe extends Model {
             
             
             
+            
 
         
     
@@ -280,6 +287,7 @@ public class Recipe extends Model {
                     hashMap.put("youtubeVideoId", youtubeVideoId);
                 }
 
+            
             
             
             
@@ -303,6 +311,7 @@ public class Recipe extends Model {
                     hashMap.put("stepsImage", stepsImage);
                 }
 
+            
             
             
             
@@ -331,13 +340,6 @@ public class Recipe extends Model {
             
             
             
-
-        
-    
-        
-            
-            
-            
             
 
         
@@ -347,10 +349,21 @@ public class Recipe extends Model {
             
             
             
+            
 
         
     
         
+            
+            
+            
+            
+            
+
+        
+    
+        
+            
             
             
             

@@ -24,6 +24,9 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
         else if (type === "boolean") {
             return "Boolean"
         }
+        else if(type === "geopoint"){
+            return "Map<String, Object>"
+        }
         else {
 
             return capitalizeFirstLetter(checkTypeConversion(type, model));

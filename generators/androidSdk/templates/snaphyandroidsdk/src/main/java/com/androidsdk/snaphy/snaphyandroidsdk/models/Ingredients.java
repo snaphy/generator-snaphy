@@ -87,6 +87,7 @@ public class Ingredients extends Model {
             
             
             
+            
 
         
     
@@ -106,6 +107,7 @@ public class Ingredients extends Model {
                     hashMap.put("sellingMetrics", sellingMetrics);
                 }
 
+            
             
             
             
@@ -131,6 +133,7 @@ public class Ingredients extends Model {
 
             
             
+            
 
         
     
@@ -151,6 +154,7 @@ public class Ingredients extends Model {
                     hashMap.put("price", price);
                 }
 
+            
             
             
 
@@ -177,18 +181,21 @@ public class Ingredients extends Model {
             
             
             
-
-        
-    
-        
-            
-            
-            
             
 
         
     
         
+            
+            
+            
+            
+            
+
+        
+    
+        
+            
             
             
             
