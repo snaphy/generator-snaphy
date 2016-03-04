@@ -103,6 +103,25 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     }
 
 
+    
+    		//Create public methods..
+    		public Customer cachedCurrentUser;
+    		public Customer getCachedCurrentUser(){
+    			return cachedCurrentUser;
+    		}
+
+    		public setCachedCurrentUser(Customer user){
+    			cachedCurrentUser = user;
+    		}
+
+    		public setCurrentUserId(Object id){
+    			super.setCurrentUserId(id);
+    		}
+
+
+    
+
+
 
 
 

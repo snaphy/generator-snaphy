@@ -49,6 +49,9 @@ public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
     }
 
 
+    
+
+
 
 
 

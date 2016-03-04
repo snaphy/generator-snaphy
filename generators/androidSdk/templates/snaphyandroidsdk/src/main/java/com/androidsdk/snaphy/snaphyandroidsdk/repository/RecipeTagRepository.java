@@ -49,6 +49,9 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
     }
 
 
+    
+
+
 
 
 
@@ -246,7 +249,7 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/prototype.__connect__recipes", "POST"), "RecipeTag.prototype.__connect__recipes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/__connect__recipes", "POST"), "RecipeTag.__connect__recipes");
                 
 
             
@@ -254,7 +257,7 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/prototype.__disconnect__recipes", "POST"), "RecipeTag.prototype.__disconnect__recipes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/__disconnect__recipes", "POST"), "RecipeTag.__disconnect__recipes");
                 
 
             
@@ -1356,14 +1359,14 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
         
     
         
-            //Method connect__recipes definition
-            public void connect__recipes(  String recipeTagId,  List<String> fk, final Adapter.JsonObjectCallback  callback ){
+            //Method __connect__recipes definition
+            public void __connect__recipes(  String id,  List<String> fk, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("recipeTagId", recipeTagId);
+                        hashMapObject.put("id", id);
                 
                         hashMapObject.put("fk", fk);
                 
@@ -1373,7 +1376,7 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
 
                 
                     
-                    invokeStaticMethod("prototype.__connect__recipes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("__connect__recipes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1392,21 +1395,21 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
 
                 
 
-            }//Method connect__recipes definition ends here..
+            }//Method __connect__recipes definition ends here..
 
             
 
         
     
         
-            //Method disconnect__recipes definition
-            public void disconnect__recipes(  String recipeTagId,  List<String> fk, final Adapter.JsonObjectCallback  callback ){
+            //Method __disconnect__recipes definition
+            public void __disconnect__recipes(  String id,  List<String> fk, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("recipeTagId", recipeTagId);
+                        hashMapObject.put("id", id);
                 
                         hashMapObject.put("fk", fk);
                 
@@ -1416,7 +1419,7 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
 
                 
                     
-                    invokeStaticMethod("prototype.__disconnect__recipes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("__disconnect__recipes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1435,7 +1438,7 @@ public class RecipeTagRepository extends ModelRepository<RecipeTag> {
 
                 
 
-            }//Method disconnect__recipes definition ends here..
+            }//Method __disconnect__recipes definition ends here..
 
             
 

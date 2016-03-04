@@ -204,6 +204,25 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
     }
 
 
+    <% if(model.base === "User" || modelName === "User"){ %>
+    		//Create public methods..
+    		public <%- modelName %> cachedCurrentUser;
+    		public <%- modelName %> getCachedCurrentUser(){
+    			return cachedCurrentUser;
+    		}
+
+    		public setCachedCurrentUser(<%- modelName %> user){
+    			cachedCurrentUser = user;
+    		}
+
+    		public setCurrentUserId(Object id){
+    			super.setCurrentUserId(id);
+    		}
+
+
+    <% } %>
+
+
 
 
 

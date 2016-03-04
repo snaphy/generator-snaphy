@@ -56,6 +56,9 @@ public class OrderRepository extends ModelRepository<Order> {
     }
 
 
+    
+
+
 
 
 
@@ -232,6 +235,22 @@ public class OrderRepository extends ModelRepository<Order> {
 
             
         
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/requestOtp", "POST"), "Order.requestOtp");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/orderWithOTP", "POST"), "Order.orderWithOTP");
+                
+
             
         
             
@@ -1243,6 +1262,92 @@ public class OrderRepository extends ModelRepository<Order> {
 
         
     
+        
+    
+        
+            //Method requestOtp definition
+            public void requestOtp(  String number, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("number", number);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("requestOtp", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method requestOtp definition ends here..
+
+            
+
+        
+    
+        
+            //Method orderWithOTP definition
+            public void orderWithOTP(  Map<String,  ? extends Object> order,  List<Map<String,  ? extends Object>> orderDetails,  String code, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("order", order);
+                
+                        hashMapObject.put("orderDetails", orderDetails);
+                
+                        hashMapObject.put("code", code);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("orderWithOTP", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method orderWithOTP definition ends here..
+
+            
+
         
     
         

@@ -54,6 +54,25 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     }
 
 
+    
+    		//Create public methods..
+    		public Employee cachedCurrentUser;
+    		public Employee getCachedCurrentUser(){
+    			return cachedCurrentUser;
+    		}
+
+    		public setCachedCurrentUser(Employee user){
+    			cachedCurrentUser = user;
+    		}
+
+    		public setCurrentUserId(Object id){
+    			super.setCurrentUserId(id);
+    		}
+
+
+    
+
+
 
 
 

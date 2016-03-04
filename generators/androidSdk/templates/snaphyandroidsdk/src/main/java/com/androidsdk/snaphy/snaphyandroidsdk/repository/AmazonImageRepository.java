@@ -42,6 +42,9 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     }
 
 
+    
+
+
 
 
 
