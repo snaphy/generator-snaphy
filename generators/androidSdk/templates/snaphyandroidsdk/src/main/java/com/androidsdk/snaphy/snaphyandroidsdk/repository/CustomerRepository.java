@@ -110,11 +110,11 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     			return cachedCurrentUser;
     		}
 
-    		public setCachedCurrentUser(Customer user){
+    		public void setCachedCurrentUser(Customer user){
     			cachedCurrentUser = user;
     		}
 
-    		public setCurrentUserId(Object id){
+    		public void setCurrentUserId(Object id){
     			super.setCurrentUserId(id);
     		}
 

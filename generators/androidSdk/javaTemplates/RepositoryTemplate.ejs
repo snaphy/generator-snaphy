@@ -211,11 +211,11 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
     			return cachedCurrentUser;
     		}
 
-    		public setCachedCurrentUser(<%- modelName %> user){
+    		public void setCachedCurrentUser(<%- modelName %> user){
     			cachedCurrentUser = user;
     		}
 
-    		public setCurrentUserId(Object id){
+    		public void setCurrentUserId(Object id){
     			super.setCurrentUserId(id);
     		}
 
