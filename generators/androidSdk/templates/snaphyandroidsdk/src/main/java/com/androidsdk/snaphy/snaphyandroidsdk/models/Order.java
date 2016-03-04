@@ -68,6 +68,15 @@ public class Order extends Model {
         
             
             
+            
+            
+            
+
+        
+    
+        
+            
+            
                 private String added;
                 /* Adding Getter and Setter methods */
                 public String getAdded(){
@@ -137,6 +146,54 @@ public class Order extends Model {
         
             
             
+            
+                private double phoneNumber;
+                /* Adding Getter and Setter methods */
+                public double getPhoneNumber(){
+                    return phoneNumber;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setPhoneNumber(double phoneNumber){
+                    this.phoneNumber = phoneNumber;
+                    //Update hashMap value..
+                    hashMap.put("phoneNumber", phoneNumber);
+                }
+
+            
+            
+            
+
+        
+    
+        
+            
+
+                private List<Map<String, Object>> staticIngredients;
+                /* Adding Getter and Setter methods */
+                public List<Map<String, Object>> getStaticIngredients(){
+                    return staticIngredients;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setStaticIngredients(List<Map<String, Object>> staticIngredients){
+                    this.staticIngredients = staticIngredients;
+
+                    //TODO change this to custom array with double quotes escaped if error occured when sending to server..
+                    hashMap.put("staticIngredients", staticIngredients);
+                }
+
+            
+            
+            
+            
+            
+
+        
+    
+        
+            
+            
                 private String status;
                 /* Adding Getter and Setter methods */
                 public String getStatus(){
@@ -150,15 +207,6 @@ public class Order extends Model {
                     hashMap.put("status", status);
                 }
 
-            
-            
-            
-            
-
-        
-    
-        
-            
             
             
             

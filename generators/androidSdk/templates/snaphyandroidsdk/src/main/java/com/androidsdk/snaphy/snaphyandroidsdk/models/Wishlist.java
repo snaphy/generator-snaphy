@@ -353,6 +353,12 @@ public class Wishlist extends Model {
                         
                         
                         
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -934,6 +940,82 @@ public class Wishlist extends Model {
                         
                         
                         
+                        
+                        
+                        
+
+                                    //Write the method here..
+                                    public void connect__recipes( RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                        //Define methods here..
+                                        final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
+                                        
+                                        
+                                        
+
+
+
+                                        wishlistRepo.connect__recipes( (String)that.getId(),  (String)that.getFk(),  new Adapter.JsonObjectCallback(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void disconnect__recipes( RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                        //Define methods here..
+                                        final WishlistRepository  wishlistRepo = restAdapter.createRepository(WishlistRepository.class);
+                                        
+                                        
+                                        
+
+
+
+                                        wishlistRepo.disconnect__recipes( (String)that.getId(),  (String)that.getFk(),  new Adapter.JsonObjectCallback(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
                         
                         
                         

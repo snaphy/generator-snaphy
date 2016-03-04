@@ -92,8 +92,15 @@ function buildScopeMethod(models, modelName, method) {
 
   var op = match[1];
   var scopeName = match[2];
-  var modelPrototype = modelClass.sharedClass.ctor.prototype;
-  var targetClass = modelPrototype[scopeName]._targetClass;
+  
+  try{
+  	var modelPrototype = modelClass.sharedClass.ctor.prototype;
+  	var targetClass = modelPrototype[scopeName]._targetClass;
+  }catch(err){
+  	console.error("Error generated in generating template. helper file androidSdk ");
+  	return ;
+  }
+  
 
   if (modelClass.scopes[scopeName] === undefined) {
     if (!targetClass) {

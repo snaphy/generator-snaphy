@@ -613,6 +613,30 @@ public class Recipe extends Model {
                         
                         
                         
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -791,6 +815,60 @@ public class Recipe extends Model {
                     
 
                      
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
                             
                         
 
@@ -1103,20 +1181,6 @@ public class Recipe extends Model {
                             
                          
                             
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
                         
 
                                     //Write the method here..
@@ -1291,46 +1355,6 @@ public class Recipe extends Model {
                                     } //method def ends here.
                                  
                             
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
                         
                         
                         
@@ -1338,6 +1362,100 @@ public class Recipe extends Model {
                         
                         
                         
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+
+                                    //Write the method here..
+                                    public void connect__cuisines( RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                        //Define methods here..
+                                        final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
+                                        
+                                        
+                                        
+
+
+
+                                        recipeRepo.connect__cuisines( (String)that.getId(),  (String)that.getFk(),  new Adapter.JsonObjectCallback(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void disconnect__cuisines( RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                        //Define methods here..
+                                        final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
+                                        
+                                        
+                                        
+
+
+
+                                        recipeRepo.disconnect__cuisines( (String)that.getId(),  (String)that.getFk(),  new Adapter.JsonObjectCallback(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
                         
                         
@@ -1527,18 +1645,6 @@ public class Recipe extends Model {
                     
 
                      
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
                             
                         
 
@@ -1861,6 +1967,10 @@ public class Recipe extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -2067,6 +2177,14 @@ public class Recipe extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
                         
                         
@@ -2074,6 +2192,100 @@ public class Recipe extends Model {
                         
                         
                         
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void connect__category( RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                        //Define methods here..
+                                        final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
+                                        
+                                        
+                                        
+
+
+
+                                        recipeRepo.connect__category( (String)that.getId(),  (String)that.getFk(),  new Adapter.JsonObjectCallback(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void disconnect__category( RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                        //Define methods here..
+                                        final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
+                                        
+                                        
+                                        
+
+
+
+                                        recipeRepo.disconnect__category( (String)that.getId(),  (String)that.getFk(),  new Adapter.JsonObjectCallback(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
                         
                         
@@ -2281,18 +2493,6 @@ public class Recipe extends Model {
                             
                          
                             
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
                         
 
                                     //Write the method here..
@@ -2428,6 +2628,10 @@ public class Recipe extends Model {
                                         });
                                     } //method def ends here.
                                  
+                            
+                         
+                            
+                         
                             
                          
                             
@@ -2687,6 +2891,14 @@ public class Recipe extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
                         
                         
@@ -2694,6 +2906,30 @@ public class Recipe extends Model {
                         
                         
                         
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
                         
                         
@@ -2883,18 +3119,6 @@ public class Recipe extends Model {
                     
 
                      
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
                             
                          
                             
@@ -3233,6 +3457,10 @@ public class Recipe extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -3423,6 +3651,14 @@ public class Recipe extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
                         
                         
@@ -3430,6 +3666,30 @@ public class Recipe extends Model {
                         
                         
                         
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
                         
                         
@@ -3658,18 +3918,6 @@ public class Recipe extends Model {
                     
 
                      
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
                             
                          
                             
@@ -4016,6 +4264,10 @@ public class Recipe extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -4198,6 +4450,14 @@ public class Recipe extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
                         
                         
@@ -4205,6 +4465,30 @@ public class Recipe extends Model {
                         
                         
                         
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
                         
                         
@@ -4394,18 +4678,6 @@ public class Recipe extends Model {
                     
 
                      
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
                             
                          
                             
@@ -4760,6 +5032,10 @@ public class Recipe extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -4934,6 +5210,14 @@ public class Recipe extends Model {
                                     } //method def ends here.
                                  
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
                         
                         
@@ -4941,6 +5225,100 @@ public class Recipe extends Model {
                         
                         
                         
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void connect__wishlists( RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                        //Define methods here..
+                                        final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
+                                        
+                                        
+                                        
+
+
+
+                                        recipeRepo.connect__wishlists( (String)that.getId(),  (String)that.getFk(),  new Adapter.JsonObjectCallback(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void disconnect__wishlists( RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                        //Define methods here..
+                                        final RecipeRepository  recipeRepo = restAdapter.createRepository(RecipeRepository.class);
+                                        
+                                        
+                                        
+
+
+
+                                        recipeRepo.disconnect__wishlists( (String)that.getId(),  (String)that.getFk(),  new Adapter.JsonObjectCallback(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
                         
                         
                         
@@ -5382,6 +5760,30 @@ public class Recipe extends Model {
                         
                         
                         
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
                         
                         

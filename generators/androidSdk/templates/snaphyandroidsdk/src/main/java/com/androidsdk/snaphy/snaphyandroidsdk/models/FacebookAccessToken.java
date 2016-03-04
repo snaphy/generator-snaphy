@@ -18,7 +18,7 @@ import com.strongloop.android.loopback.callbacks.VoidCallback;
 import com.strongloop.android.remoting.adapters.Adapter;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.CourseRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.FacebookAccessTokenRepository;
 
 //Now import repository of related models..
 
@@ -36,7 +36,7 @@ import java.util.Map;
 
 
 
-public class Course extends Model {
+public class FacebookAccessToken extends Model {
 
 
     //For converting all model values to hashMap
@@ -51,9 +51,9 @@ public class Course extends Model {
         }
     }
 
-    private Course that ;
+    private FacebookAccessToken that ;
 
-    public Course (){
+    public FacebookAccessToken (){
         that = this;
     }
 
@@ -61,17 +61,17 @@ public class Course extends Model {
         
             
             
-                private String name;
+                private String FbUserId;
                 /* Adding Getter and Setter methods */
-                public String getName(){
-                    return name;
+                public String getFbUserId(){
+                    return FbUserId;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setName(String name){
-                    this.name = name;
+                public void setFbUserId(String FbUserId){
+                    this.FbUserId = FbUserId;
                     //Update hashMap value..
-                    hashMap.put("name", name);
+                    hashMap.put("FbUserId", FbUserId);
                 }
 
             
@@ -84,17 +84,17 @@ public class Course extends Model {
         
             
             
-                private String description;
+                private String token;
                 /* Adding Getter and Setter methods */
-                public String getDescription(){
-                    return description;
+                public String getToken(){
+                    return token;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setDescription(String description){
-                    this.description = description;
+                public void setToken(String token){
+                    this.token = token;
                     //Update hashMap value..
-                    hashMap.put("description", description);
+                    hashMap.put("token", token);
                 }
 
             
@@ -107,17 +107,17 @@ public class Course extends Model {
         
             
             
-                private String courseDuration;
+                private String expires;
                 /* Adding Getter and Setter methods */
-                public String getCourseDuration(){
-                    return courseDuration;
+                public String getExpires(){
+                    return expires;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setCourseDuration(String courseDuration){
-                    this.courseDuration = courseDuration;
+                public void setExpires(String expires){
+                    this.expires = expires;
                     //Update hashMap value..
-                    hashMap.put("courseDuration", courseDuration);
+                    hashMap.put("expires", expires);
                 }
 
             
@@ -131,52 +131,27 @@ public class Course extends Model {
             
             
             
-                private double courseFees;
+            
+            
+
+        
+    
+        
+            
+            
+                private String type;
                 /* Adding Getter and Setter methods */
-                public double getCourseFees(){
-                    return courseFees;
+                public String getType(){
+                    return type;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setCourseFees(double courseFees){
-                    this.courseFees = courseFees;
+                public void setType(String type){
+                    this.type = type;
                     //Update hashMap value..
-                    hashMap.put("courseFees", courseFees);
+                    hashMap.put("type", type);
                 }
 
-            
-            
-            
-
-        
-    
-        
-            
-
-                private List<Map<String, Object>> courseRecipes;
-                /* Adding Getter and Setter methods */
-                public List<Map<String, Object>> getCourseRecipes(){
-                    return courseRecipes;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setCourseRecipes(List<Map<String, Object>> courseRecipes){
-                    this.courseRecipes = courseRecipes;
-
-                    //TODO change this to custom array with double quotes escaped if error occured when sending to server..
-                    hashMap.put("courseRecipes", courseRecipes);
-                }
-
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
             
             
             
@@ -255,7 +230,7 @@ public class Course extends Model {
                                     //Write the method here..
                                     public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
                                         //Define methods here..
-                                        final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
+                                        final FacebookAccessTokenRepository  facebookAccessTokenRepo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
                                         
                                         
                                         
@@ -264,7 +239,7 @@ public class Course extends Model {
 
 
 
-                                        courseRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
+                                        facebookAccessTokenRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
                                             
 
                                             
@@ -298,9 +273,6 @@ public class Course extends Model {
                                     } //method def ends here.
                                  
                             
-                        
-                        
-                        
                         
                         
                         

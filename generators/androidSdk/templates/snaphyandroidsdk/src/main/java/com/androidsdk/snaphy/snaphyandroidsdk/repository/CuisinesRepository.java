@@ -267,6 +267,28 @@ public class CuisinesRepository extends ModelRepository<Cuisines> {
             
         
             
+
+                
+
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/prototype.__connect__recipes", "POST"), "Cuisines.prototype.__connect__recipes");
+                
+
+            
+        
+            
+
+                
+
+                    contract.addItem(new RestContractItem("/" + "Cuisines"  + "/prototype.__disconnect__recipes", "POST"), "Cuisines.prototype.__disconnect__recipes");
+                
+
+            
+        
+            
+        
+            
+        
+            
         
             
         
@@ -1357,6 +1379,96 @@ public class CuisinesRepository extends ModelRepository<Cuisines> {
 
             
 
+        
+    
+        
+    
+        
+            //Method connect__recipes definition
+            public void connect__recipes(  String cuisinesId,  List<String> fk, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("cuisinesId", cuisinesId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__connect__recipes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method connect__recipes definition ends here..
+
+            
+
+        
+    
+        
+            //Method disconnect__recipes definition
+            public void disconnect__recipes(  String cuisinesId,  List<String> fk, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("cuisinesId", cuisinesId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__disconnect__recipes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method disconnect__recipes definition ends here..
+
+            
+
+        
+    
         
     
         

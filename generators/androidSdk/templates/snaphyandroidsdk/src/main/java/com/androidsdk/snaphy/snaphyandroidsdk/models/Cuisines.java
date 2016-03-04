@@ -648,6 +648,82 @@ public class Cuisines extends Model {
                         
                         
                         
+
+                                    //Write the method here..
+                                    public void connect__recipes( RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                        //Define methods here..
+                                        final CuisinesRepository  cuisinesRepo = restAdapter.createRepository(CuisinesRepository.class);
+                                        
+                                        
+                                        
+
+
+
+                                        cuisinesRepo.connect__recipes( (String)that.getId(),  (String)that.getFk(),  new Adapter.JsonObjectCallback(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void disconnect__recipes( RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                        //Define methods here..
+                                        final CuisinesRepository  cuisinesRepo = restAdapter.createRepository(CuisinesRepository.class);
+                                        
+                                        
+                                        
+
+
+
+                                        cuisinesRepo.disconnect__recipes( (String)that.getId(),  (String)that.getFk(),  new Adapter.JsonObjectCallback(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+                        
+                        
                         
                         
                         
