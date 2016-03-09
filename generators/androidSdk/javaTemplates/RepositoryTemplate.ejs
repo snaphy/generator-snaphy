@@ -347,22 +347,29 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
         //metch prototype.__
         var initialPatt = /^[0-9A-Za-z\_]+\./;
         var methodPatt = /prototype\.\_?\_?/;
+        var staticMethodName = restMethodObj.fullName.replace(initialPatt, "");
+        var restMethodName = restMethodObj.fullName.replace(initialPatt, "");
+        restMethodName = restMethodName.replace(methodPatt, "");
+        //check for create defined as its present here two times..
+        var createDefined = false;
+
     %>
         <% if(restMethodObj.fullName
             && patt.test(restMethodObj.fullName)
             && restMethodObj.name !== "createChangeStream"
             && restMethodObj.name !== "login"
             && restMethodObj.name !== "logout"
-            && restMethodObj.name !== "save" ){
+            && restMethodObj.name !== "save"
+            && createDefined === false ){
 
-            var staticMethodName = restMethodObj.fullName.replace(initialPatt, "");
-            var restMethodName = restMethodObj.fullName.replace(initialPatt, "");
-            restMethodName = restMethodName.replace(methodPatt, "");
+            if(restMethodName === "create"){
+                createDefined = true;
+            }
 
 
-            console.log("\n");
+        /*    console.log("\n");
             console.log(restMethodObj.fullName);
-            console.log(restMethodName);
+            console.log(restMethodName);*/
             
             
 
