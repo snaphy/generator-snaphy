@@ -607,8 +607,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
     
         
-            //Method Customer.findById__accessTokens definition
-            public void Customer.findById__accessTokens(  String customerId,  String fk, final ObjectCallback<AccessToken> callback){
+            //Method findById__accessTokens definition
+            public void findById__accessTokens(  String customerId,  String fk, final ObjectCallback<AccessToken> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -625,7 +625,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.findById__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -651,15 +651,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.findById__accessTokens definition ends here..
+            }//Method findById__accessTokens definition ends here..
 
             
 
         
     
         
-            //Method Customer.destroyById__accessTokens definition
-            public void Customer.destroyById__accessTokens(  String customerId,  String fk, final VoidCallback callback){
+            //Method destroyById__accessTokens definition
+            public void destroyById__accessTokens(  String customerId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -671,7 +671,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
                 
-                    invokeStaticMethod("Customer.destroyById__accessTokens", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroyById__accessTokens", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -689,15 +689,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.destroyById__accessTokens definition ends here..
+            }//Method destroyById__accessTokens definition ends here..
 
             
 
         
     
         
-            //Method Customer.updateById__accessTokens definition
-            public void Customer.updateById__accessTokens(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
+            //Method updateById__accessTokens definition
+            public void updateById__accessTokens(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -716,7 +716,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.updateById__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -742,15 +742,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.updateById__accessTokens definition ends here..
+            }//Method updateById__accessTokens definition ends here..
 
             
 
         
     
         
-            //Method Customer.findById__location_shared definition
-            public void Customer.findById__location_shared(  String customerId,  String fk, final ObjectCallback<Customer> callback){
+            //Method findById__location_shared definition
+            public void findById__location_shared(  String customerId,  String fk, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -767,7 +767,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.findById__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -793,15 +793,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.findById__location_shared definition ends here..
+            }//Method findById__location_shared definition ends here..
 
             
 
         
     
         
-            //Method Customer.destroyById__location_shared definition
-            public void Customer.destroyById__location_shared(  String customerId,  String fk, final VoidCallback callback){
+            //Method destroyById__location_shared definition
+            public void destroyById__location_shared(  String customerId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -813,7 +813,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
                 
-                    invokeStaticMethod("Customer.destroyById__location_shared", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroyById__location_shared", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -831,15 +831,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.destroyById__location_shared definition ends here..
+            }//Method destroyById__location_shared definition ends here..
 
             
 
         
     
         
-            //Method Customer.updateById__location_shared definition
-            public void Customer.updateById__location_shared(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
+            //Method updateById__location_shared definition
+            public void updateById__location_shared(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -858,7 +858,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.updateById__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -884,15 +884,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.updateById__location_shared definition ends here..
+            }//Method updateById__location_shared definition ends here..
 
             
 
         
     
         
-            //Method Customer.link__location_shared definition
-            public void Customer.link__location_shared(  String customerId,  String fk, final ObjectCallback<Customer> callback){
+            //Method link__location_shared definition
+            public void link__location_shared(  String customerId,  String fk, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -909,7 +909,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.link__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__link__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -935,15 +935,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.link__location_shared definition ends here..
+            }//Method link__location_shared definition ends here..
 
             
 
         
     
         
-            //Method Customer.unlink__location_shared definition
-            public void Customer.unlink__location_shared(  String customerId,  String fk, final VoidCallback callback){
+            //Method unlink__location_shared definition
+            public void unlink__location_shared(  String customerId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -955,7 +955,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
                 
-                    invokeStaticMethod("Customer.unlink__location_shared", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__unlink__location_shared", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -973,15 +973,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.unlink__location_shared definition ends here..
+            }//Method unlink__location_shared definition ends here..
 
             
 
         
     
         
-            //Method Customer.exists__location_shared definition
-            public void Customer.exists__location_shared(  String customerId,  String fk, final Adapter.JsonObjectCallback  callback ){
+            //Method exists__location_shared definition
+            public void exists__location_shared(  String customerId,  String fk, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -997,7 +997,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
                     
-                    invokeStaticMethod("Customer.exists__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__exists__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1016,15 +1016,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.exists__location_shared definition ends here..
+            }//Method exists__location_shared definition ends here..
 
             
 
         
     
         
-            //Method Customer.get__facebookAccessToken definition
-            public void Customer.get__facebookAccessToken(  String customerId,  Boolean refresh, final ObjectCallback<FacebookAccessToken> callback){
+            //Method get__facebookAccessToken definition
+            public void get__facebookAccessToken(  String customerId,  Boolean refresh, final ObjectCallback<FacebookAccessToken> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1041,7 +1041,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.get__facebookAccessToken", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__facebookAccessToken", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1067,15 +1067,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.get__facebookAccessToken definition ends here..
+            }//Method get__facebookAccessToken definition ends here..
 
             
 
         
     
         
-            //Method Customer.create__facebookAccessToken definition
-            public void Customer.create__facebookAccessToken(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
+            //Method create__facebookAccessToken definition
+            public void create__facebookAccessToken(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1092,7 +1092,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.create__facebookAccessToken", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__facebookAccessToken", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1118,15 +1118,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.create__facebookAccessToken definition ends here..
+            }//Method create__facebookAccessToken definition ends here..
 
             
 
         
     
         
-            //Method Customer.update__facebookAccessToken definition
-            public void Customer.update__facebookAccessToken(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
+            //Method update__facebookAccessToken definition
+            public void update__facebookAccessToken(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1143,7 +1143,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.update__facebookAccessToken", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__update__facebookAccessToken", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1169,15 +1169,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.update__facebookAccessToken definition ends here..
+            }//Method update__facebookAccessToken definition ends here..
 
             
 
         
     
         
-            //Method Customer.destroy__facebookAccessToken definition
-            public void Customer.destroy__facebookAccessToken(  String customerId, final VoidCallback callback){
+            //Method destroy__facebookAccessToken definition
+            public void destroy__facebookAccessToken(  String customerId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1187,7 +1187,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
                 
-                    invokeStaticMethod("Customer.destroy__facebookAccessToken", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroy__facebookAccessToken", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1205,15 +1205,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.destroy__facebookAccessToken definition ends here..
+            }//Method destroy__facebookAccessToken definition ends here..
 
             
 
         
     
         
-            //Method Customer.findById__track definition
-            public void Customer.findById__track(  String customerId,  String fk, final ObjectCallback<Track> callback){
+            //Method findById__track definition
+            public void findById__track(  String customerId,  String fk, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1230,7 +1230,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.findById__track", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__track", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1256,15 +1256,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.findById__track definition ends here..
+            }//Method findById__track definition ends here..
 
             
 
         
     
         
-            //Method Customer.destroyById__track definition
-            public void Customer.destroyById__track(  String customerId,  String fk, final VoidCallback callback){
+            //Method destroyById__track definition
+            public void destroyById__track(  String customerId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1276,7 +1276,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
                 
-                    invokeStaticMethod("Customer.destroyById__track", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroyById__track", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1294,15 +1294,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.destroyById__track definition ends here..
+            }//Method destroyById__track definition ends here..
 
             
 
         
     
         
-            //Method Customer.updateById__track definition
-            public void Customer.updateById__track(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
+            //Method updateById__track definition
+            public void updateById__track(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1321,7 +1321,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.updateById__track", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__track", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1347,15 +1347,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.updateById__track definition ends here..
+            }//Method updateById__track definition ends here..
 
             
 
         
     
         
-            //Method Customer.get__accessTokens definition
-            public void Customer.get__accessTokens(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<AccessToken> callback){
+            //Method get__accessTokens definition
+            public void get__accessTokens(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<AccessToken> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1372,7 +1372,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
                 
-                    invokeStaticMethod("Customer.get__accessTokens", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__accessTokens", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1400,15 +1400,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     });
                 
 
-            }//Method Customer.get__accessTokens definition ends here..
+            }//Method get__accessTokens definition ends here..
 
             
 
         
     
         
-            //Method Customer.create__accessTokens definition
-            public void Customer.create__accessTokens(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
+            //Method create__accessTokens definition
+            public void create__accessTokens(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1425,7 +1425,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.create__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1451,15 +1451,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.create__accessTokens definition ends here..
+            }//Method create__accessTokens definition ends here..
 
             
 
         
     
         
-            //Method Customer.delete__accessTokens definition
-            public void Customer.delete__accessTokens(  String customerId, final VoidCallback callback){
+            //Method delete__accessTokens definition
+            public void delete__accessTokens(  String customerId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1469,7 +1469,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
                 
-                    invokeStaticMethod("Customer.delete__accessTokens", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__delete__accessTokens", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1487,15 +1487,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.delete__accessTokens definition ends here..
+            }//Method delete__accessTokens definition ends here..
 
             
 
         
     
         
-            //Method Customer.count__accessTokens definition
-            public void Customer.count__accessTokens(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            //Method count__accessTokens definition
+            public void count__accessTokens(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1511,7 +1511,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
                     
-                    invokeStaticMethod("Customer.count__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1530,15 +1530,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.count__accessTokens definition ends here..
+            }//Method count__accessTokens definition ends here..
 
             
 
         
     
         
-            //Method Customer.get__location_shared definition
-            public void Customer.get__location_shared(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<Customer> callback){
+            //Method get__location_shared definition
+            public void get__location_shared(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1555,7 +1555,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
                 
-                    invokeStaticMethod("Customer.get__location_shared", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__location_shared", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1583,15 +1583,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     });
                 
 
-            }//Method Customer.get__location_shared definition ends here..
+            }//Method get__location_shared definition ends here..
 
             
 
         
     
         
-            //Method Customer.create__location_shared definition
-            public void Customer.create__location_shared(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
+            //Method create__location_shared definition
+            public void create__location_shared(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1608,7 +1608,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.create__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1634,15 +1634,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.create__location_shared definition ends here..
+            }//Method create__location_shared definition ends here..
 
             
 
         
     
         
-            //Method Customer.delete__location_shared definition
-            public void Customer.delete__location_shared(  String customerId, final VoidCallback callback){
+            //Method delete__location_shared definition
+            public void delete__location_shared(  String customerId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1652,7 +1652,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
                 
-                    invokeStaticMethod("Customer.delete__location_shared", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__delete__location_shared", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1670,15 +1670,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.delete__location_shared definition ends here..
+            }//Method delete__location_shared definition ends here..
 
             
 
         
     
         
-            //Method Customer.count__location_shared definition
-            public void Customer.count__location_shared(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            //Method count__location_shared definition
+            public void count__location_shared(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1694,7 +1694,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
                     
-                    invokeStaticMethod("Customer.count__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1713,15 +1713,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.count__location_shared definition ends here..
+            }//Method count__location_shared definition ends here..
 
             
 
         
     
         
-            //Method Customer.get__track definition
-            public void Customer.get__track(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<Track> callback){
+            //Method get__track definition
+            public void get__track(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1738,7 +1738,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
                 
-                    invokeStaticMethod("Customer.get__track", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__track", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1766,15 +1766,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     });
                 
 
-            }//Method Customer.get__track definition ends here..
+            }//Method get__track definition ends here..
 
             
 
         
     
         
-            //Method Customer.create__track definition
-            public void Customer.create__track(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
+            //Method create__track definition
+            public void create__track(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1791,7 +1791,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.create__track", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__track", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1817,15 +1817,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.create__track definition ends here..
+            }//Method create__track definition ends here..
 
             
 
         
     
         
-            //Method Customer.delete__track definition
-            public void Customer.delete__track(  String customerId, final VoidCallback callback){
+            //Method delete__track definition
+            public void delete__track(  String customerId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1835,7 +1835,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
                 
-                    invokeStaticMethod("Customer.delete__track", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__delete__track", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1853,15 +1853,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.delete__track definition ends here..
+            }//Method delete__track definition ends here..
 
             
 
         
     
         
-            //Method Customer.count__track definition
-            public void Customer.count__track(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            //Method count__track definition
+            public void count__track(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1877,7 +1877,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
                     
-                    invokeStaticMethod("Customer.count__track", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__track", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1896,15 +1896,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.count__track definition ends here..
+            }//Method count__track definition ends here..
 
             
 
         
     
         
-            //Method Customer.create definition
-            public void Customer.create(  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
+            //Method create definition
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1919,7 +1919,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.create", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1945,15 +1945,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.create definition ends here..
+            }//Method create definition ends here..
 
             
 
         
     
         
-            //Method Customer.create definition
-            public void Customer.create(  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
+            //Method create definition
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1968,7 +1968,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.create", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1994,15 +1994,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.create definition ends here..
+            }//Method create definition ends here..
 
             
 
         
     
         
-            //Method Customer.upsert definition
-            public void Customer.upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
+            //Method upsert definition
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2017,7 +2017,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.upsert", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("upsert", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -2043,15 +2043,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.upsert definition ends here..
+            }//Method upsert definition ends here..
 
             
 
         
     
         
-            //Method Customer.exists definition
-            public void Customer.exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method exists definition
+            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2065,7 +2065,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
                     
-                    invokeStaticMethod("Customer.exists", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("exists", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2084,15 +2084,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.exists definition ends here..
+            }//Method exists definition ends here..
 
             
 
         
     
         
-            //Method Customer.findById definition
-            public void Customer.findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Customer> callback){
+            //Method findById definition
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2109,7 +2109,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.findById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -2135,15 +2135,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.findById definition ends here..
+            }//Method findById definition ends here..
 
             
 
         
     
         
-            //Method Customer.find definition
-            public void Customer.find(  Map<String,  ? extends Object> filter, final ListCallback<Customer> callback){
+            //Method find definition
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2158,7 +2158,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
                 
-                    invokeStaticMethod("Customer.find", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("find", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -2186,15 +2186,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     });
                 
 
-            }//Method Customer.find definition ends here..
+            }//Method find definition ends here..
 
             
 
         
     
         
-            //Method Customer.findOne definition
-            public void Customer.findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Customer> callback){
+            //Method findOne definition
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2209,7 +2209,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.findOne", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findOne", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -2235,15 +2235,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.findOne definition ends here..
+            }//Method findOne definition ends here..
 
             
 
         
     
         
-            //Method Customer.updateAll definition
-            public void Customer.updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            //Method updateAll definition
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2259,7 +2259,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
                     
-                    invokeStaticMethod("Customer.updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2278,15 +2278,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.updateAll definition ends here..
+            }//Method updateAll definition ends here..
 
             
 
         
     
         
-            //Method Customer.deleteById definition
-            public void Customer.deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method deleteById definition
+            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2300,7 +2300,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
                     
-                    invokeStaticMethod("Customer.deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2319,15 +2319,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.deleteById definition ends here..
+            }//Method deleteById definition ends here..
 
             
 
         
     
         
-            //Method Customer.count definition
-            public void Customer.count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            //Method count definition
+            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2341,7 +2341,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
                     
-                    invokeStaticMethod("Customer.count", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("count", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2360,15 +2360,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.count definition ends here..
+            }//Method count definition ends here..
 
             
 
         
     
         
-            //Method Customer.updateAttributes definition
-            public void Customer.updateAttributes(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
+            //Method updateAttributes definition
+            public void updateAttributes(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2385,7 +2385,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -2411,7 +2411,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.updateAttributes definition ends here..
+            }//Method updateAttributes definition ends here..
 
             
 
@@ -2424,8 +2424,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
     
         
-            //Method Customer.confirm definition
-            public void Customer.confirm(  String uid,  String token,  String redirect, final VoidCallback callback){
+            //Method confirm definition
+            public void confirm(  String uid,  String token,  String redirect, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2439,7 +2439,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
                 
-                    invokeStaticMethod("Customer.confirm", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("confirm", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -2457,15 +2457,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.confirm definition ends here..
+            }//Method confirm definition ends here..
 
             
 
         
     
         
-            //Method Customer.resetPassword definition
-            public void Customer.resetPassword(  Map<String,  ? extends Object> options, final VoidCallback callback){
+            //Method resetPassword definition
+            public void resetPassword(  Map<String,  ? extends Object> options, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2475,7 +2475,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
                 
-                    invokeStaticMethod("Customer.resetPassword", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("resetPassword", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -2493,15 +2493,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.resetPassword definition ends here..
+            }//Method resetPassword definition ends here..
 
             
 
         
     
         
-            //Method Customer.getSchema definition
-            public void Customer.getSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method getSchema definition
+            public void getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2513,7 +2513,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
                     
-                    invokeStaticMethod("Customer.getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2532,15 +2532,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.getSchema definition ends here..
+            }//Method getSchema definition ends here..
 
             
 
         
     
         
-            //Method Customer.getAbsoluteSchema definition
-            public void Customer.getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method getAbsoluteSchema definition
+            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2552,7 +2552,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
                     
-                    invokeStaticMethod("Customer.getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2571,7 +2571,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.getAbsoluteSchema definition ends here..
+            }//Method getAbsoluteSchema definition ends here..
 
             
 
@@ -2580,51 +2580,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
     
         
-            //Method Customer.__connect__location_shared definition
-            public void Customer.__connect__location_shared(  String id,  List<String> fk, final Adapter.JsonObjectCallback  callback ){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("id", id);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("Customer.__connect__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method Customer.__connect__location_shared definition ends here..
-
-            
-
-        
-    
-        
-            //Method Customer.__disconnect__location_shared definition
-            public void Customer.__disconnect__location_shared(  String id,  List<String> fk, final Adapter.JsonObjectCallback  callback ){
+            //Method __connect__location_shared definition
+            public void __connect__location_shared(  String id,  List<String> fk, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2640,7 +2597,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
                     
-                    invokeStaticMethod("Customer.__disconnect__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("__connect__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2659,15 +2616,58 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.__disconnect__location_shared definition ends here..
+            }//Method __connect__location_shared definition ends here..
 
             
 
         
     
         
-            //Method Customer.requestOtp definition
-            public void Customer.requestOtp(  String number, final Adapter.JsonObjectCallback  callback ){
+            //Method __disconnect__location_shared definition
+            public void __disconnect__location_shared(  String id,  List<String> fk, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("id", id);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("__disconnect__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method __disconnect__location_shared definition ends here..
+
+            
+
+        
+    
+        
+            //Method requestOtp definition
+            public void requestOtp(  String number, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2681,7 +2681,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
                     
-                    invokeStaticMethod("Customer.requestOtp", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("requestOtp", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2700,15 +2700,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.requestOtp definition ends here..
+            }//Method requestOtp definition ends here..
 
             
 
         
     
         
-            //Method Customer.loginWithCode definition
-            public void Customer.loginWithCode(  String accessToken,  String code,  String number, final Adapter.JsonObjectCallback  callback ){
+            //Method loginWithCode definition
+            public void loginWithCode(  String accessToken,  String code,  String number, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2726,7 +2726,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
                     
-                    invokeStaticMethod("Customer.loginWithCode", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("loginWithCode", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2745,15 +2745,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.loginWithCode definition ends here..
+            }//Method loginWithCode definition ends here..
 
             
 
         
     
         
-            //Method Customer.loginWithGoogle definition
-            public void Customer.loginWithGoogle(  String accessToken, final Adapter.JsonObjectCallback  callback ){
+            //Method loginWithGoogle definition
+            public void loginWithGoogle(  String accessToken, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2767,7 +2767,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
                     
-                    invokeStaticMethod("Customer.loginWithGoogle", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("loginWithGoogle", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2786,15 +2786,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.loginWithGoogle definition ends here..
+            }//Method loginWithGoogle definition ends here..
 
             
 
         
     
         
-            //Method Customer.loginWithFb definition
-            public void Customer.loginWithFb(  String external_access_token, final Adapter.JsonObjectCallback  callback ){
+            //Method loginWithFb definition
+            public void loginWithFb(  String external_access_token, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2808,7 +2808,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
                     
-                    invokeStaticMethod("Customer.loginWithFb", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("loginWithFb", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2827,15 +2827,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.loginWithFb definition ends here..
+            }//Method loginWithFb definition ends here..
 
             
 
         
     
         
-            //Method Customer.findById__location_shared definition
-            public void Customer.findById__location_shared(  String id,  String fk, final ObjectCallback<Customer> callback){
+            //Method findById__location_shared definition
+            public void findById__location_shared(  String id,  String fk, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2852,7 +2852,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.findById__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -2878,15 +2878,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.findById__location_shared definition ends here..
+            }//Method findById__location_shared definition ends here..
 
             
 
         
     
         
-            //Method Customer.destroyById__location_shared definition
-            public void Customer.destroyById__location_shared(  String id,  String fk, final VoidCallback callback){
+            //Method destroyById__location_shared definition
+            public void destroyById__location_shared(  String id,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2898,7 +2898,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
                 
-                    invokeStaticMethod("Customer.destroyById__location_shared", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroyById__location_shared", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -2916,15 +2916,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.destroyById__location_shared definition ends here..
+            }//Method destroyById__location_shared definition ends here..
 
             
 
         
     
         
-            //Method Customer.updateById__location_shared definition
-            public void Customer.updateById__location_shared(  String id,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
+            //Method updateById__location_shared definition
+            public void updateById__location_shared(  String id,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2943,7 +2943,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.updateById__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -2969,15 +2969,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.updateById__location_shared definition ends here..
+            }//Method updateById__location_shared definition ends here..
 
             
 
         
     
         
-            //Method Customer.link__location_shared definition
-            public void Customer.link__location_shared(  String id,  String fk, final ObjectCallback<Customer> callback){
+            //Method link__location_shared definition
+            public void link__location_shared(  String id,  String fk, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2994,7 +2994,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.link__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__link__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -3020,15 +3020,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.link__location_shared definition ends here..
+            }//Method link__location_shared definition ends here..
 
             
 
         
     
         
-            //Method Customer.unlink__location_shared definition
-            public void Customer.unlink__location_shared(  String id,  String fk, final VoidCallback callback){
+            //Method unlink__location_shared definition
+            public void unlink__location_shared(  String id,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3040,7 +3040,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
                 
-                    invokeStaticMethod("Customer.unlink__location_shared", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__unlink__location_shared", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -3058,15 +3058,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.unlink__location_shared definition ends here..
+            }//Method unlink__location_shared definition ends here..
 
             
 
         
     
         
-            //Method Customer.exists__location_shared definition
-            public void Customer.exists__location_shared(  String id,  String fk, final Adapter.JsonObjectCallback  callback ){
+            //Method exists__location_shared definition
+            public void exists__location_shared(  String id,  String fk, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3082,7 +3082,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
                     
-                    invokeStaticMethod("Customer.exists__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__exists__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -3101,15 +3101,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.exists__location_shared definition ends here..
+            }//Method exists__location_shared definition ends here..
 
             
 
         
     
         
-            //Method Customer.get__location_shared definition
-            public void Customer.get__location_shared(  String id,  Map<String,  ? extends Object> filter, final ListCallback<Customer> callback){
+            //Method get__location_shared definition
+            public void get__location_shared(  String id,  Map<String,  ? extends Object> filter, final ListCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3126,7 +3126,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
                 
-                    invokeStaticMethod("Customer.get__location_shared", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__location_shared", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -3154,15 +3154,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     });
                 
 
-            }//Method Customer.get__location_shared definition ends here..
+            }//Method get__location_shared definition ends here..
 
             
 
         
     
         
-            //Method Customer.create__location_shared definition
-            public void Customer.create__location_shared(  String id,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
+            //Method create__location_shared definition
+            public void create__location_shared(  String id,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3179,7 +3179,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.create__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -3205,15 +3205,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.create__location_shared definition ends here..
+            }//Method create__location_shared definition ends here..
 
             
 
         
     
         
-            //Method Customer.create__location_shared definition
-            public void Customer.create__location_shared(  String id,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
+            //Method create__location_shared definition
+            public void create__location_shared(  String id,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3230,7 +3230,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("Customer.create__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -3256,15 +3256,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.create__location_shared definition ends here..
+            }//Method create__location_shared definition ends here..
 
             
 
         
     
         
-            //Method Customer.delete__location_shared definition
-            public void Customer.delete__location_shared(  String id, final VoidCallback callback){
+            //Method delete__location_shared definition
+            public void delete__location_shared(  String id, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3274,7 +3274,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
                 
-                    invokeStaticMethod("Customer.delete__location_shared", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__delete__location_shared", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -3292,15 +3292,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.delete__location_shared definition ends here..
+            }//Method delete__location_shared definition ends here..
 
             
 
         
     
         
-            //Method Customer.count__location_shared definition
-            public void Customer.count__location_shared(  String id,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            //Method count__location_shared definition
+            public void count__location_shared(  String id,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -3316,7 +3316,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
                     
-                    invokeStaticMethod("Customer.count__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__location_shared", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -3335,7 +3335,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method Customer.count__location_shared definition ends here..
+            }//Method count__location_shared definition ends here..
 
             
 

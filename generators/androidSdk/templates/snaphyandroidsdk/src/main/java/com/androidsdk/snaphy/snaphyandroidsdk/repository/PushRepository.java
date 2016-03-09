@@ -98,8 +98,8 @@ public class PushRepository extends ModelRepository<Push> {
 
     
         
-            //Method push.notifyByQuery definition
-            public void push.notifyByQuery(  Map<String,  ? extends Object> deviceQuery,  Map<String,  ? extends Object> notification, final Adapter.JsonObjectCallback  callback ){
+            //Method notifyByQuery definition
+            public void notifyByQuery(  Map<String,  ? extends Object> deviceQuery,  Map<String,  ? extends Object> notification, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -115,7 +115,7 @@ public class PushRepository extends ModelRepository<Push> {
 
                 
                     
-                    invokeStaticMethod("push.notifyByQuery", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("notifyByQuery", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -134,15 +134,15 @@ public class PushRepository extends ModelRepository<Push> {
 
                 
 
-            }//Method push.notifyByQuery definition ends here..
+            }//Method notifyByQuery definition ends here..
 
             
 
         
     
         
-            //Method push.getSchema definition
-            public void push.getSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method getSchema definition
+            public void getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -154,7 +154,7 @@ public class PushRepository extends ModelRepository<Push> {
 
                 
                     
-                    invokeStaticMethod("push.getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -173,15 +173,15 @@ public class PushRepository extends ModelRepository<Push> {
 
                 
 
-            }//Method push.getSchema definition ends here..
+            }//Method getSchema definition ends here..
 
             
 
         
     
         
-            //Method push.getAbsoluteSchema definition
-            public void push.getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method getAbsoluteSchema definition
+            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -193,7 +193,7 @@ public class PushRepository extends ModelRepository<Push> {
 
                 
                     
-                    invokeStaticMethod("push.getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -212,7 +212,7 @@ public class PushRepository extends ModelRepository<Push> {
 
                 
 
-            }//Method push.getAbsoluteSchema definition ends here..
+            }//Method getAbsoluteSchema definition ends here..
 
             
 

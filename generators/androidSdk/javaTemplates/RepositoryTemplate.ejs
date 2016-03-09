@@ -345,7 +345,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
     <% model.restDefinition.methods.forEach(function(restMethodObj){
         var patt = new RegExp("^" + model.name + "\\..+");
         //metch prototype.__
-        var initialPatt = /.+\./;
+        var initialPatt = /^[0-9A-Za-z\_]+\./;
         var methodPatt = /prototype\.\_?\_?/;
     %>
         <% if(restMethodObj.fullName
@@ -355,13 +355,19 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
             && restMethodObj.name !== "logout"
             && restMethodObj.name !== "save" ){
 
-           /* console.log("\n");
-            console.log(restMethodObj.fullName);
-            console.log(restMethodObj.name);
-*/
-
+            var staticMethodName = restMethodObj.fullName.replace(initialPatt, "");
             var restMethodName = restMethodObj.fullName.replace(initialPatt, "");
-            restMethodName = restMethodObj.fullName.replace(methodPatt, "");
+            restMethodName = restMethodName.replace(methodPatt, "");
+
+
+            console.log("\n");
+            console.log(restMethodObj.fullName);
+            console.log(restMethodName);
+            
+            
+
+
+            
             var methodString = "public void ";
             methodString = methodString + restMethodName + "( ";
             //ImmutableMap string concatenation..
@@ -567,7 +573,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                 %>
 
                 <% if(callbackType === "VoidCallback") {%>
-                    invokeStaticMethod("<%- restMethodName %>", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("<%- staticMethodName %>", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -583,10 +589,10 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
                 <% if(callbackType === "ObjectCallback") {%>
                     <% if(model.allModels[type] === undefined) { %>
-                    invokeStaticMethod("<%- restMethodName %>", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("<%- staticMethodName %>", hashMapObject, new Adapter.JsonObjectCallback() {
                     <% } %>
                     <% if(model.allModels[type] !== undefined) { %>
-                    invokeStaticMethod("<%- restMethodName %>", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("<%- staticMethodName %>", hashMapObject, new Adapter.JsonObjectCallback() {
                     <% } %>
                         @Override
                         public void onError(Throwable t) {
@@ -613,7 +619,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                 <% } %>
 
                 <% if(callbackType === "ListCallback") {%>
-                    invokeStaticMethod("<%- restMethodName %>", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("<%- staticMethodName %>", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);

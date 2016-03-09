@@ -204,8 +204,8 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
     
         
-            //Method installation.findByApp definition
-            public void installation.findByApp(  String deviceType,  String appId,  String appVersion, final Adapter.JsonObjectCallback  callback ){
+            //Method findByApp definition
+            public void findByApp(  String deviceType,  String appId,  String appVersion, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -223,7 +223,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
                     
-                    invokeStaticMethod("installation.findByApp", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findByApp", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -242,15 +242,15 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
 
-            }//Method installation.findByApp definition ends here..
+            }//Method findByApp definition ends here..
 
             
 
         
     
         
-            //Method installation.findByUser definition
-            public void installation.findByUser(  String deviceType,  String userId, final Adapter.JsonObjectCallback  callback ){
+            //Method findByUser definition
+            public void findByUser(  String deviceType,  String userId, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -266,7 +266,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
                     
-                    invokeStaticMethod("installation.findByUser", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findByUser", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -285,15 +285,15 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
 
-            }//Method installation.findByUser definition ends here..
+            }//Method findByUser definition ends here..
 
             
 
         
     
         
-            //Method installation.findBySubscriptions definition
-            public void installation.findBySubscriptions(  String deviceType,  String subscriptions, final Adapter.JsonObjectCallback  callback ){
+            //Method findBySubscriptions definition
+            public void findBySubscriptions(  String deviceType,  String subscriptions, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -309,7 +309,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
                     
-                    invokeStaticMethod("installation.findBySubscriptions", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findBySubscriptions", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -328,15 +328,15 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
 
-            }//Method installation.findBySubscriptions definition ends here..
+            }//Method findBySubscriptions definition ends here..
 
             
 
         
     
         
-            //Method installation.create definition
-            public void installation.create(  Map<String,  ? extends Object> data, final ObjectCallback<Installation> callback){
+            //Method create definition
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Installation> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -351,7 +351,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
                 
                     
                     
-                    invokeStaticMethod("installation.create", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -377,15 +377,15 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
 
-            }//Method installation.create definition ends here..
+            }//Method create definition ends here..
 
             
 
         
     
         
-            //Method installation.create definition
-            public void installation.create(  Map<String,  ? extends Object> data, final ObjectCallback<Installation> callback){
+            //Method create definition
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Installation> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -400,7 +400,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
                 
                     
                     
-                    invokeStaticMethod("installation.create", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -426,15 +426,15 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
 
-            }//Method installation.create definition ends here..
+            }//Method create definition ends here..
 
             
 
         
     
         
-            //Method installation.upsert definition
-            public void installation.upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Installation> callback){
+            //Method upsert definition
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Installation> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -449,7 +449,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
                 
                     
                     
-                    invokeStaticMethod("installation.upsert", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("upsert", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -475,15 +475,15 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
 
-            }//Method installation.upsert definition ends here..
+            }//Method upsert definition ends here..
 
             
 
         
     
         
-            //Method installation.exists definition
-            public void installation.exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method exists definition
+            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -497,7 +497,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
                     
-                    invokeStaticMethod("installation.exists", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("exists", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -516,15 +516,15 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
 
-            }//Method installation.exists definition ends here..
+            }//Method exists definition ends here..
 
             
 
         
     
         
-            //Method installation.findById definition
-            public void installation.findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Installation> callback){
+            //Method findById definition
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Installation> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -541,7 +541,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
                 
                     
                     
-                    invokeStaticMethod("installation.findById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -567,15 +567,15 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
 
-            }//Method installation.findById definition ends here..
+            }//Method findById definition ends here..
 
             
 
         
     
         
-            //Method installation.find definition
-            public void installation.find(  Map<String,  ? extends Object> filter, final ListCallback<Installation> callback){
+            //Method find definition
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Installation> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -590,7 +590,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
                 
 
                 
-                    invokeStaticMethod("installation.find", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("find", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -618,15 +618,15 @@ public class InstallationRepository extends ModelRepository<Installation> {
                     });
                 
 
-            }//Method installation.find definition ends here..
+            }//Method find definition ends here..
 
             
 
         
     
         
-            //Method installation.findOne definition
-            public void installation.findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Installation> callback){
+            //Method findOne definition
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Installation> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -641,7 +641,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
                 
                     
                     
-                    invokeStaticMethod("installation.findOne", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findOne", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -667,15 +667,15 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
 
-            }//Method installation.findOne definition ends here..
+            }//Method findOne definition ends here..
 
             
 
         
     
         
-            //Method installation.updateAll definition
-            public void installation.updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            //Method updateAll definition
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -691,7 +691,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
                     
-                    invokeStaticMethod("installation.updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -710,15 +710,15 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
 
-            }//Method installation.updateAll definition ends here..
+            }//Method updateAll definition ends here..
 
             
 
         
     
         
-            //Method installation.deleteById definition
-            public void installation.deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method deleteById definition
+            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -732,7 +732,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
                     
-                    invokeStaticMethod("installation.deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -751,15 +751,15 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
 
-            }//Method installation.deleteById definition ends here..
+            }//Method deleteById definition ends here..
 
             
 
         
     
         
-            //Method installation.count definition
-            public void installation.count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            //Method count definition
+            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -773,7 +773,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
                     
-                    invokeStaticMethod("installation.count", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("count", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -792,15 +792,15 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
 
-            }//Method installation.count definition ends here..
+            }//Method count definition ends here..
 
             
 
         
     
         
-            //Method installation.updateAttributes definition
-            public void installation.updateAttributes(  String installationId,  Map<String,  ? extends Object> data, final ObjectCallback<Installation> callback){
+            //Method updateAttributes definition
+            public void updateAttributes(  String installationId,  Map<String,  ? extends Object> data, final ObjectCallback<Installation> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -817,7 +817,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
                 
                     
                     
-                    invokeStaticMethod("installation.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -843,7 +843,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
 
-            }//Method installation.updateAttributes definition ends here..
+            }//Method updateAttributes definition ends here..
 
             
 
@@ -852,8 +852,8 @@ public class InstallationRepository extends ModelRepository<Installation> {
         
     
         
-            //Method installation.getSchema definition
-            public void installation.getSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method getSchema definition
+            public void getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -865,7 +865,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
                     
-                    invokeStaticMethod("installation.getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -884,15 +884,15 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
 
-            }//Method installation.getSchema definition ends here..
+            }//Method getSchema definition ends here..
 
             
 
         
     
         
-            //Method installation.getAbsoluteSchema definition
-            public void installation.getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method getAbsoluteSchema definition
+            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -904,7 +904,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
                     
-                    invokeStaticMethod("installation.getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -923,7 +923,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
 
-            }//Method installation.getAbsoluteSchema definition ends here..
+            }//Method getAbsoluteSchema definition ends here..
 
             
 

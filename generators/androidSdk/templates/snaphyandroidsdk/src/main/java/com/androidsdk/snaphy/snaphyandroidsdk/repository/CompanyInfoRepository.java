@@ -179,8 +179,8 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
     
         
-            //Method CompanyInfo.create definition
-            public void CompanyInfo.create(  Map<String,  ? extends Object> data, final ObjectCallback<CompanyInfo> callback){
+            //Method create definition
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<CompanyInfo> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -195,7 +195,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                 
                     
                     
-                    invokeStaticMethod("CompanyInfo.create", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -221,15 +221,15 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                 
 
-            }//Method CompanyInfo.create definition ends here..
+            }//Method create definition ends here..
 
             
 
         
     
         
-            //Method CompanyInfo.create definition
-            public void CompanyInfo.create(  Map<String,  ? extends Object> data, final ObjectCallback<CompanyInfo> callback){
+            //Method create definition
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<CompanyInfo> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -244,7 +244,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                 
                     
                     
-                    invokeStaticMethod("CompanyInfo.create", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -270,15 +270,15 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                 
 
-            }//Method CompanyInfo.create definition ends here..
+            }//Method create definition ends here..
 
             
 
         
     
         
-            //Method CompanyInfo.upsert definition
-            public void CompanyInfo.upsert(  Map<String,  ? extends Object> data, final ObjectCallback<CompanyInfo> callback){
+            //Method upsert definition
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<CompanyInfo> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -293,7 +293,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                 
                     
                     
-                    invokeStaticMethod("CompanyInfo.upsert", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("upsert", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -319,15 +319,15 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                 
 
-            }//Method CompanyInfo.upsert definition ends here..
+            }//Method upsert definition ends here..
 
             
 
         
     
         
-            //Method CompanyInfo.exists definition
-            public void CompanyInfo.exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method exists definition
+            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -341,7 +341,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                 
                     
-                    invokeStaticMethod("CompanyInfo.exists", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("exists", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -360,15 +360,15 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                 
 
-            }//Method CompanyInfo.exists definition ends here..
+            }//Method exists definition ends here..
 
             
 
         
     
         
-            //Method CompanyInfo.findById definition
-            public void CompanyInfo.findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<CompanyInfo> callback){
+            //Method findById definition
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<CompanyInfo> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -385,7 +385,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                 
                     
                     
-                    invokeStaticMethod("CompanyInfo.findById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -411,15 +411,15 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                 
 
-            }//Method CompanyInfo.findById definition ends here..
+            }//Method findById definition ends here..
 
             
 
         
     
         
-            //Method CompanyInfo.find definition
-            public void CompanyInfo.find(  Map<String,  ? extends Object> filter, final ListCallback<CompanyInfo> callback){
+            //Method find definition
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<CompanyInfo> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -434,7 +434,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                 
 
                 
-                    invokeStaticMethod("CompanyInfo.find", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("find", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -462,15 +462,15 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                     });
                 
 
-            }//Method CompanyInfo.find definition ends here..
+            }//Method find definition ends here..
 
             
 
         
     
         
-            //Method CompanyInfo.findOne definition
-            public void CompanyInfo.findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<CompanyInfo> callback){
+            //Method findOne definition
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<CompanyInfo> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -485,7 +485,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                 
                     
                     
-                    invokeStaticMethod("CompanyInfo.findOne", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findOne", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -511,15 +511,15 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                 
 
-            }//Method CompanyInfo.findOne definition ends here..
+            }//Method findOne definition ends here..
 
             
 
         
     
         
-            //Method CompanyInfo.updateAll definition
-            public void CompanyInfo.updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            //Method updateAll definition
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -535,7 +535,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                 
                     
-                    invokeStaticMethod("CompanyInfo.updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -554,15 +554,15 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                 
 
-            }//Method CompanyInfo.updateAll definition ends here..
+            }//Method updateAll definition ends here..
 
             
 
         
     
         
-            //Method CompanyInfo.deleteById definition
-            public void CompanyInfo.deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method deleteById definition
+            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -576,7 +576,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                 
                     
-                    invokeStaticMethod("CompanyInfo.deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -595,15 +595,15 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                 
 
-            }//Method CompanyInfo.deleteById definition ends here..
+            }//Method deleteById definition ends here..
 
             
 
         
     
         
-            //Method CompanyInfo.count definition
-            public void CompanyInfo.count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            //Method count definition
+            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -617,7 +617,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                 
                     
-                    invokeStaticMethod("CompanyInfo.count", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("count", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -636,15 +636,15 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                 
 
-            }//Method CompanyInfo.count definition ends here..
+            }//Method count definition ends here..
 
             
 
         
     
         
-            //Method CompanyInfo.updateAttributes definition
-            public void CompanyInfo.updateAttributes(  String companyInfoId,  Map<String,  ? extends Object> data, final ObjectCallback<CompanyInfo> callback){
+            //Method updateAttributes definition
+            public void updateAttributes(  String companyInfoId,  Map<String,  ? extends Object> data, final ObjectCallback<CompanyInfo> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -661,7 +661,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                 
                     
                     
-                    invokeStaticMethod("CompanyInfo.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -687,7 +687,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                 
 
-            }//Method CompanyInfo.updateAttributes definition ends here..
+            }//Method updateAttributes definition ends here..
 
             
 
@@ -696,8 +696,8 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
         
     
         
-            //Method CompanyInfo.getSchema definition
-            public void CompanyInfo.getSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method getSchema definition
+            public void getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -709,7 +709,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                 
                     
-                    invokeStaticMethod("CompanyInfo.getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -728,15 +728,15 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                 
 
-            }//Method CompanyInfo.getSchema definition ends here..
+            }//Method getSchema definition ends here..
 
             
 
         
     
         
-            //Method CompanyInfo.getAbsoluteSchema definition
-            public void CompanyInfo.getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method getAbsoluteSchema definition
+            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -748,7 +748,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                 
                     
-                    invokeStaticMethod("CompanyInfo.getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -767,7 +767,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                 
 
-            }//Method CompanyInfo.getAbsoluteSchema definition ends here..
+            }//Method getAbsoluteSchema definition ends here..
 
             
 

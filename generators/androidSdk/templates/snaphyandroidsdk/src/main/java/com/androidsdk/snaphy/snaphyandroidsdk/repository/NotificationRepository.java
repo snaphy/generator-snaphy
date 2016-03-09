@@ -180,8 +180,8 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
     
         
-            //Method notification.create definition
-            public void notification.create(  Map<String,  ? extends Object> data, final ObjectCallback<Notification> callback){
+            //Method create definition
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Notification> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -196,7 +196,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
                 
                     
                     
-                    invokeStaticMethod("notification.create", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -222,15 +222,15 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                 
 
-            }//Method notification.create definition ends here..
+            }//Method create definition ends here..
 
             
 
         
     
         
-            //Method notification.create definition
-            public void notification.create(  Map<String,  ? extends Object> data, final ObjectCallback<Notification> callback){
+            //Method create definition
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Notification> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -245,7 +245,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
                 
                     
                     
-                    invokeStaticMethod("notification.create", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -271,15 +271,15 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                 
 
-            }//Method notification.create definition ends here..
+            }//Method create definition ends here..
 
             
 
         
     
         
-            //Method notification.upsert definition
-            public void notification.upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Notification> callback){
+            //Method upsert definition
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Notification> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -294,7 +294,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
                 
                     
                     
-                    invokeStaticMethod("notification.upsert", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("upsert", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -320,15 +320,15 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                 
 
-            }//Method notification.upsert definition ends here..
+            }//Method upsert definition ends here..
 
             
 
         
     
         
-            //Method notification.exists definition
-            public void notification.exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method exists definition
+            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -342,7 +342,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                 
                     
-                    invokeStaticMethod("notification.exists", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("exists", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -361,15 +361,15 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                 
 
-            }//Method notification.exists definition ends here..
+            }//Method exists definition ends here..
 
             
 
         
     
         
-            //Method notification.findById definition
-            public void notification.findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Notification> callback){
+            //Method findById definition
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Notification> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -386,7 +386,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
                 
                     
                     
-                    invokeStaticMethod("notification.findById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -412,15 +412,15 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                 
 
-            }//Method notification.findById definition ends here..
+            }//Method findById definition ends here..
 
             
 
         
     
         
-            //Method notification.find definition
-            public void notification.find(  Map<String,  ? extends Object> filter, final ListCallback<Notification> callback){
+            //Method find definition
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Notification> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -435,7 +435,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
                 
 
                 
-                    invokeStaticMethod("notification.find", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("find", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -463,15 +463,15 @@ public class NotificationRepository extends ModelRepository<Notification> {
                     });
                 
 
-            }//Method notification.find definition ends here..
+            }//Method find definition ends here..
 
             
 
         
     
         
-            //Method notification.findOne definition
-            public void notification.findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Notification> callback){
+            //Method findOne definition
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Notification> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -486,7 +486,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
                 
                     
                     
-                    invokeStaticMethod("notification.findOne", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findOne", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -512,15 +512,15 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                 
 
-            }//Method notification.findOne definition ends here..
+            }//Method findOne definition ends here..
 
             
 
         
     
         
-            //Method notification.updateAll definition
-            public void notification.updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            //Method updateAll definition
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -536,7 +536,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                 
                     
-                    invokeStaticMethod("notification.updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -555,15 +555,15 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                 
 
-            }//Method notification.updateAll definition ends here..
+            }//Method updateAll definition ends here..
 
             
 
         
     
         
-            //Method notification.deleteById definition
-            public void notification.deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method deleteById definition
+            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -577,7 +577,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                 
                     
-                    invokeStaticMethod("notification.deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -596,15 +596,15 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                 
 
-            }//Method notification.deleteById definition ends here..
+            }//Method deleteById definition ends here..
 
             
 
         
     
         
-            //Method notification.count definition
-            public void notification.count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            //Method count definition
+            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -618,7 +618,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                 
                     
-                    invokeStaticMethod("notification.count", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("count", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -637,15 +637,15 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                 
 
-            }//Method notification.count definition ends here..
+            }//Method count definition ends here..
 
             
 
         
     
         
-            //Method notification.updateAttributes definition
-            public void notification.updateAttributes(  String notificationId,  Map<String,  ? extends Object> data, final ObjectCallback<Notification> callback){
+            //Method updateAttributes definition
+            public void updateAttributes(  String notificationId,  Map<String,  ? extends Object> data, final ObjectCallback<Notification> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -662,7 +662,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
                 
                     
                     
-                    invokeStaticMethod("notification.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -688,7 +688,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                 
 
-            }//Method notification.updateAttributes definition ends here..
+            }//Method updateAttributes definition ends here..
 
             
 
@@ -697,8 +697,8 @@ public class NotificationRepository extends ModelRepository<Notification> {
         
     
         
-            //Method notification.getSchema definition
-            public void notification.getSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method getSchema definition
+            public void getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -710,7 +710,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                 
                     
-                    invokeStaticMethod("notification.getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -729,15 +729,15 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                 
 
-            }//Method notification.getSchema definition ends here..
+            }//Method getSchema definition ends here..
 
             
 
         
     
         
-            //Method notification.getAbsoluteSchema definition
-            public void notification.getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method getAbsoluteSchema definition
+            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -749,7 +749,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                 
                     
-                    invokeStaticMethod("notification.getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -768,7 +768,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                 
 
-            }//Method notification.getAbsoluteSchema definition ends here..
+            }//Method getAbsoluteSchema definition ends here..
 
             
 

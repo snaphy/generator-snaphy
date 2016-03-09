@@ -205,8 +205,8 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
     
         
-            //Method FacebookAccessToken.get__customer definition
-            public void FacebookAccessToken.get__customer(  String facebookAccessTokenId,  Boolean refresh, final ObjectCallback<Customer> callback){
+            //Method get__customer definition
+            public void get__customer(  String facebookAccessTokenId,  Boolean refresh, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -223,7 +223,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                 
                     
                     
-                    invokeStaticMethod("FacebookAccessToken.get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -249,15 +249,15 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
 
-            }//Method FacebookAccessToken.get__customer definition ends here..
+            }//Method get__customer definition ends here..
 
             
 
         
     
         
-            //Method FacebookAccessToken.create definition
-            public void FacebookAccessToken.create(  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
+            //Method create definition
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -272,7 +272,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                 
                     
                     
-                    invokeStaticMethod("FacebookAccessToken.create", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -298,15 +298,15 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
 
-            }//Method FacebookAccessToken.create definition ends here..
+            }//Method create definition ends here..
 
             
 
         
     
         
-            //Method FacebookAccessToken.create definition
-            public void FacebookAccessToken.create(  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
+            //Method create definition
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -321,7 +321,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                 
                     
                     
-                    invokeStaticMethod("FacebookAccessToken.create", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -347,15 +347,15 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
 
-            }//Method FacebookAccessToken.create definition ends here..
+            }//Method create definition ends here..
 
             
 
         
     
         
-            //Method FacebookAccessToken.upsert definition
-            public void FacebookAccessToken.upsert(  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
+            //Method upsert definition
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -370,7 +370,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                 
                     
                     
-                    invokeStaticMethod("FacebookAccessToken.upsert", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("upsert", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -396,15 +396,15 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
 
-            }//Method FacebookAccessToken.upsert definition ends here..
+            }//Method upsert definition ends here..
 
             
 
         
     
         
-            //Method FacebookAccessToken.exists definition
-            public void FacebookAccessToken.exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method exists definition
+            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -418,7 +418,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
                     
-                    invokeStaticMethod("FacebookAccessToken.exists", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("exists", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -437,15 +437,15 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
 
-            }//Method FacebookAccessToken.exists definition ends here..
+            }//Method exists definition ends here..
 
             
 
         
     
         
-            //Method FacebookAccessToken.findById definition
-            public void FacebookAccessToken.findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<FacebookAccessToken> callback){
+            //Method findById definition
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<FacebookAccessToken> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -462,7 +462,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                 
                     
                     
-                    invokeStaticMethod("FacebookAccessToken.findById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -488,15 +488,15 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
 
-            }//Method FacebookAccessToken.findById definition ends here..
+            }//Method findById definition ends here..
 
             
 
         
     
         
-            //Method FacebookAccessToken.find definition
-            public void FacebookAccessToken.find(  Map<String,  ? extends Object> filter, final ListCallback<FacebookAccessToken> callback){
+            //Method find definition
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<FacebookAccessToken> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -511,7 +511,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                 
 
                 
-                    invokeStaticMethod("FacebookAccessToken.find", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("find", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -539,15 +539,15 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                     });
                 
 
-            }//Method FacebookAccessToken.find definition ends here..
+            }//Method find definition ends here..
 
             
 
         
     
         
-            //Method FacebookAccessToken.findOne definition
-            public void FacebookAccessToken.findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<FacebookAccessToken> callback){
+            //Method findOne definition
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<FacebookAccessToken> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -562,7 +562,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                 
                     
                     
-                    invokeStaticMethod("FacebookAccessToken.findOne", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findOne", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -588,15 +588,15 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
 
-            }//Method FacebookAccessToken.findOne definition ends here..
+            }//Method findOne definition ends here..
 
             
 
         
     
         
-            //Method FacebookAccessToken.updateAll definition
-            public void FacebookAccessToken.updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            //Method updateAll definition
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -612,7 +612,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
                     
-                    invokeStaticMethod("FacebookAccessToken.updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -631,15 +631,15 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
 
-            }//Method FacebookAccessToken.updateAll definition ends here..
+            }//Method updateAll definition ends here..
 
             
 
         
     
         
-            //Method FacebookAccessToken.deleteById definition
-            public void FacebookAccessToken.deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method deleteById definition
+            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -653,7 +653,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
                     
-                    invokeStaticMethod("FacebookAccessToken.deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -672,15 +672,15 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
 
-            }//Method FacebookAccessToken.deleteById definition ends here..
+            }//Method deleteById definition ends here..
 
             
 
         
     
         
-            //Method FacebookAccessToken.count definition
-            public void FacebookAccessToken.count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            //Method count definition
+            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -694,7 +694,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
                     
-                    invokeStaticMethod("FacebookAccessToken.count", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("count", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -713,15 +713,15 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
 
-            }//Method FacebookAccessToken.count definition ends here..
+            }//Method count definition ends here..
 
             
 
         
     
         
-            //Method FacebookAccessToken.updateAttributes definition
-            public void FacebookAccessToken.updateAttributes(  String facebookAccessTokenId,  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
+            //Method updateAttributes definition
+            public void updateAttributes(  String facebookAccessTokenId,  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -738,7 +738,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                 
                     
                     
-                    invokeStaticMethod("FacebookAccessToken.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -764,7 +764,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
 
-            }//Method FacebookAccessToken.updateAttributes definition ends here..
+            }//Method updateAttributes definition ends here..
 
             
 
@@ -773,8 +773,8 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
         
     
         
-            //Method FacebookAccessToken.getSchema definition
-            public void FacebookAccessToken.getSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method getSchema definition
+            public void getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -786,7 +786,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
                     
-                    invokeStaticMethod("FacebookAccessToken.getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -805,15 +805,15 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
 
-            }//Method FacebookAccessToken.getSchema definition ends here..
+            }//Method getSchema definition ends here..
 
             
 
         
     
         
-            //Method FacebookAccessToken.getAbsoluteSchema definition
-            public void FacebookAccessToken.getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method getAbsoluteSchema definition
+            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -825,7 +825,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
                     
-                    invokeStaticMethod("FacebookAccessToken.getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -844,7 +844,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
 
-            }//Method FacebookAccessToken.getAbsoluteSchema definition ends here..
+            }//Method getAbsoluteSchema definition ends here..
 
             
 

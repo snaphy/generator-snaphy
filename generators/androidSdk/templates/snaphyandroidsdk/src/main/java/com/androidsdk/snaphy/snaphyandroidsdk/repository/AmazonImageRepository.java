@@ -188,8 +188,8 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
     
         
-            //Method AmazonImage.create definition
-            public void AmazonImage.create(  Map<String,  ? extends Object> data, final ObjectCallback<AmazonImage> callback){
+            //Method create definition
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<AmazonImage> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -204,7 +204,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                 
                     
                     
-                    invokeStaticMethod("AmazonImage.create", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -230,15 +230,15 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
 
-            }//Method AmazonImage.create definition ends here..
+            }//Method create definition ends here..
 
             
 
         
     
         
-            //Method AmazonImage.create definition
-            public void AmazonImage.create(  Map<String,  ? extends Object> data, final ObjectCallback<AmazonImage> callback){
+            //Method create definition
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<AmazonImage> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -253,7 +253,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                 
                     
                     
-                    invokeStaticMethod("AmazonImage.create", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -279,15 +279,15 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
 
-            }//Method AmazonImage.create definition ends here..
+            }//Method create definition ends here..
 
             
 
         
     
         
-            //Method AmazonImage.upsert definition
-            public void AmazonImage.upsert(  Map<String,  ? extends Object> data, final ObjectCallback<AmazonImage> callback){
+            //Method upsert definition
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<AmazonImage> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -302,7 +302,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                 
                     
                     
-                    invokeStaticMethod("AmazonImage.upsert", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("upsert", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -328,15 +328,15 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
 
-            }//Method AmazonImage.upsert definition ends here..
+            }//Method upsert definition ends here..
 
             
 
         
     
         
-            //Method AmazonImage.exists definition
-            public void AmazonImage.exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method exists definition
+            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -350,7 +350,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
                     
-                    invokeStaticMethod("AmazonImage.exists", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("exists", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -369,15 +369,15 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
 
-            }//Method AmazonImage.exists definition ends here..
+            }//Method exists definition ends here..
 
             
 
         
     
         
-            //Method AmazonImage.findById definition
-            public void AmazonImage.findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<AmazonImage> callback){
+            //Method findById definition
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<AmazonImage> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -394,7 +394,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                 
                     
                     
-                    invokeStaticMethod("AmazonImage.findById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -420,15 +420,15 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
 
-            }//Method AmazonImage.findById definition ends here..
+            }//Method findById definition ends here..
 
             
 
         
     
         
-            //Method AmazonImage.find definition
-            public void AmazonImage.find(  Map<String,  ? extends Object> filter, final ListCallback<AmazonImage> callback){
+            //Method find definition
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<AmazonImage> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -443,7 +443,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                 
 
                 
-                    invokeStaticMethod("AmazonImage.find", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("find", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -471,15 +471,15 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                     });
                 
 
-            }//Method AmazonImage.find definition ends here..
+            }//Method find definition ends here..
 
             
 
         
     
         
-            //Method AmazonImage.findOne definition
-            public void AmazonImage.findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<AmazonImage> callback){
+            //Method findOne definition
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<AmazonImage> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -494,7 +494,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                 
                     
                     
-                    invokeStaticMethod("AmazonImage.findOne", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findOne", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -520,15 +520,15 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
 
-            }//Method AmazonImage.findOne definition ends here..
+            }//Method findOne definition ends here..
 
             
 
         
     
         
-            //Method AmazonImage.updateAll definition
-            public void AmazonImage.updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            //Method updateAll definition
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -544,7 +544,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
                     
-                    invokeStaticMethod("AmazonImage.updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -563,15 +563,15 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
 
-            }//Method AmazonImage.updateAll definition ends here..
+            }//Method updateAll definition ends here..
 
             
 
         
     
         
-            //Method AmazonImage.deleteById definition
-            public void AmazonImage.deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method deleteById definition
+            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -585,7 +585,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
                     
-                    invokeStaticMethod("AmazonImage.deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -604,15 +604,15 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
 
-            }//Method AmazonImage.deleteById definition ends here..
+            }//Method deleteById definition ends here..
 
             
 
         
     
         
-            //Method AmazonImage.count definition
-            public void AmazonImage.count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            //Method count definition
+            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -626,7 +626,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
                     
-                    invokeStaticMethod("AmazonImage.count", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("count", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -645,15 +645,15 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
 
-            }//Method AmazonImage.count definition ends here..
+            }//Method count definition ends here..
 
             
 
         
     
         
-            //Method AmazonImage.updateAttributes definition
-            public void AmazonImage.updateAttributes(  String amazonImageId,  Map<String,  ? extends Object> data, final ObjectCallback<AmazonImage> callback){
+            //Method updateAttributes definition
+            public void updateAttributes(  String amazonImageId,  Map<String,  ? extends Object> data, final ObjectCallback<AmazonImage> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -670,7 +670,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                 
                     
                     
-                    invokeStaticMethod("AmazonImage.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -696,7 +696,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
 
-            }//Method AmazonImage.updateAttributes definition ends here..
+            }//Method updateAttributes definition ends here..
 
             
 
@@ -705,8 +705,8 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
         
     
         
-            //Method AmazonImage.getSchema definition
-            public void AmazonImage.getSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method getSchema definition
+            public void getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -718,7 +718,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
                     
-                    invokeStaticMethod("AmazonImage.getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -737,15 +737,15 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
 
-            }//Method AmazonImage.getSchema definition ends here..
+            }//Method getSchema definition ends here..
 
             
 
         
     
         
-            //Method AmazonImage.getAbsoluteSchema definition
-            public void AmazonImage.getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method getAbsoluteSchema definition
+            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -757,7 +757,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
                     
-                    invokeStaticMethod("AmazonImage.getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -776,7 +776,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
 
-            }//Method AmazonImage.getAbsoluteSchema definition ends here..
+            }//Method getAbsoluteSchema definition ends here..
 
             
 
@@ -785,8 +785,8 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
         
     
         
-            //Method AmazonImage.getUrl definition
-            public void AmazonImage.getUrl(  String container,  String file,  Map<String,  ? extends Object> options, final Adapter.JsonObjectCallback  callback ){
+            //Method getUrl definition
+            public void getUrl(  String container,  String file,  Map<String,  ? extends Object> options, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -804,7 +804,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
                     
-                    invokeStaticMethod("AmazonImage.getUrl", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getUrl", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -823,7 +823,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
 
-            }//Method AmazonImage.getUrl definition ends here..
+            }//Method getUrl definition ends here..
 
             
 

@@ -195,8 +195,8 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
     
         
-            //Method LastUpdatedLocation.get__customer definition
-            public void LastUpdatedLocation.get__customer(  String lastUpdatedLocationId,  Boolean refresh, final ObjectCallback<Customer> callback){
+            //Method get__customer definition
+            public void get__customer(  String lastUpdatedLocationId,  Boolean refresh, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -213,7 +213,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                 
                     
                     
-                    invokeStaticMethod("LastUpdatedLocation.get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -239,15 +239,15 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
                 
 
-            }//Method LastUpdatedLocation.get__customer definition ends here..
+            }//Method get__customer definition ends here..
 
             
 
         
     
         
-            //Method LastUpdatedLocation.create definition
-            public void LastUpdatedLocation.create(  Map<String,  ? extends Object> data, final ObjectCallback<LastUpdatedLocation> callback){
+            //Method create definition
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<LastUpdatedLocation> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -262,7 +262,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                 
                     
                     
-                    invokeStaticMethod("LastUpdatedLocation.create", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -288,15 +288,15 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
                 
 
-            }//Method LastUpdatedLocation.create definition ends here..
+            }//Method create definition ends here..
 
             
 
         
     
         
-            //Method LastUpdatedLocation.create definition
-            public void LastUpdatedLocation.create(  Map<String,  ? extends Object> data, final ObjectCallback<LastUpdatedLocation> callback){
+            //Method create definition
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<LastUpdatedLocation> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -311,7 +311,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                 
                     
                     
-                    invokeStaticMethod("LastUpdatedLocation.create", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -337,15 +337,15 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
                 
 
-            }//Method LastUpdatedLocation.create definition ends here..
+            }//Method create definition ends here..
 
             
 
         
     
         
-            //Method LastUpdatedLocation.upsert definition
-            public void LastUpdatedLocation.upsert(  Map<String,  ? extends Object> data, final ObjectCallback<LastUpdatedLocation> callback){
+            //Method upsert definition
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<LastUpdatedLocation> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -360,7 +360,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                 
                     
                     
-                    invokeStaticMethod("LastUpdatedLocation.upsert", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("upsert", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -386,15 +386,15 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
                 
 
-            }//Method LastUpdatedLocation.upsert definition ends here..
+            }//Method upsert definition ends here..
 
             
 
         
     
         
-            //Method LastUpdatedLocation.exists definition
-            public void LastUpdatedLocation.exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method exists definition
+            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -408,7 +408,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
                 
                     
-                    invokeStaticMethod("LastUpdatedLocation.exists", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("exists", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -427,15 +427,15 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
                 
 
-            }//Method LastUpdatedLocation.exists definition ends here..
+            }//Method exists definition ends here..
 
             
 
         
     
         
-            //Method LastUpdatedLocation.findById definition
-            public void LastUpdatedLocation.findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<LastUpdatedLocation> callback){
+            //Method findById definition
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<LastUpdatedLocation> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -452,7 +452,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                 
                     
                     
-                    invokeStaticMethod("LastUpdatedLocation.findById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -478,15 +478,15 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
                 
 
-            }//Method LastUpdatedLocation.findById definition ends here..
+            }//Method findById definition ends here..
 
             
 
         
     
         
-            //Method LastUpdatedLocation.find definition
-            public void LastUpdatedLocation.find(  Map<String,  ? extends Object> filter, final ListCallback<LastUpdatedLocation> callback){
+            //Method find definition
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<LastUpdatedLocation> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -501,7 +501,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                 
 
                 
-                    invokeStaticMethod("LastUpdatedLocation.find", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("find", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -529,15 +529,15 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                     });
                 
 
-            }//Method LastUpdatedLocation.find definition ends here..
+            }//Method find definition ends here..
 
             
 
         
     
         
-            //Method LastUpdatedLocation.findOne definition
-            public void LastUpdatedLocation.findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<LastUpdatedLocation> callback){
+            //Method findOne definition
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<LastUpdatedLocation> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -552,7 +552,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                 
                     
                     
-                    invokeStaticMethod("LastUpdatedLocation.findOne", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findOne", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -578,15 +578,15 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
                 
 
-            }//Method LastUpdatedLocation.findOne definition ends here..
+            }//Method findOne definition ends here..
 
             
 
         
     
         
-            //Method LastUpdatedLocation.updateAll definition
-            public void LastUpdatedLocation.updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            //Method updateAll definition
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -602,7 +602,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
                 
                     
-                    invokeStaticMethod("LastUpdatedLocation.updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -621,15 +621,15 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
                 
 
-            }//Method LastUpdatedLocation.updateAll definition ends here..
+            }//Method updateAll definition ends here..
 
             
 
         
     
         
-            //Method LastUpdatedLocation.deleteById definition
-            public void LastUpdatedLocation.deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method deleteById definition
+            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -643,7 +643,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
                 
                     
-                    invokeStaticMethod("LastUpdatedLocation.deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -662,15 +662,15 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
                 
 
-            }//Method LastUpdatedLocation.deleteById definition ends here..
+            }//Method deleteById definition ends here..
 
             
 
         
     
         
-            //Method LastUpdatedLocation.count definition
-            public void LastUpdatedLocation.count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            //Method count definition
+            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -684,7 +684,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
                 
                     
-                    invokeStaticMethod("LastUpdatedLocation.count", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("count", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -703,15 +703,15 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
                 
 
-            }//Method LastUpdatedLocation.count definition ends here..
+            }//Method count definition ends here..
 
             
 
         
     
         
-            //Method LastUpdatedLocation.updateAttributes definition
-            public void LastUpdatedLocation.updateAttributes(  String lastUpdatedLocationId,  Map<String,  ? extends Object> data, final ObjectCallback<LastUpdatedLocation> callback){
+            //Method updateAttributes definition
+            public void updateAttributes(  String lastUpdatedLocationId,  Map<String,  ? extends Object> data, final ObjectCallback<LastUpdatedLocation> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -728,7 +728,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                 
                     
                     
-                    invokeStaticMethod("LastUpdatedLocation.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -754,7 +754,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
                 
 
-            }//Method LastUpdatedLocation.updateAttributes definition ends here..
+            }//Method updateAttributes definition ends here..
 
             
 
@@ -763,8 +763,8 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
         
     
         
-            //Method LastUpdatedLocation.getSchema definition
-            public void LastUpdatedLocation.getSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method getSchema definition
+            public void getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -776,7 +776,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
                 
                     
-                    invokeStaticMethod("LastUpdatedLocation.getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -795,15 +795,15 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
                 
 
-            }//Method LastUpdatedLocation.getSchema definition ends here..
+            }//Method getSchema definition ends here..
 
             
 
         
     
         
-            //Method LastUpdatedLocation.getAbsoluteSchema definition
-            public void LastUpdatedLocation.getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method getAbsoluteSchema definition
+            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -815,7 +815,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
                 
                     
-                    invokeStaticMethod("LastUpdatedLocation.getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -834,7 +834,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
                 
 
-            }//Method LastUpdatedLocation.getAbsoluteSchema definition ends here..
+            }//Method getAbsoluteSchema definition ends here..
 
             
 

@@ -242,8 +242,8 @@ public class TrackRepository extends ModelRepository<Track> {
 
     
         
-            //Method Track.get__customer definition
-            public void Track.get__customer(  String trackId,  Boolean refresh, final ObjectCallback<Customer> callback){
+            //Method get__customer definition
+            public void get__customer(  String trackId,  Boolean refresh, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -260,7 +260,7 @@ public class TrackRepository extends ModelRepository<Track> {
                 
                     
                     
-                    invokeStaticMethod("Track.get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -286,15 +286,15 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
 
-            }//Method Track.get__customer definition ends here..
+            }//Method get__customer definition ends here..
 
             
 
         
     
         
-            //Method Track.get__eventType definition
-            public void Track.get__eventType(  String trackId,  Boolean refresh, final ObjectCallback<EventType> callback){
+            //Method get__eventType definition
+            public void get__eventType(  String trackId,  Boolean refresh, final ObjectCallback<EventType> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -311,7 +311,7 @@ public class TrackRepository extends ModelRepository<Track> {
                 
                     
                     
-                    invokeStaticMethod("Track.get__eventType", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__eventType", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -337,15 +337,15 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
 
-            }//Method Track.get__eventType definition ends here..
+            }//Method get__eventType definition ends here..
 
             
 
         
     
         
-            //Method Track.create definition
-            public void Track.create(  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
+            //Method create definition
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -360,7 +360,7 @@ public class TrackRepository extends ModelRepository<Track> {
                 
                     
                     
-                    invokeStaticMethod("Track.create", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -386,15 +386,15 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
 
-            }//Method Track.create definition ends here..
+            }//Method create definition ends here..
 
             
 
         
     
         
-            //Method Track.create definition
-            public void Track.create(  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
+            //Method create definition
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -409,7 +409,7 @@ public class TrackRepository extends ModelRepository<Track> {
                 
                     
                     
-                    invokeStaticMethod("Track.create", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -435,15 +435,15 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
 
-            }//Method Track.create definition ends here..
+            }//Method create definition ends here..
 
             
 
         
     
         
-            //Method Track.upsert definition
-            public void Track.upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
+            //Method upsert definition
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -458,7 +458,7 @@ public class TrackRepository extends ModelRepository<Track> {
                 
                     
                     
-                    invokeStaticMethod("Track.upsert", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("upsert", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -484,15 +484,15 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
 
-            }//Method Track.upsert definition ends here..
+            }//Method upsert definition ends here..
 
             
 
         
     
         
-            //Method Track.exists definition
-            public void Track.exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method exists definition
+            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -506,7 +506,7 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
                     
-                    invokeStaticMethod("Track.exists", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("exists", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -525,15 +525,15 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
 
-            }//Method Track.exists definition ends here..
+            }//Method exists definition ends here..
 
             
 
         
     
         
-            //Method Track.findById definition
-            public void Track.findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Track> callback){
+            //Method findById definition
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -550,7 +550,7 @@ public class TrackRepository extends ModelRepository<Track> {
                 
                     
                     
-                    invokeStaticMethod("Track.findById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -576,15 +576,15 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
 
-            }//Method Track.findById definition ends here..
+            }//Method findById definition ends here..
 
             
 
         
     
         
-            //Method Track.find definition
-            public void Track.find(  Map<String,  ? extends Object> filter, final ListCallback<Track> callback){
+            //Method find definition
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -599,7 +599,7 @@ public class TrackRepository extends ModelRepository<Track> {
                 
 
                 
-                    invokeStaticMethod("Track.find", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("find", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -627,15 +627,15 @@ public class TrackRepository extends ModelRepository<Track> {
                     });
                 
 
-            }//Method Track.find definition ends here..
+            }//Method find definition ends here..
 
             
 
         
     
         
-            //Method Track.findOne definition
-            public void Track.findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Track> callback){
+            //Method findOne definition
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -650,7 +650,7 @@ public class TrackRepository extends ModelRepository<Track> {
                 
                     
                     
-                    invokeStaticMethod("Track.findOne", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findOne", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -676,15 +676,15 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
 
-            }//Method Track.findOne definition ends here..
+            }//Method findOne definition ends here..
 
             
 
         
     
         
-            //Method Track.updateAll definition
-            public void Track.updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            //Method updateAll definition
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -700,7 +700,7 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
                     
-                    invokeStaticMethod("Track.updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -719,15 +719,15 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
 
-            }//Method Track.updateAll definition ends here..
+            }//Method updateAll definition ends here..
 
             
 
         
     
         
-            //Method Track.deleteById definition
-            public void Track.deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method deleteById definition
+            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -741,7 +741,7 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
                     
-                    invokeStaticMethod("Track.deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -760,15 +760,15 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
 
-            }//Method Track.deleteById definition ends here..
+            }//Method deleteById definition ends here..
 
             
 
         
     
         
-            //Method Track.count definition
-            public void Track.count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            //Method count definition
+            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -782,7 +782,7 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
                     
-                    invokeStaticMethod("Track.count", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("count", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -801,15 +801,15 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
 
-            }//Method Track.count definition ends here..
+            }//Method count definition ends here..
 
             
 
         
     
         
-            //Method Track.updateAttributes definition
-            public void Track.updateAttributes(  String trackId,  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
+            //Method updateAttributes definition
+            public void updateAttributes(  String trackId,  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -826,7 +826,7 @@ public class TrackRepository extends ModelRepository<Track> {
                 
                     
                     
-                    invokeStaticMethod("Track.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -852,7 +852,7 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
 
-            }//Method Track.updateAttributes definition ends here..
+            }//Method updateAttributes definition ends here..
 
             
 
@@ -861,8 +861,8 @@ public class TrackRepository extends ModelRepository<Track> {
         
     
         
-            //Method Track.getSchema definition
-            public void Track.getSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method getSchema definition
+            public void getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -874,7 +874,7 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
                     
-                    invokeStaticMethod("Track.getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -893,15 +893,15 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
 
-            }//Method Track.getSchema definition ends here..
+            }//Method getSchema definition ends here..
 
             
 
         
     
         
-            //Method Track.getAbsoluteSchema definition
-            public void Track.getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method getAbsoluteSchema definition
+            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -913,7 +913,7 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
                     
-                    invokeStaticMethod("Track.getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -932,7 +932,7 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
 
-            }//Method Track.getAbsoluteSchema definition ends here..
+            }//Method getAbsoluteSchema definition ends here..
 
             
 
