@@ -229,54 +229,6 @@ public class NotificationRepository extends ModelRepository<Notification> {
         
     
         
-            //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Notification> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Notification notification = notificationRepo.createObject(result);
-                                    callback.onSuccess(notification);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method create definition ends here..
-
-            
-
-        
-    
         
             //Method upsert definition
             public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Notification> callback){

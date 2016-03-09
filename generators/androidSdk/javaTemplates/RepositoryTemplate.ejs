@@ -342,16 +342,14 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
 
 
-    <% model.restDefinition.methods.forEach(function(restMethodObj){
+    <%
+
+    var pastMethod = [];
+    model.restDefinition.methods.forEach(function(restMethodObj){
         var patt = new RegExp("^" + model.name + "\\..+");
-        //metch prototype.__
-        var initialPatt = /^[0-9A-Za-z\_]+\./;
-        var methodPatt = /prototype\.\_?\_?/;
-        var staticMethodName = restMethodObj.fullName.replace(initialPatt, "");
-        var restMethodName = restMethodObj.fullName.replace(initialPatt, "");
-        restMethodName = restMethodName.replace(methodPatt, "");
+      
         //check for create defined as its present here two times..
-        var createDefined = false;
+        
 
     %>
         <% if(restMethodObj.fullName
@@ -360,19 +358,39 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
             && restMethodObj.name !== "login"
             && restMethodObj.name !== "logout"
             && restMethodObj.name !== "save"
-            && createDefined === false ){
+            ){
 
-            if(restMethodName === "create"){
-                createDefined = true;
+            //metch prototype.__
+            var initialPatt = /^[0-9A-Za-z\_]+\./;
+            var methodPatt = /prototype\.\_?\_?/;
+            var staticMethodName = restMethodObj.fullName.replace(initialPatt, "");
+            var restMethodName = restMethodObj.fullName.replace(initialPatt, "");
+            restMethodName = restMethodName.replace(methodPatt, "");
+
+            
+            var repeat = false;
+            if(pastMethod.length){
+                for(var i=0; i<pastMethod.length; i++){
+                    var method = pastMethod[i];
+                    if(method === restMethodName){   
+                        console.log("REPEATED ", restMethodName);
+                        repeat = true;
+                        break;
+                    }
+                }
             }
 
+            if(repeat){
+                console.log("repeated return");
+                return;
+            }
 
-        /*    console.log("\n");
+            pastMethod.push(restMethodName);
+  
+            console.log("\n");
+            //console.log(createDefined);
             console.log(restMethodObj.fullName);
-            console.log(restMethodName);*/
-            
-            
-
+            console.log(restMethodObj.name);
 
             
             var methodString = "public void ";

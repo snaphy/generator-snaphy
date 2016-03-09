@@ -384,54 +384,6 @@ public class InstallationRepository extends ModelRepository<Installation> {
         
     
         
-            //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Installation> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    InstallationRepository installationRepo = getRestAdapter().createRepository(InstallationRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Installation installation = installationRepo.createObject(result);
-                                    callback.onSuccess(installation);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method create definition ends here..
-
-            
-
-        
-    
         
             //Method upsert definition
             public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Installation> callback){
