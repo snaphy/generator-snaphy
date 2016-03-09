@@ -799,14 +799,14 @@ public class InstallationRepository extends ModelRepository<Installation> {
         
     
         
-            //Method updateAttributes definition
-            public void updateAttributes(  String id,  Map<String,  ? extends Object> data, final ObjectCallback<Installation> callback){
+            //Method installation.updateAttributes definition
+            public void installation.updateAttributes(  String installationId,  Map<String,  ? extends Object> data, final ObjectCallback<Installation> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("installationId", installationId);
                 
                         hashMapObject.putAll(data);
                 
@@ -817,7 +817,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
                 
                     
                     
-                    invokeStaticMethod("updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("installation.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -843,7 +843,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
 
-            }//Method updateAttributes definition ends here..
+            }//Method installation.updateAttributes definition ends here..
 
             
 

@@ -652,14 +652,14 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
         
     
         
-            //Method updateAttributes definition
-            public void updateAttributes(  String id,  Map<String,  ? extends Object> data, final ObjectCallback<AmazonImage> callback){
+            //Method AmazonImage.updateAttributes definition
+            public void AmazonImage.updateAttributes(  String amazonImageId,  Map<String,  ? extends Object> data, final ObjectCallback<AmazonImage> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("amazonImageId", amazonImageId);
                 
                         hashMapObject.putAll(data);
                 
@@ -670,7 +670,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                 
                     
                     
-                    invokeStaticMethod("updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("AmazonImage.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -696,7 +696,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                 
 
-            }//Method updateAttributes definition ends here..
+            }//Method AmazonImage.updateAttributes definition ends here..
 
             
 

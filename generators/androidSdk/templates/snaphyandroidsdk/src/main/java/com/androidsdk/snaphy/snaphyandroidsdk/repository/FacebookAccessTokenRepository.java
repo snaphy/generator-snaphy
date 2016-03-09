@@ -205,14 +205,14 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
     
         
-            //Method get__customer definition
-            public void get__customer(  String id,  Boolean refresh, final ObjectCallback<Customer> callback){
+            //Method FacebookAccessToken.get__customer definition
+            public void FacebookAccessToken.get__customer(  String facebookAccessTokenId,  Boolean refresh, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("facebookAccessTokenId", facebookAccessTokenId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -223,7 +223,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                 
                     
                     
-                    invokeStaticMethod("get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("FacebookAccessToken.get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -249,7 +249,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
 
-            }//Method get__customer definition ends here..
+            }//Method FacebookAccessToken.get__customer definition ends here..
 
             
 
@@ -720,14 +720,14 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
         
     
         
-            //Method updateAttributes definition
-            public void updateAttributes(  String id,  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
+            //Method FacebookAccessToken.updateAttributes definition
+            public void FacebookAccessToken.updateAttributes(  String facebookAccessTokenId,  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("facebookAccessTokenId", facebookAccessTokenId);
                 
                         hashMapObject.putAll(data);
                 
@@ -738,7 +738,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                 
                     
                     
-                    invokeStaticMethod("updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("FacebookAccessToken.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -764,7 +764,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
 
-            }//Method updateAttributes definition ends here..
+            }//Method FacebookAccessToken.updateAttributes definition ends here..
 
             
 

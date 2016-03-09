@@ -242,14 +242,14 @@ public class TrackRepository extends ModelRepository<Track> {
 
     
         
-            //Method get__customer definition
-            public void get__customer(  String id,  Boolean refresh, final ObjectCallback<Customer> callback){
+            //Method Track.get__customer definition
+            public void Track.get__customer(  String trackId,  Boolean refresh, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("trackId", trackId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -260,7 +260,7 @@ public class TrackRepository extends ModelRepository<Track> {
                 
                     
                     
-                    invokeStaticMethod("get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("Track.get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -286,21 +286,21 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
 
-            }//Method get__customer definition ends here..
+            }//Method Track.get__customer definition ends here..
 
             
 
         
     
         
-            //Method get__eventType definition
-            public void get__eventType(  String id,  Boolean refresh, final ObjectCallback<EventType> callback){
+            //Method Track.get__eventType definition
+            public void Track.get__eventType(  String trackId,  Boolean refresh, final ObjectCallback<EventType> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("trackId", trackId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -311,7 +311,7 @@ public class TrackRepository extends ModelRepository<Track> {
                 
                     
                     
-                    invokeStaticMethod("get__eventType", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("Track.get__eventType", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -337,7 +337,7 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
 
-            }//Method get__eventType definition ends here..
+            }//Method Track.get__eventType definition ends here..
 
             
 
@@ -808,14 +808,14 @@ public class TrackRepository extends ModelRepository<Track> {
         
     
         
-            //Method updateAttributes definition
-            public void updateAttributes(  String id,  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
+            //Method Track.updateAttributes definition
+            public void Track.updateAttributes(  String trackId,  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("trackId", trackId);
                 
                         hashMapObject.putAll(data);
                 
@@ -826,7 +826,7 @@ public class TrackRepository extends ModelRepository<Track> {
                 
                     
                     
-                    invokeStaticMethod("updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("Track.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -852,7 +852,7 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
 
-            }//Method updateAttributes definition ends here..
+            }//Method Track.updateAttributes definition ends here..
 
             
 

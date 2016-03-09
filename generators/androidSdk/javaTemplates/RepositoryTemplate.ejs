@@ -345,7 +345,8 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
     <% model.restDefinition.methods.forEach(function(restMethodObj){
         var patt = new RegExp("^" + model.name + "\\..+");
         //metch prototype.__
-        var methodPatt = /.+prototype\.\_?\_?/;
+        var initialPatt = /.+\./;
+        var methodPatt = /prototype\.\_?\_?/;
     %>
         <% if(restMethodObj.fullName
             && patt.test(restMethodObj.fullName)
@@ -354,8 +355,13 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
             && restMethodObj.name !== "logout"
             && restMethodObj.name !== "save" ){
 
+           /* console.log("\n");
+            console.log(restMethodObj.fullName);
+            console.log(restMethodObj.name);
+*/
 
-            var restMethodName = restMethodObj.fullName.replace(methodPatt, "");
+            var restMethodName = restMethodObj.fullName.replace(initialPatt, "");
+            restMethodName = restMethodObj.fullName.replace(methodPatt, "");
             var methodString = "public void ";
             methodString = methodString + restMethodName + "( ";
             //ImmutableMap string concatenation..

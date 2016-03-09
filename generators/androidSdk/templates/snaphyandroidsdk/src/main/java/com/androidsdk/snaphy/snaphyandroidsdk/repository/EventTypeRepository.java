@@ -245,14 +245,14 @@ public class EventTypeRepository extends ModelRepository<EventType> {
 
     
         
-            //Method findById__tracks definition
-            public void findById__tracks(  String id,  String fk, final ObjectCallback<Track> callback){
+            //Method EventType.findById__tracks definition
+            public void EventType.findById__tracks(  String eventTypeId,  String fk, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("eventTypeId", eventTypeId);
                 
                         hashMapObject.put("fk", fk);
                 
@@ -263,7 +263,7 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                 
                     
                     
-                    invokeStaticMethod("findById__tracks", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("EventType.findById__tracks", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -289,27 +289,27 @@ public class EventTypeRepository extends ModelRepository<EventType> {
 
                 
 
-            }//Method findById__tracks definition ends here..
+            }//Method EventType.findById__tracks definition ends here..
 
             
 
         
     
         
-            //Method destroyById__tracks definition
-            public void destroyById__tracks(  String id,  String fk, final VoidCallback callback){
+            //Method EventType.destroyById__tracks definition
+            public void EventType.destroyById__tracks(  String eventTypeId,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("eventTypeId", eventTypeId);
                 
                         hashMapObject.put("fk", fk);
                 
 
                 
-                    invokeStaticMethod("destroyById__tracks", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("EventType.destroyById__tracks", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -327,21 +327,21 @@ public class EventTypeRepository extends ModelRepository<EventType> {
 
                 
 
-            }//Method destroyById__tracks definition ends here..
+            }//Method EventType.destroyById__tracks definition ends here..
 
             
 
         
     
         
-            //Method updateById__tracks definition
-            public void updateById__tracks(  String id,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
+            //Method EventType.updateById__tracks definition
+            public void EventType.updateById__tracks(  String eventTypeId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("eventTypeId", eventTypeId);
                 
                         hashMapObject.put("fk", fk);
                 
@@ -354,7 +354,7 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                 
                     
                     
-                    invokeStaticMethod("updateById__tracks", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("EventType.updateById__tracks", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -380,21 +380,21 @@ public class EventTypeRepository extends ModelRepository<EventType> {
 
                 
 
-            }//Method updateById__tracks definition ends here..
+            }//Method EventType.updateById__tracks definition ends here..
 
             
 
         
     
         
-            //Method get__tracks definition
-            public void get__tracks(  String id,  Map<String,  ? extends Object> filter, final ListCallback<Track> callback){
+            //Method EventType.get__tracks definition
+            public void EventType.get__tracks(  String eventTypeId,  Map<String,  ? extends Object> filter, final ListCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("eventTypeId", eventTypeId);
                 
                         hashMapObject.put("filter", filter);
                 
@@ -405,7 +405,7 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                 
 
                 
-                    invokeStaticMethod("get__tracks", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("EventType.get__tracks", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -433,21 +433,21 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                     });
                 
 
-            }//Method get__tracks definition ends here..
+            }//Method EventType.get__tracks definition ends here..
 
             
 
         
     
         
-            //Method create__tracks definition
-            public void create__tracks(  String id,  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
+            //Method EventType.create__tracks definition
+            public void EventType.create__tracks(  String eventTypeId,  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("eventTypeId", eventTypeId);
                 
                         hashMapObject.putAll(data);
                 
@@ -458,7 +458,7 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                 
                     
                     
-                    invokeStaticMethod("create__tracks", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("EventType.create__tracks", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -484,25 +484,25 @@ public class EventTypeRepository extends ModelRepository<EventType> {
 
                 
 
-            }//Method create__tracks definition ends here..
+            }//Method EventType.create__tracks definition ends here..
 
             
 
         
     
         
-            //Method delete__tracks definition
-            public void delete__tracks(  String id, final VoidCallback callback){
+            //Method EventType.delete__tracks definition
+            public void EventType.delete__tracks(  String eventTypeId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("eventTypeId", eventTypeId);
                 
 
                 
-                    invokeStaticMethod("delete__tracks", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("EventType.delete__tracks", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -520,21 +520,21 @@ public class EventTypeRepository extends ModelRepository<EventType> {
 
                 
 
-            }//Method delete__tracks definition ends here..
+            }//Method EventType.delete__tracks definition ends here..
 
             
 
         
     
         
-            //Method count__tracks definition
-            public void count__tracks(  String id,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            //Method EventType.count__tracks definition
+            public void EventType.count__tracks(  String eventTypeId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("eventTypeId", eventTypeId);
                 
                         hashMapObject.put("where", where);
                 
@@ -544,7 +544,7 @@ public class EventTypeRepository extends ModelRepository<EventType> {
 
                 
                     
-                    invokeStaticMethod("count__tracks", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("EventType.count__tracks", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -563,7 +563,7 @@ public class EventTypeRepository extends ModelRepository<EventType> {
 
                 
 
-            }//Method count__tracks definition ends here..
+            }//Method EventType.count__tracks definition ends here..
 
             
 
@@ -1034,14 +1034,14 @@ public class EventTypeRepository extends ModelRepository<EventType> {
         
     
         
-            //Method updateAttributes definition
-            public void updateAttributes(  String id,  Map<String,  ? extends Object> data, final ObjectCallback<EventType> callback){
+            //Method EventType.updateAttributes definition
+            public void EventType.updateAttributes(  String eventTypeId,  Map<String,  ? extends Object> data, final ObjectCallback<EventType> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("eventTypeId", eventTypeId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1052,7 +1052,7 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                 
                     
                     
-                    invokeStaticMethod("updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("EventType.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1078,7 +1078,7 @@ public class EventTypeRepository extends ModelRepository<EventType> {
 
                 
 
-            }//Method updateAttributes definition ends here..
+            }//Method EventType.updateAttributes definition ends here..
 
             
 

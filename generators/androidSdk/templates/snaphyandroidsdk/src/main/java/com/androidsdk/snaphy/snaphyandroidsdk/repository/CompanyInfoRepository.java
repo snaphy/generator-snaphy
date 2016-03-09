@@ -643,14 +643,14 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
         
     
         
-            //Method updateAttributes definition
-            public void updateAttributes(  String id,  Map<String,  ? extends Object> data, final ObjectCallback<CompanyInfo> callback){
+            //Method CompanyInfo.updateAttributes definition
+            public void CompanyInfo.updateAttributes(  String companyInfoId,  Map<String,  ? extends Object> data, final ObjectCallback<CompanyInfo> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("companyInfoId", companyInfoId);
                 
                         hashMapObject.putAll(data);
                 
@@ -661,7 +661,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                 
                     
                     
-                    invokeStaticMethod("updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("CompanyInfo.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -687,7 +687,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                 
 
-            }//Method updateAttributes definition ends here..
+            }//Method CompanyInfo.updateAttributes definition ends here..
 
             
 

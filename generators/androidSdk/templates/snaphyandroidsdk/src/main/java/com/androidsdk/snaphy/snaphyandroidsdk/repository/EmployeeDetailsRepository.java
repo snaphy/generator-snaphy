@@ -245,14 +245,14 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
 
     
         
-            //Method get__employees definition
-            public void get__employees(  String id,  Boolean refresh, final ObjectCallback<Employee> callback){
+            //Method EmployeeDetails.get__employees definition
+            public void EmployeeDetails.get__employees(  String employeeDetailsId,  Boolean refresh, final ObjectCallback<Employee> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("employeeDetailsId", employeeDetailsId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -263,7 +263,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                 
                     
                     
-                    invokeStaticMethod("get__employees", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("EmployeeDetails.get__employees", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -289,21 +289,21 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
 
                 
 
-            }//Method get__employees definition ends here..
+            }//Method EmployeeDetails.get__employees definition ends here..
 
             
 
         
     
         
-            //Method create__employees definition
-            public void create__employees(  String id,  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+            //Method EmployeeDetails.create__employees definition
+            public void EmployeeDetails.create__employees(  String employeeDetailsId,  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("employeeDetailsId", employeeDetailsId);
                 
                         hashMapObject.putAll(data);
                 
@@ -314,7 +314,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                 
                     
                     
-                    invokeStaticMethod("create__employees", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("EmployeeDetails.create__employees", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -340,21 +340,21 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
 
                 
 
-            }//Method create__employees definition ends here..
+            }//Method EmployeeDetails.create__employees definition ends here..
 
             
 
         
     
         
-            //Method update__employees definition
-            public void update__employees(  String id,  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+            //Method EmployeeDetails.update__employees definition
+            public void EmployeeDetails.update__employees(  String employeeDetailsId,  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("employeeDetailsId", employeeDetailsId);
                 
                         hashMapObject.putAll(data);
                 
@@ -365,7 +365,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                 
                     
                     
-                    invokeStaticMethod("update__employees", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("EmployeeDetails.update__employees", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -391,25 +391,25 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
 
                 
 
-            }//Method update__employees definition ends here..
+            }//Method EmployeeDetails.update__employees definition ends here..
 
             
 
         
     
         
-            //Method destroy__employees definition
-            public void destroy__employees(  String id, final VoidCallback callback){
+            //Method EmployeeDetails.destroy__employees definition
+            public void EmployeeDetails.destroy__employees(  String employeeDetailsId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("employeeDetailsId", employeeDetailsId);
                 
 
                 
-                    invokeStaticMethod("destroy__employees", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("EmployeeDetails.destroy__employees", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -427,7 +427,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
 
                 
 
-            }//Method destroy__employees definition ends here..
+            }//Method EmployeeDetails.destroy__employees definition ends here..
 
             
 
@@ -898,14 +898,14 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
         
     
         
-            //Method updateAttributes definition
-            public void updateAttributes(  String id,  Map<String,  ? extends Object> data, final ObjectCallback<EmployeeDetails> callback){
+            //Method EmployeeDetails.updateAttributes definition
+            public void EmployeeDetails.updateAttributes(  String employeeDetailsId,  Map<String,  ? extends Object> data, final ObjectCallback<EmployeeDetails> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("employeeDetailsId", employeeDetailsId);
                 
                         hashMapObject.putAll(data);
                 
@@ -916,7 +916,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                 
                     
                     
-                    invokeStaticMethod("updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("EmployeeDetails.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -942,7 +942,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
 
                 
 
-            }//Method updateAttributes definition ends here..
+            }//Method EmployeeDetails.updateAttributes definition ends here..
 
             
 

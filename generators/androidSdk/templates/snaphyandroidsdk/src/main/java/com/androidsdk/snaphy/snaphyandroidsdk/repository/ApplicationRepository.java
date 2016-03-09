@@ -644,14 +644,14 @@ public class ApplicationRepository extends ModelRepository<Application> {
         
     
         
-            //Method updateAttributes definition
-            public void updateAttributes(  String id,  Map<String,  ? extends Object> data, final ObjectCallback<Application> callback){
+            //Method application.updateAttributes definition
+            public void application.updateAttributes(  String applicationId,  Map<String,  ? extends Object> data, final ObjectCallback<Application> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("applicationId", applicationId);
                 
                         hashMapObject.putAll(data);
                 
@@ -662,7 +662,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
                 
                     
                     
-                    invokeStaticMethod("updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("application.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -688,7 +688,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
 
                 
 
-            }//Method updateAttributes definition ends here..
+            }//Method application.updateAttributes definition ends here..
 
             
 

@@ -644,14 +644,14 @@ public class NotificationRepository extends ModelRepository<Notification> {
         
     
         
-            //Method updateAttributes definition
-            public void updateAttributes(  String id,  Map<String,  ? extends Object> data, final ObjectCallback<Notification> callback){
+            //Method notification.updateAttributes definition
+            public void notification.updateAttributes(  String notificationId,  Map<String,  ? extends Object> data, final ObjectCallback<Notification> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
+                        hashMapObject.put("notificationId", notificationId);
                 
                         hashMapObject.putAll(data);
                 
@@ -662,7 +662,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
                 
                     
                     
-                    invokeStaticMethod("updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("notification.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -688,7 +688,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
                 
 
-            }//Method updateAttributes definition ends here..
+            }//Method notification.updateAttributes definition ends here..
 
             
 
