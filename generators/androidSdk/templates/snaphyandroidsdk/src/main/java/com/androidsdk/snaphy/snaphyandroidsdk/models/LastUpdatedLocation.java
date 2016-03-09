@@ -18,7 +18,7 @@ import com.strongloop.android.loopback.callbacks.VoidCallback;
 import com.strongloop.android.remoting.adapters.Adapter;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.ContactChefRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.LastUpdatedLocationRepository;
 
 //Now import repository of related models..
 
@@ -36,7 +36,7 @@ import java.util.Map;
 
 
 
-public class ContactChef extends Model {
+public class LastUpdatedLocation extends Model {
 
 
     //For converting all model values to hashMap
@@ -51,9 +51,9 @@ public class ContactChef extends Model {
         }
     }
 
-    private ContactChef that ;
+    private LastUpdatedLocation that ;
 
-    public ContactChef (){
+    public LastUpdatedLocation (){
         that = this;
     }
 
@@ -61,17 +61,66 @@ public class ContactChef extends Model {
         
             
             
-                private String message;
+            
+            
+            
+                private Map<String, Object> lastUpdatedLocation = new HashMap();
                 /* Adding Getter and Setter methods */
-                public String getMessage(){
-                    return message;
+                public Map<String, Object> getLastUpdatedLocation(){
+                    return lastUpdatedLocation;
+                }
+                /* Adding Getter and Setter methods */
+                public double getLastUpdatedLocationLatitide(){
+                    if(lastUpdatedLocation != null){
+                        return (Double)lastUpdatedLocation.get("lat");
+                    }else{
+                        return 0;
+                    }
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setMessage(String message){
-                    this.message = message;
+                public double getLastUpdatedLocationLongitude(){
+                    if(lastUpdatedLocation != null){
+                        return (Double)lastUpdatedLocation.get("lng");
+                    }else{
+                        return 0;
+                    }
+
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setLastUpdatedLocation(Map<String, Object> lastUpdatedLocation){
+                    this.lastUpdatedLocation.putAll(lastUpdatedLocation);
+                    //Update Map value..
+                    hashMap.put("lastUpdatedLocation", lastUpdatedLocation);
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setLastUpdatedLocation(double lat, double lng){
+                    this.lastUpdatedLocation.put("lat", lat);
+                    this.lastUpdatedLocation.put("lng", lng);
+                    //Update Map value..
+                    hashMap.put("lastUpdatedLocation", lastUpdatedLocation);
+                }
+
+            
+
+        
+    
+        
+            
+            
+                private String lastModified;
+                /* Adding Getter and Setter methods */
+                public String getLastModified(){
+                    return lastModified;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setLastModified(String lastModified){
+                    this.lastModified = lastModified;
                     //Update hashMap value..
-                    hashMap.put("message", message);
+                    hashMap.put("lastModified", lastModified);
                 }
 
             
@@ -161,7 +210,7 @@ public class ContactChef extends Model {
                                     //Write the method here..
                                     public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
                                         //Define methods here..
-                                        final ContactChefRepository  contactChefRepo = restAdapter.createRepository(ContactChefRepository.class);
+                                        final LastUpdatedLocationRepository  lastUpdatedLocationRepo = restAdapter.createRepository(LastUpdatedLocationRepository.class);
                                         
                                         
                                         
@@ -170,7 +219,7 @@ public class ContactChef extends Model {
 
 
 
-                                        contactChefRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
+                                        lastUpdatedLocationRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
                                             
 
                                             
@@ -204,14 +253,6 @@ public class ContactChef extends Model {
                                     } //method def ends here.
                                  
                             
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
                         
                         
                         

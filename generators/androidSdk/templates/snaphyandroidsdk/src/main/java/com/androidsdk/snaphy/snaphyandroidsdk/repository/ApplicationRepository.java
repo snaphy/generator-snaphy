@@ -26,26 +26,19 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.ContactChef;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Application;
 
 //Now import model of related models..
 
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
-            
-        
-    
 
 
 
 
+public class ApplicationRepository extends ModelRepository<Application> {
 
-public class ContactChefRepository extends ModelRepository<ContactChef> {
 
-
-    public ContactChefRepository(){
-        super("ContactChef", null, ContactChef.class);
+    public ApplicationRepository(){
+        super("Application", null, Application.class);
     }
 
 
@@ -61,7 +54,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:contactChefId/customer", "GET"), "ContactChef.prototype.__get__customer");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "application.create");
                 
 
             
@@ -69,7 +62,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "ContactChef.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "application.create");
                 
 
             
@@ -77,7 +70,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "ContactChef.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "application.upsert");
                 
 
             
@@ -85,7 +78,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "ContactChef.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "application.exists");
                 
 
             
@@ -93,7 +86,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "ContactChef.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "application.findById");
                 
 
             
@@ -101,7 +94,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "ContactChef.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "application.find");
                 
 
             
@@ -109,7 +102,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "ContactChef.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "application.findOne");
                 
 
             
@@ -117,7 +110,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "ContactChef.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "application.updateAll");
                 
 
             
@@ -125,7 +118,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "ContactChef.updateAll");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "application.deleteById");
                 
 
             
@@ -133,7 +126,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "ContactChef.deleteById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "application.count");
                 
 
             
@@ -141,15 +134,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "ContactChef.count");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:contactChefId", "PUT"), "ContactChef.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:applicationId", "PUT"), "application.prototype.updateAttributes");
                 
 
             
@@ -159,7 +144,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "ContactChef.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "application.getSchema");
                 
 
             
@@ -167,25 +152,9 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "ContactChef.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "application.getAbsoluteSchema");
                 
 
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -211,59 +180,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
     
         
-            //Method get__customer definition
-            public void get__customer(  String contactChefId,  Boolean refresh, final ObjectCallback<Customer> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("contactChefId", contactChefId);
-                
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Customer customer = customerRepo.createObject(result);
-                                    callback.onSuccess(customer);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method get__customer definition ends here..
-
-            
-
-        
-    
-        
-            //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
+            //Method application.create definition
+            public void application.create(  Map<String,  ? extends Object> data, final ObjectCallback<Application> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -278,7 +196,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                 
                     
                     
-                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("application.create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -289,10 +207,10 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
+                                    ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
+                                    Application application = applicationRepo.createObject(result);
+                                    callback.onSuccess(application);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -304,15 +222,15 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
                 
 
-            }//Method create definition ends here..
+            }//Method application.create definition ends here..
 
             
 
         
     
         
-            //Method createMany definition
-            public void createMany(  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
+            //Method application.create definition
+            public void application.create(  Map<String,  ? extends Object> data, final ObjectCallback<Application> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -327,7 +245,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                 
                     
                     
-                    invokeStaticMethod("createMany", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("application.create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -338,10 +256,10 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
+                                    ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
+                                    Application application = applicationRepo.createObject(result);
+                                    callback.onSuccess(application);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -353,15 +271,15 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
                 
 
-            }//Method createMany definition ends here..
+            }//Method application.create definition ends here..
 
             
 
         
     
         
-            //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
+            //Method application.upsert definition
+            public void application.upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Application> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -376,7 +294,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                 
                     
                     
-                    invokeStaticMethod("upsert", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("application.upsert", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -387,10 +305,10 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
+                                    ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
+                                    Application application = applicationRepo.createObject(result);
+                                    callback.onSuccess(application);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -402,15 +320,15 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
                 
 
-            }//Method upsert definition ends here..
+            }//Method application.upsert definition ends here..
 
             
 
         
     
         
-            //Method exists definition
-            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method application.exists definition
+            public void application.exists(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -424,7 +342,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
                 
                     
-                    invokeStaticMethod("exists", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("application.exists", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -443,15 +361,15 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
                 
 
-            }//Method exists definition ends here..
+            }//Method application.exists definition ends here..
 
             
 
         
     
         
-            //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<ContactChef> callback){
+            //Method application.findById definition
+            public void application.findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Application> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -468,7 +386,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                 
                     
                     
-                    invokeStaticMethod("findById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("application.findById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -479,10 +397,10 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
+                                    ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
+                                    Application application = applicationRepo.createObject(result);
+                                    callback.onSuccess(application);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -494,15 +412,15 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
                 
 
-            }//Method findById definition ends here..
+            }//Method application.findById definition ends here..
 
             
 
         
     
         
-            //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<ContactChef> callback){
+            //Method application.find definition
+            public void application.find(  Map<String,  ? extends Object> filter, final ListCallback<Application> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -517,7 +435,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                 
 
                 
-                    invokeStaticMethod("find", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("application.find", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -529,14 +447,14 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<ContactChef> contactChefList = new ArrayList<ContactChef>();
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
+                                    List<Application> applicationList = new ArrayList<Application>();
+                                    ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        ContactChef contactChef = contactChefRepo.createObject(obj);
-                                        contactChefList.add(contactChef);
+                                        Application application = applicationRepo.createObject(obj);
+                                        applicationList.add(application);
                                     }
-                                    callback.onSuccess(contactChefList);
+                                    callback.onSuccess(applicationList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -545,15 +463,15 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                     });
                 
 
-            }//Method find definition ends here..
+            }//Method application.find definition ends here..
 
             
 
         
     
         
-            //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<ContactChef> callback){
+            //Method application.findOne definition
+            public void application.findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Application> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -568,7 +486,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                 
                     
                     
-                    invokeStaticMethod("findOne", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("application.findOne", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -579,10 +497,10 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
+                                    ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
+                                    Application application = applicationRepo.createObject(result);
+                                    callback.onSuccess(application);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -594,15 +512,15 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
                 
 
-            }//Method findOne definition ends here..
+            }//Method application.findOne definition ends here..
 
             
 
         
     
         
-            //Method updateAll definition
-            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            //Method application.updateAll definition
+            public void application.updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -618,7 +536,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
                 
                     
-                    invokeStaticMethod("updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("application.updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -637,15 +555,15 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
                 
 
-            }//Method updateAll definition ends here..
+            }//Method application.updateAll definition ends here..
 
             
 
         
     
         
-            //Method deleteById definition
-            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method application.deleteById definition
+            public void application.deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -659,7 +577,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
                 
                     
-                    invokeStaticMethod("deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("application.deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -678,15 +596,15 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
                 
 
-            }//Method deleteById definition ends here..
+            }//Method application.deleteById definition ends here..
 
             
 
         
     
         
-            //Method count definition
-            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            //Method application.count definition
+            public void application.count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -700,7 +618,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
                 
                     
-                    invokeStaticMethod("count", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("application.count", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -719,7 +637,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
                 
 
-            }//Method count definition ends here..
+            }//Method application.count definition ends here..
 
             
 
@@ -727,13 +645,13 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String contactChefId,  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
+            public void updateAttributes(  String id,  Map<String,  ? extends Object> data, final ObjectCallback<Application> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("contactChefId", contactChefId);
+                        hashMapObject.put("id", id);
                 
                         hashMapObject.putAll(data);
                 
@@ -744,7 +662,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -755,10 +673,10 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
+                                    ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
+                                    Application application = applicationRepo.createObject(result);
+                                    callback.onSuccess(application);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -779,8 +697,8 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
         
     
         
-            //Method getSchema definition
-            public void getSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method application.getSchema definition
+            public void application.getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -792,7 +710,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
                 
                     
-                    invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("application.getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -811,15 +729,15 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
                 
 
-            }//Method getSchema definition ends here..
+            }//Method application.getSchema definition ends here..
 
             
 
         
     
         
-            //Method getAbsoluteSchema definition
-            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method application.getAbsoluteSchema definition
+            public void application.getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -831,7 +749,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
                 
                     
-                    invokeStaticMethod("getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("application.getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -850,26 +768,10 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
                 
 
-            }//Method getAbsoluteSchema definition ends here..
+            }//Method application.getAbsoluteSchema definition ends here..
 
             
 
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
         
     
         

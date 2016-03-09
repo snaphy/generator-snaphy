@@ -18,19 +18,12 @@ import com.strongloop.android.loopback.callbacks.VoidCallback;
 import com.strongloop.android.remoting.adapters.Adapter;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.OrderDetailRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.EventTypeRepository;
 
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.OrderRepository;
-            
-
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeIngredientsRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.TrackRepository;
             
 
         
@@ -43,7 +36,7 @@ import java.util.Map;
 
 
 
-public class OrderDetail extends Model {
+public class EventType extends Model {
 
 
     //For converting all model values to hashMap
@@ -58,9 +51,9 @@ public class OrderDetail extends Model {
         }
     }
 
-    private OrderDetail that ;
+    private EventType that ;
 
-    public OrderDetail (){
+    public EventType (){
         that = this;
     }
 
@@ -68,37 +61,19 @@ public class OrderDetail extends Model {
         
             
             
-            
-                private double requiredQuantity;
+                private String name;
                 /* Adding Getter and Setter methods */
-                public double getRequiredQuantity(){
-                    return requiredQuantity;
+                public String getName(){
+                    return name;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setRequiredQuantity(double requiredQuantity){
-                    this.requiredQuantity = requiredQuantity;
+                public void setName(String name){
+                    this.name = name;
                     //Update hashMap value..
-                    hashMap.put("requiredQuantity", requiredQuantity);
+                    hashMap.put("name", name);
                 }
 
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
             
             
             
@@ -125,41 +100,94 @@ public class OrderDetail extends Model {
     
         
                 
-                    //Define belongsTo relation method here..
-                    private Order  order ;
+                
+                    
+                    //Define hasMany relation method here..
+                    private List<Track>  tracks ;
 
-                    public Order getOrder() {
-                        return order;
+                    public List<Track> getTracks() {
+                        return tracks;
                     }
 
-                    public void setOrder(Order order) {
-                        this.order = order;
+                    public void setTracks(List<Track> tracks) {
+                        boolean hashType = false;
+                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        for(Object o: tracks){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }else if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
+                        }
+
+                        if(hashType){
+                            setTracks1(hashMaps);
+                        }else{
+                            this.tracks = tracks;
+                        }
                     }
 
-                    //Adding related model automatically in case of include statement from server..
-                    public void setOrder(Map<String, Object> order) {
-                        //First create a dummy Repo class object for customer.
-                        OrderRepository orderRepository = new OrderRepository();
-                        Order order1 = orderRepository.createObject(order);
-                        setOrder(order1);
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setTracks1(List<Map<String, Object>> tracks) {
+                        //First create a dummy Repo class object for ..
+                        TrackRepository tracksRepository = new TrackRepository();
+                        List<Track> result = new ArrayList<>();
+                        for (Map<String, Object> obj : tracks) {
+                            //Also add relation to child type for two way communication..
+                            Track obj1 = tracksRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setTracks(result);
+
                     }
 
-                    //Adding related model automatically in case of include statement from server..
-                    public void setOrder(HashMap<String, Object> order) {
-                        //First create a dummy Repo class object for customer.
-                        OrderRepository orderRepository = new OrderRepository();
-                        Order order1 = orderRepository.createObject(order);
-                        setOrder(order1);
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setTracks1(List<HashMap<String, Object>> tracks) {
+                        //First create a dummy Repo class object for ..
+                        TrackRepository tracksRepository = new TrackRepository();
+                        List<Track> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : tracks) {
+                            //Also add relation to child type for two way communication..
+                            Track obj1 = tracksRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setTracks(result);
+
+                    }
+
+
+                    //Adding relation method..
+                    //Add a dummy class Name object to seperate data..
+                    public void addRelation(List<Track> tracks, Track dummyClassInstance) {
+                        that.setTracks(tracks);
+
                     }
 
                     //Adding relation method..
-                    public void addRelation(Order order) {
-                        that.setOrder(order);
+                    //This will add a new data to the list relation object..
+                    public void addRelation(Track tracks) {
+                        try{
+                            that.getTracks().add(tracks);
+                        }catch(Exception e){
+                            List< Track> tracks1 = new ArrayList();
+                            //Now add this item to list..
+                            tracks1.add(tracks);
+                            //Now set data....
+                            that.setTracks(tracks1);
+                        }
                     }
 
+                    
 
 
-                
                 
                 
 
@@ -175,9 +203,9 @@ public class OrderDetail extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__order( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Order> callback) {
+                                    public void findById__tracks( String fk,  RestAdapter restAdapter, final ObjectCallback<Track> callback) {
                                         //Define methods here..
-                                        final OrderDetailRepository  orderDetailRepo = restAdapter.createRepository(OrderDetailRepository.class);
+                                        final EventTypeRepository  eventTypeRepo = restAdapter.createRepository(EventTypeRepository.class);
                                         
                                         
                                         
@@ -186,158 +214,13 @@ public class OrderDetail extends Model {
 
 
 
-                                        orderDetailRepo.get__order( (String)that.getId(), refresh,  new ObjectCallback<Order> (){
+                                        eventTypeRepo.findById__tracks( (String)that.getId(), fk,  new ObjectCallback<Track> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Order object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    
-
-                
-
-                 
-                 
-             
-          
-    
-        
-                
-                    //Define belongsTo relation method here..
-                    private RecipeIngredients  recipeIngredients ;
-
-                    public RecipeIngredients getRecipeIngredients() {
-                        return recipeIngredients;
-                    }
-
-                    public void setRecipeIngredients(RecipeIngredients recipeIngredients) {
-                        this.recipeIngredients = recipeIngredients;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setRecipeIngredients(Map<String, Object> recipeIngredients) {
-                        //First create a dummy Repo class object for customer.
-                        RecipeIngredientsRepository recipeIngredientsRepository = new RecipeIngredientsRepository();
-                        RecipeIngredients recipeIngredients1 = recipeIngredientsRepository.createObject(recipeIngredients);
-                        setRecipeIngredients(recipeIngredients1);
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setRecipeIngredients(HashMap<String, Object> recipeIngredients) {
-                        //First create a dummy Repo class object for customer.
-                        RecipeIngredientsRepository recipeIngredientsRepository = new RecipeIngredientsRepository();
-                        RecipeIngredients recipeIngredients1 = recipeIngredientsRepository.createObject(recipeIngredients);
-                        setRecipeIngredients(recipeIngredients1);
-                    }
-
-                    //Adding relation method..
-                    public void addRelation(RecipeIngredients recipeIngredients) {
-                        that.setRecipeIngredients(recipeIngredients);
-                    }
-
-
-
-                
-                
-                
-
-
-
-
-
-
-
-                    //Now add instance methods to fetch the related belongsTo Model..
-                    
-
-                     
-                            
-                        
-
-                                    //Write the method here..
-                                    public void get__recipeIngredients( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<RecipeIngredients> callback) {
-                                        //Define methods here..
-                                        final OrderDetailRepository  orderDetailRepo = restAdapter.createRepository(OrderDetailRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        orderDetailRepo.get__recipeIngredients( (String)that.getId(), refresh,  new ObjectCallback<RecipeIngredients> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(RecipeIngredients object) {
+                                                    public void onSuccess(Track object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -368,9 +251,9 @@ public class OrderDetail extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__recipeIngredients( RecipeIngredients data,  RestAdapter restAdapter, final ObjectCallback<RecipeIngredients> callback) {
+                                    public void destroyById__tracks( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
                                         //Define methods here..
-                                        final OrderDetailRepository  orderDetailRepo = restAdapter.createRepository(OrderDetailRepository.class);
+                                        final EventTypeRepository  eventTypeRepo = restAdapter.createRepository(EventTypeRepository.class);
                                         
                                         
                                         
@@ -379,100 +262,7 @@ public class OrderDetail extends Model {
 
 
 
-                                        orderDetailRepo.create__recipeIngredients( (String)that.getId(), data.convertMap(),  new ObjectCallback<RecipeIngredients> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(RecipeIngredients object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void update__recipeIngredients( RecipeIngredients data,  RestAdapter restAdapter, final ObjectCallback<RecipeIngredients> callback) {
-                                        //Define methods here..
-                                        final OrderDetailRepository  orderDetailRepo = restAdapter.createRepository(OrderDetailRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        orderDetailRepo.update__recipeIngredients( (String)that.getId(), data.convertMap(),  new ObjectCallback<RecipeIngredients> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(RecipeIngredients object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void destroy__recipeIngredients( RestAdapter restAdapter, final VoidCallback callback) {
-                                        //Define methods here..
-                                        final OrderDetailRepository  orderDetailRepo = restAdapter.createRepository(OrderDetailRepository.class);
-                                        
-                                        
-
-
-
-                                        orderDetailRepo.destroy__recipeIngredients( (String)that.getId(),  new VoidCallback (){
+                                        eventTypeRepo.destroyById__tracks( (String)that.getId(), fk,  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -496,17 +286,230 @@ public class OrderDetail extends Model {
                                  
                             
                         
+
+                                    //Write the method here..
+                                    public void updateById__tracks( String fk,  Track data,  RestAdapter restAdapter, final ObjectCallback<Track> callback) {
+                                        //Define methods here..
+                                        final EventTypeRepository  eventTypeRepo = restAdapter.createRepository(EventTypeRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        eventTypeRepo.updateById__tracks( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Track> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Track object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
                         
+
+                                    //Write the method here..
+                                    public void get__tracks( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Track> callback) {
+                                        //Define methods here..
+                                        final EventTypeRepository  eventTypeRepo = restAdapter.createRepository(EventTypeRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        eventTypeRepo.get__tracks( (String)that.getId(), filter,  new ListCallback<Track> (){
+                                            
+
+                                            
+
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(List<Track> object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            Track obj = new Track();
+                                                            addRelation(object, obj);
+                                                            //Disabling two way communication for cyclic error..
+                                                            /*for (Track obj : object) {
+                                                                //Also add relation to child type for two way communication..
+                                                                obj.addRelation(that);
+                                                            }*/
+
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
                         
+
+                                    //Write the method here..
+                                    public void create__tracks( Track data,  RestAdapter restAdapter, final ObjectCallback<Track> callback) {
+                                        //Define methods here..
+                                        final EventTypeRepository  eventTypeRepo = restAdapter.createRepository(EventTypeRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        eventTypeRepo.create__tracks( (String)that.getId(), data.convertMap(),  new ObjectCallback<Track> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Track object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
                         
+
+                                    //Write the method here..
+                                    public void delete__tracks( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Define methods here..
+                                        final EventTypeRepository  eventTypeRepo = restAdapter.createRepository(EventTypeRepository.class);
+                                        
+                                        
+
+
+
+                                        eventTypeRepo.delete__tracks( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
                         
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+
+                                    //Write the method here..
+                                    public void count__tracks( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                        //Define methods here..
+                                        final EventTypeRepository  eventTypeRepo = restAdapter.createRepository(EventTypeRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        eventTypeRepo.count__tracks( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
                         
                         
                         
@@ -527,6 +530,9 @@ public class OrderDetail extends Model {
                     
 
                 
+
+                
+                    //Define hasMany, hasManyThrough method here..
 
                  
                  

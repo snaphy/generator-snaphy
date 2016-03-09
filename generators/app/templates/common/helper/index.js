@@ -1,4 +1,9 @@
-'use strict';
+(function(){
+    'use strict';
+})();
+
+/*global require, module*/
+
 
 module.exports = function(server) {
   var loopback = require('loopback');
@@ -9,7 +14,7 @@ module.exports = function(server) {
   var MAIN_PLUGIN_FOLDER = __dirname + "/../../" + mainPackageObj.pluginPath;
   var helper = {};
   var fs = require('fs'),
-    path = require('path');
+  path = require('path');
 
   /**
     * Method for getting all the directores
@@ -20,6 +25,43 @@ module.exports = function(server) {
     return fs.readdirSync(srcpath).filter(function(file) {
       return fs.statSync(path.join(srcpath, file)).isDirectory();
     });
+  }
+
+
+
+
+    /**
+     * For getting the absolute plugin root path of a plugin.
+     * @param pluginName
+     * @returns {string}
+     */
+  function getPluginRootDir(pluginName){
+      return path.join(MAIN_PLUGIN_FOLDER, pluginName.trim());
+  }
+
+
+    /**
+     * Convert Camel case characters to dashed case characters.
+     * @param text
+     * @returns {*}
+     */
+  var camelToDashCase = function(text){
+    text = text.replace(/([A-Z])/g, function($1){return "-"+$1.toLowerCase();});
+    //Now replace first occurance of dash..
+    return text.replace(/^\-?/, '');
+  };
+
+
+    /**
+     * Retrives the path of the model.json file..
+      * @param modelName Model Name is the Original Model Name of the model
+     */
+  function getModelPath(modelName){
+      //convert to camel case..
+      modelName = camelToDashCase(modelName);
+      var modelJsonFile = modelName + '.json';
+      //Now get the model path..
+      return path.join(__dirname, '../models', modelJsonFile );
   }
 
 
@@ -35,17 +77,22 @@ module.exports = function(server) {
 
   //Return the path of the main server file
   function getServerPath(){
-    return __dirname + '/../../server/server.js';
+    return path.join(__dirname , '../../server/server.js');
   }
 
 
+  function getServerFolder(){
+      return path.join(__dirname, '../../server/');
+  }
 
-  /**
-   * Find the database from the model-config.json and return the database with it datasource attached.
-   * @param  {object} Application object of loopback.
-   * @param  {object} sampleDatabase Database object which needs to be searched
-   * @return {object}                Database object with datasource attached.
-   */
+
+    /**
+     * Find the database from the model-config.json and return the database with it datasource attached.
+     * @param app Application object of loopback.
+     * @param sampleDatabase Database object which needs to be searched
+     * @param pluginName Database object with datasource attached.
+     * @returns {{}}
+     */
   var getDatabase = function(app, sampleDatabase, pluginName){
     //var modelConfig = require('../../server/model-config.json');
     var requiredDatabase = {};
@@ -58,7 +105,7 @@ module.exports = function(server) {
           requiredDatabase[key] = app.models[databaseVal];
           //var modelProp = modelConfig[databaseVal];
         }else{
-          throw 'Please provide a value to the '+ key + ' model property. in Plugin ' + pluginName + ' model';
+          throw 'Please provide a value to the '+ key + ' model property. in Plugin ' + pluginName.trim() + ' model';
         }
 
       }//if
@@ -85,7 +132,7 @@ module.exports = function(server) {
     rootExposure = '/' + rootExposure;
     //cache control
     var oneDay = 86400000;
-    app.use(rootExposure, loopback.static(pluginContainerPath + '/' + PluginName + '/client', { maxAge: oneDay }));
+    app.use(rootExposure, loopback.static( path.join(pluginContainerPath, PluginName.trim(), '/client'), { maxAge: oneDay }));
     console.log("Static Routes " + rootExposure);
   };
 
@@ -94,7 +141,8 @@ module.exports = function(server) {
   function loadPluginsInMemory(pluginName, pluginContainerPath){
     console.log("Loading plugin " + pluginName + " in memory");
     //Now read the package  files...
-    var pluginPath = pluginContainerPath + '/' + pluginName +  '/package.json';
+    var pluginPath = path.join(pluginContainerPath, pluginName.trim(), '/package.json');
+    console.log(pluginPath);
     var packageObj = readPackageJsonFile(pluginPath);
     if( packageObj.activate ){
       try{
@@ -110,7 +158,7 @@ module.exports = function(server) {
 
 
       var databaseObj = getDatabase(server, packageObj.databases , pluginName);
-      var pluginValue = require(pluginContainerPath + '/' + pluginName)(server, databaseObj, helper, packageObj );
+      var pluginValue = require( path.join(pluginContainerPath, pluginName.trim()))(server, databaseObj, helper, packageObj );
 
       if(pluginValue){
         //Now load the corresponding plugins to the memory...
@@ -142,7 +190,7 @@ module.exports = function(server) {
     var pluginList = getDirectories(pluginContainerPath);
     var i;
     for(i=0; i<pluginList.length; i++){
-      loadPluginsInMemory(pluginList[i], pluginContainerPath);
+      loadPluginsInMemory(pluginList[i].trim(), pluginContainerPath);
     }//for loop
   };
 
@@ -151,11 +199,11 @@ module.exports = function(server) {
   //Act as a require for plugins..
   var loadPlugin = function(pluginName){
     var pluginValue = {};
-    var pluginPath = MAIN_PLUGIN_FOLDER + '/' + pluginName +  '/package.json';
+    var pluginPath = path.join(MAIN_PLUGIN_FOLDER, pluginName.trim() , '/package.json');
     var packageObj = readPackageJsonFile(pluginPath);
     if( packageObj.activate ){
       var databaseObj = getDatabase(server, packageObj.databases , pluginName);
-      pluginValue = require(pluginContainerPath + '/' + pluginName)(server, databaseObj, helper, packageObj );
+      pluginValue = require(path.join(MAIN_PLUGIN_FOLDER, pluginName.trim()) )(server, databaseObj, helper, packageObj );
     }
     return pluginValue;
   };//loadPlugin
@@ -169,7 +217,11 @@ module.exports = function(server) {
     getDirectories: getDirectories,
     getServerPath: getServerPath,
     loadPlugin: loadPlugin,
-    getLoopbackObj: getLoopbackObj
+    getLoopbackObj: getLoopbackObj,
+    getPluginRootDir: getPluginRootDir,
+    getModelPath: getModelPath,
+    getServerFolder: getServerFolder
+
   };
 
   return helper;

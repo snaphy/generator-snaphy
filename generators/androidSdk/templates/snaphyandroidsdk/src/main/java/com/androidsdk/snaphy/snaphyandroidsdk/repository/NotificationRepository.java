@@ -26,26 +26,19 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Course;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Notification;
 
 //Now import model of related models..
 
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
-            
-        
-    
 
 
 
 
+public class NotificationRepository extends ModelRepository<Notification> {
 
-public class CourseRepository extends ModelRepository<Course> {
 
-
-    public CourseRepository(){
-        super("Course", null, Course.class);
+    public NotificationRepository(){
+        super("Notification", null, Notification.class);
     }
 
 
@@ -61,7 +54,7 @@ public class CourseRepository extends ModelRepository<Course> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/customer", "GET"), "Course.prototype.__get__customer");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "notification.create");
                 
 
             
@@ -69,7 +62,7 @@ public class CourseRepository extends ModelRepository<Course> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Course.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "notification.create");
                 
 
             
@@ -77,7 +70,7 @@ public class CourseRepository extends ModelRepository<Course> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Course.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "notification.upsert");
                 
 
             
@@ -85,7 +78,7 @@ public class CourseRepository extends ModelRepository<Course> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Course.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "notification.exists");
                 
 
             
@@ -93,7 +86,7 @@ public class CourseRepository extends ModelRepository<Course> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Course.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "notification.findById");
                 
 
             
@@ -101,7 +94,7 @@ public class CourseRepository extends ModelRepository<Course> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Course.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "notification.find");
                 
 
             
@@ -109,7 +102,7 @@ public class CourseRepository extends ModelRepository<Course> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Course.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "notification.findOne");
                 
 
             
@@ -117,7 +110,7 @@ public class CourseRepository extends ModelRepository<Course> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Course.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "notification.updateAll");
                 
 
             
@@ -125,7 +118,7 @@ public class CourseRepository extends ModelRepository<Course> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Course.updateAll");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "notification.deleteById");
                 
 
             
@@ -133,7 +126,7 @@ public class CourseRepository extends ModelRepository<Course> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Course.deleteById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "notification.count");
                 
 
             
@@ -141,15 +134,7 @@ public class CourseRepository extends ModelRepository<Course> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Course.count");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId", "PUT"), "Course.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:notificationId", "PUT"), "notification.prototype.updateAttributes");
                 
 
             
@@ -159,7 +144,7 @@ public class CourseRepository extends ModelRepository<Course> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Course.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "notification.getSchema");
                 
 
             
@@ -167,25 +152,9 @@ public class CourseRepository extends ModelRepository<Course> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Course.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "notification.getAbsoluteSchema");
                 
 
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -211,59 +180,8 @@ public class CourseRepository extends ModelRepository<Course> {
 
     
         
-            //Method get__customer definition
-            public void get__customer(  String courseId,  Boolean refresh, final ObjectCallback<Customer> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("courseId", courseId);
-                
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Customer customer = customerRepo.createObject(result);
-                                    callback.onSuccess(customer);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method get__customer definition ends here..
-
-            
-
-        
-    
-        
-            //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Course> callback){
+            //Method notification.create definition
+            public void notification.create(  Map<String,  ? extends Object> data, final ObjectCallback<Notification> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -278,7 +196,7 @@ public class CourseRepository extends ModelRepository<Course> {
                 
                     
                     
-                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("notification.create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -289,10 +207,10 @@ public class CourseRepository extends ModelRepository<Course> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
+                                    NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Course course = courseRepo.createObject(result);
-                                    callback.onSuccess(course);
+                                    Notification notification = notificationRepo.createObject(result);
+                                    callback.onSuccess(notification);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -304,15 +222,15 @@ public class CourseRepository extends ModelRepository<Course> {
 
                 
 
-            }//Method create definition ends here..
+            }//Method notification.create definition ends here..
 
             
 
         
     
         
-            //Method createMany definition
-            public void createMany(  Map<String,  ? extends Object> data, final ObjectCallback<Course> callback){
+            //Method notification.create definition
+            public void notification.create(  Map<String,  ? extends Object> data, final ObjectCallback<Notification> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -327,7 +245,7 @@ public class CourseRepository extends ModelRepository<Course> {
                 
                     
                     
-                    invokeStaticMethod("createMany", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("notification.create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -338,10 +256,10 @@ public class CourseRepository extends ModelRepository<Course> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
+                                    NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Course course = courseRepo.createObject(result);
-                                    callback.onSuccess(course);
+                                    Notification notification = notificationRepo.createObject(result);
+                                    callback.onSuccess(notification);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -353,15 +271,15 @@ public class CourseRepository extends ModelRepository<Course> {
 
                 
 
-            }//Method createMany definition ends here..
+            }//Method notification.create definition ends here..
 
             
 
         
     
         
-            //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Course> callback){
+            //Method notification.upsert definition
+            public void notification.upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Notification> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -376,7 +294,7 @@ public class CourseRepository extends ModelRepository<Course> {
                 
                     
                     
-                    invokeStaticMethod("upsert", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("notification.upsert", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -387,10 +305,10 @@ public class CourseRepository extends ModelRepository<Course> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
+                                    NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Course course = courseRepo.createObject(result);
-                                    callback.onSuccess(course);
+                                    Notification notification = notificationRepo.createObject(result);
+                                    callback.onSuccess(notification);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -402,15 +320,15 @@ public class CourseRepository extends ModelRepository<Course> {
 
                 
 
-            }//Method upsert definition ends here..
+            }//Method notification.upsert definition ends here..
 
             
 
         
     
         
-            //Method exists definition
-            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method notification.exists definition
+            public void notification.exists(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -424,7 +342,7 @@ public class CourseRepository extends ModelRepository<Course> {
 
                 
                     
-                    invokeStaticMethod("exists", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("notification.exists", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -443,15 +361,15 @@ public class CourseRepository extends ModelRepository<Course> {
 
                 
 
-            }//Method exists definition ends here..
+            }//Method notification.exists definition ends here..
 
             
 
         
     
         
-            //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Course> callback){
+            //Method notification.findById definition
+            public void notification.findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Notification> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -468,7 +386,7 @@ public class CourseRepository extends ModelRepository<Course> {
                 
                     
                     
-                    invokeStaticMethod("findById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("notification.findById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -479,10 +397,10 @@ public class CourseRepository extends ModelRepository<Course> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
+                                    NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Course course = courseRepo.createObject(result);
-                                    callback.onSuccess(course);
+                                    Notification notification = notificationRepo.createObject(result);
+                                    callback.onSuccess(notification);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -494,15 +412,15 @@ public class CourseRepository extends ModelRepository<Course> {
 
                 
 
-            }//Method findById definition ends here..
+            }//Method notification.findById definition ends here..
 
             
 
         
     
         
-            //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Course> callback){
+            //Method notification.find definition
+            public void notification.find(  Map<String,  ? extends Object> filter, final ListCallback<Notification> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -517,7 +435,7 @@ public class CourseRepository extends ModelRepository<Course> {
                 
 
                 
-                    invokeStaticMethod("find", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("notification.find", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -529,14 +447,14 @@ public class CourseRepository extends ModelRepository<Course> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Course> courseList = new ArrayList<Course>();
-                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
+                                    List<Notification> notificationList = new ArrayList<Notification>();
+                                    NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Course course = courseRepo.createObject(obj);
-                                        courseList.add(course);
+                                        Notification notification = notificationRepo.createObject(obj);
+                                        notificationList.add(notification);
                                     }
-                                    callback.onSuccess(courseList);
+                                    callback.onSuccess(notificationList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -545,15 +463,15 @@ public class CourseRepository extends ModelRepository<Course> {
                     });
                 
 
-            }//Method find definition ends here..
+            }//Method notification.find definition ends here..
 
             
 
         
     
         
-            //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Course> callback){
+            //Method notification.findOne definition
+            public void notification.findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Notification> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -568,7 +486,7 @@ public class CourseRepository extends ModelRepository<Course> {
                 
                     
                     
-                    invokeStaticMethod("findOne", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("notification.findOne", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -579,10 +497,10 @@ public class CourseRepository extends ModelRepository<Course> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
+                                    NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Course course = courseRepo.createObject(result);
-                                    callback.onSuccess(course);
+                                    Notification notification = notificationRepo.createObject(result);
+                                    callback.onSuccess(notification);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -594,15 +512,15 @@ public class CourseRepository extends ModelRepository<Course> {
 
                 
 
-            }//Method findOne definition ends here..
+            }//Method notification.findOne definition ends here..
 
             
 
         
     
         
-            //Method updateAll definition
-            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            //Method notification.updateAll definition
+            public void notification.updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -618,7 +536,7 @@ public class CourseRepository extends ModelRepository<Course> {
 
                 
                     
-                    invokeStaticMethod("updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("notification.updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -637,15 +555,15 @@ public class CourseRepository extends ModelRepository<Course> {
 
                 
 
-            }//Method updateAll definition ends here..
+            }//Method notification.updateAll definition ends here..
 
             
 
         
     
         
-            //Method deleteById definition
-            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method notification.deleteById definition
+            public void notification.deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -659,7 +577,7 @@ public class CourseRepository extends ModelRepository<Course> {
 
                 
                     
-                    invokeStaticMethod("deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("notification.deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -678,15 +596,15 @@ public class CourseRepository extends ModelRepository<Course> {
 
                 
 
-            }//Method deleteById definition ends here..
+            }//Method notification.deleteById definition ends here..
 
             
 
         
     
         
-            //Method count definition
-            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            //Method notification.count definition
+            public void notification.count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -700,7 +618,7 @@ public class CourseRepository extends ModelRepository<Course> {
 
                 
                     
-                    invokeStaticMethod("count", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("notification.count", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -719,7 +637,7 @@ public class CourseRepository extends ModelRepository<Course> {
 
                 
 
-            }//Method count definition ends here..
+            }//Method notification.count definition ends here..
 
             
 
@@ -727,13 +645,13 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String courseId,  Map<String,  ? extends Object> data, final ObjectCallback<Course> callback){
+            public void updateAttributes(  String id,  Map<String,  ? extends Object> data, final ObjectCallback<Notification> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("courseId", courseId);
+                        hashMapObject.put("id", id);
                 
                         hashMapObject.putAll(data);
                 
@@ -744,7 +662,7 @@ public class CourseRepository extends ModelRepository<Course> {
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -755,10 +673,10 @@ public class CourseRepository extends ModelRepository<Course> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
+                                    NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Course course = courseRepo.createObject(result);
-                                    callback.onSuccess(course);
+                                    Notification notification = notificationRepo.createObject(result);
+                                    callback.onSuccess(notification);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -779,8 +697,8 @@ public class CourseRepository extends ModelRepository<Course> {
         
     
         
-            //Method getSchema definition
-            public void getSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method notification.getSchema definition
+            public void notification.getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -792,7 +710,7 @@ public class CourseRepository extends ModelRepository<Course> {
 
                 
                     
-                    invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("notification.getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -811,15 +729,15 @@ public class CourseRepository extends ModelRepository<Course> {
 
                 
 
-            }//Method getSchema definition ends here..
+            }//Method notification.getSchema definition ends here..
 
             
 
         
     
         
-            //Method getAbsoluteSchema definition
-            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method notification.getAbsoluteSchema definition
+            public void notification.getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -831,7 +749,7 @@ public class CourseRepository extends ModelRepository<Course> {
 
                 
                     
-                    invokeStaticMethod("getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("notification.getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -850,26 +768,10 @@ public class CourseRepository extends ModelRepository<Course> {
 
                 
 
-            }//Method getAbsoluteSchema definition ends here..
+            }//Method notification.getAbsoluteSchema definition ends here..
 
             
 
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
         
     
         

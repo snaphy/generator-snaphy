@@ -88,14 +88,6 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/sendOrder", "POST"), "adminEmail.sendOrder");
-                
-
-            
-        
-            
-
-                
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getMailSchema", "POST"), "adminEmail.getMailSchema");
                 
 
@@ -122,8 +114,8 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
     
         
-            //Method getSchema definition
-            public void getSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method adminEmail.getSchema definition
+            public void adminEmail.getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -135,7 +127,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
                 
                     
-                    invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("adminEmail.getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -154,15 +146,15 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
                 
 
-            }//Method getSchema definition ends here..
+            }//Method adminEmail.getSchema definition ends here..
 
             
 
         
     
         
-            //Method getAbsoluteSchema definition
-            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method adminEmail.getAbsoluteSchema definition
+            public void adminEmail.getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -174,7 +166,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
                 
                     
-                    invokeStaticMethod("getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("adminEmail.getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -193,7 +185,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
                 
 
-            }//Method getAbsoluteSchema definition ends here..
+            }//Method adminEmail.getAbsoluteSchema definition ends here..
 
             
 
@@ -202,8 +194,8 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
         
     
         
-            //Method sendMail definition
-            public void sendMail(  List<String> to,  String subject,  String html, final Adapter.JsonObjectCallback  callback ){
+            //Method adminEmail.sendMail definition
+            public void adminEmail.sendMail(  List<String> to,  String subject,  String html, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -221,7 +213,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
                 
                     
-                    invokeStaticMethod("sendMail", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("adminEmail.sendMail", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -240,15 +232,15 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
                 
 
-            }//Method sendMail definition ends here..
+            }//Method adminEmail.sendMail definition ends here..
 
             
 
         
     
         
-            //Method sendNotice definition
-            public void sendNotice(  List<String> to,  String subject,  Map<String,  ? extends Object> templateOptions, final Adapter.JsonObjectCallback  callback ){
+            //Method adminEmail.sendNotice definition
+            public void adminEmail.sendNotice(  List<String> to,  String subject,  Map<String,  ? extends Object> templateOptions, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -266,7 +258,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
                 
                     
-                    invokeStaticMethod("sendNotice", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("adminEmail.sendNotice", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -285,60 +277,15 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
                 
 
-            }//Method sendNotice definition ends here..
+            }//Method adminEmail.sendNotice definition ends here..
 
             
 
         
     
         
-            //Method sendOrder definition
-            public void sendOrder(  List<String> to,  String subject,  Map<String,  ? extends Object> templateOptions, final Adapter.JsonObjectCallback  callback ){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("to", to);
-                
-                        hashMapObject.put("subject", subject);
-                
-                        hashMapObject.put("templateOptions", templateOptions);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("sendOrder", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method sendOrder definition ends here..
-
-            
-
-        
-    
-        
-            //Method getMailSchema definition
-            public void getMailSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method adminEmail.getMailSchema definition
+            public void adminEmail.getMailSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -350,7 +297,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
                 
                     
-                    invokeStaticMethod("getMailSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("adminEmail.getMailSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -369,7 +316,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
                 
 
-            }//Method getMailSchema definition ends here..
+            }//Method adminEmail.getMailSchema definition ends here..
 
             
 

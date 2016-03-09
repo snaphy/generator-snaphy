@@ -26,13 +26,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.IngredientCategory;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.EventType;
 
 //Now import model of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Ingredients;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.IngredientsRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Track;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.TrackRepository;
             
         
     
@@ -41,11 +41,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.IngredientCategory;
 
 
 
-public class IngredientCategoryRepository extends ModelRepository<IngredientCategory> {
+public class EventTypeRepository extends ModelRepository<EventType> {
 
 
-    public IngredientCategoryRepository(){
-        super("IngredientCategory", null, IngredientCategory.class);
+    public EventTypeRepository(){
+        super("EventType", null, EventType.class);
     }
 
 
@@ -61,7 +61,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients/:fk", "GET"), "IngredientCategory.prototype.__findById__ingredients");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:eventTypeId/tracks/:fk", "GET"), "EventType.prototype.__findById__tracks");
                 
 
             
@@ -69,7 +69,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients/:fk", "DELETE"), "IngredientCategory.prototype.__destroyById__ingredients");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:eventTypeId/tracks/:fk", "DELETE"), "EventType.prototype.__destroyById__tracks");
                 
 
             
@@ -77,7 +77,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients/:fk", "PUT"), "IngredientCategory.prototype.__updateById__ingredients");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:eventTypeId/tracks/:fk", "PUT"), "EventType.prototype.__updateById__tracks");
                 
 
             
@@ -85,7 +85,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients", "GET"), "IngredientCategory.prototype.__get__ingredients");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:eventTypeId/tracks", "GET"), "EventType.prototype.__get__tracks");
                 
 
             
@@ -93,7 +93,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients", "POST"), "IngredientCategory.prototype.__create__ingredients");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:eventTypeId/tracks", "POST"), "EventType.prototype.__create__tracks");
                 
 
             
@@ -101,7 +101,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients", "DELETE"), "IngredientCategory.prototype.__delete__ingredients");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:eventTypeId/tracks", "DELETE"), "EventType.prototype.__delete__tracks");
                 
 
             
@@ -109,7 +109,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId/ingredients/count", "GET"), "IngredientCategory.prototype.__count__ingredients");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:eventTypeId/tracks/count", "GET"), "EventType.prototype.__count__tracks");
                 
 
             
@@ -117,7 +117,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "IngredientCategory.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "EventType.create");
                 
 
             
@@ -125,7 +125,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "IngredientCategory.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "EventType.create");
                 
 
             
@@ -133,7 +133,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "IngredientCategory.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "EventType.upsert");
                 
 
             
@@ -141,7 +141,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "IngredientCategory.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "EventType.exists");
                 
 
             
@@ -149,7 +149,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "IngredientCategory.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "EventType.findById");
                 
 
             
@@ -157,7 +157,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "IngredientCategory.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "EventType.find");
                 
 
             
@@ -165,7 +165,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "IngredientCategory.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "EventType.findOne");
                 
 
             
@@ -173,7 +173,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "IngredientCategory.updateAll");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "EventType.updateAll");
                 
 
             
@@ -181,7 +181,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "IngredientCategory.deleteById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "EventType.deleteById");
                 
 
             
@@ -189,7 +189,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "IngredientCategory.count");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "EventType.count");
                 
 
             
@@ -197,7 +197,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ingredientCategoryId", "PUT"), "IngredientCategory.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:eventTypeId", "PUT"), "EventType.prototype.updateAttributes");
                 
 
             
@@ -207,7 +207,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "IngredientCategory.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "EventType.getSchema");
                 
 
             
@@ -215,7 +215,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "IngredientCategory.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "EventType.getAbsoluteSchema");
                 
 
             
@@ -245,14 +245,14 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
     
         
-            //Method findById__ingredients definition
-            public void findById__ingredients(  String ingredientCategoryId,  String fk, final ObjectCallback<Ingredients> callback){
+            //Method findById__tracks definition
+            public void findById__tracks(  String id,  String fk, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("ingredientCategoryId", ingredientCategoryId);
+                        hashMapObject.put("id", id);
                 
                         hashMapObject.put("fk", fk);
                 
@@ -263,7 +263,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__ingredients", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("findById__tracks", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -274,10 +274,10 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
+                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Ingredients ingredients = ingredientsRepo.createObject(result);
-                                    callback.onSuccess(ingredients);
+                                    Track track = trackRepo.createObject(result);
+                                    callback.onSuccess(track);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -289,27 +289,27 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
 
-            }//Method findById__ingredients definition ends here..
+            }//Method findById__tracks definition ends here..
 
             
 
         
     
         
-            //Method destroyById__ingredients definition
-            public void destroyById__ingredients(  String ingredientCategoryId,  String fk, final VoidCallback callback){
+            //Method destroyById__tracks definition
+            public void destroyById__tracks(  String id,  String fk, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("ingredientCategoryId", ingredientCategoryId);
+                        hashMapObject.put("id", id);
                 
                         hashMapObject.put("fk", fk);
                 
 
                 
-                    invokeStaticMethod("prototype.__destroyById__ingredients", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("destroyById__tracks", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -327,21 +327,21 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
 
-            }//Method destroyById__ingredients definition ends here..
+            }//Method destroyById__tracks definition ends here..
 
             
 
         
     
         
-            //Method updateById__ingredients definition
-            public void updateById__ingredients(  String ingredientCategoryId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Ingredients> callback){
+            //Method updateById__tracks definition
+            public void updateById__tracks(  String id,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("ingredientCategoryId", ingredientCategoryId);
+                        hashMapObject.put("id", id);
                 
                         hashMapObject.put("fk", fk);
                 
@@ -354,7 +354,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__ingredients", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("updateById__tracks", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -365,10 +365,10 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
+                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Ingredients ingredients = ingredientsRepo.createObject(result);
-                                    callback.onSuccess(ingredients);
+                                    Track track = trackRepo.createObject(result);
+                                    callback.onSuccess(track);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -380,21 +380,21 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
 
-            }//Method updateById__ingredients definition ends here..
+            }//Method updateById__tracks definition ends here..
 
             
 
         
     
         
-            //Method get__ingredients definition
-            public void get__ingredients(  String ingredientCategoryId,  Map<String,  ? extends Object> filter, final ListCallback<Ingredients> callback){
+            //Method get__tracks definition
+            public void get__tracks(  String id,  Map<String,  ? extends Object> filter, final ListCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("ingredientCategoryId", ingredientCategoryId);
+                        hashMapObject.put("id", id);
                 
                         hashMapObject.put("filter", filter);
                 
@@ -405,7 +405,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                 
 
                 
-                    invokeStaticMethod("prototype.__get__ingredients", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("get__tracks", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -417,14 +417,14 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Ingredients> ingredientsList = new ArrayList<Ingredients>();
-                                    IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
+                                    List<Track> trackList = new ArrayList<Track>();
+                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Ingredients ingredients = ingredientsRepo.createObject(obj);
-                                        ingredientsList.add(ingredients);
+                                        Track track = trackRepo.createObject(obj);
+                                        trackList.add(track);
                                     }
-                                    callback.onSuccess(ingredientsList);
+                                    callback.onSuccess(trackList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -433,21 +433,21 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                     });
                 
 
-            }//Method get__ingredients definition ends here..
+            }//Method get__tracks definition ends here..
 
             
 
         
     
         
-            //Method create__ingredients definition
-            public void create__ingredients(  String ingredientCategoryId,  Map<String,  ? extends Object> data, final ObjectCallback<Ingredients> callback){
+            //Method create__tracks definition
+            public void create__tracks(  String id,  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("ingredientCategoryId", ingredientCategoryId);
+                        hashMapObject.put("id", id);
                 
                         hashMapObject.putAll(data);
                 
@@ -458,7 +458,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__ingredients", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("create__tracks", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -469,10 +469,10 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
+                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Ingredients ingredients = ingredientsRepo.createObject(result);
-                                    callback.onSuccess(ingredients);
+                                    Track track = trackRepo.createObject(result);
+                                    callback.onSuccess(track);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -484,25 +484,25 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
 
-            }//Method create__ingredients definition ends here..
+            }//Method create__tracks definition ends here..
 
             
 
         
     
         
-            //Method delete__ingredients definition
-            public void delete__ingredients(  String ingredientCategoryId, final VoidCallback callback){
+            //Method delete__tracks definition
+            public void delete__tracks(  String id, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("ingredientCategoryId", ingredientCategoryId);
+                        hashMapObject.put("id", id);
                 
 
                 
-                    invokeStaticMethod("prototype.__delete__ingredients", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("delete__tracks", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -520,21 +520,21 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
 
-            }//Method delete__ingredients definition ends here..
+            }//Method delete__tracks definition ends here..
 
             
 
         
     
         
-            //Method count__ingredients definition
-            public void count__ingredients(  String ingredientCategoryId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            //Method count__tracks definition
+            public void count__tracks(  String id,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("ingredientCategoryId", ingredientCategoryId);
+                        hashMapObject.put("id", id);
                 
                         hashMapObject.put("where", where);
                 
@@ -544,7 +544,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
                     
-                    invokeStaticMethod("prototype.__count__ingredients", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("count__tracks", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -563,15 +563,15 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
 
-            }//Method count__ingredients definition ends here..
+            }//Method count__tracks definition ends here..
 
             
 
         
     
         
-            //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<IngredientCategory> callback){
+            //Method EventType.create definition
+            public void EventType.create(  Map<String,  ? extends Object> data, final ObjectCallback<EventType> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -586,7 +586,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                 
                     
                     
-                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("EventType.create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -597,10 +597,10 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    IngredientCategoryRepository ingredientCategoryRepo = getRestAdapter().createRepository(IngredientCategoryRepository.class);
+                                    EventTypeRepository eventTypeRepo = getRestAdapter().createRepository(EventTypeRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    IngredientCategory ingredientCategory = ingredientCategoryRepo.createObject(result);
-                                    callback.onSuccess(ingredientCategory);
+                                    EventType eventType = eventTypeRepo.createObject(result);
+                                    callback.onSuccess(eventType);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -612,15 +612,15 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
 
-            }//Method create definition ends here..
+            }//Method EventType.create definition ends here..
 
             
 
         
     
         
-            //Method createMany definition
-            public void createMany(  Map<String,  ? extends Object> data, final ObjectCallback<IngredientCategory> callback){
+            //Method EventType.create definition
+            public void EventType.create(  Map<String,  ? extends Object> data, final ObjectCallback<EventType> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -635,7 +635,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                 
                     
                     
-                    invokeStaticMethod("createMany", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("EventType.create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -646,10 +646,10 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    IngredientCategoryRepository ingredientCategoryRepo = getRestAdapter().createRepository(IngredientCategoryRepository.class);
+                                    EventTypeRepository eventTypeRepo = getRestAdapter().createRepository(EventTypeRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    IngredientCategory ingredientCategory = ingredientCategoryRepo.createObject(result);
-                                    callback.onSuccess(ingredientCategory);
+                                    EventType eventType = eventTypeRepo.createObject(result);
+                                    callback.onSuccess(eventType);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -661,15 +661,15 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
 
-            }//Method createMany definition ends here..
+            }//Method EventType.create definition ends here..
 
             
 
         
     
         
-            //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<IngredientCategory> callback){
+            //Method EventType.upsert definition
+            public void EventType.upsert(  Map<String,  ? extends Object> data, final ObjectCallback<EventType> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -684,7 +684,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                 
                     
                     
-                    invokeStaticMethod("upsert", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("EventType.upsert", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -695,10 +695,10 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    IngredientCategoryRepository ingredientCategoryRepo = getRestAdapter().createRepository(IngredientCategoryRepository.class);
+                                    EventTypeRepository eventTypeRepo = getRestAdapter().createRepository(EventTypeRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    IngredientCategory ingredientCategory = ingredientCategoryRepo.createObject(result);
-                                    callback.onSuccess(ingredientCategory);
+                                    EventType eventType = eventTypeRepo.createObject(result);
+                                    callback.onSuccess(eventType);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -710,15 +710,15 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
 
-            }//Method upsert definition ends here..
+            }//Method EventType.upsert definition ends here..
 
             
 
         
     
         
-            //Method exists definition
-            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method EventType.exists definition
+            public void EventType.exists(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -732,7 +732,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
                     
-                    invokeStaticMethod("exists", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("EventType.exists", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -751,15 +751,15 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
 
-            }//Method exists definition ends here..
+            }//Method EventType.exists definition ends here..
 
             
 
         
     
         
-            //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<IngredientCategory> callback){
+            //Method EventType.findById definition
+            public void EventType.findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<EventType> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -776,7 +776,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                 
                     
                     
-                    invokeStaticMethod("findById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("EventType.findById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -787,10 +787,10 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    IngredientCategoryRepository ingredientCategoryRepo = getRestAdapter().createRepository(IngredientCategoryRepository.class);
+                                    EventTypeRepository eventTypeRepo = getRestAdapter().createRepository(EventTypeRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    IngredientCategory ingredientCategory = ingredientCategoryRepo.createObject(result);
-                                    callback.onSuccess(ingredientCategory);
+                                    EventType eventType = eventTypeRepo.createObject(result);
+                                    callback.onSuccess(eventType);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -802,15 +802,15 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
 
-            }//Method findById definition ends here..
+            }//Method EventType.findById definition ends here..
 
             
 
         
     
         
-            //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<IngredientCategory> callback){
+            //Method EventType.find definition
+            public void EventType.find(  Map<String,  ? extends Object> filter, final ListCallback<EventType> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -825,7 +825,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                 
 
                 
-                    invokeStaticMethod("find", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("EventType.find", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -837,14 +837,14 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<IngredientCategory> ingredientCategoryList = new ArrayList<IngredientCategory>();
-                                    IngredientCategoryRepository ingredientCategoryRepo = getRestAdapter().createRepository(IngredientCategoryRepository.class);
+                                    List<EventType> eventTypeList = new ArrayList<EventType>();
+                                    EventTypeRepository eventTypeRepo = getRestAdapter().createRepository(EventTypeRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        IngredientCategory ingredientCategory = ingredientCategoryRepo.createObject(obj);
-                                        ingredientCategoryList.add(ingredientCategory);
+                                        EventType eventType = eventTypeRepo.createObject(obj);
+                                        eventTypeList.add(eventType);
                                     }
-                                    callback.onSuccess(ingredientCategoryList);
+                                    callback.onSuccess(eventTypeList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -853,15 +853,15 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                     });
                 
 
-            }//Method find definition ends here..
+            }//Method EventType.find definition ends here..
 
             
 
         
     
         
-            //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<IngredientCategory> callback){
+            //Method EventType.findOne definition
+            public void EventType.findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<EventType> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -876,7 +876,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                 
                     
                     
-                    invokeStaticMethod("findOne", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("EventType.findOne", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -887,10 +887,10 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    IngredientCategoryRepository ingredientCategoryRepo = getRestAdapter().createRepository(IngredientCategoryRepository.class);
+                                    EventTypeRepository eventTypeRepo = getRestAdapter().createRepository(EventTypeRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    IngredientCategory ingredientCategory = ingredientCategoryRepo.createObject(result);
-                                    callback.onSuccess(ingredientCategory);
+                                    EventType eventType = eventTypeRepo.createObject(result);
+                                    callback.onSuccess(eventType);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -902,15 +902,15 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
 
-            }//Method findOne definition ends here..
+            }//Method EventType.findOne definition ends here..
 
             
 
         
     
         
-            //Method updateAll definition
-            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            //Method EventType.updateAll definition
+            public void EventType.updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -926,7 +926,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
                     
-                    invokeStaticMethod("updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("EventType.updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -945,15 +945,15 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
 
-            }//Method updateAll definition ends here..
+            }//Method EventType.updateAll definition ends here..
 
             
 
         
     
         
-            //Method deleteById definition
-            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method EventType.deleteById definition
+            public void EventType.deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -967,7 +967,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
                     
-                    invokeStaticMethod("deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("EventType.deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -986,15 +986,15 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
 
-            }//Method deleteById definition ends here..
+            }//Method EventType.deleteById definition ends here..
 
             
 
         
     
         
-            //Method count definition
-            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            //Method EventType.count definition
+            public void EventType.count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1008,7 +1008,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
                     
-                    invokeStaticMethod("count", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("EventType.count", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1027,7 +1027,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
 
-            }//Method count definition ends here..
+            }//Method EventType.count definition ends here..
 
             
 
@@ -1035,13 +1035,13 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String ingredientCategoryId,  Map<String,  ? extends Object> data, final ObjectCallback<IngredientCategory> callback){
+            public void updateAttributes(  String id,  Map<String,  ? extends Object> data, final ObjectCallback<EventType> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("ingredientCategoryId", ingredientCategoryId);
+                        hashMapObject.put("id", id);
                 
                         hashMapObject.putAll(data);
                 
@@ -1052,7 +1052,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1063,10 +1063,10 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    IngredientCategoryRepository ingredientCategoryRepo = getRestAdapter().createRepository(IngredientCategoryRepository.class);
+                                    EventTypeRepository eventTypeRepo = getRestAdapter().createRepository(EventTypeRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    IngredientCategory ingredientCategory = ingredientCategoryRepo.createObject(result);
-                                    callback.onSuccess(ingredientCategory);
+                                    EventType eventType = eventTypeRepo.createObject(result);
+                                    callback.onSuccess(eventType);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1087,8 +1087,8 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
         
     
         
-            //Method getSchema definition
-            public void getSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method EventType.getSchema definition
+            public void EventType.getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1100,7 +1100,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
                     
-                    invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("EventType.getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1119,15 +1119,15 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
 
-            }//Method getSchema definition ends here..
+            }//Method EventType.getSchema definition ends here..
 
             
 
         
     
         
-            //Method getAbsoluteSchema definition
-            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method EventType.getAbsoluteSchema definition
+            public void EventType.getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1139,7 +1139,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
                     
-                    invokeStaticMethod("getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("EventType.getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1158,7 +1158,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
 
                 
 
-            }//Method getAbsoluteSchema definition ends here..
+            }//Method EventType.getAbsoluteSchema definition ends here..
 
             
 

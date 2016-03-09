@@ -26,20 +26,20 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.OrderDetail;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Track;
 
 //Now import model of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Order;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.OrderRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
             
         
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.RecipeIngredients;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeIngredientsRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.EventType;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.EventTypeRepository;
             
         
     
@@ -48,11 +48,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.OrderDetail;
 
 
 
-public class OrderDetailRepository extends ModelRepository<OrderDetail> {
+public class TrackRepository extends ModelRepository<Track> {
 
 
-    public OrderDetailRepository(){
-        super("OrderDetail", null, OrderDetail.class);
+    public TrackRepository(){
+        super("Track", null, Track.class);
     }
 
 
@@ -68,7 +68,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderDetailId/order", "GET"), "OrderDetail.prototype.__get__order");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:trackId/customer", "GET"), "Track.prototype.__get__customer");
                 
 
             
@@ -76,7 +76,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderDetailId/recipeIngredients", "GET"), "OrderDetail.prototype.__get__recipeIngredients");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:trackId/eventType", "GET"), "Track.prototype.__get__eventType");
                 
 
             
@@ -84,7 +84,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderDetailId/recipeIngredients", "POST"), "OrderDetail.prototype.__create__recipeIngredients");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Track.create");
                 
 
             
@@ -92,7 +92,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderDetailId/recipeIngredients", "PUT"), "OrderDetail.prototype.__update__recipeIngredients");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Track.create");
                 
 
             
@@ -100,7 +100,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderDetailId/recipeIngredients", "DELETE"), "OrderDetail.prototype.__destroy__recipeIngredients");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Track.upsert");
                 
 
             
@@ -108,7 +108,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "OrderDetail.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Track.exists");
                 
 
             
@@ -116,7 +116,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "OrderDetail.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Track.findById");
                 
 
             
@@ -124,7 +124,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "OrderDetail.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Track.find");
                 
 
             
@@ -132,7 +132,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "OrderDetail.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Track.findOne");
                 
 
             
@@ -140,7 +140,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "OrderDetail.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Track.updateAll");
                 
 
             
@@ -148,7 +148,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "OrderDetail.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Track.deleteById");
                 
 
             
@@ -156,7 +156,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "OrderDetail.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Track.count");
                 
 
             
@@ -164,31 +164,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "OrderDetail.updateAll");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "OrderDetail.deleteById");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "OrderDetail.count");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderDetailId", "PUT"), "OrderDetail.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:trackId", "PUT"), "Track.prototype.updateAttributes");
                 
 
             
@@ -198,7 +174,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "OrderDetail.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Track.getSchema");
                 
 
             
@@ -206,9 +182,15 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "OrderDetail.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Track.getAbsoluteSchema");
                 
 
+            
+        
+            
+        
+            
+        
             
         
             
@@ -260,14 +242,14 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
 
     
         
-            //Method get__order definition
-            public void get__order(  String orderDetailId,  Boolean refresh, final ObjectCallback<Order> callback){
+            //Method get__customer definition
+            public void get__customer(  String id,  Boolean refresh, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("orderDetailId", orderDetailId);
+                        hashMapObject.put("id", id);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -278,7 +260,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__order", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -289,10 +271,10 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
+                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Order order = orderRepo.createObject(result);
-                                    callback.onSuccess(order);
+                                    Customer customer = customerRepo.createObject(result);
+                                    callback.onSuccess(customer);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -304,21 +286,21 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
 
                 
 
-            }//Method get__order definition ends here..
+            }//Method get__customer definition ends here..
 
             
 
         
     
         
-            //Method get__recipeIngredients definition
-            public void get__recipeIngredients(  String orderDetailId,  Boolean refresh, final ObjectCallback<RecipeIngredients> callback){
+            //Method get__eventType definition
+            public void get__eventType(  String id,  Boolean refresh, final ObjectCallback<EventType> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("orderDetailId", orderDetailId);
+                        hashMapObject.put("id", id);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -329,7 +311,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__recipeIngredients", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("get__eventType", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -340,10 +322,10 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
+                                    EventTypeRepository eventTypeRepo = getRestAdapter().createRepository(EventTypeRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
-                                    callback.onSuccess(recipeIngredients);
+                                    EventType eventType = eventTypeRepo.createObject(result);
+                                    callback.onSuccess(eventType);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -355,153 +337,15 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
 
                 
 
-            }//Method get__recipeIngredients definition ends here..
+            }//Method get__eventType definition ends here..
 
             
 
         
     
         
-            //Method create__recipeIngredients definition
-            public void create__recipeIngredients(  String orderDetailId,  Map<String,  ? extends Object> data, final ObjectCallback<RecipeIngredients> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("orderDetailId", orderDetailId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__create__recipeIngredients", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
-                                    callback.onSuccess(recipeIngredients);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method create__recipeIngredients definition ends here..
-
-            
-
-        
-    
-        
-            //Method update__recipeIngredients definition
-            public void update__recipeIngredients(  String orderDetailId,  Map<String,  ? extends Object> data, final ObjectCallback<RecipeIngredients> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("orderDetailId", orderDetailId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__update__recipeIngredients", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
-                                    callback.onSuccess(recipeIngredients);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method update__recipeIngredients definition ends here..
-
-            
-
-        
-    
-        
-            //Method destroy__recipeIngredients definition
-            public void destroy__recipeIngredients(  String orderDetailId, final VoidCallback callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("orderDetailId", orderDetailId);
-                
-
-                
-                    invokeStaticMethod("prototype.__destroy__recipeIngredients", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method destroy__recipeIngredients definition ends here..
-
-            
-
-        
-    
-        
-            //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
+            //Method Track.create definition
+            public void Track.create(  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -516,7 +360,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
                 
                     
                     
-                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("Track.create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -527,10 +371,10 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
+                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
-                                    callback.onSuccess(orderDetail);
+                                    Track track = trackRepo.createObject(result);
+                                    callback.onSuccess(track);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -542,15 +386,15 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
 
                 
 
-            }//Method create definition ends here..
+            }//Method Track.create definition ends here..
 
             
 
         
     
         
-            //Method createMany definition
-            public void createMany(  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
+            //Method Track.create definition
+            public void Track.create(  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -565,7 +409,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
                 
                     
                     
-                    invokeStaticMethod("createMany", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("Track.create", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -576,10 +420,10 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
+                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
-                                    callback.onSuccess(orderDetail);
+                                    Track track = trackRepo.createObject(result);
+                                    callback.onSuccess(track);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -591,15 +435,15 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
 
                 
 
-            }//Method createMany definition ends here..
+            }//Method Track.create definition ends here..
 
             
 
         
     
         
-            //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
+            //Method Track.upsert definition
+            public void Track.upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -614,7 +458,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
                 
                     
                     
-                    invokeStaticMethod("upsert", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("Track.upsert", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -625,10 +469,10 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
+                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
-                                    callback.onSuccess(orderDetail);
+                                    Track track = trackRepo.createObject(result);
+                                    callback.onSuccess(track);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -640,15 +484,15 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
 
                 
 
-            }//Method upsert definition ends here..
+            }//Method Track.upsert definition ends here..
 
             
 
         
     
         
-            //Method exists definition
-            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method Track.exists definition
+            public void Track.exists(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -662,7 +506,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
 
                 
                     
-                    invokeStaticMethod("exists", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("Track.exists", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -681,15 +525,15 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
 
                 
 
-            }//Method exists definition ends here..
+            }//Method Track.exists definition ends here..
 
             
 
         
     
         
-            //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<OrderDetail> callback){
+            //Method Track.findById definition
+            public void Track.findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -706,7 +550,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
                 
                     
                     
-                    invokeStaticMethod("findById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("Track.findById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -717,10 +561,10 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
+                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
-                                    callback.onSuccess(orderDetail);
+                                    Track track = trackRepo.createObject(result);
+                                    callback.onSuccess(track);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -732,15 +576,15 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
 
                 
 
-            }//Method findById definition ends here..
+            }//Method Track.findById definition ends here..
 
             
 
         
     
         
-            //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<OrderDetail> callback){
+            //Method Track.find definition
+            public void Track.find(  Map<String,  ? extends Object> filter, final ListCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -755,7 +599,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
                 
 
                 
-                    invokeStaticMethod("find", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("Track.find", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -767,14 +611,14 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<OrderDetail> orderDetailList = new ArrayList<OrderDetail>();
-                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
+                                    List<Track> trackList = new ArrayList<Track>();
+                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        OrderDetail orderDetail = orderDetailRepo.createObject(obj);
-                                        orderDetailList.add(orderDetail);
+                                        Track track = trackRepo.createObject(obj);
+                                        trackList.add(track);
                                     }
-                                    callback.onSuccess(orderDetailList);
+                                    callback.onSuccess(trackList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -783,15 +627,15 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
                     });
                 
 
-            }//Method find definition ends here..
+            }//Method Track.find definition ends here..
 
             
 
         
     
         
-            //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<OrderDetail> callback){
+            //Method Track.findOne definition
+            public void Track.findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -806,7 +650,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
                 
                     
                     
-                    invokeStaticMethod("findOne", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("Track.findOne", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -817,10 +661,10 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
+                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
-                                    callback.onSuccess(orderDetail);
+                                    Track track = trackRepo.createObject(result);
+                                    callback.onSuccess(track);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -832,15 +676,15 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
 
                 
 
-            }//Method findOne definition ends here..
+            }//Method Track.findOne definition ends here..
 
             
 
         
     
         
-            //Method updateAll definition
-            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            //Method Track.updateAll definition
+            public void Track.updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -856,7 +700,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
 
                 
                     
-                    invokeStaticMethod("updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("Track.updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -875,15 +719,15 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
 
                 
 
-            }//Method updateAll definition ends here..
+            }//Method Track.updateAll definition ends here..
 
             
 
         
     
         
-            //Method deleteById definition
-            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            //Method Track.deleteById definition
+            public void Track.deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -897,7 +741,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
 
                 
                     
-                    invokeStaticMethod("deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("Track.deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -916,15 +760,15 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
 
                 
 
-            }//Method deleteById definition ends here..
+            }//Method Track.deleteById definition ends here..
 
             
 
         
     
         
-            //Method count definition
-            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            //Method Track.count definition
+            public void Track.count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -938,7 +782,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
 
                 
                     
-                    invokeStaticMethod("count", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("Track.count", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -957,7 +801,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
 
                 
 
-            }//Method count definition ends here..
+            }//Method Track.count definition ends here..
 
             
 
@@ -965,13 +809,13 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String orderDetailId,  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
+            public void updateAttributes(  String id,  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("orderDetailId", orderDetailId);
+                        hashMapObject.put("id", id);
                 
                         hashMapObject.putAll(data);
                 
@@ -982,7 +826,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
                 
                     
                     
-                    invokeStaticMethod("prototype.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -993,10 +837,10 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
+                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
-                                    callback.onSuccess(orderDetail);
+                                    Track track = trackRepo.createObject(result);
+                                    callback.onSuccess(track);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1017,8 +861,8 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
         
     
         
-            //Method getSchema definition
-            public void getSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method Track.getSchema definition
+            public void Track.getSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1030,7 +874,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
 
                 
                     
-                    invokeStaticMethod("getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("Track.getSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1049,15 +893,15 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
 
                 
 
-            }//Method getSchema definition ends here..
+            }//Method Track.getSchema definition ends here..
 
             
 
         
     
         
-            //Method getAbsoluteSchema definition
-            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            //Method Track.getAbsoluteSchema definition
+            public void Track.getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1069,7 +913,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
 
                 
                     
-                    invokeStaticMethod("getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("Track.getAbsoluteSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1088,10 +932,16 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
 
                 
 
-            }//Method getAbsoluteSchema definition ends here..
+            }//Method Track.getAbsoluteSchema definition ends here..
 
             
 
+        
+    
+        
+    
+        
+    
         
     
         
