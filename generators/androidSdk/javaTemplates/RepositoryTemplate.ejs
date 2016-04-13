@@ -164,6 +164,7 @@ import com.strongloop.android.loopback.AccessToken;
 import android.content.SharedPreferences;
 import android.util.Log;
 import org.json.JSONException;
+import android.content.Context;
 <% } else { %>
 import com.strongloop.android.loopback.ModelRepository;
 <% } %>
@@ -220,9 +221,9 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
     			cachedCurrentUser = user;
     		}
 
-    		public void setCurrentUserId(Object id){
+    		<!-- public void setCurrentUserId(Object id){
     			super.setCurrentUserId(id);
-    		}
+    		} -->
 
             public void findCurrentUser(final ObjectCallback<<%- modelName %>> callback){
                 if(getCurrentUserId() == null){
@@ -285,6 +286,11 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                     String msg = "Cannot parse user id '" + json + "'";
                     Log.e("Snaphy", msg, e);
                 }
+            }
+
+            private SharedPreferences getSharedPreferences() {
+                return getApplicationContext().getSharedPreferences(
+                    SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
             }
 
 
