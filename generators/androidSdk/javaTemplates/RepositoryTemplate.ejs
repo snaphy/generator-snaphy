@@ -161,6 +161,9 @@ import java.util.HashMap;
 import com.strongloop.android.loopback.UserRepository;
 import com.strongloop.android.loopback.AccessTokenRepository;
 import com.strongloop.android.loopback.AccessToken;
+import android.content.SharedPreferences;
+import android.util.Log;
+import org.json.JSONException;
 <% } else { %>
 import com.strongloop.android.loopback.ModelRepository;
 <% } %>
@@ -207,6 +210,8 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
     <% if(model.base === "User" || modelName === "User"){ %>
     		//Create public methods..
     		public <%- modelName %> cachedCurrentUser;
+            private Object currentUserId;
+            private boolean isCurrentUserIdLoaded;
     		public <%- modelName %> getCachedCurrentUser(){
     			return cachedCurrentUser;
     		}
@@ -218,6 +223,72 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
     		public void setCurrentUserId(Object id){
     			super.setCurrentUserId(id);
     		}
+
+            public void findCurrentUser(final ObjectCallback<<%- modelName %>> callback){
+                if(getCurrentUserId() == null){
+                    callback.onSuccess(null);
+                    return;
+                }
+
+                this.findById(getCurrentUserId(), new ObjectCallback<<%- modelName %>>() {
+                    @Override
+                    public void onSuccess(<%- modelName %> user){
+                        cachedCurrentUser = user;
+                        callback.onSuccess(user);
+                    }
+
+                    @Override
+                    public void onError(Throwable t){
+                        callback.onError(t);
+                    }
+                });
+
+            }
+
+            public Object getCurrentUserId(){
+                loadCurrentUserIdIfNotLoaded();
+                return currentUserId;
+            }
+
+            protected void setCurrentUserId(Object currentUserId){
+                this.currentUserId = currentUserId;
+                cachedCurrentUser = null;
+                saveCurrentUserId();
+            }
+
+            private void saveCurrentUserId(){
+                final SharedPreferences.Editor editor = getSharedPreferences().edit();
+                final String json = new JSONArray().put(getCurrentUserId()).toString();
+                editor.putString(PROPERTY_CURRENT_USER_ID, json);
+                editor.commit();
+            }
+
+
+            //Add loadCurrentUserIdIfNotLoaded method..
+            private void loadCurrentUserIdIfNotLoaded(){
+                if(isCurrentUserIdLoaded) return;
+
+                isCurrentUserIdLoaded = true;
+                String json = getSharedPreferences.getString(PROPERTY_CURRENT_USER_ID, null);
+                if(json == null){
+                    return;
+                }
+
+                if(json.equals("[null]")){
+                    return;
+                }
+
+                try{
+                    Object id = new JSONArray(json).get(0);
+                    setCurrentUserId(id);
+                }catch(JSONException e){
+                    String msg = "Cannot parse user id '" + json + "'";
+                    Log.e("Snaphy", msg, e);
+                }
+            }
+
+
+
 
     <% } %>
 

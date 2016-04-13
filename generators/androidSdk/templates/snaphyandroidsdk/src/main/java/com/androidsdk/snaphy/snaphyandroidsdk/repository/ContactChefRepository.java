@@ -26,9 +26,16 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.LastUpdatedLocation;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.ContactChef;
 
 //Now import model of related models..
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
+            
+        
+    
 
     
             import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
@@ -41,11 +48,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.LastUpdatedLocation;
 
 
 
-public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLocation> {
+public class ContactChefRepository extends ModelRepository<ContactChef> {
 
 
-    public LastUpdatedLocationRepository(){
-        super("LastUpdatedLocation", null, LastUpdatedLocation.class);
+    public ContactChefRepository(){
+        super("ContactChef", null, ContactChef.class);
     }
 
 
@@ -61,7 +68,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:lastUpdatedLocationId/customer", "GET"), "LastUpdatedLocation.prototype.__get__customer");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:contactChefId/chef", "GET"), "ContactChef.prototype.__get__chef");
                 
 
             
@@ -69,7 +76,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "LastUpdatedLocation.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:contactChefId/customer", "GET"), "ContactChef.prototype.__get__customer");
                 
 
             
@@ -77,7 +84,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "LastUpdatedLocation.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "ContactChef.create");
                 
 
             
@@ -85,7 +92,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "LastUpdatedLocation.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "ContactChef.create");
                 
 
             
@@ -93,7 +100,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "LastUpdatedLocation.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "ContactChef.upsert");
                 
 
             
@@ -101,7 +108,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "LastUpdatedLocation.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "ContactChef.exists");
                 
 
             
@@ -109,7 +116,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "LastUpdatedLocation.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "ContactChef.findById");
                 
 
             
@@ -117,7 +124,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "LastUpdatedLocation.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "ContactChef.find");
                 
 
             
@@ -125,7 +132,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "LastUpdatedLocation.updateAll");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "ContactChef.findOne");
                 
 
             
@@ -133,7 +140,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "LastUpdatedLocation.deleteById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "ContactChef.updateAll");
                 
 
             
@@ -141,7 +148,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "LastUpdatedLocation.count");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "ContactChef.deleteById");
                 
 
             
@@ -149,7 +156,15 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:lastUpdatedLocationId", "PUT"), "LastUpdatedLocation.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "ContactChef.count");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:contactChefId", "PUT"), "ContactChef.prototype.updateAttributes");
                 
 
             
@@ -159,7 +174,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "LastUpdatedLocation.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "ContactChef.getSchema");
                 
 
             
@@ -167,9 +182,25 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "LastUpdatedLocation.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "ContactChef.getAbsoluteSchema");
                 
 
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -195,14 +226,65 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
     
         
-            //Method get__customer definition
-            public void get__customer(  String lastUpdatedLocationId,  Boolean refresh, final ObjectCallback<Customer> callback){
+            //Method get__chef definition
+            public void get__chef(  String contactChefId,  Boolean refresh, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("lastUpdatedLocationId", lastUpdatedLocationId);
+                        hashMapObject.put("contactChefId", contactChefId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__chef", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Customer customer = customerRepo.createObject(result);
+                                    callback.onSuccess(customer);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method get__chef definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__customer definition
+            public void get__customer(  String contactChefId,  Boolean refresh, final ObjectCallback<Customer> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("contactChefId", contactChefId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -247,7 +329,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<LastUpdatedLocation> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -273,10 +355,10 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    LastUpdatedLocationRepository lastUpdatedLocationRepo = getRestAdapter().createRepository(LastUpdatedLocationRepository.class);
+                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    LastUpdatedLocation lastUpdatedLocation = lastUpdatedLocationRepo.createObject(result);
-                                    callback.onSuccess(lastUpdatedLocation);
+                                    ContactChef contactChef = contactChefRepo.createObject(result);
+                                    callback.onSuccess(contactChef);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -297,7 +379,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<LastUpdatedLocation> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -323,10 +405,10 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    LastUpdatedLocationRepository lastUpdatedLocationRepo = getRestAdapter().createRepository(LastUpdatedLocationRepository.class);
+                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    LastUpdatedLocation lastUpdatedLocation = lastUpdatedLocationRepo.createObject(result);
-                                    callback.onSuccess(lastUpdatedLocation);
+                                    ContactChef contactChef = contactChefRepo.createObject(result);
+                                    callback.onSuccess(contactChef);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -387,7 +469,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<LastUpdatedLocation> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<ContactChef> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -415,10 +497,10 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    LastUpdatedLocationRepository lastUpdatedLocationRepo = getRestAdapter().createRepository(LastUpdatedLocationRepository.class);
+                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    LastUpdatedLocation lastUpdatedLocation = lastUpdatedLocationRepo.createObject(result);
-                                    callback.onSuccess(lastUpdatedLocation);
+                                    ContactChef contactChef = contactChefRepo.createObject(result);
+                                    callback.onSuccess(contactChef);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -438,7 +520,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<LastUpdatedLocation> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<ContactChef> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -465,14 +547,14 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<LastUpdatedLocation> lastUpdatedLocationList = new ArrayList<LastUpdatedLocation>();
-                                    LastUpdatedLocationRepository lastUpdatedLocationRepo = getRestAdapter().createRepository(LastUpdatedLocationRepository.class);
+                                    List<ContactChef> contactChefList = new ArrayList<ContactChef>();
+                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        LastUpdatedLocation lastUpdatedLocation = lastUpdatedLocationRepo.createObject(obj);
-                                        lastUpdatedLocationList.add(lastUpdatedLocation);
+                                        ContactChef contactChef = contactChefRepo.createObject(obj);
+                                        contactChefList.add(contactChef);
                                     }
-                                    callback.onSuccess(lastUpdatedLocationList);
+                                    callback.onSuccess(contactChefList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -489,7 +571,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<LastUpdatedLocation> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<ContactChef> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -515,10 +597,10 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    LastUpdatedLocationRepository lastUpdatedLocationRepo = getRestAdapter().createRepository(LastUpdatedLocationRepository.class);
+                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    LastUpdatedLocation lastUpdatedLocation = lastUpdatedLocationRepo.createObject(result);
-                                    callback.onSuccess(lastUpdatedLocation);
+                                    ContactChef contactChef = contactChefRepo.createObject(result);
+                                    callback.onSuccess(contactChef);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -663,13 +745,13 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String lastUpdatedLocationId,  Map<String,  ? extends Object> data, final ObjectCallback<LastUpdatedLocation> callback){
+            public void updateAttributes(  String contactChefId,  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("lastUpdatedLocationId", lastUpdatedLocationId);
+                        hashMapObject.put("contactChefId", contactChefId);
                 
                         hashMapObject.putAll(data);
                 
@@ -691,10 +773,10 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    LastUpdatedLocationRepository lastUpdatedLocationRepo = getRestAdapter().createRepository(LastUpdatedLocationRepository.class);
+                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    LastUpdatedLocation lastUpdatedLocation = lastUpdatedLocationRepo.createObject(result);
-                                    callback.onSuccess(lastUpdatedLocation);
+                                    ContactChef contactChef = contactChefRepo.createObject(result);
+                                    callback.onSuccess(contactChef);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -790,6 +872,22 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
             
 
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
         

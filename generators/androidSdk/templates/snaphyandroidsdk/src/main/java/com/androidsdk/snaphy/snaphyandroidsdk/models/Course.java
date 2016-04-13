@@ -18,7 +18,7 @@ import com.strongloop.android.loopback.callbacks.VoidCallback;
 import com.strongloop.android.remoting.adapters.Adapter;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.LastUpdatedLocationRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.CourseRepository;
 
 //Now import repository of related models..
 
@@ -36,7 +36,7 @@ import java.util.Map;
 
 
 
-public class LastUpdatedLocation extends Model {
+public class Course extends Model {
 
 
     //For converting all model values to hashMap
@@ -51,9 +51,9 @@ public class LastUpdatedLocation extends Model {
         }
     }
 
-    private LastUpdatedLocation that ;
+    private Course that ;
 
-    public LastUpdatedLocation (){
+    public Course (){
         that = this;
     }
 
@@ -61,48 +61,22 @@ public class LastUpdatedLocation extends Model {
         
             
             
+                private String name;
+                /* Adding Getter and Setter methods */
+                public String getName(){
+                    return name;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setName(String name){
+                    this.name = name;
+                    //Update hashMap value..
+                    hashMap.put("name", name);
+                }
+
             
             
             
-                private Map<String, Object> lastUpdatedLocation = new HashMap();
-                /* Adding Getter and Setter methods */
-                public Map<String, Object> getLastUpdatedLocation(){
-                    return lastUpdatedLocation;
-                }
-                /* Adding Getter and Setter methods */
-                public double getLastUpdatedLocationLatitide(){
-                    if(lastUpdatedLocation != null){
-                        return (Double)lastUpdatedLocation.get("lat");
-                    }else{
-                        return 0;
-                    }
-                }
-
-                /* Adding Getter and Setter methods */
-                public double getLastUpdatedLocationLongitude(){
-                    if(lastUpdatedLocation != null){
-                        return (Double)lastUpdatedLocation.get("lng");
-                    }else{
-                        return 0;
-                    }
-
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setLastUpdatedLocation(Map<String, Object> lastUpdatedLocation){
-                    this.lastUpdatedLocation.putAll(lastUpdatedLocation);
-                    //Update Map value..
-                    hashMap.put("lastUpdatedLocation", lastUpdatedLocation);
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setLastUpdatedLocation(double lat, double lng){
-                    this.lastUpdatedLocation.put("lat", lat);
-                    this.lastUpdatedLocation.put("lng", lng);
-                    //Update Map value..
-                    hashMap.put("lastUpdatedLocation", lastUpdatedLocation);
-                }
-
             
 
         
@@ -110,19 +84,90 @@ public class LastUpdatedLocation extends Model {
         
             
             
-                private String lastModified;
+                private String description;
                 /* Adding Getter and Setter methods */
-                public String getLastModified(){
-                    return lastModified;
+                public String getDescription(){
+                    return description;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setLastModified(String lastModified){
-                    this.lastModified = lastModified;
+                public void setDescription(String description){
+                    this.description = description;
                     //Update hashMap value..
-                    hashMap.put("lastModified", lastModified);
+                    hashMap.put("description", description);
                 }
 
+            
+            
+            
+            
+
+        
+    
+        
+            
+            
+                private String courseDuration;
+                /* Adding Getter and Setter methods */
+                public String getCourseDuration(){
+                    return courseDuration;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setCourseDuration(String courseDuration){
+                    this.courseDuration = courseDuration;
+                    //Update hashMap value..
+                    hashMap.put("courseDuration", courseDuration);
+                }
+
+            
+            
+            
+            
+
+        
+    
+        
+            
+            
+            
+                private double courseFees;
+                /* Adding Getter and Setter methods */
+                public double getCourseFees(){
+                    return courseFees;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setCourseFees(double courseFees){
+                    this.courseFees = courseFees;
+                    //Update hashMap value..
+                    hashMap.put("courseFees", courseFees);
+                }
+
+            
+            
+            
+
+        
+    
+        
+            
+
+                private List<Map<String, Object>> courseRecipes;
+                /* Adding Getter and Setter methods */
+                public List<Map<String, Object>> getCourseRecipes(){
+                    return courseRecipes;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setCourseRecipes(List<Map<String, Object>> courseRecipes){
+                    this.courseRecipes = courseRecipes;
+
+                    //TODO change this to custom array with double quotes escaped if error occured when sending to server..
+                    hashMap.put("courseRecipes", courseRecipes);
+                }
+
+            
             
             
             
@@ -210,7 +255,7 @@ public class LastUpdatedLocation extends Model {
                                     //Write the method here..
                                     public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
                                         //Define methods here..
-                                        final LastUpdatedLocationRepository  lastUpdatedLocationRepo = restAdapter.createRepository(LastUpdatedLocationRepository.class);
+                                        final CourseRepository  courseRepo = restAdapter.createRepository(CourseRepository.class);
                                         
                                         
                                         
@@ -219,7 +264,7 @@ public class LastUpdatedLocation extends Model {
 
 
 
-                                        lastUpdatedLocationRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
+                                        courseRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
                                             
 
                                             
@@ -253,6 +298,14 @@ public class LastUpdatedLocation extends Model {
                                     } //method def ends here.
                                  
                             
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         

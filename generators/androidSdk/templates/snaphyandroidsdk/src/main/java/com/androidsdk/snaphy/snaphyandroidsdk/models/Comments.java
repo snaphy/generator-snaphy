@@ -18,7 +18,7 @@ import com.strongloop.android.loopback.callbacks.VoidCallback;
 import com.strongloop.android.remoting.adapters.Adapter;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.TrackRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.CommentsRepository;
 
 //Now import repository of related models..
 
@@ -30,7 +30,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.TrackRepository;
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.EventTypeRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeRepository;
             
 
         
@@ -43,7 +43,7 @@ import java.util.Map;
 
 
 
-public class Track extends Model {
+public class Comments extends Model {
 
 
     //For converting all model values to hashMap
@@ -58,9 +58,9 @@ public class Track extends Model {
         }
     }
 
-    private Track that ;
+    private Comments that ;
 
-    public Track (){
+    public Comments (){
         that = this;
     }
 
@@ -68,252 +68,17 @@ public class Track extends Model {
         
             
             
-            
-            
-                private Map<String, Object> picture;
+                private String date;
                 /* Adding Getter and Setter methods */
-                public Map<String, Object> getPicture(){
-                    return picture;
+                public String getDate(){
+                    return date;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setPicture(Map<String, Object> picture){
-                    this.picture = picture;
-                    //Update Map value..
-                    hashMap.put("picture", picture);
-                }
-
-            
-            
-
-        
-    
-        
-            
-            
-                private String name;
-                /* Adding Getter and Setter methods */
-                public String getName(){
-                    return name;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setName(String name){
-                    this.name = name;
+                public void setDate(String date){
+                    this.date = date;
                     //Update hashMap value..
-                    hashMap.put("name", name);
-                }
-
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-                private String description;
-                /* Adding Getter and Setter methods */
-                public String getDescription(){
-                    return description;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setDescription(String description){
-                    this.description = description;
-                    //Update hashMap value..
-                    hashMap.put("description", description);
-                }
-
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-                private double uniqueCode;
-                /* Adding Getter and Setter methods */
-                public double getUniqueCode(){
-                    return uniqueCode;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setUniqueCode(double uniqueCode){
-                    this.uniqueCode = uniqueCode;
-                    //Update hashMap value..
-                    hashMap.put("uniqueCode", uniqueCode);
-                }
-
-            
-            
-            
-
-        
-    
-        
-            
-            
-                private String isPublic;
-                /* Adding Getter and Setter methods */
-                public String getIsPublic(){
-                    return isPublic;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setIsPublic(String isPublic){
-                    this.isPublic = isPublic;
-                    //Update hashMap value..
-                    hashMap.put("isPublic", isPublic);
-                }
-
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-                private String address;
-                /* Adding Getter and Setter methods */
-                public String getAddress(){
-                    return address;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setAddress(String address){
-                    this.address = address;
-                    //Update hashMap value..
-                    hashMap.put("address", address);
-                }
-
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-                private Map<String, Object> geolocation = new HashMap();
-                /* Adding Getter and Setter methods */
-                public Map<String, Object> getGeolocation(){
-                    return geolocation;
-                }
-                /* Adding Getter and Setter methods */
-                public double getGeolocationLatitide(){
-                    if(geolocation != null){
-                        return (Double)geolocation.get("lat");
-                    }else{
-                        return 0;
-                    }
-                }
-
-                /* Adding Getter and Setter methods */
-                public double getGeolocationLongitude(){
-                    if(geolocation != null){
-                        return (Double)geolocation.get("lng");
-                    }else{
-                        return 0;
-                    }
-
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setGeolocation(Map<String, Object> geolocation){
-                    this.geolocation.putAll(geolocation);
-                    //Update Map value..
-                    hashMap.put("geolocation", geolocation);
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setGeolocation(double lat, double lng){
-                    this.geolocation.put("lat", lat);
-                    this.geolocation.put("lng", lng);
-                    //Update Map value..
-                    hashMap.put("geolocation", geolocation);
-                }
-
-            
-
-        
-    
-        
-            
-
-                private List<Map<String, Object>> friends;
-                /* Adding Getter and Setter methods */
-                public List<Map<String, Object>> getFriends(){
-                    return friends;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setFriends(List<Map<String, Object>> friends){
-                    this.friends = friends;
-
-                    //TODO change this to custom array with double quotes escaped if error occured when sending to server..
-                    hashMap.put("friends", friends);
-                }
-
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-                private String type;
-                /* Adding Getter and Setter methods */
-                public String getType(){
-                    return type;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setType(String type){
-                    this.type = type;
-                    //Update hashMap value..
-                    hashMap.put("type", type);
-                }
-
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-                private String locationId;
-                /* Adding Getter and Setter methods */
-                public String getLocationId(){
-                    return locationId;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setLocationId(String locationId){
-                    this.locationId = locationId;
-                    //Update hashMap value..
-                    hashMap.put("locationId", locationId);
+                    hashMap.put("date", date);
                 }
 
             
@@ -349,17 +114,17 @@ public class Track extends Model {
         
             
             
-                private String lastModified;
+                private String comment;
                 /* Adding Getter and Setter methods */
-                public String getLastModified(){
-                    return lastModified;
+                public String getComment(){
+                    return comment;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setLastModified(String lastModified){
-                    this.lastModified = lastModified;
+                public void setComment(String comment){
+                    this.comment = comment;
                     //Update hashMap value..
-                    hashMap.put("lastModified", lastModified);
+                    hashMap.put("comment", comment);
                 }
 
             
@@ -372,43 +137,20 @@ public class Track extends Model {
         
             
             
-                private String added;
+            
+                private double rating;
                 /* Adding Getter and Setter methods */
-                public String getAdded(){
-                    return added;
+                public double getRating(){
+                    return rating;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setAdded(String added){
-                    this.added = added;
+                public void setRating(double rating){
+                    this.rating = rating;
                     //Update hashMap value..
-                    hashMap.put("added", added);
+                    hashMap.put("rating", rating);
                 }
 
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-                private String eventDate;
-                /* Adding Getter and Setter methods */
-                public String getEventDate(){
-                    return eventDate;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setEventDate(String eventDate){
-                    this.eventDate = eventDate;
-                    //Update hashMap value..
-                    hashMap.put("eventDate", eventDate);
-                }
-
-            
             
             
             
@@ -504,7 +246,7 @@ public class Track extends Model {
                                     //Write the method here..
                                     public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
                                         //Define methods here..
-                                        final TrackRepository  trackRepo = restAdapter.createRepository(TrackRepository.class);
+                                        final CommentsRepository  commentsRepo = restAdapter.createRepository(CommentsRepository.class);
                                         
                                         
                                         
@@ -513,7 +255,7 @@ public class Track extends Model {
 
 
 
-                                        trackRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
+                                        commentsRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
                                             
 
                                             
@@ -593,35 +335,35 @@ public class Track extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private EventType  eventType ;
+                    private Recipe  recipe ;
 
-                    public EventType getEventType() {
-                        return eventType;
+                    public Recipe getRecipe() {
+                        return recipe;
                     }
 
-                    public void setEventType(EventType eventType) {
-                        this.eventType = eventType;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setEventType(Map<String, Object> eventType) {
-                        //First create a dummy Repo class object for customer.
-                        EventTypeRepository eventTypeRepository = new EventTypeRepository();
-                        EventType eventType1 = eventTypeRepository.createObject(eventType);
-                        setEventType(eventType1);
+                    public void setRecipe(Recipe recipe) {
+                        this.recipe = recipe;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setEventType(HashMap<String, Object> eventType) {
+                    public void setRecipe(Map<String, Object> recipe) {
                         //First create a dummy Repo class object for customer.
-                        EventTypeRepository eventTypeRepository = new EventTypeRepository();
-                        EventType eventType1 = eventTypeRepository.createObject(eventType);
-                        setEventType(eventType1);
+                        RecipeRepository recipeRepository = new RecipeRepository();
+                        Recipe recipe1 = recipeRepository.createObject(recipe);
+                        setRecipe(recipe1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setRecipe(HashMap<String, Object> recipe) {
+                        //First create a dummy Repo class object for customer.
+                        RecipeRepository recipeRepository = new RecipeRepository();
+                        Recipe recipe1 = recipeRepository.createObject(recipe);
+                        setRecipe(recipe1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(EventType eventType) {
-                        that.setEventType(eventType);
+                    public void addRelation(Recipe recipe) {
+                        that.setRecipe(recipe);
                     }
 
 
@@ -644,9 +386,9 @@ public class Track extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__eventType( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<EventType> callback) {
+                                    public void get__recipe( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
                                         //Define methods here..
-                                        final TrackRepository  trackRepo = restAdapter.createRepository(TrackRepository.class);
+                                        final CommentsRepository  commentsRepo = restAdapter.createRepository(CommentsRepository.class);
                                         
                                         
                                         
@@ -655,13 +397,13 @@ public class Track extends Model {
 
 
 
-                                        trackRepo.get__eventType( (String)that.getId(), refresh,  new ObjectCallback<EventType> (){
+                                        commentsRepo.get__recipe( (String)that.getId(), refresh,  new ObjectCallback<Recipe> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(EventType object) {
+                                                    public void onSuccess(Recipe object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);

@@ -18,7 +18,7 @@ import com.strongloop.android.loopback.callbacks.VoidCallback;
 import com.strongloop.android.remoting.adapters.Adapter;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.PushRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmailInfoRepository;
 
 //Now import repository of related models..
 
@@ -29,7 +29,7 @@ import java.util.Map;
 
 
 
-public class Push extends Model {
+public class EmailInfo extends Model {
 
 
     //For converting all model values to hashMap
@@ -44,9 +44,9 @@ public class Push extends Model {
         }
     }
 
-    private Push that ;
+    private EmailInfo that ;
 
-    public Push (){
+    public EmailInfo (){
         that = this;
     }
 

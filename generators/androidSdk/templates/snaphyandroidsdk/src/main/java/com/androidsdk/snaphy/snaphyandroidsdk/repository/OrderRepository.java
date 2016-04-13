@@ -26,7 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Track;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Order;
 
 //Now import model of related models..
 
@@ -38,8 +38,8 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Track;
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.EventType;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.EventTypeRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.OrderDetail;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.OrderDetailRepository;
             
         
     
@@ -48,11 +48,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Track;
 
 
 
-public class TrackRepository extends ModelRepository<Track> {
+public class OrderRepository extends ModelRepository<Order> {
 
 
-    public TrackRepository(){
-        super("Track", null, Track.class);
+    public OrderRepository(){
+        super("Order", null, Order.class);
     }
 
 
@@ -68,7 +68,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:trackId/customer", "GET"), "Track.prototype.__get__customer");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId/customer", "GET"), "Order.prototype.__get__customer");
                 
 
             
@@ -76,7 +76,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:trackId/eventType", "GET"), "Track.prototype.__get__eventType");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId/orderDetails/:fk", "GET"), "Order.prototype.__findById__orderDetails");
                 
 
             
@@ -84,7 +84,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Track.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId/orderDetails/:fk", "DELETE"), "Order.prototype.__destroyById__orderDetails");
                 
 
             
@@ -92,7 +92,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Track.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId/orderDetails/:fk", "PUT"), "Order.prototype.__updateById__orderDetails");
                 
 
             
@@ -100,7 +100,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Track.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId/orderDetails", "GET"), "Order.prototype.__get__orderDetails");
                 
 
             
@@ -108,7 +108,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Track.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId/orderDetails", "POST"), "Order.prototype.__create__orderDetails");
                 
 
             
@@ -116,7 +116,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Track.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId/orderDetails", "DELETE"), "Order.prototype.__delete__orderDetails");
                 
 
             
@@ -124,7 +124,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Track.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId/orderDetails/count", "GET"), "Order.prototype.__count__orderDetails");
                 
 
             
@@ -132,7 +132,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Track.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Order.create");
                 
 
             
@@ -140,7 +140,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Track.updateAll");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Order.create");
                 
 
             
@@ -148,7 +148,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Track.deleteById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Order.upsert");
                 
 
             
@@ -156,7 +156,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Track.count");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Order.exists");
                 
 
             
@@ -164,7 +164,55 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:trackId", "PUT"), "Track.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Order.findById");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Order.find");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Order.findOne");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Order.updateAll");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Order.deleteById");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Order.count");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderId", "PUT"), "Order.prototype.updateAttributes");
                 
 
             
@@ -174,7 +222,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Track.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Order.getSchema");
                 
 
             
@@ -182,7 +230,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Track.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Order.getAbsoluteSchema");
                 
 
             
@@ -190,17 +238,19 @@ public class TrackRepository extends ModelRepository<Track> {
             
         
             
-        
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/requestOtp", "POST"), "Order.requestOtp");
+                
+
             
         
             
-        
-            
-        
-            
-        
-            
-        
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/orderWithOTP", "POST"), "Order.orderWithOTP");
+                
+
             
         
             
@@ -243,13 +293,13 @@ public class TrackRepository extends ModelRepository<Track> {
     
         
             //Method get__customer definition
-            public void get__customer(  String trackId,  Boolean refresh, final ObjectCallback<Customer> callback){
+            public void get__customer(  String orderId,  Boolean refresh, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("trackId", trackId);
+                        hashMapObject.put("orderId", orderId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -293,16 +343,16 @@ public class TrackRepository extends ModelRepository<Track> {
         
     
         
-            //Method get__eventType definition
-            public void get__eventType(  String trackId,  Boolean refresh, final ObjectCallback<EventType> callback){
+            //Method findById__orderDetails definition
+            public void findById__orderDetails(  String orderId,  String fk, final ObjectCallback<OrderDetail> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("trackId", trackId);
+                        hashMapObject.put("orderId", orderId);
                 
-                        hashMapObject.put("refresh", refresh);
+                        hashMapObject.put("fk", fk);
                 
 
                 
@@ -311,7 +361,7 @@ public class TrackRepository extends ModelRepository<Track> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__eventType", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__orderDetails", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -322,10 +372,10 @@ public class TrackRepository extends ModelRepository<Track> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EventTypeRepository eventTypeRepo = getRestAdapter().createRepository(EventTypeRepository.class);
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EventType eventType = eventTypeRepo.createObject(result);
-                                    callback.onSuccess(eventType);
+                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
+                                    callback.onSuccess(orderDetail);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -337,7 +387,281 @@ public class TrackRepository extends ModelRepository<Track> {
 
                 
 
-            }//Method get__eventType definition ends here..
+            }//Method findById__orderDetails definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__orderDetails definition
+            public void destroyById__orderDetails(  String orderId,  String fk, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("orderId", orderId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__orderDetails", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__orderDetails definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__orderDetails definition
+            public void updateById__orderDetails(  String orderId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("orderId", orderId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__updateById__orderDetails", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
+                                    callback.onSuccess(orderDetail);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method updateById__orderDetails definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__orderDetails definition
+            public void get__orderDetails(  String orderId,  Map<String,  ? extends Object> filter, final ListCallback<OrderDetail> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("orderId", orderId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__orderDetails", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    List<OrderDetail> orderDetailList = new ArrayList<OrderDetail>();
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
+
+                                    for (Map<String, Object> obj : result) {
+                                        OrderDetail orderDetail = orderDetailRepo.createObject(obj);
+                                        orderDetailList.add(orderDetail);
+                                    }
+                                    callback.onSuccess(orderDetailList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+            }//Method get__orderDetails definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__orderDetails definition
+            public void create__orderDetails(  String orderId,  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("orderId", orderId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__orderDetails", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
+                                    callback.onSuccess(orderDetail);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method create__orderDetails definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__orderDetails definition
+            public void delete__orderDetails(  String orderId, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("orderId", orderId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__orderDetails", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__orderDetails definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__orderDetails definition
+            public void count__orderDetails(  String orderId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("orderId", orderId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__orderDetails", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method count__orderDetails definition ends here..
 
             
 
@@ -345,7 +669,7 @@ public class TrackRepository extends ModelRepository<Track> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Order> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -371,10 +695,10 @@ public class TrackRepository extends ModelRepository<Track> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
+                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Track track = trackRepo.createObject(result);
-                                    callback.onSuccess(track);
+                                    Order order = orderRepo.createObject(result);
+                                    callback.onSuccess(order);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -395,7 +719,7 @@ public class TrackRepository extends ModelRepository<Track> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Order> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -421,10 +745,10 @@ public class TrackRepository extends ModelRepository<Track> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
+                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Track track = trackRepo.createObject(result);
-                                    callback.onSuccess(track);
+                                    Order order = orderRepo.createObject(result);
+                                    callback.onSuccess(order);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -485,7 +809,7 @@ public class TrackRepository extends ModelRepository<Track> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Track> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Order> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -513,10 +837,10 @@ public class TrackRepository extends ModelRepository<Track> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
+                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Track track = trackRepo.createObject(result);
-                                    callback.onSuccess(track);
+                                    Order order = orderRepo.createObject(result);
+                                    callback.onSuccess(order);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -536,7 +860,7 @@ public class TrackRepository extends ModelRepository<Track> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Track> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Order> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -563,14 +887,14 @@ public class TrackRepository extends ModelRepository<Track> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Track> trackList = new ArrayList<Track>();
-                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
+                                    List<Order> orderList = new ArrayList<Order>();
+                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Track track = trackRepo.createObject(obj);
-                                        trackList.add(track);
+                                        Order order = orderRepo.createObject(obj);
+                                        orderList.add(order);
                                     }
-                                    callback.onSuccess(trackList);
+                                    callback.onSuccess(orderList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -587,7 +911,7 @@ public class TrackRepository extends ModelRepository<Track> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Track> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Order> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -613,10 +937,10 @@ public class TrackRepository extends ModelRepository<Track> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
+                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Track track = trackRepo.createObject(result);
-                                    callback.onSuccess(track);
+                                    Order order = orderRepo.createObject(result);
+                                    callback.onSuccess(order);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -761,13 +1085,13 @@ public class TrackRepository extends ModelRepository<Track> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String trackId,  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
+            public void updateAttributes(  String orderId,  Map<String,  ? extends Object> data, final ObjectCallback<Order> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("trackId", trackId);
+                        hashMapObject.put("orderId", orderId);
                 
                         hashMapObject.putAll(data);
                 
@@ -789,10 +1113,10 @@ public class TrackRepository extends ModelRepository<Track> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
+                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Track track = trackRepo.createObject(result);
-                                    callback.onSuccess(track);
+                                    Order order = orderRepo.createObject(result);
+                                    callback.onSuccess(order);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -893,17 +1217,89 @@ public class TrackRepository extends ModelRepository<Track> {
         
     
         
-    
+            //Method requestOtp definition
+            public void requestOtp(  String number, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("number", number);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("requestOtp", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method requestOtp definition ends here..
+
+            
+
         
     
         
-    
-        
-    
-        
-    
-        
-    
+            //Method orderWithOTP definition
+            public void orderWithOTP(  Map<String,  ? extends Object> order,  List<Map<String,  ? extends Object>> orderDetails,  String code, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("order", order);
+                
+                        hashMapObject.put("orderDetails", orderDetails);
+                
+                        hashMapObject.put("code", code);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("orderWithOTP", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method orderWithOTP definition ends here..
+
+            
+
         
     
         

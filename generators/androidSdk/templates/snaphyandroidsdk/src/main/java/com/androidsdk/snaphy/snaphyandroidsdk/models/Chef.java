@@ -3,7 +3,7 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 
 
 
-import com.strongloop.android.loopback.User;
+import com.strongloop.android.loopback.Model;
 
 
 
@@ -18,15 +18,19 @@ import com.strongloop.android.loopback.callbacks.VoidCallback;
 import com.strongloop.android.remoting.adapters.Adapter;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChefRepository;
 
 //Now import repository of related models..
 
     
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
+            
+
+        
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeDetailsRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PopularityRepository;
             
 
         
@@ -39,7 +43,7 @@ import java.util.Map;
 
 
 
-public class Employee extends com.strongloop.android.loopback.User {
+public class Chef extends Model {
 
 
     //For converting all model values to hashMap
@@ -54,9 +58,9 @@ public class Employee extends com.strongloop.android.loopback.User {
         }
     }
 
-    private Employee that ;
+    private Chef that ;
 
-    public Employee (){
+    public Chef (){
         that = this;
     }
 
@@ -64,17 +68,17 @@ public class Employee extends com.strongloop.android.loopback.User {
         
             
             
-                private String username;
+                private String address;
                 /* Adding Getter and Setter methods */
-                public String getUsername(){
-                    return username;
+                public String getAddress(){
+                    return address;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setUsername(String username){
-                    this.username = username;
+                public void setAddress(String address){
+                    this.address = address;
                     //Update hashMap value..
-                    hashMap.put("username", username);
+                    hashMap.put("address", address);
                 }
 
             
@@ -87,17 +91,66 @@ public class Employee extends com.strongloop.android.loopback.User {
         
             
             
-                private String firstName;
+            
+            
+            
+                private Map<String, Object> geolocation = new HashMap();
                 /* Adding Getter and Setter methods */
-                public String getFirstName(){
-                    return firstName;
+                public Map<String, Object> getGeolocation(){
+                    return geolocation;
+                }
+                /* Adding Getter and Setter methods */
+                public double getGeolocationLatitide(){
+                    if(geolocation != null){
+                        return (Double)geolocation.get("lat");
+                    }else{
+                        return 0;
+                    }
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setFirstName(String firstName){
-                    this.firstName = firstName;
+                public double getGeolocationLongitude(){
+                    if(geolocation != null){
+                        return (Double)geolocation.get("lng");
+                    }else{
+                        return 0;
+                    }
+
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setGeolocation(Map<String, Object> geolocation){
+                    this.geolocation.putAll(geolocation);
+                    //Update Map value..
+                    hashMap.put("geolocation", geolocation);
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setGeolocation(double lat, double lng){
+                    this.geolocation.put("lat", lat);
+                    this.geolocation.put("lng", lng);
+                    //Update Map value..
+                    hashMap.put("geolocation", geolocation);
+                }
+
+            
+
+        
+    
+        
+            
+            
+                private String status;
+                /* Adding Getter and Setter methods */
+                public String getStatus(){
+                    return status;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setStatus(String status){
+                    this.status = status;
                     //Update hashMap value..
-                    hashMap.put("firstName", firstName);
+                    hashMap.put("status", status);
                 }
 
             
@@ -110,17 +163,17 @@ public class Employee extends com.strongloop.android.loopback.User {
         
             
             
-                private String lastName;
+                private String added;
                 /* Adding Getter and Setter methods */
-                public String getLastName(){
-                    return lastName;
+                public String getAdded(){
+                    return added;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setLastName(String lastName){
-                    this.lastName = lastName;
+                public void setAdded(String added){
+                    this.added = added;
                     //Update hashMap value..
-                    hashMap.put("lastName", lastName);
+                    hashMap.put("added", added);
                 }
 
             
@@ -133,20 +186,20 @@ public class Employee extends com.strongloop.android.loopback.User {
         
             
             
-                private String date;
+            
+                private double allowedRecipes;
                 /* Adding Getter and Setter methods */
-                public String getDate(){
-                    return date;
+                public double getAllowedRecipes(){
+                    return allowedRecipes;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setDate(String date){
-                    this.date = date;
+                public void setAllowedRecipes(double allowedRecipes){
+                    this.allowedRecipes = allowedRecipes;
                     //Update hashMap value..
-                    hashMap.put("date", date);
+                    hashMap.put("allowedRecipes", allowedRecipes);
                 }
 
-            
             
             
             
@@ -156,105 +209,19 @@ public class Employee extends com.strongloop.android.loopback.User {
         
             
             
-                private String email;
+                private String expiryDate;
                 /* Adding Getter and Setter methods */
-                public String getEmail(){
-                    return email;
+                public String getExpiryDate(){
+                    return expiryDate;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setEmail(String email){
-                    this.email = email;
+                public void setExpiryDate(String expiryDate){
+                    this.expiryDate = expiryDate;
                     //Update hashMap value..
-                    hashMap.put("email", email);
+                    hashMap.put("expiryDate", expiryDate);
                 }
 
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-                private String password;
-                /* Adding Getter and Setter methods */
-                public String getPassword(){
-                    return password;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setPassword(String password){
-                    this.password = password;
-                    //Update hashMap value..
-                    hashMap.put("password", password);
-                }
-
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
             
             
             
@@ -288,41 +255,174 @@ public class Employee extends com.strongloop.android.loopback.User {
 
     //Now adding relations between related models
     
-         
+        
+                
+                    //Define belongsTo relation method here..
+                    private Customer  customer ;
+
+                    public Customer getCustomer() {
+                        return customer;
+                    }
+
+                    public void setCustomer(Customer customer) {
+                        this.customer = customer;
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setCustomer(Map<String, Object> customer) {
+                        //First create a dummy Repo class object for customer.
+                        CustomerRepository customerRepository = new CustomerRepository();
+                        Customer customer1 = customerRepository.createObject(customer);
+                        setCustomer(customer1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setCustomer(HashMap<String, Object> customer) {
+                        //First create a dummy Repo class object for customer.
+                        CustomerRepository customerRepository = new CustomerRepository();
+                        Customer customer1 = customerRepository.createObject(customer);
+                        setCustomer(customer1);
+                    }
+
+                    //Adding relation method..
+                    public void addRelation(Customer customer) {
+                        that.setCustomer(customer);
+                    }
+
+
+
+                
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                    
+
+                                    //Write the method here..
+                                    public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
+                                        //Define methods here..
+                                        final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        chefRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Customer object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                 
+                 
+             
           
     
         
                 
                     //Define belongsTo relation method here..
-                    private EmployeeDetails  employeeDetails ;
+                    private Popularity  popularities ;
 
-                    public EmployeeDetails getEmployeeDetails() {
-                        return employeeDetails;
+                    public Popularity getPopularities() {
+                        return popularities;
                     }
 
-                    public void setEmployeeDetails(EmployeeDetails employeeDetails) {
-                        this.employeeDetails = employeeDetails;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setEmployeeDetails(Map<String, Object> employeeDetails) {
-                        //First create a dummy Repo class object for customer.
-                        EmployeeDetailsRepository employeeDetailsRepository = new EmployeeDetailsRepository();
-                        EmployeeDetails employeeDetails1 = employeeDetailsRepository.createObject(employeeDetails);
-                        setEmployeeDetails(employeeDetails1);
+                    public void setPopularities(Popularity popularities) {
+                        this.popularities = popularities;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setEmployeeDetails(HashMap<String, Object> employeeDetails) {
+                    public void setPopularities(Map<String, Object> popularities) {
                         //First create a dummy Repo class object for customer.
-                        EmployeeDetailsRepository employeeDetailsRepository = new EmployeeDetailsRepository();
-                        EmployeeDetails employeeDetails1 = employeeDetailsRepository.createObject(employeeDetails);
-                        setEmployeeDetails(employeeDetails1);
+                        PopularityRepository popularitiesRepository = new PopularityRepository();
+                        Popularity popularities1 = popularitiesRepository.createObject(popularities);
+                        setPopularities(popularities1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setPopularities(HashMap<String, Object> popularities) {
+                        //First create a dummy Repo class object for customer.
+                        PopularityRepository popularitiesRepository = new PopularityRepository();
+                        Popularity popularities1 = popularitiesRepository.createObject(popularities);
+                        setPopularities(popularities1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(EmployeeDetails employeeDetails) {
-                        that.setEmployeeDetails(employeeDetails);
+                    public void addRelation(Popularity popularities) {
+                        that.setPopularities(popularities);
                     }
 
 
@@ -342,16 +442,12 @@ public class Employee extends com.strongloop.android.loopback.User {
 
                      
                             
-                         
-                            
-                         
-                            
                         
 
                                     //Write the method here..
-                                    public void get__employeeDetails( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<EmployeeDetails> callback) {
+                                    public void get__popularities( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Popularity> callback) {
                                         //Define methods here..
-                                        final EmployeeRepository  employeeRepo = restAdapter.createRepository(EmployeeRepository.class);
+                                        final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
                                         
                                         
@@ -360,13 +456,13 @@ public class Employee extends com.strongloop.android.loopback.User {
 
 
 
-                                        employeeRepo.get__employeeDetails( (String)that.getId(), refresh,  new ObjectCallback<EmployeeDetails> (){
+                                        chefRepo.get__popularities( (String)that.getId(), refresh,  new ObjectCallback<Popularity> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(EmployeeDetails object) {
+                                                    public void onSuccess(Popularity object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -397,9 +493,9 @@ public class Employee extends com.strongloop.android.loopback.User {
                         
 
                                     //Write the method here..
-                                    public void create__employeeDetails( EmployeeDetails data,  RestAdapter restAdapter, final ObjectCallback<EmployeeDetails> callback) {
+                                    public void create__popularities( Popularity data,  RestAdapter restAdapter, final ObjectCallback<Popularity> callback) {
                                         //Define methods here..
-                                        final EmployeeRepository  employeeRepo = restAdapter.createRepository(EmployeeRepository.class);
+                                        final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
                                         
                                         
@@ -408,13 +504,13 @@ public class Employee extends com.strongloop.android.loopback.User {
 
 
 
-                                        employeeRepo.create__employeeDetails( (String)that.getId(), data.convertMap(),  new ObjectCallback<EmployeeDetails> (){
+                                        chefRepo.create__popularities( (String)that.getId(), data.convertMap(),  new ObjectCallback<Popularity> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(EmployeeDetails object) {
+                                                    public void onSuccess(Popularity object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -445,9 +541,9 @@ public class Employee extends com.strongloop.android.loopback.User {
                         
 
                                     //Write the method here..
-                                    public void update__employeeDetails( EmployeeDetails data,  RestAdapter restAdapter, final ObjectCallback<EmployeeDetails> callback) {
+                                    public void update__popularities( Popularity data,  RestAdapter restAdapter, final ObjectCallback<Popularity> callback) {
                                         //Define methods here..
-                                        final EmployeeRepository  employeeRepo = restAdapter.createRepository(EmployeeRepository.class);
+                                        final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
                                         
                                         
@@ -456,13 +552,13 @@ public class Employee extends com.strongloop.android.loopback.User {
 
 
 
-                                        employeeRepo.update__employeeDetails( (String)that.getId(), data.convertMap(),  new ObjectCallback<EmployeeDetails> (){
+                                        chefRepo.update__popularities( (String)that.getId(), data.convertMap(),  new ObjectCallback<Popularity> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(EmployeeDetails object) {
+                                                    public void onSuccess(Popularity object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -493,15 +589,15 @@ public class Employee extends com.strongloop.android.loopback.User {
                         
 
                                     //Write the method here..
-                                    public void destroy__employeeDetails( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroy__popularities( RestAdapter restAdapter, final VoidCallback callback) {
                                         //Define methods here..
-                                        final EmployeeRepository  employeeRepo = restAdapter.createRepository(EmployeeRepository.class);
+                                        final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
                                         
 
 
 
-                                        employeeRepo.destroy__employeeDetails( (String)that.getId(),  new VoidCallback (){
+                                        chefRepo.destroy__popularities( (String)that.getId(),  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -523,14 +619,6 @@ public class Employee extends com.strongloop.android.loopback.User {
                                         });
                                     } //method def ends here.
                                  
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
                             
                         
                         

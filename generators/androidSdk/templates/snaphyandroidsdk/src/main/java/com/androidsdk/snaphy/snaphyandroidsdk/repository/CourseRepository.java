@@ -26,19 +26,26 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Installation;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Course;
 
 //Now import model of related models..
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
+            
+        
+    
 
 
 
 
-public class InstallationRepository extends ModelRepository<Installation> {
+
+public class CourseRepository extends ModelRepository<Course> {
 
 
-    public InstallationRepository(){
-        super("Installation", null, Installation.class);
+    public CourseRepository(){
+        super("Course", null, Course.class);
     }
 
 
@@ -54,7 +61,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/byApp", "GET"), "installation.findByApp");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/customer", "GET"), "Course.prototype.__get__customer");
                 
 
             
@@ -62,7 +69,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/byUser", "GET"), "installation.findByUser");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Course.create");
                 
 
             
@@ -70,7 +77,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/bySubscriptions", "GET"), "installation.findBySubscriptions");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Course.create");
                 
 
             
@@ -78,7 +85,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "installation.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Course.upsert");
                 
 
             
@@ -86,7 +93,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "installation.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Course.exists");
                 
 
             
@@ -94,7 +101,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "installation.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Course.findById");
                 
 
             
@@ -102,7 +109,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "installation.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Course.find");
                 
 
             
@@ -110,7 +117,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "installation.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Course.findOne");
                 
 
             
@@ -118,7 +125,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "installation.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Course.updateAll");
                 
 
             
@@ -126,7 +133,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "installation.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Course.deleteById");
                 
 
             
@@ -134,7 +141,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "installation.updateAll");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Course.count");
                 
 
             
@@ -142,23 +149,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "installation.deleteById");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "installation.count");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:installationId", "PUT"), "installation.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId", "PUT"), "Course.prototype.updateAttributes");
                 
 
             
@@ -168,7 +159,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "installation.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Course.getSchema");
                 
 
             
@@ -176,9 +167,25 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "installation.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Course.getAbsoluteSchema");
                 
 
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -204,18 +211,16 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
     
         
-            //Method findByApp definition
-            public void findByApp(  String deviceType,  String appId,  String appVersion, final Adapter.JsonObjectCallback  callback ){
+            //Method get__customer definition
+            public void get__customer(  String courseId,  Boolean refresh, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("deviceType", deviceType);
+                        hashMapObject.put("courseId", courseId);
                 
-                        hashMapObject.put("appId", appId);
-                
-                        hashMapObject.put("appVersion", appVersion);
+                        hashMapObject.put("refresh", refresh);
                 
 
                 
@@ -223,8 +228,8 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
                     
-                    invokeStaticMethod("findByApp", hashMapObject, new Adapter.JsonObjectCallback() {
                     
+                    invokeStaticMethod("prototype.__get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -234,7 +239,15 @@ public class InstallationRepository extends ModelRepository<Installation> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                callback.onSuccess(response);
+                                if(response != null){
+                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Customer customer = customerRepo.createObject(result);
+                                    callback.onSuccess(customer);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                         }
                     });
@@ -242,93 +255,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
 
-            }//Method findByApp definition ends here..
-
-            
-
-        
-    
-        
-            //Method findByUser definition
-            public void findByUser(  String deviceType,  String userId, final Adapter.JsonObjectCallback  callback ){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("deviceType", deviceType);
-                
-                        hashMapObject.put("userId", userId);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("findByUser", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method findByUser definition ends here..
-
-            
-
-        
-    
-        
-            //Method findBySubscriptions definition
-            public void findBySubscriptions(  String deviceType,  String subscriptions, final Adapter.JsonObjectCallback  callback ){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("deviceType", deviceType);
-                
-                        hashMapObject.put("subscriptions", subscriptions);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("findBySubscriptions", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method findBySubscriptions definition ends here..
+            }//Method get__customer definition ends here..
 
             
 
@@ -336,7 +263,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Installation> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Course> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -362,10 +289,10 @@ public class InstallationRepository extends ModelRepository<Installation> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    InstallationRepository installationRepo = getRestAdapter().createRepository(InstallationRepository.class);
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Installation installation = installationRepo.createObject(result);
-                                    callback.onSuccess(installation);
+                                    Course course = courseRepo.createObject(result);
+                                    callback.onSuccess(course);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -386,7 +313,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Installation> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Course> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -412,10 +339,10 @@ public class InstallationRepository extends ModelRepository<Installation> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    InstallationRepository installationRepo = getRestAdapter().createRepository(InstallationRepository.class);
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Installation installation = installationRepo.createObject(result);
-                                    callback.onSuccess(installation);
+                                    Course course = courseRepo.createObject(result);
+                                    callback.onSuccess(course);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -476,7 +403,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Installation> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Course> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -504,10 +431,10 @@ public class InstallationRepository extends ModelRepository<Installation> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    InstallationRepository installationRepo = getRestAdapter().createRepository(InstallationRepository.class);
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Installation installation = installationRepo.createObject(result);
-                                    callback.onSuccess(installation);
+                                    Course course = courseRepo.createObject(result);
+                                    callback.onSuccess(course);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -527,7 +454,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Installation> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Course> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -554,14 +481,14 @@ public class InstallationRepository extends ModelRepository<Installation> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Installation> installationList = new ArrayList<Installation>();
-                                    InstallationRepository installationRepo = getRestAdapter().createRepository(InstallationRepository.class);
+                                    List<Course> courseList = new ArrayList<Course>();
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Installation installation = installationRepo.createObject(obj);
-                                        installationList.add(installation);
+                                        Course course = courseRepo.createObject(obj);
+                                        courseList.add(course);
                                     }
-                                    callback.onSuccess(installationList);
+                                    callback.onSuccess(courseList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -578,7 +505,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Installation> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Course> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -604,10 +531,10 @@ public class InstallationRepository extends ModelRepository<Installation> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    InstallationRepository installationRepo = getRestAdapter().createRepository(InstallationRepository.class);
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Installation installation = installationRepo.createObject(result);
-                                    callback.onSuccess(installation);
+                                    Course course = courseRepo.createObject(result);
+                                    callback.onSuccess(course);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -752,13 +679,13 @@ public class InstallationRepository extends ModelRepository<Installation> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String installationId,  Map<String,  ? extends Object> data, final ObjectCallback<Installation> callback){
+            public void updateAttributes(  String courseId,  Map<String,  ? extends Object> data, final ObjectCallback<Course> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("installationId", installationId);
+                        hashMapObject.put("courseId", courseId);
                 
                         hashMapObject.putAll(data);
                 
@@ -780,10 +707,10 @@ public class InstallationRepository extends ModelRepository<Installation> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    InstallationRepository installationRepo = getRestAdapter().createRepository(InstallationRepository.class);
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Installation installation = installationRepo.createObject(result);
-                                    callback.onSuccess(installation);
+                                    Course course = courseRepo.createObject(result);
+                                    callback.onSuccess(course);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -879,6 +806,22 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
             
 
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
         

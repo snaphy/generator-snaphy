@@ -26,19 +26,33 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Application;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Comments;
 
 //Now import model of related models..
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Recipe;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeRepository;
+            
+        
+    
 
 
 
 
-public class ApplicationRepository extends ModelRepository<Application> {
+
+public class CommentsRepository extends ModelRepository<Comments> {
 
 
-    public ApplicationRepository(){
-        super("Application", null, Application.class);
+    public CommentsRepository(){
+        super("Comments", null, Comments.class);
     }
 
 
@@ -54,7 +68,8 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "application.create");
+
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/:commentsId/customer", "GET"), "Comments.prototype.__get__customer");
                 
 
             
@@ -62,7 +77,8 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "application.create");
+
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/:commentsId/recipe", "GET"), "Comments.prototype.__get__recipe");
                 
 
             
@@ -70,7 +86,8 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "application.upsert");
+
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/", "POST"), "Comments.create");
                 
 
             
@@ -78,7 +95,8 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "application.exists");
+
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/", "POST"), "Comments.create");
                 
 
             
@@ -86,7 +104,8 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "application.findById");
+
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/", "PUT"), "Comments.upsert");
                 
 
             
@@ -94,7 +113,8 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "application.find");
+
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/:id/exists", "GET"), "Comments.exists");
                 
 
             
@@ -102,7 +122,8 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "application.findOne");
+
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/:id", "GET"), "Comments.findById");
                 
 
             
@@ -110,7 +131,8 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "application.updateAll");
+
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/", "GET"), "Comments.find");
                 
 
             
@@ -118,7 +140,8 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "application.deleteById");
+
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/findOne", "GET"), "Comments.findOne");
                 
 
             
@@ -126,7 +149,8 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "application.count");
+
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/update", "POST"), "Comments.updateAll");
                 
 
             
@@ -134,7 +158,26 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:applicationId", "PUT"), "application.prototype.updateAttributes");
+
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/:id", "DELETE"), "Comments.deleteById");
+                
+
+            
+        
+            
+
+                
+
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/count", "GET"), "Comments.count");
+                
+
+            
+        
+            
+
+                
+
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/:commentsId", "PUT"), "Comments.prototype.updateAttributes");
                 
 
             
@@ -144,7 +187,8 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "application.getSchema");
+
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/getSchema", "POST"), "Comments.getSchema");
                 
 
             
@@ -152,9 +196,42 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "application.getAbsoluteSchema");
+
+                    contract.addItem(new RestContractItem("/" + "Comments"  + "/getAbsoluteSchema", "POST"), "Comments.getAbsoluteSchema");
                 
 
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -166,8 +243,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
     //override getNameForRestUrlMethod
     public String  getNameForRestUrl() {
         
-            //call super method instead..
-            return super.getNameForRestUrl();
+            return "Comments";
         
     }
 
@@ -180,8 +256,110 @@ public class ApplicationRepository extends ModelRepository<Application> {
 
     
         
+            //Method get__customer definition
+            public void get__customer(  String commentsId,  Boolean refresh, final ObjectCallback<Customer> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("commentsId", commentsId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Customer customer = customerRepo.createObject(result);
+                                    callback.onSuccess(customer);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method get__customer definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__recipe definition
+            public void get__recipe(  String commentsId,  Boolean refresh, final ObjectCallback<Recipe> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("commentsId", commentsId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__recipe", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Recipe recipe = recipeRepo.createObject(result);
+                                    callback.onSuccess(recipe);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method get__recipe definition ends here..
+
+            
+
+        
+    
+        
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Application> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Comments> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -207,10 +385,10 @@ public class ApplicationRepository extends ModelRepository<Application> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
+                                    CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Application application = applicationRepo.createObject(result);
-                                    callback.onSuccess(application);
+                                    Comments comments = commentsRepo.createObject(result);
+                                    callback.onSuccess(comments);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -231,7 +409,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Application> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Comments> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -257,10 +435,10 @@ public class ApplicationRepository extends ModelRepository<Application> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
+                                    CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Application application = applicationRepo.createObject(result);
-                                    callback.onSuccess(application);
+                                    Comments comments = commentsRepo.createObject(result);
+                                    callback.onSuccess(comments);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -321,7 +499,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Application> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Comments> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -349,10 +527,10 @@ public class ApplicationRepository extends ModelRepository<Application> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
+                                    CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Application application = applicationRepo.createObject(result);
-                                    callback.onSuccess(application);
+                                    Comments comments = commentsRepo.createObject(result);
+                                    callback.onSuccess(comments);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -372,7 +550,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Application> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Comments> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -399,14 +577,14 @@ public class ApplicationRepository extends ModelRepository<Application> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Application> applicationList = new ArrayList<Application>();
-                                    ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
+                                    List<Comments> commentsList = new ArrayList<Comments>();
+                                    CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Application application = applicationRepo.createObject(obj);
-                                        applicationList.add(application);
+                                        Comments comments = commentsRepo.createObject(obj);
+                                        commentsList.add(comments);
                                     }
-                                    callback.onSuccess(applicationList);
+                                    callback.onSuccess(commentsList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -423,7 +601,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Application> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Comments> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -449,10 +627,10 @@ public class ApplicationRepository extends ModelRepository<Application> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
+                                    CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Application application = applicationRepo.createObject(result);
-                                    callback.onSuccess(application);
+                                    Comments comments = commentsRepo.createObject(result);
+                                    callback.onSuccess(comments);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -597,13 +775,13 @@ public class ApplicationRepository extends ModelRepository<Application> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String applicationId,  Map<String,  ? extends Object> data, final ObjectCallback<Application> callback){
+            public void updateAttributes(  String commentsId,  Map<String,  ? extends Object> data, final ObjectCallback<Comments> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("applicationId", applicationId);
+                        hashMapObject.put("commentsId", commentsId);
                 
                         hashMapObject.putAll(data);
                 
@@ -625,10 +803,10 @@ public class ApplicationRepository extends ModelRepository<Application> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
+                                    CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Application application = applicationRepo.createObject(result);
-                                    callback.onSuccess(application);
+                                    Comments comments = commentsRepo.createObject(result);
+                                    callback.onSuccess(comments);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -724,6 +902,38 @@ public class ApplicationRepository extends ModelRepository<Application> {
 
             
 
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
         

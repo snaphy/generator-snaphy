@@ -26,13 +26,20 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.EmployeeDetails;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Chef;
 
 //Now import model of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Employee;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Popularity;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PopularityRepository;
             
         
     
@@ -41,11 +48,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.EmployeeDetails;
 
 
 
-public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> {
+public class ChefRepository extends ModelRepository<Chef> {
 
 
-    public EmployeeDetailsRepository(){
-        super("EmployeeDetails", null, EmployeeDetails.class);
+    public ChefRepository(){
+        super("Chef", null, Chef.class);
     }
 
 
@@ -61,8 +68,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:employeeDetailsId/employee", "GET"), "EmployeeDetails.prototype.__get__employee");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/customer", "GET"), "Chef.prototype.__get__customer");
                 
 
             
@@ -70,8 +76,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/", "POST"), "EmployeeDetails.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/popularities", "GET"), "Chef.prototype.__get__popularities");
                 
 
             
@@ -79,8 +84,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/", "POST"), "EmployeeDetails.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/popularities", "POST"), "Chef.prototype.__create__popularities");
                 
 
             
@@ -88,8 +92,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/", "PUT"), "EmployeeDetails.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/popularities", "PUT"), "Chef.prototype.__update__popularities");
                 
 
             
@@ -97,8 +100,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:id/exists", "GET"), "EmployeeDetails.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/popularities", "DELETE"), "Chef.prototype.__destroy__popularities");
                 
 
             
@@ -106,8 +108,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:id", "GET"), "EmployeeDetails.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Chef.create");
                 
 
             
@@ -115,8 +116,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/", "GET"), "EmployeeDetails.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Chef.create");
                 
 
             
@@ -124,8 +124,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/findOne", "GET"), "EmployeeDetails.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Chef.upsert");
                 
 
             
@@ -133,8 +132,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/update", "POST"), "EmployeeDetails.updateAll");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Chef.exists");
                 
 
             
@@ -142,8 +140,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:id", "DELETE"), "EmployeeDetails.deleteById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Chef.findById");
                 
 
             
@@ -151,8 +148,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/count", "GET"), "EmployeeDetails.count");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Chef.find");
                 
 
             
@@ -160,8 +156,39 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Chef.findOne");
+                
 
-                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/:employeeDetailsId", "PUT"), "EmployeeDetails.prototype.updateAttributes");
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Chef.updateAll");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Chef.deleteById");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Chef.count");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId", "PUT"), "Chef.prototype.updateAttributes");
                 
 
             
@@ -171,8 +198,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/getSchema", "POST"), "EmployeeDetails.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Chef.getSchema");
                 
 
             
@@ -180,10 +206,11 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
             
 
                 
-
-                    contract.addItem(new RestContractItem("/" + "EmployeeDetails"  + "/getAbsoluteSchema", "POST"), "EmployeeDetails.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Chef.getAbsoluteSchema");
                 
 
+            
+        
             
         
             
@@ -205,7 +232,8 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
     //override getNameForRestUrlMethod
     public String  getNameForRestUrl() {
         
-            return "EmployeeDetails";
+            //call super method instead..
+            return super.getNameForRestUrl();
         
     }
 
@@ -218,14 +246,14 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
 
     
         
-            //Method get__employee definition
-            public void get__employee(  String employeeDetailsId,  Boolean refresh, final ObjectCallback<Employee> callback){
+            //Method get__customer definition
+            public void get__customer(  String chefId,  Boolean refresh, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeDetailsId", employeeDetailsId);
+                        hashMapObject.put("chefId", chefId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -236,7 +264,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__employee", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -247,10 +275,10 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    Customer customer = customerRepo.createObject(result);
+                                    callback.onSuccess(customer);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -262,7 +290,196 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
 
                 
 
-            }//Method get__employee definition ends here..
+            }//Method get__customer definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__popularities definition
+            public void get__popularities(  String chefId,  Boolean refresh, final ObjectCallback<Popularity> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("chefId", chefId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__popularities", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    PopularityRepository popularityRepo = getRestAdapter().createRepository(PopularityRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Popularity popularity = popularityRepo.createObject(result);
+                                    callback.onSuccess(popularity);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method get__popularities definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__popularities definition
+            public void create__popularities(  String chefId,  Map<String,  ? extends Object> data, final ObjectCallback<Popularity> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("chefId", chefId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__popularities", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    PopularityRepository popularityRepo = getRestAdapter().createRepository(PopularityRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Popularity popularity = popularityRepo.createObject(result);
+                                    callback.onSuccess(popularity);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method create__popularities definition ends here..
+
+            
+
+        
+    
+        
+            //Method update__popularities definition
+            public void update__popularities(  String chefId,  Map<String,  ? extends Object> data, final ObjectCallback<Popularity> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("chefId", chefId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__update__popularities", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    PopularityRepository popularityRepo = getRestAdapter().createRepository(PopularityRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Popularity popularity = popularityRepo.createObject(result);
+                                    callback.onSuccess(popularity);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method update__popularities definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroy__popularities definition
+            public void destroy__popularities(  String chefId, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("chefId", chefId);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroy__popularities", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroy__popularities definition ends here..
 
             
 
@@ -270,7 +487,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<EmployeeDetails> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Chef> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -296,10 +513,10 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                    callback.onSuccess(employeeDetails);
+                                    Chef chef = chefRepo.createObject(result);
+                                    callback.onSuccess(chef);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -320,7 +537,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<EmployeeDetails> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Chef> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -346,10 +563,10 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                    callback.onSuccess(employeeDetails);
+                                    Chef chef = chefRepo.createObject(result);
+                                    callback.onSuccess(chef);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -410,7 +627,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<EmployeeDetails> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Chef> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -438,10 +655,10 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                    callback.onSuccess(employeeDetails);
+                                    Chef chef = chefRepo.createObject(result);
+                                    callback.onSuccess(chef);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -461,7 +678,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<EmployeeDetails> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Chef> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -488,14 +705,14 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<EmployeeDetails> employeeDetailsList = new ArrayList<EmployeeDetails>();
-                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    List<Chef> chefList = new ArrayList<Chef>();
+                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(obj);
-                                        employeeDetailsList.add(employeeDetails);
+                                        Chef chef = chefRepo.createObject(obj);
+                                        chefList.add(chef);
                                     }
-                                    callback.onSuccess(employeeDetailsList);
+                                    callback.onSuccess(chefList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -512,7 +729,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<EmployeeDetails> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Chef> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -538,10 +755,10 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                    callback.onSuccess(employeeDetails);
+                                    Chef chef = chefRepo.createObject(result);
+                                    callback.onSuccess(chef);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -686,13 +903,13 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String employeeDetailsId,  Map<String,  ? extends Object> data, final ObjectCallback<EmployeeDetails> callback){
+            public void updateAttributes(  String chefId,  Map<String,  ? extends Object> data, final ObjectCallback<Chef> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeDetailsId", employeeDetailsId);
+                        hashMapObject.put("chefId", chefId);
                 
                         hashMapObject.putAll(data);
                 
@@ -714,10 +931,10 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                    callback.onSuccess(employeeDetails);
+                                    Chef chef = chefRepo.createObject(result);
+                                    callback.onSuccess(chef);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -813,6 +1030,8 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
 
             
 
+        
+    
         
     
         

@@ -18,12 +18,12 @@ import com.strongloop.android.loopback.callbacks.VoidCallback;
 import com.strongloop.android.remoting.adapters.Adapter;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.EventTypeRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.CuisinesRepository;
 
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.TrackRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeRepository;
             
 
         
@@ -36,7 +36,7 @@ import java.util.Map;
 
 
 
-public class EventType extends Model {
+public class Cuisines extends Model {
 
 
     //For converting all model values to hashMap
@@ -51,9 +51,9 @@ public class EventType extends Model {
         }
     }
 
-    private EventType that ;
+    private Cuisines that ;
 
-    public EventType (){
+    public Cuisines (){
         that = this;
     }
 
@@ -86,6 +86,29 @@ public class EventType extends Model {
             
             
             
+                private Map<String, Object> recipes_;
+                /* Adding Getter and Setter methods */
+                public Map<String, Object> getRecipes_(){
+                    return recipes_;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setRecipes_(Map<String, Object> recipes_){
+                    this.recipes_ = recipes_;
+                    //Update Map value..
+                    hashMap.put("recipes_", recipes_);
+                }
+
+            
+            
+
+        
+    
+        
+            
+            
+            
+            
             
 
         
@@ -101,18 +124,20 @@ public class EventType extends Model {
         
                 
                 
-                    
-                    //Define hasMany relation method here..
-                    private List<Track>  tracks ;
+                
+                    //TODO ADD BACKWARD COMPATIBILITY FOR hasManyThrough relationship..warning backward compatibility may leads to cyclic error..
+                    //Define belongsTo relation method here..
+                    private List<Recipe>  recipes ;
 
-                    public List<Track> getTracks() {
-                        return tracks;
+                    public List<Recipe> getRecipes() {
+                        return recipes;
                     }
 
-                    public void setTracks(List<Track> tracks) {
+
+                    public void setRecipes(List<Recipe> recipes) {
                         boolean hashType = false;
                         List<HashMap<String, Object>> hashMaps = new ArrayList<>();
-                        for(Object o: tracks){
+                        for(Object o: recipes){
                             if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
@@ -125,70 +150,63 @@ public class EventType extends Model {
                         }
 
                         if(hashType){
-                            setTracks1(hashMaps);
+                            setRecipes1(hashMaps);
                         }else{
-                            this.tracks = tracks;
+                            this.recipes = recipes;
                         }
                     }
 
-                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setTracks1(List<Map<String, Object>> tracks) {
+                    /*
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setRecipes1(List<Map<String, Object>> recipes) {
                         //First create a dummy Repo class object for ..
-                        TrackRepository tracksRepository = new TrackRepository();
-                        List<Track> result = new ArrayList<>();
-                        for (Map<String, Object> obj : tracks) {
+                        RecipeRepository recipesRepository = new RecipeRepository();
+                        List<Recipe> result = new ArrayList<>();
+                        for (Map<String, Object> obj : recipes) {
                             //Also add relation to child type for two way communication..
-                            Track obj1 = tracksRepository.createObject(obj);
+                            Recipe obj1 = recipesRepository.createObject(obj);
                             result.add(obj1);
-
                         }
-                        setTracks(result);
-
+                        setRecipes(result);
                     }
 
-                */
+                    */
 
-                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setTracks1(List<HashMap<String, Object>> tracks) {
+                    //Adding related model automatically in case of include statement from server..
+                    public void setRecipes1(List<HashMap<String, Object>> recipes) {
                         //First create a dummy Repo class object for ..
-                        TrackRepository tracksRepository = new TrackRepository();
-                        List<Track> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : tracks) {
+                        RecipeRepository recipesRepository = new RecipeRepository();
+                        List<Recipe> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : recipes) {
                             //Also add relation to child type for two way communication..
-                            Track obj1 = tracksRepository.createObject(obj);
+                            Recipe obj1 = recipesRepository.createObject(obj);
                             result.add(obj1);
-
                         }
-                        setTracks(result);
-
+                        setRecipes(result);
                     }
 
 
                     //Adding relation method..
-                    //Add a dummy class Name object to seperate data..
-                    public void addRelation(List<Track> tracks, Track dummyClassInstance) {
-                        that.setTracks(tracks);
-
+                    public void addRelation(List<Recipe> recipes, Recipe dummyClassInstance) {
+                        that.setRecipes(recipes);
                     }
+
 
                     //Adding relation method..
                     //This will add a new data to the list relation object..
-                    public void addRelation(Track tracks) {
+                    public void addRelation(Recipe recipes) {
                         try{
-                            that.getTracks().add(tracks);
+                            that.getRecipes().add(recipes);
                         }catch(Exception e){
-                            List< Track> tracks1 = new ArrayList();
+                            List< Recipe> recipes1 = new ArrayList();
                             //Now add this item to list..
-                            tracks1.add(tracks);
+                            recipes1.add(recipes);
                             //Now set data....
-                            that.setTracks(tracks1);
+                            that.setRecipes(recipes1);
                         }
                     }
 
-                    
-
-
-                
                 
 
 
@@ -203,9 +221,9 @@ public class EventType extends Model {
                     
 
                                     //Write the method here..
-                                    public void findById__tracks( String fk,  RestAdapter restAdapter, final ObjectCallback<Track> callback) {
+                                    public void findById__recipes( String fk,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
                                         //Define methods here..
-                                        final EventTypeRepository  eventTypeRepo = restAdapter.createRepository(EventTypeRepository.class);
+                                        final CuisinesRepository  cuisinesRepo = restAdapter.createRepository(CuisinesRepository.class);
                                         
                                         
                                         
@@ -214,13 +232,13 @@ public class EventType extends Model {
 
 
 
-                                        eventTypeRepo.findById__tracks( (String)that.getId(), fk,  new ObjectCallback<Track> (){
+                                        cuisinesRepo.findById__recipes( (String)that.getId(), fk,  new ObjectCallback<Recipe> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Track object) {
+                                                    public void onSuccess(Recipe object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -251,9 +269,9 @@ public class EventType extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__tracks( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__recipes( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
                                         //Define methods here..
-                                        final EventTypeRepository  eventTypeRepo = restAdapter.createRepository(EventTypeRepository.class);
+                                        final CuisinesRepository  cuisinesRepo = restAdapter.createRepository(CuisinesRepository.class);
                                         
                                         
                                         
@@ -262,7 +280,7 @@ public class EventType extends Model {
 
 
 
-                                        eventTypeRepo.destroyById__tracks( (String)that.getId(), fk,  new VoidCallback (){
+                                        cuisinesRepo.destroyById__recipes( (String)that.getId(), fk,  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -288,9 +306,9 @@ public class EventType extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__tracks( String fk,  Track data,  RestAdapter restAdapter, final ObjectCallback<Track> callback) {
+                                    public void updateById__recipes( String fk,  Recipe data,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
                                         //Define methods here..
-                                        final EventTypeRepository  eventTypeRepo = restAdapter.createRepository(EventTypeRepository.class);
+                                        final CuisinesRepository  cuisinesRepo = restAdapter.createRepository(CuisinesRepository.class);
                                         
                                         
                                         
@@ -302,13 +320,13 @@ public class EventType extends Model {
 
 
 
-                                        eventTypeRepo.updateById__tracks( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Track> (){
+                                        cuisinesRepo.updateById__recipes( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Track object) {
+                                                    public void onSuccess(Recipe object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -339,9 +357,12 @@ public class EventType extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__tracks( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Track> callback) {
+                                    public void link__recipes( String fk,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
                                         //Define methods here..
-                                        final EventTypeRepository  eventTypeRepo = restAdapter.createRepository(EventTypeRepository.class);
+                                        final CuisinesRepository  cuisinesRepo = restAdapter.createRepository(CuisinesRepository.class);
+                                        
+                                        
+                                        
                                         
                                         
                                         
@@ -350,7 +371,131 @@ public class EventType extends Model {
 
 
 
-                                        eventTypeRepo.get__tracks( (String)that.getId(), filter,  new ListCallback<Track> (){
+                                        cuisinesRepo.link__recipes( (String)that.getId(), fk,  new ObjectCallback<Recipe> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Recipe object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void unlink__recipes( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Define methods here..
+                                        final CuisinesRepository  cuisinesRepo = restAdapter.createRepository(CuisinesRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        cuisinesRepo.unlink__recipes( (String)that.getId(), fk,  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void exists__recipes( String fk,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                        //Define methods here..
+                                        final CuisinesRepository  cuisinesRepo = restAdapter.createRepository(CuisinesRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        cuisinesRepo.exists__recipes( (String)that.getId(), fk,  new Adapter.JsonObjectCallback(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__recipes( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Recipe> callback) {
+                                        //Define methods here..
+                                        final CuisinesRepository  cuisinesRepo = restAdapter.createRepository(CuisinesRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        cuisinesRepo.get__recipes( (String)that.getId(), filter,  new ListCallback<Recipe> (){
                                             
 
                                             
@@ -359,13 +504,13 @@ public class EventType extends Model {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<Track> object) {
+                                                    public void onSuccess(List<Recipe> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
-                                                            Track obj = new Track();
+                                                            Recipe obj = new Recipe();
                                                             addRelation(object, obj);
                                                             //Disabling two way communication for cyclic error..
-                                                            /*for (Track obj : object) {
+                                                            /*for (Recipe obj : object) {
                                                                 //Also add relation to child type for two way communication..
                                                                 obj.addRelation(that);
                                                             }*/
@@ -392,9 +537,9 @@ public class EventType extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__tracks( Track data,  RestAdapter restAdapter, final ObjectCallback<Track> callback) {
+                                    public void create__recipes( Recipe data,  RestAdapter restAdapter, final ObjectCallback<Recipe> callback) {
                                         //Define methods here..
-                                        final EventTypeRepository  eventTypeRepo = restAdapter.createRepository(EventTypeRepository.class);
+                                        final CuisinesRepository  cuisinesRepo = restAdapter.createRepository(CuisinesRepository.class);
                                         
                                         
                                         
@@ -403,13 +548,13 @@ public class EventType extends Model {
 
 
 
-                                        eventTypeRepo.create__tracks( (String)that.getId(), data.convertMap(),  new ObjectCallback<Track> (){
+                                        cuisinesRepo.create__recipes( (String)that.getId(), data.convertMap(),  new ObjectCallback<Recipe> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Track object) {
+                                                    public void onSuccess(Recipe object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -440,15 +585,15 @@ public class EventType extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__tracks( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__recipes( RestAdapter restAdapter, final VoidCallback callback) {
                                         //Define methods here..
-                                        final EventTypeRepository  eventTypeRepo = restAdapter.createRepository(EventTypeRepository.class);
+                                        final CuisinesRepository  cuisinesRepo = restAdapter.createRepository(CuisinesRepository.class);
                                         
                                         
 
 
 
-                                        eventTypeRepo.delete__tracks( (String)that.getId(),  new VoidCallback (){
+                                        cuisinesRepo.delete__recipes( (String)that.getId(),  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -474,9 +619,9 @@ public class EventType extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__tracks( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__recipes( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
                                         //Define methods here..
-                                        final EventTypeRepository  eventTypeRepo = restAdapter.createRepository(EventTypeRepository.class);
+                                        final CuisinesRepository  cuisinesRepo = restAdapter.createRepository(CuisinesRepository.class);
                                         
                                         
                                         
@@ -485,7 +630,7 @@ public class EventType extends Model {
 
 
 
-                                        eventTypeRepo.count__tracks( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        cuisinesRepo.count__recipes( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
                                             
 
                                             
@@ -527,14 +672,26 @@ public class EventType extends Model {
                         
                         
                         
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                     
 
                 
 
-                
-                    //Define hasMany, hasManyThrough method here..
-
                  
+                
+                    //Define hasAndBelongsToMany..
+
                  
              
           
