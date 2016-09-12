@@ -896,7 +896,7 @@ public class <%- modelName %> extends Model {
 
                                             <% if(callbackType === "ObjectCallback"){ %>
                                                 @Override
-                                                <% if(callback !== "Adapter.JsonObjectCallback" ) { %>
+                                                <% if(callback !== "ObjectCallback<JSONObject>" ) { %>
                                                     public void onSuccess(<%- returnType %> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
@@ -925,7 +925,7 @@ public class <%- modelName %> extends Model {
 
                                             <% if(callbackType === "DataListCallback"){ %>
                                                 @Override
-                                                <% if( callback !== "Adapter.JsonArrayCallback" ) {%>
+                                                <% if( callback !== "ObjectCallback<JSONArray>" ) {%>
                                                     public void onSuccess(<%- returnType %> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
