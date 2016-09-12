@@ -166,7 +166,8 @@ import java.util.HashMap;
 
 
 <% if(model.base === "User" || modelName === "User"){ %>
-import com.strongloop.android.loopback.UserRepository;
+//Replaced by Custom  Repo methods
+// import com.strongloop.android.loopback.UserRepository;
 import com.strongloop.android.loopback.AccessTokenRepository;
 import com.strongloop.android.loopback.AccessToken;
 import android.content.SharedPreferences;
@@ -174,7 +175,8 @@ import android.util.Log;
 import org.json.JSONException;
 import android.content.Context;
 <% } else { %>
-import com.strongloop.android.loopback.ModelRepository;
+//Replaced by Custom ModelRepository method
+//import com.strongloop.android.loopback.ModelRepository;
 <% } %>
 
 

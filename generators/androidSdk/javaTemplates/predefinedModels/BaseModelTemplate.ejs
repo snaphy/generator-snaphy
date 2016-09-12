@@ -48,7 +48,7 @@ public class Model extends VirtualObject {
         return id;
     }
 
-    /* package private */ void setId(Object id) {
+    public void setId(Object id) {
         this.id = id;
     }
 
