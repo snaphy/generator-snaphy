@@ -131,12 +131,18 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
     var modelName = capitalizeFirstLetter(model.name);
 %>
 
-<% if(model.base === "User" || modelName === "User"){ %>
+
+
+<% 
+/*
+if(model.base === "User" || modelName === "User"){ %>
 import com.strongloop.android.loopback.User;
 <% } else { %>
-import com.strongloop.android.loopback.Model;
-<% } %>
-
+   
+   import com.strongloop.android.loopback.Model;
+<% } 
+*/
+%>
 
 import org.json.JSONObject;
 import org.json.JSONArray;
@@ -177,7 +183,7 @@ import java.util.Map;
 
 
 <% if(model.base === "User" || modelName === "User"){ %>
-public class <%- modelName %> extends com.strongloop.android.loopback.User {
+public class <%- modelName %> extends User {
 <% } else { %>
 public class <%- modelName %> extends Model {
 <% } %>
@@ -329,30 +335,32 @@ public class <%- modelName %> extends Model {
 
 
     <%# //Adding a BELONGS TO RELATIONSHIP EXAMPLE
-    private Customer customer ;
+        private Customer customer ;
 
-    public Customer getCustomer() {
-        return customer;
-    }
+        public Customer getCustomer() {
+            return customer;
+        }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-
-
-    public void setCustomer(HashMap<String, Object> customer) {
-        //First create a dummy Repo class object for customer.
-        CustomerRepository customerRepository = new CustomerRepository();
-        Customer customer1 = customerRepository.createObject(customer);
-        addRelation(Customer customer);
-        setCustomer(customer1);
-    }
+        public void setCustomer(Customer customer) {
+            this.customer = customer;
+        }
 
 
-    public void addRelation(Customer customer) {
-        this.setCustomer(customer);
-    }%>
+
+        public void setCustomer(HashMap<String, Object> customer) {
+            //First create a dummy Repo class object for customer.
+            CustomerRepository customerRepository = new CustomerRepository();
+            Customer customer1 = customerRepository.createObject(customer);
+            addRelation(Customer customer);
+            setCustomer(customer1);
+        }
+
+
+        public void addRelation(Customer customer) {
+            this.setCustomer(customer);
+        }
+        //Example ends
+    %>
 
 
 

@@ -61,6 +61,7 @@ var generateModels = function(app, modelsRestDefinition){
     //Now compile the ejs template..
     var ModelTemplatePath      = path.join(__dirname, constants.javaTemplates, "ModelTemplate.ejs");
     var AndroidModelPath       = path.join(__dirname, constants.androidMainPath, "models");
+    
     var AndroidRepositoryPath  = path.join(__dirname, constants.androidMainPath, "repository");
 
     //Clean model folder and add new dir.
@@ -96,6 +97,39 @@ var generateModels = function(app, modelsRestDefinition){
     }
 };
 
+
+
+var generateDataList = function(app, modelsRestDefinition){
+    //Compile the EJS template..
+    var ListTemplatePath        = path.join(__dirname, constants.javaTemplates, "DataListTemplate.ejs");
+    var ListenTemplatePath      = path.join(__dirname, constants.javaTemplates, "ListenTemplate.ejs");
+    //List path for adding list and subscribers..
+    var AndroidListPath       = path.join(__dirname, constants.androidMainPath, "list");
+    //Clean model folder and add new dir.
+    rimraf.sync(AndroidListPath);
+    mkdirp.sync(AndroidListPath);
+    //Now write DataList.java to the file..
+    compileAndWrite({}, ListTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("DataList") +".java");
+    //Add the listen template..
+    compileAndWrite({}, ListenTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("Listen") +".java");
+
+};
+
+
+
+var generateCustomModel = function(app, modelsRestDefinition){
+    //Compile the EJS template..
+    var BaseModelTemplatePath = path.join(__dirname, constants.javaTemplates, "predefinedModels", "BaseModelTemplate.ejs");
+    //List path for adding list and subscribers..
+    var AndroidBaseModelPath       = path.join(__dirname, constants.androidMainPath, "models");
+    //Create folder if not present..
+    mkdirp.sync(AndroidBaseModelPath);
+    //Now write Model.java to the file..
+    compileAndWrite({}, BaseModelTemplatePath, AndroidBaseModelPath, helper.capitalizeFirstLetter("Model") +".java");
+};
+
+
+
 //Compile the EJS templates and write to destination..
 var compileAndWrite(model, templatePath, destinationFolder, fileName){
     //Now compile each models and start writing it to the models directory..
@@ -130,6 +164,9 @@ var init  = function(){
     //Now generate the models..
     generateModels(app, modelsRestDefinition);
     generateRepository(app, modelsRestDefinition);
+    generateDataList(app, modelsRestDefinition);
+    //Creating custom loopback models base java class..Model.java
+    generateCustomModel(app, modelsRestDefinition);
 
 };
 
