@@ -25,12 +25,12 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeDetailsRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.PopularityRepository;
 
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChefRepository;
             
 
         
@@ -43,7 +43,7 @@ import java.util.Map;
 
 
 
-public class EmployeeDetails extends Model {
+public class Popularity extends Model {
 
 
     //For converting all model values to hashMap
@@ -58,9 +58,9 @@ public class EmployeeDetails extends Model {
         }
     }
 
-    private EmployeeDetails that ;
+    private Popularity that ;
 
-    public EmployeeDetails (){
+    public Popularity (){
         that = this;
     }
 
@@ -68,20 +68,20 @@ public class EmployeeDetails extends Model {
         
             
             
-                private String address;
-                /* Adding Getter and Setter methods */
-                public String getAddress(){
-                    return address;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setAddress(String address){
-                    this.address = address;
-                    //Update hashMap value..
-                    hashMap.put("address", address);
-                }
-
             
+                private double popularity;
+                /* Adding Getter and Setter methods */
+                public double getPopularity(){
+                    return popularity;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setPopularity(double popularity){
+                    this.popularity = popularity;
+                    //Update hashMap value..
+                    hashMap.put("popularity", popularity);
+                }
+
             
             
             
@@ -90,20 +90,6 @@ public class EmployeeDetails extends Model {
     
         
             
-            
-                private String contactNumber;
-                /* Adding Getter and Setter methods */
-                public String getContactNumber(){
-                    return contactNumber;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setContactNumber(String contactNumber){
-                    this.contactNumber = contactNumber;
-                    //Update hashMap value..
-                    hashMap.put("contactNumber", contactNumber);
-                }
-
             
             
             
@@ -140,35 +126,35 @@ public class EmployeeDetails extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient Employee  employee ;
+                    private transient Chef  chefs ;
 
-                    public Employee getEmployee() {
-                        return employee;
+                    public Chef getChefs() {
+                        return chefs;
                     }
 
-                    public void setEmployee(Employee employee) {
-                        this.employee = employee;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setEmployee(Map<String, Object> employee) {
-                        //First create a dummy Repo class object for customer.
-                        EmployeeRepository employeeRepository = new EmployeeRepository();
-                        Employee employee1 = employeeRepository.createObject(employee);
-                        setEmployee(employee1);
+                    public void setChefs(Chef chefs) {
+                        this.chefs = chefs;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setEmployee(HashMap<String, Object> employee) {
+                    public void setChefs(Map<String, Object> chefs) {
                         //First create a dummy Repo class object for customer.
-                        EmployeeRepository employeeRepository = new EmployeeRepository();
-                        Employee employee1 = employeeRepository.createObject(employee);
-                        setEmployee(employee1);
+                        ChefRepository chefsRepository = new ChefRepository();
+                        Chef chefs1 = chefsRepository.createObject(chefs);
+                        setChefs(chefs1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setChefs(HashMap<String, Object> chefs) {
+                        //First create a dummy Repo class object for customer.
+                        ChefRepository chefsRepository = new ChefRepository();
+                        Chef chefs1 = chefsRepository.createObject(chefs);
+                        setChefs(chefs1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Employee employee) {
-                        that.setEmployee(employee);
+                    public void addRelation(Chef chefs) {
+                        that.setChefs(chefs);
                     }
 
 
@@ -189,12 +175,12 @@ public class EmployeeDetails extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__employee( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Employee> callback) {
+                                    public void get__chefs( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Chef> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final EmployeeDetailsRepository  employeeDetailsRepo = restAdapter.createRepository(EmployeeDetailsRepository.class);
+                                        final PopularityRepository  popularityRepo = restAdapter.createRepository(PopularityRepository.class);
                                         
                                         
                                         
@@ -203,13 +189,13 @@ public class EmployeeDetails extends Model {
 
 
 
-                                        employeeDetailsRepo.get__employee( (String)that.getId(), refresh,  new ObjectCallback<Employee> (){
+                                        popularityRepo.get__chefs( (String)that.getId(), refresh,  new ObjectCallback<Chef> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Employee object) {
+                                                    public void onSuccess(Chef object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);

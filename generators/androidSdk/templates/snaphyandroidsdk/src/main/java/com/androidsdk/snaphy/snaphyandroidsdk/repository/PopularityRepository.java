@@ -3,9 +3,17 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 import com.google.common.collect.ImmutableMap;
+/*
+Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
+*/
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+
 import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
@@ -26,19 +34,26 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Notification;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Popularity;
 
 //Now import model of related models..
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Chef;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChefRepository;
+            
+        
+    
 
 
 
 
-public class NotificationRepository extends ModelRepository<Notification> {
+
+public class PopularityRepository extends ModelRepository<Popularity> {
 
 
-    public NotificationRepository(){
-        super("Notification", null, Notification.class);
+    public PopularityRepository(){
+        super("Popularity", null, Popularity.class);
     }
 
 
@@ -54,7 +69,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "notification.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:popularityId/chefs", "GET"), "Popularity.prototype.__get__chefs");
                 
 
             
@@ -62,7 +77,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "notification.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Popularity.create");
                 
 
             
@@ -70,7 +85,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "notification.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Popularity.create");
                 
 
             
@@ -78,7 +93,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "notification.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Popularity.upsert");
                 
 
             
@@ -86,7 +101,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "notification.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Popularity.exists");
                 
 
             
@@ -94,7 +109,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "notification.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Popularity.findById");
                 
 
             
@@ -102,7 +117,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "notification.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Popularity.find");
                 
 
             
@@ -110,7 +125,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "notification.updateAll");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Popularity.findOne");
                 
 
             
@@ -118,7 +133,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "notification.deleteById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Popularity.updateAll");
                 
 
             
@@ -126,7 +141,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "notification.count");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Popularity.deleteById");
                 
 
             
@@ -134,7 +149,15 @@ public class NotificationRepository extends ModelRepository<Notification> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:notificationId", "PUT"), "notification.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Popularity.count");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:popularityId", "PUT"), "Popularity.prototype.updateAttributes");
                 
 
             
@@ -144,7 +167,7 @@ public class NotificationRepository extends ModelRepository<Notification> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "notification.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Popularity.getSchema");
                 
 
             
@@ -152,9 +175,19 @@ public class NotificationRepository extends ModelRepository<Notification> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "notification.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Popularity.getAbsoluteSchema");
                 
 
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -180,8 +213,75 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
     
         
+            //Method get__chefs definition
+            public void get__chefs(  String popularityId,  Boolean refresh, final ObjectCallback<Chef> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("popularityId", popularityId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__chefs", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Chef chef = chefRepo.createObject(result);
+                                    callback.onSuccess(chef);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__chefs definition ends here..
+
+            
+
+        
+    
+        
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Notification> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Popularity> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -201,21 +301,25 @@ public class NotificationRepository extends ModelRepository<Notification> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
+                                    PopularityRepository popularityRepo = getRestAdapter().createRepository(PopularityRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Notification notification = notificationRepo.createObject(result);
-                                    callback.onSuccess(notification);
+                                    Popularity popularity = popularityRepo.createObject(result);
+                                    callback.onSuccess(popularity);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -231,7 +335,13 @@ public class NotificationRepository extends ModelRepository<Notification> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Notification> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Popularity> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -251,21 +361,25 @@ public class NotificationRepository extends ModelRepository<Notification> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
+                                    PopularityRepository popularityRepo = getRestAdapter().createRepository(PopularityRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Notification notification = notificationRepo.createObject(result);
-                                    callback.onSuccess(notification);
+                                    Popularity popularity = popularityRepo.createObject(result);
+                                    callback.onSuccess(popularity);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -280,7 +394,13 @@ public class NotificationRepository extends ModelRepository<Notification> {
     
         
             //Method exists definition
-            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void exists(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -300,6 +420,8 @@ public class NotificationRepository extends ModelRepository<Notification> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -307,6 +429,8 @@ public class NotificationRepository extends ModelRepository<Notification> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -321,7 +445,13 @@ public class NotificationRepository extends ModelRepository<Notification> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Notification> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Popularity> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -343,21 +473,25 @@ public class NotificationRepository extends ModelRepository<Notification> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
+                                    PopularityRepository popularityRepo = getRestAdapter().createRepository(PopularityRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Notification notification = notificationRepo.createObject(result);
-                                    callback.onSuccess(notification);
+                                    Popularity popularity = popularityRepo.createObject(result);
+                                    callback.onSuccess(popularity);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -372,7 +506,13 @@ public class NotificationRepository extends ModelRepository<Notification> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Notification> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Popularity> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -391,6 +531,8 @@ public class NotificationRepository extends ModelRepository<Notification> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -399,18 +541,20 @@ public class NotificationRepository extends ModelRepository<Notification> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Notification> notificationList = new ArrayList<Notification>();
-                                    NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
+                                    List<Popularity> popularityList = new ArrayList<Popularity>();
+                                    PopularityRepository popularityRepo = getRestAdapter().createRepository(PopularityRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Notification notification = notificationRepo.createObject(obj);
-                                        notificationList.add(notification);
+                                        Popularity popularity = popularityRepo.createObject(obj);
+                                        popularityList.add(popularity);
                                     }
-                                    callback.onSuccess(notificationList);
+                                    callback.onSuccess(popularityList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -423,7 +567,13 @@ public class NotificationRepository extends ModelRepository<Notification> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Notification> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Popularity> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -443,21 +593,25 @@ public class NotificationRepository extends ModelRepository<Notification> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
+                                    PopularityRepository popularityRepo = getRestAdapter().createRepository(PopularityRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Notification notification = notificationRepo.createObject(result);
-                                    callback.onSuccess(notification);
+                                    Popularity popularity = popularityRepo.createObject(result);
+                                    callback.onSuccess(popularity);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -472,7 +626,13 @@ public class NotificationRepository extends ModelRepository<Notification> {
     
         
             //Method updateAll definition
-            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -494,6 +654,8 @@ public class NotificationRepository extends ModelRepository<Notification> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -501,6 +663,8 @@ public class NotificationRepository extends ModelRepository<Notification> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -515,7 +679,13 @@ public class NotificationRepository extends ModelRepository<Notification> {
     
         
             //Method deleteById definition
-            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void deleteById(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -535,6 +705,8 @@ public class NotificationRepository extends ModelRepository<Notification> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -542,6 +714,8 @@ public class NotificationRepository extends ModelRepository<Notification> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -556,7 +730,13 @@ public class NotificationRepository extends ModelRepository<Notification> {
     
         
             //Method count definition
-            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count(  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -576,6 +756,8 @@ public class NotificationRepository extends ModelRepository<Notification> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -583,6 +765,8 @@ public class NotificationRepository extends ModelRepository<Notification> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -597,13 +781,19 @@ public class NotificationRepository extends ModelRepository<Notification> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String notificationId,  Map<String,  ? extends Object> data, final ObjectCallback<Notification> callback){
+            public void updateAttributes(  String popularityId,  Map<String,  ? extends Object> data, final ObjectCallback<Popularity> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("notificationId", notificationId);
+                        hashMapObject.put("popularityId", popularityId);
                 
                         hashMapObject.putAll(data);
                 
@@ -619,21 +809,25 @@ public class NotificationRepository extends ModelRepository<Notification> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
+                                    PopularityRepository popularityRepo = getRestAdapter().createRepository(PopularityRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Notification notification = notificationRepo.createObject(result);
-                                    callback.onSuccess(notification);
+                                    Popularity popularity = popularityRepo.createObject(result);
+                                    callback.onSuccess(popularity);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -650,7 +844,13 @@ public class NotificationRepository extends ModelRepository<Notification> {
     
         
             //Method getSchema definition
-            public void getSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -668,6 +868,8 @@ public class NotificationRepository extends ModelRepository<Notification> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -675,6 +877,8 @@ public class NotificationRepository extends ModelRepository<Notification> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -689,7 +893,13 @@ public class NotificationRepository extends ModelRepository<Notification> {
     
         
             //Method getAbsoluteSchema definition
-            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getAbsoluteSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -707,6 +917,8 @@ public class NotificationRepository extends ModelRepository<Notification> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -714,6 +926,8 @@ public class NotificationRepository extends ModelRepository<Notification> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -724,6 +938,16 @@ public class NotificationRepository extends ModelRepository<Notification> {
 
             
 
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
         

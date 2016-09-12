@@ -26,13 +26,7 @@ import java.util.HashMap;
 
 
 
-import com.strongloop.android.loopback.UserRepository;
-import com.strongloop.android.loopback.AccessTokenRepository;
-import com.strongloop.android.loopback.AccessToken;
-import android.content.SharedPreferences;
-import android.util.Log;
-import org.json.JSONException;
-import android.content.Context;
+import com.strongloop.android.loopback.ModelRepository;
 
 
 
@@ -40,16 +34,27 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Employee;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.RecipeIngredients;
 
 //Now import model of related models..
 
     
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Recipe;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeRepository;
+            
+        
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.EmployeeDetails;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeDetailsRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Ingredients;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.IngredientsRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.OrderDetail;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.OrderDetailRepository;
             
         
     
@@ -58,107 +63,12 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Employee;
 
 
 
-public class EmployeeRepository extends com.strongloop.android.loopback.UserRepository<Employee> {
+public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredients> {
 
 
-    public EmployeeRepository(){
-        super("Employee", null, Employee.class);
+    public RecipeIngredientsRepository(){
+        super("RecipeIngredients", null, RecipeIngredients.class);
     }
-
-
-    
-    		//Create public methods..
-    		public Employee cachedCurrentUser;
-            private Object currentUserId;
-            private boolean isCurrentUserIdLoaded;
-    		public Employee getCachedCurrentUser(){
-    			return cachedCurrentUser;
-    		}
-
-    		public void setCachedCurrentUser(Employee user){
-    			cachedCurrentUser = user;
-    		}
-
-    		/* public void setCurrentUserId(Object id){
-    			super.setCurrentUserId(id);
-    		} */
-
-            public void findCurrentUser(final ObjectCallback<Employee> callback){
-                //Call the onBefore method..
-                callback.onBefore()
-
-                if(getCurrentUserId() == null){
-                    callback.onSuccess(null);
-                    return;
-                }
-
-                this.findById(getCurrentUserId(), new ObjectCallback<Employee>() {
-                    @Override
-                    public void onSuccess(Employee user){
-                        cachedCurrentUser = user;
-                        callback.onSuccess(user);
-                        //Call the finally method..
-                        callback.onFinally();
-                    }
-
-                    @Override
-                    public void onError(Throwable t){
-                        callback.onError(t);
-                        //Call the finally method..
-                        callback.onFinally();
-                    }
-                });
-
-            }
-
-            public Object getCurrentUserId(){
-                loadCurrentUserIdIfNotLoaded();
-                return currentUserId;
-            }
-
-            public void setCurrentUserId(Object currentUserId){
-                this.currentUserId = currentUserId;
-                cachedCurrentUser = null;
-                saveCurrentUserId();
-            }
-
-            private void saveCurrentUserId(){
-                final SharedPreferences.Editor editor = getSharedPreferences().edit();
-                final String json = new JSONArray().put(getCurrentUserId()).toString();
-                editor.putString(PROPERTY_CURRENT_USER_ID, json);
-                editor.commit();
-            }
-
-
-            //Add loadCurrentUserIdIfNotLoaded method..
-            private void loadCurrentUserIdIfNotLoaded(){
-                if(isCurrentUserIdLoaded) return;
-
-                isCurrentUserIdLoaded = true;
-                String json = getSharedPreferences().getString(PROPERTY_CURRENT_USER_ID, null);
-                if(json == null){
-                    return;
-                }
-
-                if(json.equals("[null]")){
-                    return;
-                }
-
-                try{
-                    Object id = new JSONArray(json).get(0);
-                    setCurrentUserId(id);
-                }catch(JSONException e){
-                    String msg = "Cannot parse user id '" + json + "'";
-                    Log.e("Snaphy", msg, e);
-                }
-            }
-
-            private SharedPreferences getSharedPreferences() {
-                return getApplicationContext().getSharedPreferences(
-                    SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
-            }
-
-
 
 
     
@@ -173,7 +83,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "GET"), "Employee.prototype.__findById__accessTokens");
+
+                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:recipeIngredientsId/recipe", "GET"), "RecipeIngredients.prototype.__get__recipe");
                 
 
             
@@ -181,7 +92,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "DELETE"), "Employee.prototype.__destroyById__accessTokens");
+
+                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:recipeIngredientsId/ingredients", "GET"), "RecipeIngredients.prototype.__get__ingredients");
                 
 
             
@@ -189,7 +101,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "PUT"), "Employee.prototype.__updateById__accessTokens");
+
+                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:recipeIngredientsId/orderDetails", "GET"), "RecipeIngredients.prototype.__get__orderDetails");
                 
 
             
@@ -197,7 +110,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/employeeDetails", "GET"), "Employee.prototype.__get__employeeDetails");
+
+                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:recipeIngredientsId/orderDetails", "POST"), "RecipeIngredients.prototype.__create__orderDetails");
                 
 
             
@@ -205,7 +119,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/employeeDetails", "POST"), "Employee.prototype.__create__employeeDetails");
+
+                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:recipeIngredientsId/orderDetails", "PUT"), "RecipeIngredients.prototype.__update__orderDetails");
                 
 
             
@@ -213,7 +128,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/employeeDetails", "PUT"), "Employee.prototype.__update__employeeDetails");
+
+                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:recipeIngredientsId/orderDetails", "DELETE"), "RecipeIngredients.prototype.__destroy__orderDetails");
                 
 
             
@@ -221,7 +137,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/employeeDetails", "DELETE"), "Employee.prototype.__destroy__employeeDetails");
+
+                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/", "POST"), "RecipeIngredients.create");
                 
 
             
@@ -229,7 +146,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "GET"), "Employee.prototype.__get__accessTokens");
+
+                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/", "POST"), "RecipeIngredients.create");
                 
 
             
@@ -237,7 +155,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "POST"), "Employee.prototype.__create__accessTokens");
+
+                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/", "PUT"), "RecipeIngredients.upsert");
                 
 
             
@@ -245,7 +164,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "DELETE"), "Employee.prototype.__delete__accessTokens");
+
+                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:id/exists", "GET"), "RecipeIngredients.exists");
                 
 
             
@@ -253,7 +173,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/count", "GET"), "Employee.prototype.__count__accessTokens");
+
+                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:id", "GET"), "RecipeIngredients.findById");
                 
 
             
@@ -261,7 +182,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Employee.create");
+
+                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/", "GET"), "RecipeIngredients.find");
                 
 
             
@@ -269,7 +191,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Employee.create");
+
+                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/findOne", "GET"), "RecipeIngredients.findOne");
                 
 
             
@@ -277,7 +200,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Employee.upsert");
+
+                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/update", "POST"), "RecipeIngredients.updateAll");
                 
 
             
@@ -285,7 +209,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Employee.exists");
+
+                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:id", "DELETE"), "RecipeIngredients.deleteById");
                 
 
             
@@ -293,7 +218,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Employee.findById");
+
+                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/count", "GET"), "RecipeIngredients.count");
                 
 
             
@@ -301,7 +227,19 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Employee.find");
+
+                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/:recipeIngredientsId", "PUT"), "RecipeIngredients.prototype.updateAttributes");
+                
+
+            
+        
+            
+        
+            
+
+                
+
+                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/getSchema", "POST"), "RecipeIngredients.getSchema");
                 
 
             
@@ -309,39 +247,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Employee.findOne");
-                
 
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Employee.updateAll");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Employee.deleteById");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Employee.count");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId", "PUT"), "Employee.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + "RecipeIngredients"  + "/getAbsoluteSchema", "POST"), "RecipeIngredients.getAbsoluteSchema");
                 
 
             
@@ -353,45 +260,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
             
         
             
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/confirm", "GET"), "Employee.confirm");
-                
-
-            
         
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/reset", "POST"), "Employee.resetPassword");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Employee.getSchema");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Employee.getAbsoluteSchema");
-                
-
-            
-        
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/isAdmin", "POST"), "Employee.isAdmin");
-                
-
             
         
             
@@ -403,8 +272,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     //override getNameForRestUrlMethod
     public String  getNameForRestUrl() {
         
-            //call super method instead..
-            return super.getNameForRestUrl();
+            return "RecipeIngredients";
         
     }
 
@@ -417,8 +285,8 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
 
     
         
-            //Method findById__accessTokens definition
-            public void findById__accessTokens(  String employeeId,  String fk, final ObjectCallback<AccessToken> callback){
+            //Method get__recipe definition
+            public void get__recipe(  String recipeIngredientsId,  Boolean refresh, final ObjectCallback<Recipe> callback){
 
                 /**
                 Call the onBefore event
@@ -430,179 +298,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__findById__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    AccessToken accessToken = accessTokenRepo.createObject(result);
-                                    callback.onSuccess(accessToken);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method findById__accessTokens definition ends here..
-
-            
-
-        
-    
-        
-            //Method destroyById__accessTokens definition
-            public void destroyById__accessTokens(  String employeeId,  String fk, final VoidCallback callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("employeeId", employeeId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-                    invokeStaticMethod("prototype.__destroyById__accessTokens", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                                callback.onError(t);
-                                //Call the finally method..
-                                callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method destroyById__accessTokens definition ends here..
-
-            
-
-        
-    
-        
-            //Method updateById__accessTokens definition
-            public void updateById__accessTokens(  String employeeId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("employeeId", employeeId);
-                
-                        hashMapObject.put("fk", fk);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__updateById__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    AccessToken accessToken = accessTokenRepo.createObject(result);
-                                    callback.onSuccess(accessToken);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method updateById__accessTokens definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__employeeDetails definition
-            public void get__employeeDetails(  String employeeId,  Boolean refresh, final ObjectCallback<EmployeeDetails> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("recipeIngredientsId", recipeIngredientsId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -613,7 +309,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__employeeDetails", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__recipe", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -626,10 +322,10 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                    callback.onSuccess(employeeDetails);
+                                    Recipe recipe = recipeRepo.createObject(result);
+                                    callback.onSuccess(recipe);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -643,15 +339,15 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method get__employeeDetails definition ends here..
+            }//Method get__recipe definition ends here..
 
             
 
         
     
         
-            //Method create__employeeDetails definition
-            public void create__employeeDetails(  String employeeId,  Map<String,  ? extends Object> data, final ObjectCallback<EmployeeDetails> callback){
+            //Method get__ingredients definition
+            public void get__ingredients(  String recipeIngredientsId,  Boolean refresh, final ObjectCallback<Ingredients> callback){
 
                 /**
                 Call the onBefore event
@@ -663,7 +359,129 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("recipeIngredientsId", recipeIngredientsId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__ingredients", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Ingredients ingredients = ingredientsRepo.createObject(result);
+                                    callback.onSuccess(ingredients);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__ingredients definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__orderDetails definition
+            public void get__orderDetails(  String recipeIngredientsId,  Boolean refresh, final ObjectCallback<OrderDetail> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("recipeIngredientsId", recipeIngredientsId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__orderDetails", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
+                                    callback.onSuccess(orderDetail);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__orderDetails definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__orderDetails definition
+            public void create__orderDetails(  String recipeIngredientsId,  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("recipeIngredientsId", recipeIngredientsId);
                 
                         hashMapObject.putAll(data);
                 
@@ -674,7 +492,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__employeeDetails", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__orderDetails", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -687,10 +505,10 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                    callback.onSuccess(employeeDetails);
+                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
+                                    callback.onSuccess(orderDetail);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -704,15 +522,15 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method create__employeeDetails definition ends here..
+            }//Method create__orderDetails definition ends here..
 
             
 
         
     
         
-            //Method update__employeeDetails definition
-            public void update__employeeDetails(  String employeeId,  Map<String,  ? extends Object> data, final ObjectCallback<EmployeeDetails> callback){
+            //Method update__orderDetails definition
+            public void update__orderDetails(  String recipeIngredientsId,  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
 
                 /**
                 Call the onBefore event
@@ -724,7 +542,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("recipeIngredientsId", recipeIngredientsId);
                 
                         hashMapObject.putAll(data);
                 
@@ -735,7 +553,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("prototype.__update__employeeDetails", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__update__orderDetails", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -748,10 +566,10 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EmployeeDetails employeeDetails = employeeDetailsRepo.createObject(result);
-                                    callback.onSuccess(employeeDetails);
+                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
+                                    callback.onSuccess(orderDetail);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -765,15 +583,15 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method update__employeeDetails definition ends here..
+            }//Method update__orderDetails definition ends here..
 
             
 
         
     
         
-            //Method destroy__employeeDetails definition
-            public void destroy__employeeDetails(  String employeeId, final VoidCallback callback){
+            //Method destroy__orderDetails definition
+            public void destroy__orderDetails(  String recipeIngredientsId, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -785,11 +603,11 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("recipeIngredientsId", recipeIngredientsId);
                 
 
                 
-                    invokeStaticMethod("prototype.__destroy__employeeDetails", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroy__orderDetails", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -811,230 +629,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method destroy__employeeDetails definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__accessTokens definition
-            public void get__accessTokens(  String employeeId,  Map<String,  ? extends Object> filter, final ListCallback<AccessToken> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("employeeId", employeeId);
-                
-                        hashMapObject.put("filter", filter);
-                
-
-                
-
-
-                
-
-                
-                    invokeStaticMethod("prototype.__get__accessTokens", hashMapObject, new Adapter.JsonArrayCallback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONArray response) {
-                            
-                                if(response != null){
-                                    //Now converting jsonObject to list
-                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<AccessToken> accessTokenList = new ArrayList<AccessToken>();
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
-
-                                    for (Map<String, Object> obj : result) {
-                                        AccessToken accessToken = accessTokenRepo.createObject(obj);
-                                        accessTokenList.add(accessToken);
-                                    }
-                                    callback.onSuccess(accessTokenList);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-            }//Method get__accessTokens definition ends here..
-
-            
-
-        
-    
-        
-            //Method create__accessTokens definition
-            public void create__accessTokens(  String employeeId,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("employeeId", employeeId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__create__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    AccessToken accessToken = accessTokenRepo.createObject(result);
-                                    callback.onSuccess(accessToken);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method create__accessTokens definition ends here..
-
-            
-
-        
-    
-        
-            //Method delete__accessTokens definition
-            public void delete__accessTokens(  String employeeId, final VoidCallback callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("employeeId", employeeId);
-                
-
-                
-                    invokeStaticMethod("prototype.__delete__accessTokens", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                                callback.onError(t);
-                                //Call the finally method..
-                                callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method delete__accessTokens definition ends here..
-
-            
-
-        
-    
-        
-            //Method count__accessTokens definition
-            public void count__accessTokens(  String employeeId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("employeeId", employeeId);
-                
-                        hashMapObject.put("where", where);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("prototype.__count__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method count__accessTokens definition ends here..
+            }//Method destroy__orderDetails definition ends here..
 
             
 
@@ -1042,7 +637,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<RecipeIngredients> callback){
 
                 /**
                 Call the onBefore event
@@ -1076,10 +671,10 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
+                                    callback.onSuccess(recipeIngredients);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1102,7 +697,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<RecipeIngredients> callback){
 
                 /**
                 Call the onBefore event
@@ -1136,10 +731,10 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
+                                    callback.onSuccess(recipeIngredients);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1212,7 +807,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Employee> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<RecipeIngredients> callback){
 
                 /**
                 Call the onBefore event
@@ -1248,10 +843,10 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
+                                    callback.onSuccess(recipeIngredients);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1273,7 +868,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Employee> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<RecipeIngredients> callback){
 
                 /**
                 Call the onBefore event
@@ -1308,14 +903,14 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Employee> employeeList = new ArrayList<Employee>();
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    List<RecipeIngredients> recipeIngredientsList = new ArrayList<RecipeIngredients>();
+                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Employee employee = employeeRepo.createObject(obj);
-                                        employeeList.add(employee);
+                                        RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(obj);
+                                        recipeIngredientsList.add(recipeIngredients);
                                     }
-                                    callback.onSuccess(employeeList);
+                                    callback.onSuccess(recipeIngredientsList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1334,7 +929,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Employee> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<RecipeIngredients> callback){
 
                 /**
                 Call the onBefore event
@@ -1368,10 +963,10 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
+                                    callback.onSuccess(recipeIngredients);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1548,7 +1143,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String employeeId,  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+            public void updateAttributes(  String recipeIngredientsId,  Map<String,  ? extends Object> data, final ObjectCallback<RecipeIngredients> callback){
 
                 /**
                 Call the onBefore event
@@ -1560,7 +1155,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("recipeIngredientsId", recipeIngredientsId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1584,10 +1179,10 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
+                                    callback.onSuccess(recipeIngredients);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1607,106 +1202,6 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
 
         
     
-        
-    
-        
-    
-        
-    
-        
-            //Method confirm definition
-            public void confirm(  String uid,  String token,  String redirect, final VoidCallback callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("uid", uid);
-                
-                        hashMapObject.put("token", token);
-                
-                        hashMapObject.put("redirect", redirect);
-                
-
-                
-                    invokeStaticMethod("confirm", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                                callback.onError(t);
-                                //Call the finally method..
-                                callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method confirm definition ends here..
-
-            
-
-        
-    
-        
-            //Method resetPassword definition
-            public void resetPassword(  Map<String,  ? extends Object> options, final VoidCallback callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("options", options);
-                
-
-                
-                    invokeStaticMethod("resetPassword", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                                callback.onError(t);
-                                //Call the finally method..
-                                callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method resetPassword definition ends here..
-
-            
-
         
     
         
@@ -1810,52 +1305,11 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
         
     
         
-            //Method isAdmin definition
-            public void isAdmin( final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("isAdmin", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method isAdmin definition ends here..
-
-            
-
+    
+        
+    
+        
+    
         
     
         

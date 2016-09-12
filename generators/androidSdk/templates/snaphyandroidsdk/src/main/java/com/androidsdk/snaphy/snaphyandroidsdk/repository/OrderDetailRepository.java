@@ -34,19 +34,33 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.CompanyInfo;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.OrderDetail;
 
 //Now import model of related models..
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Order;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.OrderRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.RecipeIngredients;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeIngredientsRepository;
+            
+        
+    
 
 
 
 
-public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
+
+public class OrderDetailRepository extends ModelRepository<OrderDetail> {
 
 
-    public CompanyInfoRepository(){
-        super("CompanyInfo", null, CompanyInfo.class);
+    public OrderDetailRepository(){
+        super("OrderDetail", null, OrderDetail.class);
     }
 
 
@@ -62,7 +76,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "CompanyInfo.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderDetailId/order", "GET"), "OrderDetail.prototype.__get__order");
                 
 
             
@@ -70,7 +84,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "CompanyInfo.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderDetailId/recipeIngredients", "GET"), "OrderDetail.prototype.__get__recipeIngredients");
                 
 
             
@@ -78,7 +92,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "CompanyInfo.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderDetailId/recipeIngredients", "POST"), "OrderDetail.prototype.__create__recipeIngredients");
                 
 
             
@@ -86,7 +100,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "CompanyInfo.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderDetailId/recipeIngredients", "PUT"), "OrderDetail.prototype.__update__recipeIngredients");
                 
 
             
@@ -94,7 +108,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "CompanyInfo.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderDetailId/recipeIngredients", "DELETE"), "OrderDetail.prototype.__destroy__recipeIngredients");
                 
 
             
@@ -102,7 +116,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "CompanyInfo.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "OrderDetail.create");
                 
 
             
@@ -110,7 +124,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "CompanyInfo.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "OrderDetail.create");
                 
 
             
@@ -118,7 +132,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "CompanyInfo.updateAll");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "OrderDetail.upsert");
                 
 
             
@@ -126,7 +140,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "CompanyInfo.deleteById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "OrderDetail.exists");
                 
 
             
@@ -134,7 +148,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "CompanyInfo.count");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "OrderDetail.findById");
                 
 
             
@@ -142,7 +156,47 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:companyInfoId", "PUT"), "CompanyInfo.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "OrderDetail.find");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "OrderDetail.findOne");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "OrderDetail.updateAll");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "OrderDetail.deleteById");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "OrderDetail.count");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:orderDetailId", "PUT"), "OrderDetail.prototype.updateAttributes");
                 
 
             
@@ -152,7 +206,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "CompanyInfo.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "OrderDetail.getSchema");
                 
 
             
@@ -160,9 +214,35 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "CompanyInfo.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "OrderDetail.getAbsoluteSchema");
                 
 
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -174,8 +254,9 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     //override getNameForRestUrlMethod
     public String  getNameForRestUrl() {
         
-                return "CompanyInfos";
-            
+            //call super method instead..
+            return super.getNameForRestUrl();
+        
     }
 
 
@@ -187,8 +268,298 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
     
         
+            //Method get__order definition
+            public void get__order(  String orderDetailId,  Boolean refresh, final ObjectCallback<Order> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("orderDetailId", orderDetailId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__order", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Order order = orderRepo.createObject(result);
+                                    callback.onSuccess(order);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__order definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__recipeIngredients definition
+            public void get__recipeIngredients(  String orderDetailId,  Boolean refresh, final ObjectCallback<RecipeIngredients> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("orderDetailId", orderDetailId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__recipeIngredients", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
+                                    callback.onSuccess(recipeIngredients);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__recipeIngredients definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__recipeIngredients definition
+            public void create__recipeIngredients(  String orderDetailId,  Map<String,  ? extends Object> data, final ObjectCallback<RecipeIngredients> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("orderDetailId", orderDetailId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__recipeIngredients", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
+                                    callback.onSuccess(recipeIngredients);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__recipeIngredients definition ends here..
+
+            
+
+        
+    
+        
+            //Method update__recipeIngredients definition
+            public void update__recipeIngredients(  String orderDetailId,  Map<String,  ? extends Object> data, final ObjectCallback<RecipeIngredients> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("orderDetailId", orderDetailId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__update__recipeIngredients", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    RecipeIngredients recipeIngredients = recipeIngredientsRepo.createObject(result);
+                                    callback.onSuccess(recipeIngredients);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method update__recipeIngredients definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroy__recipeIngredients definition
+            public void destroy__recipeIngredients(  String orderDetailId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("orderDetailId", orderDetailId);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroy__recipeIngredients", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroy__recipeIngredients definition ends here..
+
+            
+
+        
+    
+        
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<CompanyInfo> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
 
                 /**
                 Call the onBefore event
@@ -222,10 +593,10 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    CompanyInfo companyInfo = companyInfoRepo.createObject(result);
-                                    callback.onSuccess(companyInfo);
+                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
+                                    callback.onSuccess(orderDetail);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -248,7 +619,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<CompanyInfo> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
 
                 /**
                 Call the onBefore event
@@ -282,10 +653,10 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    CompanyInfo companyInfo = companyInfoRepo.createObject(result);
-                                    callback.onSuccess(companyInfo);
+                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
+                                    callback.onSuccess(orderDetail);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -358,7 +729,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<CompanyInfo> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<OrderDetail> callback){
 
                 /**
                 Call the onBefore event
@@ -394,10 +765,10 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    CompanyInfo companyInfo = companyInfoRepo.createObject(result);
-                                    callback.onSuccess(companyInfo);
+                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
+                                    callback.onSuccess(orderDetail);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -419,7 +790,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<CompanyInfo> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<OrderDetail> callback){
 
                 /**
                 Call the onBefore event
@@ -454,14 +825,14 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<CompanyInfo> companyInfoList = new ArrayList<CompanyInfo>();
-                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    List<OrderDetail> orderDetailList = new ArrayList<OrderDetail>();
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        CompanyInfo companyInfo = companyInfoRepo.createObject(obj);
-                                        companyInfoList.add(companyInfo);
+                                        OrderDetail orderDetail = orderDetailRepo.createObject(obj);
+                                        orderDetailList.add(orderDetail);
                                     }
-                                    callback.onSuccess(companyInfoList);
+                                    callback.onSuccess(orderDetailList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -480,7 +851,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<CompanyInfo> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<OrderDetail> callback){
 
                 /**
                 Call the onBefore event
@@ -514,10 +885,10 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    CompanyInfo companyInfo = companyInfoRepo.createObject(result);
-                                    callback.onSuccess(companyInfo);
+                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
+                                    callback.onSuccess(orderDetail);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -694,7 +1065,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String companyInfoId,  Map<String,  ? extends Object> data, final ObjectCallback<CompanyInfo> callback){
+            public void updateAttributes(  String orderDetailId,  Map<String,  ? extends Object> data, final ObjectCallback<OrderDetail> callback){
 
                 /**
                 Call the onBefore event
@@ -706,7 +1077,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("companyInfoId", companyInfoId);
+                        hashMapObject.put("orderDetailId", orderDetailId);
                 
                         hashMapObject.putAll(data);
                 
@@ -730,10 +1101,10 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    CompanyInfo companyInfo = companyInfoRepo.createObject(result);
-                                    callback.onSuccess(companyInfo);
+                                    OrderDetail orderDetail = orderDetailRepo.createObject(result);
+                                    callback.onSuccess(orderDetail);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -851,6 +1222,32 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
             
 
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
         

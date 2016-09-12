@@ -3,9 +3,17 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 import com.google.common.collect.ImmutableMap;
+/*
+Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
+*/
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+
 import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
@@ -26,19 +34,26 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Installation;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.RecipeAnalytic;
 
 //Now import model of related models..
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Recipe;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeRepository;
+            
+        
+    
 
 
 
 
-public class InstallationRepository extends ModelRepository<Installation> {
+
+public class RecipeAnalyticRepository extends ModelRepository<RecipeAnalytic> {
 
 
-    public InstallationRepository(){
-        super("Installation", null, Installation.class);
+    public RecipeAnalyticRepository(){
+        super("RecipeAnalytic", null, RecipeAnalytic.class);
     }
 
 
@@ -54,7 +69,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/byApp", "GET"), "installation.findByApp");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeAnalyticId/recipes", "GET"), "RecipeAnalytic.prototype.__get__recipes");
                 
 
             
@@ -62,7 +77,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/byUser", "GET"), "installation.findByUser");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeAnalyticId/recipes", "POST"), "RecipeAnalytic.prototype.__create__recipes");
                 
 
             
@@ -70,7 +85,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/bySubscriptions", "GET"), "installation.findBySubscriptions");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeAnalyticId/recipes", "PUT"), "RecipeAnalytic.prototype.__update__recipes");
                 
 
             
@@ -78,7 +93,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "installation.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeAnalyticId/recipes", "DELETE"), "RecipeAnalytic.prototype.__destroy__recipes");
                 
 
             
@@ -86,7 +101,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "installation.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "RecipeAnalytic.create");
                 
 
             
@@ -94,7 +109,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "installation.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "RecipeAnalytic.create");
                 
 
             
@@ -102,7 +117,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "installation.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "RecipeAnalytic.upsert");
                 
 
             
@@ -110,7 +125,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "installation.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "RecipeAnalytic.exists");
                 
 
             
@@ -118,7 +133,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "installation.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "RecipeAnalytic.findById");
                 
 
             
@@ -126,7 +141,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "installation.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "RecipeAnalytic.find");
                 
 
             
@@ -134,7 +149,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "installation.updateAll");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "RecipeAnalytic.findOne");
                 
 
             
@@ -142,7 +157,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "installation.deleteById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "RecipeAnalytic.updateAll");
                 
 
             
@@ -150,7 +165,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "installation.count");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "RecipeAnalytic.deleteById");
                 
 
             
@@ -158,7 +173,15 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:installationId", "PUT"), "installation.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "RecipeAnalytic.count");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recipeAnalyticId", "PUT"), "RecipeAnalytic.prototype.updateAttributes");
                 
 
             
@@ -168,7 +191,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "installation.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "RecipeAnalytic.getSchema");
                 
 
             
@@ -176,9 +199,19 @@ public class InstallationRepository extends ModelRepository<Installation> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "installation.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "RecipeAnalytic.getAbsoluteSchema");
                 
 
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -204,18 +237,22 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
     
         
-            //Method findByApp definition
-            public void findByApp(  String deviceType,  String appId,  String appVersion, final Adapter.JsonObjectCallback  callback ){
+            //Method get__recipes definition
+            public void get__recipes(  String recipeAnalyticId,  Boolean refresh, final ObjectCallback<Recipe> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("deviceType", deviceType);
+                        hashMapObject.put("recipeAnalyticId", recipeAnalyticId);
                 
-                        hashMapObject.put("appId", appId);
-                
-                        hashMapObject.put("appVersion", appVersion);
+                        hashMapObject.put("refresh", refresh);
                 
 
                 
@@ -223,42 +260,60 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
                     
-                    invokeStaticMethod("findByApp", hashMapObject, new Adapter.JsonObjectCallback() {
                     
+                    invokeStaticMethod("prototype.__get__recipes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                callback.onSuccess(response);
+                                if(response != null){
+                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Recipe recipe = recipeRepo.createObject(result);
+                                    callback.onSuccess(recipe);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
 
                 
 
-            }//Method findByApp definition ends here..
+            }//Method get__recipes definition ends here..
 
             
 
         
     
         
-            //Method findByUser definition
-            public void findByUser(  String deviceType,  String userId, final Adapter.JsonObjectCallback  callback ){
+            //Method create__recipes definition
+            public void create__recipes(  String recipeAnalyticId,  Map<String,  ? extends Object> data, final ObjectCallback<Recipe> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("deviceType", deviceType);
+                        hashMapObject.put("recipeAnalyticId", recipeAnalyticId);
                 
-                        hashMapObject.put("userId", userId);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -266,42 +321,60 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
                     
-                    invokeStaticMethod("findByUser", hashMapObject, new Adapter.JsonObjectCallback() {
                     
+                    invokeStaticMethod("prototype.__create__recipes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                callback.onSuccess(response);
+                                if(response != null){
+                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Recipe recipe = recipeRepo.createObject(result);
+                                    callback.onSuccess(recipe);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
 
                 
 
-            }//Method findByUser definition ends here..
+            }//Method create__recipes definition ends here..
 
             
 
         
     
         
-            //Method findBySubscriptions definition
-            public void findBySubscriptions(  String deviceType,  String subscriptions, final Adapter.JsonObjectCallback  callback ){
+            //Method update__recipes definition
+            public void update__recipes(  String recipeAnalyticId,  Map<String,  ? extends Object> data, final ObjectCallback<Recipe> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("deviceType", deviceType);
+                        hashMapObject.put("recipeAnalyticId", recipeAnalyticId);
                 
-                        hashMapObject.put("subscriptions", subscriptions);
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -309,26 +382,84 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
                 
                     
-                    invokeStaticMethod("findBySubscriptions", hashMapObject, new Adapter.JsonObjectCallback() {
                     
+                    invokeStaticMethod("prototype.__update__recipes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                callback.onSuccess(response);
+                                if(response != null){
+                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Recipe recipe = recipeRepo.createObject(result);
+                                    callback.onSuccess(recipe);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
 
                 
 
-            }//Method findBySubscriptions definition ends here..
+            }//Method update__recipes definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroy__recipes definition
+            public void destroy__recipes(  String recipeAnalyticId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("recipeAnalyticId", recipeAnalyticId);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroy__recipes", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroy__recipes definition ends here..
 
             
 
@@ -336,7 +467,13 @@ public class InstallationRepository extends ModelRepository<Installation> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Installation> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<RecipeAnalytic> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -356,21 +493,25 @@ public class InstallationRepository extends ModelRepository<Installation> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    InstallationRepository installationRepo = getRestAdapter().createRepository(InstallationRepository.class);
+                                    RecipeAnalyticRepository recipeAnalyticRepo = getRestAdapter().createRepository(RecipeAnalyticRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Installation installation = installationRepo.createObject(result);
-                                    callback.onSuccess(installation);
+                                    RecipeAnalytic recipeAnalytic = recipeAnalyticRepo.createObject(result);
+                                    callback.onSuccess(recipeAnalytic);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -386,7 +527,13 @@ public class InstallationRepository extends ModelRepository<Installation> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Installation> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<RecipeAnalytic> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -406,21 +553,25 @@ public class InstallationRepository extends ModelRepository<Installation> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    InstallationRepository installationRepo = getRestAdapter().createRepository(InstallationRepository.class);
+                                    RecipeAnalyticRepository recipeAnalyticRepo = getRestAdapter().createRepository(RecipeAnalyticRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Installation installation = installationRepo.createObject(result);
-                                    callback.onSuccess(installation);
+                                    RecipeAnalytic recipeAnalytic = recipeAnalyticRepo.createObject(result);
+                                    callback.onSuccess(recipeAnalytic);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -435,7 +586,13 @@ public class InstallationRepository extends ModelRepository<Installation> {
     
         
             //Method exists definition
-            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void exists(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -455,6 +612,8 @@ public class InstallationRepository extends ModelRepository<Installation> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -462,6 +621,8 @@ public class InstallationRepository extends ModelRepository<Installation> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -476,7 +637,13 @@ public class InstallationRepository extends ModelRepository<Installation> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Installation> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<RecipeAnalytic> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -498,21 +665,25 @@ public class InstallationRepository extends ModelRepository<Installation> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    InstallationRepository installationRepo = getRestAdapter().createRepository(InstallationRepository.class);
+                                    RecipeAnalyticRepository recipeAnalyticRepo = getRestAdapter().createRepository(RecipeAnalyticRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Installation installation = installationRepo.createObject(result);
-                                    callback.onSuccess(installation);
+                                    RecipeAnalytic recipeAnalytic = recipeAnalyticRepo.createObject(result);
+                                    callback.onSuccess(recipeAnalytic);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -527,7 +698,13 @@ public class InstallationRepository extends ModelRepository<Installation> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Installation> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<RecipeAnalytic> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -546,6 +723,8 @@ public class InstallationRepository extends ModelRepository<Installation> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -554,18 +733,20 @@ public class InstallationRepository extends ModelRepository<Installation> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Installation> installationList = new ArrayList<Installation>();
-                                    InstallationRepository installationRepo = getRestAdapter().createRepository(InstallationRepository.class);
+                                    List<RecipeAnalytic> recipeAnalyticList = new ArrayList<RecipeAnalytic>();
+                                    RecipeAnalyticRepository recipeAnalyticRepo = getRestAdapter().createRepository(RecipeAnalyticRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Installation installation = installationRepo.createObject(obj);
-                                        installationList.add(installation);
+                                        RecipeAnalytic recipeAnalytic = recipeAnalyticRepo.createObject(obj);
+                                        recipeAnalyticList.add(recipeAnalytic);
                                     }
-                                    callback.onSuccess(installationList);
+                                    callback.onSuccess(recipeAnalyticList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -578,7 +759,13 @@ public class InstallationRepository extends ModelRepository<Installation> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Installation> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<RecipeAnalytic> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -598,21 +785,25 @@ public class InstallationRepository extends ModelRepository<Installation> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    InstallationRepository installationRepo = getRestAdapter().createRepository(InstallationRepository.class);
+                                    RecipeAnalyticRepository recipeAnalyticRepo = getRestAdapter().createRepository(RecipeAnalyticRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Installation installation = installationRepo.createObject(result);
-                                    callback.onSuccess(installation);
+                                    RecipeAnalytic recipeAnalytic = recipeAnalyticRepo.createObject(result);
+                                    callback.onSuccess(recipeAnalytic);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -627,7 +818,13 @@ public class InstallationRepository extends ModelRepository<Installation> {
     
         
             //Method updateAll definition
-            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -649,6 +846,8 @@ public class InstallationRepository extends ModelRepository<Installation> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -656,6 +855,8 @@ public class InstallationRepository extends ModelRepository<Installation> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -670,7 +871,13 @@ public class InstallationRepository extends ModelRepository<Installation> {
     
         
             //Method deleteById definition
-            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void deleteById(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -690,6 +897,8 @@ public class InstallationRepository extends ModelRepository<Installation> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -697,6 +906,8 @@ public class InstallationRepository extends ModelRepository<Installation> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -711,7 +922,13 @@ public class InstallationRepository extends ModelRepository<Installation> {
     
         
             //Method count definition
-            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count(  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -731,6 +948,8 @@ public class InstallationRepository extends ModelRepository<Installation> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -738,6 +957,8 @@ public class InstallationRepository extends ModelRepository<Installation> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -752,13 +973,19 @@ public class InstallationRepository extends ModelRepository<Installation> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String installationId,  Map<String,  ? extends Object> data, final ObjectCallback<Installation> callback){
+            public void updateAttributes(  String recipeAnalyticId,  Map<String,  ? extends Object> data, final ObjectCallback<RecipeAnalytic> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("installationId", installationId);
+                        hashMapObject.put("recipeAnalyticId", recipeAnalyticId);
                 
                         hashMapObject.putAll(data);
                 
@@ -774,21 +1001,25 @@ public class InstallationRepository extends ModelRepository<Installation> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    InstallationRepository installationRepo = getRestAdapter().createRepository(InstallationRepository.class);
+                                    RecipeAnalyticRepository recipeAnalyticRepo = getRestAdapter().createRepository(RecipeAnalyticRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Installation installation = installationRepo.createObject(result);
-                                    callback.onSuccess(installation);
+                                    RecipeAnalytic recipeAnalytic = recipeAnalyticRepo.createObject(result);
+                                    callback.onSuccess(recipeAnalytic);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -805,7 +1036,13 @@ public class InstallationRepository extends ModelRepository<Installation> {
     
         
             //Method getSchema definition
-            public void getSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -823,6 +1060,8 @@ public class InstallationRepository extends ModelRepository<Installation> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -830,6 +1069,8 @@ public class InstallationRepository extends ModelRepository<Installation> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -844,7 +1085,13 @@ public class InstallationRepository extends ModelRepository<Installation> {
     
         
             //Method getAbsoluteSchema definition
-            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getAbsoluteSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -862,6 +1109,8 @@ public class InstallationRepository extends ModelRepository<Installation> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -869,6 +1118,8 @@ public class InstallationRepository extends ModelRepository<Installation> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -879,6 +1130,16 @@ public class InstallationRepository extends ModelRepository<Installation> {
 
             
 
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
         

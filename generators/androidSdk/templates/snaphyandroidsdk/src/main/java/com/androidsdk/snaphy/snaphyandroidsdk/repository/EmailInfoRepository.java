@@ -3,9 +3,17 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 import com.google.common.collect.ImmutableMap;
+/*
+Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
+*/
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+
 import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
@@ -26,26 +34,19 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.LastUpdatedLocation;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.EmailInfo;
 
 //Now import model of related models..
 
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
-            
-        
-    
 
 
 
 
+public class EmailInfoRepository extends ModelRepository<EmailInfo> {
 
-public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLocation> {
 
-
-    public LastUpdatedLocationRepository(){
-        super("LastUpdatedLocation", null, LastUpdatedLocation.class);
+    public EmailInfoRepository(){
+        super("EmailInfo", null, EmailInfo.class);
     }
 
 
@@ -61,7 +62,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:lastUpdatedLocationId/customer", "GET"), "LastUpdatedLocation.prototype.__get__customer");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "EmailInfo.create");
                 
 
             
@@ -69,7 +70,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "LastUpdatedLocation.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "EmailInfo.create");
                 
 
             
@@ -77,7 +78,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "LastUpdatedLocation.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "EmailInfo.upsert");
                 
 
             
@@ -85,7 +86,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "LastUpdatedLocation.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "EmailInfo.exists");
                 
 
             
@@ -93,7 +94,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "LastUpdatedLocation.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "EmailInfo.findById");
                 
 
             
@@ -101,7 +102,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "LastUpdatedLocation.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "EmailInfo.find");
                 
 
             
@@ -109,7 +110,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "LastUpdatedLocation.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "EmailInfo.findOne");
                 
 
             
@@ -117,7 +118,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "LastUpdatedLocation.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "EmailInfo.updateAll");
                 
 
             
@@ -125,7 +126,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "LastUpdatedLocation.updateAll");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "EmailInfo.deleteById");
                 
 
             
@@ -133,7 +134,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "LastUpdatedLocation.deleteById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "EmailInfo.count");
                 
 
             
@@ -141,15 +142,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "LastUpdatedLocation.count");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:lastUpdatedLocationId", "PUT"), "LastUpdatedLocation.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:emailInfoId", "PUT"), "EmailInfo.prototype.updateAttributes");
                 
 
             
@@ -159,7 +152,7 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "LastUpdatedLocation.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "EmailInfo.getSchema");
                 
 
             
@@ -167,19 +160,9 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "LastUpdatedLocation.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "EmailInfo.getAbsoluteSchema");
                 
 
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -191,9 +174,8 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
     //override getNameForRestUrlMethod
     public String  getNameForRestUrl() {
         
-            //call super method instead..
-            return super.getNameForRestUrl();
-        
+                return "EmailInfos";
+            
     }
 
 
@@ -205,59 +187,14 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
     
         
-            //Method get__customer definition
-            public void get__customer(  String lastUpdatedLocationId,  Boolean refresh, final ObjectCallback<Customer> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("lastUpdatedLocationId", lastUpdatedLocationId);
-                
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Customer customer = customerRepo.createObject(result);
-                                    callback.onSuccess(customer);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method get__customer definition ends here..
-
-            
-
-        
-    
-        
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<LastUpdatedLocation> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<EmailInfo> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -277,21 +214,25 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    LastUpdatedLocationRepository lastUpdatedLocationRepo = getRestAdapter().createRepository(LastUpdatedLocationRepository.class);
+                                    EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    LastUpdatedLocation lastUpdatedLocation = lastUpdatedLocationRepo.createObject(result);
-                                    callback.onSuccess(lastUpdatedLocation);
+                                    EmailInfo emailInfo = emailInfoRepo.createObject(result);
+                                    callback.onSuccess(emailInfo);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -307,7 +248,13 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<LastUpdatedLocation> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<EmailInfo> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -327,21 +274,25 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    LastUpdatedLocationRepository lastUpdatedLocationRepo = getRestAdapter().createRepository(LastUpdatedLocationRepository.class);
+                                    EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    LastUpdatedLocation lastUpdatedLocation = lastUpdatedLocationRepo.createObject(result);
-                                    callback.onSuccess(lastUpdatedLocation);
+                                    EmailInfo emailInfo = emailInfoRepo.createObject(result);
+                                    callback.onSuccess(emailInfo);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -356,7 +307,13 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
     
         
             //Method exists definition
-            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void exists(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -376,6 +333,8 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -383,6 +342,8 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -397,7 +358,13 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<LastUpdatedLocation> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<EmailInfo> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -419,21 +386,25 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    LastUpdatedLocationRepository lastUpdatedLocationRepo = getRestAdapter().createRepository(LastUpdatedLocationRepository.class);
+                                    EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    LastUpdatedLocation lastUpdatedLocation = lastUpdatedLocationRepo.createObject(result);
-                                    callback.onSuccess(lastUpdatedLocation);
+                                    EmailInfo emailInfo = emailInfoRepo.createObject(result);
+                                    callback.onSuccess(emailInfo);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -448,7 +419,13 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<LastUpdatedLocation> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<EmailInfo> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -467,6 +444,8 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -475,18 +454,20 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<LastUpdatedLocation> lastUpdatedLocationList = new ArrayList<LastUpdatedLocation>();
-                                    LastUpdatedLocationRepository lastUpdatedLocationRepo = getRestAdapter().createRepository(LastUpdatedLocationRepository.class);
+                                    List<EmailInfo> emailInfoList = new ArrayList<EmailInfo>();
+                                    EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        LastUpdatedLocation lastUpdatedLocation = lastUpdatedLocationRepo.createObject(obj);
-                                        lastUpdatedLocationList.add(lastUpdatedLocation);
+                                        EmailInfo emailInfo = emailInfoRepo.createObject(obj);
+                                        emailInfoList.add(emailInfo);
                                     }
-                                    callback.onSuccess(lastUpdatedLocationList);
+                                    callback.onSuccess(emailInfoList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -499,7 +480,13 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<LastUpdatedLocation> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<EmailInfo> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -519,21 +506,25 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    LastUpdatedLocationRepository lastUpdatedLocationRepo = getRestAdapter().createRepository(LastUpdatedLocationRepository.class);
+                                    EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    LastUpdatedLocation lastUpdatedLocation = lastUpdatedLocationRepo.createObject(result);
-                                    callback.onSuccess(lastUpdatedLocation);
+                                    EmailInfo emailInfo = emailInfoRepo.createObject(result);
+                                    callback.onSuccess(emailInfo);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -548,7 +539,13 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
     
         
             //Method updateAll definition
-            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -570,6 +567,8 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -577,6 +576,8 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -591,7 +592,13 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
     
         
             //Method deleteById definition
-            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void deleteById(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -611,6 +618,8 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -618,6 +627,8 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -632,7 +643,13 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
     
         
             //Method count definition
-            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count(  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -652,6 +669,8 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -659,6 +678,8 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -673,13 +694,19 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String lastUpdatedLocationId,  Map<String,  ? extends Object> data, final ObjectCallback<LastUpdatedLocation> callback){
+            public void updateAttributes(  String emailInfoId,  Map<String,  ? extends Object> data, final ObjectCallback<EmailInfo> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("lastUpdatedLocationId", lastUpdatedLocationId);
+                        hashMapObject.put("emailInfoId", emailInfoId);
                 
                         hashMapObject.putAll(data);
                 
@@ -695,21 +722,25 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    LastUpdatedLocationRepository lastUpdatedLocationRepo = getRestAdapter().createRepository(LastUpdatedLocationRepository.class);
+                                    EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    LastUpdatedLocation lastUpdatedLocation = lastUpdatedLocationRepo.createObject(result);
-                                    callback.onSuccess(lastUpdatedLocation);
+                                    EmailInfo emailInfo = emailInfoRepo.createObject(result);
+                                    callback.onSuccess(emailInfo);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -726,7 +757,13 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
     
         
             //Method getSchema definition
-            public void getSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -744,6 +781,8 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -751,6 +790,8 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -765,7 +806,13 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
     
         
             //Method getAbsoluteSchema definition
-            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getAbsoluteSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -783,6 +830,8 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -790,6 +839,8 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -800,16 +851,6 @@ public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLo
 
             
 
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
         
     
         

@@ -3,7 +3,6 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 
 
 
-import com.strongloop.android.loopback.Model;
 
 
 
@@ -12,18 +11,26 @@ import org.json.JSONArray;
 
 import java.util.List;
 import com.strongloop.android.loopback.RestAdapter;
+import com.strongloop.android.remoting.adapters.Adapter;
+
+/*
+Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
-import com.strongloop.android.remoting.adapters.Adapter;
+*/
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.EventTypeRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.IngredientCategoryRepository;
 
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.TrackRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.IngredientsRepository;
             
 
         
@@ -36,11 +43,11 @@ import java.util.Map;
 
 
 
-public class EventType extends Model {
+public class IngredientCategory extends Model {
 
 
     //For converting all model values to hashMap
-    private Map<String, Object> hashMap = new HashMap<>();
+    private  transient Map<String, Object> hashMap = new HashMap<>();
 
     public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
@@ -51,9 +58,9 @@ public class EventType extends Model {
         }
     }
 
-    private EventType that ;
+    private IngredientCategory that ;
 
-    public EventType (){
+    public IngredientCategory (){
         that = this;
     }
 
@@ -103,16 +110,16 @@ public class EventType extends Model {
                 
                     
                     //Define hasMany relation method here..
-                    private List<Track>  tracks ;
+                    private transient List<Ingredients>  ingredients ;
 
-                    public List<Track> getTracks() {
-                        return tracks;
+                    public List<Ingredients> getIngredients() {
+                        return ingredients;
                     }
 
-                    public void setTracks(List<Track> tracks) {
+                    public void setIngredients(List<Ingredients> ingredients) {
                         boolean hashType = false;
                         List<HashMap<String, Object>> hashMaps = new ArrayList<>();
-                        for(Object o: tracks){
+                        for(Object o: ingredients){
                             if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
@@ -125,63 +132,63 @@ public class EventType extends Model {
                         }
 
                         if(hashType){
-                            setTracks1(hashMaps);
+                            setIngredients1(hashMaps);
                         }else{
-                            this.tracks = tracks;
+                            this.ingredients = ingredients;
                         }
                     }
 
                 /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setTracks1(List<Map<String, Object>> tracks) {
+                    public void setIngredients1(List<Map<String, Object>> ingredients) {
                         //First create a dummy Repo class object for ..
-                        TrackRepository tracksRepository = new TrackRepository();
-                        List<Track> result = new ArrayList<>();
-                        for (Map<String, Object> obj : tracks) {
+                        IngredientsRepository ingredientsRepository = new IngredientsRepository();
+                        List<Ingredients> result = new ArrayList<>();
+                        for (Map<String, Object> obj : ingredients) {
                             //Also add relation to child type for two way communication..
-                            Track obj1 = tracksRepository.createObject(obj);
+                            Ingredients obj1 = ingredientsRepository.createObject(obj);
                             result.add(obj1);
 
                         }
-                        setTracks(result);
+                        setIngredients(result);
 
                     }
 
                 */
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setTracks1(List<HashMap<String, Object>> tracks) {
+                    public void setIngredients1(List<HashMap<String, Object>> ingredients) {
                         //First create a dummy Repo class object for ..
-                        TrackRepository tracksRepository = new TrackRepository();
-                        List<Track> result = new ArrayList<>();
-                        for (HashMap<String, Object> obj : tracks) {
+                        IngredientsRepository ingredientsRepository = new IngredientsRepository();
+                        List<Ingredients> result = new ArrayList<>();
+                        for (HashMap<String, Object> obj : ingredients) {
                             //Also add relation to child type for two way communication..
-                            Track obj1 = tracksRepository.createObject(obj);
+                            Ingredients obj1 = ingredientsRepository.createObject(obj);
                             result.add(obj1);
 
                         }
-                        setTracks(result);
+                        setIngredients(result);
 
                     }
 
 
                     //Adding relation method..
                     //Add a dummy class Name object to seperate data..
-                    public void addRelation(List<Track> tracks, Track dummyClassInstance) {
-                        that.setTracks(tracks);
+                    public void addRelation(List<Ingredients> ingredients, Ingredients dummyClassInstance) {
+                        that.setIngredients(ingredients);
 
                     }
 
                     //Adding relation method..
                     //This will add a new data to the list relation object..
-                    public void addRelation(Track tracks) {
+                    public void addRelation(Ingredients ingredients) {
                         try{
-                            that.getTracks().add(tracks);
+                            that.getIngredients().add(ingredients);
                         }catch(Exception e){
-                            List< Track> tracks1 = new ArrayList();
+                            List< Ingredients> ingredients1 = new ArrayList();
                             //Now add this item to list..
-                            tracks1.add(tracks);
+                            ingredients1.add(ingredients);
                             //Now set data....
-                            that.setTracks(tracks1);
+                            that.setIngredients(ingredients1);
                         }
                     }
 
@@ -203,9 +210,12 @@ public class EventType extends Model {
                     
 
                                     //Write the method here..
-                                    public void findById__tracks( String fk,  RestAdapter restAdapter, final ObjectCallback<Track> callback) {
+                                    public void findById__ingredients( String fk,  RestAdapter restAdapter, final ObjectCallback<Ingredients> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
-                                        final EventTypeRepository  eventTypeRepo = restAdapter.createRepository(EventTypeRepository.class);
+                                        final IngredientCategoryRepository  ingredientCategoryRepo = restAdapter.createRepository(IngredientCategoryRepository.class);
                                         
                                         
                                         
@@ -214,21 +224,25 @@ public class EventType extends Model {
 
 
 
-                                        eventTypeRepo.findById__tracks( (String)that.getId(), fk,  new ObjectCallback<Track> (){
+                                        ingredientCategoryRepo.findById__ingredients( (String)that.getId(), fk,  new ObjectCallback<Ingredients> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Track object) {
+                                                    public void onSuccess(Ingredients object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -242,6 +256,8 @@ public class EventType extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -251,9 +267,12 @@ public class EventType extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__tracks( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__ingredients( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
-                                        final EventTypeRepository  eventTypeRepo = restAdapter.createRepository(EventTypeRepository.class);
+                                        final IngredientCategoryRepository  ingredientCategoryRepo = restAdapter.createRepository(IngredientCategoryRepository.class);
                                         
                                         
                                         
@@ -262,11 +281,13 @@ public class EventType extends Model {
 
 
 
-                                        eventTypeRepo.destroyById__tracks( (String)that.getId(), fk,  new VoidCallback (){
+                                        ingredientCategoryRepo.destroyById__ingredients( (String)that.getId(), fk,  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
                                                     callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
                                                 }
                                             
 
@@ -279,6 +300,8 @@ public class EventType extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -288,9 +311,12 @@ public class EventType extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__tracks( String fk,  Track data,  RestAdapter restAdapter, final ObjectCallback<Track> callback) {
+                                    public void updateById__ingredients( String fk,  Ingredients data,  RestAdapter restAdapter, final ObjectCallback<Ingredients> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
-                                        final EventTypeRepository  eventTypeRepo = restAdapter.createRepository(EventTypeRepository.class);
+                                        final IngredientCategoryRepository  ingredientCategoryRepo = restAdapter.createRepository(IngredientCategoryRepository.class);
                                         
                                         
                                         
@@ -302,21 +328,25 @@ public class EventType extends Model {
 
 
 
-                                        eventTypeRepo.updateById__tracks( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Track> (){
+                                        ingredientCategoryRepo.updateById__ingredients( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Ingredients> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Track object) {
+                                                    public void onSuccess(Ingredients object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -330,6 +360,8 @@ public class EventType extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -339,9 +371,12 @@ public class EventType extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__tracks( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Track> callback) {
+                                    public void get__ingredients( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Ingredients> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
-                                        final EventTypeRepository  eventTypeRepo = restAdapter.createRepository(EventTypeRepository.class);
+                                        final IngredientCategoryRepository  ingredientCategoryRepo = restAdapter.createRepository(IngredientCategoryRepository.class);
                                         
                                         
                                         
@@ -350,7 +385,7 @@ public class EventType extends Model {
 
 
 
-                                        eventTypeRepo.get__tracks( (String)that.getId(), filter,  new ListCallback<Track> (){
+                                        ingredientCategoryRepo.get__ingredients( (String)that.getId(), filter,  new ListCallback<Ingredients> (){
                                             
 
                                             
@@ -359,20 +394,24 @@ public class EventType extends Model {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<Track> object) {
+                                                    public void onSuccess(List<Ingredients> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
-                                                            Track obj = new Track();
+                                                            Ingredients obj = new Ingredients();
                                                             addRelation(object, obj);
                                                             //Disabling two way communication for cyclic error..
-                                                            /*for (Track obj : object) {
+                                                            /*for (Ingredients obj : object) {
                                                                 //Also add relation to child type for two way communication..
                                                                 obj.addRelation(that);
                                                             }*/
 
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -383,6 +422,8 @@ public class EventType extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -392,9 +433,12 @@ public class EventType extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__tracks( Track data,  RestAdapter restAdapter, final ObjectCallback<Track> callback) {
+                                    public void create__ingredients( Ingredients data,  RestAdapter restAdapter, final ObjectCallback<Ingredients> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
-                                        final EventTypeRepository  eventTypeRepo = restAdapter.createRepository(EventTypeRepository.class);
+                                        final IngredientCategoryRepository  ingredientCategoryRepo = restAdapter.createRepository(IngredientCategoryRepository.class);
                                         
                                         
                                         
@@ -403,21 +447,25 @@ public class EventType extends Model {
 
 
 
-                                        eventTypeRepo.create__tracks( (String)that.getId(), data.convertMap(),  new ObjectCallback<Track> (){
+                                        ingredientCategoryRepo.create__ingredients( (String)that.getId(), data.convertMap(),  new ObjectCallback<Ingredients> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Track object) {
+                                                    public void onSuccess(Ingredients object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -431,6 +479,8 @@ public class EventType extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -440,19 +490,24 @@ public class EventType extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__tracks( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__ingredients( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
-                                        final EventTypeRepository  eventTypeRepo = restAdapter.createRepository(EventTypeRepository.class);
+                                        final IngredientCategoryRepository  ingredientCategoryRepo = restAdapter.createRepository(IngredientCategoryRepository.class);
                                         
                                         
 
 
 
-                                        eventTypeRepo.delete__tracks( (String)that.getId(),  new VoidCallback (){
+                                        ingredientCategoryRepo.delete__ingredients( (String)that.getId(),  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
                                                     callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
                                                 }
                                             
 
@@ -465,6 +520,8 @@ public class EventType extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -474,9 +531,12 @@ public class EventType extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__tracks( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final Adapter.JsonObjectCallback  callback ) {
+                                    public void count__ingredients( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
-                                        final EventTypeRepository  eventTypeRepo = restAdapter.createRepository(EventTypeRepository.class);
+                                        final IngredientCategoryRepository  ingredientCategoryRepo = restAdapter.createRepository(IngredientCategoryRepository.class);
                                         
                                         
                                         
@@ -485,7 +545,7 @@ public class EventType extends Model {
 
 
 
-                                        eventTypeRepo.count__tracks( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        ingredientCategoryRepo.count__ingredients( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
                                             
 
                                             
@@ -493,6 +553,8 @@ public class EventType extends Model {
                                                 
                                                     public void onSuccess(JSONObject object) {
                                                         callback.onSuccess(object);
+                                                        //Calling the finally..callback
+                                                        callback.onFinally();
                                                     }
                                                 
                                             
@@ -504,6 +566,8 @@ public class EventType extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });

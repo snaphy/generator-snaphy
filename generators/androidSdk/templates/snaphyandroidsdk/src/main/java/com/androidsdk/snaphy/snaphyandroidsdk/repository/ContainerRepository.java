@@ -3,9 +3,17 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 import com.google.common.collect.ImmutableMap;
+/*
+Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
+*/
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+
 import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
@@ -163,7 +171,13 @@ public class ContainerRepository extends ModelRepository<Container> {
     
         
             //Method getContainers definition
-            public void getContainers( final Adapter.JsonArrayCallback callback){
+            public void getContainers( final ObjectCallback<JSONArray> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -180,6 +194,8 @@ public class ContainerRepository extends ModelRepository<Container> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -187,6 +203,8 @@ public class ContainerRepository extends ModelRepository<Container> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -199,7 +217,13 @@ public class ContainerRepository extends ModelRepository<Container> {
     
         
             //Method createContainer definition
-            public void createContainer(  Map<String,  ? extends Object> options, final Adapter.JsonObjectCallback  callback ){
+            public void createContainer(  Map<String,  ? extends Object> options, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -219,6 +243,8 @@ public class ContainerRepository extends ModelRepository<Container> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -226,6 +252,8 @@ public class ContainerRepository extends ModelRepository<Container> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -242,6 +270,12 @@ public class ContainerRepository extends ModelRepository<Container> {
             //Method destroyContainer definition
             public void destroyContainer(  String container, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -253,12 +287,16 @@ public class ContainerRepository extends ModelRepository<Container> {
                     invokeStaticMethod("destroyContainer", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -276,7 +314,13 @@ public class ContainerRepository extends ModelRepository<Container> {
     
         
             //Method getContainer definition
-            public void getContainer(  String container, final Adapter.JsonObjectCallback  callback ){
+            public void getContainer(  String container, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -296,6 +340,8 @@ public class ContainerRepository extends ModelRepository<Container> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -303,6 +349,8 @@ public class ContainerRepository extends ModelRepository<Container> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -317,7 +365,13 @@ public class ContainerRepository extends ModelRepository<Container> {
     
         
             //Method getFiles definition
-            public void getFiles(  String container, final Adapter.JsonArrayCallback callback){
+            public void getFiles(  String container, final ObjectCallback<JSONArray> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -336,6 +390,8 @@ public class ContainerRepository extends ModelRepository<Container> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -343,6 +399,8 @@ public class ContainerRepository extends ModelRepository<Container> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -355,7 +413,13 @@ public class ContainerRepository extends ModelRepository<Container> {
     
         
             //Method getFile definition
-            public void getFile(  String container,  String file, final Adapter.JsonObjectCallback  callback ){
+            public void getFile(  String container,  String file, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -377,6 +441,8 @@ public class ContainerRepository extends ModelRepository<Container> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -384,6 +450,8 @@ public class ContainerRepository extends ModelRepository<Container> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -400,6 +468,12 @@ public class ContainerRepository extends ModelRepository<Container> {
             //Method removeFile definition
             public void removeFile(  String container,  String file, final VoidCallback callback){
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -413,12 +487,16 @@ public class ContainerRepository extends ModelRepository<Container> {
                     invokeStaticMethod("removeFile", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -436,7 +514,13 @@ public class ContainerRepository extends ModelRepository<Container> {
     
         
             //Method upload definition
-            public void upload(  Map<String,  ? extends Object> req,  Map<String,  ? extends Object> res, final Adapter.JsonObjectCallback  callback ){
+            public void upload(  Map<String,  ? extends Object> req,  Map<String,  ? extends Object> res, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -458,6 +542,8 @@ public class ContainerRepository extends ModelRepository<Container> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -465,6 +551,8 @@ public class ContainerRepository extends ModelRepository<Container> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -480,6 +568,12 @@ public class ContainerRepository extends ModelRepository<Container> {
         
             //Method download definition
             public void download(  String container,  String file,  Map<String,  ? extends Object> req,  Map<String,  ? extends Object> res, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -498,12 +592,16 @@ public class ContainerRepository extends ModelRepository<Container> {
                     invokeStaticMethod("download", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -521,7 +619,13 @@ public class ContainerRepository extends ModelRepository<Container> {
     
         
             //Method getSchema definition
-            public void getSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -539,6 +643,8 @@ public class ContainerRepository extends ModelRepository<Container> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -546,6 +652,8 @@ public class ContainerRepository extends ModelRepository<Container> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -560,7 +668,13 @@ public class ContainerRepository extends ModelRepository<Container> {
     
         
             //Method getAbsoluteSchema definition
-            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getAbsoluteSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -578,6 +692,8 @@ public class ContainerRepository extends ModelRepository<Container> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -585,6 +701,8 @@ public class ContainerRepository extends ModelRepository<Container> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 

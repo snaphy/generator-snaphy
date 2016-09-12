@@ -759,16 +759,16 @@ public class <%- modelName %> extends Model {
                                             if(method.returns[0].type instanceof Array){
                                                 type = convertType(method.returns[0].type[0], model);
                                                 if(model.allModels[type] !== undefined){
-                                                    returnType = "List<" + type + ">";
-                                                    methodString = methodString + " " + "RestAdapter restAdapter" + ", " +  "final ListCallback<" + type + "> callback)";
-                                                    callback = "ListCallback<" + type + "> ";
-                                                    callbackType = "ListCallback";
+                                                    returnType = "DataList<" + type + ">";
+                                                    methodString = methodString + " " + "RestAdapter restAdapter" + ", " +  "final DataListCallback<" + type + "> callback)";
+                                                    callback = "DataListCallback<" + type + "> ";
+                                                    callbackType = "DataListCallback";
                                                 }else{
                                                     returnType = type;
                                                     //methodString = methodString  + " " + " RestAdapter restAdapter" + ", " +  "final Adapter.JsonArrayCallback callback)";
                                                     methodString = methodString  + " " + " RestAdapter restAdapter" + ", " +  "final ObjectCallback<JSONArray>  callback)";
                                                     callback = "Adapter.JsonArrayCallback";
-                                                    callbackType = "ListCallback";
+                                                    callbackType = "DataListCallback";
                                                 }
                                             }else{
 
@@ -922,7 +922,7 @@ public class <%- modelName %> extends Model {
                                             <% } %>
 
 
-                                            <% if(callbackType === "ListCallback"){ %>
+                                            <% if(callbackType === "DataListCallback"){ %>
                                                 @Override
                                                 <% if( callback !== "Adapter.JsonArrayCallback" ) {%>
                                                     public void onSuccess(<%- returnType %> object) {

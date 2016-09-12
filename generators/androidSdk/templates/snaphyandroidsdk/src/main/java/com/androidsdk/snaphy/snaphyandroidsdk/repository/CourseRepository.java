@@ -3,9 +3,17 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 import com.google.common.collect.ImmutableMap;
+/*
+Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
+*/
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+
 import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
@@ -26,13 +34,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.EventType;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Course;
 
 //Now import model of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Track;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.TrackRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
             
         
     
@@ -41,11 +49,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.EventType;
 
 
 
-public class EventTypeRepository extends ModelRepository<EventType> {
+public class CourseRepository extends ModelRepository<Course> {
 
 
-    public EventTypeRepository(){
-        super("EventType", null, EventType.class);
+    public CourseRepository(){
+        super("Course", null, Course.class);
     }
 
 
@@ -61,7 +69,7 @@ public class EventTypeRepository extends ModelRepository<EventType> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:eventTypeId/tracks/:fk", "GET"), "EventType.prototype.__findById__tracks");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId/customer", "GET"), "Course.prototype.__get__customer");
                 
 
             
@@ -69,7 +77,7 @@ public class EventTypeRepository extends ModelRepository<EventType> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:eventTypeId/tracks/:fk", "DELETE"), "EventType.prototype.__destroyById__tracks");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Course.create");
                 
 
             
@@ -77,7 +85,7 @@ public class EventTypeRepository extends ModelRepository<EventType> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:eventTypeId/tracks/:fk", "PUT"), "EventType.prototype.__updateById__tracks");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Course.create");
                 
 
             
@@ -85,7 +93,7 @@ public class EventTypeRepository extends ModelRepository<EventType> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:eventTypeId/tracks", "GET"), "EventType.prototype.__get__tracks");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Course.upsert");
                 
 
             
@@ -93,7 +101,7 @@ public class EventTypeRepository extends ModelRepository<EventType> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:eventTypeId/tracks", "POST"), "EventType.prototype.__create__tracks");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Course.exists");
                 
 
             
@@ -101,7 +109,7 @@ public class EventTypeRepository extends ModelRepository<EventType> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:eventTypeId/tracks", "DELETE"), "EventType.prototype.__delete__tracks");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Course.findById");
                 
 
             
@@ -109,7 +117,7 @@ public class EventTypeRepository extends ModelRepository<EventType> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:eventTypeId/tracks/count", "GET"), "EventType.prototype.__count__tracks");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Course.find");
                 
 
             
@@ -117,7 +125,7 @@ public class EventTypeRepository extends ModelRepository<EventType> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "EventType.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Course.findOne");
                 
 
             
@@ -125,7 +133,7 @@ public class EventTypeRepository extends ModelRepository<EventType> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "EventType.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Course.updateAll");
                 
 
             
@@ -133,7 +141,7 @@ public class EventTypeRepository extends ModelRepository<EventType> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "EventType.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Course.deleteById");
                 
 
             
@@ -141,7 +149,7 @@ public class EventTypeRepository extends ModelRepository<EventType> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "EventType.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Course.count");
                 
 
             
@@ -149,55 +157,7 @@ public class EventTypeRepository extends ModelRepository<EventType> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "EventType.findById");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "EventType.find");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "EventType.findOne");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "EventType.updateAll");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "EventType.deleteById");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "EventType.count");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:eventTypeId", "PUT"), "EventType.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:courseId", "PUT"), "Course.prototype.updateAttributes");
                 
 
             
@@ -207,7 +167,7 @@ public class EventTypeRepository extends ModelRepository<EventType> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "EventType.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Course.getSchema");
                 
 
             
@@ -215,9 +175,23 @@ public class EventTypeRepository extends ModelRepository<EventType> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "EventType.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Course.getAbsoluteSchema");
                 
 
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -245,16 +219,22 @@ public class EventTypeRepository extends ModelRepository<EventType> {
 
     
         
-            //Method findById__tracks definition
-            public void findById__tracks(  String eventTypeId,  String fk, final ObjectCallback<Track> callback){
+            //Method get__customer definition
+            public void get__customer(  String courseId,  Boolean refresh, final ObjectCallback<Customer> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("eventTypeId", eventTypeId);
+                        hashMapObject.put("courseId", courseId);
                 
-                        hashMapObject.put("fk", fk);
+                        hashMapObject.put("refresh", refresh);
                 
 
                 
@@ -263,307 +243,37 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__tracks", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
+                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Track track = trackRepo.createObject(result);
-                                    callback.onSuccess(track);
+                                    Customer customer = customerRepo.createObject(result);
+                                    callback.onSuccess(customer);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
 
                 
 
-            }//Method findById__tracks definition ends here..
-
-            
-
-        
-    
-        
-            //Method destroyById__tracks definition
-            public void destroyById__tracks(  String eventTypeId,  String fk, final VoidCallback callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("eventTypeId", eventTypeId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-                    invokeStaticMethod("prototype.__destroyById__tracks", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method destroyById__tracks definition ends here..
-
-            
-
-        
-    
-        
-            //Method updateById__tracks definition
-            public void updateById__tracks(  String eventTypeId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("eventTypeId", eventTypeId);
-                
-                        hashMapObject.put("fk", fk);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__updateById__tracks", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Track track = trackRepo.createObject(result);
-                                    callback.onSuccess(track);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method updateById__tracks definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__tracks definition
-            public void get__tracks(  String eventTypeId,  Map<String,  ? extends Object> filter, final ListCallback<Track> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("eventTypeId", eventTypeId);
-                
-                        hashMapObject.put("filter", filter);
-                
-
-                
-
-
-                
-
-                
-                    invokeStaticMethod("prototype.__get__tracks", hashMapObject, new Adapter.JsonArrayCallback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONArray response) {
-                            
-                                if(response != null){
-                                    //Now converting jsonObject to list
-                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Track> trackList = new ArrayList<Track>();
-                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
-
-                                    for (Map<String, Object> obj : result) {
-                                        Track track = trackRepo.createObject(obj);
-                                        trackList.add(track);
-                                    }
-                                    callback.onSuccess(trackList);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-            }//Method get__tracks definition ends here..
-
-            
-
-        
-    
-        
-            //Method create__tracks definition
-            public void create__tracks(  String eventTypeId,  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("eventTypeId", eventTypeId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__create__tracks", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Track track = trackRepo.createObject(result);
-                                    callback.onSuccess(track);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method create__tracks definition ends here..
-
-            
-
-        
-    
-        
-            //Method delete__tracks definition
-            public void delete__tracks(  String eventTypeId, final VoidCallback callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("eventTypeId", eventTypeId);
-                
-
-                
-                    invokeStaticMethod("prototype.__delete__tracks", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method delete__tracks definition ends here..
-
-            
-
-        
-    
-        
-            //Method count__tracks definition
-            public void count__tracks(  String eventTypeId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("eventTypeId", eventTypeId);
-                
-                        hashMapObject.put("where", where);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("prototype.__count__tracks", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method count__tracks definition ends here..
+            }//Method get__customer definition ends here..
 
             
 
@@ -571,7 +281,13 @@ public class EventTypeRepository extends ModelRepository<EventType> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<EventType> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Course> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -591,21 +307,25 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EventTypeRepository eventTypeRepo = getRestAdapter().createRepository(EventTypeRepository.class);
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EventType eventType = eventTypeRepo.createObject(result);
-                                    callback.onSuccess(eventType);
+                                    Course course = courseRepo.createObject(result);
+                                    callback.onSuccess(course);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -621,7 +341,13 @@ public class EventTypeRepository extends ModelRepository<EventType> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<EventType> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Course> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -641,21 +367,25 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EventTypeRepository eventTypeRepo = getRestAdapter().createRepository(EventTypeRepository.class);
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EventType eventType = eventTypeRepo.createObject(result);
-                                    callback.onSuccess(eventType);
+                                    Course course = courseRepo.createObject(result);
+                                    callback.onSuccess(course);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -670,7 +400,13 @@ public class EventTypeRepository extends ModelRepository<EventType> {
     
         
             //Method exists definition
-            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void exists(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -690,6 +426,8 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -697,6 +435,8 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -711,7 +451,13 @@ public class EventTypeRepository extends ModelRepository<EventType> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<EventType> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Course> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -733,21 +479,25 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EventTypeRepository eventTypeRepo = getRestAdapter().createRepository(EventTypeRepository.class);
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EventType eventType = eventTypeRepo.createObject(result);
-                                    callback.onSuccess(eventType);
+                                    Course course = courseRepo.createObject(result);
+                                    callback.onSuccess(course);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -762,7 +512,13 @@ public class EventTypeRepository extends ModelRepository<EventType> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<EventType> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Course> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -781,6 +537,8 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -789,18 +547,20 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<EventType> eventTypeList = new ArrayList<EventType>();
-                                    EventTypeRepository eventTypeRepo = getRestAdapter().createRepository(EventTypeRepository.class);
+                                    List<Course> courseList = new ArrayList<Course>();
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        EventType eventType = eventTypeRepo.createObject(obj);
-                                        eventTypeList.add(eventType);
+                                        Course course = courseRepo.createObject(obj);
+                                        courseList.add(course);
                                     }
-                                    callback.onSuccess(eventTypeList);
+                                    callback.onSuccess(courseList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -813,7 +573,13 @@ public class EventTypeRepository extends ModelRepository<EventType> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<EventType> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Course> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -833,21 +599,25 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EventTypeRepository eventTypeRepo = getRestAdapter().createRepository(EventTypeRepository.class);
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EventType eventType = eventTypeRepo.createObject(result);
-                                    callback.onSuccess(eventType);
+                                    Course course = courseRepo.createObject(result);
+                                    callback.onSuccess(course);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -862,7 +632,13 @@ public class EventTypeRepository extends ModelRepository<EventType> {
     
         
             //Method updateAll definition
-            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -884,6 +660,8 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -891,6 +669,8 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -905,7 +685,13 @@ public class EventTypeRepository extends ModelRepository<EventType> {
     
         
             //Method deleteById definition
-            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void deleteById(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -925,6 +711,8 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -932,6 +720,8 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -946,7 +736,13 @@ public class EventTypeRepository extends ModelRepository<EventType> {
     
         
             //Method count definition
-            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count(  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -966,6 +762,8 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -973,6 +771,8 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -987,13 +787,19 @@ public class EventTypeRepository extends ModelRepository<EventType> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String eventTypeId,  Map<String,  ? extends Object> data, final ObjectCallback<EventType> callback){
+            public void updateAttributes(  String courseId,  Map<String,  ? extends Object> data, final ObjectCallback<Course> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("eventTypeId", eventTypeId);
+                        hashMapObject.put("courseId", courseId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1009,21 +815,25 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EventTypeRepository eventTypeRepo = getRestAdapter().createRepository(EventTypeRepository.class);
+                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EventType eventType = eventTypeRepo.createObject(result);
-                                    callback.onSuccess(eventType);
+                                    Course course = courseRepo.createObject(result);
+                                    callback.onSuccess(course);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1040,7 +850,13 @@ public class EventTypeRepository extends ModelRepository<EventType> {
     
         
             //Method getSchema definition
-            public void getSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1058,6 +874,8 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1065,6 +883,8 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1079,7 +899,13 @@ public class EventTypeRepository extends ModelRepository<EventType> {
     
         
             //Method getAbsoluteSchema definition
-            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getAbsoluteSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -1097,6 +923,8 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -1104,6 +932,8 @@ public class EventTypeRepository extends ModelRepository<EventType> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -1114,6 +944,20 @@ public class EventTypeRepository extends ModelRepository<EventType> {
 
             
 
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
         

@@ -235,7 +235,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
             public void findCurrentUser(final ObjectCallback<<%- modelName %>> callback){
                 //Call the onBefore method..
-                callback.onBefore()
+                callback.onBefore();
 
                 if(getCurrentUserId() == null){
                     callback.onSuccess(null);
@@ -640,16 +640,16 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                     type = convertType(method.returns[0].type[0], model);
                     if(model.allModels[type] !== undefined){
                         returnType = "List<" + type + ">";
-                        methodString = methodString  +  "final ListCallback<" + type + "> callback)";
-                        callback = "ListCallback<" + type + "> ";
-                        callbackType = "ListCallback";
+                        methodString = methodString  +  "final DataListCallback<" + type + "> callback)";
+                        callback = "DataListCallback<" + type + "> ";
+                        callbackType = "DataListCallback";
                     }else{
                         returnType = type;
                         //methodString = methodString  +  "final Adapter.JsonArrayCallback callback)";
                         methodString = methodString  +  "final ObjectCallback<JSONArray> callback)";
                     
                         callback = "new Adapter.JsonArrayCallback()";
-                        callbackType = "ListCallback";
+                        callbackType = "DataListCallback";
                         
                     }
                 }else{
@@ -756,7 +756,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                     });
                 <% } %>
 
-                <% if(callbackType === "ListCallback") {%>
+                <% if(callbackType === "DataListCallback") {%>
                     invokeStaticMethod("<%- staticMethodName %>", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
@@ -773,7 +773,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<<%- type %>> <%- lowercaseFirstLetter(type) %>List = new ArrayList<<%- type %>>();
+                                    DataList<<%- type %>> <%- lowercaseFirstLetter(type) %>List = new DataList<<%- type %>>();
                                     <%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
 
                                     for (Map<String, Object> obj : result) {

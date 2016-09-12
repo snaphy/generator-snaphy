@@ -3,7 +3,6 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 
 
 
-import com.strongloop.android.loopback.Model;
 
 
 
@@ -12,13 +11,21 @@ import org.json.JSONArray;
 
 import java.util.List;
 import com.strongloop.android.loopback.RestAdapter;
+import com.strongloop.android.remoting.adapters.Adapter;
+
+/*
+Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
-import com.strongloop.android.remoting.adapters.Adapter;
+*/
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.TrackRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChefRepository;
 
 //Now import repository of related models..
 
@@ -30,7 +37,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.TrackRepository;
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.EventTypeRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PopularityRepository;
             
 
         
@@ -43,11 +50,11 @@ import java.util.Map;
 
 
 
-public class Track extends Model {
+public class Chef extends Model {
 
 
     //For converting all model values to hashMap
-    private Map<String, Object> hashMap = new HashMap<>();
+    private  transient Map<String, Object> hashMap = new HashMap<>();
 
     public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
@@ -58,127 +65,12 @@ public class Track extends Model {
         }
     }
 
-    private Track that ;
+    private Chef that ;
 
-    public Track (){
+    public Chef (){
         that = this;
     }
 
-    
-        
-            
-            
-            
-            
-                private Map<String, Object> picture;
-                /* Adding Getter and Setter methods */
-                public Map<String, Object> getPicture(){
-                    return picture;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setPicture(Map<String, Object> picture){
-                    this.picture = picture;
-                    //Update Map value..
-                    hashMap.put("picture", picture);
-                }
-
-            
-            
-
-        
-    
-        
-            
-            
-                private String name;
-                /* Adding Getter and Setter methods */
-                public String getName(){
-                    return name;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setName(String name){
-                    this.name = name;
-                    //Update hashMap value..
-                    hashMap.put("name", name);
-                }
-
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-                private String description;
-                /* Adding Getter and Setter methods */
-                public String getDescription(){
-                    return description;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setDescription(String description){
-                    this.description = description;
-                    //Update hashMap value..
-                    hashMap.put("description", description);
-                }
-
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-                private double uniqueCode;
-                /* Adding Getter and Setter methods */
-                public double getUniqueCode(){
-                    return uniqueCode;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setUniqueCode(double uniqueCode){
-                    this.uniqueCode = uniqueCode;
-                    //Update hashMap value..
-                    hashMap.put("uniqueCode", uniqueCode);
-                }
-
-            
-            
-            
-
-        
-    
-        
-            
-            
-                private String isPublic;
-                /* Adding Getter and Setter methods */
-                public String getIsPublic(){
-                    return isPublic;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setIsPublic(String isPublic){
-                    this.isPublic = isPublic;
-                    //Update hashMap value..
-                    hashMap.put("isPublic", isPublic);
-                }
-
-            
-            
-            
-            
-
-        
     
         
             
@@ -254,77 +146,6 @@ public class Track extends Model {
     
         
             
-
-                private List<Map<String, Object>> friends;
-                /* Adding Getter and Setter methods */
-                public List<Map<String, Object>> getFriends(){
-                    return friends;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setFriends(List<Map<String, Object>> friends){
-                    this.friends = friends;
-
-                    //TODO change this to custom array with double quotes escaped if error occured when sending to server..
-                    hashMap.put("friends", friends);
-                }
-
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-                private String type;
-                /* Adding Getter and Setter methods */
-                public String getType(){
-                    return type;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setType(String type){
-                    this.type = type;
-                    //Update hashMap value..
-                    hashMap.put("type", type);
-                }
-
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-                private String locationId;
-                /* Adding Getter and Setter methods */
-                public String getLocationId(){
-                    return locationId;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setLocationId(String locationId){
-                    this.locationId = locationId;
-                    //Update hashMap value..
-                    hashMap.put("locationId", locationId);
-                }
-
-            
-            
-            
-            
-
-        
-    
-        
-            
             
                 private String status;
                 /* Adding Getter and Setter methods */
@@ -337,29 +158,6 @@ public class Track extends Model {
                     this.status = status;
                     //Update hashMap value..
                     hashMap.put("status", status);
-                }
-
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-                private String lastModified;
-                /* Adding Getter and Setter methods */
-                public String getLastModified(){
-                    return lastModified;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setLastModified(String lastModified){
-                    this.lastModified = lastModified;
-                    //Update hashMap value..
-                    hashMap.put("lastModified", lastModified);
                 }
 
             
@@ -395,20 +193,20 @@ public class Track extends Model {
         
             
             
-                private String eventDate;
-                /* Adding Getter and Setter methods */
-                public String getEventDate(){
-                    return eventDate;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setEventDate(String eventDate){
-                    this.eventDate = eventDate;
-                    //Update hashMap value..
-                    hashMap.put("eventDate", eventDate);
-                }
-
             
+                private double allowedRecipes;
+                /* Adding Getter and Setter methods */
+                public double getAllowedRecipes(){
+                    return allowedRecipes;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setAllowedRecipes(double allowedRecipes){
+                    this.allowedRecipes = allowedRecipes;
+                    //Update hashMap value..
+                    hashMap.put("allowedRecipes", allowedRecipes);
+                }
+
             
             
             
@@ -418,28 +216,19 @@ public class Track extends Model {
         
             
             
-                private String eventTime;
+                private String expiryDate;
                 /* Adding Getter and Setter methods */
-                public String getEventTime(){
-                    return eventTime;
+                public String getExpiryDate(){
+                    return expiryDate;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setEventTime(String eventTime){
-                    this.eventTime = eventTime;
+                public void setExpiryDate(String expiryDate){
+                    this.expiryDate = expiryDate;
                     //Update hashMap value..
-                    hashMap.put("eventTime", eventTime);
+                    hashMap.put("expiryDate", expiryDate);
                 }
 
-            
-            
-            
-            
-
-        
-    
-        
-            
             
             
             
@@ -476,7 +265,7 @@ public class Track extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private Customer  customer ;
+                    private transient Customer  customer ;
 
                     public Customer getCustomer() {
                         return customer;
@@ -526,8 +315,11 @@ public class Track extends Model {
 
                                     //Write the method here..
                                     public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
-                                        final TrackRepository  trackRepo = restAdapter.createRepository(TrackRepository.class);
+                                        final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
                                         
                                         
@@ -536,7 +328,7 @@ public class Track extends Model {
 
 
 
-                                        trackRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
+                                        chefRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
                                             
 
                                             
@@ -549,8 +341,12 @@ public class Track extends Model {
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -564,6 +360,8 @@ public class Track extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -572,16 +370,12 @@ public class Track extends Model {
                             
                          
                             
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+                         
+                            
+                         
+                            
+                         
+                            
                         
                         
                         
@@ -616,35 +410,35 @@ public class Track extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private EventType  eventType ;
+                    private transient Popularity  popularities ;
 
-                    public EventType getEventType() {
-                        return eventType;
+                    public Popularity getPopularities() {
+                        return popularities;
                     }
 
-                    public void setEventType(EventType eventType) {
-                        this.eventType = eventType;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setEventType(Map<String, Object> eventType) {
-                        //First create a dummy Repo class object for customer.
-                        EventTypeRepository eventTypeRepository = new EventTypeRepository();
-                        EventType eventType1 = eventTypeRepository.createObject(eventType);
-                        setEventType(eventType1);
+                    public void setPopularities(Popularity popularities) {
+                        this.popularities = popularities;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setEventType(HashMap<String, Object> eventType) {
+                    public void setPopularities(Map<String, Object> popularities) {
                         //First create a dummy Repo class object for customer.
-                        EventTypeRepository eventTypeRepository = new EventTypeRepository();
-                        EventType eventType1 = eventTypeRepository.createObject(eventType);
-                        setEventType(eventType1);
+                        PopularityRepository popularitiesRepository = new PopularityRepository();
+                        Popularity popularities1 = popularitiesRepository.createObject(popularities);
+                        setPopularities(popularities1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setPopularities(HashMap<String, Object> popularities) {
+                        //First create a dummy Repo class object for customer.
+                        PopularityRepository popularitiesRepository = new PopularityRepository();
+                        Popularity popularities1 = popularitiesRepository.createObject(popularities);
+                        setPopularities(popularities1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(EventType eventType) {
-                        that.setEventType(eventType);
+                    public void addRelation(Popularity popularities) {
+                        that.setPopularities(popularities);
                     }
 
 
@@ -667,9 +461,12 @@ public class Track extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__eventType( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<EventType> callback) {
+                                    public void get__popularities( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Popularity> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
                                         //Define methods here..
-                                        final TrackRepository  trackRepo = restAdapter.createRepository(TrackRepository.class);
+                                        final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
                                         
                                         
                                         
@@ -678,21 +475,25 @@ public class Track extends Model {
 
 
 
-                                        trackRepo.get__eventType( (String)that.getId(), refresh,  new ObjectCallback<EventType> (){
+                                        chefRepo.get__popularities( (String)that.getId(), refresh,  new ObjectCallback<Popularity> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(EventType object) {
+                                                    public void onSuccess(Popularity object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
                                                             //Also add relation to child type for two way communication..Removing two way communication for cyclic error
                                                             //object.addRelation(that);
                                                             callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }else{
                                                             callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
                                                         }
 
                                                     }
@@ -706,6 +507,8 @@ public class Track extends Model {
                                             public void onError(Throwable t) {
                                                 //Now calling the callback
                                                 callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
                                             }
 
                                         });
@@ -713,15 +516,160 @@ public class Track extends Model {
                                  
                             
                         
+
+                                    //Write the method here..
+                                    public void create__popularities( Popularity data,  RestAdapter restAdapter, final ObjectCallback<Popularity> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        chefRepo.create__popularities( (String)that.getId(), data.convertMap(),  new ObjectCallback<Popularity> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Popularity object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
                         
+
+                                    //Write the method here..
+                                    public void update__popularities( Popularity data,  RestAdapter restAdapter, final ObjectCallback<Popularity> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        chefRepo.update__popularities( (String)that.getId(), data.convertMap(),  new ObjectCallback<Popularity> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Popularity object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
                         
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+
+                                    //Write the method here..
+                                    public void destroy__popularities( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final ChefRepository  chefRepo = restAdapter.createRepository(ChefRepository.class);
+                                        
+                                        
+
+
+
+                                        chefRepo.destroy__popularities( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
                         
                         
                         

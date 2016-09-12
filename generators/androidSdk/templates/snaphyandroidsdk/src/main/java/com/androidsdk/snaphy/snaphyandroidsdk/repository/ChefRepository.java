@@ -3,9 +3,17 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 import com.google.common.collect.ImmutableMap;
+/*
+Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
+*/
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+
 import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
@@ -26,7 +34,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Track;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Chef;
 
 //Now import model of related models..
 
@@ -38,8 +46,8 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Track;
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.EventType;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.EventTypeRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Popularity;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PopularityRepository;
             
         
     
@@ -48,11 +56,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Track;
 
 
 
-public class TrackRepository extends ModelRepository<Track> {
+public class ChefRepository extends ModelRepository<Chef> {
 
 
-    public TrackRepository(){
-        super("Track", null, Track.class);
+    public ChefRepository(){
+        super("Chef", null, Chef.class);
     }
 
 
@@ -68,7 +76,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:trackId/customer", "GET"), "Track.prototype.__get__customer");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/customer", "GET"), "Chef.prototype.__get__customer");
                 
 
             
@@ -76,7 +84,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:trackId/eventType", "GET"), "Track.prototype.__get__eventType");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/popularities", "GET"), "Chef.prototype.__get__popularities");
                 
 
             
@@ -84,7 +92,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Track.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/popularities", "POST"), "Chef.prototype.__create__popularities");
                 
 
             
@@ -92,7 +100,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Track.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/popularities", "PUT"), "Chef.prototype.__update__popularities");
                 
 
             
@@ -100,7 +108,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Track.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId/popularities", "DELETE"), "Chef.prototype.__destroy__popularities");
                 
 
             
@@ -108,7 +116,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Track.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Chef.create");
                 
 
             
@@ -116,7 +124,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Track.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Chef.create");
                 
 
             
@@ -124,7 +132,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Track.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Chef.upsert");
                 
 
             
@@ -132,7 +140,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Track.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Chef.exists");
                 
 
             
@@ -140,7 +148,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Track.updateAll");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Chef.findById");
                 
 
             
@@ -148,7 +156,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Track.deleteById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Chef.find");
                 
 
             
@@ -156,7 +164,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Track.count");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Chef.findOne");
                 
 
             
@@ -164,7 +172,31 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:trackId", "PUT"), "Track.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Chef.updateAll");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Chef.deleteById");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Chef.count");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chefId", "PUT"), "Chef.prototype.updateAttributes");
                 
 
             
@@ -174,7 +206,7 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Track.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Chef.getSchema");
                 
 
             
@@ -182,29 +214,9 @@ public class TrackRepository extends ModelRepository<Track> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Track.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Chef.getAbsoluteSchema");
                 
 
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -243,13 +255,19 @@ public class TrackRepository extends ModelRepository<Track> {
     
         
             //Method get__customer definition
-            public void get__customer(  String trackId,  Boolean refresh, final ObjectCallback<Customer> callback){
+            public void get__customer(  String chefId,  Boolean refresh, final ObjectCallback<Customer> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("trackId", trackId);
+                        hashMapObject.put("chefId", chefId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -265,6 +283,8 @@ public class TrackRepository extends ModelRepository<Track> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -280,6 +300,8 @@ public class TrackRepository extends ModelRepository<Track> {
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -293,14 +315,20 @@ public class TrackRepository extends ModelRepository<Track> {
         
     
         
-            //Method get__eventType definition
-            public void get__eventType(  String trackId,  Boolean refresh, final ObjectCallback<EventType> callback){
+            //Method get__popularities definition
+            public void get__popularities(  String chefId,  Boolean refresh, final ObjectCallback<Popularity> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("trackId", trackId);
+                        hashMapObject.put("chefId", chefId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -311,33 +339,205 @@ public class TrackRepository extends ModelRepository<Track> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__eventType", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__popularities", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EventTypeRepository eventTypeRepo = getRestAdapter().createRepository(EventTypeRepository.class);
+                                    PopularityRepository popularityRepo = getRestAdapter().createRepository(PopularityRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EventType eventType = eventTypeRepo.createObject(result);
-                                    callback.onSuccess(eventType);
+                                    Popularity popularity = popularityRepo.createObject(result);
+                                    callback.onSuccess(popularity);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
 
                 
 
-            }//Method get__eventType definition ends here..
+            }//Method get__popularities definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__popularities definition
+            public void create__popularities(  String chefId,  Map<String,  ? extends Object> data, final ObjectCallback<Popularity> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("chefId", chefId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__popularities", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    PopularityRepository popularityRepo = getRestAdapter().createRepository(PopularityRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Popularity popularity = popularityRepo.createObject(result);
+                                    callback.onSuccess(popularity);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__popularities definition ends here..
+
+            
+
+        
+    
+        
+            //Method update__popularities definition
+            public void update__popularities(  String chefId,  Map<String,  ? extends Object> data, final ObjectCallback<Popularity> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("chefId", chefId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__update__popularities", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    PopularityRepository popularityRepo = getRestAdapter().createRepository(PopularityRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Popularity popularity = popularityRepo.createObject(result);
+                                    callback.onSuccess(popularity);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method update__popularities definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroy__popularities definition
+            public void destroy__popularities(  String chefId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("chefId", chefId);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroy__popularities", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroy__popularities definition ends here..
 
             
 
@@ -345,7 +545,13 @@ public class TrackRepository extends ModelRepository<Track> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Chef> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -365,21 +571,25 @@ public class TrackRepository extends ModelRepository<Track> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
+                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Track track = trackRepo.createObject(result);
-                                    callback.onSuccess(track);
+                                    Chef chef = chefRepo.createObject(result);
+                                    callback.onSuccess(chef);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -395,7 +605,13 @@ public class TrackRepository extends ModelRepository<Track> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Chef> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -415,21 +631,25 @@ public class TrackRepository extends ModelRepository<Track> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
+                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Track track = trackRepo.createObject(result);
-                                    callback.onSuccess(track);
+                                    Chef chef = chefRepo.createObject(result);
+                                    callback.onSuccess(chef);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -444,7 +664,13 @@ public class TrackRepository extends ModelRepository<Track> {
     
         
             //Method exists definition
-            public void exists(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void exists(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -464,6 +690,8 @@ public class TrackRepository extends ModelRepository<Track> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -471,6 +699,8 @@ public class TrackRepository extends ModelRepository<Track> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -485,7 +715,13 @@ public class TrackRepository extends ModelRepository<Track> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Track> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Chef> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -507,21 +743,25 @@ public class TrackRepository extends ModelRepository<Track> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
+                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Track track = trackRepo.createObject(result);
-                                    callback.onSuccess(track);
+                                    Chef chef = chefRepo.createObject(result);
+                                    callback.onSuccess(chef);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -536,7 +776,13 @@ public class TrackRepository extends ModelRepository<Track> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Track> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Chef> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -555,6 +801,8 @@ public class TrackRepository extends ModelRepository<Track> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -563,18 +811,20 @@ public class TrackRepository extends ModelRepository<Track> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Track> trackList = new ArrayList<Track>();
-                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
+                                    List<Chef> chefList = new ArrayList<Chef>();
+                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Track track = trackRepo.createObject(obj);
-                                        trackList.add(track);
+                                        Chef chef = chefRepo.createObject(obj);
+                                        chefList.add(chef);
                                     }
-                                    callback.onSuccess(trackList);
+                                    callback.onSuccess(chefList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -587,7 +837,13 @@ public class TrackRepository extends ModelRepository<Track> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Track> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Chef> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -607,21 +863,25 @@ public class TrackRepository extends ModelRepository<Track> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
+                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Track track = trackRepo.createObject(result);
-                                    callback.onSuccess(track);
+                                    Chef chef = chefRepo.createObject(result);
+                                    callback.onSuccess(chef);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -636,7 +896,13 @@ public class TrackRepository extends ModelRepository<Track> {
     
         
             //Method updateAll definition
-            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final Adapter.JsonObjectCallback  callback ){
+            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -658,6 +924,8 @@ public class TrackRepository extends ModelRepository<Track> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -665,6 +933,8 @@ public class TrackRepository extends ModelRepository<Track> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -679,7 +949,13 @@ public class TrackRepository extends ModelRepository<Track> {
     
         
             //Method deleteById definition
-            public void deleteById(  String id, final Adapter.JsonObjectCallback  callback ){
+            public void deleteById(  String id, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -699,6 +975,8 @@ public class TrackRepository extends ModelRepository<Track> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -706,6 +984,8 @@ public class TrackRepository extends ModelRepository<Track> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -720,7 +1000,13 @@ public class TrackRepository extends ModelRepository<Track> {
     
         
             //Method count definition
-            public void count(  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            public void count(  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -740,6 +1026,8 @@ public class TrackRepository extends ModelRepository<Track> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -747,6 +1035,8 @@ public class TrackRepository extends ModelRepository<Track> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -761,13 +1051,19 @@ public class TrackRepository extends ModelRepository<Track> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String trackId,  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
+            public void updateAttributes(  String chefId,  Map<String,  ? extends Object> data, final ObjectCallback<Chef> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("trackId", trackId);
+                        hashMapObject.put("chefId", chefId);
                 
                         hashMapObject.putAll(data);
                 
@@ -783,21 +1079,25 @@ public class TrackRepository extends ModelRepository<Track> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
+                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Track track = trackRepo.createObject(result);
-                                    callback.onSuccess(track);
+                                    Chef chef = chefRepo.createObject(result);
+                                    callback.onSuccess(chef);
 
                                 }else{
                                     callback.onSuccess(null);
                                 }
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -814,7 +1114,13 @@ public class TrackRepository extends ModelRepository<Track> {
     
         
             //Method getSchema definition
-            public void getSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -832,6 +1138,8 @@ public class TrackRepository extends ModelRepository<Track> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -839,6 +1147,8 @@ public class TrackRepository extends ModelRepository<Track> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -853,7 +1163,13 @@ public class TrackRepository extends ModelRepository<Track> {
     
         
             //Method getAbsoluteSchema definition
-            public void getAbsoluteSchema( final Adapter.JsonObjectCallback  callback ){
+            public void getAbsoluteSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -871,6 +1187,8 @@ public class TrackRepository extends ModelRepository<Track> {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -878,6 +1196,8 @@ public class TrackRepository extends ModelRepository<Track> {
                             
                                 callback.onSuccess(response);
                             
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 
@@ -888,26 +1208,6 @@ public class TrackRepository extends ModelRepository<Track> {
 
             
 
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
         
     
         

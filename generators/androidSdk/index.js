@@ -116,6 +116,42 @@ var generateDataList = function(app, modelsRestDefinition){
 };
 
 
+var generateCustomCallbacks = function(app, modelsRestDefinition){
+    //Compile the EJS template..
+    var DataListCallback             = path.join(__dirname, constants.javaTemplates, "DataListCallback.ejs");
+    var DataListCallbackInterface    = path.join(__dirname, constants.javaTemplates, "DataListCallbackInterface.ejs");
+    
+    var ObjectCallback               = path.join(__dirname, constants.javaTemplates, "ObjectCallback.ejs");
+    var ObjectCallbackInterface      = path.join(__dirname, constants.javaTemplates, "ObjectCallbackInterface.ejs");
+
+    var VoidCallback               = path.join(__dirname, constants.javaTemplates, "VoidCallback.ejs");
+    var VoidCallbackInterface      = path.join(__dirname, constants.javaTemplates, "VoidCallbackInterface.ejs");
+    
+    //List path for adding list and subscribers..
+    var AndroidListPath       = path.join(__dirname, constants.androidMainPath, "callbacks");
+    //Clean model folder and add new dir.
+    rimraf.sync(AndroidListPath);
+    mkdirp.sync(AndroidListPath);
+
+    //Now write DataListCallback.java to the file..
+    compileAndWrite({}, ListTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("DataListCallback") +".java");
+    //Add the listen template..
+    compileAndWrite({}, ListenTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("DataListCallbackInterface") +".java");
+
+    //Now write DataListCallback.java to the file..
+    compileAndWrite({}, ListTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("ObjectCallback") +".java");
+    //Add the listen template..
+    compileAndWrite({}, ListenTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("ObjectCallbackInterface") +".java");
+
+    //Now write DataListCallback.java to the file..
+    compileAndWrite({}, ListTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("VoidCallback") +".java");
+    //Add the listen template..
+    compileAndWrite({}, ListenTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("VoidCallbackInterface") +".java");
+
+
+};
+
+
 //Custom Base Model.java and User.java
 var generateCustomModel = function(app, modelsRestDefinition){
     //Compile the EJS template..
@@ -140,7 +176,7 @@ var generateCustomModel = function(app, modelsRestDefinition){
 
 
 //Compile the EJS templates and write to destination..
-var compileAndWrite(model, templatePath, destinationFolder, fileName){
+var compileAndWrite = function(model, templatePath, destinationFolder, fileName){
     //Now compile each models and start writing it to the models directory..
     //First read the template file
     var modelTemplate = fs.readFileSync(
@@ -151,13 +187,13 @@ var compileAndWrite(model, templatePath, destinationFolder, fileName){
     var formattedModel = ejs.render(modelTemplate, {model: model});
     console.log(chalk.blue("\nCompiling Model Class -> " + fileName));
     //Now writing it to file and saving to model folder..
-    writeFile(path.join(destinationFolder, fileName), data);
+    writeFile(path.join(destinationFolder, fileName), formattedModel);
 
     
 }
 
 //Write file synronously..
-var writeFile(filePath, data){
+var writeFile = function(filePath, data){
     fs.writeFileSync(filePath, data, 'utf8'
     );
 }
@@ -176,6 +212,8 @@ var init  = function(){
     generateDataList(app, modelsRestDefinition);
     //Creating custom loopback models base java class..Model.java
     generateCustomModel(app, modelsRestDefinition);
+    //Generate Custom Callbacks
+    generateCustomCallbacks(app, modelsRestDefinition);
 
 };
 

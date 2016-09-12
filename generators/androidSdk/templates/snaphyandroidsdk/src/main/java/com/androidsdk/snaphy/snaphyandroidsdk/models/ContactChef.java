@@ -25,9 +25,16 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.FacebookAccessTokenRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.ContactChefRepository;
 
 //Now import repository of related models..
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
+            
+
+        
+    
 
     
             import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
@@ -43,7 +50,7 @@ import java.util.Map;
 
 
 
-public class FacebookAccessToken extends Model {
+public class ContactChef extends Model {
 
 
     //For converting all model values to hashMap
@@ -58,9 +65,9 @@ public class FacebookAccessToken extends Model {
         }
     }
 
-    private FacebookAccessToken that ;
+    private ContactChef that ;
 
-    public FacebookAccessToken (){
+    public ContactChef (){
         that = this;
     }
 
@@ -68,17 +75,17 @@ public class FacebookAccessToken extends Model {
         
             
             
-                private String FbUserId;
+                private String message;
                 /* Adding Getter and Setter methods */
-                public String getFbUserId(){
-                    return FbUserId;
+                public String getMessage(){
+                    return message;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setFbUserId(String FbUserId){
-                    this.FbUserId = FbUserId;
+                public void setMessage(String message){
+                    this.message = message;
                     //Update hashMap value..
-                    hashMap.put("FbUserId", FbUserId);
+                    hashMap.put("message", message);
                 }
 
             
@@ -91,40 +98,17 @@ public class FacebookAccessToken extends Model {
         
             
             
-                private String token;
+                private String added;
                 /* Adding Getter and Setter methods */
-                public String getToken(){
-                    return token;
+                public String getAdded(){
+                    return added;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setToken(String token){
-                    this.token = token;
+                public void setAdded(String added){
+                    this.added = added;
                     //Update hashMap value..
-                    hashMap.put("token", token);
-                }
-
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-                private String expires;
-                /* Adding Getter and Setter methods */
-                public String getExpires(){
-                    return expires;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setExpires(String expires){
-                    this.expires = expires;
-                    //Update hashMap value..
-                    hashMap.put("expires", expires);
+                    hashMap.put("added", added);
                 }
 
             
@@ -145,20 +129,6 @@ public class FacebookAccessToken extends Model {
     
         
             
-            
-                private String type;
-                /* Adding Getter and Setter methods */
-                public String getType(){
-                    return type;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setType(String type){
-                    this.type = type;
-                    //Update hashMap value..
-                    hashMap.put("type", type);
-                }
-
             
             
             
@@ -182,6 +152,147 @@ public class FacebookAccessToken extends Model {
 
 
     //Now adding relations between related models
+    
+        
+                
+                    //Define belongsTo relation method here..
+                    private transient Customer  chef ;
+
+                    public Customer getChef() {
+                        return chef;
+                    }
+
+                    public void setChef(Customer chef) {
+                        this.chef = chef;
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setChef(Map<String, Object> chef) {
+                        //First create a dummy Repo class object for customer.
+                        CustomerRepository chefRepository = new CustomerRepository();
+                        Customer chef1 = chefRepository.createObject(chef);
+                        setChef(chef1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setChef(HashMap<String, Object> chef) {
+                        //First create a dummy Repo class object for customer.
+                        CustomerRepository chefRepository = new CustomerRepository();
+                        Customer chef1 = chefRepository.createObject(chef);
+                        setChef(chef1);
+                    }
+
+                    //Adding relation method..
+                    public void addRelation(Customer chef) {
+                        that.setChef(chef);
+                    }
+
+
+
+                
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                    
+
+                                    //Write the method here..
+                                    public void get__chef( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final ContactChefRepository  contactChefRepo = restAdapter.createRepository(ContactChefRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        contactChefRepo.get__chef( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Customer object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                 
+                 
+             
+          
     
         
                 
@@ -232,7 +343,9 @@ public class FacebookAccessToken extends Model {
                     //Now add instance methods to fetch the related belongsTo Model..
                     
 
-                    
+                     
+                            
+                        
 
                                     //Write the method here..
                                     public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
@@ -240,7 +353,7 @@ public class FacebookAccessToken extends Model {
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final FacebookAccessTokenRepository  facebookAccessTokenRepo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+                                        final ContactChefRepository  contactChefRepo = restAdapter.createRepository(ContactChefRepository.class);
                                         
                                         
                                         
@@ -249,7 +362,7 @@ public class FacebookAccessToken extends Model {
 
 
 
-                                        facebookAccessTokenRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
+                                        contactChefRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
                                             
 
                                             
@@ -289,6 +402,9 @@ public class FacebookAccessToken extends Model {
                                     } //method def ends here.
                                  
                             
+                        
+                        
+                        
                         
                         
                         
