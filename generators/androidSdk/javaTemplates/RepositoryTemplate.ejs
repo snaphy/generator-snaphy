@@ -152,6 +152,7 @@ import com.strongloop.android.loopback.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
@@ -631,6 +632,8 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
             var callbackType;
             //Type name like String etc..
             var type;
+            
+
             var method = restMethodObj;
             if(method.returns.length && Object.keys(method.returns[0]).length !== 0){
                 if(method.returns[0].type instanceof Array){
@@ -642,10 +645,12 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                         callbackType = "ListCallback";
                     }else{
                         returnType = type;
-                        methodString = methodString  +  "final Adapter.JsonArrayCallback callback)";
-                        //methodString = methodString  +  "final ObjectCallback<" + type + "> callback)";
+                        //methodString = methodString  +  "final Adapter.JsonArrayCallback callback)";
+                        methodString = methodString  +  "final ObjectCallback<JSONArray> callback)";
+                    
                         callback = "new Adapter.JsonArrayCallback()";
                         callbackType = "ListCallback";
+                        
                     }
                 }else{
 
@@ -658,11 +663,14 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                     }else{
                         returnType = type;
 
-                        methodString = methodString + "final Adapter.JsonObjectCallback  callback )";
+                        //methodString = methodString + "final Adapter.JsonObjectCallback  callback )";
+                        methodString = methodString + "final ObjectCallback<JSONObject>  callback )";
                         //methodString = methodString  +  "final ObjectCallback<" + type + "> callback)";
                         callback = "new Adapter.JsonObjectCallback()";
+                        
                         //callback = "ObjectCallback<" + type + "> ";
                         callbackType = "ObjectCallback";
+                        
                     }
 
                 }
@@ -681,6 +689,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                 Call the onBefore event
                 */
                 callback.onBefore();
+                
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -697,9 +706,9 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                     invokeStaticMethod("<%- staticMethodName %>", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
