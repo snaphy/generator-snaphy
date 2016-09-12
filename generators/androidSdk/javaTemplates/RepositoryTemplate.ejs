@@ -221,9 +221,9 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
     			cachedCurrentUser = user;
     		}
 
-    		<!-- public void setCurrentUserId(Object id){
+    		/* public void setCurrentUserId(Object id){
     			super.setCurrentUserId(id);
-    		} -->
+    		} */
 
             public void findCurrentUser(final ObjectCallback<<%- modelName %>> callback){
                 if(getCurrentUserId() == null){
@@ -251,7 +251,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                 return currentUserId;
             }
 
-            protected void setCurrentUserId(Object currentUserId){
+            public void setCurrentUserId(Object currentUserId){
                 this.currentUserId = currentUserId;
                 cachedCurrentUser = null;
                 saveCurrentUserId();
@@ -270,7 +270,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                 if(isCurrentUserIdLoaded) return;
 
                 isCurrentUserIdLoaded = true;
-                String json = getSharedPreferences.getString(PROPERTY_CURRENT_USER_ID, null);
+                String json = getSharedPreferences().getString(PROPERTY_CURRENT_USER_ID, null);
                 if(json == null){
                     return;
                 }

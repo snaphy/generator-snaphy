@@ -26,7 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.EmailInfo;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Notification;
 
 //Now import model of related models..
 
@@ -34,11 +34,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.EmailInfo;
 
 
 
-public class EmailInfoRepository extends ModelRepository<EmailInfo> {
+public class NotificationRepository extends ModelRepository<Notification> {
 
 
-    public EmailInfoRepository(){
-        super("EmailInfo", null, EmailInfo.class);
+    public NotificationRepository(){
+        super("Notification", null, Notification.class);
     }
 
 
@@ -54,7 +54,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "EmailInfo.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "notification.create");
                 
 
             
@@ -62,7 +62,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "EmailInfo.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "notification.create");
                 
 
             
@@ -70,7 +70,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "EmailInfo.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "notification.upsert");
                 
 
             
@@ -78,7 +78,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "EmailInfo.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "notification.exists");
                 
 
             
@@ -86,7 +86,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "EmailInfo.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "notification.findById");
                 
 
             
@@ -94,7 +94,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "EmailInfo.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "notification.find");
                 
 
             
@@ -102,7 +102,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "EmailInfo.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "notification.findOne");
                 
 
             
@@ -110,7 +110,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "EmailInfo.updateAll");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "notification.updateAll");
                 
 
             
@@ -118,7 +118,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "EmailInfo.deleteById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "notification.deleteById");
                 
 
             
@@ -126,7 +126,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "EmailInfo.count");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "notification.count");
                 
 
             
@@ -134,7 +134,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:emailInfoId", "PUT"), "EmailInfo.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:notificationId", "PUT"), "notification.prototype.updateAttributes");
                 
 
             
@@ -144,7 +144,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "EmailInfo.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "notification.getSchema");
                 
 
             
@@ -152,7 +152,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "EmailInfo.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "notification.getAbsoluteSchema");
                 
 
             
@@ -166,8 +166,9 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
     //override getNameForRestUrlMethod
     public String  getNameForRestUrl() {
         
-                return "EmailInfos";
-            
+            //call super method instead..
+            return super.getNameForRestUrl();
+        
     }
 
 
@@ -180,7 +181,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<EmailInfo> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Notification> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -206,10 +207,10 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
+                                    NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EmailInfo emailInfo = emailInfoRepo.createObject(result);
-                                    callback.onSuccess(emailInfo);
+                                    Notification notification = notificationRepo.createObject(result);
+                                    callback.onSuccess(notification);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -230,7 +231,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<EmailInfo> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Notification> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -256,10 +257,10 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
+                                    NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EmailInfo emailInfo = emailInfoRepo.createObject(result);
-                                    callback.onSuccess(emailInfo);
+                                    Notification notification = notificationRepo.createObject(result);
+                                    callback.onSuccess(notification);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -320,7 +321,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<EmailInfo> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Notification> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -348,10 +349,10 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
+                                    NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EmailInfo emailInfo = emailInfoRepo.createObject(result);
-                                    callback.onSuccess(emailInfo);
+                                    Notification notification = notificationRepo.createObject(result);
+                                    callback.onSuccess(notification);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -371,7 +372,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<EmailInfo> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Notification> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -398,14 +399,14 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<EmailInfo> emailInfoList = new ArrayList<EmailInfo>();
-                                    EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
+                                    List<Notification> notificationList = new ArrayList<Notification>();
+                                    NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        EmailInfo emailInfo = emailInfoRepo.createObject(obj);
-                                        emailInfoList.add(emailInfo);
+                                        Notification notification = notificationRepo.createObject(obj);
+                                        notificationList.add(notification);
                                     }
-                                    callback.onSuccess(emailInfoList);
+                                    callback.onSuccess(notificationList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -422,7 +423,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<EmailInfo> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Notification> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -448,10 +449,10 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
+                                    NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EmailInfo emailInfo = emailInfoRepo.createObject(result);
-                                    callback.onSuccess(emailInfo);
+                                    Notification notification = notificationRepo.createObject(result);
+                                    callback.onSuccess(notification);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -596,13 +597,13 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String emailInfoId,  Map<String,  ? extends Object> data, final ObjectCallback<EmailInfo> callback){
+            public void updateAttributes(  String notificationId,  Map<String,  ? extends Object> data, final ObjectCallback<Notification> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("emailInfoId", emailInfoId);
+                        hashMapObject.put("notificationId", notificationId);
                 
                         hashMapObject.putAll(data);
                 
@@ -624,10 +625,10 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
+                                    NotificationRepository notificationRepo = getRestAdapter().createRepository(NotificationRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    EmailInfo emailInfo = emailInfoRepo.createObject(result);
-                                    callback.onSuccess(emailInfo);
+                                    Notification notification = notificationRepo.createObject(result);
+                                    callback.onSuccess(notification);
 
                                 }else{
                                     callback.onSuccess(null);

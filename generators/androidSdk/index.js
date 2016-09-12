@@ -48,23 +48,8 @@ var generateRepository = function(app, modelsRestDefinition){
                     allModels: app.models,
                     allDef: modelsRestDefinition
                 };
-
-                //Now compile each Repository and start writing it to the Repository directory..
-                //First read the template file
-                var repoTemplate = fs.readFileSync(
-                   RepositoryTemplatePath,
-                   { encoding: 'utf-8' }
-                );
-
-                var formattedRepo = ejs.render(repoTemplate, {model: model});
-                console.log(chalk.red("\nCompiling Repository Class -> " + helper.capitalizeFirstLetter(modelName) + "Repository.java" ));
-                //Now writing it to file and saving to model folder..
-
-                fs.writeFileSync(
-                    path.join(AndroidRepositoryPath, helper.capitalizeFirstLetter(modelName) + "Repository.java") ,
-                    formattedRepo,
-                    'utf8'
-                );
+                //Now compiler ejs and write..
+                compileAndWrite(model, RepositoryTemplatePath, AndroidRepositoryPath, helper.capitalizeFirstLetter(modelName) + "Repository.java");
             }
         }
     }
@@ -105,27 +90,34 @@ var generateModels = function(app, modelsRestDefinition){
                 };
                 //console.log(modelsRestDefinition);
 
-
-                //Now compile each models and start writing it to the models directory..
-                //First read the template file
-                var modelTemplate = fs.readFileSync(
-                   ModelTemplatePath,
-                   { encoding: 'utf-8' }
-                );
-
-                var formattedModel = ejs.render(modelTemplate, {model: model});
-                console.log(chalk.blue("\nCompiling Model Class -> " + helper.capitalizeFirstLetter(modelName) +".java"));
-                //Now writing it to file and saving to model folder..
-
-                fs.writeFileSync(
-                    path.join(AndroidModelPath, helper.capitalizeFirstLetter(modelName) + ".java") ,
-                    formattedModel,
-                    'utf8'
-                );
+                compileAndWrite(model, ModelTemplatePath, AndroidModelPath, helper.capitalizeFirstLetter(modelName) +".java");
             }
         }
     }
 };
+
+//Compile the EJS templates and write to destination..
+var compileAndWrite(model, templatePath, destinationFolder, fileName){
+    //Now compile each models and start writing it to the models directory..
+    //First read the template file
+    var modelTemplate = fs.readFileSync(
+       templatePath,
+       { encoding: 'utf-8' }
+    );
+
+    var formattedModel = ejs.render(modelTemplate, {model: model});
+    console.log(chalk.blue("\nCompiling Model Class -> " + fileName));
+    //Now writing it to file and saving to model folder..
+    writeFile(path.join(destinationFolder, fileName), data);
+
+    
+}
+
+//Write file synronously..
+var writeFile(filePath, data){
+    fs.writeFileSync(filePath, data, 'utf8'
+    );
+}
 
 
 

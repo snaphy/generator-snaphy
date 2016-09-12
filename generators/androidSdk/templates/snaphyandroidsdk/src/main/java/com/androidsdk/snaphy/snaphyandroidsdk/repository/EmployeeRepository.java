@@ -21,6 +21,10 @@ import java.util.HashMap;
 import com.strongloop.android.loopback.UserRepository;
 import com.strongloop.android.loopback.AccessTokenRepository;
 import com.strongloop.android.loopback.AccessToken;
+import android.content.SharedPreferences;
+import android.util.Log;
+import org.json.JSONException;
+import android.content.Context;
 
 
 
@@ -67,9 +71,9 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     			cachedCurrentUser = user;
     		}
 
-    		public void setCurrentUserId(Object id){
+    		/* public void setCurrentUserId(Object id){
     			super.setCurrentUserId(id);
-    		}
+    		} */
 
             public void findCurrentUser(final ObjectCallback<Employee> callback){
                 if(getCurrentUserId() == null){
@@ -97,7 +101,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                 return currentUserId;
             }
 
-            protected void setCurrentUserId(Object currentUserId){
+            public void setCurrentUserId(Object currentUserId){
                 this.currentUserId = currentUserId;
                 cachedCurrentUser = null;
                 saveCurrentUserId();
@@ -116,7 +120,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                 if(isCurrentUserIdLoaded) return;
 
                 isCurrentUserIdLoaded = true;
-                String json = getSharedPreferences.getString(PROPERTY_CURRENT_USER_ID, null);
+                String json = getSharedPreferences().getString(PROPERTY_CURRENT_USER_ID, null);
                 if(json == null){
                     return;
                 }
@@ -132,6 +136,11 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                     String msg = "Cannot parse user id '" + json + "'";
                     Log.e("Snaphy", msg, e);
                 }
+            }
+
+            private SharedPreferences getSharedPreferences() {
+                return getApplicationContext().getSharedPreferences(
+                    SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
             }
 
 
@@ -368,6 +377,14 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/isAdmin", "POST"), "Employee.isAdmin");
                 
 
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -1572,6 +1589,14 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
 
             
 
+        
+    
+        
+    
+        
+    
+        
+    
         
     
         

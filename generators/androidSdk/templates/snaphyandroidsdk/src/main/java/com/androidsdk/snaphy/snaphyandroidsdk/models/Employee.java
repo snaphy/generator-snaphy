@@ -280,6 +280,15 @@ public class Employee extends com.strongloop.android.loopback.User {
 
         
     
+        
+            
+            
+            
+            
+            
+
+        
+    
 
 
     
@@ -532,6 +541,10 @@ public class Employee extends com.strongloop.android.loopback.User {
                             
                          
                             
+                        
+                        
+                        
+                        
                         
                         
                         

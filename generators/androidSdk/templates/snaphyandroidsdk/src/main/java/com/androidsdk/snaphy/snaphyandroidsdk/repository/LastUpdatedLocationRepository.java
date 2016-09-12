@@ -26,7 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.ContactChef;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.LastUpdatedLocation;
 
 //Now import model of related models..
 
@@ -37,22 +37,15 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.ContactChef;
         
     
 
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
-            
-        
-    
 
 
 
 
+public class LastUpdatedLocationRepository extends ModelRepository<LastUpdatedLocation> {
 
-public class ContactChefRepository extends ModelRepository<ContactChef> {
 
-
-    public ContactChefRepository(){
-        super("ContactChef", null, ContactChef.class);
+    public LastUpdatedLocationRepository(){
+        super("LastUpdatedLocation", null, LastUpdatedLocation.class);
     }
 
 
@@ -68,7 +61,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:contactChefId/chef", "GET"), "ContactChef.prototype.__get__chef");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:lastUpdatedLocationId/customer", "GET"), "LastUpdatedLocation.prototype.__get__customer");
                 
 
             
@@ -76,7 +69,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:contactChefId/customer", "GET"), "ContactChef.prototype.__get__customer");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "LastUpdatedLocation.create");
                 
 
             
@@ -84,7 +77,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "ContactChef.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "LastUpdatedLocation.create");
                 
 
             
@@ -92,7 +85,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "ContactChef.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "LastUpdatedLocation.upsert");
                 
 
             
@@ -100,7 +93,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "ContactChef.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "LastUpdatedLocation.exists");
                 
 
             
@@ -108,7 +101,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "ContactChef.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "LastUpdatedLocation.findById");
                 
 
             
@@ -116,7 +109,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "ContactChef.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "LastUpdatedLocation.find");
                 
 
             
@@ -124,7 +117,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "ContactChef.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "LastUpdatedLocation.findOne");
                 
 
             
@@ -132,7 +125,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "ContactChef.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "LastUpdatedLocation.updateAll");
                 
 
             
@@ -140,7 +133,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "ContactChef.updateAll");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "LastUpdatedLocation.deleteById");
                 
 
             
@@ -148,7 +141,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "ContactChef.deleteById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "LastUpdatedLocation.count");
                 
 
             
@@ -156,15 +149,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "ContactChef.count");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:contactChefId", "PUT"), "ContactChef.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:lastUpdatedLocationId", "PUT"), "LastUpdatedLocation.prototype.updateAttributes");
                 
 
             
@@ -174,7 +159,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "ContactChef.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "LastUpdatedLocation.getSchema");
                 
 
             
@@ -182,15 +167,9 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "ContactChef.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "LastUpdatedLocation.getAbsoluteSchema");
                 
 
-            
-        
-            
-        
-            
-        
             
         
             
@@ -226,65 +205,14 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
     
         
-            //Method get__chef definition
-            public void get__chef(  String contactChefId,  Boolean refresh, final ObjectCallback<Customer> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("contactChefId", contactChefId);
-                
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__chef", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Customer customer = customerRepo.createObject(result);
-                                    callback.onSuccess(customer);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method get__chef definition ends here..
-
-            
-
-        
-    
-        
             //Method get__customer definition
-            public void get__customer(  String contactChefId,  Boolean refresh, final ObjectCallback<Customer> callback){
+            public void get__customer(  String lastUpdatedLocationId,  Boolean refresh, final ObjectCallback<Customer> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("contactChefId", contactChefId);
+                        hashMapObject.put("lastUpdatedLocationId", lastUpdatedLocationId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -329,7 +257,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<LastUpdatedLocation> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -355,10 +283,10 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
+                                    LastUpdatedLocationRepository lastUpdatedLocationRepo = getRestAdapter().createRepository(LastUpdatedLocationRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
+                                    LastUpdatedLocation lastUpdatedLocation = lastUpdatedLocationRepo.createObject(result);
+                                    callback.onSuccess(lastUpdatedLocation);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -379,7 +307,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<LastUpdatedLocation> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -405,10 +333,10 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
+                                    LastUpdatedLocationRepository lastUpdatedLocationRepo = getRestAdapter().createRepository(LastUpdatedLocationRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
+                                    LastUpdatedLocation lastUpdatedLocation = lastUpdatedLocationRepo.createObject(result);
+                                    callback.onSuccess(lastUpdatedLocation);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -469,7 +397,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<ContactChef> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<LastUpdatedLocation> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -497,10 +425,10 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
+                                    LastUpdatedLocationRepository lastUpdatedLocationRepo = getRestAdapter().createRepository(LastUpdatedLocationRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
+                                    LastUpdatedLocation lastUpdatedLocation = lastUpdatedLocationRepo.createObject(result);
+                                    callback.onSuccess(lastUpdatedLocation);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -520,7 +448,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<ContactChef> callback){
+            public void find(  Map<String,  ? extends Object> filter, final ListCallback<LastUpdatedLocation> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -547,14 +475,14 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<ContactChef> contactChefList = new ArrayList<ContactChef>();
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
+                                    List<LastUpdatedLocation> lastUpdatedLocationList = new ArrayList<LastUpdatedLocation>();
+                                    LastUpdatedLocationRepository lastUpdatedLocationRepo = getRestAdapter().createRepository(LastUpdatedLocationRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        ContactChef contactChef = contactChefRepo.createObject(obj);
-                                        contactChefList.add(contactChef);
+                                        LastUpdatedLocation lastUpdatedLocation = lastUpdatedLocationRepo.createObject(obj);
+                                        lastUpdatedLocationList.add(lastUpdatedLocation);
                                     }
-                                    callback.onSuccess(contactChefList);
+                                    callback.onSuccess(lastUpdatedLocationList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -571,7 +499,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<ContactChef> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<LastUpdatedLocation> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -597,10 +525,10 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
+                                    LastUpdatedLocationRepository lastUpdatedLocationRepo = getRestAdapter().createRepository(LastUpdatedLocationRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
+                                    LastUpdatedLocation lastUpdatedLocation = lastUpdatedLocationRepo.createObject(result);
+                                    callback.onSuccess(lastUpdatedLocation);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -745,13 +673,13 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String contactChefId,  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
+            public void updateAttributes(  String lastUpdatedLocationId,  Map<String,  ? extends Object> data, final ObjectCallback<LastUpdatedLocation> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("contactChefId", contactChefId);
+                        hashMapObject.put("lastUpdatedLocationId", lastUpdatedLocationId);
                 
                         hashMapObject.putAll(data);
                 
@@ -773,10 +701,10 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
+                                    LastUpdatedLocationRepository lastUpdatedLocationRepo = getRestAdapter().createRepository(LastUpdatedLocationRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
+                                    LastUpdatedLocation lastUpdatedLocation = lastUpdatedLocationRepo.createObject(result);
+                                    callback.onSuccess(lastUpdatedLocation);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -872,12 +800,6 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
 
             
 
-        
-    
-        
-    
-        
-    
         
     
         

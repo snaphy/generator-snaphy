@@ -21,6 +21,10 @@ import java.util.HashMap;
 import com.strongloop.android.loopback.UserRepository;
 import com.strongloop.android.loopback.AccessTokenRepository;
 import com.strongloop.android.loopback.AccessToken;
+import android.content.SharedPreferences;
+import android.util.Log;
+import org.json.JSONException;
+import android.content.Context;
 
 
 
@@ -36,57 +40,22 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Recipe;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecipeRepository;
-            
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Comments;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CommentsRepository;
-            
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Wishlist;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.WishlistRepository;
-            
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Chef;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChefRepository;
-            
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.ContactChef;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ContactChefRepository;
-            
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Order;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.OrderRepository;
-            
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Course;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CourseRepository;
-            
-        
-    
-
-    
             import com.androidsdk.snaphy.snaphyandroidsdk.models.FacebookAccessToken;
             import com.androidsdk.snaphy.snaphyandroidsdk.repository.FacebookAccessTokenRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Track;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.TrackRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.LastUpdatedLocation;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.LastUpdatedLocationRepository;
             
         
     
@@ -116,9 +85,9 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     			cachedCurrentUser = user;
     		}
 
-    		public void setCurrentUserId(Object id){
+    		/* public void setCurrentUserId(Object id){
     			super.setCurrentUserId(id);
-    		}
+    		} */
 
             public void findCurrentUser(final ObjectCallback<Customer> callback){
                 if(getCurrentUserId() == null){
@@ -146,7 +115,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 return currentUserId;
             }
 
-            protected void setCurrentUserId(Object currentUserId){
+            public void setCurrentUserId(Object currentUserId){
                 this.currentUserId = currentUserId;
                 cachedCurrentUser = null;
                 saveCurrentUserId();
@@ -165,7 +134,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 if(isCurrentUserIdLoaded) return;
 
                 isCurrentUserIdLoaded = true;
-                String json = getSharedPreferences.getString(PROPERTY_CURRENT_USER_ID, null);
+                String json = getSharedPreferences().getString(PROPERTY_CURRENT_USER_ID, null);
                 if(json == null){
                     return;
                 }
@@ -181,6 +150,11 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     String msg = "Cannot parse user id '" + json + "'";
                     Log.e("Snaphy", msg, e);
                 }
+            }
+
+            private SharedPreferences getSharedPreferences() {
+                return getApplicationContext().getSharedPreferences(
+                    SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
             }
 
 
@@ -222,190 +196,6 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recipes/:fk", "GET"), "Customer.prototype.__findById__recipes");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recipes/:fk", "DELETE"), "Customer.prototype.__destroyById__recipes");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recipes/:fk", "PUT"), "Customer.prototype.__updateById__recipes");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/comments/:fk", "GET"), "Customer.prototype.__findById__comments");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/comments/:fk", "DELETE"), "Customer.prototype.__destroyById__comments");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/comments/:fk", "PUT"), "Customer.prototype.__updateById__comments");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/wishlists", "GET"), "Customer.prototype.__get__wishlists");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/wishlists", "POST"), "Customer.prototype.__create__wishlists");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/wishlists", "PUT"), "Customer.prototype.__update__wishlists");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/wishlists", "DELETE"), "Customer.prototype.__destroy__wishlists");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/chefs", "GET"), "Customer.prototype.__get__chefs");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/chefs", "POST"), "Customer.prototype.__create__chefs");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/chefs", "PUT"), "Customer.prototype.__update__chefs");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/chefs", "DELETE"), "Customer.prototype.__destroy__chefs");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/courses/:fk", "GET"), "Customer.prototype.__findById__courses");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/courses/:fk", "DELETE"), "Customer.prototype.__destroyById__courses");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/courses/:fk", "PUT"), "Customer.prototype.__updateById__courses");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/contactChefs/:fk", "GET"), "Customer.prototype.__findById__contactChefs");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/contactChefs/:fk", "DELETE"), "Customer.prototype.__destroyById__contactChefs");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/contactChefs/:fk", "PUT"), "Customer.prototype.__updateById__contactChefs");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/orders/:fk", "GET"), "Customer.prototype.__findById__orders");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/orders/:fk", "DELETE"), "Customer.prototype.__destroyById__orders");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/orders/:fk", "PUT"), "Customer.prototype.__updateById__orders");
-                
-
-            
-        
-            
-
-                
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/facebookAccessToken", "GET"), "Customer.prototype.__get__facebookAccessToken");
                 
 
@@ -431,6 +221,62 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/facebookAccessToken", "DELETE"), "Customer.prototype.__destroy__facebookAccessToken");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/track/:fk", "GET"), "Customer.prototype.__findById__track");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/track/:fk", "DELETE"), "Customer.prototype.__destroyById__track");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/track/:fk", "PUT"), "Customer.prototype.__updateById__track");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/lastUpdatedLocations", "GET"), "Customer.prototype.__get__lastUpdatedLocations");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/lastUpdatedLocations", "POST"), "Customer.prototype.__create__lastUpdatedLocations");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/lastUpdatedLocations", "PUT"), "Customer.prototype.__update__lastUpdatedLocations");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/lastUpdatedLocations", "DELETE"), "Customer.prototype.__destroy__lastUpdatedLocations");
                 
 
             
@@ -470,7 +316,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recipes", "GET"), "Customer.prototype.__get__recipes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/track", "GET"), "Customer.prototype.__get__track");
                 
 
             
@@ -478,7 +324,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recipes", "POST"), "Customer.prototype.__create__recipes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/track", "POST"), "Customer.prototype.__create__track");
                 
 
             
@@ -486,7 +332,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recipes", "DELETE"), "Customer.prototype.__delete__recipes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/track", "DELETE"), "Customer.prototype.__delete__track");
                 
 
             
@@ -494,135 +340,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recipes/count", "GET"), "Customer.prototype.__count__recipes");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/comments", "GET"), "Customer.prototype.__get__comments");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/comments", "POST"), "Customer.prototype.__create__comments");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/comments", "DELETE"), "Customer.prototype.__delete__comments");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/comments/count", "GET"), "Customer.prototype.__count__comments");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/courses", "GET"), "Customer.prototype.__get__courses");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/courses", "POST"), "Customer.prototype.__create__courses");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/courses", "DELETE"), "Customer.prototype.__delete__courses");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/courses/count", "GET"), "Customer.prototype.__count__courses");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/contactChefs", "GET"), "Customer.prototype.__get__contactChefs");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/contactChefs", "POST"), "Customer.prototype.__create__contactChefs");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/contactChefs", "DELETE"), "Customer.prototype.__delete__contactChefs");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/contactChefs/count", "GET"), "Customer.prototype.__count__contactChefs");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/orders", "GET"), "Customer.prototype.__get__orders");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/orders", "POST"), "Customer.prototype.__create__orders");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/orders", "DELETE"), "Customer.prototype.__delete__orders");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/orders/count", "GET"), "Customer.prototype.__count__orders");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/track/count", "GET"), "Customer.prototype.__count__track");
                 
 
             
@@ -758,6 +476,38 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
             
 
                 
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/requestOtp", "POST"), "Customer.requestOtp");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/loginWithCode", "POST"), "Customer.loginWithCode");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/search", "POST"), "Customer.search");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/sendAppLink", "POST"), "Customer.sendAppLink");
+                
+
+            
+        
+            
+
+                
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/loginWithGoogle", "POST"), "Customer.loginWithGoogle");
                 
 
@@ -769,26 +519,6 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/loginWithFb", "POST"), "Customer.loginWithFb");
                 
 
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
-            
-        
             
         
             
@@ -954,1094 +684,6 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
             }//Method updateById__accessTokens definition ends here..
-
-            
-
-        
-    
-        
-            //Method findById__recipes definition
-            public void findById__recipes(  String customerId,  String fk, final ObjectCallback<Recipe> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__findById__recipes", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Recipe recipe = recipeRepo.createObject(result);
-                                    callback.onSuccess(recipe);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method findById__recipes definition ends here..
-
-            
-
-        
-    
-        
-            //Method destroyById__recipes definition
-            public void destroyById__recipes(  String customerId,  String fk, final VoidCallback callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-                    invokeStaticMethod("prototype.__destroyById__recipes", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method destroyById__recipes definition ends here..
-
-            
-
-        
-    
-        
-            //Method updateById__recipes definition
-            public void updateById__recipes(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Recipe> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("fk", fk);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__updateById__recipes", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Recipe recipe = recipeRepo.createObject(result);
-                                    callback.onSuccess(recipe);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method updateById__recipes definition ends here..
-
-            
-
-        
-    
-        
-            //Method findById__comments definition
-            public void findById__comments(  String customerId,  String fk, final ObjectCallback<Comments> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__findById__comments", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Comments comments = commentsRepo.createObject(result);
-                                    callback.onSuccess(comments);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method findById__comments definition ends here..
-
-            
-
-        
-    
-        
-            //Method destroyById__comments definition
-            public void destroyById__comments(  String customerId,  String fk, final VoidCallback callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-                    invokeStaticMethod("prototype.__destroyById__comments", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method destroyById__comments definition ends here..
-
-            
-
-        
-    
-        
-            //Method updateById__comments definition
-            public void updateById__comments(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Comments> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("fk", fk);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__updateById__comments", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Comments comments = commentsRepo.createObject(result);
-                                    callback.onSuccess(comments);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method updateById__comments definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__wishlists definition
-            public void get__wishlists(  String customerId,  Boolean refresh, final ObjectCallback<Wishlist> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__wishlists", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    WishlistRepository wishlistRepo = getRestAdapter().createRepository(WishlistRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Wishlist wishlist = wishlistRepo.createObject(result);
-                                    callback.onSuccess(wishlist);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method get__wishlists definition ends here..
-
-            
-
-        
-    
-        
-            //Method create__wishlists definition
-            public void create__wishlists(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Wishlist> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__create__wishlists", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    WishlistRepository wishlistRepo = getRestAdapter().createRepository(WishlistRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Wishlist wishlist = wishlistRepo.createObject(result);
-                                    callback.onSuccess(wishlist);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method create__wishlists definition ends here..
-
-            
-
-        
-    
-        
-            //Method update__wishlists definition
-            public void update__wishlists(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Wishlist> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__update__wishlists", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    WishlistRepository wishlistRepo = getRestAdapter().createRepository(WishlistRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Wishlist wishlist = wishlistRepo.createObject(result);
-                                    callback.onSuccess(wishlist);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method update__wishlists definition ends here..
-
-            
-
-        
-    
-        
-            //Method destroy__wishlists definition
-            public void destroy__wishlists(  String customerId, final VoidCallback callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-
-                
-                    invokeStaticMethod("prototype.__destroy__wishlists", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method destroy__wishlists definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__chefs definition
-            public void get__chefs(  String customerId,  Boolean refresh, final ObjectCallback<Chef> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__chefs", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Chef chef = chefRepo.createObject(result);
-                                    callback.onSuccess(chef);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method get__chefs definition ends here..
-
-            
-
-        
-    
-        
-            //Method create__chefs definition
-            public void create__chefs(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Chef> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__create__chefs", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Chef chef = chefRepo.createObject(result);
-                                    callback.onSuccess(chef);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method create__chefs definition ends here..
-
-            
-
-        
-    
-        
-            //Method update__chefs definition
-            public void update__chefs(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Chef> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__update__chefs", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Chef chef = chefRepo.createObject(result);
-                                    callback.onSuccess(chef);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method update__chefs definition ends here..
-
-            
-
-        
-    
-        
-            //Method destroy__chefs definition
-            public void destroy__chefs(  String customerId, final VoidCallback callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-
-                
-                    invokeStaticMethod("prototype.__destroy__chefs", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method destroy__chefs definition ends here..
-
-            
-
-        
-    
-        
-            //Method findById__courses definition
-            public void findById__courses(  String customerId,  String fk, final ObjectCallback<Course> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__findById__courses", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Course course = courseRepo.createObject(result);
-                                    callback.onSuccess(course);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method findById__courses definition ends here..
-
-            
-
-        
-    
-        
-            //Method destroyById__courses definition
-            public void destroyById__courses(  String customerId,  String fk, final VoidCallback callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-                    invokeStaticMethod("prototype.__destroyById__courses", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method destroyById__courses definition ends here..
-
-            
-
-        
-    
-        
-            //Method updateById__courses definition
-            public void updateById__courses(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Course> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("fk", fk);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__updateById__courses", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Course course = courseRepo.createObject(result);
-                                    callback.onSuccess(course);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method updateById__courses definition ends here..
-
-            
-
-        
-    
-        
-            //Method findById__contactChefs definition
-            public void findById__contactChefs(  String customerId,  String fk, final ObjectCallback<ContactChef> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__findById__contactChefs", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method findById__contactChefs definition ends here..
-
-            
-
-        
-    
-        
-            //Method destroyById__contactChefs definition
-            public void destroyById__contactChefs(  String customerId,  String fk, final VoidCallback callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-                    invokeStaticMethod("prototype.__destroyById__contactChefs", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method destroyById__contactChefs definition ends here..
-
-            
-
-        
-    
-        
-            //Method updateById__contactChefs definition
-            public void updateById__contactChefs(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("fk", fk);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__updateById__contactChefs", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method updateById__contactChefs definition ends here..
-
-            
-
-        
-    
-        
-            //Method findById__orders definition
-            public void findById__orders(  String customerId,  String fk, final ObjectCallback<Order> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__findById__orders", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Order order = orderRepo.createObject(result);
-                                    callback.onSuccess(order);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method findById__orders definition ends here..
-
-            
-
-        
-    
-        
-            //Method destroyById__orders definition
-            public void destroyById__orders(  String customerId,  String fk, final VoidCallback callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-                    invokeStaticMethod("prototype.__destroyById__orders", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method destroyById__orders definition ends here..
-
-            
-
-        
-    
-        
-            //Method updateById__orders definition
-            public void updateById__orders(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Order> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("fk", fk);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__updateById__orders", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Order order = orderRepo.createObject(result);
-                                    callback.onSuccess(order);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method updateById__orders definition ends here..
 
             
 
@@ -2237,6 +879,337 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
     
         
+            //Method findById__track definition
+            public void findById__track(  String customerId,  String fk, final ObjectCallback<Track> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__findById__track", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Track track = trackRepo.createObject(result);
+                                    callback.onSuccess(track);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method findById__track definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__track definition
+            public void destroyById__track(  String customerId,  String fk, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__track", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__track definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__track definition
+            public void updateById__track(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__updateById__track", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Track track = trackRepo.createObject(result);
+                                    callback.onSuccess(track);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method updateById__track definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__lastUpdatedLocations definition
+            public void get__lastUpdatedLocations(  String customerId,  Boolean refresh, final ObjectCallback<LastUpdatedLocation> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__lastUpdatedLocations", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    LastUpdatedLocationRepository lastUpdatedLocationRepo = getRestAdapter().createRepository(LastUpdatedLocationRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    LastUpdatedLocation lastUpdatedLocation = lastUpdatedLocationRepo.createObject(result);
+                                    callback.onSuccess(lastUpdatedLocation);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method get__lastUpdatedLocations definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__lastUpdatedLocations definition
+            public void create__lastUpdatedLocations(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<LastUpdatedLocation> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__lastUpdatedLocations", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    LastUpdatedLocationRepository lastUpdatedLocationRepo = getRestAdapter().createRepository(LastUpdatedLocationRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    LastUpdatedLocation lastUpdatedLocation = lastUpdatedLocationRepo.createObject(result);
+                                    callback.onSuccess(lastUpdatedLocation);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method create__lastUpdatedLocations definition ends here..
+
+            
+
+        
+    
+        
+            //Method update__lastUpdatedLocations definition
+            public void update__lastUpdatedLocations(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<LastUpdatedLocation> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__update__lastUpdatedLocations", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    LastUpdatedLocationRepository lastUpdatedLocationRepo = getRestAdapter().createRepository(LastUpdatedLocationRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    LastUpdatedLocation lastUpdatedLocation = lastUpdatedLocationRepo.createObject(result);
+                                    callback.onSuccess(lastUpdatedLocation);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method update__lastUpdatedLocations definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroy__lastUpdatedLocations definition
+            public void destroy__lastUpdatedLocations(  String customerId, final VoidCallback callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("customerId", customerId);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroy__lastUpdatedLocations", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroy__lastUpdatedLocations definition ends here..
+
+            
+
+        
+    
+        
             //Method get__accessTokens definition
             public void get__accessTokens(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<AccessToken> callback){
 
@@ -2420,8 +1393,8 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
     
         
-            //Method get__recipes definition
-            public void get__recipes(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<Recipe> callback){
+            //Method get__track definition
+            public void get__track(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2438,7 +1411,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
                 
-                    invokeStaticMethod("prototype.__get__recipes", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__track", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -2450,14 +1423,14 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Recipe> recipeList = new ArrayList<Recipe>();
-                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                    List<Track> trackList = new ArrayList<Track>();
+                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Recipe recipe = recipeRepo.createObject(obj);
-                                        recipeList.add(recipe);
+                                        Track track = trackRepo.createObject(obj);
+                                        trackList.add(track);
                                     }
-                                    callback.onSuccess(recipeList);
+                                    callback.onSuccess(trackList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -2466,15 +1439,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     });
                 
 
-            }//Method get__recipes definition ends here..
+            }//Method get__track definition ends here..
 
             
 
         
     
         
-            //Method create__recipes definition
-            public void create__recipes(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Recipe> callback){
+            //Method create__track definition
+            public void create__track(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Track> callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2491,7 +1464,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__recipes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__track", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -2502,10 +1475,10 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
+                                    TrackRepository trackRepo = getRestAdapter().createRepository(TrackRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Recipe recipe = recipeRepo.createObject(result);
-                                    callback.onSuccess(recipe);
+                                    Track track = trackRepo.createObject(result);
+                                    callback.onSuccess(track);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -2517,15 +1490,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method create__recipes definition ends here..
+            }//Method create__track definition ends here..
 
             
 
         
     
         
-            //Method delete__recipes definition
-            public void delete__recipes(  String customerId, final VoidCallback callback){
+            //Method delete__track definition
+            public void delete__track(  String customerId, final VoidCallback callback){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2535,7 +1508,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                 
 
                 
-                    invokeStaticMethod("prototype.__delete__recipes", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__delete__track", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -2553,15 +1526,15 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method delete__recipes definition ends here..
+            }//Method delete__track definition ends here..
 
             
 
         
     
         
-            //Method count__recipes definition
-            public void count__recipes(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
+            //Method count__track definition
+            public void count__track(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -2577,7 +1550,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
                     
-                    invokeStaticMethod("prototype.__count__recipes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__track", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2596,739 +1569,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
                 
 
-            }//Method count__recipes definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__comments definition
-            public void get__comments(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<Comments> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("filter", filter);
-                
-
-                
-
-
-                
-
-                
-                    invokeStaticMethod("prototype.__get__comments", hashMapObject, new Adapter.JsonArrayCallback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONArray response) {
-                            
-                                if(response != null){
-                                    //Now converting jsonObject to list
-                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Comments> commentsList = new ArrayList<Comments>();
-                                    CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
-
-                                    for (Map<String, Object> obj : result) {
-                                        Comments comments = commentsRepo.createObject(obj);
-                                        commentsList.add(comments);
-                                    }
-                                    callback.onSuccess(commentsList);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-            }//Method get__comments definition ends here..
-
-            
-
-        
-    
-        
-            //Method create__comments definition
-            public void create__comments(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Comments> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__create__comments", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Comments comments = commentsRepo.createObject(result);
-                                    callback.onSuccess(comments);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method create__comments definition ends here..
-
-            
-
-        
-    
-        
-            //Method delete__comments definition
-            public void delete__comments(  String customerId, final VoidCallback callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-
-                
-                    invokeStaticMethod("prototype.__delete__comments", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method delete__comments definition ends here..
-
-            
-
-        
-    
-        
-            //Method count__comments definition
-            public void count__comments(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("where", where);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("prototype.__count__comments", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method count__comments definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__courses definition
-            public void get__courses(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<Course> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("filter", filter);
-                
-
-                
-
-
-                
-
-                
-                    invokeStaticMethod("prototype.__get__courses", hashMapObject, new Adapter.JsonArrayCallback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONArray response) {
-                            
-                                if(response != null){
-                                    //Now converting jsonObject to list
-                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Course> courseList = new ArrayList<Course>();
-                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
-
-                                    for (Map<String, Object> obj : result) {
-                                        Course course = courseRepo.createObject(obj);
-                                        courseList.add(course);
-                                    }
-                                    callback.onSuccess(courseList);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-            }//Method get__courses definition ends here..
-
-            
-
-        
-    
-        
-            //Method create__courses definition
-            public void create__courses(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Course> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__create__courses", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Course course = courseRepo.createObject(result);
-                                    callback.onSuccess(course);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method create__courses definition ends here..
-
-            
-
-        
-    
-        
-            //Method delete__courses definition
-            public void delete__courses(  String customerId, final VoidCallback callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-
-                
-                    invokeStaticMethod("prototype.__delete__courses", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method delete__courses definition ends here..
-
-            
-
-        
-    
-        
-            //Method count__courses definition
-            public void count__courses(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("where", where);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("prototype.__count__courses", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method count__courses definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__contactChefs definition
-            public void get__contactChefs(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<ContactChef> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("filter", filter);
-                
-
-                
-
-
-                
-
-                
-                    invokeStaticMethod("prototype.__get__contactChefs", hashMapObject, new Adapter.JsonArrayCallback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONArray response) {
-                            
-                                if(response != null){
-                                    //Now converting jsonObject to list
-                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<ContactChef> contactChefList = new ArrayList<ContactChef>();
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
-
-                                    for (Map<String, Object> obj : result) {
-                                        ContactChef contactChef = contactChefRepo.createObject(obj);
-                                        contactChefList.add(contactChef);
-                                    }
-                                    callback.onSuccess(contactChefList);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-            }//Method get__contactChefs definition ends here..
-
-            
-
-        
-    
-        
-            //Method create__contactChefs definition
-            public void create__contactChefs(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<ContactChef> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__create__contactChefs", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    ContactChef contactChef = contactChefRepo.createObject(result);
-                                    callback.onSuccess(contactChef);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method create__contactChefs definition ends here..
-
-            
-
-        
-    
-        
-            //Method delete__contactChefs definition
-            public void delete__contactChefs(  String customerId, final VoidCallback callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-
-                
-                    invokeStaticMethod("prototype.__delete__contactChefs", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method delete__contactChefs definition ends here..
-
-            
-
-        
-    
-        
-            //Method count__contactChefs definition
-            public void count__contactChefs(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("where", where);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("prototype.__count__contactChefs", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method count__contactChefs definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__orders definition
-            public void get__orders(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<Order> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("filter", filter);
-                
-
-                
-
-
-                
-
-                
-                    invokeStaticMethod("prototype.__get__orders", hashMapObject, new Adapter.JsonArrayCallback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONArray response) {
-                            
-                                if(response != null){
-                                    //Now converting jsonObject to list
-                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Order> orderList = new ArrayList<Order>();
-                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
-
-                                    for (Map<String, Object> obj : result) {
-                                        Order order = orderRepo.createObject(obj);
-                                        orderList.add(order);
-                                    }
-                                    callback.onSuccess(orderList);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-            }//Method get__orders definition ends here..
-
-            
-
-        
-    
-        
-            //Method create__orders definition
-            public void create__orders(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Order> callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__create__orders", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Order order = orderRepo.createObject(result);
-                                    callback.onSuccess(order);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method create__orders definition ends here..
-
-            
-
-        
-    
-        
-            //Method delete__orders definition
-            public void delete__orders(  String customerId, final VoidCallback callback){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-
-                
-                    invokeStaticMethod("prototype.__delete__orders", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method delete__orders definition ends here..
-
-            
-
-        
-    
-        
-            //Method count__orders definition
-            public void count__orders(  String customerId,  Map<String,  ? extends Object> where, final Adapter.JsonObjectCallback  callback ){
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("where", where);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("prototype.__count__orders", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                        }
-                    });
-                
-
-                
-
-            }//Method count__orders definition ends here..
+            }//Method count__track definition ends here..
 
             
 
@@ -3964,6 +2205,184 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
         
     
         
+            //Method requestOtp definition
+            public void requestOtp(  String number, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("number", number);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("requestOtp", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method requestOtp definition ends here..
+
+            
+
+        
+    
+        
+            //Method loginWithCode definition
+            public void loginWithCode(  String accessToken,  String code,  String number, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("accessToken", accessToken);
+                
+                        hashMapObject.put("code", code);
+                
+                        hashMapObject.put("number", number);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("loginWithCode", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method loginWithCode definition ends here..
+
+            
+
+        
+    
+        
+            //Method search definition
+            public void search(  Map<String,  ? extends Object> filter, final ListCallback<Customer> callback){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("search", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    List<Customer> customerList = new ArrayList<Customer>();
+                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+
+                                    for (Map<String, Object> obj : result) {
+                                        Customer customer = customerRepo.createObject(obj);
+                                        customerList.add(customer);
+                                    }
+                                    callback.onSuccess(customerList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                        }
+                    });
+                
+
+            }//Method search definition ends here..
+
+            
+
+        
+    
+        
+            //Method sendAppLink definition
+            public void sendAppLink(  String number, final Adapter.JsonObjectCallback  callback ){
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("number", number);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("sendAppLink", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                        }
+                    });
+                
+
+                
+
+            }//Method sendAppLink definition ends here..
+
+            
+
+        
+    
+        
             //Method loginWithGoogle definition
             public void loginWithGoogle(  String accessToken, final Adapter.JsonObjectCallback  callback ){
 
@@ -4043,26 +2462,6 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
             
 
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
         
     
         
