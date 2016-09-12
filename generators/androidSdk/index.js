@@ -171,6 +171,24 @@ var generateCustomModel = function(app, modelsRestDefinition){
     mkdirp.sync(AndroidBaseModelPath);
     //Now write Model.java to the file..
     compileAndWrite({}, BaseUserModelTemplatePath, AndroidBaseModelPath, helper.capitalizeFirstLetter("User") +".java");
+
+    //Compile the EJS template..
+    var BaseModelRepoTemplatePath = path.join(__dirname, constants.javaTemplates, "predefinedModels", "BaseModelRepository.ejs");
+    //List path for adding list and subscribers..
+    var AndroidBaseModelPath       = path.join(__dirname, constants.androidMainPath, "repository");
+    //Create folder if not present..
+    mkdirp.sync(AndroidBaseModelPath);
+    //Now write Model.java to the file..
+    compileAndWrite({}, BaseModelRepoTemplatePath, AndroidBaseModelPath, helper.capitalizeFirstLetter("ModelRepository") +".java");
+
+    //Compile the EJS template..
+    var UserRepoTemplatePath = path.join(__dirname, constants.javaTemplates, "predefinedModels", "UserRepository.ejs");
+    //List path for adding list and subscribers..
+    var AndroidBaseModelPath       = path.join(__dirname, constants.androidMainPath, "repository");
+    //Create folder if not present..
+    mkdirp.sync(AndroidBaseModelPath);
+    //Now write Model.java to the file..
+    compileAndWrite({}, UserRepoTemplatePath, AndroidBaseModelPath, helper.capitalizeFirstLetter("UserRepository") +".java");
 };
 
 
