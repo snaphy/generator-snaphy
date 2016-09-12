@@ -542,7 +542,7 @@ public class OrderRepository extends ModelRepository<Order> {
     
         
             //Method get__orderDetails definition
-            public void get__orderDetails(  String orderId,  Map<String,  ? extends Object> filter, final ListCallback<OrderDetail> callback){
+            public void get__orderDetails(  String orderId,  Map<String,  ? extends Object> filter, final DataListCallback<OrderDetail> callback){
 
                 /**
                 Call the onBefore event
@@ -579,7 +579,7 @@ public class OrderRepository extends ModelRepository<Order> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<OrderDetail> orderDetailList = new ArrayList<OrderDetail>();
+                                    DataList<OrderDetail> orderDetailList = new DataList<OrderDetail>();
                                     OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -996,7 +996,7 @@ public class OrderRepository extends ModelRepository<Order> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Order> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Order> callback){
 
                 /**
                 Call the onBefore event
@@ -1031,7 +1031,7 @@ public class OrderRepository extends ModelRepository<Order> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Order> orderList = new ArrayList<Order>();
+                                    DataList<Order> orderList = new DataList<Order>();
                                     OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
 
                                     for (Map<String, Object> obj : result) {

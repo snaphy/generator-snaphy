@@ -627,7 +627,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Comments> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Comments> callback){
 
                 /**
                 Call the onBefore event
@@ -662,7 +662,7 @@ public class CommentsRepository extends ModelRepository<Comments> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Comments> commentsList = new ArrayList<Comments>();
+                                    DataList<Comments> commentsList = new DataList<Comments>();
                                     CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
 
                                     for (Map<String, Object> obj : result) {

@@ -868,7 +868,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<RecipeIngredients> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<RecipeIngredients> callback){
 
                 /**
                 Call the onBefore event
@@ -903,7 +903,7 @@ public class RecipeIngredientsRepository extends ModelRepository<RecipeIngredien
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<RecipeIngredients> recipeIngredientsList = new ArrayList<RecipeIngredients>();
+                                    DataList<RecipeIngredients> recipeIngredientsList = new DataList<RecipeIngredients>();
                                     RecipeIngredientsRepository recipeIngredientsRepo = getRestAdapter().createRepository(RecipeIngredientsRepository.class);
 
                                     for (Map<String, Object> obj : result) {

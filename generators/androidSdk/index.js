@@ -118,14 +118,14 @@ var generateDataList = function(app, modelsRestDefinition){
 
 var generateCustomCallbacks = function(app, modelsRestDefinition){
     //Compile the EJS template..
-    var DataListCallback             = path.join(__dirname, constants.javaTemplates, "DataListCallback.ejs");
-    var DataListCallbackInterface    = path.join(__dirname, constants.javaTemplates, "DataListCallbackInterface.ejs");
+    var DataListCallback             = path.join(__dirname, constants.javaTemplates, "callbacks", "DataListCallback.ejs");
+    var DataListCallbackInterface    = path.join(__dirname, constants.javaTemplates, "callbacks", "DataListCallbackInterface.ejs");
     
-    var ObjectCallback               = path.join(__dirname, constants.javaTemplates, "ObjectCallback.ejs");
-    var ObjectCallbackInterface      = path.join(__dirname, constants.javaTemplates, "ObjectCallbackInterface.ejs");
+    var ObjectCallback               = path.join(__dirname, constants.javaTemplates, "callbacks", "ObjectCallback.ejs");
+    var ObjectCallbackInterface      = path.join(__dirname, constants.javaTemplates, "callbacks", "ObjectCallbackInterface.ejs");
 
-    var VoidCallback               = path.join(__dirname, constants.javaTemplates, "VoidCallback.ejs");
-    var VoidCallbackInterface      = path.join(__dirname, constants.javaTemplates, "VoidCallbackInterface.ejs");
+    var VoidCallback               = path.join(__dirname, constants.javaTemplates, "callbacks", "VoidCallback.ejs");
+    var VoidCallbackInterface      = path.join(__dirname, constants.javaTemplates, "callbacks", "VoidCallbackInterface.ejs");
     
     //List path for adding list and subscribers..
     var AndroidListPath       = path.join(__dirname, constants.androidMainPath, "callbacks");
@@ -134,19 +134,19 @@ var generateCustomCallbacks = function(app, modelsRestDefinition){
     mkdirp.sync(AndroidListPath);
 
     //Now write DataListCallback.java to the file..
-    compileAndWrite({}, ListTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("DataListCallback") +".java");
+    compileAndWrite({}, DataListCallback, AndroidListPath, helper.capitalizeFirstLetter("DataListCallback") +".java");
     //Add the listen template..
-    compileAndWrite({}, ListenTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("DataListCallbackInterface") +".java");
+    compileAndWrite({}, DataListCallbackInterface, AndroidListPath, helper.capitalizeFirstLetter("DataListCallbackInterface") +".java");
 
     //Now write DataListCallback.java to the file..
-    compileAndWrite({}, ListTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("ObjectCallback") +".java");
+    compileAndWrite({}, ObjectCallback, AndroidListPath, helper.capitalizeFirstLetter("ObjectCallback") +".java");
     //Add the listen template..
-    compileAndWrite({}, ListenTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("ObjectCallbackInterface") +".java");
+    compileAndWrite({}, ObjectCallbackInterface, AndroidListPath, helper.capitalizeFirstLetter("ObjectCallbackInterface") +".java");
 
     //Now write DataListCallback.java to the file..
-    compileAndWrite({}, ListTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("VoidCallback") +".java");
+    compileAndWrite({}, VoidCallback, AndroidListPath, helper.capitalizeFirstLetter("VoidCallback") +".java");
     //Add the listen template..
-    compileAndWrite({}, ListenTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("VoidCallbackInterface") +".java");
+    compileAndWrite({}, VoidCallbackInterface, AndroidListPath, helper.capitalizeFirstLetter("VoidCallbackInterface") +".java");
 
 
 };

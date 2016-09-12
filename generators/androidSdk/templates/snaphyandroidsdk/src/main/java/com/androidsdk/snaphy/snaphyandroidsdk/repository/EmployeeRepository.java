@@ -85,7 +85,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
 
             public void findCurrentUser(final ObjectCallback<Employee> callback){
                 //Call the onBefore method..
-                callback.onBefore()
+                callback.onBefore();
 
                 if(getCurrentUserId() == null){
                     callback.onSuccess(null);
@@ -819,7 +819,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method get__accessTokens definition
-            public void get__accessTokens(  String employeeId,  Map<String,  ? extends Object> filter, final ListCallback<AccessToken> callback){
+            public void get__accessTokens(  String employeeId,  Map<String,  ? extends Object> filter, final DataListCallback<AccessToken> callback){
 
                 /**
                 Call the onBefore event
@@ -856,7 +856,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<AccessToken> accessTokenList = new ArrayList<AccessToken>();
+                                    DataList<AccessToken> accessTokenList = new DataList<AccessToken>();
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -1273,7 +1273,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Employee> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Employee> callback){
 
                 /**
                 Call the onBefore event
@@ -1308,7 +1308,7 @@ public class EmployeeRepository extends com.strongloop.android.loopback.UserRepo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Employee> employeeList = new ArrayList<Employee>();
+                                    DataList<Employee> employeeList = new DataList<Employee>();
                                     EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
 
                                     for (Map<String, Object> obj : result) {

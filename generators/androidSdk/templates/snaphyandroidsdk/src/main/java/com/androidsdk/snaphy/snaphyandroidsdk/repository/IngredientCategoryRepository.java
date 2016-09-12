@@ -426,7 +426,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
     
         
             //Method get__ingredients definition
-            public void get__ingredients(  String ingredientCategoryId,  Map<String,  ? extends Object> filter, final ListCallback<Ingredients> callback){
+            public void get__ingredients(  String ingredientCategoryId,  Map<String,  ? extends Object> filter, final DataListCallback<Ingredients> callback){
 
                 /**
                 Call the onBefore event
@@ -463,7 +463,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Ingredients> ingredientsList = new ArrayList<Ingredients>();
+                                    DataList<Ingredients> ingredientsList = new DataList<Ingredients>();
                                     IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -880,7 +880,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<IngredientCategory> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<IngredientCategory> callback){
 
                 /**
                 Call the onBefore event
@@ -915,7 +915,7 @@ public class IngredientCategoryRepository extends ModelRepository<IngredientCate
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<IngredientCategory> ingredientCategoryList = new ArrayList<IngredientCategory>();
+                                    DataList<IngredientCategory> ingredientCategoryList = new DataList<IngredientCategory>();
                                     IngredientCategoryRepository ingredientCategoryRepo = getRestAdapter().createRepository(IngredientCategoryRepository.class);
 
                                     for (Map<String, Object> obj : result) {

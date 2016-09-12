@@ -512,7 +512,7 @@ public class CourseRepository extends ModelRepository<Course> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Course> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Course> callback){
 
                 /**
                 Call the onBefore event
@@ -547,7 +547,7 @@ public class CourseRepository extends ModelRepository<Course> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Course> courseList = new ArrayList<Course>();
+                                    DataList<Course> courseList = new DataList<Course>();
                                     CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
 
                                     for (Map<String, Object> obj : result) {

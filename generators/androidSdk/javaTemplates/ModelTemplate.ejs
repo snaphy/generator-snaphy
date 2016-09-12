@@ -767,7 +767,8 @@ public class <%- modelName %> extends Model {
                                                     returnType = type;
                                                     //methodString = methodString  + " " + " RestAdapter restAdapter" + ", " +  "final Adapter.JsonArrayCallback callback)";
                                                     methodString = methodString  + " " + " RestAdapter restAdapter" + ", " +  "final ObjectCallback<JSONArray>  callback)";
-                                                    callback = "Adapter.JsonArrayCallback";
+                                                    //callback = "Adapter.JsonArrayCallback";
+                                                    callback = "ObjectCallback<JSONArray>";
                                                     callbackType = "DataListCallback";
                                                 }
                                             }else{
@@ -784,8 +785,8 @@ public class <%- modelName %> extends Model {
                                                     //methodString = methodString + " RestAdapter restAdapter" + ", " + "final Adapter.JsonObjectCallback  callback )";
                                                     methodString = methodString + " RestAdapter restAdapter" + ", " + "final ObjectCallback<JSONObject>  callback)";
                                                     
-                                                    callback = "Adapter.JsonObjectCallback";
-                                                    //callback = "ObjectCallback<" + type + "> ";
+                                                    //callback = "Adapter.JsonObjectCallback";
+                                                    callback = "ObjectCallback<JSONObject>";
                                                     callbackType = "ObjectCallback";
                                                 }
                                             }

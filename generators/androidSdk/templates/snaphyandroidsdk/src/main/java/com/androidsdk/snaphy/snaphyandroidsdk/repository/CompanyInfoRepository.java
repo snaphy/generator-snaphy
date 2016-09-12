@@ -419,7 +419,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<CompanyInfo> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<CompanyInfo> callback){
 
                 /**
                 Call the onBefore event
@@ -454,7 +454,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<CompanyInfo> companyInfoList = new ArrayList<CompanyInfo>();
+                                    DataList<CompanyInfo> companyInfoList = new DataList<CompanyInfo>();
                                     CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
 
                                     for (Map<String, Object> obj : result) {

@@ -371,7 +371,7 @@ public class IngredientCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__ingredients( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Ingredients> callback) {
+                                    public void get__ingredients( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Ingredients> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -385,7 +385,7 @@ public class IngredientCategory extends Model {
 
 
 
-                                        ingredientCategoryRepo.get__ingredients( (String)that.getId(), filter,  new ListCallback<Ingredients> (){
+                                        ingredientCategoryRepo.get__ingredients( (String)that.getId(), filter,  new DataListCallback<Ingredients> (){
                                             
 
                                             
@@ -394,7 +394,7 @@ public class IngredientCategory extends Model {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<Ingredients> object) {
+                                                    public void onSuccess(DataList<Ingredients> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             Ingredients obj = new Ingredients();
@@ -545,16 +545,27 @@ public class IngredientCategory extends Model {
 
 
 
-                                        ingredientCategoryRepo.count__ingredients( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        ingredientCategoryRepo.count__ingredients( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
+                                                    public void onSuccess(double object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
                                                     }
                                                 
                                             

@@ -506,7 +506,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<FacebookAccessToken> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<FacebookAccessToken> callback){
 
                 /**
                 Call the onBefore event
@@ -541,7 +541,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<FacebookAccessToken> facebookAccessTokenList = new ArrayList<FacebookAccessToken>();
+                                    DataList<FacebookAccessToken> facebookAccessTokenList = new DataList<FacebookAccessToken>();
                                     FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
 
                                     for (Map<String, Object> obj : result) {

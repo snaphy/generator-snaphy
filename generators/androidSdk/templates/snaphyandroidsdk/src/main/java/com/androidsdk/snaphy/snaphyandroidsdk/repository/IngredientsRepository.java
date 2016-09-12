@@ -754,7 +754,7 @@ public class IngredientsRepository extends ModelRepository<Ingredients> {
     
         
             //Method get__recipes definition
-            public void get__recipes(  String ingredientsId,  Map<String,  ? extends Object> filter, final ListCallback<Recipe> callback){
+            public void get__recipes(  String ingredientsId,  Map<String,  ? extends Object> filter, final DataListCallback<Recipe> callback){
 
                 /**
                 Call the onBefore event
@@ -791,7 +791,7 @@ public class IngredientsRepository extends ModelRepository<Ingredients> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Recipe> recipeList = new ArrayList<Recipe>();
+                                    DataList<Recipe> recipeList = new DataList<Recipe>();
                                     RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -1208,7 +1208,7 @@ public class IngredientsRepository extends ModelRepository<Ingredients> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Ingredients> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Ingredients> callback){
 
                 /**
                 Call the onBefore event
@@ -1243,7 +1243,7 @@ public class IngredientsRepository extends ModelRepository<Ingredients> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Ingredients> ingredientsList = new ArrayList<Ingredients>();
+                                    DataList<Ingredients> ingredientsList = new DataList<Ingredients>();
                                     IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
 
                                     for (Map<String, Object> obj : result) {

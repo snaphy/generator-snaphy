@@ -663,7 +663,7 @@ public class Order extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__orderDetails( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<OrderDetail> callback) {
+                                    public void get__orderDetails( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<OrderDetail> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -677,7 +677,7 @@ public class Order extends Model {
 
 
 
-                                        orderRepo.get__orderDetails( (String)that.getId(), filter,  new ListCallback<OrderDetail> (){
+                                        orderRepo.get__orderDetails( (String)that.getId(), filter,  new DataListCallback<OrderDetail> (){
                                             
 
                                             
@@ -686,7 +686,7 @@ public class Order extends Model {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<OrderDetail> object) {
+                                                    public void onSuccess(DataList<OrderDetail> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             OrderDetail obj = new OrderDetail();
@@ -837,16 +837,27 @@ public class Order extends Model {
 
 
 
-                                        orderRepo.count__orderDetails( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        orderRepo.count__orderDetails( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
+                                                    public void onSuccess(double object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
                                                     }
                                                 
                                             

@@ -809,16 +809,27 @@ public class Wishlist extends Model {
 
 
 
-                                        wishlistRepo.exists__recipes( (String)that.getId(), fk,  new Adapter.JsonObjectCallback(){
+                                        wishlistRepo.exists__recipes( (String)that.getId(), fk,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
+                                                    public void onSuccess(Boolean object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
                                                     }
                                                 
                                             
@@ -841,7 +852,7 @@ public class Wishlist extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__recipes( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Recipe> callback) {
+                                    public void get__recipes( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Recipe> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -855,7 +866,7 @@ public class Wishlist extends Model {
 
 
 
-                                        wishlistRepo.get__recipes( (String)that.getId(), filter,  new ListCallback<Recipe> (){
+                                        wishlistRepo.get__recipes( (String)that.getId(), filter,  new DataListCallback<Recipe> (){
                                             
 
                                             
@@ -864,7 +875,7 @@ public class Wishlist extends Model {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<Recipe> object) {
+                                                    public void onSuccess(DataList<Recipe> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             Recipe obj = new Recipe();
@@ -1015,16 +1026,27 @@ public class Wishlist extends Model {
 
 
 
-                                        wishlistRepo.count__recipes( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        wishlistRepo.count__recipes( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
+                                                    public void onSuccess(double object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
                                                     }
                                                 
                                             

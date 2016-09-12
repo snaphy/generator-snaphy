@@ -428,7 +428,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<AmazonImage> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<AmazonImage> callback){
 
                 /**
                 Call the onBefore event
@@ -463,7 +463,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<AmazonImage> amazonImageList = new ArrayList<AmazonImage>();
+                                    DataList<AmazonImage> amazonImageList = new DataList<AmazonImage>();
                                     AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
 
                                     for (Map<String, Object> obj : result) {

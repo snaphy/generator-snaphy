@@ -672,7 +672,7 @@ public class CuisinesRepository extends ModelRepository<Cuisines> {
     
         
             //Method get__recipes definition
-            public void get__recipes(  String cuisinesId,  Map<String,  ? extends Object> filter, final ListCallback<Recipe> callback){
+            public void get__recipes(  String cuisinesId,  Map<String,  ? extends Object> filter, final DataListCallback<Recipe> callback){
 
                 /**
                 Call the onBefore event
@@ -709,7 +709,7 @@ public class CuisinesRepository extends ModelRepository<Cuisines> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Recipe> recipeList = new ArrayList<Recipe>();
+                                    DataList<Recipe> recipeList = new DataList<Recipe>();
                                     RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -1126,7 +1126,7 @@ public class CuisinesRepository extends ModelRepository<Cuisines> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Cuisines> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Cuisines> callback){
 
                 /**
                 Call the onBefore event
@@ -1161,7 +1161,7 @@ public class CuisinesRepository extends ModelRepository<Cuisines> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Cuisines> cuisinesList = new ArrayList<Cuisines>();
+                                    DataList<Cuisines> cuisinesList = new DataList<Cuisines>();
                                     CuisinesRepository cuisinesRepo = getRestAdapter().createRepository(CuisinesRepository.class);
 
                                     for (Map<String, Object> obj : result) {

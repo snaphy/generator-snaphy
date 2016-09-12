@@ -134,7 +134,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
 
             public void findCurrentUser(final ObjectCallback<Customer> callback){
                 //Call the onBefore method..
-                callback.onBefore()
+                callback.onBefore();
 
                 if(getCurrentUserId() == null){
                     callback.onSuccess(null);
@@ -2562,7 +2562,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method get__accessTokens definition
-            public void get__accessTokens(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<AccessToken> callback){
+            public void get__accessTokens(  String customerId,  Map<String,  ? extends Object> filter, final DataListCallback<AccessToken> callback){
 
                 /**
                 Call the onBefore event
@@ -2599,7 +2599,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<AccessToken> accessTokenList = new ArrayList<AccessToken>();
+                                    DataList<AccessToken> accessTokenList = new DataList<AccessToken>();
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -2785,7 +2785,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method get__recipes definition
-            public void get__recipes(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<Recipe> callback){
+            public void get__recipes(  String customerId,  Map<String,  ? extends Object> filter, final DataListCallback<Recipe> callback){
 
                 /**
                 Call the onBefore event
@@ -2822,7 +2822,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Recipe> recipeList = new ArrayList<Recipe>();
+                                    DataList<Recipe> recipeList = new DataList<Recipe>();
                                     RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -3008,7 +3008,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method get__comments definition
-            public void get__comments(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<Comments> callback){
+            public void get__comments(  String customerId,  Map<String,  ? extends Object> filter, final DataListCallback<Comments> callback){
 
                 /**
                 Call the onBefore event
@@ -3045,7 +3045,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Comments> commentsList = new ArrayList<Comments>();
+                                    DataList<Comments> commentsList = new DataList<Comments>();
                                     CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -3231,7 +3231,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method get__courses definition
-            public void get__courses(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<Course> callback){
+            public void get__courses(  String customerId,  Map<String,  ? extends Object> filter, final DataListCallback<Course> callback){
 
                 /**
                 Call the onBefore event
@@ -3268,7 +3268,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Course> courseList = new ArrayList<Course>();
+                                    DataList<Course> courseList = new DataList<Course>();
                                     CourseRepository courseRepo = getRestAdapter().createRepository(CourseRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -3454,7 +3454,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method get__contactChefs definition
-            public void get__contactChefs(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<ContactChef> callback){
+            public void get__contactChefs(  String customerId,  Map<String,  ? extends Object> filter, final DataListCallback<ContactChef> callback){
 
                 /**
                 Call the onBefore event
@@ -3491,7 +3491,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<ContactChef> contactChefList = new ArrayList<ContactChef>();
+                                    DataList<ContactChef> contactChefList = new DataList<ContactChef>();
                                     ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -3677,7 +3677,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method get__orders definition
-            public void get__orders(  String customerId,  Map<String,  ? extends Object> filter, final ListCallback<Order> callback){
+            public void get__orders(  String customerId,  Map<String,  ? extends Object> filter, final DataListCallback<Order> callback){
 
                 /**
                 Call the onBefore event
@@ -3714,7 +3714,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Order> orderList = new ArrayList<Order>();
+                                    DataList<Order> orderList = new DataList<Order>();
                                     OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -4131,7 +4131,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Customer> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Customer> callback){
 
                 /**
                 Call the onBefore event
@@ -4166,7 +4166,7 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Customer> customerList = new ArrayList<Customer>();
+                                    DataList<Customer> customerList = new DataList<Customer>();
                                     CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
 
                                     for (Map<String, Object> obj : result) {

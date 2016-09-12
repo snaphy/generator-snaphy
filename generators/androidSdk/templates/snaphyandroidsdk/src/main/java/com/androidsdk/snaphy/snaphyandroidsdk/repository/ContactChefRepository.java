@@ -588,7 +588,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<ContactChef> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<ContactChef> callback){
 
                 /**
                 Call the onBefore event
@@ -623,7 +623,7 @@ public class ContactChefRepository extends ModelRepository<ContactChef> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<ContactChef> contactChefList = new ArrayList<ContactChef>();
+                                    DataList<ContactChef> contactChefList = new DataList<ContactChef>();
                                     ContactChefRepository contactChefRepo = getRestAdapter().createRepository(ContactChefRepository.class);
 
                                     for (Map<String, Object> obj : result) {

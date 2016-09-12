@@ -790,7 +790,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<OrderDetail> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<OrderDetail> callback){
 
                 /**
                 Call the onBefore event
@@ -825,7 +825,7 @@ public class OrderDetailRepository extends ModelRepository<OrderDetail> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<OrderDetail> orderDetailList = new ArrayList<OrderDetail>();
+                                    DataList<OrderDetail> orderDetailList = new DataList<OrderDetail>();
                                     OrderDetailRepository orderDetailRepo = getRestAdapter().createRepository(OrderDetailRepository.class);
 
                                     for (Map<String, Object> obj : result) {

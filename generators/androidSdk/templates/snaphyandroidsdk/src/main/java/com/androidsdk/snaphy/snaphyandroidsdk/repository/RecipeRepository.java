@@ -3090,7 +3090,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method get__category definition
-            public void get__category(  String recipeId,  Map<String,  ? extends Object> filter, final ListCallback<Category> callback){
+            public void get__category(  String recipeId,  Map<String,  ? extends Object> filter, final DataListCallback<Category> callback){
 
                 /**
                 Call the onBefore event
@@ -3127,7 +3127,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Category> categoryList = new ArrayList<Category>();
+                                    DataList<Category> categoryList = new DataList<Category>();
                                     CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -3313,7 +3313,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method get__comments definition
-            public void get__comments(  String recipeId,  Map<String,  ? extends Object> filter, final ListCallback<Comments> callback){
+            public void get__comments(  String recipeId,  Map<String,  ? extends Object> filter, final DataListCallback<Comments> callback){
 
                 /**
                 Call the onBefore event
@@ -3350,7 +3350,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Comments> commentsList = new ArrayList<Comments>();
+                                    DataList<Comments> commentsList = new DataList<Comments>();
                                     CommentsRepository commentsRepo = getRestAdapter().createRepository(CommentsRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -3536,7 +3536,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method get__recipeTags definition
-            public void get__recipeTags(  String recipeId,  Map<String,  ? extends Object> filter, final ListCallback<RecipeTag> callback){
+            public void get__recipeTags(  String recipeId,  Map<String,  ? extends Object> filter, final DataListCallback<RecipeTag> callback){
 
                 /**
                 Call the onBefore event
@@ -3573,7 +3573,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<RecipeTag> recipeTagList = new ArrayList<RecipeTag>();
+                                    DataList<RecipeTag> recipeTagList = new DataList<RecipeTag>();
                                     RecipeTagRepository recipeTagRepo = getRestAdapter().createRepository(RecipeTagRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -3759,7 +3759,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method get__ingredients definition
-            public void get__ingredients(  String recipeId,  Map<String,  ? extends Object> filter, final ListCallback<Ingredients> callback){
+            public void get__ingredients(  String recipeId,  Map<String,  ? extends Object> filter, final DataListCallback<Ingredients> callback){
 
                 /**
                 Call the onBefore event
@@ -3796,7 +3796,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Ingredients> ingredientsList = new ArrayList<Ingredients>();
+                                    DataList<Ingredients> ingredientsList = new DataList<Ingredients>();
                                     IngredientsRepository ingredientsRepo = getRestAdapter().createRepository(IngredientsRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -3982,7 +3982,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method get__wishlists definition
-            public void get__wishlists(  String recipeId,  Map<String,  ? extends Object> filter, final ListCallback<Wishlist> callback){
+            public void get__wishlists(  String recipeId,  Map<String,  ? extends Object> filter, final DataListCallback<Wishlist> callback){
 
                 /**
                 Call the onBefore event
@@ -4019,7 +4019,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Wishlist> wishlistList = new ArrayList<Wishlist>();
+                                    DataList<Wishlist> wishlistList = new DataList<Wishlist>();
                                     WishlistRepository wishlistRepo = getRestAdapter().createRepository(WishlistRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -4205,7 +4205,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method get__cuisines definition
-            public void get__cuisines(  String recipeId,  Map<String,  ? extends Object> filter, final ListCallback<Cuisines> callback){
+            public void get__cuisines(  String recipeId,  Map<String,  ? extends Object> filter, final DataListCallback<Cuisines> callback){
 
                 /**
                 Call the onBefore event
@@ -4242,7 +4242,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Cuisines> cuisinesList = new ArrayList<Cuisines>();
+                                    DataList<Cuisines> cuisinesList = new DataList<Cuisines>();
                                     CuisinesRepository cuisinesRepo = getRestAdapter().createRepository(CuisinesRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -4659,7 +4659,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Recipe> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Recipe> callback){
 
                 /**
                 Call the onBefore event
@@ -4694,7 +4694,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Recipe> recipeList = new ArrayList<Recipe>();
+                                    DataList<Recipe> recipeList = new DataList<Recipe>();
                                     RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -5521,7 +5521,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
     
         
             //Method findCategoryRecipes definition
-            public void findCategoryRecipes(  String categoryId,  Map<String,  ? extends Object> recipeFilter,  List<String> cuisinesId, final ListCallback<Recipe> callback){
+            public void findCategoryRecipes(  String categoryId,  Map<String,  ? extends Object> recipeFilter,  List<String> cuisinesId, final DataListCallback<Recipe> callback){
 
                 /**
                 Call the onBefore event
@@ -5560,7 +5560,7 @@ public class RecipeRepository extends ModelRepository<Recipe> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Recipe> recipeList = new ArrayList<Recipe>();
+                                    DataList<Recipe> recipeList = new DataList<Recipe>();
                                     RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
 
                                     for (Map<String, Object> obj : result) {

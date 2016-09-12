@@ -506,7 +506,7 @@ public class PopularityRepository extends ModelRepository<Popularity> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Popularity> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Popularity> callback){
 
                 /**
                 Call the onBefore event
@@ -541,7 +541,7 @@ public class PopularityRepository extends ModelRepository<Popularity> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Popularity> popularityList = new ArrayList<Popularity>();
+                                    DataList<Popularity> popularityList = new DataList<Popularity>();
                                     PopularityRepository popularityRepo = getRestAdapter().createRepository(PopularityRepository.class);
 
                                     for (Map<String, Object> obj : result) {

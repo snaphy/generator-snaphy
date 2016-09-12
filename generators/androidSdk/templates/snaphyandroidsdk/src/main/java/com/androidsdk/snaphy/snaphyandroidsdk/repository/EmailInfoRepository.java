@@ -419,7 +419,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<EmailInfo> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<EmailInfo> callback){
 
                 /**
                 Call the onBefore event
@@ -454,7 +454,7 @@ public class EmailInfoRepository extends ModelRepository<EmailInfo> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<EmailInfo> emailInfoList = new ArrayList<EmailInfo>();
+                                    DataList<EmailInfo> emailInfoList = new DataList<EmailInfo>();
                                     EmailInfoRepository emailInfoRepo = getRestAdapter().createRepository(EmailInfoRepository.class);
 
                                     for (Map<String, Object> obj : result) {

@@ -1222,16 +1222,27 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.exists__cuisines( (String)that.getId(), fk,  new Adapter.JsonObjectCallback(){
+                                        recipeRepo.exists__cuisines( (String)that.getId(), fk,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
+                                                    public void onSuccess(Boolean object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
                                                     }
                                                 
                                             
@@ -1302,7 +1313,7 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__cuisines( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Cuisines> callback) {
+                                    public void get__cuisines( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Cuisines> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1316,7 +1327,7 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.get__cuisines( (String)that.getId(), filter,  new ListCallback<Cuisines> (){
+                                        recipeRepo.get__cuisines( (String)that.getId(), filter,  new DataListCallback<Cuisines> (){
                                             
 
                                             
@@ -1325,7 +1336,7 @@ public class Recipe extends Model {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<Cuisines> object) {
+                                                    public void onSuccess(DataList<Cuisines> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             Cuisines obj = new Cuisines();
@@ -1476,16 +1487,27 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.count__cuisines( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        recipeRepo.count__cuisines( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
+                                                    public void onSuccess(double object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
                                                     }
                                                 
                                             
@@ -1993,16 +2015,27 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.exists__category( (String)that.getId(), fk,  new Adapter.JsonObjectCallback(){
+                                        recipeRepo.exists__category( (String)that.getId(), fk,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
+                                                    public void onSuccess(Boolean object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
                                                     }
                                                 
                                             
@@ -2087,7 +2120,7 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__category( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Category> callback) {
+                                    public void get__category( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Category> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2101,7 +2134,7 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.get__category( (String)that.getId(), filter,  new ListCallback<Category> (){
+                                        recipeRepo.get__category( (String)that.getId(), filter,  new DataListCallback<Category> (){
                                             
 
                                             
@@ -2110,7 +2143,7 @@ public class Recipe extends Model {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<Category> object) {
+                                                    public void onSuccess(DataList<Category> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             Category obj = new Category();
@@ -2261,16 +2294,27 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.count__category( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        recipeRepo.count__category( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
+                                                    public void onSuccess(double object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
                                                     }
                                                 
                                             
@@ -2781,7 +2825,7 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__comments( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Comments> callback) {
+                                    public void get__comments( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Comments> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2795,7 +2839,7 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.get__comments( (String)that.getId(), filter,  new ListCallback<Comments> (){
+                                        recipeRepo.get__comments( (String)that.getId(), filter,  new DataListCallback<Comments> (){
                                             
 
                                             
@@ -2804,7 +2848,7 @@ public class Recipe extends Model {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<Comments> object) {
+                                                    public void onSuccess(DataList<Comments> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             Comments obj = new Comments();
@@ -2955,16 +2999,27 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.count__comments( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        recipeRepo.count__comments( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
+                                                    public void onSuccess(double object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
                                                     }
                                                 
                                             
@@ -3522,16 +3577,27 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.exists__recipeTags( (String)that.getId(), fk,  new Adapter.JsonObjectCallback(){
+                                        recipeRepo.exists__recipeTags( (String)that.getId(), fk,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
+                                                    public void onSuccess(Boolean object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
                                                     }
                                                 
                                             
@@ -3614,7 +3680,7 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__recipeTags( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<RecipeTag> callback) {
+                                    public void get__recipeTags( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<RecipeTag> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -3628,7 +3694,7 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.get__recipeTags( (String)that.getId(), filter,  new ListCallback<RecipeTag> (){
+                                        recipeRepo.get__recipeTags( (String)that.getId(), filter,  new DataListCallback<RecipeTag> (){
                                             
 
                                             
@@ -3637,7 +3703,7 @@ public class Recipe extends Model {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<RecipeTag> object) {
+                                                    public void onSuccess(DataList<RecipeTag> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             RecipeTag obj = new RecipeTag();
@@ -3788,16 +3854,27 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.count__recipeTags( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        recipeRepo.count__recipeTags( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
+                                                    public void onSuccess(double object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
                                                     }
                                                 
                                             
@@ -4398,16 +4475,27 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.exists__ingredients( (String)that.getId(), fk,  new Adapter.JsonObjectCallback(){
+                                        recipeRepo.exists__ingredients( (String)that.getId(), fk,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
+                                                    public void onSuccess(Boolean object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
                                                     }
                                                 
                                             
@@ -4486,7 +4574,7 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__ingredients( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Ingredients> callback) {
+                                    public void get__ingredients( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Ingredients> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -4500,7 +4588,7 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.get__ingredients( (String)that.getId(), filter,  new ListCallback<Ingredients> (){
+                                        recipeRepo.get__ingredients( (String)that.getId(), filter,  new DataListCallback<Ingredients> (){
                                             
 
                                             
@@ -4509,7 +4597,7 @@ public class Recipe extends Model {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<Ingredients> object) {
+                                                    public void onSuccess(DataList<Ingredients> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             Ingredients obj = new Ingredients();
@@ -4660,16 +4748,27 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.count__ingredients( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        recipeRepo.count__ingredients( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
+                                                    public void onSuccess(double object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
                                                     }
                                                 
                                             
@@ -5235,16 +5334,27 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.exists__wishlists( (String)that.getId(), fk,  new Adapter.JsonObjectCallback(){
+                                        recipeRepo.exists__wishlists( (String)that.getId(), fk,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
+                                                    public void onSuccess(Boolean object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
                                                     }
                                                 
                                             
@@ -5319,7 +5429,7 @@ public class Recipe extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__wishlists( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Wishlist> callback) {
+                                    public void get__wishlists( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Wishlist> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5333,7 +5443,7 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.get__wishlists( (String)that.getId(), filter,  new ListCallback<Wishlist> (){
+                                        recipeRepo.get__wishlists( (String)that.getId(), filter,  new DataListCallback<Wishlist> (){
                                             
 
                                             
@@ -5342,7 +5452,7 @@ public class Recipe extends Model {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<Wishlist> object) {
+                                                    public void onSuccess(DataList<Wishlist> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             Wishlist obj = new Wishlist();
@@ -5493,16 +5603,27 @@ public class Recipe extends Model {
 
 
 
-                                        recipeRepo.count__wishlists( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        recipeRepo.count__wishlists( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
+                                                    public void onSuccess(double object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
                                                     }
                                                 
                                             

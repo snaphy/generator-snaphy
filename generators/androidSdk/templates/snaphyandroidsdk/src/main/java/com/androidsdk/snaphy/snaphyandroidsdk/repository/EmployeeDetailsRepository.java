@@ -519,7 +519,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<EmployeeDetails> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<EmployeeDetails> callback){
 
                 /**
                 Call the onBefore event
@@ -554,7 +554,7 @@ public class EmployeeDetailsRepository extends ModelRepository<EmployeeDetails> 
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<EmployeeDetails> employeeDetailsList = new ArrayList<EmployeeDetails>();
+                                    DataList<EmployeeDetails> employeeDetailsList = new DataList<EmployeeDetails>();
                                     EmployeeDetailsRepository employeeDetailsRepo = getRestAdapter().createRepository(EmployeeDetailsRepository.class);
 
                                     for (Map<String, Object> obj : result) {

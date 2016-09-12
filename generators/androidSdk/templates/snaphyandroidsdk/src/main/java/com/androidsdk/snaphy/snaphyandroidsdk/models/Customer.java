@@ -716,7 +716,7 @@ public class Customer extends User {
                         
 
                                     //Write the method here..
-                                    public void get__recipes( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Recipe> callback) {
+                                    public void get__recipes( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Recipe> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -730,7 +730,7 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.get__recipes( (String)that.getId(), filter,  new ListCallback<Recipe> (){
+                                        customerRepo.get__recipes( (String)that.getId(), filter,  new DataListCallback<Recipe> (){
                                             
 
                                             
@@ -739,7 +739,7 @@ public class Customer extends User {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<Recipe> object) {
+                                                    public void onSuccess(DataList<Recipe> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             Recipe obj = new Recipe();
@@ -890,16 +890,27 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.count__recipes( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        customerRepo.count__recipes( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
+                                                    public void onSuccess(double object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
                                                     }
                                                 
                                             
@@ -1334,7 +1345,7 @@ public class Customer extends User {
                         
 
                                     //Write the method here..
-                                    public void get__comments( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Comments> callback) {
+                                    public void get__comments( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Comments> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1348,7 +1359,7 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.get__comments( (String)that.getId(), filter,  new ListCallback<Comments> (){
+                                        customerRepo.get__comments( (String)that.getId(), filter,  new DataListCallback<Comments> (){
                                             
 
                                             
@@ -1357,7 +1368,7 @@ public class Customer extends User {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<Comments> object) {
+                                                    public void onSuccess(DataList<Comments> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             Comments obj = new Comments();
@@ -1508,16 +1519,27 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.count__comments( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        customerRepo.count__comments( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
+                                                    public void onSuccess(double object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
                                                     }
                                                 
                                             
@@ -2770,7 +2792,7 @@ public class Customer extends User {
                         
 
                                     //Write the method here..
-                                    public void get__contactChefs( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<ContactChef> callback) {
+                                    public void get__contactChefs( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<ContactChef> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2784,7 +2806,7 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.get__contactChefs( (String)that.getId(), filter,  new ListCallback<ContactChef> (){
+                                        customerRepo.get__contactChefs( (String)that.getId(), filter,  new DataListCallback<ContactChef> (){
                                             
 
                                             
@@ -2793,7 +2815,7 @@ public class Customer extends User {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<ContactChef> object) {
+                                                    public void onSuccess(DataList<ContactChef> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             ContactChef obj = new ContactChef();
@@ -2944,16 +2966,27 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.count__contactChefs( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        customerRepo.count__contactChefs( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
+                                                    public void onSuccess(double object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
                                                     }
                                                 
                                             
@@ -3388,7 +3421,7 @@ public class Customer extends User {
                         
 
                                     //Write the method here..
-                                    public void get__orders( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Order> callback) {
+                                    public void get__orders( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Order> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -3402,7 +3435,7 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.get__orders( (String)that.getId(), filter,  new ListCallback<Order> (){
+                                        customerRepo.get__orders( (String)that.getId(), filter,  new DataListCallback<Order> (){
                                             
 
                                             
@@ -3411,7 +3444,7 @@ public class Customer extends User {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<Order> object) {
+                                                    public void onSuccess(DataList<Order> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             Order obj = new Order();
@@ -3562,16 +3595,27 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.count__orders( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        customerRepo.count__orders( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
+                                                    public void onSuccess(double object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
                                                     }
                                                 
                                             
@@ -3982,7 +4026,7 @@ public class Customer extends User {
                         
 
                                     //Write the method here..
-                                    public void get__courses( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final ListCallback<Course> callback) {
+                                    public void get__courses( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Course> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -3996,7 +4040,7 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.get__courses( (String)that.getId(), filter,  new ListCallback<Course> (){
+                                        customerRepo.get__courses( (String)that.getId(), filter,  new DataListCallback<Course> (){
                                             
 
                                             
@@ -4005,7 +4049,7 @@ public class Customer extends User {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(List<Course> object) {
+                                                    public void onSuccess(DataList<Course> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             Course obj = new Course();
@@ -4156,16 +4200,27 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.count__courses( (String)that.getId(), where,  new Adapter.JsonObjectCallback(){
+                                        customerRepo.count__courses( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
+                                                    public void onSuccess(double object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
                                                     }
                                                 
                                             

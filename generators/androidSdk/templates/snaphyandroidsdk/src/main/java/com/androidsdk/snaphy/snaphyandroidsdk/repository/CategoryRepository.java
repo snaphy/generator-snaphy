@@ -648,7 +648,7 @@ public class CategoryRepository extends ModelRepository<Category> {
     
         
             //Method get__recipes definition
-            public void get__recipes(  String categoryId,  Map<String,  ? extends Object> filter, final ListCallback<Recipe> callback){
+            public void get__recipes(  String categoryId,  Map<String,  ? extends Object> filter, final DataListCallback<Recipe> callback){
 
                 /**
                 Call the onBefore event
@@ -685,7 +685,7 @@ public class CategoryRepository extends ModelRepository<Category> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Recipe> recipeList = new ArrayList<Recipe>();
+                                    DataList<Recipe> recipeList = new DataList<Recipe>();
                                     RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -1102,7 +1102,7 @@ public class CategoryRepository extends ModelRepository<Category> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Category> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Category> callback){
 
                 /**
                 Call the onBefore event
@@ -1137,7 +1137,7 @@ public class CategoryRepository extends ModelRepository<Category> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Category> categoryList = new ArrayList<Category>();
+                                    DataList<Category> categoryList = new DataList<Category>();
                                     CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
 
                                     for (Map<String, Object> obj : result) {

@@ -926,7 +926,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method get__recipes definition
-            public void get__recipes(  String wishlistId,  Map<String,  ? extends Object> filter, final ListCallback<Recipe> callback){
+            public void get__recipes(  String wishlistId,  Map<String,  ? extends Object> filter, final DataListCallback<Recipe> callback){
 
                 /**
                 Call the onBefore event
@@ -963,7 +963,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Recipe> recipeList = new ArrayList<Recipe>();
+                                    DataList<Recipe> recipeList = new DataList<Recipe>();
                                     RecipeRepository recipeRepo = getRestAdapter().createRepository(RecipeRepository.class);
 
                                     for (Map<String, Object> obj : result) {
@@ -1380,7 +1380,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Wishlist> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Wishlist> callback){
 
                 /**
                 Call the onBefore event
@@ -1415,7 +1415,7 @@ public class WishlistRepository extends ModelRepository<Wishlist> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Wishlist> wishlistList = new ArrayList<Wishlist>();
+                                    DataList<Wishlist> wishlistList = new DataList<Wishlist>();
                                     WishlistRepository wishlistRepo = getRestAdapter().createRepository(WishlistRepository.class);
 
                                     for (Map<String, Object> obj : result) {

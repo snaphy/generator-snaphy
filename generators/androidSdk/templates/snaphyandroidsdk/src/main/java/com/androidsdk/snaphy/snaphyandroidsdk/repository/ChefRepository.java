@@ -776,7 +776,7 @@ public class ChefRepository extends ModelRepository<Chef> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final ListCallback<Chef> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Chef> callback){
 
                 /**
                 Call the onBefore event
@@ -811,7 +811,7 @@ public class ChefRepository extends ModelRepository<Chef> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    List<Chef> chefList = new ArrayList<Chef>();
+                                    DataList<Chef> chefList = new DataList<Chef>();
                                     ChefRepository chefRepo = getRestAdapter().createRepository(ChefRepository.class);
 
                                     for (Map<String, Object> obj : result) {
