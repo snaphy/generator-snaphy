@@ -233,6 +233,9 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
     		} */
 
             public void findCurrentUser(final ObjectCallback<<%- modelName %>> callback){
+                //Call the onBefore method..
+                callback.onBefore()
+
                 if(getCurrentUserId() == null){
                     callback.onSuccess(null);
                     return;
@@ -243,11 +246,15 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                     public void onSuccess(<%- modelName %> user){
                         cachedCurrentUser = user;
                         callback.onSuccess(user);
+                        //Call the finally method..
+                        callback.onFinally();
                     }
 
                     @Override
                     public void onError(Throwable t){
                         callback.onError(t);
+                        //Call the finally method..
+                        callback.onFinally();
                     }
                 });
 
@@ -670,6 +677,11 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
             //Method <%- restMethodName %> definition
             <%- methodString %>{
 
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
@@ -686,11 +698,15 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
                         public void onSuccess(String response) {
                             callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 <% } %>
@@ -706,6 +722,8 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -723,6 +741,8 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                                     callback.onSuccess(null);
                                 }
                             <% } %>
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 <% } %>
@@ -732,6 +752,8 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
                         }
 
                         @Override
@@ -754,13 +776,17 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                                     callback.onSuccess(null);
                                 }
                             <% } %>
+                            //Call the finally method..
+                            callback.onFinally();
                         }
                     });
                 <% } %>
 
             }//Method <%- restMethodName %> definition ends here..
 
-            <%# //Now add methods for each restMethods..
+            <%# 
+            //EXAMPLE
+            //Now add methods for each restMethods..
             public void get__customer(String id, final ObjectCallback<Customer> callback) {
                 invokeStaticMethod("prototype.__get__customer", ImmutableMap.of("id", id), new Adapter.JsonObjectCallback() {
                     @Override
@@ -779,7 +805,9 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                     }
                 });
 
-            }%>
+            }
+            //END EXAMPLE
+            %>
 
         <% } %>
     <% });%>
