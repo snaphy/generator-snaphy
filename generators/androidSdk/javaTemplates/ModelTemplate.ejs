@@ -149,10 +149,17 @@ import org.json.JSONArray;
 
 import java.util.List;
 import com.strongloop.android.loopback.RestAdapter;
+import com.strongloop.android.remoting.adapters.Adapter;
+
+/*
+Replacing with custom Snaphy callback methods
 import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
-import com.strongloop.android.remoting.adapters.Adapter;
+*/
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 
 //Import self repository..
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.<%- modelName %>Repository;
@@ -189,7 +196,7 @@ public class <%- modelName %> extends Model {
 <% } %>
 
     //For converting all model values to hashMap
-    private Map<String, Object> hashMap = new HashMap<>();
+    private  transient Map<String, Object> hashMap = new HashMap<>();
 
     public Map<String,  ? extends Object> convertMap(){
         if(that.getId() != null){
@@ -374,7 +381,7 @@ public class <%- modelName %> extends Model {
         %>
                 <% if(model.relations[relation].type === "belongsTo" || model.relations[relation].type === "hasOne"){ %>
                     //Define belongsTo relation method here..
-                    private <%- capitalcaseRelatedModelName %>  <%- relation %> ;
+                    private transient <%- capitalcaseRelatedModelName %>  <%- relation %> ;
 
                     public <%- capitalcaseRelatedModelName %> get<%- capitalcaseRelationName %>() {
                         return <%- relation %>;
@@ -411,7 +418,7 @@ public class <%- modelName %> extends Model {
                 <% if (model.relations[relation].type === "hasMany") { %>
                     <%# In case of hasMany || hasManyThrough || hasAndBelongsToMany %>
                     //Define hasMany relation method here..
-                    private List<<%- capitalcaseRelatedModelName %>>  <%- relation %> ;
+                    private transient List<<%- capitalcaseRelatedModelName %>>  <%- relation %> ;
 
                     public List<<%- capitalcaseRelatedModelName %>> get<%- capitalcaseRelationName %>() {
                         return <%- relation %>;
@@ -500,7 +507,7 @@ public class <%- modelName %> extends Model {
                         var throughRelation = lowercaseFirstLetter(model.relations[relation].through);
                     %>
                         //Write hasManyThrough def too..
-                        private List<<%- capitalcaseRelatedModelName %>>  <%- throughRelation %> ;
+                        private transient List<<%- capitalcaseRelatedModelName %>>  <%- throughRelation %> ;
 
                         public List<<%- capitalcaseRelatedModelName %>> get<%- capitalcaseRelatedModelName %>() {
                             return <%- throughRelation %>;
@@ -539,7 +546,7 @@ public class <%- modelName %> extends Model {
                 <% if (model.relations[relation].type === "hasAndBelongsToMany") { %>
                     //TODO ADD BACKWARD COMPATIBILITY FOR hasManyThrough relationship..warning backward compatibility may leads to cyclic error..
                     //Define belongsTo relation method here..
-                    private List<<%- capitalcaseRelatedModelName %>>  <%- relation %> ;
+                    private transient List<<%- capitalcaseRelatedModelName %>>  <%- relation %> ;
 
                     public List<<%- capitalcaseRelatedModelName %>> get<%- capitalcaseRelationName %>() {
                         return <%- relation %>;

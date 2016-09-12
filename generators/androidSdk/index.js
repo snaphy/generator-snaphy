@@ -116,7 +116,7 @@ var generateDataList = function(app, modelsRestDefinition){
 };
 
 
-
+//Custom Base Model.java and User.java
 var generateCustomModel = function(app, modelsRestDefinition){
     //Compile the EJS template..
     var BaseModelTemplatePath = path.join(__dirname, constants.javaTemplates, "predefinedModels", "BaseModelTemplate.ejs");
@@ -126,6 +126,15 @@ var generateCustomModel = function(app, modelsRestDefinition){
     mkdirp.sync(AndroidBaseModelPath);
     //Now write Model.java to the file..
     compileAndWrite({}, BaseModelTemplatePath, AndroidBaseModelPath, helper.capitalizeFirstLetter("Model") +".java");
+    
+    //Compile the EJS template..
+    var BaseUserModelTemplatePath = path.join(__dirname, constants.javaTemplates, "predefinedModels", "BaseUserTemplate.ejs");
+    //List path for adding list and subscribers..
+    var AndroidBaseModelPath       = path.join(__dirname, constants.androidMainPath, "models");
+    //Create folder if not present..
+    mkdirp.sync(AndroidBaseModelPath);
+    //Now write Model.java to the file..
+    compileAndWrite({}, BaseUserModelTemplatePath, AndroidBaseModelPath, helper.capitalizeFirstLetter("User") +".java");
 };
 
 
