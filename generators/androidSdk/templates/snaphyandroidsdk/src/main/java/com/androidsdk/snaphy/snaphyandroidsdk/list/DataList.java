@@ -1,12 +1,7 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.list;
 
-
-
-
 import android.util.Log;
-
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Model;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -40,7 +35,9 @@ public class DataList<T> extends ArrayList<T> {
 
 
     public void add(int index, T element){
-        super.add(index, element);
+        synchronized (this){
+            super.add(index, element);
+        }
         publishOnChange();
         addBackRefrences(element);
     }
@@ -64,7 +61,10 @@ public class DataList<T> extends ArrayList<T> {
 
 
     public boolean add(T element){
-        boolean returnValue = super.add(element);
+        boolean returnValue;
+        synchronized (this) {
+            returnValue = super.add(element);
+        }
         publishOnChange();
         addBackRefrences(element);
         return returnValue;
@@ -73,14 +73,20 @@ public class DataList<T> extends ArrayList<T> {
 
 
     public boolean addAll(Collection<? extends T> collection){
-        boolean returnValue = super.addAll(collection);
+        boolean returnValue;
+        synchronized (this) {
+            returnValue = super.addAll(collection);
+        }
         publishOnChange();
         return returnValue;
     }
 
 
     public boolean addAll(int index, Collection<? extends T> collection){
-        boolean returnValue = super.addAll(index, collection);
+        boolean returnValue;
+        synchronized (this) {
+            returnValue = super.addAll(index, collection);
+        }
         publishOnChange();
         return returnValue;
     }
@@ -92,7 +98,9 @@ public class DataList<T> extends ArrayList<T> {
      * @see #size
      */
     public void clear() {
-        super.clear();
+        synchronized (this) {
+            super.clear();
+        }
         publishOnChange();
         publishOnClear();
     }
@@ -107,14 +115,20 @@ public class DataList<T> extends ArrayList<T> {
      *             when {@code location < 0 || location >= size()}
      */
     public T remove(int index) {
-        T returnValue = super.remove(index);
+        T returnValue;
+        synchronized (this) {
+            returnValue = super.remove(index);
+        }
         publishOnChange();
         publishOnRemove(returnValue);
         return returnValue;
     }
 
     public boolean remove(Object object) {
-        boolean returnValue = super.remove(object);
+        boolean returnValue;
+        synchronized (this) {
+            returnValue = super.remove(object);
+        }
         publishOnChange();
         publishOnRemove((T)object);
         return returnValue;
@@ -135,7 +149,10 @@ public class DataList<T> extends ArrayList<T> {
      *             when {@code location < 0 || location >= size()}
      */
     public T set(int index, T object){
-        T returnValue = super.set(index, object);
+        T returnValue;
+        synchronized (this) {
+            returnValue = super.set(index, object);
+        }
         publishOnChange();
         return returnValue;
     }

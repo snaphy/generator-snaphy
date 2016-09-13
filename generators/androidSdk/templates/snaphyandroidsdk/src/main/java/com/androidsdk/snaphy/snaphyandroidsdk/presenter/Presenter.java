@@ -37,14 +37,6 @@ public final class Presenter {
         eventTypeHashMap.put(Id, eventType);
     }
 
-    public void removeFromList(String Id){
-        //Find the given Object..
-        EventType eventType = eventTypeHashMap.remove(Id);
-        if(eventType == null){
-            Log.e("Snaphy", "EventType is not found. Wrong id");
-        }
-    }
-
     //http://stackoverflow.com/questions/450807/how-do-i-make-the-method-return-type-generic
     //Generic return type..
     public <T> DataList<T> getList(Class<T> type, String Id){
