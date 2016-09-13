@@ -151,6 +151,18 @@ var generateCustomCallbacks = function(app, modelsRestDefinition){
 
 };
 
+/*Generate the preenter file.*/
+var generatePresenter = function(app, modelsRestDefinition){
+    //Compile the EJS template..
+    var PresenterTemplatePath = path.join(__dirname, constants.javaTemplates, "presenter", "Presenter.ejs");
+    //List path for adding list and subscribers..
+    var AndroidBaseModelPath       = path.join(__dirname, constants.androidMainPath, "presenter");
+    //Create folder if not present..
+    mkdirp.sync(AndroidBaseModelPath);
+    //Now write Model.java to the file..
+    compileAndWrite({}, PresenterTemplatePath, AndroidBaseModelPath, helper.capitalizeFirstLetter("Presenter") +".java");
+};
+
 
 //Custom Base Model.java and User.java
 var generateCustomModel = function(app, modelsRestDefinition){
@@ -232,6 +244,8 @@ var init  = function(){
     generateCustomModel(app, modelsRestDefinition);
     //Generate Custom Callbacks
     generateCustomCallbacks(app, modelsRestDefinition);
+    //Generate Presenter..
+    generatePresenter(app, modelsRestDefinition);
 
 };
 
