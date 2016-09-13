@@ -7,12 +7,17 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+
 import com.androidsdk.snaphy.snaphyandroidsdk.models.User;
 import com.strongloop.android.loopback.AccessToken;
 import com.strongloop.android.loopback.AccessTokenRepository;
 import com.strongloop.android.loopback.RestAdapter;
-import com.strongloop.android.loopback.callbacks.ObjectCallback;
-import com.strongloop.android.loopback.callbacks.VoidCallback;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
+
+
 import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
@@ -108,17 +113,21 @@ public class UserRepository<U extends User> extends ModelRepository<U> {
         saveCurrentUserId();
     }
 
+
+    /*Manually implemented by each repo through SnaphySDK*/
     /**
      * Fetch the data of the currently logged in user. Invokes
      * {@code callback.onSuccess(null)} when no user is logged in.
      * The data is cached, see {@link #getCachedCurrentUser()}
      * @param callback success/error callback
      */
-    public void findCurrentUser(final ObjectCallback<U> callback) {
+    /*public void findCurrentUser(final ObjectCallback<U> callback) {
         if (getCurrentUserId() == null) {
             callback.onSuccess(null);
             return;
         }
+
+        HashMap<String, Object> hashMap = new HashMap<>();
 
         this.findById(getCurrentUserId(), new ObjectCallback<U>() {
             @Override
@@ -132,7 +141,7 @@ public class UserRepository<U extends User> extends ModelRepository<U> {
                 callback.onError(t);
             }
         });
-    }
+    }*/
 
     /**
      * Get the cached value of the currently logged in user.

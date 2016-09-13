@@ -26,7 +26,8 @@ import java.util.HashMap;
 
 
 
-import com.strongloop.android.loopback.UserRepository;
+//Replaced by Custom  Repo methods
+// import com.strongloop.android.loopback.UserRepository;
 import com.strongloop.android.loopback.AccessTokenRepository;
 import com.strongloop.android.loopback.AccessToken;
 import android.content.SharedPreferences;
@@ -107,7 +108,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
 
 
 
-public class CustomerRepository extends com.strongloop.android.loopback.UserRepository<Customer> {
+public class CustomerRepository extends UserRepository<Customer> {
 
 
     public CustomerRepository(){
@@ -141,7 +142,9 @@ public class CustomerRepository extends com.strongloop.android.loopback.UserRepo
                     return;
                 }
 
-                this.findById(getCurrentUserId(), new ObjectCallback<Customer>() {
+                HashMap<String, Object> hashMap = new HashMap<>();
+
+                this.findById((String)getCurrentUserId(), hashMap, new ObjectCallback<Customer>() {
                     @Override
                     public void onSuccess(Customer user){
                         cachedCurrentUser = user;

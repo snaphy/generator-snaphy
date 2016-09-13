@@ -7,10 +7,6 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Model;
 import com.strongloop.android.loopback.RestRepository;
-import com.strongloop.android.loopback.callbacks.JsonArrayParser;
-import com.strongloop.android.loopback.callbacks.JsonObjectParser;
-import com.strongloop.android.loopback.callbacks.ListCallback;
-import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
 import com.strongloop.android.remoting.adapters.RestContractItem;
@@ -27,17 +23,7 @@ import java.util.Map;
  */
 public class ModelRepository<T extends Model> extends RestRepository<T> {
 
-    /**
-     * @deprecated Use {link ObjectCallback} instead.
-     */
-    public interface FindCallback<T extends Model> extends ObjectCallback<T> {
-    }
 
-    /**
-     * @deprecated Use {link ListCallback} instead.
-     */
-    public interface FindAllCallback<T extends Model> extends ListCallback<T> {
-    }
 
     private String nameForRestUrl;
 
@@ -132,26 +118,6 @@ public class ModelRepository<T extends Model> extends RestRepository<T> {
         return model;
     }
 
-    /**
-     * Finds and downloads a single instance of this model type on and from the
-     * server with the given id.
-     * @param id The id to search for.
-     * @param callback The callback to be executed when finished.
-     */
-    public void findById(Object id, final ObjectCallback<T> callback) {
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("id", id);
-        invokeStaticMethod("findById", params,
-                new JsonObjectParser<T>(this, callback));
-    }
 
-    /**
-     * Finds and downloads all models of this type on and from the server.
-     * @param callback The callback to be executed when finished.
-     */
-    public void findAll(final ListCallback<T> callback) {
-        invokeStaticMethod("all", null,
-                new JsonArrayParser<T>(this, callback));
-    }
 }
 

@@ -208,7 +208,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.<%- modelName %>;
 
 
 <% if(model.base === "User" || modelName === "User"){ %>
-public class <%- modelName %>Repository extends com.strongloop.android.loopback.UserRepository<<%- modelName %>> {
+public class <%- modelName %>Repository extends UserRepository<<%- modelName %>> {
 <% } else { %>
 public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>> {
 <% } %>
@@ -244,7 +244,9 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                     return;
                 }
 
-                this.findById(getCurrentUserId(), new ObjectCallback<<%- modelName %>>() {
+                HashMap<String, Object> hashMap = new HashMap<>();
+
+                this.findById((String)getCurrentUserId(), hashMap, new ObjectCallback<<%- modelName %>>() {
                     @Override
                     public void onSuccess(<%- modelName %> user){
                         cachedCurrentUser = user;
