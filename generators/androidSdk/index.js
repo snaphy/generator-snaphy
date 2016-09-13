@@ -164,6 +164,53 @@ var generatePresenter = function(app, modelsRestDefinition){
 };
 
 
+
+var generateImagePresenter(app, modelsRestDefinition){
+    //Compile the EJS template..
+    var CustomFileRepository = path.join(__dirname, constants.javaTemplates, "repository", "CustomFileRepository.ejs");
+    //List path for adding list and subscribers..
+    var repository       = path.join(__dirname, constants.androidMainPath, "repository");
+    //Create folder if not present..
+    mkdirp.sync(repository);
+    //Now write Model.java to the file..
+    compileAndWrite({}, CustomFileRepository, repository, helper.capitalizeFirstLetter("CustomFileRepository") +".java");
+
+    //Compile the EJS template..
+    var ImageModelRepository = path.join(__dirname, constants.javaTemplates, "repository", "ImageModelRepository.ejs");
+    //Now write Model.java to the file..
+    compileAndWrite({}, ImageModelRepository, repository, helper.capitalizeFirstLetter("ImageModelRepository") +".java");
+
+    //Compile the EJS template..
+    var CustomContainer = path.join(__dirname, constants.javaTemplates, "models", "CustomContainer.ejs");
+    //List path for adding list and subscribers..
+    var models       = path.join(__dirname, constants.androidMainPath, "models");
+    //Create folder if not present..
+    mkdirp.sync(models);
+    //Now write Model.java to the file..
+    compileAndWrite({}, CustomContainer, models, helper.capitalizeFirstLetter("CustomContainer") +".java");
+
+    //Compile the EJS template..
+    var ImageModel = path.join(__dirname, constants.javaTemplates, "models", "ImageModel.ejs");
+    //Now write Model.java to the file..
+    compileAndWrite({}, ImageModel, models, helper.capitalizeFirstLetter("ImageModel") +".java");
+
+
+    //Compile the EJS template..
+    var JsonArrayParser = path.join(__dirname, constants.javaTemplates, "callbacks", "JsonArrayParser.ejs");
+    //List path for adding list and subscribers..
+    var callbacks       = path.join(__dirname, constants.androidMainPath, "callbacks");
+    //Create folder if not present..
+    mkdirp.sync(callbacks);
+    //Now write Model.java to the file..
+    compileAndWrite({}, JsonArrayParser, callbacks, helper.capitalizeFirstLetter("JsonArrayParser") +".java");
+
+    //Compile the EJS template..
+    var JsonObjectParser = path.join(__dirname, constants.javaTemplates, "callbacks", "JsonObjectParser.ejs");
+    //Now write Model.java to the file..
+    compileAndWrite({}, JsonObjectParser, callbacks, helper.capitalizeFirstLetter("JsonObjectParser") +".java");
+}
+
+
 //Custom Base Model.java and User.java
 var generateCustomModel = function(app, modelsRestDefinition){
     //Compile the EJS template..
@@ -246,6 +293,8 @@ var init  = function(){
     generateCustomCallbacks(app, modelsRestDefinition);
     //Generate Presenter..
     generatePresenter(app, modelsRestDefinition);
+    //Generate Image model and Repository..
+    generateImagePresenter(app, modelsRestDefinition);
 
 };
 
