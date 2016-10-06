@@ -1,3 +1,4 @@
+
 (function(){
 'use strict';
 })();
@@ -116,6 +117,9 @@ var generateDataList = function(app, modelsRestDefinition){
 };
 
 
+
+
+
 var generateCustomCallbacks = function(app, modelsRestDefinition){
     //Compile the EJS template..
     var DataListCallback             = path.join(__dirname, constants.javaTemplates, "callbacks", "DataListCallback.ejs");
@@ -151,6 +155,10 @@ var generateCustomCallbacks = function(app, modelsRestDefinition){
 
 };
 
+
+
+
+
 /*Generate the preenter file.*/
 var generatePresenter = function(app, modelsRestDefinition){
     //Compile the EJS template..
@@ -165,7 +173,7 @@ var generatePresenter = function(app, modelsRestDefinition){
 
 
 
-var generateImagePresenter(app, modelsRestDefinition){
+var generateImagePresenter = function(app, modelsRestDefinition){
     //Compile the EJS template..
     var CustomFileRepository = path.join(__dirname, constants.javaTemplates, "repository", "CustomFileRepository.ejs");
     //List path for adding list and subscribers..
@@ -174,6 +182,18 @@ var generateImagePresenter(app, modelsRestDefinition){
     mkdirp.sync(repository);
     //Now write Model.java to the file..
     compileAndWrite({}, CustomFileRepository, repository, helper.capitalizeFirstLetter("CustomFileRepository") +".java");
+
+    /*CustomContainerRepository*/
+    //Compile the EJS template..
+    var CustomContainerRepository = path.join(__dirname, constants.javaTemplates, "repository", "CustomContainerRepository.ejs");
+    //List path for adding list and subscribers..
+    var repository       = path.join(__dirname, constants.androidMainPath, "repository");
+    //Create folder if not present..
+    mkdirp.sync(repository);
+    //Now write Model.java to the file..
+    compileAndWrite({}, CustomContainerRepository, repository, helper.capitalizeFirstLetter("CustomContainerRepository") +".java");
+
+    
 
     //Compile the EJS template..
     var ImageModelRepository = path.join(__dirname, constants.javaTemplates, "repository", "ImageModelRepository.ejs");

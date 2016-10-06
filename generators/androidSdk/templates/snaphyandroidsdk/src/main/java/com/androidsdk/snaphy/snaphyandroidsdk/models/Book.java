@@ -25,12 +25,9 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.BookRepository;
 
 //Now import repository of related models..
-
-    
-    
 
 
 import java.util.ArrayList;
@@ -39,7 +36,7 @@ import java.util.Map;
 
 
 
-public class Employee extends User {
+public class Book extends Model {
 
 
     //For converting all model values to hashMap
@@ -54,9 +51,9 @@ public class Employee extends User {
         }
     }
 
-    private Employee that ;
+    private Book that ;
 
-    public Employee (){
+    public Book (){
         that = this;
     }
 
@@ -64,17 +61,17 @@ public class Employee extends User {
         
             
             
-                private String username;
+                private String title;
                 /* Adding Getter and Setter methods */
-                public String getUsername(){
-                    return username;
+                public String getTitle(){
+                    return title;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setUsername(String username){
-                    this.username = username;
+                public void setTitle(String title){
+                    this.title = title;
                     //Update hashMap value..
-                    hashMap.put("username", username);
+                    hashMap.put("title", title);
                 }
 
             
@@ -87,17 +84,17 @@ public class Employee extends User {
         
             
             
-                private String firstName;
+                private String description;
                 /* Adding Getter and Setter methods */
-                public String getFirstName(){
-                    return firstName;
+                public String getDescription(){
+                    return description;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setFirstName(String firstName){
-                    this.firstName = firstName;
+                public void setDescription(String description){
+                    this.description = description;
                     //Update hashMap value..
-                    hashMap.put("firstName", firstName);
+                    hashMap.put("description", description);
                 }
 
             
@@ -110,17 +107,17 @@ public class Employee extends User {
         
             
             
-                private String lastName;
+                private String status;
                 /* Adding Getter and Setter methods */
-                public String getLastName(){
-                    return lastName;
+                public String getStatus(){
+                    return status;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setLastName(String lastName){
-                    this.lastName = lastName;
+                public void setStatus(String status){
+                    this.status = status;
                     //Update hashMap value..
-                    hashMap.put("lastName", lastName);
+                    hashMap.put("status", status);
                 }
 
             
@@ -133,17 +130,86 @@ public class Employee extends User {
         
             
             
-                private String date;
+            
+            
+                private Map<String, Object> frontCover;
                 /* Adding Getter and Setter methods */
-                public String getDate(){
-                    return date;
+                public Map<String, Object> getFrontCover(){
+                    return frontCover;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setDate(String date){
-                    this.date = date;
+                public void setFrontCover(Map<String, Object> frontCover){
+                    this.frontCover = frontCover;
+                    //Update Map value..
+                    hashMap.put("frontCover", frontCover);
+                }
+
+            
+            
+
+        
+    
+        
+            
+            
+            
+            
+                private Map<String, Object> backCover;
+                /* Adding Getter and Setter methods */
+                public Map<String, Object> getBackCover(){
+                    return backCover;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setBackCover(Map<String, Object> backCover){
+                    this.backCover = backCover;
+                    //Update Map value..
+                    hashMap.put("backCover", backCover);
+                }
+
+            
+            
+
+        
+    
+        
+            
+            
+            
+            
+                private Map<String, Object> uploadBook;
+                /* Adding Getter and Setter methods */
+                public Map<String, Object> getUploadBook(){
+                    return uploadBook;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setUploadBook(Map<String, Object> uploadBook){
+                    this.uploadBook = uploadBook;
+                    //Update Map value..
+                    hashMap.put("uploadBook", uploadBook);
+                }
+
+            
+            
+
+        
+    
+        
+            
+            
+                private String added;
+                /* Adding Getter and Setter methods */
+                public String getAdded(){
+                    return added;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setAdded(String added){
+                    this.added = added;
                     //Update hashMap value..
-                    hashMap.put("date", date);
+                    hashMap.put("added", added);
                 }
 
             
@@ -179,124 +245,6 @@ public class Employee extends User {
         
             
             
-                private String email;
-                /* Adding Getter and Setter methods */
-                public String getEmail(){
-                    return email;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setEmail(String email){
-                    this.email = email;
-                    //Update hashMap value..
-                    hashMap.put("email", email);
-                }
-
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-                private String password;
-                /* Adding Getter and Setter methods */
-                public String getPassword(){
-                    return password;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setPassword(String password){
-                    this.password = password;
-                    //Update hashMap value..
-                    hashMap.put("password", password);
-                }
-
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
             
             
             
@@ -310,9 +258,6 @@ public class Employee extends User {
 
 
     //Now adding relations between related models
-    
-         
-          
       
 
 }

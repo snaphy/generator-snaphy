@@ -26,14 +26,8 @@ import java.util.HashMap;
 
 
 
-//Replaced by Custom  Repo methods
-// import com.strongloop.android.loopback.UserRepository;
-import com.strongloop.android.loopback.AccessTokenRepository;
-import com.strongloop.android.loopback.AccessToken;
-import android.content.SharedPreferences;
-import android.util.Log;
-import org.json.JSONException;
-import android.content.Context;
+//Replaced by Custom ModelRepository method
+//import com.strongloop.android.loopback.ModelRepository;
 
 
 
@@ -41,120 +35,41 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Employee;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.LikePost;
 
 //Now import model of related models..
 
     
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Post;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PostRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.PostSubscriber;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PostSubscriberRepository;
+            
+        
     
 
 
 
 
 
-public class EmployeeRepository extends UserRepository<Employee> {
+public class LikePostRepository extends ModelRepository<LikePost> {
 
 
-    public EmployeeRepository(){
-        super("Employee", null, Employee.class);
+    public LikePostRepository(){
+        super("LikePost", null, LikePost.class);
     }
-
-
-    
-    		//Create public methods..
-    		public Employee cachedCurrentUser;
-            private Object currentUserId;
-            private boolean isCurrentUserIdLoaded;
-    		public Employee getCachedCurrentUser(){
-    			return cachedCurrentUser;
-    		}
-
-    		public void setCachedCurrentUser(Employee user){
-    			cachedCurrentUser = user;
-    		}
-
-    		/* public void setCurrentUserId(Object id){
-    			super.setCurrentUserId(id);
-    		} */
-
-            public void findCurrentUser(final ObjectCallback<Employee> callback){
-                //Call the onBefore method..
-                callback.onBefore();
-
-                if(getCurrentUserId() == null){
-                    callback.onSuccess(null);
-                    return;
-                }
-
-                HashMap<String, Object> hashMap = new HashMap<>();
-
-                this.findById((String)getCurrentUserId(), hashMap, new ObjectCallback<Employee>() {
-                    @Override
-                    public void onSuccess(Employee user){
-                        cachedCurrentUser = user;
-                        callback.onSuccess(user);
-                        //Call the finally method..
-                        callback.onFinally();
-                    }
-
-                    @Override
-                    public void onError(Throwable t){
-                        callback.onError(t);
-                        //Call the finally method..
-                        callback.onFinally();
-                    }
-                });
-
-            }
-
-            public Object getCurrentUserId(){
-                loadCurrentUserIdIfNotLoaded();
-                return currentUserId;
-            }
-
-            public void setCurrentUserId(Object currentUserId){
-                this.currentUserId = currentUserId;
-                cachedCurrentUser = null;
-                saveCurrentUserId();
-            }
-
-            private void saveCurrentUserId(){
-                final SharedPreferences.Editor editor = getSharedPreferences().edit();
-                final String json = new JSONArray().put(getCurrentUserId()).toString();
-                editor.putString(PROPERTY_CURRENT_USER_ID, json);
-                editor.commit();
-            }
-
-
-            //Add loadCurrentUserIdIfNotLoaded method..
-            private void loadCurrentUserIdIfNotLoaded(){
-                if(isCurrentUserIdLoaded) return;
-
-                isCurrentUserIdLoaded = true;
-                String json = getSharedPreferences().getString(PROPERTY_CURRENT_USER_ID, null);
-                if(json == null){
-                    return;
-                }
-
-                if(json.equals("[null]")){
-                    return;
-                }
-
-                try{
-                    Object id = new JSONArray(json).get(0);
-                    setCurrentUserId(id);
-                }catch(JSONException e){
-                    String msg = "Cannot parse user id '" + json + "'";
-                    Log.e("Snaphy", msg, e);
-                }
-            }
-
-            private SharedPreferences getSharedPreferences() {
-                return getApplicationContext().getSharedPreferences(
-                    SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
-            }
-
-
 
 
     
@@ -169,7 +84,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "GET"), "Employee.prototype.__findById__accessTokens");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:likePostId/post", "GET"), "LikePost.prototype.__get__post");
                 
 
             
@@ -177,7 +92,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "DELETE"), "Employee.prototype.__destroyById__accessTokens");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:likePostId/customer", "GET"), "LikePost.prototype.__get__customer");
                 
 
             
@@ -185,7 +100,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "PUT"), "Employee.prototype.__updateById__accessTokens");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:likePostId/postSubscribers", "GET"), "LikePost.prototype.__get__postSubscribers");
                 
 
             
@@ -193,7 +108,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "GET"), "Employee.prototype.__get__accessTokens");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:likePostId/postSubscribers", "POST"), "LikePost.prototype.__create__postSubscribers");
                 
 
             
@@ -201,7 +116,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "POST"), "Employee.prototype.__create__accessTokens");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:likePostId/postSubscribers", "PUT"), "LikePost.prototype.__update__postSubscribers");
                 
 
             
@@ -209,7 +124,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "DELETE"), "Employee.prototype.__delete__accessTokens");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:likePostId/postSubscribers", "DELETE"), "LikePost.prototype.__destroy__postSubscribers");
                 
 
             
@@ -217,7 +132,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/count", "GET"), "Employee.prototype.__count__accessTokens");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "LikePost.create");
                 
 
             
@@ -225,7 +140,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Employee.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "LikePost.create");
                 
 
             
@@ -233,7 +148,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Employee.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "LikePost.upsert");
                 
 
             
@@ -241,7 +156,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Employee.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "LikePost.exists");
                 
 
             
@@ -249,7 +164,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Employee.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "LikePost.findById");
                 
 
             
@@ -257,7 +172,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Employee.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "LikePost.find");
                 
 
             
@@ -265,7 +180,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Employee.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "LikePost.findOne");
                 
 
             
@@ -273,7 +188,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Employee.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "LikePost.updateAll");
                 
 
             
@@ -281,7 +196,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Employee.updateAll");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "LikePost.deleteById");
                 
 
             
@@ -289,7 +204,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Employee.deleteById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "LikePost.count");
                 
 
             
@@ -297,53 +212,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Employee.count");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId", "PUT"), "Employee.prototype.updateAttributes");
-                
-
-            
-        
-            
-        
-            
-        
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/confirm", "GET"), "Employee.confirm");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/reset", "POST"), "Employee.resetPassword");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Employee.getSchema");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Employee.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:likePostId", "PUT"), "LikePost.prototype.updateAttributes");
                 
 
             
@@ -353,9 +222,53 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/isAdmin", "POST"), "Employee.isAdmin");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "LikePost.getSchema");
                 
 
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "LikePost.getAbsoluteSchema");
+                
+
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
         return contract;
@@ -379,8 +292,8 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
     
         
-            //Method findById__accessTokens definition
-            public void findById__accessTokens(  String employeeId,  String fk, final ObjectCallback<AccessToken> callback){
+            //Method get__post definition
+            public void get__post(  String likePostId,  Boolean refresh, final ObjectCallback<Post> callback){
 
                 /**
                 Call the onBefore event
@@ -392,9 +305,9 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("likePostId", likePostId);
                 
-                        hashMapObject.put("fk", fk);
+                        hashMapObject.put("refresh", refresh);
                 
 
                 
@@ -403,7 +316,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__post", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -416,10 +329,10 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    PostRepository postRepo = getRestAdapter().createRepository(PostRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    AccessToken accessToken = accessTokenRepo.createObject(result);
-                                    callback.onSuccess(accessToken);
+                                    Post post = postRepo.createObject(result);
+                                    callback.onSuccess(post);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -433,15 +346,15 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                 
 
-            }//Method findById__accessTokens definition ends here..
+            }//Method get__post definition ends here..
 
             
 
         
     
         
-            //Method destroyById__accessTokens definition
-            public void destroyById__accessTokens(  String employeeId,  String fk, final VoidCallback callback){
+            //Method get__customer definition
+            public void get__customer(  String likePostId,  Boolean refresh, final ObjectCallback<Customer> callback){
 
                 /**
                 Call the onBefore event
@@ -453,13 +366,255 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("likePostId", likePostId);
                 
-                        hashMapObject.put("fk", fk);
+                        hashMapObject.put("refresh", refresh);
                 
 
                 
-                    invokeStaticMethod("prototype.__destroyById__accessTokens", hashMapObject, new Adapter.Callback() {
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Customer customer = customerRepo.createObject(result);
+                                    callback.onSuccess(customer);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__customer definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__postSubscribers definition
+            public void get__postSubscribers(  String likePostId,  Boolean refresh, final ObjectCallback<PostSubscriber> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("likePostId", likePostId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__postSubscribers", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    PostSubscriberRepository postSubscriberRepo = getRestAdapter().createRepository(PostSubscriberRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    PostSubscriber postSubscriber = postSubscriberRepo.createObject(result);
+                                    callback.onSuccess(postSubscriber);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__postSubscribers definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__postSubscribers definition
+            public void create__postSubscribers(  String likePostId,  Map<String,  ? extends Object> data, final ObjectCallback<PostSubscriber> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("likePostId", likePostId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__postSubscribers", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    PostSubscriberRepository postSubscriberRepo = getRestAdapter().createRepository(PostSubscriberRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    PostSubscriber postSubscriber = postSubscriberRepo.createObject(result);
+                                    callback.onSuccess(postSubscriber);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__postSubscribers definition ends here..
+
+            
+
+        
+    
+        
+            //Method update__postSubscribers definition
+            public void update__postSubscribers(  String likePostId,  Map<String,  ? extends Object> data, final ObjectCallback<PostSubscriber> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("likePostId", likePostId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__update__postSubscribers", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    PostSubscriberRepository postSubscriberRepo = getRestAdapter().createRepository(PostSubscriberRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    PostSubscriber postSubscriber = postSubscriberRepo.createObject(result);
+                                    callback.onSuccess(postSubscriber);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method update__postSubscribers definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroy__postSubscribers definition
+            public void destroy__postSubscribers(  String likePostId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("likePostId", likePostId);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroy__postSubscribers", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -481,293 +636,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                 
 
-            }//Method destroyById__accessTokens definition ends here..
-
-            
-
-        
-    
-        
-            //Method updateById__accessTokens definition
-            public void updateById__accessTokens(  String employeeId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("employeeId", employeeId);
-                
-                        hashMapObject.put("fk", fk);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__updateById__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    AccessToken accessToken = accessTokenRepo.createObject(result);
-                                    callback.onSuccess(accessToken);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method updateById__accessTokens definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__accessTokens definition
-            public void get__accessTokens(  String employeeId,  Map<String,  ? extends Object> filter, final DataListCallback<AccessToken> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("employeeId", employeeId);
-                
-                        hashMapObject.put("filter", filter);
-                
-
-                
-
-
-                
-
-                
-                    invokeStaticMethod("prototype.__get__accessTokens", hashMapObject, new Adapter.JsonArrayCallback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONArray response) {
-                            
-                                if(response != null){
-                                    //Now converting jsonObject to list
-                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    DataList<AccessToken> accessTokenList = new DataList<AccessToken>();
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
-
-                                    for (Map<String, Object> obj : result) {
-                                        AccessToken accessToken = accessTokenRepo.createObject(obj);
-                                        accessTokenList.add(accessToken);
-                                    }
-                                    callback.onSuccess(accessTokenList);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-            }//Method get__accessTokens definition ends here..
-
-            
-
-        
-    
-        
-            //Method create__accessTokens definition
-            public void create__accessTokens(  String employeeId,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("employeeId", employeeId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__create__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
-                                    AccessToken accessToken = accessTokenRepo.createObject(result);
-                                    callback.onSuccess(accessToken);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method create__accessTokens definition ends here..
-
-            
-
-        
-    
-        
-            //Method delete__accessTokens definition
-            public void delete__accessTokens(  String employeeId, final VoidCallback callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("employeeId", employeeId);
-                
-
-                
-                    invokeStaticMethod("prototype.__delete__accessTokens", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                                callback.onError(t);
-                                //Call the finally method..
-                                callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method delete__accessTokens definition ends here..
-
-            
-
-        
-    
-        
-            //Method count__accessTokens definition
-            public void count__accessTokens(  String employeeId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("employeeId", employeeId);
-                
-                        hashMapObject.put("where", where);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("prototype.__count__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method count__accessTokens definition ends here..
+            }//Method destroy__postSubscribers definition ends here..
 
             
 
@@ -775,7 +644,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<LikePost> callback){
 
                 /**
                 Call the onBefore event
@@ -809,10 +678,10 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    LikePostRepository likePostRepo = getRestAdapter().createRepository(LikePostRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    LikePost likePost = likePostRepo.createObject(result);
+                                    callback.onSuccess(likePost);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -835,7 +704,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<LikePost> callback){
 
                 /**
                 Call the onBefore event
@@ -869,10 +738,10 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    LikePostRepository likePostRepo = getRestAdapter().createRepository(LikePostRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    LikePost likePost = likePostRepo.createObject(result);
+                                    callback.onSuccess(likePost);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -945,7 +814,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Employee> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<LikePost> callback){
 
                 /**
                 Call the onBefore event
@@ -981,10 +850,10 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    LikePostRepository likePostRepo = getRestAdapter().createRepository(LikePostRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    LikePost likePost = likePostRepo.createObject(result);
+                                    callback.onSuccess(likePost);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1006,7 +875,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Employee> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<LikePost> callback){
 
                 /**
                 Call the onBefore event
@@ -1041,14 +910,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
-                                    DataList<Employee> employeeList = new DataList<Employee>();
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    DataList<LikePost> likePostList = new DataList<LikePost>();
+                                    LikePostRepository likePostRepo = getRestAdapter().createRepository(LikePostRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Employee employee = employeeRepo.createObject(obj);
-                                        employeeList.add(employee);
+                                        LikePost likePost = likePostRepo.createObject(obj);
+                                        likePostList.add(likePost);
                                     }
-                                    callback.onSuccess(employeeList);
+                                    callback.onSuccess(likePostList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1067,7 +936,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Employee> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<LikePost> callback){
 
                 /**
                 Call the onBefore event
@@ -1101,10 +970,10 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    LikePostRepository likePostRepo = getRestAdapter().createRepository(LikePostRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    LikePost likePost = likePostRepo.createObject(result);
+                                    callback.onSuccess(likePost);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1281,7 +1150,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String employeeId,  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+            public void updateAttributes(  String likePostId,  Map<String,  ? extends Object> data, final ObjectCallback<LikePost> callback){
 
                 /**
                 Call the onBefore event
@@ -1293,7 +1162,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("likePostId", likePostId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1317,10 +1186,10 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    LikePostRepository likePostRepo = getRestAdapter().createRepository(LikePostRepository.class);
                                     Map<String, Object> result = JsonUtil.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    LikePost likePost = likePostRepo.createObject(result);
+                                    callback.onSuccess(likePost);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1340,106 +1209,6 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
         
     
-        
-    
-        
-    
-        
-    
-        
-            //Method confirm definition
-            public void confirm(  String uid,  String token,  String redirect, final VoidCallback callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("uid", uid);
-                
-                        hashMapObject.put("token", token);
-                
-                        hashMapObject.put("redirect", redirect);
-                
-
-                
-                    invokeStaticMethod("confirm", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                                callback.onError(t);
-                                //Call the finally method..
-                                callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method confirm definition ends here..
-
-            
-
-        
-    
-        
-            //Method resetPassword definition
-            public void resetPassword(  Map<String,  ? extends Object> options, final VoidCallback callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("options", options);
-                
-
-                
-                    invokeStaticMethod("resetPassword", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                                callback.onError(t);
-                                //Call the finally method..
-                                callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method resetPassword definition ends here..
-
-            
-
         
     
         
@@ -1543,52 +1312,37 @@ public class EmployeeRepository extends UserRepository<Employee> {
         
     
         
-            //Method isAdmin definition
-            public void isAdmin( final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("isAdmin", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method isAdmin definition ends here..
-
-            
-
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
 

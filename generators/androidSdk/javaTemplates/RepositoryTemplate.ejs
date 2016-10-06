@@ -488,6 +488,10 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
             console.log(restMethodObj.fullName);
             console.log(restMethodObj.name);
 
+           /* if(restMethodObj.name.toString().trim() === "getPostDetail"){
+                console.log(restMethodObj);
+            }*/
+
             
             var methodString = "public void ";
             methodString = methodString + restMethodName + "( ";
@@ -642,6 +646,9 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
             if(method.returns.length && Object.keys(method.returns[0]).length !== 0){
                 if(method.returns[0].type instanceof Array){
                     type = convertType(method.returns[0].type[0], model);
+
+                   
+
                     if(model.allModels[type] !== undefined){
                         returnType = "List<" + type + ">";
                         methodString = methodString  +  "final DataListCallback<" + type + "> callback)";
@@ -657,7 +664,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                         
                     }
                 }else{
-
+                    
                     type = convertType(method.returns[0].type, model);
                     if(model.allModels[type] !== undefined){
                         returnType = type;
