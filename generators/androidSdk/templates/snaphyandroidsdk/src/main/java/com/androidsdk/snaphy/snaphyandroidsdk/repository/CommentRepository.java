@@ -1593,7 +1593,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
         
             //Method fetchPostCommments definition
-            public void fetchPostCommments(  String postId,  double skip,  double limit,  List<String> exceptCommentIdList, final DataListCallback<Comment> callback){
+            public void fetchPostCommments(  String postId,  double skip,  double limit,  DataList<String> exceptCommentIdList, final DataListCallback<Comment> callback){
 
                 /**
                 Call the onBefore event

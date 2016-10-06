@@ -223,16 +223,16 @@ public class <%- modelName %> extends Model {
                 var typeName = model.properties[property].type[0];
                 var listType;
                 if(typeName === "object" || typeName === "geopoint"){
-                    listType = "List<Map<String, Object>>";
+                    listType = "DataList<Map<String, Object>>";
                 }
                 else if (typeName === "string" || typeName === "date") {
-                    listType = "List<String>";
+                    listType = "DataList<String>";
                 }
                 else if (typeName === "number") {
-                    listType = "List<Double>";
+                    listType = "DataList<Double>";
                 }
                 else if(true){
-                    listType = "List<Object>";
+                    listType = "DataList<Object>";
                 }
             %>
 
@@ -251,6 +251,7 @@ public class <%- modelName %> extends Model {
                 }
 
             <% } %>
+
             <% if( (model.properties[property].type === "string" || model.properties[property].type === "date") && property !== "id") { %>
                 private String <%- property %>;
                 /* Adding Getter and Setter methods */
@@ -338,6 +339,22 @@ public class <%- modelName %> extends Model {
 
             <% } %>
 
+            <% if( model.properties[property].type === "boolean" ) { %>
+                private boolean <%- property %>;
+                /* Adding Getter and Setter methods */
+                public boolean get<%- capitalPropertyName %>(){
+                    return <%- property %>;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void set<%- capitalPropertyName %>(boolean <%- property %>){
+                    this.<%- property %> = <%- property %>;
+                    //Update hashMap value..
+                    hashMap.put("<%- property %>", <%- property %>);
+                }
+
+            <% } %>
+
         <% } %>
     <% } %>
 
@@ -419,15 +436,15 @@ public class <%- modelName %> extends Model {
                 <% if (model.relations[relation].type === "hasMany") { %>
                     <%# In case of hasMany || hasManyThrough || hasAndBelongsToMany %>
                     //Define hasMany relation method here..
-                    private transient List<<%- capitalcaseRelatedModelName %>>  <%- relation %> ;
+                    private transient DataList<<%- capitalcaseRelatedModelName %>>  <%- relation %> ;
 
-                    public List<<%- capitalcaseRelatedModelName %>> get<%- capitalcaseRelationName %>() {
+                    public DataList<<%- capitalcaseRelatedModelName %>> get<%- capitalcaseRelationName %>() {
                         return <%- relation %>;
                     }
 
-                    public void set<%- capitalcaseRelationName %>(List<<%- capitalcaseRelatedModelName %>> <%- relation %>) {
+                    public void set<%- capitalcaseRelationName %>(DataList<<%- capitalcaseRelatedModelName %>> <%- relation %>) {
                         boolean hashType = false;
-                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
                         for(Object o: <%- relation %>){
                             if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
@@ -465,10 +482,10 @@ public class <%- modelName %> extends Model {
                 */
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void set<%- capitalcaseRelationName %>1(List<HashMap<String, Object>> <%- relation %>) {
+                    public void set<%- capitalcaseRelationName %>1(DataList<HashMap<String, Object>> <%- relation %>) {
                         //First create a dummy Repo class object for ..
                         <%- capitalcaseRelatedModelName %>Repository <%- relation %>Repository = new <%- capitalcaseRelatedModelName %>Repository();
-                        List<<%- capitalcaseRelatedModelName %>> result = new ArrayList<>();
+                        DataList<<%- capitalcaseRelatedModelName %>> result = new DataList<>();
                         for (HashMap<String, Object> obj : <%- relation %>) {
                             //Also add relation to child type for two way communication..
                             <%- capitalcaseRelatedModelName %> obj1 = <%- relation %>Repository.createObject(obj);
@@ -482,7 +499,7 @@ public class <%- modelName %> extends Model {
 
                     //Adding relation method..
                     //Add a dummy class Name object to seperate data..
-                    public void addRelation(List<<%- capitalcaseRelatedModelName %>> <%- relation %>, <%- capitalcaseRelatedModelName %> dummyClassInstance) {
+                    public void addRelation(DataList<<%- capitalcaseRelatedModelName %>> <%- relation %>, <%- capitalcaseRelatedModelName %> dummyClassInstance) {
                         that.set<%- capitalcaseRelationName %>(<%- relation %>);
 
                     }
@@ -493,7 +510,7 @@ public class <%- modelName %> extends Model {
                         try{
                             that.get<%- capitalcaseRelationName %>().add(<%- relation %>);
                         }catch(Exception e){
-                            List< <%- capitalcaseRelatedModelName %>> <%- relation %>1 = new ArrayList();
+                            DataList< <%- capitalcaseRelatedModelName %>> <%- relation %>1 = new DataList();
                             //Now add this item to list..
                             <%- relation %>1.add(<%- relation %>);
                             //Now set data....
@@ -508,19 +525,19 @@ public class <%- modelName %> extends Model {
                         var throughRelation = lowercaseFirstLetter(model.relations[relation].through);
                     %>
                         //Write hasManyThrough def too..
-                        private transient List<<%- capitalcaseRelatedModelName %>>  <%- throughRelation %> ;
+                        private transient DataList<<%- capitalcaseRelatedModelName %>>  <%- throughRelation %> ;
 
-                        public List<<%- capitalcaseRelatedModelName %>> get<%- capitalcaseRelatedModelName %>() {
+                        public DataList<<%- capitalcaseRelatedModelName %>> get<%- capitalcaseRelatedModelName %>() {
                             return <%- throughRelation %>;
                         }
 
-                        public void set<%- capitalcaseRelatedModelName %>(List<<%- capitalcaseRelatedModelName %>> <%- throughRelation %>) {
+                        public void set<%- capitalcaseRelatedModelName %>(DataList<<%- capitalcaseRelatedModelName %>> <%- throughRelation %>) {
                             this.<%- throughRelation %> = <%- throughRelation %>;
                         }
 
                         //Adding throughRelation method..
                         //Add a dummy class Name object to seperate data..
-                        public void addRelation(List<<%- capitalcaseRelatedModelName %>> <%- throughRelation %>, <%- capitalcaseRelatedModelName %> dummyClassInstance) {
+                        public void addRelation(DataList<<%- capitalcaseRelatedModelName %>> <%- throughRelation %>, <%- capitalcaseRelatedModelName %> dummyClassInstance) {
                             that.set<%- capitalcaseRelatedModelName %>(<%- throughRelation %>);
 
                         }
@@ -531,7 +548,7 @@ public class <%- modelName %> extends Model {
                             try{
                                 that.get<%- capitalcaseRelatedModelName %>().add(<%- throughRelation %>);
                             }catch(Exception e){
-                                List< <%- capitalcaseRelatedModelName %>> <%- throughRelation %>1 = new ArrayList();
+                                DataList< <%- capitalcaseRelatedModelName %>> <%- throughRelation %>1 = new DataList();
                                 //Now add this item to list..
                                 <%- throughRelation %>1.add(<%- throughRelation %>);
                                 //Now set data....
@@ -547,16 +564,16 @@ public class <%- modelName %> extends Model {
                 <% if (model.relations[relation].type === "hasAndBelongsToMany") { %>
                     //TODO ADD BACKWARD COMPATIBILITY FOR hasManyThrough relationship..warning backward compatibility may leads to cyclic error..
                     //Define belongsTo relation method here..
-                    private transient List<<%- capitalcaseRelatedModelName %>>  <%- relation %> ;
+                    private transient DataList<<%- capitalcaseRelatedModelName %>>  <%- relation %> ;
 
-                    public List<<%- capitalcaseRelatedModelName %>> get<%- capitalcaseRelationName %>() {
+                    public DataList<<%- capitalcaseRelatedModelName %>> get<%- capitalcaseRelationName %>() {
                         return <%- relation %>;
                     }
 
 
-                    public void set<%- capitalcaseRelationName %>(List<<%- capitalcaseRelatedModelName %>> <%- relation %>) {
+                    public void set<%- capitalcaseRelationName %>(DataList<<%- capitalcaseRelatedModelName %>> <%- relation %>) {
                         boolean hashType = false;
-                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
                         for(Object o: <%- relation %>){
                             if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
@@ -594,10 +611,10 @@ public class <%- modelName %> extends Model {
                     */
 
                     //Adding related model automatically in case of include statement from server..
-                    public void set<%- capitalcaseRelationName %>1(List<HashMap<String, Object>> <%- relation %>) {
+                    public void set<%- capitalcaseRelationName %>1(DataList<HashMap<String, Object>> <%- relation %>) {
                         //First create a dummy Repo class object for ..
                         <%- capitalcaseRelatedModelName %>Repository <%- relation %>Repository = new <%- capitalcaseRelatedModelName %>Repository();
-                        List<<%- capitalcaseRelatedModelName %>> result = new ArrayList<>();
+                        DataList<<%- capitalcaseRelatedModelName %>> result = new DataList<>();
                         for (HashMap<String, Object> obj : <%- relation %>) {
                             //Also add relation to child type for two way communication..
                             <%- capitalcaseRelatedModelName %> obj1 = <%- relation %>Repository.createObject(obj);
@@ -608,7 +625,7 @@ public class <%- modelName %> extends Model {
 
 
                     //Adding relation method..
-                    public void addRelation(List<<%- capitalcaseRelatedModelName %>> <%- relation %>, <%- capitalcaseRelatedModelName %> dummyClassInstance) {
+                    public void addRelation(DataList<<%- capitalcaseRelatedModelName %>> <%- relation %>, <%- capitalcaseRelatedModelName %> dummyClassInstance) {
                         that.set<%- capitalcaseRelationName %>(<%- relation %>);
                     }
 
@@ -619,7 +636,7 @@ public class <%- modelName %> extends Model {
                         try{
                             that.get<%- capitalcaseRelationName %>().add(<%- relation %>);
                         }catch(Exception e){
-                            List< <%- capitalcaseRelatedModelName %>> <%- relation %>1 = new ArrayList();
+                            DataList< <%- capitalcaseRelatedModelName %>> <%- relation %>1 = new DataList();
                             //Now add this item to list..
                             <%- relation %>1.add(<%- relation %>);
                             //Now set data....
@@ -724,7 +741,7 @@ public class <%- modelName %> extends Model {
                                             if(!internalArgument ){
                                                 if(argumentType  instanceof Array){
                                                     hasAndBelongsToType = checkHasAndBelongsToDataType(argumentType[0], model);
-                                                    argumentType = "List<" + convertType(argumentType[0], model) + ">" ;
+                                                    argumentType = "DataList<" + convertType(argumentType[0], model) + ">" ;
 
                                                     type = argumentType;
                                                 }
@@ -836,7 +853,7 @@ public class <%- modelName %> extends Model {
 
                                                     if(argumentType  instanceof Array){
                                                         hasAndBelongsToType = checkHasAndBelongsToDataType(argumentType[0], model);
-                                                        argumentType = "List<" + convertType(argumentType[0], model) + ">" ;
+                                                        argumentType = "DataList<" + convertType(argumentType[0], model) + ">" ;
                                                         isArray = true;
 
                                                         if(model.restDefinition[argumentType[0]] !== undefined){
@@ -856,7 +873,7 @@ public class <%- modelName %> extends Model {
                                                         if(isCustomClass){
                                                             if(isArray){
                                         %>
-                                                                List<Map<String, Object>> objects = new ArrayList<>();
+                                                                DataList<Map<String, Object>> objects = new DataList<>();
                                                                 for(<%- argumentType[0] %> object : <%- argumentName %>){
                                                                     objects.add(object.convertMap());
                                                                 }

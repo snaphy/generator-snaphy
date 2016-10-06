@@ -95,6 +95,7 @@ public class Post extends Model {
     
         
             
+
             
                 private String heading;
                 /* Adding Getter and Setter methods */
@@ -114,10 +115,13 @@ public class Post extends Model {
             
             
 
+            
+
         
     
         
             
+
             
                 private String description;
                 /* Adding Getter and Setter methods */
@@ -137,19 +141,21 @@ public class Post extends Model {
             
             
 
+            
+
         
     
         
             
 
-                private List<Map<String, Object>> postImages;
+                private DataList<Map<String, Object>> postImages;
                 /* Adding Getter and Setter methods */
-                public List<Map<String, Object>> getPostImages(){
+                public DataList<Map<String, Object>> getPostImages(){
                     return postImages;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setPostImages(List<Map<String, Object>> postImages){
+                public void setPostImages(DataList<Map<String, Object>> postImages){
                     this.postImages = postImages;
 
                     //TODO change this to custom array with double quotes escaped if error occured when sending to server..
@@ -157,36 +163,62 @@ public class Post extends Model {
                 }
 
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
+            
+                private boolean anonymous;
+                /* Adding Getter and Setter methods */
+                public boolean getAnonymous(){
+                    return anonymous;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setAnonymous(boolean anonymous){
+                    this.anonymous = anonymous;
+                    //Update hashMap value..
+                    hashMap.put("anonymous", anonymous);
+                }
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
@@ -741,15 +773,15 @@ public class Post extends Model {
                 
                     
                     //Define hasMany relation method here..
-                    private transient List<Comment>  comments ;
+                    private transient DataList<Comment>  comments ;
 
-                    public List<Comment> getComments() {
+                    public DataList<Comment> getComments() {
                         return comments;
                     }
 
-                    public void setComments(List<Comment> comments) {
+                    public void setComments(DataList<Comment> comments) {
                         boolean hashType = false;
-                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
                         for(Object o: comments){
                             if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
@@ -787,10 +819,10 @@ public class Post extends Model {
                 */
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setComments1(List<HashMap<String, Object>> comments) {
+                    public void setComments1(DataList<HashMap<String, Object>> comments) {
                         //First create a dummy Repo class object for ..
                         CommentRepository commentsRepository = new CommentRepository();
-                        List<Comment> result = new ArrayList<>();
+                        DataList<Comment> result = new DataList<>();
                         for (HashMap<String, Object> obj : comments) {
                             //Also add relation to child type for two way communication..
                             Comment obj1 = commentsRepository.createObject(obj);
@@ -804,7 +836,7 @@ public class Post extends Model {
 
                     //Adding relation method..
                     //Add a dummy class Name object to seperate data..
-                    public void addRelation(List<Comment> comments, Comment dummyClassInstance) {
+                    public void addRelation(DataList<Comment> comments, Comment dummyClassInstance) {
                         that.setComments(comments);
 
                     }
@@ -815,7 +847,7 @@ public class Post extends Model {
                         try{
                             that.getComments().add(comments);
                         }catch(Exception e){
-                            List< Comment> comments1 = new ArrayList();
+                            DataList< Comment> comments1 = new DataList();
                             //Now add this item to list..
                             comments1.add(comments);
                             //Now set data....
@@ -1289,15 +1321,15 @@ public class Post extends Model {
                 
                     
                     //Define hasMany relation method here..
-                    private transient List<LikePost>  likePosts ;
+                    private transient DataList<LikePost>  likePosts ;
 
-                    public List<LikePost> getLikePosts() {
+                    public DataList<LikePost> getLikePosts() {
                         return likePosts;
                     }
 
-                    public void setLikePosts(List<LikePost> likePosts) {
+                    public void setLikePosts(DataList<LikePost> likePosts) {
                         boolean hashType = false;
-                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
                         for(Object o: likePosts){
                             if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
@@ -1335,10 +1367,10 @@ public class Post extends Model {
                 */
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setLikePosts1(List<HashMap<String, Object>> likePosts) {
+                    public void setLikePosts1(DataList<HashMap<String, Object>> likePosts) {
                         //First create a dummy Repo class object for ..
                         LikePostRepository likePostsRepository = new LikePostRepository();
-                        List<LikePost> result = new ArrayList<>();
+                        DataList<LikePost> result = new DataList<>();
                         for (HashMap<String, Object> obj : likePosts) {
                             //Also add relation to child type for two way communication..
                             LikePost obj1 = likePostsRepository.createObject(obj);
@@ -1352,7 +1384,7 @@ public class Post extends Model {
 
                     //Adding relation method..
                     //Add a dummy class Name object to seperate data..
-                    public void addRelation(List<LikePost> likePosts, LikePost dummyClassInstance) {
+                    public void addRelation(DataList<LikePost> likePosts, LikePost dummyClassInstance) {
                         that.setLikePosts(likePosts);
 
                     }
@@ -1363,7 +1395,7 @@ public class Post extends Model {
                         try{
                             that.getLikePosts().add(likePosts);
                         }catch(Exception e){
-                            List< LikePost> likePosts1 = new ArrayList();
+                            DataList< LikePost> likePosts1 = new DataList();
                             //Now add this item to list..
                             likePosts1.add(likePosts);
                             //Now set data....
@@ -1837,15 +1869,15 @@ public class Post extends Model {
                 
                     
                     //Define hasMany relation method here..
-                    private transient List<PostSubscriber>  postSubscribers ;
+                    private transient DataList<PostSubscriber>  postSubscribers ;
 
-                    public List<PostSubscriber> getPostSubscribers() {
+                    public DataList<PostSubscriber> getPostSubscribers() {
                         return postSubscribers;
                     }
 
-                    public void setPostSubscribers(List<PostSubscriber> postSubscribers) {
+                    public void setPostSubscribers(DataList<PostSubscriber> postSubscribers) {
                         boolean hashType = false;
-                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
                         for(Object o: postSubscribers){
                             if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
@@ -1883,10 +1915,10 @@ public class Post extends Model {
                 */
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setPostSubscribers1(List<HashMap<String, Object>> postSubscribers) {
+                    public void setPostSubscribers1(DataList<HashMap<String, Object>> postSubscribers) {
                         //First create a dummy Repo class object for ..
                         PostSubscriberRepository postSubscribersRepository = new PostSubscriberRepository();
-                        List<PostSubscriber> result = new ArrayList<>();
+                        DataList<PostSubscriber> result = new DataList<>();
                         for (HashMap<String, Object> obj : postSubscribers) {
                             //Also add relation to child type for two way communication..
                             PostSubscriber obj1 = postSubscribersRepository.createObject(obj);
@@ -1900,7 +1932,7 @@ public class Post extends Model {
 
                     //Adding relation method..
                     //Add a dummy class Name object to seperate data..
-                    public void addRelation(List<PostSubscriber> postSubscribers, PostSubscriber dummyClassInstance) {
+                    public void addRelation(DataList<PostSubscriber> postSubscribers, PostSubscriber dummyClassInstance) {
                         that.setPostSubscribers(postSubscribers);
 
                     }
@@ -1911,7 +1943,7 @@ public class Post extends Model {
                         try{
                             that.getPostSubscribers().add(postSubscribers);
                         }catch(Exception e){
-                            List< PostSubscriber> postSubscribers1 = new ArrayList();
+                            DataList< PostSubscriber> postSubscribers1 = new DataList();
                             //Now add this item to list..
                             postSubscribers1.add(postSubscribers);
                             //Now set data....

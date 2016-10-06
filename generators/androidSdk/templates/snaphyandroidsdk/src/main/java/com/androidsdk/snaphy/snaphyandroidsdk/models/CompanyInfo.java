@@ -60,6 +60,7 @@ public class CompanyInfo extends Model {
     
         
             
+
             
                 private String type;
                 /* Adding Getter and Setter methods */
@@ -79,10 +80,13 @@ public class CompanyInfo extends Model {
             
             
 
+            
+
         
     
         
             
+
             
                 private String html;
                 /* Adding Getter and Setter methods */
@@ -102,10 +106,13 @@ public class CompanyInfo extends Model {
             
             
 
+            
+
         
     
         
             
+
             
                 private String edited;
                 /* Adding Getter and Setter methods */
@@ -125,13 +132,18 @@ public class CompanyInfo extends Model {
             
             
 
+            
+
         
     
         
             
+
             
             
             
+            
+
             
 
         

@@ -232,7 +232,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
     
         
             //Method sendMail definition
-            public void sendMail(  List<String> to,  String subject,  String html, final ObjectCallback<JSONObject>  callback ){
+            public void sendMail(  DataList<String> to,  String subject,  String html, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -287,7 +287,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
     
         
             //Method sendNotice definition
-            public void sendNotice(  List<String> to,  String subject,  Map<String,  ? extends Object> templateOptions, final ObjectCallback<JSONObject>  callback ){
+            public void sendNotice(  DataList<String> to,  String subject,  Map<String,  ? extends Object> templateOptions, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -342,7 +342,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
     
         
             //Method sendOrder definition
-            public void sendOrder(  List<String> to,  String subject,  Map<String,  ? extends Object> templateOptions, final ObjectCallback<JSONObject>  callback ){
+            public void sendOrder(  DataList<String> to,  String subject,  Map<String,  ? extends Object> templateOptions, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event

@@ -88,6 +88,7 @@ public class Comment extends Model {
     
         
             
+
             
                 private String answer;
                 /* Adding Getter and Setter methods */
@@ -107,10 +108,13 @@ public class Comment extends Model {
             
             
 
+            
+
         
     
         
             
+
             
                 private String status;
                 /* Adding Getter and Setter methods */
@@ -130,31 +134,42 @@ public class Comment extends Model {
             
             
 
-        
-    
-        
-            
-            
-            
-            
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
             
 
         

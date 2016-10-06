@@ -105,6 +105,7 @@ public class Customer extends User {
     
         
             
+
             
                 private String date;
                 /* Adding Getter and Setter methods */
@@ -124,10 +125,13 @@ public class Customer extends User {
             
             
 
+            
+
         
     
         
             
+
             
                 private String lastModified;
                 /* Adding Getter and Setter methods */
@@ -147,10 +151,13 @@ public class Customer extends User {
             
             
 
+            
+
         
     
         
             
+
             
                 private String email;
                 /* Adding Getter and Setter methods */
@@ -170,10 +177,13 @@ public class Customer extends User {
             
             
 
+            
+
         
     
         
             
+
             
                 private String firstName;
                 /* Adding Getter and Setter methods */
@@ -193,10 +203,13 @@ public class Customer extends User {
             
             
 
+            
+
         
     
         
             
+
             
                 private String lastName;
                 /* Adding Getter and Setter methods */
@@ -216,10 +229,13 @@ public class Customer extends User {
             
             
 
+            
+
         
     
         
             
+
             
                 private String password;
                 /* Adding Getter and Setter methods */
@@ -239,10 +255,13 @@ public class Customer extends User {
             
             
 
+            
+
         
     
         
             
+
             
                 private String status;
                 /* Adding Getter and Setter methods */
@@ -262,10 +281,13 @@ public class Customer extends User {
             
             
 
+            
+
         
     
         
             
+
             
                 private String registrationId;
                 /* Adding Getter and Setter methods */
@@ -285,10 +307,13 @@ public class Customer extends User {
             
             
 
+            
+
         
     
         
             
+
             
             
             
@@ -308,85 +333,114 @@ public class Customer extends User {
             
             
 
-        
-    
-        
-            
-            
-            
-            
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
             
 
         
@@ -789,15 +843,15 @@ public class Customer extends User {
                 
                     
                     //Define hasMany relation method here..
-                    private transient List<Comment>  comments ;
+                    private transient DataList<Comment>  comments ;
 
-                    public List<Comment> getComments() {
+                    public DataList<Comment> getComments() {
                         return comments;
                     }
 
-                    public void setComments(List<Comment> comments) {
+                    public void setComments(DataList<Comment> comments) {
                         boolean hashType = false;
-                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
                         for(Object o: comments){
                             if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
@@ -835,10 +889,10 @@ public class Customer extends User {
                 */
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setComments1(List<HashMap<String, Object>> comments) {
+                    public void setComments1(DataList<HashMap<String, Object>> comments) {
                         //First create a dummy Repo class object for ..
                         CommentRepository commentsRepository = new CommentRepository();
-                        List<Comment> result = new ArrayList<>();
+                        DataList<Comment> result = new DataList<>();
                         for (HashMap<String, Object> obj : comments) {
                             //Also add relation to child type for two way communication..
                             Comment obj1 = commentsRepository.createObject(obj);
@@ -852,7 +906,7 @@ public class Customer extends User {
 
                     //Adding relation method..
                     //Add a dummy class Name object to seperate data..
-                    public void addRelation(List<Comment> comments, Comment dummyClassInstance) {
+                    public void addRelation(DataList<Comment> comments, Comment dummyClassInstance) {
                         that.setComments(comments);
 
                     }
@@ -863,7 +917,7 @@ public class Customer extends User {
                         try{
                             that.getComments().add(comments);
                         }catch(Exception e){
-                            List< Comment> comments1 = new ArrayList();
+                            DataList< Comment> comments1 = new DataList();
                             //Now add this item to list..
                             comments1.add(comments);
                             //Now set data....
@@ -1376,15 +1430,15 @@ public class Customer extends User {
                 
                     
                     //Define hasMany relation method here..
-                    private transient List<Post>  posts ;
+                    private transient DataList<Post>  posts ;
 
-                    public List<Post> getPosts() {
+                    public DataList<Post> getPosts() {
                         return posts;
                     }
 
-                    public void setPosts(List<Post> posts) {
+                    public void setPosts(DataList<Post> posts) {
                         boolean hashType = false;
-                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
                         for(Object o: posts){
                             if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
@@ -1422,10 +1476,10 @@ public class Customer extends User {
                 */
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setPosts1(List<HashMap<String, Object>> posts) {
+                    public void setPosts1(DataList<HashMap<String, Object>> posts) {
                         //First create a dummy Repo class object for ..
                         PostRepository postsRepository = new PostRepository();
-                        List<Post> result = new ArrayList<>();
+                        DataList<Post> result = new DataList<>();
                         for (HashMap<String, Object> obj : posts) {
                             //Also add relation to child type for two way communication..
                             Post obj1 = postsRepository.createObject(obj);
@@ -1439,7 +1493,7 @@ public class Customer extends User {
 
                     //Adding relation method..
                     //Add a dummy class Name object to seperate data..
-                    public void addRelation(List<Post> posts, Post dummyClassInstance) {
+                    public void addRelation(DataList<Post> posts, Post dummyClassInstance) {
                         that.setPosts(posts);
 
                     }
@@ -1450,7 +1504,7 @@ public class Customer extends User {
                         try{
                             that.getPosts().add(posts);
                         }catch(Exception e){
-                            List< Post> posts1 = new ArrayList();
+                            DataList< Post> posts1 = new DataList();
                             //Now add this item to list..
                             posts1.add(posts);
                             //Now set data....
@@ -1963,15 +2017,15 @@ public class Customer extends User {
                 
                     
                     //Define hasMany relation method here..
-                    private transient List<SavePost>  savePosts ;
+                    private transient DataList<SavePost>  savePosts ;
 
-                    public List<SavePost> getSavePosts() {
+                    public DataList<SavePost> getSavePosts() {
                         return savePosts;
                     }
 
-                    public void setSavePosts(List<SavePost> savePosts) {
+                    public void setSavePosts(DataList<SavePost> savePosts) {
                         boolean hashType = false;
-                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
                         for(Object o: savePosts){
                             if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
@@ -2009,10 +2063,10 @@ public class Customer extends User {
                 */
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setSavePosts1(List<HashMap<String, Object>> savePosts) {
+                    public void setSavePosts1(DataList<HashMap<String, Object>> savePosts) {
                         //First create a dummy Repo class object for ..
                         SavePostRepository savePostsRepository = new SavePostRepository();
-                        List<SavePost> result = new ArrayList<>();
+                        DataList<SavePost> result = new DataList<>();
                         for (HashMap<String, Object> obj : savePosts) {
                             //Also add relation to child type for two way communication..
                             SavePost obj1 = savePostsRepository.createObject(obj);
@@ -2026,7 +2080,7 @@ public class Customer extends User {
 
                     //Adding relation method..
                     //Add a dummy class Name object to seperate data..
-                    public void addRelation(List<SavePost> savePosts, SavePost dummyClassInstance) {
+                    public void addRelation(DataList<SavePost> savePosts, SavePost dummyClassInstance) {
                         that.setSavePosts(savePosts);
 
                     }
@@ -2037,7 +2091,7 @@ public class Customer extends User {
                         try{
                             that.getSavePosts().add(savePosts);
                         }catch(Exception e){
-                            List< SavePost> savePosts1 = new ArrayList();
+                            DataList< SavePost> savePosts1 = new DataList();
                             //Now add this item to list..
                             savePosts1.add(savePosts);
                             //Now set data....
@@ -2550,15 +2604,15 @@ public class Customer extends User {
                 
                     
                     //Define hasMany relation method here..
-                    private transient List<LikePost>  likePosts ;
+                    private transient DataList<LikePost>  likePosts ;
 
-                    public List<LikePost> getLikePosts() {
+                    public DataList<LikePost> getLikePosts() {
                         return likePosts;
                     }
 
-                    public void setLikePosts(List<LikePost> likePosts) {
+                    public void setLikePosts(DataList<LikePost> likePosts) {
                         boolean hashType = false;
-                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
                         for(Object o: likePosts){
                             if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
@@ -2596,10 +2650,10 @@ public class Customer extends User {
                 */
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setLikePosts1(List<HashMap<String, Object>> likePosts) {
+                    public void setLikePosts1(DataList<HashMap<String, Object>> likePosts) {
                         //First create a dummy Repo class object for ..
                         LikePostRepository likePostsRepository = new LikePostRepository();
-                        List<LikePost> result = new ArrayList<>();
+                        DataList<LikePost> result = new DataList<>();
                         for (HashMap<String, Object> obj : likePosts) {
                             //Also add relation to child type for two way communication..
                             LikePost obj1 = likePostsRepository.createObject(obj);
@@ -2613,7 +2667,7 @@ public class Customer extends User {
 
                     //Adding relation method..
                     //Add a dummy class Name object to seperate data..
-                    public void addRelation(List<LikePost> likePosts, LikePost dummyClassInstance) {
+                    public void addRelation(DataList<LikePost> likePosts, LikePost dummyClassInstance) {
                         that.setLikePosts(likePosts);
 
                     }
@@ -2624,7 +2678,7 @@ public class Customer extends User {
                         try{
                             that.getLikePosts().add(likePosts);
                         }catch(Exception e){
-                            List< LikePost> likePosts1 = new ArrayList();
+                            DataList< LikePost> likePosts1 = new DataList();
                             //Now add this item to list..
                             likePosts1.add(likePosts);
                             //Now set data....
@@ -3137,15 +3191,15 @@ public class Customer extends User {
                 
                     
                     //Define hasMany relation method here..
-                    private transient List<PostSubscriber>  postSubscribers ;
+                    private transient DataList<PostSubscriber>  postSubscribers ;
 
-                    public List<PostSubscriber> getPostSubscribers() {
+                    public DataList<PostSubscriber> getPostSubscribers() {
                         return postSubscribers;
                     }
 
-                    public void setPostSubscribers(List<PostSubscriber> postSubscribers) {
+                    public void setPostSubscribers(DataList<PostSubscriber> postSubscribers) {
                         boolean hashType = false;
-                        List<HashMap<String, Object>> hashMaps = new ArrayList<>();
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
                         for(Object o: postSubscribers){
                             if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
@@ -3183,10 +3237,10 @@ public class Customer extends User {
                 */
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setPostSubscribers1(List<HashMap<String, Object>> postSubscribers) {
+                    public void setPostSubscribers1(DataList<HashMap<String, Object>> postSubscribers) {
                         //First create a dummy Repo class object for ..
                         PostSubscriberRepository postSubscribersRepository = new PostSubscriberRepository();
-                        List<PostSubscriber> result = new ArrayList<>();
+                        DataList<PostSubscriber> result = new DataList<>();
                         for (HashMap<String, Object> obj : postSubscribers) {
                             //Also add relation to child type for two way communication..
                             PostSubscriber obj1 = postSubscribersRepository.createObject(obj);
@@ -3200,7 +3254,7 @@ public class Customer extends User {
 
                     //Adding relation method..
                     //Add a dummy class Name object to seperate data..
-                    public void addRelation(List<PostSubscriber> postSubscribers, PostSubscriber dummyClassInstance) {
+                    public void addRelation(DataList<PostSubscriber> postSubscribers, PostSubscriber dummyClassInstance) {
                         that.setPostSubscribers(postSubscribers);
 
                     }
@@ -3211,7 +3265,7 @@ public class Customer extends User {
                         try{
                             that.getPostSubscribers().add(postSubscribers);
                         }catch(Exception e){
-                            List< PostSubscriber> postSubscribers1 = new ArrayList();
+                            DataList< PostSubscriber> postSubscribers1 = new DataList();
                             //Now add this item to list..
                             postSubscribers1.add(postSubscribers);
                             //Now set data....

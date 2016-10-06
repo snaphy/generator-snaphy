@@ -528,7 +528,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                         var isCustomClass = true;
                         var customClassType = type[0];
                     }
-                    type = "List<" + convertType(type[0], model) + ">" ;
+                    type = "DataList<" + convertType(type[0], model) + ">" ;
                 }else{
                     hasAndBelongsToType = checkHasAndBelongsToDataType(type, model);
                     type = convertType(type, model);
@@ -584,7 +584,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                         //Convert custom class to hashMap type first
                         //if array
                         if(isArray){
-                            methodString = methodString + " " + "List<Map<String,  ? extends Object>>" + " " + argumentName + ", ";
+                            methodString = methodString + " " + "DataList<Map<String,  ? extends Object>>" + " " + argumentName + ", ";
 
                                 //Adding array argument to hash
                                 hashMapList.push( "hashMapObject.put(\"" + argumentName + "\", " + argumentName + ");" );
@@ -650,7 +650,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                    
 
                     if(model.allModels[type] !== undefined){
-                        returnType = "List<" + type + ">";
+                        returnType = "DataList<" + type + ">";
                         methodString = methodString  +  "final DataListCallback<" + type + "> callback)";
                         callback = "DataListCallback<" + type + "> ";
                         callbackType = "DataListCallback";

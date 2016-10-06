@@ -67,6 +67,7 @@ public class CommentDetail extends Model {
     
         
             
+
             
             
                 private double totalLike;
@@ -86,10 +87,13 @@ public class CommentDetail extends Model {
             
             
 
+            
+
         
     
         
             
+
             
                 private String added;
                 /* Adding Getter and Setter methods */
@@ -109,10 +113,13 @@ public class CommentDetail extends Model {
             
             
 
+            
+
         
     
         
             
+
             
                 private String updated;
                 /* Adding Getter and Setter methods */
@@ -132,10 +139,13 @@ public class CommentDetail extends Model {
             
             
 
+            
+
         
     
         
             
+
             
                 private String status;
                 /* Adding Getter and Setter methods */
@@ -155,22 +165,30 @@ public class CommentDetail extends Model {
             
             
 
-        
-    
-        
-            
-            
-            
-            
             
 
         
     
         
             
+
             
             
             
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
             
 
         

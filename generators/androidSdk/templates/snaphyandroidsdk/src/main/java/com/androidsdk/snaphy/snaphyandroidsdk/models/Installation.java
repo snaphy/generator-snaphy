@@ -60,72 +60,12 @@ public class Installation extends Model {
     
         
             
+
             
             
             
             
 
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
             
 
         
@@ -133,14 +73,98 @@ public class Installation extends Model {
         
             
 
-                private List<Object> subscriptions;
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+                private DataList<Object> subscriptions;
                 /* Adding Getter and Setter methods */
-                public List<Object> getSubscriptions(){
+                public DataList<Object> getSubscriptions(){
                     return subscriptions;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setSubscriptions(List<Object> subscriptions){
+                public void setSubscriptions(DataList<Object> subscriptions){
                     this.subscriptions = subscriptions;
 
                     //TODO change this to custom array with double quotes escaped if error occured when sending to server..
@@ -148,36 +172,48 @@ public class Installation extends Model {
                 }
 
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         

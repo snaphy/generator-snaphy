@@ -81,6 +81,7 @@ public class SavePost extends Model {
     
         
             
+
             
                 private String added;
                 /* Adding Getter and Setter methods */
@@ -100,31 +101,42 @@ public class SavePost extends Model {
             
             
 
-        
-    
-        
-            
-            
-            
-            
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
             
 
         

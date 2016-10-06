@@ -60,6 +60,7 @@ public class News extends Model {
     
         
             
+
             
                 private String title;
                 /* Adding Getter and Setter methods */
@@ -79,10 +80,13 @@ public class News extends Model {
             
             
 
+            
+
         
     
         
             
+
             
                 private String description;
                 /* Adding Getter and Setter methods */
@@ -102,10 +106,13 @@ public class News extends Model {
             
             
 
+            
+
         
     
         
             
+
             
                 private String url;
                 /* Adding Getter and Setter methods */
@@ -125,10 +132,13 @@ public class News extends Model {
             
             
 
+            
+
         
     
         
             
+
             
                 private String status;
                 /* Adding Getter and Setter methods */
@@ -148,10 +158,13 @@ public class News extends Model {
             
             
 
+            
+
         
     
         
             
+
             
                 private String type;
                 /* Adding Getter and Setter methods */
@@ -171,10 +184,13 @@ public class News extends Model {
             
             
 
+            
+
         
     
         
             
+
             
             
             
@@ -194,10 +210,13 @@ public class News extends Model {
             
             
 
+            
+
         
     
         
             
+
             
                 private String added;
                 /* Adding Getter and Setter methods */
@@ -217,10 +236,13 @@ public class News extends Model {
             
             
 
+            
+
         
     
         
             
+
             
                 private String updated;
                 /* Adding Getter and Setter methods */
@@ -240,13 +262,18 @@ public class News extends Model {
             
             
 
+            
+
         
     
         
             
+
             
             
             
+            
+
             
 
         

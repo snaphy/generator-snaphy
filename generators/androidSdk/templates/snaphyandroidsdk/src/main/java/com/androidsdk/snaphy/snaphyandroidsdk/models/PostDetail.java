@@ -74,6 +74,7 @@ public class PostDetail extends Model {
     
         
             
+
             
             
                 private double totalLike;
@@ -93,19 +94,39 @@ public class PostDetail extends Model {
             
             
 
-        
-    
-        
-            
-            
-            
-            
             
 
         
     
         
             
+
+            
+            
+            
+            
+
+            
+                private boolean hasAcceptedAnswer;
+                /* Adding Getter and Setter methods */
+                public boolean getHasAcceptedAnswer(){
+                    return hasAcceptedAnswer;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setHasAcceptedAnswer(boolean hasAcceptedAnswer){
+                    this.hasAcceptedAnswer = hasAcceptedAnswer;
+                    //Update hashMap value..
+                    hashMap.put("hasAcceptedAnswer", hasAcceptedAnswer);
+                }
+
+            
+
+        
+    
+        
+            
+
             
             
                 private double totalSave;
@@ -125,10 +146,13 @@ public class PostDetail extends Model {
             
             
 
+            
+
         
     
         
             
+
             
                 private String added;
                 /* Adding Getter and Setter methods */
@@ -148,10 +172,13 @@ public class PostDetail extends Model {
             
             
 
+            
+
         
     
         
             
+
             
                 private String updated;
                 /* Adding Getter and Setter methods */
@@ -171,10 +198,13 @@ public class PostDetail extends Model {
             
             
 
+            
+
         
     
         
             
+
             
                 private String type;
                 /* Adding Getter and Setter methods */
@@ -194,10 +224,13 @@ public class PostDetail extends Model {
             
             
 
+            
+
         
     
         
             
+
             
                 private String status;
                 /* Adding Getter and Setter methods */
@@ -217,31 +250,42 @@ public class PostDetail extends Model {
             
             
 
-        
-    
-        
-            
-            
-            
-            
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
             
 
         

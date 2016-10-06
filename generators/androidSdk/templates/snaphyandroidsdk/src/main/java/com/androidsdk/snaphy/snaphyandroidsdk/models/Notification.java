@@ -60,135 +60,12 @@ public class Notification extends Model {
     
         
             
+
             
             
             
             
 
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
             
 
         
@@ -196,14 +73,182 @@ public class Notification extends Model {
         
             
 
-                private List<Object> urlArgs;
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+                private DataList<Object> urlArgs;
                 /* Adding Getter and Setter methods */
-                public List<Object> getUrlArgs(){
+                public DataList<Object> getUrlArgs(){
                     return urlArgs;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setUrlArgs(List<Object> urlArgs){
+                public void setUrlArgs(DataList<Object> urlArgs){
                     this.urlArgs = urlArgs;
 
                     //TODO change this to custom array with double quotes escaped if error occured when sending to server..
@@ -211,18 +256,24 @@ public class Notification extends Model {
                 }
 
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         

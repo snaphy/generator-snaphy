@@ -67,6 +67,7 @@ public class FacebookAccessToken extends Model {
     
         
             
+
             
                 private String FbUserId;
                 /* Adding Getter and Setter methods */
@@ -86,10 +87,13 @@ public class FacebookAccessToken extends Model {
             
             
 
+            
+
         
     
         
             
+
             
                 private String token;
                 /* Adding Getter and Setter methods */
@@ -109,10 +113,13 @@ public class FacebookAccessToken extends Model {
             
             
 
+            
+
         
     
         
             
+
             
                 private String expires;
                 /* Adding Getter and Setter methods */
@@ -132,19 +139,25 @@ public class FacebookAccessToken extends Model {
             
             
 
-        
-    
-        
-            
-            
-            
-            
             
 
         
     
         
             
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
             
                 private String type;
                 /* Adding Getter and Setter methods */
@@ -164,13 +177,18 @@ public class FacebookAccessToken extends Model {
             
             
 
+            
+
         
     
         
             
+
             
             
             
+            
+
             
 
         

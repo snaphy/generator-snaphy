@@ -63,6 +63,7 @@ public class Employee extends User {
     
         
             
+
             
                 private String username;
                 /* Adding Getter and Setter methods */
@@ -82,10 +83,13 @@ public class Employee extends User {
             
             
 
+            
+
         
     
         
             
+
             
                 private String firstName;
                 /* Adding Getter and Setter methods */
@@ -105,10 +109,13 @@ public class Employee extends User {
             
             
 
+            
+
         
     
         
             
+
             
                 private String lastName;
                 /* Adding Getter and Setter methods */
@@ -128,10 +135,13 @@ public class Employee extends User {
             
             
 
+            
+
         
     
         
             
+
             
                 private String date;
                 /* Adding Getter and Setter methods */
@@ -151,10 +161,13 @@ public class Employee extends User {
             
             
 
+            
+
         
     
         
             
+
             
                 private String updated;
                 /* Adding Getter and Setter methods */
@@ -174,10 +187,13 @@ public class Employee extends User {
             
             
 
+            
+
         
     
         
             
+
             
                 private String email;
                 /* Adding Getter and Setter methods */
@@ -197,10 +213,13 @@ public class Employee extends User {
             
             
 
+            
+
         
     
         
             
+
             
                 private String password;
                 /* Adding Getter and Setter methods */
@@ -220,85 +239,114 @@ public class Employee extends User {
             
             
 
-        
-    
-        
-            
-            
-            
-            
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
             
 
         

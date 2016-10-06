@@ -60,54 +60,12 @@ public class Application extends Model {
     
         
             
+
             
             
             
             
 
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
             
 
         
@@ -115,14 +73,74 @@ public class Application extends Model {
         
             
 
-                private List<Object> collaborators;
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+                private DataList<Object> collaborators;
                 /* Adding Getter and Setter methods */
-                public List<Object> getCollaborators(){
+                public DataList<Object> getCollaborators(){
                     return collaborators;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setCollaborators(List<Object> collaborators){
+                public void setCollaborators(DataList<Object> collaborators){
                     this.collaborators = collaborators;
 
                     //TODO change this to custom array with double quotes escaped if error occured when sending to server..
@@ -130,36 +148,12 @@ public class Application extends Model {
                 }
 
             
+
             
             
             
             
 
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
             
 
         
@@ -167,14 +161,50 @@ public class Application extends Model {
         
             
 
-                private List<Object> callbackUrls;
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+                private DataList<Object> callbackUrls;
                 /* Adding Getter and Setter methods */
-                public List<Object> getCallbackUrls(){
+                public DataList<Object> getCallbackUrls(){
                     return callbackUrls;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setCallbackUrls(List<Object> callbackUrls){
+                public void setCallbackUrls(DataList<Object> callbackUrls){
                     this.callbackUrls = callbackUrls;
 
                     //TODO change this to custom array with double quotes escaped if error occured when sending to server..
@@ -182,9 +212,12 @@ public class Application extends Model {
                 }
 
             
+
             
             
             
+            
+
             
 
         
@@ -192,14 +225,14 @@ public class Application extends Model {
         
             
 
-                private List<Object> permissions;
+                private DataList<Object> permissions;
                 /* Adding Getter and Setter methods */
-                public List<Object> getPermissions(){
+                public DataList<Object> getPermissions(){
                     return permissions;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setPermissions(List<Object> permissions){
+                public void setPermissions(DataList<Object> permissions){
                     this.permissions = permissions;
 
                     //TODO change this to custom array with double quotes escaped if error occured when sending to server..
@@ -207,81 +240,12 @@ public class Application extends Model {
                 }
 
             
+
             
             
             
             
 
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
-            
-
-        
-    
-        
-            
-            
-            
-            
             
 
         
@@ -289,14 +253,110 @@ public class Application extends Model {
         
             
 
-                private List<Object> authenticationSchemes;
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+                private DataList<Object> authenticationSchemes;
                 /* Adding Getter and Setter methods */
-                public List<Object> getAuthenticationSchemes(){
+                public DataList<Object> getAuthenticationSchemes(){
                     return authenticationSchemes;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setAuthenticationSchemes(List<Object> authenticationSchemes){
+                public void setAuthenticationSchemes(DataList<Object> authenticationSchemes){
                     this.authenticationSchemes = authenticationSchemes;
 
                     //TODO change this to custom array with double quotes escaped if error occured when sending to server..
@@ -304,36 +364,48 @@ public class Application extends Model {
                 }
 
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         

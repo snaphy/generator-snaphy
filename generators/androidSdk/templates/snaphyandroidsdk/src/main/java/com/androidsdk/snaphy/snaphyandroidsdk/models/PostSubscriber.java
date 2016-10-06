@@ -95,6 +95,7 @@ public class PostSubscriber extends Model {
     
         
             
+
             
                 private String type;
                 /* Adding Getter and Setter methods */
@@ -114,58 +115,78 @@ public class PostSubscriber extends Model {
             
             
 
-        
-    
-        
-            
-            
-            
-            
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
             
 
         
     
         
             
+
             
             
             
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
             
 
         

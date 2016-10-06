@@ -60,6 +60,7 @@ public class AmazonImage extends Model {
     
         
             
+
             
                 private String name;
                 /* Adding Getter and Setter methods */
@@ -79,10 +80,13 @@ public class AmazonImage extends Model {
             
             
 
+            
+
         
     
         
             
+
             
                 private String container;
                 /* Adding Getter and Setter methods */
@@ -102,10 +106,13 @@ public class AmazonImage extends Model {
             
             
 
+            
+
         
     
         
             
+
             
                 private String type;
                 /* Adding Getter and Setter methods */
@@ -125,10 +132,13 @@ public class AmazonImage extends Model {
             
             
 
+            
+
         
     
         
             
+
             
             
             
@@ -148,13 +158,18 @@ public class AmazonImage extends Model {
             
             
 
+            
+
         
     
         
             
+
             
             
             
+            
+
             
 
         
