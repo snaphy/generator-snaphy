@@ -85,7 +85,7 @@ public class PostDetailRepository extends ModelRepository<PostDetail> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:postDetailId/acceptedAnswer", "GET"), "PostDetail.prototype.__get__acceptedAnswer");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:postDetailId/comment", "GET"), "PostDetail.prototype.__get__comment");
                 
 
             
@@ -207,6 +207,24 @@ public class PostDetailRepository extends ModelRepository<PostDetail> {
             
         
             
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/addRemoveAcceptedAnswer", "POST"), "PostDetail.addRemoveAcceptedAnswer");
+                
+
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
         
             
         
@@ -298,8 +316,8 @@ public class PostDetailRepository extends ModelRepository<PostDetail> {
         
     
         
-            //Method get__acceptedAnswer definition
-            public void get__acceptedAnswer(  String postDetailId,  Boolean refresh, final ObjectCallback<Comment> callback){
+            //Method get__comment definition
+            public void get__comment(  String postDetailId,  Boolean refresh, final ObjectCallback<Comment> callback){
 
                 /**
                 Call the onBefore event
@@ -322,7 +340,7 @@ public class PostDetailRepository extends ModelRepository<PostDetail> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__acceptedAnswer", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__comment", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -352,7 +370,7 @@ public class PostDetailRepository extends ModelRepository<PostDetail> {
 
                 
 
-            }//Method get__acceptedAnswer definition ends here..
+            }//Method get__comment definition ends here..
 
             
 
@@ -1090,6 +1108,71 @@ public class PostDetailRepository extends ModelRepository<PostDetail> {
 
             
 
+        
+    
+        
+            //Method addRemoveAcceptedAnswer definition
+            public void addRemoveAcceptedAnswer(  String postId,  String commentId,  Boolean add, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("postId", postId);
+                
+                        hashMapObject.put("commentId", commentId);
+                
+                        hashMapObject.put("add", add);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("addRemoveAcceptedAnswer", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method addRemoveAcceptedAnswer definition ends here..
+
+            
+
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
         

@@ -104,6 +104,7 @@ var generateDataList = function(app, modelsRestDefinition){
     //Compile the EJS template..
     var ListTemplatePath        = path.join(__dirname, constants.javaTemplates, "DataListTemplate.ejs");
     var ListenTemplatePath      = path.join(__dirname, constants.javaTemplates, "ListenTemplate.ejs");
+    var UtilTemplatePath      = path.join(__dirname, constants.javaTemplates, "Util.ejs");
     //List path for adding list and subscribers..
     var AndroidListPath       = path.join(__dirname, constants.androidMainPath, "list");
     //Clean model folder and add new dir.
@@ -113,6 +114,7 @@ var generateDataList = function(app, modelsRestDefinition){
     compileAndWrite({}, ListTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("DataList") +".java");
     //Add the listen template..
     compileAndWrite({}, ListenTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("Listen") +".java");
+    compileAndWrite({}, ListenTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("Util") +".java");
 
 };
 

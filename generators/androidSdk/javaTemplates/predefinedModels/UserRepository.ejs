@@ -18,10 +18,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 
 
-import com.strongloop.android.remoting.JsonUtil;
+
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
 import com.strongloop.android.remoting.adapters.RestContractItem;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -255,12 +256,12 @@ public class UserRepository<U extends User> extends ModelRepository<U> {
                     @Override
                     public void onSuccess(JSONObject response) {
                         AccessToken token = getAccessTokenRepository()
-                                .createObject(JsonUtil.fromJson(response));
+                                .createObject(Util.fromJson(response));
                         getRestAdapter().setAccessToken(token.getId().toString());
 
                         JSONObject userJson = response.optJSONObject("user");
                         U user = userJson != null
-                                ? createObject(JsonUtil.fromJson(userJson))
+                                ? createObject(Util.fromJson(userJson))
                                 : null;
 
                         setCurrentUserId(token.getUserId());

@@ -67,6 +67,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Comment;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.PostDetail;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PostDetailRepository;
+            
+        
+    
+
 
 
 
@@ -100,6 +107,38 @@ public class CommentRepository extends ModelRepository<Comment> {
 
                 
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentId/customer", "GET"), "Comment.prototype.__get__customer");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentId/postDetails", "GET"), "Comment.prototype.__get__postDetails");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentId/postDetails", "POST"), "Comment.prototype.__create__postDetails");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentId/postDetails", "PUT"), "Comment.prototype.__update__postDetails");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentId/postDetails", "DELETE"), "Comment.prototype.__destroy__postDetails");
                 
 
             
@@ -459,6 +498,235 @@ public class CommentRepository extends ModelRepository<Comment> {
                 
 
             }//Method get__customer definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__postDetails definition
+            public void get__postDetails(  String commentId,  Boolean refresh, final ObjectCallback<PostDetail> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("commentId", commentId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__postDetails", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    PostDetailRepository postDetailRepo = getRestAdapter().createRepository(PostDetailRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    PostDetail postDetail = postDetailRepo.createObject(result);
+                                    callback.onSuccess(postDetail);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__postDetails definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__postDetails definition
+            public void create__postDetails(  String commentId,  Map<String,  ? extends Object> data, final ObjectCallback<PostDetail> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("commentId", commentId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__postDetails", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    PostDetailRepository postDetailRepo = getRestAdapter().createRepository(PostDetailRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    PostDetail postDetail = postDetailRepo.createObject(result);
+                                    callback.onSuccess(postDetail);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__postDetails definition ends here..
+
+            
+
+        
+    
+        
+            //Method update__postDetails definition
+            public void update__postDetails(  String commentId,  Map<String,  ? extends Object> data, final ObjectCallback<PostDetail> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("commentId", commentId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__update__postDetails", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    PostDetailRepository postDetailRepo = getRestAdapter().createRepository(PostDetailRepository.class);
+                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    PostDetail postDetail = postDetailRepo.createObject(result);
+                                    callback.onSuccess(postDetail);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method update__postDetails definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroy__postDetails definition
+            public void destroy__postDetails(  String commentId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("commentId", commentId);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroy__postDetails", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroy__postDetails definition ends here..
 
             
 

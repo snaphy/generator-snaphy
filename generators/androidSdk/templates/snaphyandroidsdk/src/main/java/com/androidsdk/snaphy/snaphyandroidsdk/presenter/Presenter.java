@@ -11,6 +11,7 @@ import java.util.HashMap;
 public final class Presenter {
     private static Presenter instance;
     private HashMap<String, EventType> eventTypeHashMap;
+    private HashMap<String, ModelType> eventTypeModel;
 
     private class EventType{
         Class type;
@@ -24,11 +25,24 @@ public final class Presenter {
         }
     }
 
+    private class ModelType{
+        Class type;
+        Object data;
+        String Id;
+
+        public ModelType(String Id, Object data){
+            //this.type = type;
+            this.Id = Id;
+            this.data = data;
+        }
+    }
+
     /**
      * Constructor
      * */
     public Presenter() {
         eventTypeHashMap = new HashMap<>();
+        eventTypeModel = new HashMap<>();
     }
 
 
@@ -36,6 +50,8 @@ public final class Presenter {
         EventType eventType = new EventType(Id, dataList);
         eventTypeHashMap.put(Id, eventType);
     }
+
+
 
     public void removeFromList(String Id){
         //Find the given Object..
@@ -59,6 +75,39 @@ public final class Presenter {
             DataList<T> tDataList = (DataList < T >) (DataList) dataList;
             //type.cast(dataList);
             return tDataList;
+        }
+    }
+
+
+
+    public void addModel(String Id, Object data){
+        ModelType eventType = new ModelType(Id, data);
+        eventTypeModel.put(Id, eventType);
+    }
+
+
+
+    public void removeModelFromList(String Id){
+        //Find the given Object..
+        ModelType eventType = eventTypeModel.remove(Id);
+        if(eventType == null){
+            Log.e("Snaphy", "EventType is not found. Wrong id");
+        }
+    }
+
+    //http://stackoverflow.com/questions/450807/how-do-i-make-the-method-return-type-generic
+    //Generic return type..
+    public <T extends Object> T getModel(Class<T> type, String Id){
+        //Find the given Object..
+        ModelType eventType = eventTypeModel.get(Id);
+        if(eventType == null){
+            Log.e("Snaphy", "EventType is not found. Wrong id");
+            return null;
+        }else{
+            Object dataModel = eventType.data;
+            //Now cast according to its type..
+            T tDataModel = type.cast(dataModel);
+            return tDataModel;
         }
     }
 

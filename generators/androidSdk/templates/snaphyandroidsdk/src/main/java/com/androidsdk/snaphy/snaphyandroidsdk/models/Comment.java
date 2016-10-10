@@ -57,6 +57,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.CommentRepository;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PostDetailRepository;
+            
+
+        
+    
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -306,6 +313,14 @@ public class Comment extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
                         
                         
@@ -475,6 +490,14 @@ public class Comment extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
                         
                         
@@ -570,6 +593,14 @@ public class Comment extends Model {
                     
 
                      
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
                             
                          
                             
@@ -899,6 +930,14 @@ public class Comment extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -1110,6 +1149,332 @@ public class Comment extends Model {
                                         });
                                     } //method def ends here.
                                  
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                 
+                 
+             
+          
+    
+        
+                
+                    //Define belongsTo relation method here..
+                    private transient PostDetail  postDetails ;
+
+                    public PostDetail getPostDetails() {
+                        return postDetails;
+                    }
+
+                    public void setPostDetails(PostDetail postDetails) {
+                        this.postDetails = postDetails;
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setPostDetails(Map<String, Object> postDetails) {
+                        //First create a dummy Repo class object for customer.
+                        PostDetailRepository postDetailsRepository = new PostDetailRepository();
+                        PostDetail postDetails1 = postDetailsRepository.createObject(postDetails);
+                        setPostDetails(postDetails1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setPostDetails(HashMap<String, Object> postDetails) {
+                        //First create a dummy Repo class object for customer.
+                        PostDetailRepository postDetailsRepository = new PostDetailRepository();
+                        PostDetail postDetails1 = postDetailsRepository.createObject(postDetails);
+                        setPostDetails(postDetails1);
+                    }
+
+                    //Adding relation method..
+                    public void addRelation(PostDetail postDetails) {
+                        that.setPostDetails(postDetails);
+                    }
+
+
+
+                
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__postDetails( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<PostDetail> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CommentRepository  commentRepo = restAdapter.createRepository(CommentRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        commentRepo.get__postDetails( (String)that.getId(), refresh,  new ObjectCallback<PostDetail> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(PostDetail object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void create__postDetails( PostDetail data,  RestAdapter restAdapter, final ObjectCallback<PostDetail> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CommentRepository  commentRepo = restAdapter.createRepository(CommentRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        commentRepo.create__postDetails( (String)that.getId(), data.convertMap(),  new ObjectCallback<PostDetail> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(PostDetail object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void update__postDetails( PostDetail data,  RestAdapter restAdapter, final ObjectCallback<PostDetail> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CommentRepository  commentRepo = restAdapter.createRepository(CommentRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        commentRepo.update__postDetails( (String)that.getId(), data.convertMap(),  new ObjectCallback<PostDetail> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(PostDetail object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void destroy__postDetails( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final CommentRepository  commentRepo = restAdapter.createRepository(CommentRepository.class);
+                                        
+                                        
+
+
+
+                                        commentRepo.destroy__postDetails( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
                             
                         
                         

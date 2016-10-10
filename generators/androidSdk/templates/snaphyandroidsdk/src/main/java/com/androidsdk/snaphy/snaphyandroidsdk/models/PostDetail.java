@@ -428,6 +428,12 @@ public class PostDetail extends Model {
                         
                         
                         
+                        
+                        
+                        
+                        
+                        
+                        
                     
 
                 
@@ -440,35 +446,35 @@ public class PostDetail extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient Comment  acceptedAnswer ;
+                    private transient Comment  comment ;
 
-                    public Comment getAcceptedAnswer() {
-                        return acceptedAnswer;
+                    public Comment getComment() {
+                        return comment;
                     }
 
-                    public void setAcceptedAnswer(Comment acceptedAnswer) {
-                        this.acceptedAnswer = acceptedAnswer;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setAcceptedAnswer(Map<String, Object> acceptedAnswer) {
-                        //First create a dummy Repo class object for customer.
-                        CommentRepository acceptedAnswerRepository = new CommentRepository();
-                        Comment acceptedAnswer1 = acceptedAnswerRepository.createObject(acceptedAnswer);
-                        setAcceptedAnswer(acceptedAnswer1);
+                    public void setComment(Comment comment) {
+                        this.comment = comment;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setAcceptedAnswer(HashMap<String, Object> acceptedAnswer) {
+                    public void setComment(Map<String, Object> comment) {
                         //First create a dummy Repo class object for customer.
-                        CommentRepository acceptedAnswerRepository = new CommentRepository();
-                        Comment acceptedAnswer1 = acceptedAnswerRepository.createObject(acceptedAnswer);
-                        setAcceptedAnswer(acceptedAnswer1);
+                        CommentRepository commentRepository = new CommentRepository();
+                        Comment comment1 = commentRepository.createObject(comment);
+                        setComment(comment1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setComment(HashMap<String, Object> comment) {
+                        //First create a dummy Repo class object for customer.
+                        CommentRepository commentRepository = new CommentRepository();
+                        Comment comment1 = commentRepository.createObject(comment);
+                        setComment(comment1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Comment acceptedAnswer) {
-                        that.setAcceptedAnswer(acceptedAnswer);
+                    public void addRelation(Comment comment) {
+                        that.setComment(comment);
                     }
 
 
@@ -491,7 +497,7 @@ public class PostDetail extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__acceptedAnswer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Comment> callback) {
+                                    public void get__comment( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Comment> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -505,7 +511,7 @@ public class PostDetail extends Model {
 
 
 
-                                        postDetailRepo.get__acceptedAnswer( (String)that.getId(), refresh,  new ObjectCallback<Comment> (){
+                                        postDetailRepo.get__comment( (String)that.getId(), refresh,  new ObjectCallback<Comment> (){
                                             
 
                                             
@@ -545,6 +551,12 @@ public class PostDetail extends Model {
                                     } //method def ends here.
                                  
                             
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         

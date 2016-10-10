@@ -237,6 +237,32 @@ public class Customer extends User {
             
 
             
+                private String mciNumber;
+                /* Adding Getter and Setter methods */
+                public String getMciNumber(){
+                    return mciNumber;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setMciNumber(String mciNumber){
+                    this.mciNumber = mciNumber;
+                    //Update hashMap value..
+                    hashMap.put("mciNumber", mciNumber);
+                }
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
                 private String password;
                 /* Adding Getter and Setter methods */
                 public String getPassword(){
