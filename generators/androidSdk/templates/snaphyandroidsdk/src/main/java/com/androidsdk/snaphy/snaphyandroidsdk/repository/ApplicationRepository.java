@@ -13,8 +13,8 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.Util;
 
-import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
 import com.strongloop.android.remoting.adapters.RestContractItem;
@@ -225,7 +225,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
                             
                                 if(response != null){
                                     ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Application application = applicationRepo.createObject(result);
                                     callback.onSuccess(application);
 
@@ -285,7 +285,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
                             
                                 if(response != null){
                                     ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Application application = applicationRepo.createObject(result);
                                     callback.onSuccess(application);
 
@@ -397,7 +397,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
                             
                                 if(response != null){
                                     ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Application application = applicationRepo.createObject(result);
                                     callback.onSuccess(application);
 
@@ -455,7 +455,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
                             
                                 if(response != null){
                                     //Now converting jsonObject to list
-                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<Application> applicationList = new DataList<Application>();
                                     ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
 
@@ -517,7 +517,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
                             
                                 if(response != null){
                                     ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Application application = applicationRepo.createObject(result);
                                     callback.onSuccess(application);
 
@@ -733,7 +733,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
                             
                                 if(response != null){
                                     ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Application application = applicationRepo.createObject(result);
                                     callback.onSuccess(application);
 

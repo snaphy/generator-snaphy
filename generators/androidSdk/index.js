@@ -114,7 +114,7 @@ var generateDataList = function(app, modelsRestDefinition){
     compileAndWrite({}, ListTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("DataList") +".java");
     //Add the listen template..
     compileAndWrite({}, ListenTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("Listen") +".java");
-    compileAndWrite({}, ListenTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("Util") +".java");
+    compileAndWrite({}, UtilTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("Util") +".java");
 
 };
 

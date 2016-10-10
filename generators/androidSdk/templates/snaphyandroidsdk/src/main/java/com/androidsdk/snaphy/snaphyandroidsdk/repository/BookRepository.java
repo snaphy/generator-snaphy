@@ -13,8 +13,8 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.Util;
 
-import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
 import com.strongloop.android.remoting.adapters.RestContractItem;
@@ -225,7 +225,7 @@ public class BookRepository extends ModelRepository<Book> {
                             
                                 if(response != null){
                                     BookRepository bookRepo = getRestAdapter().createRepository(BookRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Book book = bookRepo.createObject(result);
                                     callback.onSuccess(book);
 
@@ -285,7 +285,7 @@ public class BookRepository extends ModelRepository<Book> {
                             
                                 if(response != null){
                                     BookRepository bookRepo = getRestAdapter().createRepository(BookRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Book book = bookRepo.createObject(result);
                                     callback.onSuccess(book);
 
@@ -397,7 +397,7 @@ public class BookRepository extends ModelRepository<Book> {
                             
                                 if(response != null){
                                     BookRepository bookRepo = getRestAdapter().createRepository(BookRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Book book = bookRepo.createObject(result);
                                     callback.onSuccess(book);
 
@@ -455,7 +455,7 @@ public class BookRepository extends ModelRepository<Book> {
                             
                                 if(response != null){
                                     //Now converting jsonObject to list
-                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<Book> bookList = new DataList<Book>();
                                     BookRepository bookRepo = getRestAdapter().createRepository(BookRepository.class);
 
@@ -517,7 +517,7 @@ public class BookRepository extends ModelRepository<Book> {
                             
                                 if(response != null){
                                     BookRepository bookRepo = getRestAdapter().createRepository(BookRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Book book = bookRepo.createObject(result);
                                     callback.onSuccess(book);
 
@@ -733,7 +733,7 @@ public class BookRepository extends ModelRepository<Book> {
                             
                                 if(response != null){
                                     BookRepository bookRepo = getRestAdapter().createRepository(BookRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Book book = bookRepo.createObject(result);
                                     callback.onSuccess(book);
 

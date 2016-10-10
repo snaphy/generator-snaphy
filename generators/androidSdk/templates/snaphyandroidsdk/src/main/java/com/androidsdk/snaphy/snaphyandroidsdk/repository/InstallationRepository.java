@@ -13,8 +13,8 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.Util;
 
-import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
 import com.strongloop.android.remoting.adapters.RestContractItem;
@@ -410,7 +410,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
                             
                                 if(response != null){
                                     InstallationRepository installationRepo = getRestAdapter().createRepository(InstallationRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Installation installation = installationRepo.createObject(result);
                                     callback.onSuccess(installation);
 
@@ -470,7 +470,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
                             
                                 if(response != null){
                                     InstallationRepository installationRepo = getRestAdapter().createRepository(InstallationRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Installation installation = installationRepo.createObject(result);
                                     callback.onSuccess(installation);
 
@@ -582,7 +582,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
                             
                                 if(response != null){
                                     InstallationRepository installationRepo = getRestAdapter().createRepository(InstallationRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Installation installation = installationRepo.createObject(result);
                                     callback.onSuccess(installation);
 
@@ -640,7 +640,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
                             
                                 if(response != null){
                                     //Now converting jsonObject to list
-                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<Installation> installationList = new DataList<Installation>();
                                     InstallationRepository installationRepo = getRestAdapter().createRepository(InstallationRepository.class);
 
@@ -702,7 +702,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
                             
                                 if(response != null){
                                     InstallationRepository installationRepo = getRestAdapter().createRepository(InstallationRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Installation installation = installationRepo.createObject(result);
                                     callback.onSuccess(installation);
 
@@ -918,7 +918,7 @@ public class InstallationRepository extends ModelRepository<Installation> {
                             
                                 if(response != null){
                                     InstallationRepository installationRepo = getRestAdapter().createRepository(InstallationRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Installation installation = installationRepo.createObject(result);
                                     callback.onSuccess(installation);
 

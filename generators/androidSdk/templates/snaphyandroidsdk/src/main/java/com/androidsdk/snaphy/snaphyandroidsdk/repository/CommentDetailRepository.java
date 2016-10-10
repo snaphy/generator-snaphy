@@ -13,8 +13,8 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.Util;
 
-import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
 import com.strongloop.android.remoting.adapters.RestContractItem;
@@ -252,7 +252,7 @@ public class CommentDetailRepository extends ModelRepository<CommentDetail> {
                             
                                 if(response != null){
                                     CommentRepository commentRepo = getRestAdapter().createRepository(CommentRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Comment comment = commentRepo.createObject(result);
                                     callback.onSuccess(comment);
 
@@ -311,7 +311,7 @@ public class CommentDetailRepository extends ModelRepository<CommentDetail> {
                             
                                 if(response != null){
                                     CommentDetailRepository commentDetailRepo = getRestAdapter().createRepository(CommentDetailRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     CommentDetail commentDetail = commentDetailRepo.createObject(result);
                                     callback.onSuccess(commentDetail);
 
@@ -371,7 +371,7 @@ public class CommentDetailRepository extends ModelRepository<CommentDetail> {
                             
                                 if(response != null){
                                     CommentDetailRepository commentDetailRepo = getRestAdapter().createRepository(CommentDetailRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     CommentDetail commentDetail = commentDetailRepo.createObject(result);
                                     callback.onSuccess(commentDetail);
 
@@ -483,7 +483,7 @@ public class CommentDetailRepository extends ModelRepository<CommentDetail> {
                             
                                 if(response != null){
                                     CommentDetailRepository commentDetailRepo = getRestAdapter().createRepository(CommentDetailRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     CommentDetail commentDetail = commentDetailRepo.createObject(result);
                                     callback.onSuccess(commentDetail);
 
@@ -541,7 +541,7 @@ public class CommentDetailRepository extends ModelRepository<CommentDetail> {
                             
                                 if(response != null){
                                     //Now converting jsonObject to list
-                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<CommentDetail> commentDetailList = new DataList<CommentDetail>();
                                     CommentDetailRepository commentDetailRepo = getRestAdapter().createRepository(CommentDetailRepository.class);
 
@@ -603,7 +603,7 @@ public class CommentDetailRepository extends ModelRepository<CommentDetail> {
                             
                                 if(response != null){
                                     CommentDetailRepository commentDetailRepo = getRestAdapter().createRepository(CommentDetailRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     CommentDetail commentDetail = commentDetailRepo.createObject(result);
                                     callback.onSuccess(commentDetail);
 
@@ -819,7 +819,7 @@ public class CommentDetailRepository extends ModelRepository<CommentDetail> {
                             
                                 if(response != null){
                                     CommentDetailRepository commentDetailRepo = getRestAdapter().createRepository(CommentDetailRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     CommentDetail commentDetail = commentDetailRepo.createObject(result);
                                     callback.onSuccess(commentDetail);
 

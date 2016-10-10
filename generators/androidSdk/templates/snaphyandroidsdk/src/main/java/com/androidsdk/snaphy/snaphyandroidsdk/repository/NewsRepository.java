@@ -13,8 +13,8 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.Util;
 
-import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
 import com.strongloop.android.remoting.adapters.RestContractItem;
@@ -237,7 +237,7 @@ public class NewsRepository extends ModelRepository<News> {
                             
                                 if(response != null){
                                     NewsRepository newsRepo = getRestAdapter().createRepository(NewsRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     News news = newsRepo.createObject(result);
                                     callback.onSuccess(news);
 
@@ -297,7 +297,7 @@ public class NewsRepository extends ModelRepository<News> {
                             
                                 if(response != null){
                                     NewsRepository newsRepo = getRestAdapter().createRepository(NewsRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     News news = newsRepo.createObject(result);
                                     callback.onSuccess(news);
 
@@ -409,7 +409,7 @@ public class NewsRepository extends ModelRepository<News> {
                             
                                 if(response != null){
                                     NewsRepository newsRepo = getRestAdapter().createRepository(NewsRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     News news = newsRepo.createObject(result);
                                     callback.onSuccess(news);
 
@@ -467,7 +467,7 @@ public class NewsRepository extends ModelRepository<News> {
                             
                                 if(response != null){
                                     //Now converting jsonObject to list
-                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<News> newsList = new DataList<News>();
                                     NewsRepository newsRepo = getRestAdapter().createRepository(NewsRepository.class);
 
@@ -529,7 +529,7 @@ public class NewsRepository extends ModelRepository<News> {
                             
                                 if(response != null){
                                     NewsRepository newsRepo = getRestAdapter().createRepository(NewsRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     News news = newsRepo.createObject(result);
                                     callback.onSuccess(news);
 
@@ -745,7 +745,7 @@ public class NewsRepository extends ModelRepository<News> {
                             
                                 if(response != null){
                                     NewsRepository newsRepo = getRestAdapter().createRepository(NewsRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     News news = newsRepo.createObject(result);
                                     callback.onSuccess(news);
 

@@ -13,8 +13,8 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.Util;
 
-import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
 import com.strongloop.android.remoting.adapters.RestContractItem;
@@ -417,7 +417,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                             
                                 if(response != null){
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     AccessToken accessToken = accessTokenRepo.createObject(result);
                                     callback.onSuccess(accessToken);
 
@@ -528,7 +528,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                             
                                 if(response != null){
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     AccessToken accessToken = accessTokenRepo.createObject(result);
                                     callback.onSuccess(accessToken);
 
@@ -588,7 +588,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                             
                                 if(response != null){
                                     //Now converting jsonObject to list
-                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<AccessToken> accessTokenList = new DataList<AccessToken>();
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
 
@@ -652,7 +652,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                             
                                 if(response != null){
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     AccessToken accessToken = accessTokenRepo.createObject(result);
                                     callback.onSuccess(accessToken);
 
@@ -810,7 +810,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                             
                                 if(response != null){
                                     EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Employee employee = employeeRepo.createObject(result);
                                     callback.onSuccess(employee);
 
@@ -870,7 +870,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                             
                                 if(response != null){
                                     EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Employee employee = employeeRepo.createObject(result);
                                     callback.onSuccess(employee);
 
@@ -982,7 +982,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                             
                                 if(response != null){
                                     EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Employee employee = employeeRepo.createObject(result);
                                     callback.onSuccess(employee);
 
@@ -1040,7 +1040,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                             
                                 if(response != null){
                                     //Now converting jsonObject to list
-                                    List<Map<String, Object>> result = (List) JsonUtil.fromJson(response);
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<Employee> employeeList = new DataList<Employee>();
                                     EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
 
@@ -1102,7 +1102,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                             
                                 if(response != null){
                                     EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Employee employee = employeeRepo.createObject(result);
                                     callback.onSuccess(employee);
 
@@ -1318,7 +1318,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                             
                                 if(response != null){
                                     EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
-                                    Map<String, Object> result = JsonUtil.fromJson(response);
+                                    Map<String, Object> result = Util.fromJson(response);
                                     Employee employee = employeeRepo.createObject(result);
                                     callback.onSuccess(employee);
 
