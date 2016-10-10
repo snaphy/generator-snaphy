@@ -15,7 +15,7 @@ import org.json.JSONObject;
  * Utility methods for converting JSON objects to Java collection objects
  * (and vice versa).
  */
-public class JsonUtil {
+public class Util {
 
     /**
      * Converts a Java object to a JSON object. A {@link java.util.Map} is
@@ -101,11 +101,11 @@ public class JsonUtil {
      * @return a list, or <code>null</code> if the array is <code>null</code>.
      * @throws JSONException If the array cannot be converted.
      */
-    public static List<Object> fromJson(JSONArray array) {
+    public static DataList<Object> fromJson(JSONArray array) {
         if (array == null) {
             return null;
         }
-        List<Object> list = new ArrayList<Object>();
+        DataList<Object> list = new DataList<Object>();
         if (array != null) {
             for (int i = 0; i < array.length(); i++) {
                 list.add(fromJson(array.opt(i)));
