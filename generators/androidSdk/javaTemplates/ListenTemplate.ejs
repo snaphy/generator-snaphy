@@ -12,7 +12,7 @@ public abstract class Listen<T> implements DataList.Listeners<T> {
     // On Clearing the list..
     public void onClear(){}
     //On removing of an element from datalist..
-    public void onRemove(T element, DataList<T> dataList){
+    public void onRemove(T element, int index, DataList<T> dataList){
 
     }
 }

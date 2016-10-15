@@ -4,10 +4,10 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
  * Created by snaphy on 14/9/16.
  */
 
-import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
-import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.JsonArrayParser;
-import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.JsonObjectParser;
-import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+//import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.DataListCallback;
+//import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.JsonArrayParser;
+//import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.JsonObjectParser;
+//import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.models.CustomContainer;
 import com.androidsdk.snaphy.snaphyandroidsdk.models.ImageModel;
 import com.google.common.collect.ImmutableMap;
@@ -16,6 +16,10 @@ import com.strongloop.android.loopback.File;
 import com.strongloop.android.loopback.FileRepository;
 
 
+import com.strongloop.android.loopback.callbacks.JsonArrayParser;
+import com.strongloop.android.loopback.callbacks.ListCallback;
+import com.strongloop.android.loopback.callbacks.JsonObjectParser;
+import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
@@ -97,7 +101,7 @@ public class CustomFileRepository extends FileRepository {
      * List all files in the container.
      * @param callback The callback to be executed when finished.
      */
-    public void getAll(DataListCallback<File> callback) {
+    public void getAll(ListCallback<File> callback) {
         invokeStaticMethod("getAll",
                 ImmutableMap.of("container", getContainerName()),
                 new JsonArrayParser<File>(this, callback));

@@ -68,6 +68,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Post;
     
 
     
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.SavePost;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.SavePostRepository;
+            
+        
+    
+
+    
             import com.androidsdk.snaphy.snaphyandroidsdk.models.PostSubscriber;
             import com.androidsdk.snaphy.snaphyandroidsdk.repository.PostSubscriberRepository;
             
@@ -162,6 +169,30 @@ public class PostRepository extends ModelRepository<Post> {
             
 
                 
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:postId/savePosts/:fk", "GET"), "Post.prototype.__findById__savePosts");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:postId/savePosts/:fk", "DELETE"), "Post.prototype.__destroyById__savePosts");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:postId/savePosts/:fk", "PUT"), "Post.prototype.__updateById__savePosts");
+                
+
+            
+        
+            
+
+                
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:postId/likePosts/:fk", "GET"), "Post.prototype.__findById__likePosts");
                 
 
@@ -235,6 +266,38 @@ public class PostRepository extends ModelRepository<Post> {
 
                 
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:postId/comments/count", "GET"), "Post.prototype.__count__comments");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:postId/savePosts", "GET"), "Post.prototype.__get__savePosts");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:postId/savePosts", "POST"), "Post.prototype.__create__savePosts");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:postId/savePosts", "DELETE"), "Post.prototype.__delete__savePosts");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:postId/savePosts/count", "GET"), "Post.prototype.__count__savePosts");
                 
 
             
@@ -409,6 +472,22 @@ public class PostRepository extends ModelRepository<Post> {
 
             
         
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getPostedCases", "POST"), "Post.getPostedCases");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchSavedCases", "POST"), "Post.fetchSavedCases");
+                
+
             
         
             
@@ -914,6 +993,178 @@ public class PostRepository extends ModelRepository<Post> {
                 
 
             }//Method updateById__comments definition ends here..
+
+            
+
+        
+    
+        
+            //Method findById__savePosts definition
+            public void findById__savePosts(  String postId,  String fk, final ObjectCallback<SavePost> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("postId", postId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__findById__savePosts", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    SavePostRepository savePostRepo = getRestAdapter().createRepository(SavePostRepository.class);
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    SavePost savePost = savePostRepo.createObject(result);
+                                    callback.onSuccess(savePost);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method findById__savePosts definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__savePosts definition
+            public void destroyById__savePosts(  String postId,  String fk, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("postId", postId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__savePosts", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__savePosts definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__savePosts definition
+            public void updateById__savePosts(  String postId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<SavePost> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("postId", postId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__updateById__savePosts", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    SavePostRepository savePostRepo = getRestAdapter().createRepository(SavePostRepository.class);
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    SavePost savePost = savePostRepo.createObject(result);
+                                    callback.onSuccess(savePost);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method updateById__savePosts definition ends here..
 
             
 
@@ -1481,6 +1732,229 @@ public class PostRepository extends ModelRepository<Post> {
                 
 
             }//Method count__comments definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__savePosts definition
+            public void get__savePosts(  String postId,  Map<String,  ? extends Object> filter, final DataListCallback<SavePost> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("postId", postId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__savePosts", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<SavePost> savePostList = new DataList<SavePost>();
+                                    SavePostRepository savePostRepo = getRestAdapter().createRepository(SavePostRepository.class);
+
+                                    for (Map<String, Object> obj : result) {
+                                        SavePost savePost = savePostRepo.createObject(obj);
+                                        savePostList.add(savePost);
+                                    }
+                                    callback.onSuccess(savePostList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method get__savePosts definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__savePosts definition
+            public void create__savePosts(  String postId,  Map<String,  ? extends Object> data, final ObjectCallback<SavePost> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("postId", postId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__savePosts", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    SavePostRepository savePostRepo = getRestAdapter().createRepository(SavePostRepository.class);
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    SavePost savePost = savePostRepo.createObject(result);
+                                    callback.onSuccess(savePost);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__savePosts definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__savePosts definition
+            public void delete__savePosts(  String postId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("postId", postId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__savePosts", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__savePosts definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__savePosts definition
+            public void count__savePosts(  String postId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("postId", postId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__savePosts", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method count__savePosts definition ends here..
 
             
 
@@ -2599,6 +3073,136 @@ public class PostRepository extends ModelRepository<Post> {
 
         
     
+        
+    
+        
+            //Method getPostedCases definition
+            public void getPostedCases(  double skip,  double limit,  String customerId, final DataListCallback<Post> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("skip", skip);
+                
+                        hashMapObject.put("limit", limit);
+                
+                        hashMapObject.put("customerId", customerId);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("getPostedCases", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<Post> postList = new DataList<Post>();
+                                    PostRepository postRepo = getRestAdapter().createRepository(PostRepository.class);
+
+                                    for (Map<String, Object> obj : result) {
+                                        Post post = postRepo.createObject(obj);
+                                        postList.add(post);
+                                    }
+                                    callback.onSuccess(postList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method getPostedCases definition ends here..
+
+            
+
+        
+    
+        
+            //Method fetchSavedCases definition
+            public void fetchSavedCases(  double skip,  double limit,  String customerId, final DataListCallback<Post> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("skip", skip);
+                
+                        hashMapObject.put("limit", limit);
+                
+                        hashMapObject.put("customerId", customerId);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("fetchSavedCases", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<Post> postList = new DataList<Post>();
+                                    PostRepository postRepo = getRestAdapter().createRepository(PostRepository.class);
+
+                                    for (Map<String, Object> obj : result) {
+                                        Post post = postRepo.createObject(obj);
+                                        postList.add(post);
+                                    }
+                                    callback.onSuccess(postList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method fetchSavedCases definition ends here..
+
+            
+
         
     
         

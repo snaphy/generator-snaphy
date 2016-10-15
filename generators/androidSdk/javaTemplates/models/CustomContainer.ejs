@@ -3,7 +3,7 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 /**
  * Created by snaphy on 14/9/16.
  */
-import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomFileRepository;
 import com.strongloop.android.loopback.Container;
 import com.strongloop.android.loopback.RestAdapter;
