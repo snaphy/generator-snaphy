@@ -120,17 +120,19 @@ public class DataList<T> extends ArrayList<T> {
             returnValue = super.remove(index);
         }
         publishOnChange();
-        publishOnRemove(returnValue);
+        publishOnRemove(returnValue, index);
         return returnValue;
     }
 
     public boolean remove(Object object) {
         boolean returnValue;
+        int index = dataList.indexOf(object);
+
         synchronized (this) {
             returnValue = super.remove(object);
         }
         publishOnChange();
-        publishOnRemove((T)object);
+        publishOnRemove((T)object, index);
         return returnValue;
 
     }
@@ -178,7 +180,7 @@ public class DataList<T> extends ArrayList<T> {
          * @param element Element which is removed.
          * @param dataList Collection from which the element is removed.
          */
-        public void onRemove(T element, DataList<T> dataList);
+        public void onRemove(T element, int index, DataList<T> dataList);
     }
 
 
@@ -260,7 +262,7 @@ public class DataList<T> extends ArrayList<T> {
      * Publish all the onRemove event subscribed to datalist
      * @param element Remove element
      */
-    private void publishOnRemove(T element){
+    private void publishOnRemove(T element, int index){
         for(Object key : listenersMap.keySet()){
             if(key == null){
                 return;
@@ -268,7 +270,7 @@ public class DataList<T> extends ArrayList<T> {
             Listeners<T> listener = listenersMap.get(key);
             //Now publish the onChange event..
             if(listener != null){
-                listener.onRemove(element, this);
+                listener.onRemove(element, index, this);
             }
         }
     }
