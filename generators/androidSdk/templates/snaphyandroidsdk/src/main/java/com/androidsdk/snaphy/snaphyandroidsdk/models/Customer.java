@@ -40,35 +40,14 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CommentRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BookmarkRepository;
             
 
         
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PostRepository;
-            
-
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.SavePostRepository;
-            
-
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.LikePostRepository;
-            
-
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PostSubscriberRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecentItemRepository;
             
 
         
@@ -185,84 +164,6 @@ public class Customer extends User {
             
 
             
-                private String firstName;
-                /* Adding Getter and Setter methods */
-                public String getFirstName(){
-                    return firstName;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setFirstName(String firstName){
-                    this.firstName = firstName;
-                    //Update hashMap value..
-                    hashMap.put("firstName", firstName);
-                }
-
-            
-            
-            
-            
-
-            
-
-        
-    
-        
-            
-
-            
-                private String lastName;
-                /* Adding Getter and Setter methods */
-                public String getLastName(){
-                    return lastName;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setLastName(String lastName){
-                    this.lastName = lastName;
-                    //Update hashMap value..
-                    hashMap.put("lastName", lastName);
-                }
-
-            
-            
-            
-            
-
-            
-
-        
-    
-        
-            
-
-            
-                private String mciNumber;
-                /* Adding Getter and Setter methods */
-                public String getMciNumber(){
-                    return mciNumber;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setMciNumber(String mciNumber){
-                    this.mciNumber = mciNumber;
-                    //Update hashMap value..
-                    hashMap.put("mciNumber", mciNumber);
-                }
-
-            
-            
-            
-            
-
-            
-
-        
-    
-        
-            
-
-            
                 private String password;
                 /* Adding Getter and Setter methods */
                 public String getPassword(){
@@ -304,58 +205,6 @@ public class Customer extends User {
 
             
             
-            
-            
-
-            
-
-        
-    
-        
-            
-
-            
-                private String registrationId;
-                /* Adding Getter and Setter methods */
-                public String getRegistrationId(){
-                    return registrationId;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setRegistrationId(String registrationId){
-                    this.registrationId = registrationId;
-                    //Update hashMap value..
-                    hashMap.put("registrationId", registrationId);
-                }
-
-            
-            
-            
-            
-
-            
-
-        
-    
-        
-            
-
-            
-            
-            
-                private Map<String, Object> profilePic;
-                /* Adding Getter and Setter methods */
-                public Map<String, Object> getProfilePic(){
-                    return profilePic;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setProfilePic(Map<String, Object> profilePic){
-                    this.profilePic = profilePic;
-                    //Update Map value..
-                    hashMap.put("profilePic", profilePic);
-                }
-
             
             
 
@@ -785,50 +634,6 @@ public class Customer extends User {
                             
                          
                             
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-                        
                         
                         
                         
@@ -869,16 +674,16 @@ public class Customer extends User {
                 
                     
                     //Define hasMany relation method here..
-                    private transient DataList<Comment>  comments ;
+                    private transient DataList<Bookmark>  bookmarks ;
 
-                    public DataList<Comment> getComments() {
-                        return comments;
+                    public DataList<Bookmark> getBookmarks() {
+                        return bookmarks;
                     }
 
-                    public void setComments(DataList<Comment> comments) {
+                    public void setBookmarks(DataList<Bookmark> bookmarks) {
                         boolean hashType = false;
                         DataList<HashMap<String, Object>> hashMaps = new DataList<>();
-                        for(Object o: comments){
+                        for(Object o: bookmarks){
                             if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
@@ -891,63 +696,63 @@ public class Customer extends User {
                         }
 
                         if(hashType){
-                            setComments1(hashMaps);
+                            setBookmarks1(hashMaps);
                         }else{
-                            this.comments = comments;
+                            this.bookmarks = bookmarks;
                         }
                     }
 
                 /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setComments1(List<Map<String, Object>> comments) {
+                    public void setBookmarks1(List<Map<String, Object>> bookmarks) {
                         //First create a dummy Repo class object for ..
-                        CommentRepository commentsRepository = new CommentRepository();
-                        List<Comment> result = new ArrayList<>();
-                        for (Map<String, Object> obj : comments) {
+                        BookmarkRepository bookmarksRepository = new BookmarkRepository();
+                        List<Bookmark> result = new ArrayList<>();
+                        for (Map<String, Object> obj : bookmarks) {
                             //Also add relation to child type for two way communication..
-                            Comment obj1 = commentsRepository.createObject(obj);
+                            Bookmark obj1 = bookmarksRepository.createObject(obj);
                             result.add(obj1);
 
                         }
-                        setComments(result);
+                        setBookmarks(result);
 
                     }
 
                 */
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setComments1(DataList<HashMap<String, Object>> comments) {
+                    public void setBookmarks1(DataList<HashMap<String, Object>> bookmarks) {
                         //First create a dummy Repo class object for ..
-                        CommentRepository commentsRepository = new CommentRepository();
-                        DataList<Comment> result = new DataList<>();
-                        for (HashMap<String, Object> obj : comments) {
+                        BookmarkRepository bookmarksRepository = new BookmarkRepository();
+                        DataList<Bookmark> result = new DataList<>();
+                        for (HashMap<String, Object> obj : bookmarks) {
                             //Also add relation to child type for two way communication..
-                            Comment obj1 = commentsRepository.createObject(obj);
+                            Bookmark obj1 = bookmarksRepository.createObject(obj);
                             result.add(obj1);
 
                         }
-                        setComments(result);
+                        setBookmarks(result);
 
                     }
 
 
                     //Adding relation method..
                     //Add a dummy class Name object to seperate data..
-                    public void addRelation(DataList<Comment> comments, Comment dummyClassInstance) {
-                        that.setComments(comments);
+                    public void addRelation(DataList<Bookmark> bookmarks, Bookmark dummyClassInstance) {
+                        that.setBookmarks(bookmarks);
 
                     }
 
                     //Adding relation method..
                     //This will add a new data to the list relation object..
-                    public void addRelation(Comment comments) {
+                    public void addRelation(Bookmark bookmarks) {
                         try{
-                            that.getComments().add(comments);
+                            that.getBookmarks().add(bookmarks);
                         }catch(Exception e){
-                            DataList< Comment> comments1 = new DataList();
+                            DataList< Bookmark> bookmarks1 = new DataList();
                             //Now add this item to list..
-                            comments1.add(comments);
+                            bookmarks1.add(bookmarks);
                             //Now set data....
-                            that.setComments(comments1);
+                            that.setBookmarks(bookmarks1);
                         }
                     }
 
@@ -980,16 +785,10 @@ public class Customer extends User {
                             
                          
                             
-                         
-                            
-                         
-                            
-                         
-                            
                         
 
                                     //Write the method here..
-                                    public void findById__comments( String fk,  RestAdapter restAdapter, final ObjectCallback<Comment> callback) {
+                                    public void findById__bookmarks( String fk,  RestAdapter restAdapter, final ObjectCallback<Bookmark> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1003,13 +802,13 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.findById__comments( (String)that.getId(), fk,  new ObjectCallback<Comment> (){
+                                        customerRepo.findById__bookmarks( (String)that.getId(), fk,  new ObjectCallback<Bookmark> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Comment object) {
+                                                    public void onSuccess(Bookmark object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -1046,7 +845,7 @@ public class Customer extends User {
                         
 
                                     //Write the method here..
-                                    public void destroyById__comments( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__bookmarks( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1060,7 +859,7 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.destroyById__comments( (String)that.getId(), fk,  new VoidCallback (){
+                                        customerRepo.destroyById__bookmarks( (String)that.getId(), fk,  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -1090,7 +889,7 @@ public class Customer extends User {
                         
 
                                     //Write the method here..
-                                    public void updateById__comments( String fk,  Comment data,  RestAdapter restAdapter, final ObjectCallback<Comment> callback) {
+                                    public void updateById__bookmarks( String fk,  Bookmark data,  RestAdapter restAdapter, final ObjectCallback<Bookmark> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1107,13 +906,13 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.updateById__comments( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Comment> (){
+                                        customerRepo.updateById__bookmarks( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Bookmark> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Comment object) {
+                                                    public void onSuccess(Bookmark object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -1161,30 +960,10 @@ public class Customer extends User {
                             
                          
                             
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
                         
 
                                     //Write the method here..
-                                    public void get__comments( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Comment> callback) {
+                                    public void get__bookmarks( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Bookmark> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1198,7 +977,7 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.get__comments( (String)that.getId(), filter,  new DataListCallback<Comment> (){
+                                        customerRepo.get__bookmarks( (String)that.getId(), filter,  new DataListCallback<Bookmark> (){
                                             
 
                                             
@@ -1207,13 +986,13 @@ public class Customer extends User {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(DataList<Comment> object) {
+                                                    public void onSuccess(DataList<Bookmark> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
-                                                            Comment obj = new Comment();
+                                                            Bookmark obj = new Bookmark();
                                                             addRelation(object, obj);
                                                             //Disabling two way communication for cyclic error..
-                                                            /*for (Comment obj : object) {
+                                                            /*for (Bookmark obj : object) {
                                                                 //Also add relation to child type for two way communication..
                                                                 obj.addRelation(that);
                                                             }*/
@@ -1246,7 +1025,7 @@ public class Customer extends User {
                         
 
                                     //Write the method here..
-                                    public void create__comments( Comment data,  RestAdapter restAdapter, final ObjectCallback<Comment> callback) {
+                                    public void create__bookmarks( Bookmark data,  RestAdapter restAdapter, final ObjectCallback<Bookmark> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1260,13 +1039,13 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.create__comments( (String)that.getId(), data.convertMap(),  new ObjectCallback<Comment> (){
+                                        customerRepo.create__bookmarks( (String)that.getId(), data.convertMap(),  new ObjectCallback<Bookmark> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Comment object) {
+                                                    public void onSuccess(Bookmark object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -1303,7 +1082,7 @@ public class Customer extends User {
                         
 
                                     //Write the method here..
-                                    public void delete__comments( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__bookmarks( RestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1314,7 +1093,7 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.delete__comments( (String)that.getId(),  new VoidCallback (){
+                                        customerRepo.delete__bookmarks( (String)that.getId(),  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -1344,7 +1123,7 @@ public class Customer extends User {
                         
 
                                     //Write the method here..
-                                    public void count__comments( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__bookmarks( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1358,7 +1137,7 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.count__comments( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
+                                        customerRepo.count__bookmarks( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
@@ -1395,24 +1174,6 @@ public class Customer extends User {
                             
                          
                             
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-                        
                         
                         
                         
@@ -1456,16 +1217,16 @@ public class Customer extends User {
                 
                     
                     //Define hasMany relation method here..
-                    private transient DataList<Post>  posts ;
+                    private transient DataList<RecentItem>  recentItems ;
 
-                    public DataList<Post> getPosts() {
-                        return posts;
+                    public DataList<RecentItem> getRecentItems() {
+                        return recentItems;
                     }
 
-                    public void setPosts(DataList<Post> posts) {
+                    public void setRecentItems(DataList<RecentItem> recentItems) {
                         boolean hashType = false;
                         DataList<HashMap<String, Object>> hashMaps = new DataList<>();
-                        for(Object o: posts){
+                        for(Object o: recentItems){
                             if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
@@ -1478,650 +1239,63 @@ public class Customer extends User {
                         }
 
                         if(hashType){
-                            setPosts1(hashMaps);
+                            setRecentItems1(hashMaps);
                         }else{
-                            this.posts = posts;
+                            this.recentItems = recentItems;
                         }
                     }
 
                 /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setPosts1(List<Map<String, Object>> posts) {
+                    public void setRecentItems1(List<Map<String, Object>> recentItems) {
                         //First create a dummy Repo class object for ..
-                        PostRepository postsRepository = new PostRepository();
-                        List<Post> result = new ArrayList<>();
-                        for (Map<String, Object> obj : posts) {
+                        RecentItemRepository recentItemsRepository = new RecentItemRepository();
+                        List<RecentItem> result = new ArrayList<>();
+                        for (Map<String, Object> obj : recentItems) {
                             //Also add relation to child type for two way communication..
-                            Post obj1 = postsRepository.createObject(obj);
+                            RecentItem obj1 = recentItemsRepository.createObject(obj);
                             result.add(obj1);
 
                         }
-                        setPosts(result);
+                        setRecentItems(result);
 
                     }
 
                 */
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setPosts1(DataList<HashMap<String, Object>> posts) {
+                    public void setRecentItems1(DataList<HashMap<String, Object>> recentItems) {
                         //First create a dummy Repo class object for ..
-                        PostRepository postsRepository = new PostRepository();
-                        DataList<Post> result = new DataList<>();
-                        for (HashMap<String, Object> obj : posts) {
+                        RecentItemRepository recentItemsRepository = new RecentItemRepository();
+                        DataList<RecentItem> result = new DataList<>();
+                        for (HashMap<String, Object> obj : recentItems) {
                             //Also add relation to child type for two way communication..
-                            Post obj1 = postsRepository.createObject(obj);
+                            RecentItem obj1 = recentItemsRepository.createObject(obj);
                             result.add(obj1);
 
                         }
-                        setPosts(result);
+                        setRecentItems(result);
 
                     }
 
 
                     //Adding relation method..
                     //Add a dummy class Name object to seperate data..
-                    public void addRelation(DataList<Post> posts, Post dummyClassInstance) {
-                        that.setPosts(posts);
+                    public void addRelation(DataList<RecentItem> recentItems, RecentItem dummyClassInstance) {
+                        that.setRecentItems(recentItems);
 
                     }
 
                     //Adding relation method..
                     //This will add a new data to the list relation object..
-                    public void addRelation(Post posts) {
+                    public void addRelation(RecentItem recentItems) {
                         try{
-                            that.getPosts().add(posts);
+                            that.getRecentItems().add(recentItems);
                         }catch(Exception e){
-                            DataList< Post> posts1 = new DataList();
+                            DataList< RecentItem> recentItems1 = new DataList();
                             //Now add this item to list..
-                            posts1.add(posts);
+                            recentItems1.add(recentItems);
                             //Now set data....
-                            that.setPosts(posts1);
-                        }
-                    }
-
-                    
-
-
-                
-                
-
-
-
-
-
-
-
-                    //Now add instance methods to fetch the related belongsTo Model..
-                    
-
-                     
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-
-                                    //Write the method here..
-                                    public void findById__posts( String fk,  RestAdapter restAdapter, final ObjectCallback<Post> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        customerRepo.findById__posts( (String)that.getId(), fk,  new ObjectCallback<Post> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(Post object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void destroyById__posts( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        customerRepo.destroyById__posts( (String)that.getId(), fk,  new VoidCallback (){
-                                            
-                                                @Override
-                                                public void onSuccess() {
-                                                    callback.onSuccess();
-                                                    //Calling the finally..callback
-                                                    callback.onFinally();
-                                                }
-                                            
-
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void updateById__posts( String fk,  Post data,  RestAdapter restAdapter, final ObjectCallback<Post> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        customerRepo.updateById__posts( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Post> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(Post object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-
-                                    //Write the method here..
-                                    public void get__posts( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Post> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        customerRepo.get__posts( (String)that.getId(), filter,  new DataListCallback<Post> (){
-                                            
-
-                                            
-
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(DataList<Post> object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            Post obj = new Post();
-                                                            addRelation(object, obj);
-                                                            //Disabling two way communication for cyclic error..
-                                                            /*for (Post obj : object) {
-                                                                //Also add relation to child type for two way communication..
-                                                                obj.addRelation(that);
-                                                            }*/
-
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void create__posts( Post data,  RestAdapter restAdapter, final ObjectCallback<Post> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        customerRepo.create__posts( (String)that.getId(), data.convertMap(),  new ObjectCallback<Post> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(Post object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void delete__posts( RestAdapter restAdapter, final VoidCallback callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-                                        
-
-
-
-                                        customerRepo.delete__posts( (String)that.getId(),  new VoidCallback (){
-                                            
-                                                @Override
-                                                public void onSuccess() {
-                                                    callback.onSuccess();
-                                                    //Calling the finally..callback
-                                                    callback.onFinally();
-                                                }
-                                            
-
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void count__posts( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        customerRepo.count__posts( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    
-
-                
-
-                
-                    //Define hasMany, hasManyThrough method here..
-
-                 
-                 
-             
-          
-    
-        
-                
-                
-                    
-                    //Define hasMany relation method here..
-                    private transient DataList<SavePost>  savePosts ;
-
-                    public DataList<SavePost> getSavePosts() {
-                        return savePosts;
-                    }
-
-                    public void setSavePosts(DataList<SavePost> savePosts) {
-                        boolean hashType = false;
-                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
-                        for(Object o: savePosts){
-                            if(o.getClass().equals(HashMap.class)){
-                                hashType = true;
-                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
-                                hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class)){
-                                hashType = true;
-                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
-                                hashMaps.add(dataObj);
-                            }
-                        }
-
-                        if(hashType){
-                            setSavePosts1(hashMaps);
-                        }else{
-                            this.savePosts = savePosts;
-                        }
-                    }
-
-                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setSavePosts1(List<Map<String, Object>> savePosts) {
-                        //First create a dummy Repo class object for ..
-                        SavePostRepository savePostsRepository = new SavePostRepository();
-                        List<SavePost> result = new ArrayList<>();
-                        for (Map<String, Object> obj : savePosts) {
-                            //Also add relation to child type for two way communication..
-                            SavePost obj1 = savePostsRepository.createObject(obj);
-                            result.add(obj1);
-
-                        }
-                        setSavePosts(result);
-
-                    }
-
-                */
-
-                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setSavePosts1(DataList<HashMap<String, Object>> savePosts) {
-                        //First create a dummy Repo class object for ..
-                        SavePostRepository savePostsRepository = new SavePostRepository();
-                        DataList<SavePost> result = new DataList<>();
-                        for (HashMap<String, Object> obj : savePosts) {
-                            //Also add relation to child type for two way communication..
-                            SavePost obj1 = savePostsRepository.createObject(obj);
-                            result.add(obj1);
-
-                        }
-                        setSavePosts(result);
-
-                    }
-
-
-                    //Adding relation method..
-                    //Add a dummy class Name object to seperate data..
-                    public void addRelation(DataList<SavePost> savePosts, SavePost dummyClassInstance) {
-                        that.setSavePosts(savePosts);
-
-                    }
-
-                    //Adding relation method..
-                    //This will add a new data to the list relation object..
-                    public void addRelation(SavePost savePosts) {
-                        try{
-                            that.getSavePosts().add(savePosts);
-                        }catch(Exception e){
-                            DataList< SavePost> savePosts1 = new DataList();
-                            //Now add this item to list..
-                            savePosts1.add(savePosts);
-                            //Now set data....
-                            that.setSavePosts(savePosts1);
+                            that.setRecentItems(recentItems1);
                         }
                     }
 
@@ -2160,16 +1334,10 @@ public class Customer extends User {
                             
                          
                             
-                         
-                            
-                         
-                            
-                         
-                            
                         
 
                                     //Write the method here..
-                                    public void findById__savePosts( String fk,  RestAdapter restAdapter, final ObjectCallback<SavePost> callback) {
+                                    public void findById__recentItems( String fk,  RestAdapter restAdapter, final ObjectCallback<RecentItem> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2183,13 +1351,13 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.findById__savePosts( (String)that.getId(), fk,  new ObjectCallback<SavePost> (){
+                                        customerRepo.findById__recentItems( (String)that.getId(), fk,  new ObjectCallback<RecentItem> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(SavePost object) {
+                                                    public void onSuccess(RecentItem object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -2226,7 +1394,7 @@ public class Customer extends User {
                         
 
                                     //Write the method here..
-                                    public void destroyById__savePosts( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__recentItems( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2240,7 +1408,7 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.destroyById__savePosts( (String)that.getId(), fk,  new VoidCallback (){
+                                        customerRepo.destroyById__recentItems( (String)that.getId(), fk,  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -2270,7 +1438,7 @@ public class Customer extends User {
                         
 
                                     //Write the method here..
-                                    public void updateById__savePosts( String fk,  SavePost data,  RestAdapter restAdapter, final ObjectCallback<SavePost> callback) {
+                                    public void updateById__recentItems( String fk,  RecentItem data,  RestAdapter restAdapter, final ObjectCallback<RecentItem> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2287,13 +1455,13 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.updateById__savePosts( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<SavePost> (){
+                                        customerRepo.updateById__recentItems( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<RecentItem> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(SavePost object) {
+                                                    public void onSuccess(RecentItem object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -2343,30 +1511,10 @@ public class Customer extends User {
                             
                          
                             
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
                         
 
                                     //Write the method here..
-                                    public void get__savePosts( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<SavePost> callback) {
+                                    public void get__recentItems( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<RecentItem> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2380,7 +1528,7 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.get__savePosts( (String)that.getId(), filter,  new DataListCallback<SavePost> (){
+                                        customerRepo.get__recentItems( (String)that.getId(), filter,  new DataListCallback<RecentItem> (){
                                             
 
                                             
@@ -2389,13 +1537,13 @@ public class Customer extends User {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(DataList<SavePost> object) {
+                                                    public void onSuccess(DataList<RecentItem> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
-                                                            SavePost obj = new SavePost();
+                                                            RecentItem obj = new RecentItem();
                                                             addRelation(object, obj);
                                                             //Disabling two way communication for cyclic error..
-                                                            /*for (SavePost obj : object) {
+                                                            /*for (RecentItem obj : object) {
                                                                 //Also add relation to child type for two way communication..
                                                                 obj.addRelation(that);
                                                             }*/
@@ -2428,7 +1576,7 @@ public class Customer extends User {
                         
 
                                     //Write the method here..
-                                    public void create__savePosts( SavePost data,  RestAdapter restAdapter, final ObjectCallback<SavePost> callback) {
+                                    public void create__recentItems( RecentItem data,  RestAdapter restAdapter, final ObjectCallback<RecentItem> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2442,13 +1590,13 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.create__savePosts( (String)that.getId(), data.convertMap(),  new ObjectCallback<SavePost> (){
+                                        customerRepo.create__recentItems( (String)that.getId(), data.convertMap(),  new ObjectCallback<RecentItem> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(SavePost object) {
+                                                    public void onSuccess(RecentItem object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -2485,7 +1633,7 @@ public class Customer extends User {
                         
 
                                     //Write the method here..
-                                    public void delete__savePosts( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__recentItems( RestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2496,7 +1644,7 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.delete__savePosts( (String)that.getId(),  new VoidCallback (){
+                                        customerRepo.delete__recentItems( (String)that.getId(),  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -2526,7 +1674,7 @@ public class Customer extends User {
                         
 
                                     //Write the method here..
-                                    public void count__savePosts( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__recentItems( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2540,7 +1688,7 @@ public class Customer extends User {
 
 
 
-                                        customerRepo.count__savePosts( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
+                                        customerRepo.count__recentItems( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
@@ -2569,1198 +1717,6 @@ public class Customer extends User {
                                     } //method def ends here.
                                  
                             
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    
-
-                
-
-                
-                    //Define hasMany, hasManyThrough method here..
-
-                 
-                 
-             
-          
-    
-        
-                
-                
-                    
-                    //Define hasMany relation method here..
-                    private transient DataList<LikePost>  likePosts ;
-
-                    public DataList<LikePost> getLikePosts() {
-                        return likePosts;
-                    }
-
-                    public void setLikePosts(DataList<LikePost> likePosts) {
-                        boolean hashType = false;
-                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
-                        for(Object o: likePosts){
-                            if(o.getClass().equals(HashMap.class)){
-                                hashType = true;
-                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
-                                hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class)){
-                                hashType = true;
-                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
-                                hashMaps.add(dataObj);
-                            }
-                        }
-
-                        if(hashType){
-                            setLikePosts1(hashMaps);
-                        }else{
-                            this.likePosts = likePosts;
-                        }
-                    }
-
-                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setLikePosts1(List<Map<String, Object>> likePosts) {
-                        //First create a dummy Repo class object for ..
-                        LikePostRepository likePostsRepository = new LikePostRepository();
-                        List<LikePost> result = new ArrayList<>();
-                        for (Map<String, Object> obj : likePosts) {
-                            //Also add relation to child type for two way communication..
-                            LikePost obj1 = likePostsRepository.createObject(obj);
-                            result.add(obj1);
-
-                        }
-                        setLikePosts(result);
-
-                    }
-
-                */
-
-                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setLikePosts1(DataList<HashMap<String, Object>> likePosts) {
-                        //First create a dummy Repo class object for ..
-                        LikePostRepository likePostsRepository = new LikePostRepository();
-                        DataList<LikePost> result = new DataList<>();
-                        for (HashMap<String, Object> obj : likePosts) {
-                            //Also add relation to child type for two way communication..
-                            LikePost obj1 = likePostsRepository.createObject(obj);
-                            result.add(obj1);
-
-                        }
-                        setLikePosts(result);
-
-                    }
-
-
-                    //Adding relation method..
-                    //Add a dummy class Name object to seperate data..
-                    public void addRelation(DataList<LikePost> likePosts, LikePost dummyClassInstance) {
-                        that.setLikePosts(likePosts);
-
-                    }
-
-                    //Adding relation method..
-                    //This will add a new data to the list relation object..
-                    public void addRelation(LikePost likePosts) {
-                        try{
-                            that.getLikePosts().add(likePosts);
-                        }catch(Exception e){
-                            DataList< LikePost> likePosts1 = new DataList();
-                            //Now add this item to list..
-                            likePosts1.add(likePosts);
-                            //Now set data....
-                            that.setLikePosts(likePosts1);
-                        }
-                    }
-
-                    
-
-
-                
-                
-
-
-
-
-
-
-
-                    //Now add instance methods to fetch the related belongsTo Model..
-                    
-
-                     
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-
-                                    //Write the method here..
-                                    public void findById__likePosts( String fk,  RestAdapter restAdapter, final ObjectCallback<LikePost> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        customerRepo.findById__likePosts( (String)that.getId(), fk,  new ObjectCallback<LikePost> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(LikePost object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void destroyById__likePosts( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        customerRepo.destroyById__likePosts( (String)that.getId(), fk,  new VoidCallback (){
-                                            
-                                                @Override
-                                                public void onSuccess() {
-                                                    callback.onSuccess();
-                                                    //Calling the finally..callback
-                                                    callback.onFinally();
-                                                }
-                                            
-
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void updateById__likePosts( String fk,  LikePost data,  RestAdapter restAdapter, final ObjectCallback<LikePost> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        customerRepo.updateById__likePosts( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<LikePost> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(LikePost object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-
-                                    //Write the method here..
-                                    public void get__likePosts( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<LikePost> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        customerRepo.get__likePosts( (String)that.getId(), filter,  new DataListCallback<LikePost> (){
-                                            
-
-                                            
-
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(DataList<LikePost> object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            LikePost obj = new LikePost();
-                                                            addRelation(object, obj);
-                                                            //Disabling two way communication for cyclic error..
-                                                            /*for (LikePost obj : object) {
-                                                                //Also add relation to child type for two way communication..
-                                                                obj.addRelation(that);
-                                                            }*/
-
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void create__likePosts( LikePost data,  RestAdapter restAdapter, final ObjectCallback<LikePost> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        customerRepo.create__likePosts( (String)that.getId(), data.convertMap(),  new ObjectCallback<LikePost> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(LikePost object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void delete__likePosts( RestAdapter restAdapter, final VoidCallback callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-                                        
-
-
-
-                                        customerRepo.delete__likePosts( (String)that.getId(),  new VoidCallback (){
-                                            
-                                                @Override
-                                                public void onSuccess() {
-                                                    callback.onSuccess();
-                                                    //Calling the finally..callback
-                                                    callback.onFinally();
-                                                }
-                                            
-
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void count__likePosts( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        customerRepo.count__likePosts( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    
-
-                
-
-                
-                    //Define hasMany, hasManyThrough method here..
-
-                 
-                 
-             
-          
-    
-        
-                
-                
-                    
-                    //Define hasMany relation method here..
-                    private transient DataList<PostSubscriber>  postSubscribers ;
-
-                    public DataList<PostSubscriber> getPostSubscribers() {
-                        return postSubscribers;
-                    }
-
-                    public void setPostSubscribers(DataList<PostSubscriber> postSubscribers) {
-                        boolean hashType = false;
-                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
-                        for(Object o: postSubscribers){
-                            if(o.getClass().equals(HashMap.class)){
-                                hashType = true;
-                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
-                                hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class)){
-                                hashType = true;
-                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
-                                hashMaps.add(dataObj);
-                            }
-                        }
-
-                        if(hashType){
-                            setPostSubscribers1(hashMaps);
-                        }else{
-                            this.postSubscribers = postSubscribers;
-                        }
-                    }
-
-                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setPostSubscribers1(List<Map<String, Object>> postSubscribers) {
-                        //First create a dummy Repo class object for ..
-                        PostSubscriberRepository postSubscribersRepository = new PostSubscriberRepository();
-                        List<PostSubscriber> result = new ArrayList<>();
-                        for (Map<String, Object> obj : postSubscribers) {
-                            //Also add relation to child type for two way communication..
-                            PostSubscriber obj1 = postSubscribersRepository.createObject(obj);
-                            result.add(obj1);
-
-                        }
-                        setPostSubscribers(result);
-
-                    }
-
-                */
-
-                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setPostSubscribers1(DataList<HashMap<String, Object>> postSubscribers) {
-                        //First create a dummy Repo class object for ..
-                        PostSubscriberRepository postSubscribersRepository = new PostSubscriberRepository();
-                        DataList<PostSubscriber> result = new DataList<>();
-                        for (HashMap<String, Object> obj : postSubscribers) {
-                            //Also add relation to child type for two way communication..
-                            PostSubscriber obj1 = postSubscribersRepository.createObject(obj);
-                            result.add(obj1);
-
-                        }
-                        setPostSubscribers(result);
-
-                    }
-
-
-                    //Adding relation method..
-                    //Add a dummy class Name object to seperate data..
-                    public void addRelation(DataList<PostSubscriber> postSubscribers, PostSubscriber dummyClassInstance) {
-                        that.setPostSubscribers(postSubscribers);
-
-                    }
-
-                    //Adding relation method..
-                    //This will add a new data to the list relation object..
-                    public void addRelation(PostSubscriber postSubscribers) {
-                        try{
-                            that.getPostSubscribers().add(postSubscribers);
-                        }catch(Exception e){
-                            DataList< PostSubscriber> postSubscribers1 = new DataList();
-                            //Now add this item to list..
-                            postSubscribers1.add(postSubscribers);
-                            //Now set data....
-                            that.setPostSubscribers(postSubscribers1);
-                        }
-                    }
-
-                    
-
-
-                
-                
-
-
-
-
-
-
-
-                    //Now add instance methods to fetch the related belongsTo Model..
-                    
-
-                     
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-
-                                    //Write the method here..
-                                    public void findById__postSubscribers( String fk,  RestAdapter restAdapter, final ObjectCallback<PostSubscriber> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        customerRepo.findById__postSubscribers( (String)that.getId(), fk,  new ObjectCallback<PostSubscriber> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(PostSubscriber object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void destroyById__postSubscribers( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        customerRepo.destroyById__postSubscribers( (String)that.getId(), fk,  new VoidCallback (){
-                                            
-                                                @Override
-                                                public void onSuccess() {
-                                                    callback.onSuccess();
-                                                    //Calling the finally..callback
-                                                    callback.onFinally();
-                                                }
-                                            
-
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void updateById__postSubscribers( String fk,  PostSubscriber data,  RestAdapter restAdapter, final ObjectCallback<PostSubscriber> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        customerRepo.updateById__postSubscribers( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<PostSubscriber> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(PostSubscriber object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-
-                                    //Write the method here..
-                                    public void get__postSubscribers( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<PostSubscriber> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        customerRepo.get__postSubscribers( (String)that.getId(), filter,  new DataListCallback<PostSubscriber> (){
-                                            
-
-                                            
-
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(DataList<PostSubscriber> object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            PostSubscriber obj = new PostSubscriber();
-                                                            addRelation(object, obj);
-                                                            //Disabling two way communication for cyclic error..
-                                                            /*for (PostSubscriber obj : object) {
-                                                                //Also add relation to child type for two way communication..
-                                                                obj.addRelation(that);
-                                                            }*/
-
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void create__postSubscribers( PostSubscriber data,  RestAdapter restAdapter, final ObjectCallback<PostSubscriber> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        customerRepo.create__postSubscribers( (String)that.getId(), data.convertMap(),  new ObjectCallback<PostSubscriber> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(PostSubscriber object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void delete__postSubscribers( RestAdapter restAdapter, final VoidCallback callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-                                        
-
-
-
-                                        customerRepo.delete__postSubscribers( (String)that.getId(),  new VoidCallback (){
-                                            
-                                                @Override
-                                                public void onSuccess() {
-                                                    callback.onSuccess();
-                                                    //Calling the finally..callback
-                                                    callback.onFinally();
-                                                }
-                                            
-
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-
-                                    //Write the method here..
-                                    public void count__postSubscribers( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final CustomerRepository  customerRepo = restAdapter.createRepository(CustomerRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        customerRepo.count__postSubscribers( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(JSONObject object) {
-                                                        callback.onSuccess(object);
-                                                        //Calling the finally..callback
-                                                        callback.onFinally();
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-                        
                         
                         
                         

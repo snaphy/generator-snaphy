@@ -126,7 +126,7 @@ public class DataList<T> extends ArrayList<T> {
 
     public boolean remove(Object object) {
         boolean returnValue;
-        int index = dataList.indexOf(object);
+        int index = this.indexOf(object);
 
         synchronized (this) {
             returnValue = super.remove(object);
@@ -212,7 +212,7 @@ public class DataList<T> extends ArrayList<T> {
     /**
      * Publish all the onChange event subscribed to datalist
      */
-    private void publishOnChange(){
+    public void publishOnChange(){
         for(Object key : listenersMap.keySet()){
             if(key == null){
                 return;

@@ -1,0 +1,15 @@
+{
+  "name": "mapbox-sdk-js",
+  "homepage": "https://github.com/mapbox/mapbox-sdk-js",
+  "version": "0.12.0",
+  "_release": "0.12.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.12.0",
+    "commit": "25132360b22a020cfa1f7dd8cb48c7351c572ddd"
+  },
+  "_source": "https://github.com/mapbox/mapbox-sdk-js.git",
+  "_target": "~0.12.0",
+  "_originalSource": "https://github.com/mapbox/mapbox-sdk-js.git",
+  "_direct": true
+}
