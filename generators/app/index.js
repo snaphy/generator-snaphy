@@ -48,7 +48,7 @@ module.exports = yeoman.generators.Base.extend({
       var elementDir = process.cwd() + '/' + this.props.applicationName;
       process.chdir(elementDir);
 
-      this.log(yosay('\nDone! \nNow type ' + chalk.red('$ cd ' + this.props.applicationName + ' && slc run') + ' to start the application\n\n'));
+      this.log(yosay('\nDone! \nNow type ' + chalk.red('$ cd ' + this.props.applicationName + ' && babel-node ./server/server.js') + ' to start the application\n\n'));
 
       done();
     }.bind(this));
@@ -100,8 +100,6 @@ module.exports = yeoman.generators.Base.extend({
       this.templatePath('server/boot'),
       this.destinationPath('server/boot')
     );
-
-
 
     this.fs.copy(
       this.templatePath('common/validations'),

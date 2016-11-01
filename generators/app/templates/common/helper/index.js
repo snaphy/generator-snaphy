@@ -1,16 +1,14 @@
-(function(){
-    'use strict';
-})();
+import loopback from "loopback";
+import chalk from "chalk";
+import SETTINGS from "../settings/conf";
+import {readdirSync, statSync, existsSync} from "fs";
+import {kebabCase} from "lodash";
+import {join} from "path";
+
 
 /*global require, module*/
 
 module.exports = function(server) {
-  import loopback from "loopback";
-  import chalk from "chalk";
-  import SETTINGS from "../settings/conf";
-  import {readdirSync, statSync, existsSync} from "fs";
-  import {kebabCase} from "lodash";
-  import {join} from "path";
 
   //Contains all the helper methods inside this object..
   const helper = {};
@@ -19,7 +17,7 @@ module.exports = function(server) {
   /**
    * Contains all settings adn basic configuration of file..
    * @type {{MAIN_PLUGIN_FOLDER, DESCRIPTION, ANGULAR_MODULE, SERVER_PATH, SERVER_FOLDER, MODEL_PATH}}
-     */
+   */
   const {
     PLUGIN_PATH,
     SERVER_PATH,
@@ -32,11 +30,11 @@ module.exports = function(server) {
 
 
   /**
-    * Method for getting all the directores
-    * @param  {string} srcpath parent directory within which search is to be performed
-    * @return {array}           [Array of directories names retrived]
-    */
-   function getDirectories(srcpath) {
+   * Method for getting all the directores
+   * @param  {string} srcpath parent directory within which search is to be performed
+   * @return {array}           [Array of directories names retrived]
+   */
+  function getDirectories(srcpath) {
     return readdirSync(srcpath).filter(function(file) {
       return statSync(join(srcpath, file)).isDirectory();
     });
@@ -51,21 +49,21 @@ module.exports = function(server) {
    * @returns {string}
    */
   function getPluginRootDir(pluginName){
-      return join(PLUGIN_PATH, pluginName.trim());
+    return join(PLUGIN_PATH, pluginName.trim());
   }
 
 
 
   /**
    * Retrives the path of the model.json file..
-    * @param modelName Model Name is the Original Model Name of the model
+   * @param modelName Model Name is the Original Model Name of the model
    */
   function getModelPath(modelName){
-      //convert to camel case..
-      modelName = kebabCase(modelName);
-      const modelJsonFile = modelName + '.json';
-      //Now get the model path..
-      return join(MODEL_PATH, modelJsonFile );
+    //convert to camel case..
+    modelName = kebabCase(modelName);
+    const modelJsonFile = modelName + '.json';
+    //Now get the model path..
+    return join(MODEL_PATH, modelJsonFile );
   }
 
   /**
@@ -91,10 +89,10 @@ module.exports = function(server) {
    * Get Model Validation Path...
    * @param modelName
    * @returns {{json, js}} json file and js file path
-     */
+   */
   function getValidationPath(modelName){
     //convert to camel case..
-    const modelName = kebabCase(modelName);
+    modelName = kebabCase(modelName);
     const modelJSONPath = modelName + ".json";
     const modelJSPath = modelName + ".js";
     const validation = {};
@@ -160,7 +158,7 @@ module.exports = function(server) {
 
 
   function getServerFolder(){
-      return SERVER_FOLDER;
+    return SERVER_FOLDER;
   }
 
 
@@ -219,7 +217,7 @@ module.exports = function(server) {
   function loadPluginsInMemory(pluginName, pluginContainerPath){
     console.log(
       `
-      Loading plugin $(pluginName) in memory
+      Loading plugin ${pluginName} in memory
       `
     );
 

@@ -1,14 +1,13 @@
-'use strict';
+import SETTINGS from "../../common/settings/conf";
+import {join} from "path";
+
 module.exports = function(server) {
   const chalk = require('chalk');
   const loopback = require('loopback');
   const helper   = require(__dirname + '/../../common/helper')(server);
   const config   = require(__dirname + '/../config.json');
-  import SETTINGS from "../../common/settings/conf";
-  import {join} from "path";
-
   const STATIC_PATH = '/static';
-
+  
   const {
     PLUGIN_PRIORITY,
     DESCRIPTION,
@@ -125,6 +124,9 @@ module.exports = function(server) {
       }//if activate
     }
   };
+
+
+
 
 
   /**

@@ -2,18 +2,17 @@
 
 module.exports = (server) => {
   const NAME = "<%= props.applicationName %>";
-  //Getting the main root package file of the server..
-  const PLUGIN_PATH = `$(__dirname)../../common/plugins`;
   const DESCRIPTION = "<%= props.applicationTitle %>";
   const ANGULAR_MODULE = "<%= props.applicationName %>";
-  const SERVER_PATH = `$(__dirname)../../server/server.js`;
-  const SERVER_FOLDER = `$(__dirname)../../server`;
-  const MODEL_PATH = `$(__dirname)../../common/models`;
-  const VALIDATION_PATH = `$(__dirname)../../common/validations`;
-  const TABLE_PATH = `$(__dirname)../../common/table`;
-  const SETTING_PATH = `$(__dirname)../../common/settings`;
   const VERSION =  "1.0.0";
   const AUTHOR =  "Robins Gupta";
+  const PLUGIN_PATH =  join(__dirname, "../../common/plugins");
+  const SERVER_PATH =  join(__dirname, "../../server/server.js");
+  const SERVER_FOLDER =  join(__dirname, "../../server");
+  const MODEL_PATH = join(__dirname, "../../common/models");
+  const VALIDATION_PATH = join(__dirname, "../../common/validations");
+  const TABLE_PATH = join(__dirname, "../../common/table");
+  const SETTING_PATH = join(__dirname, "../../common/settings");
 
   //Write all the plugins name whose load priority is to be set...
   const PLUGIN_PRIORITY = [];
