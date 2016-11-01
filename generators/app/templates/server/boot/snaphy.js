@@ -5,6 +5,9 @@ module.exports = function(server) {
   const helper   = require(__dirname + '/../../common/helper')(server);
   const config   = require(__dirname + '/../config.json');
   import SETTINGS from "../../common/settings/conf";
+  import {join} from "path";
+
+  const STATIC_PATH = '/static';
 
   const {
     PLUGIN_PRIORITY,
@@ -17,7 +20,7 @@ module.exports = function(server) {
 
 
   //Now setting up the static files..
-  server.use(config.adminApiRoot + '/static', loopback.static(__dirname + '/../../.views/static'));
+  server.use(join(config.adminApiRoot, STATIC_PATH), loopback.static(__dirname + '/../../.views/static'));
   // set the view engine to ejs
   server.set('view engine', 'ejs');
 
@@ -153,7 +156,7 @@ module.exports = function(server) {
   server.set('views', __dirname + '/../../.views');
 
 
-  var apiRoot = config.adminApiRoot === '/' ? '/static' : config.adminApiRoot + '/static';
+  var apiRoot = config.adminApiRoot === '/' ? STATIC_PATH : join(config.adminApiRoot, STATIC_PATH);
 
 
   //Now render the index page..

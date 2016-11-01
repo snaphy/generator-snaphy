@@ -1,6 +1,6 @@
 {
   "restApiRoot": "/api",
-  "adminApiRoot": "/admin",
+  "adminApiRoot": "/",
   "host": "0.0.0.0",
   "port": 3000,
   "remoting": {

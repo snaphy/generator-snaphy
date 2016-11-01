@@ -43,7 +43,7 @@ module.exports = yeoman.generators.Base.extend({
     this.prompt(prompts, function(props) {
       this.props = props;
       // To access props later use this.props.someOption;
-      //Now create a folder 
+      //Now create a folder
       mkdirp.sync(this.props.applicationName);
       var elementDir = process.cwd() + '/' + this.props.applicationName;
       process.chdir(elementDir);
@@ -62,6 +62,9 @@ module.exports = yeoman.generators.Base.extend({
     mkdirp.sync('common/helper');
     mkdirp.sync('common/models');
     mkdirp.sync('common/plugins');
+    mkdirp.sync('common/table');
+    mkdirp.sync('common/validations');
+    mkdirp.sync('common/settings');
 
     mkdirp.sync('.views/static');
     mkdirp.sync('.views/static/assets');

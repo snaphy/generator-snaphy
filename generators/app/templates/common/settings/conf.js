@@ -15,7 +15,7 @@ module.exports = (server) => {
   const VERSION =  "1.0.0";
   const AUTHOR =  "Robins Gupta";
 
-  //Write all the plugins name whose load prioroty is to be set...
+  //Write all the plugins name whose load priority is to be set...
   const PLUGIN_PRIORITY = [];
 
   return {
