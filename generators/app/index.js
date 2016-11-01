@@ -101,6 +101,8 @@ module.exports = yeoman.generators.Base.extend({
       this.destinationPath('server/boot')
     );
 
+
+
     this.fs.copy(
       this.templatePath('common/validations'),
       this.destinationPath('common/validations')
@@ -112,8 +114,8 @@ module.exports = yeoman.generators.Base.extend({
     );
 
     this.fs.copy(
-      this.templatePath('common/settings'),
-      this.destinationPath('common/settings')
+      this.templatePath('common/settings/dashboard'),
+      this.destinationPath('common/settings/dashboard')
     );
 
 
