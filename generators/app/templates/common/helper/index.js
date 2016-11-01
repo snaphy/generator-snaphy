@@ -9,8 +9,11 @@ module.exports = function(server) {
   import chalk from "chalk";
   import SETTINGS from "../settings/conf";
   import {readdirSync, statSync, existsSync} from "fs";
-  import {snakeCase} from "lodash";
+  import {kebabCase} from "lodash";
   import {join} from "path";
+
+  //Contains all the helper methods inside this object..
+  const helper = {};
 
 
   /**
@@ -59,8 +62,8 @@ module.exports = function(server) {
    */
   function getModelPath(modelName){
       //convert to camel case..
-      modelName = snakeCase(modelName);
-      var modelJsonFile = modelName + '.json';
+      modelName = kebabCase(modelName);
+      const modelJsonFile = modelName + '.json';
       //Now get the model path..
       return join(MODEL_PATH, modelJsonFile );
   }
@@ -71,7 +74,7 @@ module.exports = function(server) {
    */
   function getTablePath(modelName){
     //convert to camel case..
-    modelName = snakeCase(modelName);
+    modelName = kebabCase(modelName);
     const modelJsonFile = modelName + '.json';
     //Now get the model path..
     const tablePath = join(TABLE_PATH, modelJsonFile );
@@ -80,9 +83,7 @@ module.exports = function(server) {
     if(existsSync(tablePath)){
       tableObj.json = tablePath
     }
-
     return tableObj;
-
   }
 
 
@@ -93,7 +94,7 @@ module.exports = function(server) {
      */
   function getValidationPath(modelName){
     //convert to camel case..
-    const modelName = snakeCase(modelName);
+    const modelName = kebabCase(modelName);
     const modelJSONPath = modelName + ".json";
     const modelJSPath = modelName + ".js";
     const validation = {};
@@ -116,18 +117,18 @@ module.exports = function(server) {
    * Get the plugins settings file path..
    *
    */
-  const getSettingPath = function(modelName){
+  const getSettingPath = function(pluginName){
     //convert to camel case..
-    const modelName = snakeCase(modelName);
-    const ADMIN_SETTING = "admin-setting.js";
+    pluginName = kebabCase(pluginName);
+    const ADMIN_SETTING = "admin-panel-setting.js";
     const CONF = "conf.json";
     const DATABASE = "database.json";
     const STATIC = "static.json";
 
-    const adminPath = join(SETTING_PATH, modelName, ADMIN_SETTING);
-    const confPath = join(SETTING_PATH, modelName, CONF);
-    const databasePath = join(SETTING_PATH, modelName, DATABASE);
-    const staticPath = join(SETTING_PATH, modelName, STATIC);
+    const adminPath = join(SETTING_PATH, pluginName, ADMIN_SETTING);
+    const confPath = join(SETTING_PATH, pluginName, CONF);
+    const databasePath = join(SETTING_PATH, pluginName, DATABASE);
+    const staticPath = join(SETTING_PATH, pluginName, STATIC);
 
     const setting = {};
     if(existsSync(adminPath)){
@@ -177,7 +178,7 @@ module.exports = function(server) {
    * @param pluginName Database object with datasource attached.
    * @returns {{}}
    */
-  var getDatabase = function(app, sampleDatabase, pluginName){
+  const getDatabase = function(app, sampleDatabase, pluginName){
     //var modelConfig = require('../../server/model-config.json');
     var requiredDatabase = {};
     var key;
@@ -202,7 +203,7 @@ module.exports = function(server) {
   /**
    * Method to getting the loopback object..
    */
-  var getLoopbackObj = function(){
+  const getLoopbackObj = function(){
     return loopback;
   };
 
@@ -210,12 +211,12 @@ module.exports = function(server) {
 
 
   //Add static routes for the database..
-  var setStaticRoute = function(app, rootExposure, PluginName, pluginContainerPath){
+  const setStaticRoute = function(app, rootExposure, PluginName, pluginContainerPath){
     //Replace the '/' with ''
     rootExposure = rootExposure.replace(/^\//, "");
     rootExposure = '/' + rootExposure;
     //cache control
-    var oneDay = 86400000;
+    const oneDay = 86400000;
     app.use(rootExposure, loopback.static( join(pluginContainerPath, PluginName.trim(), '/client'), { maxAge: oneDay }));
     console.log("Static Routes " + rootExposure);
   };
@@ -223,42 +224,55 @@ module.exports = function(server) {
 
 
   function loadPluginsInMemory(pluginName, pluginContainerPath){
-    console.log("Loading plugin " + pluginName + " in memory");
-    //Now read the package  files...
-    var pluginPath = join(pluginContainerPath, pluginName.trim(), '/package.json');
-    console.log(pluginPath);
-    var packageObj = readPackageJsonFile(pluginPath);
-    if( packageObj.activate ){
-      try{
-        if(packageObj.staticFiles.css || packageObj.staticFiles.js || packageObj.moduleDependencies){
-          var rootExposure =  packageObj.routeExposure || packageObj.name;
-          //Now load it static route..
-          setStaticRoute(server, rootExposure, packageObj.name, pluginContainerPath);
+    console.log(
+      `
+      Loading plugin $(pluginName) in memory
+      `
+    );
+
+    //Get the settings of the plugin..
+    const {adminSetting, confPath, databasePath, staticPath} = getSettingPath(pluginName);
+    //if settings has configuration path defined...
+    if(confPath){
+      const pluginSettings = readPackageJsonFile(confPath);
+      if(pluginSettings.activate){
+        if(staticPath){
+          const pluginStaticFiles = readPackageJsonFile(staticPath);
+          try{
+            if(pluginStaticFiles.css || pluginStaticFiles.js || pluginStaticFiles.moduleDependencies){
+              let rootExposure =  pluginSettings.routeExposure || pluginSettings.name;
+              //Now load it static route..
+              setStaticRoute(server, rootExposure, pluginSettings.name, pluginContainerPath);
+            }
+          }catch (err){
+            //Do nothing in this case
+            console.log(chalk.red(" >> Error: ") + "In exposing plugin " + pluginName + " . Please edit info in package.json for property staticFiles carefully");
+          }
         }
-      }catch (err){
-        //Do nothing in this case
-        console.log(chalk.red(" >> Error: ") + "In exposing plugin " + pluginName + " . Please edit info in package.json for property staticFiles carefully");
+
+        if(databasePath){
+          const pluginDatabases = readPackageJsonFile(databasePath);
+          //Now add the database..
+          const databaseObj = getDatabase(server, pluginDatabases, pluginName);
+          const pluginValue = require( join(pluginContainerPath, pluginName.trim()))(server, databaseObj, helper, pluginSettings );
+
+          if(pluginValue){
+            //Now load the corresponding plugins to the memory...
+            /*try{
+             server.plugins[packageObj.name] = pluginValue;
+             }catch (err){
+             //TODO Check why error occurs here in this case..
+             console.error(chalk.red(">> Error: ") + "Error occured while adding plugin value to server variable.");
+             }*/
+
+            if(pluginValue.init){
+              //TODO check whether to show warning when init variable is not present inside the plugins.
+              //Now initialize the plugins..
+              pluginValue.init();
+            }
+          }//if pluginValue
+        }
       }
-
-
-      var databaseObj = getDatabase(server, packageObj.databases , pluginName);
-      var pluginValue = require( join(pluginContainerPath, pluginName.trim()))(server, databaseObj, helper, packageObj );
-
-      if(pluginValue){
-        //Now load the corresponding plugins to the memory...
-        /*try{
-          server.plugins[packageObj.name] = pluginValue;
-        }catch (err){
-          //TODO Check why error occurs here in this case..
-          console.error(chalk.red(">> Error: ") + "Error occured while adding plugin value to server variable.");
-        }*/
-
-        if(pluginValue.init){
-          //TODO check whether to show warning when init variable is not present inside the plugins.
-          //Now initialize the plugins..
-          pluginValue.init();
-        }
-      }//if pluginValue
     }
   }
 
@@ -268,12 +282,16 @@ module.exports = function(server) {
 
   //This function is called on function load.
   //Initialize all the plugins and add it to the memory..
-  var initPlugins = function(){
-    console.log("Loading this plugin");
-    var pluginContainerPath = PLUGIN_PATH;
-    var pluginList = getDirectories(pluginContainerPath);
-    var i;
-    for(i=0; i<pluginList.length; i++){
+  const initPlugins = function(){
+    console.log(
+      `
+      Loading snaphy plugins
+      `
+    );
+
+    const pluginContainerPath = PLUGIN_PATH;
+    const pluginList = getDirectories(pluginContainerPath);
+    for(let i=0; i<pluginList.length; i++){
       loadPluginsInMemory(pluginList[i].trim(), pluginContainerPath);
     }//for loop
   };
@@ -281,34 +299,43 @@ module.exports = function(server) {
 
   //Require by plugins..
   //Act as a require for plugins..
-  var loadPlugin = function(pluginName){
-    var pluginValue = {};
-    var pluginPath = join(PLUGIN_PATH, pluginName.trim() , '/package.json');
-    var packageObj = readPackageJsonFile(pluginPath);
-    if( packageObj.activate ){
-      var databaseObj = getDatabase(server, packageObj.databases , pluginName);
-      pluginValue = require(join(PLUGIN_PATH, pluginName.trim()) )(server, databaseObj, helper, packageObj );
+  const loadPlugin = function(pluginName){
+    //Get the settings of the plugin..
+    const {confPath, databasePath} = getSettingPath(pluginName);
+    //if settings has configuration path defined...
+    if(confPath){
+      const pluginSettings = readPackageJsonFile(confPath);
+      if(pluginSettings.activate){
+        let databaseObj = {};
+        if(databasePath){
+          const pluginDatabases = readPackageJsonFile(databasePath);
+          //Now add the database..
+          databaseObj = getDatabase(server, pluginDatabases, pluginName);
+
+        }
+        return require(getPluginRootDir(pluginName))(server, databaseObj, helper, pluginSettings );
+      }
     }
-    return pluginValue;
+
+    return null;
   };//loadPlugin
 
 
 
   //ADD ALL THE REQUIRED METHOD TO HELPERS VARIABLE OBJ.
-  const helper =  {
-    initPlugins: initPlugins,
-    readPackageJsonFile: readPackageJsonFile,
-    getDirectories: getDirectories,
-    getServerPath: getServerPath,
-    loadPlugin: loadPlugin,
-    getLoopbackObj: getLoopbackObj,
-    getPluginRootDir: getPluginRootDir,
-    getModelPath: getModelPath,
-    getServerFolder: getServerFolder,
-    getSettingPath: getSettingPath,
-    getTablePath: getTablePath,
-    getValidationPath: getValidationPath
-  };
+
+  helper.initPlugins = initPlugins;
+  helper.readPackageJsonFile = readPackageJsonFile;
+  helper.getDirectories = getDirectories;
+  helper.getServerPath = getServerPath;
+  helper.loadPlugin = loadPlugin;
+  helper.getLoopbackObj = getLoopbackObj;
+  helper.getPluginRootDir = getPluginRootDir;
+  helper.getModelPath = getModelPath;
+  helper.getServerFolder = getServerFolder;
+  helper.getSettingPath = getSettingPath;
+  helper.getTablePath = getTablePath;
+  helper.getValidationPath = getValidationPath;
 
   return helper;
 };

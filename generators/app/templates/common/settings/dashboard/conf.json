@@ -1,4 +1,5 @@
 {
+  "name": "dashboard",
   "routeExposure": "/dashboard",
   "defaultTemplate": "true",
   "activate": true,
