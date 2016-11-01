@@ -1,0 +1,127 @@
+{
+  "name": "Post",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "heading": {
+      "type": "string",
+      "required": true,
+      "template": {
+        "type": "input",
+        "templateOptions": {
+          "type": "text",
+          "label": "Enter post heading",
+          "id": "PostHeading"
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "template": {
+        "type": "textarea",
+        "templateOptions": {
+          "type": "text",
+          "label": "Enter post description",
+          "id": "PostDescription"
+        }
+      }
+    },
+    "added": {
+      "type": "date",
+      "defaultFn": "now"
+    },
+    "postImages": {
+      "type": [
+        "object"
+      ],
+      "template": {
+        "type": "multipleFileUpload",
+        "templateOptions": {
+          "label": "Add images",
+          "containerName": "orthopg",
+          "containerModel": "Container",
+          "url": {
+            "upload": "",
+            "delete": ""
+          },
+          "bind": true,
+          "fullWidth": true,
+          "fileDataSource": "Image",
+          "onImageUpdate": {
+            "deletePrevious": true
+          }
+        }
+      }
+    },
+    "anonymous": {
+      "type": "boolean",
+      "default": false
+    },
+    "status": {
+      "type": "string",
+      "default": "publish"
+    }
+  },
+  "hidden": [
+    "status",
+    "added"
+  ],
+  "validations": [],
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": "",
+      "templateOptions": {
+        "btnText": "Add Doctor",
+        "searchProp": "email",
+        "search": true,
+        "create": false,
+        "id": "customerIdName"
+      }
+    },
+    "postDetails": {
+      "type": "hasOne",
+      "model": "PostDetail",
+      "foreignKey": "",
+      "onCascadeDelete": true,
+      "templateOptions": {
+        "btnText": "Add post details",
+        "search": false,
+        "hide": false,
+        "create": true,
+        "init": true,
+        "id": "postDetails"
+      }
+    },
+    "comments": {
+      "type": "hasMany",
+      "model": "Comment",
+      "foreignKey": "",
+      "onCascadeDelete": true
+    },
+    "likePosts": {
+      "type": "hasMany",
+      "model": "LikePost",
+      "foreignKey": "",
+      "onCascadeDelete": true
+    },
+    "savePosts": {
+      "type": "hasMany",
+      "model": "SavePost",
+      "foreignKey": "",
+      "onCascadeDelete": true
+    },
+    "postSubscribers": {
+      "type": "hasMany",
+      "model": "PostSubscriber",
+      "foreignKey": "",
+      "onCascadeDelete": true
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

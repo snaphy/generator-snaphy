@@ -1,7 +1,6 @@
 {
   "name": "<%= props.applicationName %>",
   "title": "<%= props.applicationTitle %>",
-  "angularModuleName": "<%= props.applicationName %>",
   "author": "Robins Gupta",
   "version": "1.0.0",
   "main": "server/server.js",
@@ -17,7 +16,8 @@
     "loopback": "^2.14.0",
     "loopback-boot": "^2.6.5",
     "loopback-datasource-juggler": "^2.19.0",
-    "serve-favicon": "^2.0.1"
+    "serve-favicon": "^2.0.1",
+    "lodash": "^4.16.1"
   },
   "optionalDependencies": {
     "loopback-explorer": "^1.1.0"
@@ -29,7 +29,5 @@
   "repository": {
     "type": "",
     "url": ""
-  },
-  "description": "<%= props.applicationTitle %>",
-  "pluginPath": "common/plugins"
+  }
 }

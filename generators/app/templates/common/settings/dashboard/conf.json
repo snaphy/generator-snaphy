@@ -1,0 +1,6 @@
+{
+  "routeExposure": "/dashboard",
+  "defaultTemplate": "true",
+  "activate": true,
+  "services": {}
+}

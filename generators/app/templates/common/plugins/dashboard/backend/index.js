@@ -19,4 +19,4 @@ module.exports = function( server, databaseObj, helper, packageObj) {
 	return {
 		init: init
 	};
-} //module.exports
+}; //module.exports
