@@ -118,22 +118,15 @@ module.exports = function(server) {
    *
    */
   const getSettingPath = function(pluginName){
-    //convert to camel case..
-    pluginName = kebabCase(pluginName);
-    const ADMIN_SETTING = "admin-panel-setting.js";
     const CONF = "conf.json";
     const DATABASE = "database.json";
     const STATIC = "static.json";
 
-    const adminPath = join(SETTING_PATH, pluginName, ADMIN_SETTING);
     const confPath = join(SETTING_PATH, pluginName, CONF);
     const databasePath = join(SETTING_PATH, pluginName, DATABASE);
     const staticPath = join(SETTING_PATH, pluginName, STATIC);
 
     const setting = {};
-    if(existsSync(adminPath)){
-      setting.adminSetting = adminPath;
-    }
 
     if(existsSync(confPath)){
       setting.confPath = confPath;

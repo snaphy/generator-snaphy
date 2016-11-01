@@ -1,6 +1,7 @@
 (()=>{ 'use strict';})();
 
 module.exports = (server) => {
+  const NAME = "<%= props.applicationName %>";
   //Getting the main root package file of the server..
   const PLUGIN_PATH = `$(__dirname)../../common/plugins`;
   const DESCRIPTION = "<%= props.applicationTitle %>";
@@ -11,8 +12,14 @@ module.exports = (server) => {
   const VALIDATION_PATH = `$(__dirname)../../common/validations`;
   const TABLE_PATH = `$(__dirname)../../common/table`;
   const SETTING_PATH = `$(__dirname)../../common/settings`;
+  const VERSION =  "1.0.0";
+  const AUTHOR =  "Robins Gupta";
+
+  //Write all the plugins name whose load prioroty is to be set...
+  const PLUGIN_PRIORITY = [];
 
   return {
+    NAME,
     PLUGIN_PATH,
     DESCRIPTION,
     ANGULAR_MODULE,
@@ -21,6 +28,9 @@ module.exports = (server) => {
     MODEL_PATH,
     VALIDATION_PATH,
     TABLE_PATH,
-    SETTING_PATH
-  };
+    SETTING_PATH,
+    PLUGIN_PRIORITY,
+    VERSION,
+    AUTHOR
+  }
 };

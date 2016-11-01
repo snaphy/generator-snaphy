@@ -1,15 +1,15 @@
 {
   "css": {
-    "exampleCss" : "/dashboard/style/dashboard.css"
+    "/dashboard/style/dashboard.css": "exampleCss"
   },
   "js": {
-    "dashboardRoute": "/dashboard/scripts/routes/dashboard.js",
-    "dashboardController": "/dashboard/scripts/controllers/dashboard.js"
+    "/dashboard/scripts/routes/dashboard.js":"dashboardRoute",
+    "/dashboard/scripts/controllers/dashboard.js": "dashboardController"
   },
   "moduleDependencies":{
 
   },
-  "settings": "/dashboard/admin-setting.js",
+  "settings": ["/dashboard/admin-setting.js"],
 
   "bodystructure": {
     "asidebarHook": [],

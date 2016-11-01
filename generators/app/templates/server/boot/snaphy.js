@@ -1,9 +1,19 @@
 'use strict';
 module.exports = function(server) {
-  var chalk = require('chalk');
-  var loopback = require('loopback');
-  var helper   = require(__dirname + '/../../common/helper')(server);
-  var config   = require(__dirname + '/../config.json');
+  const chalk = require('chalk');
+  const loopback = require('loopback');
+  const helper   = require(__dirname + '/../../common/helper')(server);
+  const config   = require(__dirname + '/../config.json');
+  import SETTINGS from "../../common/settings/conf";
+
+  const {
+    PLUGIN_PRIORITY,
+    DESCRIPTION,
+    ANGULAR_MODULE,
+    NAME,
+    AUTHOR,
+    VERSION
+  } = SETTINGS(server);
 
 
   //Now setting up the static files..
@@ -13,8 +23,8 @@ module.exports = function(server) {
 
 
   //Adding properties to an object..
-  var concatObject = function(targetObj, containerObj){
-    for (var property in targetObj) {
+  const concatObject = function(targetObj, containerObj){
+    for (let property in targetObj) {
         if (targetObj.hasOwnProperty(property)) {
             // do stuff
             //Add its property and its values..
@@ -24,56 +34,93 @@ module.exports = function(server) {
     return containerObj;
   };
 
+
+
   //Load the required plugins script and styles in the memory..
-  var loadPluginsData = function(data){
-    var i;
+  /**
+   * Loads plugins accorsing to priority list..
+   * @param data
+   * @returns {*}
+     */
+  const loadPluginsData = function(data){
     //get the list of plugins..
-    var pluginList = helper.getDirectories(__dirname + '/../../common/plugins');
-    for(i=0; i<pluginList.length; i++){
-      var pluginName = pluginList[i];
-      var pluginPath = __dirname + '/../../common/plugins/' + pluginName +  '/package.json';
-      var packageObj = helper.readPackageJsonFile(pluginPath);
-      if(packageObj.activate){
-        //If the plugin has declared staticFiles
-        if(packageObj.staticFiles) {
-          if (packageObj.staticFiles.css) {
-            data.pluginStyles = concatObject(packageObj.staticFiles.css, data.pluginStyles);
-          }
+    const pluginList = helper.getDirectories(__dirname + '/../../common/plugins');
+    //object to check the list of plugin which has been loaded already..
+    const done = {};
+    //first load the plugins according to priority list..
+    if(PLUGIN_PRIORITY){
+      for(let i=0; i< PLUGIN_PRIORITY.length; i++){
+        let pluginName = pluginList[i];
+        //Only run if not already processed..
+        if(!done[pluginName]){
+          //Add to done list..
+          done[pluginName] = true;
+          loadPlugin(data, pluginName);
+        }
+      }
+    }
 
-          if (packageObj.staticFiles.js) {
-            data.pluginScripts = concatObject(packageObj.staticFiles.js, data.pluginScripts);
-          }
+    for(let i=0; i< pluginList.length; i++){
+      let pluginName = pluginList[i];
+      //Only run if not already processed..
+      if(!done[pluginName]){
+        //Add to done list..
+        done[pluginName] = true;
+        loadPlugin(data, pluginName);
+      }
+    }//for loop
 
-        
-          //Load module dependencies..
-          if(packageObj.staticFiles.moduleDependencies){
-            data.moduleDependencies = concatObject(packageObj.staticFiles.moduleDependencies, data.moduleDependencies);
-          }
+    return data;
+  };
 
-          //Load plugin settings file....
-          if(packageObj.staticFiles.settings){
-            data.clientSettings = data.clientSettings.concat(packageObj.staticFiles.settings);
-          }
 
-          //Now getting the html templates...hooks..
-          if(packageObj.bodystructure){
-            data.asidebarHook = data.asidebarHook.concat(packageObj.bodystructure.asidebarHook);
-            data.sidebarHook  = data.sidebarHook.concat(packageObj.bodystructure.sidebarHook);
-            data.headerHook   = data.headerHook.concat(packageObj.bodystructure.headerHook);
-            if(packageObj.bodystructure.footerHook != undefined){
-              data.footerHook = data.footerHook.concat(packageObj.bodystructure.footerHook)
+  /**
+   * Load the plugin confirguration and static file..
+   * @param data
+   * @param pluginName
+   */
+  const loadPlugin = function(data, pluginName){
+    //Get the settings of the plugin..
+    const {confPath, databasePath, staticPath} = helper.getSettingPath(pluginName);
+    if(confPath){
+      const pluginSettings = helper.readPackageJsonFile(confPath);
+      if(pluginSettings.activate){
+        if(staticPath){
+          const pluginStaticFiles = helper.readPackageJsonFile(staticPath);
+          if(pluginStaticFiles){
+            if (pluginStaticFiles.css) {
+              data.pluginStyles = concatObject(pluginStaticFiles.css, data.pluginStyles);
             }
-          }//if
-        }// if staticFiles..
 
-        //If databases is not undefined.
-        if(packageObj.databases){
-          data.databaseObj = getDatabaseObjFormat(packageObj.name, packageObj.databases, data.databaseObj);
+            if (pluginStaticFiles.js) {
+              data.pluginScripts = concatObject(pluginStaticFiles.js, data.pluginScripts);
+            }
+
+            //Load module dependencies..
+            if(pluginStaticFiles.moduleDependencies){
+              data.moduleDependencies = concatObject(pluginStaticFiles.moduleDependencies, data.moduleDependencies);
+            }
+
+            //Load module dependencies..
+            if(pluginStaticFiles.settings){
+              const adminPanelSettings = pluginStaticFiles.settings;
+              for(let i=0; i<adminPanelSettings.length; i++){
+                let setting = adminPanelSettings[i];
+                if(setting){
+                  data.clientSettings = data.clientSettings.push(setting);
+                }
+              }
+            }
+
+          }//if static file
+        } //if staticPath
+
+        if(databasePath){
+          const pluginDatabases = helper.readPackageJsonFile(databasePath);
+          data.databaseObj = getDatabaseObjFormat(pluginName, pluginDatabases, data.databaseObj);
         }
       }//if activate
-
-    }//for loop
-    return data;
+    }
   };
 
 
@@ -93,12 +140,11 @@ module.exports = function(server) {
 
   //Loads the title, desc of the app given in the package.json file.
   var loadAppData = function(data){
-    var packageObj = helper.readPackageJsonFile(__dirname + '/../../package.json');
-    data.title = packageObj.title;
-    data.description = packageObj.description;
-    data.author = packageObj.author;
-    data.module = packageObj.angularModuleName;
-    data.version = packageObj.version;
+    data.title = NAME;
+    data.description = DESCRIPTION;
+    data.author = AUTHOR;
+    data.module = ANGULAR_MODULE;
+    data.version = VERSION;
     return data;
   };
 
@@ -141,6 +187,6 @@ module.exports = function(server) {
  server.once('started', function() {
     console.log("Explore admin console at " + chalk.cyan("http://" +  config.host + ':' + config.port + config.adminApiRoot));
   });
- 
+
 
 };
