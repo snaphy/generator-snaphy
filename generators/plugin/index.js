@@ -4,6 +4,7 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 var mkdirp = require('mkdirp');
 var fs  = require("fs");
+const {join} = require("path");
 
 function validateEmail(email) {
     var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
@@ -17,6 +18,8 @@ var checkFilePath = function(path){
 
 
 var rootPath = process.cwd() + '/' ;
+//represents the main root path of the server..
+const mainRootFolder = rootPath;
 
 function checkDirectory(){
   	var packageObj;
@@ -29,14 +32,14 @@ function checkDirectory(){
   		}
   	}//if
 
-	//Now check if the package has pluginPath set..
-	packageObj = require(rootPath +  "package.json");
-	if(!packageObj.pluginPath){
-		throw chalk.red('>>Error:') + ' Cannot found the `pluginPath` entry in  ' + chalk.cyan('package.json') + ' file.\nPlease run it from the main root directory';
+	//Now check if the package has PLUGIN_PATH set..
+  packageObj = require(`${rootPath}common/settings/conf.js`)();
+	if(!packageObj.PLUGIN_PATH){
+		throw chalk.red('>>Error:') + ' Cannot found the `PLUGIN_PATH` entry in ' +  chalk.cyan(rootPath + 'common/settings/conf.js') + ' file.\nPlease run it from the main root directory';
 	}
 
-  	//Now change the directory to the pluginPath
-  	rootPath = rootPath + packageObj.pluginPath;
+  	//Now change the directory to the PLUGIN_PATH
+  	rootPath = packageObj.PLUGIN_PATH;
   	process.chdir(rootPath);
 }
 
@@ -145,12 +148,9 @@ module.exports = yeoman.generators.Base.extend({
         done();
       });
 
-      //console.log(this.props.pluginName);
-      /*	try{
-
-    	}catch(err){
-    		//Do nothing
-    	}*/
+      var serverFile = "server/server.js";
+      //Add the root path..
+      this.props.mainServerFile = join(mainRootFolder, serverFile);
 
 
     }.bind(this));
@@ -166,12 +166,6 @@ module.exports = yeoman.generators.Base.extend({
 
     var that = this;
     mkdirp('client', function(){
-      //Now add folders to client based ..
-      //This is the new way..
-      that.fs.copy(
-        that.templatePath('client/style'),
-        that.destinationPath('client/style')
-      );
 
       that.fs.copy(
         that.templatePath('database-format'),
@@ -180,6 +174,7 @@ module.exports = yeoman.generators.Base.extend({
 
       //Creating directories first..
       mkdirp.sync( 'client/scripts');
+      mkdirp.sync( 'client/style');
       mkdirp.sync( 'client/scripts/controllers');
       mkdirp.sync( 'client/scripts/directives');
       mkdirp.sync( 'client/scripts/filters');
@@ -206,7 +201,7 @@ module.exports = yeoman.generators.Base.extend({
       that.copy(`${settingDirectory}/static.json`, `${that.props.pluginName}/static.json`);
 
       that.copy('client/views/example.html', 'client/views/' + that.props.pluginName + '.html');
-      that.copy('client/style/example.css', 'client/views/' + that.props.pluginName + '.css');
+      that.copy('client/style/example.css', 'client/style/' + that.props.pluginName + '.css');
 
 
       console.info(chalk.red('TODO') + ' Work needs to be done for default Template.' );
