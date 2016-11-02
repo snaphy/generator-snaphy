@@ -92,6 +92,11 @@ module.exports = yeoman.generators.Base.extend({
     );
 
     this.fs.copy(
+      this.templatePath('views/static/style'),
+      this.destinationPath('.views/static/style')
+    );
+
+    this.fs.copy(
       this.templatePath('views/partials'),
       this.destinationPath('.views/partials')
     );
