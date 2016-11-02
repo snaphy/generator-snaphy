@@ -46,7 +46,8 @@
         <!--Now loop to get all required plugins css from the server.-->
         <% for (var style in pluginStyles) {
 		  if (pluginStyles.hasOwnProperty(style)) { %>
-		    <link rel="stylesheet"  href="<%= pluginStyles[style] %>">
+        <!-- PLUGIN CSS: MODULE CSS ID: <%= pluginStyles[style] %>-->
+		    <link rel="stylesheet"  href="<%= style %>">
 		  <%}
 		}%>
         <!-- endbuild -->
@@ -211,7 +212,8 @@
 
         <% for (var angularModules in moduleDependencies) {
 		      if (moduleDependencies.hasOwnProperty(angularModules)) { %>
-		        <script src="<%= moduleDependencies[angularModules] %>"></script>
+		        <!--Angular module Plugin Module Id: <%= moduleDependencies[angularModules] %>-->
+            <script src="<%= angularModules %>"></script>
 		      <%}
         }%>
 
@@ -220,10 +222,15 @@
 
         <!--Always put it below the footer script insertion-->
         <!--ADDING THE SETTINGS FILE.-->
-        <% clientSettings.forEach(function(settings) { %>
-        <script src="<%= settings %>"></script>
-        <% }); %>
-
+        <%
+        if(clientSettings){
+          clientSettings.forEach(function(settings) {
+        %>
+            <script src="<%= settings %>"></script>
+        <%
+          });
+        }
+        %>
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="<%= staticRoute %>/scripts/controllers/bodyCtrl.js"></script>
@@ -232,7 +239,8 @@
         <script src="<%= staticRoute %>/scripts/config/config.js"></script>
         <% for (var script in pluginScripts) {
     		  if (pluginScripts.hasOwnProperty(script)) { %>
-    		    <script src="<%= pluginScripts[script] %>"></script>
+    		    <!--JS PLUGIN MODULE ID: <%= pluginScripts[script] %> -->
+            <script src="<%= script %>"></script>
     		  <%}
     		}%>
         <!-- endbuild -->

@@ -9,7 +9,7 @@
   "moduleDependencies":{
 
   },
-  "settings": ["/dashboard/admin-setting.js"],
+  "settings": ["/dashboard/admin-panel-setting.js"],
 
   "bodystructure": {
     "asidebarHook": [],

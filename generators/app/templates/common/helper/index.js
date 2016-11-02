@@ -1,9 +1,9 @@
-import loopback from "loopback";
-import chalk from "chalk";
-import SETTINGS from "../settings/conf";
-import {readdirSync, statSync, existsSync} from "fs";
-import {kebabCase} from "lodash";
-import {join} from "path";
+const loopback = require("loopback");
+const chalk = require("chalk");
+const  SETTINGS = require("../settings/conf");
+const {readdirSync, statSync, existsSync} =  require("fs");
+const {kebabCase}  = require("lodash");
+const {join} = require("path");
 
 
 /*global require, module*/
@@ -141,6 +141,11 @@ module.exports = function(server) {
     return setting;
   };
 
+  //Get the setting sfolder plugin root path..
+  const getSettingRootPath = function(pluginName){
+    return join(SETTING_PATH, pluginName);
+  };
+
 
   /**
    * [method for reading package file]
@@ -213,6 +218,21 @@ module.exports = function(server) {
   };
 
 
+  /**
+   * Set local file route.
+   * @param routePath {String} - Route path server get route.
+   * @param localPath {String} - local path where the file is present.
+     */
+  const setStaticFileRoute = function(routePath, localPath){
+    if(routePath && localPath){
+      
+      server.get(routePath, function(req, res){
+        res.sendFile(localPath);
+      });
+    }
+  };
+
+
 
 
 
@@ -232,11 +252,23 @@ module.exports = function(server) {
       if(pluginSettings.activate){
         if(staticPath){
           const pluginStaticFiles = readPackageJsonFile(staticPath);
+          const rootExposure =  pluginSettings.routeExposure || pluginSettings.name;
           try{
             if(pluginStaticFiles.css || pluginStaticFiles.js || pluginStaticFiles.moduleDependencies){
-              let rootExposure =  pluginSettings.routeExposure || pluginSettings.name;
+
               //Now load it static route..
               setStaticRoute(server, rootExposure, pluginSettings.name, pluginContainerPath);
+            }
+
+            if(pluginStaticFiles.settings){
+              const rootExposurePattern = new RegExp("^" + rootExposure);
+
+              _.forEach(pluginStaticFiles.settings, function(routePath) {
+                //set the static route for each settings..
+                const filePath = value.replace(rootExposurePattern, "");
+                const absLocalPath = join(getSettingRootPath(pluginName), filePath);
+                setStaticFileRoute(routePath, absLocalPath);
+              });
             }
           }catch (err){
             //Do nothing in this case

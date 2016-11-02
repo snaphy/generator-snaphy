@@ -1,5 +1,6 @@
-import SETTINGS from "../../common/settings/conf";
-import {join} from "path";
+const SETTINGS  = require("../../common/settings/conf");
+const path = require("path");
+const join = path.join;
 
 module.exports = function(server) {
   const chalk = require('chalk');
@@ -84,6 +85,7 @@ module.exports = function(server) {
   const loadPlugin = function(data, pluginName){
     //Get the settings of the plugin..
     const {confPath, databasePath, staticPath} = helper.getSettingPath(pluginName);
+
     if(confPath){
       const pluginSettings = helper.readPackageJsonFile(confPath);
       if(pluginSettings.activate){
@@ -109,7 +111,7 @@ module.exports = function(server) {
               for(let i=0; i<adminPanelSettings.length; i++){
                 let setting = adminPanelSettings[i];
                 if(setting){
-                  data.clientSettings = data.clientSettings.push(setting);
+                  data.clientSettings.push(setting);
                 }
               }
             }

@@ -1,4 +1,4 @@
-(()=>{ 'use strict';})();
+const {join} =  require("path");
 
 module.exports = (server) => {
   const NAME = "<%= props.applicationName %>";
