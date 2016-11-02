@@ -4,7 +4,8 @@
 'use strict';
 /*jslint browser: true*/
 var settings = {
-  "homeState" : "dashboard"
+  "homeState" : "dashboard",
+  "loginEnabled": false
 };
 
 

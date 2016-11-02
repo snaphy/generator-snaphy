@@ -4,7 +4,7 @@ module.exports = (server) => {
   const NAME = "<%= props.applicationName %>";
   const DESCRIPTION = "<%= props.applicationTitle %>";
   const ANGULAR_MODULE = "<%= props.applicationName %>";
-  const VERSION =  "1.0.0";
+  const VERSION =  "2.0.0";
   const AUTHOR =  "Robins Gupta";
   const PLUGIN_PATH =  join(__dirname, "../../common/plugins");
   const SERVER_PATH =  join(__dirname, "../../server/server.js");

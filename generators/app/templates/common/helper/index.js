@@ -225,7 +225,6 @@ module.exports = function(server) {
    */
   const setStaticFileRoute = function(routePath, localPath){
     if(routePath && localPath){
-      console.log("Static Route", routePath, localPath);
       server.get(routePath, function(req, res){
         res.sendFile(localPath);
       });
@@ -238,18 +237,13 @@ module.exports = function(server) {
 
 
   function loadPluginsInMemory(pluginName, pluginContainerPath){
-    console.log(
-      `
-      Loading plugin ${pluginName} in memory
-      `
-    );
-
     //Get the settings of the plugin..
     const {adminSetting, confPath, databasePath, staticPath} = getSettingPath(pluginName);
     //if settings has configuration path defined...
     if(confPath){
       const pluginSettings = readPackageJsonFile(confPath);
       if(pluginSettings.activate){
+        console.log(`\nLoading plugin ${pluginName} in memory\n`);
         if(staticPath){
           const pluginStaticFiles = readPackageJsonFile(staticPath);
           const rootExposure =  pluginSettings.routeExposure || pluginSettings.name;
