@@ -2,7 +2,7 @@ const loopback = require("loopback");
 const chalk = require("chalk");
 const  SETTINGS = require("../settings/conf");
 const {readdirSync, statSync, existsSync} =  require("fs");
-const {kebabCase}  = require("lodash");
+const {kebabCase, forEach}  = require("lodash");
 const {join} = require("path");
 
 
@@ -222,10 +222,10 @@ module.exports = function(server) {
    * Set local file route.
    * @param routePath {String} - Route path server get route.
    * @param localPath {String} - local path where the file is present.
-     */
+   */
   const setStaticFileRoute = function(routePath, localPath){
     if(routePath && localPath){
-      
+      console.log("Static Route", routePath, localPath);
       server.get(routePath, function(req, res){
         res.sendFile(localPath);
       });
@@ -263,14 +263,15 @@ module.exports = function(server) {
             if(pluginStaticFiles.settings){
               const rootExposurePattern = new RegExp("^" + rootExposure);
 
-              _.forEach(pluginStaticFiles.settings, function(routePath) {
+              forEach(pluginStaticFiles.settings, function(routePath) {
                 //set the static route for each settings..
-                const filePath = value.replace(rootExposurePattern, "");
+                const filePath = routePath.replace(rootExposurePattern, "");
                 const absLocalPath = join(getSettingRootPath(pluginName), filePath);
                 setStaticFileRoute(routePath, absLocalPath);
               });
             }
           }catch (err){
+            console.log(err);
             //Do nothing in this case
             console.log(chalk.red(" >> Error: ") + "In exposing plugin " + pluginName + " . Please edit info in package.json for property staticFiles carefully");
           }
