@@ -7,7 +7,7 @@ module.exports = function(server) {
   const helper   = require(__dirname + '/../../common/helper')(server);
   const config   = require(__dirname + '/../config.json');
   const STATIC_PATH = '/static';
-  
+
   const {
     PLUGIN_PRIORITY,
     DESCRIPTION,
@@ -77,7 +77,7 @@ module.exports = function(server) {
 
 
   /**
-   * Load the plugin confirguration and static file..
+   * Load the plugin configuration and static file..
    * @param data
    * @param pluginName
    */

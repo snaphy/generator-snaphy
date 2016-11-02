@@ -214,6 +214,9 @@ module.exports = function(server) {
 
 
 
+
+
+
   function loadPluginsInMemory(pluginName, pluginContainerPath){
     console.log(
       `
@@ -269,11 +272,39 @@ module.exports = function(server) {
 
 
 
+  const loadValidationPlugin = function(){
+    "use strict";
+    console.log(
+      `
+      Loading models validations
+      `
+    );
+
+    let models = server.models();
+    if(models){
+      models.forEach(function(Model) {
+        //Now check if the validation file related to the given model is present..
+        //if present load the file..
+        const modelName = Model.modelName;
+        const validationPath = getValidationPath(modelName);
+        if(validationPath.js){
+          //Now load the file in memory..
+          const reqirePath = validationPath.replace(/\.js$/, "");
+          //Now require the file..
+          require(reqirePath)(Model, server, helper);
+        }
+      });
+    }
+  };
+
+
+
 
 
   //This function is called on function load.
   //Initialize all the plugins and add it to the memory..
   const initPlugins = function(){
+    loadValidationPlugin();
     console.log(
       `
       Loading snaphy plugins
