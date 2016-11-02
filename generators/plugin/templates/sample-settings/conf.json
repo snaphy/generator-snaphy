@@ -1,0 +1,7 @@
+{
+  "name": "<%= props.pluginName %>",
+  "description": "<%= props.pluginTitle %>",
+  "routeExposure": "<%= props.routeExposure %>",
+  "activate": true,
+  "pluginDependencies": {}
+}

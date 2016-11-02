@@ -1,0 +1,19 @@
+{
+  "css": {
+    "<%= props.pluginName %>Css" : "<%= props.routeExposure %>/style/<%= props.pluginName %>.css"
+  },
+  "js": {
+    "<%= props.pluginName %>Route": "<%= props.routeExposure %>/scripts/routes/<%= props.pluginName %>.js",
+    "<%= props.pluginName %>Controller": "<%= props.routeExposure %>/scripts/controllers/<%= props.pluginName %>.js"
+  },
+  "moduleDependencies":{
+
+  },
+  "settings": "<%= props.routeExposure %>/admin-panel-setting.js",
+  "bodystructure": {
+    "asidebarHook": [],
+    "sidebarHook": [],
+    "headerHook": [],
+    "footerHook":[]
+  }
+}

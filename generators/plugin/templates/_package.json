@@ -5,33 +5,6 @@
   "description": "<%= props.pluginTitle %>",
   "author": "<%= props.authorName %>",
   "authorEmail": "<%= props.authorEmail %>",
-  "routeExposure": "<%= props.routeExposure %>",
-  "staticFiles": {
-    "css": {
-        "exampleCss" : "<%= props.routeExposure %>/style/example.css"
-      },
-    "js": {
-      "<%= props.pluginName %>Route": "<%= props.routeExposure %>/scripts/routes/<%= props.pluginName %>.js",
-      "<%= props.pluginName %>Controller": "<%= props.routeExposure %>/scripts/controllers/<%= props.pluginName %>.js"
-    },
-    "moduleDependencies":{
-
-    },
-    "settings": "<%= props.routeExposure %>/settings.js"
-  },
-  "bodystructure": {
-    "asidebarHook": [],
-    "sidebarHook": [],
-    "headerHook": [],
-    "footerHook":[]
-  },
-  "databases": {
-  },
-  "pluginDepedencies": {
-     
-  },
-  "activate": true,
-  "services": {},
   "dependencies": {},
   "optionalDependencies": {},
   "repository": {

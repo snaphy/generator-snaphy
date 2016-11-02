@@ -1,6 +1,5 @@
 {
   "css": {
-    "/dashboard/style/dashboard.css": "exampleCss"
   },
   "js": {
     "/dashboard/scripts/routes/dashboard.js":"dashboardRoute",

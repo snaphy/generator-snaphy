@@ -188,6 +188,10 @@ module.exports = yeoman.generators.Base.extend({
       mkdirp.sync( 'client/views');
       mkdirp.sync('client/scripts/directives');
 
+      //Now create the folder containing settings file..
+      //sample-settings directives will be replaced by plugin name
+      mkdirp.sync(that.props.pluginName);
+
 
       //Copying with templating..
       that.copy('client/scripts/controllers/exampleController.js', 'client/scripts/controllers/'  + that.props.pluginName + '.js');
@@ -195,9 +199,14 @@ module.exports = yeoman.generators.Base.extend({
       that.copy('client/scripts/routes/exampleRoute.js', 'client/scripts/routes/'  + that.props.pluginName + '.js');
       that.copy('client/scripts/services/exampleServices.js', 'client/scripts/services/'  + that.props.pluginName + '.js');
       that.copy('client/scripts/directives/exampleDirectives.js', 'client/scripts/directives/'  + that.props.pluginName + '.js');
+      const settingDirectory = "sample-settings";
+      that.copy(`${settingDirectory}/admin-panel-setting.js`, `${that.props.pluginName}/admin-panel-setting.js`);
+      that.copy(`${settingDirectory}/conf.json`, `${that.props.pluginName}/conf.json`);
+      that.copy(`${settingDirectory}/database.json`, `${that.props.pluginName}/database.json`);
+      that.copy(`${settingDirectory}/static.json`, `${that.props.pluginName}/static.json`);
 
-      that.copy('client/settings.js', 'client/settings.js');
       that.copy('client/views/example.html', 'client/views/' + that.props.pluginName + '.html');
+      that.copy('client/style/example.css', 'client/views/' + that.props.pluginName + '.css');
 
 
       console.info(chalk.red('TODO') + ' Work needs to be done for default Template.' );
@@ -220,7 +229,6 @@ module.exports = yeoman.generators.Base.extend({
     //Copy all files that handle git repositorys
     this.copy('gitignore', '.gitignore');
     this.copy('readMe.md', 'readMe.md');
-    this.copy('client/settings.js', 'client/settings.js');
   },
 
   install: function () {
