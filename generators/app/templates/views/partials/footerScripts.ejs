@@ -17,7 +17,7 @@
       /*Adding the runtime modules added from plugins*/
       <% for (var angularModules in moduleDependencies) {
         if (moduleDependencies.hasOwnProperty(angularModules)) { %>
-          ,'<%= angularModules %>'
+          ,'<%= moduleDependencies[angularModules] %>'
         <%}
       }%>
     ]);

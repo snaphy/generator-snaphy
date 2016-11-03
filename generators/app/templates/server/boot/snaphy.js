@@ -28,11 +28,11 @@ module.exports = function(server) {
   //Adding properties to an object..
   const concatObject = function(targetObj, containerObj){
     for (let property in targetObj) {
-        if (targetObj.hasOwnProperty(property)) {
-            // do stuff
-            //Add its property and its values..
-            containerObj[property] = targetObj[property];
-        }
+      if (targetObj.hasOwnProperty(property)) {
+        // do stuff
+        //Add its property and its values..
+        containerObj[property] = targetObj[property];
+      }
     }
     return containerObj;
   };
@@ -44,7 +44,7 @@ module.exports = function(server) {
    * Loads plugins accorsing to priority list..
    * @param data
    * @returns {*}
-     */
+   */
   const loadPluginsData = function(data){
     //get the list of plugins..
     const pluginList = helper.getDirectories(__dirname + '/../../common/plugins');
@@ -53,7 +53,7 @@ module.exports = function(server) {
     //first load the plugins according to priority list..
     if(PLUGIN_PRIORITY){
       for(let i=0; i< PLUGIN_PRIORITY.length; i++){
-        let pluginName = pluginList[i];
+        let pluginName = PLUGIN_PRIORITY[i];
         //Only run if not already processed..
         if(!done[pluginName]){
           //Add to done list..
@@ -85,7 +85,6 @@ module.exports = function(server) {
   const loadPlugin = function(data, pluginName){
     //Get the settings of the plugin..
     const {confPath, databasePath, staticPath} = helper.getSettingPath(pluginName);
-
     if(confPath){
       const pluginSettings = helper.readPackageJsonFile(confPath);
       if(pluginSettings.activate){
@@ -115,23 +114,42 @@ module.exports = function(server) {
                 }
               }
             }
-
             //Now add hooks..
             if(pluginStaticFiles.bodystructure){
               const {asidebarHook, sidebarHook, headerHook, footerHook} = pluginStaticFiles.bodystructure;
               if(asidebarHook){
-                data.asidebarHook = asidebarHook;
+                for(let i=0; i< asidebarHook.length; i++){
+                  let hook = asidebarHook[i];
+                  if(hook){
+                    data.asidebarHook.push(hook);
+                  }
+                }
               }
 
               if(sidebarHook){
-                data.sidebarHook = sidebarHook;
+                for(let i=0; i< sidebarHook.length; i++){
+                  let hook = sidebarHook[i];
+                  if(hook){
+                    data.sidebarHook.push(hook);
+                  }
+                }
               }
 
               if(headerHook){
-                data.headerHook = headerHook;
+                for(let i=0; i< headerHook.length; i++){
+                  let hook = headerHook[i];
+                  if(hook){
+                    data.headerHook.push(hook);
+                  }
+                }
               }
               if(footerHook){
-                data.footerHook = footerHook;
+                for(let i=0; i< footerHook.length; i++){
+                  let hook = footerHook[i];
+                  if(hook){
+                    data.footerHook.push(hook);
+                  }
+                }
               }
             }
 
@@ -159,8 +177,8 @@ module.exports = function(server) {
    * }
    */
   var getDatabaseObjFormat = function(pluginName, oldDatabaseObj, targetObjDatabase){
-      targetObjDatabase[pluginName] = oldDatabaseObj;
-      return targetObjDatabase;
+    targetObjDatabase[pluginName] = oldDatabaseObj;
+    return targetObjDatabase;
   };
 
 
@@ -210,7 +228,7 @@ module.exports = function(server) {
 
   });
 
- server.once('started', function() {
+  server.once('started', function() {
     console.log("Explore admin console at " + chalk.cyan("http://" +  config.host + ':' + config.port + config.adminApiRoot));
   });
 

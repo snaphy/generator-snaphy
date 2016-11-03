@@ -25,7 +25,8 @@ module.exports = function(server) {
     MODEL_PATH,
     VALIDATION_PATH,
     TABLE_PATH,
-    SETTING_PATH
+    SETTING_PATH,
+    PLUGIN_PRIORITY
   } = SETTINGS(server);
 
 
@@ -337,11 +338,37 @@ module.exports = function(server) {
       Loading snaphy plugins
       `
     );
+    loadPluginsData();
+  };
 
+  const loadPluginsData = function(){
     const pluginContainerPath = PLUGIN_PATH;
+    //get the list of plugins..
     const pluginList = getDirectories(pluginContainerPath);
-    for(let i=0; i<pluginList.length; i++){
-      loadPluginsInMemory(pluginList[i].trim(), pluginContainerPath);
+    //object to check the list of plugin which has been loaded already..
+    const done = {};
+    //first load the plugins according to priority list..
+    if(PLUGIN_PRIORITY){
+      for(let i=0; i< PLUGIN_PRIORITY.length; i++){
+        let pluginName = PLUGIN_PRIORITY[i];
+        //Only run if not already processed..
+        if(!done[pluginName]){
+          //Add to done list..
+          done[pluginName] = true;
+          console.log(pluginName);
+          loadPluginsInMemory(pluginName, pluginContainerPath);
+        }
+      }
+    }
+
+    for(let i=0; i< pluginList.length; i++){
+      let pluginName = pluginList[i];
+      //Only run if not already processed..
+      if(!done[pluginName]){
+        //Add to done list..
+        done[pluginName] = true;
+        loadPluginsInMemory(pluginName, pluginContainerPath);
+      }
     }//for loop
   };
 
