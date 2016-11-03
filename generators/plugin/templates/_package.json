@@ -5,7 +5,8 @@
   "description": "<%= props.pluginTitle %>",
   "author": "<%= props.authorName %>",
   "authorEmail": "<%= props.authorEmail %>",
-  "dependencies": {},
+  "dependencies": {
+  },
   "optionalDependencies": {},
   "repository": {
     "type": "",

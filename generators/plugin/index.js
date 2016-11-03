@@ -5,6 +5,7 @@ var yosay = require('yosay');
 var mkdirp = require('mkdirp');
 var fs  = require("fs");
 const {join} = require("path");
+const _ = require("lodash");
 
 function validateEmail(email) {
     var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
@@ -15,6 +16,7 @@ function validateEmail(email) {
 var checkFilePath = function(path){
 	return fs.existsSync(rootPath);
 };
+
 
 
 var rootPath = process.cwd() + '/' ;
@@ -226,7 +228,43 @@ module.exports = yeoman.generators.Base.extend({
     this.copy('readMe.md', 'readMe.md');
   },
 
+
+
   install: function () {
-    this.installDependencies();
+    var that = this;
+    var installNpmModule = function(moduleName, that){
+     /* that.npmInstall(moduleName, ["install"], {
+        "prefix": "../../../",
+        "save": true
+      });*/
+      that.spawnCommandSync("npm", ["install", moduleName, "--prefix", "../../../", "--save"], {});
+    };
+
+
+    var packageFile = require(join(__dirname, "templates/_package.json"));
+    if(packageFile){
+      if(packageFile.dependencies){
+        _.forEach(packageFile.dependencies, function(value, key) {
+          let moduleName = `${key}@${value}`;
+          installNpmModule(moduleName, that);
+        });
+      }
+
+      if(packageFile.optionalDependencies){
+
+        _.forEach(packageFile.optionalDependencies, function(value, key) {
+          let moduleName = `${key}@${value}`;
+          installNpmModule(moduleName, that);
+        });
+      }
+      if(packageFile.devDependencies){
+        _.forEach(packageFile.devDependencies, function(value, key) {
+          let moduleName = `${key}@${value}`;
+          installNpmModule(moduleName, that);
+        });
+      }
+
+    }
+    this.bowerInstall();
   }
 });
