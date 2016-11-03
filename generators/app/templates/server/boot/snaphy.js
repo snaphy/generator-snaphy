@@ -116,6 +116,25 @@ module.exports = function(server) {
               }
             }
 
+            //Now add hooks..
+            if(pluginStaticFiles.bodystructure){
+              const {asidebarHook, sidebarHook, headerHook, footerHook} = pluginStaticFiles.bodystructure;
+              if(asidebarHook){
+                data.asidebarHook = asidebarHook;
+              }
+
+              if(sidebarHook){
+                data.sidebarHook = sidebarHook;
+              }
+
+              if(headerHook){
+                data.headerHook = headerHook;
+              }
+              if(footerHook){
+                data.footerHook = footerHook;
+              }
+            }
+
           }//if static file
         } //if staticPath
 
