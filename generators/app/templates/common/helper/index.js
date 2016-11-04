@@ -215,7 +215,7 @@ module.exports = function(server) {
     //cache control
     const oneDay = 86400000;
     app.use(rootExposure, loopback.static( join(pluginContainerPath, PluginName.trim(), '/client'), { maxAge: oneDay }));
-    console.log("Static Routes " + rootExposure);
+    console.log(`Static Routes ${rootExposure} \n`);
   };
 
 
@@ -244,12 +244,12 @@ module.exports = function(server) {
     if(confPath){
       const pluginSettings = readPackageJsonFile(confPath);
       if(pluginSettings.activate){
-        console.log(`\nLoading plugin ${pluginName} in memory\n`);
+        console.log(`Loading plugin ${pluginName} in memory`);
         if(staticPath){
           const pluginStaticFiles = readPackageJsonFile(staticPath);
           const rootExposure =  pluginSettings.routeExposure || pluginSettings.name;
           try{
-            if(pluginStaticFiles.css || pluginStaticFiles.js || pluginStaticFiles.moduleDependencies){
+            if(pluginStaticFiles.css || pluginStaticFiles.js || pluginStaticFiles.moduleDependencies || pluginStaticFiles.bodystructure){
 
               //Now load it static route..
               setStaticRoute(server, rootExposure, pluginSettings.name, pluginContainerPath);
@@ -302,11 +302,7 @@ module.exports = function(server) {
 
   const loadValidationPlugin = function(){
     "use strict";
-    console.log(
-      `
-      Loading models validations
-      `
-    );
+    console.log(`Loading models validations`);
 
     let models = server.models();
     if(models){
@@ -333,12 +329,9 @@ module.exports = function(server) {
   //Initialize all the plugins and add it to the memory..
   const initPlugins = function(){
     loadValidationPlugin();
-    console.log(
-      `
-      Loading snaphy plugins
-      `
-    );
+    console.log(`\n\t\t\t-------------------Loading snaphy plugins-------------------\n`);
     loadPluginsData();
+    console.log(`\t\t\t------------------------------------------------------------\n`);
   };
 
   const loadPluginsData = function(){
@@ -355,7 +348,6 @@ module.exports = function(server) {
         if(!done[pluginName]){
           //Add to done list..
           done[pluginName] = true;
-          console.log(pluginName);
           loadPluginsInMemory(pluginName, pluginContainerPath);
         }
       }

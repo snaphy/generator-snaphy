@@ -55,6 +55,30 @@ angular.module($snaphy.getModuleName())
 }])//factory database..
 
 
+//Service for initilize the dashboard.
+.factory('Initialize', [function(){
+    //Init method should be called only once..
+    let loadEventFired = false;
+    const load = function(){
+        if(!loadEventFired){
+            jQuery(function() {
+                console.log("Getting called");
+                App.init();
+                App.layout('side_scroll_on');
+            });
+            loadEventFired = true;
+        }
+    };
+
+    return{
+        load: load
+    };
+}])//factory database..
+
+
+
+
+
 
 
 //Provider for adding runtime states..

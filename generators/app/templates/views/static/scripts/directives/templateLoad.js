@@ -3,17 +3,13 @@
 angular.module($snaphy.getModuleName())
 
 
-.directive('snaphyLoadTemplate', [function() {
+.directive('snaphyLoadTemplate', ["Initialize", function(Initialize) {
     return {
         restrict: 'A',
         link: function(scope, iElement, iAttrs) {
             setTimeout(function() {
                 // Initialize app when page loads
-                jQuery(function() {
-                    App.init();
-                    App.layout('side_scroll_on');
-                });
-
+                Initialize.load();
             }, 200);
         }
     };
