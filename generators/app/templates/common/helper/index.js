@@ -67,6 +67,22 @@ module.exports = function(server) {
     return join(MODEL_PATH, modelJsonFile );
   }
 
+
+
+  /**
+   * Retrives the json data of the table...
+   * @param modelName
+   * @returns {*}
+   */
+  const getTableJson = function(modelName){
+    const {json} = getTablePath(modelName);
+    if(json){
+      return readPackageJsonFile(json);
+    }
+
+    return null;
+  };
+
   /**
    *  Retrives the path of the table of admin of file..
    * @param modelName Model Name is the Original Model Name of the model
@@ -84,6 +100,15 @@ module.exports = function(server) {
     }
     return tableObj;
   }
+
+
+  const getValidationObj = function(modelName){
+    const {json} = getValidationPath(modelName);
+    if(json){
+      return readPackageJsonFile(json);
+    }
+    return null;
+  };
 
 
   /**
@@ -313,7 +338,7 @@ module.exports = function(server) {
         const validationPath = getValidationPath(modelName);
         if(validationPath.js){
           //Now load the file in memory..
-          const reqirePath = validationPath.replace(/\.js$/, "");
+          const reqirePath = validationPath.js.replace(/\.js$/, "");
           //Now require the file..
           require(reqirePath)(Model, server, helper);
         }
@@ -404,6 +429,8 @@ module.exports = function(server) {
   helper.getSettingPath = getSettingPath;
   helper.getTablePath = getTablePath;
   helper.getValidationPath = getValidationPath;
+  helper.getTableJson = getTableJson;
+  helper.getValidationObj = getValidationObj;
 
   return helper;
 };
