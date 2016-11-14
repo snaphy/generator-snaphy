@@ -1,15 +1,15 @@
 {
   "css": {
-    "<%= props.pluginName %>Css" : "<%= props.routeExposure %>/style/<%= props.pluginName %>.css"
+    "<%= props.routeExposure %>/style/<%= props.pluginName %>.css": "<%= props.pluginName %>Css"
   },
   "js": {
-    "<%= props.pluginName %>Route": "<%= props.routeExposure %>/scripts/routes/<%= props.pluginName %>.js",
-    "<%= props.pluginName %>Controller": "<%= props.routeExposure %>/scripts/controllers/<%= props.pluginName %>.js"
+    "<%= props.routeExposure %>/scripts/routes/<%= props.pluginName %>.js": "<%= props.pluginName %>Route",
+    "<%= props.routeExposure %>/scripts/controllers/<%= props.pluginName %>.js": "<%= props.pluginName %>Controller"
   },
   "moduleDependencies":{
 
   },
-  "settings": "<%= props.routeExposure %>/admin-panel-setting.js",
+  "settings": ["<%= props.routeExposure %>/admin-panel-setting.js"],
   "bodystructure": {
     "asidebarHook": [],
     "sidebarHook": [],
