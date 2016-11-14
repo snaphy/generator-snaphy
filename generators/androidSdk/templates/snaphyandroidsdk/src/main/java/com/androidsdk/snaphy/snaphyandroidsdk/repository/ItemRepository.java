@@ -367,6 +367,14 @@ public class ItemRepository extends ModelRepository<Item> {
             
 
                 
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchDistinctCountry", "POST"), "Item.fetchDistinctCountry");
+                
+
+            
+        
+            
+
+                
                     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:itemId/category", "GET"), "Item.prototype.__get__category");
                 
 
@@ -2254,6 +2262,52 @@ public class ItemRepository extends ModelRepository<Item> {
                 
 
             }//Method fetchAllCategory definition ends here..
+
+            
+
+        
+    
+        
+            //Method fetchDistinctCountry definition
+            public void fetchDistinctCountry( final ObjectCallback<JSONArray> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("fetchDistinctCountry", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method fetchDistinctCountry definition ends here..
 
             
 

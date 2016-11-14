@@ -87,6 +87,14 @@
 
 
     angular.module($snaphy.getModuleName())
+
+        //Contains all the setting written for template settings..
+        .factory("TemplateSettings", [function(){
+            var settings = <%- JSON.stringify(templateSettings)%>;
+            return settings;
+        }])
+
+
     //Define a service for fetching database..
     .factory('Database', ['$injector', function($injector){
         //Contain plugin name with the database object..

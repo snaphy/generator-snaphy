@@ -1,3 +1,12 @@
+<%
+//Add all the global variables here..
+//Defigning some variables..
+var showHeader = true;
+
+
+
+%>
+
 <!DOCTYPE html>
 <!--[if IE 9]>         <html class="ie9 no-focus"> <![endif]-->
 <!--[if gt IE 9]><!--> <html class="no-focus"> <!--<![endif]-->
@@ -34,12 +43,6 @@
         <!-- Stylesheets -->
         <!-- Web fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
-        <!-- Page JS Plugins CSS go here -->
-
-
-        <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
-        <!-- <link rel="stylesheet" id="css-theme" href="static/assets/css/themes/flat.min.css"> -->
-        <!-- END Stylesheets -->
 
         <!-- build:css(.tmp) styles/main.css -->
         <!-- MY STYLE PLACED HERE-->
@@ -62,7 +65,13 @@
 
         <!--Load Page Container only if `defaultTemplate` variable is true-->
         <!-- Page Container -->
-        <div ng-if="templateEnabled()" id="page-container"  snaphy-load-template class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+        <div
+                ng-if="templateEnabled()"
+                id="page-container"
+                snaphy-load-template
+                ng-class="templateSettings.container.class"
+                class="sidebar-l sidebar-o side-scroll header-navbar-fixed">
+
         	<!-- Side Overlay-->
           <aside id="side-overlay" snaphy-load-template>
             <!-- ASIDEBAR HOOK -->
@@ -80,92 +89,35 @@
             <div id="sidebar-scroll" >
               <!-- Sidebar Content -->
               <!-- Adding .sidebar-mini-hide to an element will hide it when the sidebar is in mini mode -->
-              <div class="sidebar-content">
-
-                <!-- Side Content -->
-                <div class="side-content">
-
-                  <!-- SIDEBAR HOOK -->
-                  <% sidebarHook.forEach(function(sidebarLink) { %>
-                  <!-- Custom Plugins headers.. -->
-                  <span snaphy-load-template ng-include="'<%= sidebarLink %>'"></span>
-                  <% }); %>
-                </div>
-                <!-- END Side Content -->
-              </div>
-              <!-- Sidebar Content -->
-            </div>
-            <!-- END Sidebar Scroll Container -->
+                <div class="sidebar-content">
+                    <div class="side-content">
+                        <!-- SIDEBAR HOOK -->
+                        <%
+                            sidebarHook.forEach(function(sidebarLink) {
+                        %>
+                            <!-- Custom Plugins sidebar headers.. -->
+                            <span snaphy-load-template ng-include="'<%= sidebarLink %>'"></span>
+                        <% }); %>
+                    </div><!-- END Side Content -->
+                </div><!-- Sidebar Content -->
+            </div><!-- END Sidebar Scroll Container -->
 
 
-          </nav>
-          <!-- END Sidebar -->
+            </nav>
+            <!-- END Sidebar -->
 
-          <!-- Header -->
-          <header id="header-navbar" snaphy-load-template class="content-mini content-mini-full" >
-            <!-- Header Navigation Right -->
-            <!--<ul class="nav-header pull-right">
-              <li>
-                <button class="btn btn-default" data-toggle="layout" data-action="side_overlay_toggle" type="button">
-                  <i class="fa fa-tasks"></i>
-                </button>
-              </li>
-            </ul>-->
-            <!-- END Header Navigation Right -->
 
-            <!-- Header Navigation Left -->
-            <ul class="nav-header pull-left">
-              <li class="hidden-md hidden-lg">
+            <% include ./partials/header %>
 
-                <button class="btn btn-default" data-toggle="layout" data-action="sidebar_toggle"  type="button">
-                  <i class="fa fa-navicon"></i>
-                </button>
-              </li>
-              <li class="hidden-xs hidden-sm">
+            <!-- Main Container -->
+            <main ui-view  ng-class="templateSettings.main.class" id="main-container"></main>
+            <!-- END Main Container -->
 
-                <button class="btn btn-default" data-toggle="layout" data-action="sidebar_mini_toggle" type="button">
-                  <i class="fa fa-ellipsis-v"></i>
-                </button>
-              </li>
-         <!-- <li class="visible-xs">
-                <button class="btn btn-default" data-toggle="class-toggle" data-target=".js-header-search" data-class="header-search-xs-visible" type="button">
-                  <i class="fa fa-search"></i>
-                </button>
-              </li>
-             <li class="js-header-search header-search">
-                <form class="form-horizontal" action="start_backend.html" method="post">
-                  <div class="form-material form-material-primary input-group remove-margin-t remove-margin-b">
-                    <input class="form-control" type="text" id="base-material-text" name="base-material-text" placeholder="Search..">
-                    <span class="input-group-addon"><i class="si si-magnifier"></i></span>
-                  </div>
-                </form>
-              </li>-->
-            </ul>
-            <!-- END Header Navigation Left -->
+            <footer id="page-footer" class="content-mini content-mini-full font-s12 bg-gray-lighter clearfix" >
+              <% include ./partials/footer %>
+            </footer>
 
-            <!-- HEADER HOOK -->
-            <% headerHook.forEach(function(headerLink) { %>
-            <!-- Custom Plugins headers.. -->
-            <ul snaphy-load-template ng-include="'<%= headerLink %>'"></ul>
-            <% }); %>
-          </header>
-          <!-- END Header -->
-
-           <!-- Main Container -->
-           <main ui-view  id="main-container">
-
-           </main>
-           <!-- END Main Container -->
-
-          <footer id="page-footer" class="content-mini content-mini-full font-s12 bg-gray-lighter clearfix" >
-            <!-- Footer hook -->
-            <% footerHook.forEach(function(footerLink) { %>
-            <!-- Custom Plugins headers.. -->
-            <div snaphy-load-template ng-include="'<%= footerLink %>'"></div>
-            <% }); %>
-          </footer>
-
-        </div>
+        </div> <!--End Template enabled-->
         <!-- END Page Container -->
 
         <!--ONLY load this template if the default template is not needed for-example for login plugin..-->
@@ -175,12 +127,7 @@
 
 
         <footer ng-if="!templateEnabled()">
-          <!-- Footer hook -->
-          <% footerHook.forEach(function(footerLink) { %>
-          <!-- Custom Plugins headers.. -->
-          <div snaphy-load-template ng-include="'<%= footerLink %>'"></div>
-          <% }); %>
-
+            <% include ./partials/footer %>
           <!-- Login Footer -->
           <div class="push-10-t text-center animated fadeInUp">
               <small class="text-muted font-w600"><span class="js-year-copy"></span> &copy; <%= module %> <%= version %> </small>
@@ -193,7 +140,6 @@
         <script src="<%= staticRoute %>/assets/js/oneui.min.js"></script>
         <!-- Adding notifications -->
         <script src="<%= staticRoute %>/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js"></script>
-
 
 
 

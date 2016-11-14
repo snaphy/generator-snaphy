@@ -1,0 +1,13 @@
+{
+  "header":{
+    "display": false
+  },
+  "container":{
+    "class": ["sidebar-mini"]
+  },
+
+  "main":{
+    "class":["remove-padding-t"]
+  }
+
+}

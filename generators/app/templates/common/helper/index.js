@@ -3,6 +3,7 @@ const chalk = require("chalk");
 const  SETTINGS = require("../settings/conf");
 const {readdirSync, statSync, existsSync} =  require("fs");
 const {kebabCase, forEach}  = require("lodash");
+const TEMPLATE_SETTINGS = require("../settings/templateSettings.json");
 const {join} = require("path");
 
 
@@ -26,7 +27,7 @@ module.exports = function(server) {
     VALIDATION_PATH,
     TABLE_PATH,
     SETTING_PATH,
-    PLUGIN_PRIORITY
+      PLUGIN_PRIORITY
   } = SETTINGS(server);
 
 
@@ -39,6 +40,14 @@ module.exports = function(server) {
     return readdirSync(srcpath).filter(function(file) {
       return statSync(join(srcpath, file)).isDirectory();
     });
+  }
+
+
+    /**
+     * Return the json data of template settings..
+     */
+  function getTemplateSettings(){
+    return TEMPLATE_SETTINGS;
   }
 
 
@@ -73,7 +82,7 @@ module.exports = function(server) {
    * Retrives the json data of the table...
    * @param modelName
    * @returns {*}
-   */
+     */
   const getTableJson = function(modelName){
     const {json} = getTablePath(modelName);
     if(json){
@@ -167,7 +176,7 @@ module.exports = function(server) {
     return setting;
   };
 
-  //Get the setting sfolder plugin root path..
+  //Get the setting folder plugin root path..
   const getSettingRootPath = function(pluginName){
     return join(SETTING_PATH, pluginName);
   };
@@ -431,6 +440,8 @@ module.exports = function(server) {
   helper.getValidationPath = getValidationPath;
   helper.getTableJson = getTableJson;
   helper.getValidationObj = getValidationObj;
+  helper.getSettingRootPath = getSettingRootPath;
+  helper.getTemplateSettings = getTemplateSettings;
 
   return helper;
 };
