@@ -11,10 +11,10 @@ angular.module($snaphy.getModuleName())
 .run(['formlyConfig', function(formlyConfig, SnaphyValidate) {
     formlyConfig.setType({
         name: 'input',
-        template: '<div  class="form-group">' +
+        template: '<div  ng-class="{\'form-group\': !options.templateOptions.inline, \'inline-elements\': options.templateOptions.inline}" >' +
             '<div  ng-class="[options.templateOptions.colSize, options.templateOptions.color]">' +
             '<div class="form-material" ng-class="options.templateOptions.color">' +
-            '<input  class="form-control" type="{{options.templateOptions.type}}"  ng-class="options.templateOptions.class" name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}" ng-model="model[options.key]">' +
+            '<input  class="form-control input-box" type="{{options.templateOptions.type}}"  ng-class="options.templateOptions.class" name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}" ng-model="model[options.key]">' +
             '<label for="{{options.templateOptions.id}}">{{options.templateOptions.label}}</label>' +
             '</div>' +
             '</div>' +
@@ -34,15 +34,15 @@ angular.module($snaphy.getModuleName())
 
     formlyConfig.setType({
         name: 'textarea',
-        template: '<div class="form-group">' +
+        template: '<div ng-class="{\'form-group\': !options.templateOptions.inline, \'inline-elements\': options.templateOptions.inline}">' +
             '<div ng-class="options.templateOptions.colSize">' +
             '<div class="form-material" ng-class="options.templateOptions.color">' +
-            '<textarea type="{{options.templateOptions.type}}" name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}" ng-class="options.templateOptions.class" class="form-control" ng-model="model[options.key]" rows="{{options.templateOptions.row}}"></textarea>' +
+            '<textarea type="{{options.templateOptions.type}}" name="{{options.templateOptions.id}}" id="{{options.templateOptions.id}}" ng-class="options.templateOptions.class" class="form-control input-box" ng-model="model[options.key]" rows="{{options.templateOptions.row}}"></textarea>' +
             '<label for="{{options.templateOptions.id}}">{{options.templateOptions.label}}</label>' +
             '</div>' +
             '</div>' +
             '</div>',
-        controller: function($scope) {
+        controller: ["$scope", function($scope) {
             //Set default value for label..
             if ($scope.options.templateOptions.row === undefined) {
                 $scope.options.templateOptions.row = 3;
@@ -51,7 +51,7 @@ angular.module($snaphy.getModuleName())
             if ($scope.options.templateOptions.colSize === undefined) {
                 $scope.options.templateOptions.colSize = "col-sm-12";
             }
-        }
+        }]
     });
 
 
@@ -59,10 +59,10 @@ angular.module($snaphy.getModuleName())
 
     formlyConfig.setType({
         name: 'select',
-        template: '<div class="form-group">' +
+        template: '<div ng-class="{\'form-group\': !options.templateOptions.inline, \'inline-elements\': options.templateOptions.inline}">' +
             '<div ng-class="options.templateOptions.colSize">' +
             '<div class="form-material" ng-class="options.templateOptions.color">' +
-            '<select type="{{options.templateOptions.type}}" name="{{options.templateOptions.id}}" ng-class="options.templateOptions.class" id="{{options.templateOptions.id}}" ng-change="convertToString(model[options.key])" ng-model="model[options.key]" class="form-control"  size="{{options.templateOptions.size}}">' +
+            '<select type="{{options.templateOptions.type}}" name="{{options.templateOptions.id}}" ng-class="options.templateOptions.class" id="{{options.templateOptions.id}}" ng-change="convertToString(model[options.key])" ng-model="model[options.key]" class="form-control input-box"  size="{{options.templateOptions.size}}">' +
             '<option value=""></option>' +
             '<option value="{{option.id}}" ng-repeat="option in options.templateOptions.options">{{option.name}}</option>' +
             '</select>' +
@@ -70,7 +70,7 @@ angular.module($snaphy.getModuleName())
             '</div>' +
             '</div>' +
             '</div>',
-        controller: function($scope, $http) {
+        controller: ["$scope", "$http", function($scope, $http) {
             //Set default value for label..
             if ($scope.options.templateOptions.size === undefined) {
                 $scope.options.templateOptions.size = 1;
@@ -106,7 +106,7 @@ angular.module($snaphy.getModuleName())
                     }
                 }
             );
-        }
+        }]
     });
 
 
@@ -114,10 +114,10 @@ angular.module($snaphy.getModuleName())
     //For selecting string only .. previous for selecting object..
     formlyConfig.setType({
         name: 'selectString',
-        template: '<div class="form-group">' +
+        template: '<div ng-class="{\'form-group\': !options.templateOptions.inline, \'inline-elements\': options.templateOptions.inline}">' +
             '<div ng-class="options.templateOptions.colSize">' +
             '<div class="form-material" ng-class="options.templateOptions.color">' +
-            '<select type="{{options.templateOptions.type}}" name="{{options.templateOptions.id}}" ng-class="options.templateOptions.class" id="{{options.templateOptions.id}}"   ng-model="model[options.key]" class="form-control"  size="{{options.templateOptions.size}}">' +
+            '<select type="{{options.templateOptions.type}}" name="{{options.templateOptions.id}}" ng-class="options.templateOptions.class" id="{{options.templateOptions.id}}"   ng-model="model[options.key]" class="form-control input-box"  size="{{options.templateOptions.size}}">' +
             '<option value=""></option>' +
             '<option value="{{option}}" ng-repeat="option in options.templateOptions.options">{{option | uppercase}}</option>' +
             '</select>' +
@@ -125,7 +125,7 @@ angular.module($snaphy.getModuleName())
             '</div>' +
             '</div>' +
             '</div>',
-        controller: function($scope, $http) {
+        controller: ["$scope", "$http", function($scope, $http) {
             //Set default value for label..
             if ($scope.options.templateOptions.size === undefined) {
                 $scope.options.templateOptions.size = 1;
@@ -163,7 +163,7 @@ angular.module($snaphy.getModuleName())
                     }
                 }
             );
-        }
+        }]
 
     });
 

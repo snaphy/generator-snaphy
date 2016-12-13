@@ -32,7 +32,7 @@ if(templateSettings){
     <!-- HEADER HOOK -->
     <% headerHook.forEach(function(headerLink) { %>
     <!-- Custom Plugins headers.. -->
-    <ul snaphy-load-template ng-include="'<%= headerLink %>'"></ul>
+    <span snaphy-load-template  ng-include="'<%= headerLink %>'"></span>
     <% }); %>
 </header>
 <!-- END Header -->

@@ -43,9 +43,10 @@ module.exports = function(server) {
   /**
    * Loads plugins accorsing to priority list..
    * @param data
+   * @param state active state name
    * @returns {*}
      */
-  const loadPluginsData = function(data){
+  const loadPluginsData = function(data, state){
     //get the list of plugins..
     const pluginList = helper.getDirectories(__dirname + '/../../common/plugins');
     //object to check the list of plugin which has been loaded already..
@@ -58,7 +59,7 @@ module.exports = function(server) {
         if(!done[pluginName]){
           //Add to done list..
           done[pluginName] = true;
-          loadPlugin(data, pluginName);
+          loadPluginToState(pluginName, data, state);
         }
       }
     }
@@ -67,13 +68,34 @@ module.exports = function(server) {
       let pluginName = pluginList[i];
       //Only run if not already processed..
       if(!done[pluginName]){
-        //Add to done list..
-        done[pluginName] = true;
-        loadPlugin(data, pluginName);
+          //Add to done list..
+          done[pluginName] = true;
+          loadPluginToState(pluginName, data, state);
       }
     }//for loop
 
     return data;
+  };
+
+    /**
+     * Load plugin to state wise..load if state is permitted else unload..it..
+      */
+  const loadPluginToState = function(pluginName, data, state){
+        //Get the settings of the plugin..
+        const {confPath} = helper.getSettingPath(pluginName);
+        if(confPath){
+            const pluginSettings = helper.readPackageJsonFile(confPath);
+            if(pluginSettings.activate){
+                if(pluginSettings.load){
+                    if(pluginSettings.load[state]){
+                        loadPlugin(data, pluginName);
+                    }
+                }else{
+                    loadPlugin(data, pluginName);
+                }
+            }
+        }
+
   };
 
 
@@ -209,41 +231,86 @@ module.exports = function(server) {
         return data;
     };
 
+    var initData = function(){
+        //Read the main package file..
+        var data = {
+            title: '',
+            author: '',
+            description: '',
+            //By default the state name is root.
+            state: 'root',
+            pluginStyles:{},
+            pluginScripts: {},
+            moduleDependencies:{},
+            asidebarHook:[],
+            sidebarHook:[],
+            headerHook:[],
+            footerHook:[],
+            //For mapping the defined database in the plugins..
+            databaseObj:{},
+            staticRoute: apiRoot,
+            clientSettings: [],
+            templateSettings:{}
+        };
+        return data;
+    };
 
 
-  //Now render the index page..
+
+  /*//Now render the index page..
   //index page
   server.get(config.adminApiRoot, function(req, res) {
-    //Read the main package file..
-    var data = {
-      title: '',
-      author: '',
-      description: '',
-      pluginStyles:{},
-      pluginScripts: {},
-      moduleDependencies:{},
-      asidebarHook:[],
-      sidebarHook:[],
-      headerHook:[],
-      footerHook:[],
-      //For mapping the defined database in the plugins..
-      databaseObj:{},
-      staticRoute: apiRoot,
-      clientSettings: [],
-      templateSettings:{}
-    };
+    var data = initData();
     data = loadPluginsData(data);
     data = loadAppData(data);
     data = fetchTemplateSettings(data);
-    //console.log( data);
-
     res.render('index', data);
-
   });
+*/
+    /**
+     * Add additional routes with a new route and new page with same index.js configuration..but clean web page..with no hooks..present..
+     */
+  var addAdditionalRoutes = function(){
+
+      var data = fetchTemplateSettings({});
+      if(data.templateSettings.routes){
+          data.templateSettings.routes.forEach(function(route){
+              if(route){
+                  if(route.activate){
+                    if(route.state){
+                        //replace data state..with new state..
+                        data.state = route.state;
+                        //Now load the route..
+                        server.get(route.routeExposure, function(req, res) {
+                            var data = initData();
+                            data = loadPluginsData(data, route.state);
+                            data = loadAppData(data);
+                            data = fetchTemplateSettings(data);
+                            data.state = route.state;
+                            //remove route prop from data..for safe..
+                            delete data.templateSettings.route;
+
+                            res.render('index', data);
+                        });
+
+                        server.once('started', function() {
+                            console.log("Explore " +  chalk.red(route.state) + " at " + chalk.cyan("http://" +  config.host + ':' + config.port + route.routeExposure));
+                        });
+                    }
+                  }
+              }
+          });
+      }
+
+
+
+  };
+
+  addAdditionalRoutes();
 
  server.once('started', function() {
     console.log("Explore admin console at " + chalk.cyan("http://" +  config.host + ':' + config.port + config.adminApiRoot));
-  });
+ });
 
 
 };

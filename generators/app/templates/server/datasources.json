@@ -12,5 +12,13 @@
     "connector": "mongodb",
     "connectionTimeout": 18000,
     "user": "robins"
+  },
+  "Image": {
+    "name": "Image",
+    "connector": "loopback-component-storage",
+    "provider": "amazon",
+    "key": "qoW/iNDapviJoK4qFqpGnxd9hFXo0YtRRYZixZUs",
+    "keyId": "AKIAIGCDVLPUKMT6FGMQ",
+    "maxFileSize": "35485760"
   }
 }

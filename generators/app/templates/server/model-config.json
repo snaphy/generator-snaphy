@@ -17,19 +17,63 @@
     "dataSource": "db"
   },
   "AccessToken": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
   },
   "ACL": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
+  },
+  "CompanyInfo": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Employee": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "FacebookAccessToken": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Customer": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "container": {
+    "dataSource": "Image",
+    "public": true
+  },
+  "HotDeal": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Category": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Chat": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "Brand": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "DailyFeed": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "BrandManager": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }
