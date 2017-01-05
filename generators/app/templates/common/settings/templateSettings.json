@@ -3,7 +3,7 @@
     "display": false
   },
   "container":{
-    "class": ["sidebar-mini"]
+    "class": ["sidebar-o", "sidebar-mini"]
   },
 
   "main":{
