@@ -139,6 +139,7 @@ module.exports = yeoman.generators.Base.extend({
 
   projectfiles: function() {
     this.copy('_package.json', 'package.json');
+    this.copy('ecosystem.json', 'ecosystem.json');
     //write configuration file to the module..
     this.copy('common/settings/conf.js', 'common/settings/conf.js');
     this.copy('_Gruntfile.js', 'Gruntfile.js');
