@@ -1,5 +1,7 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 <%
+    /*===================================PURE JAVASCRIPT PART==================================*/
+
     function capitalizeFirstLetter(string) {
 
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -138,6 +140,8 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
     var modelName = capitalizeFirstLetter(model.name);
 
+    /*===================================END PURE JAVASCRIPT PART==================================*/
+
 
 %>
 
@@ -182,6 +186,7 @@ import android.content.Context;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.<%- modelName %>;
@@ -317,6 +322,8 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
     <% } %>
 
+    <!--INCLUDING THE DATABASE PART..-->
+    <% include partials/database.ejs %>
 
 
 
@@ -443,9 +450,9 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
     var pastMethod = [];
     model.restDefinition.methods.forEach(function(restMethodObj){
         var patt = new RegExp("^" + model.name + "\\..+");
-      
+
         //check for create defined as its present here two times..
-        
+
 
     %>
         <% if(restMethodObj.fullName
@@ -463,12 +470,12 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
             var restMethodName = restMethodObj.fullName.replace(initialPatt, "");
             restMethodName = restMethodName.replace(methodPatt, "");
 
-            
+
             var repeat = false;
             if(pastMethod.length){
                 for(var i=0; i<pastMethod.length; i++){
                     var method = pastMethod[i];
-                    if(method === restMethodName){   
+                    if(method === restMethodName){
                         console.log("REPEATED ", restMethodName);
                         repeat = true;
                         break;
@@ -482,7 +489,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
             }
 
             pastMethod.push(restMethodName);
-  
+
             console.log("\n");
             //console.log(createDefined);
             console.log(restMethodObj.fullName);
@@ -492,7 +499,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                 console.log(restMethodObj);
             }*/
 
-            
+
             var methodString = "public void ";
             methodString = methodString + restMethodName + "( ";
             //ImmutableMap string concatenation..
@@ -640,14 +647,14 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
             var callbackType;
             //Type name like String etc..
             var type;
-            
+
 
             var method = restMethodObj;
             if(method.returns.length && Object.keys(method.returns[0]).length !== 0){
                 if(method.returns[0].type instanceof Array){
                     type = convertType(method.returns[0].type[0], model);
 
-                   
+
 
                     if(model.allModels[type] !== undefined){
                         returnType = "DataList<" + type + ">";
@@ -658,13 +665,13 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                         returnType = type;
                         //methodString = methodString  +  "final Adapter.JsonArrayCallback callback)";
                         methodString = methodString  +  "final ObjectCallback<JSONArray> callback)";
-                    
+
                         callback = "new Adapter.JsonArrayCallback()";
                         callbackType = "DataListCallback";
-                        
+
                     }
                 }else{
-                    
+
                     type = convertType(method.returns[0].type, model);
                     if(model.allModels[type] !== undefined){
                         returnType = type;
@@ -678,10 +685,10 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                         methodString = methodString + "final ObjectCallback<JSONObject>  callback )";
                         //methodString = methodString  +  "final ObjectCallback<" + type + "> callback)";
                         callback = "new Adapter.JsonObjectCallback()";
-                        
+
                         //callback = "ObjectCallback<" + type + "> ";
                         callbackType = "ObjectCallback";
-                        
+
                     }
 
                 }
@@ -700,7 +707,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                 Call the onBefore event
                 */
                 callback.onBefore();
-                
+
 
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
@@ -804,7 +811,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
             }//Method <%- restMethodName %> definition ends here..
 
-            <%# 
+            <%#
             //EXAMPLE
             //Now add methods for each restMethods..
             public void get__customer(String id, final ObjectCallback<Customer> callback) {

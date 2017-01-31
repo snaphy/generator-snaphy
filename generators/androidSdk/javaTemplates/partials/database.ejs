@@ -1,0 +1,30 @@
+public DbHandler getDbHandler() {
+  return dbHandler;
+}
+
+public void setDbHandler(DbHandler dbHandler) {
+  this.dbHandler = dbHandler;
+}
+
+private DbHandler dbHandler;
+
+
+
+//Flag to check either to store data locally or not..
+private boolean STORE_LOCALLY = true;
+
+public boolean isSTORE_LOCALLY() {
+  return STORE_LOCALLY;
+}
+
+
+public void  persistData(boolean persist){
+  STORE_LOCALLY = persist;
+}
+
+
+private void addStorage(Context context){
+  setDbHandler(new DbHandler< <%- modelName %>, <%- modelName %>Repository >(context, "<%- modelName %>", getRestAdapter()));
+  //allow data storage locally..
+  persistData(true);
+}

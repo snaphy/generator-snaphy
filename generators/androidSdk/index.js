@@ -333,6 +333,8 @@ var init  = function(){
     generateCustomCallbacks(app, modelsRestDefinition);
     //Generate Presenter..
     generatePresenter(app, modelsRestDefinition);
+    //Generate database..
+    generateDatabase(app, modelsRestDefinition);
     //Generate Image model and Repository..
     generateImagePresenter(app, modelsRestDefinition);
 
