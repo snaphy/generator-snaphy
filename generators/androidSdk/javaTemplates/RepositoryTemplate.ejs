@@ -325,63 +325,8 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
     <!--INCLUDING THE DATABASE PART..-->
     <% include partials/database.ejs %>
 
+    <% include partials/addRestContract.ejs %>
 
-
-
-    public RestContract createContract() {
-        RestContract contract = super.createContract();
-        <% model.restDefinition.methods.forEach(function(restMethodObj){
-            var patt = new RegExp("^" + model.name + "\\..+");
-            var routeMethod = restMethodObj.routes[0].verb.toUpperCase();
-            if(routeMethod === "DEL"){
-                routeMethod = "DELETE"
-            }
-            if(routeMethod === "ALL"){
-                routeMethod = "POST"
-            }
-
-            //Convert path ids name to avoidConfusion..in case of related data name..
-            var methodPatt = /^prototype\.\_?\_?/;
-            //If method belongsTo a related Type data..
-            if(methodPatt.test(restMethodObj.name)){
-                //Now check if it accepts any id params..and change the path argument names.. to avoid confusion with server in case of id name..
-                if(restMethodObj.accepts){
-                    restMethodObj.accepts.forEach(function(argumentsObj, index){
-                        var newArg = getNewArgumentName(argumentsObj);
-                        //Now replace the path name..
-                        restMethodObj.routes[0].path = restMethodObj.routes[0].path.replace(":"+ argumentsObj.arg, ":" +newArg);
-                    });
-                }
-            }
-
-
-
-
-
-
-
-
-        %>
-            <% if(restMethodObj.fullName
-                && patt.test(restMethodObj.fullName)
-                && restMethodObj.name !== "createChangeStream"
-                && restMethodObj.name !== "login"
-                && restMethodObj.name !== "logout"
-                && restMethodObj.name !== "save" ){
-                var testPlural = /[sS]$/;
-            %>
-
-                <% if (testPlural.test(model.name)){ %>
-
-                    contract.addItem(new RestContractItem("/" + "<%- capitalizeFirstLetter(model.name) %>"  + "<%- restMethodObj.routes[0].path %>", "<%- routeMethod %>"), "<%- restMethodObj.fullName %>");
-                <% } else { %>
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "<%- restMethodObj.routes[0].path %>", "<%- routeMethod %>"), "<%- restMethodObj.fullName %>");
-                <% } %>
-
-            <% } %>
-        <% });%>
-        return contract;
-    }
 
 
     //override getNameForRestUrlMethod
