@@ -62,7 +62,7 @@ var generateModels = function(app, modelsRestDefinition){
     //Now compile the ejs template..
     var ModelTemplatePath      = path.join(__dirname, constants.javaTemplates, "ModelTemplate.ejs");
     var AndroidModelPath       = path.join(__dirname, constants.androidMainPath, "models");
-    
+
     var AndroidRepositoryPath  = path.join(__dirname, constants.androidMainPath, "repository");
 
     //Clean model folder and add new dir.
@@ -126,13 +126,13 @@ var generateCustomCallbacks = function(app, modelsRestDefinition){
     //Compile the EJS template..
     var DataListCallback             = path.join(__dirname, constants.javaTemplates, "callbacks", "DataListCallback.ejs");
     var DataListCallbackInterface    = path.join(__dirname, constants.javaTemplates, "callbacks", "DataListCallbackInterface.ejs");
-    
+
     var ObjectCallback               = path.join(__dirname, constants.javaTemplates, "callbacks", "ObjectCallback.ejs");
     var ObjectCallbackInterface      = path.join(__dirname, constants.javaTemplates, "callbacks", "ObjectCallbackInterface.ejs");
 
     var VoidCallback               = path.join(__dirname, constants.javaTemplates, "callbacks", "VoidCallback.ejs");
     var VoidCallbackInterface      = path.join(__dirname, constants.javaTemplates, "callbacks", "VoidCallbackInterface.ejs");
-    
+
     //List path for adding list and subscribers..
     var AndroidListPath       = path.join(__dirname, constants.androidMainPath, "callbacks");
     //Clean model folder and add new dir.
@@ -175,6 +175,24 @@ var generatePresenter = function(app, modelsRestDefinition){
 
 
 
+/**
+ * Add the database file for adding sqlite local storage of android device..
+ * @param app
+ * @param modelsRestDefinition
+ */
+var generateDatabase = function(app, modelsRestDefinition){
+    //Compile the EJS template..
+    var PresenterTemplatePath = path.join(__dirname, constants.javaTemplates, "db", "DbHandler.ejs");
+    //List path for adding list and subscribers..
+    var AndroidBaseModelPath = path.join(__dirname, constants.androidMainPath, "db");
+    //Create folder if not present..
+    mkdirp.sync(AndroidBaseModelPath);
+    //Now write Model.java to the file..
+    compileAndWrite({}, PresenterTemplatePath, AndroidBaseModelPath, helper.capitalizeFirstLetter("DbHandler") +".java");
+};
+
+
+
 var generateImagePresenter = function(app, modelsRestDefinition){
     //Compile the EJS template..
     var CustomFileRepository = path.join(__dirname, constants.javaTemplates, "repository", "CustomFileRepository.ejs");
@@ -195,7 +213,7 @@ var generateImagePresenter = function(app, modelsRestDefinition){
     //Now write Model.java to the file..
     compileAndWrite({}, CustomContainerRepository, repository, helper.capitalizeFirstLetter("CustomContainerRepository") +".java");
 
-    
+
 
     //Compile the EJS template..
     var ImageModelRepository = path.join(__dirname, constants.javaTemplates, "repository", "ImageModelRepository.ejs");
@@ -243,7 +261,7 @@ var generateCustomModel = function(app, modelsRestDefinition){
     mkdirp.sync(AndroidBaseModelPath);
     //Now write Model.java to the file..
     compileAndWrite({}, BaseModelTemplatePath, AndroidBaseModelPath, helper.capitalizeFirstLetter("Model") +".java");
-    
+
     //Compile the EJS template..
     var BaseUserModelTemplatePath = path.join(__dirname, constants.javaTemplates, "predefinedModels", "BaseUserTemplate.ejs");
     //List path for adding list and subscribers..
@@ -288,7 +306,7 @@ var compileAndWrite = function(model, templatePath, destinationFolder, fileName)
     //Now writing it to file and saving to model folder..
     writeFile(path.join(destinationFolder, fileName), formattedModel);
 
-    
+
 }
 
 //Write file synronously..
