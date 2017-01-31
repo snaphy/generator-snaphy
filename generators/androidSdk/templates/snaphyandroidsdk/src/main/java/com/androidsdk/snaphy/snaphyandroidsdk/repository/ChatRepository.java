@@ -35,20 +35,20 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.RecentItem;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
 
 //Now import model of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Brand;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
             
         
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Item;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ItemRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.AppUser;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.AppUserRepository;
             
         
     
@@ -57,11 +57,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.RecentItem;
 
 
 
-public class RecentItemRepository extends ModelRepository<RecentItem> {
+public class ChatRepository extends ModelRepository<Chat> {
 
 
-    public RecentItemRepository(){
-        super("RecentItem", null, RecentItem.class);
+    public ChatRepository(){
+        super("Chat", null, Chat.class);
     }
 
 
@@ -77,7 +77,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recentItemId/customer", "GET"), "RecentItem.prototype.__get__customer");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chatId/appUser", "GET"), "Chat.prototype.__get__appUser");
                 
 
             
@@ -85,7 +85,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recentItemId/item", "GET"), "RecentItem.prototype.__get__item");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chatId/brand", "GET"), "Chat.prototype.__get__brand");
                 
 
             
@@ -93,7 +93,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "RecentItem.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Chat.create");
                 
 
             
@@ -101,7 +101,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "RecentItem.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Chat.create");
                 
 
             
@@ -109,7 +109,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "RecentItem.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Chat.upsert");
                 
 
             
@@ -117,7 +117,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "RecentItem.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Chat.exists");
                 
 
             
@@ -125,7 +125,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "RecentItem.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Chat.findById");
                 
 
             
@@ -133,7 +133,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "RecentItem.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Chat.find");
                 
 
             
@@ -141,7 +141,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "RecentItem.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Chat.findOne");
                 
 
             
@@ -149,7 +149,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "RecentItem.updateAll");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Chat.updateAll");
                 
 
             
@@ -157,7 +157,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "RecentItem.deleteById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Chat.deleteById");
                 
 
             
@@ -165,7 +165,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "RecentItem.count");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Chat.count");
                 
 
             
@@ -173,25 +173,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:recentItemId", "PUT"), "RecentItem.prototype.updateAttributes");
-                
-
-            
-        
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "RecentItem.getSchema");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "RecentItem.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chatId", "PUT"), "Chat.prototype.updateAttributes");
                 
 
             
@@ -201,7 +183,41 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/addRecentItem", "POST"), "RecentItem.addRecentItem");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Chat.getSchema");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Chat.getAbsoluteSchema");
+                
+
+            
+        
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "Chat.getDetailSchema");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "Chat.getModelRelationSchema");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/subscribe", "POST"), "Chat.subscribe");
                 
 
             
@@ -259,8 +275,8 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
 
     
         
-            //Method get__customer definition
-            public void get__customer(  String recentItemId,  Boolean refresh, final ObjectCallback<Customer> callback){
+            //Method get__appUser definition
+            public void get__appUser(  String chatId,  Boolean refresh, final ObjectCallback<AppUser> callback){
 
                 /**
                 Call the onBefore event
@@ -272,7 +288,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("recentItemId", recentItemId);
+                        hashMapObject.put("chatId", chatId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -283,7 +299,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__appUser", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -296,10 +312,10 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Customer customer = customerRepo.createObject(result);
-                                    callback.onSuccess(customer);
+                                    AppUser appUser = appUserRepo.createObject(result);
+                                    callback.onSuccess(appUser);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -313,15 +329,15 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
 
                 
 
-            }//Method get__customer definition ends here..
+            }//Method get__appUser definition ends here..
 
             
 
         
     
         
-            //Method get__item definition
-            public void get__item(  String recentItemId,  Boolean refresh, final ObjectCallback<Item> callback){
+            //Method get__brand definition
+            public void get__brand(  String chatId,  Boolean refresh, final ObjectCallback<Brand> callback){
 
                 /**
                 Call the onBefore event
@@ -333,7 +349,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("recentItemId", recentItemId);
+                        hashMapObject.put("chatId", chatId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -344,7 +360,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__item", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__brand", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -357,10 +373,10 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ItemRepository itemRepo = getRestAdapter().createRepository(ItemRepository.class);
+                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Item item = itemRepo.createObject(result);
-                                    callback.onSuccess(item);
+                                    Brand brand = brandRepo.createObject(result);
+                                    callback.onSuccess(brand);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -374,7 +390,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
 
                 
 
-            }//Method get__item definition ends here..
+            }//Method get__brand definition ends here..
 
             
 
@@ -382,7 +398,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<RecentItem> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Chat> callback){
 
                 /**
                 Call the onBefore event
@@ -416,10 +432,10 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RecentItemRepository recentItemRepo = getRestAdapter().createRepository(RecentItemRepository.class);
+                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    RecentItem recentItem = recentItemRepo.createObject(result);
-                                    callback.onSuccess(recentItem);
+                                    Chat chat = chatRepo.createObject(result);
+                                    callback.onSuccess(chat);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -442,7 +458,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<RecentItem> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Chat> callback){
 
                 /**
                 Call the onBefore event
@@ -476,10 +492,10 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RecentItemRepository recentItemRepo = getRestAdapter().createRepository(RecentItemRepository.class);
+                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    RecentItem recentItem = recentItemRepo.createObject(result);
-                                    callback.onSuccess(recentItem);
+                                    Chat chat = chatRepo.createObject(result);
+                                    callback.onSuccess(chat);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -552,7 +568,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<RecentItem> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Chat> callback){
 
                 /**
                 Call the onBefore event
@@ -588,10 +604,10 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RecentItemRepository recentItemRepo = getRestAdapter().createRepository(RecentItemRepository.class);
+                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    RecentItem recentItem = recentItemRepo.createObject(result);
-                                    callback.onSuccess(recentItem);
+                                    Chat chat = chatRepo.createObject(result);
+                                    callback.onSuccess(chat);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -613,7 +629,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<RecentItem> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Chat> callback){
 
                 /**
                 Call the onBefore event
@@ -648,14 +664,14 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<RecentItem> recentItemList = new DataList<RecentItem>();
-                                    RecentItemRepository recentItemRepo = getRestAdapter().createRepository(RecentItemRepository.class);
+                                    DataList<Chat> chatList = new DataList<Chat>();
+                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        RecentItem recentItem = recentItemRepo.createObject(obj);
-                                        recentItemList.add(recentItem);
+                                        Chat chat = chatRepo.createObject(obj);
+                                        chatList.add(chat);
                                     }
-                                    callback.onSuccess(recentItemList);
+                                    callback.onSuccess(chatList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -674,7 +690,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<RecentItem> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Chat> callback){
 
                 /**
                 Call the onBefore event
@@ -708,10 +724,10 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RecentItemRepository recentItemRepo = getRestAdapter().createRepository(RecentItemRepository.class);
+                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    RecentItem recentItem = recentItemRepo.createObject(result);
-                                    callback.onSuccess(recentItem);
+                                    Chat chat = chatRepo.createObject(result);
+                                    callback.onSuccess(chat);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -888,7 +904,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String recentItemId,  Map<String,  ? extends Object> data, final ObjectCallback<RecentItem> callback){
+            public void updateAttributes(  String chatId,  Map<String,  ? extends Object> data, final ObjectCallback<Chat> callback){
 
                 /**
                 Call the onBefore event
@@ -900,7 +916,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("recentItemId", recentItemId);
+                        hashMapObject.put("chatId", chatId);
                 
                         hashMapObject.putAll(data);
                 
@@ -924,10 +940,10 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RecentItemRepository recentItemRepo = getRestAdapter().createRepository(RecentItemRepository.class);
+                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    RecentItem recentItem = recentItemRepo.createObject(result);
-                                    callback.onSuccess(recentItem);
+                                    Chat chat = chatRepo.createObject(result);
+                                    callback.onSuccess(chat);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1050,8 +1066,8 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
         
     
         
-            //Method addRecentItem definition
-            public void addRecentItem(  String customerId,  String applicationId, final ObjectCallback<RecentItem> callback){
+            //Method getDetailSchema definition
+            public void getDetailSchema( final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -1063,18 +1079,14 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
-                
-                        hashMapObject.put("applicationId", applicationId);
-                
 
                 
 
 
                 
                     
+                    invokeStaticMethod("getDetailSchema", hashMapObject, new Adapter.JsonObjectCallback() {
                     
-                    invokeStaticMethod("addRecentItem", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1086,15 +1098,7 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(response != null){
-                                    RecentItemRepository recentItemRepo = getRestAdapter().createRepository(RecentItemRepository.class);
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    RecentItem recentItem = recentItemRepo.createObject(result);
-                                    callback.onSuccess(recentItem);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
+                                callback.onSuccess(response);
                             
                             //Call the finally method..
                             callback.onFinally();
@@ -1104,7 +1108,107 @@ public class RecentItemRepository extends ModelRepository<RecentItem> {
 
                 
 
-            }//Method addRecentItem definition ends here..
+            }//Method getDetailSchema definition ends here..
+
+            
+
+        
+    
+        
+            //Method getModelRelationSchema definition
+            public void getModelRelationSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getModelRelationSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method getModelRelationSchema definition ends here..
+
+            
+
+        
+    
+        
+            //Method subscribe definition
+            public void subscribe(  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("subscribe", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method subscribe definition ends here..
 
             
 

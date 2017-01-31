@@ -41,7 +41,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.AppUser;
 
 //Now import model of related models..
 
@@ -56,15 +56,15 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Bookmark;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BookmarkRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Brand;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
             
         
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.RecentItem;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecentItemRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRepository;
             
         
     
@@ -73,24 +73,24 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
 
 
 
-public class CustomerRepository extends UserRepository<Customer> {
+public class AppUserRepository extends UserRepository<AppUser> {
 
 
-    public CustomerRepository(){
-        super("Customer", null, Customer.class);
+    public AppUserRepository(){
+        super("AppUser", null, AppUser.class);
     }
 
 
     
     		//Create public methods..
-    		public Customer cachedCurrentUser;
+    		public AppUser cachedCurrentUser;
             private Object currentUserId;
             private boolean isCurrentUserIdLoaded;
-    		public Customer getCachedCurrentUser(){
+    		public AppUser getCachedCurrentUser(){
     			return cachedCurrentUser;
     		}
 
-    		public void setCachedCurrentUser(Customer user){
+    		public void setCachedCurrentUser(AppUser user){
     			cachedCurrentUser = user;
     		}
 
@@ -98,7 +98,7 @@ public class CustomerRepository extends UserRepository<Customer> {
     			super.setCurrentUserId(id);
     		} */
 
-            public void findCurrentUser(final ObjectCallback<Customer> callback){
+            public void findCurrentUser(final ObjectCallback<AppUser> callback){
                 //Call the onBefore method..
                 callback.onBefore();
 
@@ -109,9 +109,9 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 HashMap<String, Object> hashMap = new HashMap<>();
 
-                this.findById((String)getCurrentUserId(), hashMap, new ObjectCallback<Customer>() {
+                this.findById((String)getCurrentUserId(), hashMap, new ObjectCallback<AppUser>() {
                     @Override
-                    public void onSuccess(Customer user){
+                    public void onSuccess(AppUser user){
                         cachedCurrentUser = user;
                         callback.onSuccess(user);
                         //Call the finally method..
@@ -190,7 +190,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/accessTokens/:fk", "GET"), "Customer.prototype.__findById__accessTokens");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/accessTokens/:fk", "GET"), "AppUser.prototype.__findById__accessTokens");
                 
 
             
@@ -198,7 +198,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/accessTokens/:fk", "DELETE"), "Customer.prototype.__destroyById__accessTokens");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/accessTokens/:fk", "DELETE"), "AppUser.prototype.__destroyById__accessTokens");
                 
 
             
@@ -206,7 +206,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/accessTokens/:fk", "PUT"), "Customer.prototype.__updateById__accessTokens");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/accessTokens/:fk", "PUT"), "AppUser.prototype.__updateById__accessTokens");
                 
 
             
@@ -214,7 +214,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/facebookAccessToken", "GET"), "Customer.prototype.__get__facebookAccessToken");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/facebookAccessToken/:fk", "GET"), "AppUser.prototype.__findById__facebookAccessToken");
                 
 
             
@@ -222,7 +222,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/facebookAccessToken", "POST"), "Customer.prototype.__create__facebookAccessToken");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/facebookAccessToken/:fk", "DELETE"), "AppUser.prototype.__destroyById__facebookAccessToken");
                 
 
             
@@ -230,7 +230,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/facebookAccessToken", "PUT"), "Customer.prototype.__update__facebookAccessToken");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/facebookAccessToken/:fk", "PUT"), "AppUser.prototype.__updateById__facebookAccessToken");
                 
 
             
@@ -238,7 +238,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/facebookAccessToken", "DELETE"), "Customer.prototype.__destroy__facebookAccessToken");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/chats/:fk", "GET"), "AppUser.prototype.__findById__chats");
                 
 
             
@@ -246,7 +246,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/bookmarks/:fk", "GET"), "Customer.prototype.__findById__bookmarks");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/chats/:fk", "DELETE"), "AppUser.prototype.__destroyById__chats");
                 
 
             
@@ -254,7 +254,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/bookmarks/:fk", "DELETE"), "Customer.prototype.__destroyById__bookmarks");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/chats/:fk", "PUT"), "AppUser.prototype.__updateById__chats");
                 
 
             
@@ -262,7 +262,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/bookmarks/:fk", "PUT"), "Customer.prototype.__updateById__bookmarks");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/:fk", "GET"), "AppUser.prototype.__findById__brands");
                 
 
             
@@ -270,7 +270,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recentItems/:fk", "GET"), "Customer.prototype.__findById__recentItems");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/:fk", "DELETE"), "AppUser.prototype.__destroyById__brands");
                 
 
             
@@ -278,7 +278,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recentItems/:fk", "DELETE"), "Customer.prototype.__destroyById__recentItems");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/:fk", "PUT"), "AppUser.prototype.__updateById__brands");
                 
 
             
@@ -286,7 +286,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recentItems/:fk", "PUT"), "Customer.prototype.__updateById__recentItems");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/rel/:fk", "PUT"), "AppUser.prototype.__link__brands");
                 
 
             
@@ -294,7 +294,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/accessTokens", "GET"), "Customer.prototype.__get__accessTokens");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/rel/:fk", "DELETE"), "AppUser.prototype.__unlink__brands");
                 
 
             
@@ -302,7 +302,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/accessTokens", "POST"), "Customer.prototype.__create__accessTokens");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/rel/:fk", "HEAD"), "AppUser.prototype.__exists__brands");
                 
 
             
@@ -310,7 +310,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/accessTokens", "DELETE"), "Customer.prototype.__delete__accessTokens");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/accessTokens", "GET"), "AppUser.prototype.__get__accessTokens");
                 
 
             
@@ -318,7 +318,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/accessTokens/count", "GET"), "Customer.prototype.__count__accessTokens");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/accessTokens", "POST"), "AppUser.prototype.__create__accessTokens");
                 
 
             
@@ -326,7 +326,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/bookmarks", "GET"), "Customer.prototype.__get__bookmarks");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/accessTokens", "DELETE"), "AppUser.prototype.__delete__accessTokens");
                 
 
             
@@ -334,7 +334,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/bookmarks", "POST"), "Customer.prototype.__create__bookmarks");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/accessTokens/count", "GET"), "AppUser.prototype.__count__accessTokens");
                 
 
             
@@ -342,7 +342,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/bookmarks", "DELETE"), "Customer.prototype.__delete__bookmarks");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/facebookAccessToken", "GET"), "AppUser.prototype.__get__facebookAccessToken");
                 
 
             
@@ -350,7 +350,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/bookmarks/count", "GET"), "Customer.prototype.__count__bookmarks");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/facebookAccessToken", "POST"), "AppUser.prototype.__create__facebookAccessToken");
                 
 
             
@@ -358,7 +358,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recentItems", "GET"), "Customer.prototype.__get__recentItems");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/facebookAccessToken", "DELETE"), "AppUser.prototype.__delete__facebookAccessToken");
                 
 
             
@@ -366,7 +366,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recentItems", "POST"), "Customer.prototype.__create__recentItems");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/facebookAccessToken/count", "GET"), "AppUser.prototype.__count__facebookAccessToken");
                 
 
             
@@ -374,7 +374,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recentItems", "DELETE"), "Customer.prototype.__delete__recentItems");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/chats", "GET"), "AppUser.prototype.__get__chats");
                 
 
             
@@ -382,7 +382,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId/recentItems/count", "GET"), "Customer.prototype.__count__recentItems");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/chats", "POST"), "AppUser.prototype.__create__chats");
                 
 
             
@@ -390,7 +390,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Customer.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/chats", "DELETE"), "AppUser.prototype.__delete__chats");
                 
 
             
@@ -398,7 +398,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Customer.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/chats/count", "GET"), "AppUser.prototype.__count__chats");
                 
 
             
@@ -406,7 +406,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Customer.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands", "GET"), "AppUser.prototype.__get__brands");
                 
 
             
@@ -414,7 +414,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Customer.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands", "POST"), "AppUser.prototype.__create__brands");
                 
 
             
@@ -422,7 +422,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Customer.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands", "DELETE"), "AppUser.prototype.__delete__brands");
                 
 
             
@@ -430,7 +430,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Customer.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/count", "GET"), "AppUser.prototype.__count__brands");
                 
 
             
@@ -438,7 +438,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Customer.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "AppUser.create");
                 
 
             
@@ -446,7 +446,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Customer.updateAll");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "AppUser.create");
                 
 
             
@@ -454,7 +454,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Customer.deleteById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "AppUser.upsert");
                 
 
             
@@ -462,7 +462,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Customer.count");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "AppUser.exists");
                 
 
             
@@ -470,7 +470,55 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:customerId", "PUT"), "Customer.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "AppUser.findById");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "AppUser.find");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "AppUser.findOne");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "AppUser.updateAll");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "AppUser.deleteById");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "AppUser.count");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId", "PUT"), "AppUser.prototype.updateAttributes");
                 
 
             
@@ -484,7 +532,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/confirm", "GET"), "Customer.confirm");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/confirm", "GET"), "AppUser.confirm");
                 
 
             
@@ -492,7 +540,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/reset", "POST"), "Customer.resetPassword");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/reset", "POST"), "AppUser.resetPassword");
                 
 
             
@@ -500,7 +548,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Customer.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "AppUser.getSchema");
                 
 
             
@@ -508,7 +556,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Customer.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "AppUser.getAbsoluteSchema");
                 
 
             
@@ -518,7 +566,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/loginWithGoogle", "POST"), "Customer.loginWithGoogle");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/__connect__brands", "POST"), "AppUser.__connect__brands");
                 
 
             
@@ -526,7 +574,7 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/loginWithFb", "POST"), "Customer.loginWithFb");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/__disconnect__brands", "POST"), "AppUser.__disconnect__brands");
                 
 
             
@@ -534,9 +582,77 @@ public class CustomerRepository extends UserRepository<Customer> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/loginWithEmail", "POST"), "Customer.loginWithEmail");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchRecentAppUser", "POST"), "AppUser.fetchRecentAppUser");
                 
 
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "AppUser.getDetailSchema");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "AppUser.getModelRelationSchema");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/loginWithGoogle", "POST"), "AppUser.loginWithGoogle");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/loginWithFb", "POST"), "AppUser.loginWithFb");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/loginWithInstagram", "POST"), "AppUser.loginWithInstagram");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/subscribe", "POST"), "AppUser.subscribe");
+                
+
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -567,7 +683,7 @@ public class CustomerRepository extends UserRepository<Customer> {
     
         
             //Method findById__accessTokens definition
-            public void findById__accessTokens(  String customerId,  String fk, final ObjectCallback<AccessToken> callback){
+            public void findById__accessTokens(  String appUserId,  String fk, final ObjectCallback<AccessToken> callback){
 
                 /**
                 Call the onBefore event
@@ -579,7 +695,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
                         hashMapObject.put("fk", fk);
                 
@@ -628,7 +744,7 @@ public class CustomerRepository extends UserRepository<Customer> {
     
         
             //Method destroyById__accessTokens definition
-            public void destroyById__accessTokens(  String customerId,  String fk, final VoidCallback callback){
+            public void destroyById__accessTokens(  String appUserId,  String fk, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -640,7 +756,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
                         hashMapObject.put("fk", fk);
                 
@@ -676,7 +792,7 @@ public class CustomerRepository extends UserRepository<Customer> {
     
         
             //Method updateById__accessTokens definition
-            public void updateById__accessTokens(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
+            public void updateById__accessTokens(  String appUserId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
 
                 /**
                 Call the onBefore event
@@ -688,7 +804,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
                         hashMapObject.put("fk", fk);
                 
@@ -738,8 +854,8 @@ public class CustomerRepository extends UserRepository<Customer> {
         
     
         
-            //Method get__facebookAccessToken definition
-            public void get__facebookAccessToken(  String customerId,  Boolean refresh, final ObjectCallback<FacebookAccessToken> callback){
+            //Method findById__facebookAccessToken definition
+            public void findById__facebookAccessToken(  String appUserId,  String fk, final ObjectCallback<FacebookAccessToken> callback){
 
                 /**
                 Call the onBefore event
@@ -751,9 +867,9 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
-                        hashMapObject.put("refresh", refresh);
+                        hashMapObject.put("fk", fk);
                 
 
                 
@@ -762,7 +878,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__facebookAccessToken", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__facebookAccessToken", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -792,15 +908,15 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method get__facebookAccessToken definition ends here..
+            }//Method findById__facebookAccessToken definition ends here..
 
             
 
         
     
         
-            //Method create__facebookAccessToken definition
-            public void create__facebookAccessToken(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
+            //Method destroyById__facebookAccessToken definition
+            public void destroyById__facebookAccessToken(  String appUserId,  String fk, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -812,7 +928,57 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__facebookAccessToken", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__facebookAccessToken definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__facebookAccessToken definition
+            public void updateById__facebookAccessToken(  String appUserId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+                        hashMapObject.put("fk", fk);
                 
                         hashMapObject.putAll(data);
                 
@@ -823,7 +989,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__facebookAccessToken", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__facebookAccessToken", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -853,15 +1019,15 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method create__facebookAccessToken definition ends here..
+            }//Method updateById__facebookAccessToken definition ends here..
 
             
 
         
     
         
-            //Method update__facebookAccessToken definition
-            public void update__facebookAccessToken(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
+            //Method findById__chats definition
+            public void findById__chats(  String appUserId,  String fk, final ObjectCallback<Chat> callback){
 
                 /**
                 Call the onBefore event
@@ -873,9 +1039,9 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
-                        hashMapObject.putAll(data);
+                        hashMapObject.put("fk", fk);
                 
 
                 
@@ -884,7 +1050,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__update__facebookAccessToken", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__chats", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -897,10 +1063,10 @@ public class CustomerRepository extends UserRepository<Customer> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
-                                    callback.onSuccess(facebookAccessToken);
+                                    Chat chat = chatRepo.createObject(result);
+                                    callback.onSuccess(chat);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -914,15 +1080,15 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method update__facebookAccessToken definition ends here..
+            }//Method findById__chats definition ends here..
 
             
 
         
     
         
-            //Method destroy__facebookAccessToken definition
-            public void destroy__facebookAccessToken(  String customerId, final VoidCallback callback){
+            //Method destroyById__chats definition
+            public void destroyById__chats(  String appUserId,  String fk, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -934,11 +1100,13 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
+                
+                        hashMapObject.put("fk", fk);
                 
 
                 
-                    invokeStaticMethod("prototype.__destroy__facebookAccessToken", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroyById__chats", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -960,15 +1128,15 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method destroy__facebookAccessToken definition ends here..
+            }//Method destroyById__chats definition ends here..
 
             
 
         
     
         
-            //Method findById__bookmarks definition
-            public void findById__bookmarks(  String customerId,  String fk, final ObjectCallback<Bookmark> callback){
+            //Method updateById__chats definition
+            public void updateById__chats(  String appUserId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Chat> callback){
 
                 /**
                 Call the onBefore event
@@ -980,10 +1148,12 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
                         hashMapObject.put("fk", fk);
                 
+                        hashMapObject.putAll(data);
+                
 
                 
 
@@ -991,7 +1161,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__bookmarks", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__chats", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1004,10 +1174,10 @@ public class CustomerRepository extends UserRepository<Customer> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BookmarkRepository bookmarkRepo = getRestAdapter().createRepository(BookmarkRepository.class);
+                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Bookmark bookmark = bookmarkRepo.createObject(result);
-                                    callback.onSuccess(bookmark);
+                                    Chat chat = chatRepo.createObject(result);
+                                    callback.onSuccess(chat);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1021,15 +1191,15 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method findById__bookmarks definition ends here..
+            }//Method updateById__chats definition ends here..
 
             
 
         
     
         
-            //Method destroyById__bookmarks definition
-            public void destroyById__bookmarks(  String customerId,  String fk, final VoidCallback callback){
+            //Method findById__brands definition
+            public void findById__brands(  String appUserId,  String fk, final ObjectCallback<Brand> callback){
 
                 /**
                 Call the onBefore event
@@ -1041,13 +1211,74 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
                         hashMapObject.put("fk", fk);
                 
 
                 
-                    invokeStaticMethod("prototype.__destroyById__bookmarks", hashMapObject, new Adapter.Callback() {
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__findById__brands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Brand brand = brandRepo.createObject(result);
+                                    callback.onSuccess(brand);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method findById__brands definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__brands definition
+            public void destroyById__brands(  String appUserId,  String fk, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__brands", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -1069,15 +1300,15 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method destroyById__bookmarks definition ends here..
+            }//Method destroyById__brands definition ends here..
 
             
 
         
     
         
-            //Method updateById__bookmarks definition
-            public void updateById__bookmarks(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Bookmark> callback){
+            //Method updateById__brands definition
+            public void updateById__brands(  String appUserId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Brand> callback){
 
                 /**
                 Call the onBefore event
@@ -1089,7 +1320,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
                         hashMapObject.put("fk", fk);
                 
@@ -1102,7 +1333,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__bookmarks", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__brands", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1115,10 +1346,10 @@ public class CustomerRepository extends UserRepository<Customer> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BookmarkRepository bookmarkRepo = getRestAdapter().createRepository(BookmarkRepository.class);
+                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Bookmark bookmark = bookmarkRepo.createObject(result);
-                                    callback.onSuccess(bookmark);
+                                    Brand brand = brandRepo.createObject(result);
+                                    callback.onSuccess(brand);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1132,15 +1363,15 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method updateById__bookmarks definition ends here..
+            }//Method updateById__brands definition ends here..
 
             
 
         
     
         
-            //Method findById__recentItems definition
-            public void findById__recentItems(  String customerId,  String fk, final ObjectCallback<RecentItem> callback){
+            //Method link__brands definition
+            public void link__brands(  String appUserId,  String fk, final ObjectCallback<Brand> callback){
 
                 /**
                 Call the onBefore event
@@ -1152,7 +1383,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
                         hashMapObject.put("fk", fk);
                 
@@ -1163,7 +1394,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__recentItems", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__link__brands", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1176,10 +1407,10 @@ public class CustomerRepository extends UserRepository<Customer> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RecentItemRepository recentItemRepo = getRestAdapter().createRepository(RecentItemRepository.class);
+                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    RecentItem recentItem = recentItemRepo.createObject(result);
-                                    callback.onSuccess(recentItem);
+                                    Brand brand = brandRepo.createObject(result);
+                                    callback.onSuccess(brand);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1193,15 +1424,15 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method findById__recentItems definition ends here..
+            }//Method link__brands definition ends here..
 
             
 
         
     
         
-            //Method destroyById__recentItems definition
-            public void destroyById__recentItems(  String customerId,  String fk, final VoidCallback callback){
+            //Method unlink__brands definition
+            public void unlink__brands(  String appUserId,  String fk, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -1213,13 +1444,13 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
                         hashMapObject.put("fk", fk);
                 
 
                 
-                    invokeStaticMethod("prototype.__destroyById__recentItems", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__unlink__brands", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -1241,15 +1472,15 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method destroyById__recentItems definition ends here..
+            }//Method unlink__brands definition ends here..
 
             
 
         
     
         
-            //Method updateById__recentItems definition
-            public void updateById__recentItems(  String customerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<RecentItem> callback){
+            //Method exists__brands definition
+            public void exists__brands(  String appUserId,  String fk, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -1261,20 +1492,18 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
                         hashMapObject.put("fk", fk);
                 
-                        hashMapObject.putAll(data);
-                
 
                 
 
 
                 
                     
+                    invokeStaticMethod("prototype.__exists__brands", hashMapObject, new Adapter.JsonObjectCallback() {
                     
-                    invokeStaticMethod("prototype.__updateById__recentItems", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1286,15 +1515,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(response != null){
-                                    RecentItemRepository recentItemRepo = getRestAdapter().createRepository(RecentItemRepository.class);
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    RecentItem recentItem = recentItemRepo.createObject(result);
-                                    callback.onSuccess(recentItem);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
+                                callback.onSuccess(response);
                             
                             //Call the finally method..
                             callback.onFinally();
@@ -1304,7 +1525,7 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method updateById__recentItems definition ends here..
+            }//Method exists__brands definition ends here..
 
             
 
@@ -1312,7 +1533,7 @@ public class CustomerRepository extends UserRepository<Customer> {
     
         
             //Method get__accessTokens definition
-            public void get__accessTokens(  String customerId,  Map<String,  ? extends Object> filter, final DataListCallback<AccessToken> callback){
+            public void get__accessTokens(  String appUserId,  Map<String,  ? extends Object> filter, final DataListCallback<AccessToken> callback){
 
                 /**
                 Call the onBefore event
@@ -1324,7 +1545,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
                         hashMapObject.put("filter", filter);
                 
@@ -1375,7 +1596,7 @@ public class CustomerRepository extends UserRepository<Customer> {
     
         
             //Method create__accessTokens definition
-            public void create__accessTokens(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
+            public void create__accessTokens(  String appUserId,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
 
                 /**
                 Call the onBefore event
@@ -1387,7 +1608,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1436,7 +1657,7 @@ public class CustomerRepository extends UserRepository<Customer> {
     
         
             //Method delete__accessTokens definition
-            public void delete__accessTokens(  String customerId, final VoidCallback callback){
+            public void delete__accessTokens(  String appUserId, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -1448,7 +1669,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
 
                 
@@ -1482,7 +1703,7 @@ public class CustomerRepository extends UserRepository<Customer> {
     
         
             //Method count__accessTokens definition
-            public void count__accessTokens(  String customerId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+            public void count__accessTokens(  String appUserId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -1494,7 +1715,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
                         hashMapObject.put("where", where);
                 
@@ -1534,8 +1755,8 @@ public class CustomerRepository extends UserRepository<Customer> {
         
     
         
-            //Method get__bookmarks definition
-            public void get__bookmarks(  String customerId,  Map<String,  ? extends Object> filter, final DataListCallback<Bookmark> callback){
+            //Method get__facebookAccessToken definition
+            public void get__facebookAccessToken(  String appUserId,  Map<String,  ? extends Object> filter, final DataListCallback<FacebookAccessToken> callback){
 
                 /**
                 Call the onBefore event
@@ -1547,7 +1768,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
                         hashMapObject.put("filter", filter);
                 
@@ -1558,7 +1779,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 
 
                 
-                    invokeStaticMethod("prototype.__get__bookmarks", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__facebookAccessToken", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1572,14 +1793,14 @@ public class CustomerRepository extends UserRepository<Customer> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<Bookmark> bookmarkList = new DataList<Bookmark>();
-                                    BookmarkRepository bookmarkRepo = getRestAdapter().createRepository(BookmarkRepository.class);
+                                    DataList<FacebookAccessToken> facebookAccessTokenList = new DataList<FacebookAccessToken>();
+                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Bookmark bookmark = bookmarkRepo.createObject(obj);
-                                        bookmarkList.add(bookmark);
+                                        FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(obj);
+                                        facebookAccessTokenList.add(facebookAccessToken);
                                     }
-                                    callback.onSuccess(bookmarkList);
+                                    callback.onSuccess(facebookAccessTokenList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1590,15 +1811,15 @@ public class CustomerRepository extends UserRepository<Customer> {
                     });
                 
 
-            }//Method get__bookmarks definition ends here..
+            }//Method get__facebookAccessToken definition ends here..
 
             
 
         
     
         
-            //Method create__bookmarks definition
-            public void create__bookmarks(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Bookmark> callback){
+            //Method create__facebookAccessToken definition
+            public void create__facebookAccessToken(  String appUserId,  Map<String,  ? extends Object> data, final ObjectCallback<FacebookAccessToken> callback){
 
                 /**
                 Call the onBefore event
@@ -1610,7 +1831,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1621,7 +1842,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__bookmarks", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__facebookAccessToken", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1634,10 +1855,10 @@ public class CustomerRepository extends UserRepository<Customer> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BookmarkRepository bookmarkRepo = getRestAdapter().createRepository(BookmarkRepository.class);
+                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Bookmark bookmark = bookmarkRepo.createObject(result);
-                                    callback.onSuccess(bookmark);
+                                    FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    callback.onSuccess(facebookAccessToken);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1651,15 +1872,15 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method create__bookmarks definition ends here..
+            }//Method create__facebookAccessToken definition ends here..
 
             
 
         
     
         
-            //Method delete__bookmarks definition
-            public void delete__bookmarks(  String customerId, final VoidCallback callback){
+            //Method delete__facebookAccessToken definition
+            public void delete__facebookAccessToken(  String appUserId, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -1671,11 +1892,11 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
 
                 
-                    invokeStaticMethod("prototype.__delete__bookmarks", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__delete__facebookAccessToken", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -1697,15 +1918,15 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method delete__bookmarks definition ends here..
+            }//Method delete__facebookAccessToken definition ends here..
 
             
 
         
     
         
-            //Method count__bookmarks definition
-            public void count__bookmarks(  String customerId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+            //Method count__facebookAccessToken definition
+            public void count__facebookAccessToken(  String appUserId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -1717,7 +1938,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
                         hashMapObject.put("where", where);
                 
@@ -1727,7 +1948,7 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
                     
-                    invokeStaticMethod("prototype.__count__bookmarks", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__facebookAccessToken", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1750,15 +1971,15 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method count__bookmarks definition ends here..
+            }//Method count__facebookAccessToken definition ends here..
 
             
 
         
     
         
-            //Method get__recentItems definition
-            public void get__recentItems(  String customerId,  Map<String,  ? extends Object> filter, final DataListCallback<RecentItem> callback){
+            //Method get__chats definition
+            public void get__chats(  String appUserId,  Map<String,  ? extends Object> filter, final DataListCallback<Chat> callback){
 
                 /**
                 Call the onBefore event
@@ -1770,7 +1991,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
                         hashMapObject.put("filter", filter);
                 
@@ -1781,7 +2002,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 
 
                 
-                    invokeStaticMethod("prototype.__get__recentItems", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__chats", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1795,14 +2016,14 @@ public class CustomerRepository extends UserRepository<Customer> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<RecentItem> recentItemList = new DataList<RecentItem>();
-                                    RecentItemRepository recentItemRepo = getRestAdapter().createRepository(RecentItemRepository.class);
+                                    DataList<Chat> chatList = new DataList<Chat>();
+                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        RecentItem recentItem = recentItemRepo.createObject(obj);
-                                        recentItemList.add(recentItem);
+                                        Chat chat = chatRepo.createObject(obj);
+                                        chatList.add(chat);
                                     }
-                                    callback.onSuccess(recentItemList);
+                                    callback.onSuccess(chatList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1813,15 +2034,15 @@ public class CustomerRepository extends UserRepository<Customer> {
                     });
                 
 
-            }//Method get__recentItems definition ends here..
+            }//Method get__chats definition ends here..
 
             
 
         
     
         
-            //Method create__recentItems definition
-            public void create__recentItems(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<RecentItem> callback){
+            //Method create__chats definition
+            public void create__chats(  String appUserId,  Map<String,  ? extends Object> data, final ObjectCallback<Chat> callback){
 
                 /**
                 Call the onBefore event
@@ -1833,7 +2054,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1844,7 +2065,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__recentItems", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__chats", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1857,10 +2078,10 @@ public class CustomerRepository extends UserRepository<Customer> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RecentItemRepository recentItemRepo = getRestAdapter().createRepository(RecentItemRepository.class);
+                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    RecentItem recentItem = recentItemRepo.createObject(result);
-                                    callback.onSuccess(recentItem);
+                                    Chat chat = chatRepo.createObject(result);
+                                    callback.onSuccess(chat);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1874,15 +2095,15 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method create__recentItems definition ends here..
+            }//Method create__chats definition ends here..
 
             
 
         
     
         
-            //Method delete__recentItems definition
-            public void delete__recentItems(  String customerId, final VoidCallback callback){
+            //Method delete__chats definition
+            public void delete__chats(  String appUserId, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -1894,11 +2115,11 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
 
                 
-                    invokeStaticMethod("prototype.__delete__recentItems", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__delete__chats", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -1920,15 +2141,15 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method delete__recentItems definition ends here..
+            }//Method delete__chats definition ends here..
 
             
 
         
     
         
-            //Method count__recentItems definition
-            public void count__recentItems(  String customerId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+            //Method count__chats definition
+            public void count__chats(  String appUserId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -1940,7 +2161,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
                         hashMapObject.put("where", where);
                 
@@ -1950,7 +2171,7 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
                     
-                    invokeStaticMethod("prototype.__count__recentItems", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__chats", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1973,7 +2194,230 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method count__recentItems definition ends here..
+            }//Method count__chats definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__brands definition
+            public void get__brands(  String appUserId,  Map<String,  ? extends Object> filter, final DataListCallback<Brand> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__brands", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<Brand> brandList = new DataList<Brand>();
+                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+
+                                    for (Map<String, Object> obj : result) {
+                                        Brand brand = brandRepo.createObject(obj);
+                                        brandList.add(brand);
+                                    }
+                                    callback.onSuccess(brandList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method get__brands definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__brands definition
+            public void create__brands(  String appUserId,  Map<String,  ? extends Object> data, final ObjectCallback<Brand> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__brands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Brand brand = brandRepo.createObject(result);
+                                    callback.onSuccess(brand);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__brands definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__brands definition
+            public void delete__brands(  String appUserId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__brands", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__brands definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__brands definition
+            public void count__brands(  String appUserId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__brands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method count__brands definition ends here..
 
             
 
@@ -1981,7 +2425,7 @@ public class CustomerRepository extends UserRepository<Customer> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<AppUser> callback){
 
                 /**
                 Call the onBefore event
@@ -2015,10 +2459,10 @@ public class CustomerRepository extends UserRepository<Customer> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Customer customer = customerRepo.createObject(result);
-                                    callback.onSuccess(customer);
+                                    AppUser appUser = appUserRepo.createObject(result);
+                                    callback.onSuccess(appUser);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -2041,7 +2485,7 @@ public class CustomerRepository extends UserRepository<Customer> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<AppUser> callback){
 
                 /**
                 Call the onBefore event
@@ -2075,10 +2519,10 @@ public class CustomerRepository extends UserRepository<Customer> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Customer customer = customerRepo.createObject(result);
-                                    callback.onSuccess(customer);
+                                    AppUser appUser = appUserRepo.createObject(result);
+                                    callback.onSuccess(appUser);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -2151,7 +2595,7 @@ public class CustomerRepository extends UserRepository<Customer> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Customer> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<AppUser> callback){
 
                 /**
                 Call the onBefore event
@@ -2187,10 +2631,10 @@ public class CustomerRepository extends UserRepository<Customer> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Customer customer = customerRepo.createObject(result);
-                                    callback.onSuccess(customer);
+                                    AppUser appUser = appUserRepo.createObject(result);
+                                    callback.onSuccess(appUser);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -2212,7 +2656,7 @@ public class CustomerRepository extends UserRepository<Customer> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Customer> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<AppUser> callback){
 
                 /**
                 Call the onBefore event
@@ -2247,14 +2691,14 @@ public class CustomerRepository extends UserRepository<Customer> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<Customer> customerList = new DataList<Customer>();
-                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    DataList<AppUser> appUserList = new DataList<AppUser>();
+                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Customer customer = customerRepo.createObject(obj);
-                                        customerList.add(customer);
+                                        AppUser appUser = appUserRepo.createObject(obj);
+                                        appUserList.add(appUser);
                                     }
-                                    callback.onSuccess(customerList);
+                                    callback.onSuccess(appUserList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -2273,7 +2717,7 @@ public class CustomerRepository extends UserRepository<Customer> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Customer> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<AppUser> callback){
 
                 /**
                 Call the onBefore event
@@ -2307,10 +2751,10 @@ public class CustomerRepository extends UserRepository<Customer> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Customer customer = customerRepo.createObject(result);
-                                    callback.onSuccess(customer);
+                                    AppUser appUser = appUserRepo.createObject(result);
+                                    callback.onSuccess(appUser);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -2487,7 +2931,7 @@ public class CustomerRepository extends UserRepository<Customer> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String customerId,  Map<String,  ? extends Object> data, final ObjectCallback<Customer> callback){
+            public void updateAttributes(  String appUserId,  Map<String,  ? extends Object> data, final ObjectCallback<AppUser> callback){
 
                 /**
                 Call the onBefore event
@@ -2499,7 +2943,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("customerId", customerId);
+                        hashMapObject.put("appUserId", appUserId);
                 
                         hashMapObject.putAll(data);
                 
@@ -2523,10 +2967,10 @@ public class CustomerRepository extends UserRepository<Customer> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Customer customer = customerRepo.createObject(result);
-                                    callback.onSuccess(customer);
+                                    AppUser appUser = appUserRepo.createObject(result);
+                                    callback.onSuccess(appUser);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -2749,6 +3193,275 @@ public class CustomerRepository extends UserRepository<Customer> {
         
     
         
+            //Method __connect__brands definition
+            public void __connect__brands(  String id,  DataList<String> fk, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("id", id);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("__connect__brands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method __connect__brands definition ends here..
+
+            
+
+        
+    
+        
+            //Method __disconnect__brands definition
+            public void __disconnect__brands(  String id,  DataList<String> fk, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("id", id);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("__disconnect__brands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method __disconnect__brands definition ends here..
+
+            
+
+        
+    
+        
+            //Method fetchRecentAppUser definition
+            public void fetchRecentAppUser(  String brandId,  double limit,  String query, final DataListCallback<AppUser> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("brandId", brandId);
+                
+                        hashMapObject.put("limit", limit);
+                
+                        hashMapObject.put("query", query);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("fetchRecentAppUser", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<AppUser> appUserList = new DataList<AppUser>();
+                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+
+                                    for (Map<String, Object> obj : result) {
+                                        AppUser appUser = appUserRepo.createObject(obj);
+                                        appUserList.add(appUser);
+                                    }
+                                    callback.onSuccess(appUserList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method fetchRecentAppUser definition ends here..
+
+            
+
+        
+    
+        
+            //Method getDetailSchema definition
+            public void getDetailSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getDetailSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method getDetailSchema definition ends here..
+
+            
+
+        
+    
+        
+            //Method getModelRelationSchema definition
+            public void getModelRelationSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getModelRelationSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method getModelRelationSchema definition ends here..
+
+            
+
+        
+    
+        
             //Method loginWithGoogle definition
             public void loginWithGoogle(  String accessToken, final ObjectCallback<JSONObject>  callback ){
 
@@ -2851,8 +3564,8 @@ public class CustomerRepository extends UserRepository<Customer> {
         
     
         
-            //Method loginWithEmail definition
-            public void loginWithEmail(  String email, final ObjectCallback<JSONObject>  callback ){
+            //Method loginWithInstagram definition
+            public void loginWithInstagram(  String accessToken, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -2864,7 +3577,7 @@ public class CustomerRepository extends UserRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("email", email);
+                        hashMapObject.put("accessToken", accessToken);
                 
 
                 
@@ -2872,7 +3585,7 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
                     
-                    invokeStaticMethod("loginWithEmail", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("loginWithInstagram", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2895,10 +3608,81 @@ public class CustomerRepository extends UserRepository<Customer> {
 
                 
 
-            }//Method loginWithEmail definition ends here..
+            }//Method loginWithInstagram definition ends here..
 
             
 
+        
+    
+        
+            //Method subscribe definition
+            public void subscribe(  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("subscribe", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method subscribe definition ends here..
+
+            
+
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
         

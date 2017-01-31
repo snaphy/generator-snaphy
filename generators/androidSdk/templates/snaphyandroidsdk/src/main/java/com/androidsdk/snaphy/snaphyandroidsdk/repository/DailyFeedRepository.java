@@ -35,19 +35,26 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Application;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.DailyFeed;
 
 //Now import model of related models..
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Brand;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
+            
+        
+    
 
 
 
 
-public class ApplicationRepository extends ModelRepository<Application> {
+
+public class DailyFeedRepository extends ModelRepository<DailyFeed> {
 
 
-    public ApplicationRepository(){
-        super("Application", null, Application.class);
+    public DailyFeedRepository(){
+        super("DailyFeed", null, DailyFeed.class);
     }
 
 
@@ -63,7 +70,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "application.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:dailyFeedId/brand", "GET"), "DailyFeed.prototype.__get__brand");
                 
 
             
@@ -71,7 +78,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "application.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "DailyFeed.create");
                 
 
             
@@ -79,7 +86,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "application.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "DailyFeed.create");
                 
 
             
@@ -87,7 +94,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "application.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "DailyFeed.upsert");
                 
 
             
@@ -95,7 +102,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "application.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "DailyFeed.exists");
                 
 
             
@@ -103,7 +110,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "application.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "DailyFeed.findById");
                 
 
             
@@ -111,7 +118,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "application.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "DailyFeed.find");
                 
 
             
@@ -119,7 +126,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "application.updateAll");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "DailyFeed.findOne");
                 
 
             
@@ -127,7 +134,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "application.deleteById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "DailyFeed.updateAll");
                 
 
             
@@ -135,7 +142,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "application.count");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "DailyFeed.deleteById");
                 
 
             
@@ -143,7 +150,15 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:applicationId", "PUT"), "application.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "DailyFeed.count");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:dailyFeedId", "PUT"), "DailyFeed.prototype.updateAttributes");
                 
 
             
@@ -153,7 +168,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "application.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "DailyFeed.getSchema");
                 
 
             
@@ -161,9 +176,41 @@ public class ApplicationRepository extends ModelRepository<Application> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "application.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "DailyFeed.getAbsoluteSchema");
                 
 
+            
+        
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "DailyFeed.getDetailSchema");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "DailyFeed.getModelRelationSchema");
+                
+
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
             
@@ -189,8 +236,69 @@ public class ApplicationRepository extends ModelRepository<Application> {
 
     
         
+            //Method get__brand definition
+            public void get__brand(  String dailyFeedId,  Boolean refresh, final ObjectCallback<Brand> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("dailyFeedId", dailyFeedId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__brand", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Brand brand = brandRepo.createObject(result);
+                                    callback.onSuccess(brand);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__brand definition ends here..
+
+            
+
+        
+    
+        
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Application> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<DailyFeed> callback){
 
                 /**
                 Call the onBefore event
@@ -224,10 +332,10 @@ public class ApplicationRepository extends ModelRepository<Application> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
+                                    DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Application application = applicationRepo.createObject(result);
-                                    callback.onSuccess(application);
+                                    DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
+                                    callback.onSuccess(dailyFeed);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -250,7 +358,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Application> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<DailyFeed> callback){
 
                 /**
                 Call the onBefore event
@@ -284,10 +392,10 @@ public class ApplicationRepository extends ModelRepository<Application> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
+                                    DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Application application = applicationRepo.createObject(result);
-                                    callback.onSuccess(application);
+                                    DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
+                                    callback.onSuccess(dailyFeed);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -360,7 +468,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Application> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<DailyFeed> callback){
 
                 /**
                 Call the onBefore event
@@ -396,10 +504,10 @@ public class ApplicationRepository extends ModelRepository<Application> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
+                                    DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Application application = applicationRepo.createObject(result);
-                                    callback.onSuccess(application);
+                                    DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
+                                    callback.onSuccess(dailyFeed);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -421,7 +529,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Application> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<DailyFeed> callback){
 
                 /**
                 Call the onBefore event
@@ -456,14 +564,14 @@ public class ApplicationRepository extends ModelRepository<Application> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<Application> applicationList = new DataList<Application>();
-                                    ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
+                                    DataList<DailyFeed> dailyFeedList = new DataList<DailyFeed>();
+                                    DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Application application = applicationRepo.createObject(obj);
-                                        applicationList.add(application);
+                                        DailyFeed dailyFeed = dailyFeedRepo.createObject(obj);
+                                        dailyFeedList.add(dailyFeed);
                                     }
-                                    callback.onSuccess(applicationList);
+                                    callback.onSuccess(dailyFeedList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -482,7 +590,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Application> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<DailyFeed> callback){
 
                 /**
                 Call the onBefore event
@@ -516,10 +624,10 @@ public class ApplicationRepository extends ModelRepository<Application> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
+                                    DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Application application = applicationRepo.createObject(result);
-                                    callback.onSuccess(application);
+                                    DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
+                                    callback.onSuccess(dailyFeed);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -696,7 +804,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String applicationId,  Map<String,  ? extends Object> data, final ObjectCallback<Application> callback){
+            public void updateAttributes(  String dailyFeedId,  Map<String,  ? extends Object> data, final ObjectCallback<DailyFeed> callback){
 
                 /**
                 Call the onBefore event
@@ -708,7 +816,7 @@ public class ApplicationRepository extends ModelRepository<Application> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("applicationId", applicationId);
+                        hashMapObject.put("dailyFeedId", dailyFeedId);
                 
                         hashMapObject.putAll(data);
                 
@@ -732,10 +840,10 @@ public class ApplicationRepository extends ModelRepository<Application> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ApplicationRepository applicationRepo = getRestAdapter().createRepository(ApplicationRepository.class);
+                                    DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Application application = applicationRepo.createObject(result);
-                                    callback.onSuccess(application);
+                                    DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
+                                    callback.onSuccess(dailyFeed);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -853,6 +961,120 @@ public class ApplicationRepository extends ModelRepository<Application> {
 
             
 
+        
+    
+        
+    
+        
+            //Method getDetailSchema definition
+            public void getDetailSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getDetailSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method getDetailSchema definition ends here..
+
+            
+
+        
+    
+        
+            //Method getModelRelationSchema definition
+            public void getModelRelationSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getModelRelationSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method getModelRelationSchema definition ends here..
+
+            
+
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
         

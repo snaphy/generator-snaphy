@@ -25,7 +25,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.DealRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.AdminEmailRepository;
 
 //Now import repository of related models..
 
@@ -36,7 +36,7 @@ import java.util.Map;
 
 
 
-public class Deal extends Model {
+public class AdminEmail extends Model {
 
 
     //For converting all model values to hashMap
@@ -51,9 +51,9 @@ public class Deal extends Model {
         }
     }
 
-    private Deal that ;
+    private AdminEmail that ;
 
-    public Deal (){
+    public AdminEmail (){
         that = this;
     }
 
@@ -62,18 +62,16 @@ public class Deal extends Model {
             
 
             
-                private String added;
-                /* Adding Getter and Setter methods */
-                public String getAdded(){
-                    return added;
-                }
+            
+            
+            
 
-                /* Adding Getter and Setter methods */
-                public void setAdded(String added){
-                    this.added = added;
-                    //Update hashMap value..
-                    hashMap.put("added", added);
-                }
+            
+
+        
+    
+        
+            
 
             
             
@@ -88,20 +86,6 @@ public class Deal extends Model {
             
 
             
-                private String updated;
-                /* Adding Getter and Setter methods */
-                public String getUpdated(){
-                    return updated;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setUpdated(String updated){
-                    this.updated = updated;
-                    //Update hashMap value..
-                    hashMap.put("updated", updated);
-                }
-
-            
             
             
             
@@ -114,18 +98,16 @@ public class Deal extends Model {
             
 
             
-                private String url;
-                /* Adding Getter and Setter methods */
-                public String getUrl(){
-                    return url;
-                }
+            
+            
+            
 
-                /* Adding Getter and Setter methods */
-                public void setUrl(String url){
-                    this.url = url;
-                    //Update hashMap value..
-                    hashMap.put("url", url);
-                }
+            
+
+        
+    
+        
+            
 
             
             

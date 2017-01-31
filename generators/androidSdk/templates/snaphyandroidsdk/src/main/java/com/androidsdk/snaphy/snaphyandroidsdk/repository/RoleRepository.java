@@ -35,19 +35,26 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Deal;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Role;
 
 //Now import model of related models..
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.RoleMapping;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RoleMappingRepository;
+            
+        
+    
 
 
 
 
-public class DealRepository extends ModelRepository<Deal> {
+
+public class RoleRepository extends ModelRepository<Role> {
 
 
-    public DealRepository(){
-        super("Deal", null, Deal.class);
+    public RoleRepository(){
+        super("Role", null, Role.class);
     }
 
 
@@ -63,7 +70,7 @@ public class DealRepository extends ModelRepository<Deal> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Deal.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:roleId/principals/:fk", "GET"), "Role.prototype.__findById__principals");
                 
 
             
@@ -71,7 +78,7 @@ public class DealRepository extends ModelRepository<Deal> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Deal.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:roleId/principals/:fk", "DELETE"), "Role.prototype.__destroyById__principals");
                 
 
             
@@ -79,7 +86,7 @@ public class DealRepository extends ModelRepository<Deal> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Deal.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:roleId/principals/:fk", "PUT"), "Role.prototype.__updateById__principals");
                 
 
             
@@ -87,7 +94,7 @@ public class DealRepository extends ModelRepository<Deal> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Deal.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:roleId/principals", "GET"), "Role.prototype.__get__principals");
                 
 
             
@@ -95,7 +102,7 @@ public class DealRepository extends ModelRepository<Deal> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Deal.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:roleId/principals", "POST"), "Role.prototype.__create__principals");
                 
 
             
@@ -103,7 +110,7 @@ public class DealRepository extends ModelRepository<Deal> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Deal.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:roleId/principals", "DELETE"), "Role.prototype.__delete__principals");
                 
 
             
@@ -111,39 +118,7 @@ public class DealRepository extends ModelRepository<Deal> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Deal.findOne");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Deal.updateAll");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Deal.deleteById");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Deal.count");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:dealId", "PUT"), "Deal.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:roleId/principals/count", "GET"), "Role.prototype.__count__principals");
                 
 
             
@@ -153,7 +128,7 @@ public class DealRepository extends ModelRepository<Deal> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Deal.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/verifyRole", "POST"), "Role.verifyRole");
                 
 
             
@@ -161,7 +136,33 @@ public class DealRepository extends ModelRepository<Deal> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Deal.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Role.getSchema");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Role.getAbsoluteSchema");
+                
+
+            
+        
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "Role.getDetailSchema");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "Role.getModelRelationSchema");
                 
 
             
@@ -189,8 +190,8 @@ public class DealRepository extends ModelRepository<Deal> {
 
     
         
-            //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Deal> callback){
+            //Method findById__principals definition
+            public void findById__principals(  String roleId,  String fk, final ObjectCallback<RoleMapping> callback){
 
                 /**
                 Call the onBefore event
@@ -201,6 +202,119 @@ public class DealRepository extends ModelRepository<Deal> {
                 //Definging hashMap for data conversion
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
+                
+                        hashMapObject.put("roleId", roleId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__findById__principals", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    RoleMapping roleMapping = roleMappingRepo.createObject(result);
+                                    callback.onSuccess(roleMapping);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method findById__principals definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__principals definition
+            public void destroyById__principals(  String roleId,  String fk, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("roleId", roleId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__principals", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__principals definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__principals definition
+            public void updateById__principals(  String roleId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<RoleMapping> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("roleId", roleId);
+                
+                        hashMapObject.put("fk", fk);
                 
                         hashMapObject.putAll(data);
                 
@@ -211,7 +325,7 @@ public class DealRepository extends ModelRepository<Deal> {
                 
                     
                     
-                    invokeStaticMethod("create", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__principals", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -224,10 +338,10 @@ public class DealRepository extends ModelRepository<Deal> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    DealRepository dealRepo = getRestAdapter().createRepository(DealRepository.class);
+                                    RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Deal deal = dealRepo.createObject(result);
-                                    callback.onSuccess(deal);
+                                    RoleMapping roleMapping = roleMappingRepo.createObject(result);
+                                    callback.onSuccess(roleMapping);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -241,16 +355,15 @@ public class DealRepository extends ModelRepository<Deal> {
 
                 
 
-            }//Method create definition ends here..
+            }//Method updateById__principals definition ends here..
 
             
 
         
     
         
-        
-            //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Deal> callback){
+            //Method get__principals definition
+            public void get__principals(  String roleId,  Map<String,  ? extends Object> filter, final DataListCallback<RoleMapping> callback){
 
                 /**
                 Call the onBefore event
@@ -262,176 +375,7 @@ public class DealRepository extends ModelRepository<Deal> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("upsert", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    DealRepository dealRepo = getRestAdapter().createRepository(DealRepository.class);
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    Deal deal = dealRepo.createObject(result);
-                                    callback.onSuccess(deal);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method upsert definition ends here..
-
-            
-
-        
-    
-        
-            //Method exists definition
-            public void exists(  String id, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("id", id);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("exists", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method exists definition ends here..
-
-            
-
-        
-    
-        
-            //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Deal> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("id", id);
-                
-                        hashMapObject.put("filter", filter);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("findById", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    DealRepository dealRepo = getRestAdapter().createRepository(DealRepository.class);
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    Deal deal = dealRepo.createObject(result);
-                                    callback.onSuccess(deal);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method findById definition ends here..
-
-            
-
-        
-    
-        
-            //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Deal> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
+                        hashMapObject.put("roleId", roleId);
                 
                         hashMapObject.put("filter", filter);
                 
@@ -442,7 +386,7 @@ public class DealRepository extends ModelRepository<Deal> {
                 
 
                 
-                    invokeStaticMethod("find", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__principals", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -456,14 +400,14 @@ public class DealRepository extends ModelRepository<Deal> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<Deal> dealList = new DataList<Deal>();
-                                    DealRepository dealRepo = getRestAdapter().createRepository(DealRepository.class);
+                                    DataList<RoleMapping> roleMappingList = new DataList<RoleMapping>();
+                                    RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Deal deal = dealRepo.createObject(obj);
-                                        dealList.add(deal);
+                                        RoleMapping roleMapping = roleMappingRepo.createObject(obj);
+                                        roleMappingList.add(roleMapping);
                                     }
-                                    callback.onSuccess(dealList);
+                                    callback.onSuccess(roleMappingList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -474,15 +418,15 @@ public class DealRepository extends ModelRepository<Deal> {
                     });
                 
 
-            }//Method find definition ends here..
+            }//Method get__principals definition ends here..
 
             
 
         
     
         
-            //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Deal> callback){
+            //Method create__principals definition
+            public void create__principals(  String roleId,  Map<String,  ? extends Object> data, final ObjectCallback<RoleMapping> callback){
 
                 /**
                 Call the onBefore event
@@ -494,7 +438,9 @@ public class DealRepository extends ModelRepository<Deal> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("filter", filter);
+                        hashMapObject.put("roleId", roleId);
+                
+                        hashMapObject.putAll(data);
                 
 
                 
@@ -503,7 +449,7 @@ public class DealRepository extends ModelRepository<Deal> {
                 
                     
                     
-                    invokeStaticMethod("findOne", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__principals", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -516,10 +462,10 @@ public class DealRepository extends ModelRepository<Deal> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    DealRepository dealRepo = getRestAdapter().createRepository(DealRepository.class);
+                                    RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Deal deal = dealRepo.createObject(result);
-                                    callback.onSuccess(deal);
+                                    RoleMapping roleMapping = roleMappingRepo.createObject(result);
+                                    callback.onSuccess(roleMapping);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -533,15 +479,15 @@ public class DealRepository extends ModelRepository<Deal> {
 
                 
 
-            }//Method findOne definition ends here..
+            }//Method create__principals definition ends here..
 
             
 
         
     
         
-            //Method updateAll definition
-            public void updateAll(  Map<String,  ? extends Object> where,  Map<String,  ? extends Object> data, final ObjectCallback<JSONObject>  callback ){
+            //Method delete__principals definition
+            public void delete__principals(  String roleId, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -553,48 +499,41 @@ public class DealRepository extends ModelRepository<Deal> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("where", where);
-                
-                        hashMapObject.putAll(data);
+                        hashMapObject.put("roleId", roleId);
                 
 
                 
-
-
-                
-                    
-                    invokeStaticMethod("updateAll", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
+                    invokeStaticMethod("prototype.__delete__principals", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
                         }
 
                         @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
                             //Call the finally method..
                             callback.onFinally();
                         }
                     });
                 
 
+
                 
 
-            }//Method updateAll definition ends here..
+                
+
+            }//Method delete__principals definition ends here..
 
             
 
         
     
         
-            //Method deleteById definition
-            public void deleteById(  String id, final ObjectCallback<JSONObject>  callback ){
+            //Method count__principals definition
+            public void count__principals(  String roleId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -606,56 +545,7 @@ public class DealRepository extends ModelRepository<Deal> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("id", id);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("deleteById", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method deleteById definition ends here..
-
-            
-
-        
-    
-        
-            //Method count definition
-            public void count(  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
+                        hashMapObject.put("roleId", roleId);
                 
                         hashMapObject.put("where", where);
                 
@@ -665,7 +555,7 @@ public class DealRepository extends ModelRepository<Deal> {
 
                 
                     
-                    invokeStaticMethod("count", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__principals", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -688,15 +578,17 @@ public class DealRepository extends ModelRepository<Deal> {
 
                 
 
-            }//Method count definition ends here..
+            }//Method count__principals definition ends here..
 
             
 
         
     
         
-            //Method updateAttributes definition
-            public void updateAttributes(  String dealId,  Map<String,  ? extends Object> data, final ObjectCallback<Deal> callback){
+    
+        
+            //Method verifyRole definition
+            public void verifyRole(  String role, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -708,9 +600,7 @@ public class DealRepository extends ModelRepository<Deal> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("dealId", dealId);
-                
-                        hashMapObject.putAll(data);
+                        hashMapObject.put("role", role);
                 
 
                 
@@ -718,8 +608,8 @@ public class DealRepository extends ModelRepository<Deal> {
 
                 
                     
+                    invokeStaticMethod("verifyRole", hashMapObject, new Adapter.JsonObjectCallback() {
                     
-                    invokeStaticMethod("prototype.updateAttributes", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -731,15 +621,7 @@ public class DealRepository extends ModelRepository<Deal> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                if(response != null){
-                                    DealRepository dealRepo = getRestAdapter().createRepository(DealRepository.class);
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    Deal deal = dealRepo.createObject(result);
-                                    callback.onSuccess(deal);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
+                                callback.onSuccess(response);
                             
                             //Call the finally method..
                             callback.onFinally();
@@ -749,12 +631,10 @@ public class DealRepository extends ModelRepository<Deal> {
 
                 
 
-            }//Method updateAttributes definition ends here..
+            }//Method verifyRole definition ends here..
 
             
 
-        
-    
         
     
         
@@ -850,6 +730,106 @@ public class DealRepository extends ModelRepository<Deal> {
                 
 
             }//Method getAbsoluteSchema definition ends here..
+
+            
+
+        
+    
+        
+    
+        
+            //Method getDetailSchema definition
+            public void getDetailSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getDetailSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method getDetailSchema definition ends here..
+
+            
+
+        
+    
+        
+            //Method getModelRelationSchema definition
+            public void getModelRelationSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getModelRelationSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method getModelRelationSchema definition ends here..
 
             
 

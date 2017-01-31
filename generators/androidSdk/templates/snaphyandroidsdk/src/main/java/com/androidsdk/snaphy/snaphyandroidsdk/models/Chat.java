@@ -25,19 +25,19 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.RecentItemRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRepository;
 
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
             
 
         
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ItemRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.AppUserRepository;
             
 
         
@@ -50,7 +50,7 @@ import java.util.Map;
 
 
 
-public class RecentItem extends Model {
+public class Chat extends Model {
 
 
     //For converting all model values to hashMap
@@ -65,9 +65,9 @@ public class RecentItem extends Model {
         }
     }
 
-    private RecentItem that ;
+    private Chat that ;
 
-    public RecentItem (){
+    public Chat (){
         that = this;
     }
 
@@ -128,6 +128,162 @@ public class RecentItem extends Model {
             
 
             
+                private String message;
+                /* Adding Getter and Setter methods */
+                public String getMessage(){
+                    return message;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setMessage(String message){
+                    this.message = message;
+                    //Update hashMap value..
+                    hashMap.put("message", message);
+                }
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+                private String type;
+                /* Adding Getter and Setter methods */
+                public String getType(){
+                    return type;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setType(String type){
+                    this.type = type;
+                    //Update hashMap value..
+                    hashMap.put("type", type);
+                }
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+                private Map<String, Object> image;
+                /* Adding Getter and Setter methods */
+                public Map<String, Object> getImage(){
+                    return image;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setImage(Map<String, Object> image){
+                    this.image = image;
+                    //Update Map value..
+                    hashMap.put("image", image);
+                }
+
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+                private String from;
+                /* Adding Getter and Setter methods */
+                public String getFrom(){
+                    return from;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setFrom(String from){
+                    this.from = from;
+                    //Update hashMap value..
+                    hashMap.put("from", from);
+                }
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+                private String guid;
+                /* Adding Getter and Setter methods */
+                public String getGuid(){
+                    return guid;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setGuid(String guid){
+                    this.guid = guid;
+                    //Update hashMap value..
+                    hashMap.put("guid", guid);
+                }
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+                private String status;
+                /* Adding Getter and Setter methods */
+                public String getStatus(){
+                    return status;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setStatus(String status){
+                    this.status = status;
+                    //Update hashMap value..
+                    hashMap.put("status", status);
+                }
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
             
             
             
@@ -171,35 +327,35 @@ public class RecentItem extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient Customer  customer ;
+                    private transient Brand  brand ;
 
-                    public Customer getCustomer() {
-                        return customer;
+                    public Brand getBrand() {
+                        return brand;
                     }
 
-                    public void setCustomer(Customer customer) {
-                        this.customer = customer;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setCustomer(Map<String, Object> customer) {
-                        //First create a dummy Repo class object for customer.
-                        CustomerRepository customerRepository = new CustomerRepository();
-                        Customer customer1 = customerRepository.createObject(customer);
-                        setCustomer(customer1);
+                    public void setBrand(Brand brand) {
+                        this.brand = brand;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setCustomer(HashMap<String, Object> customer) {
+                    public void setBrand(Map<String, Object> brand) {
                         //First create a dummy Repo class object for customer.
-                        CustomerRepository customerRepository = new CustomerRepository();
-                        Customer customer1 = customerRepository.createObject(customer);
-                        setCustomer(customer1);
+                        BrandRepository brandRepository = new BrandRepository();
+                        Brand brand1 = brandRepository.createObject(brand);
+                        setBrand(brand1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setBrand(HashMap<String, Object> brand) {
+                        //First create a dummy Repo class object for customer.
+                        BrandRepository brandRepository = new BrandRepository();
+                        Brand brand1 = brandRepository.createObject(brand);
+                        setBrand(brand1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Customer customer) {
-                        that.setCustomer(customer);
+                    public void addRelation(Brand brand) {
+                        that.setBrand(brand);
                     }
 
 
@@ -217,15 +373,17 @@ public class RecentItem extends Model {
                     //Now add instance methods to fetch the related belongsTo Model..
                     
 
-                    
+                     
+                            
+                        
 
                                     //Write the method here..
-                                    public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
+                                    public void get__brand( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Brand> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final RecentItemRepository  recentItemRepo = restAdapter.createRepository(RecentItemRepository.class);
+                                        final ChatRepository  chatRepo = restAdapter.createRepository(ChatRepository.class);
                                         
                                         
                                         
@@ -234,13 +392,13 @@ public class RecentItem extends Model {
 
 
 
-                                        recentItemRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
+                                        chatRepo.get__brand( (String)that.getId(), refresh,  new ObjectCallback<Brand> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Customer object) {
+                                                    public void onSuccess(Brand object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -274,8 +432,8 @@ public class RecentItem extends Model {
                                     } //method def ends here.
                                  
                             
-                         
-                            
+                        
+                        
                         
                         
                         
@@ -321,35 +479,35 @@ public class RecentItem extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient Item  item ;
+                    private transient AppUser  appUser ;
 
-                    public Item getItem() {
-                        return item;
+                    public AppUser getAppUser() {
+                        return appUser;
                     }
 
-                    public void setItem(Item item) {
-                        this.item = item;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setItem(Map<String, Object> item) {
-                        //First create a dummy Repo class object for customer.
-                        ItemRepository itemRepository = new ItemRepository();
-                        Item item1 = itemRepository.createObject(item);
-                        setItem(item1);
+                    public void setAppUser(AppUser appUser) {
+                        this.appUser = appUser;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setItem(HashMap<String, Object> item) {
+                    public void setAppUser(Map<String, Object> appUser) {
                         //First create a dummy Repo class object for customer.
-                        ItemRepository itemRepository = new ItemRepository();
-                        Item item1 = itemRepository.createObject(item);
-                        setItem(item1);
+                        AppUserRepository appUserRepository = new AppUserRepository();
+                        AppUser appUser1 = appUserRepository.createObject(appUser);
+                        setAppUser(appUser1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setAppUser(HashMap<String, Object> appUser) {
+                        //First create a dummy Repo class object for customer.
+                        AppUserRepository appUserRepository = new AppUserRepository();
+                        AppUser appUser1 = appUserRepository.createObject(appUser);
+                        setAppUser(appUser1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Item item) {
-                        that.setItem(item);
+                    public void addRelation(AppUser appUser) {
+                        that.setAppUser(appUser);
                     }
 
 
@@ -367,17 +525,15 @@ public class RecentItem extends Model {
                     //Now add instance methods to fetch the related belongsTo Model..
                     
 
-                     
-                            
-                        
+                    
 
                                     //Write the method here..
-                                    public void get__item( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Item> callback) {
+                                    public void get__appUser( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<AppUser> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final RecentItemRepository  recentItemRepo = restAdapter.createRepository(RecentItemRepository.class);
+                                        final ChatRepository  chatRepo = restAdapter.createRepository(ChatRepository.class);
                                         
                                         
                                         
@@ -386,13 +542,13 @@ public class RecentItem extends Model {
 
 
 
-                                        recentItemRepo.get__item( (String)that.getId(), refresh,  new ObjectCallback<Item> (){
+                                        chatRepo.get__appUser( (String)that.getId(), refresh,  new ObjectCallback<AppUser> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Item object) {
+                                                    public void onSuccess(AppUser object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -426,6 +582,10 @@ public class RecentItem extends Model {
                                     } //method def ends here.
                                  
                             
+                         
+                            
+                        
+                        
                         
                         
                         

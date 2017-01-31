@@ -35,13 +35,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Carousel;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Category;
 
 //Now import model of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Item;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ItemRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.HotDeal;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.HotDealRepository;
             
         
     
@@ -50,11 +50,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Carousel;
 
 
 
-public class CarouselRepository extends ModelRepository<Carousel> {
+public class CategoryRepository extends ModelRepository<Category> {
 
 
-    public CarouselRepository(){
-        super("Carousel", null, Carousel.class);
+    public CategoryRepository(){
+        super("Category", null, Category.class);
     }
 
 
@@ -70,7 +70,7 @@ public class CarouselRepository extends ModelRepository<Carousel> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:carouselId/item", "GET"), "Carousel.prototype.__get__item");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/hotDeals/:fk", "GET"), "Category.prototype.__findById__hotDeals");
                 
 
             
@@ -78,7 +78,7 @@ public class CarouselRepository extends ModelRepository<Carousel> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Carousel.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/hotDeals/:fk", "DELETE"), "Category.prototype.__destroyById__hotDeals");
                 
 
             
@@ -86,7 +86,7 @@ public class CarouselRepository extends ModelRepository<Carousel> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Carousel.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/hotDeals/:fk", "PUT"), "Category.prototype.__updateById__hotDeals");
                 
 
             
@@ -94,7 +94,7 @@ public class CarouselRepository extends ModelRepository<Carousel> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Carousel.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/hotDeals", "GET"), "Category.prototype.__get__hotDeals");
                 
 
             
@@ -102,7 +102,7 @@ public class CarouselRepository extends ModelRepository<Carousel> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Carousel.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/hotDeals", "POST"), "Category.prototype.__create__hotDeals");
                 
 
             
@@ -110,7 +110,7 @@ public class CarouselRepository extends ModelRepository<Carousel> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Carousel.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/hotDeals", "DELETE"), "Category.prototype.__delete__hotDeals");
                 
 
             
@@ -118,7 +118,7 @@ public class CarouselRepository extends ModelRepository<Carousel> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Carousel.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/hotDeals/count", "GET"), "Category.prototype.__count__hotDeals");
                 
 
             
@@ -126,7 +126,7 @@ public class CarouselRepository extends ModelRepository<Carousel> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Carousel.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Category.create");
                 
 
             
@@ -134,7 +134,7 @@ public class CarouselRepository extends ModelRepository<Carousel> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Carousel.updateAll");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Category.create");
                 
 
             
@@ -142,7 +142,7 @@ public class CarouselRepository extends ModelRepository<Carousel> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Carousel.deleteById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Category.upsert");
                 
 
             
@@ -150,7 +150,7 @@ public class CarouselRepository extends ModelRepository<Carousel> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Carousel.count");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Category.exists");
                 
 
             
@@ -158,7 +158,55 @@ public class CarouselRepository extends ModelRepository<Carousel> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:carouselId", "PUT"), "Carousel.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Category.findById");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Category.find");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Category.findOne");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Category.updateAll");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Category.deleteById");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Category.count");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId", "PUT"), "Category.prototype.updateAttributes");
                 
 
             
@@ -168,7 +216,7 @@ public class CarouselRepository extends ModelRepository<Carousel> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Carousel.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Category.getSchema");
                 
 
             
@@ -176,7 +224,7 @@ public class CarouselRepository extends ModelRepository<Carousel> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Carousel.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Category.getAbsoluteSchema");
                 
 
             
@@ -184,11 +232,19 @@ public class CarouselRepository extends ModelRepository<Carousel> {
             
         
             
-        
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "Category.getDetailSchema");
+                
+
             
         
             
-        
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "Category.getModelRelationSchema");
+                
+
             
         
             
@@ -214,8 +270,8 @@ public class CarouselRepository extends ModelRepository<Carousel> {
 
     
         
-            //Method get__item definition
-            public void get__item(  String carouselId,  Boolean refresh, final ObjectCallback<Item> callback){
+            //Method findById__hotDeals definition
+            public void findById__hotDeals(  String categoryId,  String fk, final ObjectCallback<HotDeal> callback){
 
                 /**
                 Call the onBefore event
@@ -227,9 +283,9 @@ public class CarouselRepository extends ModelRepository<Carousel> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("carouselId", carouselId);
+                        hashMapObject.put("categoryId", categoryId);
                 
-                        hashMapObject.put("refresh", refresh);
+                        hashMapObject.put("fk", fk);
                 
 
                 
@@ -238,7 +294,7 @@ public class CarouselRepository extends ModelRepository<Carousel> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__item", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__hotDeals", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -251,10 +307,10 @@ public class CarouselRepository extends ModelRepository<Carousel> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ItemRepository itemRepo = getRestAdapter().createRepository(ItemRepository.class);
+                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Item item = itemRepo.createObject(result);
-                                    callback.onSuccess(item);
+                                    HotDeal hotDeal = hotDealRepo.createObject(result);
+                                    callback.onSuccess(hotDeal);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -268,7 +324,341 @@ public class CarouselRepository extends ModelRepository<Carousel> {
 
                 
 
-            }//Method get__item definition ends here..
+            }//Method findById__hotDeals definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__hotDeals definition
+            public void destroyById__hotDeals(  String categoryId,  String fk, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("categoryId", categoryId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__hotDeals", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__hotDeals definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__hotDeals definition
+            public void updateById__hotDeals(  String categoryId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<HotDeal> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("categoryId", categoryId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__updateById__hotDeals", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    HotDeal hotDeal = hotDealRepo.createObject(result);
+                                    callback.onSuccess(hotDeal);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method updateById__hotDeals definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__hotDeals definition
+            public void get__hotDeals(  String categoryId,  Map<String,  ? extends Object> filter, final DataListCallback<HotDeal> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("categoryId", categoryId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__hotDeals", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<HotDeal> hotDealList = new DataList<HotDeal>();
+                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+
+                                    for (Map<String, Object> obj : result) {
+                                        HotDeal hotDeal = hotDealRepo.createObject(obj);
+                                        hotDealList.add(hotDeal);
+                                    }
+                                    callback.onSuccess(hotDealList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method get__hotDeals definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__hotDeals definition
+            public void create__hotDeals(  String categoryId,  Map<String,  ? extends Object> data, final ObjectCallback<HotDeal> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("categoryId", categoryId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__hotDeals", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    HotDeal hotDeal = hotDealRepo.createObject(result);
+                                    callback.onSuccess(hotDeal);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__hotDeals definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__hotDeals definition
+            public void delete__hotDeals(  String categoryId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("categoryId", categoryId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__hotDeals", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__hotDeals definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__hotDeals definition
+            public void count__hotDeals(  String categoryId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("categoryId", categoryId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__hotDeals", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method count__hotDeals definition ends here..
 
             
 
@@ -276,7 +666,7 @@ public class CarouselRepository extends ModelRepository<Carousel> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Carousel> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Category> callback){
 
                 /**
                 Call the onBefore event
@@ -310,10 +700,10 @@ public class CarouselRepository extends ModelRepository<Carousel> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CarouselRepository carouselRepo = getRestAdapter().createRepository(CarouselRepository.class);
+                                    CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Carousel carousel = carouselRepo.createObject(result);
-                                    callback.onSuccess(carousel);
+                                    Category category = categoryRepo.createObject(result);
+                                    callback.onSuccess(category);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -336,7 +726,7 @@ public class CarouselRepository extends ModelRepository<Carousel> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Carousel> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Category> callback){
 
                 /**
                 Call the onBefore event
@@ -370,10 +760,10 @@ public class CarouselRepository extends ModelRepository<Carousel> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CarouselRepository carouselRepo = getRestAdapter().createRepository(CarouselRepository.class);
+                                    CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Carousel carousel = carouselRepo.createObject(result);
-                                    callback.onSuccess(carousel);
+                                    Category category = categoryRepo.createObject(result);
+                                    callback.onSuccess(category);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -446,7 +836,7 @@ public class CarouselRepository extends ModelRepository<Carousel> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Carousel> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Category> callback){
 
                 /**
                 Call the onBefore event
@@ -482,10 +872,10 @@ public class CarouselRepository extends ModelRepository<Carousel> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CarouselRepository carouselRepo = getRestAdapter().createRepository(CarouselRepository.class);
+                                    CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Carousel carousel = carouselRepo.createObject(result);
-                                    callback.onSuccess(carousel);
+                                    Category category = categoryRepo.createObject(result);
+                                    callback.onSuccess(category);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -507,7 +897,7 @@ public class CarouselRepository extends ModelRepository<Carousel> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Carousel> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Category> callback){
 
                 /**
                 Call the onBefore event
@@ -542,14 +932,14 @@ public class CarouselRepository extends ModelRepository<Carousel> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<Carousel> carouselList = new DataList<Carousel>();
-                                    CarouselRepository carouselRepo = getRestAdapter().createRepository(CarouselRepository.class);
+                                    DataList<Category> categoryList = new DataList<Category>();
+                                    CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Carousel carousel = carouselRepo.createObject(obj);
-                                        carouselList.add(carousel);
+                                        Category category = categoryRepo.createObject(obj);
+                                        categoryList.add(category);
                                     }
-                                    callback.onSuccess(carouselList);
+                                    callback.onSuccess(categoryList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -568,7 +958,7 @@ public class CarouselRepository extends ModelRepository<Carousel> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Carousel> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Category> callback){
 
                 /**
                 Call the onBefore event
@@ -602,10 +992,10 @@ public class CarouselRepository extends ModelRepository<Carousel> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CarouselRepository carouselRepo = getRestAdapter().createRepository(CarouselRepository.class);
+                                    CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Carousel carousel = carouselRepo.createObject(result);
-                                    callback.onSuccess(carousel);
+                                    Category category = categoryRepo.createObject(result);
+                                    callback.onSuccess(category);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -782,7 +1172,7 @@ public class CarouselRepository extends ModelRepository<Carousel> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String carouselId,  Map<String,  ? extends Object> data, final ObjectCallback<Carousel> callback){
+            public void updateAttributes(  String categoryId,  Map<String,  ? extends Object> data, final ObjectCallback<Category> callback){
 
                 /**
                 Call the onBefore event
@@ -794,7 +1184,7 @@ public class CarouselRepository extends ModelRepository<Carousel> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("carouselId", carouselId);
+                        hashMapObject.put("categoryId", categoryId);
                 
                         hashMapObject.putAll(data);
                 
@@ -818,10 +1208,10 @@ public class CarouselRepository extends ModelRepository<Carousel> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CarouselRepository carouselRepo = getRestAdapter().createRepository(CarouselRepository.class);
+                                    CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Carousel carousel = carouselRepo.createObject(result);
-                                    callback.onSuccess(carousel);
+                                    Category category = categoryRepo.createObject(result);
+                                    callback.onSuccess(category);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -944,11 +1334,101 @@ public class CarouselRepository extends ModelRepository<Carousel> {
         
     
         
-    
+            //Method getDetailSchema definition
+            public void getDetailSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getDetailSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method getDetailSchema definition ends here..
+
+            
+
         
     
         
-    
+            //Method getModelRelationSchema definition
+            public void getModelRelationSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getModelRelationSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method getModelRelationSchema definition ends here..
+
+            
+
         
     
         

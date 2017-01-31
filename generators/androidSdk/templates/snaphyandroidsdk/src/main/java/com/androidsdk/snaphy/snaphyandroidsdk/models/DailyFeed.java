@@ -25,12 +25,12 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.FacebookAccessTokenRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.DailyFeedRepository;
 
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.AppUserRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
             
 
         
@@ -43,7 +43,7 @@ import java.util.Map;
 
 
 
-public class FacebookAccessToken extends Model {
+public class DailyFeed extends Model {
 
 
     //For converting all model values to hashMap
@@ -58,9 +58,9 @@ public class FacebookAccessToken extends Model {
         }
     }
 
-    private FacebookAccessToken that ;
+    private DailyFeed that ;
 
-    public FacebookAccessToken (){
+    public DailyFeed (){
         that = this;
     }
 
@@ -69,17 +69,17 @@ public class FacebookAccessToken extends Model {
             
 
             
-                private String FbUserId;
+                private String added;
                 /* Adding Getter and Setter methods */
-                public String getFbUserId(){
-                    return FbUserId;
+                public String getAdded(){
+                    return added;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setFbUserId(String FbUserId){
-                    this.FbUserId = FbUserId;
+                public void setAdded(String added){
+                    this.added = added;
                     //Update hashMap value..
-                    hashMap.put("FbUserId", FbUserId);
+                    hashMap.put("added", added);
                 }
 
             
@@ -95,17 +95,17 @@ public class FacebookAccessToken extends Model {
             
 
             
-                private String token;
+                private String updated;
                 /* Adding Getter and Setter methods */
-                public String getToken(){
-                    return token;
+                public String getUpdated(){
+                    return updated;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setToken(String token){
-                    this.token = token;
+                public void setUpdated(String updated){
+                    this.updated = updated;
                     //Update hashMap value..
-                    hashMap.put("token", token);
+                    hashMap.put("updated", updated);
                 }
 
             
@@ -121,17 +121,43 @@ public class FacebookAccessToken extends Model {
             
 
             
-                private String expires;
+                private String title;
                 /* Adding Getter and Setter methods */
-                public String getExpires(){
-                    return expires;
+                public String getTitle(){
+                    return title;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setExpires(String expires){
-                    this.expires = expires;
+                public void setTitle(String title){
+                    this.title = title;
                     //Update hashMap value..
-                    hashMap.put("expires", expires);
+                    hashMap.put("title", title);
+                }
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+                private String description;
+                /* Adding Getter and Setter methods */
+                public String getDescription(){
+                    return description;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setDescription(String description){
+                    this.description = description;
+                    //Update hashMap value..
+                    hashMap.put("description", description);
                 }
 
             
@@ -149,6 +175,20 @@ public class FacebookAccessToken extends Model {
             
             
             
+                private Map<String, Object> image;
+                /* Adding Getter and Setter methods */
+                public Map<String, Object> getImage(){
+                    return image;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setImage(Map<String, Object> image){
+                    this.image = image;
+                    //Update Map value..
+                    hashMap.put("image", image);
+                }
+
+            
             
 
             
@@ -157,20 +197,6 @@ public class FacebookAccessToken extends Model {
     
         
             
-
-            
-                private String type;
-                /* Adding Getter and Setter methods */
-                public String getType(){
-                    return type;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setType(String type){
-                    this.type = type;
-                    //Update hashMap value..
-                    hashMap.put("type", type);
-                }
 
             
             
@@ -204,35 +230,35 @@ public class FacebookAccessToken extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient AppUser  appUser ;
+                    private transient Brand  brand ;
 
-                    public AppUser getAppUser() {
-                        return appUser;
+                    public Brand getBrand() {
+                        return brand;
                     }
 
-                    public void setAppUser(AppUser appUser) {
-                        this.appUser = appUser;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setAppUser(Map<String, Object> appUser) {
-                        //First create a dummy Repo class object for customer.
-                        AppUserRepository appUserRepository = new AppUserRepository();
-                        AppUser appUser1 = appUserRepository.createObject(appUser);
-                        setAppUser(appUser1);
+                    public void setBrand(Brand brand) {
+                        this.brand = brand;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setAppUser(HashMap<String, Object> appUser) {
+                    public void setBrand(Map<String, Object> brand) {
                         //First create a dummy Repo class object for customer.
-                        AppUserRepository appUserRepository = new AppUserRepository();
-                        AppUser appUser1 = appUserRepository.createObject(appUser);
-                        setAppUser(appUser1);
+                        BrandRepository brandRepository = new BrandRepository();
+                        Brand brand1 = brandRepository.createObject(brand);
+                        setBrand(brand1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setBrand(HashMap<String, Object> brand) {
+                        //First create a dummy Repo class object for customer.
+                        BrandRepository brandRepository = new BrandRepository();
+                        Brand brand1 = brandRepository.createObject(brand);
+                        setBrand(brand1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(AppUser appUser) {
-                        that.setAppUser(appUser);
+                    public void addRelation(Brand brand) {
+                        that.setBrand(brand);
                     }
 
 
@@ -253,12 +279,12 @@ public class FacebookAccessToken extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__appUser( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<AppUser> callback) {
+                                    public void get__brand( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Brand> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final FacebookAccessTokenRepository  facebookAccessTokenRepo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+                                        final DailyFeedRepository  dailyFeedRepo = restAdapter.createRepository(DailyFeedRepository.class);
                                         
                                         
                                         
@@ -267,13 +293,13 @@ public class FacebookAccessToken extends Model {
 
 
 
-                                        facebookAccessTokenRepo.get__appUser( (String)that.getId(), refresh,  new ObjectCallback<AppUser> (){
+                                        dailyFeedRepo.get__brand( (String)that.getId(), refresh,  new ObjectCallback<Brand> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(AppUser object) {
+                                                    public void onSuccess(Brand object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);

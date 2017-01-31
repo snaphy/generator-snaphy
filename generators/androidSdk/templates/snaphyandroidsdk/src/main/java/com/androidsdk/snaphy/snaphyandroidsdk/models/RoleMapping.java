@@ -25,12 +25,12 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.FacebookAccessTokenRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.RoleMappingRepository;
 
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.AppUserRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RoleRepository;
             
 
         
@@ -43,7 +43,7 @@ import java.util.Map;
 
 
 
-public class FacebookAccessToken extends Model {
+public class RoleMapping extends Model {
 
 
     //For converting all model values to hashMap
@@ -58,9 +58,9 @@ public class FacebookAccessToken extends Model {
         }
     }
 
-    private FacebookAccessToken that ;
+    private RoleMapping that ;
 
-    public FacebookAccessToken (){
+    public RoleMapping (){
         that = this;
     }
 
@@ -69,17 +69,29 @@ public class FacebookAccessToken extends Model {
             
 
             
-                private String FbUserId;
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+                private String principalType;
                 /* Adding Getter and Setter methods */
-                public String getFbUserId(){
-                    return FbUserId;
+                public String getPrincipalType(){
+                    return principalType;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setFbUserId(String FbUserId){
-                    this.FbUserId = FbUserId;
+                public void setPrincipalType(String principalType){
+                    this.principalType = principalType;
                     //Update hashMap value..
-                    hashMap.put("FbUserId", FbUserId);
+                    hashMap.put("principalType", principalType);
                 }
 
             
@@ -93,84 +105,6 @@ public class FacebookAccessToken extends Model {
     
         
             
-
-            
-                private String token;
-                /* Adding Getter and Setter methods */
-                public String getToken(){
-                    return token;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setToken(String token){
-                    this.token = token;
-                    //Update hashMap value..
-                    hashMap.put("token", token);
-                }
-
-            
-            
-            
-            
-
-            
-
-        
-    
-        
-            
-
-            
-                private String expires;
-                /* Adding Getter and Setter methods */
-                public String getExpires(){
-                    return expires;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setExpires(String expires){
-                    this.expires = expires;
-                    //Update hashMap value..
-                    hashMap.put("expires", expires);
-                }
-
-            
-            
-            
-            
-
-            
-
-        
-    
-        
-            
-
-            
-            
-            
-            
-
-            
-
-        
-    
-        
-            
-
-            
-                private String type;
-                /* Adding Getter and Setter methods */
-                public String getType(){
-                    return type;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setType(String type){
-                    this.type = type;
-                    //Update hashMap value..
-                    hashMap.put("type", type);
-                }
 
             
             
@@ -204,35 +138,35 @@ public class FacebookAccessToken extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient AppUser  appUser ;
+                    private transient Role  role ;
 
-                    public AppUser getAppUser() {
-                        return appUser;
+                    public Role getRole() {
+                        return role;
                     }
 
-                    public void setAppUser(AppUser appUser) {
-                        this.appUser = appUser;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setAppUser(Map<String, Object> appUser) {
-                        //First create a dummy Repo class object for customer.
-                        AppUserRepository appUserRepository = new AppUserRepository();
-                        AppUser appUser1 = appUserRepository.createObject(appUser);
-                        setAppUser(appUser1);
+                    public void setRole(Role role) {
+                        this.role = role;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setAppUser(HashMap<String, Object> appUser) {
+                    public void setRole(Map<String, Object> role) {
                         //First create a dummy Repo class object for customer.
-                        AppUserRepository appUserRepository = new AppUserRepository();
-                        AppUser appUser1 = appUserRepository.createObject(appUser);
-                        setAppUser(appUser1);
+                        RoleRepository roleRepository = new RoleRepository();
+                        Role role1 = roleRepository.createObject(role);
+                        setRole(role1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setRole(HashMap<String, Object> role) {
+                        //First create a dummy Repo class object for customer.
+                        RoleRepository roleRepository = new RoleRepository();
+                        Role role1 = roleRepository.createObject(role);
+                        setRole(role1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(AppUser appUser) {
-                        that.setAppUser(appUser);
+                    public void addRelation(Role role) {
+                        that.setRole(role);
                     }
 
 
@@ -253,12 +187,12 @@ public class FacebookAccessToken extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__appUser( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<AppUser> callback) {
+                                    public void get__role( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Role> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final FacebookAccessTokenRepository  facebookAccessTokenRepo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+                                        final RoleMappingRepository  roleMappingRepo = restAdapter.createRepository(RoleMappingRepository.class);
                                         
                                         
                                         
@@ -267,13 +201,13 @@ public class FacebookAccessToken extends Model {
 
 
 
-                                        facebookAccessTokenRepo.get__appUser( (String)that.getId(), refresh,  new ObjectCallback<AppUser> (){
+                                        roleMappingRepo.get__role( (String)that.getId(), refresh,  new ObjectCallback<Role> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(AppUser object) {
+                                                    public void onSuccess(Role object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);

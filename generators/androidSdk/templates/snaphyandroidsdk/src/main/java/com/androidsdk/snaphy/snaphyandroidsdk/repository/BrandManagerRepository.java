@@ -41,35 +41,42 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Employee;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.BrandManager;
 
 //Now import model of related models..
 
     
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Brand;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
+            
+        
+    
 
 
 
 
-public class EmployeeRepository extends UserRepository<Employee> {
+
+public class BrandManagerRepository extends UserRepository<BrandManager> {
 
 
-    public EmployeeRepository(){
-        super("Employee", null, Employee.class);
+    public BrandManagerRepository(){
+        super("BrandManager", null, BrandManager.class);
     }
 
 
     
     		//Create public methods..
-    		public Employee cachedCurrentUser;
+    		public BrandManager cachedCurrentUser;
             private Object currentUserId;
             private boolean isCurrentUserIdLoaded;
-    		public Employee getCachedCurrentUser(){
+    		public BrandManager getCachedCurrentUser(){
     			return cachedCurrentUser;
     		}
 
-    		public void setCachedCurrentUser(Employee user){
+    		public void setCachedCurrentUser(BrandManager user){
     			cachedCurrentUser = user;
     		}
 
@@ -77,7 +84,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     			super.setCurrentUserId(id);
     		} */
 
-            public void findCurrentUser(final ObjectCallback<Employee> callback){
+            public void findCurrentUser(final ObjectCallback<BrandManager> callback){
                 //Call the onBefore method..
                 callback.onBefore();
 
@@ -88,9 +95,9 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                 HashMap<String, Object> hashMap = new HashMap<>();
 
-                this.findById((String)getCurrentUserId(), hashMap, new ObjectCallback<Employee>() {
+                this.findById((String)getCurrentUserId(), hashMap, new ObjectCallback<BrandManager>() {
                     @Override
-                    public void onSuccess(Employee user){
+                    public void onSuccess(BrandManager user){
                         cachedCurrentUser = user;
                         callback.onSuccess(user);
                         //Call the finally method..
@@ -169,7 +176,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "GET"), "Employee.prototype.__findById__accessTokens");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandManagerId/accessTokens/:fk", "GET"), "BrandManager.prototype.__findById__accessTokens");
                 
 
             
@@ -177,7 +184,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "DELETE"), "Employee.prototype.__destroyById__accessTokens");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandManagerId/accessTokens/:fk", "DELETE"), "BrandManager.prototype.__destroyById__accessTokens");
                 
 
             
@@ -185,7 +192,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "PUT"), "Employee.prototype.__updateById__accessTokens");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandManagerId/accessTokens/:fk", "PUT"), "BrandManager.prototype.__updateById__accessTokens");
                 
 
             
@@ -193,7 +200,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "GET"), "Employee.prototype.__get__accessTokens");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandManagerId/brand", "GET"), "BrandManager.prototype.__get__brand");
                 
 
             
@@ -201,7 +208,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "POST"), "Employee.prototype.__create__accessTokens");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandManagerId/accessTokens", "GET"), "BrandManager.prototype.__get__accessTokens");
                 
 
             
@@ -209,7 +216,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "DELETE"), "Employee.prototype.__delete__accessTokens");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandManagerId/accessTokens", "POST"), "BrandManager.prototype.__create__accessTokens");
                 
 
             
@@ -217,7 +224,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/count", "GET"), "Employee.prototype.__count__accessTokens");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandManagerId/accessTokens", "DELETE"), "BrandManager.prototype.__delete__accessTokens");
                 
 
             
@@ -225,7 +232,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Employee.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandManagerId/accessTokens/count", "GET"), "BrandManager.prototype.__count__accessTokens");
                 
 
             
@@ -233,7 +240,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Employee.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "BrandManager.create");
                 
 
             
@@ -241,7 +248,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Employee.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "BrandManager.create");
                 
 
             
@@ -249,7 +256,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Employee.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "BrandManager.upsert");
                 
 
             
@@ -257,7 +264,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Employee.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "BrandManager.exists");
                 
 
             
@@ -265,7 +272,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Employee.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "BrandManager.findById");
                 
 
             
@@ -273,7 +280,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Employee.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "BrandManager.find");
                 
 
             
@@ -281,7 +288,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Employee.updateAll");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "BrandManager.findOne");
                 
 
             
@@ -289,7 +296,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Employee.deleteById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "BrandManager.updateAll");
                 
 
             
@@ -297,7 +304,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Employee.count");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "BrandManager.deleteById");
                 
 
             
@@ -305,7 +312,15 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId", "PUT"), "Employee.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "BrandManager.count");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandManagerId", "PUT"), "BrandManager.prototype.updateAttributes");
                 
 
             
@@ -319,7 +334,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/confirm", "GET"), "Employee.confirm");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/confirm", "GET"), "BrandManager.confirm");
                 
 
             
@@ -327,7 +342,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/reset", "POST"), "Employee.resetPassword");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/reset", "POST"), "BrandManager.resetPassword");
                 
 
             
@@ -335,7 +350,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/isAdmin", "POST"), "Employee.isAdmin");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "BrandManager.getSchema");
                 
 
             
@@ -343,15 +358,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Employee.getSchema");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Employee.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "BrandManager.getAbsoluteSchema");
                 
 
             
@@ -361,7 +368,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "Employee.getDetailSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/resetPasswordToken", "POST"), "BrandManager.resetPasswordToken");
                 
 
             
@@ -369,9 +376,49 @@ public class EmployeeRepository extends UserRepository<Employee> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "Employee.getModelRelationSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/resetPassword", "POST"), "BrandManager.resetPassword");
                 
 
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "BrandManager.getDetailSchema");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "BrandManager.getModelRelationSchema");
+                
+
+            
+        
+            
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/subscribe", "POST"), "BrandManager.subscribe");
+                
+
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
             
         
         return contract;
@@ -396,7 +443,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method findById__accessTokens definition
-            public void findById__accessTokens(  String employeeId,  String fk, final ObjectCallback<AccessToken> callback){
+            public void findById__accessTokens(  String brandManagerId,  String fk, final ObjectCallback<AccessToken> callback){
 
                 /**
                 Call the onBefore event
@@ -408,7 +455,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("brandManagerId", brandManagerId);
                 
                         hashMapObject.put("fk", fk);
                 
@@ -457,7 +504,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method destroyById__accessTokens definition
-            public void destroyById__accessTokens(  String employeeId,  String fk, final VoidCallback callback){
+            public void destroyById__accessTokens(  String brandManagerId,  String fk, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -469,7 +516,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("brandManagerId", brandManagerId);
                 
                         hashMapObject.put("fk", fk);
                 
@@ -505,7 +552,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method updateById__accessTokens definition
-            public void updateById__accessTokens(  String employeeId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
+            public void updateById__accessTokens(  String brandManagerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
 
                 /**
                 Call the onBefore event
@@ -517,7 +564,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("brandManagerId", brandManagerId);
                 
                         hashMapObject.put("fk", fk);
                 
@@ -567,8 +614,8 @@ public class EmployeeRepository extends UserRepository<Employee> {
         
     
         
-            //Method get__accessTokens definition
-            public void get__accessTokens(  String employeeId,  Map<String,  ? extends Object> filter, final DataListCallback<AccessToken> callback){
+            //Method get__brand definition
+            public void get__brand(  String brandManagerId,  Boolean refresh, final ObjectCallback<Brand> callback){
 
                 /**
                 Call the onBefore event
@@ -580,7 +627,68 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("brandManagerId", brandManagerId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__brand", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Brand brand = brandRepo.createObject(result);
+                                    callback.onSuccess(brand);
+
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__brand definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__accessTokens definition
+            public void get__accessTokens(  String brandManagerId,  Map<String,  ? extends Object> filter, final DataListCallback<AccessToken> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("brandManagerId", brandManagerId);
                 
                         hashMapObject.put("filter", filter);
                 
@@ -631,7 +739,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method create__accessTokens definition
-            public void create__accessTokens(  String employeeId,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
+            public void create__accessTokens(  String brandManagerId,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
 
                 /**
                 Call the onBefore event
@@ -643,7 +751,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("brandManagerId", brandManagerId);
                 
                         hashMapObject.putAll(data);
                 
@@ -692,7 +800,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method delete__accessTokens definition
-            public void delete__accessTokens(  String employeeId, final VoidCallback callback){
+            public void delete__accessTokens(  String brandManagerId, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -704,7 +812,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("brandManagerId", brandManagerId);
                 
 
                 
@@ -738,7 +846,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method count__accessTokens definition
-            public void count__accessTokens(  String employeeId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+            public void count__accessTokens(  String brandManagerId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -750,7 +858,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("brandManagerId", brandManagerId);
                 
                         hashMapObject.put("where", where);
                 
@@ -791,7 +899,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<BrandManager> callback){
 
                 /**
                 Call the onBefore event
@@ -825,10 +933,10 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    BrandManager brandManager = brandManagerRepo.createObject(result);
+                                    callback.onSuccess(brandManager);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -851,7 +959,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<BrandManager> callback){
 
                 /**
                 Call the onBefore event
@@ -885,10 +993,10 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    BrandManager brandManager = brandManagerRepo.createObject(result);
+                                    callback.onSuccess(brandManager);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -961,7 +1069,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Employee> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<BrandManager> callback){
 
                 /**
                 Call the onBefore event
@@ -997,10 +1105,10 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    BrandManager brandManager = brandManagerRepo.createObject(result);
+                                    callback.onSuccess(brandManager);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1022,7 +1130,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Employee> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<BrandManager> callback){
 
                 /**
                 Call the onBefore event
@@ -1057,14 +1165,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<Employee> employeeList = new DataList<Employee>();
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    DataList<BrandManager> brandManagerList = new DataList<BrandManager>();
+                                    BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Employee employee = employeeRepo.createObject(obj);
-                                        employeeList.add(employee);
+                                        BrandManager brandManager = brandManagerRepo.createObject(obj);
+                                        brandManagerList.add(brandManager);
                                     }
-                                    callback.onSuccess(employeeList);
+                                    callback.onSuccess(brandManagerList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1083,7 +1191,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Employee> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<BrandManager> callback){
 
                 /**
                 Call the onBefore event
@@ -1117,10 +1225,10 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    BrandManager brandManager = brandManagerRepo.createObject(result);
+                                    callback.onSuccess(brandManager);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1297,7 +1405,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String employeeId,  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+            public void updateAttributes(  String brandManagerId,  Map<String,  ? extends Object> data, final ObjectCallback<BrandManager> callback){
 
                 /**
                 Call the onBefore event
@@ -1309,7 +1417,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("brandManagerId", brandManagerId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1333,10 +1441,10 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
+                                    BrandManager brandManager = brandManagerRepo.createObject(result);
+                                    callback.onSuccess(brandManager);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1459,55 +1567,6 @@ public class EmployeeRepository extends UserRepository<Employee> {
         
     
         
-            //Method isAdmin definition
-            public void isAdmin( final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("isAdmin", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method isAdmin definition ends here..
-
-            
-
-        
-    
-        
             //Method getSchema definition
             public void getSchema( final ObjectCallback<JSONObject>  callback ){
 
@@ -1608,6 +1667,58 @@ public class EmployeeRepository extends UserRepository<Employee> {
         
     
         
+            //Method resetPasswordToken definition
+            public void resetPasswordToken(  String email, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("email", email);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("resetPasswordToken", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method resetPasswordToken definition ends here..
+
+            
+
+        
+    
+        
+        
             //Method getDetailSchema definition
             public void getDetailSchema( final ObjectCallback<JSONObject>  callback ){
 
@@ -1703,6 +1814,73 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
             
 
+        
+    
+        
+            //Method subscribe definition
+            public void subscribe(  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("subscribe", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method subscribe definition ends here..
+
+            
+
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
 

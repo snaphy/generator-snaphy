@@ -25,12 +25,15 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.CarouselRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandManagerRepository;
 
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ItemRepository;
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
             
 
         
@@ -43,7 +46,7 @@ import java.util.Map;
 
 
 
-public class Carousel extends Model {
+public class BrandManager extends User {
 
 
     //For converting all model values to hashMap
@@ -58,9 +61,9 @@ public class Carousel extends Model {
         }
     }
 
-    private Carousel that ;
+    private BrandManager that ;
 
-    public Carousel (){
+    public BrandManager (){
         that = this;
     }
 
@@ -68,21 +71,19 @@ public class Carousel extends Model {
         
             
 
-                private DataList<Map<String, Object>> images;
-                /* Adding Getter and Setter methods */
-                public DataList<Map<String, Object>> getImages(){
-                    return images;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setImages(DataList<Map<String, Object>> images){
-                    this.images = images;
-
-                    //TODO change this to custom array with double quotes escaped if error occured when sending to server..
-                    hashMap.put("images", images);
-                }
-
             
+                private String firstName;
+                /* Adding Getter and Setter methods */
+                public String getFirstName(){
+                    return firstName;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setFirstName(String firstName){
+                    this.firstName = firstName;
+                    //Update hashMap value..
+                    hashMap.put("firstName", firstName);
+                }
 
             
             
@@ -97,17 +98,121 @@ public class Carousel extends Model {
             
 
             
-                private String updated;
+                private String lastName;
                 /* Adding Getter and Setter methods */
-                public String getUpdated(){
-                    return updated;
+                public String getLastName(){
+                    return lastName;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setUpdated(String updated){
-                    this.updated = updated;
+                public void setLastName(String lastName){
+                    this.lastName = lastName;
                     //Update hashMap value..
-                    hashMap.put("updated", updated);
+                    hashMap.put("lastName", lastName);
+                }
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+                private String email;
+                /* Adding Getter and Setter methods */
+                public String getEmail(){
+                    return email;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setEmail(String email){
+                    this.email = email;
+                    //Update hashMap value..
+                    hashMap.put("email", email);
+                }
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+                private String password;
+                /* Adding Getter and Setter methods */
+                public String getPassword(){
+                    return password;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setPassword(String password){
+                    this.password = password;
+                    //Update hashMap value..
+                    hashMap.put("password", password);
+                }
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+                private String restrictHotDeal;
+                /* Adding Getter and Setter methods */
+                public String getRestrictHotDeal(){
+                    return restrictHotDeal;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setRestrictHotDeal(String restrictHotDeal){
+                    this.restrictHotDeal = restrictHotDeal;
+                    //Update hashMap value..
+                    hashMap.put("restrictHotDeal", restrictHotDeal);
+                }
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+                private String status;
+                /* Adding Getter and Setter methods */
+                public String getStatus(){
+                    return status;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setStatus(String status){
+                    this.status = status;
+                    //Update hashMap value..
+                    hashMap.put("status", status);
                 }
 
             
@@ -149,18 +254,114 @@ public class Carousel extends Model {
             
 
             
-                private String country;
+                private String updated;
                 /* Adding Getter and Setter methods */
-                public String getCountry(){
-                    return country;
+                public String getUpdated(){
+                    return updated;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setCountry(String country){
-                    this.country = country;
+                public void setUpdated(String updated){
+                    this.updated = updated;
                     //Update hashMap value..
-                    hashMap.put("country", country);
+                    hashMap.put("updated", updated);
                 }
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
 
             
             
@@ -203,38 +404,41 @@ public class Carousel extends Model {
 
     //Now adding relations between related models
     
+         
+          
+    
         
                 
                     //Define belongsTo relation method here..
-                    private transient Item  item ;
+                    private transient Brand  brand ;
 
-                    public Item getItem() {
-                        return item;
+                    public Brand getBrand() {
+                        return brand;
                     }
 
-                    public void setItem(Item item) {
-                        this.item = item;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setItem(Map<String, Object> item) {
-                        //First create a dummy Repo class object for customer.
-                        ItemRepository itemRepository = new ItemRepository();
-                        Item item1 = itemRepository.createObject(item);
-                        setItem(item1);
+                    public void setBrand(Brand brand) {
+                        this.brand = brand;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setItem(HashMap<String, Object> item) {
+                    public void setBrand(Map<String, Object> brand) {
                         //First create a dummy Repo class object for customer.
-                        ItemRepository itemRepository = new ItemRepository();
-                        Item item1 = itemRepository.createObject(item);
-                        setItem(item1);
+                        BrandRepository brandRepository = new BrandRepository();
+                        Brand brand1 = brandRepository.createObject(brand);
+                        setBrand(brand1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setBrand(HashMap<String, Object> brand) {
+                        //First create a dummy Repo class object for customer.
+                        BrandRepository brandRepository = new BrandRepository();
+                        Brand brand1 = brandRepository.createObject(brand);
+                        setBrand(brand1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Item item) {
-                        that.setItem(item);
+                    public void addRelation(Brand brand) {
+                        that.setBrand(brand);
                     }
 
 
@@ -252,15 +456,21 @@ public class Carousel extends Model {
                     //Now add instance methods to fetch the related belongsTo Model..
                     
 
-                    
+                     
+                            
+                         
+                            
+                         
+                            
+                        
 
                                     //Write the method here..
-                                    public void get__item( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Item> callback) {
+                                    public void get__brand( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Brand> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final CarouselRepository  carouselRepo = restAdapter.createRepository(CarouselRepository.class);
+                                        final BrandManagerRepository  brandManagerRepo = restAdapter.createRepository(BrandManagerRepository.class);
                                         
                                         
                                         
@@ -269,13 +479,13 @@ public class Carousel extends Model {
 
 
 
-                                        carouselRepo.get__item( (String)that.getId(), refresh,  new ObjectCallback<Item> (){
+                                        brandManagerRepo.get__brand( (String)that.getId(), refresh,  new ObjectCallback<Brand> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Item object) {
+                                                    public void onSuccess(Brand object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -309,6 +519,26 @@ public class Carousel extends Model {
                                     } //method def ends here.
                                  
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         

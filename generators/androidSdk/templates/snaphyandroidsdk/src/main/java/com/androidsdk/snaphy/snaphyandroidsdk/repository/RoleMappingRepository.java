@@ -35,20 +35,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Bookmark;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.RoleMapping;
 
 //Now import model of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
-            
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Item;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ItemRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Role;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RoleRepository;
             
         
     
@@ -57,11 +50,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.models.Bookmark;
 
 
 
-public class BookmarkRepository extends ModelRepository<Bookmark> {
+public class RoleMappingRepository extends ModelRepository<RoleMapping> {
 
 
-    public BookmarkRepository(){
-        super("Bookmark", null, Bookmark.class);
+    public RoleMappingRepository(){
+        super("RoleMapping", null, RoleMapping.class);
     }
 
 
@@ -77,7 +70,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookmarkId/customer", "GET"), "Bookmark.prototype.__get__customer");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:roleMappingId/role", "GET"), "RoleMapping.prototype.__get__role");
                 
 
             
@@ -85,7 +78,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookmarkId/item", "GET"), "Bookmark.prototype.__get__item");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "RoleMapping.create");
                 
 
             
@@ -93,7 +86,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Bookmark.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "RoleMapping.create");
                 
 
             
@@ -101,7 +94,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Bookmark.create");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "RoleMapping.upsert");
                 
 
             
@@ -109,7 +102,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Bookmark.upsert");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "RoleMapping.exists");
                 
 
             
@@ -117,7 +110,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Bookmark.exists");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "RoleMapping.findById");
                 
 
             
@@ -125,7 +118,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Bookmark.findById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "RoleMapping.find");
                 
 
             
@@ -133,7 +126,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Bookmark.find");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "RoleMapping.findOne");
                 
 
             
@@ -141,7 +134,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Bookmark.findOne");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "RoleMapping.updateAll");
                 
 
             
@@ -149,7 +142,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Bookmark.updateAll");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "RoleMapping.deleteById");
                 
 
             
@@ -157,7 +150,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Bookmark.deleteById");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "RoleMapping.count");
                 
 
             
@@ -165,15 +158,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Bookmark.count");
-                
-
-            
-        
-            
-
-                
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookmarkId", "PUT"), "Bookmark.prototype.updateAttributes");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:roleMappingId", "PUT"), "RoleMapping.prototype.updateAttributes");
                 
 
             
@@ -183,7 +168,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Bookmark.getSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "RoleMapping.getSchema");
                 
 
             
@@ -191,7 +176,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
             
 
                 
-                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Bookmark.getAbsoluteSchema");
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "RoleMapping.getAbsoluteSchema");
                 
 
             
@@ -199,19 +184,19 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
             
         
             
-        
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "RoleMapping.getDetailSchema");
+                
+
             
         
             
-        
-            
-        
-            
-        
-            
-        
-            
-        
+
+                
+                    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "RoleMapping.getModelRelationSchema");
+                
+
             
         
             
@@ -251,8 +236,8 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
 
     
         
-            //Method get__customer definition
-            public void get__customer(  String bookmarkId,  Boolean refresh, final ObjectCallback<Customer> callback){
+            //Method get__role definition
+            public void get__role(  String roleMappingId,  Boolean refresh, final ObjectCallback<Role> callback){
 
                 /**
                 Call the onBefore event
@@ -264,7 +249,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("bookmarkId", bookmarkId);
+                        hashMapObject.put("roleMappingId", roleMappingId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -275,7 +260,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__role", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -288,10 +273,10 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    RoleRepository roleRepo = getRestAdapter().createRepository(RoleRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Customer customer = customerRepo.createObject(result);
-                                    callback.onSuccess(customer);
+                                    Role role = roleRepo.createObject(result);
+                                    callback.onSuccess(role);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -305,68 +290,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
 
                 
 
-            }//Method get__customer definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__item definition
-            public void get__item(  String bookmarkId,  Boolean refresh, final ObjectCallback<Item> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-                
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("bookmarkId", bookmarkId);
-                
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__item", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    ItemRepository itemRepo = getRestAdapter().createRepository(ItemRepository.class);
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    Item item = itemRepo.createObject(result);
-                                    callback.onSuccess(item);
-
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method get__item definition ends here..
+            }//Method get__role definition ends here..
 
             
 
@@ -374,7 +298,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Bookmark> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<RoleMapping> callback){
 
                 /**
                 Call the onBefore event
@@ -408,10 +332,10 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BookmarkRepository bookmarkRepo = getRestAdapter().createRepository(BookmarkRepository.class);
+                                    RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Bookmark bookmark = bookmarkRepo.createObject(result);
-                                    callback.onSuccess(bookmark);
+                                    RoleMapping roleMapping = roleMappingRepo.createObject(result);
+                                    callback.onSuccess(roleMapping);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -434,7 +358,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Bookmark> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<RoleMapping> callback){
 
                 /**
                 Call the onBefore event
@@ -468,10 +392,10 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BookmarkRepository bookmarkRepo = getRestAdapter().createRepository(BookmarkRepository.class);
+                                    RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Bookmark bookmark = bookmarkRepo.createObject(result);
-                                    callback.onSuccess(bookmark);
+                                    RoleMapping roleMapping = roleMappingRepo.createObject(result);
+                                    callback.onSuccess(roleMapping);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -544,7 +468,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Bookmark> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<RoleMapping> callback){
 
                 /**
                 Call the onBefore event
@@ -580,10 +504,10 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BookmarkRepository bookmarkRepo = getRestAdapter().createRepository(BookmarkRepository.class);
+                                    RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Bookmark bookmark = bookmarkRepo.createObject(result);
-                                    callback.onSuccess(bookmark);
+                                    RoleMapping roleMapping = roleMappingRepo.createObject(result);
+                                    callback.onSuccess(roleMapping);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -605,7 +529,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Bookmark> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<RoleMapping> callback){
 
                 /**
                 Call the onBefore event
@@ -640,14 +564,14 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<Bookmark> bookmarkList = new DataList<Bookmark>();
-                                    BookmarkRepository bookmarkRepo = getRestAdapter().createRepository(BookmarkRepository.class);
+                                    DataList<RoleMapping> roleMappingList = new DataList<RoleMapping>();
+                                    RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Bookmark bookmark = bookmarkRepo.createObject(obj);
-                                        bookmarkList.add(bookmark);
+                                        RoleMapping roleMapping = roleMappingRepo.createObject(obj);
+                                        roleMappingList.add(roleMapping);
                                     }
-                                    callback.onSuccess(bookmarkList);
+                                    callback.onSuccess(roleMappingList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -666,7 +590,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Bookmark> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<RoleMapping> callback){
 
                 /**
                 Call the onBefore event
@@ -700,10 +624,10 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BookmarkRepository bookmarkRepo = getRestAdapter().createRepository(BookmarkRepository.class);
+                                    RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Bookmark bookmark = bookmarkRepo.createObject(result);
-                                    callback.onSuccess(bookmark);
+                                    RoleMapping roleMapping = roleMappingRepo.createObject(result);
+                                    callback.onSuccess(roleMapping);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -880,7 +804,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String bookmarkId,  Map<String,  ? extends Object> data, final ObjectCallback<Bookmark> callback){
+            public void updateAttributes(  String roleMappingId,  Map<String,  ? extends Object> data, final ObjectCallback<RoleMapping> callback){
 
                 /**
                 Call the onBefore event
@@ -892,7 +816,7 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("bookmarkId", bookmarkId);
+                        hashMapObject.put("roleMappingId", roleMappingId);
                 
                         hashMapObject.putAll(data);
                 
@@ -916,10 +840,10 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BookmarkRepository bookmarkRepo = getRestAdapter().createRepository(BookmarkRepository.class);
+                                    RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Bookmark bookmark = bookmarkRepo.createObject(result);
-                                    callback.onSuccess(bookmark);
+                                    RoleMapping roleMapping = roleMappingRepo.createObject(result);
+                                    callback.onSuccess(roleMapping);
 
                                 }else{
                                     callback.onSuccess(null);
@@ -1042,19 +966,101 @@ public class BookmarkRepository extends ModelRepository<Bookmark> {
         
     
         
-    
+            //Method getDetailSchema definition
+            public void getDetailSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getDetailSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method getDetailSchema definition ends here..
+
+            
+
         
     
         
-    
-        
-    
-        
-    
-        
-    
-        
-    
+            //Method getModelRelationSchema definition
+            public void getModelRelationSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+                
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getModelRelationSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method getModelRelationSchema definition ends here..
+
+            
+
         
     
         

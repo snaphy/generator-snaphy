@@ -25,19 +25,19 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.BookmarkRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.HotDealRepository;
 
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CategoryRepository;
             
 
         
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ItemRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
             
 
         
@@ -50,7 +50,7 @@ import java.util.Map;
 
 
 
-public class Bookmark extends Model {
+public class HotDeal extends Model {
 
 
     //For converting all model values to hashMap
@@ -65,12 +65,194 @@ public class Bookmark extends Model {
         }
     }
 
-    private Bookmark that ;
+    private HotDeal that ;
 
-    public Bookmark (){
+    public HotDeal (){
         that = this;
     }
 
+    
+        
+            
+
+            
+                private String title;
+                /* Adding Getter and Setter methods */
+                public String getTitle(){
+                    return title;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setTitle(String title){
+                    this.title = title;
+                    //Update hashMap value..
+                    hashMap.put("title", title);
+                }
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+                private String description;
+                /* Adding Getter and Setter methods */
+                public String getDescription(){
+                    return description;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setDescription(String description){
+                    this.description = description;
+                    //Update hashMap value..
+                    hashMap.put("description", description);
+                }
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+            
+                private Map<String, Object> image;
+                /* Adding Getter and Setter methods */
+                public Map<String, Object> getImage(){
+                    return image;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setImage(Map<String, Object> image){
+                    this.image = image;
+                    //Update Map value..
+                    hashMap.put("image", image);
+                }
+
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+                private String url;
+                /* Adding Getter and Setter methods */
+                public String getUrl(){
+                    return url;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setUrl(String url){
+                    this.url = url;
+                    //Update hashMap value..
+                    hashMap.put("url", url);
+                }
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+            
+                private double price;
+                /* Adding Getter and Setter methods */
+                public double getPrice(){
+                    return price;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setPrice(double price){
+                    this.price = price;
+                    //Update hashMap value..
+                    hashMap.put("price", price);
+                }
+
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+                private String status;
+                /* Adding Getter and Setter methods */
+                public String getStatus(){
+                    return status;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setStatus(String status){
+                    this.status = status;
+                    //Update hashMap value..
+                    hashMap.put("status", status);
+                }
+
+            
+            
+            
+            
+
+            
+
+        
+    
+        
+            
+
+            
+                private String expiryDate;
+                /* Adding Getter and Setter methods */
+                public String getExpiryDate(){
+                    return expiryDate;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setExpiryDate(String expiryDate){
+                    this.expiryDate = expiryDate;
+                    //Update hashMap value..
+                    hashMap.put("expiryDate", expiryDate);
+                }
+
+            
+            
+            
+            
+
+            
+
+        
     
         
             
@@ -171,35 +353,35 @@ public class Bookmark extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient Customer  customer ;
+                    private transient Category  category ;
 
-                    public Customer getCustomer() {
-                        return customer;
+                    public Category getCategory() {
+                        return category;
                     }
 
-                    public void setCustomer(Customer customer) {
-                        this.customer = customer;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setCustomer(Map<String, Object> customer) {
-                        //First create a dummy Repo class object for customer.
-                        CustomerRepository customerRepository = new CustomerRepository();
-                        Customer customer1 = customerRepository.createObject(customer);
-                        setCustomer(customer1);
+                    public void setCategory(Category category) {
+                        this.category = category;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setCustomer(HashMap<String, Object> customer) {
+                    public void setCategory(Map<String, Object> category) {
                         //First create a dummy Repo class object for customer.
-                        CustomerRepository customerRepository = new CustomerRepository();
-                        Customer customer1 = customerRepository.createObject(customer);
-                        setCustomer(customer1);
+                        CategoryRepository categoryRepository = new CategoryRepository();
+                        Category category1 = categoryRepository.createObject(category);
+                        setCategory(category1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setCategory(HashMap<String, Object> category) {
+                        //First create a dummy Repo class object for customer.
+                        CategoryRepository categoryRepository = new CategoryRepository();
+                        Category category1 = categoryRepository.createObject(category);
+                        setCategory(category1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Customer customer) {
-                        that.setCustomer(customer);
+                    public void addRelation(Category category) {
+                        that.setCategory(category);
                     }
 
 
@@ -220,12 +402,12 @@ public class Bookmark extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
+                                    public void get__category( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Category> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final BookmarkRepository  bookmarkRepo = restAdapter.createRepository(BookmarkRepository.class);
+                                        final HotDealRepository  hotDealRepo = restAdapter.createRepository(HotDealRepository.class);
                                         
                                         
                                         
@@ -234,13 +416,13 @@ public class Bookmark extends Model {
 
 
 
-                                        bookmarkRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
+                                        hotDealRepo.get__category( (String)that.getId(), refresh,  new ObjectCallback<Category> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Customer object) {
+                                                    public void onSuccess(Category object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -308,6 +490,8 @@ public class Bookmark extends Model {
                         
                         
                         
+                        
+                        
                     
 
                 
@@ -320,35 +504,35 @@ public class Bookmark extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient Item  item ;
+                    private transient Brand  brand ;
 
-                    public Item getItem() {
-                        return item;
+                    public Brand getBrand() {
+                        return brand;
                     }
 
-                    public void setItem(Item item) {
-                        this.item = item;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setItem(Map<String, Object> item) {
-                        //First create a dummy Repo class object for customer.
-                        ItemRepository itemRepository = new ItemRepository();
-                        Item item1 = itemRepository.createObject(item);
-                        setItem(item1);
+                    public void setBrand(Brand brand) {
+                        this.brand = brand;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setItem(HashMap<String, Object> item) {
+                    public void setBrand(Map<String, Object> brand) {
                         //First create a dummy Repo class object for customer.
-                        ItemRepository itemRepository = new ItemRepository();
-                        Item item1 = itemRepository.createObject(item);
-                        setItem(item1);
+                        BrandRepository brandRepository = new BrandRepository();
+                        Brand brand1 = brandRepository.createObject(brand);
+                        setBrand(brand1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setBrand(HashMap<String, Object> brand) {
+                        //First create a dummy Repo class object for customer.
+                        BrandRepository brandRepository = new BrandRepository();
+                        Brand brand1 = brandRepository.createObject(brand);
+                        setBrand(brand1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Item item) {
-                        that.setItem(item);
+                    public void addRelation(Brand brand) {
+                        that.setBrand(brand);
                     }
 
 
@@ -371,12 +555,12 @@ public class Bookmark extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__item( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Item> callback) {
+                                    public void get__brand( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Brand> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final BookmarkRepository  bookmarkRepo = restAdapter.createRepository(BookmarkRepository.class);
+                                        final HotDealRepository  hotDealRepo = restAdapter.createRepository(HotDealRepository.class);
                                         
                                         
                                         
@@ -385,13 +569,13 @@ public class Bookmark extends Model {
 
 
 
-                                        bookmarkRepo.get__item( (String)that.getId(), refresh,  new ObjectCallback<Item> (){
+                                        hotDealRepo.get__brand( (String)that.getId(), refresh,  new ObjectCallback<Brand> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Item object) {
+                                                    public void onSuccess(Brand object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -425,6 +609,8 @@ public class Bookmark extends Model {
                                     } //method def ends here.
                                  
                             
+                        
+                        
                         
                         
                         
