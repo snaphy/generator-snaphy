@@ -64,7 +64,7 @@ var generateDbModel = function(app, modelsRestDefinition){
   var ModelDBTemplatePath      = path.join(__dirname, constants.javaTemplates, "db", "CustomDb.ejs");
   var AndroidModelPath       = path.join(__dirname, constants.androidMainPath, "db");
   //Clean model folder and add new dir.
-  //rimraf.sync(AndroidModelPath);
+  rimraf.sync(AndroidModelPath);
   mkdirp.sync(AndroidModelPath);
   
   for(var modelName in app.models){
@@ -368,7 +368,7 @@ var init  = function(){
     generateCustomCallbacks(app, modelsRestDefinition);
     //Generate Presenter..
     generatePresenter(app, modelsRestDefinition);
-    //Generate database..
+    //Generate database..Db Handler always call this method after  generateDbModel
     generateDatabase(app, modelsRestDefinition);
     //Generate Image model and Repository..
     generateImagePresenter(app, modelsRestDefinition);
