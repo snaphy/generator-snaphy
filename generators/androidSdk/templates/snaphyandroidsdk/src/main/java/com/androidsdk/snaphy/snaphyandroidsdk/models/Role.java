@@ -214,7 +214,7 @@ public class Role extends Model {
                                  //Fetch locally from db
                                  //principals = getPrincipals__db(restAdapter);
                                  // Getting single cont
-                                 principals = roleRepository.getRoleDb().get__db("roleId", that.getId().toString());
+                                 principals = roleRepository.getRoleDb().getAll__db("roleId", that.getId().toString());
                               
                                    //lowercaseFirstLetter(modelName)
                             }

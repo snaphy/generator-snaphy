@@ -474,7 +474,7 @@ public class AppUser extends User {
                                  //Fetch locally from db
                                  //facebookAccessToken = getFacebookAccessToken__db(restAdapter);
                                  // Getting single cont
-                                 facebookAccessToken = appUserRepository.getAppUserDb().get__db("appUserId", that.getId().toString());
+                                 facebookAccessToken = appUserRepository.getAppUserDb().getAll__db("appUserId", that.getId().toString());
                               
                                    //lowercaseFirstLetter(modelName)
                             }
@@ -1777,7 +1777,7 @@ public class AppUser extends User {
                                  //Fetch locally from db
                                  //chats = getChats__db(restAdapter);
                                  // Getting single cont
-                                 chats = appUserRepository.getAppUserDb().get__db("appUserId", that.getId().toString());
+                                 chats = appUserRepository.getAppUserDb().getAll__db("appUserId", that.getId().toString());
                               
                                    //lowercaseFirstLetter(modelName)
                             }

@@ -230,7 +230,7 @@ public class Category extends Model {
                                  //Fetch locally from db
                                  //hotDeals = getHotDeals__db(restAdapter);
                                  // Getting single cont
-                                 hotDeals = categoryRepository.getCategoryDb().get__db("categoryId", that.getId().toString());
+                                 hotDeals = categoryRepository.getCategoryDb().getAll__db("categoryId", that.getId().toString());
                               
                                    //lowercaseFirstLetter(modelName)
                             }
