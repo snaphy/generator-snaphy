@@ -537,12 +537,12 @@ public class <%- modelName %> extends Model {
                             if(that.getId() != null){
                                    //TODO: Modify foreign key name..
                                    <%- modelName %>Repository <%- lowercaseFirstLetter(modelName) %>Repository = (<%- modelName %>Repository) getRepository();
-                                   if(restAdapter != null){
-                                     //Fetch locally from db
-                                     //<%- relation %> = get<%- capitalcaseRelationName %>__db(restAdapter);
-                                     // Getting single cont
-                                     <%- relation %> = modelRepository.get<%- modelName %>Db().get__db(<%- lowercaseFirstLetter(modelName) %>Id, that.getId().toString());
-                                   }
+                                 
+                                 //Fetch locally from db
+                                 //<%- relation %> = get<%- capitalcaseRelationName %>__db(restAdapter);
+                                 // Getting single cont
+                                 <%- relation %> = modelRepository.get<%- modelName %>Db().get__db(<%- lowercaseFirstLetter(modelName) %>Id, that.getId().toString());
+                              
                                    //lowercaseFirstLetter(modelName)
                             }
                         <%}-%>
