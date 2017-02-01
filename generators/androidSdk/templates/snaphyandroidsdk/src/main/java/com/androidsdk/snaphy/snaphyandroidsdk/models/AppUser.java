@@ -470,12 +470,12 @@ public class AppUser extends User {
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
                                    AppUserRepository appUserRepository = (AppUserRepository) getRepository();
-                                   if(restAdapter != null){
-                                     //Fetch locally from db
-                                     //facebookAccessToken = getFacebookAccessToken__db(restAdapter);
-                                     // Getting single cont
-                                     facebookAccessToken = modelRepository.getAppUserDb().get__db(appUserId, that.getId().toString());
-                                   }
+                                 
+                                 //Fetch locally from db
+                                 //facebookAccessToken = getFacebookAccessToken__db(restAdapter);
+                                 // Getting single cont
+                                 facebookAccessToken = modelRepository.getAppUserDb().get__db(appUserId, that.getId().toString());
+                              
                                    //lowercaseFirstLetter(modelName)
                             }
                                                 return facebookAccessToken;
@@ -1773,12 +1773,12 @@ public class AppUser extends User {
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
                                    AppUserRepository appUserRepository = (AppUserRepository) getRepository();
-                                   if(restAdapter != null){
-                                     //Fetch locally from db
-                                     //chats = getChats__db(restAdapter);
-                                     // Getting single cont
-                                     chats = modelRepository.getAppUserDb().get__db(appUserId, that.getId().toString());
-                                   }
+                                 
+                                 //Fetch locally from db
+                                 //chats = getChats__db(restAdapter);
+                                 // Getting single cont
+                                 chats = modelRepository.getAppUserDb().get__db(appUserId, that.getId().toString());
+                              
                                    //lowercaseFirstLetter(modelName)
                             }
                                                 return chats;

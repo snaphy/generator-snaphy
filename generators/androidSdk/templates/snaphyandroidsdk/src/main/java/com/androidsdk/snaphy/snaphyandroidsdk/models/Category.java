@@ -226,12 +226,12 @@ public class Category extends Model {
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
                                    CategoryRepository categoryRepository = (CategoryRepository) getRepository();
-                                   if(restAdapter != null){
-                                     //Fetch locally from db
-                                     //hotDeals = getHotDeals__db(restAdapter);
-                                     // Getting single cont
-                                     hotDeals = modelRepository.getCategoryDb().get__db(categoryId, that.getId().toString());
-                                   }
+                                 
+                                 //Fetch locally from db
+                                 //hotDeals = getHotDeals__db(restAdapter);
+                                 // Getting single cont
+                                 hotDeals = modelRepository.getCategoryDb().get__db(categoryId, that.getId().toString());
+                              
                                    //lowercaseFirstLetter(modelName)
                             }
                                                 return hotDeals;

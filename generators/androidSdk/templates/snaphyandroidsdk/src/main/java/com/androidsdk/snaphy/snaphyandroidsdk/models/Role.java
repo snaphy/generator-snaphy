@@ -210,12 +210,12 @@ public class Role extends Model {
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
                                    RoleRepository roleRepository = (RoleRepository) getRepository();
-                                   if(restAdapter != null){
-                                     //Fetch locally from db
-                                     //principals = getPrincipals__db(restAdapter);
-                                     // Getting single cont
-                                     principals = modelRepository.getRoleDb().get__db(roleId, that.getId().toString());
-                                   }
+                                 
+                                 //Fetch locally from db
+                                 //principals = getPrincipals__db(restAdapter);
+                                 // Getting single cont
+                                 principals = modelRepository.getRoleDb().get__db(roleId, that.getId().toString());
+                              
                                    //lowercaseFirstLetter(modelName)
                             }
                                                 return principals;
