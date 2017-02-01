@@ -39,80 +39,88 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
     }
 
 
-    public void insert__db (String id, Chat model) {
+    public void insert__db (String id, Chat modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
-        ContentValues values = new ContentValues();
+        ContentValues values = getContentValues(modelData);
+        db.insert(TABLE, null, values);
+        db.close(); // Closing database connection
+    }
+
+
+
+    public ContentValues getContentValues(Chat modelData){
+      ContentValues values = new ContentValues();
                        
                                                             String addedData;
-                        if(model.getAdded() != null){
-                          addedData = model.getAdded().toString();
+                        if(modelData.getAdded() != null){
+                          addedData = modelData.getAdded().toString();
                         }
                                                 values.put("added", addedData);
                                 
                                                             String updatedData;
-                        if(model.getUpdated() != null){
-                          updatedData = model.getUpdated().toString();
+                        if(modelData.getUpdated() != null){
+                          updatedData = modelData.getUpdated().toString();
                         }
                                                 values.put("updated", updatedData);
                                 
                                                             String messageData;
-                        if(model.getMessage() != null){
-                          messageData = model.getMessage().toString();
+                        if(modelData.getMessage() != null){
+                          messageData = modelData.getMessage().toString();
                         }
                                                 values.put("message", messageData);
                                 
                                                             String typeData;
-                        if(model.getType() != null){
-                          typeData = model.getType().toString();
+                        if(modelData.getType() != null){
+                          typeData = modelData.getType().toString();
                         }
                                                 values.put("type", typeData);
                                 
                                                             String imageData;
-                        if(model.getImage() != null){
-                          imageData = new Gson().toJson(model.getImage(), HashMap.class);
+                        if(modelData.getImage() != null){
+                          imageData = new Gson().toJson(modelData.getImage(), HashMap.class);
                         }
                                                 values.put("image", imageData);
                                 
                                                             String fromData;
-                        if(model.getFrom() != null){
-                          fromData = model.getFrom().toString();
+                        if(modelData.getFrom() != null){
+                          fromData = modelData.getFrom().toString();
                         }
                                                 values.put("from", fromData);
                                 
                                                             String guidData;
-                        if(model.getGuid() != null){
-                          guidData = model.getGuid().toString();
+                        if(modelData.getGuid() != null){
+                          guidData = modelData.getGuid().toString();
                         }
                                                 values.put("guid", guidData);
                                 
                                                             String statusData;
-                        if(model.getStatus() != null){
-                          statusData = model.getStatus().toString();
+                        if(modelData.getStatus() != null){
+                          statusData = modelData.getStatus().toString();
                         }
                                                 values.put("status", statusData);
                                 
                                                             String idData;
-                        if(model.getId() != null){
-                          idData = model.getId().toString();
+                        if(modelData.getId() != null){
+                          idData =modelData.getId().toString();
                         }
                                                 values.put("id", idData);
                                 
                                                             String appUserIdData;
-                        if(model.getAppUserId() != null){
-                          appUserIdData = model.getAppUserId().toString();
+                        if(modelData.getAppUserId() != null){
+                          appUserIdData =modelData.getAppUserId().toString();
                         }
                                                 values.put("appUserId", appUserIdData);
                                 
                                                             String brandIdData;
-                        if(model.getBrandId() != null){
-                          brandIdData = model.getBrandId().toString();
+                        if(modelData.getBrandId() != null){
+                          brandIdData =modelData.getBrandId().toString();
                         }
                                                 values.put("brandId", brandIdData);
                   
-        db.insert(TABLE, null, values);
-        db.close(); // Closing database connection
+        return values;
     }
+
 
 
     // Getting single cont
@@ -301,6 +309,16 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
         db.close();
         // return contact list
         return (DataList<Chat>) modelList;
+    }
+
+
+    // Updating single contact
+    public int update__db(String id,   Chat modelData) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = getContentValues(modelData);
+        // updating row
+        return db.update(TABLE, values, KEY_ID + " = ?",
+                new String[] { id });
     }
 
 

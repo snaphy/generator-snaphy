@@ -39,38 +39,46 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
     }
 
 
-    public void insert__db (String id, Category model) {
+    public void insert__db (String id, Category modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
-        ContentValues values = new ContentValues();
+        ContentValues values = getContentValues(modelData);
+        db.insert(TABLE, null, values);
+        db.close(); // Closing database connection
+    }
+
+
+
+    public ContentValues getContentValues(Category modelData){
+      ContentValues values = new ContentValues();
                        
                                                             String nameData;
-                        if(model.getName() != null){
-                          nameData = model.getName().toString();
+                        if(modelData.getName() != null){
+                          nameData = modelData.getName().toString();
                         }
                                                 values.put("name", nameData);
                                 
                                                             String addedData;
-                        if(model.getAdded() != null){
-                          addedData = model.getAdded().toString();
+                        if(modelData.getAdded() != null){
+                          addedData = modelData.getAdded().toString();
                         }
                                                 values.put("added", addedData);
                                 
                                                             String updatedData;
-                        if(model.getUpdated() != null){
-                          updatedData = model.getUpdated().toString();
+                        if(modelData.getUpdated() != null){
+                          updatedData = modelData.getUpdated().toString();
                         }
                                                 values.put("updated", updatedData);
                                 
                                                             String idData;
-                        if(model.getId() != null){
-                          idData = model.getId().toString();
+                        if(modelData.getId() != null){
+                          idData =modelData.getId().toString();
                         }
                                                 values.put("id", idData);
                   
-        db.insert(TABLE, null, values);
-        db.close(); // Closing database connection
+        return values;
     }
+
 
 
     // Getting single cont
@@ -189,6 +197,16 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
         db.close();
         // return contact list
         return (DataList<Category>) modelList;
+    }
+
+
+    // Updating single contact
+    public int update__db(String id,   Category modelData) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = getContentValues(modelData);
+        // updating row
+        return db.update(TABLE, values, KEY_ID + " = ?",
+                new String[] { id });
     }
 
 

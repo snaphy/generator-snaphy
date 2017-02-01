@@ -39,38 +39,46 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
     }
 
 
-    public void insert__db (String id, RoleMapping model) {
+    public void insert__db (String id, RoleMapping modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
-        ContentValues values = new ContentValues();
+        ContentValues values = getContentValues(modelData);
+        db.insert(TABLE, null, values);
+        db.close(); // Closing database connection
+    }
+
+
+
+    public ContentValues getContentValues(RoleMapping modelData){
+      ContentValues values = new ContentValues();
                        
                                                             String idData;
-                        if(model.getId() != null){
-                          idData = model.getId().toString();
+                        if(modelData.getId() != null){
+                          idData =modelData.getId().toString();
                         }
                                                 values.put("id", idData);
                                 
                                                             String principalTypeData;
-                        if(model.getPrincipalType() != null){
-                          principalTypeData = model.getPrincipalType().toString();
+                        if(modelData.getPrincipalType() != null){
+                          principalTypeData = modelData.getPrincipalType().toString();
                         }
                                                 values.put("principalType", principalTypeData);
                                 
                                                             String principalIdData;
-                        if(model.getPrincipalId() != null){
-                          principalIdData = model.getPrincipalId().toString();
+                        if(modelData.getPrincipalId() != null){
+                          principalIdData =modelData.getPrincipalId().toString();
                         }
                                                 values.put("principalId", principalIdData);
                                 
                                                             String roleIdData;
-                        if(model.getRoleId() != null){
-                          roleIdData = model.getRoleId().toString();
+                        if(modelData.getRoleId() != null){
+                          roleIdData =modelData.getRoleId().toString();
                         }
                                                 values.put("roleId", roleIdData);
                   
-        db.insert(TABLE, null, values);
-        db.close(); // Closing database connection
+        return values;
     }
+
 
 
     // Getting single cont
@@ -189,6 +197,16 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
         db.close();
         // return contact list
         return (DataList<RoleMapping>) modelList;
+    }
+
+
+    // Updating single contact
+    public int update__db(String id,   RoleMapping modelData) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = getContentValues(modelData);
+        // updating row
+        return db.update(TABLE, values, KEY_ID + " = ?",
+                new String[] { id });
     }
 
 

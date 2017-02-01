@@ -39,50 +39,58 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
     }
 
 
-    public void insert__db (String id, AdminEmail model) {
+    public void insert__db (String id, AdminEmail modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
-        ContentValues values = new ContentValues();
+        ContentValues values = getContentValues(modelData);
+        db.insert(TABLE, null, values);
+        db.close(); // Closing database connection
+    }
+
+
+
+    public ContentValues getContentValues(AdminEmail modelData){
+      ContentValues values = new ContentValues();
                        
                                                             String toData;
-                        if(model.getTo() != null){
-                          toData = model.getTo().toString();
+                        if(modelData.getTo() != null){
+                          toData =modelData.getTo().toString();
                         }
                                                 values.put("to", toData);
                                 
                                                             String fromData;
-                        if(model.getFrom() != null){
-                          fromData = model.getFrom().toString();
+                        if(modelData.getFrom() != null){
+                          fromData =modelData.getFrom().toString();
                         }
                                                 values.put("from", fromData);
                                 
                                                             String subjectData;
-                        if(model.getSubject() != null){
-                          subjectData = model.getSubject().toString();
+                        if(modelData.getSubject() != null){
+                          subjectData =modelData.getSubject().toString();
                         }
                                                 values.put("subject", subjectData);
                                 
                                                             String textData;
-                        if(model.getText() != null){
-                          textData = model.getText().toString();
+                        if(modelData.getText() != null){
+                          textData =modelData.getText().toString();
                         }
                                                 values.put("text", textData);
                                 
                                                             String htmlData;
-                        if(model.getHtml() != null){
-                          htmlData = model.getHtml().toString();
+                        if(modelData.getHtml() != null){
+                          htmlData =modelData.getHtml().toString();
                         }
                                                 values.put("html", htmlData);
                                 
                                                             String idData;
-                        if(model.getId() != null){
-                          idData = model.getId().toString();
+                        if(modelData.getId() != null){
+                          idData =modelData.getId().toString();
                         }
                                                 values.put("id", idData);
                   
-        db.insert(TABLE, null, values);
-        db.close(); // Closing database connection
+        return values;
     }
+
 
 
     // Getting single cont
@@ -221,6 +229,16 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
         db.close();
         // return contact list
         return (DataList<AdminEmail>) modelList;
+    }
+
+
+    // Updating single contact
+    public int update__db(String id,   AdminEmail modelData) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = getContentValues(modelData);
+        // updating row
+        return db.update(TABLE, values, KEY_ID + " = ?",
+                new String[] { id });
     }
 
 

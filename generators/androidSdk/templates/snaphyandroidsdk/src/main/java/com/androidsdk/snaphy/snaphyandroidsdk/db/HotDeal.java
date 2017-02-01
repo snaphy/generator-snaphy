@@ -39,86 +39,94 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
     }
 
 
-    public void insert__db (String id, HotDeal model) {
+    public void insert__db (String id, HotDeal modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
-        ContentValues values = new ContentValues();
+        ContentValues values = getContentValues(modelData);
+        db.insert(TABLE, null, values);
+        db.close(); // Closing database connection
+    }
+
+
+
+    public ContentValues getContentValues(HotDeal modelData){
+      ContentValues values = new ContentValues();
                        
                                                             String titleData;
-                        if(model.getTitle() != null){
-                          titleData = model.getTitle().toString();
+                        if(modelData.getTitle() != null){
+                          titleData = modelData.getTitle().toString();
                         }
                                                 values.put("title", titleData);
                                 
                                                             String descriptionData;
-                        if(model.getDescription() != null){
-                          descriptionData = model.getDescription().toString();
+                        if(modelData.getDescription() != null){
+                          descriptionData = modelData.getDescription().toString();
                         }
                                                 values.put("description", descriptionData);
                                 
                                                             String imageData;
-                        if(model.getImage() != null){
-                          imageData = new Gson().toJson(model.getImage(), HashMap.class);
+                        if(modelData.getImage() != null){
+                          imageData = new Gson().toJson(modelData.getImage(), HashMap.class);
                         }
                                                 values.put("image", imageData);
                                 
                                                             String urlData;
-                        if(model.getUrl() != null){
-                          urlData = model.getUrl().toString();
+                        if(modelData.getUrl() != null){
+                          urlData = modelData.getUrl().toString();
                         }
                                                 values.put("url", urlData);
                                 
                                                             double priceData;
-                        if(model.getPrice() != null){
-                          priceData = (double)model.getPrice();
+                        if(modelData.getPrice() != null){
+                          priceData = (double)modelData.getPrice();
                         }
                                                 values.put("price", priceData);
                                 
                                                             String statusData;
-                        if(model.getStatus() != null){
-                          statusData = model.getStatus().toString();
+                        if(modelData.getStatus() != null){
+                          statusData = modelData.getStatus().toString();
                         }
                                                 values.put("status", statusData);
                                 
                                                             String expiryDateData;
-                        if(model.getExpiryDate() != null){
-                          expiryDateData = model.getExpiryDate().toString();
+                        if(modelData.getExpiryDate() != null){
+                          expiryDateData = modelData.getExpiryDate().toString();
                         }
                                                 values.put("expiryDate", expiryDateData);
                                 
                                                             String addedData;
-                        if(model.getAdded() != null){
-                          addedData = model.getAdded().toString();
+                        if(modelData.getAdded() != null){
+                          addedData = modelData.getAdded().toString();
                         }
                                                 values.put("added", addedData);
                                 
                                                             String updatedData;
-                        if(model.getUpdated() != null){
-                          updatedData = model.getUpdated().toString();
+                        if(modelData.getUpdated() != null){
+                          updatedData = modelData.getUpdated().toString();
                         }
                                                 values.put("updated", updatedData);
                                 
                                                             String idData;
-                        if(model.getId() != null){
-                          idData = model.getId().toString();
+                        if(modelData.getId() != null){
+                          idData =modelData.getId().toString();
                         }
                                                 values.put("id", idData);
                                 
                                                             String categoryIdData;
-                        if(model.getCategoryId() != null){
-                          categoryIdData = model.getCategoryId().toString();
+                        if(modelData.getCategoryId() != null){
+                          categoryIdData =modelData.getCategoryId().toString();
                         }
                                                 values.put("categoryId", categoryIdData);
                                 
                                                             String brandIdData;
-                        if(model.getBrandId() != null){
-                          brandIdData = model.getBrandId().toString();
+                        if(modelData.getBrandId() != null){
+                          brandIdData =modelData.getBrandId().toString();
                         }
                                                 values.put("brandId", brandIdData);
                   
-        db.insert(TABLE, null, values);
-        db.close(); // Closing database connection
+        return values;
     }
+
 
 
     // Getting single cont
@@ -315,6 +323,16 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
         db.close();
         // return contact list
         return (DataList<HotDeal>) modelList;
+    }
+
+
+    // Updating single contact
+    public int update__db(String id,   HotDeal modelData) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = getContentValues(modelData);
+        // updating row
+        return db.update(TABLE, values, KEY_ID + " = ?",
+                new String[] { id });
     }
 
 

@@ -39,122 +39,130 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
     }
 
 
-    public void insert__db (String id, AppUser model) {
+    public void insert__db (String id, AppUser modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
-        ContentValues values = new ContentValues();
+        ContentValues values = getContentValues(modelData);
+        db.insert(TABLE, null, values);
+        db.close(); // Closing database connection
+    }
+
+
+
+    public ContentValues getContentValues(AppUser modelData){
+      ContentValues values = new ContentValues();
                        
                                                             String firstNameData;
-                        if(model.getFirstName() != null){
-                          firstNameData = model.getFirstName().toString();
+                        if(modelData.getFirstName() != null){
+                          firstNameData = modelData.getFirstName().toString();
                         }
                                                 values.put("firstName", firstNameData);
                                 
                                                             String lastNameData;
-                        if(model.getLastName() != null){
-                          lastNameData = model.getLastName().toString();
+                        if(modelData.getLastName() != null){
+                          lastNameData = modelData.getLastName().toString();
                         }
                                                 values.put("lastName", lastNameData);
                                 
                                                             String emailData;
-                        if(model.getEmail() != null){
-                          emailData = model.getEmail().toString();
+                        if(modelData.getEmail() != null){
+                          emailData = modelData.getEmail().toString();
                         }
                                                 values.put("email", emailData);
                                 
                                                             String addedData;
-                        if(model.getAdded() != null){
-                          addedData = model.getAdded().toString();
+                        if(modelData.getAdded() != null){
+                          addedData = modelData.getAdded().toString();
                         }
                                                 values.put("added", addedData);
                                 
                                                             String updatedData;
-                        if(model.getUpdated() != null){
-                          updatedData = model.getUpdated().toString();
+                        if(modelData.getUpdated() != null){
+                          updatedData = modelData.getUpdated().toString();
                         }
                                                 values.put("updated", updatedData);
                                 
                                                             String registrationIdData;
-                        if(model.getRegistrationId() != null){
-                          registrationIdData = model.getRegistrationId().toString();
+                        if(modelData.getRegistrationId() != null){
+                          registrationIdData = modelData.getRegistrationId().toString();
                         }
                                                 values.put("registrationId", registrationIdData);
                                 
                                                             String profilePicData;
-                        if(model.getProfilePic() != null){
-                          profilePicData = new Gson().toJson(model.getProfilePic(), HashMap.class);
+                        if(modelData.getProfilePic() != null){
+                          profilePicData = new Gson().toJson(modelData.getProfilePic(), HashMap.class);
                         }
                                                 values.put("profilePic", profilePicData);
                                 
                                                             String realmData;
-                        if(model.getRealm() != null){
-                          realmData = model.getRealm().toString();
+                        if(modelData.getRealm() != null){
+                          realmData =modelData.getRealm().toString();
                         }
                                                 values.put("realm", realmData);
                                 
                                                             String usernameData;
-                        if(model.getUsername() != null){
-                          usernameData = model.getUsername().toString();
+                        if(modelData.getUsername() != null){
+                          usernameData =modelData.getUsername().toString();
                         }
                                                 values.put("username", usernameData);
                                 
                                                             String passwordData;
-                        if(model.getPassword() != null){
-                          passwordData = model.getPassword().toString();
+                        if(modelData.getPassword() != null){
+                          passwordData =modelData.getPassword().toString();
                         }
                                                 values.put("password", passwordData);
                                 
                                                             String credentialsData;
-                        if(model.getCredentials() != null){
-                          credentialsData = model.getCredentials().toString();
+                        if(modelData.getCredentials() != null){
+                          credentialsData =modelData.getCredentials().toString();
                         }
                                                 values.put("credentials", credentialsData);
                                 
                                                             String challengesData;
-                        if(model.getChallenges() != null){
-                          challengesData = model.getChallenges().toString();
+                        if(modelData.getChallenges() != null){
+                          challengesData =modelData.getChallenges().toString();
                         }
                                                 values.put("challenges", challengesData);
                                 
                                                             String emailVerifiedData;
-                        if(model.getEmailVerified() != null){
-                          emailVerifiedData = model.getEmailVerified().toString();
+                        if(modelData.getEmailVerified() != null){
+                          emailVerifiedData =modelData.getEmailVerified().toString();
                         }
                                                 values.put("emailVerified", emailVerifiedData);
                                 
                                                             String verificationTokenData;
-                        if(model.getVerificationToken() != null){
-                          verificationTokenData = model.getVerificationToken().toString();
+                        if(modelData.getVerificationToken() != null){
+                          verificationTokenData =modelData.getVerificationToken().toString();
                         }
                                                 values.put("verificationToken", verificationTokenData);
                                 
                                                             String statusData;
-                        if(model.getStatus() != null){
-                          statusData = model.getStatus().toString();
+                        if(modelData.getStatus() != null){
+                          statusData =modelData.getStatus().toString();
                         }
                                                 values.put("status", statusData);
                                 
                                                             String createdData;
-                        if(model.getCreated() != null){
-                          createdData = model.getCreated().toString();
+                        if(modelData.getCreated() != null){
+                          createdData =modelData.getCreated().toString();
                         }
                                                 values.put("created", createdData);
                                 
                                                             String lastUpdatedData;
-                        if(model.getLastUpdated() != null){
-                          lastUpdatedData = model.getLastUpdated().toString();
+                        if(modelData.getLastUpdated() != null){
+                          lastUpdatedData =modelData.getLastUpdated().toString();
                         }
                                                 values.put("lastUpdated", lastUpdatedData);
                                 
                                                             String idData;
-                        if(model.getId() != null){
-                          idData = model.getId().toString();
+                        if(modelData.getId() != null){
+                          idData =modelData.getId().toString();
                         }
                                                 values.put("id", idData);
                   
-        db.insert(TABLE, null, values);
-        db.close(); // Closing database connection
+        return values;
     }
+
 
 
     // Getting single cont
@@ -413,6 +421,16 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
         db.close();
         // return contact list
         return (DataList<AppUser>) modelList;
+    }
+
+
+    // Updating single contact
+    public int update__db(String id,   AppUser modelData) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = getContentValues(modelData);
+        // updating row
+        return db.update(TABLE, values, KEY_ID + " = ?",
+                new String[] { id });
     }
 
 

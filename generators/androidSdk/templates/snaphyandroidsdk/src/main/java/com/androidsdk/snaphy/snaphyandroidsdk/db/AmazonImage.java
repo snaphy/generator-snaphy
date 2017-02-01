@@ -39,44 +39,52 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
     }
 
 
-    public void insert__db (String id, AmazonImage model) {
+    public void insert__db (String id, AmazonImage modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
-        ContentValues values = new ContentValues();
+        ContentValues values = getContentValues(modelData);
+        db.insert(TABLE, null, values);
+        db.close(); // Closing database connection
+    }
+
+
+
+    public ContentValues getContentValues(AmazonImage modelData){
+      ContentValues values = new ContentValues();
                        
                                                             String nameData;
-                        if(model.getName() != null){
-                          nameData = model.getName().toString();
+                        if(modelData.getName() != null){
+                          nameData = modelData.getName().toString();
                         }
                                                 values.put("name", nameData);
                                 
                                                             String containerData;
-                        if(model.getContainer() != null){
-                          containerData = model.getContainer().toString();
+                        if(modelData.getContainer() != null){
+                          containerData = modelData.getContainer().toString();
                         }
                                                 values.put("container", containerData);
                                 
                                                             String typeData;
-                        if(model.getType() != null){
-                          typeData = model.getType().toString();
+                        if(modelData.getType() != null){
+                          typeData = modelData.getType().toString();
                         }
                                                 values.put("type", typeData);
                                 
                                                             String urlData;
-                        if(model.getUrl() != null){
-                          urlData = new Gson().toJson(model.getUrl(), HashMap.class);
+                        if(modelData.getUrl() != null){
+                          urlData = new Gson().toJson(modelData.getUrl(), HashMap.class);
                         }
                                                 values.put("url", urlData);
                                 
                                                             String idData;
-                        if(model.getId() != null){
-                          idData = model.getId().toString();
+                        if(modelData.getId() != null){
+                          idData =modelData.getId().toString();
                         }
                                                 values.put("id", idData);
                   
-        db.insert(TABLE, null, values);
-        db.close(); // Closing database connection
+        return values;
     }
+
 
 
     // Getting single cont
@@ -205,6 +213,16 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
         db.close();
         // return contact list
         return (DataList<AmazonImage>) modelList;
+    }
+
+
+    // Updating single contact
+    public int update__db(String id,   AmazonImage modelData) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = getContentValues(modelData);
+        // updating row
+        return db.update(TABLE, values, KEY_ID + " = ?",
+                new String[] { id });
     }
 
 

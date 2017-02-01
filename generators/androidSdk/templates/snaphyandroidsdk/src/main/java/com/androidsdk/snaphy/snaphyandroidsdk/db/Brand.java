@@ -39,80 +39,88 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
     }
 
 
-    public void insert__db (String id, Brand model) {
+    public void insert__db (String id, Brand modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
-        ContentValues values = new ContentValues();
+        ContentValues values = getContentValues(modelData);
+        db.insert(TABLE, null, values);
+        db.close(); // Closing database connection
+    }
+
+
+
+    public ContentValues getContentValues(Brand modelData){
+      ContentValues values = new ContentValues();
                        
                                                             String addedData;
-                        if(model.getAdded() != null){
-                          addedData = model.getAdded().toString();
+                        if(modelData.getAdded() != null){
+                          addedData = modelData.getAdded().toString();
                         }
                                                 values.put("added", addedData);
                                 
                                                             String updatedData;
-                        if(model.getUpdated() != null){
-                          updatedData = model.getUpdated().toString();
+                        if(modelData.getUpdated() != null){
+                          updatedData = modelData.getUpdated().toString();
                         }
                                                 values.put("updated", updatedData);
                                 
                                                             String nameData;
-                        if(model.getName() != null){
-                          nameData = model.getName().toString();
+                        if(modelData.getName() != null){
+                          nameData = modelData.getName().toString();
                         }
                                                 values.put("name", nameData);
                                 
                                                             String imageData;
-                        if(model.getImage() != null){
-                          imageData = new Gson().toJson(model.getImage(), HashMap.class);
+                        if(modelData.getImage() != null){
+                          imageData = new Gson().toJson(modelData.getImage(), HashMap.class);
                         }
                                                 values.put("image", imageData);
                                 
                                                             String trendingData;
-                        if(model.getTrending() != null){
-                          trendingData = model.getTrending().toString();
+                        if(modelData.getTrending() != null){
+                          trendingData = modelData.getTrending().toString();
                         }
                                                 values.put("trending", trendingData);
                                 
                                                             String facebookUrlData;
-                        if(model.getFacebookUrl() != null){
-                          facebookUrlData = model.getFacebookUrl().toString();
+                        if(modelData.getFacebookUrl() != null){
+                          facebookUrlData = modelData.getFacebookUrl().toString();
                         }
                                                 values.put("facebookUrl", facebookUrlData);
                                 
                                                             String googleUrlData;
-                        if(model.getGoogleUrl() != null){
-                          googleUrlData = model.getGoogleUrl().toString();
+                        if(modelData.getGoogleUrl() != null){
+                          googleUrlData = modelData.getGoogleUrl().toString();
                         }
                                                 values.put("googleUrl", googleUrlData);
                                 
                                                             String instagramUrlData;
-                        if(model.getInstagramUrl() != null){
-                          instagramUrlData = model.getInstagramUrl().toString();
+                        if(modelData.getInstagramUrl() != null){
+                          instagramUrlData = modelData.getInstagramUrl().toString();
                         }
                                                 values.put("instagramUrl", instagramUrlData);
                                 
                                                             String statusData;
-                        if(model.getStatus() != null){
-                          statusData = model.getStatus().toString();
+                        if(modelData.getStatus() != null){
+                          statusData = modelData.getStatus().toString();
                         }
                                                 values.put("status", statusData);
                                 
                                                             String associatedEmailData;
-                        if(model.getAssociatedEmail() != null){
-                          associatedEmailData = model.getAssociatedEmail().toString();
+                        if(modelData.getAssociatedEmail() != null){
+                          associatedEmailData = modelData.getAssociatedEmail().toString();
                         }
                                                 values.put("associatedEmail", associatedEmailData);
                                 
                                                             String idData;
-                        if(model.getId() != null){
-                          idData = model.getId().toString();
+                        if(modelData.getId() != null){
+                          idData =modelData.getId().toString();
                         }
                                                 values.put("id", idData);
                   
-        db.insert(TABLE, null, values);
-        db.close(); // Closing database connection
+        return values;
     }
+
 
 
     // Getting single cont
@@ -301,6 +309,16 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
         db.close();
         // return contact list
         return (DataList<Brand>) modelList;
+    }
+
+
+    // Updating single contact
+    public int update__db(String id,   Brand modelData) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = getContentValues(modelData);
+        // updating row
+        return db.update(TABLE, values, KEY_ID + " = ?",
+                new String[] { id });
     }
 
 

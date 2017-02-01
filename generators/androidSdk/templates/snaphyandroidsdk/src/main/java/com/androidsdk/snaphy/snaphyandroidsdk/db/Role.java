@@ -39,44 +39,52 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
     }
 
 
-    public void insert__db (String id, Role model) {
+    public void insert__db (String id, Role modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
-        ContentValues values = new ContentValues();
+        ContentValues values = getContentValues(modelData);
+        db.insert(TABLE, null, values);
+        db.close(); // Closing database connection
+    }
+
+
+
+    public ContentValues getContentValues(Role modelData){
+      ContentValues values = new ContentValues();
                        
                                                             String idData;
-                        if(model.getId() != null){
-                          idData = model.getId().toString();
+                        if(modelData.getId() != null){
+                          idData =modelData.getId().toString();
                         }
                                                 values.put("id", idData);
                                 
                                                             String nameData;
-                        if(model.getName() != null){
-                          nameData = model.getName().toString();
+                        if(modelData.getName() != null){
+                          nameData = modelData.getName().toString();
                         }
                                                 values.put("name", nameData);
                                 
                                                             String descriptionData;
-                        if(model.getDescription() != null){
-                          descriptionData = model.getDescription().toString();
+                        if(modelData.getDescription() != null){
+                          descriptionData =modelData.getDescription().toString();
                         }
                                                 values.put("description", descriptionData);
                                 
                                                             String createdData;
-                        if(model.getCreated() != null){
-                          createdData = model.getCreated().toString();
+                        if(modelData.getCreated() != null){
+                          createdData =modelData.getCreated().toString();
                         }
                                                 values.put("created", createdData);
                                 
                                                             String modifiedData;
-                        if(model.getModified() != null){
-                          modifiedData = model.getModified().toString();
+                        if(modelData.getModified() != null){
+                          modifiedData =modelData.getModified().toString();
                         }
                                                 values.put("modified", modifiedData);
                   
-        db.insert(TABLE, null, values);
-        db.close(); // Closing database connection
+        return values;
     }
+
 
 
     // Getting single cont
@@ -205,6 +213,16 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
         db.close();
         // return contact list
         return (DataList<Role>) modelList;
+    }
+
+
+    // Updating single contact
+    public int update__db(String id,   Role modelData) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = getContentValues(modelData);
+        // updating row
+        return db.update(TABLE, values, KEY_ID + " = ?",
+                new String[] { id });
     }
 
 

@@ -39,56 +39,64 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
     }
 
 
-    public void insert__db (String id, DailyFeed model) {
+    public void insert__db (String id, DailyFeed modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
-        ContentValues values = new ContentValues();
+        ContentValues values = getContentValues(modelData);
+        db.insert(TABLE, null, values);
+        db.close(); // Closing database connection
+    }
+
+
+
+    public ContentValues getContentValues(DailyFeed modelData){
+      ContentValues values = new ContentValues();
                        
                                                             String addedData;
-                        if(model.getAdded() != null){
-                          addedData = model.getAdded().toString();
+                        if(modelData.getAdded() != null){
+                          addedData = modelData.getAdded().toString();
                         }
                                                 values.put("added", addedData);
                                 
                                                             String updatedData;
-                        if(model.getUpdated() != null){
-                          updatedData = model.getUpdated().toString();
+                        if(modelData.getUpdated() != null){
+                          updatedData = modelData.getUpdated().toString();
                         }
                                                 values.put("updated", updatedData);
                                 
                                                             String titleData;
-                        if(model.getTitle() != null){
-                          titleData = model.getTitle().toString();
+                        if(modelData.getTitle() != null){
+                          titleData = modelData.getTitle().toString();
                         }
                                                 values.put("title", titleData);
                                 
                                                             String descriptionData;
-                        if(model.getDescription() != null){
-                          descriptionData = model.getDescription().toString();
+                        if(modelData.getDescription() != null){
+                          descriptionData = modelData.getDescription().toString();
                         }
                                                 values.put("description", descriptionData);
                                 
                                                             String imageData;
-                        if(model.getImage() != null){
-                          imageData = new Gson().toJson(model.getImage(), HashMap.class);
+                        if(modelData.getImage() != null){
+                          imageData = new Gson().toJson(modelData.getImage(), HashMap.class);
                         }
                                                 values.put("image", imageData);
                                 
                                                             String idData;
-                        if(model.getId() != null){
-                          idData = model.getId().toString();
+                        if(modelData.getId() != null){
+                          idData =modelData.getId().toString();
                         }
                                                 values.put("id", idData);
                                 
                                                             String brandIdData;
-                        if(model.getBrandId() != null){
-                          brandIdData = model.getBrandId().toString();
+                        if(modelData.getBrandId() != null){
+                          brandIdData =modelData.getBrandId().toString();
                         }
                                                 values.put("brandId", brandIdData);
                   
-        db.insert(TABLE, null, values);
-        db.close(); // Closing database connection
+        return values;
     }
+
 
 
     // Getting single cont
@@ -237,6 +245,16 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
         db.close();
         // return contact list
         return (DataList<DailyFeed>) modelList;
+    }
+
+
+    // Updating single contact
+    public int update__db(String id,   DailyFeed modelData) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = getContentValues(modelData);
+        // updating row
+        return db.update(TABLE, values, KEY_ID + " = ?",
+                new String[] { id });
     }
 
 

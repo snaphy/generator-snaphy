@@ -1,23 +1,29 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.db;
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
-//Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.<%- modelName %>Repository;
-//Import Model
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.<%- modelName %>;
-import com.strongloop.android.loopback.RestAdapter;
-
-/**
-* Created by snaphy on 1/2/2017.
-*/
 
 <%
  /*-------PURE JAVASCRIPT METHODS-------------------*/
  var modelName = model.methods.capitalizeFirstLetter(model.name);
 %>
+
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues;
+import java.util.HashMap;
+import com.google.gson.Gson;
+import android.database.Cursor;
+import java.util.Map;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.models.<%- modelName %>;
+//Import self repository..
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.<%- modelName %>Repository;
+import com.strongloop.android.loopback.RestAdapter;
+
+/**
+* Created by snaphy on 1/2/2017.
+*/
 
 public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelName %>Repository> {
   public ChatDb(Context context, RestAdapter restAdapter){
@@ -71,7 +77,7 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         ContentValues values = getContentValues(modelData);
-        db.insert(TABLE, null, values);
+        db.insert("<%- modelName %>", null, values);
         db.close(); // Closing database connection
     }
 
@@ -93,29 +99,29 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
                   }
               <% }else{ -%>
                     <% if(model.properties[property].type === "string" || model.properties[property].type === "date"){ -%>
-                        String <%-property%>Data;
+                        String <%-property%>Data = "";
                         if(modelData.get<%-capitalPropertyName%>() != null){
                           <%-property%>Data = modelData.get<%-capitalPropertyName%>().toString();
                         }
                     <% }else if(model.properties[property].type === "object" || model.properties[property].type === "geopoint"){ -%>
-                        String <%-property%>Data;
+                        String <%-property%>Data = "";
                         if(modelData.get<%-capitalPropertyName%>() != null){
                           <%-property%>Data = new Gson().toJson(modelData.get<%-capitalPropertyName%>(), HashMap.class);
                         }
                     <% }else if(model.properties[property].type === "number"){ -%>
-                        double <%-property%>Data;
+                        double <%-property%>Data = 0;
                         if(modelData.get<%-capitalPropertyName%>() != null){
                           <%-property%>Data = (double)modelData.get<%-capitalPropertyName%>();
                         }
                     <% }else if(model.properties[property].type === "boolean"){ -%>
-                        int <%-property%>Data;
+                        int <%-property%>Data = 0;
                         if(modelData.get<%-capitalPropertyName%>()){
                           <%-property%>Data = 1;
                         }else{
                           <%-property%>Data = 0;
                         }
                     <% }else{ -%>
-                        String <%-property%>Data;
+                        String <%-property%>Data = "";
                         if(modelData.get<%-capitalPropertyName%>() != null){
                           <%-property%>Data =modelData.get<%-capitalPropertyName%>().toString();
                         }
@@ -140,17 +146,13 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
 
                 cursor.close();
                 db.close(); // Closing database connection
-                if (object != null) {
-                    if (chatHashMap != null) {
-                        <%- modelName %>Repository repo = restAdapter.createRepository(<%- modelName %>Repository.class);
-                        return (<%- modelName %>)repo.createObject(chatHashMap);
-                    } else {
-                        return null;
-                    }
+                
+                if (chatHashMap != null) {
+                    <%- modelName %>Repository repo = restAdapter.createRepository(<%- modelName %>Repository.class);
+                    return (<%- modelName %>)repo.createObject(chatHashMap);
                 } else {
                     return null;
                 }
-
             } else {
                 return null;
             }
@@ -186,7 +188,7 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
                   }
               <% }else{ -%>
                     <% if(model.properties[property].type === "string" || model.properties[property].type === "date"){ -%>
-                        String <%-property%>Data;
+                        String <%-property%>Data = "";
                         if(cursor.getString(<%- id %>) != null){
                           <%-property%>Data = cursor.getString(<%- id %>);
                           if(<%-property%>Data != null){
@@ -195,7 +197,7 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
                           }
                         }
                     <% }else if(model.properties[property].type === "object" || model.properties[property].type === "geopoint"){ -%>
-                        <%- model.methods.getJavaType(model.properties[property].type, false) %> <%-property%>Data = new Map<>();
+                        <%- model.methods.getJavaType(model.properties[property].type, false) %> <%-property%>Data = new HashMap<>();
                         if(cursor.getString(<%- id %>) != null){
                           <%-property%>Data = new Gson().fromJson(cursor.getString(<%- id %>), Map.class);
                           if(<%-property%>Data != null){
@@ -204,14 +206,14 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
                           }
                         }
                     <% }else if(model.properties[property].type === "number"){ -%>
-                        double <%-property%>Data;  
+                        double <%-property%>Data = double(0);  
                           <%-property%>Data = cursor.getInt(<%- id %>);
                           <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) %>)<%-property%>Data;
                           chatHashMap.put("<%-property%>", <%-property%>Data);
                       
                       
                     <% }else if(model.properties[property].type === "boolean"){ -%>
-                        boolean <%-property%>Data;
+                        boolean <%-property%>Data = false;
                         int temp<%-property%>Data = cursor.getInt(<%- id %>);
                         if( temp<%-property%>Data > 0){
                           <%-property%>Data = true;
@@ -219,11 +221,11 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
                           <%-property%>Data = false;
                         }
                     <% }else{ -%>
-                        String <%-property%>Data;
+                        String <%-property%>Data = "";
                         if(cursor.getString(<%- id %>) != null){
                           <%-property%>Data = cursor.getString(<%- id %>);
                           if(<%-property%>Data != null){
-                            <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) %>)<%-property%>Data;
+                            <%-property%>Data = <%-property%>Data.toString();
                             chatHashMap.put("<%-property%>", <%-property%>Data);
                           }
                         }
@@ -279,15 +281,8 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = getContentValues(modelData);
         // updating row
-        return db.update(TABLE, values, KEY_ID + " = ?",
+        return db.update("<%- modelName %>", values, "id = ?",
                 new String[] { id });
     }
-
-
-
-
-
-
-
 
 }

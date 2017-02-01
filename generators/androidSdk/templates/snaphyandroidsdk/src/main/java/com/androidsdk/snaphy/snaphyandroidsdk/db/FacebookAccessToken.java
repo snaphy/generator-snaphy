@@ -39,50 +39,58 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
     }
 
 
-    public void insert__db (String id, FacebookAccessToken model) {
+    public void insert__db (String id, FacebookAccessToken modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
-        ContentValues values = new ContentValues();
+        ContentValues values = getContentValues(modelData);
+        db.insert(TABLE, null, values);
+        db.close(); // Closing database connection
+    }
+
+
+
+    public ContentValues getContentValues(FacebookAccessToken modelData){
+      ContentValues values = new ContentValues();
                        
                                                             String FbUserIdData;
-                        if(model.getFbUserId() != null){
-                          FbUserIdData = model.getFbUserId().toString();
+                        if(modelData.getFbUserId() != null){
+                          FbUserIdData = modelData.getFbUserId().toString();
                         }
                                                 values.put("FbUserId", FbUserIdData);
                                 
                                                             String tokenData;
-                        if(model.getToken() != null){
-                          tokenData = model.getToken().toString();
+                        if(modelData.getToken() != null){
+                          tokenData = modelData.getToken().toString();
                         }
                                                 values.put("token", tokenData);
                                 
                                                             String expiresData;
-                        if(model.getExpires() != null){
-                          expiresData = model.getExpires().toString();
+                        if(modelData.getExpires() != null){
+                          expiresData = modelData.getExpires().toString();
                         }
                                                 values.put("expires", expiresData);
                                 
                                                             String userIdData;
-                        if(model.getUserId() != null){
-                          userIdData = model.getUserId().toString();
+                        if(modelData.getUserId() != null){
+                          userIdData =modelData.getUserId().toString();
                         }
                                                 values.put("userId", userIdData);
                                 
                                                             String typeData;
-                        if(model.getType() != null){
-                          typeData = model.getType().toString();
+                        if(modelData.getType() != null){
+                          typeData = modelData.getType().toString();
                         }
                                                 values.put("type", typeData);
                                 
                                                             String appUserIdData;
-                        if(model.getAppUserId() != null){
-                          appUserIdData = model.getAppUserId().toString();
+                        if(modelData.getAppUserId() != null){
+                          appUserIdData =modelData.getAppUserId().toString();
                         }
                                                 values.put("appUserId", appUserIdData);
                   
-        db.insert(TABLE, null, values);
-        db.close(); // Closing database connection
+        return values;
     }
+
 
 
     // Getting single cont
@@ -221,6 +229,16 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
         db.close();
         // return contact list
         return (DataList<FacebookAccessToken>) modelList;
+    }
+
+
+    // Updating single contact
+    public int update__db(String id,   FacebookAccessToken modelData) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = getContentValues(modelData);
+        // updating row
+        return db.update(TABLE, values, KEY_ID + " = ?",
+                new String[] { id });
     }
 
 

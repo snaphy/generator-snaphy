@@ -39,38 +39,46 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
     }
 
 
-    public void insert__db (String id, CompanyInfo model) {
+    public void insert__db (String id, CompanyInfo modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
-        ContentValues values = new ContentValues();
+        ContentValues values = getContentValues(modelData);
+        db.insert(TABLE, null, values);
+        db.close(); // Closing database connection
+    }
+
+
+
+    public ContentValues getContentValues(CompanyInfo modelData){
+      ContentValues values = new ContentValues();
                        
                                                             String typeData;
-                        if(model.getType() != null){
-                          typeData = model.getType().toString();
+                        if(modelData.getType() != null){
+                          typeData = modelData.getType().toString();
                         }
                                                 values.put("type", typeData);
                                 
                                                             String htmlData;
-                        if(model.getHtml() != null){
-                          htmlData = model.getHtml().toString();
+                        if(modelData.getHtml() != null){
+                          htmlData = modelData.getHtml().toString();
                         }
                                                 values.put("html", htmlData);
                                 
                                                             String editedData;
-                        if(model.getEdited() != null){
-                          editedData = model.getEdited().toString();
+                        if(modelData.getEdited() != null){
+                          editedData = modelData.getEdited().toString();
                         }
                                                 values.put("edited", editedData);
                                 
                                                             String idData;
-                        if(model.getId() != null){
-                          idData = model.getId().toString();
+                        if(modelData.getId() != null){
+                          idData =modelData.getId().toString();
                         }
                                                 values.put("id", idData);
                   
-        db.insert(TABLE, null, values);
-        db.close(); // Closing database connection
+        return values;
     }
+
 
 
     // Getting single cont
@@ -189,6 +197,16 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
         db.close();
         // return contact list
         return (DataList<CompanyInfo>) modelList;
+    }
+
+
+    // Updating single contact
+    public int update__db(String id,   CompanyInfo modelData) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = getContentValues(modelData);
+        // updating row
+        return db.update(TABLE, values, KEY_ID + " = ?",
+                new String[] { id });
     }
 
 

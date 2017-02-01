@@ -39,20 +39,28 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
     }
 
 
-    public void insert__db (String id, Container model) {
+    public void insert__db (String id, Container modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
-        ContentValues values = new ContentValues();
-                       
-                                                            String idData;
-                        if(model.getId() != null){
-                          idData = model.getId().toString();
-                        }
-                                                values.put("id", idData);
-                  
+        ContentValues values = getContentValues(modelData);
         db.insert(TABLE, null, values);
         db.close(); // Closing database connection
     }
+
+
+
+    public ContentValues getContentValues(Container modelData){
+      ContentValues values = new ContentValues();
+                       
+                                                            String idData;
+                        if(modelData.getId() != null){
+                          idData =modelData.getId().toString();
+                        }
+                                                values.put("id", idData);
+                  
+        return values;
+    }
+
 
 
     // Getting single cont
@@ -141,6 +149,16 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
         db.close();
         // return contact list
         return (DataList<Container>) modelList;
+    }
+
+
+    // Updating single contact
+    public int update__db(String id,   Container modelData) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = getContentValues(modelData);
+        // updating row
+        return db.update(TABLE, values, KEY_ID + " = ?",
+                new String[] { id });
     }
 
 
