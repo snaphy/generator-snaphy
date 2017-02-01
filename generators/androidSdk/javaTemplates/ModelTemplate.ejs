@@ -368,16 +368,31 @@ public class <%- modelName %> extends Model {
       super.save(callback);
     }
 
+    public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
+      <%- modelName %>Repository <%- lowercaseFirstLetter(modelName) %>Repository = (<%- modelName %>Repository) getRepository();
+      if(<%- lowercaseFirstLetter(modelName) %>Repository.getDbHandler().isSTORE_LOCALLY()){
+          //Delete from database..
+          String id = getId().toString();
+          if(id != null){
+             <%- lowercaseFirstLetter(modelName) %>Repository.getDbHandler().delete__db(id);
+          }
+      }
+      //Also save to database..
+      super.save(callback);
+    }
+
 
     public void save__db(String id){
       <%- modelName %>Repository <%- lowercaseFirstLetter(modelName) %>Repository = (<%- modelName %>Repository) getRepository();
-      if(id != null){
-        HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
-        String object = <%- lowercaseFirstLetter(modelName) %>Repository.getDbHandler().toJsonString(hashMap);
-        ContentValues values = new ContentValues();
-        values.put("ID", id); // Contact Name
-        values.put("OBJECT", object); // Contact Phone Number*/
-        <%- lowercaseFirstLetter(modelName) %>Repository.getDbHandler().upsert__db(id, object);
+      if(<%- lowercaseFirstLetter(modelName) %>Repository.getDbHandler().isSTORE_LOCALLY()){
+        if(id != null){
+          HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
+          String object = <%- lowercaseFirstLetter(modelName) %>Repository.getDbHandler().toJsonString(hashMap);
+          ContentValues values = new ContentValues();
+          values.put("ID", id); // Contact Name
+          values.put("OBJECT", object); // Contact Phone Number*/
+          <%- lowercaseFirstLetter(modelName) %>Repository.getDbHandler().upsert__db(id, object);
+        }
       }
     }
 

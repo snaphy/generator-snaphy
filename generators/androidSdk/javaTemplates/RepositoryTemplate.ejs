@@ -349,7 +349,16 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
     }
 
 
-    private void addStorage(Context context){
+
+    public void reset__db(){
+      if(isSTORE_LOCALLY()){
+        getDbHandler().reset__db();
+      }
+    }
+
+
+
+private void addStorage(Context context){
     setDbHandler(new DbHandler< <%- modelName %>, <%- modelName %>Repository >(context, "<%- modelName %>", getRestAdapter()));
       //allow data storage locally..
       persistData(true);
