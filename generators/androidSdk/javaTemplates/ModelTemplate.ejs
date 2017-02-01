@@ -361,6 +361,7 @@ public class <%- modelName %> extends Model {
 
     //------------------------------------Database Method---------------------------------------------------
 
+   
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();
@@ -369,12 +370,12 @@ public class <%- modelName %> extends Model {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      <%- modelName %>Repository <%- lowercaseFirstLetter(modelName) %>Repository = (<%- modelName %>Repository) getRepository();
-      if(<%- lowercaseFirstLetter(modelName) %>Repository.getDbHandler().isSTORE_LOCALLY()){
+      <%- modelName %>Repository lowercaseFirstLetterRepository = (<%- modelName %>Repository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             <%- lowercaseFirstLetter(modelName) %>Repository.getDbHandler().delete__db(id);
+             lowercaseFirstLetterRepository.get<%- modelName %>Db().delete__db(id);
           }
       }
       //Also save to database..
@@ -382,16 +383,12 @@ public class <%- modelName %> extends Model {
     }
 
 
+
     public void save__db(String id){
-      <%- modelName %>Repository <%- lowercaseFirstLetter(modelName) %>Repository = (<%- modelName %>Repository) getRepository();
-      if(<%- lowercaseFirstLetter(modelName) %>Repository.getDbHandler().isSTORE_LOCALLY()){
+      <%- modelName %>Repository lowercaseFirstLetterRepository = (<%- modelName %>Repository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
-          String object = <%- lowercaseFirstLetter(modelName) %>Repository.getDbHandler().toJsonString(hashMap);
-          ContentValues values = new ContentValues();
-          values.put("ID", id); // Contact Name
-          values.put("OBJECT", object); // Contact Phone Number*/
-          <%- lowercaseFirstLetter(modelName) %>Repository.getDbHandler().upsert__db(id, object);
+          lowercaseFirstLetterRepository.get<%- modelName %>Db().upsert__db(id, this);
         }
       }
     }
@@ -481,7 +478,7 @@ public class <%- modelName %> extends Model {
                           RestAdapter restAdapter = <%- lowercaseFirstLetter(modelName) %>Repository.getRestAdapter();
                           if(restAdapter != null){
                             //Fetch locally from db
-                            <%- relation %> = get<%- capitalcaseRelatedModelName %>__db(restAdapter);
+                            <%- relation %> = get<%- capitalcaseRelationName %>__db(restAdapter);
                           }
                         }
                         return <%- relation %>;
@@ -514,7 +511,7 @@ public class <%- modelName %> extends Model {
 
 
                     //Fetch related data from local database if present a <%- getForeignKeyName() %> identifier as property for belongsTo
-                    public <%- capitalcaseRelatedModelName %> get<%- relation %>__db(RestAdapter restAdapter){
+                    public <%- capitalcaseRelatedModelName %> get<%- capitalcaseRelationName %>__db(RestAdapter restAdapter){
                       if(<%- getForeignKeyName() %> != null){
                         <%- capitalcaseRelatedModelName %>Repository <%- relation %>Repository = restAdapter.createRepository(<%- capitalcaseRelatedModelName %>Repository.class);
                         <%- capitalcaseRelatedModelName %> <%- relation %> = (<%- capitalcaseRelatedModelName %>) <%- relation %>Repository.getDbHandler().get__db(<%- capitalcaseRelatedModelName %>.class, <%- getForeignKeyName() %>);

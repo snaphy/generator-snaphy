@@ -81,63 +81,7 @@ public class DbHandler<M extends Model, R extends ModelRepository> extends SQLit
     }
 
 
-    public void insert__db (String id, String object) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        // Inserting Row
-        ContentValues values = new ContentValues();
-        values.put("ID", id); // Contact Name
-        values.put("OBJECT", object); // Contact Phone Number
-        db.insert(TABLE, null, values);
-        db.close(); // Closing database connection
-
-    }
-
-    // Getting single cont
-    public  M get__db(Class<R> type, String id) {
-        if (id != null) {
-            SQLiteDatabase db = this.getReadableDatabase();
-
-            Cursor cursor = db.query(TABLE, new String[]{"",
-                            KEY_ID, KEY_OBJECT}, KEY_ID + "=?",
-                    new String[]{id}, null, null, null, null);
-            if (cursor != null) {
-                cursor.moveToFirst();
-
-                //String model_id = cursor.getString(0);
-                String object = cursor.getString(1);
-                cursor.close();
-                db.close(); // Closing database connection
-                if (object != null) {
-                    HashMap<String, Object> chatHashMap = toHashMap(object);
-                    if (chatHashMap != null) {
-                        R repo = restAdapter.createRepository(type);
-                        return (M)repo.createObject(chatHashMap);
-                    } else {
-                        return null;
-                    }
-                } else {
-                    return null;
-                }
-
-            } else {
-                return null;
-            }
-        } else {
-            return null;
-        }
-
-    }
-
-
-    public void upsert__db(String id, String object){
-        if(count__db(id) != 0){
-            update__db(id, object);
-        }else{
-            insert__db(id, object);
-        }
-    }
-
+   
 
     public String toJsonString(HashMap<String, Object> data ){
         if(data != null){
@@ -156,37 +100,6 @@ public class DbHandler<M extends Model, R extends ModelRepository> extends SQLit
         }
 
     }
-
-
-
-
-    // Getting All Contacts
-    public <M> DataList<M>  getAll__db(Class<R> type) {
-        DataList<M> modelList = new DataList<M>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE;
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                //String model_id = cursor.getString(0);
-                String object = cursor.getString(1);
-                HashMap<String, Object> chatHashMap = toHashMap(object);
-                if(chatHashMap != null){
-                    R repo = restAdapter.createRepository(type);
-                    modelList.add((M)repo.createObject(chatHashMap));
-                }
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        db.close();
-        // return contact list
-        return (DataList<M>) modelList;
-    }
-
 
 
     // Getting contacts Count
@@ -212,21 +125,6 @@ public class DbHandler<M extends Model, R extends ModelRepository> extends SQLit
         cursor.close();
         // return count
         return cursor.getCount();
-    }
-
-
-    // Updating single contact
-    public int update__db(String id, String object) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        /*HashMap<String, Object> hashMap = (HashMap<String, Object>) chat.convertMap();
-        String object = toJsonString(hashMap);*/
-        ContentValues values = new ContentValues();
-        values.put("ID", id); // Contact Name
-        values.put("OBJECT", object); // Contact Phone Number
-
-        // updating row
-        return db.update(TABLE, values, KEY_ID + " = ?",
-                new String[] { id });
     }
 
 

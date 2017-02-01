@@ -191,6 +191,10 @@ import org.json.JSONObject;
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.<%- modelName %>;
 
+import android.content.Context;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.db.<%- modelName %>Db;
+
 //Now import model of related models..
 <% for(relation in model.relations) { %>
     <% if(model.relations.hasOwnProperty(relation)) {
@@ -324,15 +328,19 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
 
 
-    public DbHandler getDbHandler() {
-      return dbHandler;
+    
+
+
+
+    public <%- modelName %>Db get<%- modelName %>Db() {
+      return <%- lowercaseFirstLetter(modelName) %>Db;
     }
 
-    public void setDbHandler(DbHandler dbHandler) {
-      this.dbHandler = dbHandler;
+    public void set<%- modelName %>Db(<%- modelName %>Db <%- lowercaseFirstLetter(modelName) %>Db) {
+      this.<%- lowercaseFirstLetter(modelName) %>Db = <%- lowercaseFirstLetter(modelName) %>Db;
     }
 
-    private DbHandler dbHandler;
+    private <%- modelName %>Db <%- lowercaseFirstLetter(modelName) %>Db;
 
 
 
@@ -352,17 +360,17 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-        getDbHandler().reset__db();
+          get<%- modelName %>Db().reset__db();
       }
     }
 
 
 
 private void addStorage(Context context){
-    setDbHandler(new DbHandler< <%- modelName %>, <%- modelName %>Repository >(context, "<%- modelName %>", getRestAdapter()));
+    set<%- modelName %>Db(new <%- modelName %>Db(context, getRestAdapter()));
       //allow data storage locally..
       persistData(true);
-    }
+}
 
 
     public RestContract createContract() {
