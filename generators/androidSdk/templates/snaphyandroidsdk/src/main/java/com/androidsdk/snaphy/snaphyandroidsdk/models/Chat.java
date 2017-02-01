@@ -373,6 +373,7 @@ public class Chat extends Model {
 
 
 
+
     //Now adding relations between related models
     
         

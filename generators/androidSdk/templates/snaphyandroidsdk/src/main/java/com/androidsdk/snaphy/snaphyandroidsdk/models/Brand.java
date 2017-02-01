@@ -429,6 +429,7 @@ public class Brand extends Model {
 
 
 
+
     //Now adding relations between related models
     
         

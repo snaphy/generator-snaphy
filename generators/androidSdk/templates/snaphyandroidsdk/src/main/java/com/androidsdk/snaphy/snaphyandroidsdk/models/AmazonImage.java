@@ -231,6 +231,7 @@ public class AmazonImage extends Model {
 
 
 
+
     //Now adding relations between related models
       
 

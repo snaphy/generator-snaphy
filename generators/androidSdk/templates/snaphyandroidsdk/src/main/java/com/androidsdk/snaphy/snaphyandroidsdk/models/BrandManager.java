@@ -453,6 +453,7 @@ public class BrandManager extends User {
 
 
 
+
     //Now adding relations between related models
     
          

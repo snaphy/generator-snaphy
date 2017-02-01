@@ -196,6 +196,7 @@ public class Role extends Model {
 
 
 
+
     //Now adding relations between related models
     
         

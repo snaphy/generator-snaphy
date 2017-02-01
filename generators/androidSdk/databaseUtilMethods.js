@@ -78,7 +78,17 @@ module.exports = function(){
     },
     lowercaseFirstLetter: function (string) {
       return string.charAt(0).toLowerCase() + string.slice(1);
-    }
+    },
+    //Prepare method for get foreign key..
+    getForeignKeyName: function(lowercaseRelatedModelName, relationObj){
+      var foreignKey = relationObj.foreignKey;
+      if(!foreignKey) {
+        foreignKey = lowercaseRelatedModelName + "Id";
+      }
+      return foreignKey;
+    },
+    //Track which models has been processed..
+    processed:{}
   };
 
   return {

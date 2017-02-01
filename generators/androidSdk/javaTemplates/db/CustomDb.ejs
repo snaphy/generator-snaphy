@@ -29,16 +29,84 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
   public void onCreate(SQLiteDatabase db) {
     <%
     var tableQuery = `CREATE TABLE  ${modelName} IF NOT EXISTS ( id TEXT PRIMARY KEY`;
-    for( var property in model.properties) { %>
+    for( let property in model.properties) { -%>
         <% if(model.properties.hasOwnProperty(property)){
-            var capitalPropertyName = model.methods.capitalizeFirstLetter(property);
-            var isArray = model.properties[property].type instanceof Array;
+            let isArray = model.properties[property].type instanceof Array;
             tableQuery = `${tableQuery}, ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)}`;
-        %>
-        <%}%>
-    <%}%>
+        -%>
+        <%} -%>
+    <%} -%>
     <% tableQuery = tableQuery + ")"; %>
-    String CREATE_<%- modelName %>_TABLE = tableQuery;
+    String CREATE_<%- modelName %>_TABLE = "<%- tableQuery %>";
     db.execSQL(CREATE_<%- modelName %>_TABLE);
   }
+
+    // Upgrading database
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            // Drop older table if existed
+            db.execSQL("DROP TABLE IF EXISTS <%- modelName %>");
+            // Create tables again
+            onCreate(db);
+    }
+
+
+    public void insert__db (String id, <%- modelName %> model) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        // Inserting Row
+        ContentValues values = new ContentValues();
+         <%
+          for( let property in model.properties) { -%>
+              <% if(model.properties.hasOwnProperty(property)){
+                  let isArray = model.properties[property].type instanceof Array;
+                  var capitalPropertyName = model.methods.capitalizeFirstLetter(property);
+              -%>
+
+                <% if(isArray){ -%>
+                  String <%-property%>Data;
+                  if(model.get<%-capitalPropertyName%>() != null){
+                    <%-property%>Data = new Gson().toJson(model.get<%-capitalPropertyName%>(), DataList.class);
+                  }
+              <% }else{ -%>
+                    <% if(model.properties[property].type === "string" || model.properties[property].type === "date"){ -%>
+                        String <%-property%>Data;
+                        if(model.get<%-capitalPropertyName%>() != null){
+                          <%-property%>Data = model.get<%-capitalPropertyName%>().toString();
+                        }
+                    <% }else if(model.properties[property].type === "object" || model.properties[property].type === "geopoint"){ -%>
+                        String <%-property%>Data;
+                        if(model.get<%-capitalPropertyName%>() != null){
+                          <%-property%>Data = new Gson().toJson(model.get<%-capitalPropertyName%>(), HashMap.class);
+                        }
+                    <% }else if(model.properties[property].type === "number"){ -%>
+                        double <%-property%>Data;
+                        if(model.get<%-capitalPropertyName%>() != null){
+                          <%-property%>Data = (double)model.get<%-capitalPropertyName%>();
+                        }
+                    <% }else if(model.properties[property].type === "boolean"){ -%>
+                        int <%-property%>Data;
+                        if(model.get<%-capitalPropertyName%>()){
+                          <%-property%>Data = 1;
+                        }else{
+                          <%-property%>Data = 0;
+                        }
+                    <% }else{ -%>
+                        String <%-property%>Data;
+                        if(model.get<%-capitalPropertyName%>() != null){
+                          <%-property%>Data = model.get<%-capitalPropertyName%>().toString();
+                        }
+                    <% } -%>
+              <% }//END IF-ELSE -%>
+              values.put("<%-property%>", <%-property%>Data);
+          <% } -%>
+        <%}%>
+        if(model.getId() != null){
+            values.put("id", model.getId().toString());
+        }
+        db.insert(TABLE, null, values);
+        db.close(); // Closing database connection
+    }
+
+
+
 }

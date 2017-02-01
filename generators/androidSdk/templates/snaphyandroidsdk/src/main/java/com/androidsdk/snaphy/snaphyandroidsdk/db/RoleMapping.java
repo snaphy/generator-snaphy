@@ -24,21 +24,64 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-    
-        
-        
-    
-        
-        
-    
-        
-        
-    
-        
-        
-    
-    
-    String CREATE_RoleMapping_TABLE = tableQuery;
+                                                                                        
+    String CREATE_RoleMapping_TABLE = "CREATE TABLE  RoleMapping IF NOT EXISTS ( id TEXT PRIMARY KEY, id TEXT, principalType TEXT, principalId TEXT, roleId TEXT)";
     db.execSQL(CREATE_RoleMapping_TABLE);
   }
+
+    // Upgrading database
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            // Drop older table if existed
+            db.execSQL("DROP TABLE IF EXISTS RoleMapping");
+            // Create tables again
+            onCreate(db);
+    }
+
+
+    public void insert__db (String id, RoleMapping model) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+    /*    HashMap<String, Object> hashMap = (HashMap<String, Object>) chat.convertMap();
+        String object = toJsonString(hashMap);
+        ContentValues values = new ContentValues();
+        values.put("ID", chat.getId().toString()); // Contact Name
+        values.put("OBJECT", object); // Contact Phone Number*/
+
+        // Inserting Row
+        ContentValues values = new ContentValues();
+                       
+                                                            String idData;
+                        if(model.getId() != null){
+                          idData = model.getId().toString();
+                        }
+                                                values.put("id", idData);
+                                
+                                                            String principalTypeData;
+                        if(model.getPrincipalType() != null){
+                          principalTypeData = model.getPrincipalType().toString();
+                        }
+                                                values.put("principalType", principalTypeData);
+                                
+                                                            String principalIdData;
+                        if(model.getPrincipalId() != null){
+                          principalIdData = model.getPrincipalId().toString();
+                        }
+                                                values.put("principalId", principalIdData);
+                                
+                                                            String roleIdData;
+                        if(model.getRoleId() != null){
+                          roleIdData = model.getRoleId().toString();
+                        }
+                                                values.put("roleId", roleIdData);
+                  
+        if(model.getId() != null){
+            values.put("id", model.getId().toString());
+        }
+        db.insert(TABLE, null, values);
+        db.close(); // Closing database connection
+    }
+
+
+
 }

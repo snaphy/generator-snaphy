@@ -276,6 +276,7 @@ public class DailyFeed extends Model {
 
 
 
+
     //Now adding relations between related models
     
         

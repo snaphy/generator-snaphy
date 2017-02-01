@@ -440,8 +440,9 @@ public class <%- modelName %> extends Model {
 
 
 
+
     //Now adding relations between related models
-    <% for(relation in model.relations) { %>
+    <% for(var relation in model.relations) { %>
         <% if(model.relations.hasOwnProperty(relation)) {
             var lowercaseRelatedModelName = lowercaseFirstLetter( model.relations[relation].model );
             var capitalcaseRelatedModelName = capitalizeFirstLetter(model.relations[relation].model);

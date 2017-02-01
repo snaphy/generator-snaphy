@@ -250,6 +250,7 @@ public class FacebookAccessToken extends Model {
 
 
 
+
     //Now adding relations between related models
     
         
