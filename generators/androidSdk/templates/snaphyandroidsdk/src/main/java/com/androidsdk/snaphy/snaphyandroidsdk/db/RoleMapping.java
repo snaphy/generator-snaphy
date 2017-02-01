@@ -24,8 +24,12 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                        
-    String CREATE_RoleMapping_TABLE = "CREATE TABLE  RoleMapping IF NOT EXISTS ( id TEXT PRIMARY KEY, id TEXT, principalType TEXT, principalId TEXT, roleId TEXT)";
+                           
+                           
+                           
+                           
+        
+    String CREATE_RoleMapping_TABLE = "CREATE TABLE  RoleMapping IF NOT EXISTS (  id TEXT PRIMARY KEY, principalType TEXT, principalId TEXT, roleId TEXT)";
     db.execSQL(CREATE_RoleMapping_TABLE);
   }
 
@@ -40,14 +44,7 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
 
 
     public void insert__db (String id, RoleMapping model) {
-
         SQLiteDatabase db = this.getWritableDatabase();
-    /*    HashMap<String, Object> hashMap = (HashMap<String, Object>) chat.convertMap();
-        String object = toJsonString(hashMap);
-        ContentValues values = new ContentValues();
-        values.put("ID", chat.getId().toString()); // Contact Name
-        values.put("OBJECT", object); // Contact Phone Number*/
-
         // Inserting Row
         ContentValues values = new ContentValues();
                        
@@ -75,12 +72,84 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
                         }
                                                 values.put("roleId", roleIdData);
                   
-        if(model.getId() != null){
-            values.put("id", model.getId().toString());
-        }
         db.insert(TABLE, null, values);
         db.close(); // Closing database connection
     }
+
+
+    // Getting single cont
+    public   RoleMapping get__db(String id) {
+        if (id != null) {
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.query("RoleMapping", null, "id=?", new String[]{id}, null, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                HashMap<String, Object> chatHashMap = new HashMap<>();
+
+                                      
+                                                                                    String idData;
+                                if(cursor.getString(0) != null){
+                                  idData = cursor.getString(0);
+                                  if(idData != null){
+                                    idData = (Object)idData;
+                                    chatHashMap.put("id", idData);
+                                  }
+                                }
+                                                                        
+                                                        
+                                                                                    String principalTypeData;
+                                if(cursor.getString(1) != null){
+                                  principalTypeData = cursor.getString(1);
+                                  if(principalTypeData != null){
+                                    principalTypeData = (String)principalTypeData;
+                                    chatHashMap.put("principalType", principalTypeData);
+                                  }
+                                }
+                                                                        
+                                                        
+                                                                                    String principalIdData;
+                                if(cursor.getString(2) != null){
+                                  principalIdData = cursor.getString(2);
+                                  if(principalIdData != null){
+                                    principalIdData = (Object)principalIdData;
+                                    chatHashMap.put("principalId", principalIdData);
+                                  }
+                                }
+                                                                        
+                                                        
+                                                                                    String roleIdData;
+                                if(cursor.getString(3) != null){
+                                  roleIdData = cursor.getString(3);
+                                  if(roleIdData != null){
+                                    roleIdData = (Object)roleIdData;
+                                    chatHashMap.put("roleId", roleIdData);
+                                  }
+                                }
+                                                                        
+                                    
+
+                cursor.close();
+                db.close(); // Closing database connection
+                if (object != null) {
+                    if (chatHashMap != null) {
+                        RoleMappingRepository repo = restAdapter.createRepository(RoleMappingRepository.class);
+                        return (RoleMapping)repo.createObject(chatHashMap);
+                    } else {
+                        return null;
+                    }
+                } else {
+                    return null;
+                }
+
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+
+    }
+
 
 
 

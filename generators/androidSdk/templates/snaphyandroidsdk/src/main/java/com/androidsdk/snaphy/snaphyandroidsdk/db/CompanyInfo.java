@@ -24,8 +24,12 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                        
-    String CREATE_CompanyInfo_TABLE = "CREATE TABLE  CompanyInfo IF NOT EXISTS ( id TEXT PRIMARY KEY, type TEXT, html TEXT, edited TEXT, id TEXT)";
+                           
+                           
+                           
+                           
+        
+    String CREATE_CompanyInfo_TABLE = "CREATE TABLE  CompanyInfo IF NOT EXISTS (  type TEXT, html TEXT, edited TEXT, id TEXT PRIMARY KEY)";
     db.execSQL(CREATE_CompanyInfo_TABLE);
   }
 
@@ -40,14 +44,7 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
 
 
     public void insert__db (String id, CompanyInfo model) {
-
         SQLiteDatabase db = this.getWritableDatabase();
-    /*    HashMap<String, Object> hashMap = (HashMap<String, Object>) chat.convertMap();
-        String object = toJsonString(hashMap);
-        ContentValues values = new ContentValues();
-        values.put("ID", chat.getId().toString()); // Contact Name
-        values.put("OBJECT", object); // Contact Phone Number*/
-
         // Inserting Row
         ContentValues values = new ContentValues();
                        
@@ -75,12 +72,84 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
                         }
                                                 values.put("id", idData);
                   
-        if(model.getId() != null){
-            values.put("id", model.getId().toString());
-        }
         db.insert(TABLE, null, values);
         db.close(); // Closing database connection
     }
+
+
+    // Getting single cont
+    public   CompanyInfo get__db(String id) {
+        if (id != null) {
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.query("CompanyInfo", null, "id=?", new String[]{id}, null, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                HashMap<String, Object> chatHashMap = new HashMap<>();
+
+                                      
+                                                                                    String typeData;
+                                if(cursor.getString(0) != null){
+                                  typeData = cursor.getString(0);
+                                  if(typeData != null){
+                                    typeData = (String)typeData;
+                                    chatHashMap.put("type", typeData);
+                                  }
+                                }
+                                                                        
+                                                        
+                                                                                    String htmlData;
+                                if(cursor.getString(1) != null){
+                                  htmlData = cursor.getString(1);
+                                  if(htmlData != null){
+                                    htmlData = (String)htmlData;
+                                    chatHashMap.put("html", htmlData);
+                                  }
+                                }
+                                                                        
+                                                        
+                                                                                    String editedData;
+                                if(cursor.getString(2) != null){
+                                  editedData = cursor.getString(2);
+                                  if(editedData != null){
+                                    editedData = (String)editedData;
+                                    chatHashMap.put("edited", editedData);
+                                  }
+                                }
+                                                                        
+                                                        
+                                                                                    String idData;
+                                if(cursor.getString(3) != null){
+                                  idData = cursor.getString(3);
+                                  if(idData != null){
+                                    idData = (Object)idData;
+                                    chatHashMap.put("id", idData);
+                                  }
+                                }
+                                                                        
+                                    
+
+                cursor.close();
+                db.close(); // Closing database connection
+                if (object != null) {
+                    if (chatHashMap != null) {
+                        CompanyInfoRepository repo = restAdapter.createRepository(CompanyInfoRepository.class);
+                        return (CompanyInfo)repo.createObject(chatHashMap);
+                    } else {
+                        return null;
+                    }
+                } else {
+                    return null;
+                }
+
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+
+    }
+
 
 
 

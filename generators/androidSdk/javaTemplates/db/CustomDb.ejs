@@ -28,13 +28,29 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
   @Override
   public void onCreate(SQLiteDatabase db) {
     <%
-    var tableQuery = `CREATE TABLE  ${modelName} IF NOT EXISTS ( id TEXT PRIMARY KEY`;
+    var tableQuery = `CREATE TABLE  ${modelName} IF NOT EXISTS ( `;
+    var i=0;
     for( let property in model.properties) { -%>
         <% if(model.properties.hasOwnProperty(property)){
             let isArray = model.properties[property].type instanceof Array;
-            tableQuery = `${tableQuery}, ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)}`;
+            if(i==0){
+                if(property === "id"){
+                  tableQuery = `${tableQuery} ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)} PRIMARY KEY`;
+                }else{
+                  tableQuery = `${tableQuery} ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)}`;
+                }
+            }else{
+              if(property === "id"){
+                tableQuery = `${tableQuery}, ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)} PRIMARY KEY`;
+              }else{
+                tableQuery = `${tableQuery}, ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)}`;
+              }
+            }
+            
+            
         -%>
         <%} -%>
+       <% i++; -%>
     <%} -%>
     <% tableQuery = tableQuery + ")"; %>
     String CREATE_<%- modelName %>_TABLE = "<%- tableQuery %>";
@@ -112,74 +128,7 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
             Cursor cursor = db.query("<%- modelName %>", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                HashMap<String, Object> chatHashMap = new HashMap<>();
-
-                <%
-                  var i=0;
-                  for( let property in model.properties) { 
-                -%>
-                      <% if(model.properties.hasOwnProperty(property)){
-                          let isArray = model.properties[property].type instanceof Array;
-                          var capitalPropertyName = model.methods.capitalizeFirstLetter(property);
-                      -%>
-
-                        <% if(isArray){ -%>
-                          <%- model.methods.getJavaType(model.properties[property].type[0], isArray) > <%-property%>Data = new DataList<>();
-                          if(cursor.getString(<%- id %>) != null){
-                            <%-property%>Data = new Gson().fromJson(cursor.getString(<%- id %>), DataList.class);
-                            if(<%-property%>Data != null){
-                              <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type[0], isArray) >)<%-property%>Data;
-                              chatHashMap.put("<%-property%>", <%-property%>Data);
-                            }
-                          }
-                      <% }else{ -%>
-                            <% if(model.properties[property].type === "string" || model.properties[property].type === "date"){ -%>
-                                String <%-property%>Data;
-                                if(cursor.getString(<%- id %>) != null){
-                                  <%-property%>Data = cursor.getString(<%- id %>);
-                                  if(<%-property%>Data != null){
-                                    <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) >)<%-property%>Data;
-                                    chatHashMap.put("<%-property%>", <%-property%>Data);
-                                  }
-                                }
-                            <% }else if(model.properties[property].type === "object" || model.properties[property].type === "geopoint"){ -%>
-                                <%- model.methods.getJavaType(model.properties[property].type, false) > <%-property%>Data = new Map<>();
-                                if(cursor.getString(<%- id %>) != null){
-                                  <%-property%>Data = cursor.getString(<%- id %>);
-                                  if(<%-property%>Data != null){
-                                    <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) >)<%-property%>Data;
-                                    chatHashMap.put("<%-property%>", <%-property%>Data);
-                                  }
-                                }
-                            <% }else if(model.properties[property].type === "number"){ -%>
-                                double <%-property%>Data;  
-                                  <%-property%>Data = cursor.getInt(<%- id %>);
-                                  <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) >)<%-property%>Data;
-                                  chatHashMap.put("<%-property%>", <%-property%>Data);
-                              
-                              
-                            <% }else if(model.properties[property].type === "boolean"){ -%>
-                                boolean <%-property%>Data;
-                                int temp<%-property%>Data = cursor.getInt(<%- id %>);
-                                if( temp<%-property%>Data > 0){
-                                  <%-property%>Data = true;
-                                }else{
-                                  <%-property%>Data = false;
-                                }
-                            <% }else{ -%>
-                                String <%-property%>Data;
-                                if(cursor.getString(<%- id %>) != null){
-                                  <%-property%>Data = cursor.getString(<%- id %>);
-                                  if(<%-property%>Data != null){
-                                    <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) >)<%-property%>Data;
-                                    chatHashMap.put("<%-property%>", <%-property%>Data);
-                                  }
-                                }
-                            <% } -%>
-                      <% }//END IF-ELSE -%>
-                      <% i++; %>
-                  <% } -%>
-                <%}%>  
+                HashMap<String, Object> chatHashMap = parseCursor(cursor);
 
                 cursor.close();
                 db.close(); // Closing database connection
@@ -201,7 +150,124 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
             return null;
         }
 
+    } //get__db
+
+
+
+    private HashMap<String, Object> parseCursor(Cursor cursor ){
+      HashMap<String, Object> chatHashMap = new HashMap<>();
+
+        <%
+          //Increment after each loop
+          var id=0;
+          for( let property in model.properties) { 
+        -%>
+              <% if(model.properties.hasOwnProperty(property)){
+                  let isArray = model.properties[property].type instanceof Array;
+                  var capitalPropertyName = model.methods.capitalizeFirstLetter(property);
+              -%>
+
+                <% if(isArray){ -%>
+                  <%- model.methods.getJavaType(model.properties[property].type[0], isArray) %> <%-property%>Data = new DataList<>();
+                  if(cursor.getString(<%- id %>) != null){
+                    <%-property%>Data = new Gson().fromJson(cursor.getString(<%- id %>), DataList.class);
+                    if(<%-property%>Data != null){
+                      <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type[0], isArray) %>)<%-property%>Data;
+                      chatHashMap.put("<%-property%>", <%-property%>Data);
+                    }
+                  }
+              <% }else{ -%>
+                    <% if(model.properties[property].type === "string" || model.properties[property].type === "date"){ -%>
+                        String <%-property%>Data;
+                        if(cursor.getString(<%- id %>) != null){
+                          <%-property%>Data = cursor.getString(<%- id %>);
+                          if(<%-property%>Data != null){
+                            <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) %>)<%-property%>Data;
+                            chatHashMap.put("<%-property%>", <%-property%>Data);
+                          }
+                        }
+                    <% }else if(model.properties[property].type === "object" || model.properties[property].type === "geopoint"){ -%>
+                        <%- model.methods.getJavaType(model.properties[property].type, false) %> <%-property%>Data = new Map<>();
+                        if(cursor.getString(<%- id %>) != null){
+                          <%-property%>Data = new Gson().fromJson(cursor.getString(<%- id %>), Map.class);
+                          if(<%-property%>Data != null){
+                            <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) %>)<%-property%>Data;
+                            chatHashMap.put("<%-property%>", <%-property%>Data);
+                          }
+                        }
+                    <% }else if(model.properties[property].type === "number"){ -%>
+                        double <%-property%>Data;  
+                          <%-property%>Data = cursor.getInt(<%- id %>);
+                          <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) %>)<%-property%>Data;
+                          chatHashMap.put("<%-property%>", <%-property%>Data);
+                      
+                      
+                    <% }else if(model.properties[property].type === "boolean"){ -%>
+                        boolean <%-property%>Data;
+                        int temp<%-property%>Data = cursor.getInt(<%- id %>);
+                        if( temp<%-property%>Data > 0){
+                          <%-property%>Data = true;
+                        }else{
+                          <%-property%>Data = false;
+                        }
+                    <% }else{ -%>
+                        String <%-property%>Data;
+                        if(cursor.getString(<%- id %>) != null){
+                          <%-property%>Data = cursor.getString(<%- id %>);
+                          if(<%-property%>Data != null){
+                            <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) %>)<%-property%>Data;
+                            chatHashMap.put("<%-property%>", <%-property%>Data);
+                          }
+                        }
+                    <% } -%>
+              <% }//END IF-ELSE -%>
+              <% id++; %>
+          <% } -%>
+        <%}%>  
+        return chatHashMap;
+    }//parseCursor
+
+
+
+    public void upsert__db(String id, <%- modelName %> model){
+        if(count__db(id) != 0){
+            update__db(id, model);
+        }else{
+            insert__db(id, model);
+        }
+    } //upsert__db
+
+
+
+    // Getting All Contacts
+    public DataList<<%- modelName %>>  getAll__db() {
+        DataList<<%- modelName %>> modelList = new DataList<<%- modelName %>>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM <%- modelName %>";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+               
+                HashMap<String, Object> chatHashMap = parseCursor(cursor);
+                if(chatHashMap != null){
+                    <%- modelName %>Repository repo = restAdapter.createRepository(<%- modelName %>Repository.class);
+                    modelList.add((<%- modelName %>)repo.createObject(chatHashMap));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+        return (DataList<<%- modelName %>>) modelList;
     }
+
+
+
+
 
 
 

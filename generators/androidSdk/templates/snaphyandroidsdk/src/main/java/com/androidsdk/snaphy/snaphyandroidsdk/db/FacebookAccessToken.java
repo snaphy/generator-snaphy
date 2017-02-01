@@ -24,8 +24,14 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                                
-    String CREATE_FacebookAccessToken_TABLE = "CREATE TABLE  FacebookAccessToken IF NOT EXISTS ( id TEXT PRIMARY KEY, FbUserId TEXT, token TEXT, expires TEXT, userId TEXT, type TEXT, appUserId TEXT)";
+                           
+                           
+                           
+                           
+                           
+                           
+        
+    String CREATE_FacebookAccessToken_TABLE = "CREATE TABLE  FacebookAccessToken IF NOT EXISTS (  FbUserId TEXT, token TEXT, expires TEXT, userId TEXT, type TEXT, appUserId TEXT)";
     db.execSQL(CREATE_FacebookAccessToken_TABLE);
   }
 
@@ -40,14 +46,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
 
 
     public void insert__db (String id, FacebookAccessToken model) {
-
         SQLiteDatabase db = this.getWritableDatabase();
-    /*    HashMap<String, Object> hashMap = (HashMap<String, Object>) chat.convertMap();
-        String object = toJsonString(hashMap);
-        ContentValues values = new ContentValues();
-        values.put("ID", chat.getId().toString()); // Contact Name
-        values.put("OBJECT", object); // Contact Phone Number*/
-
         // Inserting Row
         ContentValues values = new ContentValues();
                        
@@ -87,12 +86,104 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
                         }
                                                 values.put("appUserId", appUserIdData);
                   
-        if(model.getId() != null){
-            values.put("id", model.getId().toString());
-        }
         db.insert(TABLE, null, values);
         db.close(); // Closing database connection
     }
+
+
+    // Getting single cont
+    public   FacebookAccessToken get__db(String id) {
+        if (id != null) {
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.query("FacebookAccessToken", null, "id=?", new String[]{id}, null, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                HashMap<String, Object> chatHashMap = new HashMap<>();
+
+                                      
+                                                                                    String FbUserIdData;
+                                if(cursor.getString(0) != null){
+                                  FbUserIdData = cursor.getString(0);
+                                  if(FbUserIdData != null){
+                                    FbUserIdData = (String)FbUserIdData;
+                                    chatHashMap.put("FbUserId", FbUserIdData);
+                                  }
+                                }
+                                                                        
+                                                        
+                                                                                    String tokenData;
+                                if(cursor.getString(1) != null){
+                                  tokenData = cursor.getString(1);
+                                  if(tokenData != null){
+                                    tokenData = (String)tokenData;
+                                    chatHashMap.put("token", tokenData);
+                                  }
+                                }
+                                                                        
+                                                        
+                                                                                    String expiresData;
+                                if(cursor.getString(2) != null){
+                                  expiresData = cursor.getString(2);
+                                  if(expiresData != null){
+                                    expiresData = (String)expiresData;
+                                    chatHashMap.put("expires", expiresData);
+                                  }
+                                }
+                                                                        
+                                                        
+                                                                                    String userIdData;
+                                if(cursor.getString(3) != null){
+                                  userIdData = cursor.getString(3);
+                                  if(userIdData != null){
+                                    userIdData = (Object)userIdData;
+                                    chatHashMap.put("userId", userIdData);
+                                  }
+                                }
+                                                                        
+                                                        
+                                                                                    String typeData;
+                                if(cursor.getString(4) != null){
+                                  typeData = cursor.getString(4);
+                                  if(typeData != null){
+                                    typeData = (String)typeData;
+                                    chatHashMap.put("type", typeData);
+                                  }
+                                }
+                                                                        
+                                                        
+                                                                                    String appUserIdData;
+                                if(cursor.getString(5) != null){
+                                  appUserIdData = cursor.getString(5);
+                                  if(appUserIdData != null){
+                                    appUserIdData = (Object)appUserIdData;
+                                    chatHashMap.put("appUserId", appUserIdData);
+                                  }
+                                }
+                                                                        
+                                    
+
+                cursor.close();
+                db.close(); // Closing database connection
+                if (object != null) {
+                    if (chatHashMap != null) {
+                        FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+                        return (FacebookAccessToken)repo.createObject(chatHashMap);
+                    } else {
+                        return null;
+                    }
+                } else {
+                    return null;
+                }
+
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+
+    }
+
 
 
 
