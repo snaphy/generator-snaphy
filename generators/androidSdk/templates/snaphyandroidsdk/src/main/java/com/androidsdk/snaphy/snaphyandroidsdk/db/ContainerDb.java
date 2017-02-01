@@ -98,6 +98,37 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
 
 
 
+
+    // Getting single cont
+    public   Container get__db(String whereKey, String whereKeyValue) {
+        if (whereKeyValue != null) {
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.query("Container", null, whereKey + "=?", new String[]{whereKeyValue}, null, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+
+                cursor.close();
+                db.close(); // Closing database connection
+
+                if (HashMap != null) {
+                    ContainerRepository repo = restAdapter.createRepository(ContainerRepository.class);
+                    return (Container)repo.createObject(hashMap);
+                } else {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+
+    } //get__db
+
+
+
+
     private HashMap<String, Object> parseCursor(Cursor cursor ){
       HashMap<String, Object> chatHashMap = new HashMap<>();
 

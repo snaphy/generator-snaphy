@@ -122,6 +122,37 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
 
 
 
+
+    // Getting single cont
+    public   Role get__db(String whereKey, String whereKeyValue) {
+        if (whereKeyValue != null) {
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.query("Role", null, whereKey + "=?", new String[]{whereKeyValue}, null, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+
+                cursor.close();
+                db.close(); // Closing database connection
+
+                if (HashMap != null) {
+                    RoleRepository repo = restAdapter.createRepository(RoleRepository.class);
+                    return (Role)repo.createObject(hashMap);
+                } else {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+
+    } //get__db
+
+
+
+
     private HashMap<String, Object> parseCursor(Cursor cursor ){
       HashMap<String, Object> chatHashMap = new HashMap<>();
 

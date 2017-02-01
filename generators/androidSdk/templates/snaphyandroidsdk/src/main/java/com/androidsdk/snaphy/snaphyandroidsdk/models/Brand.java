@@ -376,6 +376,7 @@ public class Brand extends Model {
 
     //------------------------------------Database Method---------------------------------------------------
 
+   
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();
@@ -384,12 +385,12 @@ public class Brand extends Model {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      BrandRepository brandRepository = (BrandRepository) getRepository();
-      if(brandRepository.getDbHandler().isSTORE_LOCALLY()){
+      BrandRepository lowercaseFirstLetterRepository = (BrandRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             brandRepository.getDbHandler().delete__db(id);
+             lowercaseFirstLetterRepository.getBrandDb().delete__db(id);
           }
       }
       //Also save to database..
@@ -397,16 +398,12 @@ public class Brand extends Model {
     }
 
 
+
     public void save__db(String id){
-      BrandRepository brandRepository = (BrandRepository) getRepository();
-      if(brandRepository.getDbHandler().isSTORE_LOCALLY()){
+      BrandRepository lowercaseFirstLetterRepository = (BrandRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
-          String object = brandRepository.getDbHandler().toJsonString(hashMap);
-          ContentValues values = new ContentValues();
-          values.put("ID", id); // Contact Name
-          values.put("OBJECT", object); // Contact Phone Number*/
-          brandRepository.getDbHandler().upsert__db(id, object);
+          lowercaseFirstLetterRepository.getBrandDb().upsert__db(id, this);
         }
       }
     }

@@ -38,6 +38,10 @@ import org.json.JSONObject;
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Category;
 
+import android.content.Context;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.db.CategoryDb;
+
 //Now import model of related models..
 
     
@@ -63,15 +67,19 @@ public class CategoryRepository extends ModelRepository<Category> {
 
 
 
-    public DbHandler getDbHandler() {
-      return dbHandler;
+    
+
+
+
+    public CategoryDb getCategoryDb() {
+      return categoryDb;
     }
 
-    public void setDbHandler(DbHandler dbHandler) {
-      this.dbHandler = dbHandler;
+    public void setCategoryDb(CategoryDb categoryDb) {
+      this.categoryDb = categoryDb;
     }
 
-    private DbHandler dbHandler;
+    private CategoryDb categoryDb;
 
 
 
@@ -91,17 +99,17 @@ public class CategoryRepository extends ModelRepository<Category> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-        getDbHandler().reset__db();
+          getCategoryDb().reset__db();
       }
     }
 
 
 
 private void addStorage(Context context){
-    setDbHandler(new DbHandler< Category, CategoryRepository >(context, "Category", getRestAdapter()));
+    setCategoryDb(new CategoryDb(context, getRestAdapter()));
       //allow data storage locally..
       persistData(true);
-    }
+}
 
 
     public RestContract createContract() {

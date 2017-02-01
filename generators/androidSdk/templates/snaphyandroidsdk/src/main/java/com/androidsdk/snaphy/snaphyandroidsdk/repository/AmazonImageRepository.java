@@ -38,6 +38,10 @@ import org.json.JSONObject;
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.AmazonImage;
 
+import android.content.Context;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.db.AmazonImageDb;
+
 //Now import model of related models..
 
 
@@ -56,15 +60,19 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
 
 
-    public DbHandler getDbHandler() {
-      return dbHandler;
+    
+
+
+
+    public AmazonImageDb getAmazonImageDb() {
+      return amazonImageDb;
     }
 
-    public void setDbHandler(DbHandler dbHandler) {
-      this.dbHandler = dbHandler;
+    public void setAmazonImageDb(AmazonImageDb amazonImageDb) {
+      this.amazonImageDb = amazonImageDb;
     }
 
-    private DbHandler dbHandler;
+    private AmazonImageDb amazonImageDb;
 
 
 
@@ -84,17 +92,17 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-        getDbHandler().reset__db();
+          getAmazonImageDb().reset__db();
       }
     }
 
 
 
 private void addStorage(Context context){
-    setDbHandler(new DbHandler< AmazonImage, AmazonImageRepository >(context, "AmazonImage", getRestAdapter()));
+    setAmazonImageDb(new AmazonImageDb(context, getRestAdapter()));
       //allow data storage locally..
       persistData(true);
-    }
+}
 
 
     public RestContract createContract() {

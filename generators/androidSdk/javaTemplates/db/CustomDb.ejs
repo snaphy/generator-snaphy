@@ -142,14 +142,14 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
             Cursor cursor = db.query("<%- modelName %>", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
+                HashMap<String, Object> hashMap = parseCursor(cursor);
 
                 cursor.close();
                 db.close(); // Closing database connection
                 
-                if (chatHashMap != null) {
+                if (hashMap != null) {
                     <%- modelName %>Repository repo = restAdapter.createRepository(<%- modelName %>Repository.class);
-                    return (<%- modelName %>)repo.createObject(chatHashMap);
+                    return (<%- modelName %>)repo.createObject(hashMap);
                 } else {
                     return null;
                 }
@@ -177,7 +177,7 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
                 cursor.close();
                 db.close(); // Closing database connection
 
-                if (HashMap != null) {
+                if (hashMap != null) {
                     <%- modelName %>Repository repo = restAdapter.createRepository(<%- modelName %>Repository.class);
                     return (<%- modelName %>)repo.createObject(hashMap);
                 } else {
@@ -196,7 +196,7 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
 
 
     private HashMap<String, Object> parseCursor(Cursor cursor ){
-      HashMap<String, Object> chatHashMap = new HashMap<>();
+      HashMap<String, Object> hashMap = new HashMap<>();
 
         <%
           //Increment after each loop
@@ -214,7 +214,7 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
                     <%-property%>Data = new Gson().fromJson(cursor.getString(<%- id %>), DataList.class);
                     if(<%-property%>Data != null){
                       <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type[0], isArray) %>)<%-property%>Data;
-                      chatHashMap.put("<%-property%>", <%-property%>Data);
+                      hashMap.put("<%-property%>", <%-property%>Data);
                     }
                   }
               <% }else{ -%>
@@ -224,7 +224,7 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
                           <%-property%>Data = cursor.getString(<%- id %>);
                           if(<%-property%>Data != null){
                             <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) %>)<%-property%>Data;
-                            chatHashMap.put("<%-property%>", <%-property%>Data);
+                            hashMap.put("<%-property%>", <%-property%>Data);
                           }
                         }
                     <% }else if(model.properties[property].type === "object" || model.properties[property].type === "geopoint"){ -%>
@@ -233,14 +233,14 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
                           <%-property%>Data = new Gson().fromJson(cursor.getString(<%- id %>), Map.class);
                           if(<%-property%>Data != null){
                             <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) %>)<%-property%>Data;
-                            chatHashMap.put("<%-property%>", <%-property%>Data);
+                            hashMap.put("<%-property%>", <%-property%>Data);
                           }
                         }
                     <% }else if(model.properties[property].type === "number"){ -%>
                         double <%-property%>Data = double(0);  
                           <%-property%>Data = cursor.getInt(<%- id %>);
                           <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) %>)<%-property%>Data;
-                          chatHashMap.put("<%-property%>", <%-property%>Data);
+                          hashMap.put("<%-property%>", <%-property%>Data);
                       
                       
                     <% }else if(model.properties[property].type === "boolean"){ -%>
@@ -257,7 +257,7 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
                           <%-property%>Data = cursor.getString(<%- id %>);
                           if(<%-property%>Data != null){
                             <%-property%>Data = <%-property%>Data.toString();
-                            chatHashMap.put("<%-property%>", <%-property%>Data);
+                            hashMap.put("<%-property%>", <%-property%>Data);
                           }
                         }
                     <% } -%>
@@ -265,7 +265,7 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
               <% id++; %>
           <% } -%>
         <%}%>  
-        return chatHashMap;
+        return hashMap;
     }//parseCursor
 
 
@@ -293,10 +293,37 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
         if (cursor.moveToFirst()) {
             do {
                
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
-                if(chatHashMap != null){
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
                     <%- modelName %>Repository repo = restAdapter.createRepository(<%- modelName %>Repository.class);
-                    modelList.add((<%- modelName %>)repo.createObject(chatHashMap));
+                    modelList.add((<%- modelName %>)repo.createObject(hashMap));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+        return (DataList<<%- modelName %>>) modelList;
+    } 
+
+
+    // Getting All Data where
+    public DataList<<%- modelName %>>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<<%- modelName %>> modelList = new DataList<<%- modelName %>>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM <%- modelName %> WHERE " + whereKey +"="+ whereKeyValue ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+               
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
+                    <%- modelName %>Repository repo = restAdapter.createRepository(<%- modelName %>Repository.class);
+                    modelList.add((<%- modelName %>)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }

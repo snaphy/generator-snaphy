@@ -159,6 +159,7 @@ public class Category extends Model {
 
     //------------------------------------Database Method---------------------------------------------------
 
+   
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();
@@ -167,12 +168,12 @@ public class Category extends Model {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      CategoryRepository categoryRepository = (CategoryRepository) getRepository();
-      if(categoryRepository.getDbHandler().isSTORE_LOCALLY()){
+      CategoryRepository lowercaseFirstLetterRepository = (CategoryRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             categoryRepository.getDbHandler().delete__db(id);
+             lowercaseFirstLetterRepository.getCategoryDb().delete__db(id);
           }
       }
       //Also save to database..
@@ -180,16 +181,12 @@ public class Category extends Model {
     }
 
 
+
     public void save__db(String id){
-      CategoryRepository categoryRepository = (CategoryRepository) getRepository();
-      if(categoryRepository.getDbHandler().isSTORE_LOCALLY()){
+      CategoryRepository lowercaseFirstLetterRepository = (CategoryRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
-          String object = categoryRepository.getDbHandler().toJsonString(hashMap);
-          ContentValues values = new ContentValues();
-          values.put("ID", id); // Contact Name
-          values.put("OBJECT", object); // Contact Phone Number*/
-          categoryRepository.getDbHandler().upsert__db(id, object);
+          lowercaseFirstLetterRepository.getCategoryDb().upsert__db(id, this);
         }
       }
     }

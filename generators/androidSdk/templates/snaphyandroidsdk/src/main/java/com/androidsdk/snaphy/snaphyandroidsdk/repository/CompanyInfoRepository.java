@@ -38,6 +38,10 @@ import org.json.JSONObject;
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.CompanyInfo;
 
+import android.content.Context;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.db.CompanyInfoDb;
+
 //Now import model of related models..
 
 
@@ -56,15 +60,19 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
 
 
-    public DbHandler getDbHandler() {
-      return dbHandler;
+    
+
+
+
+    public CompanyInfoDb getCompanyInfoDb() {
+      return companyInfoDb;
     }
 
-    public void setDbHandler(DbHandler dbHandler) {
-      this.dbHandler = dbHandler;
+    public void setCompanyInfoDb(CompanyInfoDb companyInfoDb) {
+      this.companyInfoDb = companyInfoDb;
     }
 
-    private DbHandler dbHandler;
+    private CompanyInfoDb companyInfoDb;
 
 
 
@@ -84,17 +92,17 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-        getDbHandler().reset__db();
+          getCompanyInfoDb().reset__db();
       }
     }
 
 
 
 private void addStorage(Context context){
-    setDbHandler(new DbHandler< CompanyInfo, CompanyInfoRepository >(context, "CompanyInfo", getRestAdapter()));
+    setCompanyInfoDb(new CompanyInfoDb(context, getRestAdapter()));
       //allow data storage locally..
       persistData(true);
-    }
+}
 
 
     public RestContract createContract() {

@@ -400,6 +400,7 @@ public class AppUser extends User {
 
     //------------------------------------Database Method---------------------------------------------------
 
+   
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();
@@ -408,12 +409,12 @@ public class AppUser extends User {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      AppUserRepository appUserRepository = (AppUserRepository) getRepository();
-      if(appUserRepository.getDbHandler().isSTORE_LOCALLY()){
+      AppUserRepository lowercaseFirstLetterRepository = (AppUserRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             appUserRepository.getDbHandler().delete__db(id);
+             lowercaseFirstLetterRepository.getAppUserDb().delete__db(id);
           }
       }
       //Also save to database..
@@ -421,16 +422,12 @@ public class AppUser extends User {
     }
 
 
+
     public void save__db(String id){
-      AppUserRepository appUserRepository = (AppUserRepository) getRepository();
-      if(appUserRepository.getDbHandler().isSTORE_LOCALLY()){
+      AppUserRepository lowercaseFirstLetterRepository = (AppUserRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
-          String object = appUserRepository.getDbHandler().toJsonString(hashMap);
-          ContentValues values = new ContentValues();
-          values.put("ID", id); // Contact Name
-          values.put("OBJECT", object); // Contact Phone Number*/
-          appUserRepository.getDbHandler().upsert__db(id, object);
+          lowercaseFirstLetterRepository.getAppUserDb().upsert__db(id, this);
         }
       }
     }

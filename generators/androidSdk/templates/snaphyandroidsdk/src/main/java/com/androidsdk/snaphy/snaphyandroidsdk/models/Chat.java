@@ -320,6 +320,7 @@ public class Chat extends Model {
 
     //------------------------------------Database Method---------------------------------------------------
 
+   
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();
@@ -328,12 +329,12 @@ public class Chat extends Model {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      ChatRepository chatRepository = (ChatRepository) getRepository();
-      if(chatRepository.getDbHandler().isSTORE_LOCALLY()){
+      ChatRepository lowercaseFirstLetterRepository = (ChatRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             chatRepository.getDbHandler().delete__db(id);
+             lowercaseFirstLetterRepository.getChatDb().delete__db(id);
           }
       }
       //Also save to database..
@@ -341,16 +342,12 @@ public class Chat extends Model {
     }
 
 
+
     public void save__db(String id){
-      ChatRepository chatRepository = (ChatRepository) getRepository();
-      if(chatRepository.getDbHandler().isSTORE_LOCALLY()){
+      ChatRepository lowercaseFirstLetterRepository = (ChatRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
-          String object = chatRepository.getDbHandler().toJsonString(hashMap);
-          ContentValues values = new ContentValues();
-          values.put("ID", id); // Contact Name
-          values.put("OBJECT", object); // Contact Phone Number*/
-          chatRepository.getDbHandler().upsert__db(id, object);
+          lowercaseFirstLetterRepository.getChatDb().upsert__db(id, this);
         }
       }
     }
@@ -433,7 +430,7 @@ public class Chat extends Model {
 
 
                     //Fetch related data from local database if present a brandId identifier as property for belongsTo
-                    public Brand getbrand__db(RestAdapter restAdapter){
+                    public Brand getBrand__db(RestAdapter restAdapter){
                       if(brandId != null){
                         BrandRepository brandRepository = restAdapter.createRepository(BrandRepository.class);
                         Brand brand = (Brand) brandRepository.getDbHandler().get__db(Brand.class, brandId);
@@ -620,7 +617,7 @@ public class Chat extends Model {
 
 
                     //Fetch related data from local database if present a appUserId identifier as property for belongsTo
-                    public AppUser getappUser__db(RestAdapter restAdapter){
+                    public AppUser getAppUser__db(RestAdapter restAdapter){
                       if(appUserId != null){
                         AppUserRepository appUserRepository = restAdapter.createRepository(AppUserRepository.class);
                         AppUser appUser = (AppUser) appUserRepository.getDbHandler().get__db(AppUser.class, appUserId);

@@ -38,6 +38,10 @@ import org.json.JSONObject;
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.HotDeal;
 
+import android.content.Context;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.db.HotDealDb;
+
 //Now import model of related models..
 
     
@@ -70,15 +74,19 @@ public class HotDealRepository extends ModelRepository<HotDeal> {
 
 
 
-    public DbHandler getDbHandler() {
-      return dbHandler;
+    
+
+
+
+    public HotDealDb getHotDealDb() {
+      return hotDealDb;
     }
 
-    public void setDbHandler(DbHandler dbHandler) {
-      this.dbHandler = dbHandler;
+    public void setHotDealDb(HotDealDb hotDealDb) {
+      this.hotDealDb = hotDealDb;
     }
 
-    private DbHandler dbHandler;
+    private HotDealDb hotDealDb;
 
 
 
@@ -98,17 +106,17 @@ public class HotDealRepository extends ModelRepository<HotDeal> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-        getDbHandler().reset__db();
+          getHotDealDb().reset__db();
       }
     }
 
 
 
 private void addStorage(Context context){
-    setDbHandler(new DbHandler< HotDeal, HotDealRepository >(context, "HotDeal", getRestAdapter()));
+    setHotDealDb(new HotDealDb(context, getRestAdapter()));
       //allow data storage locally..
       persistData(true);
-    }
+}
 
 
     public RestContract createContract() {

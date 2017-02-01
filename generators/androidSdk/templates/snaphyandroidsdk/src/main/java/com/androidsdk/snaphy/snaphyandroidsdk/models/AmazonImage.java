@@ -178,6 +178,7 @@ public class AmazonImage extends Model {
 
     //------------------------------------Database Method---------------------------------------------------
 
+   
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();
@@ -186,12 +187,12 @@ public class AmazonImage extends Model {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      AmazonImageRepository amazonImageRepository = (AmazonImageRepository) getRepository();
-      if(amazonImageRepository.getDbHandler().isSTORE_LOCALLY()){
+      AmazonImageRepository lowercaseFirstLetterRepository = (AmazonImageRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             amazonImageRepository.getDbHandler().delete__db(id);
+             lowercaseFirstLetterRepository.getAmazonImageDb().delete__db(id);
           }
       }
       //Also save to database..
@@ -199,16 +200,12 @@ public class AmazonImage extends Model {
     }
 
 
+
     public void save__db(String id){
-      AmazonImageRepository amazonImageRepository = (AmazonImageRepository) getRepository();
-      if(amazonImageRepository.getDbHandler().isSTORE_LOCALLY()){
+      AmazonImageRepository lowercaseFirstLetterRepository = (AmazonImageRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
-          String object = amazonImageRepository.getDbHandler().toJsonString(hashMap);
-          ContentValues values = new ContentValues();
-          values.put("ID", id); // Contact Name
-          values.put("OBJECT", object); // Contact Phone Number*/
-          amazonImageRepository.getDbHandler().upsert__db(id, object);
+          lowercaseFirstLetterRepository.getAmazonImageDb().upsert__db(id, this);
         }
       }
     }

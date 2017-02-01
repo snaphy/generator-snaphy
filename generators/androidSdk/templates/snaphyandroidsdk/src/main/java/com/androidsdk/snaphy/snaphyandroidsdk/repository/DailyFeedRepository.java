@@ -38,6 +38,10 @@ import org.json.JSONObject;
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.DailyFeed;
 
+import android.content.Context;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.db.DailyFeedDb;
+
 //Now import model of related models..
 
     
@@ -63,15 +67,19 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
 
 
 
-    public DbHandler getDbHandler() {
-      return dbHandler;
+    
+
+
+
+    public DailyFeedDb getDailyFeedDb() {
+      return dailyFeedDb;
     }
 
-    public void setDbHandler(DbHandler dbHandler) {
-      this.dbHandler = dbHandler;
+    public void setDailyFeedDb(DailyFeedDb dailyFeedDb) {
+      this.dailyFeedDb = dailyFeedDb;
     }
 
-    private DbHandler dbHandler;
+    private DailyFeedDb dailyFeedDb;
 
 
 
@@ -91,17 +99,17 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-        getDbHandler().reset__db();
+          getDailyFeedDb().reset__db();
       }
     }
 
 
 
 private void addStorage(Context context){
-    setDbHandler(new DbHandler< DailyFeed, DailyFeedRepository >(context, "DailyFeed", getRestAdapter()));
+    setDailyFeedDb(new DailyFeedDb(context, getRestAdapter()));
       //allow data storage locally..
       persistData(true);
-    }
+}
 
 
     public RestContract createContract() {

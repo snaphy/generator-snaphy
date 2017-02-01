@@ -38,6 +38,10 @@ import org.json.JSONObject;
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.AdminEmail;
 
+import android.content.Context;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.db.AdminEmailDb;
+
 //Now import model of related models..
 
 
@@ -56,15 +60,19 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
 
 
-    public DbHandler getDbHandler() {
-      return dbHandler;
+    
+
+
+
+    public AdminEmailDb getAdminEmailDb() {
+      return adminEmailDb;
     }
 
-    public void setDbHandler(DbHandler dbHandler) {
-      this.dbHandler = dbHandler;
+    public void setAdminEmailDb(AdminEmailDb adminEmailDb) {
+      this.adminEmailDb = adminEmailDb;
     }
 
-    private DbHandler dbHandler;
+    private AdminEmailDb adminEmailDb;
 
 
 
@@ -84,17 +92,17 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-        getDbHandler().reset__db();
+          getAdminEmailDb().reset__db();
       }
     }
 
 
 
 private void addStorage(Context context){
-    setDbHandler(new DbHandler< AdminEmail, AdminEmailRepository >(context, "AdminEmail", getRestAdapter()));
+    setAdminEmailDb(new AdminEmailDb(context, getRestAdapter()));
       //allow data storage locally..
       persistData(true);
-    }
+}
 
 
     public RestContract createContract() {

@@ -346,6 +346,7 @@ public class HotDeal extends Model {
 
     //------------------------------------Database Method---------------------------------------------------
 
+   
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();
@@ -354,12 +355,12 @@ public class HotDeal extends Model {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      HotDealRepository hotDealRepository = (HotDealRepository) getRepository();
-      if(hotDealRepository.getDbHandler().isSTORE_LOCALLY()){
+      HotDealRepository lowercaseFirstLetterRepository = (HotDealRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             hotDealRepository.getDbHandler().delete__db(id);
+             lowercaseFirstLetterRepository.getHotDealDb().delete__db(id);
           }
       }
       //Also save to database..
@@ -367,16 +368,12 @@ public class HotDeal extends Model {
     }
 
 
+
     public void save__db(String id){
-      HotDealRepository hotDealRepository = (HotDealRepository) getRepository();
-      if(hotDealRepository.getDbHandler().isSTORE_LOCALLY()){
+      HotDealRepository lowercaseFirstLetterRepository = (HotDealRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
-          String object = hotDealRepository.getDbHandler().toJsonString(hashMap);
-          ContentValues values = new ContentValues();
-          values.put("ID", id); // Contact Name
-          values.put("OBJECT", object); // Contact Phone Number*/
-          hotDealRepository.getDbHandler().upsert__db(id, object);
+          lowercaseFirstLetterRepository.getHotDealDb().upsert__db(id, this);
         }
       }
     }
@@ -459,7 +456,7 @@ public class HotDeal extends Model {
 
 
                     //Fetch related data from local database if present a categoryId identifier as property for belongsTo
-                    public Category getcategory__db(RestAdapter restAdapter){
+                    public Category getCategory__db(RestAdapter restAdapter){
                       if(categoryId != null){
                         CategoryRepository categoryRepository = restAdapter.createRepository(CategoryRepository.class);
                         Category category = (Category) categoryRepository.getDbHandler().get__db(Category.class, categoryId);
@@ -645,7 +642,7 @@ public class HotDeal extends Model {
 
 
                     //Fetch related data from local database if present a brandId identifier as property for belongsTo
-                    public Brand getbrand__db(RestAdapter restAdapter){
+                    public Brand getBrand__db(RestAdapter restAdapter){
                       if(brandId != null){
                         BrandRepository brandRepository = restAdapter.createRepository(BrandRepository.class);
                         Brand brand = (Brand) brandRepository.getDbHandler().get__db(Brand.class, brandId);

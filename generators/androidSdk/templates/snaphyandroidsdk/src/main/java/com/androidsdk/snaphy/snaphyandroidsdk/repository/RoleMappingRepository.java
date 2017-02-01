@@ -38,6 +38,10 @@ import org.json.JSONObject;
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.RoleMapping;
 
+import android.content.Context;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.db.RoleMappingDb;
+
 //Now import model of related models..
 
     
@@ -63,15 +67,19 @@ public class RoleMappingRepository extends ModelRepository<RoleMapping> {
 
 
 
-    public DbHandler getDbHandler() {
-      return dbHandler;
+    
+
+
+
+    public RoleMappingDb getRoleMappingDb() {
+      return roleMappingDb;
     }
 
-    public void setDbHandler(DbHandler dbHandler) {
-      this.dbHandler = dbHandler;
+    public void setRoleMappingDb(RoleMappingDb roleMappingDb) {
+      this.roleMappingDb = roleMappingDb;
     }
 
-    private DbHandler dbHandler;
+    private RoleMappingDb roleMappingDb;
 
 
 
@@ -91,17 +99,17 @@ public class RoleMappingRepository extends ModelRepository<RoleMapping> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-        getDbHandler().reset__db();
+          getRoleMappingDb().reset__db();
       }
     }
 
 
 
 private void addStorage(Context context){
-    setDbHandler(new DbHandler< RoleMapping, RoleMappingRepository >(context, "RoleMapping", getRestAdapter()));
+    setRoleMappingDb(new RoleMappingDb(context, getRestAdapter()));
       //allow data storage locally..
       persistData(true);
-    }
+}
 
 
     public RestContract createContract() {

@@ -38,6 +38,10 @@ import org.json.JSONObject;
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Role;
 
+import android.content.Context;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.db.RoleDb;
+
 //Now import model of related models..
 
     
@@ -63,15 +67,19 @@ public class RoleRepository extends ModelRepository<Role> {
 
 
 
-    public DbHandler getDbHandler() {
-      return dbHandler;
+    
+
+
+
+    public RoleDb getRoleDb() {
+      return roleDb;
     }
 
-    public void setDbHandler(DbHandler dbHandler) {
-      this.dbHandler = dbHandler;
+    public void setRoleDb(RoleDb roleDb) {
+      this.roleDb = roleDb;
     }
 
-    private DbHandler dbHandler;
+    private RoleDb roleDb;
 
 
 
@@ -91,17 +99,17 @@ public class RoleRepository extends ModelRepository<Role> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-        getDbHandler().reset__db();
+          getRoleDb().reset__db();
       }
     }
 
 
 
 private void addStorage(Context context){
-    setDbHandler(new DbHandler< Role, RoleRepository >(context, "Role", getRestAdapter()));
+    setRoleDb(new RoleDb(context, getRestAdapter()));
       //allow data storage locally..
       persistData(true);
-    }
+}
 
 
     public RestContract createContract() {

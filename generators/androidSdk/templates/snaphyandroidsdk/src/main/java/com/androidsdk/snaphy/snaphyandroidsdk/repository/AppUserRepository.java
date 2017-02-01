@@ -44,6 +44,10 @@ import org.json.JSONObject;
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.AppUser;
 
+import android.content.Context;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.db.AppUserDb;
+
 //Now import model of related models..
 
     
@@ -183,15 +187,19 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
 
 
-    public DbHandler getDbHandler() {
-      return dbHandler;
+    
+
+
+
+    public AppUserDb getAppUserDb() {
+      return appUserDb;
     }
 
-    public void setDbHandler(DbHandler dbHandler) {
-      this.dbHandler = dbHandler;
+    public void setAppUserDb(AppUserDb appUserDb) {
+      this.appUserDb = appUserDb;
     }
 
-    private DbHandler dbHandler;
+    private AppUserDb appUserDb;
 
 
 
@@ -211,17 +219,17 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-        getDbHandler().reset__db();
+          getAppUserDb().reset__db();
       }
     }
 
 
 
 private void addStorage(Context context){
-    setDbHandler(new DbHandler< AppUser, AppUserRepository >(context, "AppUser", getRestAdapter()));
+    setAppUserDb(new AppUserDb(context, getRestAdapter()));
       //allow data storage locally..
       persistData(true);
-    }
+}
 
 
     public RestContract createContract() {

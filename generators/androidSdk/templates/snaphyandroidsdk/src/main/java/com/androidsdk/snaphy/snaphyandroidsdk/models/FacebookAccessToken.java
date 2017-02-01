@@ -197,6 +197,7 @@ public class FacebookAccessToken extends Model {
 
     //------------------------------------Database Method---------------------------------------------------
 
+   
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();
@@ -205,12 +206,12 @@ public class FacebookAccessToken extends Model {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      FacebookAccessTokenRepository facebookAccessTokenRepository = (FacebookAccessTokenRepository) getRepository();
-      if(facebookAccessTokenRepository.getDbHandler().isSTORE_LOCALLY()){
+      FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             facebookAccessTokenRepository.getDbHandler().delete__db(id);
+             lowercaseFirstLetterRepository.getFacebookAccessTokenDb().delete__db(id);
           }
       }
       //Also save to database..
@@ -218,16 +219,12 @@ public class FacebookAccessToken extends Model {
     }
 
 
+
     public void save__db(String id){
-      FacebookAccessTokenRepository facebookAccessTokenRepository = (FacebookAccessTokenRepository) getRepository();
-      if(facebookAccessTokenRepository.getDbHandler().isSTORE_LOCALLY()){
+      FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
-          String object = facebookAccessTokenRepository.getDbHandler().toJsonString(hashMap);
-          ContentValues values = new ContentValues();
-          values.put("ID", id); // Contact Name
-          values.put("OBJECT", object); // Contact Phone Number*/
-          facebookAccessTokenRepository.getDbHandler().upsert__db(id, object);
+          lowercaseFirstLetterRepository.getFacebookAccessTokenDb().upsert__db(id, this);
         }
       }
     }
@@ -310,7 +307,7 @@ public class FacebookAccessToken extends Model {
 
 
                     //Fetch related data from local database if present a userId identifier as property for belongsTo
-                    public AppUser getappUser__db(RestAdapter restAdapter){
+                    public AppUser getAppUser__db(RestAdapter restAdapter){
                       if(userId != null){
                         AppUserRepository appUserRepository = restAdapter.createRepository(AppUserRepository.class);
                         AppUser appUser = (AppUser) appUserRepository.getDbHandler().get__db(AppUser.class, userId);

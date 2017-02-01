@@ -164,6 +164,37 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
 
 
 
+
+    // Getting single cont
+    public   HotDeal get__db(String whereKey, String whereKeyValue) {
+        if (whereKeyValue != null) {
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.query("HotDeal", null, whereKey + "=?", new String[]{whereKeyValue}, null, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+
+                cursor.close();
+                db.close(); // Closing database connection
+
+                if (HashMap != null) {
+                    HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
+                    return (HotDeal)repo.createObject(hashMap);
+                } else {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+
+    } //get__db
+
+
+
+
     private HashMap<String, Object> parseCursor(Cursor cursor ){
       HashMap<String, Object> chatHashMap = new HashMap<>();
 

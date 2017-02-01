@@ -400,6 +400,7 @@ public class BrandManager extends User {
 
     //------------------------------------Database Method---------------------------------------------------
 
+   
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();
@@ -408,12 +409,12 @@ public class BrandManager extends User {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      BrandManagerRepository brandManagerRepository = (BrandManagerRepository) getRepository();
-      if(brandManagerRepository.getDbHandler().isSTORE_LOCALLY()){
+      BrandManagerRepository lowercaseFirstLetterRepository = (BrandManagerRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             brandManagerRepository.getDbHandler().delete__db(id);
+             lowercaseFirstLetterRepository.getBrandManagerDb().delete__db(id);
           }
       }
       //Also save to database..
@@ -421,16 +422,12 @@ public class BrandManager extends User {
     }
 
 
+
     public void save__db(String id){
-      BrandManagerRepository brandManagerRepository = (BrandManagerRepository) getRepository();
-      if(brandManagerRepository.getDbHandler().isSTORE_LOCALLY()){
+      BrandManagerRepository lowercaseFirstLetterRepository = (BrandManagerRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
-          String object = brandManagerRepository.getDbHandler().toJsonString(hashMap);
-          ContentValues values = new ContentValues();
-          values.put("ID", id); // Contact Name
-          values.put("OBJECT", object); // Contact Phone Number*/
-          brandManagerRepository.getDbHandler().upsert__db(id, object);
+          lowercaseFirstLetterRepository.getBrandManagerDb().upsert__db(id, this);
         }
       }
     }
@@ -516,7 +513,7 @@ public class BrandManager extends User {
 
 
                     //Fetch related data from local database if present a brandId identifier as property for belongsTo
-                    public Brand getbrand__db(RestAdapter restAdapter){
+                    public Brand getBrand__db(RestAdapter restAdapter){
                       if(brandId != null){
                         BrandRepository brandRepository = restAdapter.createRepository(BrandRepository.class);
                         Brand brand = (Brand) brandRepository.getDbHandler().get__db(Brand.class, brandId);

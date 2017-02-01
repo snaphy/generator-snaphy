@@ -514,7 +514,7 @@ public class <%- modelName %> extends Model {
                     public <%- capitalcaseRelatedModelName %> get<%- capitalcaseRelationName %>__db(RestAdapter restAdapter){
                       if(<%- getForeignKeyName() %> != null){
                         <%- capitalcaseRelatedModelName %>Repository <%- relation %>Repository = restAdapter.createRepository(<%- capitalcaseRelatedModelName %>Repository.class);
-                        <%- capitalcaseRelatedModelName %> <%- relation %> = (<%- capitalcaseRelatedModelName %>) <%- relation %>Repository.getDbHandler().get__db(<%- capitalcaseRelatedModelName %>.class, <%- getForeignKeyName() %>);
+                        <%- capitalcaseRelatedModelName %> <%- relation %> = (<%- capitalcaseRelatedModelName %>) <%- relation %>Repository.get<%- capitalcaseRelatedModelName %>Db().get__db(<%- getForeignKeyName() %>);
                         if(<%- relation %> != null){
                           return <%- relation %>;
                         }else{
@@ -532,6 +532,20 @@ public class <%- modelName %> extends Model {
                     private transient DataList<<%- capitalcaseRelatedModelName %>>  <%- relation %> ;
 
                     public DataList<<%- capitalcaseRelatedModelName %>> get<%- capitalcaseRelationName %>() {
+                        //Check for pure case of hasMany
+                        <% if(!model.relations[relation].through){ -%>
+                            if(that.getId() != null){
+                                   //TODO: Modify foreign key name..
+                                   <%- modelName %>Repository <%- lowercaseFirstLetter(modelName) %>Repository = (<%- modelName %>Repository) getRepository();
+                                   if(restAdapter != null){
+                                     //Fetch locally from db
+                                     //<%- relation %> = get<%- capitalcaseRelationName %>__db(restAdapter);
+                                     // Getting single cont
+                                     <%- relation %> = modelRepository.get<%- modelName %>Db.get__db(<%- lowercaseFirstLetter(modelName)Id %>, that.getId().toString());
+                                   }
+                                   //lowercaseFirstLetter(modelName)
+                            }
+                        <%}-%>
                         return <%- relation %>;
                     }
 
@@ -543,10 +557,6 @@ public class <%- modelName %> extends Model {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class)){
-                                hashType = true;
-                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
-                                hashMaps.add(dataObj);
                             }
                         }
 
@@ -554,6 +564,10 @@ public class <%- modelName %> extends Model {
                             set<%- capitalcaseRelationName %>1(hashMaps);
                         }else{
                             this.<%- relation %> = <%- relation %>;
+                            //TODO: Warning move this to new thread
+                            for(<%- capitalcaseRelatedModelName %> data: <%- relation %>){
+                                data.save__db();
+                            }
                         }
                     }
 
@@ -601,6 +615,8 @@ public class <%- modelName %> extends Model {
                     //This will add a new data to the list relation object..
                     public void addRelation(<%- capitalcaseRelatedModelName %> <%- relation %>) {
                         try{
+                            //Save to database..
+                            <%- relation %>.save__db();
                             that.get<%- capitalcaseRelationName %>().add(<%- relation %>);
                         }catch(Exception e){
                             DataList< <%- capitalcaseRelatedModelName %>> <%- relation %>1 = new DataList();
@@ -629,6 +645,7 @@ public class <%- modelName %> extends Model {
 
                         public void set<%- capitalcaseRelatedModelName %>(DataList<<%- capitalcaseRelatedModelName %>> <%- throughRelation %>) {
                             this.<%- throughRelation %> = <%- throughRelation %>;
+
                         }
 
                         //Adding throughRelation method..

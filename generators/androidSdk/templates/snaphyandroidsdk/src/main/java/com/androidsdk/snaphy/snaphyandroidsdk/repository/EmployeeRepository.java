@@ -44,6 +44,10 @@ import org.json.JSONObject;
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Employee;
 
+import android.content.Context;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.db.EmployeeDb;
+
 //Now import model of related models..
 
     
@@ -162,15 +166,19 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
 
 
-    public DbHandler getDbHandler() {
-      return dbHandler;
+    
+
+
+
+    public EmployeeDb getEmployeeDb() {
+      return employeeDb;
     }
 
-    public void setDbHandler(DbHandler dbHandler) {
-      this.dbHandler = dbHandler;
+    public void setEmployeeDb(EmployeeDb employeeDb) {
+      this.employeeDb = employeeDb;
     }
 
-    private DbHandler dbHandler;
+    private EmployeeDb employeeDb;
 
 
 
@@ -190,17 +198,17 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-        getDbHandler().reset__db();
+          getEmployeeDb().reset__db();
       }
     }
 
 
 
 private void addStorage(Context context){
-    setDbHandler(new DbHandler< Employee, EmployeeRepository >(context, "Employee", getRestAdapter()));
+    setEmployeeDb(new EmployeeDb(context, getRestAdapter()));
       //allow data storage locally..
       persistData(true);
-    }
+}
 
 
     public RestContract createContract() {

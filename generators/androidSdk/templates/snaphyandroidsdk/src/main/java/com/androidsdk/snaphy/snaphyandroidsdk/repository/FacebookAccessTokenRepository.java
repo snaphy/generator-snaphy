@@ -38,6 +38,10 @@ import org.json.JSONObject;
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.FacebookAccessToken;
 
+import android.content.Context;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.db.FacebookAccessTokenDb;
+
 //Now import model of related models..
 
     
@@ -63,15 +67,19 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
 
 
-    public DbHandler getDbHandler() {
-      return dbHandler;
+    
+
+
+
+    public FacebookAccessTokenDb getFacebookAccessTokenDb() {
+      return facebookAccessTokenDb;
     }
 
-    public void setDbHandler(DbHandler dbHandler) {
-      this.dbHandler = dbHandler;
+    public void setFacebookAccessTokenDb(FacebookAccessTokenDb facebookAccessTokenDb) {
+      this.facebookAccessTokenDb = facebookAccessTokenDb;
     }
 
-    private DbHandler dbHandler;
+    private FacebookAccessTokenDb facebookAccessTokenDb;
 
 
 
@@ -91,17 +99,17 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-        getDbHandler().reset__db();
+          getFacebookAccessTokenDb().reset__db();
       }
     }
 
 
 
 private void addStorage(Context context){
-    setDbHandler(new DbHandler< FacebookAccessToken, FacebookAccessTokenRepository >(context, "FacebookAccessToken", getRestAdapter()));
+    setFacebookAccessTokenDb(new FacebookAccessTokenDb(context, getRestAdapter()));
       //allow data storage locally..
       persistData(true);
-    }
+}
 
 
     public RestContract createContract() {

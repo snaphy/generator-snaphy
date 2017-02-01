@@ -131,6 +131,7 @@ public class RoleMapping extends Model {
 
     //------------------------------------Database Method---------------------------------------------------
 
+   
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();
@@ -139,12 +140,12 @@ public class RoleMapping extends Model {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      RoleMappingRepository roleMappingRepository = (RoleMappingRepository) getRepository();
-      if(roleMappingRepository.getDbHandler().isSTORE_LOCALLY()){
+      RoleMappingRepository lowercaseFirstLetterRepository = (RoleMappingRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             roleMappingRepository.getDbHandler().delete__db(id);
+             lowercaseFirstLetterRepository.getRoleMappingDb().delete__db(id);
           }
       }
       //Also save to database..
@@ -152,16 +153,12 @@ public class RoleMapping extends Model {
     }
 
 
+
     public void save__db(String id){
-      RoleMappingRepository roleMappingRepository = (RoleMappingRepository) getRepository();
-      if(roleMappingRepository.getDbHandler().isSTORE_LOCALLY()){
+      RoleMappingRepository lowercaseFirstLetterRepository = (RoleMappingRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
-          String object = roleMappingRepository.getDbHandler().toJsonString(hashMap);
-          ContentValues values = new ContentValues();
-          values.put("ID", id); // Contact Name
-          values.put("OBJECT", object); // Contact Phone Number*/
-          roleMappingRepository.getDbHandler().upsert__db(id, object);
+          lowercaseFirstLetterRepository.getRoleMappingDb().upsert__db(id, this);
         }
       }
     }
@@ -244,7 +241,7 @@ public class RoleMapping extends Model {
 
 
                     //Fetch related data from local database if present a roleId identifier as property for belongsTo
-                    public Role getrole__db(RestAdapter restAdapter){
+                    public Role getRole__db(RestAdapter restAdapter){
                       if(roleId != null){
                         RoleRepository roleRepository = restAdapter.createRepository(RoleRepository.class);
                         Role role = (Role) roleRepository.getDbHandler().get__db(Role.class, roleId);

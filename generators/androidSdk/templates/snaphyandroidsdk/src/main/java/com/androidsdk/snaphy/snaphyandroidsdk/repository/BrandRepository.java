@@ -38,6 +38,10 @@ import org.json.JSONObject;
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Brand;
 
+import android.content.Context;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.db.BrandDb;
+
 //Now import model of related models..
 
     
@@ -94,15 +98,19 @@ public class BrandRepository extends ModelRepository<Brand> {
 
 
 
-    public DbHandler getDbHandler() {
-      return dbHandler;
+    
+
+
+
+    public BrandDb getBrandDb() {
+      return brandDb;
     }
 
-    public void setDbHandler(DbHandler dbHandler) {
-      this.dbHandler = dbHandler;
+    public void setBrandDb(BrandDb brandDb) {
+      this.brandDb = brandDb;
     }
 
-    private DbHandler dbHandler;
+    private BrandDb brandDb;
 
 
 
@@ -122,17 +130,17 @@ public class BrandRepository extends ModelRepository<Brand> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-        getDbHandler().reset__db();
+          getBrandDb().reset__db();
       }
     }
 
 
 
 private void addStorage(Context context){
-    setDbHandler(new DbHandler< Brand, BrandRepository >(context, "Brand", getRestAdapter()));
+    setBrandDb(new BrandDb(context, getRestAdapter()));
       //allow data storage locally..
       persistData(true);
-    }
+}
 
 
     public RestContract createContract() {

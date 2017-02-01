@@ -134,6 +134,7 @@ public class AdminEmail extends Model {
 
     //------------------------------------Database Method---------------------------------------------------
 
+   
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();
@@ -142,12 +143,12 @@ public class AdminEmail extends Model {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      AdminEmailRepository adminEmailRepository = (AdminEmailRepository) getRepository();
-      if(adminEmailRepository.getDbHandler().isSTORE_LOCALLY()){
+      AdminEmailRepository lowercaseFirstLetterRepository = (AdminEmailRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             adminEmailRepository.getDbHandler().delete__db(id);
+             lowercaseFirstLetterRepository.getAdminEmailDb().delete__db(id);
           }
       }
       //Also save to database..
@@ -155,16 +156,12 @@ public class AdminEmail extends Model {
     }
 
 
+
     public void save__db(String id){
-      AdminEmailRepository adminEmailRepository = (AdminEmailRepository) getRepository();
-      if(adminEmailRepository.getDbHandler().isSTORE_LOCALLY()){
+      AdminEmailRepository lowercaseFirstLetterRepository = (AdminEmailRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
-          String object = adminEmailRepository.getDbHandler().toJsonString(hashMap);
-          ContentValues values = new ContentValues();
-          values.put("ID", id); // Contact Name
-          values.put("OBJECT", object); // Contact Phone Number*/
-          adminEmailRepository.getDbHandler().upsert__db(id, object);
+          lowercaseFirstLetterRepository.getAdminEmailDb().upsert__db(id, this);
         }
       }
     }

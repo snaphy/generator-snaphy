@@ -38,6 +38,10 @@ import org.json.JSONObject;
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Container;
 
+import android.content.Context;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.db.ContainerDb;
+
 //Now import model of related models..
 
 
@@ -56,15 +60,19 @@ public class ContainerRepository extends ModelRepository<Container> {
 
 
 
-    public DbHandler getDbHandler() {
-      return dbHandler;
+    
+
+
+
+    public ContainerDb getContainerDb() {
+      return containerDb;
     }
 
-    public void setDbHandler(DbHandler dbHandler) {
-      this.dbHandler = dbHandler;
+    public void setContainerDb(ContainerDb containerDb) {
+      this.containerDb = containerDb;
     }
 
-    private DbHandler dbHandler;
+    private ContainerDb containerDb;
 
 
 
@@ -84,17 +92,17 @@ public class ContainerRepository extends ModelRepository<Container> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-        getDbHandler().reset__db();
+          getContainerDb().reset__db();
       }
     }
 
 
 
 private void addStorage(Context context){
-    setDbHandler(new DbHandler< Container, ContainerRepository >(context, "Container", getRestAdapter()));
+    setContainerDb(new ContainerDb(context, getRestAdapter()));
       //allow data storage locally..
       persistData(true);
-    }
+}
 
 
     public RestContract createContract() {

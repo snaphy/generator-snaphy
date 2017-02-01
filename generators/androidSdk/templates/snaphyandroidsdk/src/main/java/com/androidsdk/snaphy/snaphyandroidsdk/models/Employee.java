@@ -355,6 +355,7 @@ public class Employee extends User {
 
     //------------------------------------Database Method---------------------------------------------------
 
+   
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();
@@ -363,12 +364,12 @@ public class Employee extends User {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      EmployeeRepository employeeRepository = (EmployeeRepository) getRepository();
-      if(employeeRepository.getDbHandler().isSTORE_LOCALLY()){
+      EmployeeRepository lowercaseFirstLetterRepository = (EmployeeRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             employeeRepository.getDbHandler().delete__db(id);
+             lowercaseFirstLetterRepository.getEmployeeDb().delete__db(id);
           }
       }
       //Also save to database..
@@ -376,16 +377,12 @@ public class Employee extends User {
     }
 
 
+
     public void save__db(String id){
-      EmployeeRepository employeeRepository = (EmployeeRepository) getRepository();
-      if(employeeRepository.getDbHandler().isSTORE_LOCALLY()){
+      EmployeeRepository lowercaseFirstLetterRepository = (EmployeeRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
-          String object = employeeRepository.getDbHandler().toJsonString(hashMap);
-          ContentValues values = new ContentValues();
-          values.put("ID", id); // Contact Name
-          values.put("OBJECT", object); // Contact Phone Number*/
-          employeeRepository.getDbHandler().upsert__db(id, object);
+          lowercaseFirstLetterRepository.getEmployeeDb().upsert__db(id, this);
         }
       }
     }

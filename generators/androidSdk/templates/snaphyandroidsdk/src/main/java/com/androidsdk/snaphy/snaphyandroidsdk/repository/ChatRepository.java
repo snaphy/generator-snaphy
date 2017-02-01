@@ -38,6 +38,10 @@ import org.json.JSONObject;
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
 
+import android.content.Context;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.db.ChatDb;
+
 //Now import model of related models..
 
     
@@ -70,15 +74,19 @@ public class ChatRepository extends ModelRepository<Chat> {
 
 
 
-    public DbHandler getDbHandler() {
-      return dbHandler;
+    
+
+
+
+    public ChatDb getChatDb() {
+      return chatDb;
     }
 
-    public void setDbHandler(DbHandler dbHandler) {
-      this.dbHandler = dbHandler;
+    public void setChatDb(ChatDb chatDb) {
+      this.chatDb = chatDb;
     }
 
-    private DbHandler dbHandler;
+    private ChatDb chatDb;
 
 
 
@@ -98,17 +106,17 @@ public class ChatRepository extends ModelRepository<Chat> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-        getDbHandler().reset__db();
+          getChatDb().reset__db();
       }
     }
 
 
 
 private void addStorage(Context context){
-    setDbHandler(new DbHandler< Chat, ChatRepository >(context, "Chat", getRestAdapter()));
+    setChatDb(new ChatDb(context, getRestAdapter()));
       //allow data storage locally..
       persistData(true);
-    }
+}
 
 
     public RestContract createContract() {

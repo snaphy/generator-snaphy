@@ -223,6 +223,7 @@ public class DailyFeed extends Model {
 
     //------------------------------------Database Method---------------------------------------------------
 
+   
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();
@@ -231,12 +232,12 @@ public class DailyFeed extends Model {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      DailyFeedRepository dailyFeedRepository = (DailyFeedRepository) getRepository();
-      if(dailyFeedRepository.getDbHandler().isSTORE_LOCALLY()){
+      DailyFeedRepository lowercaseFirstLetterRepository = (DailyFeedRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             dailyFeedRepository.getDbHandler().delete__db(id);
+             lowercaseFirstLetterRepository.getDailyFeedDb().delete__db(id);
           }
       }
       //Also save to database..
@@ -244,16 +245,12 @@ public class DailyFeed extends Model {
     }
 
 
+
     public void save__db(String id){
-      DailyFeedRepository dailyFeedRepository = (DailyFeedRepository) getRepository();
-      if(dailyFeedRepository.getDbHandler().isSTORE_LOCALLY()){
+      DailyFeedRepository lowercaseFirstLetterRepository = (DailyFeedRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
-          String object = dailyFeedRepository.getDbHandler().toJsonString(hashMap);
-          ContentValues values = new ContentValues();
-          values.put("ID", id); // Contact Name
-          values.put("OBJECT", object); // Contact Phone Number*/
-          dailyFeedRepository.getDbHandler().upsert__db(id, object);
+          lowercaseFirstLetterRepository.getDailyFeedDb().upsert__db(id, this);
         }
       }
     }
@@ -336,7 +333,7 @@ public class DailyFeed extends Model {
 
 
                     //Fetch related data from local database if present a brandId identifier as property for belongsTo
-                    public Brand getbrand__db(RestAdapter restAdapter){
+                    public Brand getBrand__db(RestAdapter restAdapter){
                       if(brandId != null){
                         BrandRepository brandRepository = restAdapter.createRepository(BrandRepository.class);
                         Brand brand = (Brand) brandRepository.getDbHandler().get__db(Brand.class, brandId);

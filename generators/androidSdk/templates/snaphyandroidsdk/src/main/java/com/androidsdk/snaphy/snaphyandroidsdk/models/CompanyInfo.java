@@ -152,6 +152,7 @@ public class CompanyInfo extends Model {
 
     //------------------------------------Database Method---------------------------------------------------
 
+   
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();
@@ -160,12 +161,12 @@ public class CompanyInfo extends Model {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      CompanyInfoRepository companyInfoRepository = (CompanyInfoRepository) getRepository();
-      if(companyInfoRepository.getDbHandler().isSTORE_LOCALLY()){
+      CompanyInfoRepository lowercaseFirstLetterRepository = (CompanyInfoRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             companyInfoRepository.getDbHandler().delete__db(id);
+             lowercaseFirstLetterRepository.getCompanyInfoDb().delete__db(id);
           }
       }
       //Also save to database..
@@ -173,16 +174,12 @@ public class CompanyInfo extends Model {
     }
 
 
+
     public void save__db(String id){
-      CompanyInfoRepository companyInfoRepository = (CompanyInfoRepository) getRepository();
-      if(companyInfoRepository.getDbHandler().isSTORE_LOCALLY()){
+      CompanyInfoRepository lowercaseFirstLetterRepository = (CompanyInfoRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
-          String object = companyInfoRepository.getDbHandler().toJsonString(hashMap);
-          ContentValues values = new ContentValues();
-          values.put("ID", id); // Contact Name
-          values.put("OBJECT", object); // Contact Phone Number*/
-          companyInfoRepository.getDbHandler().upsert__db(id, object);
+          lowercaseFirstLetterRepository.getCompanyInfoDb().upsert__db(id, this);
         }
       }
     }

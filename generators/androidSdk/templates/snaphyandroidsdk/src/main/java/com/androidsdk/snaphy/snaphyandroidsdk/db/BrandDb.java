@@ -158,6 +158,37 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
 
 
 
+
+    // Getting single cont
+    public   Brand get__db(String whereKey, String whereKeyValue) {
+        if (whereKeyValue != null) {
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.query("Brand", null, whereKey + "=?", new String[]{whereKeyValue}, null, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+
+                cursor.close();
+                db.close(); // Closing database connection
+
+                if (HashMap != null) {
+                    BrandRepository repo = restAdapter.createRepository(BrandRepository.class);
+                    return (Brand)repo.createObject(hashMap);
+                } else {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+
+    } //get__db
+
+
+
+
     private HashMap<String, Object> parseCursor(Cursor cursor ){
       HashMap<String, Object> chatHashMap = new HashMap<>();
 
