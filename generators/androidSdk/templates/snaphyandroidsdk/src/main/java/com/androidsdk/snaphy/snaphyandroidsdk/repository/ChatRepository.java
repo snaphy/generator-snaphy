@@ -71,11 +71,11 @@ public class ChatRepository extends ModelRepository<Chat> {
 
 
     public DbHandler getDbHandler() {
-    return dbHandler;
+      return dbHandler;
     }
 
     public void setDbHandler(DbHandler dbHandler) {
-    this.dbHandler = dbHandler;
+      this.dbHandler = dbHandler;
     }
 
     private DbHandler dbHandler;
@@ -86,19 +86,28 @@ public class ChatRepository extends ModelRepository<Chat> {
     private boolean STORE_LOCALLY = true;
 
     public boolean isSTORE_LOCALLY() {
-    return STORE_LOCALLY;
+      return STORE_LOCALLY;
     }
 
 
     public void  persistData(boolean persist){
-    STORE_LOCALLY = persist;
+      STORE_LOCALLY = persist;
     }
 
 
-    private void addStorage(Context context){
+
+    public void reset__db(){
+      if(isSTORE_LOCALLY()){
+        getDbHandler().reset__db();
+      }
+    }
+
+
+
+private void addStorage(Context context){
     setDbHandler(new DbHandler< Chat, ChatRepository >(context, "Chat", getRestAdapter()));
-    //allow data storage locally..
-    persistData(true);
+      //allow data storage locally..
+      persistData(true);
     }
 
 
@@ -383,8 +392,14 @@ public class ChatRepository extends ModelRepository<Chat> {
                                     AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AppUser appUser = appUserRepo.createObject(result);
-                                    callback.onSuccess(appUser);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          appUser.save__db();
+                                      }
+
+                                    callback.onSuccess(appUser);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -444,8 +459,14 @@ public class ChatRepository extends ModelRepository<Chat> {
                                     BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Brand brand = brandRepo.createObject(result);
-                                    callback.onSuccess(brand);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brand.save__db();
+                                      }
+
+                                    callback.onSuccess(brand);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -503,8 +524,14 @@ public class ChatRepository extends ModelRepository<Chat> {
                                     ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Chat chat = chatRepo.createObject(result);
-                                    callback.onSuccess(chat);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          chat.save__db();
+                                      }
+
+                                    callback.onSuccess(chat);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -563,8 +590,14 @@ public class ChatRepository extends ModelRepository<Chat> {
                                     ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Chat chat = chatRepo.createObject(result);
-                                    callback.onSuccess(chat);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          chat.save__db();
+                                      }
+
+                                    callback.onSuccess(chat);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -675,8 +708,14 @@ public class ChatRepository extends ModelRepository<Chat> {
                                     ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Chat chat = chatRepo.createObject(result);
-                                    callback.onSuccess(chat);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          chat.save__db();
+                                      }
+
+                                    callback.onSuccess(chat);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -737,6 +776,13 @@ public class ChatRepository extends ModelRepository<Chat> {
 
                                     for (Map<String, Object> obj : result) {
                                         Chat chat = chatRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 chat.save__db();
+                                            }
+
                                         chatList.add(chat);
                                     }
                                     callback.onSuccess(chatList);
@@ -795,8 +841,14 @@ public class ChatRepository extends ModelRepository<Chat> {
                                     ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Chat chat = chatRepo.createObject(result);
-                                    callback.onSuccess(chat);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          chat.save__db();
+                                      }
+
+                                    callback.onSuccess(chat);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1011,8 +1063,14 @@ public class ChatRepository extends ModelRepository<Chat> {
                                     ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Chat chat = chatRepo.createObject(result);
-                                    callback.onSuccess(chat);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          chat.save__db();
+                                      }
+
+                                    callback.onSuccess(chat);
                                 }else{
                                     callback.onSuccess(null);
                                 }

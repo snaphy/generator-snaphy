@@ -195,6 +195,57 @@ public class FacebookAccessToken extends Model {
     
 
 
+    //------------------------------------Database Method---------------------------------------------------
+
+    public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
+      //Save to database..
+      save__db();
+      //Also save to database..
+      super.save(callback);
+    }
+
+    public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
+      FacebookAccessTokenRepository facebookAccessTokenRepository = (FacebookAccessTokenRepository) getRepository();
+      if(facebookAccessTokenRepository.getDbHandler().isSTORE_LOCALLY()){
+          //Delete from database..
+          String id = getId().toString();
+          if(id != null){
+             facebookAccessTokenRepository.getDbHandler().delete__db(id);
+          }
+      }
+      //Also save to database..
+      super.save(callback);
+    }
+
+
+    public void save__db(String id){
+      FacebookAccessTokenRepository facebookAccessTokenRepository = (FacebookAccessTokenRepository) getRepository();
+      if(facebookAccessTokenRepository.getDbHandler().isSTORE_LOCALLY()){
+        if(id != null){
+          HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
+          String object = facebookAccessTokenRepository.getDbHandler().toJsonString(hashMap);
+          ContentValues values = new ContentValues();
+          values.put("ID", id); // Contact Name
+          values.put("OBJECT", object); // Contact Phone Number*/
+          facebookAccessTokenRepository.getDbHandler().upsert__db(id, object);
+        }
+      }
+    }
+
+
+    public void save__db(){
+      if(getId() == null){
+        return;
+      }
+      String id = getId().toString();
+      save__db(id);
+    }
+
+
+
+//-----------------------------------END Database Methods------------------------------------------------
+
+
     
 
 
@@ -202,11 +253,32 @@ public class FacebookAccessToken extends Model {
     //Now adding relations between related models
     
         
+        
                 
                     //Define belongsTo relation method here..
                     private transient AppUser  appUser ;
+                    private String userId;
+
+                    public String getUserId(){
+                         return userId;
+                    }
+
+                    public void setUserId(Object userId){
+                        if(userId != null){
+                          this.userId = userId.toString();
+                        }
+                    }
 
                     public AppUser getAppUser() {
+                        //Adding database method for fetching from relation if not present..
+                        if(appUser == null){
+                          FacebookAccessTokenRepository facebookAccessTokenRepository = (FacebookAccessTokenRepository) getRepository();
+                          RestAdapter restAdapter = facebookAccessTokenRepository.getRestAdapter();
+                          if(restAdapter != null){
+                            //Fetch locally from db
+                            appUser = getAppUser__db(restAdapter);
+                          }
+                        }
                         return appUser;
                     }
 
@@ -236,8 +308,22 @@ public class FacebookAccessToken extends Model {
                     }
 
 
-
+                    //Fetch related data from local database if present a userId identifier as property for belongsTo
+                    public AppUser getappUser__db(RestAdapter restAdapter){
+                      if(userId != null){
+                        AppUserRepository appUserRepository = restAdapter.createRepository(AppUserRepository.class);
+                        AppUser appUser = (AppUser) appUserRepository.getDbHandler().get__db(AppUser.class, userId);
+                        if(appUser != null){
+                          return appUser;
+                        }else{
+                          return null;
+                        }
+                        }else{
+                          return null;
+                      }
+                    }
                 
+
                 
                 
 

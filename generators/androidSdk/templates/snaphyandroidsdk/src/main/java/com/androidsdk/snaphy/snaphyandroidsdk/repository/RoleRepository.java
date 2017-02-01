@@ -64,11 +64,11 @@ public class RoleRepository extends ModelRepository<Role> {
 
 
     public DbHandler getDbHandler() {
-    return dbHandler;
+      return dbHandler;
     }
 
     public void setDbHandler(DbHandler dbHandler) {
-    this.dbHandler = dbHandler;
+      this.dbHandler = dbHandler;
     }
 
     private DbHandler dbHandler;
@@ -79,19 +79,28 @@ public class RoleRepository extends ModelRepository<Role> {
     private boolean STORE_LOCALLY = true;
 
     public boolean isSTORE_LOCALLY() {
-    return STORE_LOCALLY;
+      return STORE_LOCALLY;
     }
 
 
     public void  persistData(boolean persist){
-    STORE_LOCALLY = persist;
+      STORE_LOCALLY = persist;
     }
 
 
-    private void addStorage(Context context){
+
+    public void reset__db(){
+      if(isSTORE_LOCALLY()){
+        getDbHandler().reset__db();
+      }
+    }
+
+
+
+private void addStorage(Context context){
     setDbHandler(new DbHandler< Role, RoleRepository >(context, "Role", getRestAdapter()));
-    //allow data storage locally..
-    persistData(true);
+      //allow data storage locally..
+      persistData(true);
     }
 
 
@@ -277,8 +286,14 @@ public class RoleRepository extends ModelRepository<Role> {
                                     RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     RoleMapping roleMapping = roleMappingRepo.createObject(result);
-                                    callback.onSuccess(roleMapping);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          roleMapping.save__db();
+                                      }
+
+                                    callback.onSuccess(roleMapping);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -388,8 +403,14 @@ public class RoleRepository extends ModelRepository<Role> {
                                     RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     RoleMapping roleMapping = roleMappingRepo.createObject(result);
-                                    callback.onSuccess(roleMapping);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          roleMapping.save__db();
+                                      }
+
+                                    callback.onSuccess(roleMapping);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -452,6 +473,13 @@ public class RoleRepository extends ModelRepository<Role> {
 
                                     for (Map<String, Object> obj : result) {
                                         RoleMapping roleMapping = roleMappingRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 roleMapping.save__db();
+                                            }
+
                                         roleMappingList.add(roleMapping);
                                     }
                                     callback.onSuccess(roleMappingList);
@@ -512,8 +540,14 @@ public class RoleRepository extends ModelRepository<Role> {
                                     RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     RoleMapping roleMapping = roleMappingRepo.createObject(result);
-                                    callback.onSuccess(roleMapping);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          roleMapping.save__db();
+                                      }
+
+                                    callback.onSuccess(roleMapping);
                                 }else{
                                     callback.onSuccess(null);
                                 }

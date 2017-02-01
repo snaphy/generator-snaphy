@@ -129,6 +129,57 @@ public class RoleMapping extends Model {
     
 
 
+    //------------------------------------Database Method---------------------------------------------------
+
+    public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
+      //Save to database..
+      save__db();
+      //Also save to database..
+      super.save(callback);
+    }
+
+    public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
+      RoleMappingRepository roleMappingRepository = (RoleMappingRepository) getRepository();
+      if(roleMappingRepository.getDbHandler().isSTORE_LOCALLY()){
+          //Delete from database..
+          String id = getId().toString();
+          if(id != null){
+             roleMappingRepository.getDbHandler().delete__db(id);
+          }
+      }
+      //Also save to database..
+      super.save(callback);
+    }
+
+
+    public void save__db(String id){
+      RoleMappingRepository roleMappingRepository = (RoleMappingRepository) getRepository();
+      if(roleMappingRepository.getDbHandler().isSTORE_LOCALLY()){
+        if(id != null){
+          HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
+          String object = roleMappingRepository.getDbHandler().toJsonString(hashMap);
+          ContentValues values = new ContentValues();
+          values.put("ID", id); // Contact Name
+          values.put("OBJECT", object); // Contact Phone Number*/
+          roleMappingRepository.getDbHandler().upsert__db(id, object);
+        }
+      }
+    }
+
+
+    public void save__db(){
+      if(getId() == null){
+        return;
+      }
+      String id = getId().toString();
+      save__db(id);
+    }
+
+
+
+//-----------------------------------END Database Methods------------------------------------------------
+
+
     
 
 
@@ -136,11 +187,32 @@ public class RoleMapping extends Model {
     //Now adding relations between related models
     
         
+        
                 
                     //Define belongsTo relation method here..
                     private transient Role  role ;
+                    private String roleId;
+
+                    public String getRoleId(){
+                         return roleId;
+                    }
+
+                    public void setRoleId(Object roleId){
+                        if(roleId != null){
+                          this.roleId = roleId.toString();
+                        }
+                    }
 
                     public Role getRole() {
+                        //Adding database method for fetching from relation if not present..
+                        if(role == null){
+                          RoleMappingRepository roleMappingRepository = (RoleMappingRepository) getRepository();
+                          RestAdapter restAdapter = roleMappingRepository.getRestAdapter();
+                          if(restAdapter != null){
+                            //Fetch locally from db
+                            role = getRole__db(restAdapter);
+                          }
+                        }
                         return role;
                     }
 
@@ -170,8 +242,22 @@ public class RoleMapping extends Model {
                     }
 
 
-
+                    //Fetch related data from local database if present a roleId identifier as property for belongsTo
+                    public Role getrole__db(RestAdapter restAdapter){
+                      if(roleId != null){
+                        RoleRepository roleRepository = restAdapter.createRepository(RoleRepository.class);
+                        Role role = (Role) roleRepository.getDbHandler().get__db(Role.class, roleId);
+                        if(role != null){
+                          return role;
+                        }else{
+                          return null;
+                        }
+                        }else{
+                          return null;
+                      }
+                    }
                 
+
                 
                 
 

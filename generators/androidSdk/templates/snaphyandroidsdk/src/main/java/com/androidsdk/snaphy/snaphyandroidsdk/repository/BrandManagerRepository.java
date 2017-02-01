@@ -170,11 +170,11 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
 
 
     public DbHandler getDbHandler() {
-    return dbHandler;
+      return dbHandler;
     }
 
     public void setDbHandler(DbHandler dbHandler) {
-    this.dbHandler = dbHandler;
+      this.dbHandler = dbHandler;
     }
 
     private DbHandler dbHandler;
@@ -185,19 +185,28 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
     private boolean STORE_LOCALLY = true;
 
     public boolean isSTORE_LOCALLY() {
-    return STORE_LOCALLY;
+      return STORE_LOCALLY;
     }
 
 
     public void  persistData(boolean persist){
-    STORE_LOCALLY = persist;
+      STORE_LOCALLY = persist;
     }
 
 
-    private void addStorage(Context context){
+
+    public void reset__db(){
+      if(isSTORE_LOCALLY()){
+        getDbHandler().reset__db();
+      }
+    }
+
+
+
+private void addStorage(Context context){
     setDbHandler(new DbHandler< BrandManager, BrandManagerRepository >(context, "BrandManager", getRestAdapter()));
-    //allow data storage locally..
-    persistData(true);
+      //allow data storage locally..
+      persistData(true);
     }
 
 
@@ -554,8 +563,14 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AccessToken accessToken = accessTokenRepo.createObject(result);
-                                    callback.onSuccess(accessToken);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          accessToken.save__db();
+                                      }
+
+                                    callback.onSuccess(accessToken);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -665,8 +680,14 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AccessToken accessToken = accessTokenRepo.createObject(result);
-                                    callback.onSuccess(accessToken);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          accessToken.save__db();
+                                      }
+
+                                    callback.onSuccess(accessToken);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -726,8 +747,14 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
                                     BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Brand brand = brandRepo.createObject(result);
-                                    callback.onSuccess(brand);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brand.save__db();
+                                      }
+
+                                    callback.onSuccess(brand);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -790,6 +817,13 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
 
                                     for (Map<String, Object> obj : result) {
                                         AccessToken accessToken = accessTokenRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 accessToken.save__db();
+                                            }
+
                                         accessTokenList.add(accessToken);
                                     }
                                     callback.onSuccess(accessTokenList);
@@ -850,8 +884,14 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AccessToken accessToken = accessTokenRepo.createObject(result);
-                                    callback.onSuccess(accessToken);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          accessToken.save__db();
+                                      }
+
+                                    callback.onSuccess(accessToken);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1008,8 +1048,14 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
                                     BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     BrandManager brandManager = brandManagerRepo.createObject(result);
-                                    callback.onSuccess(brandManager);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brandManager.save__db();
+                                      }
+
+                                    callback.onSuccess(brandManager);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1068,8 +1114,14 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
                                     BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     BrandManager brandManager = brandManagerRepo.createObject(result);
-                                    callback.onSuccess(brandManager);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brandManager.save__db();
+                                      }
+
+                                    callback.onSuccess(brandManager);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1180,8 +1232,14 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
                                     BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     BrandManager brandManager = brandManagerRepo.createObject(result);
-                                    callback.onSuccess(brandManager);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brandManager.save__db();
+                                      }
+
+                                    callback.onSuccess(brandManager);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1242,6 +1300,13 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
 
                                     for (Map<String, Object> obj : result) {
                                         BrandManager brandManager = brandManagerRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 brandManager.save__db();
+                                            }
+
                                         brandManagerList.add(brandManager);
                                     }
                                     callback.onSuccess(brandManagerList);
@@ -1300,8 +1365,14 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
                                     BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     BrandManager brandManager = brandManagerRepo.createObject(result);
-                                    callback.onSuccess(brandManager);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brandManager.save__db();
+                                      }
+
+                                    callback.onSuccess(brandManager);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1516,8 +1587,14 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
                                     BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     BrandManager brandManager = brandManagerRepo.createObject(result);
-                                    callback.onSuccess(brandManager);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brandManager.save__db();
+                                      }
+
+                                    callback.onSuccess(brandManager);
                                 }else{
                                     callback.onSuccess(null);
                                 }

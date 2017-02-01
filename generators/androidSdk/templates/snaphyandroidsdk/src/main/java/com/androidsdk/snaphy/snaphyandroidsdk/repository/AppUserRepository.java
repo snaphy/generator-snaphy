@@ -184,11 +184,11 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
 
     public DbHandler getDbHandler() {
-    return dbHandler;
+      return dbHandler;
     }
 
     public void setDbHandler(DbHandler dbHandler) {
-    this.dbHandler = dbHandler;
+      this.dbHandler = dbHandler;
     }
 
     private DbHandler dbHandler;
@@ -199,19 +199,28 @@ public class AppUserRepository extends UserRepository<AppUser> {
     private boolean STORE_LOCALLY = true;
 
     public boolean isSTORE_LOCALLY() {
-    return STORE_LOCALLY;
+      return STORE_LOCALLY;
     }
 
 
     public void  persistData(boolean persist){
-    STORE_LOCALLY = persist;
+      STORE_LOCALLY = persist;
     }
 
 
-    private void addStorage(Context context){
+
+    public void reset__db(){
+      if(isSTORE_LOCALLY()){
+        getDbHandler().reset__db();
+      }
+    }
+
+
+
+private void addStorage(Context context){
     setDbHandler(new DbHandler< AppUser, AppUserRepository >(context, "AppUser", getRestAdapter()));
-    //allow data storage locally..
-    persistData(true);
+      //allow data storage locally..
+      persistData(true);
     }
 
 
@@ -826,8 +835,14 @@ public class AppUserRepository extends UserRepository<AppUser> {
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AccessToken accessToken = accessTokenRepo.createObject(result);
-                                    callback.onSuccess(accessToken);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          accessToken.save__db();
+                                      }
+
+                                    callback.onSuccess(accessToken);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -937,8 +952,14 @@ public class AppUserRepository extends UserRepository<AppUser> {
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AccessToken accessToken = accessTokenRepo.createObject(result);
-                                    callback.onSuccess(accessToken);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          accessToken.save__db();
+                                      }
+
+                                    callback.onSuccess(accessToken);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -998,8 +1019,14 @@ public class AppUserRepository extends UserRepository<AppUser> {
                                     FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
-                                    callback.onSuccess(facebookAccessToken);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          facebookAccessToken.save__db();
+                                      }
+
+                                    callback.onSuccess(facebookAccessToken);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1109,8 +1136,14 @@ public class AppUserRepository extends UserRepository<AppUser> {
                                     FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
-                                    callback.onSuccess(facebookAccessToken);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          facebookAccessToken.save__db();
+                                      }
+
+                                    callback.onSuccess(facebookAccessToken);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1170,8 +1203,14 @@ public class AppUserRepository extends UserRepository<AppUser> {
                                     ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Chat chat = chatRepo.createObject(result);
-                                    callback.onSuccess(chat);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          chat.save__db();
+                                      }
+
+                                    callback.onSuccess(chat);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1281,8 +1320,14 @@ public class AppUserRepository extends UserRepository<AppUser> {
                                     ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Chat chat = chatRepo.createObject(result);
-                                    callback.onSuccess(chat);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          chat.save__db();
+                                      }
+
+                                    callback.onSuccess(chat);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1342,8 +1387,14 @@ public class AppUserRepository extends UserRepository<AppUser> {
                                     BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Brand brand = brandRepo.createObject(result);
-                                    callback.onSuccess(brand);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brand.save__db();
+                                      }
+
+                                    callback.onSuccess(brand);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1453,8 +1504,14 @@ public class AppUserRepository extends UserRepository<AppUser> {
                                     BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Brand brand = brandRepo.createObject(result);
-                                    callback.onSuccess(brand);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brand.save__db();
+                                      }
+
+                                    callback.onSuccess(brand);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1514,8 +1571,14 @@ public class AppUserRepository extends UserRepository<AppUser> {
                                     BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Brand brand = brandRepo.createObject(result);
-                                    callback.onSuccess(brand);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brand.save__db();
+                                      }
+
+                                    callback.onSuccess(brand);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1679,6 +1742,13 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
                                     for (Map<String, Object> obj : result) {
                                         AccessToken accessToken = accessTokenRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 accessToken.save__db();
+                                            }
+
                                         accessTokenList.add(accessToken);
                                     }
                                     callback.onSuccess(accessTokenList);
@@ -1739,8 +1809,14 @@ public class AppUserRepository extends UserRepository<AppUser> {
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AccessToken accessToken = accessTokenRepo.createObject(result);
-                                    callback.onSuccess(accessToken);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          accessToken.save__db();
+                                      }
+
+                                    callback.onSuccess(accessToken);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1902,6 +1978,13 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
                                     for (Map<String, Object> obj : result) {
                                         FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 facebookAccessToken.save__db();
+                                            }
+
                                         facebookAccessTokenList.add(facebookAccessToken);
                                     }
                                     callback.onSuccess(facebookAccessTokenList);
@@ -1962,8 +2045,14 @@ public class AppUserRepository extends UserRepository<AppUser> {
                                     FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
-                                    callback.onSuccess(facebookAccessToken);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          facebookAccessToken.save__db();
+                                      }
+
+                                    callback.onSuccess(facebookAccessToken);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -2125,6 +2214,13 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
                                     for (Map<String, Object> obj : result) {
                                         Chat chat = chatRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 chat.save__db();
+                                            }
+
                                         chatList.add(chat);
                                     }
                                     callback.onSuccess(chatList);
@@ -2185,8 +2281,14 @@ public class AppUserRepository extends UserRepository<AppUser> {
                                     ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Chat chat = chatRepo.createObject(result);
-                                    callback.onSuccess(chat);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          chat.save__db();
+                                      }
+
+                                    callback.onSuccess(chat);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -2348,6 +2450,13 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
                                     for (Map<String, Object> obj : result) {
                                         Brand brand = brandRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 brand.save__db();
+                                            }
+
                                         brandList.add(brand);
                                     }
                                     callback.onSuccess(brandList);
@@ -2408,8 +2517,14 @@ public class AppUserRepository extends UserRepository<AppUser> {
                                     BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Brand brand = brandRepo.createObject(result);
-                                    callback.onSuccess(brand);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brand.save__db();
+                                      }
+
+                                    callback.onSuccess(brand);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -2566,8 +2681,14 @@ public class AppUserRepository extends UserRepository<AppUser> {
                                     AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AppUser appUser = appUserRepo.createObject(result);
-                                    callback.onSuccess(appUser);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          appUser.save__db();
+                                      }
+
+                                    callback.onSuccess(appUser);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -2626,8 +2747,14 @@ public class AppUserRepository extends UserRepository<AppUser> {
                                     AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AppUser appUser = appUserRepo.createObject(result);
-                                    callback.onSuccess(appUser);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          appUser.save__db();
+                                      }
+
+                                    callback.onSuccess(appUser);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -2738,8 +2865,14 @@ public class AppUserRepository extends UserRepository<AppUser> {
                                     AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AppUser appUser = appUserRepo.createObject(result);
-                                    callback.onSuccess(appUser);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          appUser.save__db();
+                                      }
+
+                                    callback.onSuccess(appUser);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -2800,6 +2933,13 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
                                     for (Map<String, Object> obj : result) {
                                         AppUser appUser = appUserRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 appUser.save__db();
+                                            }
+
                                         appUserList.add(appUser);
                                     }
                                     callback.onSuccess(appUserList);
@@ -2858,8 +2998,14 @@ public class AppUserRepository extends UserRepository<AppUser> {
                                     AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AppUser appUser = appUserRepo.createObject(result);
-                                    callback.onSuccess(appUser);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          appUser.save__db();
+                                      }
+
+                                    callback.onSuccess(appUser);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -3074,8 +3220,14 @@ public class AppUserRepository extends UserRepository<AppUser> {
                                     AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AppUser appUser = appUserRepo.createObject(result);
-                                    callback.onSuccess(appUser);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          appUser.save__db();
+                                      }
+
+                                    callback.onSuccess(appUser);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -3448,6 +3600,13 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
                                     for (Map<String, Object> obj : result) {
                                         AppUser appUser = appUserRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 appUser.save__db();
+                                            }
+
                                         appUserList.add(appUser);
                                     }
                                     callback.onSuccess(appUserList);

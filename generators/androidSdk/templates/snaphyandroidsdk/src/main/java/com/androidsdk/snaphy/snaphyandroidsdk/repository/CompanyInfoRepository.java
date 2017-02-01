@@ -57,11 +57,11 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
 
     public DbHandler getDbHandler() {
-    return dbHandler;
+      return dbHandler;
     }
 
     public void setDbHandler(DbHandler dbHandler) {
-    this.dbHandler = dbHandler;
+      this.dbHandler = dbHandler;
     }
 
     private DbHandler dbHandler;
@@ -72,19 +72,28 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     private boolean STORE_LOCALLY = true;
 
     public boolean isSTORE_LOCALLY() {
-    return STORE_LOCALLY;
+      return STORE_LOCALLY;
     }
 
 
     public void  persistData(boolean persist){
-    STORE_LOCALLY = persist;
+      STORE_LOCALLY = persist;
     }
 
 
-    private void addStorage(Context context){
+
+    public void reset__db(){
+      if(isSTORE_LOCALLY()){
+        getDbHandler().reset__db();
+      }
+    }
+
+
+
+private void addStorage(Context context){
     setDbHandler(new DbHandler< CompanyInfo, CompanyInfoRepository >(context, "CompanyInfo", getRestAdapter()));
-    //allow data storage locally..
-    persistData(true);
+      //allow data storage locally..
+      persistData(true);
     }
 
 
@@ -291,8 +300,14 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                                     CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     CompanyInfo companyInfo = companyInfoRepo.createObject(result);
-                                    callback.onSuccess(companyInfo);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          companyInfo.save__db();
+                                      }
+
+                                    callback.onSuccess(companyInfo);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -351,8 +366,14 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                                     CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     CompanyInfo companyInfo = companyInfoRepo.createObject(result);
-                                    callback.onSuccess(companyInfo);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          companyInfo.save__db();
+                                      }
+
+                                    callback.onSuccess(companyInfo);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -463,8 +484,14 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                                     CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     CompanyInfo companyInfo = companyInfoRepo.createObject(result);
-                                    callback.onSuccess(companyInfo);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          companyInfo.save__db();
+                                      }
+
+                                    callback.onSuccess(companyInfo);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -525,6 +552,13 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                                     for (Map<String, Object> obj : result) {
                                         CompanyInfo companyInfo = companyInfoRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 companyInfo.save__db();
+                                            }
+
                                         companyInfoList.add(companyInfo);
                                     }
                                     callback.onSuccess(companyInfoList);
@@ -583,8 +617,14 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                                     CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     CompanyInfo companyInfo = companyInfoRepo.createObject(result);
-                                    callback.onSuccess(companyInfo);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          companyInfo.save__db();
+                                      }
+
+                                    callback.onSuccess(companyInfo);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -799,8 +839,14 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                                     CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     CompanyInfo companyInfo = companyInfoRepo.createObject(result);
-                                    callback.onSuccess(companyInfo);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          companyInfo.save__db();
+                                      }
+
+                                    callback.onSuccess(companyInfo);
                                 }else{
                                     callback.onSuccess(null);
                                 }

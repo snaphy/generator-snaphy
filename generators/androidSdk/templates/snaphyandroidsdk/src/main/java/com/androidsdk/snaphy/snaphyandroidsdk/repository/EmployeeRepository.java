@@ -163,11 +163,11 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
 
     public DbHandler getDbHandler() {
-    return dbHandler;
+      return dbHandler;
     }
 
     public void setDbHandler(DbHandler dbHandler) {
-    this.dbHandler = dbHandler;
+      this.dbHandler = dbHandler;
     }
 
     private DbHandler dbHandler;
@@ -178,19 +178,28 @@ public class EmployeeRepository extends UserRepository<Employee> {
     private boolean STORE_LOCALLY = true;
 
     public boolean isSTORE_LOCALLY() {
-    return STORE_LOCALLY;
+      return STORE_LOCALLY;
     }
 
 
     public void  persistData(boolean persist){
-    STORE_LOCALLY = persist;
+      STORE_LOCALLY = persist;
     }
 
 
-    private void addStorage(Context context){
+
+    public void reset__db(){
+      if(isSTORE_LOCALLY()){
+        getDbHandler().reset__db();
+      }
+    }
+
+
+
+private void addStorage(Context context){
     setDbHandler(new DbHandler< Employee, EmployeeRepository >(context, "Employee", getRestAdapter()));
-    //allow data storage locally..
-    persistData(true);
+      //allow data storage locally..
+      persistData(true);
     }
 
 
@@ -496,8 +505,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AccessToken accessToken = accessTokenRepo.createObject(result);
-                                    callback.onSuccess(accessToken);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          accessToken.save__db();
+                                      }
+
+                                    callback.onSuccess(accessToken);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -607,8 +622,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AccessToken accessToken = accessTokenRepo.createObject(result);
-                                    callback.onSuccess(accessToken);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          accessToken.save__db();
+                                      }
+
+                                    callback.onSuccess(accessToken);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -671,6 +692,13 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                                     for (Map<String, Object> obj : result) {
                                         AccessToken accessToken = accessTokenRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 accessToken.save__db();
+                                            }
+
                                         accessTokenList.add(accessToken);
                                     }
                                     callback.onSuccess(accessTokenList);
@@ -731,8 +759,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
                                     AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AccessToken accessToken = accessTokenRepo.createObject(result);
-                                    callback.onSuccess(accessToken);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          accessToken.save__db();
+                                      }
+
+                                    callback.onSuccess(accessToken);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -889,8 +923,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
                                     EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          employee.save__db();
+                                      }
+
+                                    callback.onSuccess(employee);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -949,8 +989,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
                                     EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          employee.save__db();
+                                      }
+
+                                    callback.onSuccess(employee);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1061,8 +1107,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
                                     EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          employee.save__db();
+                                      }
+
+                                    callback.onSuccess(employee);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1123,6 +1175,13 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                                     for (Map<String, Object> obj : result) {
                                         Employee employee = employeeRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 employee.save__db();
+                                            }
+
                                         employeeList.add(employee);
                                     }
                                     callback.onSuccess(employeeList);
@@ -1181,8 +1240,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
                                     EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          employee.save__db();
+                                      }
+
+                                    callback.onSuccess(employee);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1397,8 +1462,14 @@ public class EmployeeRepository extends UserRepository<Employee> {
                                     EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Employee employee = employeeRepo.createObject(result);
-                                    callback.onSuccess(employee);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          employee.save__db();
+                                      }
+
+                                    callback.onSuccess(employee);
                                 }else{
                                     callback.onSuccess(null);
                                 }

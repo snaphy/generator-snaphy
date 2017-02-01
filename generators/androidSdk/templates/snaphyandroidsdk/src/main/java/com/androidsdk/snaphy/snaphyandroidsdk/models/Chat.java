@@ -318,6 +318,57 @@ public class Chat extends Model {
     
 
 
+    //------------------------------------Database Method---------------------------------------------------
+
+    public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
+      //Save to database..
+      save__db();
+      //Also save to database..
+      super.save(callback);
+    }
+
+    public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
+      ChatRepository chatRepository = (ChatRepository) getRepository();
+      if(chatRepository.getDbHandler().isSTORE_LOCALLY()){
+          //Delete from database..
+          String id = getId().toString();
+          if(id != null){
+             chatRepository.getDbHandler().delete__db(id);
+          }
+      }
+      //Also save to database..
+      super.save(callback);
+    }
+
+
+    public void save__db(String id){
+      ChatRepository chatRepository = (ChatRepository) getRepository();
+      if(chatRepository.getDbHandler().isSTORE_LOCALLY()){
+        if(id != null){
+          HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
+          String object = chatRepository.getDbHandler().toJsonString(hashMap);
+          ContentValues values = new ContentValues();
+          values.put("ID", id); // Contact Name
+          values.put("OBJECT", object); // Contact Phone Number*/
+          chatRepository.getDbHandler().upsert__db(id, object);
+        }
+      }
+    }
+
+
+    public void save__db(){
+      if(getId() == null){
+        return;
+      }
+      String id = getId().toString();
+      save__db(id);
+    }
+
+
+
+//-----------------------------------END Database Methods------------------------------------------------
+
+
     
 
 
@@ -325,11 +376,32 @@ public class Chat extends Model {
     //Now adding relations between related models
     
         
+        
                 
                     //Define belongsTo relation method here..
                     private transient Brand  brand ;
+                    private String brandId;
+
+                    public String getBrandId(){
+                         return brandId;
+                    }
+
+                    public void setBrandId(Object brandId){
+                        if(brandId != null){
+                          this.brandId = brandId.toString();
+                        }
+                    }
 
                     public Brand getBrand() {
+                        //Adding database method for fetching from relation if not present..
+                        if(brand == null){
+                          ChatRepository chatRepository = (ChatRepository) getRepository();
+                          RestAdapter restAdapter = chatRepository.getRestAdapter();
+                          if(restAdapter != null){
+                            //Fetch locally from db
+                            brand = getBrand__db(restAdapter);
+                          }
+                        }
                         return brand;
                     }
 
@@ -359,8 +431,22 @@ public class Chat extends Model {
                     }
 
 
-
+                    //Fetch related data from local database if present a brandId identifier as property for belongsTo
+                    public Brand getbrand__db(RestAdapter restAdapter){
+                      if(brandId != null){
+                        BrandRepository brandRepository = restAdapter.createRepository(BrandRepository.class);
+                        Brand brand = (Brand) brandRepository.getDbHandler().get__db(Brand.class, brandId);
+                        if(brand != null){
+                          return brand;
+                        }else{
+                          return null;
+                        }
+                        }else{
+                          return null;
+                      }
+                    }
                 
+
                 
                 
 
@@ -477,11 +563,32 @@ public class Chat extends Model {
           
     
         
+        
                 
                     //Define belongsTo relation method here..
                     private transient AppUser  appUser ;
+                    private String appUserId;
+
+                    public String getAppUserId(){
+                         return appUserId;
+                    }
+
+                    public void setAppUserId(Object appUserId){
+                        if(appUserId != null){
+                          this.appUserId = appUserId.toString();
+                        }
+                    }
 
                     public AppUser getAppUser() {
+                        //Adding database method for fetching from relation if not present..
+                        if(appUser == null){
+                          ChatRepository chatRepository = (ChatRepository) getRepository();
+                          RestAdapter restAdapter = chatRepository.getRestAdapter();
+                          if(restAdapter != null){
+                            //Fetch locally from db
+                            appUser = getAppUser__db(restAdapter);
+                          }
+                        }
                         return appUser;
                     }
 
@@ -511,8 +618,22 @@ public class Chat extends Model {
                     }
 
 
-
+                    //Fetch related data from local database if present a appUserId identifier as property for belongsTo
+                    public AppUser getappUser__db(RestAdapter restAdapter){
+                      if(appUserId != null){
+                        AppUserRepository appUserRepository = restAdapter.createRepository(AppUserRepository.class);
+                        AppUser appUser = (AppUser) appUserRepository.getDbHandler().get__db(AppUser.class, appUserId);
+                        if(appUser != null){
+                          return appUser;
+                        }else{
+                          return null;
+                        }
+                        }else{
+                          return null;
+                      }
+                    }
                 
+
                 
                 
 

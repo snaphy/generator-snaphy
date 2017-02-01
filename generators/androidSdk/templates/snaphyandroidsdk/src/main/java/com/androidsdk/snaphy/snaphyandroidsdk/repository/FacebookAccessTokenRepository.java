@@ -64,11 +64,11 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
 
     public DbHandler getDbHandler() {
-    return dbHandler;
+      return dbHandler;
     }
 
     public void setDbHandler(DbHandler dbHandler) {
-    this.dbHandler = dbHandler;
+      this.dbHandler = dbHandler;
     }
 
     private DbHandler dbHandler;
@@ -79,19 +79,28 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     private boolean STORE_LOCALLY = true;
 
     public boolean isSTORE_LOCALLY() {
-    return STORE_LOCALLY;
+      return STORE_LOCALLY;
     }
 
 
     public void  persistData(boolean persist){
-    STORE_LOCALLY = persist;
+      STORE_LOCALLY = persist;
     }
 
 
-    private void addStorage(Context context){
+
+    public void reset__db(){
+      if(isSTORE_LOCALLY()){
+        getDbHandler().reset__db();
+      }
+    }
+
+
+
+private void addStorage(Context context){
     setDbHandler(new DbHandler< FacebookAccessToken, FacebookAccessTokenRepository >(context, "FacebookAccessToken", getRestAdapter()));
-    //allow data storage locally..
-    persistData(true);
+      //allow data storage locally..
+      persistData(true);
     }
 
 
@@ -334,8 +343,14 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                                     AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AppUser appUser = appUserRepo.createObject(result);
-                                    callback.onSuccess(appUser);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          appUser.save__db();
+                                      }
+
+                                    callback.onSuccess(appUser);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -393,8 +408,14 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                                     FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
-                                    callback.onSuccess(facebookAccessToken);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          facebookAccessToken.save__db();
+                                      }
+
+                                    callback.onSuccess(facebookAccessToken);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -453,8 +474,14 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                                     FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
-                                    callback.onSuccess(facebookAccessToken);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          facebookAccessToken.save__db();
+                                      }
+
+                                    callback.onSuccess(facebookAccessToken);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -565,8 +592,14 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                                     FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
-                                    callback.onSuccess(facebookAccessToken);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          facebookAccessToken.save__db();
+                                      }
+
+                                    callback.onSuccess(facebookAccessToken);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -627,6 +660,13 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                                     for (Map<String, Object> obj : result) {
                                         FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 facebookAccessToken.save__db();
+                                            }
+
                                         facebookAccessTokenList.add(facebookAccessToken);
                                     }
                                     callback.onSuccess(facebookAccessTokenList);
@@ -685,8 +725,14 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                                     FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
-                                    callback.onSuccess(facebookAccessToken);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          facebookAccessToken.save__db();
+                                      }
+
+                                    callback.onSuccess(facebookAccessToken);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -901,8 +947,14 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                                     FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
-                                    callback.onSuccess(facebookAccessToken);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          facebookAccessToken.save__db();
+                                      }
+
+                                    callback.onSuccess(facebookAccessToken);
                                 }else{
                                     callback.onSuccess(null);
                                 }

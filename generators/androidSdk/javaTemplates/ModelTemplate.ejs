@@ -455,6 +455,7 @@ public class <%- modelName %> extends Model {
                if(!foreignKey) {
                   foreignKey = lowercaseRelatedModelName + "Id";
                }
+              return foreignKey;
             };
         %>
                 <% if(model.relations[relation].type === "belongsTo" || model.relations[relation].type === "hasOne"){ %>
@@ -513,7 +514,7 @@ public class <%- modelName %> extends Model {
 
                     //Fetch related data from local database if present a <%- getForeignKeyName() %> identifier as property for belongsTo
                     public <%- capitalcaseRelatedModelName %> get<%- relation %>__db(RestAdapter restAdapter){
-                      if(getForeignKeyName() != null){
+                      if(<%- getForeignKeyName() %> != null){
                         <%- capitalcaseRelatedModelName %>Repository <%- relation %>Repository = restAdapter.createRepository(<%- capitalcaseRelatedModelName %>Repository.class);
                         <%- capitalcaseRelatedModelName %> <%- relation %> = (<%- capitalcaseRelatedModelName %>) <%- relation %>Repository.getDbHandler().get__db(<%- capitalcaseRelatedModelName %>.class, <%- getForeignKeyName() %>);
                         if(<%- relation %> != null){
@@ -654,9 +655,10 @@ public class <%- modelName %> extends Model {
                         }
 
 
-                    <% } %>
+                    <% }else{ %>
+                        //Implement logic for pure hasMany methods here....
 
-
+                    <%}%>
                 <% } %>
                 <% if (model.relations[relation].type === "hasAndBelongsToMany") { %>
                     //TODO ADD BACKWARD COMPATIBILITY FOR hasManyThrough relationship..warning backward compatibility may leads to cyclic error..

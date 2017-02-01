@@ -205,7 +205,7 @@ public class DbHandler<M extends Model, R extends ModelRepository> extends SQLit
         return cursor.getCount();
     }
 
-    
+
     /**
      * Get count by Id..
      * @param id
@@ -236,11 +236,17 @@ public class DbHandler<M extends Model, R extends ModelRepository> extends SQLit
     }
 
 
-    // Deleting single contact
-    public void deleteContact(String id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE, KEY_ID + " = ?",
-                new String[] { id });
-        db.close();
+    // Deleting by id
+    public void delete__db(String id) {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete(TABLE, KEY_ID + " = ?",
+      new String[] { id });
+      db.close();
+    }
+
+    public void reset__db(){
+       SQLiteDatabase db = this.getWritableDatabase();
+       db.delete(TABLE,null,null);
+       db.close();
     }
 }

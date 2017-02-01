@@ -243,4 +243,10 @@ public class DbHandler<M extends Model, R extends ModelRepository> extends SQLit
       new String[] { id });
       db.close();
     }
+
+    public void reset__db(){
+       SQLiteDatabase db = this.getWritableDatabase();
+       db.delete(TABLE,null,null);
+       db.close();
+    }
 }

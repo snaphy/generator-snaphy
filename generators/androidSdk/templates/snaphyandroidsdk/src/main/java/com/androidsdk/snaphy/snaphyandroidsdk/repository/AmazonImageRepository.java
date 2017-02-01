@@ -57,11 +57,11 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
 
     public DbHandler getDbHandler() {
-    return dbHandler;
+      return dbHandler;
     }
 
     public void setDbHandler(DbHandler dbHandler) {
-    this.dbHandler = dbHandler;
+      this.dbHandler = dbHandler;
     }
 
     private DbHandler dbHandler;
@@ -72,19 +72,28 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     private boolean STORE_LOCALLY = true;
 
     public boolean isSTORE_LOCALLY() {
-    return STORE_LOCALLY;
+      return STORE_LOCALLY;
     }
 
 
     public void  persistData(boolean persist){
-    STORE_LOCALLY = persist;
+      STORE_LOCALLY = persist;
     }
 
 
-    private void addStorage(Context context){
+
+    public void reset__db(){
+      if(isSTORE_LOCALLY()){
+        getDbHandler().reset__db();
+      }
+    }
+
+
+
+private void addStorage(Context context){
     setDbHandler(new DbHandler< AmazonImage, AmazonImageRepository >(context, "AmazonImage", getRestAdapter()));
-    //allow data storage locally..
-    persistData(true);
+      //allow data storage locally..
+      persistData(true);
     }
 
 
@@ -301,8 +310,14 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                                     AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AmazonImage amazonImage = amazonImageRepo.createObject(result);
-                                    callback.onSuccess(amazonImage);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          amazonImage.save__db();
+                                      }
+
+                                    callback.onSuccess(amazonImage);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -361,8 +376,14 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                                     AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AmazonImage amazonImage = amazonImageRepo.createObject(result);
-                                    callback.onSuccess(amazonImage);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          amazonImage.save__db();
+                                      }
+
+                                    callback.onSuccess(amazonImage);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -473,8 +494,14 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                                     AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AmazonImage amazonImage = amazonImageRepo.createObject(result);
-                                    callback.onSuccess(amazonImage);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          amazonImage.save__db();
+                                      }
+
+                                    callback.onSuccess(amazonImage);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -535,6 +562,13 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                                     for (Map<String, Object> obj : result) {
                                         AmazonImage amazonImage = amazonImageRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 amazonImage.save__db();
+                                            }
+
                                         amazonImageList.add(amazonImage);
                                     }
                                     callback.onSuccess(amazonImageList);
@@ -593,8 +627,14 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                                     AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AmazonImage amazonImage = amazonImageRepo.createObject(result);
-                                    callback.onSuccess(amazonImage);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          amazonImage.save__db();
+                                      }
+
+                                    callback.onSuccess(amazonImage);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -809,8 +849,14 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                                     AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AmazonImage amazonImage = amazonImageRepo.createObject(result);
-                                    callback.onSuccess(amazonImage);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          amazonImage.save__db();
+                                      }
+
+                                    callback.onSuccess(amazonImage);
                                 }else{
                                     callback.onSuccess(null);
                                 }

@@ -374,6 +374,57 @@ public class Brand extends Model {
     
 
 
+    //------------------------------------Database Method---------------------------------------------------
+
+    public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
+      //Save to database..
+      save__db();
+      //Also save to database..
+      super.save(callback);
+    }
+
+    public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
+      BrandRepository brandRepository = (BrandRepository) getRepository();
+      if(brandRepository.getDbHandler().isSTORE_LOCALLY()){
+          //Delete from database..
+          String id = getId().toString();
+          if(id != null){
+             brandRepository.getDbHandler().delete__db(id);
+          }
+      }
+      //Also save to database..
+      super.save(callback);
+    }
+
+
+    public void save__db(String id){
+      BrandRepository brandRepository = (BrandRepository) getRepository();
+      if(brandRepository.getDbHandler().isSTORE_LOCALLY()){
+        if(id != null){
+          HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
+          String object = brandRepository.getDbHandler().toJsonString(hashMap);
+          ContentValues values = new ContentValues();
+          values.put("ID", id); // Contact Name
+          values.put("OBJECT", object); // Contact Phone Number*/
+          brandRepository.getDbHandler().upsert__db(id, object);
+        }
+      }
+    }
+
+
+    public void save__db(){
+      if(getId() == null){
+        return;
+      }
+      String id = getId().toString();
+      save__db(id);
+    }
+
+
+
+//-----------------------------------END Database Methods------------------------------------------------
+
+
     
 
 
@@ -381,7 +432,9 @@ public class Brand extends Model {
     //Now adding relations between related models
     
         
+        
                 
+
                 
                     
                     //Define hasMany relation method here..
@@ -467,9 +520,13 @@ public class Brand extends Model {
                         }
                     }
 
+
+
+
                     
+                        //Implement logic for pure hasMany methods here....
 
-
+                    
                 
                 
 
@@ -970,7 +1027,9 @@ public class Brand extends Model {
           
     
         
+        
                 
+
                 
                     
                     //Define hasMany relation method here..
@@ -1056,9 +1115,13 @@ public class Brand extends Model {
                         }
                     }
 
+
+
+
                     
+                        //Implement logic for pure hasMany methods here....
 
-
+                    
                 
                 
 
@@ -1559,7 +1622,9 @@ public class Brand extends Model {
           
     
         
+        
                 
+
                 
                     
                     //Define hasMany relation method here..
@@ -1645,9 +1710,13 @@ public class Brand extends Model {
                         }
                     }
 
+
+
+
                     
+                        //Implement logic for pure hasMany methods here....
 
-
+                    
                 
                 
 
@@ -2148,7 +2217,9 @@ public class Brand extends Model {
           
     
         
+        
                 
+
                 
                     
                     //Define hasMany relation method here..
@@ -2234,9 +2305,13 @@ public class Brand extends Model {
                         }
                     }
 
+
+
+
                     
+                        //Implement logic for pure hasMany methods here....
 
-
+                    
                 
                 
 
@@ -2737,7 +2812,9 @@ public class Brand extends Model {
           
     
         
+        
                 
+
                 
                 
                     //TODO ADD BACKWARD COMPATIBILITY FOR hasManyThrough relationship..warning backward compatibility may leads to cyclic error..

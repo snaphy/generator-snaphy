@@ -72,6 +72,57 @@ public class Container extends Model {
     
 
 
+    //------------------------------------Database Method---------------------------------------------------
+
+    public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
+      //Save to database..
+      save__db();
+      //Also save to database..
+      super.save(callback);
+    }
+
+    public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
+      ContainerRepository containerRepository = (ContainerRepository) getRepository();
+      if(containerRepository.getDbHandler().isSTORE_LOCALLY()){
+          //Delete from database..
+          String id = getId().toString();
+          if(id != null){
+             containerRepository.getDbHandler().delete__db(id);
+          }
+      }
+      //Also save to database..
+      super.save(callback);
+    }
+
+
+    public void save__db(String id){
+      ContainerRepository containerRepository = (ContainerRepository) getRepository();
+      if(containerRepository.getDbHandler().isSTORE_LOCALLY()){
+        if(id != null){
+          HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
+          String object = containerRepository.getDbHandler().toJsonString(hashMap);
+          ContentValues values = new ContentValues();
+          values.put("ID", id); // Contact Name
+          values.put("OBJECT", object); // Contact Phone Number*/
+          containerRepository.getDbHandler().upsert__db(id, object);
+        }
+      }
+    }
+
+
+    public void save__db(){
+      if(getId() == null){
+        return;
+      }
+      String id = getId().toString();
+      save__db(id);
+    }
+
+
+
+//-----------------------------------END Database Methods------------------------------------------------
+
+
     
 
 

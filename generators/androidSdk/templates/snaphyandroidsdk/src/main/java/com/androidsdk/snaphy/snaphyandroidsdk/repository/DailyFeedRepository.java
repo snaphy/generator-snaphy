@@ -64,11 +64,11 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
 
 
     public DbHandler getDbHandler() {
-    return dbHandler;
+      return dbHandler;
     }
 
     public void setDbHandler(DbHandler dbHandler) {
-    this.dbHandler = dbHandler;
+      this.dbHandler = dbHandler;
     }
 
     private DbHandler dbHandler;
@@ -79,19 +79,28 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
     private boolean STORE_LOCALLY = true;
 
     public boolean isSTORE_LOCALLY() {
-    return STORE_LOCALLY;
+      return STORE_LOCALLY;
     }
 
 
     public void  persistData(boolean persist){
-    STORE_LOCALLY = persist;
+      STORE_LOCALLY = persist;
     }
 
 
-    private void addStorage(Context context){
+
+    public void reset__db(){
+      if(isSTORE_LOCALLY()){
+        getDbHandler().reset__db();
+      }
+    }
+
+
+
+private void addStorage(Context context){
     setDbHandler(new DbHandler< DailyFeed, DailyFeedRepository >(context, "DailyFeed", getRestAdapter()));
-    //allow data storage locally..
-    persistData(true);
+      //allow data storage locally..
+      persistData(true);
     }
 
 
@@ -334,8 +343,14 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
                                     BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Brand brand = brandRepo.createObject(result);
-                                    callback.onSuccess(brand);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brand.save__db();
+                                      }
+
+                                    callback.onSuccess(brand);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -393,8 +408,14 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
                                     DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
-                                    callback.onSuccess(dailyFeed);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          dailyFeed.save__db();
+                                      }
+
+                                    callback.onSuccess(dailyFeed);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -453,8 +474,14 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
                                     DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
-                                    callback.onSuccess(dailyFeed);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          dailyFeed.save__db();
+                                      }
+
+                                    callback.onSuccess(dailyFeed);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -565,8 +592,14 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
                                     DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
-                                    callback.onSuccess(dailyFeed);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          dailyFeed.save__db();
+                                      }
+
+                                    callback.onSuccess(dailyFeed);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -627,6 +660,13 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
 
                                     for (Map<String, Object> obj : result) {
                                         DailyFeed dailyFeed = dailyFeedRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 dailyFeed.save__db();
+                                            }
+
                                         dailyFeedList.add(dailyFeed);
                                     }
                                     callback.onSuccess(dailyFeedList);
@@ -685,8 +725,14 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
                                     DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
-                                    callback.onSuccess(dailyFeed);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          dailyFeed.save__db();
+                                      }
+
+                                    callback.onSuccess(dailyFeed);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -901,8 +947,14 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
                                     DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
-                                    callback.onSuccess(dailyFeed);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          dailyFeed.save__db();
+                                      }
+
+                                    callback.onSuccess(dailyFeed);
                                 }else{
                                     callback.onSuccess(null);
                                 }

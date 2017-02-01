@@ -8,6 +8,7 @@ var yosay = require('yosay');
 var mkdirp = require('mkdirp');
 var fs  = require("fs");
 var constants = require("./constants");
+var dbMethods = require("./databaseUtilMethods")();
 var helper = require("./helper");
 var ejs = require('ejs');
 var path = require('path');
@@ -57,12 +58,45 @@ var generateRepository = function(app, modelsRestDefinition){
 };
 
 
+/*Generate Database for all models..*/
+var generateDbModel = function(app, modelsRestDefinition){
+  //Now compile the ejs template..
+  var ModelDBTemplatePath      = path.join(__dirname, constants.javaTemplates, "db", "CustomDb.ejs");
+  var AndroidModelPath       = path.join(__dirname, constants.androidMainPath, "db");
+  //Clean model folder and add new dir.
+  //rimraf.sync(AndroidModelPath);
+  mkdirp.sync(AndroidModelPath);
+  
+  for(var modelName in app.models){
+    if(app.models.hasOwnProperty(modelName)){
+      var modelObj = app.models[modelName];
+      var modelProperties = modelObj.definition.rawProperties;
+      //TODO: THIS LATER FOR EXCLUDING USER FROM LIST
+      if(modelsRestDefinition[modelName] !== undefined && modelName !== "User"){
+        var model = {
+          name : modelName,
+          properties: modelProperties,
+          base: modelObj.definition.settings.base,
+          relations: modelObj.definition.settings.relations,
+          allModels: app.models,
+          restDefinition: modelsRestDefinition,
+          methods: dbMethods.methods
+        };
+        //console.log(modelsRestDefinition);
+
+        compileAndWrite(model, ModelDBTemplatePath, AndroidModelPath, helper.capitalizeFirstLetter(modelName) +".java");
+      }
+    }
+  }
+
+};
+
+
 //Generate models class file in java..
 var generateModels = function(app, modelsRestDefinition){
     //Now compile the ejs template..
     var ModelTemplatePath      = path.join(__dirname, constants.javaTemplates, "ModelTemplate.ejs");
     var AndroidModelPath       = path.join(__dirname, constants.androidMainPath, "models");
-
     var AndroidRepositoryPath  = path.join(__dirname, constants.androidMainPath, "repository");
 
     //Clean model folder and add new dir.
@@ -307,7 +341,7 @@ var compileAndWrite = function(model, templatePath, destinationFolder, fileName)
     writeFile(path.join(destinationFolder, fileName), formattedModel);
 
 
-}
+};
 
 //Write file synronously..
 var writeFile = function(filePath, data){
@@ -326,6 +360,7 @@ var init  = function(){
     //Now generate the models..
     generateModels(app, modelsRestDefinition);
     generateRepository(app, modelsRestDefinition);
+    generateDbModel(app, modelsRestDefinition);
     generateDataList(app, modelsRestDefinition);
     //Creating custom loopback models base java class..Model.java
     generateCustomModel(app, modelsRestDefinition);

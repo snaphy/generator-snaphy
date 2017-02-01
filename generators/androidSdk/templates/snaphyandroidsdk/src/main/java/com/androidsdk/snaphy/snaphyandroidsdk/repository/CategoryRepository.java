@@ -64,11 +64,11 @@ public class CategoryRepository extends ModelRepository<Category> {
 
 
     public DbHandler getDbHandler() {
-    return dbHandler;
+      return dbHandler;
     }
 
     public void setDbHandler(DbHandler dbHandler) {
-    this.dbHandler = dbHandler;
+      this.dbHandler = dbHandler;
     }
 
     private DbHandler dbHandler;
@@ -79,19 +79,28 @@ public class CategoryRepository extends ModelRepository<Category> {
     private boolean STORE_LOCALLY = true;
 
     public boolean isSTORE_LOCALLY() {
-    return STORE_LOCALLY;
+      return STORE_LOCALLY;
     }
 
 
     public void  persistData(boolean persist){
-    STORE_LOCALLY = persist;
+      STORE_LOCALLY = persist;
     }
 
 
-    private void addStorage(Context context){
+
+    public void reset__db(){
+      if(isSTORE_LOCALLY()){
+        getDbHandler().reset__db();
+      }
+    }
+
+
+
+private void addStorage(Context context){
     setDbHandler(new DbHandler< Category, CategoryRepository >(context, "Category", getRestAdapter()));
-    //allow data storage locally..
-    persistData(true);
+      //allow data storage locally..
+      persistData(true);
     }
 
 
@@ -367,8 +376,14 @@ public class CategoryRepository extends ModelRepository<Category> {
                                     HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     HotDeal hotDeal = hotDealRepo.createObject(result);
-                                    callback.onSuccess(hotDeal);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          hotDeal.save__db();
+                                      }
+
+                                    callback.onSuccess(hotDeal);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -478,8 +493,14 @@ public class CategoryRepository extends ModelRepository<Category> {
                                     HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     HotDeal hotDeal = hotDealRepo.createObject(result);
-                                    callback.onSuccess(hotDeal);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          hotDeal.save__db();
+                                      }
+
+                                    callback.onSuccess(hotDeal);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -542,6 +563,13 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                                     for (Map<String, Object> obj : result) {
                                         HotDeal hotDeal = hotDealRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 hotDeal.save__db();
+                                            }
+
                                         hotDealList.add(hotDeal);
                                     }
                                     callback.onSuccess(hotDealList);
@@ -602,8 +630,14 @@ public class CategoryRepository extends ModelRepository<Category> {
                                     HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     HotDeal hotDeal = hotDealRepo.createObject(result);
-                                    callback.onSuccess(hotDeal);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          hotDeal.save__db();
+                                      }
+
+                                    callback.onSuccess(hotDeal);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -760,8 +794,14 @@ public class CategoryRepository extends ModelRepository<Category> {
                                     CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Category category = categoryRepo.createObject(result);
-                                    callback.onSuccess(category);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          category.save__db();
+                                      }
+
+                                    callback.onSuccess(category);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -820,8 +860,14 @@ public class CategoryRepository extends ModelRepository<Category> {
                                     CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Category category = categoryRepo.createObject(result);
-                                    callback.onSuccess(category);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          category.save__db();
+                                      }
+
+                                    callback.onSuccess(category);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -932,8 +978,14 @@ public class CategoryRepository extends ModelRepository<Category> {
                                     CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Category category = categoryRepo.createObject(result);
-                                    callback.onSuccess(category);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          category.save__db();
+                                      }
+
+                                    callback.onSuccess(category);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -994,6 +1046,13 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                                     for (Map<String, Object> obj : result) {
                                         Category category = categoryRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 category.save__db();
+                                            }
+
                                         categoryList.add(category);
                                     }
                                     callback.onSuccess(categoryList);
@@ -1052,8 +1111,14 @@ public class CategoryRepository extends ModelRepository<Category> {
                                     CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Category category = categoryRepo.createObject(result);
-                                    callback.onSuccess(category);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          category.save__db();
+                                      }
+
+                                    callback.onSuccess(category);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1268,8 +1333,14 @@ public class CategoryRepository extends ModelRepository<Category> {
                                     CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Category category = categoryRepo.createObject(result);
-                                    callback.onSuccess(category);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          category.save__db();
+                                      }
+
+                                    callback.onSuccess(category);
                                 }else{
                                     callback.onSuccess(null);
                                 }

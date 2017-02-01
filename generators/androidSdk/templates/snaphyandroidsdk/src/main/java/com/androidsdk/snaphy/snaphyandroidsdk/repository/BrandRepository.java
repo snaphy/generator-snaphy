@@ -95,11 +95,11 @@ public class BrandRepository extends ModelRepository<Brand> {
 
 
     public DbHandler getDbHandler() {
-    return dbHandler;
+      return dbHandler;
     }
 
     public void setDbHandler(DbHandler dbHandler) {
-    this.dbHandler = dbHandler;
+      this.dbHandler = dbHandler;
     }
 
     private DbHandler dbHandler;
@@ -110,19 +110,28 @@ public class BrandRepository extends ModelRepository<Brand> {
     private boolean STORE_LOCALLY = true;
 
     public boolean isSTORE_LOCALLY() {
-    return STORE_LOCALLY;
+      return STORE_LOCALLY;
     }
 
 
     public void  persistData(boolean persist){
-    STORE_LOCALLY = persist;
+      STORE_LOCALLY = persist;
     }
 
 
-    private void addStorage(Context context){
+
+    public void reset__db(){
+      if(isSTORE_LOCALLY()){
+        getDbHandler().reset__db();
+      }
+    }
+
+
+
+private void addStorage(Context context){
     setDbHandler(new DbHandler< Brand, BrandRepository >(context, "Brand", getRestAdapter()));
-    //allow data storage locally..
-    persistData(true);
+      //allow data storage locally..
+      persistData(true);
     }
 
 
@@ -800,8 +809,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     HotDeal hotDeal = hotDealRepo.createObject(result);
-                                    callback.onSuccess(hotDeal);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          hotDeal.save__db();
+                                      }
+
+                                    callback.onSuccess(hotDeal);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -911,8 +926,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     HotDeal hotDeal = hotDealRepo.createObject(result);
-                                    callback.onSuccess(hotDeal);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          hotDeal.save__db();
+                                      }
+
+                                    callback.onSuccess(hotDeal);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -972,8 +993,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Chat chat = chatRepo.createObject(result);
-                                    callback.onSuccess(chat);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          chat.save__db();
+                                      }
+
+                                    callback.onSuccess(chat);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1083,8 +1110,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Chat chat = chatRepo.createObject(result);
-                                    callback.onSuccess(chat);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          chat.save__db();
+                                      }
+
+                                    callback.onSuccess(chat);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1144,8 +1177,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AppUser appUser = appUserRepo.createObject(result);
-                                    callback.onSuccess(appUser);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          appUser.save__db();
+                                      }
+
+                                    callback.onSuccess(appUser);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1255,8 +1294,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AppUser appUser = appUserRepo.createObject(result);
-                                    callback.onSuccess(appUser);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          appUser.save__db();
+                                      }
+
+                                    callback.onSuccess(appUser);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1316,8 +1361,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AppUser appUser = appUserRepo.createObject(result);
-                                    callback.onSuccess(appUser);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          appUser.save__db();
+                                      }
+
+                                    callback.onSuccess(appUser);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1478,8 +1529,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
-                                    callback.onSuccess(dailyFeed);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          dailyFeed.save__db();
+                                      }
+
+                                    callback.onSuccess(dailyFeed);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1589,8 +1646,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
-                                    callback.onSuccess(dailyFeed);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          dailyFeed.save__db();
+                                      }
+
+                                    callback.onSuccess(dailyFeed);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1650,8 +1713,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     BrandManager brandManager = brandManagerRepo.createObject(result);
-                                    callback.onSuccess(brandManager);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brandManager.save__db();
+                                      }
+
+                                    callback.onSuccess(brandManager);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1761,8 +1830,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     BrandManager brandManager = brandManagerRepo.createObject(result);
-                                    callback.onSuccess(brandManager);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brandManager.save__db();
+                                      }
+
+                                    callback.onSuccess(brandManager);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1822,8 +1897,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     BrandVerificationRepository brandVerificationRepo = getRestAdapter().createRepository(BrandVerificationRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     BrandVerification brandVerification = brandVerificationRepo.createObject(result);
-                                    callback.onSuccess(brandVerification);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brandVerification.save__db();
+                                      }
+
+                                    callback.onSuccess(brandVerification);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1883,8 +1964,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     BrandVerificationRepository brandVerificationRepo = getRestAdapter().createRepository(BrandVerificationRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     BrandVerification brandVerification = brandVerificationRepo.createObject(result);
-                                    callback.onSuccess(brandVerification);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brandVerification.save__db();
+                                      }
+
+                                    callback.onSuccess(brandVerification);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1944,8 +2031,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     BrandVerificationRepository brandVerificationRepo = getRestAdapter().createRepository(BrandVerificationRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     BrandVerification brandVerification = brandVerificationRepo.createObject(result);
-                                    callback.onSuccess(brandVerification);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brandVerification.save__db();
+                                      }
+
+                                    callback.onSuccess(brandVerification);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -2054,6 +2147,13 @@ public class BrandRepository extends ModelRepository<Brand> {
 
                                     for (Map<String, Object> obj : result) {
                                         HotDeal hotDeal = hotDealRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 hotDeal.save__db();
+                                            }
+
                                         hotDealList.add(hotDeal);
                                     }
                                     callback.onSuccess(hotDealList);
@@ -2114,8 +2214,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     HotDeal hotDeal = hotDealRepo.createObject(result);
-                                    callback.onSuccess(hotDeal);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          hotDeal.save__db();
+                                      }
+
+                                    callback.onSuccess(hotDeal);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -2277,6 +2383,13 @@ public class BrandRepository extends ModelRepository<Brand> {
 
                                     for (Map<String, Object> obj : result) {
                                         Chat chat = chatRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 chat.save__db();
+                                            }
+
                                         chatList.add(chat);
                                     }
                                     callback.onSuccess(chatList);
@@ -2337,8 +2450,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Chat chat = chatRepo.createObject(result);
-                                    callback.onSuccess(chat);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          chat.save__db();
+                                      }
+
+                                    callback.onSuccess(chat);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -2500,6 +2619,13 @@ public class BrandRepository extends ModelRepository<Brand> {
 
                                     for (Map<String, Object> obj : result) {
                                         AppUser appUser = appUserRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 appUser.save__db();
+                                            }
+
                                         appUserList.add(appUser);
                                     }
                                     callback.onSuccess(appUserList);
@@ -2560,8 +2686,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     AppUser appUser = appUserRepo.createObject(result);
-                                    callback.onSuccess(appUser);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          appUser.save__db();
+                                      }
+
+                                    callback.onSuccess(appUser);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -2723,6 +2855,13 @@ public class BrandRepository extends ModelRepository<Brand> {
 
                                     for (Map<String, Object> obj : result) {
                                         DailyFeed dailyFeed = dailyFeedRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 dailyFeed.save__db();
+                                            }
+
                                         dailyFeedList.add(dailyFeed);
                                     }
                                     callback.onSuccess(dailyFeedList);
@@ -2783,8 +2922,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
-                                    callback.onSuccess(dailyFeed);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          dailyFeed.save__db();
+                                      }
+
+                                    callback.onSuccess(dailyFeed);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -2946,6 +3091,13 @@ public class BrandRepository extends ModelRepository<Brand> {
 
                                     for (Map<String, Object> obj : result) {
                                         BrandManager brandManager = brandManagerRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 brandManager.save__db();
+                                            }
+
                                         brandManagerList.add(brandManager);
                                     }
                                     callback.onSuccess(brandManagerList);
@@ -3006,8 +3158,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     BrandManager brandManager = brandManagerRepo.createObject(result);
-                                    callback.onSuccess(brandManager);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brandManager.save__db();
+                                      }
+
+                                    callback.onSuccess(brandManager);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -3164,8 +3322,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Brand brand = brandRepo.createObject(result);
-                                    callback.onSuccess(brand);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brand.save__db();
+                                      }
+
+                                    callback.onSuccess(brand);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -3224,8 +3388,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Brand brand = brandRepo.createObject(result);
-                                    callback.onSuccess(brand);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brand.save__db();
+                                      }
+
+                                    callback.onSuccess(brand);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -3336,8 +3506,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Brand brand = brandRepo.createObject(result);
-                                    callback.onSuccess(brand);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brand.save__db();
+                                      }
+
+                                    callback.onSuccess(brand);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -3398,6 +3574,13 @@ public class BrandRepository extends ModelRepository<Brand> {
 
                                     for (Map<String, Object> obj : result) {
                                         Brand brand = brandRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 brand.save__db();
+                                            }
+
                                         brandList.add(brand);
                                     }
                                     callback.onSuccess(brandList);
@@ -3456,8 +3639,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Brand brand = brandRepo.createObject(result);
-                                    callback.onSuccess(brand);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brand.save__db();
+                                      }
+
+                                    callback.onSuccess(brand);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -3672,8 +3861,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Brand brand = brandRepo.createObject(result);
-                                    callback.onSuccess(brand);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brand.save__db();
+                                      }
+
+                                    callback.onSuccess(brand);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -3992,8 +4187,14 @@ public class BrandRepository extends ModelRepository<Brand> {
                                     BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     Brand brand = brandRepo.createObject(result);
-                                    callback.onSuccess(brand);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          brand.save__db();
+                                      }
+
+                                    callback.onSuccess(brand);
                                 }else{
                                     callback.onSuccess(null);
                                 }

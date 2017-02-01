@@ -398,6 +398,57 @@ public class BrandManager extends User {
     
 
 
+    //------------------------------------Database Method---------------------------------------------------
+
+    public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
+      //Save to database..
+      save__db();
+      //Also save to database..
+      super.save(callback);
+    }
+
+    public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
+      BrandManagerRepository brandManagerRepository = (BrandManagerRepository) getRepository();
+      if(brandManagerRepository.getDbHandler().isSTORE_LOCALLY()){
+          //Delete from database..
+          String id = getId().toString();
+          if(id != null){
+             brandManagerRepository.getDbHandler().delete__db(id);
+          }
+      }
+      //Also save to database..
+      super.save(callback);
+    }
+
+
+    public void save__db(String id){
+      BrandManagerRepository brandManagerRepository = (BrandManagerRepository) getRepository();
+      if(brandManagerRepository.getDbHandler().isSTORE_LOCALLY()){
+        if(id != null){
+          HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
+          String object = brandManagerRepository.getDbHandler().toJsonString(hashMap);
+          ContentValues values = new ContentValues();
+          values.put("ID", id); // Contact Name
+          values.put("OBJECT", object); // Contact Phone Number*/
+          brandManagerRepository.getDbHandler().upsert__db(id, object);
+        }
+      }
+    }
+
+
+    public void save__db(){
+      if(getId() == null){
+        return;
+      }
+      String id = getId().toString();
+      save__db(id);
+    }
+
+
+
+//-----------------------------------END Database Methods------------------------------------------------
+
+
     
 
 
@@ -408,11 +459,32 @@ public class BrandManager extends User {
           
     
         
+        
                 
                     //Define belongsTo relation method here..
                     private transient Brand  brand ;
+                    private String brandId;
+
+                    public String getBrandId(){
+                         return brandId;
+                    }
+
+                    public void setBrandId(Object brandId){
+                        if(brandId != null){
+                          this.brandId = brandId.toString();
+                        }
+                    }
 
                     public Brand getBrand() {
+                        //Adding database method for fetching from relation if not present..
+                        if(brand == null){
+                          BrandManagerRepository brandManagerRepository = (BrandManagerRepository) getRepository();
+                          RestAdapter restAdapter = brandManagerRepository.getRestAdapter();
+                          if(restAdapter != null){
+                            //Fetch locally from db
+                            brand = getBrand__db(restAdapter);
+                          }
+                        }
                         return brand;
                     }
 
@@ -442,8 +514,22 @@ public class BrandManager extends User {
                     }
 
 
-
+                    //Fetch related data from local database if present a brandId identifier as property for belongsTo
+                    public Brand getbrand__db(RestAdapter restAdapter){
+                      if(brandId != null){
+                        BrandRepository brandRepository = restAdapter.createRepository(BrandRepository.class);
+                        Brand brand = (Brand) brandRepository.getDbHandler().get__db(Brand.class, brandId);
+                        if(brand != null){
+                          return brand;
+                        }else{
+                          return null;
+                        }
+                        }else{
+                          return null;
+                      }
+                    }
                 
+
                 
                 
 

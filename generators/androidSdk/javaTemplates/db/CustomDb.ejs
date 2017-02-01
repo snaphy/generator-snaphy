@@ -1,0 +1,44 @@
+package com.androidsdk.snaphy.snaphyandroidsdk.db;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
+//Import self repository..
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.<%- modelName %>Repository;
+//Import Model
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.<%- modelName %>;
+import com.strongloop.android.loopback.RestAdapter;
+
+/**
+* Created by snaphy on 1/2/2017.
+*/
+
+<%
+ /*-------PURE JAVASCRIPT METHODS-------------------*/
+ var modelName = model.methods.capitalizeFirstLetter(model.name);
+%>
+
+public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelName %>Repository> {
+  public ChatDb(Context context, RestAdapter restAdapter){
+    super(context, "<%- modelName %>", restAdapter);
+  }
+
+  // Creating Tables
+  @Override
+  public void onCreate(SQLiteDatabase db) {
+    <%
+    var tableQuery = `CREATE TABLE  ${modelName} IF NOT EXISTS ( id TEXT PRIMARY KEY`;
+    for( var property in model.properties) { %>
+        <% if(model.properties.hasOwnProperty(property)){
+            var capitalPropertyName = model.methods.capitalizeFirstLetter(property);
+            var isArray = model.properties[property].type instanceof Array;
+            tableQuery = `${tableQuery}, ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)}`;
+        %>
+        <%}%>
+    <%}%>
+    <% tableQuery = tableQuery + ")"; %>
+    String CREATE_<%- modelName %>_TABLE = tableQuery;
+    db.execSQL(CREATE_<%- modelName %>_TABLE);
+  }
+}
