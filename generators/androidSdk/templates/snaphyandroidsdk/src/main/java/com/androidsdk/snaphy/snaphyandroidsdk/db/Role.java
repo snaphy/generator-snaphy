@@ -24,12 +24,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                           
-                           
-                           
-                           
-                           
-        
+                                                                                                                                               
     String CREATE_Role_TABLE = "CREATE TABLE  Role IF NOT EXISTS (  id TEXT PRIMARY KEY, name TEXT, description TEXT, created TEXT, modified TEXT)";
     db.execSQL(CREATE_Role_TABLE);
   }
@@ -91,59 +86,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
             Cursor cursor = db.query("Role", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                HashMap<String, Object> chatHashMap = new HashMap<>();
-
-                                      
-                                                                                    String idData;
-                                if(cursor.getString(0) != null){
-                                  idData = cursor.getString(0);
-                                  if(idData != null){
-                                    idData = (Object)idData;
-                                    chatHashMap.put("id", idData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String nameData;
-                                if(cursor.getString(1) != null){
-                                  nameData = cursor.getString(1);
-                                  if(nameData != null){
-                                    nameData = (String)nameData;
-                                    chatHashMap.put("name", nameData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String descriptionData;
-                                if(cursor.getString(2) != null){
-                                  descriptionData = cursor.getString(2);
-                                  if(descriptionData != null){
-                                    descriptionData = (Object)descriptionData;
-                                    chatHashMap.put("description", descriptionData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String createdData;
-                                if(cursor.getString(3) != null){
-                                  createdData = cursor.getString(3);
-                                  if(createdData != null){
-                                    createdData = (Object)createdData;
-                                    chatHashMap.put("created", createdData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String modifiedData;
-                                if(cursor.getString(4) != null){
-                                  modifiedData = cursor.getString(4);
-                                  if(modifiedData != null){
-                                    modifiedData = (Object)modifiedData;
-                                    chatHashMap.put("modified", modifiedData);
-                                  }
-                                }
-                                                                        
-                                    
+                HashMap<String, Object> chatHashMap = parseCursor(cursor);
 
                 cursor.close();
                 db.close(); // Closing database connection
@@ -165,7 +108,108 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
             return null;
         }
 
+    } //get__db
+
+
+
+    private HashMap<String, Object> parseCursor(Cursor cursor ){
+      HashMap<String, Object> chatHashMap = new HashMap<>();
+
+                      
+                                                            String idData;
+                        if(cursor.getString(0) != null){
+                          idData = cursor.getString(0);
+                          if(idData != null){
+                            idData = (Object)idData;
+                            chatHashMap.put("id", idData);
+                          }
+                        }
+                                                
+                                
+                                                            String nameData;
+                        if(cursor.getString(1) != null){
+                          nameData = cursor.getString(1);
+                          if(nameData != null){
+                            nameData = (String)nameData;
+                            chatHashMap.put("name", nameData);
+                          }
+                        }
+                                                
+                                
+                                                            String descriptionData;
+                        if(cursor.getString(2) != null){
+                          descriptionData = cursor.getString(2);
+                          if(descriptionData != null){
+                            descriptionData = (Object)descriptionData;
+                            chatHashMap.put("description", descriptionData);
+                          }
+                        }
+                                                
+                                
+                                                            String createdData;
+                        if(cursor.getString(3) != null){
+                          createdData = cursor.getString(3);
+                          if(createdData != null){
+                            createdData = (Object)createdData;
+                            chatHashMap.put("created", createdData);
+                          }
+                        }
+                                                
+                                
+                                                            String modifiedData;
+                        if(cursor.getString(4) != null){
+                          modifiedData = cursor.getString(4);
+                          if(modifiedData != null){
+                            modifiedData = (Object)modifiedData;
+                            chatHashMap.put("modified", modifiedData);
+                          }
+                        }
+                                                
+                    
+        return chatHashMap;
+    }//parseCursor
+
+
+
+    public void upsert__db(String id, Role model){
+        if(count__db(id) != 0){
+            update__db(id, model);
+        }else{
+            insert__db(id, model);
+        }
+    } //upsert__db
+
+
+
+    // Getting All Contacts
+    public DataList<Role>  getAll__db() {
+        DataList<Role> modelList = new DataList<Role>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM Role";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+               
+                HashMap<String, Object> chatHashMap = parseCursor(cursor);
+                if(chatHashMap != null){
+                    RoleRepository repo = restAdapter.createRepository(RoleRepository.class);
+                    modelList.add((Role)repo.createObject(chatHashMap));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+        return (DataList<Role>) modelList;
     }
+
+
+
+
 
 
 

@@ -24,14 +24,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-        
+                                                                                                                                                                                                     
     String CREATE_DailyFeed_TABLE = "CREATE TABLE  DailyFeed IF NOT EXISTS (  added TEXT, updated TEXT, title TEXT, description TEXT, image TEXT, id TEXT PRIMARY KEY, brandId TEXT)";
     db.execSQL(CREATE_DailyFeed_TABLE);
   }
@@ -105,79 +98,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
             Cursor cursor = db.query("DailyFeed", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                HashMap<String, Object> chatHashMap = new HashMap<>();
-
-                                      
-                                                                                    String addedData;
-                                if(cursor.getString(0) != null){
-                                  addedData = cursor.getString(0);
-                                  if(addedData != null){
-                                    addedData = (String)addedData;
-                                    chatHashMap.put("added", addedData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String updatedData;
-                                if(cursor.getString(1) != null){
-                                  updatedData = cursor.getString(1);
-                                  if(updatedData != null){
-                                    updatedData = (String)updatedData;
-                                    chatHashMap.put("updated", updatedData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String titleData;
-                                if(cursor.getString(2) != null){
-                                  titleData = cursor.getString(2);
-                                  if(titleData != null){
-                                    titleData = (String)titleData;
-                                    chatHashMap.put("title", titleData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String descriptionData;
-                                if(cursor.getString(3) != null){
-                                  descriptionData = cursor.getString(3);
-                                  if(descriptionData != null){
-                                    descriptionData = (String)descriptionData;
-                                    chatHashMap.put("description", descriptionData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    Map<String, Object> imageData = new Map<>();
-                                if(cursor.getString(4) != null){
-                                  imageData = new Gson().fromJson(cursor.getString(4), Map.class);
-                                  if(imageData != null){
-                                    imageData = (Map<String, Object>)imageData;
-                                    chatHashMap.put("image", imageData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String idData;
-                                if(cursor.getString(5) != null){
-                                  idData = cursor.getString(5);
-                                  if(idData != null){
-                                    idData = (Object)idData;
-                                    chatHashMap.put("id", idData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String brandIdData;
-                                if(cursor.getString(6) != null){
-                                  brandIdData = cursor.getString(6);
-                                  if(brandIdData != null){
-                                    brandIdData = (Object)brandIdData;
-                                    chatHashMap.put("brandId", brandIdData);
-                                  }
-                                }
-                                                                        
-                                    
+                HashMap<String, Object> chatHashMap = parseCursor(cursor);
 
                 cursor.close();
                 db.close(); // Closing database connection
@@ -199,7 +120,128 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
             return null;
         }
 
+    } //get__db
+
+
+
+    private HashMap<String, Object> parseCursor(Cursor cursor ){
+      HashMap<String, Object> chatHashMap = new HashMap<>();
+
+                      
+                                                            String addedData;
+                        if(cursor.getString(0) != null){
+                          addedData = cursor.getString(0);
+                          if(addedData != null){
+                            addedData = (String)addedData;
+                            chatHashMap.put("added", addedData);
+                          }
+                        }
+                                                
+                                
+                                                            String updatedData;
+                        if(cursor.getString(1) != null){
+                          updatedData = cursor.getString(1);
+                          if(updatedData != null){
+                            updatedData = (String)updatedData;
+                            chatHashMap.put("updated", updatedData);
+                          }
+                        }
+                                                
+                                
+                                                            String titleData;
+                        if(cursor.getString(2) != null){
+                          titleData = cursor.getString(2);
+                          if(titleData != null){
+                            titleData = (String)titleData;
+                            chatHashMap.put("title", titleData);
+                          }
+                        }
+                                                
+                                
+                                                            String descriptionData;
+                        if(cursor.getString(3) != null){
+                          descriptionData = cursor.getString(3);
+                          if(descriptionData != null){
+                            descriptionData = (String)descriptionData;
+                            chatHashMap.put("description", descriptionData);
+                          }
+                        }
+                                                
+                                
+                                                            Map<String, Object> imageData = new Map<>();
+                        if(cursor.getString(4) != null){
+                          imageData = new Gson().fromJson(cursor.getString(4), Map.class);
+                          if(imageData != null){
+                            imageData = (Map<String, Object>)imageData;
+                            chatHashMap.put("image", imageData);
+                          }
+                        }
+                                                
+                                
+                                                            String idData;
+                        if(cursor.getString(5) != null){
+                          idData = cursor.getString(5);
+                          if(idData != null){
+                            idData = (Object)idData;
+                            chatHashMap.put("id", idData);
+                          }
+                        }
+                                                
+                                
+                                                            String brandIdData;
+                        if(cursor.getString(6) != null){
+                          brandIdData = cursor.getString(6);
+                          if(brandIdData != null){
+                            brandIdData = (Object)brandIdData;
+                            chatHashMap.put("brandId", brandIdData);
+                          }
+                        }
+                                                
+                    
+        return chatHashMap;
+    }//parseCursor
+
+
+
+    public void upsert__db(String id, DailyFeed model){
+        if(count__db(id) != 0){
+            update__db(id, model);
+        }else{
+            insert__db(id, model);
+        }
+    } //upsert__db
+
+
+
+    // Getting All Contacts
+    public DataList<DailyFeed>  getAll__db() {
+        DataList<DailyFeed> modelList = new DataList<DailyFeed>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM DailyFeed";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+               
+                HashMap<String, Object> chatHashMap = parseCursor(cursor);
+                if(chatHashMap != null){
+                    DailyFeedRepository repo = restAdapter.createRepository(DailyFeedRepository.class);
+                    modelList.add((DailyFeed)repo.createObject(chatHashMap));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+        return (DataList<DailyFeed>) modelList;
     }
+
+
+
+
 
 
 

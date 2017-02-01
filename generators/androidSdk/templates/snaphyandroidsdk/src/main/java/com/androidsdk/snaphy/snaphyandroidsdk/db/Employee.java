@@ -24,23 +24,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        
     String CREATE_Employee_TABLE = "CREATE TABLE  Employee IF NOT EXISTS (  username TEXT, firstName TEXT, lastName TEXT, added TEXT, updated TEXT, email TEXT, password TEXT, realm TEXT, credentials TEXT, challenges TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY)";
     db.execSQL(CREATE_Employee_TABLE);
   }
@@ -168,169 +152,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
             Cursor cursor = db.query("Employee", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                HashMap<String, Object> chatHashMap = new HashMap<>();
-
-                                      
-                                                                                    String usernameData;
-                                if(cursor.getString(0) != null){
-                                  usernameData = cursor.getString(0);
-                                  if(usernameData != null){
-                                    usernameData = (String)usernameData;
-                                    chatHashMap.put("username", usernameData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String firstNameData;
-                                if(cursor.getString(1) != null){
-                                  firstNameData = cursor.getString(1);
-                                  if(firstNameData != null){
-                                    firstNameData = (String)firstNameData;
-                                    chatHashMap.put("firstName", firstNameData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String lastNameData;
-                                if(cursor.getString(2) != null){
-                                  lastNameData = cursor.getString(2);
-                                  if(lastNameData != null){
-                                    lastNameData = (String)lastNameData;
-                                    chatHashMap.put("lastName", lastNameData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String addedData;
-                                if(cursor.getString(3) != null){
-                                  addedData = cursor.getString(3);
-                                  if(addedData != null){
-                                    addedData = (String)addedData;
-                                    chatHashMap.put("added", addedData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String updatedData;
-                                if(cursor.getString(4) != null){
-                                  updatedData = cursor.getString(4);
-                                  if(updatedData != null){
-                                    updatedData = (String)updatedData;
-                                    chatHashMap.put("updated", updatedData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String emailData;
-                                if(cursor.getString(5) != null){
-                                  emailData = cursor.getString(5);
-                                  if(emailData != null){
-                                    emailData = (String)emailData;
-                                    chatHashMap.put("email", emailData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String passwordData;
-                                if(cursor.getString(6) != null){
-                                  passwordData = cursor.getString(6);
-                                  if(passwordData != null){
-                                    passwordData = (String)passwordData;
-                                    chatHashMap.put("password", passwordData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String realmData;
-                                if(cursor.getString(7) != null){
-                                  realmData = cursor.getString(7);
-                                  if(realmData != null){
-                                    realmData = (Object)realmData;
-                                    chatHashMap.put("realm", realmData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String credentialsData;
-                                if(cursor.getString(8) != null){
-                                  credentialsData = cursor.getString(8);
-                                  if(credentialsData != null){
-                                    credentialsData = (Object)credentialsData;
-                                    chatHashMap.put("credentials", credentialsData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String challengesData;
-                                if(cursor.getString(9) != null){
-                                  challengesData = cursor.getString(9);
-                                  if(challengesData != null){
-                                    challengesData = (Object)challengesData;
-                                    chatHashMap.put("challenges", challengesData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String emailVerifiedData;
-                                if(cursor.getString(10) != null){
-                                  emailVerifiedData = cursor.getString(10);
-                                  if(emailVerifiedData != null){
-                                    emailVerifiedData = (Object)emailVerifiedData;
-                                    chatHashMap.put("emailVerified", emailVerifiedData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String verificationTokenData;
-                                if(cursor.getString(11) != null){
-                                  verificationTokenData = cursor.getString(11);
-                                  if(verificationTokenData != null){
-                                    verificationTokenData = (Object)verificationTokenData;
-                                    chatHashMap.put("verificationToken", verificationTokenData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String statusData;
-                                if(cursor.getString(12) != null){
-                                  statusData = cursor.getString(12);
-                                  if(statusData != null){
-                                    statusData = (Object)statusData;
-                                    chatHashMap.put("status", statusData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String createdData;
-                                if(cursor.getString(13) != null){
-                                  createdData = cursor.getString(13);
-                                  if(createdData != null){
-                                    createdData = (Object)createdData;
-                                    chatHashMap.put("created", createdData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String lastUpdatedData;
-                                if(cursor.getString(14) != null){
-                                  lastUpdatedData = cursor.getString(14);
-                                  if(lastUpdatedData != null){
-                                    lastUpdatedData = (Object)lastUpdatedData;
-                                    chatHashMap.put("lastUpdated", lastUpdatedData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String idData;
-                                if(cursor.getString(15) != null){
-                                  idData = cursor.getString(15);
-                                  if(idData != null){
-                                    idData = (Object)idData;
-                                    chatHashMap.put("id", idData);
-                                  }
-                                }
-                                                                        
-                                    
+                HashMap<String, Object> chatHashMap = parseCursor(cursor);
 
                 cursor.close();
                 db.close(); // Closing database connection
@@ -352,7 +174,218 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
             return null;
         }
 
+    } //get__db
+
+
+
+    private HashMap<String, Object> parseCursor(Cursor cursor ){
+      HashMap<String, Object> chatHashMap = new HashMap<>();
+
+                      
+                                                            String usernameData;
+                        if(cursor.getString(0) != null){
+                          usernameData = cursor.getString(0);
+                          if(usernameData != null){
+                            usernameData = (String)usernameData;
+                            chatHashMap.put("username", usernameData);
+                          }
+                        }
+                                                
+                                
+                                                            String firstNameData;
+                        if(cursor.getString(1) != null){
+                          firstNameData = cursor.getString(1);
+                          if(firstNameData != null){
+                            firstNameData = (String)firstNameData;
+                            chatHashMap.put("firstName", firstNameData);
+                          }
+                        }
+                                                
+                                
+                                                            String lastNameData;
+                        if(cursor.getString(2) != null){
+                          lastNameData = cursor.getString(2);
+                          if(lastNameData != null){
+                            lastNameData = (String)lastNameData;
+                            chatHashMap.put("lastName", lastNameData);
+                          }
+                        }
+                                                
+                                
+                                                            String addedData;
+                        if(cursor.getString(3) != null){
+                          addedData = cursor.getString(3);
+                          if(addedData != null){
+                            addedData = (String)addedData;
+                            chatHashMap.put("added", addedData);
+                          }
+                        }
+                                                
+                                
+                                                            String updatedData;
+                        if(cursor.getString(4) != null){
+                          updatedData = cursor.getString(4);
+                          if(updatedData != null){
+                            updatedData = (String)updatedData;
+                            chatHashMap.put("updated", updatedData);
+                          }
+                        }
+                                                
+                                
+                                                            String emailData;
+                        if(cursor.getString(5) != null){
+                          emailData = cursor.getString(5);
+                          if(emailData != null){
+                            emailData = (String)emailData;
+                            chatHashMap.put("email", emailData);
+                          }
+                        }
+                                                
+                                
+                                                            String passwordData;
+                        if(cursor.getString(6) != null){
+                          passwordData = cursor.getString(6);
+                          if(passwordData != null){
+                            passwordData = (String)passwordData;
+                            chatHashMap.put("password", passwordData);
+                          }
+                        }
+                                                
+                                
+                                                            String realmData;
+                        if(cursor.getString(7) != null){
+                          realmData = cursor.getString(7);
+                          if(realmData != null){
+                            realmData = (Object)realmData;
+                            chatHashMap.put("realm", realmData);
+                          }
+                        }
+                                                
+                                
+                                                            String credentialsData;
+                        if(cursor.getString(8) != null){
+                          credentialsData = cursor.getString(8);
+                          if(credentialsData != null){
+                            credentialsData = (Object)credentialsData;
+                            chatHashMap.put("credentials", credentialsData);
+                          }
+                        }
+                                                
+                                
+                                                            String challengesData;
+                        if(cursor.getString(9) != null){
+                          challengesData = cursor.getString(9);
+                          if(challengesData != null){
+                            challengesData = (Object)challengesData;
+                            chatHashMap.put("challenges", challengesData);
+                          }
+                        }
+                                                
+                                
+                                                            String emailVerifiedData;
+                        if(cursor.getString(10) != null){
+                          emailVerifiedData = cursor.getString(10);
+                          if(emailVerifiedData != null){
+                            emailVerifiedData = (Object)emailVerifiedData;
+                            chatHashMap.put("emailVerified", emailVerifiedData);
+                          }
+                        }
+                                                
+                                
+                                                            String verificationTokenData;
+                        if(cursor.getString(11) != null){
+                          verificationTokenData = cursor.getString(11);
+                          if(verificationTokenData != null){
+                            verificationTokenData = (Object)verificationTokenData;
+                            chatHashMap.put("verificationToken", verificationTokenData);
+                          }
+                        }
+                                                
+                                
+                                                            String statusData;
+                        if(cursor.getString(12) != null){
+                          statusData = cursor.getString(12);
+                          if(statusData != null){
+                            statusData = (Object)statusData;
+                            chatHashMap.put("status", statusData);
+                          }
+                        }
+                                                
+                                
+                                                            String createdData;
+                        if(cursor.getString(13) != null){
+                          createdData = cursor.getString(13);
+                          if(createdData != null){
+                            createdData = (Object)createdData;
+                            chatHashMap.put("created", createdData);
+                          }
+                        }
+                                                
+                                
+                                                            String lastUpdatedData;
+                        if(cursor.getString(14) != null){
+                          lastUpdatedData = cursor.getString(14);
+                          if(lastUpdatedData != null){
+                            lastUpdatedData = (Object)lastUpdatedData;
+                            chatHashMap.put("lastUpdated", lastUpdatedData);
+                          }
+                        }
+                                                
+                                
+                                                            String idData;
+                        if(cursor.getString(15) != null){
+                          idData = cursor.getString(15);
+                          if(idData != null){
+                            idData = (Object)idData;
+                            chatHashMap.put("id", idData);
+                          }
+                        }
+                                                
+                    
+        return chatHashMap;
+    }//parseCursor
+
+
+
+    public void upsert__db(String id, Employee model){
+        if(count__db(id) != 0){
+            update__db(id, model);
+        }else{
+            insert__db(id, model);
+        }
+    } //upsert__db
+
+
+
+    // Getting All Contacts
+    public DataList<Employee>  getAll__db() {
+        DataList<Employee> modelList = new DataList<Employee>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM Employee";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+               
+                HashMap<String, Object> chatHashMap = parseCursor(cursor);
+                if(chatHashMap != null){
+                    EmployeeRepository repo = restAdapter.createRepository(EmployeeRepository.class);
+                    modelList.add((Employee)repo.createObject(chatHashMap));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+        return (DataList<Employee>) modelList;
     }
+
+
+
+
 
 
 

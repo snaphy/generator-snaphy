@@ -24,13 +24,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                           
-                           
-                           
-                           
-                           
-                           
-        
+                                                                                                                                                                          
     String CREATE_AdminEmail_TABLE = "CREATE TABLE  AdminEmail IF NOT EXISTS (  to TEXT, from TEXT, subject TEXT, text TEXT, html TEXT, id TEXT PRIMARY KEY)";
     db.execSQL(CREATE_AdminEmail_TABLE);
   }
@@ -98,69 +92,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
             Cursor cursor = db.query("AdminEmail", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                HashMap<String, Object> chatHashMap = new HashMap<>();
-
-                                      
-                                                                                    String toData;
-                                if(cursor.getString(0) != null){
-                                  toData = cursor.getString(0);
-                                  if(toData != null){
-                                    toData = (Object)toData;
-                                    chatHashMap.put("to", toData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String fromData;
-                                if(cursor.getString(1) != null){
-                                  fromData = cursor.getString(1);
-                                  if(fromData != null){
-                                    fromData = (Object)fromData;
-                                    chatHashMap.put("from", fromData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String subjectData;
-                                if(cursor.getString(2) != null){
-                                  subjectData = cursor.getString(2);
-                                  if(subjectData != null){
-                                    subjectData = (Object)subjectData;
-                                    chatHashMap.put("subject", subjectData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String textData;
-                                if(cursor.getString(3) != null){
-                                  textData = cursor.getString(3);
-                                  if(textData != null){
-                                    textData = (Object)textData;
-                                    chatHashMap.put("text", textData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String htmlData;
-                                if(cursor.getString(4) != null){
-                                  htmlData = cursor.getString(4);
-                                  if(htmlData != null){
-                                    htmlData = (Object)htmlData;
-                                    chatHashMap.put("html", htmlData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String idData;
-                                if(cursor.getString(5) != null){
-                                  idData = cursor.getString(5);
-                                  if(idData != null){
-                                    idData = (Object)idData;
-                                    chatHashMap.put("id", idData);
-                                  }
-                                }
-                                                                        
-                                    
+                HashMap<String, Object> chatHashMap = parseCursor(cursor);
 
                 cursor.close();
                 db.close(); // Closing database connection
@@ -182,7 +114,118 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
             return null;
         }
 
+    } //get__db
+
+
+
+    private HashMap<String, Object> parseCursor(Cursor cursor ){
+      HashMap<String, Object> chatHashMap = new HashMap<>();
+
+                      
+                                                            String toData;
+                        if(cursor.getString(0) != null){
+                          toData = cursor.getString(0);
+                          if(toData != null){
+                            toData = (Object)toData;
+                            chatHashMap.put("to", toData);
+                          }
+                        }
+                                                
+                                
+                                                            String fromData;
+                        if(cursor.getString(1) != null){
+                          fromData = cursor.getString(1);
+                          if(fromData != null){
+                            fromData = (Object)fromData;
+                            chatHashMap.put("from", fromData);
+                          }
+                        }
+                                                
+                                
+                                                            String subjectData;
+                        if(cursor.getString(2) != null){
+                          subjectData = cursor.getString(2);
+                          if(subjectData != null){
+                            subjectData = (Object)subjectData;
+                            chatHashMap.put("subject", subjectData);
+                          }
+                        }
+                                                
+                                
+                                                            String textData;
+                        if(cursor.getString(3) != null){
+                          textData = cursor.getString(3);
+                          if(textData != null){
+                            textData = (Object)textData;
+                            chatHashMap.put("text", textData);
+                          }
+                        }
+                                                
+                                
+                                                            String htmlData;
+                        if(cursor.getString(4) != null){
+                          htmlData = cursor.getString(4);
+                          if(htmlData != null){
+                            htmlData = (Object)htmlData;
+                            chatHashMap.put("html", htmlData);
+                          }
+                        }
+                                                
+                                
+                                                            String idData;
+                        if(cursor.getString(5) != null){
+                          idData = cursor.getString(5);
+                          if(idData != null){
+                            idData = (Object)idData;
+                            chatHashMap.put("id", idData);
+                          }
+                        }
+                                                
+                    
+        return chatHashMap;
+    }//parseCursor
+
+
+
+    public void upsert__db(String id, AdminEmail model){
+        if(count__db(id) != 0){
+            update__db(id, model);
+        }else{
+            insert__db(id, model);
+        }
+    } //upsert__db
+
+
+
+    // Getting All Contacts
+    public DataList<AdminEmail>  getAll__db() {
+        DataList<AdminEmail> modelList = new DataList<AdminEmail>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM AdminEmail";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+               
+                HashMap<String, Object> chatHashMap = parseCursor(cursor);
+                if(chatHashMap != null){
+                    AdminEmailRepository repo = restAdapter.createRepository(AdminEmailRepository.class);
+                    modelList.add((AdminEmail)repo.createObject(chatHashMap));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+        return (DataList<AdminEmail>) modelList;
     }
+
+
+
+
 
 
 

@@ -67,10 +67,18 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
     }
 
 
-    public void insert__db (String id, <%- modelName %> model) {
+    public void insert__db (String id, <%- modelName %> modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
-        ContentValues values = new ContentValues();
+        ContentValues values = getContentValues(modelData);
+        db.insert(TABLE, null, values);
+        db.close(); // Closing database connection
+    }
+
+
+
+    public ContentValues getContentValues(<%- modelName %> modelData){
+      ContentValues values = new ContentValues();
          <%
           for( let property in model.properties) { -%>
               <% if(model.properties.hasOwnProperty(property)){
@@ -80,45 +88,45 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
 
                 <% if(isArray){ -%>
                   String <%-property%>Data;
-                  if(model.get<%-capitalPropertyName%>() != null){
-                    <%-property%>Data = new Gson().toJson(model.get<%-capitalPropertyName%>(), DataList.class);
+                  if(modelData.get<%-capitalPropertyName%>() != null){
+                    <%-property%>Data = new Gson().toJson(modelData.get<%-capitalPropertyName%>(), DataList.class);
                   }
               <% }else{ -%>
                     <% if(model.properties[property].type === "string" || model.properties[property].type === "date"){ -%>
                         String <%-property%>Data;
-                        if(model.get<%-capitalPropertyName%>() != null){
-                          <%-property%>Data = model.get<%-capitalPropertyName%>().toString();
+                        if(modelData.get<%-capitalPropertyName%>() != null){
+                          <%-property%>Data = modelData.get<%-capitalPropertyName%>().toString();
                         }
                     <% }else if(model.properties[property].type === "object" || model.properties[property].type === "geopoint"){ -%>
                         String <%-property%>Data;
-                        if(model.get<%-capitalPropertyName%>() != null){
-                          <%-property%>Data = new Gson().toJson(model.get<%-capitalPropertyName%>(), HashMap.class);
+                        if(modelData.get<%-capitalPropertyName%>() != null){
+                          <%-property%>Data = new Gson().toJson(modelData.get<%-capitalPropertyName%>(), HashMap.class);
                         }
                     <% }else if(model.properties[property].type === "number"){ -%>
                         double <%-property%>Data;
-                        if(model.get<%-capitalPropertyName%>() != null){
-                          <%-property%>Data = (double)model.get<%-capitalPropertyName%>();
+                        if(modelData.get<%-capitalPropertyName%>() != null){
+                          <%-property%>Data = (double)modelData.get<%-capitalPropertyName%>();
                         }
                     <% }else if(model.properties[property].type === "boolean"){ -%>
                         int <%-property%>Data;
-                        if(model.get<%-capitalPropertyName%>()){
+                        if(modelData.get<%-capitalPropertyName%>()){
                           <%-property%>Data = 1;
                         }else{
                           <%-property%>Data = 0;
                         }
                     <% }else{ -%>
                         String <%-property%>Data;
-                        if(model.get<%-capitalPropertyName%>() != null){
-                          <%-property%>Data = model.get<%-capitalPropertyName%>().toString();
+                        if(modelData.get<%-capitalPropertyName%>() != null){
+                          <%-property%>Data =modelData.get<%-capitalPropertyName%>().toString();
                         }
                     <% } -%>
               <% }//END IF-ELSE -%>
               values.put("<%-property%>", <%-property%>Data);
           <% } -%>
         <%}%>
-        db.insert(TABLE, null, values);
-        db.close(); // Closing database connection
+        return values;
     }
+
 
 
     // Getting single cont
@@ -263,6 +271,16 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
         db.close();
         // return contact list
         return (DataList<<%- modelName %>>) modelList;
+    }
+
+
+    // Updating single contact
+    public int update__db(String id,   <%- modelName %> modelData) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = getContentValues(modelData);
+        // updating row
+        return db.update(TABLE, values, KEY_ID + " = ?",
+                new String[] { id });
     }
 
 

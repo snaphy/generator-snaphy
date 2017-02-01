@@ -24,19 +24,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-                           
-        
+                                                                                                                                                                                                                                                                                                                                            
     String CREATE_HotDeal_TABLE = "CREATE TABLE  HotDeal IF NOT EXISTS (  title TEXT, description TEXT, image TEXT, url TEXT, price NUMBER, status TEXT, expiryDate TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, categoryId TEXT, brandId TEXT)";
     db.execSQL(CREATE_HotDeal_TABLE);
   }
@@ -140,127 +128,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
             Cursor cursor = db.query("HotDeal", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                HashMap<String, Object> chatHashMap = new HashMap<>();
-
-                                      
-                                                                                    String titleData;
-                                if(cursor.getString(0) != null){
-                                  titleData = cursor.getString(0);
-                                  if(titleData != null){
-                                    titleData = (String)titleData;
-                                    chatHashMap.put("title", titleData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String descriptionData;
-                                if(cursor.getString(1) != null){
-                                  descriptionData = cursor.getString(1);
-                                  if(descriptionData != null){
-                                    descriptionData = (String)descriptionData;
-                                    chatHashMap.put("description", descriptionData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    Map<String, Object> imageData = new Map<>();
-                                if(cursor.getString(2) != null){
-                                  imageData = new Gson().fromJson(cursor.getString(2), Map.class);
-                                  if(imageData != null){
-                                    imageData = (Map<String, Object>)imageData;
-                                    chatHashMap.put("image", imageData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String urlData;
-                                if(cursor.getString(3) != null){
-                                  urlData = cursor.getString(3);
-                                  if(urlData != null){
-                                    urlData = (String)urlData;
-                                    chatHashMap.put("url", urlData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    double priceData;  
-                                  priceData = cursor.getInt(4);
-                                  priceData = (double)priceData;
-                                  chatHashMap.put("price", priceData);
-                              
-                              
-                                                                        
-                                                        
-                                                                                    String statusData;
-                                if(cursor.getString(5) != null){
-                                  statusData = cursor.getString(5);
-                                  if(statusData != null){
-                                    statusData = (String)statusData;
-                                    chatHashMap.put("status", statusData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String expiryDateData;
-                                if(cursor.getString(6) != null){
-                                  expiryDateData = cursor.getString(6);
-                                  if(expiryDateData != null){
-                                    expiryDateData = (String)expiryDateData;
-                                    chatHashMap.put("expiryDate", expiryDateData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String addedData;
-                                if(cursor.getString(7) != null){
-                                  addedData = cursor.getString(7);
-                                  if(addedData != null){
-                                    addedData = (String)addedData;
-                                    chatHashMap.put("added", addedData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String updatedData;
-                                if(cursor.getString(8) != null){
-                                  updatedData = cursor.getString(8);
-                                  if(updatedData != null){
-                                    updatedData = (String)updatedData;
-                                    chatHashMap.put("updated", updatedData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String idData;
-                                if(cursor.getString(9) != null){
-                                  idData = cursor.getString(9);
-                                  if(idData != null){
-                                    idData = (Object)idData;
-                                    chatHashMap.put("id", idData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String categoryIdData;
-                                if(cursor.getString(10) != null){
-                                  categoryIdData = cursor.getString(10);
-                                  if(categoryIdData != null){
-                                    categoryIdData = (Object)categoryIdData;
-                                    chatHashMap.put("categoryId", categoryIdData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String brandIdData;
-                                if(cursor.getString(11) != null){
-                                  brandIdData = cursor.getString(11);
-                                  if(brandIdData != null){
-                                    brandIdData = (Object)brandIdData;
-                                    chatHashMap.put("brandId", brandIdData);
-                                  }
-                                }
-                                                                        
-                                    
+                HashMap<String, Object> chatHashMap = parseCursor(cursor);
 
                 cursor.close();
                 db.close(); // Closing database connection
@@ -282,7 +150,176 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
             return null;
         }
 
+    } //get__db
+
+
+
+    private HashMap<String, Object> parseCursor(Cursor cursor ){
+      HashMap<String, Object> chatHashMap = new HashMap<>();
+
+                      
+                                                            String titleData;
+                        if(cursor.getString(0) != null){
+                          titleData = cursor.getString(0);
+                          if(titleData != null){
+                            titleData = (String)titleData;
+                            chatHashMap.put("title", titleData);
+                          }
+                        }
+                                                
+                                
+                                                            String descriptionData;
+                        if(cursor.getString(1) != null){
+                          descriptionData = cursor.getString(1);
+                          if(descriptionData != null){
+                            descriptionData = (String)descriptionData;
+                            chatHashMap.put("description", descriptionData);
+                          }
+                        }
+                                                
+                                
+                                                            Map<String, Object> imageData = new Map<>();
+                        if(cursor.getString(2) != null){
+                          imageData = new Gson().fromJson(cursor.getString(2), Map.class);
+                          if(imageData != null){
+                            imageData = (Map<String, Object>)imageData;
+                            chatHashMap.put("image", imageData);
+                          }
+                        }
+                                                
+                                
+                                                            String urlData;
+                        if(cursor.getString(3) != null){
+                          urlData = cursor.getString(3);
+                          if(urlData != null){
+                            urlData = (String)urlData;
+                            chatHashMap.put("url", urlData);
+                          }
+                        }
+                                                
+                                
+                                                            double priceData;  
+                          priceData = cursor.getInt(4);
+                          priceData = (double)priceData;
+                          chatHashMap.put("price", priceData);
+                      
+                      
+                                                
+                                
+                                                            String statusData;
+                        if(cursor.getString(5) != null){
+                          statusData = cursor.getString(5);
+                          if(statusData != null){
+                            statusData = (String)statusData;
+                            chatHashMap.put("status", statusData);
+                          }
+                        }
+                                                
+                                
+                                                            String expiryDateData;
+                        if(cursor.getString(6) != null){
+                          expiryDateData = cursor.getString(6);
+                          if(expiryDateData != null){
+                            expiryDateData = (String)expiryDateData;
+                            chatHashMap.put("expiryDate", expiryDateData);
+                          }
+                        }
+                                                
+                                
+                                                            String addedData;
+                        if(cursor.getString(7) != null){
+                          addedData = cursor.getString(7);
+                          if(addedData != null){
+                            addedData = (String)addedData;
+                            chatHashMap.put("added", addedData);
+                          }
+                        }
+                                                
+                                
+                                                            String updatedData;
+                        if(cursor.getString(8) != null){
+                          updatedData = cursor.getString(8);
+                          if(updatedData != null){
+                            updatedData = (String)updatedData;
+                            chatHashMap.put("updated", updatedData);
+                          }
+                        }
+                                                
+                                
+                                                            String idData;
+                        if(cursor.getString(9) != null){
+                          idData = cursor.getString(9);
+                          if(idData != null){
+                            idData = (Object)idData;
+                            chatHashMap.put("id", idData);
+                          }
+                        }
+                                                
+                                
+                                                            String categoryIdData;
+                        if(cursor.getString(10) != null){
+                          categoryIdData = cursor.getString(10);
+                          if(categoryIdData != null){
+                            categoryIdData = (Object)categoryIdData;
+                            chatHashMap.put("categoryId", categoryIdData);
+                          }
+                        }
+                                                
+                                
+                                                            String brandIdData;
+                        if(cursor.getString(11) != null){
+                          brandIdData = cursor.getString(11);
+                          if(brandIdData != null){
+                            brandIdData = (Object)brandIdData;
+                            chatHashMap.put("brandId", brandIdData);
+                          }
+                        }
+                                                
+                    
+        return chatHashMap;
+    }//parseCursor
+
+
+
+    public void upsert__db(String id, HotDeal model){
+        if(count__db(id) != 0){
+            update__db(id, model);
+        }else{
+            insert__db(id, model);
+        }
+    } //upsert__db
+
+
+
+    // Getting All Contacts
+    public DataList<HotDeal>  getAll__db() {
+        DataList<HotDeal> modelList = new DataList<HotDeal>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM HotDeal";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+               
+                HashMap<String, Object> chatHashMap = parseCursor(cursor);
+                if(chatHashMap != null){
+                    HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
+                    modelList.add((HotDeal)repo.createObject(chatHashMap));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+        return (DataList<HotDeal>) modelList;
     }
+
+
+
+
 
 
 

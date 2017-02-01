@@ -24,13 +24,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                           
-                           
-                           
-                           
-                           
-                           
-        
+                                                                                                                                                                          
     String CREATE_FacebookAccessToken_TABLE = "CREATE TABLE  FacebookAccessToken IF NOT EXISTS (  FbUserId TEXT, token TEXT, expires TEXT, userId TEXT, type TEXT, appUserId TEXT)";
     db.execSQL(CREATE_FacebookAccessToken_TABLE);
   }
@@ -98,69 +92,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
             Cursor cursor = db.query("FacebookAccessToken", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                HashMap<String, Object> chatHashMap = new HashMap<>();
-
-                                      
-                                                                                    String FbUserIdData;
-                                if(cursor.getString(0) != null){
-                                  FbUserIdData = cursor.getString(0);
-                                  if(FbUserIdData != null){
-                                    FbUserIdData = (String)FbUserIdData;
-                                    chatHashMap.put("FbUserId", FbUserIdData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String tokenData;
-                                if(cursor.getString(1) != null){
-                                  tokenData = cursor.getString(1);
-                                  if(tokenData != null){
-                                    tokenData = (String)tokenData;
-                                    chatHashMap.put("token", tokenData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String expiresData;
-                                if(cursor.getString(2) != null){
-                                  expiresData = cursor.getString(2);
-                                  if(expiresData != null){
-                                    expiresData = (String)expiresData;
-                                    chatHashMap.put("expires", expiresData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String userIdData;
-                                if(cursor.getString(3) != null){
-                                  userIdData = cursor.getString(3);
-                                  if(userIdData != null){
-                                    userIdData = (Object)userIdData;
-                                    chatHashMap.put("userId", userIdData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String typeData;
-                                if(cursor.getString(4) != null){
-                                  typeData = cursor.getString(4);
-                                  if(typeData != null){
-                                    typeData = (String)typeData;
-                                    chatHashMap.put("type", typeData);
-                                  }
-                                }
-                                                                        
-                                                        
-                                                                                    String appUserIdData;
-                                if(cursor.getString(5) != null){
-                                  appUserIdData = cursor.getString(5);
-                                  if(appUserIdData != null){
-                                    appUserIdData = (Object)appUserIdData;
-                                    chatHashMap.put("appUserId", appUserIdData);
-                                  }
-                                }
-                                                                        
-                                    
+                HashMap<String, Object> chatHashMap = parseCursor(cursor);
 
                 cursor.close();
                 db.close(); // Closing database connection
@@ -182,7 +114,118 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
             return null;
         }
 
+    } //get__db
+
+
+
+    private HashMap<String, Object> parseCursor(Cursor cursor ){
+      HashMap<String, Object> chatHashMap = new HashMap<>();
+
+                      
+                                                            String FbUserIdData;
+                        if(cursor.getString(0) != null){
+                          FbUserIdData = cursor.getString(0);
+                          if(FbUserIdData != null){
+                            FbUserIdData = (String)FbUserIdData;
+                            chatHashMap.put("FbUserId", FbUserIdData);
+                          }
+                        }
+                                                
+                                
+                                                            String tokenData;
+                        if(cursor.getString(1) != null){
+                          tokenData = cursor.getString(1);
+                          if(tokenData != null){
+                            tokenData = (String)tokenData;
+                            chatHashMap.put("token", tokenData);
+                          }
+                        }
+                                                
+                                
+                                                            String expiresData;
+                        if(cursor.getString(2) != null){
+                          expiresData = cursor.getString(2);
+                          if(expiresData != null){
+                            expiresData = (String)expiresData;
+                            chatHashMap.put("expires", expiresData);
+                          }
+                        }
+                                                
+                                
+                                                            String userIdData;
+                        if(cursor.getString(3) != null){
+                          userIdData = cursor.getString(3);
+                          if(userIdData != null){
+                            userIdData = (Object)userIdData;
+                            chatHashMap.put("userId", userIdData);
+                          }
+                        }
+                                                
+                                
+                                                            String typeData;
+                        if(cursor.getString(4) != null){
+                          typeData = cursor.getString(4);
+                          if(typeData != null){
+                            typeData = (String)typeData;
+                            chatHashMap.put("type", typeData);
+                          }
+                        }
+                                                
+                                
+                                                            String appUserIdData;
+                        if(cursor.getString(5) != null){
+                          appUserIdData = cursor.getString(5);
+                          if(appUserIdData != null){
+                            appUserIdData = (Object)appUserIdData;
+                            chatHashMap.put("appUserId", appUserIdData);
+                          }
+                        }
+                                                
+                    
+        return chatHashMap;
+    }//parseCursor
+
+
+
+    public void upsert__db(String id, FacebookAccessToken model){
+        if(count__db(id) != 0){
+            update__db(id, model);
+        }else{
+            insert__db(id, model);
+        }
+    } //upsert__db
+
+
+
+    // Getting All Contacts
+    public DataList<FacebookAccessToken>  getAll__db() {
+        DataList<FacebookAccessToken> modelList = new DataList<FacebookAccessToken>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM FacebookAccessToken";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+               
+                HashMap<String, Object> chatHashMap = parseCursor(cursor);
+                if(chatHashMap != null){
+                    FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+                    modelList.add((FacebookAccessToken)repo.createObject(chatHashMap));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+        return (DataList<FacebookAccessToken>) modelList;
     }
+
+
+
+
 
 
 
