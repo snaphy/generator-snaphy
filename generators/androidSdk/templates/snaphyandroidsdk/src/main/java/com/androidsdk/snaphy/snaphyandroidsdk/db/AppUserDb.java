@@ -178,14 +178,14 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
             Cursor cursor = db.query("AppUser", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
+                HashMap<String, Object> hashMap = parseCursor(cursor);
 
                 cursor.close();
                 db.close(); // Closing database connection
                 
-                if (chatHashMap != null) {
+                if (hashMap != null) {
                     AppUserRepository repo = restAdapter.createRepository(AppUserRepository.class);
-                    return (AppUser)repo.createObject(chatHashMap);
+                    return (AppUser)repo.createObject(hashMap);
                 } else {
                     return null;
                 }
@@ -213,7 +213,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
                 cursor.close();
                 db.close(); // Closing database connection
 
-                if (HashMap != null) {
+                if (hashMap != null) {
                     AppUserRepository repo = restAdapter.createRepository(AppUserRepository.class);
                     return (AppUser)repo.createObject(hashMap);
                 } else {
@@ -232,7 +232,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
 
 
     private HashMap<String, Object> parseCursor(Cursor cursor ){
-      HashMap<String, Object> chatHashMap = new HashMap<>();
+      HashMap<String, Object> hashMap = new HashMap<>();
 
                       
                                                             String firstNameData = "";
@@ -240,7 +240,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
                           firstNameData = cursor.getString(0);
                           if(firstNameData != null){
                             firstNameData = (String)firstNameData;
-                            chatHashMap.put("firstName", firstNameData);
+                            hashMap.put("firstName", firstNameData);
                           }
                         }
                                                 
@@ -250,7 +250,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
                           lastNameData = cursor.getString(1);
                           if(lastNameData != null){
                             lastNameData = (String)lastNameData;
-                            chatHashMap.put("lastName", lastNameData);
+                            hashMap.put("lastName", lastNameData);
                           }
                         }
                                                 
@@ -260,7 +260,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
                           emailData = cursor.getString(2);
                           if(emailData != null){
                             emailData = (String)emailData;
-                            chatHashMap.put("email", emailData);
+                            hashMap.put("email", emailData);
                           }
                         }
                                                 
@@ -270,7 +270,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
                           addedData = cursor.getString(3);
                           if(addedData != null){
                             addedData = (String)addedData;
-                            chatHashMap.put("added", addedData);
+                            hashMap.put("added", addedData);
                           }
                         }
                                                 
@@ -280,7 +280,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
                           updatedData = cursor.getString(4);
                           if(updatedData != null){
                             updatedData = (String)updatedData;
-                            chatHashMap.put("updated", updatedData);
+                            hashMap.put("updated", updatedData);
                           }
                         }
                                                 
@@ -290,7 +290,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
                           registrationIdData = cursor.getString(5);
                           if(registrationIdData != null){
                             registrationIdData = (String)registrationIdData;
-                            chatHashMap.put("registrationId", registrationIdData);
+                            hashMap.put("registrationId", registrationIdData);
                           }
                         }
                                                 
@@ -300,7 +300,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
                           profilePicData = new Gson().fromJson(cursor.getString(6), Map.class);
                           if(profilePicData != null){
                             profilePicData = (Map<String, Object>)profilePicData;
-                            chatHashMap.put("profilePic", profilePicData);
+                            hashMap.put("profilePic", profilePicData);
                           }
                         }
                                                 
@@ -310,7 +310,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
                           realmData = cursor.getString(7);
                           if(realmData != null){
                             realmData = realmData.toString();
-                            chatHashMap.put("realm", realmData);
+                            hashMap.put("realm", realmData);
                           }
                         }
                                                 
@@ -320,7 +320,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
                           usernameData = cursor.getString(8);
                           if(usernameData != null){
                             usernameData = usernameData.toString();
-                            chatHashMap.put("username", usernameData);
+                            hashMap.put("username", usernameData);
                           }
                         }
                                                 
@@ -330,7 +330,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
                           passwordData = cursor.getString(9);
                           if(passwordData != null){
                             passwordData = passwordData.toString();
-                            chatHashMap.put("password", passwordData);
+                            hashMap.put("password", passwordData);
                           }
                         }
                                                 
@@ -340,7 +340,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
                           credentialsData = cursor.getString(10);
                           if(credentialsData != null){
                             credentialsData = credentialsData.toString();
-                            chatHashMap.put("credentials", credentialsData);
+                            hashMap.put("credentials", credentialsData);
                           }
                         }
                                                 
@@ -350,7 +350,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
                           challengesData = cursor.getString(11);
                           if(challengesData != null){
                             challengesData = challengesData.toString();
-                            chatHashMap.put("challenges", challengesData);
+                            hashMap.put("challenges", challengesData);
                           }
                         }
                                                 
@@ -360,7 +360,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
                           emailVerifiedData = cursor.getString(12);
                           if(emailVerifiedData != null){
                             emailVerifiedData = emailVerifiedData.toString();
-                            chatHashMap.put("emailVerified", emailVerifiedData);
+                            hashMap.put("emailVerified", emailVerifiedData);
                           }
                         }
                                                 
@@ -370,7 +370,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
                           verificationTokenData = cursor.getString(13);
                           if(verificationTokenData != null){
                             verificationTokenData = verificationTokenData.toString();
-                            chatHashMap.put("verificationToken", verificationTokenData);
+                            hashMap.put("verificationToken", verificationTokenData);
                           }
                         }
                                                 
@@ -380,7 +380,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
                           statusData = cursor.getString(14);
                           if(statusData != null){
                             statusData = statusData.toString();
-                            chatHashMap.put("status", statusData);
+                            hashMap.put("status", statusData);
                           }
                         }
                                                 
@@ -390,7 +390,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
                           createdData = cursor.getString(15);
                           if(createdData != null){
                             createdData = createdData.toString();
-                            chatHashMap.put("created", createdData);
+                            hashMap.put("created", createdData);
                           }
                         }
                                                 
@@ -400,7 +400,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
                           lastUpdatedData = cursor.getString(16);
                           if(lastUpdatedData != null){
                             lastUpdatedData = lastUpdatedData.toString();
-                            chatHashMap.put("lastUpdated", lastUpdatedData);
+                            hashMap.put("lastUpdated", lastUpdatedData);
                           }
                         }
                                                 
@@ -410,12 +410,12 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
                           idData = cursor.getString(17);
                           if(idData != null){
                             idData = idData.toString();
-                            chatHashMap.put("id", idData);
+                            hashMap.put("id", idData);
                           }
                         }
                                                 
                     
-        return chatHashMap;
+        return hashMap;
     }//parseCursor
 
 
@@ -443,10 +443,37 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
         if (cursor.moveToFirst()) {
             do {
                
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
-                if(chatHashMap != null){
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
                     AppUserRepository repo = restAdapter.createRepository(AppUserRepository.class);
-                    modelList.add((AppUser)repo.createObject(chatHashMap));
+                    modelList.add((AppUser)repo.createObject(hashMap));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+        return (DataList<AppUser>) modelList;
+    } 
+
+
+    // Getting All Data where
+    public DataList<AppUser>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<AppUser> modelList = new DataList<AppUser>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM AppUser WHERE " + whereKey +"="+ whereKeyValue ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+               
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
+                    AppUserRepository repo = restAdapter.createRepository(AppUserRepository.class);
+                    modelList.add((AppUser)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }

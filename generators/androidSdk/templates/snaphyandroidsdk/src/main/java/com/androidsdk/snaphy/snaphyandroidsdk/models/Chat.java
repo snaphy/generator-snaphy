@@ -433,7 +433,7 @@ public class Chat extends Model {
                     public Brand getBrand__db(RestAdapter restAdapter){
                       if(brandId != null){
                         BrandRepository brandRepository = restAdapter.createRepository(BrandRepository.class);
-                        Brand brand = (Brand) brandRepository.getDbHandler().get__db(Brand.class, brandId);
+                        Brand brand = (Brand) brandRepository.getBrandDb().get__db(brandId);
                         if(brand != null){
                           return brand;
                         }else{
@@ -620,7 +620,7 @@ public class Chat extends Model {
                     public AppUser getAppUser__db(RestAdapter restAdapter){
                       if(appUserId != null){
                         AppUserRepository appUserRepository = restAdapter.createRepository(AppUserRepository.class);
-                        AppUser appUser = (AppUser) appUserRepository.getDbHandler().get__db(AppUser.class, appUserId);
+                        AppUser appUser = (AppUser) appUserRepository.getAppUserDb().get__db(appUserId);
                         if(appUser != null){
                           return appUser;
                         }else{

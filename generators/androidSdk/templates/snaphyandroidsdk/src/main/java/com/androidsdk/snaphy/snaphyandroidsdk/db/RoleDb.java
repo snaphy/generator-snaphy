@@ -100,14 +100,14 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
             Cursor cursor = db.query("Role", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
+                HashMap<String, Object> hashMap = parseCursor(cursor);
 
                 cursor.close();
                 db.close(); // Closing database connection
                 
-                if (chatHashMap != null) {
+                if (hashMap != null) {
                     RoleRepository repo = restAdapter.createRepository(RoleRepository.class);
-                    return (Role)repo.createObject(chatHashMap);
+                    return (Role)repo.createObject(hashMap);
                 } else {
                     return null;
                 }
@@ -135,7 +135,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
                 cursor.close();
                 db.close(); // Closing database connection
 
-                if (HashMap != null) {
+                if (hashMap != null) {
                     RoleRepository repo = restAdapter.createRepository(RoleRepository.class);
                     return (Role)repo.createObject(hashMap);
                 } else {
@@ -154,7 +154,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
 
 
     private HashMap<String, Object> parseCursor(Cursor cursor ){
-      HashMap<String, Object> chatHashMap = new HashMap<>();
+      HashMap<String, Object> hashMap = new HashMap<>();
 
                       
                                                             String idData = "";
@@ -162,7 +162,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
                           idData = cursor.getString(0);
                           if(idData != null){
                             idData = idData.toString();
-                            chatHashMap.put("id", idData);
+                            hashMap.put("id", idData);
                           }
                         }
                                                 
@@ -172,7 +172,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
                           nameData = cursor.getString(1);
                           if(nameData != null){
                             nameData = (String)nameData;
-                            chatHashMap.put("name", nameData);
+                            hashMap.put("name", nameData);
                           }
                         }
                                                 
@@ -182,7 +182,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
                           descriptionData = cursor.getString(2);
                           if(descriptionData != null){
                             descriptionData = descriptionData.toString();
-                            chatHashMap.put("description", descriptionData);
+                            hashMap.put("description", descriptionData);
                           }
                         }
                                                 
@@ -192,7 +192,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
                           createdData = cursor.getString(3);
                           if(createdData != null){
                             createdData = createdData.toString();
-                            chatHashMap.put("created", createdData);
+                            hashMap.put("created", createdData);
                           }
                         }
                                                 
@@ -202,12 +202,12 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
                           modifiedData = cursor.getString(4);
                           if(modifiedData != null){
                             modifiedData = modifiedData.toString();
-                            chatHashMap.put("modified", modifiedData);
+                            hashMap.put("modified", modifiedData);
                           }
                         }
                                                 
                     
-        return chatHashMap;
+        return hashMap;
     }//parseCursor
 
 
@@ -235,10 +235,37 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
         if (cursor.moveToFirst()) {
             do {
                
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
-                if(chatHashMap != null){
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
                     RoleRepository repo = restAdapter.createRepository(RoleRepository.class);
-                    modelList.add((Role)repo.createObject(chatHashMap));
+                    modelList.add((Role)repo.createObject(hashMap));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+        return (DataList<Role>) modelList;
+    } 
+
+
+    // Getting All Data where
+    public DataList<Role>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<Role> modelList = new DataList<Role>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM Role WHERE " + whereKey +"="+ whereKeyValue ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+               
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
+                    RoleRepository repo = restAdapter.createRepository(RoleRepository.class);
+                    modelList.add((Role)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }

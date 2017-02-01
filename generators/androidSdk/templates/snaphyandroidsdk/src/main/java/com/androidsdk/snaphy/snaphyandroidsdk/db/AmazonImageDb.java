@@ -100,14 +100,14 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
             Cursor cursor = db.query("AmazonImage", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
+                HashMap<String, Object> hashMap = parseCursor(cursor);
 
                 cursor.close();
                 db.close(); // Closing database connection
                 
-                if (chatHashMap != null) {
+                if (hashMap != null) {
                     AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);
-                    return (AmazonImage)repo.createObject(chatHashMap);
+                    return (AmazonImage)repo.createObject(hashMap);
                 } else {
                     return null;
                 }
@@ -135,7 +135,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
                 cursor.close();
                 db.close(); // Closing database connection
 
-                if (HashMap != null) {
+                if (hashMap != null) {
                     AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);
                     return (AmazonImage)repo.createObject(hashMap);
                 } else {
@@ -154,7 +154,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
 
 
     private HashMap<String, Object> parseCursor(Cursor cursor ){
-      HashMap<String, Object> chatHashMap = new HashMap<>();
+      HashMap<String, Object> hashMap = new HashMap<>();
 
                       
                                                             String nameData = "";
@@ -162,7 +162,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
                           nameData = cursor.getString(0);
                           if(nameData != null){
                             nameData = (String)nameData;
-                            chatHashMap.put("name", nameData);
+                            hashMap.put("name", nameData);
                           }
                         }
                                                 
@@ -172,7 +172,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
                           containerData = cursor.getString(1);
                           if(containerData != null){
                             containerData = (String)containerData;
-                            chatHashMap.put("container", containerData);
+                            hashMap.put("container", containerData);
                           }
                         }
                                                 
@@ -182,7 +182,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
                           typeData = cursor.getString(2);
                           if(typeData != null){
                             typeData = (String)typeData;
-                            chatHashMap.put("type", typeData);
+                            hashMap.put("type", typeData);
                           }
                         }
                                                 
@@ -192,7 +192,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
                           urlData = new Gson().fromJson(cursor.getString(3), Map.class);
                           if(urlData != null){
                             urlData = (Map<String, Object>)urlData;
-                            chatHashMap.put("url", urlData);
+                            hashMap.put("url", urlData);
                           }
                         }
                                                 
@@ -202,12 +202,12 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
                           idData = cursor.getString(4);
                           if(idData != null){
                             idData = idData.toString();
-                            chatHashMap.put("id", idData);
+                            hashMap.put("id", idData);
                           }
                         }
                                                 
                     
-        return chatHashMap;
+        return hashMap;
     }//parseCursor
 
 
@@ -235,10 +235,37 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
         if (cursor.moveToFirst()) {
             do {
                
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
-                if(chatHashMap != null){
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
                     AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);
-                    modelList.add((AmazonImage)repo.createObject(chatHashMap));
+                    modelList.add((AmazonImage)repo.createObject(hashMap));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+        return (DataList<AmazonImage>) modelList;
+    } 
+
+
+    // Getting All Data where
+    public DataList<AmazonImage>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<AmazonImage> modelList = new DataList<AmazonImage>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM AmazonImage WHERE " + whereKey +"="+ whereKeyValue ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+               
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
+                    AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);
+                    modelList.add((AmazonImage)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }

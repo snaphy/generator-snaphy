@@ -221,8 +221,20 @@ public class Category extends Model {
                     //Define hasMany relation method here..
                     private transient DataList<HotDeal>  hotDeals ;
 
-                    public DataList<HotDeal> getHotDeals() {
-                        return hotDeals;
+                    public DataList< HotDeal > getHotDeals() {
+                        //Check for pure case of hasMany
+                                                    if(that.getId() != null){
+                                   //TODO: Modify foreign key name..
+                                   CategoryRepository categoryRepository = (CategoryRepository) getRepository();
+                                   if(restAdapter != null){
+                                     //Fetch locally from db
+                                     //hotDeals = getHotDeals__db(restAdapter);
+                                     // Getting single cont
+                                     hotDeals = modelRepository.getCategoryDb().get__db(categoryId, that.getId().toString());
+                                   }
+                                   //lowercaseFirstLetter(modelName)
+                            }
+                                                return hotDeals;
                     }
 
                     public void setHotDeals(DataList<HotDeal> hotDeals) {
@@ -233,10 +245,6 @@ public class Category extends Model {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class)){
-                                hashType = true;
-                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
-                                hashMaps.add(dataObj);
                             }
                         }
 
@@ -244,6 +252,10 @@ public class Category extends Model {
                             setHotDeals1(hashMaps);
                         }else{
                             this.hotDeals = hotDeals;
+                            //TODO: Warning move this to new thread
+                            for(HotDeal data: hotDeals){
+                                data.save__db();
+                            }
                         }
                     }
 
@@ -291,6 +303,8 @@ public class Category extends Model {
                     //This will add a new data to the list relation object..
                     public void addRelation(HotDeal hotDeals) {
                         try{
+                            //Save to database..
+                            hotDeals.save__db();
                             that.getHotDeals().add(hotDeals);
                         }catch(Exception e){
                             DataList< HotDeal> hotDeals1 = new DataList();

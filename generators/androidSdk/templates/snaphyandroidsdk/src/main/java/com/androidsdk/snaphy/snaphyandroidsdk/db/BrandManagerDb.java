@@ -178,14 +178,14 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
             Cursor cursor = db.query("BrandManager", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
+                HashMap<String, Object> hashMap = parseCursor(cursor);
 
                 cursor.close();
                 db.close(); // Closing database connection
                 
-                if (chatHashMap != null) {
+                if (hashMap != null) {
                     BrandManagerRepository repo = restAdapter.createRepository(BrandManagerRepository.class);
-                    return (BrandManager)repo.createObject(chatHashMap);
+                    return (BrandManager)repo.createObject(hashMap);
                 } else {
                     return null;
                 }
@@ -213,7 +213,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                 cursor.close();
                 db.close(); // Closing database connection
 
-                if (HashMap != null) {
+                if (hashMap != null) {
                     BrandManagerRepository repo = restAdapter.createRepository(BrandManagerRepository.class);
                     return (BrandManager)repo.createObject(hashMap);
                 } else {
@@ -232,7 +232,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
 
 
     private HashMap<String, Object> parseCursor(Cursor cursor ){
-      HashMap<String, Object> chatHashMap = new HashMap<>();
+      HashMap<String, Object> hashMap = new HashMap<>();
 
                       
                                                             String firstNameData = "";
@@ -240,7 +240,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                           firstNameData = cursor.getString(0);
                           if(firstNameData != null){
                             firstNameData = (String)firstNameData;
-                            chatHashMap.put("firstName", firstNameData);
+                            hashMap.put("firstName", firstNameData);
                           }
                         }
                                                 
@@ -250,7 +250,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                           lastNameData = cursor.getString(1);
                           if(lastNameData != null){
                             lastNameData = (String)lastNameData;
-                            chatHashMap.put("lastName", lastNameData);
+                            hashMap.put("lastName", lastNameData);
                           }
                         }
                                                 
@@ -260,7 +260,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                           emailData = cursor.getString(2);
                           if(emailData != null){
                             emailData = (String)emailData;
-                            chatHashMap.put("email", emailData);
+                            hashMap.put("email", emailData);
                           }
                         }
                                                 
@@ -270,7 +270,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                           passwordData = cursor.getString(3);
                           if(passwordData != null){
                             passwordData = (String)passwordData;
-                            chatHashMap.put("password", passwordData);
+                            hashMap.put("password", passwordData);
                           }
                         }
                                                 
@@ -280,7 +280,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                           restrictHotDealData = cursor.getString(4);
                           if(restrictHotDealData != null){
                             restrictHotDealData = (String)restrictHotDealData;
-                            chatHashMap.put("restrictHotDeal", restrictHotDealData);
+                            hashMap.put("restrictHotDeal", restrictHotDealData);
                           }
                         }
                                                 
@@ -290,7 +290,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                           statusData = cursor.getString(5);
                           if(statusData != null){
                             statusData = (String)statusData;
-                            chatHashMap.put("status", statusData);
+                            hashMap.put("status", statusData);
                           }
                         }
                                                 
@@ -300,7 +300,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                           addedData = cursor.getString(6);
                           if(addedData != null){
                             addedData = (String)addedData;
-                            chatHashMap.put("added", addedData);
+                            hashMap.put("added", addedData);
                           }
                         }
                                                 
@@ -310,7 +310,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                           updatedData = cursor.getString(7);
                           if(updatedData != null){
                             updatedData = (String)updatedData;
-                            chatHashMap.put("updated", updatedData);
+                            hashMap.put("updated", updatedData);
                           }
                         }
                                                 
@@ -320,7 +320,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                           realmData = cursor.getString(8);
                           if(realmData != null){
                             realmData = realmData.toString();
-                            chatHashMap.put("realm", realmData);
+                            hashMap.put("realm", realmData);
                           }
                         }
                                                 
@@ -330,7 +330,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                           usernameData = cursor.getString(9);
                           if(usernameData != null){
                             usernameData = usernameData.toString();
-                            chatHashMap.put("username", usernameData);
+                            hashMap.put("username", usernameData);
                           }
                         }
                                                 
@@ -340,7 +340,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                           credentialsData = cursor.getString(10);
                           if(credentialsData != null){
                             credentialsData = credentialsData.toString();
-                            chatHashMap.put("credentials", credentialsData);
+                            hashMap.put("credentials", credentialsData);
                           }
                         }
                                                 
@@ -350,7 +350,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                           challengesData = cursor.getString(11);
                           if(challengesData != null){
                             challengesData = challengesData.toString();
-                            chatHashMap.put("challenges", challengesData);
+                            hashMap.put("challenges", challengesData);
                           }
                         }
                                                 
@@ -360,7 +360,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                           emailVerifiedData = cursor.getString(12);
                           if(emailVerifiedData != null){
                             emailVerifiedData = emailVerifiedData.toString();
-                            chatHashMap.put("emailVerified", emailVerifiedData);
+                            hashMap.put("emailVerified", emailVerifiedData);
                           }
                         }
                                                 
@@ -370,7 +370,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                           verificationTokenData = cursor.getString(13);
                           if(verificationTokenData != null){
                             verificationTokenData = verificationTokenData.toString();
-                            chatHashMap.put("verificationToken", verificationTokenData);
+                            hashMap.put("verificationToken", verificationTokenData);
                           }
                         }
                                                 
@@ -380,7 +380,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                           createdData = cursor.getString(14);
                           if(createdData != null){
                             createdData = createdData.toString();
-                            chatHashMap.put("created", createdData);
+                            hashMap.put("created", createdData);
                           }
                         }
                                                 
@@ -390,7 +390,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                           lastUpdatedData = cursor.getString(15);
                           if(lastUpdatedData != null){
                             lastUpdatedData = lastUpdatedData.toString();
-                            chatHashMap.put("lastUpdated", lastUpdatedData);
+                            hashMap.put("lastUpdated", lastUpdatedData);
                           }
                         }
                                                 
@@ -400,7 +400,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                           idData = cursor.getString(16);
                           if(idData != null){
                             idData = idData.toString();
-                            chatHashMap.put("id", idData);
+                            hashMap.put("id", idData);
                           }
                         }
                                                 
@@ -410,12 +410,12 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                           brandIdData = cursor.getString(17);
                           if(brandIdData != null){
                             brandIdData = brandIdData.toString();
-                            chatHashMap.put("brandId", brandIdData);
+                            hashMap.put("brandId", brandIdData);
                           }
                         }
                                                 
                     
-        return chatHashMap;
+        return hashMap;
     }//parseCursor
 
 
@@ -443,10 +443,37 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
         if (cursor.moveToFirst()) {
             do {
                
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
-                if(chatHashMap != null){
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
                     BrandManagerRepository repo = restAdapter.createRepository(BrandManagerRepository.class);
-                    modelList.add((BrandManager)repo.createObject(chatHashMap));
+                    modelList.add((BrandManager)repo.createObject(hashMap));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+        return (DataList<BrandManager>) modelList;
+    } 
+
+
+    // Getting All Data where
+    public DataList<BrandManager>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<BrandManager> modelList = new DataList<BrandManager>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM BrandManager WHERE " + whereKey +"="+ whereKeyValue ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+               
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
+                    BrandManagerRepository repo = restAdapter.createRepository(BrandManagerRepository.class);
+                    modelList.add((BrandManager)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }

@@ -336,7 +336,7 @@ public class DailyFeed extends Model {
                     public Brand getBrand__db(RestAdapter restAdapter){
                       if(brandId != null){
                         BrandRepository brandRepository = restAdapter.createRepository(BrandRepository.class);
-                        Brand brand = (Brand) brandRepository.getDbHandler().get__db(Brand.class, brandId);
+                        Brand brand = (Brand) brandRepository.getBrandDb().get__db(brandId);
                         if(brand != null){
                           return brand;
                         }else{

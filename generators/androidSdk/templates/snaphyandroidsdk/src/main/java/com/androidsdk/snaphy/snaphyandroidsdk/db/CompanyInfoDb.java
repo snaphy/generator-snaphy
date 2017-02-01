@@ -94,14 +94,14 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
             Cursor cursor = db.query("CompanyInfo", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
+                HashMap<String, Object> hashMap = parseCursor(cursor);
 
                 cursor.close();
                 db.close(); // Closing database connection
                 
-                if (chatHashMap != null) {
+                if (hashMap != null) {
                     CompanyInfoRepository repo = restAdapter.createRepository(CompanyInfoRepository.class);
-                    return (CompanyInfo)repo.createObject(chatHashMap);
+                    return (CompanyInfo)repo.createObject(hashMap);
                 } else {
                     return null;
                 }
@@ -129,7 +129,7 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
                 cursor.close();
                 db.close(); // Closing database connection
 
-                if (HashMap != null) {
+                if (hashMap != null) {
                     CompanyInfoRepository repo = restAdapter.createRepository(CompanyInfoRepository.class);
                     return (CompanyInfo)repo.createObject(hashMap);
                 } else {
@@ -148,7 +148,7 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
 
 
     private HashMap<String, Object> parseCursor(Cursor cursor ){
-      HashMap<String, Object> chatHashMap = new HashMap<>();
+      HashMap<String, Object> hashMap = new HashMap<>();
 
                       
                                                             String typeData = "";
@@ -156,7 +156,7 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
                           typeData = cursor.getString(0);
                           if(typeData != null){
                             typeData = (String)typeData;
-                            chatHashMap.put("type", typeData);
+                            hashMap.put("type", typeData);
                           }
                         }
                                                 
@@ -166,7 +166,7 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
                           htmlData = cursor.getString(1);
                           if(htmlData != null){
                             htmlData = (String)htmlData;
-                            chatHashMap.put("html", htmlData);
+                            hashMap.put("html", htmlData);
                           }
                         }
                                                 
@@ -176,7 +176,7 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
                           editedData = cursor.getString(2);
                           if(editedData != null){
                             editedData = (String)editedData;
-                            chatHashMap.put("edited", editedData);
+                            hashMap.put("edited", editedData);
                           }
                         }
                                                 
@@ -186,12 +186,12 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
                           idData = cursor.getString(3);
                           if(idData != null){
                             idData = idData.toString();
-                            chatHashMap.put("id", idData);
+                            hashMap.put("id", idData);
                           }
                         }
                                                 
                     
-        return chatHashMap;
+        return hashMap;
     }//parseCursor
 
 
@@ -219,10 +219,37 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
         if (cursor.moveToFirst()) {
             do {
                
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
-                if(chatHashMap != null){
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
                     CompanyInfoRepository repo = restAdapter.createRepository(CompanyInfoRepository.class);
-                    modelList.add((CompanyInfo)repo.createObject(chatHashMap));
+                    modelList.add((CompanyInfo)repo.createObject(hashMap));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+        return (DataList<CompanyInfo>) modelList;
+    } 
+
+
+    // Getting All Data where
+    public DataList<CompanyInfo>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<CompanyInfo> modelList = new DataList<CompanyInfo>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM CompanyInfo WHERE " + whereKey +"="+ whereKeyValue ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+               
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
+                    CompanyInfoRepository repo = restAdapter.createRepository(CompanyInfoRepository.class);
+                    modelList.add((CompanyInfo)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }

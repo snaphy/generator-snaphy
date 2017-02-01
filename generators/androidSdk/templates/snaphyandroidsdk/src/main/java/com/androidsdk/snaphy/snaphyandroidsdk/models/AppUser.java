@@ -465,8 +465,20 @@ public class AppUser extends User {
                     //Define hasMany relation method here..
                     private transient DataList<FacebookAccessToken>  facebookAccessToken ;
 
-                    public DataList<FacebookAccessToken> getFacebookAccessToken() {
-                        return facebookAccessToken;
+                    public DataList< FacebookAccessToken > getFacebookAccessToken() {
+                        //Check for pure case of hasMany
+                                                    if(that.getId() != null){
+                                   //TODO: Modify foreign key name..
+                                   AppUserRepository appUserRepository = (AppUserRepository) getRepository();
+                                   if(restAdapter != null){
+                                     //Fetch locally from db
+                                     //facebookAccessToken = getFacebookAccessToken__db(restAdapter);
+                                     // Getting single cont
+                                     facebookAccessToken = modelRepository.getAppUserDb().get__db(appUserId, that.getId().toString());
+                                   }
+                                   //lowercaseFirstLetter(modelName)
+                            }
+                                                return facebookAccessToken;
                     }
 
                     public void setFacebookAccessToken(DataList<FacebookAccessToken> facebookAccessToken) {
@@ -477,10 +489,6 @@ public class AppUser extends User {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class)){
-                                hashType = true;
-                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
-                                hashMaps.add(dataObj);
                             }
                         }
 
@@ -488,6 +496,10 @@ public class AppUser extends User {
                             setFacebookAccessToken1(hashMaps);
                         }else{
                             this.facebookAccessToken = facebookAccessToken;
+                            //TODO: Warning move this to new thread
+                            for(FacebookAccessToken data: facebookAccessToken){
+                                data.save__db();
+                            }
                         }
                     }
 
@@ -535,6 +547,8 @@ public class AppUser extends User {
                     //This will add a new data to the list relation object..
                     public void addRelation(FacebookAccessToken facebookAccessToken) {
                         try{
+                            //Save to database..
+                            facebookAccessToken.save__db();
                             that.getFacebookAccessToken().add(facebookAccessToken);
                         }catch(Exception e){
                             DataList< FacebookAccessToken> facebookAccessToken1 = new DataList();
@@ -1754,8 +1768,20 @@ public class AppUser extends User {
                     //Define hasMany relation method here..
                     private transient DataList<Chat>  chats ;
 
-                    public DataList<Chat> getChats() {
-                        return chats;
+                    public DataList< Chat > getChats() {
+                        //Check for pure case of hasMany
+                                                    if(that.getId() != null){
+                                   //TODO: Modify foreign key name..
+                                   AppUserRepository appUserRepository = (AppUserRepository) getRepository();
+                                   if(restAdapter != null){
+                                     //Fetch locally from db
+                                     //chats = getChats__db(restAdapter);
+                                     // Getting single cont
+                                     chats = modelRepository.getAppUserDb().get__db(appUserId, that.getId().toString());
+                                   }
+                                   //lowercaseFirstLetter(modelName)
+                            }
+                                                return chats;
                     }
 
                     public void setChats(DataList<Chat> chats) {
@@ -1766,10 +1792,6 @@ public class AppUser extends User {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class)){
-                                hashType = true;
-                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
-                                hashMaps.add(dataObj);
                             }
                         }
 
@@ -1777,6 +1799,10 @@ public class AppUser extends User {
                             setChats1(hashMaps);
                         }else{
                             this.chats = chats;
+                            //TODO: Warning move this to new thread
+                            for(Chat data: chats){
+                                data.save__db();
+                            }
                         }
                     }
 
@@ -1824,6 +1850,8 @@ public class AppUser extends User {
                     //This will add a new data to the list relation object..
                     public void addRelation(Chat chats) {
                         try{
+                            //Save to database..
+                            chats.save__db();
                             that.getChats().add(chats);
                         }catch(Exception e){
                             DataList< Chat> chats1 = new DataList();

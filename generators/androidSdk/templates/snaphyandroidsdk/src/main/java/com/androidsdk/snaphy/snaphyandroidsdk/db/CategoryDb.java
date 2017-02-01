@@ -94,14 +94,14 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
             Cursor cursor = db.query("Category", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
+                HashMap<String, Object> hashMap = parseCursor(cursor);
 
                 cursor.close();
                 db.close(); // Closing database connection
                 
-                if (chatHashMap != null) {
+                if (hashMap != null) {
                     CategoryRepository repo = restAdapter.createRepository(CategoryRepository.class);
-                    return (Category)repo.createObject(chatHashMap);
+                    return (Category)repo.createObject(hashMap);
                 } else {
                     return null;
                 }
@@ -129,7 +129,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
                 cursor.close();
                 db.close(); // Closing database connection
 
-                if (HashMap != null) {
+                if (hashMap != null) {
                     CategoryRepository repo = restAdapter.createRepository(CategoryRepository.class);
                     return (Category)repo.createObject(hashMap);
                 } else {
@@ -148,7 +148,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
 
 
     private HashMap<String, Object> parseCursor(Cursor cursor ){
-      HashMap<String, Object> chatHashMap = new HashMap<>();
+      HashMap<String, Object> hashMap = new HashMap<>();
 
                       
                                                             String nameData = "";
@@ -156,7 +156,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
                           nameData = cursor.getString(0);
                           if(nameData != null){
                             nameData = (String)nameData;
-                            chatHashMap.put("name", nameData);
+                            hashMap.put("name", nameData);
                           }
                         }
                                                 
@@ -166,7 +166,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
                           addedData = cursor.getString(1);
                           if(addedData != null){
                             addedData = (String)addedData;
-                            chatHashMap.put("added", addedData);
+                            hashMap.put("added", addedData);
                           }
                         }
                                                 
@@ -176,7 +176,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
                           updatedData = cursor.getString(2);
                           if(updatedData != null){
                             updatedData = (String)updatedData;
-                            chatHashMap.put("updated", updatedData);
+                            hashMap.put("updated", updatedData);
                           }
                         }
                                                 
@@ -186,12 +186,12 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
                           idData = cursor.getString(3);
                           if(idData != null){
                             idData = idData.toString();
-                            chatHashMap.put("id", idData);
+                            hashMap.put("id", idData);
                           }
                         }
                                                 
                     
-        return chatHashMap;
+        return hashMap;
     }//parseCursor
 
 
@@ -219,10 +219,37 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
         if (cursor.moveToFirst()) {
             do {
                
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
-                if(chatHashMap != null){
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
                     CategoryRepository repo = restAdapter.createRepository(CategoryRepository.class);
-                    modelList.add((Category)repo.createObject(chatHashMap));
+                    modelList.add((Category)repo.createObject(hashMap));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+        return (DataList<Category>) modelList;
+    } 
+
+
+    // Getting All Data where
+    public DataList<Category>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<Category> modelList = new DataList<Category>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM Category WHERE " + whereKey +"="+ whereKeyValue ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+               
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
+                    CategoryRepository repo = restAdapter.createRepository(CategoryRepository.class);
+                    modelList.add((Category)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }

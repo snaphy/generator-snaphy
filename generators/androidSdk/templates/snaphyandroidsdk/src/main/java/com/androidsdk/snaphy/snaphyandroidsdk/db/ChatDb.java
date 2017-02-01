@@ -136,14 +136,14 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
             Cursor cursor = db.query("Chat", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
+                HashMap<String, Object> hashMap = parseCursor(cursor);
 
                 cursor.close();
                 db.close(); // Closing database connection
                 
-                if (chatHashMap != null) {
+                if (hashMap != null) {
                     ChatRepository repo = restAdapter.createRepository(ChatRepository.class);
-                    return (Chat)repo.createObject(chatHashMap);
+                    return (Chat)repo.createObject(hashMap);
                 } else {
                     return null;
                 }
@@ -171,7 +171,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                 cursor.close();
                 db.close(); // Closing database connection
 
-                if (HashMap != null) {
+                if (hashMap != null) {
                     ChatRepository repo = restAdapter.createRepository(ChatRepository.class);
                     return (Chat)repo.createObject(hashMap);
                 } else {
@@ -190,7 +190,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
 
 
     private HashMap<String, Object> parseCursor(Cursor cursor ){
-      HashMap<String, Object> chatHashMap = new HashMap<>();
+      HashMap<String, Object> hashMap = new HashMap<>();
 
                       
                                                             String addedData = "";
@@ -198,7 +198,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                           addedData = cursor.getString(0);
                           if(addedData != null){
                             addedData = (String)addedData;
-                            chatHashMap.put("added", addedData);
+                            hashMap.put("added", addedData);
                           }
                         }
                                                 
@@ -208,7 +208,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                           updatedData = cursor.getString(1);
                           if(updatedData != null){
                             updatedData = (String)updatedData;
-                            chatHashMap.put("updated", updatedData);
+                            hashMap.put("updated", updatedData);
                           }
                         }
                                                 
@@ -218,7 +218,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                           messageData = cursor.getString(2);
                           if(messageData != null){
                             messageData = (String)messageData;
-                            chatHashMap.put("message", messageData);
+                            hashMap.put("message", messageData);
                           }
                         }
                                                 
@@ -228,7 +228,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                           typeData = cursor.getString(3);
                           if(typeData != null){
                             typeData = (String)typeData;
-                            chatHashMap.put("type", typeData);
+                            hashMap.put("type", typeData);
                           }
                         }
                                                 
@@ -238,7 +238,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                           imageData = new Gson().fromJson(cursor.getString(4), Map.class);
                           if(imageData != null){
                             imageData = (Map<String, Object>)imageData;
-                            chatHashMap.put("image", imageData);
+                            hashMap.put("image", imageData);
                           }
                         }
                                                 
@@ -248,7 +248,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                           fromData = cursor.getString(5);
                           if(fromData != null){
                             fromData = (String)fromData;
-                            chatHashMap.put("from", fromData);
+                            hashMap.put("from", fromData);
                           }
                         }
                                                 
@@ -258,7 +258,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                           guidData = cursor.getString(6);
                           if(guidData != null){
                             guidData = (String)guidData;
-                            chatHashMap.put("guid", guidData);
+                            hashMap.put("guid", guidData);
                           }
                         }
                                                 
@@ -268,7 +268,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                           statusData = cursor.getString(7);
                           if(statusData != null){
                             statusData = (String)statusData;
-                            chatHashMap.put("status", statusData);
+                            hashMap.put("status", statusData);
                           }
                         }
                                                 
@@ -278,7 +278,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                           idData = cursor.getString(8);
                           if(idData != null){
                             idData = idData.toString();
-                            chatHashMap.put("id", idData);
+                            hashMap.put("id", idData);
                           }
                         }
                                                 
@@ -288,7 +288,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                           appUserIdData = cursor.getString(9);
                           if(appUserIdData != null){
                             appUserIdData = appUserIdData.toString();
-                            chatHashMap.put("appUserId", appUserIdData);
+                            hashMap.put("appUserId", appUserIdData);
                           }
                         }
                                                 
@@ -298,12 +298,12 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                           brandIdData = cursor.getString(10);
                           if(brandIdData != null){
                             brandIdData = brandIdData.toString();
-                            chatHashMap.put("brandId", brandIdData);
+                            hashMap.put("brandId", brandIdData);
                           }
                         }
                                                 
                     
-        return chatHashMap;
+        return hashMap;
     }//parseCursor
 
 
@@ -331,10 +331,37 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
         if (cursor.moveToFirst()) {
             do {
                
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
-                if(chatHashMap != null){
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
                     ChatRepository repo = restAdapter.createRepository(ChatRepository.class);
-                    modelList.add((Chat)repo.createObject(chatHashMap));
+                    modelList.add((Chat)repo.createObject(hashMap));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+        return (DataList<Chat>) modelList;
+    } 
+
+
+    // Getting All Data where
+    public DataList<Chat>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<Chat> modelList = new DataList<Chat>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM Chat WHERE " + whereKey +"="+ whereKeyValue ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+               
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
+                    ChatRepository repo = restAdapter.createRepository(ChatRepository.class);
+                    modelList.add((Chat)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }

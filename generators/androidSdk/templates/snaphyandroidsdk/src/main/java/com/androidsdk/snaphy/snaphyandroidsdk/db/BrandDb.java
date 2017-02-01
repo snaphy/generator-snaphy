@@ -136,14 +136,14 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
             Cursor cursor = db.query("Brand", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
+                HashMap<String, Object> hashMap = parseCursor(cursor);
 
                 cursor.close();
                 db.close(); // Closing database connection
                 
-                if (chatHashMap != null) {
+                if (hashMap != null) {
                     BrandRepository repo = restAdapter.createRepository(BrandRepository.class);
-                    return (Brand)repo.createObject(chatHashMap);
+                    return (Brand)repo.createObject(hashMap);
                 } else {
                     return null;
                 }
@@ -171,7 +171,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                 cursor.close();
                 db.close(); // Closing database connection
 
-                if (HashMap != null) {
+                if (hashMap != null) {
                     BrandRepository repo = restAdapter.createRepository(BrandRepository.class);
                     return (Brand)repo.createObject(hashMap);
                 } else {
@@ -190,7 +190,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
 
 
     private HashMap<String, Object> parseCursor(Cursor cursor ){
-      HashMap<String, Object> chatHashMap = new HashMap<>();
+      HashMap<String, Object> hashMap = new HashMap<>();
 
                       
                                                             String addedData = "";
@@ -198,7 +198,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                           addedData = cursor.getString(0);
                           if(addedData != null){
                             addedData = (String)addedData;
-                            chatHashMap.put("added", addedData);
+                            hashMap.put("added", addedData);
                           }
                         }
                                                 
@@ -208,7 +208,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                           updatedData = cursor.getString(1);
                           if(updatedData != null){
                             updatedData = (String)updatedData;
-                            chatHashMap.put("updated", updatedData);
+                            hashMap.put("updated", updatedData);
                           }
                         }
                                                 
@@ -218,7 +218,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                           nameData = cursor.getString(2);
                           if(nameData != null){
                             nameData = (String)nameData;
-                            chatHashMap.put("name", nameData);
+                            hashMap.put("name", nameData);
                           }
                         }
                                                 
@@ -228,7 +228,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                           imageData = new Gson().fromJson(cursor.getString(3), Map.class);
                           if(imageData != null){
                             imageData = (Map<String, Object>)imageData;
-                            chatHashMap.put("image", imageData);
+                            hashMap.put("image", imageData);
                           }
                         }
                                                 
@@ -238,7 +238,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                           trendingData = cursor.getString(4);
                           if(trendingData != null){
                             trendingData = (String)trendingData;
-                            chatHashMap.put("trending", trendingData);
+                            hashMap.put("trending", trendingData);
                           }
                         }
                                                 
@@ -248,7 +248,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                           facebookUrlData = cursor.getString(5);
                           if(facebookUrlData != null){
                             facebookUrlData = (String)facebookUrlData;
-                            chatHashMap.put("facebookUrl", facebookUrlData);
+                            hashMap.put("facebookUrl", facebookUrlData);
                           }
                         }
                                                 
@@ -258,7 +258,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                           googleUrlData = cursor.getString(6);
                           if(googleUrlData != null){
                             googleUrlData = (String)googleUrlData;
-                            chatHashMap.put("googleUrl", googleUrlData);
+                            hashMap.put("googleUrl", googleUrlData);
                           }
                         }
                                                 
@@ -268,7 +268,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                           instagramUrlData = cursor.getString(7);
                           if(instagramUrlData != null){
                             instagramUrlData = (String)instagramUrlData;
-                            chatHashMap.put("instagramUrl", instagramUrlData);
+                            hashMap.put("instagramUrl", instagramUrlData);
                           }
                         }
                                                 
@@ -278,7 +278,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                           statusData = cursor.getString(8);
                           if(statusData != null){
                             statusData = (String)statusData;
-                            chatHashMap.put("status", statusData);
+                            hashMap.put("status", statusData);
                           }
                         }
                                                 
@@ -288,7 +288,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                           associatedEmailData = cursor.getString(9);
                           if(associatedEmailData != null){
                             associatedEmailData = (String)associatedEmailData;
-                            chatHashMap.put("associatedEmail", associatedEmailData);
+                            hashMap.put("associatedEmail", associatedEmailData);
                           }
                         }
                                                 
@@ -298,12 +298,12 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                           idData = cursor.getString(10);
                           if(idData != null){
                             idData = idData.toString();
-                            chatHashMap.put("id", idData);
+                            hashMap.put("id", idData);
                           }
                         }
                                                 
                     
-        return chatHashMap;
+        return hashMap;
     }//parseCursor
 
 
@@ -331,10 +331,37 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
         if (cursor.moveToFirst()) {
             do {
                
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
-                if(chatHashMap != null){
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
                     BrandRepository repo = restAdapter.createRepository(BrandRepository.class);
-                    modelList.add((Brand)repo.createObject(chatHashMap));
+                    modelList.add((Brand)repo.createObject(hashMap));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+        return (DataList<Brand>) modelList;
+    } 
+
+
+    // Getting All Data where
+    public DataList<Brand>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<Brand> modelList = new DataList<Brand>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM Brand WHERE " + whereKey +"="+ whereKeyValue ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+               
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
+                    BrandRepository repo = restAdapter.createRepository(BrandRepository.class);
+                    modelList.add((Brand)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }

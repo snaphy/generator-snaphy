@@ -205,8 +205,20 @@ public class Role extends Model {
                     //Define hasMany relation method here..
                     private transient DataList<RoleMapping>  principals ;
 
-                    public DataList<RoleMapping> getPrincipals() {
-                        return principals;
+                    public DataList< RoleMapping > getPrincipals() {
+                        //Check for pure case of hasMany
+                                                    if(that.getId() != null){
+                                   //TODO: Modify foreign key name..
+                                   RoleRepository roleRepository = (RoleRepository) getRepository();
+                                   if(restAdapter != null){
+                                     //Fetch locally from db
+                                     //principals = getPrincipals__db(restAdapter);
+                                     // Getting single cont
+                                     principals = modelRepository.getRoleDb().get__db(roleId, that.getId().toString());
+                                   }
+                                   //lowercaseFirstLetter(modelName)
+                            }
+                                                return principals;
                     }
 
                     public void setPrincipals(DataList<RoleMapping> principals) {
@@ -217,10 +229,6 @@ public class Role extends Model {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class)){
-                                hashType = true;
-                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
-                                hashMaps.add(dataObj);
                             }
                         }
 
@@ -228,6 +236,10 @@ public class Role extends Model {
                             setPrincipals1(hashMaps);
                         }else{
                             this.principals = principals;
+                            //TODO: Warning move this to new thread
+                            for(RoleMapping data: principals){
+                                data.save__db();
+                            }
                         }
                     }
 
@@ -275,6 +287,8 @@ public class Role extends Model {
                     //This will add a new data to the list relation object..
                     public void addRelation(RoleMapping principals) {
                         try{
+                            //Save to database..
+                            principals.save__db();
                             that.getPrincipals().add(principals);
                         }catch(Exception e){
                             DataList< RoleMapping> principals1 = new DataList();

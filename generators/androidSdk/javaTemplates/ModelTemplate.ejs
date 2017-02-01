@@ -531,7 +531,7 @@ public class <%- modelName %> extends Model {
                     //Define hasMany relation method here..
                     private transient DataList<<%- capitalcaseRelatedModelName %>>  <%- relation %> ;
 
-                    public DataList<<%- capitalcaseRelatedModelName %>> get<%- capitalcaseRelationName %>() {
+                    public DataList< <%- capitalcaseRelatedModelName %> > get<%- capitalcaseRelationName %>() {
                         //Check for pure case of hasMany
                         <% if(!model.relations[relation].through){ -%>
                             if(that.getId() != null){
@@ -541,7 +541,7 @@ public class <%- modelName %> extends Model {
                                      //Fetch locally from db
                                      //<%- relation %> = get<%- capitalcaseRelationName %>__db(restAdapter);
                                      // Getting single cont
-                                     <%- relation %> = modelRepository.get<%- modelName %>Db.get__db(<%- lowercaseFirstLetter(modelName)Id %>, that.getId().toString());
+                                     <%- relation %> = modelRepository.get<%- modelName %>Db().get__db(<%- lowercaseFirstLetter(modelName) %>Id, that.getId().toString());
                                    }
                                    //lowercaseFirstLetter(modelName)
                             }

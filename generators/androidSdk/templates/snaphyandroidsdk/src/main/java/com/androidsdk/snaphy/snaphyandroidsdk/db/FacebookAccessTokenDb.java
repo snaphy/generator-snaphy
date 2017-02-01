@@ -106,14 +106,14 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
             Cursor cursor = db.query("FacebookAccessToken", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
+                HashMap<String, Object> hashMap = parseCursor(cursor);
 
                 cursor.close();
                 db.close(); // Closing database connection
                 
-                if (chatHashMap != null) {
+                if (hashMap != null) {
                     FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
-                    return (FacebookAccessToken)repo.createObject(chatHashMap);
+                    return (FacebookAccessToken)repo.createObject(hashMap);
                 } else {
                     return null;
                 }
@@ -141,7 +141,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
                 cursor.close();
                 db.close(); // Closing database connection
 
-                if (HashMap != null) {
+                if (hashMap != null) {
                     FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
                     return (FacebookAccessToken)repo.createObject(hashMap);
                 } else {
@@ -160,7 +160,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
 
 
     private HashMap<String, Object> parseCursor(Cursor cursor ){
-      HashMap<String, Object> chatHashMap = new HashMap<>();
+      HashMap<String, Object> hashMap = new HashMap<>();
 
                       
                                                             String FbUserIdData = "";
@@ -168,7 +168,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
                           FbUserIdData = cursor.getString(0);
                           if(FbUserIdData != null){
                             FbUserIdData = (String)FbUserIdData;
-                            chatHashMap.put("FbUserId", FbUserIdData);
+                            hashMap.put("FbUserId", FbUserIdData);
                           }
                         }
                                                 
@@ -178,7 +178,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
                           tokenData = cursor.getString(1);
                           if(tokenData != null){
                             tokenData = (String)tokenData;
-                            chatHashMap.put("token", tokenData);
+                            hashMap.put("token", tokenData);
                           }
                         }
                                                 
@@ -188,7 +188,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
                           expiresData = cursor.getString(2);
                           if(expiresData != null){
                             expiresData = (String)expiresData;
-                            chatHashMap.put("expires", expiresData);
+                            hashMap.put("expires", expiresData);
                           }
                         }
                                                 
@@ -198,7 +198,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
                           userIdData = cursor.getString(3);
                           if(userIdData != null){
                             userIdData = userIdData.toString();
-                            chatHashMap.put("userId", userIdData);
+                            hashMap.put("userId", userIdData);
                           }
                         }
                                                 
@@ -208,7 +208,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
                           typeData = cursor.getString(4);
                           if(typeData != null){
                             typeData = (String)typeData;
-                            chatHashMap.put("type", typeData);
+                            hashMap.put("type", typeData);
                           }
                         }
                                                 
@@ -218,12 +218,12 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
                           appUserIdData = cursor.getString(5);
                           if(appUserIdData != null){
                             appUserIdData = appUserIdData.toString();
-                            chatHashMap.put("appUserId", appUserIdData);
+                            hashMap.put("appUserId", appUserIdData);
                           }
                         }
                                                 
                     
-        return chatHashMap;
+        return hashMap;
     }//parseCursor
 
 
@@ -251,10 +251,37 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
         if (cursor.moveToFirst()) {
             do {
                
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
-                if(chatHashMap != null){
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
                     FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
-                    modelList.add((FacebookAccessToken)repo.createObject(chatHashMap));
+                    modelList.add((FacebookAccessToken)repo.createObject(hashMap));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+        return (DataList<FacebookAccessToken>) modelList;
+    } 
+
+
+    // Getting All Data where
+    public DataList<FacebookAccessToken>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<FacebookAccessToken> modelList = new DataList<FacebookAccessToken>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM FacebookAccessToken WHERE " + whereKey +"="+ whereKeyValue ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+               
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
+                    FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+                    modelList.add((FacebookAccessToken)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }

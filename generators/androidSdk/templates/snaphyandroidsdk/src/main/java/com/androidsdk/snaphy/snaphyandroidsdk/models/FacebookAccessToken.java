@@ -310,7 +310,7 @@ public class FacebookAccessToken extends Model {
                     public AppUser getAppUser__db(RestAdapter restAdapter){
                       if(userId != null){
                         AppUserRepository appUserRepository = restAdapter.createRepository(AppUserRepository.class);
-                        AppUser appUser = (AppUser) appUserRepository.getDbHandler().get__db(AppUser.class, userId);
+                        AppUser appUser = (AppUser) appUserRepository.getAppUserDb().get__db(userId);
                         if(appUser != null){
                           return appUser;
                         }else{

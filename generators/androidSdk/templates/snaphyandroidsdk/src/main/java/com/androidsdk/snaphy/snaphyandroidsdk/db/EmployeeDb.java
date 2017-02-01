@@ -166,14 +166,14 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
             Cursor cursor = db.query("Employee", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
+                HashMap<String, Object> hashMap = parseCursor(cursor);
 
                 cursor.close();
                 db.close(); // Closing database connection
                 
-                if (chatHashMap != null) {
+                if (hashMap != null) {
                     EmployeeRepository repo = restAdapter.createRepository(EmployeeRepository.class);
-                    return (Employee)repo.createObject(chatHashMap);
+                    return (Employee)repo.createObject(hashMap);
                 } else {
                     return null;
                 }
@@ -201,7 +201,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                 cursor.close();
                 db.close(); // Closing database connection
 
-                if (HashMap != null) {
+                if (hashMap != null) {
                     EmployeeRepository repo = restAdapter.createRepository(EmployeeRepository.class);
                     return (Employee)repo.createObject(hashMap);
                 } else {
@@ -220,7 +220,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
 
 
     private HashMap<String, Object> parseCursor(Cursor cursor ){
-      HashMap<String, Object> chatHashMap = new HashMap<>();
+      HashMap<String, Object> hashMap = new HashMap<>();
 
                       
                                                             String usernameData = "";
@@ -228,7 +228,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                           usernameData = cursor.getString(0);
                           if(usernameData != null){
                             usernameData = (String)usernameData;
-                            chatHashMap.put("username", usernameData);
+                            hashMap.put("username", usernameData);
                           }
                         }
                                                 
@@ -238,7 +238,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                           firstNameData = cursor.getString(1);
                           if(firstNameData != null){
                             firstNameData = (String)firstNameData;
-                            chatHashMap.put("firstName", firstNameData);
+                            hashMap.put("firstName", firstNameData);
                           }
                         }
                                                 
@@ -248,7 +248,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                           lastNameData = cursor.getString(2);
                           if(lastNameData != null){
                             lastNameData = (String)lastNameData;
-                            chatHashMap.put("lastName", lastNameData);
+                            hashMap.put("lastName", lastNameData);
                           }
                         }
                                                 
@@ -258,7 +258,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                           addedData = cursor.getString(3);
                           if(addedData != null){
                             addedData = (String)addedData;
-                            chatHashMap.put("added", addedData);
+                            hashMap.put("added", addedData);
                           }
                         }
                                                 
@@ -268,7 +268,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                           updatedData = cursor.getString(4);
                           if(updatedData != null){
                             updatedData = (String)updatedData;
-                            chatHashMap.put("updated", updatedData);
+                            hashMap.put("updated", updatedData);
                           }
                         }
                                                 
@@ -278,7 +278,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                           emailData = cursor.getString(5);
                           if(emailData != null){
                             emailData = (String)emailData;
-                            chatHashMap.put("email", emailData);
+                            hashMap.put("email", emailData);
                           }
                         }
                                                 
@@ -288,7 +288,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                           passwordData = cursor.getString(6);
                           if(passwordData != null){
                             passwordData = (String)passwordData;
-                            chatHashMap.put("password", passwordData);
+                            hashMap.put("password", passwordData);
                           }
                         }
                                                 
@@ -298,7 +298,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                           realmData = cursor.getString(7);
                           if(realmData != null){
                             realmData = realmData.toString();
-                            chatHashMap.put("realm", realmData);
+                            hashMap.put("realm", realmData);
                           }
                         }
                                                 
@@ -308,7 +308,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                           credentialsData = cursor.getString(8);
                           if(credentialsData != null){
                             credentialsData = credentialsData.toString();
-                            chatHashMap.put("credentials", credentialsData);
+                            hashMap.put("credentials", credentialsData);
                           }
                         }
                                                 
@@ -318,7 +318,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                           challengesData = cursor.getString(9);
                           if(challengesData != null){
                             challengesData = challengesData.toString();
-                            chatHashMap.put("challenges", challengesData);
+                            hashMap.put("challenges", challengesData);
                           }
                         }
                                                 
@@ -328,7 +328,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                           emailVerifiedData = cursor.getString(10);
                           if(emailVerifiedData != null){
                             emailVerifiedData = emailVerifiedData.toString();
-                            chatHashMap.put("emailVerified", emailVerifiedData);
+                            hashMap.put("emailVerified", emailVerifiedData);
                           }
                         }
                                                 
@@ -338,7 +338,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                           verificationTokenData = cursor.getString(11);
                           if(verificationTokenData != null){
                             verificationTokenData = verificationTokenData.toString();
-                            chatHashMap.put("verificationToken", verificationTokenData);
+                            hashMap.put("verificationToken", verificationTokenData);
                           }
                         }
                                                 
@@ -348,7 +348,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                           statusData = cursor.getString(12);
                           if(statusData != null){
                             statusData = statusData.toString();
-                            chatHashMap.put("status", statusData);
+                            hashMap.put("status", statusData);
                           }
                         }
                                                 
@@ -358,7 +358,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                           createdData = cursor.getString(13);
                           if(createdData != null){
                             createdData = createdData.toString();
-                            chatHashMap.put("created", createdData);
+                            hashMap.put("created", createdData);
                           }
                         }
                                                 
@@ -368,7 +368,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                           lastUpdatedData = cursor.getString(14);
                           if(lastUpdatedData != null){
                             lastUpdatedData = lastUpdatedData.toString();
-                            chatHashMap.put("lastUpdated", lastUpdatedData);
+                            hashMap.put("lastUpdated", lastUpdatedData);
                           }
                         }
                                                 
@@ -378,12 +378,12 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                           idData = cursor.getString(15);
                           if(idData != null){
                             idData = idData.toString();
-                            chatHashMap.put("id", idData);
+                            hashMap.put("id", idData);
                           }
                         }
                                                 
                     
-        return chatHashMap;
+        return hashMap;
     }//parseCursor
 
 
@@ -411,10 +411,37 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
         if (cursor.moveToFirst()) {
             do {
                
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
-                if(chatHashMap != null){
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
                     EmployeeRepository repo = restAdapter.createRepository(EmployeeRepository.class);
-                    modelList.add((Employee)repo.createObject(chatHashMap));
+                    modelList.add((Employee)repo.createObject(hashMap));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+        return (DataList<Employee>) modelList;
+    } 
+
+
+    // Getting All Data where
+    public DataList<Employee>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<Employee> modelList = new DataList<Employee>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM Employee WHERE " + whereKey +"="+ whereKeyValue ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+               
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
+                    EmployeeRepository repo = restAdapter.createRepository(EmployeeRepository.class);
+                    modelList.add((Employee)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }

@@ -112,14 +112,14 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
             Cursor cursor = db.query("DailyFeed", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
+                HashMap<String, Object> hashMap = parseCursor(cursor);
 
                 cursor.close();
                 db.close(); // Closing database connection
                 
-                if (chatHashMap != null) {
+                if (hashMap != null) {
                     DailyFeedRepository repo = restAdapter.createRepository(DailyFeedRepository.class);
-                    return (DailyFeed)repo.createObject(chatHashMap);
+                    return (DailyFeed)repo.createObject(hashMap);
                 } else {
                     return null;
                 }
@@ -147,7 +147,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
                 cursor.close();
                 db.close(); // Closing database connection
 
-                if (HashMap != null) {
+                if (hashMap != null) {
                     DailyFeedRepository repo = restAdapter.createRepository(DailyFeedRepository.class);
                     return (DailyFeed)repo.createObject(hashMap);
                 } else {
@@ -166,7 +166,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
 
 
     private HashMap<String, Object> parseCursor(Cursor cursor ){
-      HashMap<String, Object> chatHashMap = new HashMap<>();
+      HashMap<String, Object> hashMap = new HashMap<>();
 
                       
                                                             String addedData = "";
@@ -174,7 +174,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
                           addedData = cursor.getString(0);
                           if(addedData != null){
                             addedData = (String)addedData;
-                            chatHashMap.put("added", addedData);
+                            hashMap.put("added", addedData);
                           }
                         }
                                                 
@@ -184,7 +184,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
                           updatedData = cursor.getString(1);
                           if(updatedData != null){
                             updatedData = (String)updatedData;
-                            chatHashMap.put("updated", updatedData);
+                            hashMap.put("updated", updatedData);
                           }
                         }
                                                 
@@ -194,7 +194,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
                           titleData = cursor.getString(2);
                           if(titleData != null){
                             titleData = (String)titleData;
-                            chatHashMap.put("title", titleData);
+                            hashMap.put("title", titleData);
                           }
                         }
                                                 
@@ -204,7 +204,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
                           descriptionData = cursor.getString(3);
                           if(descriptionData != null){
                             descriptionData = (String)descriptionData;
-                            chatHashMap.put("description", descriptionData);
+                            hashMap.put("description", descriptionData);
                           }
                         }
                                                 
@@ -214,7 +214,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
                           imageData = new Gson().fromJson(cursor.getString(4), Map.class);
                           if(imageData != null){
                             imageData = (Map<String, Object>)imageData;
-                            chatHashMap.put("image", imageData);
+                            hashMap.put("image", imageData);
                           }
                         }
                                                 
@@ -224,7 +224,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
                           idData = cursor.getString(5);
                           if(idData != null){
                             idData = idData.toString();
-                            chatHashMap.put("id", idData);
+                            hashMap.put("id", idData);
                           }
                         }
                                                 
@@ -234,12 +234,12 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
                           brandIdData = cursor.getString(6);
                           if(brandIdData != null){
                             brandIdData = brandIdData.toString();
-                            chatHashMap.put("brandId", brandIdData);
+                            hashMap.put("brandId", brandIdData);
                           }
                         }
                                                 
                     
-        return chatHashMap;
+        return hashMap;
     }//parseCursor
 
 
@@ -267,10 +267,37 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
         if (cursor.moveToFirst()) {
             do {
                
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
-                if(chatHashMap != null){
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
                     DailyFeedRepository repo = restAdapter.createRepository(DailyFeedRepository.class);
-                    modelList.add((DailyFeed)repo.createObject(chatHashMap));
+                    modelList.add((DailyFeed)repo.createObject(hashMap));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+        return (DataList<DailyFeed>) modelList;
+    } 
+
+
+    // Getting All Data where
+    public DataList<DailyFeed>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<DailyFeed> modelList = new DataList<DailyFeed>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM DailyFeed WHERE " + whereKey +"="+ whereKeyValue ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+               
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
+                    DailyFeedRepository repo = restAdapter.createRepository(DailyFeedRepository.class);
+                    modelList.add((DailyFeed)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }

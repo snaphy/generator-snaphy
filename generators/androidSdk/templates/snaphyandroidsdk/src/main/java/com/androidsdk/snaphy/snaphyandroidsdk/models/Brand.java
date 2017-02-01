@@ -438,8 +438,20 @@ public class Brand extends Model {
                     //Define hasMany relation method here..
                     private transient DataList<HotDeal>  hotDeals ;
 
-                    public DataList<HotDeal> getHotDeals() {
-                        return hotDeals;
+                    public DataList< HotDeal > getHotDeals() {
+                        //Check for pure case of hasMany
+                                                    if(that.getId() != null){
+                                   //TODO: Modify foreign key name..
+                                   BrandRepository brandRepository = (BrandRepository) getRepository();
+                                   if(restAdapter != null){
+                                     //Fetch locally from db
+                                     //hotDeals = getHotDeals__db(restAdapter);
+                                     // Getting single cont
+                                     hotDeals = modelRepository.getBrandDb().get__db(brandId, that.getId().toString());
+                                   }
+                                   //lowercaseFirstLetter(modelName)
+                            }
+                                                return hotDeals;
                     }
 
                     public void setHotDeals(DataList<HotDeal> hotDeals) {
@@ -450,10 +462,6 @@ public class Brand extends Model {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class)){
-                                hashType = true;
-                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
-                                hashMaps.add(dataObj);
                             }
                         }
 
@@ -461,6 +469,10 @@ public class Brand extends Model {
                             setHotDeals1(hashMaps);
                         }else{
                             this.hotDeals = hotDeals;
+                            //TODO: Warning move this to new thread
+                            for(HotDeal data: hotDeals){
+                                data.save__db();
+                            }
                         }
                     }
 
@@ -508,6 +520,8 @@ public class Brand extends Model {
                     //This will add a new data to the list relation object..
                     public void addRelation(HotDeal hotDeals) {
                         try{
+                            //Save to database..
+                            hotDeals.save__db();
                             that.getHotDeals().add(hotDeals);
                         }catch(Exception e){
                             DataList< HotDeal> hotDeals1 = new DataList();
@@ -1033,8 +1047,20 @@ public class Brand extends Model {
                     //Define hasMany relation method here..
                     private transient DataList<Chat>  chats ;
 
-                    public DataList<Chat> getChats() {
-                        return chats;
+                    public DataList< Chat > getChats() {
+                        //Check for pure case of hasMany
+                                                    if(that.getId() != null){
+                                   //TODO: Modify foreign key name..
+                                   BrandRepository brandRepository = (BrandRepository) getRepository();
+                                   if(restAdapter != null){
+                                     //Fetch locally from db
+                                     //chats = getChats__db(restAdapter);
+                                     // Getting single cont
+                                     chats = modelRepository.getBrandDb().get__db(brandId, that.getId().toString());
+                                   }
+                                   //lowercaseFirstLetter(modelName)
+                            }
+                                                return chats;
                     }
 
                     public void setChats(DataList<Chat> chats) {
@@ -1045,10 +1071,6 @@ public class Brand extends Model {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class)){
-                                hashType = true;
-                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
-                                hashMaps.add(dataObj);
                             }
                         }
 
@@ -1056,6 +1078,10 @@ public class Brand extends Model {
                             setChats1(hashMaps);
                         }else{
                             this.chats = chats;
+                            //TODO: Warning move this to new thread
+                            for(Chat data: chats){
+                                data.save__db();
+                            }
                         }
                     }
 
@@ -1103,6 +1129,8 @@ public class Brand extends Model {
                     //This will add a new data to the list relation object..
                     public void addRelation(Chat chats) {
                         try{
+                            //Save to database..
+                            chats.save__db();
                             that.getChats().add(chats);
                         }catch(Exception e){
                             DataList< Chat> chats1 = new DataList();
@@ -1628,8 +1656,20 @@ public class Brand extends Model {
                     //Define hasMany relation method here..
                     private transient DataList<DailyFeed>  dailyFeeds ;
 
-                    public DataList<DailyFeed> getDailyFeeds() {
-                        return dailyFeeds;
+                    public DataList< DailyFeed > getDailyFeeds() {
+                        //Check for pure case of hasMany
+                                                    if(that.getId() != null){
+                                   //TODO: Modify foreign key name..
+                                   BrandRepository brandRepository = (BrandRepository) getRepository();
+                                   if(restAdapter != null){
+                                     //Fetch locally from db
+                                     //dailyFeeds = getDailyFeeds__db(restAdapter);
+                                     // Getting single cont
+                                     dailyFeeds = modelRepository.getBrandDb().get__db(brandId, that.getId().toString());
+                                   }
+                                   //lowercaseFirstLetter(modelName)
+                            }
+                                                return dailyFeeds;
                     }
 
                     public void setDailyFeeds(DataList<DailyFeed> dailyFeeds) {
@@ -1640,10 +1680,6 @@ public class Brand extends Model {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class)){
-                                hashType = true;
-                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
-                                hashMaps.add(dataObj);
                             }
                         }
 
@@ -1651,6 +1687,10 @@ public class Brand extends Model {
                             setDailyFeeds1(hashMaps);
                         }else{
                             this.dailyFeeds = dailyFeeds;
+                            //TODO: Warning move this to new thread
+                            for(DailyFeed data: dailyFeeds){
+                                data.save__db();
+                            }
                         }
                     }
 
@@ -1698,6 +1738,8 @@ public class Brand extends Model {
                     //This will add a new data to the list relation object..
                     public void addRelation(DailyFeed dailyFeeds) {
                         try{
+                            //Save to database..
+                            dailyFeeds.save__db();
                             that.getDailyFeeds().add(dailyFeeds);
                         }catch(Exception e){
                             DataList< DailyFeed> dailyFeeds1 = new DataList();
@@ -2223,8 +2265,20 @@ public class Brand extends Model {
                     //Define hasMany relation method here..
                     private transient DataList<BrandManager>  brandManagers ;
 
-                    public DataList<BrandManager> getBrandManagers() {
-                        return brandManagers;
+                    public DataList< BrandManager > getBrandManagers() {
+                        //Check for pure case of hasMany
+                                                    if(that.getId() != null){
+                                   //TODO: Modify foreign key name..
+                                   BrandRepository brandRepository = (BrandRepository) getRepository();
+                                   if(restAdapter != null){
+                                     //Fetch locally from db
+                                     //brandManagers = getBrandManagers__db(restAdapter);
+                                     // Getting single cont
+                                     brandManagers = modelRepository.getBrandDb().get__db(brandId, that.getId().toString());
+                                   }
+                                   //lowercaseFirstLetter(modelName)
+                            }
+                                                return brandManagers;
                     }
 
                     public void setBrandManagers(DataList<BrandManager> brandManagers) {
@@ -2235,10 +2289,6 @@ public class Brand extends Model {
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
                                 hashMaps.add(dataObj);
-                            }else if(o.getClass().equals(HashMap.class)){
-                                hashType = true;
-                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
-                                hashMaps.add(dataObj);
                             }
                         }
 
@@ -2246,6 +2296,10 @@ public class Brand extends Model {
                             setBrandManagers1(hashMaps);
                         }else{
                             this.brandManagers = brandManagers;
+                            //TODO: Warning move this to new thread
+                            for(BrandManager data: brandManagers){
+                                data.save__db();
+                            }
                         }
                     }
 
@@ -2293,6 +2347,8 @@ public class Brand extends Model {
                     //This will add a new data to the list relation object..
                     public void addRelation(BrandManager brandManagers) {
                         try{
+                            //Save to database..
+                            brandManagers.save__db();
                             that.getBrandManagers().add(brandManagers);
                         }catch(Exception e){
                             DataList< BrandManager> brandManagers1 = new DataList();

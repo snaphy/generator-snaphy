@@ -106,14 +106,14 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
             Cursor cursor = db.query("AdminEmail", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
+                HashMap<String, Object> hashMap = parseCursor(cursor);
 
                 cursor.close();
                 db.close(); // Closing database connection
                 
-                if (chatHashMap != null) {
+                if (hashMap != null) {
                     AdminEmailRepository repo = restAdapter.createRepository(AdminEmailRepository.class);
-                    return (AdminEmail)repo.createObject(chatHashMap);
+                    return (AdminEmail)repo.createObject(hashMap);
                 } else {
                     return null;
                 }
@@ -141,7 +141,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
                 cursor.close();
                 db.close(); // Closing database connection
 
-                if (HashMap != null) {
+                if (hashMap != null) {
                     AdminEmailRepository repo = restAdapter.createRepository(AdminEmailRepository.class);
                     return (AdminEmail)repo.createObject(hashMap);
                 } else {
@@ -160,7 +160,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
 
 
     private HashMap<String, Object> parseCursor(Cursor cursor ){
-      HashMap<String, Object> chatHashMap = new HashMap<>();
+      HashMap<String, Object> hashMap = new HashMap<>();
 
                       
                                                             String toData = "";
@@ -168,7 +168,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
                           toData = cursor.getString(0);
                           if(toData != null){
                             toData = toData.toString();
-                            chatHashMap.put("to", toData);
+                            hashMap.put("to", toData);
                           }
                         }
                                                 
@@ -178,7 +178,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
                           fromData = cursor.getString(1);
                           if(fromData != null){
                             fromData = fromData.toString();
-                            chatHashMap.put("from", fromData);
+                            hashMap.put("from", fromData);
                           }
                         }
                                                 
@@ -188,7 +188,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
                           subjectData = cursor.getString(2);
                           if(subjectData != null){
                             subjectData = subjectData.toString();
-                            chatHashMap.put("subject", subjectData);
+                            hashMap.put("subject", subjectData);
                           }
                         }
                                                 
@@ -198,7 +198,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
                           textData = cursor.getString(3);
                           if(textData != null){
                             textData = textData.toString();
-                            chatHashMap.put("text", textData);
+                            hashMap.put("text", textData);
                           }
                         }
                                                 
@@ -208,7 +208,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
                           htmlData = cursor.getString(4);
                           if(htmlData != null){
                             htmlData = htmlData.toString();
-                            chatHashMap.put("html", htmlData);
+                            hashMap.put("html", htmlData);
                           }
                         }
                                                 
@@ -218,12 +218,12 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
                           idData = cursor.getString(5);
                           if(idData != null){
                             idData = idData.toString();
-                            chatHashMap.put("id", idData);
+                            hashMap.put("id", idData);
                           }
                         }
                                                 
                     
-        return chatHashMap;
+        return hashMap;
     }//parseCursor
 
 
@@ -251,10 +251,37 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
         if (cursor.moveToFirst()) {
             do {
                
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
-                if(chatHashMap != null){
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
                     AdminEmailRepository repo = restAdapter.createRepository(AdminEmailRepository.class);
-                    modelList.add((AdminEmail)repo.createObject(chatHashMap));
+                    modelList.add((AdminEmail)repo.createObject(hashMap));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+        return (DataList<AdminEmail>) modelList;
+    } 
+
+
+    // Getting All Data where
+    public DataList<AdminEmail>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<AdminEmail> modelList = new DataList<AdminEmail>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM AdminEmail WHERE " + whereKey +"="+ whereKeyValue ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+               
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
+                    AdminEmailRepository repo = restAdapter.createRepository(AdminEmailRepository.class);
+                    modelList.add((AdminEmail)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }

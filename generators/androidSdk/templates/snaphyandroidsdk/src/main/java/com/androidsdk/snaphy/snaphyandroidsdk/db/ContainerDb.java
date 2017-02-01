@@ -76,14 +76,14 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
             Cursor cursor = db.query("Container", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
+                HashMap<String, Object> hashMap = parseCursor(cursor);
 
                 cursor.close();
                 db.close(); // Closing database connection
                 
-                if (chatHashMap != null) {
+                if (hashMap != null) {
                     ContainerRepository repo = restAdapter.createRepository(ContainerRepository.class);
-                    return (Container)repo.createObject(chatHashMap);
+                    return (Container)repo.createObject(hashMap);
                 } else {
                     return null;
                 }
@@ -111,7 +111,7 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
                 cursor.close();
                 db.close(); // Closing database connection
 
-                if (HashMap != null) {
+                if (hashMap != null) {
                     ContainerRepository repo = restAdapter.createRepository(ContainerRepository.class);
                     return (Container)repo.createObject(hashMap);
                 } else {
@@ -130,7 +130,7 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
 
 
     private HashMap<String, Object> parseCursor(Cursor cursor ){
-      HashMap<String, Object> chatHashMap = new HashMap<>();
+      HashMap<String, Object> hashMap = new HashMap<>();
 
                       
                                                             String idData = "";
@@ -138,12 +138,12 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
                           idData = cursor.getString(0);
                           if(idData != null){
                             idData = idData.toString();
-                            chatHashMap.put("id", idData);
+                            hashMap.put("id", idData);
                           }
                         }
                                                 
                     
-        return chatHashMap;
+        return hashMap;
     }//parseCursor
 
 
@@ -171,10 +171,37 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
         if (cursor.moveToFirst()) {
             do {
                
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
-                if(chatHashMap != null){
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
                     ContainerRepository repo = restAdapter.createRepository(ContainerRepository.class);
-                    modelList.add((Container)repo.createObject(chatHashMap));
+                    modelList.add((Container)repo.createObject(hashMap));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+        return (DataList<Container>) modelList;
+    } 
+
+
+    // Getting All Data where
+    public DataList<Container>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<Container> modelList = new DataList<Container>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM Container WHERE " + whereKey +"="+ whereKeyValue ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+               
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
+                    ContainerRepository repo = restAdapter.createRepository(ContainerRepository.class);
+                    modelList.add((Container)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }

@@ -244,7 +244,7 @@ public class RoleMapping extends Model {
                     public Role getRole__db(RestAdapter restAdapter){
                       if(roleId != null){
                         RoleRepository roleRepository = restAdapter.createRepository(RoleRepository.class);
-                        Role role = (Role) roleRepository.getDbHandler().get__db(Role.class, roleId);
+                        Role role = (Role) roleRepository.getRoleDb().get__db(roleId);
                         if(role != null){
                           return role;
                         }else{

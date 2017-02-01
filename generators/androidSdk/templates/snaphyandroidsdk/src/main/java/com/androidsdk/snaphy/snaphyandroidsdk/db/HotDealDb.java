@@ -142,14 +142,14 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
             Cursor cursor = db.query("HotDeal", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
+                HashMap<String, Object> hashMap = parseCursor(cursor);
 
                 cursor.close();
                 db.close(); // Closing database connection
                 
-                if (chatHashMap != null) {
+                if (hashMap != null) {
                     HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
-                    return (HotDeal)repo.createObject(chatHashMap);
+                    return (HotDeal)repo.createObject(hashMap);
                 } else {
                     return null;
                 }
@@ -177,7 +177,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                 cursor.close();
                 db.close(); // Closing database connection
 
-                if (HashMap != null) {
+                if (hashMap != null) {
                     HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
                     return (HotDeal)repo.createObject(hashMap);
                 } else {
@@ -196,7 +196,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
 
 
     private HashMap<String, Object> parseCursor(Cursor cursor ){
-      HashMap<String, Object> chatHashMap = new HashMap<>();
+      HashMap<String, Object> hashMap = new HashMap<>();
 
                       
                                                             String titleData = "";
@@ -204,7 +204,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                           titleData = cursor.getString(0);
                           if(titleData != null){
                             titleData = (String)titleData;
-                            chatHashMap.put("title", titleData);
+                            hashMap.put("title", titleData);
                           }
                         }
                                                 
@@ -214,7 +214,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                           descriptionData = cursor.getString(1);
                           if(descriptionData != null){
                             descriptionData = (String)descriptionData;
-                            chatHashMap.put("description", descriptionData);
+                            hashMap.put("description", descriptionData);
                           }
                         }
                                                 
@@ -224,7 +224,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                           imageData = new Gson().fromJson(cursor.getString(2), Map.class);
                           if(imageData != null){
                             imageData = (Map<String, Object>)imageData;
-                            chatHashMap.put("image", imageData);
+                            hashMap.put("image", imageData);
                           }
                         }
                                                 
@@ -234,7 +234,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                           urlData = cursor.getString(3);
                           if(urlData != null){
                             urlData = (String)urlData;
-                            chatHashMap.put("url", urlData);
+                            hashMap.put("url", urlData);
                           }
                         }
                                                 
@@ -242,7 +242,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                                                             double priceData = double(0);  
                           priceData = cursor.getInt(4);
                           priceData = (double)priceData;
-                          chatHashMap.put("price", priceData);
+                          hashMap.put("price", priceData);
                       
                       
                                                 
@@ -252,7 +252,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                           statusData = cursor.getString(5);
                           if(statusData != null){
                             statusData = (String)statusData;
-                            chatHashMap.put("status", statusData);
+                            hashMap.put("status", statusData);
                           }
                         }
                                                 
@@ -262,7 +262,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                           expiryDateData = cursor.getString(6);
                           if(expiryDateData != null){
                             expiryDateData = (String)expiryDateData;
-                            chatHashMap.put("expiryDate", expiryDateData);
+                            hashMap.put("expiryDate", expiryDateData);
                           }
                         }
                                                 
@@ -272,7 +272,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                           addedData = cursor.getString(7);
                           if(addedData != null){
                             addedData = (String)addedData;
-                            chatHashMap.put("added", addedData);
+                            hashMap.put("added", addedData);
                           }
                         }
                                                 
@@ -282,7 +282,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                           updatedData = cursor.getString(8);
                           if(updatedData != null){
                             updatedData = (String)updatedData;
-                            chatHashMap.put("updated", updatedData);
+                            hashMap.put("updated", updatedData);
                           }
                         }
                                                 
@@ -292,7 +292,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                           idData = cursor.getString(9);
                           if(idData != null){
                             idData = idData.toString();
-                            chatHashMap.put("id", idData);
+                            hashMap.put("id", idData);
                           }
                         }
                                                 
@@ -302,7 +302,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                           categoryIdData = cursor.getString(10);
                           if(categoryIdData != null){
                             categoryIdData = categoryIdData.toString();
-                            chatHashMap.put("categoryId", categoryIdData);
+                            hashMap.put("categoryId", categoryIdData);
                           }
                         }
                                                 
@@ -312,12 +312,12 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                           brandIdData = cursor.getString(11);
                           if(brandIdData != null){
                             brandIdData = brandIdData.toString();
-                            chatHashMap.put("brandId", brandIdData);
+                            hashMap.put("brandId", brandIdData);
                           }
                         }
                                                 
                     
-        return chatHashMap;
+        return hashMap;
     }//parseCursor
 
 
@@ -345,10 +345,37 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
         if (cursor.moveToFirst()) {
             do {
                
-                HashMap<String, Object> chatHashMap = parseCursor(cursor);
-                if(chatHashMap != null){
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
                     HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
-                    modelList.add((HotDeal)repo.createObject(chatHashMap));
+                    modelList.add((HotDeal)repo.createObject(hashMap));
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        // return contact list
+        return (DataList<HotDeal>) modelList;
+    } 
+
+
+    // Getting All Data where
+    public DataList<HotDeal>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<HotDeal> modelList = new DataList<HotDeal>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM HotDeal WHERE " + whereKey +"="+ whereKeyValue ;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+               
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
+                    HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
+                    modelList.add((HotDeal)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }
