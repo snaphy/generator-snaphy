@@ -100,12 +100,116 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
               values.put("<%-property%>", <%-property%>Data);
           <% } -%>
         <%}%>
-        if(model.getId() != null){
-            values.put("id", model.getId().toString());
-        }
         db.insert(TABLE, null, values);
         db.close(); // Closing database connection
     }
+
+
+    // Getting single cont
+    public   <%- modelName %> get__db(String id) {
+        if (id != null) {
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor cursor = db.query("<%- modelName %>", null, "id=?", new String[]{id}, null, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                HashMap<String, Object> chatHashMap = new HashMap<>();
+
+                <%
+                  var i=0;
+                  for( let property in model.properties) { 
+                -%>
+                      <% if(model.properties.hasOwnProperty(property)){
+                          let isArray = model.properties[property].type instanceof Array;
+                          var capitalPropertyName = model.methods.capitalizeFirstLetter(property);
+                      -%>
+
+                        <% if(isArray){ -%>
+                          <%- model.methods.getJavaType(model.properties[property].type[0], isArray) > <%-property%>Data = new DataList<>();
+                          if(cursor.getString(<%- id %>) != null){
+                            <%-property%>Data = new Gson().fromJson(cursor.getString(<%- id %>), DataList.class);
+                            if(<%-property%>Data != null){
+                              <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type[0], isArray) >)<%-property%>Data;
+                              chatHashMap.put("<%-property%>", <%-property%>Data);
+                            }
+                          }
+                      <% }else{ -%>
+                            <% if(model.properties[property].type === "string" || model.properties[property].type === "date"){ -%>
+                                String <%-property%>Data;
+                                if(cursor.getString(<%- id %>) != null){
+                                  <%-property%>Data = cursor.getString(<%- id %>);
+                                  if(<%-property%>Data != null){
+                                    <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) >)<%-property%>Data;
+                                    chatHashMap.put("<%-property%>", <%-property%>Data);
+                                  }
+                                }
+                            <% }else if(model.properties[property].type === "object" || model.properties[property].type === "geopoint"){ -%>
+                                <%- model.methods.getJavaType(model.properties[property].type, false) > <%-property%>Data = new Map<>();
+                                if(cursor.getString(<%- id %>) != null){
+                                  <%-property%>Data = cursor.getString(<%- id %>);
+                                  if(<%-property%>Data != null){
+                                    <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) >)<%-property%>Data;
+                                    chatHashMap.put("<%-property%>", <%-property%>Data);
+                                  }
+                                }
+                            <% }else if(model.properties[property].type === "number"){ -%>
+                                double <%-property%>Data;  
+                                  <%-property%>Data = cursor.getInt(<%- id %>);
+                                  <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) >)<%-property%>Data;
+                                  chatHashMap.put("<%-property%>", <%-property%>Data);
+                              
+                              
+                            <% }else if(model.properties[property].type === "boolean"){ -%>
+                                boolean <%-property%>Data;
+                                int temp<%-property%>Data = cursor.getInt(<%- id %>);
+                                if( temp<%-property%>Data > 0){
+                                  <%-property%>Data = true;
+                                }else{
+                                  <%-property%>Data = false;
+                                }
+                            <% }else{ -%>
+                                String <%-property%>Data;
+                                if(cursor.getString(<%- id %>) != null){
+                                  <%-property%>Data = cursor.getString(<%- id %>);
+                                  if(<%-property%>Data != null){
+                                    <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) >)<%-property%>Data;
+                                    chatHashMap.put("<%-property%>", <%-property%>Data);
+                                  }
+                                }
+                            <% } -%>
+                      <% }//END IF-ELSE -%>
+                      <% i++; %>
+                  <% } -%>
+                <%}%>  
+
+                String idData = cursor.getString(0);
+                if(idData != null){
+                    chatHashMap.put("id", idData);
+                }
+                
+                String object = cursor.getString(1);
+                cursor.close();
+                db.close(); // Closing database connection
+                if (object != null) {
+                    HashMap<String, Object> chatHashMap = toHashMap(object);
+                    if (chatHashMap != null) {
+                        R repo = restAdapter.createRepository(type);
+                        return (M)repo.createObject(chatHashMap);
+                    } else {
+                        return null;
+                    }
+                } else {
+                    return null;
+                }
+
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+
+    }
+
 
 
 
