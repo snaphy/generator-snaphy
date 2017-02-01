@@ -133,14 +133,14 @@ package com.androidsdk.snaphy.snaphyandroidsdk.models;
 
 
 
-<% 
+<%
 /*
 if(model.base === "User" || modelName === "User"){ %>
 import com.strongloop.android.loopback.User;
 <% } else { %>
-   
+
    import com.strongloop.android.loopback.Model;
-<% } 
+<% }
 */
 %>
 
@@ -359,6 +359,42 @@ public class <%- modelName %> extends Model {
     <% } %>
 
 
+    //------------------------------------Database Method---------------------------------------------------
+
+    public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
+      //Save to database..
+      save__db();
+      //Also save to database..
+      super.save(callback);
+    }
+
+
+    public void save__db(String id){
+      <%- modelName %>Repository <%- lowercaseFirstLetter(modelName) %>Repository = (<%- modelName %>Repository) getRepository();
+      if(id != null){
+        HashMap<String, Object> hashMap = (HashMap<String, Object>) convertMap();
+        String object = <%- lowercaseFirstLetter(modelName) %>Repository.getDbHandler().toJsonString(hashMap);
+        ContentValues values = new ContentValues();
+        values.put("ID", id); // Contact Name
+        values.put("OBJECT", object); // Contact Phone Number*/
+        <%- lowercaseFirstLetter(modelName) %>Repository.getDbHandler().upsert__db(id, object);
+      }
+    }
+
+
+    public void save__db(){
+      if(getId() == null){
+        return;
+      }
+      String id = getId().toString();
+      save__db(id);
+    }
+
+
+
+//-----------------------------------END Database Methods------------------------------------------------
+
+
     <%# //Adding a BELONGS TO RELATIONSHIP EXAMPLE
         private Customer customer ;
 
@@ -402,6 +438,15 @@ public class <%- modelName %> extends Model {
                     private transient <%- capitalcaseRelatedModelName %>  <%- relation %> ;
 
                     public <%- capitalcaseRelatedModelName %> get<%- capitalcaseRelationName %>() {
+                        //Adding database method for fetching from relation if not present..
+                        if(<%- relation %> == null){
+                          <%- modelName %>Repository <%- lowercaseFirstLetter(modelName) %>Repository = (<%- modelName %>Repository) getRepository();
+                          RestAdapter restAdapter = <%- lowercaseFirstLetter(modelName) %>Repository.getRestAdapter();
+                          if(restAdapter != null){
+                            //Fetch locally from db
+                            <%- relation %> = get<%- capitalcaseRelatedModelName %>__db(restAdapter);
+                          }
+                        }
                         return <%- relation %>;
                     }
 
@@ -517,6 +562,9 @@ public class <%- modelName %> extends Model {
                             that.set<%- capitalcaseRelationName %>(<%- relation %>1);
                         }
                     }
+
+
+
 
                     <%
                     //Now checking for hasManyThrough relationship..
@@ -801,7 +849,7 @@ public class <%- modelName %> extends Model {
                                                     returnType = type;
                                                     //methodString = methodString + " RestAdapter restAdapter" + ", " + "final Adapter.JsonObjectCallback  callback )";
                                                     methodString = methodString + " RestAdapter restAdapter" + ", " + "final ObjectCallback<JSONObject>  callback)";
-                                                    
+
                                                     //callback = "Adapter.JsonObjectCallback";
                                                     callback = "ObjectCallback<JSONObject>";
                                                     callbackType = "ObjectCallback";

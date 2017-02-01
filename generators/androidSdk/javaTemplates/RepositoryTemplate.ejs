@@ -325,11 +325,11 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
 
     public DbHandler getDbHandler() {
-    return dbHandler;
+      return dbHandler;
     }
 
     public void setDbHandler(DbHandler dbHandler) {
-    this.dbHandler = dbHandler;
+      this.dbHandler = dbHandler;
     }
 
     private DbHandler dbHandler;
@@ -340,19 +340,19 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
     private boolean STORE_LOCALLY = true;
 
     public boolean isSTORE_LOCALLY() {
-    return STORE_LOCALLY;
+      return STORE_LOCALLY;
     }
 
 
     public void  persistData(boolean persist){
-    STORE_LOCALLY = persist;
+      STORE_LOCALLY = persist;
     }
 
 
     private void addStorage(Context context){
     setDbHandler(new DbHandler< <%- modelName %>, <%- modelName %>Repository >(context, "<%- modelName %>", getRestAdapter()));
-    //allow data storage locally..
-    persistData(true);
+      //allow data storage locally..
+      persistData(true);
     }
 
 
@@ -544,7 +544,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                 }
 
 
-                var hasAndBelongsToType ;
+                var hasAndBelongsToType;
                 //boolean checking if the type is custom class type like recipe
                 var isCustomClass = false;
                 var customClassType;
@@ -784,8 +784,14 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                                     <%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
                                     Map<String, Object> result = Util.fromJson(response);
                                     <%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(result);
-                                    callback.onSuccess(<%- lowercaseFirstLetter(type) %>);
 
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          <%- lowercaseFirstLetter(type) %>.save__db();
+                                      }
+
+                                    callback.onSuccess(<%- lowercaseFirstLetter(type) %>);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -818,6 +824,13 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
                                     for (Map<String, Object> obj : result) {
                                         <%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 <%- lowercaseFirstLetter(type) %>.save__db();
+                                            }
+
                                         <%- lowercaseFirstLetter(type) %>List.add(<%- lowercaseFirstLetter(type) %>);
                                     }
                                     callback.onSuccess(<%- lowercaseFirstLetter(type) %>List);
