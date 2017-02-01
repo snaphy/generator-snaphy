@@ -181,19 +181,12 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
                   <% } -%>
                 <%}%>  
 
-                String idData = cursor.getString(0);
-                if(idData != null){
-                    chatHashMap.put("id", idData);
-                }
-                
-                String object = cursor.getString(1);
                 cursor.close();
                 db.close(); // Closing database connection
                 if (object != null) {
-                    HashMap<String, Object> chatHashMap = toHashMap(object);
                     if (chatHashMap != null) {
-                        R repo = restAdapter.createRepository(type);
-                        return (M)repo.createObject(chatHashMap);
+                        <%- modelName %>Repository repo = restAdapter.createRepository(<%- modelName %>Repository.class);
+                        return (<%- modelName %>)repo.createObject(chatHashMap);
                     } else {
                         return null;
                     }
