@@ -433,9 +433,29 @@ public class <%- modelName %> extends Model {
             var capitalcaseRelationName = capitalizeFirstLetter(relation);
             if(model.restDefinition[model.relations[relation].model] !== undefined){
         %>
+        <%
+            //Prepare method for get foreign key..
+            var getForeignKeyName = function(){
+               var foreignKey = model.relations[relation].foreignKey;
+               if(!foreignKey) {
+                  foreignKey = lowercaseRelatedModelName + "Id";
+               }
+            };
+        %>
                 <% if(model.relations[relation].type === "belongsTo" || model.relations[relation].type === "hasOne"){ %>
                     //Define belongsTo relation method here..
                     private transient <%- capitalcaseRelatedModelName %>  <%- relation %> ;
+                    private String <%- getForeignKeyName() %>;
+
+                    public String get<%- capitalizeFirstLetter(getForeignKeyName()) %>(){
+                         return <%- getForeignKeyName() %>;
+                    }
+
+                    public void set<%- capitalizeFirstLetter(getForeignKeyName()) %>(Object <%- getForeignKeyName() %>){
+                        if(<%- getForeignKeyName() %> != null){
+                          this.<%- getForeignKeyName() %> = <%- getForeignKeyName() %>.toString();
+                        }
+                    }
 
                     public <%- capitalcaseRelatedModelName %> get<%- capitalcaseRelationName %>() {
                         //Adding database method for fetching from relation if not present..
@@ -476,8 +496,22 @@ public class <%- modelName %> extends Model {
                     }
 
 
-
+                    //Fetch related data from local database if present a <%- getForeignKeyName() %> identifier as property for belongsTo
+                    public <%- capitalcaseRelatedModelName %> get<%- relation %>__db(RestAdapter restAdapter){
+                      if(getForeignKeyName() != null){
+                        <%- capitalcaseRelatedModelName %>Repository <%- relation %>Repository = restAdapter.createRepository(<%- capitalcaseRelatedModelName %>Repository.class);
+                        <%- capitalcaseRelatedModelName %> <%- relation %> = (<%- capitalcaseRelatedModelName %>) <%- relation %>Repository.getDbHandler().get__db(<%- capitalcaseRelatedModelName %>.class, <%- getForeignKeyName() %>);
+                        if(<%- relation %> != null){
+                          return <%- relation %>;
+                        }else{
+                          return null;
+                        }
+                        }else{
+                          return null;
+                      }
+                    }
                 <% }%>
+
                 <% if (model.relations[relation].type === "hasMany") { %>
                     <%# In case of hasMany || hasManyThrough || hasAndBelongsToMany %>
                     //Define hasMany relation method here..
