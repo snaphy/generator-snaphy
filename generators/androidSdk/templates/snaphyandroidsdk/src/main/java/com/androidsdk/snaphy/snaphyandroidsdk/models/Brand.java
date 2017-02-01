@@ -447,7 +447,7 @@ public class Brand extends Model {
                                  //Fetch locally from db
                                  //hotDeals = getHotDeals__db(restAdapter);
                                  // Getting single cont
-                                 hotDeals = modelRepository.getBrandDb().get__db(brandId, that.getId().toString());
+                                 hotDeals = brandRepository.getBrandDb().get__db("brandId", that.getId().toString());
                               
                                    //lowercaseFirstLetter(modelName)
                             }
@@ -1056,7 +1056,7 @@ public class Brand extends Model {
                                  //Fetch locally from db
                                  //chats = getChats__db(restAdapter);
                                  // Getting single cont
-                                 chats = modelRepository.getBrandDb().get__db(brandId, that.getId().toString());
+                                 chats = brandRepository.getBrandDb().get__db("brandId", that.getId().toString());
                               
                                    //lowercaseFirstLetter(modelName)
                             }
@@ -1665,7 +1665,7 @@ public class Brand extends Model {
                                  //Fetch locally from db
                                  //dailyFeeds = getDailyFeeds__db(restAdapter);
                                  // Getting single cont
-                                 dailyFeeds = modelRepository.getBrandDb().get__db(brandId, that.getId().toString());
+                                 dailyFeeds = brandRepository.getBrandDb().get__db("brandId", that.getId().toString());
                               
                                    //lowercaseFirstLetter(modelName)
                             }
@@ -2274,7 +2274,7 @@ public class Brand extends Model {
                                  //Fetch locally from db
                                  //brandManagers = getBrandManagers__db(restAdapter);
                                  // Getting single cont
-                                 brandManagers = modelRepository.getBrandDb().get__db(brandId, that.getId().toString());
+                                 brandManagers = brandRepository.getBrandDb().get__db("brandId", that.getId().toString());
                               
                                    //lowercaseFirstLetter(modelName)
                             }
