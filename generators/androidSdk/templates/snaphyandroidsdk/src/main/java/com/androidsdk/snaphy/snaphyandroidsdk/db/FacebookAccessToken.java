@@ -1,20 +1,26 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.db;
 
+
+
+
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues;
+import java.util.HashMap;
+import com.google.gson.Gson;
+import android.database.Cursor;
+import java.util.Map;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.FacebookAccessToken;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.Repository;
-//Import Model
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.FacebookAccessTokenRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
-
-
 
 public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, FacebookAccessTokenRepository> {
   public ChatDb(Context context, RestAdapter restAdapter){
@@ -43,7 +49,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         ContentValues values = getContentValues(modelData);
-        db.insert(TABLE, null, values);
+        db.insert("FacebookAccessToken", null, values);
         db.close(); // Closing database connection
     }
 
@@ -52,37 +58,37 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
     public ContentValues getContentValues(FacebookAccessToken modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String FbUserIdData;
+                                                            String FbUserIdData = "";
                         if(modelData.getFbUserId() != null){
                           FbUserIdData = modelData.getFbUserId().toString();
                         }
                                                 values.put("FbUserId", FbUserIdData);
                                 
-                                                            String tokenData;
+                                                            String tokenData = "";
                         if(modelData.getToken() != null){
                           tokenData = modelData.getToken().toString();
                         }
                                                 values.put("token", tokenData);
                                 
-                                                            String expiresData;
+                                                            String expiresData = "";
                         if(modelData.getExpires() != null){
                           expiresData = modelData.getExpires().toString();
                         }
                                                 values.put("expires", expiresData);
                                 
-                                                            String userIdData;
+                                                            String userIdData = "";
                         if(modelData.getUserId() != null){
                           userIdData =modelData.getUserId().toString();
                         }
                                                 values.put("userId", userIdData);
                                 
-                                                            String typeData;
+                                                            String typeData = "";
                         if(modelData.getType() != null){
                           typeData = modelData.getType().toString();
                         }
                                                 values.put("type", typeData);
                                 
-                                                            String appUserIdData;
+                                                            String appUserIdData = "";
                         if(modelData.getAppUserId() != null){
                           appUserIdData =modelData.getAppUserId().toString();
                         }
@@ -104,17 +110,13 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
 
                 cursor.close();
                 db.close(); // Closing database connection
-                if (object != null) {
-                    if (chatHashMap != null) {
-                        FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
-                        return (FacebookAccessToken)repo.createObject(chatHashMap);
-                    } else {
-                        return null;
-                    }
+                
+                if (chatHashMap != null) {
+                    FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+                    return (FacebookAccessToken)repo.createObject(chatHashMap);
                 } else {
                     return null;
                 }
-
             } else {
                 return null;
             }
@@ -130,7 +132,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
       HashMap<String, Object> chatHashMap = new HashMap<>();
 
                       
-                                                            String FbUserIdData;
+                                                            String FbUserIdData = "";
                         if(cursor.getString(0) != null){
                           FbUserIdData = cursor.getString(0);
                           if(FbUserIdData != null){
@@ -140,7 +142,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
                         }
                                                 
                                 
-                                                            String tokenData;
+                                                            String tokenData = "";
                         if(cursor.getString(1) != null){
                           tokenData = cursor.getString(1);
                           if(tokenData != null){
@@ -150,7 +152,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
                         }
                                                 
                                 
-                                                            String expiresData;
+                                                            String expiresData = "";
                         if(cursor.getString(2) != null){
                           expiresData = cursor.getString(2);
                           if(expiresData != null){
@@ -160,17 +162,17 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
                         }
                                                 
                                 
-                                                            String userIdData;
+                                                            String userIdData = "";
                         if(cursor.getString(3) != null){
                           userIdData = cursor.getString(3);
                           if(userIdData != null){
-                            userIdData = (Object)userIdData;
+                            userIdData = userIdData.toString();
                             chatHashMap.put("userId", userIdData);
                           }
                         }
                                                 
                                 
-                                                            String typeData;
+                                                            String typeData = "";
                         if(cursor.getString(4) != null){
                           typeData = cursor.getString(4);
                           if(typeData != null){
@@ -180,11 +182,11 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
                         }
                                                 
                                 
-                                                            String appUserIdData;
+                                                            String appUserIdData = "";
                         if(cursor.getString(5) != null){
                           appUserIdData = cursor.getString(5);
                           if(appUserIdData != null){
-                            appUserIdData = (Object)appUserIdData;
+                            appUserIdData = appUserIdData.toString();
                             chatHashMap.put("appUserId", appUserIdData);
                           }
                         }
@@ -237,15 +239,8 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = getContentValues(modelData);
         // updating row
-        return db.update(TABLE, values, KEY_ID + " = ?",
+        return db.update("FacebookAccessToken", values, "id = ?",
                 new String[] { id });
     }
-
-
-
-
-
-
-
 
 }

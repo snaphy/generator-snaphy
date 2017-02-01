@@ -1,20 +1,26 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.db;
 
+
+
+
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues;
+import java.util.HashMap;
+import com.google.gson.Gson;
+import android.database.Cursor;
+import java.util.Map;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.HotDeal;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.Repository;
-//Import Model
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.HotDealRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
-
-
 
 public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
   public ChatDb(Context context, RestAdapter restAdapter){
@@ -43,7 +49,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         ContentValues values = getContentValues(modelData);
-        db.insert(TABLE, null, values);
+        db.insert("HotDeal", null, values);
         db.close(); // Closing database connection
     }
 
@@ -52,73 +58,73 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
     public ContentValues getContentValues(HotDeal modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String titleData;
+                                                            String titleData = "";
                         if(modelData.getTitle() != null){
                           titleData = modelData.getTitle().toString();
                         }
                                                 values.put("title", titleData);
                                 
-                                                            String descriptionData;
+                                                            String descriptionData = "";
                         if(modelData.getDescription() != null){
                           descriptionData = modelData.getDescription().toString();
                         }
                                                 values.put("description", descriptionData);
                                 
-                                                            String imageData;
+                                                            String imageData = "";
                         if(modelData.getImage() != null){
                           imageData = new Gson().toJson(modelData.getImage(), HashMap.class);
                         }
                                                 values.put("image", imageData);
                                 
-                                                            String urlData;
+                                                            String urlData = "";
                         if(modelData.getUrl() != null){
                           urlData = modelData.getUrl().toString();
                         }
                                                 values.put("url", urlData);
                                 
-                                                            double priceData;
+                                                            double priceData = 0;
                         if(modelData.getPrice() != null){
                           priceData = (double)modelData.getPrice();
                         }
                                                 values.put("price", priceData);
                                 
-                                                            String statusData;
+                                                            String statusData = "";
                         if(modelData.getStatus() != null){
                           statusData = modelData.getStatus().toString();
                         }
                                                 values.put("status", statusData);
                                 
-                                                            String expiryDateData;
+                                                            String expiryDateData = "";
                         if(modelData.getExpiryDate() != null){
                           expiryDateData = modelData.getExpiryDate().toString();
                         }
                                                 values.put("expiryDate", expiryDateData);
                                 
-                                                            String addedData;
+                                                            String addedData = "";
                         if(modelData.getAdded() != null){
                           addedData = modelData.getAdded().toString();
                         }
                                                 values.put("added", addedData);
                                 
-                                                            String updatedData;
+                                                            String updatedData = "";
                         if(modelData.getUpdated() != null){
                           updatedData = modelData.getUpdated().toString();
                         }
                                                 values.put("updated", updatedData);
                                 
-                                                            String idData;
+                                                            String idData = "";
                         if(modelData.getId() != null){
                           idData =modelData.getId().toString();
                         }
                                                 values.put("id", idData);
                                 
-                                                            String categoryIdData;
+                                                            String categoryIdData = "";
                         if(modelData.getCategoryId() != null){
                           categoryIdData =modelData.getCategoryId().toString();
                         }
                                                 values.put("categoryId", categoryIdData);
                                 
-                                                            String brandIdData;
+                                                            String brandIdData = "";
                         if(modelData.getBrandId() != null){
                           brandIdData =modelData.getBrandId().toString();
                         }
@@ -140,17 +146,13 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                if (object != null) {
-                    if (chatHashMap != null) {
-                        HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
-                        return (HotDeal)repo.createObject(chatHashMap);
-                    } else {
-                        return null;
-                    }
+                
+                if (chatHashMap != null) {
+                    HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
+                    return (HotDeal)repo.createObject(chatHashMap);
                 } else {
                     return null;
                 }
-
             } else {
                 return null;
             }
@@ -166,7 +168,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
       HashMap<String, Object> chatHashMap = new HashMap<>();
 
                       
-                                                            String titleData;
+                                                            String titleData = "";
                         if(cursor.getString(0) != null){
                           titleData = cursor.getString(0);
                           if(titleData != null){
@@ -176,7 +178,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                         }
                                                 
                                 
-                                                            String descriptionData;
+                                                            String descriptionData = "";
                         if(cursor.getString(1) != null){
                           descriptionData = cursor.getString(1);
                           if(descriptionData != null){
@@ -186,7 +188,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                         }
                                                 
                                 
-                                                            Map<String, Object> imageData = new Map<>();
+                                                            Map<String, Object> imageData = new HashMap<>();
                         if(cursor.getString(2) != null){
                           imageData = new Gson().fromJson(cursor.getString(2), Map.class);
                           if(imageData != null){
@@ -196,7 +198,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                         }
                                                 
                                 
-                                                            String urlData;
+                                                            String urlData = "";
                         if(cursor.getString(3) != null){
                           urlData = cursor.getString(3);
                           if(urlData != null){
@@ -206,7 +208,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                         }
                                                 
                                 
-                                                            double priceData;  
+                                                            double priceData = double(0);  
                           priceData = cursor.getInt(4);
                           priceData = (double)priceData;
                           chatHashMap.put("price", priceData);
@@ -214,7 +216,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                       
                                                 
                                 
-                                                            String statusData;
+                                                            String statusData = "";
                         if(cursor.getString(5) != null){
                           statusData = cursor.getString(5);
                           if(statusData != null){
@@ -224,7 +226,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                         }
                                                 
                                 
-                                                            String expiryDateData;
+                                                            String expiryDateData = "";
                         if(cursor.getString(6) != null){
                           expiryDateData = cursor.getString(6);
                           if(expiryDateData != null){
@@ -234,7 +236,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                         }
                                                 
                                 
-                                                            String addedData;
+                                                            String addedData = "";
                         if(cursor.getString(7) != null){
                           addedData = cursor.getString(7);
                           if(addedData != null){
@@ -244,7 +246,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                         }
                                                 
                                 
-                                                            String updatedData;
+                                                            String updatedData = "";
                         if(cursor.getString(8) != null){
                           updatedData = cursor.getString(8);
                           if(updatedData != null){
@@ -254,31 +256,31 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                         }
                                                 
                                 
-                                                            String idData;
+                                                            String idData = "";
                         if(cursor.getString(9) != null){
                           idData = cursor.getString(9);
                           if(idData != null){
-                            idData = (Object)idData;
+                            idData = idData.toString();
                             chatHashMap.put("id", idData);
                           }
                         }
                                                 
                                 
-                                                            String categoryIdData;
+                                                            String categoryIdData = "";
                         if(cursor.getString(10) != null){
                           categoryIdData = cursor.getString(10);
                           if(categoryIdData != null){
-                            categoryIdData = (Object)categoryIdData;
+                            categoryIdData = categoryIdData.toString();
                             chatHashMap.put("categoryId", categoryIdData);
                           }
                         }
                                                 
                                 
-                                                            String brandIdData;
+                                                            String brandIdData = "";
                         if(cursor.getString(11) != null){
                           brandIdData = cursor.getString(11);
                           if(brandIdData != null){
-                            brandIdData = (Object)brandIdData;
+                            brandIdData = brandIdData.toString();
                             chatHashMap.put("brandId", brandIdData);
                           }
                         }
@@ -331,15 +333,8 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = getContentValues(modelData);
         // updating row
-        return db.update(TABLE, values, KEY_ID + " = ?",
+        return db.update("HotDeal", values, "id = ?",
                 new String[] { id });
     }
-
-
-
-
-
-
-
 
 }

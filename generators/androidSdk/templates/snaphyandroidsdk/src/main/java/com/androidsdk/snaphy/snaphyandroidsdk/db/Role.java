@@ -1,20 +1,26 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.db;
 
+
+
+
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues;
+import java.util.HashMap;
+import com.google.gson.Gson;
+import android.database.Cursor;
+import java.util.Map;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Role;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.Repository;
-//Import Model
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.RoleRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
-
-
 
 public class RoleDb extends DbHandler<Role, RoleRepository> {
   public ChatDb(Context context, RestAdapter restAdapter){
@@ -43,7 +49,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         ContentValues values = getContentValues(modelData);
-        db.insert(TABLE, null, values);
+        db.insert("Role", null, values);
         db.close(); // Closing database connection
     }
 
@@ -52,31 +58,31 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
     public ContentValues getContentValues(Role modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String idData;
+                                                            String idData = "";
                         if(modelData.getId() != null){
                           idData =modelData.getId().toString();
                         }
                                                 values.put("id", idData);
                                 
-                                                            String nameData;
+                                                            String nameData = "";
                         if(modelData.getName() != null){
                           nameData = modelData.getName().toString();
                         }
                                                 values.put("name", nameData);
                                 
-                                                            String descriptionData;
+                                                            String descriptionData = "";
                         if(modelData.getDescription() != null){
                           descriptionData =modelData.getDescription().toString();
                         }
                                                 values.put("description", descriptionData);
                                 
-                                                            String createdData;
+                                                            String createdData = "";
                         if(modelData.getCreated() != null){
                           createdData =modelData.getCreated().toString();
                         }
                                                 values.put("created", createdData);
                                 
-                                                            String modifiedData;
+                                                            String modifiedData = "";
                         if(modelData.getModified() != null){
                           modifiedData =modelData.getModified().toString();
                         }
@@ -98,17 +104,13 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                if (object != null) {
-                    if (chatHashMap != null) {
-                        RoleRepository repo = restAdapter.createRepository(RoleRepository.class);
-                        return (Role)repo.createObject(chatHashMap);
-                    } else {
-                        return null;
-                    }
+                
+                if (chatHashMap != null) {
+                    RoleRepository repo = restAdapter.createRepository(RoleRepository.class);
+                    return (Role)repo.createObject(chatHashMap);
                 } else {
                     return null;
                 }
-
             } else {
                 return null;
             }
@@ -124,17 +126,17 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
       HashMap<String, Object> chatHashMap = new HashMap<>();
 
                       
-                                                            String idData;
+                                                            String idData = "";
                         if(cursor.getString(0) != null){
                           idData = cursor.getString(0);
                           if(idData != null){
-                            idData = (Object)idData;
+                            idData = idData.toString();
                             chatHashMap.put("id", idData);
                           }
                         }
                                                 
                                 
-                                                            String nameData;
+                                                            String nameData = "";
                         if(cursor.getString(1) != null){
                           nameData = cursor.getString(1);
                           if(nameData != null){
@@ -144,31 +146,31 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
                         }
                                                 
                                 
-                                                            String descriptionData;
+                                                            String descriptionData = "";
                         if(cursor.getString(2) != null){
                           descriptionData = cursor.getString(2);
                           if(descriptionData != null){
-                            descriptionData = (Object)descriptionData;
+                            descriptionData = descriptionData.toString();
                             chatHashMap.put("description", descriptionData);
                           }
                         }
                                                 
                                 
-                                                            String createdData;
+                                                            String createdData = "";
                         if(cursor.getString(3) != null){
                           createdData = cursor.getString(3);
                           if(createdData != null){
-                            createdData = (Object)createdData;
+                            createdData = createdData.toString();
                             chatHashMap.put("created", createdData);
                           }
                         }
                                                 
                                 
-                                                            String modifiedData;
+                                                            String modifiedData = "";
                         if(cursor.getString(4) != null){
                           modifiedData = cursor.getString(4);
                           if(modifiedData != null){
-                            modifiedData = (Object)modifiedData;
+                            modifiedData = modifiedData.toString();
                             chatHashMap.put("modified", modifiedData);
                           }
                         }
@@ -221,15 +223,8 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = getContentValues(modelData);
         // updating row
-        return db.update(TABLE, values, KEY_ID + " = ?",
+        return db.update("Role", values, "id = ?",
                 new String[] { id });
     }
-
-
-
-
-
-
-
 
 }

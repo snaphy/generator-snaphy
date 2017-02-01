@@ -1,20 +1,26 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.db;
 
+
+
+
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues;
+import java.util.HashMap;
+import com.google.gson.Gson;
+import android.database.Cursor;
+import java.util.Map;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.AdminEmail;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.Repository;
-//Import Model
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.AdminEmailRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
-
-
 
 public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
   public ChatDb(Context context, RestAdapter restAdapter){
@@ -43,7 +49,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         ContentValues values = getContentValues(modelData);
-        db.insert(TABLE, null, values);
+        db.insert("AdminEmail", null, values);
         db.close(); // Closing database connection
     }
 
@@ -52,37 +58,37 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
     public ContentValues getContentValues(AdminEmail modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String toData;
+                                                            String toData = "";
                         if(modelData.getTo() != null){
                           toData =modelData.getTo().toString();
                         }
                                                 values.put("to", toData);
                                 
-                                                            String fromData;
+                                                            String fromData = "";
                         if(modelData.getFrom() != null){
                           fromData =modelData.getFrom().toString();
                         }
                                                 values.put("from", fromData);
                                 
-                                                            String subjectData;
+                                                            String subjectData = "";
                         if(modelData.getSubject() != null){
                           subjectData =modelData.getSubject().toString();
                         }
                                                 values.put("subject", subjectData);
                                 
-                                                            String textData;
+                                                            String textData = "";
                         if(modelData.getText() != null){
                           textData =modelData.getText().toString();
                         }
                                                 values.put("text", textData);
                                 
-                                                            String htmlData;
+                                                            String htmlData = "";
                         if(modelData.getHtml() != null){
                           htmlData =modelData.getHtml().toString();
                         }
                                                 values.put("html", htmlData);
                                 
-                                                            String idData;
+                                                            String idData = "";
                         if(modelData.getId() != null){
                           idData =modelData.getId().toString();
                         }
@@ -104,17 +110,13 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                if (object != null) {
-                    if (chatHashMap != null) {
-                        AdminEmailRepository repo = restAdapter.createRepository(AdminEmailRepository.class);
-                        return (AdminEmail)repo.createObject(chatHashMap);
-                    } else {
-                        return null;
-                    }
+                
+                if (chatHashMap != null) {
+                    AdminEmailRepository repo = restAdapter.createRepository(AdminEmailRepository.class);
+                    return (AdminEmail)repo.createObject(chatHashMap);
                 } else {
                     return null;
                 }
-
             } else {
                 return null;
             }
@@ -130,61 +132,61 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
       HashMap<String, Object> chatHashMap = new HashMap<>();
 
                       
-                                                            String toData;
+                                                            String toData = "";
                         if(cursor.getString(0) != null){
                           toData = cursor.getString(0);
                           if(toData != null){
-                            toData = (Object)toData;
+                            toData = toData.toString();
                             chatHashMap.put("to", toData);
                           }
                         }
                                                 
                                 
-                                                            String fromData;
+                                                            String fromData = "";
                         if(cursor.getString(1) != null){
                           fromData = cursor.getString(1);
                           if(fromData != null){
-                            fromData = (Object)fromData;
+                            fromData = fromData.toString();
                             chatHashMap.put("from", fromData);
                           }
                         }
                                                 
                                 
-                                                            String subjectData;
+                                                            String subjectData = "";
                         if(cursor.getString(2) != null){
                           subjectData = cursor.getString(2);
                           if(subjectData != null){
-                            subjectData = (Object)subjectData;
+                            subjectData = subjectData.toString();
                             chatHashMap.put("subject", subjectData);
                           }
                         }
                                                 
                                 
-                                                            String textData;
+                                                            String textData = "";
                         if(cursor.getString(3) != null){
                           textData = cursor.getString(3);
                           if(textData != null){
-                            textData = (Object)textData;
+                            textData = textData.toString();
                             chatHashMap.put("text", textData);
                           }
                         }
                                                 
                                 
-                                                            String htmlData;
+                                                            String htmlData = "";
                         if(cursor.getString(4) != null){
                           htmlData = cursor.getString(4);
                           if(htmlData != null){
-                            htmlData = (Object)htmlData;
+                            htmlData = htmlData.toString();
                             chatHashMap.put("html", htmlData);
                           }
                         }
                                                 
                                 
-                                                            String idData;
+                                                            String idData = "";
                         if(cursor.getString(5) != null){
                           idData = cursor.getString(5);
                           if(idData != null){
-                            idData = (Object)idData;
+                            idData = idData.toString();
                             chatHashMap.put("id", idData);
                           }
                         }
@@ -237,15 +239,8 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = getContentValues(modelData);
         // updating row
-        return db.update(TABLE, values, KEY_ID + " = ?",
+        return db.update("AdminEmail", values, "id = ?",
                 new String[] { id });
     }
-
-
-
-
-
-
-
 
 }

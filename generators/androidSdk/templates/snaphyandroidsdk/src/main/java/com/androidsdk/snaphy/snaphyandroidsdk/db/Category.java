@@ -1,20 +1,26 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.db;
 
+
+
+
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues;
+import java.util.HashMap;
+import com.google.gson.Gson;
+import android.database.Cursor;
+import java.util.Map;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Category;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.Repository;
-//Import Model
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.CategoryRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
-
-
 
 public class CategoryDb extends DbHandler<Category, CategoryRepository> {
   public ChatDb(Context context, RestAdapter restAdapter){
@@ -43,7 +49,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         ContentValues values = getContentValues(modelData);
-        db.insert(TABLE, null, values);
+        db.insert("Category", null, values);
         db.close(); // Closing database connection
     }
 
@@ -52,25 +58,25 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
     public ContentValues getContentValues(Category modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String nameData;
+                                                            String nameData = "";
                         if(modelData.getName() != null){
                           nameData = modelData.getName().toString();
                         }
                                                 values.put("name", nameData);
                                 
-                                                            String addedData;
+                                                            String addedData = "";
                         if(modelData.getAdded() != null){
                           addedData = modelData.getAdded().toString();
                         }
                                                 values.put("added", addedData);
                                 
-                                                            String updatedData;
+                                                            String updatedData = "";
                         if(modelData.getUpdated() != null){
                           updatedData = modelData.getUpdated().toString();
                         }
                                                 values.put("updated", updatedData);
                                 
-                                                            String idData;
+                                                            String idData = "";
                         if(modelData.getId() != null){
                           idData =modelData.getId().toString();
                         }
@@ -92,17 +98,13 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                if (object != null) {
-                    if (chatHashMap != null) {
-                        CategoryRepository repo = restAdapter.createRepository(CategoryRepository.class);
-                        return (Category)repo.createObject(chatHashMap);
-                    } else {
-                        return null;
-                    }
+                
+                if (chatHashMap != null) {
+                    CategoryRepository repo = restAdapter.createRepository(CategoryRepository.class);
+                    return (Category)repo.createObject(chatHashMap);
                 } else {
                     return null;
                 }
-
             } else {
                 return null;
             }
@@ -118,7 +120,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
       HashMap<String, Object> chatHashMap = new HashMap<>();
 
                       
-                                                            String nameData;
+                                                            String nameData = "";
                         if(cursor.getString(0) != null){
                           nameData = cursor.getString(0);
                           if(nameData != null){
@@ -128,7 +130,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
                         }
                                                 
                                 
-                                                            String addedData;
+                                                            String addedData = "";
                         if(cursor.getString(1) != null){
                           addedData = cursor.getString(1);
                           if(addedData != null){
@@ -138,7 +140,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
                         }
                                                 
                                 
-                                                            String updatedData;
+                                                            String updatedData = "";
                         if(cursor.getString(2) != null){
                           updatedData = cursor.getString(2);
                           if(updatedData != null){
@@ -148,11 +150,11 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
                         }
                                                 
                                 
-                                                            String idData;
+                                                            String idData = "";
                         if(cursor.getString(3) != null){
                           idData = cursor.getString(3);
                           if(idData != null){
-                            idData = (Object)idData;
+                            idData = idData.toString();
                             chatHashMap.put("id", idData);
                           }
                         }
@@ -205,15 +207,8 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = getContentValues(modelData);
         // updating row
-        return db.update(TABLE, values, KEY_ID + " = ?",
+        return db.update("Category", values, "id = ?",
                 new String[] { id });
     }
-
-
-
-
-
-
-
 
 }

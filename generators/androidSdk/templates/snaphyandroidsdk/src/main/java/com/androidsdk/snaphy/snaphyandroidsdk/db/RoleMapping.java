@@ -1,20 +1,26 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.db;
 
+
+
+
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues;
+import java.util.HashMap;
+import com.google.gson.Gson;
+import android.database.Cursor;
+import java.util.Map;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.RoleMapping;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.Repository;
-//Import Model
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.RoleMappingRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
-
-
 
 public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository> {
   public ChatDb(Context context, RestAdapter restAdapter){
@@ -43,7 +49,7 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         ContentValues values = getContentValues(modelData);
-        db.insert(TABLE, null, values);
+        db.insert("RoleMapping", null, values);
         db.close(); // Closing database connection
     }
 
@@ -52,25 +58,25 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
     public ContentValues getContentValues(RoleMapping modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String idData;
+                                                            String idData = "";
                         if(modelData.getId() != null){
                           idData =modelData.getId().toString();
                         }
                                                 values.put("id", idData);
                                 
-                                                            String principalTypeData;
+                                                            String principalTypeData = "";
                         if(modelData.getPrincipalType() != null){
                           principalTypeData = modelData.getPrincipalType().toString();
                         }
                                                 values.put("principalType", principalTypeData);
                                 
-                                                            String principalIdData;
+                                                            String principalIdData = "";
                         if(modelData.getPrincipalId() != null){
                           principalIdData =modelData.getPrincipalId().toString();
                         }
                                                 values.put("principalId", principalIdData);
                                 
-                                                            String roleIdData;
+                                                            String roleIdData = "";
                         if(modelData.getRoleId() != null){
                           roleIdData =modelData.getRoleId().toString();
                         }
@@ -92,17 +98,13 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
 
                 cursor.close();
                 db.close(); // Closing database connection
-                if (object != null) {
-                    if (chatHashMap != null) {
-                        RoleMappingRepository repo = restAdapter.createRepository(RoleMappingRepository.class);
-                        return (RoleMapping)repo.createObject(chatHashMap);
-                    } else {
-                        return null;
-                    }
+                
+                if (chatHashMap != null) {
+                    RoleMappingRepository repo = restAdapter.createRepository(RoleMappingRepository.class);
+                    return (RoleMapping)repo.createObject(chatHashMap);
                 } else {
                     return null;
                 }
-
             } else {
                 return null;
             }
@@ -118,17 +120,17 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
       HashMap<String, Object> chatHashMap = new HashMap<>();
 
                       
-                                                            String idData;
+                                                            String idData = "";
                         if(cursor.getString(0) != null){
                           idData = cursor.getString(0);
                           if(idData != null){
-                            idData = (Object)idData;
+                            idData = idData.toString();
                             chatHashMap.put("id", idData);
                           }
                         }
                                                 
                                 
-                                                            String principalTypeData;
+                                                            String principalTypeData = "";
                         if(cursor.getString(1) != null){
                           principalTypeData = cursor.getString(1);
                           if(principalTypeData != null){
@@ -138,21 +140,21 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
                         }
                                                 
                                 
-                                                            String principalIdData;
+                                                            String principalIdData = "";
                         if(cursor.getString(2) != null){
                           principalIdData = cursor.getString(2);
                           if(principalIdData != null){
-                            principalIdData = (Object)principalIdData;
+                            principalIdData = principalIdData.toString();
                             chatHashMap.put("principalId", principalIdData);
                           }
                         }
                                                 
                                 
-                                                            String roleIdData;
+                                                            String roleIdData = "";
                         if(cursor.getString(3) != null){
                           roleIdData = cursor.getString(3);
                           if(roleIdData != null){
-                            roleIdData = (Object)roleIdData;
+                            roleIdData = roleIdData.toString();
                             chatHashMap.put("roleId", roleIdData);
                           }
                         }
@@ -205,15 +207,8 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = getContentValues(modelData);
         // updating row
-        return db.update(TABLE, values, KEY_ID + " = ?",
+        return db.update("RoleMapping", values, "id = ?",
                 new String[] { id });
     }
-
-
-
-
-
-
-
 
 }

@@ -1,20 +1,26 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.db;
 
+
+
+
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues;
+import java.util.HashMap;
+import com.google.gson.Gson;
+import android.database.Cursor;
+import java.util.Map;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.CompanyInfo;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.Repository;
-//Import Model
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.CompanyInfoRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
-
-
 
 public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository> {
   public ChatDb(Context context, RestAdapter restAdapter){
@@ -43,7 +49,7 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         ContentValues values = getContentValues(modelData);
-        db.insert(TABLE, null, values);
+        db.insert("CompanyInfo", null, values);
         db.close(); // Closing database connection
     }
 
@@ -52,25 +58,25 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
     public ContentValues getContentValues(CompanyInfo modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String typeData;
+                                                            String typeData = "";
                         if(modelData.getType() != null){
                           typeData = modelData.getType().toString();
                         }
                                                 values.put("type", typeData);
                                 
-                                                            String htmlData;
+                                                            String htmlData = "";
                         if(modelData.getHtml() != null){
                           htmlData = modelData.getHtml().toString();
                         }
                                                 values.put("html", htmlData);
                                 
-                                                            String editedData;
+                                                            String editedData = "";
                         if(modelData.getEdited() != null){
                           editedData = modelData.getEdited().toString();
                         }
                                                 values.put("edited", editedData);
                                 
-                                                            String idData;
+                                                            String idData = "";
                         if(modelData.getId() != null){
                           idData =modelData.getId().toString();
                         }
@@ -92,17 +98,13 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
 
                 cursor.close();
                 db.close(); // Closing database connection
-                if (object != null) {
-                    if (chatHashMap != null) {
-                        CompanyInfoRepository repo = restAdapter.createRepository(CompanyInfoRepository.class);
-                        return (CompanyInfo)repo.createObject(chatHashMap);
-                    } else {
-                        return null;
-                    }
+                
+                if (chatHashMap != null) {
+                    CompanyInfoRepository repo = restAdapter.createRepository(CompanyInfoRepository.class);
+                    return (CompanyInfo)repo.createObject(chatHashMap);
                 } else {
                     return null;
                 }
-
             } else {
                 return null;
             }
@@ -118,7 +120,7 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
       HashMap<String, Object> chatHashMap = new HashMap<>();
 
                       
-                                                            String typeData;
+                                                            String typeData = "";
                         if(cursor.getString(0) != null){
                           typeData = cursor.getString(0);
                           if(typeData != null){
@@ -128,7 +130,7 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
                         }
                                                 
                                 
-                                                            String htmlData;
+                                                            String htmlData = "";
                         if(cursor.getString(1) != null){
                           htmlData = cursor.getString(1);
                           if(htmlData != null){
@@ -138,7 +140,7 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
                         }
                                                 
                                 
-                                                            String editedData;
+                                                            String editedData = "";
                         if(cursor.getString(2) != null){
                           editedData = cursor.getString(2);
                           if(editedData != null){
@@ -148,11 +150,11 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
                         }
                                                 
                                 
-                                                            String idData;
+                                                            String idData = "";
                         if(cursor.getString(3) != null){
                           idData = cursor.getString(3);
                           if(idData != null){
-                            idData = (Object)idData;
+                            idData = idData.toString();
                             chatHashMap.put("id", idData);
                           }
                         }
@@ -205,15 +207,8 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = getContentValues(modelData);
         // updating row
-        return db.update(TABLE, values, KEY_ID + " = ?",
+        return db.update("CompanyInfo", values, "id = ?",
                 new String[] { id });
     }
-
-
-
-
-
-
-
 
 }

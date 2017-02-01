@@ -1,20 +1,26 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.db;
 
+
+
+
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues;
+import java.util.HashMap;
+import com.google.gson.Gson;
+import android.database.Cursor;
+import java.util.Map;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.BrandManager;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.Repository;
-//Import Model
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandManagerRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
-
-
 
 public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerRepository> {
   public ChatDb(Context context, RestAdapter restAdapter){
@@ -43,7 +49,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         ContentValues values = getContentValues(modelData);
-        db.insert(TABLE, null, values);
+        db.insert("BrandManager", null, values);
         db.close(); // Closing database connection
     }
 
@@ -52,109 +58,109 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
     public ContentValues getContentValues(BrandManager modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String firstNameData;
+                                                            String firstNameData = "";
                         if(modelData.getFirstName() != null){
                           firstNameData = modelData.getFirstName().toString();
                         }
                                                 values.put("firstName", firstNameData);
                                 
-                                                            String lastNameData;
+                                                            String lastNameData = "";
                         if(modelData.getLastName() != null){
                           lastNameData = modelData.getLastName().toString();
                         }
                                                 values.put("lastName", lastNameData);
                                 
-                                                            String emailData;
+                                                            String emailData = "";
                         if(modelData.getEmail() != null){
                           emailData = modelData.getEmail().toString();
                         }
                                                 values.put("email", emailData);
                                 
-                                                            String passwordData;
+                                                            String passwordData = "";
                         if(modelData.getPassword() != null){
                           passwordData = modelData.getPassword().toString();
                         }
                                                 values.put("password", passwordData);
                                 
-                                                            String restrictHotDealData;
+                                                            String restrictHotDealData = "";
                         if(modelData.getRestrictHotDeal() != null){
                           restrictHotDealData = modelData.getRestrictHotDeal().toString();
                         }
                                                 values.put("restrictHotDeal", restrictHotDealData);
                                 
-                                                            String statusData;
+                                                            String statusData = "";
                         if(modelData.getStatus() != null){
                           statusData = modelData.getStatus().toString();
                         }
                                                 values.put("status", statusData);
                                 
-                                                            String addedData;
+                                                            String addedData = "";
                         if(modelData.getAdded() != null){
                           addedData = modelData.getAdded().toString();
                         }
                                                 values.put("added", addedData);
                                 
-                                                            String updatedData;
+                                                            String updatedData = "";
                         if(modelData.getUpdated() != null){
                           updatedData = modelData.getUpdated().toString();
                         }
                                                 values.put("updated", updatedData);
                                 
-                                                            String realmData;
+                                                            String realmData = "";
                         if(modelData.getRealm() != null){
                           realmData =modelData.getRealm().toString();
                         }
                                                 values.put("realm", realmData);
                                 
-                                                            String usernameData;
+                                                            String usernameData = "";
                         if(modelData.getUsername() != null){
                           usernameData =modelData.getUsername().toString();
                         }
                                                 values.put("username", usernameData);
                                 
-                                                            String credentialsData;
+                                                            String credentialsData = "";
                         if(modelData.getCredentials() != null){
                           credentialsData =modelData.getCredentials().toString();
                         }
                                                 values.put("credentials", credentialsData);
                                 
-                                                            String challengesData;
+                                                            String challengesData = "";
                         if(modelData.getChallenges() != null){
                           challengesData =modelData.getChallenges().toString();
                         }
                                                 values.put("challenges", challengesData);
                                 
-                                                            String emailVerifiedData;
+                                                            String emailVerifiedData = "";
                         if(modelData.getEmailVerified() != null){
                           emailVerifiedData =modelData.getEmailVerified().toString();
                         }
                                                 values.put("emailVerified", emailVerifiedData);
                                 
-                                                            String verificationTokenData;
+                                                            String verificationTokenData = "";
                         if(modelData.getVerificationToken() != null){
                           verificationTokenData =modelData.getVerificationToken().toString();
                         }
                                                 values.put("verificationToken", verificationTokenData);
                                 
-                                                            String createdData;
+                                                            String createdData = "";
                         if(modelData.getCreated() != null){
                           createdData =modelData.getCreated().toString();
                         }
                                                 values.put("created", createdData);
                                 
-                                                            String lastUpdatedData;
+                                                            String lastUpdatedData = "";
                         if(modelData.getLastUpdated() != null){
                           lastUpdatedData =modelData.getLastUpdated().toString();
                         }
                                                 values.put("lastUpdated", lastUpdatedData);
                                 
-                                                            String idData;
+                                                            String idData = "";
                         if(modelData.getId() != null){
                           idData =modelData.getId().toString();
                         }
                                                 values.put("id", idData);
                                 
-                                                            String brandIdData;
+                                                            String brandIdData = "";
                         if(modelData.getBrandId() != null){
                           brandIdData =modelData.getBrandId().toString();
                         }
@@ -176,17 +182,13 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
 
                 cursor.close();
                 db.close(); // Closing database connection
-                if (object != null) {
-                    if (chatHashMap != null) {
-                        BrandManagerRepository repo = restAdapter.createRepository(BrandManagerRepository.class);
-                        return (BrandManager)repo.createObject(chatHashMap);
-                    } else {
-                        return null;
-                    }
+                
+                if (chatHashMap != null) {
+                    BrandManagerRepository repo = restAdapter.createRepository(BrandManagerRepository.class);
+                    return (BrandManager)repo.createObject(chatHashMap);
                 } else {
                     return null;
                 }
-
             } else {
                 return null;
             }
@@ -202,7 +204,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
       HashMap<String, Object> chatHashMap = new HashMap<>();
 
                       
-                                                            String firstNameData;
+                                                            String firstNameData = "";
                         if(cursor.getString(0) != null){
                           firstNameData = cursor.getString(0);
                           if(firstNameData != null){
@@ -212,7 +214,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                         }
                                                 
                                 
-                                                            String lastNameData;
+                                                            String lastNameData = "";
                         if(cursor.getString(1) != null){
                           lastNameData = cursor.getString(1);
                           if(lastNameData != null){
@@ -222,7 +224,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                         }
                                                 
                                 
-                                                            String emailData;
+                                                            String emailData = "";
                         if(cursor.getString(2) != null){
                           emailData = cursor.getString(2);
                           if(emailData != null){
@@ -232,7 +234,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                         }
                                                 
                                 
-                                                            String passwordData;
+                                                            String passwordData = "";
                         if(cursor.getString(3) != null){
                           passwordData = cursor.getString(3);
                           if(passwordData != null){
@@ -242,7 +244,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                         }
                                                 
                                 
-                                                            String restrictHotDealData;
+                                                            String restrictHotDealData = "";
                         if(cursor.getString(4) != null){
                           restrictHotDealData = cursor.getString(4);
                           if(restrictHotDealData != null){
@@ -252,7 +254,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                         }
                                                 
                                 
-                                                            String statusData;
+                                                            String statusData = "";
                         if(cursor.getString(5) != null){
                           statusData = cursor.getString(5);
                           if(statusData != null){
@@ -262,7 +264,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                         }
                                                 
                                 
-                                                            String addedData;
+                                                            String addedData = "";
                         if(cursor.getString(6) != null){
                           addedData = cursor.getString(6);
                           if(addedData != null){
@@ -272,7 +274,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                         }
                                                 
                                 
-                                                            String updatedData;
+                                                            String updatedData = "";
                         if(cursor.getString(7) != null){
                           updatedData = cursor.getString(7);
                           if(updatedData != null){
@@ -282,101 +284,101 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                         }
                                                 
                                 
-                                                            String realmData;
+                                                            String realmData = "";
                         if(cursor.getString(8) != null){
                           realmData = cursor.getString(8);
                           if(realmData != null){
-                            realmData = (Object)realmData;
+                            realmData = realmData.toString();
                             chatHashMap.put("realm", realmData);
                           }
                         }
                                                 
                                 
-                                                            String usernameData;
+                                                            String usernameData = "";
                         if(cursor.getString(9) != null){
                           usernameData = cursor.getString(9);
                           if(usernameData != null){
-                            usernameData = (Object)usernameData;
+                            usernameData = usernameData.toString();
                             chatHashMap.put("username", usernameData);
                           }
                         }
                                                 
                                 
-                                                            String credentialsData;
+                                                            String credentialsData = "";
                         if(cursor.getString(10) != null){
                           credentialsData = cursor.getString(10);
                           if(credentialsData != null){
-                            credentialsData = (Object)credentialsData;
+                            credentialsData = credentialsData.toString();
                             chatHashMap.put("credentials", credentialsData);
                           }
                         }
                                                 
                                 
-                                                            String challengesData;
+                                                            String challengesData = "";
                         if(cursor.getString(11) != null){
                           challengesData = cursor.getString(11);
                           if(challengesData != null){
-                            challengesData = (Object)challengesData;
+                            challengesData = challengesData.toString();
                             chatHashMap.put("challenges", challengesData);
                           }
                         }
                                                 
                                 
-                                                            String emailVerifiedData;
+                                                            String emailVerifiedData = "";
                         if(cursor.getString(12) != null){
                           emailVerifiedData = cursor.getString(12);
                           if(emailVerifiedData != null){
-                            emailVerifiedData = (Object)emailVerifiedData;
+                            emailVerifiedData = emailVerifiedData.toString();
                             chatHashMap.put("emailVerified", emailVerifiedData);
                           }
                         }
                                                 
                                 
-                                                            String verificationTokenData;
+                                                            String verificationTokenData = "";
                         if(cursor.getString(13) != null){
                           verificationTokenData = cursor.getString(13);
                           if(verificationTokenData != null){
-                            verificationTokenData = (Object)verificationTokenData;
+                            verificationTokenData = verificationTokenData.toString();
                             chatHashMap.put("verificationToken", verificationTokenData);
                           }
                         }
                                                 
                                 
-                                                            String createdData;
+                                                            String createdData = "";
                         if(cursor.getString(14) != null){
                           createdData = cursor.getString(14);
                           if(createdData != null){
-                            createdData = (Object)createdData;
+                            createdData = createdData.toString();
                             chatHashMap.put("created", createdData);
                           }
                         }
                                                 
                                 
-                                                            String lastUpdatedData;
+                                                            String lastUpdatedData = "";
                         if(cursor.getString(15) != null){
                           lastUpdatedData = cursor.getString(15);
                           if(lastUpdatedData != null){
-                            lastUpdatedData = (Object)lastUpdatedData;
+                            lastUpdatedData = lastUpdatedData.toString();
                             chatHashMap.put("lastUpdated", lastUpdatedData);
                           }
                         }
                                                 
                                 
-                                                            String idData;
+                                                            String idData = "";
                         if(cursor.getString(16) != null){
                           idData = cursor.getString(16);
                           if(idData != null){
-                            idData = (Object)idData;
+                            idData = idData.toString();
                             chatHashMap.put("id", idData);
                           }
                         }
                                                 
                                 
-                                                            String brandIdData;
+                                                            String brandIdData = "";
                         if(cursor.getString(17) != null){
                           brandIdData = cursor.getString(17);
                           if(brandIdData != null){
-                            brandIdData = (Object)brandIdData;
+                            brandIdData = brandIdData.toString();
                             chatHashMap.put("brandId", brandIdData);
                           }
                         }
@@ -429,15 +431,8 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = getContentValues(modelData);
         // updating row
-        return db.update(TABLE, values, KEY_ID + " = ?",
+        return db.update("BrandManager", values, "id = ?",
                 new String[] { id });
     }
-
-
-
-
-
-
-
 
 }

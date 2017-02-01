@@ -1,20 +1,26 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.db;
 
+
+
+
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues;
+import java.util.HashMap;
+import com.google.gson.Gson;
+import android.database.Cursor;
+import java.util.Map;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.DailyFeed;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.Repository;
-//Import Model
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.DailyFeedRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
-
-
 
 public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
   public ChatDb(Context context, RestAdapter restAdapter){
@@ -43,7 +49,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         ContentValues values = getContentValues(modelData);
-        db.insert(TABLE, null, values);
+        db.insert("DailyFeed", null, values);
         db.close(); // Closing database connection
     }
 
@@ -52,43 +58,43 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
     public ContentValues getContentValues(DailyFeed modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String addedData;
+                                                            String addedData = "";
                         if(modelData.getAdded() != null){
                           addedData = modelData.getAdded().toString();
                         }
                                                 values.put("added", addedData);
                                 
-                                                            String updatedData;
+                                                            String updatedData = "";
                         if(modelData.getUpdated() != null){
                           updatedData = modelData.getUpdated().toString();
                         }
                                                 values.put("updated", updatedData);
                                 
-                                                            String titleData;
+                                                            String titleData = "";
                         if(modelData.getTitle() != null){
                           titleData = modelData.getTitle().toString();
                         }
                                                 values.put("title", titleData);
                                 
-                                                            String descriptionData;
+                                                            String descriptionData = "";
                         if(modelData.getDescription() != null){
                           descriptionData = modelData.getDescription().toString();
                         }
                                                 values.put("description", descriptionData);
                                 
-                                                            String imageData;
+                                                            String imageData = "";
                         if(modelData.getImage() != null){
                           imageData = new Gson().toJson(modelData.getImage(), HashMap.class);
                         }
                                                 values.put("image", imageData);
                                 
-                                                            String idData;
+                                                            String idData = "";
                         if(modelData.getId() != null){
                           idData =modelData.getId().toString();
                         }
                                                 values.put("id", idData);
                                 
-                                                            String brandIdData;
+                                                            String brandIdData = "";
                         if(modelData.getBrandId() != null){
                           brandIdData =modelData.getBrandId().toString();
                         }
@@ -110,17 +116,13 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                if (object != null) {
-                    if (chatHashMap != null) {
-                        DailyFeedRepository repo = restAdapter.createRepository(DailyFeedRepository.class);
-                        return (DailyFeed)repo.createObject(chatHashMap);
-                    } else {
-                        return null;
-                    }
+                
+                if (chatHashMap != null) {
+                    DailyFeedRepository repo = restAdapter.createRepository(DailyFeedRepository.class);
+                    return (DailyFeed)repo.createObject(chatHashMap);
                 } else {
                     return null;
                 }
-
             } else {
                 return null;
             }
@@ -136,7 +138,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
       HashMap<String, Object> chatHashMap = new HashMap<>();
 
                       
-                                                            String addedData;
+                                                            String addedData = "";
                         if(cursor.getString(0) != null){
                           addedData = cursor.getString(0);
                           if(addedData != null){
@@ -146,7 +148,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
                         }
                                                 
                                 
-                                                            String updatedData;
+                                                            String updatedData = "";
                         if(cursor.getString(1) != null){
                           updatedData = cursor.getString(1);
                           if(updatedData != null){
@@ -156,7 +158,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
                         }
                                                 
                                 
-                                                            String titleData;
+                                                            String titleData = "";
                         if(cursor.getString(2) != null){
                           titleData = cursor.getString(2);
                           if(titleData != null){
@@ -166,7 +168,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
                         }
                                                 
                                 
-                                                            String descriptionData;
+                                                            String descriptionData = "";
                         if(cursor.getString(3) != null){
                           descriptionData = cursor.getString(3);
                           if(descriptionData != null){
@@ -176,7 +178,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
                         }
                                                 
                                 
-                                                            Map<String, Object> imageData = new Map<>();
+                                                            Map<String, Object> imageData = new HashMap<>();
                         if(cursor.getString(4) != null){
                           imageData = new Gson().fromJson(cursor.getString(4), Map.class);
                           if(imageData != null){
@@ -186,21 +188,21 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
                         }
                                                 
                                 
-                                                            String idData;
+                                                            String idData = "";
                         if(cursor.getString(5) != null){
                           idData = cursor.getString(5);
                           if(idData != null){
-                            idData = (Object)idData;
+                            idData = idData.toString();
                             chatHashMap.put("id", idData);
                           }
                         }
                                                 
                                 
-                                                            String brandIdData;
+                                                            String brandIdData = "";
                         if(cursor.getString(6) != null){
                           brandIdData = cursor.getString(6);
                           if(brandIdData != null){
-                            brandIdData = (Object)brandIdData;
+                            brandIdData = brandIdData.toString();
                             chatHashMap.put("brandId", brandIdData);
                           }
                         }
@@ -253,15 +255,8 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = getContentValues(modelData);
         // updating row
-        return db.update(TABLE, values, KEY_ID + " = ?",
+        return db.update("DailyFeed", values, "id = ?",
                 new String[] { id });
     }
-
-
-
-
-
-
-
 
 }

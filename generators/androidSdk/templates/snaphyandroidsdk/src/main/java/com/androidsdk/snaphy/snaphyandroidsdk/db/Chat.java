@@ -1,20 +1,26 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.db;
 
+
+
+
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues;
+import java.util.HashMap;
+import com.google.gson.Gson;
+import android.database.Cursor;
+import java.util.Map;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.Repository;
-//Import Model
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
-
-
 
 public class ChatDb extends DbHandler<Chat, ChatRepository> {
   public ChatDb(Context context, RestAdapter restAdapter){
@@ -43,7 +49,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         ContentValues values = getContentValues(modelData);
-        db.insert(TABLE, null, values);
+        db.insert("Chat", null, values);
         db.close(); // Closing database connection
     }
 
@@ -52,67 +58,67 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
     public ContentValues getContentValues(Chat modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String addedData;
+                                                            String addedData = "";
                         if(modelData.getAdded() != null){
                           addedData = modelData.getAdded().toString();
                         }
                                                 values.put("added", addedData);
                                 
-                                                            String updatedData;
+                                                            String updatedData = "";
                         if(modelData.getUpdated() != null){
                           updatedData = modelData.getUpdated().toString();
                         }
                                                 values.put("updated", updatedData);
                                 
-                                                            String messageData;
+                                                            String messageData = "";
                         if(modelData.getMessage() != null){
                           messageData = modelData.getMessage().toString();
                         }
                                                 values.put("message", messageData);
                                 
-                                                            String typeData;
+                                                            String typeData = "";
                         if(modelData.getType() != null){
                           typeData = modelData.getType().toString();
                         }
                                                 values.put("type", typeData);
                                 
-                                                            String imageData;
+                                                            String imageData = "";
                         if(modelData.getImage() != null){
                           imageData = new Gson().toJson(modelData.getImage(), HashMap.class);
                         }
                                                 values.put("image", imageData);
                                 
-                                                            String fromData;
+                                                            String fromData = "";
                         if(modelData.getFrom() != null){
                           fromData = modelData.getFrom().toString();
                         }
                                                 values.put("from", fromData);
                                 
-                                                            String guidData;
+                                                            String guidData = "";
                         if(modelData.getGuid() != null){
                           guidData = modelData.getGuid().toString();
                         }
                                                 values.put("guid", guidData);
                                 
-                                                            String statusData;
+                                                            String statusData = "";
                         if(modelData.getStatus() != null){
                           statusData = modelData.getStatus().toString();
                         }
                                                 values.put("status", statusData);
                                 
-                                                            String idData;
+                                                            String idData = "";
                         if(modelData.getId() != null){
                           idData =modelData.getId().toString();
                         }
                                                 values.put("id", idData);
                                 
-                                                            String appUserIdData;
+                                                            String appUserIdData = "";
                         if(modelData.getAppUserId() != null){
                           appUserIdData =modelData.getAppUserId().toString();
                         }
                                                 values.put("appUserId", appUserIdData);
                                 
-                                                            String brandIdData;
+                                                            String brandIdData = "";
                         if(modelData.getBrandId() != null){
                           brandIdData =modelData.getBrandId().toString();
                         }
@@ -134,17 +140,13 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                if (object != null) {
-                    if (chatHashMap != null) {
-                        ChatRepository repo = restAdapter.createRepository(ChatRepository.class);
-                        return (Chat)repo.createObject(chatHashMap);
-                    } else {
-                        return null;
-                    }
+                
+                if (chatHashMap != null) {
+                    ChatRepository repo = restAdapter.createRepository(ChatRepository.class);
+                    return (Chat)repo.createObject(chatHashMap);
                 } else {
                     return null;
                 }
-
             } else {
                 return null;
             }
@@ -160,7 +162,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
       HashMap<String, Object> chatHashMap = new HashMap<>();
 
                       
-                                                            String addedData;
+                                                            String addedData = "";
                         if(cursor.getString(0) != null){
                           addedData = cursor.getString(0);
                           if(addedData != null){
@@ -170,7 +172,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                         }
                                                 
                                 
-                                                            String updatedData;
+                                                            String updatedData = "";
                         if(cursor.getString(1) != null){
                           updatedData = cursor.getString(1);
                           if(updatedData != null){
@@ -180,7 +182,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                         }
                                                 
                                 
-                                                            String messageData;
+                                                            String messageData = "";
                         if(cursor.getString(2) != null){
                           messageData = cursor.getString(2);
                           if(messageData != null){
@@ -190,7 +192,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                         }
                                                 
                                 
-                                                            String typeData;
+                                                            String typeData = "";
                         if(cursor.getString(3) != null){
                           typeData = cursor.getString(3);
                           if(typeData != null){
@@ -200,7 +202,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                         }
                                                 
                                 
-                                                            Map<String, Object> imageData = new Map<>();
+                                                            Map<String, Object> imageData = new HashMap<>();
                         if(cursor.getString(4) != null){
                           imageData = new Gson().fromJson(cursor.getString(4), Map.class);
                           if(imageData != null){
@@ -210,7 +212,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                         }
                                                 
                                 
-                                                            String fromData;
+                                                            String fromData = "";
                         if(cursor.getString(5) != null){
                           fromData = cursor.getString(5);
                           if(fromData != null){
@@ -220,7 +222,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                         }
                                                 
                                 
-                                                            String guidData;
+                                                            String guidData = "";
                         if(cursor.getString(6) != null){
                           guidData = cursor.getString(6);
                           if(guidData != null){
@@ -230,7 +232,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                         }
                                                 
                                 
-                                                            String statusData;
+                                                            String statusData = "";
                         if(cursor.getString(7) != null){
                           statusData = cursor.getString(7);
                           if(statusData != null){
@@ -240,31 +242,31 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                         }
                                                 
                                 
-                                                            String idData;
+                                                            String idData = "";
                         if(cursor.getString(8) != null){
                           idData = cursor.getString(8);
                           if(idData != null){
-                            idData = (Object)idData;
+                            idData = idData.toString();
                             chatHashMap.put("id", idData);
                           }
                         }
                                                 
                                 
-                                                            String appUserIdData;
+                                                            String appUserIdData = "";
                         if(cursor.getString(9) != null){
                           appUserIdData = cursor.getString(9);
                           if(appUserIdData != null){
-                            appUserIdData = (Object)appUserIdData;
+                            appUserIdData = appUserIdData.toString();
                             chatHashMap.put("appUserId", appUserIdData);
                           }
                         }
                                                 
                                 
-                                                            String brandIdData;
+                                                            String brandIdData = "";
                         if(cursor.getString(10) != null){
                           brandIdData = cursor.getString(10);
                           if(brandIdData != null){
-                            brandIdData = (Object)brandIdData;
+                            brandIdData = brandIdData.toString();
                             chatHashMap.put("brandId", brandIdData);
                           }
                         }
@@ -317,15 +319,8 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = getContentValues(modelData);
         // updating row
-        return db.update(TABLE, values, KEY_ID + " = ?",
+        return db.update("Chat", values, "id = ?",
                 new String[] { id });
     }
-
-
-
-
-
-
-
 
 }

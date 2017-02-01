@@ -1,20 +1,26 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.db;
 
+
+
+
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues;
+import java.util.HashMap;
+import com.google.gson.Gson;
+import android.database.Cursor;
+import java.util.Map;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.AmazonImage;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.Repository;
-//Import Model
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.AmazonImageRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
-
-
 
 public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository> {
   public ChatDb(Context context, RestAdapter restAdapter){
@@ -43,7 +49,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         ContentValues values = getContentValues(modelData);
-        db.insert(TABLE, null, values);
+        db.insert("AmazonImage", null, values);
         db.close(); // Closing database connection
     }
 
@@ -52,31 +58,31 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
     public ContentValues getContentValues(AmazonImage modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String nameData;
+                                                            String nameData = "";
                         if(modelData.getName() != null){
                           nameData = modelData.getName().toString();
                         }
                                                 values.put("name", nameData);
                                 
-                                                            String containerData;
+                                                            String containerData = "";
                         if(modelData.getContainer() != null){
                           containerData = modelData.getContainer().toString();
                         }
                                                 values.put("container", containerData);
                                 
-                                                            String typeData;
+                                                            String typeData = "";
                         if(modelData.getType() != null){
                           typeData = modelData.getType().toString();
                         }
                                                 values.put("type", typeData);
                                 
-                                                            String urlData;
+                                                            String urlData = "";
                         if(modelData.getUrl() != null){
                           urlData = new Gson().toJson(modelData.getUrl(), HashMap.class);
                         }
                                                 values.put("url", urlData);
                                 
-                                                            String idData;
+                                                            String idData = "";
                         if(modelData.getId() != null){
                           idData =modelData.getId().toString();
                         }
@@ -98,17 +104,13 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
 
                 cursor.close();
                 db.close(); // Closing database connection
-                if (object != null) {
-                    if (chatHashMap != null) {
-                        AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);
-                        return (AmazonImage)repo.createObject(chatHashMap);
-                    } else {
-                        return null;
-                    }
+                
+                if (chatHashMap != null) {
+                    AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);
+                    return (AmazonImage)repo.createObject(chatHashMap);
                 } else {
                     return null;
                 }
-
             } else {
                 return null;
             }
@@ -124,7 +126,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
       HashMap<String, Object> chatHashMap = new HashMap<>();
 
                       
-                                                            String nameData;
+                                                            String nameData = "";
                         if(cursor.getString(0) != null){
                           nameData = cursor.getString(0);
                           if(nameData != null){
@@ -134,7 +136,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
                         }
                                                 
                                 
-                                                            String containerData;
+                                                            String containerData = "";
                         if(cursor.getString(1) != null){
                           containerData = cursor.getString(1);
                           if(containerData != null){
@@ -144,7 +146,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
                         }
                                                 
                                 
-                                                            String typeData;
+                                                            String typeData = "";
                         if(cursor.getString(2) != null){
                           typeData = cursor.getString(2);
                           if(typeData != null){
@@ -154,7 +156,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
                         }
                                                 
                                 
-                                                            Map<String, Object> urlData = new Map<>();
+                                                            Map<String, Object> urlData = new HashMap<>();
                         if(cursor.getString(3) != null){
                           urlData = new Gson().fromJson(cursor.getString(3), Map.class);
                           if(urlData != null){
@@ -164,11 +166,11 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
                         }
                                                 
                                 
-                                                            String idData;
+                                                            String idData = "";
                         if(cursor.getString(4) != null){
                           idData = cursor.getString(4);
                           if(idData != null){
-                            idData = (Object)idData;
+                            idData = idData.toString();
                             chatHashMap.put("id", idData);
                           }
                         }
@@ -221,15 +223,8 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = getContentValues(modelData);
         // updating row
-        return db.update(TABLE, values, KEY_ID + " = ?",
+        return db.update("AmazonImage", values, "id = ?",
                 new String[] { id });
     }
-
-
-
-
-
-
-
 
 }

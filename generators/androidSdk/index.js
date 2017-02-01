@@ -84,7 +84,7 @@ var generateDbModel = function(app, modelsRestDefinition){
         };
         //console.log(modelsRestDefinition);
 
-        compileAndWrite(model, ModelDBTemplatePath, AndroidModelPath, helper.capitalizeFirstLetter(modelName) +".java");
+        compileAndWrite(model, ModelDBTemplatePath, AndroidModelPath, helper.capitalizeFirstLetter(modelName) +"Db.java");
       }
     }
   }

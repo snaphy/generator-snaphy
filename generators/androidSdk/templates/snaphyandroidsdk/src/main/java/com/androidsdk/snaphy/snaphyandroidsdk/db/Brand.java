@@ -1,20 +1,26 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.db;
 
+
+
+
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues;
+import java.util.HashMap;
+import com.google.gson.Gson;
+import android.database.Cursor;
+import java.util.Map;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Brand;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.Repository;
-//Import Model
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
-
-
 
 public class BrandDb extends DbHandler<Brand, BrandRepository> {
   public ChatDb(Context context, RestAdapter restAdapter){
@@ -43,7 +49,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         ContentValues values = getContentValues(modelData);
-        db.insert(TABLE, null, values);
+        db.insert("Brand", null, values);
         db.close(); // Closing database connection
     }
 
@@ -52,67 +58,67 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
     public ContentValues getContentValues(Brand modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String addedData;
+                                                            String addedData = "";
                         if(modelData.getAdded() != null){
                           addedData = modelData.getAdded().toString();
                         }
                                                 values.put("added", addedData);
                                 
-                                                            String updatedData;
+                                                            String updatedData = "";
                         if(modelData.getUpdated() != null){
                           updatedData = modelData.getUpdated().toString();
                         }
                                                 values.put("updated", updatedData);
                                 
-                                                            String nameData;
+                                                            String nameData = "";
                         if(modelData.getName() != null){
                           nameData = modelData.getName().toString();
                         }
                                                 values.put("name", nameData);
                                 
-                                                            String imageData;
+                                                            String imageData = "";
                         if(modelData.getImage() != null){
                           imageData = new Gson().toJson(modelData.getImage(), HashMap.class);
                         }
                                                 values.put("image", imageData);
                                 
-                                                            String trendingData;
+                                                            String trendingData = "";
                         if(modelData.getTrending() != null){
                           trendingData = modelData.getTrending().toString();
                         }
                                                 values.put("trending", trendingData);
                                 
-                                                            String facebookUrlData;
+                                                            String facebookUrlData = "";
                         if(modelData.getFacebookUrl() != null){
                           facebookUrlData = modelData.getFacebookUrl().toString();
                         }
                                                 values.put("facebookUrl", facebookUrlData);
                                 
-                                                            String googleUrlData;
+                                                            String googleUrlData = "";
                         if(modelData.getGoogleUrl() != null){
                           googleUrlData = modelData.getGoogleUrl().toString();
                         }
                                                 values.put("googleUrl", googleUrlData);
                                 
-                                                            String instagramUrlData;
+                                                            String instagramUrlData = "";
                         if(modelData.getInstagramUrl() != null){
                           instagramUrlData = modelData.getInstagramUrl().toString();
                         }
                                                 values.put("instagramUrl", instagramUrlData);
                                 
-                                                            String statusData;
+                                                            String statusData = "";
                         if(modelData.getStatus() != null){
                           statusData = modelData.getStatus().toString();
                         }
                                                 values.put("status", statusData);
                                 
-                                                            String associatedEmailData;
+                                                            String associatedEmailData = "";
                         if(modelData.getAssociatedEmail() != null){
                           associatedEmailData = modelData.getAssociatedEmail().toString();
                         }
                                                 values.put("associatedEmail", associatedEmailData);
                                 
-                                                            String idData;
+                                                            String idData = "";
                         if(modelData.getId() != null){
                           idData =modelData.getId().toString();
                         }
@@ -134,17 +140,13 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                if (object != null) {
-                    if (chatHashMap != null) {
-                        BrandRepository repo = restAdapter.createRepository(BrandRepository.class);
-                        return (Brand)repo.createObject(chatHashMap);
-                    } else {
-                        return null;
-                    }
+                
+                if (chatHashMap != null) {
+                    BrandRepository repo = restAdapter.createRepository(BrandRepository.class);
+                    return (Brand)repo.createObject(chatHashMap);
                 } else {
                     return null;
                 }
-
             } else {
                 return null;
             }
@@ -160,7 +162,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
       HashMap<String, Object> chatHashMap = new HashMap<>();
 
                       
-                                                            String addedData;
+                                                            String addedData = "";
                         if(cursor.getString(0) != null){
                           addedData = cursor.getString(0);
                           if(addedData != null){
@@ -170,7 +172,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                         }
                                                 
                                 
-                                                            String updatedData;
+                                                            String updatedData = "";
                         if(cursor.getString(1) != null){
                           updatedData = cursor.getString(1);
                           if(updatedData != null){
@@ -180,7 +182,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                         }
                                                 
                                 
-                                                            String nameData;
+                                                            String nameData = "";
                         if(cursor.getString(2) != null){
                           nameData = cursor.getString(2);
                           if(nameData != null){
@@ -190,7 +192,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                         }
                                                 
                                 
-                                                            Map<String, Object> imageData = new Map<>();
+                                                            Map<String, Object> imageData = new HashMap<>();
                         if(cursor.getString(3) != null){
                           imageData = new Gson().fromJson(cursor.getString(3), Map.class);
                           if(imageData != null){
@@ -200,7 +202,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                         }
                                                 
                                 
-                                                            String trendingData;
+                                                            String trendingData = "";
                         if(cursor.getString(4) != null){
                           trendingData = cursor.getString(4);
                           if(trendingData != null){
@@ -210,7 +212,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                         }
                                                 
                                 
-                                                            String facebookUrlData;
+                                                            String facebookUrlData = "";
                         if(cursor.getString(5) != null){
                           facebookUrlData = cursor.getString(5);
                           if(facebookUrlData != null){
@@ -220,7 +222,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                         }
                                                 
                                 
-                                                            String googleUrlData;
+                                                            String googleUrlData = "";
                         if(cursor.getString(6) != null){
                           googleUrlData = cursor.getString(6);
                           if(googleUrlData != null){
@@ -230,7 +232,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                         }
                                                 
                                 
-                                                            String instagramUrlData;
+                                                            String instagramUrlData = "";
                         if(cursor.getString(7) != null){
                           instagramUrlData = cursor.getString(7);
                           if(instagramUrlData != null){
@@ -240,7 +242,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                         }
                                                 
                                 
-                                                            String statusData;
+                                                            String statusData = "";
                         if(cursor.getString(8) != null){
                           statusData = cursor.getString(8);
                           if(statusData != null){
@@ -250,7 +252,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                         }
                                                 
                                 
-                                                            String associatedEmailData;
+                                                            String associatedEmailData = "";
                         if(cursor.getString(9) != null){
                           associatedEmailData = cursor.getString(9);
                           if(associatedEmailData != null){
@@ -260,11 +262,11 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                         }
                                                 
                                 
-                                                            String idData;
+                                                            String idData = "";
                         if(cursor.getString(10) != null){
                           idData = cursor.getString(10);
                           if(idData != null){
-                            idData = (Object)idData;
+                            idData = idData.toString();
                             chatHashMap.put("id", idData);
                           }
                         }
@@ -317,15 +319,8 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = getContentValues(modelData);
         // updating row
-        return db.update(TABLE, values, KEY_ID + " = ?",
+        return db.update("Brand", values, "id = ?",
                 new String[] { id });
     }
-
-
-
-
-
-
-
 
 }

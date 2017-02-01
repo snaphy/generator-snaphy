@@ -1,20 +1,26 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.db;
 
+
+
+
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues;
+import java.util.HashMap;
+import com.google.gson.Gson;
+import android.database.Cursor;
+import java.util.Map;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Employee;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.Repository;
-//Import Model
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
-
-
 
 public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
   public ChatDb(Context context, RestAdapter restAdapter){
@@ -43,7 +49,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         ContentValues values = getContentValues(modelData);
-        db.insert(TABLE, null, values);
+        db.insert("Employee", null, values);
         db.close(); // Closing database connection
     }
 
@@ -52,97 +58,97 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
     public ContentValues getContentValues(Employee modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String usernameData;
+                                                            String usernameData = "";
                         if(modelData.getUsername() != null){
                           usernameData = modelData.getUsername().toString();
                         }
                                                 values.put("username", usernameData);
                                 
-                                                            String firstNameData;
+                                                            String firstNameData = "";
                         if(modelData.getFirstName() != null){
                           firstNameData = modelData.getFirstName().toString();
                         }
                                                 values.put("firstName", firstNameData);
                                 
-                                                            String lastNameData;
+                                                            String lastNameData = "";
                         if(modelData.getLastName() != null){
                           lastNameData = modelData.getLastName().toString();
                         }
                                                 values.put("lastName", lastNameData);
                                 
-                                                            String addedData;
+                                                            String addedData = "";
                         if(modelData.getAdded() != null){
                           addedData = modelData.getAdded().toString();
                         }
                                                 values.put("added", addedData);
                                 
-                                                            String updatedData;
+                                                            String updatedData = "";
                         if(modelData.getUpdated() != null){
                           updatedData = modelData.getUpdated().toString();
                         }
                                                 values.put("updated", updatedData);
                                 
-                                                            String emailData;
+                                                            String emailData = "";
                         if(modelData.getEmail() != null){
                           emailData = modelData.getEmail().toString();
                         }
                                                 values.put("email", emailData);
                                 
-                                                            String passwordData;
+                                                            String passwordData = "";
                         if(modelData.getPassword() != null){
                           passwordData = modelData.getPassword().toString();
                         }
                                                 values.put("password", passwordData);
                                 
-                                                            String realmData;
+                                                            String realmData = "";
                         if(modelData.getRealm() != null){
                           realmData =modelData.getRealm().toString();
                         }
                                                 values.put("realm", realmData);
                                 
-                                                            String credentialsData;
+                                                            String credentialsData = "";
                         if(modelData.getCredentials() != null){
                           credentialsData =modelData.getCredentials().toString();
                         }
                                                 values.put("credentials", credentialsData);
                                 
-                                                            String challengesData;
+                                                            String challengesData = "";
                         if(modelData.getChallenges() != null){
                           challengesData =modelData.getChallenges().toString();
                         }
                                                 values.put("challenges", challengesData);
                                 
-                                                            String emailVerifiedData;
+                                                            String emailVerifiedData = "";
                         if(modelData.getEmailVerified() != null){
                           emailVerifiedData =modelData.getEmailVerified().toString();
                         }
                                                 values.put("emailVerified", emailVerifiedData);
                                 
-                                                            String verificationTokenData;
+                                                            String verificationTokenData = "";
                         if(modelData.getVerificationToken() != null){
                           verificationTokenData =modelData.getVerificationToken().toString();
                         }
                                                 values.put("verificationToken", verificationTokenData);
                                 
-                                                            String statusData;
+                                                            String statusData = "";
                         if(modelData.getStatus() != null){
                           statusData =modelData.getStatus().toString();
                         }
                                                 values.put("status", statusData);
                                 
-                                                            String createdData;
+                                                            String createdData = "";
                         if(modelData.getCreated() != null){
                           createdData =modelData.getCreated().toString();
                         }
                                                 values.put("created", createdData);
                                 
-                                                            String lastUpdatedData;
+                                                            String lastUpdatedData = "";
                         if(modelData.getLastUpdated() != null){
                           lastUpdatedData =modelData.getLastUpdated().toString();
                         }
                                                 values.put("lastUpdated", lastUpdatedData);
                                 
-                                                            String idData;
+                                                            String idData = "";
                         if(modelData.getId() != null){
                           idData =modelData.getId().toString();
                         }
@@ -164,17 +170,13 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                if (object != null) {
-                    if (chatHashMap != null) {
-                        EmployeeRepository repo = restAdapter.createRepository(EmployeeRepository.class);
-                        return (Employee)repo.createObject(chatHashMap);
-                    } else {
-                        return null;
-                    }
+                
+                if (chatHashMap != null) {
+                    EmployeeRepository repo = restAdapter.createRepository(EmployeeRepository.class);
+                    return (Employee)repo.createObject(chatHashMap);
                 } else {
                     return null;
                 }
-
             } else {
                 return null;
             }
@@ -190,7 +192,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
       HashMap<String, Object> chatHashMap = new HashMap<>();
 
                       
-                                                            String usernameData;
+                                                            String usernameData = "";
                         if(cursor.getString(0) != null){
                           usernameData = cursor.getString(0);
                           if(usernameData != null){
@@ -200,7 +202,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                         }
                                                 
                                 
-                                                            String firstNameData;
+                                                            String firstNameData = "";
                         if(cursor.getString(1) != null){
                           firstNameData = cursor.getString(1);
                           if(firstNameData != null){
@@ -210,7 +212,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                         }
                                                 
                                 
-                                                            String lastNameData;
+                                                            String lastNameData = "";
                         if(cursor.getString(2) != null){
                           lastNameData = cursor.getString(2);
                           if(lastNameData != null){
@@ -220,7 +222,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                         }
                                                 
                                 
-                                                            String addedData;
+                                                            String addedData = "";
                         if(cursor.getString(3) != null){
                           addedData = cursor.getString(3);
                           if(addedData != null){
@@ -230,7 +232,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                         }
                                                 
                                 
-                                                            String updatedData;
+                                                            String updatedData = "";
                         if(cursor.getString(4) != null){
                           updatedData = cursor.getString(4);
                           if(updatedData != null){
@@ -240,7 +242,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                         }
                                                 
                                 
-                                                            String emailData;
+                                                            String emailData = "";
                         if(cursor.getString(5) != null){
                           emailData = cursor.getString(5);
                           if(emailData != null){
@@ -250,7 +252,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                         }
                                                 
                                 
-                                                            String passwordData;
+                                                            String passwordData = "";
                         if(cursor.getString(6) != null){
                           passwordData = cursor.getString(6);
                           if(passwordData != null){
@@ -260,91 +262,91 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                         }
                                                 
                                 
-                                                            String realmData;
+                                                            String realmData = "";
                         if(cursor.getString(7) != null){
                           realmData = cursor.getString(7);
                           if(realmData != null){
-                            realmData = (Object)realmData;
+                            realmData = realmData.toString();
                             chatHashMap.put("realm", realmData);
                           }
                         }
                                                 
                                 
-                                                            String credentialsData;
+                                                            String credentialsData = "";
                         if(cursor.getString(8) != null){
                           credentialsData = cursor.getString(8);
                           if(credentialsData != null){
-                            credentialsData = (Object)credentialsData;
+                            credentialsData = credentialsData.toString();
                             chatHashMap.put("credentials", credentialsData);
                           }
                         }
                                                 
                                 
-                                                            String challengesData;
+                                                            String challengesData = "";
                         if(cursor.getString(9) != null){
                           challengesData = cursor.getString(9);
                           if(challengesData != null){
-                            challengesData = (Object)challengesData;
+                            challengesData = challengesData.toString();
                             chatHashMap.put("challenges", challengesData);
                           }
                         }
                                                 
                                 
-                                                            String emailVerifiedData;
+                                                            String emailVerifiedData = "";
                         if(cursor.getString(10) != null){
                           emailVerifiedData = cursor.getString(10);
                           if(emailVerifiedData != null){
-                            emailVerifiedData = (Object)emailVerifiedData;
+                            emailVerifiedData = emailVerifiedData.toString();
                             chatHashMap.put("emailVerified", emailVerifiedData);
                           }
                         }
                                                 
                                 
-                                                            String verificationTokenData;
+                                                            String verificationTokenData = "";
                         if(cursor.getString(11) != null){
                           verificationTokenData = cursor.getString(11);
                           if(verificationTokenData != null){
-                            verificationTokenData = (Object)verificationTokenData;
+                            verificationTokenData = verificationTokenData.toString();
                             chatHashMap.put("verificationToken", verificationTokenData);
                           }
                         }
                                                 
                                 
-                                                            String statusData;
+                                                            String statusData = "";
                         if(cursor.getString(12) != null){
                           statusData = cursor.getString(12);
                           if(statusData != null){
-                            statusData = (Object)statusData;
+                            statusData = statusData.toString();
                             chatHashMap.put("status", statusData);
                           }
                         }
                                                 
                                 
-                                                            String createdData;
+                                                            String createdData = "";
                         if(cursor.getString(13) != null){
                           createdData = cursor.getString(13);
                           if(createdData != null){
-                            createdData = (Object)createdData;
+                            createdData = createdData.toString();
                             chatHashMap.put("created", createdData);
                           }
                         }
                                                 
                                 
-                                                            String lastUpdatedData;
+                                                            String lastUpdatedData = "";
                         if(cursor.getString(14) != null){
                           lastUpdatedData = cursor.getString(14);
                           if(lastUpdatedData != null){
-                            lastUpdatedData = (Object)lastUpdatedData;
+                            lastUpdatedData = lastUpdatedData.toString();
                             chatHashMap.put("lastUpdated", lastUpdatedData);
                           }
                         }
                                                 
                                 
-                                                            String idData;
+                                                            String idData = "";
                         if(cursor.getString(15) != null){
                           idData = cursor.getString(15);
                           if(idData != null){
-                            idData = (Object)idData;
+                            idData = idData.toString();
                             chatHashMap.put("id", idData);
                           }
                         }
@@ -397,15 +399,8 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = getContentValues(modelData);
         // updating row
-        return db.update(TABLE, values, KEY_ID + " = ?",
+        return db.update("Employee", values, "id = ?",
                 new String[] { id });
     }
-
-
-
-
-
-
-
 
 }

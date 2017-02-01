@@ -1,20 +1,26 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.db;
 
+
+
+
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues;
+import java.util.HashMap;
+import com.google.gson.Gson;
+import android.database.Cursor;
+import java.util.Map;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Container;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.Repository;
-//Import Model
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.ContainerRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
-
-
 
 public class ContainerDb extends DbHandler<Container, ContainerRepository> {
   public ChatDb(Context context, RestAdapter restAdapter){
@@ -43,7 +49,7 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         ContentValues values = getContentValues(modelData);
-        db.insert(TABLE, null, values);
+        db.insert("Container", null, values);
         db.close(); // Closing database connection
     }
 
@@ -52,7 +58,7 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
     public ContentValues getContentValues(Container modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String idData;
+                                                            String idData = "";
                         if(modelData.getId() != null){
                           idData =modelData.getId().toString();
                         }
@@ -74,17 +80,13 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                if (object != null) {
-                    if (chatHashMap != null) {
-                        ContainerRepository repo = restAdapter.createRepository(ContainerRepository.class);
-                        return (Container)repo.createObject(chatHashMap);
-                    } else {
-                        return null;
-                    }
+                
+                if (chatHashMap != null) {
+                    ContainerRepository repo = restAdapter.createRepository(ContainerRepository.class);
+                    return (Container)repo.createObject(chatHashMap);
                 } else {
                     return null;
                 }
-
             } else {
                 return null;
             }
@@ -100,11 +102,11 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
       HashMap<String, Object> chatHashMap = new HashMap<>();
 
                       
-                                                            String idData;
+                                                            String idData = "";
                         if(cursor.getString(0) != null){
                           idData = cursor.getString(0);
                           if(idData != null){
-                            idData = (Object)idData;
+                            idData = idData.toString();
                             chatHashMap.put("id", idData);
                           }
                         }
@@ -157,15 +159,8 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = getContentValues(modelData);
         // updating row
-        return db.update(TABLE, values, KEY_ID + " = ?",
+        return db.update("Container", values, "id = ?",
                 new String[] { id });
     }
-
-
-
-
-
-
-
 
 }

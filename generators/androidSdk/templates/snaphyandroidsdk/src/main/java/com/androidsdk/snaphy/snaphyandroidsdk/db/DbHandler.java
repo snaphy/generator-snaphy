@@ -82,13 +82,7 @@ public class DbHandler<M extends Model, R extends ModelRepository> extends SQLit
 
 
     public void insert__db (String id, String object) {
-        /*Chat chat = new Chat();*/
         SQLiteDatabase db = this.getWritableDatabase();
-    /*    HashMap<String, Object> hashMap = (HashMap<String, Object>) chat.convertMap();
-        String object = toJsonString(hashMap);
-        ContentValues values = new ContentValues();
-        values.put("ID", chat.getId().toString()); // Contact Name
-        values.put("OBJECT", object); // Contact Phone Number*/
 
         // Inserting Row
         ContentValues values = new ContentValues();
