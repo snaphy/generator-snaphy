@@ -469,12 +469,12 @@ public class AppUser extends User {
                         //Check for pure case of hasMany
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
-                                   AppUserRepository appUserRepository = (AppUserRepository) getRepository();
+                                   FacebookAccessTokenRepository facebookAccessTokenRepository = (FacebookAccessTokenRepository) getRepository();
                                  
                                  //Fetch locally from db
                                  //facebookAccessToken = getFacebookAccessToken__db(restAdapter);
                                  // Getting single cont
-                                 facebookAccessToken = appUserRepository.getAppUserDb().getAll__db("appUserId", that.getId().toString());
+                                 facebookAccessToken = facebookAccessTokenRepository.getFacebookAccessTokenDb().getAll__db("appUserId", that.getId().toString());
                               
                                    //lowercaseFirstLetter(modelName)
                             }
@@ -1772,12 +1772,12 @@ public class AppUser extends User {
                         //Check for pure case of hasMany
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
-                                   AppUserRepository appUserRepository = (AppUserRepository) getRepository();
+                                   ChatRepository chatRepository = (ChatRepository) getRepository();
                                  
                                  //Fetch locally from db
                                  //chats = getChats__db(restAdapter);
                                  // Getting single cont
-                                 chats = appUserRepository.getAppUserDb().getAll__db("appUserId", that.getId().toString());
+                                 chats = chatRepository.getChatDb().getAll__db("appUserId", that.getId().toString());
                               
                                    //lowercaseFirstLetter(modelName)
                             }

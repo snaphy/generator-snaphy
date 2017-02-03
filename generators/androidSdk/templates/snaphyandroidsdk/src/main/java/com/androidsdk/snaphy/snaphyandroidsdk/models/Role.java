@@ -209,12 +209,12 @@ public class Role extends Model {
                         //Check for pure case of hasMany
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
-                                   RoleRepository roleRepository = (RoleRepository) getRepository();
+                                   RoleMappingRepository roleMappingRepository = (RoleMappingRepository) getRepository();
                                  
                                  //Fetch locally from db
                                  //principals = getPrincipals__db(restAdapter);
                                  // Getting single cont
-                                 principals = roleRepository.getRoleDb().getAll__db("roleId", that.getId().toString());
+                                 principals = roleMappingRepository.getRoleMappingDb().getAll__db("roleId", that.getId().toString());
                               
                                    //lowercaseFirstLetter(modelName)
                             }

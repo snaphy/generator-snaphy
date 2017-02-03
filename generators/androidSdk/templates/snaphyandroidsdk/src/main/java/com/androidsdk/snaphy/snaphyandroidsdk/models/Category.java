@@ -225,12 +225,12 @@ public class Category extends Model {
                         //Check for pure case of hasMany
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
-                                   CategoryRepository categoryRepository = (CategoryRepository) getRepository();
+                                   HotDealRepository hotDealRepository = (HotDealRepository) getRepository();
                                  
                                  //Fetch locally from db
                                  //hotDeals = getHotDeals__db(restAdapter);
                                  // Getting single cont
-                                 hotDeals = categoryRepository.getCategoryDb().getAll__db("categoryId", that.getId().toString());
+                                 hotDeals = hotDealRepository.getHotDealDb().getAll__db("categoryId", that.getId().toString());
                               
                                    //lowercaseFirstLetter(modelName)
                             }

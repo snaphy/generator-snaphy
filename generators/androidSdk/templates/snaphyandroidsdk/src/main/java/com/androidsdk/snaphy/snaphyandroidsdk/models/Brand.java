@@ -442,12 +442,12 @@ public class Brand extends Model {
                         //Check for pure case of hasMany
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
-                                   BrandRepository brandRepository = (BrandRepository) getRepository();
+                                   HotDealRepository hotDealRepository = (HotDealRepository) getRepository();
                                  
                                  //Fetch locally from db
                                  //hotDeals = getHotDeals__db(restAdapter);
                                  // Getting single cont
-                                 hotDeals = brandRepository.getBrandDb().getAll__db("brandId", that.getId().toString());
+                                 hotDeals = hotDealRepository.getHotDealDb().getAll__db("brandId", that.getId().toString());
                               
                                    //lowercaseFirstLetter(modelName)
                             }
@@ -1051,12 +1051,12 @@ public class Brand extends Model {
                         //Check for pure case of hasMany
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
-                                   BrandRepository brandRepository = (BrandRepository) getRepository();
+                                   ChatRepository chatRepository = (ChatRepository) getRepository();
                                  
                                  //Fetch locally from db
                                  //chats = getChats__db(restAdapter);
                                  // Getting single cont
-                                 chats = brandRepository.getBrandDb().getAll__db("brandId", that.getId().toString());
+                                 chats = chatRepository.getChatDb().getAll__db("brandId", that.getId().toString());
                               
                                    //lowercaseFirstLetter(modelName)
                             }
@@ -1660,12 +1660,12 @@ public class Brand extends Model {
                         //Check for pure case of hasMany
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
-                                   BrandRepository brandRepository = (BrandRepository) getRepository();
+                                   DailyFeedRepository dailyFeedRepository = (DailyFeedRepository) getRepository();
                                  
                                  //Fetch locally from db
                                  //dailyFeeds = getDailyFeeds__db(restAdapter);
                                  // Getting single cont
-                                 dailyFeeds = brandRepository.getBrandDb().getAll__db("brandId", that.getId().toString());
+                                 dailyFeeds = dailyFeedRepository.getDailyFeedDb().getAll__db("brandId", that.getId().toString());
                               
                                    //lowercaseFirstLetter(modelName)
                             }
@@ -2269,12 +2269,12 @@ public class Brand extends Model {
                         //Check for pure case of hasMany
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
-                                   BrandRepository brandRepository = (BrandRepository) getRepository();
+                                   BrandManagerRepository brandManagerRepository = (BrandManagerRepository) getRepository();
                                  
                                  //Fetch locally from db
                                  //brandManagers = getBrandManagers__db(restAdapter);
                                  // Getting single cont
-                                 brandManagers = brandRepository.getBrandDb().getAll__db("brandId", that.getId().toString());
+                                 brandManagers = brandManagerRepository.getBrandManagerDb().getAll__db("brandId", that.getId().toString());
                               
                                    //lowercaseFirstLetter(modelName)
                             }
