@@ -348,18 +348,59 @@ public class <%- modelName %> extends Model {
                     hashMap.put("<%- property %>", <%- property %>);
                 }
 
-            <% }else { %>
-                private String <%- property %>;
+            <% }else {
+                //console.log("ANY", property, model.properties[property]);
+                var type;
+                if(typeof model.properties[property].type === "function") {
+
+                  if (model.properties[property].type === "String") {
+                    type = "String";
+                  }
+                  else if (model.properties[property].type === "ObjectID") {
+                    type = "Object";
+                  }
+                  else if (model.properties[property].type === "Number") {
+                    type = "double";
+                  }
+                  else if (model.properties[property].type === "Date") {
+                    type = "String";
+                  }else if (model.properties[property].type === "Boolean") {
+                    type = "Boolean";
+                  }else{
+                      type = "Object";
+                  }
+                }else{
+                  if(model.properties[property] === "string" || model.properties[property] === "any"){
+                    type= "String";
+                  }
+                  else if (model.properties[property] === "number") {
+                    type =  "double";
+                  }
+                  else if (model.properties[property] === "object") {
+                    type =  "Map<String,  ? extends Object>"
+                  }
+                  else if (model.properties[property] === "boolean") {
+                    type =  "Boolean"
+                  }
+                  else if(model.properties[property] === "geopoint"){
+                    type =  "Map<String, Object>"
+                  }
+                  else {
+                    type = "Object";
+                  }
+                }
+            %>
+                private boolean <%- property %>;
                 /* Adding Getter and Setter methods */
-                public String get<%- capitalPropertyName %>(){
-                  return <%- property %>;
+                public <%- type %> get<%- capitalPropertyName %>(){
+                    return <%- property %>;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void set<%- capitalPropertyName %>(String <%- property %>){
-                  this.<%- property %> = <%- property %>;
+                public void set<%- capitalPropertyName %>(<%- type %> <%- property %>){
+                    this.<%- property %> = <%- property %>;
                 }
-            <% }%>
+             <% } %>
         <% } %>
     <% } %>
 

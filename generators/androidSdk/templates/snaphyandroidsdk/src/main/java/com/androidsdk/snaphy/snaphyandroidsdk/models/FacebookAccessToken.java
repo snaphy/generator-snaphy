@@ -129,17 +129,17 @@ public class FacebookAccessToken extends Model {
             
 
             
-                private String userId;
+                private boolean userId;
                 /* Adding Getter and Setter methods */
-                public String getUserId(){
-                  return userId;
+                public Object getUserId(){
+                    return userId;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setUserId(String userId){
-                  this.userId = userId;
+                public void setUserId(Object userId){
+                    this.userId = userId;
                 }
-            
+             
         
     
         
@@ -166,17 +166,17 @@ public class FacebookAccessToken extends Model {
             
 
             
-                private String appUserId;
+                private boolean appUserId;
                 /* Adding Getter and Setter methods */
-                public String getAppUserId(){
-                  return appUserId;
+                public Object getAppUserId(){
+                    return appUserId;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setAppUserId(String appUserId){
-                  this.appUserId = appUserId;
+                public void setAppUserId(Object appUserId){
+                    this.appUserId = appUserId;
                 }
-            
+             
         
     
 

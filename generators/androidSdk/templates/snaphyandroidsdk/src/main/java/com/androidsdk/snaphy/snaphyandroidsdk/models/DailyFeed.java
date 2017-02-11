@@ -169,34 +169,34 @@ public class DailyFeed extends Model {
             
 
             
-                private String id;
+                private boolean id;
                 /* Adding Getter and Setter methods */
-                public String getId(){
-                  return id;
+                public Object getId(){
+                    return id;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setId(String id){
-                  this.id = id;
+                public void setId(Object id){
+                    this.id = id;
                 }
-            
+             
         
     
         
             
 
             
-                private String brandId;
+                private boolean brandId;
                 /* Adding Getter and Setter methods */
-                public String getBrandId(){
-                  return brandId;
+                public Object getBrandId(){
+                    return brandId;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setBrandId(String brandId){
-                  this.brandId = brandId;
+                public void setBrandId(Object brandId){
+                    this.brandId = brandId;
                 }
-            
+             
         
     
 

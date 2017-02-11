@@ -69,17 +69,17 @@ public class Role extends Model {
             
 
             
-                private String id;
+                private boolean id;
                 /* Adding Getter and Setter methods */
-                public String getId(){
-                  return id;
+                public Object getId(){
+                    return id;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setId(String id){
-                  this.id = id;
+                public void setId(Object id){
+                    this.id = id;
                 }
-            
+             
         
     
         
@@ -106,51 +106,51 @@ public class Role extends Model {
             
 
             
-                private String description;
+                private boolean description;
                 /* Adding Getter and Setter methods */
                 public String getDescription(){
-                  return description;
+                    return description;
                 }
 
                 /* Adding Getter and Setter methods */
                 public void setDescription(String description){
-                  this.description = description;
+                    this.description = description;
                 }
-            
+             
         
     
         
             
 
             
-                private String created;
+                private boolean created;
                 /* Adding Getter and Setter methods */
-                public String getCreated(){
-                  return created;
+                public Object getCreated(){
+                    return created;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setCreated(String created){
-                  this.created = created;
+                public void setCreated(Object created){
+                    this.created = created;
                 }
-            
+             
         
     
         
             
 
             
-                private String modified;
+                private boolean modified;
                 /* Adding Getter and Setter methods */
-                public String getModified(){
-                  return modified;
+                public Object getModified(){
+                    return modified;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setModified(String modified){
-                  this.modified = modified;
+                public void setModified(Object modified){
+                    this.modified = modified;
                 }
-            
+             
         
     
 
