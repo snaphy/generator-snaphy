@@ -129,7 +129,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
 
 
 
-    // Getting single cont
+    // Getting single c
     public   Brand get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -140,7 +140,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     BrandRepository repo = restAdapter.createRepository(BrandRepository.class);
                     return (Brand)repo.createObject(hashMap);
@@ -302,7 +302,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -330,7 +330,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     BrandRepository repo = restAdapter.createRepository(BrandRepository.class);
@@ -342,7 +342,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
         db.close();
         // return contact list
         return (DataList<Brand>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
@@ -357,7 +357,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     BrandRepository repo = restAdapter.createRepository(BrandRepository.class);

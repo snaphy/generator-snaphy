@@ -105,7 +105,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
 
 
 
-    // Getting single cont
+    // Getting single c
     public   DailyFeed get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -116,7 +116,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     DailyFeedRepository repo = restAdapter.createRepository(DailyFeedRepository.class);
                     return (DailyFeed)repo.createObject(hashMap);
@@ -238,7 +238,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -266,7 +266,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     DailyFeedRepository repo = restAdapter.createRepository(DailyFeedRepository.class);
@@ -278,7 +278,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
         db.close();
         // return contact list
         return (DataList<DailyFeed>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
@@ -293,7 +293,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     DailyFeedRepository repo = restAdapter.createRepository(DailyFeedRepository.class);

@@ -129,7 +129,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
 
 
 
-    // Getting single cont
+    // Getting single c
     public   Chat get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -140,7 +140,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     ChatRepository repo = restAdapter.createRepository(ChatRepository.class);
                     return (Chat)repo.createObject(hashMap);
@@ -302,7 +302,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -330,7 +330,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     ChatRepository repo = restAdapter.createRepository(ChatRepository.class);
@@ -342,7 +342,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
         db.close();
         // return contact list
         return (DataList<Chat>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
@@ -357,7 +357,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     ChatRepository repo = restAdapter.createRepository(ChatRepository.class);

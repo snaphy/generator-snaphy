@@ -93,7 +93,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
 
 
 
-    // Getting single cont
+    // Getting single c
     public   AmazonImage get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -104,7 +104,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);
                     return (AmazonImage)repo.createObject(hashMap);
@@ -206,7 +206,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -234,7 +234,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);
@@ -246,7 +246,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
         db.close();
         // return contact list
         return (DataList<AmazonImage>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
@@ -261,7 +261,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);

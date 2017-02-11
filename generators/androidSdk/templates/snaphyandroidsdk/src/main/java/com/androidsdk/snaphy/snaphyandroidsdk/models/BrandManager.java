@@ -86,12 +86,6 @@ public class BrandManager extends User {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -112,12 +106,6 @@ public class BrandManager extends User {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -138,12 +126,6 @@ public class BrandManager extends User {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -164,12 +146,6 @@ public class BrandManager extends User {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -190,12 +166,6 @@ public class BrandManager extends User {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -216,12 +186,6 @@ public class BrandManager extends User {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -242,12 +206,6 @@ public class BrandManager extends User {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -268,139 +226,183 @@ public class BrandManager extends User {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
             
 
             
-            
-            
-            
+                private String realm;
+                /* Adding Getter and Setter methods */
+                public String getRealm(){
+                  return realm;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setRealm(String realm){
+                  this.realm = realm;
+                }
             
-
         
     
         
             
 
             
-            
-            
-            
+                private String username;
+                /* Adding Getter and Setter methods */
+                public String getUsername(){
+                  return username;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setUsername(String username){
+                  this.username = username;
+                }
             
-
         
     
         
             
 
             
-            
-            
-            
+                private String credentials;
+                /* Adding Getter and Setter methods */
+                public String getCredentials(){
+                  return credentials;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setCredentials(String credentials){
+                  this.credentials = credentials;
+                }
             
-
         
     
         
             
 
             
-            
-            
-            
+                private String challenges;
+                /* Adding Getter and Setter methods */
+                public String getChallenges(){
+                  return challenges;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setChallenges(String challenges){
+                  this.challenges = challenges;
+                }
             
-
         
     
         
             
 
             
-            
-            
-            
+                private String emailVerified;
+                /* Adding Getter and Setter methods */
+                public String getEmailVerified(){
+                  return emailVerified;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setEmailVerified(String emailVerified){
+                  this.emailVerified = emailVerified;
+                }
             
-
         
     
         
             
 
             
-            
-            
-            
+                private String verificationToken;
+                /* Adding Getter and Setter methods */
+                public String getVerificationToken(){
+                  return verificationToken;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setVerificationToken(String verificationToken){
+                  this.verificationToken = verificationToken;
+                }
             
-
         
     
         
             
 
             
-            
-            
-            
+                private String created;
+                /* Adding Getter and Setter methods */
+                public String getCreated(){
+                  return created;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setCreated(String created){
+                  this.created = created;
+                }
             
-
         
     
         
             
 
             
-            
-            
-            
+                private String lastUpdated;
+                /* Adding Getter and Setter methods */
+                public String getLastUpdated(){
+                  return lastUpdated;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setLastUpdated(String lastUpdated){
+                  this.lastUpdated = lastUpdated;
+                }
             
-
         
     
         
             
 
             
-            
-            
-            
+                private String id;
+                /* Adding Getter and Setter methods */
+                public String getId(){
+                  return id;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setId(String id){
+                  this.id = id;
+                }
             
-
         
     
         
             
 
             
-            
-            
-            
+                private String brandId;
+                /* Adding Getter and Setter methods */
+                public String getBrandId(){
+                  return brandId;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setBrandId(String brandId){
+                  this.brandId = brandId;
+                }
             
-
         
     
 
 
     //------------------------------------Database Method---------------------------------------------------
 
-   
+
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();

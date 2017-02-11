@@ -87,7 +87,7 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
 
 
 
-    // Getting single cont
+    // Getting single c
     public   CompanyInfo get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -98,7 +98,7 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     CompanyInfoRepository repo = restAdapter.createRepository(CompanyInfoRepository.class);
                     return (CompanyInfo)repo.createObject(hashMap);
@@ -190,7 +190,7 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -218,7 +218,7 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     CompanyInfoRepository repo = restAdapter.createRepository(CompanyInfoRepository.class);
@@ -230,7 +230,7 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
         db.close();
         // return contact list
         return (DataList<CompanyInfo>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
@@ -245,7 +245,7 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     CompanyInfoRepository repo = restAdapter.createRepository(CompanyInfoRepository.class);

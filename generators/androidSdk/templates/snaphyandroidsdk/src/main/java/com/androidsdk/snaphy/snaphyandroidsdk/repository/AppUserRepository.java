@@ -43,9 +43,7 @@ import org.json.JSONObject;
 
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.AppUser;
-
 import android.content.Context;
-
 import com.androidsdk.snaphy.snaphyandroidsdk.db.AppUserDb;
 
 //Now import model of related models..
@@ -187,7 +185,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
 
 
-    
+
 
 
 

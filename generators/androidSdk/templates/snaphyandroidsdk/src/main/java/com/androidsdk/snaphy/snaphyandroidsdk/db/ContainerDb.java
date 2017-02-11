@@ -69,7 +69,7 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
 
 
 
-    // Getting single cont
+    // Getting single c
     public   Container get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -80,7 +80,7 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     ContainerRepository repo = restAdapter.createRepository(ContainerRepository.class);
                     return (Container)repo.createObject(hashMap);
@@ -142,7 +142,7 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -170,7 +170,7 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     ContainerRepository repo = restAdapter.createRepository(ContainerRepository.class);
@@ -182,7 +182,7 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
         db.close();
         // return contact list
         return (DataList<Container>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
@@ -197,7 +197,7 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     ContainerRepository repo = restAdapter.createRepository(ContainerRepository.class);

@@ -83,12 +83,6 @@ public class Category extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -109,12 +103,6 @@ public class Category extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -135,31 +123,30 @@ public class Category extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
             
 
             
-            
-            
-            
+                private String id;
+                /* Adding Getter and Setter methods */
+                public String getId(){
+                  return id;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setId(String id){
+                  this.id = id;
+                }
             
-
         
     
 
 
     //------------------------------------Database Method---------------------------------------------------
 
-   
+
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();
@@ -226,12 +213,12 @@ public class Category extends Model {
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
                                    HotDealRepository hotDealRepository = (HotDealRepository) getRepository();
-                                 
+
                                  //Fetch locally from db
                                  //hotDeals = getHotDeals__db(restAdapter);
                                  // Getting single cont
                                  hotDeals = hotDealRepository.getHotDealDb().getAll__db("categoryId", that.getId().toString());
-                              
+
                                    //lowercaseFirstLetter(modelName)
                             }
                                                 return hotDeals;

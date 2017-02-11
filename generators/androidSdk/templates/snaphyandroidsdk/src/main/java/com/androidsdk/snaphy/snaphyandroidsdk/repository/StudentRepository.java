@@ -26,8 +26,14 @@ import java.util.HashMap;
 
 
 
-//Replaced by Custom ModelRepository method
-//import com.strongloop.android.loopback.ModelRepository;
+//Replaced by Custom  Repo methods
+// import com.strongloop.android.loopback.UserRepository;
+import com.strongloop.android.loopback.AccessTokenRepository;
+import com.strongloop.android.loopback.AccessToken;
+import android.content.SharedPreferences;
+import android.util.Log;
+import org.json.JSONException;
+import android.content.Context;
 
 
 
@@ -36,11 +42,14 @@ import org.json.JSONObject;
 
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Student;
 import android.content.Context;
-import com.androidsdk.snaphy.snaphyandroidsdk.db.ChatDb;
+import com.androidsdk.snaphy.snaphyandroidsdk.db.StudentDb;
 
 //Now import model of related models..
+
+    
+    
 
     
             import com.androidsdk.snaphy.snaphyandroidsdk.models.Brand;
@@ -49,26 +58,116 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.ChatDb;
         
     
 
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.AppUser;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.AppUserRepository;
-            
-        
-    
 
 
 
 
+public class StudentRepository extends UserRepository<Student> {
 
-public class ChatRepository extends ModelRepository<Chat> {
 
-
-    public ChatRepository(){
-        super("Chat", null, Chat.class);
+    public StudentRepository(){
+        super("Student", null, Student.class);
     }
 
 
     
+    		//Create public methods..
+    		public Student cachedCurrentUser;
+            private Object currentUserId;
+            private boolean isCurrentUserIdLoaded;
+    		public Student getCachedCurrentUser(){
+    			return cachedCurrentUser;
+    		}
+
+    		public void setCachedCurrentUser(Student user){
+    			cachedCurrentUser = user;
+    		}
+
+    		/* public void setCurrentUserId(Object id){
+    			super.setCurrentUserId(id);
+    		} */
+
+            public void findCurrentUser(final ObjectCallback<Student> callback){
+                //Call the onBefore method..
+                callback.onBefore();
+
+                if(getCurrentUserId() == null){
+                    callback.onSuccess(null);
+                    return;
+                }
+
+                HashMap<String, Object> hashMap = new HashMap<>();
+
+                this.findById((String)getCurrentUserId(), hashMap, new ObjectCallback<Student>() {
+                    @Override
+                    public void onSuccess(Student user){
+                        cachedCurrentUser = user;
+                        callback.onSuccess(user);
+                        //Call the finally method..
+                        callback.onFinally();
+                    }
+
+                    @Override
+                    public void onError(Throwable t){
+                        callback.onError(t);
+                        //Call the finally method..
+                        callback.onFinally();
+                    }
+                });
+
+            }
+
+            public Object getCurrentUserId(){
+                loadCurrentUserIdIfNotLoaded();
+                return currentUserId;
+            }
+
+            public void setCurrentUserId(Object currentUserId){
+                this.currentUserId = currentUserId;
+                cachedCurrentUser = null;
+                saveCurrentUserId();
+            }
+
+            private void saveCurrentUserId(){
+                final SharedPreferences.Editor editor = getSharedPreferences().edit();
+                final String json = new JSONArray().put(getCurrentUserId()).toString();
+                editor.putString(PROPERTY_CURRENT_USER_ID, json);
+                editor.commit();
+            }
+
+
+            //Add loadCurrentUserIdIfNotLoaded method..
+            private void loadCurrentUserIdIfNotLoaded(){
+                if(isCurrentUserIdLoaded) return;
+
+                isCurrentUserIdLoaded = true;
+                String json = getSharedPreferences().getString(PROPERTY_CURRENT_USER_ID, null);
+                if(json == null){
+                    return;
+                }
+
+                if(json.equals("[null]")){
+                    return;
+                }
+
+                try{
+                    Object id = new JSONArray(json).get(0);
+                    setCurrentUserId(id);
+                }catch(JSONException e){
+                    String msg = "Cannot parse user id '" + json + "'";
+                    Log.e("Snaphy", msg, e);
+                }
+            }
+
+            private SharedPreferences getSharedPreferences() {
+                return getApplicationContext().getSharedPreferences(
+                    SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+            }
+
+
+
+
+    
 
 
 
@@ -76,15 +175,15 @@ public class ChatRepository extends ModelRepository<Chat> {
 
 
 
-    public ChatDb getChatDb() {
-      return chatDb;
+    public StudentDb getStudentDb() {
+      return studentDb;
     }
 
-    public void setChatDb(ChatDb chatDb) {
-      this.chatDb = chatDb;
+    public void setStudentDb(StudentDb studentDb) {
+      this.studentDb = studentDb;
     }
 
-    private ChatDb chatDb;
+    private StudentDb studentDb;
 
 
 
@@ -104,14 +203,14 @@ public class ChatRepository extends ModelRepository<Chat> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-          getChatDb().reset__db();
+          getStudentDb().reset__db();
       }
     }
 
 
 
 private void addStorage(Context context){
-    setChatDb(new ChatDb(context, getRestAdapter()));
+    setStudentDb(new StudentDb(context, getRestAdapter()));
       //allow data storage locally..
       persistData(true);
 }
@@ -124,7 +223,7 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chatId/appUser", "GET"), "Chat.prototype.__get__appUser");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:studentId/accessTokens/:fk", "GET"), "Student.prototype.__findById__accessTokens");
     
 
     
@@ -133,7 +232,7 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chatId/brand", "GET"), "Chat.prototype.__get__brand");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:studentId/accessTokens/:fk", "DELETE"), "Student.prototype.__destroyById__accessTokens");
     
 
     
@@ -142,7 +241,7 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Chat.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:studentId/accessTokens/:fk", "PUT"), "Student.prototype.__updateById__accessTokens");
     
 
     
@@ -151,7 +250,7 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Chat.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:studentId/brand", "GET"), "Student.prototype.__get__brand");
     
 
     
@@ -160,7 +259,7 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Chat.upsert");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:studentId/accessTokens", "GET"), "Student.prototype.__get__accessTokens");
     
 
     
@@ -169,7 +268,7 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Chat.exists");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:studentId/accessTokens", "POST"), "Student.prototype.__create__accessTokens");
     
 
     
@@ -178,7 +277,7 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Chat.findById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:studentId/accessTokens", "DELETE"), "Student.prototype.__delete__accessTokens");
     
 
     
@@ -187,7 +286,7 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Chat.find");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:studentId/accessTokens/count", "GET"), "Student.prototype.__count__accessTokens");
     
 
     
@@ -196,7 +295,7 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Chat.findOne");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Student.create");
     
 
     
@@ -205,7 +304,7 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Chat.updateAll");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Student.create");
     
 
     
@@ -214,7 +313,7 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Chat.deleteById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Student.upsert");
     
 
     
@@ -223,7 +322,7 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Chat.count");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Student.exists");
     
 
     
@@ -232,31 +331,34 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:chatId", "PUT"), "Chat.prototype.updateAttributes");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Student.findById");
     
 
     
     
 
     
-    
 
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Student.find");
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Chat.getSchema");
     
 
     
-    
 
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Student.findOne");
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Chat.getAbsoluteSchema");
     
 
     
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Student.updateAll");
     
 
     
@@ -265,7 +367,7 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "Chat.getDetailSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Student.deleteById");
     
 
     
@@ -274,7 +376,7 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "Chat.getModelRelationSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Student.count");
     
 
     
@@ -283,7 +385,7 @@ private void addStorage(Context context){
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/subscribe", "POST"), "Chat.subscribe");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:studentId", "PUT"), "Student.prototype.updateAttributes");
     
 
     
@@ -299,39 +401,57 @@ private void addStorage(Context context){
     
 
     
+
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/confirm", "GET"), "Student.confirm");
+    
 
+    
     
+
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/reset", "POST"), "Student.resetPassword");
     
 
+    
     
+
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Student.getSchema");
     
 
+    
     
+
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Student.getAbsoluteSchema");
     
 
     
     
 
+    
     
+
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "Student.getDetailSchema");
     
 
     
+    
+
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "Student.getModelRelationSchema");
     
 
     
@@ -358,8 +478,8 @@ private void addStorage(Context context){
 
     
         
-            //Method get__appUser definition
-            public void get__appUser(  String chatId,  Boolean refresh, final ObjectCallback<AppUser> callback){
+            //Method findById__accessTokens definition
+            public void findById__accessTokens(  String studentId,  String fk, final ObjectCallback<AccessToken> callback){
 
                 /**
                 Call the onBefore event
@@ -371,9 +491,9 @@ private void addStorage(Context context){
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("chatId", chatId);
+                        hashMapObject.put("studentId", studentId);
                 
-                        hashMapObject.put("refresh", refresh);
+                        hashMapObject.put("fk", fk);
                 
 
                 
@@ -382,7 +502,7 @@ private void addStorage(Context context){
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__appUser", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -395,17 +515,17 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AppUser appUser = appUserRepo.createObject(result);
+                                    AccessToken accessToken = accessTokenRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //Insert to database if not present then else update data..
-                                          appUser.save__db();
+                                          accessToken.save__db();
                                       }
 
-                                    callback.onSuccess(appUser);
+                                    callback.onSuccess(accessToken);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -418,15 +538,15 @@ private void addStorage(Context context){
 
                 
 
-            }//Method get__appUser definition ends here..
+            }//Method findById__accessTokens definition ends here..
 
             
 
         
     
         
-            //Method get__brand definition
-            public void get__brand(  String chatId,  Boolean refresh, final ObjectCallback<Brand> callback){
+            //Method destroyById__accessTokens definition
+            public void destroyById__accessTokens(  String studentId,  String fk, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -438,7 +558,124 @@ private void addStorage(Context context){
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("chatId", chatId);
+                        hashMapObject.put("studentId", studentId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__accessTokens", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__accessTokens definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__accessTokens definition
+            public void updateById__accessTokens(  String studentId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("studentId", studentId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__updateById__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    AccessToken accessToken = accessTokenRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          accessToken.save__db();
+                                      }
+
+                                    callback.onSuccess(accessToken);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method updateById__accessTokens definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__brand definition
+            public void get__brand(  String studentId,  Boolean refresh, final ObjectCallback<Brand> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("studentId", studentId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -492,8 +729,244 @@ private void addStorage(Context context){
         
     
         
+            //Method get__accessTokens definition
+            public void get__accessTokens(  String studentId,  Map<String,  ? extends Object> filter, final DataListCallback<AccessToken> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("studentId", studentId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__accessTokens", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<AccessToken> accessTokenList = new DataList<AccessToken>();
+                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+
+                                    for (Map<String, Object> obj : result) {
+                                        AccessToken accessToken = accessTokenRepo.createObject(obj);
+
+                                            //Add to database if persistent storage required..
+                                            if(isSTORE_LOCALLY()){
+                                                 //Insert to database if not present then else update data..
+                                                 accessToken.save__db();
+                                            }
+
+                                        accessTokenList.add(accessToken);
+                                    }
+                                    callback.onSuccess(accessTokenList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method get__accessTokens definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__accessTokens definition
+            public void create__accessTokens(  String studentId,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("studentId", studentId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    AccessToken accessToken = accessTokenRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //Insert to database if not present then else update data..
+                                          accessToken.save__db();
+                                      }
+
+                                    callback.onSuccess(accessToken);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__accessTokens definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__accessTokens definition
+            public void delete__accessTokens(  String studentId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("studentId", studentId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__accessTokens", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__accessTokens definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__accessTokens definition
+            public void count__accessTokens(  String studentId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("studentId", studentId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method count__accessTokens definition ends here..
+
+            
+
+        
+    
+        
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Chat> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Student> callback){
 
                 /**
                 Call the onBefore event
@@ -527,17 +1000,17 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    StudentRepository studentRepo = getRestAdapter().createRepository(StudentRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Chat chat = chatRepo.createObject(result);
+                                    Student student = studentRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //Insert to database if not present then else update data..
-                                          chat.save__db();
+                                          student.save__db();
                                       }
 
-                                    callback.onSuccess(chat);
+                                    callback.onSuccess(student);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -559,7 +1032,7 @@ private void addStorage(Context context){
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Chat> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Student> callback){
 
                 /**
                 Call the onBefore event
@@ -593,17 +1066,17 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    StudentRepository studentRepo = getRestAdapter().createRepository(StudentRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Chat chat = chatRepo.createObject(result);
+                                    Student student = studentRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //Insert to database if not present then else update data..
-                                          chat.save__db();
+                                          student.save__db();
                                       }
 
-                                    callback.onSuccess(chat);
+                                    callback.onSuccess(student);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -675,7 +1148,7 @@ private void addStorage(Context context){
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Chat> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Student> callback){
 
                 /**
                 Call the onBefore event
@@ -711,17 +1184,17 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    StudentRepository studentRepo = getRestAdapter().createRepository(StudentRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Chat chat = chatRepo.createObject(result);
+                                    Student student = studentRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //Insert to database if not present then else update data..
-                                          chat.save__db();
+                                          student.save__db();
                                       }
 
-                                    callback.onSuccess(chat);
+                                    callback.onSuccess(student);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -742,7 +1215,7 @@ private void addStorage(Context context){
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Chat> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Student> callback){
 
                 /**
                 Call the onBefore event
@@ -777,21 +1250,21 @@ private void addStorage(Context context){
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<Chat> chatList = new DataList<Chat>();
-                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    DataList<Student> studentList = new DataList<Student>();
+                                    StudentRepository studentRepo = getRestAdapter().createRepository(StudentRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Chat chat = chatRepo.createObject(obj);
+                                        Student student = studentRepo.createObject(obj);
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
                                                  //Insert to database if not present then else update data..
-                                                 chat.save__db();
+                                                 student.save__db();
                                             }
 
-                                        chatList.add(chat);
+                                        studentList.add(student);
                                     }
-                                    callback.onSuccess(chatList);
+                                    callback.onSuccess(studentList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -810,7 +1283,7 @@ private void addStorage(Context context){
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Chat> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Student> callback){
 
                 /**
                 Call the onBefore event
@@ -844,17 +1317,17 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    StudentRepository studentRepo = getRestAdapter().createRepository(StudentRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Chat chat = chatRepo.createObject(result);
+                                    Student student = studentRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //Insert to database if not present then else update data..
-                                          chat.save__db();
+                                          student.save__db();
                                       }
 
-                                    callback.onSuccess(chat);
+                                    callback.onSuccess(student);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1030,7 +1503,7 @@ private void addStorage(Context context){
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String chatId,  Map<String,  ? extends Object> data, final ObjectCallback<Chat> callback){
+            public void updateAttributes(  String studentId,  Map<String,  ? extends Object> data, final ObjectCallback<Student> callback){
 
                 /**
                 Call the onBefore event
@@ -1042,7 +1515,7 @@ private void addStorage(Context context){
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("chatId", chatId);
+                        hashMapObject.put("studentId", studentId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1066,17 +1539,17 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    StudentRepository studentRepo = getRestAdapter().createRepository(StudentRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Chat chat = chatRepo.createObject(result);
+                                    Student student = studentRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //Insert to database if not present then else update data..
-                                          chat.save__db();
+                                          student.save__db();
                                       }
 
-                                    callback.onSuccess(chat);
+                                    callback.onSuccess(student);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1095,6 +1568,106 @@ private void addStorage(Context context){
 
         
     
+        
+    
+        
+    
+        
+    
+        
+            //Method confirm definition
+            public void confirm(  String uid,  String token,  String redirect, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("uid", uid);
+                
+                        hashMapObject.put("token", token);
+                
+                        hashMapObject.put("redirect", redirect);
+                
+
+                
+                    invokeStaticMethod("confirm", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method confirm definition ends here..
+
+            
+
+        
+    
+        
+            //Method resetPassword definition
+            public void resetPassword(  Map<String,  ? extends Object> options, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("options", options);
+                
+
+                
+                    invokeStaticMethod("resetPassword", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method resetPassword definition ends here..
+
+            
+
         
     
         
@@ -1293,89 +1866,6 @@ private void addStorage(Context context){
 
             
 
-        
-    
-        
-            //Method subscribe definition
-            public void subscribe(  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("where", where);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("subscribe", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method subscribe definition ends here..
-
-            
-
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
         
     
 

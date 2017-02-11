@@ -62,19 +62,24 @@ public class Container extends Model {
             
 
             
-            
-            
-            
+                private String id;
+                /* Adding Getter and Setter methods */
+                public String getId(){
+                  return id;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setId(String id){
+                  this.id = id;
+                }
             
-
         
     
 
 
     //------------------------------------Database Method---------------------------------------------------
 
-   
+
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();

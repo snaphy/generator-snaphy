@@ -69,12 +69,17 @@ public class RoleMapping extends Model {
             
 
             
-            
-            
-            
+                private String id;
+                /* Adding Getter and Setter methods */
+                public String getId(){
+                  return id;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setId(String id){
+                  this.id = id;
+                }
             
-
         
     
         
@@ -95,43 +100,47 @@ public class RoleMapping extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
             
 
             
-            
-            
-            
+                private String principalId;
+                /* Adding Getter and Setter methods */
+                public String getPrincipalId(){
+                  return principalId;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setPrincipalId(String principalId){
+                  this.principalId = principalId;
+                }
             
-
         
     
         
             
 
             
-            
-            
-            
+                private String roleId;
+                /* Adding Getter and Setter methods */
+                public String getRoleId(){
+                  return roleId;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setRoleId(String roleId){
+                  this.roleId = roleId;
+                }
             
-
         
     
 
 
     //------------------------------------Database Method---------------------------------------------------
 
-   
+
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();

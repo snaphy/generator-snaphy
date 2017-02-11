@@ -69,12 +69,17 @@ public class Role extends Model {
             
 
             
-            
-            
-            
+                private String id;
+                /* Adding Getter and Setter methods */
+                public String getId(){
+                  return id;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setId(String id){
+                  this.id = id;
+                }
             
-
         
     
         
@@ -95,55 +100,64 @@ public class Role extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
             
 
             
-            
-            
-            
+                private String description;
+                /* Adding Getter and Setter methods */
+                public String getDescription(){
+                  return description;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setDescription(String description){
+                  this.description = description;
+                }
             
-
         
     
         
             
 
             
-            
-            
-            
+                private String created;
+                /* Adding Getter and Setter methods */
+                public String getCreated(){
+                  return created;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setCreated(String created){
+                  this.created = created;
+                }
             
-
         
     
         
             
 
             
-            
-            
-            
+                private String modified;
+                /* Adding Getter and Setter methods */
+                public String getModified(){
+                  return modified;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setModified(String modified){
+                  this.modified = modified;
+                }
             
-
         
     
 
 
     //------------------------------------Database Method---------------------------------------------------
 
-   
+
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();
@@ -210,12 +224,12 @@ public class Role extends Model {
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
                                    RoleMappingRepository roleMappingRepository = (RoleMappingRepository) getRepository();
-                                 
+
                                  //Fetch locally from db
                                  //principals = getPrincipals__db(restAdapter);
                                  // Getting single cont
                                  principals = roleMappingRepository.getRoleMappingDb().getAll__db("roleId", that.getId().toString());
-                              
+
                                    //lowercaseFirstLetter(modelName)
                             }
                                                 return principals;

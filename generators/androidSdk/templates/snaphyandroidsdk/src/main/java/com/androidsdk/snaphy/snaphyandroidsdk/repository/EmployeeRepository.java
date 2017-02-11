@@ -43,9 +43,7 @@ import org.json.JSONObject;
 
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Employee;
-
 import android.content.Context;
-
 import com.androidsdk.snaphy.snaphyandroidsdk.db.EmployeeDb;
 
 //Now import model of related models..
@@ -166,7 +164,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
 
 
-    
+
 
 
 

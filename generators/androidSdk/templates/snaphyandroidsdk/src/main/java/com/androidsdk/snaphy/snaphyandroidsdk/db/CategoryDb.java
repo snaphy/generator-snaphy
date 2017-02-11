@@ -87,7 +87,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
 
 
 
-    // Getting single cont
+    // Getting single c
     public   Category get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -98,7 +98,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     CategoryRepository repo = restAdapter.createRepository(CategoryRepository.class);
                     return (Category)repo.createObject(hashMap);
@@ -190,7 +190,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -218,7 +218,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     CategoryRepository repo = restAdapter.createRepository(CategoryRepository.class);
@@ -230,7 +230,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
         db.close();
         // return contact list
         return (DataList<Category>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
@@ -245,7 +245,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     CategoryRepository repo = restAdapter.createRepository(CategoryRepository.class);

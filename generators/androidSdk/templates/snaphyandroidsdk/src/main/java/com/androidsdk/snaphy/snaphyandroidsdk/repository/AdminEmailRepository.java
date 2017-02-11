@@ -37,9 +37,7 @@ import org.json.JSONObject;
 
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.AdminEmail;
-
 import android.content.Context;
-
 import com.androidsdk.snaphy.snaphyandroidsdk.db.AdminEmailDb;
 
 //Now import model of related models..
@@ -60,7 +58,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
 
 
-    
+
 
 
 

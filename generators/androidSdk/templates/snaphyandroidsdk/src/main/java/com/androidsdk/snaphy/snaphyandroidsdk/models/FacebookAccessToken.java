@@ -83,12 +83,6 @@ public class FacebookAccessToken extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -109,12 +103,6 @@ public class FacebookAccessToken extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -135,24 +123,23 @@ public class FacebookAccessToken extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
             
 
             
-            
-            
-            
+                private String userId;
+                /* Adding Getter and Setter methods */
+                public String getUserId(){
+                  return userId;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setUserId(String userId){
+                  this.userId = userId;
+                }
             
-
         
     
         
@@ -173,31 +160,30 @@ public class FacebookAccessToken extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
             
 
             
-            
-            
-            
+                private String appUserId;
+                /* Adding Getter and Setter methods */
+                public String getAppUserId(){
+                  return appUserId;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setAppUserId(String appUserId){
+                  this.appUserId = appUserId;
+                }
             
-
         
     
 
 
     //------------------------------------Database Method---------------------------------------------------
 
-   
+
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();

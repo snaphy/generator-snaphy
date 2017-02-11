@@ -37,9 +37,7 @@ import org.json.JSONObject;
 
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.HotDeal;
-
 import android.content.Context;
-
 import com.androidsdk.snaphy.snaphyandroidsdk.db.HotDealDb;
 
 //Now import model of related models..
@@ -74,7 +72,7 @@ public class HotDealRepository extends ModelRepository<HotDeal> {
 
 
 
-    
+
 
 
 

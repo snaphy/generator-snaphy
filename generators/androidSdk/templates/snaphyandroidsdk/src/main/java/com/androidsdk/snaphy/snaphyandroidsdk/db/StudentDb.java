@@ -13,49 +13,49 @@ import android.database.Cursor;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.BrandManager;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Student;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandManagerRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.StudentRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
 
-public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerRepository> {
-  public BrandManagerDb(Context context, RestAdapter restAdapter){
-    super(context, "BrandManager", restAdapter);
+public class StudentDb extends DbHandler<Student, StudentRepository> {
+  public StudentDb(Context context, RestAdapter restAdapter){
+    super(context, "Student", restAdapter);
   }
 
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-    String CREATE_BrandManager_TABLE = "CREATE TABLE  BrandManager IF NOT EXISTS (  firstName TEXT, lastName TEXT, email TEXT, password TEXT, restrictHotDeal TEXT, status TEXT, added TEXT, updated TEXT, realm TEXT, username TEXT, credentials TEXT, challenges TEXT, emailVerified TEXT, verificationToken TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, brandId TEXT)";
-    db.execSQL(CREATE_BrandManager_TABLE);
+                                                                                                                                                                                                                                                                                                                                                                                                                             
+    String CREATE_Student_TABLE = "CREATE TABLE  Student IF NOT EXISTS (  firstName TEXT, lastName TEXT, realm TEXT, username TEXT, password TEXT, credentials TEXT, challenges TEXT, email TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, brandId TEXT)";
+    db.execSQL(CREATE_Student_TABLE);
   }
 
     // Upgrading database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS BrandManager");
+            db.execSQL("DROP TABLE IF EXISTS Student");
             // Create tables again
             onCreate(db);
     }
 
 
-    public void insert__db (String id, BrandManager modelData) {
+    public void insert__db (String id, Student modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
         ContentValues values = getContentValues(modelData);
-        db.insert("BrandManager", null, values);
+        db.insert("Student", null, values);
         db.close(); // Closing database connection
     }
 
 
 
-    public ContentValues getContentValues(BrandManager modelData){
+    public ContentValues getContentValues(Student modelData){
       ContentValues values = new ContentValues();
                        
                                                             String firstNameData = "";
@@ -70,42 +70,6 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                         }
                                                 values.put("lastName", lastNameData);
                                 
-                                                            String emailData = "";
-                        if(modelData.getEmail() != null){
-                          emailData = modelData.getEmail().toString();
-                        }
-                                                values.put("email", emailData);
-                                
-                                                            String passwordData = "";
-                        if(modelData.getPassword() != null){
-                          passwordData = modelData.getPassword().toString();
-                        }
-                                                values.put("password", passwordData);
-                                
-                                                            String restrictHotDealData = "";
-                        if(modelData.getRestrictHotDeal() != null){
-                          restrictHotDealData = modelData.getRestrictHotDeal().toString();
-                        }
-                                                values.put("restrictHotDeal", restrictHotDealData);
-                                
-                                                            String statusData = "";
-                        if(modelData.getStatus() != null){
-                          statusData = modelData.getStatus().toString();
-                        }
-                                                values.put("status", statusData);
-                                
-                                                            String addedData = "";
-                        if(modelData.getAdded() != null){
-                          addedData = modelData.getAdded().toString();
-                        }
-                                                values.put("added", addedData);
-                                
-                                                            String updatedData = "";
-                        if(modelData.getUpdated() != null){
-                          updatedData = modelData.getUpdated().toString();
-                        }
-                                                values.put("updated", updatedData);
-                                
                                                             String realmData = "";
                         if(modelData.getRealm() != null){
                           realmData =modelData.getRealm().toString();
@@ -117,6 +81,12 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                           usernameData =modelData.getUsername().toString();
                         }
                                                 values.put("username", usernameData);
+                                
+                                                            String passwordData = "";
+                        if(modelData.getPassword() != null){
+                          passwordData =modelData.getPassword().toString();
+                        }
+                                                values.put("password", passwordData);
                                 
                                                             String credentialsData = "";
                         if(modelData.getCredentials() != null){
@@ -130,6 +100,12 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                         }
                                                 values.put("challenges", challengesData);
                                 
+                                                            String emailData = "";
+                        if(modelData.getEmail() != null){
+                          emailData =modelData.getEmail().toString();
+                        }
+                                                values.put("email", emailData);
+                                
                                                             String emailVerifiedData = "";
                         if(modelData.getEmailVerified() != null){
                           emailVerifiedData =modelData.getEmailVerified().toString();
@@ -141,6 +117,12 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                           verificationTokenData =modelData.getVerificationToken().toString();
                         }
                                                 values.put("verificationToken", verificationTokenData);
+                                
+                                                            String statusData = "";
+                        if(modelData.getStatus() != null){
+                          statusData =modelData.getStatus().toString();
+                        }
+                                                values.put("status", statusData);
                                 
                                                             String createdData = "";
                         if(modelData.getCreated() != null){
@@ -172,10 +154,10 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
 
 
     // Getting single c
-    public   BrandManager get__db(String id) {
+    public   Student get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
-            Cursor cursor = db.query("BrandManager", null, "id=?", new String[]{id}, null, null, null, null);
+            Cursor cursor = db.query("Student", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
                 HashMap<String, Object> hashMap = parseCursor(cursor);
@@ -184,8 +166,8 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                 db.close(); // Closing database connection
 
                 if (hashMap != null) {
-                    BrandManagerRepository repo = restAdapter.createRepository(BrandManagerRepository.class);
-                    return (BrandManager)repo.createObject(hashMap);
+                    StudentRepository repo = restAdapter.createRepository(StudentRepository.class);
+                    return (Student)repo.createObject(hashMap);
                 } else {
                     return null;
                 }
@@ -202,10 +184,10 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
 
 
     // Getting single cont
-    public   BrandManager get__db(String whereKey, String whereKeyValue) {
+    public   Student get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = this.getReadableDatabase();
-            Cursor cursor = db.query("BrandManager", null, whereKey + "=?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("Student", null, whereKey + "=?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
                 HashMap<String, Object> hashMap = parseCursor(cursor);
@@ -214,8 +196,8 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                 db.close(); // Closing database connection
 
                 if (hashMap != null) {
-                    BrandManagerRepository repo = restAdapter.createRepository(BrandManagerRepository.class);
-                    return (BrandManager)repo.createObject(hashMap);
+                    StudentRepository repo = restAdapter.createRepository(StudentRepository.class);
+                    return (Student)repo.createObject(hashMap);
                 } else {
                     return null;
                 }
@@ -255,69 +237,9 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                         }
                                                 
                                 
-                                                            String emailData = "";
-                        if(cursor.getString(2) != null){
-                          emailData = cursor.getString(2);
-                          if(emailData != null){
-                            emailData = (String)emailData;
-                            hashMap.put("email", emailData);
-                          }
-                        }
-                                                
-                                
-                                                            String passwordData = "";
-                        if(cursor.getString(3) != null){
-                          passwordData = cursor.getString(3);
-                          if(passwordData != null){
-                            passwordData = (String)passwordData;
-                            hashMap.put("password", passwordData);
-                          }
-                        }
-                                                
-                                
-                                                            String restrictHotDealData = "";
-                        if(cursor.getString(4) != null){
-                          restrictHotDealData = cursor.getString(4);
-                          if(restrictHotDealData != null){
-                            restrictHotDealData = (String)restrictHotDealData;
-                            hashMap.put("restrictHotDeal", restrictHotDealData);
-                          }
-                        }
-                                                
-                                
-                                                            String statusData = "";
-                        if(cursor.getString(5) != null){
-                          statusData = cursor.getString(5);
-                          if(statusData != null){
-                            statusData = (String)statusData;
-                            hashMap.put("status", statusData);
-                          }
-                        }
-                                                
-                                
-                                                            String addedData = "";
-                        if(cursor.getString(6) != null){
-                          addedData = cursor.getString(6);
-                          if(addedData != null){
-                            addedData = (String)addedData;
-                            hashMap.put("added", addedData);
-                          }
-                        }
-                                                
-                                
-                                                            String updatedData = "";
-                        if(cursor.getString(7) != null){
-                          updatedData = cursor.getString(7);
-                          if(updatedData != null){
-                            updatedData = (String)updatedData;
-                            hashMap.put("updated", updatedData);
-                          }
-                        }
-                                                
-                                
                                                             String realmData = "";
-                        if(cursor.getString(8) != null){
-                          realmData = cursor.getString(8);
+                        if(cursor.getString(2) != null){
+                          realmData = cursor.getString(2);
                           if(realmData != null){
                             realmData = realmData.toString();
                             hashMap.put("realm", realmData);
@@ -326,8 +248,8 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                                                 
                                 
                                                             String usernameData = "";
-                        if(cursor.getString(9) != null){
-                          usernameData = cursor.getString(9);
+                        if(cursor.getString(3) != null){
+                          usernameData = cursor.getString(3);
                           if(usernameData != null){
                             usernameData = usernameData.toString();
                             hashMap.put("username", usernameData);
@@ -335,9 +257,19 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                         }
                                                 
                                 
+                                                            String passwordData = "";
+                        if(cursor.getString(4) != null){
+                          passwordData = cursor.getString(4);
+                          if(passwordData != null){
+                            passwordData = passwordData.toString();
+                            hashMap.put("password", passwordData);
+                          }
+                        }
+                                                
+                                
                                                             String credentialsData = "";
-                        if(cursor.getString(10) != null){
-                          credentialsData = cursor.getString(10);
+                        if(cursor.getString(5) != null){
+                          credentialsData = cursor.getString(5);
                           if(credentialsData != null){
                             credentialsData = credentialsData.toString();
                             hashMap.put("credentials", credentialsData);
@@ -346,8 +278,8 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                                                 
                                 
                                                             String challengesData = "";
-                        if(cursor.getString(11) != null){
-                          challengesData = cursor.getString(11);
+                        if(cursor.getString(6) != null){
+                          challengesData = cursor.getString(6);
                           if(challengesData != null){
                             challengesData = challengesData.toString();
                             hashMap.put("challenges", challengesData);
@@ -355,9 +287,19 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                         }
                                                 
                                 
+                                                            String emailData = "";
+                        if(cursor.getString(7) != null){
+                          emailData = cursor.getString(7);
+                          if(emailData != null){
+                            emailData = emailData.toString();
+                            hashMap.put("email", emailData);
+                          }
+                        }
+                                                
+                                
                                                             String emailVerifiedData = "";
-                        if(cursor.getString(12) != null){
-                          emailVerifiedData = cursor.getString(12);
+                        if(cursor.getString(8) != null){
+                          emailVerifiedData = cursor.getString(8);
                           if(emailVerifiedData != null){
                             emailVerifiedData = emailVerifiedData.toString();
                             hashMap.put("emailVerified", emailVerifiedData);
@@ -366,8 +308,8 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                                                 
                                 
                                                             String verificationTokenData = "";
-                        if(cursor.getString(13) != null){
-                          verificationTokenData = cursor.getString(13);
+                        if(cursor.getString(9) != null){
+                          verificationTokenData = cursor.getString(9);
                           if(verificationTokenData != null){
                             verificationTokenData = verificationTokenData.toString();
                             hashMap.put("verificationToken", verificationTokenData);
@@ -375,9 +317,19 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                         }
                                                 
                                 
+                                                            String statusData = "";
+                        if(cursor.getString(10) != null){
+                          statusData = cursor.getString(10);
+                          if(statusData != null){
+                            statusData = statusData.toString();
+                            hashMap.put("status", statusData);
+                          }
+                        }
+                                                
+                                
                                                             String createdData = "";
-                        if(cursor.getString(14) != null){
-                          createdData = cursor.getString(14);
+                        if(cursor.getString(11) != null){
+                          createdData = cursor.getString(11);
                           if(createdData != null){
                             createdData = createdData.toString();
                             hashMap.put("created", createdData);
@@ -386,8 +338,8 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                                                 
                                 
                                                             String lastUpdatedData = "";
-                        if(cursor.getString(15) != null){
-                          lastUpdatedData = cursor.getString(15);
+                        if(cursor.getString(12) != null){
+                          lastUpdatedData = cursor.getString(12);
                           if(lastUpdatedData != null){
                             lastUpdatedData = lastUpdatedData.toString();
                             hashMap.put("lastUpdated", lastUpdatedData);
@@ -396,8 +348,8 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(16) != null){
-                          idData = cursor.getString(16);
+                        if(cursor.getString(13) != null){
+                          idData = cursor.getString(13);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -406,8 +358,8 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                                                 
                                 
                                                             String brandIdData = "";
-                        if(cursor.getString(17) != null){
-                          brandIdData = cursor.getString(17);
+                        if(cursor.getString(14) != null){
+                          brandIdData = cursor.getString(14);
                           if(brandIdData != null){
                             brandIdData = brandIdData.toString();
                             hashMap.put("brandId", brandIdData);
@@ -420,7 +372,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
 
 
 
-    public void upsert__db(String id, BrandManager model){
+    public void upsert__db(String id, Student model){
         if(count__db(id) != 0){
             update__db(id, model);
         }else{
@@ -431,10 +383,10 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
 
 
     // Getting All Contacts
-    public DataList<BrandManager>  getAll__db() {
-        DataList<BrandManager> modelList = new DataList<BrandManager>();
+    public DataList<Student>  getAll__db() {
+        DataList<Student> modelList = new DataList<Student>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM BrandManager";
+        String selectQuery = "SELECT  * FROM Student";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -445,23 +397,23 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    BrandManagerRepository repo = restAdapter.createRepository(BrandManagerRepository.class);
-                    modelList.add((BrandManager)repo.createObject(hashMap));
+                    StudentRepository repo = restAdapter.createRepository(StudentRepository.class);
+                    modelList.add((Student)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
         // return contact list
-        return (DataList<BrandManager>) modelList;
+        return (DataList<Student>) modelList;
     }
 
 
     // Getting All Data where
-    public DataList<BrandManager>  getAll__db(String whereKey, String whereKeyValue) {
-        DataList<BrandManager> modelList = new DataList<BrandManager>();
+    public DataList<Student>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<Student> modelList = new DataList<Student>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM BrandManager WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM Student WHERE " + whereKey +"="+ whereKeyValue ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -472,24 +424,24 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    BrandManagerRepository repo = restAdapter.createRepository(BrandManagerRepository.class);
-                    modelList.add((BrandManager)repo.createObject(hashMap));
+                    StudentRepository repo = restAdapter.createRepository(StudentRepository.class);
+                    modelList.add((Student)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
         // return contact list
-        return (DataList<BrandManager>) modelList;
+        return (DataList<Student>) modelList;
     }
 
 
     // Updating single contact
-    public int update__db(String id,   BrandManager modelData) {
+    public int update__db(String id,   Student modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = getContentValues(modelData);
         // updating row
-        return db.update("BrandManager", values, "id = ?",
+        return db.update("Student", values, "id = ?",
                 new String[] { id });
     }
 

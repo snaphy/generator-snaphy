@@ -90,12 +90,6 @@ public class HotDeal extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -116,19 +110,11 @@ public class HotDeal extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
             
 
-            
-            
             
                 private Map<String, Object> image;
                 /* Adding Getter and Setter methods */
@@ -144,10 +130,6 @@ public class HotDeal extends Model {
                 }
 
             
-            
-
-            
-
         
     
         
@@ -168,18 +150,11 @@ public class HotDeal extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
             
 
-            
             
                 private double price;
                 /* Adding Getter and Setter methods */
@@ -195,11 +170,6 @@ public class HotDeal extends Model {
                 }
 
             
-            
-            
-
-            
-
         
     
         
@@ -220,12 +190,6 @@ public class HotDeal extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -246,12 +210,6 @@ public class HotDeal extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -272,12 +230,6 @@ public class HotDeal extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -298,55 +250,64 @@ public class HotDeal extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
             
 
             
-            
-            
-            
+                private String id;
+                /* Adding Getter and Setter methods */
+                public String getId(){
+                  return id;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setId(String id){
+                  this.id = id;
+                }
             
-
         
     
         
             
 
             
-            
-            
-            
+                private String categoryId;
+                /* Adding Getter and Setter methods */
+                public String getCategoryId(){
+                  return categoryId;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setCategoryId(String categoryId){
+                  this.categoryId = categoryId;
+                }
             
-
         
     
         
             
 
             
-            
-            
-            
+                private String brandId;
+                /* Adding Getter and Setter methods */
+                public String getBrandId(){
+                  return brandId;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setBrandId(String brandId){
+                  this.brandId = brandId;
+                }
             
-
         
     
 
 
     //------------------------------------Database Method---------------------------------------------------
 
-   
+
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();

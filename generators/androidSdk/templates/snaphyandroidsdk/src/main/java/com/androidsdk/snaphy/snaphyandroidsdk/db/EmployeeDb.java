@@ -159,7 +159,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
 
 
 
-    // Getting single cont
+    // Getting single c
     public   Employee get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -170,7 +170,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     EmployeeRepository repo = restAdapter.createRepository(EmployeeRepository.class);
                     return (Employee)repo.createObject(hashMap);
@@ -382,7 +382,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -410,7 +410,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     EmployeeRepository repo = restAdapter.createRepository(EmployeeRepository.class);
@@ -422,7 +422,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
         db.close();
         // return contact list
         return (DataList<Employee>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
@@ -437,7 +437,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     EmployeeRepository repo = restAdapter.createRepository(EmployeeRepository.class);

@@ -37,9 +37,7 @@ import org.json.JSONObject;
 
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.FacebookAccessToken;
-
 import android.content.Context;
-
 import com.androidsdk.snaphy.snaphyandroidsdk.db.FacebookAccessTokenDb;
 
 //Now import model of related models..
@@ -67,7 +65,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
 
 
-    
+
 
 
 

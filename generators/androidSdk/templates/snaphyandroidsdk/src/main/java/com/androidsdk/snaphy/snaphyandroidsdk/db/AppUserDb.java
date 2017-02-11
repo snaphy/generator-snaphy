@@ -171,7 +171,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
 
 
 
-    // Getting single cont
+    // Getting single c
     public   AppUser get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -182,7 +182,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     AppUserRepository repo = restAdapter.createRepository(AppUserRepository.class);
                     return (AppUser)repo.createObject(hashMap);
@@ -414,7 +414,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -442,7 +442,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     AppUserRepository repo = restAdapter.createRepository(AppUserRepository.class);
@@ -454,7 +454,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
         db.close();
         // return contact list
         return (DataList<AppUser>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
@@ -469,7 +469,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     AppUserRepository repo = restAdapter.createRepository(AppUserRepository.class);

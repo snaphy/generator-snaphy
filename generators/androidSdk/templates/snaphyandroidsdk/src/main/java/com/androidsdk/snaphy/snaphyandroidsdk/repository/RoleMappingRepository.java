@@ -37,9 +37,7 @@ import org.json.JSONObject;
 
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.RoleMapping;
-
 import android.content.Context;
-
 import com.androidsdk.snaphy.snaphyandroidsdk.db.RoleMappingDb;
 
 //Now import model of related models..
@@ -67,7 +65,7 @@ public class RoleMappingRepository extends ModelRepository<RoleMapping> {
 
 
 
-    
+
 
 
 

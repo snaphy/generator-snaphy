@@ -118,12 +118,6 @@ public class Brand extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -144,12 +138,6 @@ public class Brand extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -170,19 +158,11 @@ public class Brand extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
             
 
-            
-            
             
                 private Map<String, Object> image;
                 /* Adding Getter and Setter methods */
@@ -198,10 +178,6 @@ public class Brand extends Model {
                 }
 
             
-            
-
-            
-
         
     
         
@@ -222,12 +198,6 @@ public class Brand extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -248,12 +218,6 @@ public class Brand extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -274,12 +238,6 @@ public class Brand extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -300,12 +258,6 @@ public class Brand extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -326,12 +278,6 @@ public class Brand extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -352,31 +298,30 @@ public class Brand extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
             
 
             
-            
-            
-            
+                private String id;
+                /* Adding Getter and Setter methods */
+                public String getId(){
+                  return id;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setId(String id){
+                  this.id = id;
+                }
             
-
         
     
 
 
     //------------------------------------Database Method---------------------------------------------------
 
-   
+
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();
@@ -443,12 +388,12 @@ public class Brand extends Model {
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
                                    HotDealRepository hotDealRepository = (HotDealRepository) getRepository();
-                                 
+
                                  //Fetch locally from db
                                  //hotDeals = getHotDeals__db(restAdapter);
                                  // Getting single cont
                                  hotDeals = hotDealRepository.getHotDealDb().getAll__db("brandId", that.getId().toString());
-                              
+
                                    //lowercaseFirstLetter(modelName)
                             }
                                                 return hotDeals;
@@ -1026,6 +971,7 @@ public class Brand extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -1052,12 +998,12 @@ public class Brand extends Model {
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
                                    ChatRepository chatRepository = (ChatRepository) getRepository();
-                                 
+
                                  //Fetch locally from db
                                  //chats = getChats__db(restAdapter);
                                  // Getting single cont
                                  chats = chatRepository.getChatDb().getAll__db("brandId", that.getId().toString());
-                              
+
                                    //lowercaseFirstLetter(modelName)
                             }
                                                 return chats;
@@ -1635,6 +1581,7 @@ public class Brand extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -1661,12 +1608,12 @@ public class Brand extends Model {
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
                                    DailyFeedRepository dailyFeedRepository = (DailyFeedRepository) getRepository();
-                                 
+
                                  //Fetch locally from db
                                  //dailyFeeds = getDailyFeeds__db(restAdapter);
                                  // Getting single cont
                                  dailyFeeds = dailyFeedRepository.getDailyFeedDb().getAll__db("brandId", that.getId().toString());
-                              
+
                                    //lowercaseFirstLetter(modelName)
                             }
                                                 return dailyFeeds;
@@ -2244,6 +2191,7 @@ public class Brand extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -2270,12 +2218,12 @@ public class Brand extends Model {
                                                     if(that.getId() != null){
                                    //TODO: Modify foreign key name..
                                    BrandManagerRepository brandManagerRepository = (BrandManagerRepository) getRepository();
-                                 
+
                                  //Fetch locally from db
                                  //brandManagers = getBrandManagers__db(restAdapter);
                                  // Getting single cont
                                  brandManagers = brandManagerRepository.getBrandManagerDb().getAll__db("brandId", that.getId().toString());
-                              
+
                                    //lowercaseFirstLetter(modelName)
                             }
                                                 return brandManagers;
@@ -2815,6 +2763,7 @@ public class Brand extends Model {
                                     } //method def ends here.
                                  
                             
+                        
                         
                         
                         
@@ -3545,6 +3494,7 @@ public class Brand extends Model {
                             
                          
                             
+                        
                         
                         
                         

@@ -11,8 +11,6 @@ import java.util.HashMap;
  * Created by snaphy on 12/9/16.
  */
 public class DataList<T> extends ArrayList<T> {
-
-
     //Variable holding all the subscriber object respect to object..
     HashMap<Object, Listen> listenersMap = new HashMap();
 
@@ -274,8 +272,4 @@ public class DataList<T> extends ArrayList<T> {
             }
         }
     }
-
-
-
-
 }

@@ -37,9 +37,7 @@ import org.json.JSONObject;
 
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Container;
-
 import android.content.Context;
-
 import com.androidsdk.snaphy.snaphyandroidsdk.db.ContainerDb;
 
 //Now import model of related models..
@@ -60,7 +58,7 @@ public class ContainerRepository extends ModelRepository<Container> {
 
 
 
-    
+
 
 
 

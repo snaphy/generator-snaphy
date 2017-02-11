@@ -37,9 +37,7 @@ import org.json.JSONObject;
 
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Brand;
-
 import android.content.Context;
-
 import com.androidsdk.snaphy.snaphyandroidsdk.db.BrandDb;
 
 //Now import model of related models..
@@ -98,7 +96,7 @@ public class BrandRepository extends ModelRepository<Brand> {
 
 
 
-    
+
 
 
 
@@ -706,6 +704,9 @@ private void addStorage(Context context){
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "Brand.getModelRelationSchema");
+    
+
+    
     
 
     
@@ -4366,6 +4367,8 @@ private void addStorage(Context context){
 
             
 
+        
+    
         
     
         

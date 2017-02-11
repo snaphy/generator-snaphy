@@ -99,7 +99,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
 
 
 
-    // Getting single cont
+    // Getting single c
     public   AdminEmail get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -110,7 +110,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     AdminEmailRepository repo = restAdapter.createRepository(AdminEmailRepository.class);
                     return (AdminEmail)repo.createObject(hashMap);
@@ -222,7 +222,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -250,7 +250,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     AdminEmailRepository repo = restAdapter.createRepository(AdminEmailRepository.class);
@@ -262,7 +262,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
         db.close();
         // return contact list
         return (DataList<AdminEmail>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
@@ -277,7 +277,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     AdminEmailRepository repo = restAdapter.createRepository(AdminEmailRepository.class);

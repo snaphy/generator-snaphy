@@ -135,7 +135,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
 
 
 
-    // Getting single cont
+    // Getting single c
     public   HotDeal get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -146,7 +146,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
                     return (HotDeal)repo.createObject(hashMap);
@@ -239,12 +239,12 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                         }
                                                 
                                 
-                                                            double priceData = double(0);  
+                                                            double priceData = double(0);
                           priceData = cursor.getInt(4);
                           priceData = (double)priceData;
                           hashMap.put("price", priceData);
-                      
-                      
+
+
                                                 
                                 
                                                             String statusData = "";
@@ -316,7 +316,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -344,7 +344,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
@@ -356,7 +356,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
         db.close();
         // return contact list
         return (DataList<HotDeal>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
@@ -371,7 +371,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);

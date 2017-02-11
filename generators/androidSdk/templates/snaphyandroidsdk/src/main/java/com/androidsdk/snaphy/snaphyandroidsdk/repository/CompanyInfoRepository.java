@@ -37,9 +37,7 @@ import org.json.JSONObject;
 
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.CompanyInfo;
-
 import android.content.Context;
-
 import com.androidsdk.snaphy.snaphyandroidsdk.db.CompanyInfoDb;
 
 //Now import model of related models..
@@ -60,7 +58,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
 
 
-    
+
 
 
 

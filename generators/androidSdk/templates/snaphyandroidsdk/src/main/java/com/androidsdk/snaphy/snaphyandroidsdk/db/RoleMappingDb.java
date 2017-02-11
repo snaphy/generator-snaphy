@@ -87,7 +87,7 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
 
 
 
-    // Getting single cont
+    // Getting single c
     public   RoleMapping get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -98,7 +98,7 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     RoleMappingRepository repo = restAdapter.createRepository(RoleMappingRepository.class);
                     return (RoleMapping)repo.createObject(hashMap);
@@ -190,7 +190,7 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -218,7 +218,7 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     RoleMappingRepository repo = restAdapter.createRepository(RoleMappingRepository.class);
@@ -230,7 +230,7 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
         db.close();
         // return contact list
         return (DataList<RoleMapping>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
@@ -245,7 +245,7 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     RoleMappingRepository repo = restAdapter.createRepository(RoleMappingRepository.class);

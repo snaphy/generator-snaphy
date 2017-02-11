@@ -43,9 +43,7 @@ import org.json.JSONObject;
 
 //Import its models too.
 import com.androidsdk.snaphy.snaphyandroidsdk.models.BrandManager;
-
 import android.content.Context;
-
 import com.androidsdk.snaphy.snaphyandroidsdk.db.BrandManagerDb;
 
 //Now import model of related models..
@@ -173,7 +171,7 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
 
 
 
-    
+
 
 
 

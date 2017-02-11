@@ -93,7 +93,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
 
 
 
-    // Getting single cont
+    // Getting single c
     public   Role get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -104,7 +104,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     RoleRepository repo = restAdapter.createRepository(RoleRepository.class);
                     return (Role)repo.createObject(hashMap);
@@ -206,7 +206,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -234,7 +234,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     RoleRepository repo = restAdapter.createRepository(RoleRepository.class);
@@ -246,7 +246,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
         db.close();
         // return contact list
         return (DataList<Role>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
@@ -261,7 +261,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     RoleRepository repo = restAdapter.createRepository(RoleRepository.class);

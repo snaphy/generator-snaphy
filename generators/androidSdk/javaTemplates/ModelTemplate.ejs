@@ -220,20 +220,20 @@ public class <%- modelName %> extends Model {
             var isArray = model.properties[property].type instanceof Array;
         %>
             <% if(isArray) {
-                var typeName = model.properties[property].type[0];
-                var listType;
-                if(typeName === "object" || typeName === "geopoint"){
-                    listType = "DataList<Map<String, Object>>";
-                }
-                else if (typeName === "string" || typeName === "date") {
-                    listType = "DataList<String>";
-                }
-                else if (typeName === "number") {
-                    listType = "DataList<Double>";
-                }
-                else if(true){
-                    listType = "DataList<Object>";
-                }
+                  var typeName = model.properties[property].type[0];
+                  var listType;
+                  if(typeName === "object" || typeName === "geopoint"){
+                      listType = "DataList<Map<String, Object>>";
+                  }
+                  else if (typeName === "string" || typeName === "date") {
+                      listType = "DataList<String>";
+                  }
+                  else if (typeName === "number") {
+                      listType = "DataList<Double>";
+                  }
+                  else{
+                      listType = "DataList<Object>";
+                  }
             %>
 
                 private <%- listType %> <%- property %>;
@@ -266,8 +266,7 @@ public class <%- modelName %> extends Model {
                     hashMap.put("<%- property %>", <%- property %>);
                 }
 
-            <% } %>
-            <% if( (model.properties[property].type === "number" )&& property !== "id") { %>
+            <% } else if( (model.properties[property].type === "number" )&& property !== "id") { %>
                 private double <%- property %>;
                 /* Adding Getter and Setter methods */
                 public double get<%- capitalPropertyName %>(){
@@ -281,8 +280,7 @@ public class <%- modelName %> extends Model {
                     hashMap.put("<%- property %>", <%- property %>);
                 }
 
-            <% } %>
-            <% if( model.properties[property].type === "object" && property !== "id" ) { %>
+            <% } else if( model.properties[property].type === "object" && property !== "id" ) { %>
                 private Map<String, Object> <%- property %>;
                 /* Adding Getter and Setter methods */
                 public Map<String, Object> get<%- capitalPropertyName %>(){
@@ -296,8 +294,7 @@ public class <%- modelName %> extends Model {
                     hashMap.put("<%- property %>", <%- property %>);
                 }
 
-            <% } %>
-            <% if( model.properties[property].type === "geopoint" ) { %>
+            <% } else if( model.properties[property].type === "geopoint" ) { %>
                 private Map<String, Object> <%- property %> = new HashMap();
                 /* Adding Getter and Setter methods */
                 public Map<String, Object> get<%- capitalPropertyName %>(){
@@ -337,9 +334,7 @@ public class <%- modelName %> extends Model {
                     hashMap.put("<%- property %>", <%- property %>);
                 }
 
-            <% } %>
-
-            <% if( model.properties[property].type === "boolean" ) { %>
+            <% } else if( model.properties[property].type === "boolean" ) { %>
                 private boolean <%- property %>;
                 /* Adding Getter and Setter methods */
                 public boolean get<%- capitalPropertyName %>(){
@@ -353,15 +348,25 @@ public class <%- modelName %> extends Model {
                     hashMap.put("<%- property %>", <%- property %>);
                 }
 
-            <% } %>
+            <% }else { %>
+                private String <%- property %>;
+                /* Adding Getter and Setter methods */
+                public String get<%- capitalPropertyName %>(){
+                  return <%- property %>;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void set<%- capitalPropertyName %>(String <%- property %>){
+                  this.<%- property %> = <%- property %>;
+                }
+            <% }%>
         <% } %>
     <% } %>
 
 
     //------------------------------------Database Method---------------------------------------------------
 
-   
+
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();
@@ -537,12 +542,12 @@ public class <%- modelName %> extends Model {
                             if(that.getId() != null){
                                    //TODO: Modify foreign key name..
                                    <%- capitalcaseRelatedModelName %>Repository <%- lowercaseFirstLetter(capitalcaseRelatedModelName) %>Repository = (<%- capitalcaseRelatedModelName %>Repository) getRepository();
-                                 
+
                                  //Fetch locally from db
                                  //<%- relation %> = get<%- capitalcaseRelationName %>__db(restAdapter);
                                  // Getting single cont
                                  <%- relation %> = <%- lowercaseFirstLetter(capitalcaseRelatedModelName) %>Repository.get<%- capitalcaseRelatedModelName %>Db().getAll__db("<%- lowercaseFirstLetter(modelName) %>Id", that.getId().toString());
-                              
+
                                    //lowercaseFirstLetter(modelName)
                             }
                         <%}-%>

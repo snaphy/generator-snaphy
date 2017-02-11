@@ -83,12 +83,6 @@ public class DailyFeed extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -109,12 +103,6 @@ public class DailyFeed extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -135,12 +123,6 @@ public class DailyFeed extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
@@ -161,19 +143,11 @@ public class DailyFeed extends Model {
                 }
 
             
-            
-            
-            
-
-            
-
         
     
         
             
 
-            
-            
             
                 private Map<String, Object> image;
                 /* Adding Getter and Setter methods */
@@ -189,41 +163,47 @@ public class DailyFeed extends Model {
                 }
 
             
-            
-
-            
-
         
     
         
             
 
             
-            
-            
-            
+                private String id;
+                /* Adding Getter and Setter methods */
+                public String getId(){
+                  return id;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setId(String id){
+                  this.id = id;
+                }
             
-
         
     
         
             
 
             
-            
-            
-            
+                private String brandId;
+                /* Adding Getter and Setter methods */
+                public String getBrandId(){
+                  return brandId;
+                }
 
+                /* Adding Getter and Setter methods */
+                public void setBrandId(String brandId){
+                  this.brandId = brandId;
+                }
             
-
         
     
 
 
     //------------------------------------Database Method---------------------------------------------------
 
-   
+
     public void save(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
       //Save to database..
       save__db();

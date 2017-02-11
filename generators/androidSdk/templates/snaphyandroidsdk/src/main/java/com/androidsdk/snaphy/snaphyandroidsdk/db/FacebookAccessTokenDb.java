@@ -99,7 +99,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
 
 
 
-    // Getting single cont
+    // Getting single c
     public   FacebookAccessToken get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -110,7 +110,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
                     return (FacebookAccessToken)repo.createObject(hashMap);
@@ -222,7 +222,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
                           }
                         }
                                                 
-                    
+                  
         return hashMap;
     }//parseCursor
 
@@ -250,7 +250,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
@@ -262,7 +262,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
         db.close();
         // return contact list
         return (DataList<FacebookAccessToken>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
@@ -277,7 +277,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
