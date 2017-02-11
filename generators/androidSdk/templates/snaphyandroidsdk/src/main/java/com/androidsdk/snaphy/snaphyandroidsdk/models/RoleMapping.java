@@ -69,7 +69,7 @@ public class RoleMapping extends Model {
             
 
             
-                private boolean id;
+                private Object id;
                 /* Adding Getter and Setter methods */
                 public Object getId(){
                     return id;
@@ -106,7 +106,7 @@ public class RoleMapping extends Model {
             
 
             
-                private boolean principalId;
+                private String principalId;
                 /* Adding Getter and Setter methods */
                 public String getPrincipalId(){
                     return principalId;
@@ -123,7 +123,7 @@ public class RoleMapping extends Model {
             
 
             
-                private boolean roleId;
+                private Object roleId;
                 /* Adding Getter and Setter methods */
                 public Object getRoleId(){
                     return roleId;

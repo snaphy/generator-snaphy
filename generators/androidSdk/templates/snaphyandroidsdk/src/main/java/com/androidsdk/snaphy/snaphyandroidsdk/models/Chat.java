@@ -236,7 +236,7 @@ public class Chat extends Model {
             
 
             
-                private boolean id;
+                private Object id;
                 /* Adding Getter and Setter methods */
                 public Object getId(){
                     return id;
@@ -253,7 +253,7 @@ public class Chat extends Model {
             
 
             
-                private boolean appUserId;
+                private Object appUserId;
                 /* Adding Getter and Setter methods */
                 public Object getAppUserId(){
                     return appUserId;
@@ -270,7 +270,7 @@ public class Chat extends Model {
             
 
             
-                private boolean brandId;
+                private Object brandId;
                 /* Adding Getter and Setter methods */
                 public Object getBrandId(){
                     return brandId;

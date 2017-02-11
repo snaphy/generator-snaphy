@@ -122,7 +122,7 @@ public class CompanyInfo extends Model {
             
 
             
-                private boolean id;
+                private Object id;
                 /* Adding Getter and Setter methods */
                 public Object getId(){
                     return id;

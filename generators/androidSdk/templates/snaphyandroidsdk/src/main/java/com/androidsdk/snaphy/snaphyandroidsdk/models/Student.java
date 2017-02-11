@@ -112,14 +112,14 @@ public class Student extends User {
             
 
             
-                private boolean realm;
+                private String realm;
                 /* Adding Getter and Setter methods */
-                public Object getRealm(){
+                public String getRealm(){
                     return realm;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setRealm(Object realm){
+                public void setRealm(String realm){
                     this.realm = realm;
                 }
              
@@ -129,14 +129,14 @@ public class Student extends User {
             
 
             
-                private boolean username;
+                private String username;
                 /* Adding Getter and Setter methods */
-                public Object getUsername(){
+                public String getUsername(){
                     return username;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setUsername(Object username){
+                public void setUsername(String username){
                     this.username = username;
                 }
              
@@ -146,14 +146,14 @@ public class Student extends User {
             
 
             
-                private boolean password;
+                private String password;
                 /* Adding Getter and Setter methods */
-                public Object getPassword(){
+                public String getPassword(){
                     return password;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setPassword(Object password){
+                public void setPassword(String password){
                     this.password = password;
                 }
              
@@ -163,7 +163,7 @@ public class Student extends User {
             
 
             
-                private boolean credentials;
+                private Object credentials;
                 /* Adding Getter and Setter methods */
                 public Object getCredentials(){
                     return credentials;
@@ -180,7 +180,7 @@ public class Student extends User {
             
 
             
-                private boolean challenges;
+                private Object challenges;
                 /* Adding Getter and Setter methods */
                 public Object getChallenges(){
                     return challenges;
@@ -197,14 +197,14 @@ public class Student extends User {
             
 
             
-                private boolean email;
+                private String email;
                 /* Adding Getter and Setter methods */
-                public Object getEmail(){
+                public String getEmail(){
                     return email;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setEmail(Object email){
+                public void setEmail(String email){
                     this.email = email;
                 }
              
@@ -214,14 +214,14 @@ public class Student extends User {
             
 
             
-                private boolean emailVerified;
+                private Boolean emailVerified;
                 /* Adding Getter and Setter methods */
-                public Object getEmailVerified(){
+                public Boolean getEmailVerified(){
                     return emailVerified;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setEmailVerified(Object emailVerified){
+                public void setEmailVerified(Boolean emailVerified){
                     this.emailVerified = emailVerified;
                 }
              
@@ -231,14 +231,14 @@ public class Student extends User {
             
 
             
-                private boolean verificationToken;
+                private String verificationToken;
                 /* Adding Getter and Setter methods */
-                public Object getVerificationToken(){
+                public String getVerificationToken(){
                     return verificationToken;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setVerificationToken(Object verificationToken){
+                public void setVerificationToken(String verificationToken){
                     this.verificationToken = verificationToken;
                 }
              
@@ -248,14 +248,14 @@ public class Student extends User {
             
 
             
-                private boolean status;
+                private String status;
                 /* Adding Getter and Setter methods */
-                public Object getStatus(){
+                public String getStatus(){
                     return status;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setStatus(Object status){
+                public void setStatus(String status){
                     this.status = status;
                 }
              
@@ -265,14 +265,14 @@ public class Student extends User {
             
 
             
-                private boolean created;
+                private String created;
                 /* Adding Getter and Setter methods */
-                public Object getCreated(){
+                public String getCreated(){
                     return created;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setCreated(Object created){
+                public void setCreated(String created){
                     this.created = created;
                 }
              
@@ -282,14 +282,14 @@ public class Student extends User {
             
 
             
-                private boolean lastUpdated;
+                private String lastUpdated;
                 /* Adding Getter and Setter methods */
-                public Object getLastUpdated(){
+                public String getLastUpdated(){
                     return lastUpdated;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setLastUpdated(Object lastUpdated){
+                public void setLastUpdated(String lastUpdated){
                     this.lastUpdated = lastUpdated;
                 }
              
@@ -299,7 +299,7 @@ public class Student extends User {
             
 
             
-                private boolean id;
+                private Object id;
                 /* Adding Getter and Setter methods */
                 public Object getId(){
                     return id;
@@ -316,7 +316,7 @@ public class Student extends User {
             
 
             
-                private boolean brandId;
+                private Object brandId;
                 /* Adding Getter and Setter methods */
                 public Object getBrandId(){
                     return brandId;

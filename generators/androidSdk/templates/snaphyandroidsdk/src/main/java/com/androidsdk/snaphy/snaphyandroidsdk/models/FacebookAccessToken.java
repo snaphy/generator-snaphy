@@ -129,7 +129,7 @@ public class FacebookAccessToken extends Model {
             
 
             
-                private boolean userId;
+                private Object userId;
                 /* Adding Getter and Setter methods */
                 public Object getUserId(){
                     return userId;
@@ -166,7 +166,7 @@ public class FacebookAccessToken extends Model {
             
 
             
-                private boolean appUserId;
+                private Object appUserId;
                 /* Adding Getter and Setter methods */
                 public Object getAppUserId(){
                     return appUserId;

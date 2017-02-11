@@ -169,7 +169,7 @@ public class DailyFeed extends Model {
             
 
             
-                private boolean id;
+                private Object id;
                 /* Adding Getter and Setter methods */
                 public Object getId(){
                     return id;
@@ -186,7 +186,7 @@ public class DailyFeed extends Model {
             
 
             
-                private boolean brandId;
+                private Object brandId;
                 /* Adding Getter and Setter methods */
                 public Object getBrandId(){
                     return brandId;

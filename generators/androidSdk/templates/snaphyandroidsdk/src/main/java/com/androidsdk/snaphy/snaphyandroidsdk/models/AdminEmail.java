@@ -62,14 +62,14 @@ public class AdminEmail extends Model {
             
 
             
-                private boolean to;
+                private String to;
                 /* Adding Getter and Setter methods */
-                public Object getTo(){
+                public String getTo(){
                     return to;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setTo(Object to){
+                public void setTo(String to){
                     this.to = to;
                 }
              
@@ -79,14 +79,14 @@ public class AdminEmail extends Model {
             
 
             
-                private boolean from;
+                private String from;
                 /* Adding Getter and Setter methods */
-                public Object getFrom(){
+                public String getFrom(){
                     return from;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setFrom(Object from){
+                public void setFrom(String from){
                     this.from = from;
                 }
              
@@ -96,14 +96,14 @@ public class AdminEmail extends Model {
             
 
             
-                private boolean subject;
+                private String subject;
                 /* Adding Getter and Setter methods */
-                public Object getSubject(){
+                public String getSubject(){
                     return subject;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setSubject(Object subject){
+                public void setSubject(String subject){
                     this.subject = subject;
                 }
              
@@ -113,14 +113,14 @@ public class AdminEmail extends Model {
             
 
             
-                private boolean text;
+                private String text;
                 /* Adding Getter and Setter methods */
-                public Object getText(){
+                public String getText(){
                     return text;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setText(Object text){
+                public void setText(String text){
                     this.text = text;
                 }
              
@@ -130,14 +130,14 @@ public class AdminEmail extends Model {
             
 
             
-                private boolean html;
+                private String html;
                 /* Adding Getter and Setter methods */
-                public Object getHtml(){
+                public String getHtml(){
                     return html;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setHtml(Object html){
+                public void setHtml(String html){
                     this.html = html;
                 }
              
@@ -147,14 +147,14 @@ public class AdminEmail extends Model {
             
 
             
-                private boolean id;
+                private double id;
                 /* Adding Getter and Setter methods */
-                public Object getId(){
+                public double getId(){
                     return id;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setId(Object id){
+                public void setId(double id){
                     this.id = id;
                 }
              

@@ -349,28 +349,28 @@ public class <%- modelName %> extends Model {
                 }
 
             <% }else {
-                //console.log("ANY", property, model.properties[property]);
+                console.log("ANY", property, model.properties[property]);
                 var type;
                 if(typeof model.properties[property].type === "function") {
 
-                  if (model.properties[property].type === "String") {
+                  if (model.properties[property].type.name === "String") {
                     type = "String";
                   }
-                  else if (model.properties[property].type === "ObjectID") {
+                  else if (model.properties[property].type.name === "ObjectID") {
                     type = "Object";
                   }
-                  else if (model.properties[property].type === "Number") {
+                  else if (model.properties[property].type.name === "Number") {
                     type = "double";
                   }
-                  else if (model.properties[property].type === "Date") {
+                  else if (model.properties[property].type.name === "Date") {
                     type = "String";
-                  }else if (model.properties[property].type === "Boolean") {
+                  }else if (model.properties[property].type.name === "Boolean") {
                     type = "Boolean";
                   }else{
                       type = "Object";
                   }
                 }else{
-                  if(model.properties[property] === "string" || model.properties[property] === "any"){
+                  if(model.properties[property] === "string" || model.properties[property] === "any" || model.properties[property] === "String"){
                     type= "String";
                   }
                   else if (model.properties[property] === "number") {
@@ -390,7 +390,7 @@ public class <%- modelName %> extends Model {
                   }
                 }
             %>
-                private boolean <%- property %>;
+                private <%- type %> <%- property %>;
                 /* Adding Getter and Setter methods */
                 public <%- type %> get<%- capitalPropertyName %>(){
                     return <%- property %>;

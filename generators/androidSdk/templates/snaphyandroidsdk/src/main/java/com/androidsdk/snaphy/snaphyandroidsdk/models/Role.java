@@ -69,7 +69,7 @@ public class Role extends Model {
             
 
             
-                private boolean id;
+                private Object id;
                 /* Adding Getter and Setter methods */
                 public Object getId(){
                     return id;
@@ -106,7 +106,7 @@ public class Role extends Model {
             
 
             
-                private boolean description;
+                private String description;
                 /* Adding Getter and Setter methods */
                 public String getDescription(){
                     return description;
@@ -123,7 +123,7 @@ public class Role extends Model {
             
 
             
-                private boolean created;
+                private Object created;
                 /* Adding Getter and Setter methods */
                 public Object getCreated(){
                     return created;
@@ -140,7 +140,7 @@ public class Role extends Model {
             
 
             
-                private boolean modified;
+                private Object modified;
                 /* Adding Getter and Setter methods */
                 public Object getModified(){
                     return modified;
