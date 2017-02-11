@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
-
+import java.lang.reflect.Method;
 
 
 //Replaced by Custom ModelRepository method
@@ -354,7 +354,7 @@ private void addStorage(Context context){
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    method = appUser.getClass().getMethod("save__db");
+                                                    Method method = appUser.getClass().getMethod("save__db");
                                                     method.invoke(appUser);
 
                                           } catch (Exception e) {
@@ -426,7 +426,7 @@ private void addStorage(Context context){
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    method = facebookAccessToken.getClass().getMethod("save__db");
+                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
                                                     method.invoke(facebookAccessToken);
 
                                           } catch (Exception e) {
@@ -499,7 +499,7 @@ private void addStorage(Context context){
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    method = facebookAccessToken.getClass().getMethod("save__db");
+                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
                                                     method.invoke(facebookAccessToken);
 
                                           } catch (Exception e) {
@@ -624,7 +624,7 @@ private void addStorage(Context context){
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    method = facebookAccessToken.getClass().getMethod("save__db");
+                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
                                                     method.invoke(facebookAccessToken);
 
                                           } catch (Exception e) {
@@ -699,7 +699,7 @@ private void addStorage(Context context){
                                             if(isSTORE_LOCALLY()){
                                                 //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                                 try {
-                                                          method = facebookAccessToken.getClass().getMethod("save__db");
+                                                          Method method = facebookAccessToken.getClass().getMethod("save__db");
                                                           method.invoke(facebookAccessToken);
 
                                                 } catch (Exception e) {
@@ -770,7 +770,7 @@ private void addStorage(Context context){
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    method = facebookAccessToken.getClass().getMethod("save__db");
+                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
                                                     method.invoke(facebookAccessToken);
 
                                           } catch (Exception e) {
@@ -999,7 +999,7 @@ private void addStorage(Context context){
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    method = facebookAccessToken.getClass().getMethod("save__db");
+                                                    Method method = facebookAccessToken.getClass().getMethod("save__db");
                                                     method.invoke(facebookAccessToken);
 
                                           } catch (Exception e) {

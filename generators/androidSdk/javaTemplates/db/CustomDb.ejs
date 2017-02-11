@@ -13,6 +13,7 @@ import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
 import android.database.Cursor;
+import java.lang.reflect.Method;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
@@ -121,11 +122,11 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
                     <% }else{ -%>
                         //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         try {
-                              method = <%- modelData %>.getClass().getMethod("get<%-capitalPropertyName%>");
+                              Method method = modelData.getClass().getMethod("get<%-capitalPropertyName%>");
                               String <%-property%>Data = "";
-                              if(method.invoke(<%- modelData %>) != null){
+                              if(method.invoke(modelData) != null){
                                 //<%-property%>Data = modelData.get<%-capitalPropertyName%>().toString();
-                                <%-property%>Data = (String) method.invoke(<%- modelData %>);
+                                <%-property%>Data = (String) method.invoke(modelData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());

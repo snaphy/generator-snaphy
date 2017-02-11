@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
-
+import java.lang.reflect.Method;
 
 
 //Replaced by Custom  Repo methods
@@ -516,7 +516,7 @@ private void addStorage(Context context){
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    method = accessToken.getClass().getMethod("save__db");
+                                                    Method method = accessToken.getClass().getMethod("save__db");
                                                     method.invoke(accessToken);
 
                                           } catch (Exception e) {
@@ -640,7 +640,7 @@ private void addStorage(Context context){
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    method = accessToken.getClass().getMethod("save__db");
+                                                    Method method = accessToken.getClass().getMethod("save__db");
                                                     method.invoke(accessToken);
 
                                           } catch (Exception e) {
@@ -717,7 +717,7 @@ private void addStorage(Context context){
                                             if(isSTORE_LOCALLY()){
                                                 //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                                 try {
-                                                          method = accessToken.getClass().getMethod("save__db");
+                                                          Method method = accessToken.getClass().getMethod("save__db");
                                                           method.invoke(accessToken);
 
                                                 } catch (Exception e) {
@@ -790,7 +790,7 @@ private void addStorage(Context context){
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    method = accessToken.getClass().getMethod("save__db");
+                                                    Method method = accessToken.getClass().getMethod("save__db");
                                                     method.invoke(accessToken);
 
                                           } catch (Exception e) {
@@ -961,7 +961,7 @@ private void addStorage(Context context){
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    method = employee.getClass().getMethod("save__db");
+                                                    Method method = employee.getClass().getMethod("save__db");
                                                     method.invoke(employee);
 
                                           } catch (Exception e) {
@@ -1034,7 +1034,7 @@ private void addStorage(Context context){
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    method = employee.getClass().getMethod("save__db");
+                                                    Method method = employee.getClass().getMethod("save__db");
                                                     method.invoke(employee);
 
                                           } catch (Exception e) {
@@ -1159,7 +1159,7 @@ private void addStorage(Context context){
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    method = employee.getClass().getMethod("save__db");
+                                                    Method method = employee.getClass().getMethod("save__db");
                                                     method.invoke(employee);
 
                                           } catch (Exception e) {
@@ -1234,7 +1234,7 @@ private void addStorage(Context context){
                                             if(isSTORE_LOCALLY()){
                                                 //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                                 try {
-                                                          method = employee.getClass().getMethod("save__db");
+                                                          Method method = employee.getClass().getMethod("save__db");
                                                           method.invoke(employee);
 
                                                 } catch (Exception e) {
@@ -1305,7 +1305,7 @@ private void addStorage(Context context){
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    method = employee.getClass().getMethod("save__db");
+                                                    Method method = employee.getClass().getMethod("save__db");
                                                     method.invoke(employee);
 
                                           } catch (Exception e) {
@@ -1534,7 +1534,7 @@ private void addStorage(Context context){
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    method = employee.getClass().getMethod("save__db");
+                                                    Method method = employee.getClass().getMethod("save__db");
                                                     method.invoke(employee);
 
                                           } catch (Exception e) {

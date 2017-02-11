@@ -167,7 +167,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
-
+import java.lang.reflect.Method;
 
 <% if(model.base === "User" || modelName === "User"){ %>
 //Replaced by Custom  Repo methods
@@ -804,7 +804,7 @@ private void addStorage(Context context){
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    method = <%- lowercaseFirstLetter(type) %>.getClass().getMethod("save__db");
+                                                    Method method = <%- lowercaseFirstLetter(type) %>.getClass().getMethod("save__db");
                                                     method.invoke(<%- lowercaseFirstLetter(type) %>);
 
                                           } catch (Exception e) {
@@ -851,7 +851,7 @@ private void addStorage(Context context){
                                             if(isSTORE_LOCALLY()){
                                                 //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                                 try {
-                                                          method = <%- lowercaseFirstLetter(type) %>.getClass().getMethod("save__db");
+                                                          Method method = <%- lowercaseFirstLetter(type) %>.getClass().getMethod("save__db");
                                                           method.invoke(<%- lowercaseFirstLetter(type) %>);
 
                                                 } catch (Exception e) {
