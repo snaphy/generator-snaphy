@@ -221,6 +221,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
     public <%- modelName %>Repository(){
         super("<%- modelName %>", null, <%- modelName %>.class);
+        addStorage(getApplicationContext());
     }
 
 
@@ -363,11 +364,11 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
 
 
-private void addStorage(Context context){
-    set<%- modelName %>Db(new <%- modelName %>Db(context, getRestAdapter()));
-      //allow data storage locally..
-      persistData(true);
-}
+    public void addStorage(Context context){
+        set<%- modelName %>Db(new <%- modelName %>Db(context, getRestAdapter()));
+          //allow data storage locally..
+          persistData(true);
+    }
 
 
     public RestContract createContract() {
