@@ -11,6 +11,7 @@ import java.util.HashMap;
 import com.google.gson.Gson;
 import android.database.Cursor;
 import java.lang.reflect.Method;
+import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
@@ -60,9 +61,9 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
       ContentValues values = new ContentValues();
                        
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String toData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getTo");
-                              String toData = "";
                               if(method.invoke(modelData) != null){
                                 //toData = modelData.getTo().toString();
                                 toData = (String) method.invoke(modelData);
@@ -74,9 +75,9 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
                                                 values.put("to", toData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String fromData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getFrom");
-                              String fromData = "";
                               if(method.invoke(modelData) != null){
                                 //fromData = modelData.getFrom().toString();
                                 fromData = (String) method.invoke(modelData);
@@ -88,9 +89,9 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
                                                 values.put("from", fromData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String subjectData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getSubject");
-                              String subjectData = "";
                               if(method.invoke(modelData) != null){
                                 //subjectData = modelData.getSubject().toString();
                                 subjectData = (String) method.invoke(modelData);
@@ -102,9 +103,9 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
                                                 values.put("subject", subjectData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String textData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getText");
-                              String textData = "";
                               if(method.invoke(modelData) != null){
                                 //textData = modelData.getText().toString();
                                 textData = (String) method.invoke(modelData);
@@ -116,9 +117,9 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
                                                 values.put("text", textData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String htmlData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getHtml");
-                              String htmlData = "";
                               if(method.invoke(modelData) != null){
                                 //htmlData = modelData.getHtml().toString();
                                 htmlData = (String) method.invoke(modelData);
@@ -130,9 +131,9 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
                                                 values.put("html", htmlData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String idData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getId");
-                              String idData = "";
                               if(method.invoke(modelData) != null){
                                 //idData = modelData.getId().toString();
                                 idData = (String) method.invoke(modelData);

@@ -168,14 +168,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.lang.reflect.Method;
-
+import android.util.Log;
 <% if(model.base === "User" || modelName === "User"){ %>
 //Replaced by Custom  Repo methods
 // import com.strongloop.android.loopback.UserRepository;
 import com.strongloop.android.loopback.AccessTokenRepository;
 import com.strongloop.android.loopback.AccessToken;
 import android.content.SharedPreferences;
-import android.util.Log;
 import org.json.JSONException;
 import android.content.Context;
 <% } else { %>

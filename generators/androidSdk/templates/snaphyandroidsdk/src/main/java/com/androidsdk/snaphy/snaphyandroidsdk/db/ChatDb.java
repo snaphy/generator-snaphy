@@ -11,6 +11,7 @@ import java.util.HashMap;
 import com.google.gson.Gson;
 import android.database.Cursor;
 import java.lang.reflect.Method;
+import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
@@ -108,9 +109,9 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                                                 values.put("status", statusData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String idData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getId");
-                              String idData = "";
                               if(method.invoke(modelData) != null){
                                 //idData = modelData.getId().toString();
                                 idData = (String) method.invoke(modelData);
@@ -122,9 +123,9 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                                                 values.put("id", idData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String appUserIdData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getAppUserId");
-                              String appUserIdData = "";
                               if(method.invoke(modelData) != null){
                                 //appUserIdData = modelData.getAppUserId().toString();
                                 appUserIdData = (String) method.invoke(modelData);
@@ -136,9 +137,9 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
                                                 values.put("appUserId", appUserIdData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String brandIdData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getBrandId");
-                              String brandIdData = "";
                               if(method.invoke(modelData) != null){
                                 //brandIdData = modelData.getBrandId().toString();
                                 brandIdData = (String) method.invoke(modelData);

@@ -11,6 +11,7 @@ import java.util.HashMap;
 import com.google.gson.Gson;
 import android.database.Cursor;
 import java.lang.reflect.Method;
+import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
@@ -108,9 +109,9 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                                                 values.put("updated", updatedData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String realmData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getRealm");
-                              String realmData = "";
                               if(method.invoke(modelData) != null){
                                 //realmData = modelData.getRealm().toString();
                                 realmData = (String) method.invoke(modelData);
@@ -122,9 +123,9 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                                                 values.put("realm", realmData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String usernameData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getUsername");
-                              String usernameData = "";
                               if(method.invoke(modelData) != null){
                                 //usernameData = modelData.getUsername().toString();
                                 usernameData = (String) method.invoke(modelData);
@@ -136,9 +137,9 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                                                 values.put("username", usernameData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String credentialsData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getCredentials");
-                              String credentialsData = "";
                               if(method.invoke(modelData) != null){
                                 //credentialsData = modelData.getCredentials().toString();
                                 credentialsData = (String) method.invoke(modelData);
@@ -150,9 +151,9 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                                                 values.put("credentials", credentialsData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String challengesData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getChallenges");
-                              String challengesData = "";
                               if(method.invoke(modelData) != null){
                                 //challengesData = modelData.getChallenges().toString();
                                 challengesData = (String) method.invoke(modelData);
@@ -164,9 +165,9 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                                                 values.put("challenges", challengesData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String emailVerifiedData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getEmailVerified");
-                              String emailVerifiedData = "";
                               if(method.invoke(modelData) != null){
                                 //emailVerifiedData = modelData.getEmailVerified().toString();
                                 emailVerifiedData = (String) method.invoke(modelData);
@@ -178,9 +179,9 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                                                 values.put("emailVerified", emailVerifiedData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String verificationTokenData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getVerificationToken");
-                              String verificationTokenData = "";
                               if(method.invoke(modelData) != null){
                                 //verificationTokenData = modelData.getVerificationToken().toString();
                                 verificationTokenData = (String) method.invoke(modelData);
@@ -192,9 +193,9 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                                                 values.put("verificationToken", verificationTokenData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String createdData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getCreated");
-                              String createdData = "";
                               if(method.invoke(modelData) != null){
                                 //createdData = modelData.getCreated().toString();
                                 createdData = (String) method.invoke(modelData);
@@ -206,9 +207,9 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                                                 values.put("created", createdData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String lastUpdatedData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getLastUpdated");
-                              String lastUpdatedData = "";
                               if(method.invoke(modelData) != null){
                                 //lastUpdatedData = modelData.getLastUpdated().toString();
                                 lastUpdatedData = (String) method.invoke(modelData);
@@ -220,9 +221,9 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                                                 values.put("lastUpdated", lastUpdatedData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String idData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getId");
-                              String idData = "";
                               if(method.invoke(modelData) != null){
                                 //idData = modelData.getId().toString();
                                 idData = (String) method.invoke(modelData);
@@ -234,9 +235,9 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
                                                 values.put("id", idData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String brandIdData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getBrandId");
-                              String brandIdData = "";
                               if(method.invoke(modelData) != null){
                                 //brandIdData = modelData.getBrandId().toString();
                                 brandIdData = (String) method.invoke(modelData);

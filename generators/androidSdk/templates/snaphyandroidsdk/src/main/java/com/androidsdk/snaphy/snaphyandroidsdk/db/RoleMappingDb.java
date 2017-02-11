@@ -11,6 +11,7 @@ import java.util.HashMap;
 import com.google.gson.Gson;
 import android.database.Cursor;
 import java.lang.reflect.Method;
+import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
@@ -60,9 +61,9 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
       ContentValues values = new ContentValues();
                        
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String idData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getId");
-                              String idData = "";
                               if(method.invoke(modelData) != null){
                                 //idData = modelData.getId().toString();
                                 idData = (String) method.invoke(modelData);
@@ -80,9 +81,9 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
                                                 values.put("principalType", principalTypeData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String principalIdData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getPrincipalId");
-                              String principalIdData = "";
                               if(method.invoke(modelData) != null){
                                 //principalIdData = modelData.getPrincipalId().toString();
                                 principalIdData = (String) method.invoke(modelData);
@@ -94,9 +95,9 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
                                                 values.put("principalId", principalIdData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String roleIdData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getRoleId");
-                              String roleIdData = "";
                               if(method.invoke(modelData) != null){
                                 //roleIdData = modelData.getRoleId().toString();
                                 roleIdData = (String) method.invoke(modelData);

@@ -11,6 +11,7 @@ import java.util.HashMap;
 import com.google.gson.Gson;
 import android.database.Cursor;
 import java.lang.reflect.Method;
+import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
@@ -78,9 +79,9 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
                                                 values.put("expires", expiresData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String userIdData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getUserId");
-                              String userIdData = "";
                               if(method.invoke(modelData) != null){
                                 //userIdData = modelData.getUserId().toString();
                                 userIdData = (String) method.invoke(modelData);
@@ -98,9 +99,9 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
                                                 values.put("type", typeData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String appUserIdData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getAppUserId");
-                              String appUserIdData = "";
                               if(method.invoke(modelData) != null){
                                 //appUserIdData = modelData.getAppUserId().toString();
                                 appUserIdData = (String) method.invoke(modelData);
