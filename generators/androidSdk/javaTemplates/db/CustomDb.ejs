@@ -52,8 +52,6 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
                 tableQuery = `${tableQuery}, ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)}`;
               }
             }
-            
-            
         -%>
         <%} -%>
        <% i++; -%>
@@ -146,7 +144,7 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
 
                 cursor.close();
                 db.close(); // Closing database connection
-                
+
                 if (hashMap != null) {
                     <%- modelName %>Repository repo = restAdapter.createRepository(<%- modelName %>Repository.class);
                     return (<%- modelName %>)repo.createObject(hashMap);
@@ -201,7 +199,7 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
         <%
           //Increment after each loop
           var id=0;
-          for( let property in model.properties) { 
+          for( let property in model.properties) {
         -%>
               <% if(model.properties.hasOwnProperty(property)){
                   let isArray = model.properties[property].type instanceof Array;
@@ -237,12 +235,12 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
                           }
                         }
                     <% }else if(model.properties[property].type === "number"){ -%>
-                        double <%-property%>Data = double(0);  
+                        double <%-property%>Data = double(0);
                           <%-property%>Data = cursor.getInt(<%- id %>);
                           <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) %>)<%-property%>Data;
                           hashMap.put("<%-property%>", <%-property%>Data);
-                      
-                      
+
+
                     <% }else if(model.properties[property].type === "boolean"){ -%>
                         boolean <%-property%>Data = false;
                         int temp<%-property%>Data = cursor.getInt(<%- id %>);
@@ -264,7 +262,7 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
               <% }//END IF-ELSE -%>
               <% id++; %>
           <% } -%>
-        <%}%>  
+        <%}%>
         return hashMap;
     }//parseCursor
 
@@ -292,7 +290,7 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     <%- modelName %>Repository repo = restAdapter.createRepository(<%- modelName %>Repository.class);
@@ -304,7 +302,7 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
         db.close();
         // return contact list
         return (DataList<<%- modelName %>>) modelList;
-    } 
+    }
 
 
     // Getting All Data where
@@ -319,7 +317,7 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-               
+
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     <%- modelName %>Repository repo = restAdapter.createRepository(<%- modelName %>Repository.class);
