@@ -90,6 +90,7 @@ public class Chat extends Model {
                 }
 
             
+            
         
     
         
@@ -109,6 +110,7 @@ public class Chat extends Model {
                     hashMap.put("updated", updated);
                 }
 
+            
             
         
     
@@ -130,6 +132,7 @@ public class Chat extends Model {
                 }
 
             
+            
         
     
         
@@ -149,6 +152,7 @@ public class Chat extends Model {
                     hashMap.put("type", type);
                 }
 
+            
             
         
     
@@ -170,6 +174,7 @@ public class Chat extends Model {
                 }
 
             
+            
         
     
         
@@ -189,6 +194,7 @@ public class Chat extends Model {
                     hashMap.put("from", from);
                 }
 
+            
             
         
     
@@ -210,6 +216,7 @@ public class Chat extends Model {
                 }
 
             
+            
         
     
         
@@ -230,57 +237,28 @@ public class Chat extends Model {
                 }
 
             
+            
         
     
         
             
 
             
-                private Object id;
-                /* Adding Getter and Setter methods */
-                public Object getId(){
-                    return id;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setId(Object id){
-                    this.id = id;
-                }
-             
+            
         
     
         
             
 
             
-                private Object appUserId;
-                /* Adding Getter and Setter methods */
-                public Object getAppUserId(){
-                    return appUserId;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setAppUserId(Object appUserId){
-                    this.appUserId = appUserId;
-                }
-             
+            
         
     
         
             
 
             
-                private Object brandId;
-                /* Adding Getter and Setter methods */
-                public Object getBrandId(){
-                    return brandId;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setBrandId(Object brandId){
-                    this.brandId = brandId;
-                }
-             
+            
         
     
 

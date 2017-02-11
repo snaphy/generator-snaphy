@@ -76,6 +76,7 @@ public class AmazonImage extends Model {
                 }
 
             
+            
         
     
         
@@ -95,6 +96,7 @@ public class AmazonImage extends Model {
                     hashMap.put("container", container);
                 }
 
+            
             
         
     
@@ -116,6 +118,7 @@ public class AmazonImage extends Model {
                 }
 
             
+            
         
     
         
@@ -136,23 +139,14 @@ public class AmazonImage extends Model {
                 }
 
             
+            
         
     
         
             
 
             
-                private Object id;
-                /* Adding Getter and Setter methods */
-                public Object getId(){
-                    return id;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setId(Object id){
-                    this.id = id;
-                }
-             
+            
         
     
 

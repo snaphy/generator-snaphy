@@ -295,8 +295,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          roleMapping.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = roleMapping.getClass().getMethod("save__db");
+                                                    method.invoke(roleMapping);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(roleMapping);
@@ -412,8 +419,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          roleMapping.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = roleMapping.getClass().getMethod("save__db");
+                                                    method.invoke(roleMapping);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(roleMapping);
@@ -482,8 +496,14 @@ private void addStorage(Context context){
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
-                                                 //Insert to database if not present then else update data..
-                                                 roleMapping.save__db();
+                                                //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                                try {
+                                                          method = roleMapping.getClass().getMethod("save__db");
+                                                          method.invoke(roleMapping);
+
+                                                } catch (Exception e) {
+                                                    Log.e("Database Error", e.toString());
+                                                }
                                             }
 
                                         roleMappingList.add(roleMapping);
@@ -549,8 +569,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          roleMapping.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = roleMapping.getClass().getMethod("save__db");
+                                                    method.invoke(roleMapping);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(roleMapping);

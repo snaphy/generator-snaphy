@@ -62,17 +62,7 @@ public class Container extends Model {
             
 
             
-                private double id;
-                /* Adding Getter and Setter methods */
-                public double getId(){
-                    return id;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setId(double id){
-                    this.id = id;
-                }
-             
+            
         
     
 

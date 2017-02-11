@@ -118,6 +118,7 @@ public class Brand extends Model {
                 }
 
             
+            
         
     
         
@@ -137,6 +138,7 @@ public class Brand extends Model {
                     hashMap.put("updated", updated);
                 }
 
+            
             
         
     
@@ -158,6 +160,7 @@ public class Brand extends Model {
                 }
 
             
+            
         
     
         
@@ -177,6 +180,7 @@ public class Brand extends Model {
                     hashMap.put("image", image);
                 }
 
+            
             
         
     
@@ -198,6 +202,7 @@ public class Brand extends Model {
                 }
 
             
+            
         
     
         
@@ -217,6 +222,7 @@ public class Brand extends Model {
                     hashMap.put("facebookUrl", facebookUrl);
                 }
 
+            
             
         
     
@@ -238,6 +244,7 @@ public class Brand extends Model {
                 }
 
             
+            
         
     
         
@@ -257,6 +264,7 @@ public class Brand extends Model {
                     hashMap.put("instagramUrl", instagramUrl);
                 }
 
+            
             
         
     
@@ -278,6 +286,7 @@ public class Brand extends Model {
                 }
 
             
+            
         
     
         
@@ -298,23 +307,14 @@ public class Brand extends Model {
                 }
 
             
+            
         
     
         
             
 
             
-                private Object id;
-                /* Adding Getter and Setter methods */
-                public Object getId(){
-                    return id;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setId(Object id){
-                    this.id = id;
-                }
-             
+            
         
     
 
@@ -416,7 +416,11 @@ public class Brand extends Model {
                             this.hotDeals = hotDeals;
                             //TODO: Warning move this to new thread
                             for(HotDeal data: hotDeals){
+                              try{
                                 data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
                             }
                         }
                     }
@@ -465,8 +469,13 @@ public class Brand extends Model {
                     //This will add a new data to the list relation object..
                     public void addRelation(HotDeal hotDeals) {
                         try{
-                            //Save to database..
-                            hotDeals.save__db();
+                            try{
+
+                                  //Save to database..
+                                  hotDeals.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
                             that.getHotDeals().add(hotDeals);
                         }catch(Exception e){
                             DataList< HotDeal> hotDeals1 = new DataList();
@@ -1026,7 +1035,11 @@ public class Brand extends Model {
                             this.chats = chats;
                             //TODO: Warning move this to new thread
                             for(Chat data: chats){
+                              try{
                                 data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
                             }
                         }
                     }
@@ -1075,8 +1088,13 @@ public class Brand extends Model {
                     //This will add a new data to the list relation object..
                     public void addRelation(Chat chats) {
                         try{
-                            //Save to database..
-                            chats.save__db();
+                            try{
+
+                                  //Save to database..
+                                  chats.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
                             that.getChats().add(chats);
                         }catch(Exception e){
                             DataList< Chat> chats1 = new DataList();
@@ -1636,7 +1654,11 @@ public class Brand extends Model {
                             this.dailyFeeds = dailyFeeds;
                             //TODO: Warning move this to new thread
                             for(DailyFeed data: dailyFeeds){
+                              try{
                                 data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
                             }
                         }
                     }
@@ -1685,8 +1707,13 @@ public class Brand extends Model {
                     //This will add a new data to the list relation object..
                     public void addRelation(DailyFeed dailyFeeds) {
                         try{
-                            //Save to database..
-                            dailyFeeds.save__db();
+                            try{
+
+                                  //Save to database..
+                                  dailyFeeds.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
                             that.getDailyFeeds().add(dailyFeeds);
                         }catch(Exception e){
                             DataList< DailyFeed> dailyFeeds1 = new DataList();
@@ -2246,7 +2273,11 @@ public class Brand extends Model {
                             this.brandManagers = brandManagers;
                             //TODO: Warning move this to new thread
                             for(BrandManager data: brandManagers){
+                              try{
                                 data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
                             }
                         }
                     }
@@ -2295,8 +2326,13 @@ public class Brand extends Model {
                     //This will add a new data to the list relation object..
                     public void addRelation(BrandManager brandManagers) {
                         try{
-                            //Save to database..
-                            brandManagers.save__db();
+                            try{
+
+                                  //Save to database..
+                                  brandManagers.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
                             that.getBrandManagers().add(brandManagers);
                         }catch(Exception e){
                             DataList< BrandManager> brandManagers1 = new DataList();

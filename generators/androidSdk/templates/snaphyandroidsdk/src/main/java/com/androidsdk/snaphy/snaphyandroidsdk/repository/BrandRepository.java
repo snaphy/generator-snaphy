@@ -821,8 +821,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          hotDeal.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = hotDeal.getClass().getMethod("save__db");
+                                                    method.invoke(hotDeal);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(hotDeal);
@@ -938,8 +945,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          hotDeal.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = hotDeal.getClass().getMethod("save__db");
+                                                    method.invoke(hotDeal);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(hotDeal);
@@ -1005,8 +1019,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          chat.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = chat.getClass().getMethod("save__db");
+                                                    method.invoke(chat);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(chat);
@@ -1122,8 +1143,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          chat.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = chat.getClass().getMethod("save__db");
+                                                    method.invoke(chat);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(chat);
@@ -1189,8 +1217,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          appUser.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = appUser.getClass().getMethod("save__db");
+                                                    method.invoke(appUser);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(appUser);
@@ -1306,8 +1341,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          appUser.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = appUser.getClass().getMethod("save__db");
+                                                    method.invoke(appUser);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(appUser);
@@ -1373,8 +1415,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          appUser.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = appUser.getClass().getMethod("save__db");
+                                                    method.invoke(appUser);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(appUser);
@@ -1541,8 +1590,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          dailyFeed.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = dailyFeed.getClass().getMethod("save__db");
+                                                    method.invoke(dailyFeed);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(dailyFeed);
@@ -1658,8 +1714,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          dailyFeed.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = dailyFeed.getClass().getMethod("save__db");
+                                                    method.invoke(dailyFeed);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(dailyFeed);
@@ -1725,8 +1788,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brandManager.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = brandManager.getClass().getMethod("save__db");
+                                                    method.invoke(brandManager);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(brandManager);
@@ -1842,8 +1912,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brandManager.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = brandManager.getClass().getMethod("save__db");
+                                                    method.invoke(brandManager);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(brandManager);
@@ -1909,8 +1986,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brandVerification.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = brandVerification.getClass().getMethod("save__db");
+                                                    method.invoke(brandVerification);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(brandVerification);
@@ -1976,8 +2060,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brandVerification.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = brandVerification.getClass().getMethod("save__db");
+                                                    method.invoke(brandVerification);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(brandVerification);
@@ -2043,8 +2134,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brandVerification.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = brandVerification.getClass().getMethod("save__db");
+                                                    method.invoke(brandVerification);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(brandVerification);
@@ -2159,8 +2257,14 @@ private void addStorage(Context context){
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
-                                                 //Insert to database if not present then else update data..
-                                                 hotDeal.save__db();
+                                                //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                                try {
+                                                          method = hotDeal.getClass().getMethod("save__db");
+                                                          method.invoke(hotDeal);
+
+                                                } catch (Exception e) {
+                                                    Log.e("Database Error", e.toString());
+                                                }
                                             }
 
                                         hotDealList.add(hotDeal);
@@ -2226,8 +2330,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          hotDeal.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = hotDeal.getClass().getMethod("save__db");
+                                                    method.invoke(hotDeal);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(hotDeal);
@@ -2395,8 +2506,14 @@ private void addStorage(Context context){
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
-                                                 //Insert to database if not present then else update data..
-                                                 chat.save__db();
+                                                //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                                try {
+                                                          method = chat.getClass().getMethod("save__db");
+                                                          method.invoke(chat);
+
+                                                } catch (Exception e) {
+                                                    Log.e("Database Error", e.toString());
+                                                }
                                             }
 
                                         chatList.add(chat);
@@ -2462,8 +2579,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          chat.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = chat.getClass().getMethod("save__db");
+                                                    method.invoke(chat);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(chat);
@@ -2631,8 +2755,14 @@ private void addStorage(Context context){
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
-                                                 //Insert to database if not present then else update data..
-                                                 appUser.save__db();
+                                                //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                                try {
+                                                          method = appUser.getClass().getMethod("save__db");
+                                                          method.invoke(appUser);
+
+                                                } catch (Exception e) {
+                                                    Log.e("Database Error", e.toString());
+                                                }
                                             }
 
                                         appUserList.add(appUser);
@@ -2698,8 +2828,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          appUser.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = appUser.getClass().getMethod("save__db");
+                                                    method.invoke(appUser);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(appUser);
@@ -2867,8 +3004,14 @@ private void addStorage(Context context){
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
-                                                 //Insert to database if not present then else update data..
-                                                 dailyFeed.save__db();
+                                                //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                                try {
+                                                          method = dailyFeed.getClass().getMethod("save__db");
+                                                          method.invoke(dailyFeed);
+
+                                                } catch (Exception e) {
+                                                    Log.e("Database Error", e.toString());
+                                                }
                                             }
 
                                         dailyFeedList.add(dailyFeed);
@@ -2934,8 +3077,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          dailyFeed.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = dailyFeed.getClass().getMethod("save__db");
+                                                    method.invoke(dailyFeed);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(dailyFeed);
@@ -3103,8 +3253,14 @@ private void addStorage(Context context){
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
-                                                 //Insert to database if not present then else update data..
-                                                 brandManager.save__db();
+                                                //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                                try {
+                                                          method = brandManager.getClass().getMethod("save__db");
+                                                          method.invoke(brandManager);
+
+                                                } catch (Exception e) {
+                                                    Log.e("Database Error", e.toString());
+                                                }
                                             }
 
                                         brandManagerList.add(brandManager);
@@ -3170,8 +3326,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brandManager.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = brandManager.getClass().getMethod("save__db");
+                                                    method.invoke(brandManager);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(brandManager);
@@ -3334,8 +3497,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brand.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = brand.getClass().getMethod("save__db");
+                                                    method.invoke(brand);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(brand);
@@ -3400,8 +3570,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brand.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = brand.getClass().getMethod("save__db");
+                                                    method.invoke(brand);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(brand);
@@ -3518,8 +3695,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brand.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = brand.getClass().getMethod("save__db");
+                                                    method.invoke(brand);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(brand);
@@ -3586,8 +3770,14 @@ private void addStorage(Context context){
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
-                                                 //Insert to database if not present then else update data..
-                                                 brand.save__db();
+                                                //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                                try {
+                                                          method = brand.getClass().getMethod("save__db");
+                                                          method.invoke(brand);
+
+                                                } catch (Exception e) {
+                                                    Log.e("Database Error", e.toString());
+                                                }
                                             }
 
                                         brandList.add(brand);
@@ -3651,8 +3841,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brand.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = brand.getClass().getMethod("save__db");
+                                                    method.invoke(brand);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(brand);
@@ -3873,8 +4070,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brand.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = brand.getClass().getMethod("save__db");
+                                                    method.invoke(brand);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(brand);
@@ -4199,8 +4403,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          brand.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = brand.getClass().getMethod("save__db");
+                                                    method.invoke(brand);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(brand);

@@ -86,6 +86,7 @@ public class Student extends User {
                 }
 
             
+            
         
     
         
@@ -106,227 +107,98 @@ public class Student extends User {
                 }
 
             
+            
         
     
         
             
 
             
-                private String realm;
-                /* Adding Getter and Setter methods */
-                public String getRealm(){
-                    return realm;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setRealm(String realm){
-                    this.realm = realm;
-                }
-             
+            
         
     
         
             
 
             
-                private String username;
-                /* Adding Getter and Setter methods */
-                public String getUsername(){
-                    return username;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setUsername(String username){
-                    this.username = username;
-                }
-             
+            
         
     
         
             
 
             
-                private String password;
-                /* Adding Getter and Setter methods */
-                public String getPassword(){
-                    return password;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setPassword(String password){
-                    this.password = password;
-                }
-             
+            
         
     
         
             
 
             
-                private Object credentials;
-                /* Adding Getter and Setter methods */
-                public Object getCredentials(){
-                    return credentials;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setCredentials(Object credentials){
-                    this.credentials = credentials;
-                }
-             
+            
         
     
         
             
 
             
-                private Object challenges;
-                /* Adding Getter and Setter methods */
-                public Object getChallenges(){
-                    return challenges;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setChallenges(Object challenges){
-                    this.challenges = challenges;
-                }
-             
+            
         
     
         
             
 
             
-                private String email;
-                /* Adding Getter and Setter methods */
-                public String getEmail(){
-                    return email;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setEmail(String email){
-                    this.email = email;
-                }
-             
+            
         
     
         
             
 
             
-                private Boolean emailVerified;
-                /* Adding Getter and Setter methods */
-                public Boolean getEmailVerified(){
-                    return emailVerified;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setEmailVerified(Boolean emailVerified){
-                    this.emailVerified = emailVerified;
-                }
-             
+            
         
     
         
             
 
             
-                private String verificationToken;
-                /* Adding Getter and Setter methods */
-                public String getVerificationToken(){
-                    return verificationToken;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setVerificationToken(String verificationToken){
-                    this.verificationToken = verificationToken;
-                }
-             
+            
         
     
         
             
 
             
-                private String status;
-                /* Adding Getter and Setter methods */
-                public String getStatus(){
-                    return status;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setStatus(String status){
-                    this.status = status;
-                }
-             
+            
         
     
         
             
 
             
-                private String created;
-                /* Adding Getter and Setter methods */
-                public String getCreated(){
-                    return created;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setCreated(String created){
-                    this.created = created;
-                }
-             
+            
         
     
         
             
 
             
-                private String lastUpdated;
-                /* Adding Getter and Setter methods */
-                public String getLastUpdated(){
-                    return lastUpdated;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setLastUpdated(String lastUpdated){
-                    this.lastUpdated = lastUpdated;
-                }
-             
+            
         
     
         
             
 
             
-                private Object id;
-                /* Adding Getter and Setter methods */
-                public Object getId(){
-                    return id;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setId(Object id){
-                    this.id = id;
-                }
-             
+            
         
     
         
             
 
             
-                private Object brandId;
-                /* Adding Getter and Setter methods */
-                public Object getBrandId(){
-                    return brandId;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setBrandId(Object brandId){
-                    this.brandId = brandId;
-                }
-             
+            
         
     
 

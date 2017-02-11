@@ -62,102 +62,42 @@ public class AdminEmail extends Model {
             
 
             
-                private String to;
-                /* Adding Getter and Setter methods */
-                public String getTo(){
-                    return to;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setTo(String to){
-                    this.to = to;
-                }
-             
+            
         
     
         
             
 
             
-                private String from;
-                /* Adding Getter and Setter methods */
-                public String getFrom(){
-                    return from;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setFrom(String from){
-                    this.from = from;
-                }
-             
+            
         
     
         
             
 
             
-                private String subject;
-                /* Adding Getter and Setter methods */
-                public String getSubject(){
-                    return subject;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setSubject(String subject){
-                    this.subject = subject;
-                }
-             
+            
         
     
         
             
 
             
-                private String text;
-                /* Adding Getter and Setter methods */
-                public String getText(){
-                    return text;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setText(String text){
-                    this.text = text;
-                }
-             
+            
         
     
         
             
 
             
-                private String html;
-                /* Adding Getter and Setter methods */
-                public String getHtml(){
-                    return html;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setHtml(String html){
-                    this.html = html;
-                }
-             
+            
         
     
         
             
 
             
-                private double id;
-                /* Adding Getter and Setter methods */
-                public double getId(){
-                    return id;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setId(double id){
-                    this.id = id;
-                }
-             
+            
         
     
 

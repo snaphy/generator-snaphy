@@ -352,8 +352,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          appUser.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = appUser.getClass().getMethod("save__db");
+                                                    method.invoke(appUser);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(appUser);
@@ -417,8 +424,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          facebookAccessToken.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = facebookAccessToken.getClass().getMethod("save__db");
+                                                    method.invoke(facebookAccessToken);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(facebookAccessToken);
@@ -483,8 +497,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          facebookAccessToken.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = facebookAccessToken.getClass().getMethod("save__db");
+                                                    method.invoke(facebookAccessToken);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(facebookAccessToken);
@@ -601,8 +622,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          facebookAccessToken.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = facebookAccessToken.getClass().getMethod("save__db");
+                                                    method.invoke(facebookAccessToken);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(facebookAccessToken);
@@ -669,8 +697,14 @@ private void addStorage(Context context){
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
-                                                 //Insert to database if not present then else update data..
-                                                 facebookAccessToken.save__db();
+                                                //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                                try {
+                                                          method = facebookAccessToken.getClass().getMethod("save__db");
+                                                          method.invoke(facebookAccessToken);
+
+                                                } catch (Exception e) {
+                                                    Log.e("Database Error", e.toString());
+                                                }
                                             }
 
                                         facebookAccessTokenList.add(facebookAccessToken);
@@ -734,8 +768,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          facebookAccessToken.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = facebookAccessToken.getClass().getMethod("save__db");
+                                                    method.invoke(facebookAccessToken);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(facebookAccessToken);
@@ -956,8 +997,15 @@ private void addStorage(Context context){
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
-                                          //Insert to database if not present then else update data..
-                                          facebookAccessToken.save__db();
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    method = facebookAccessToken.getClass().getMethod("save__db");
+                                                    method.invoke(facebookAccessToken);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
                                       }
 
                                     callback.onSuccess(facebookAccessToken);

@@ -119,10 +119,18 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
                           <%-property%>Data = 0;
                         }
                     <% }else{ -%>
-                        String <%-property%>Data = "";
-                        if(modelData.get<%-capitalPropertyName%>() != null){
-                          <%-property%>Data =modelData.get<%-capitalPropertyName%>().toString();
+                        //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        try {
+                              method = <%- modelData %>.getClass().getMethod("get<%-capitalPropertyName%>");
+                              String <%-property%>Data = "";
+                              if(method.invoke(<%- modelData %>) != null){
+                                //<%-property%>Data = modelData.get<%-capitalPropertyName%>().toString();
+                                <%-property%>Data = (String) method.invoke(<%- modelData %>);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                     <% } -%>
               <% }//END IF-ELSE -%>
               values.put("<%-property%>", <%-property%>Data);

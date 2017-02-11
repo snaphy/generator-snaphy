@@ -69,17 +69,7 @@ public class RoleMapping extends Model {
             
 
             
-                private Object id;
-                /* Adding Getter and Setter methods */
-                public Object getId(){
-                    return id;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setId(Object id){
-                    this.id = id;
-                }
-             
+            
         
     
         
@@ -100,40 +90,21 @@ public class RoleMapping extends Model {
                 }
 
             
+            
         
     
         
             
 
             
-                private String principalId;
-                /* Adding Getter and Setter methods */
-                public String getPrincipalId(){
-                    return principalId;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setPrincipalId(String principalId){
-                    this.principalId = principalId;
-                }
-             
+            
         
     
         
             
 
             
-                private Object roleId;
-                /* Adding Getter and Setter methods */
-                public Object getRoleId(){
-                    return roleId;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setRoleId(Object roleId){
-                    this.roleId = roleId;
-                }
-             
+            
         
     
 

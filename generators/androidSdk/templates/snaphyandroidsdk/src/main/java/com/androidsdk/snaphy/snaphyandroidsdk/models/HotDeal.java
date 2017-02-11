@@ -90,6 +90,7 @@ public class HotDeal extends Model {
                 }
 
             
+            
         
     
         
@@ -109,6 +110,7 @@ public class HotDeal extends Model {
                     hashMap.put("description", description);
                 }
 
+            
             
         
     
@@ -130,6 +132,7 @@ public class HotDeal extends Model {
                 }
 
             
+            
         
     
         
@@ -149,6 +152,7 @@ public class HotDeal extends Model {
                     hashMap.put("url", url);
                 }
 
+            
             
         
     
@@ -170,6 +174,7 @@ public class HotDeal extends Model {
                 }
 
             
+            
         
     
         
@@ -189,6 +194,7 @@ public class HotDeal extends Model {
                     hashMap.put("status", status);
                 }
 
+            
             
         
     
@@ -210,6 +216,7 @@ public class HotDeal extends Model {
                 }
 
             
+            
         
     
         
@@ -229,6 +236,7 @@ public class HotDeal extends Model {
                     hashMap.put("added", added);
                 }
 
+            
             
         
     
@@ -250,57 +258,28 @@ public class HotDeal extends Model {
                 }
 
             
+            
         
     
         
             
 
             
-                private Object id;
-                /* Adding Getter and Setter methods */
-                public Object getId(){
-                    return id;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setId(Object id){
-                    this.id = id;
-                }
-             
+            
         
     
         
             
 
             
-                private Object categoryId;
-                /* Adding Getter and Setter methods */
-                public Object getCategoryId(){
-                    return categoryId;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setCategoryId(Object categoryId){
-                    this.categoryId = categoryId;
-                }
-             
+            
         
     
         
             
 
             
-                private Object brandId;
-                /* Adding Getter and Setter methods */
-                public Object getBrandId(){
-                    return brandId;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setBrandId(Object brandId){
-                    this.brandId = brandId;
-                }
-             
+            
         
     
 

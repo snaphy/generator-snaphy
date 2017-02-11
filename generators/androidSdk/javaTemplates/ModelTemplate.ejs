@@ -348,7 +348,8 @@ public class <%- modelName %> extends Model {
                     hashMap.put("<%- property %>", <%- property %>);
                 }
 
-            <% }else {
+            <% } %>
+            <%# else {
                 //console.log("ANY", property, model.properties[property]);
                 var type;
                 if(typeof model.properties[property].type === "function") {
@@ -389,18 +390,8 @@ public class <%- modelName %> extends Model {
                     type = "Object";
                   }
                 }
-            %>
-                private <%- type %> <%- property %>;
-                /* Adding Getter and Setter methods */
-                public <%- type %> get<%- capitalPropertyName %>(){
-                    return <%- property %>;
-                }
 
-                /* Adding Getter and Setter methods */
-                public void set<%- capitalPropertyName %>(<%- type %> <%- property %>){
-                    this.<%- property %> = <%- property %>;
-                }
-             <% } %>
+            %>
         <% } %>
     <% } %>
 
@@ -612,7 +603,11 @@ public class <%- modelName %> extends Model {
                             this.<%- relation %> = <%- relation %>;
                             //TODO: Warning move this to new thread
                             for(<%- capitalcaseRelatedModelName %> data: <%- relation %>){
+                              try{
                                 data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
                             }
                         }
                     }
@@ -661,8 +656,13 @@ public class <%- modelName %> extends Model {
                     //This will add a new data to the list relation object..
                     public void addRelation(<%- capitalcaseRelatedModelName %> <%- relation %>) {
                         try{
-                            //Save to database..
-                            <%- relation %>.save__db();
+                            try{
+
+                                  //Save to database..
+                                  <%- relation %>.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
                             that.get<%- capitalcaseRelationName %>().add(<%- relation %>);
                         }catch(Exception e){
                             DataList< <%- capitalcaseRelatedModelName %>> <%- relation %>1 = new DataList();

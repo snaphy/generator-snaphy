@@ -100,6 +100,7 @@ public class AppUser extends User {
                 }
 
             
+            
         
     
         
@@ -119,6 +120,7 @@ public class AppUser extends User {
                     hashMap.put("lastName", lastName);
                 }
 
+            
             
         
     
@@ -140,6 +142,7 @@ public class AppUser extends User {
                 }
 
             
+            
         
     
         
@@ -159,6 +162,7 @@ public class AppUser extends User {
                     hashMap.put("added", added);
                 }
 
+            
             
         
     
@@ -180,6 +184,7 @@ public class AppUser extends User {
                 }
 
             
+            
         
     
         
@@ -199,6 +204,7 @@ public class AppUser extends User {
                     hashMap.put("registrationId", registrationId);
                 }
 
+            
             
         
     
@@ -220,193 +226,84 @@ public class AppUser extends User {
                 }
 
             
+            
         
     
         
             
 
             
-                private String realm;
-                /* Adding Getter and Setter methods */
-                public String getRealm(){
-                    return realm;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setRealm(String realm){
-                    this.realm = realm;
-                }
-             
+            
         
     
         
             
 
             
-                private String username;
-                /* Adding Getter and Setter methods */
-                public String getUsername(){
-                    return username;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setUsername(String username){
-                    this.username = username;
-                }
-             
+            
         
     
         
             
 
             
-                private String password;
-                /* Adding Getter and Setter methods */
-                public String getPassword(){
-                    return password;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setPassword(String password){
-                    this.password = password;
-                }
-             
+            
         
     
         
             
 
             
-                private Object credentials;
-                /* Adding Getter and Setter methods */
-                public Object getCredentials(){
-                    return credentials;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setCredentials(Object credentials){
-                    this.credentials = credentials;
-                }
-             
+            
         
     
         
             
 
             
-                private Object challenges;
-                /* Adding Getter and Setter methods */
-                public Object getChallenges(){
-                    return challenges;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setChallenges(Object challenges){
-                    this.challenges = challenges;
-                }
-             
+            
         
     
         
             
 
             
-                private Boolean emailVerified;
-                /* Adding Getter and Setter methods */
-                public Boolean getEmailVerified(){
-                    return emailVerified;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setEmailVerified(Boolean emailVerified){
-                    this.emailVerified = emailVerified;
-                }
-             
+            
         
     
         
             
 
             
-                private String verificationToken;
-                /* Adding Getter and Setter methods */
-                public String getVerificationToken(){
-                    return verificationToken;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setVerificationToken(String verificationToken){
-                    this.verificationToken = verificationToken;
-                }
-             
+            
         
     
         
             
 
             
-                private String status;
-                /* Adding Getter and Setter methods */
-                public String getStatus(){
-                    return status;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setStatus(String status){
-                    this.status = status;
-                }
-             
+            
         
     
         
             
 
             
-                private String created;
-                /* Adding Getter and Setter methods */
-                public String getCreated(){
-                    return created;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setCreated(String created){
-                    this.created = created;
-                }
-             
+            
         
     
         
             
 
             
-                private String lastUpdated;
-                /* Adding Getter and Setter methods */
-                public String getLastUpdated(){
-                    return lastUpdated;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setLastUpdated(String lastUpdated){
-                    this.lastUpdated = lastUpdated;
-                }
-             
+            
         
     
         
             
 
             
-                private Object id;
-                /* Adding Getter and Setter methods */
-                public Object getId(){
-                    return id;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setId(Object id){
-                    this.id = id;
-                }
-             
+            
         
     
 
@@ -511,7 +408,11 @@ public class AppUser extends User {
                             this.facebookAccessToken = facebookAccessToken;
                             //TODO: Warning move this to new thread
                             for(FacebookAccessToken data: facebookAccessToken){
+                              try{
                                 data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
                             }
                         }
                     }
@@ -560,8 +461,13 @@ public class AppUser extends User {
                     //This will add a new data to the list relation object..
                     public void addRelation(FacebookAccessToken facebookAccessToken) {
                         try{
-                            //Save to database..
-                            facebookAccessToken.save__db();
+                            try{
+
+                                  //Save to database..
+                                  facebookAccessToken.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
                             that.getFacebookAccessToken().add(facebookAccessToken);
                         }catch(Exception e){
                             DataList< FacebookAccessToken> facebookAccessToken1 = new DataList();
@@ -1814,7 +1720,11 @@ public class AppUser extends User {
                             this.chats = chats;
                             //TODO: Warning move this to new thread
                             for(Chat data: chats){
+                              try{
                                 data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
                             }
                         }
                     }
@@ -1863,8 +1773,13 @@ public class AppUser extends User {
                     //This will add a new data to the list relation object..
                     public void addRelation(Chat chats) {
                         try{
-                            //Save to database..
-                            chats.save__db();
+                            try{
+
+                                  //Save to database..
+                                  chats.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
                             that.getChats().add(chats);
                         }catch(Exception e){
                             DataList< Chat> chats1 = new DataList();

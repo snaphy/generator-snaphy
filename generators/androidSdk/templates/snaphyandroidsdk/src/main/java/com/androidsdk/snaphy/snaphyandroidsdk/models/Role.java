@@ -69,17 +69,7 @@ public class Role extends Model {
             
 
             
-                private Object id;
-                /* Adding Getter and Setter methods */
-                public Object getId(){
-                    return id;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setId(Object id){
-                    this.id = id;
-                }
-             
+            
         
     
         
@@ -100,57 +90,28 @@ public class Role extends Model {
                 }
 
             
+            
         
     
         
             
 
             
-                private String description;
-                /* Adding Getter and Setter methods */
-                public String getDescription(){
-                    return description;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setDescription(String description){
-                    this.description = description;
-                }
-             
+            
         
     
         
             
 
             
-                private Object created;
-                /* Adding Getter and Setter methods */
-                public Object getCreated(){
-                    return created;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setCreated(Object created){
-                    this.created = created;
-                }
-             
+            
         
     
         
             
 
             
-                private Object modified;
-                /* Adding Getter and Setter methods */
-                public Object getModified(){
-                    return modified;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setModified(Object modified){
-                    this.modified = modified;
-                }
-             
+            
         
     
 
@@ -252,7 +213,11 @@ public class Role extends Model {
                             this.principals = principals;
                             //TODO: Warning move this to new thread
                             for(RoleMapping data: principals){
+                              try{
                                 data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
                             }
                         }
                     }
@@ -301,8 +266,13 @@ public class Role extends Model {
                     //This will add a new data to the list relation object..
                     public void addRelation(RoleMapping principals) {
                         try{
-                            //Save to database..
-                            principals.save__db();
+                            try{
+
+                                  //Save to database..
+                                  principals.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
                             that.getPrincipals().add(principals);
                         }catch(Exception e){
                             DataList< RoleMapping> principals1 = new DataList();

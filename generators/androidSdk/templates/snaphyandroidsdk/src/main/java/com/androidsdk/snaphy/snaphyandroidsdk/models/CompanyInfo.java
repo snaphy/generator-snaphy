@@ -76,6 +76,7 @@ public class CompanyInfo extends Model {
                 }
 
             
+            
         
     
         
@@ -95,6 +96,7 @@ public class CompanyInfo extends Model {
                     hashMap.put("html", html);
                 }
 
+            
             
         
     
@@ -116,23 +118,14 @@ public class CompanyInfo extends Model {
                 }
 
             
+            
         
     
         
             
 
             
-                private Object id;
-                /* Adding Getter and Setter methods */
-                public Object getId(){
-                    return id;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setId(Object id){
-                    this.id = id;
-                }
-             
+            
         
     
 

@@ -83,6 +83,7 @@ public class Category extends Model {
                 }
 
             
+            
         
     
         
@@ -102,6 +103,7 @@ public class Category extends Model {
                     hashMap.put("added", added);
                 }
 
+            
             
         
     
@@ -123,23 +125,14 @@ public class Category extends Model {
                 }
 
             
+            
         
     
         
             
 
             
-                private Object id;
-                /* Adding Getter and Setter methods */
-                public Object getId(){
-                    return id;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setId(Object id){
-                    this.id = id;
-                }
-             
+            
         
     
 
@@ -241,7 +234,11 @@ public class Category extends Model {
                             this.hotDeals = hotDeals;
                             //TODO: Warning move this to new thread
                             for(HotDeal data: hotDeals){
+                              try{
                                 data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
                             }
                         }
                     }
@@ -290,8 +287,13 @@ public class Category extends Model {
                     //This will add a new data to the list relation object..
                     public void addRelation(HotDeal hotDeals) {
                         try{
-                            //Save to database..
-                            hotDeals.save__db();
+                            try{
+
+                                  //Save to database..
+                                  hotDeals.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
                             that.getHotDeals().add(hotDeals);
                         }catch(Exception e){
                             DataList< HotDeal> hotDeals1 = new DataList();

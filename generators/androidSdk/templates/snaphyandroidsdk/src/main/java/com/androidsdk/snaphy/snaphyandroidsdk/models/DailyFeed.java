@@ -83,6 +83,7 @@ public class DailyFeed extends Model {
                 }
 
             
+            
         
     
         
@@ -102,6 +103,7 @@ public class DailyFeed extends Model {
                     hashMap.put("updated", updated);
                 }
 
+            
             
         
     
@@ -123,6 +125,7 @@ public class DailyFeed extends Model {
                 }
 
             
+            
         
     
         
@@ -142,6 +145,7 @@ public class DailyFeed extends Model {
                     hashMap.put("description", description);
                 }
 
+            
             
         
     
@@ -163,40 +167,21 @@ public class DailyFeed extends Model {
                 }
 
             
+            
         
     
         
             
 
             
-                private Object id;
-                /* Adding Getter and Setter methods */
-                public Object getId(){
-                    return id;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setId(Object id){
-                    this.id = id;
-                }
-             
+            
         
     
         
             
 
             
-                private Object brandId;
-                /* Adding Getter and Setter methods */
-                public Object getBrandId(){
-                    return brandId;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setBrandId(Object brandId){
-                    this.brandId = brandId;
-                }
-             
+            
         
     
 

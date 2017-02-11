@@ -83,6 +83,7 @@ public class FacebookAccessToken extends Model {
                 }
 
             
+            
         
     
         
@@ -102,6 +103,7 @@ public class FacebookAccessToken extends Model {
                     hashMap.put("token", token);
                 }
 
+            
             
         
     
@@ -123,23 +125,14 @@ public class FacebookAccessToken extends Model {
                 }
 
             
+            
         
     
         
             
 
             
-                private Object userId;
-                /* Adding Getter and Setter methods */
-                public Object getUserId(){
-                    return userId;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setUserId(Object userId){
-                    this.userId = userId;
-                }
-             
+            
         
     
         
@@ -160,23 +153,14 @@ public class FacebookAccessToken extends Model {
                 }
 
             
+            
         
     
         
             
 
             
-                private Object appUserId;
-                /* Adding Getter and Setter methods */
-                public Object getAppUserId(){
-                    return appUserId;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setAppUserId(Object appUserId){
-                    this.appUserId = appUserId;
-                }
-             
+            
         
     
 
