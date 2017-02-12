@@ -74,7 +74,7 @@ public class DbHandler<M extends Model, R extends ModelRepository> extends SQLit
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE);
+            //db.execSQL("DROP TABLE IF EXISTS " + TABLE);
             // Create tables again
             onCreate(db);
 
