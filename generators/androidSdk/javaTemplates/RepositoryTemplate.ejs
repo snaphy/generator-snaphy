@@ -219,8 +219,11 @@ public class <%- modelName %>Repository extends UserRepository<<%- modelName %>>
 public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>> {
 <% } %>
 
+    private <%- modelName %>Repository that;
+
     public <%- modelName %>Repository(){
         super("<%- modelName %>", null, <%- modelName %>.class);
+        that = this;
     }
 
 
@@ -229,6 +232,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
     		public <%- modelName %> cachedCurrentUser;
             private Object currentUserId;
             private boolean isCurrentUserIdLoaded;
+
     		public <%- modelName %> getCachedCurrentUser(){
     			return cachedCurrentUser;
     		}
@@ -251,7 +255,6 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                 }
 
                 HashMap<String, Object> hashMap = new HashMap<>();
-
                 this.findById((String)getCurrentUserId(), hashMap, new ObjectCallback<<%- modelName %>>() {
                     @Override
                     public void onSuccess(<%- modelName %> user){
@@ -268,7 +271,6 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                         callback.onFinally();
                     }
                 });
-
             }
 
             public Object getCurrentUserId(){
@@ -364,7 +366,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
 
     public void addStorage(Context context){
-        set<%- modelName %>Db(new <%- modelName %>Db(context, getRestAdapter()));
+          set<%- modelName %>Db(new <%- modelName %>Db(context, getRestAdapter()));
           //allow data storage locally..
           persistData(true);
     }
@@ -797,7 +799,8 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                                 if(response != null){
                                     <%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    <%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(result);
+                                    //<%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(result);
+                                    <%- type %> <%- lowercaseFirstLetter(type) %> = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -844,7 +847,8 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                                     <%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        <%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(obj);
+                                        //<%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(obj);
+                                        <%- type %> <%- lowercaseFirstLetter(type) %> = that.createObject(obj);
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
