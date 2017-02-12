@@ -223,7 +223,6 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
     public <%- modelName %>Repository(){
         super("<%- modelName %>", null, <%- modelName %>.class);
-        that = this;
     }
 
 
@@ -800,7 +799,15 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                                 if(response != null){
                                     <%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
                                     if(context != null){
-                                        <%- lowercaseFirstLetter(type) %>Repo.addStorage(context);
+                                        try {
+                                            Method method = <%- lowercaseFirstLetter(type) %>Repo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(<%- lowercaseFirstLetter(type) %>Repo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //<%- lowercaseFirstLetter(type) %>Repo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
                                     <%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(result);
@@ -848,24 +855,30 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<<%- type %>> <%- lowercaseFirstLetter(type) %>List = new DataList<<%- type %>>();
                                     <%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = <%- lowercaseFirstLetter(type) %>Repo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(<%- lowercaseFirstLetter(type) %>Repo, context);
 
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
                                     for (Map<String, Object> obj : result) {
-                                            if(context != null){
-                                                <%- lowercaseFirstLetter(type) %>Repo.addStorage(context);
-                                            }
-                                            <%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(obj);
 
-                                            //Add to database if persistent storage required..
-                                            if(isSTORE_LOCALLY()){
-                                                //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                                try {
-                                                          Method method = <%- lowercaseFirstLetter(type) %>.getClass().getMethod("save__db");
-                                                          method.invoke(<%- lowercaseFirstLetter(type) %>);
+                                        <%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(obj);
 
-                                                } catch (Exception e) {
-                                                    Log.e("Database Error", e.toString());
-                                                }
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = <%- lowercaseFirstLetter(type) %>.getClass().getMethod("save__db");
+                                                      method.invoke(<%- lowercaseFirstLetter(type) %>);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
                                             }
+                                        }
 
                                         <%- lowercaseFirstLetter(type) %>List.add(<%- lowercaseFirstLetter(type) %>);
                                     }
