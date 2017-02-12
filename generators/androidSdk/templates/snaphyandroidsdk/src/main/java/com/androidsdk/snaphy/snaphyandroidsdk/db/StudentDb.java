@@ -24,9 +24,9 @@ import com.strongloop.android.loopback.RestAdapter;
 * Created by snaphy on 1/2/2017.
 */
 
-public class StudentDb extends DbHandler<Student, StudentRepository> {
+public class StudentDb extends DbHandler<Student, String DATABASE_NAME, StudentRepository> {
   public StudentDb(Context context, RestAdapter restAdapter){
-    super(context, "Student", restAdapter);
+    super(context, "Student", DATABASE_NAME, restAdapter);
   }
 
   // Creating Tables

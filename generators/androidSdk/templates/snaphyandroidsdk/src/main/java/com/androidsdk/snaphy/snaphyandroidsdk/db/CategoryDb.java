@@ -24,9 +24,9 @@ import com.strongloop.android.loopback.RestAdapter;
 * Created by snaphy on 1/2/2017.
 */
 
-public class CategoryDb extends DbHandler<Category, CategoryRepository> {
+public class CategoryDb extends DbHandler<Category, String DATABASE_NAME, CategoryRepository> {
   public CategoryDb(Context context, RestAdapter restAdapter){
-    super(context, "Category", restAdapter);
+    super(context, "Category", DATABASE_NAME, restAdapter);
   }
 
   // Creating Tables

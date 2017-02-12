@@ -27,8 +27,8 @@ import com.strongloop.android.loopback.RestAdapter;
 * Created by snaphy on 1/2/2017.
 */
 
-public class <%- modelName %>Db extends DbHandler<<%- modelName %>, String DATABASE_NAME, <%- modelName %>Repository> {
-  public <%- modelName %>Db(Context context, RestAdapter restAdapter){
+public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelName %>Repository> {
+  public <%- modelName %>Db(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "<%- modelName %>", DATABASE_NAME, restAdapter);
   }
 

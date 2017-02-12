@@ -25,6 +25,11 @@ import java.util.Map;
 import java.util.HashMap;
 import java.lang.reflect.Method;
 import android.util.Log;
+import android.content.ContentValues;
+import android.content.pm.PackageManager;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+
 
 //Replaced by Custom ModelRepository method
 //import com.strongloop.android.loopback.ModelRepository;
@@ -49,11 +54,19 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.CompanyInfoDb;
 public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
 
-    private CompanyInfoRepository that;
+    private Context context;
+    private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
+    private static String DATABASE_NAME;
 
     public CompanyInfoRepository(){
         super("CompanyInfo", null, CompanyInfo.class);
-        that = this;
+        try{
+            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
+        }
+        catch (Exception e){
+            Log.e(TAG, e.toString());
+        }
     }
 
 
@@ -100,9 +113,10 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
 
     public void addStorage(Context context){
-          setCompanyInfoDb(new CompanyInfoDb(context, getRestAdapter()));
+          setCompanyInfoDb(new CompanyInfoDb(context, DATABASE_NAME, getRestAdapter()));
           //allow data storage locally..
           persistData(true);
+          this.context = context;
     }
 
 
@@ -306,10 +320,20 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = companyInfoRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(companyInfoRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //companyInfoRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // CompanyInfo companyInfo = companyInfoRepo.createObject(result);
-                                    CompanyInfo companyInfo = that.createObject(result);
+                                    CompanyInfo companyInfo = companyInfoRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -380,10 +404,20 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = companyInfoRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(companyInfoRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //companyInfoRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // CompanyInfo companyInfo = companyInfoRepo.createObject(result);
-                                    CompanyInfo companyInfo = that.createObject(result);
+                                    CompanyInfo companyInfo = companyInfoRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -506,10 +540,20 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = companyInfoRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(companyInfoRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //companyInfoRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // CompanyInfo companyInfo = companyInfoRepo.createObject(result);
-                                    CompanyInfo companyInfo = that.createObject(result);
+                                    CompanyInfo companyInfo = companyInfoRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -581,23 +625,31 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<CompanyInfo> companyInfoList = new DataList<CompanyInfo>();
-                                    //CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = companyInfoRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(companyInfoRepo, context);
 
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
                                     for (Map<String, Object> obj : result) {
-                                        //CompanyInfo companyInfo = companyInfoRepo.createObject(obj);
-                                        CompanyInfo companyInfo = that.createObject(obj);
 
-                                            //Add to database if persistent storage required..
-                                            if(isSTORE_LOCALLY()){
-                                                //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                                try {
-                                                          Method method = companyInfo.getClass().getMethod("save__db");
-                                                          method.invoke(companyInfo);
+                                        CompanyInfo companyInfo = companyInfoRepo.createObject(obj);
 
-                                                } catch (Exception e) {
-                                                    Log.e("Database Error", e.toString());
-                                                }
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = companyInfo.getClass().getMethod("save__db");
+                                                      method.invoke(companyInfo);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
                                             }
+                                        }
 
                                         companyInfoList.add(companyInfo);
                                     }
@@ -654,10 +706,20 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = companyInfoRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(companyInfoRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //companyInfoRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // CompanyInfo companyInfo = companyInfoRepo.createObject(result);
-                                    CompanyInfo companyInfo = that.createObject(result);
+                                    CompanyInfo companyInfo = companyInfoRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -884,10 +946,20 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = companyInfoRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(companyInfoRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //companyInfoRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // CompanyInfo companyInfo = companyInfoRepo.createObject(result);
-                                    CompanyInfo companyInfo = that.createObject(result);
+                                    CompanyInfo companyInfo = companyInfoRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){

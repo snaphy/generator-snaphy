@@ -24,9 +24,9 @@ import com.strongloop.android.loopback.RestAdapter;
 * Created by snaphy on 1/2/2017.
 */
 
-public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
+public class DailyFeedDb extends DbHandler<DailyFeed, String DATABASE_NAME, DailyFeedRepository> {
   public DailyFeedDb(Context context, RestAdapter restAdapter){
-    super(context, "DailyFeed", restAdapter);
+    super(context, "DailyFeed", DATABASE_NAME, restAdapter);
   }
 
   // Creating Tables

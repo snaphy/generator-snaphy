@@ -25,6 +25,11 @@ import java.util.Map;
 import java.util.HashMap;
 import java.lang.reflect.Method;
 import android.util.Log;
+import android.content.ContentValues;
+import android.content.pm.PackageManager;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+
 
 //Replaced by Custom ModelRepository method
 //import com.strongloop.android.loopback.ModelRepository;
@@ -56,11 +61,19 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.DailyFeedDb;
 public class DailyFeedRepository extends ModelRepository<DailyFeed> {
 
 
-    private DailyFeedRepository that;
+    private Context context;
+    private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
+    private static String DATABASE_NAME;
 
     public DailyFeedRepository(){
         super("DailyFeed", null, DailyFeed.class);
-        that = this;
+        try{
+            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
+        }
+        catch (Exception e){
+            Log.e(TAG, e.toString());
+        }
     }
 
 
@@ -107,9 +120,10 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
 
 
     public void addStorage(Context context){
-          setDailyFeedDb(new DailyFeedDb(context, getRestAdapter()));
+          setDailyFeedDb(new DailyFeedDb(context, DATABASE_NAME, getRestAdapter()));
           //allow data storage locally..
           persistData(true);
+          this.context = context;
     }
 
 
@@ -349,10 +363,20 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = brandRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //brandRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // Brand brand = brandRepo.createObject(result);
-                                    Brand brand = that.createObject(result);
+                                    Brand brand = brandRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -422,10 +446,20 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = dailyFeedRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(dailyFeedRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //dailyFeedRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
-                                    DailyFeed dailyFeed = that.createObject(result);
+                                    DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -496,10 +530,20 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = dailyFeedRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(dailyFeedRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //dailyFeedRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
-                                    DailyFeed dailyFeed = that.createObject(result);
+                                    DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -622,10 +666,20 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = dailyFeedRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(dailyFeedRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //dailyFeedRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
-                                    DailyFeed dailyFeed = that.createObject(result);
+                                    DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -697,23 +751,31 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<DailyFeed> dailyFeedList = new DataList<DailyFeed>();
-                                    //DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = dailyFeedRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(dailyFeedRepo, context);
 
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
                                     for (Map<String, Object> obj : result) {
-                                        //DailyFeed dailyFeed = dailyFeedRepo.createObject(obj);
-                                        DailyFeed dailyFeed = that.createObject(obj);
 
-                                            //Add to database if persistent storage required..
-                                            if(isSTORE_LOCALLY()){
-                                                //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                                try {
-                                                          Method method = dailyFeed.getClass().getMethod("save__db");
-                                                          method.invoke(dailyFeed);
+                                        DailyFeed dailyFeed = dailyFeedRepo.createObject(obj);
 
-                                                } catch (Exception e) {
-                                                    Log.e("Database Error", e.toString());
-                                                }
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = dailyFeed.getClass().getMethod("save__db");
+                                                      method.invoke(dailyFeed);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
                                             }
+                                        }
 
                                         dailyFeedList.add(dailyFeed);
                                     }
@@ -770,10 +832,20 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = dailyFeedRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(dailyFeedRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //dailyFeedRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
-                                    DailyFeed dailyFeed = that.createObject(result);
+                                    DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1000,10 +1072,20 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = dailyFeedRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(dailyFeedRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //dailyFeedRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
-                                    DailyFeed dailyFeed = that.createObject(result);
+                                    DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){

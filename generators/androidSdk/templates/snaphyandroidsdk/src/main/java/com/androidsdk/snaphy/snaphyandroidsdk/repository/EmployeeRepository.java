@@ -25,6 +25,11 @@ import java.util.Map;
 import java.util.HashMap;
 import java.lang.reflect.Method;
 import android.util.Log;
+import android.content.ContentValues;
+import android.content.pm.PackageManager;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+
 
 //Replaced by Custom  Repo methods
 // import com.strongloop.android.loopback.UserRepository;
@@ -57,11 +62,19 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.EmployeeDb;
 public class EmployeeRepository extends UserRepository<Employee> {
 
 
-    private EmployeeRepository that;
+    private Context context;
+    private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
+    private static String DATABASE_NAME;
 
     public EmployeeRepository(){
         super("Employee", null, Employee.class);
-        that = this;
+        try{
+            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
+        }
+        catch (Exception e){
+            Log.e(TAG, e.toString());
+        }
     }
 
 
@@ -204,9 +217,10 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
 
     public void addStorage(Context context){
-          setEmployeeDb(new EmployeeDb(context, getRestAdapter()));
+          setEmployeeDb(new EmployeeDb(context, DATABASE_NAME, getRestAdapter()));
           //allow data storage locally..
           persistData(true);
+          this.context = context;
     }
 
 
@@ -509,10 +523,20 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(accessTokenRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //accessTokenRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // AccessToken accessToken = accessTokenRepo.createObject(result);
-                                    AccessToken accessToken = that.createObject(result);
+                                    AccessToken accessToken = accessTokenRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -634,10 +658,20 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(accessTokenRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //accessTokenRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // AccessToken accessToken = accessTokenRepo.createObject(result);
-                                    AccessToken accessToken = that.createObject(result);
+                                    AccessToken accessToken = accessTokenRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -711,23 +745,31 @@ public class EmployeeRepository extends UserRepository<Employee> {
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<AccessToken> accessTokenList = new DataList<AccessToken>();
-                                    //AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(accessTokenRepo, context);
 
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
                                     for (Map<String, Object> obj : result) {
-                                        //AccessToken accessToken = accessTokenRepo.createObject(obj);
-                                        AccessToken accessToken = that.createObject(obj);
 
-                                            //Add to database if persistent storage required..
-                                            if(isSTORE_LOCALLY()){
-                                                //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                                try {
-                                                          Method method = accessToken.getClass().getMethod("save__db");
-                                                          method.invoke(accessToken);
+                                        AccessToken accessToken = accessTokenRepo.createObject(obj);
 
-                                                } catch (Exception e) {
-                                                    Log.e("Database Error", e.toString());
-                                                }
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = accessToken.getClass().getMethod("save__db");
+                                                      method.invoke(accessToken);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
                                             }
+                                        }
 
                                         accessTokenList.add(accessToken);
                                     }
@@ -786,10 +828,20 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(accessTokenRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //accessTokenRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // AccessToken accessToken = accessTokenRepo.createObject(result);
-                                    AccessToken accessToken = that.createObject(result);
+                                    AccessToken accessToken = accessTokenRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -958,10 +1010,20 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(employeeRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //employeeRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // Employee employee = employeeRepo.createObject(result);
-                                    Employee employee = that.createObject(result);
+                                    Employee employee = employeeRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1032,10 +1094,20 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(employeeRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //employeeRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // Employee employee = employeeRepo.createObject(result);
-                                    Employee employee = that.createObject(result);
+                                    Employee employee = employeeRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1158,10 +1230,20 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(employeeRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //employeeRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // Employee employee = employeeRepo.createObject(result);
-                                    Employee employee = that.createObject(result);
+                                    Employee employee = employeeRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1233,23 +1315,31 @@ public class EmployeeRepository extends UserRepository<Employee> {
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<Employee> employeeList = new DataList<Employee>();
-                                    //EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(employeeRepo, context);
 
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
                                     for (Map<String, Object> obj : result) {
-                                        //Employee employee = employeeRepo.createObject(obj);
-                                        Employee employee = that.createObject(obj);
 
-                                            //Add to database if persistent storage required..
-                                            if(isSTORE_LOCALLY()){
-                                                //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                                try {
-                                                          Method method = employee.getClass().getMethod("save__db");
-                                                          method.invoke(employee);
+                                        Employee employee = employeeRepo.createObject(obj);
 
-                                                } catch (Exception e) {
-                                                    Log.e("Database Error", e.toString());
-                                                }
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = employee.getClass().getMethod("save__db");
+                                                      method.invoke(employee);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
                                             }
+                                        }
 
                                         employeeList.add(employee);
                                     }
@@ -1306,10 +1396,20 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(employeeRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //employeeRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // Employee employee = employeeRepo.createObject(result);
-                                    Employee employee = that.createObject(result);
+                                    Employee employee = employeeRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1536,10 +1636,20 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(employeeRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //employeeRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // Employee employee = employeeRepo.createObject(result);
-                                    Employee employee = that.createObject(result);
+                                    Employee employee = employeeRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){

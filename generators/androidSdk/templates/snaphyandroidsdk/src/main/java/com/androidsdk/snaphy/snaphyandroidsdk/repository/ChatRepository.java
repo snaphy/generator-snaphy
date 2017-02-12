@@ -25,6 +25,11 @@ import java.util.Map;
 import java.util.HashMap;
 import java.lang.reflect.Method;
 import android.util.Log;
+import android.content.ContentValues;
+import android.content.pm.PackageManager;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+
 
 //Replaced by Custom ModelRepository method
 //import com.strongloop.android.loopback.ModelRepository;
@@ -63,11 +68,19 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.ChatDb;
 public class ChatRepository extends ModelRepository<Chat> {
 
 
-    private ChatRepository that;
+    private Context context;
+    private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
+    private static String DATABASE_NAME;
 
     public ChatRepository(){
         super("Chat", null, Chat.class);
-        that = this;
+        try{
+            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
+        }
+        catch (Exception e){
+            Log.e(TAG, e.toString());
+        }
     }
 
 
@@ -114,9 +127,10 @@ public class ChatRepository extends ModelRepository<Chat> {
 
 
     public void addStorage(Context context){
-          setChatDb(new ChatDb(context, getRestAdapter()));
+          setChatDb(new ChatDb(context, DATABASE_NAME, getRestAdapter()));
           //allow data storage locally..
           persistData(true);
+          this.context = context;
     }
 
 
@@ -398,10 +412,20 @@ public class ChatRepository extends ModelRepository<Chat> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = appUserRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(appUserRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //appUserRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // AppUser appUser = appUserRepo.createObject(result);
-                                    AppUser appUser = that.createObject(result);
+                                    AppUser appUser = appUserRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -473,10 +497,20 @@ public class ChatRepository extends ModelRepository<Chat> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = brandRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //brandRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // Brand brand = brandRepo.createObject(result);
-                                    Brand brand = that.createObject(result);
+                                    Brand brand = brandRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -546,10 +580,20 @@ public class ChatRepository extends ModelRepository<Chat> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = chatRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(chatRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //chatRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // Chat chat = chatRepo.createObject(result);
-                                    Chat chat = that.createObject(result);
+                                    Chat chat = chatRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -620,10 +664,20 @@ public class ChatRepository extends ModelRepository<Chat> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = chatRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(chatRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //chatRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // Chat chat = chatRepo.createObject(result);
-                                    Chat chat = that.createObject(result);
+                                    Chat chat = chatRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -746,10 +800,20 @@ public class ChatRepository extends ModelRepository<Chat> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = chatRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(chatRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //chatRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // Chat chat = chatRepo.createObject(result);
-                                    Chat chat = that.createObject(result);
+                                    Chat chat = chatRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -821,23 +885,31 @@ public class ChatRepository extends ModelRepository<Chat> {
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<Chat> chatList = new DataList<Chat>();
-                                    //ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = chatRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(chatRepo, context);
 
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
                                     for (Map<String, Object> obj : result) {
-                                        //Chat chat = chatRepo.createObject(obj);
-                                        Chat chat = that.createObject(obj);
 
-                                            //Add to database if persistent storage required..
-                                            if(isSTORE_LOCALLY()){
-                                                //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                                try {
-                                                          Method method = chat.getClass().getMethod("save__db");
-                                                          method.invoke(chat);
+                                        Chat chat = chatRepo.createObject(obj);
 
-                                                } catch (Exception e) {
-                                                    Log.e("Database Error", e.toString());
-                                                }
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = chat.getClass().getMethod("save__db");
+                                                      method.invoke(chat);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
                                             }
+                                        }
 
                                         chatList.add(chat);
                                     }
@@ -894,10 +966,20 @@ public class ChatRepository extends ModelRepository<Chat> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = chatRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(chatRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //chatRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // Chat chat = chatRepo.createObject(result);
-                                    Chat chat = that.createObject(result);
+                                    Chat chat = chatRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1124,10 +1206,20 @@ public class ChatRepository extends ModelRepository<Chat> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = chatRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(chatRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //chatRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // Chat chat = chatRepo.createObject(result);
-                                    Chat chat = that.createObject(result);
+                                    Chat chat = chatRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){

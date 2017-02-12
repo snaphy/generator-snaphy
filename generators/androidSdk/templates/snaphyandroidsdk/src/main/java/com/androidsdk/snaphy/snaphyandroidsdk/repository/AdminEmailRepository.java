@@ -25,6 +25,11 @@ import java.util.Map;
 import java.util.HashMap;
 import java.lang.reflect.Method;
 import android.util.Log;
+import android.content.ContentValues;
+import android.content.pm.PackageManager;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+
 
 //Replaced by Custom ModelRepository method
 //import com.strongloop.android.loopback.ModelRepository;
@@ -49,11 +54,19 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.AdminEmailDb;
 public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
 
-    private AdminEmailRepository that;
+    private Context context;
+    private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
+    private static String DATABASE_NAME;
 
     public AdminEmailRepository(){
         super("AdminEmail", null, AdminEmail.class);
-        that = this;
+        try{
+            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
+        }
+        catch (Exception e){
+            Log.e(TAG, e.toString());
+        }
     }
 
 
@@ -100,9 +113,10 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
 
     public void addStorage(Context context){
-          setAdminEmailDb(new AdminEmailDb(context, getRestAdapter()));
+          setAdminEmailDb(new AdminEmailDb(context, DATABASE_NAME, getRestAdapter()));
           //allow data storage locally..
           persistData(true);
+          this.context = context;
     }
 
 

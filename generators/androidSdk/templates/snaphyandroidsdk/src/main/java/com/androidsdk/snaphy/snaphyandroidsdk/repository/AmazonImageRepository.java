@@ -25,6 +25,11 @@ import java.util.Map;
 import java.util.HashMap;
 import java.lang.reflect.Method;
 import android.util.Log;
+import android.content.ContentValues;
+import android.content.pm.PackageManager;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+
 
 //Replaced by Custom ModelRepository method
 //import com.strongloop.android.loopback.ModelRepository;
@@ -49,11 +54,19 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.AmazonImageDb;
 public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
 
-    private AmazonImageRepository that;
+    private Context context;
+    private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
+    private static String DATABASE_NAME;
 
     public AmazonImageRepository(){
         super("AmazonImage", null, AmazonImage.class);
-        that = this;
+        try{
+            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
+        }
+        catch (Exception e){
+            Log.e(TAG, e.toString());
+        }
     }
 
 
@@ -100,9 +113,10 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
 
     public void addStorage(Context context){
-          setAmazonImageDb(new AmazonImageDb(context, getRestAdapter()));
+          setAmazonImageDb(new AmazonImageDb(context, DATABASE_NAME, getRestAdapter()));
           //allow data storage locally..
           persistData(true);
+          this.context = context;
     }
 
 
@@ -316,10 +330,20 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = amazonImageRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(amazonImageRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //amazonImageRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // AmazonImage amazonImage = amazonImageRepo.createObject(result);
-                                    AmazonImage amazonImage = that.createObject(result);
+                                    AmazonImage amazonImage = amazonImageRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -390,10 +414,20 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = amazonImageRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(amazonImageRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //amazonImageRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // AmazonImage amazonImage = amazonImageRepo.createObject(result);
-                                    AmazonImage amazonImage = that.createObject(result);
+                                    AmazonImage amazonImage = amazonImageRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -516,10 +550,20 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = amazonImageRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(amazonImageRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //amazonImageRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // AmazonImage amazonImage = amazonImageRepo.createObject(result);
-                                    AmazonImage amazonImage = that.createObject(result);
+                                    AmazonImage amazonImage = amazonImageRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -591,23 +635,31 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<AmazonImage> amazonImageList = new DataList<AmazonImage>();
-                                    //AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = amazonImageRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(amazonImageRepo, context);
 
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
                                     for (Map<String, Object> obj : result) {
-                                        //AmazonImage amazonImage = amazonImageRepo.createObject(obj);
-                                        AmazonImage amazonImage = that.createObject(obj);
 
-                                            //Add to database if persistent storage required..
-                                            if(isSTORE_LOCALLY()){
-                                                //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                                try {
-                                                          Method method = amazonImage.getClass().getMethod("save__db");
-                                                          method.invoke(amazonImage);
+                                        AmazonImage amazonImage = amazonImageRepo.createObject(obj);
 
-                                                } catch (Exception e) {
-                                                    Log.e("Database Error", e.toString());
-                                                }
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = amazonImage.getClass().getMethod("save__db");
+                                                      method.invoke(amazonImage);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
                                             }
+                                        }
 
                                         amazonImageList.add(amazonImage);
                                     }
@@ -664,10 +716,20 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = amazonImageRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(amazonImageRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //amazonImageRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // AmazonImage amazonImage = amazonImageRepo.createObject(result);
-                                    AmazonImage amazonImage = that.createObject(result);
+                                    AmazonImage amazonImage = amazonImageRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -894,10 +956,20 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = amazonImageRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(amazonImageRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //amazonImageRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // AmazonImage amazonImage = amazonImageRepo.createObject(result);
-                                    AmazonImage amazonImage = that.createObject(result);
+                                    AmazonImage amazonImage = amazonImageRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){

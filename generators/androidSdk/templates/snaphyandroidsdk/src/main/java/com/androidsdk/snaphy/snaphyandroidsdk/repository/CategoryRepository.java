@@ -25,6 +25,11 @@ import java.util.Map;
 import java.util.HashMap;
 import java.lang.reflect.Method;
 import android.util.Log;
+import android.content.ContentValues;
+import android.content.pm.PackageManager;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+
 
 //Replaced by Custom ModelRepository method
 //import com.strongloop.android.loopback.ModelRepository;
@@ -56,11 +61,19 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.CategoryDb;
 public class CategoryRepository extends ModelRepository<Category> {
 
 
-    private CategoryRepository that;
+    private Context context;
+    private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
+    private static String DATABASE_NAME;
 
     public CategoryRepository(){
         super("Category", null, Category.class);
-        that = this;
+        try{
+            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
+        }
+        catch (Exception e){
+            Log.e(TAG, e.toString());
+        }
     }
 
 
@@ -107,9 +120,10 @@ public class CategoryRepository extends ModelRepository<Category> {
 
 
     public void addStorage(Context context){
-          setCategoryDb(new CategoryDb(context, getRestAdapter()));
+          setCategoryDb(new CategoryDb(context, DATABASE_NAME, getRestAdapter()));
           //allow data storage locally..
           persistData(true);
+          this.context = context;
     }
 
 
@@ -382,10 +396,20 @@ public class CategoryRepository extends ModelRepository<Category> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hotDealRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //hotDealRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // HotDeal hotDeal = hotDealRepo.createObject(result);
-                                    HotDeal hotDeal = that.createObject(result);
+                                    HotDeal hotDeal = hotDealRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -507,10 +531,20 @@ public class CategoryRepository extends ModelRepository<Category> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hotDealRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //hotDealRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // HotDeal hotDeal = hotDealRepo.createObject(result);
-                                    HotDeal hotDeal = that.createObject(result);
+                                    HotDeal hotDeal = hotDealRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -584,23 +618,31 @@ public class CategoryRepository extends ModelRepository<Category> {
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<HotDeal> hotDealList = new DataList<HotDeal>();
-                                    //HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hotDealRepo, context);
 
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
                                     for (Map<String, Object> obj : result) {
-                                        //HotDeal hotDeal = hotDealRepo.createObject(obj);
-                                        HotDeal hotDeal = that.createObject(obj);
 
-                                            //Add to database if persistent storage required..
-                                            if(isSTORE_LOCALLY()){
-                                                //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                                try {
-                                                          Method method = hotDeal.getClass().getMethod("save__db");
-                                                          method.invoke(hotDeal);
+                                        HotDeal hotDeal = hotDealRepo.createObject(obj);
 
-                                                } catch (Exception e) {
-                                                    Log.e("Database Error", e.toString());
-                                                }
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = hotDeal.getClass().getMethod("save__db");
+                                                      method.invoke(hotDeal);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
                                             }
+                                        }
 
                                         hotDealList.add(hotDeal);
                                     }
@@ -659,10 +701,20 @@ public class CategoryRepository extends ModelRepository<Category> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hotDealRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //hotDealRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // HotDeal hotDeal = hotDealRepo.createObject(result);
-                                    HotDeal hotDeal = that.createObject(result);
+                                    HotDeal hotDeal = hotDealRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -831,10 +883,20 @@ public class CategoryRepository extends ModelRepository<Category> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
+                                    CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = categoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(categoryRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //categoryRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // Category category = categoryRepo.createObject(result);
-                                    Category category = that.createObject(result);
+                                    Category category = categoryRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -905,10 +967,20 @@ public class CategoryRepository extends ModelRepository<Category> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
+                                    CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = categoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(categoryRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //categoryRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // Category category = categoryRepo.createObject(result);
-                                    Category category = that.createObject(result);
+                                    Category category = categoryRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1031,10 +1103,20 @@ public class CategoryRepository extends ModelRepository<Category> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
+                                    CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = categoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(categoryRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //categoryRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // Category category = categoryRepo.createObject(result);
-                                    Category category = that.createObject(result);
+                                    Category category = categoryRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1106,23 +1188,31 @@ public class CategoryRepository extends ModelRepository<Category> {
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<Category> categoryList = new DataList<Category>();
-                                    //CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
+                                    CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = categoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(categoryRepo, context);
 
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
                                     for (Map<String, Object> obj : result) {
-                                        //Category category = categoryRepo.createObject(obj);
-                                        Category category = that.createObject(obj);
 
-                                            //Add to database if persistent storage required..
-                                            if(isSTORE_LOCALLY()){
-                                                //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                                try {
-                                                          Method method = category.getClass().getMethod("save__db");
-                                                          method.invoke(category);
+                                        Category category = categoryRepo.createObject(obj);
 
-                                                } catch (Exception e) {
-                                                    Log.e("Database Error", e.toString());
-                                                }
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = category.getClass().getMethod("save__db");
+                                                      method.invoke(category);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
                                             }
+                                        }
 
                                         categoryList.add(category);
                                     }
@@ -1179,10 +1269,20 @@ public class CategoryRepository extends ModelRepository<Category> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
+                                    CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = categoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(categoryRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //categoryRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // Category category = categoryRepo.createObject(result);
-                                    Category category = that.createObject(result);
+                                    Category category = categoryRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1409,10 +1509,20 @@ public class CategoryRepository extends ModelRepository<Category> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    //CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
+                                    CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = categoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(categoryRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //categoryRepo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // Category category = categoryRepo.createObject(result);
-                                    Category category = that.createObject(result);
+                                    Category category = categoryRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){

@@ -24,9 +24,9 @@ import com.strongloop.android.loopback.RestAdapter;
 * Created by snaphy on 1/2/2017.
 */
 
-public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerRepository> {
+public class BrandManagerDb extends DbHandler<BrandManager, String DATABASE_NAME, BrandManagerRepository> {
   public BrandManagerDb(Context context, RestAdapter restAdapter){
-    super(context, "BrandManager", restAdapter);
+    super(context, "BrandManager", DATABASE_NAME, restAdapter);
   }
 
   // Creating Tables
