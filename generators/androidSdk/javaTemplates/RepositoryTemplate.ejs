@@ -219,7 +219,7 @@ public class <%- modelName %>Repository extends UserRepository<<%- modelName %>>
 public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>> {
 <% } %>
 
-    private <%- modelName %>Repository that;
+    private Context context;
 
     public <%- modelName %>Repository(){
         super("<%- modelName %>", null, <%- modelName %>.class);
@@ -369,6 +369,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
           set<%- modelName %>Db(new <%- modelName %>Db(context, getRestAdapter()));
           //allow data storage locally..
           persistData(true);
+          this.context = context;
     }
 
 
@@ -797,10 +798,12 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                                 callback.onSuccess(response);
                             <% }else{ %>
                                 if(response != null){
-                                    //<%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
+                                    <%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
+                                    if(context != null){
+                                        <%- lowercaseFirstLetter(type) %>Repo.addStorage(context);
+                                    }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    // <%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(result);
-                                    <%- type %> <%- lowercaseFirstLetter(type) %> = that.createObject(result);
+                                    <%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -844,11 +847,13 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<<%- type %>> <%- lowercaseFirstLetter(type) %>List = new DataList<<%- type %>>();
-                                    //<%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
+                                    <%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        //<%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(obj);
-                                        <%- type %> <%- lowercaseFirstLetter(type) %> = that.createObject(obj);
+                                            if(context != null){
+                                                <%- lowercaseFirstLetter(type) %>Repo.addStorage(context);
+                                            }
+                                            <%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(obj);
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
