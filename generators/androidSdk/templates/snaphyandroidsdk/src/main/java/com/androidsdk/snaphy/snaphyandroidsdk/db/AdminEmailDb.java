@@ -24,8 +24,8 @@ import com.strongloop.android.loopback.RestAdapter;
 * Created by snaphy on 1/2/2017.
 */
 
-public class AdminEmailDb extends DbHandler<AdminEmail, String DATABASE_NAME, AdminEmailRepository> {
-  public AdminEmailDb(Context context, RestAdapter restAdapter){
+public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
+  public AdminEmailDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "AdminEmail", DATABASE_NAME, restAdapter);
   }
 

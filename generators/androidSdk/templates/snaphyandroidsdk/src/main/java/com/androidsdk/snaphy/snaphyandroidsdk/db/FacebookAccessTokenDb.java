@@ -24,8 +24,8 @@ import com.strongloop.android.loopback.RestAdapter;
 * Created by snaphy on 1/2/2017.
 */
 
-public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, String DATABASE_NAME, FacebookAccessTokenRepository> {
-  public FacebookAccessTokenDb(Context context, RestAdapter restAdapter){
+public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, FacebookAccessTokenRepository> {
+  public FacebookAccessTokenDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "FacebookAccessToken", DATABASE_NAME, restAdapter);
   }
 

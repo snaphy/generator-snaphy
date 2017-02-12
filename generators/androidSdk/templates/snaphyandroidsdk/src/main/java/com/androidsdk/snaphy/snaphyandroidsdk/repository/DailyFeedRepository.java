@@ -72,7 +72,7 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
             DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
         }
         catch (Exception e){
-            Log.e(TAG, e.toString());
+            Log.e("Snaphy", e.toString());
         }
     }
 

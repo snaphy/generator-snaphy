@@ -24,8 +24,8 @@ import com.strongloop.android.loopback.RestAdapter;
 * Created by snaphy on 1/2/2017.
 */
 
-public class EmployeeDb extends DbHandler<Employee, String DATABASE_NAME, EmployeeRepository> {
-  public EmployeeDb(Context context, RestAdapter restAdapter){
+public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
+  public EmployeeDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "Employee", DATABASE_NAME, restAdapter);
   }
 

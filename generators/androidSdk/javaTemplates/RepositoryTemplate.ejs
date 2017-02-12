@@ -230,13 +230,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
     public <%- modelName %>Repository(){
         super("<%- modelName %>", null, <%- modelName %>.class);
-        try{
-            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
-        }
-        catch (Exception e){
-            Log.e("Snaphy", e.toString());
-        }
+
     }
 
 
@@ -379,10 +373,17 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
 
     public void addStorage(Context context){
-          set<%- modelName %>Db(new <%- modelName %>Db(context, DATABASE_NAME, getRestAdapter()));
-          //allow data storage locally..
-          persistData(true);
-          this.context = context;
+         try{
+            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
+         }
+         catch (Exception e){
+            Log.e("Snaphy", e.toString());
+         }
+         set<%- modelName %>Db(new <%- modelName %>Db(context, DATABASE_NAME, getRestAdapter()));
+         //allow data storage locally..
+         persistData(true);
+         this.context = context;
     }
 
 

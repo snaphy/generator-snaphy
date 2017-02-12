@@ -24,8 +24,8 @@ import com.strongloop.android.loopback.RestAdapter;
 * Created by snaphy on 1/2/2017.
 */
 
-public class HotDealDb extends DbHandler<HotDeal, String DATABASE_NAME, HotDealRepository> {
-  public HotDealDb(Context context, RestAdapter restAdapter){
+public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
+  public HotDealDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "HotDeal", DATABASE_NAME, restAdapter);
   }
 

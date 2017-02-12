@@ -24,8 +24,8 @@ import com.strongloop.android.loopback.RestAdapter;
 * Created by snaphy on 1/2/2017.
 */
 
-public class ContainerDb extends DbHandler<Container, String DATABASE_NAME, ContainerRepository> {
-  public ContainerDb(Context context, RestAdapter restAdapter){
+public class ContainerDb extends DbHandler<Container, ContainerRepository> {
+  public ContainerDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "Container", DATABASE_NAME, restAdapter);
   }
 

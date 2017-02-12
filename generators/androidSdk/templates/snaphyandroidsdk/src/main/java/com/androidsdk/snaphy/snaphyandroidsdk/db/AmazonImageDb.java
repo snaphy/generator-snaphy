@@ -24,8 +24,8 @@ import com.strongloop.android.loopback.RestAdapter;
 * Created by snaphy on 1/2/2017.
 */
 
-public class AmazonImageDb extends DbHandler<AmazonImage, String DATABASE_NAME, AmazonImageRepository> {
-  public AmazonImageDb(Context context, RestAdapter restAdapter){
+public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository> {
+  public AmazonImageDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "AmazonImage", DATABASE_NAME, restAdapter);
   }
 

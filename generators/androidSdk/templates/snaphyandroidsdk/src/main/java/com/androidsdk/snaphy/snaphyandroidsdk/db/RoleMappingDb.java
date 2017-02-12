@@ -24,8 +24,8 @@ import com.strongloop.android.loopback.RestAdapter;
 * Created by snaphy on 1/2/2017.
 */
 
-public class RoleMappingDb extends DbHandler<RoleMapping, String DATABASE_NAME, RoleMappingRepository> {
-  public RoleMappingDb(Context context, RestAdapter restAdapter){
+public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository> {
+  public RoleMappingDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "RoleMapping", DATABASE_NAME, restAdapter);
   }
 

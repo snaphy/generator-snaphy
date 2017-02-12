@@ -24,8 +24,8 @@ import com.strongloop.android.loopback.RestAdapter;
 * Created by snaphy on 1/2/2017.
 */
 
-public class BrandDb extends DbHandler<Brand, String DATABASE_NAME, BrandRepository> {
-  public BrandDb(Context context, RestAdapter restAdapter){
+public class BrandDb extends DbHandler<Brand, BrandRepository> {
+  public BrandDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "Brand", DATABASE_NAME, restAdapter);
   }
 
