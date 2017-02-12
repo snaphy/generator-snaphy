@@ -33,7 +33,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
   @Override
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                                
-    String CREATE_Role_TABLE = "CREATE TABLE  Role IF NOT EXISTS (  id TEXT PRIMARY KEY, name TEXT, description TEXT, created TEXT, modified TEXT)";
+    String CREATE_Role_TABLE = "CREATE TABLE IF NOT EXISTS Role (  id TEXT PRIMARY KEY, name TEXT, description TEXT, created TEXT, modified TEXT)";
     db.execSQL(CREATE_Role_TABLE);
   }
 
@@ -41,7 +41,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS Role");
+            //db.execSQL("DROP TABLE IF EXISTS Role");
             // Create tables again
             onCreate(db);
     }
@@ -287,7 +287,7 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
     public DataList<Role>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<Role> modelList = new DataList<Role>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Role WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM Role WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.lang.reflect.Method;
-
+import android.util.Log;
 
 //Replaced by Custom ModelRepository method
 //import com.strongloop.android.loopback.ModelRepository;
@@ -63,8 +63,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.ChatDb;
 public class ChatRepository extends ModelRepository<Chat> {
 
 
+    private ChatRepository that;
+
     public ChatRepository(){
         super("Chat", null, Chat.class);
+        that = this;
     }
 
 
@@ -110,11 +113,11 @@ public class ChatRepository extends ModelRepository<Chat> {
 
 
 
-private void addStorage(Context context){
-    setChatDb(new ChatDb(context, getRestAdapter()));
-      //allow data storage locally..
-      persistData(true);
-}
+    public void addStorage(Context context){
+          setChatDb(new ChatDb(context, getRestAdapter()));
+          //allow data storage locally..
+          persistData(true);
+    }
 
 
     public RestContract createContract() {
@@ -395,9 +398,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    //AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AppUser appUser = appUserRepo.createObject(result);
+                                    // AppUser appUser = appUserRepo.createObject(result);
+                                    AppUser appUser = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -469,9 +473,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    //BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Brand brand = brandRepo.createObject(result);
+                                    // Brand brand = brandRepo.createObject(result);
+                                    Brand brand = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -541,9 +546,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    //ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Chat chat = chatRepo.createObject(result);
+                                    // Chat chat = chatRepo.createObject(result);
+                                    Chat chat = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -614,9 +620,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    //ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Chat chat = chatRepo.createObject(result);
+                                    // Chat chat = chatRepo.createObject(result);
+                                    Chat chat = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -739,9 +746,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    //ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Chat chat = chatRepo.createObject(result);
+                                    // Chat chat = chatRepo.createObject(result);
+                                    Chat chat = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -813,10 +821,11 @@ private void addStorage(Context context){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<Chat> chatList = new DataList<Chat>();
-                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    //ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Chat chat = chatRepo.createObject(obj);
+                                        //Chat chat = chatRepo.createObject(obj);
+                                        Chat chat = that.createObject(obj);
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
@@ -885,9 +894,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    //ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Chat chat = chatRepo.createObject(result);
+                                    // Chat chat = chatRepo.createObject(result);
+                                    Chat chat = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1114,9 +1124,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    //ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Chat chat = chatRepo.createObject(result);
+                                    // Chat chat = chatRepo.createObject(result);
+                                    Chat chat = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){

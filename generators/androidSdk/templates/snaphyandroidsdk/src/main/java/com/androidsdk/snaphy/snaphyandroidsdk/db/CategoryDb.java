@@ -33,7 +33,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
   @Override
   public void onCreate(SQLiteDatabase db) {
                                                                                                                     
-    String CREATE_Category_TABLE = "CREATE TABLE  Category IF NOT EXISTS (  name TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY)";
+    String CREATE_Category_TABLE = "CREATE TABLE IF NOT EXISTS Category (  name TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY)";
     db.execSQL(CREATE_Category_TABLE);
   }
 
@@ -41,7 +41,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS Category");
+            //db.execSQL("DROP TABLE IF EXISTS Category");
             // Create tables again
             onCreate(db);
     }
@@ -247,7 +247,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
     public DataList<Category>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<Category> modelList = new DataList<Category>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Category WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM Category WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

@@ -33,7 +33,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
   @Override
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                                                                                                                                                                  
-    String CREATE_Chat_TABLE = "CREATE TABLE  Chat IF NOT EXISTS (  added TEXT, updated TEXT, message TEXT, type TEXT, image TEXT, from TEXT, guid TEXT, status TEXT, id TEXT PRIMARY KEY, appUserId TEXT, brandId TEXT)";
+    String CREATE_Chat_TABLE = "CREATE TABLE IF NOT EXISTS Chat (  added TEXT, updated TEXT, message TEXT, type TEXT, image TEXT, from TEXT, guid TEXT, status TEXT, id TEXT PRIMARY KEY, appUserId TEXT, brandId TEXT)";
     db.execSQL(CREATE_Chat_TABLE);
   }
 
@@ -41,7 +41,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS Chat");
+            //db.execSQL("DROP TABLE IF EXISTS Chat");
             // Create tables again
             onCreate(db);
     }
@@ -375,7 +375,7 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
     public DataList<Chat>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<Chat> modelList = new DataList<Chat>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Chat WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM Chat WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

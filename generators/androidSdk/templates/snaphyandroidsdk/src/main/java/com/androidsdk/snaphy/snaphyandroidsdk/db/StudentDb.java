@@ -33,7 +33,7 @@ public class StudentDb extends DbHandler<Student, StudentRepository> {
   @Override
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                                                                                                                                                                                                                                                                              
-    String CREATE_Student_TABLE = "CREATE TABLE  Student IF NOT EXISTS (  firstName TEXT, lastName TEXT, realm TEXT, username TEXT, password TEXT, credentials TEXT, challenges TEXT, email TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, brandId TEXT)";
+    String CREATE_Student_TABLE = "CREATE TABLE IF NOT EXISTS Student (  firstName TEXT, lastName TEXT, realm TEXT, username TEXT, password TEXT, credentials TEXT, challenges TEXT, email TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, brandId TEXT)";
     db.execSQL(CREATE_Student_TABLE);
   }
 
@@ -41,7 +41,7 @@ public class StudentDb extends DbHandler<Student, StudentRepository> {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS Student");
+            //db.execSQL("DROP TABLE IF EXISTS Student");
             // Create tables again
             onCreate(db);
     }
@@ -519,7 +519,7 @@ public class StudentDb extends DbHandler<Student, StudentRepository> {
     public DataList<Student>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<Student> modelList = new DataList<Student>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Student WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM Student WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

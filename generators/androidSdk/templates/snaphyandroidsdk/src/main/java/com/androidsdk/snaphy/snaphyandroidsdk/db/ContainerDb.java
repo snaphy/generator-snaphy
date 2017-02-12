@@ -33,7 +33,7 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
   @Override
   public void onCreate(SQLiteDatabase db) {
                                    
-    String CREATE_Container_TABLE = "CREATE TABLE  Container IF NOT EXISTS (  id TEXT PRIMARY KEY)";
+    String CREATE_Container_TABLE = "CREATE TABLE IF NOT EXISTS Container (  id TEXT PRIMARY KEY)";
     db.execSQL(CREATE_Container_TABLE);
   }
 
@@ -41,7 +41,7 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS Container");
+            //db.execSQL("DROP TABLE IF EXISTS Container");
             // Create tables again
             onCreate(db);
     }
@@ -199,7 +199,7 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
     public DataList<Container>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<Container> modelList = new DataList<Container>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Container WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM Container WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

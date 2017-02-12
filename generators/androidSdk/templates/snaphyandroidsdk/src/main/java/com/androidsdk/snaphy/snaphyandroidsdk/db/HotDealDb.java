@@ -33,7 +33,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
   @Override
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                                                                                                                                                                                             
-    String CREATE_HotDeal_TABLE = "CREATE TABLE  HotDeal IF NOT EXISTS (  title TEXT, description TEXT, image TEXT, url TEXT, price NUMBER, status TEXT, expiryDate TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, categoryId TEXT, brandId TEXT)";
+    String CREATE_HotDeal_TABLE = "CREATE TABLE IF NOT EXISTS HotDeal (  title TEXT, description TEXT, image TEXT, url TEXT, price NUMBER, status TEXT, expiryDate TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, categoryId TEXT, brandId TEXT)";
     db.execSQL(CREATE_HotDeal_TABLE);
   }
 
@@ -41,7 +41,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS HotDeal");
+            //db.execSQL("DROP TABLE IF EXISTS HotDeal");
             // Create tables again
             onCreate(db);
     }
@@ -389,7 +389,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
     public DataList<HotDeal>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<HotDeal> modelList = new DataList<HotDeal>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM HotDeal WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM HotDeal WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

@@ -74,14 +74,14 @@ public class DbHandler<M extends Model, R extends ModelRepository> extends SQLit
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE);
+            //db.execSQL("DROP TABLE IF EXISTS " + TABLE);
             // Create tables again
             onCreate(db);
 
     }
 
 
-   
+
 
     public String toJsonString(HashMap<String, Object> data ){
         if(data != null){
@@ -107,9 +107,10 @@ public class DbHandler<M extends Model, R extends ModelRepository> extends SQLit
         String countQuery = "SELECT  * FROM " + TABLE;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
         cursor.close();
         // return count
-        return cursor.getCount();
+        return count;
     }
 
 
@@ -119,12 +120,13 @@ public class DbHandler<M extends Model, R extends ModelRepository> extends SQLit
      * @return
      */
     public int count__db(String id){
-        String countQuery = "SELECT  * FROM " + TABLE  + " WHERE ID=" + id;
+        String countQuery = "SELECT  * FROM " + TABLE  + " WHERE ID='" + id+"'";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
         cursor.close();
         // return count
-        return cursor.getCount();
+        return count;
     }
 
 

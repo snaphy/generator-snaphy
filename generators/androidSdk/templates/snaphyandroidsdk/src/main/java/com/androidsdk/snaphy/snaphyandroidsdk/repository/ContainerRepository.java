@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.lang.reflect.Method;
-
+import android.util.Log;
 
 //Replaced by Custom ModelRepository method
 //import com.strongloop.android.loopback.ModelRepository;
@@ -49,8 +49,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.ContainerDb;
 public class ContainerRepository extends ModelRepository<Container> {
 
 
+    private ContainerRepository that;
+
     public ContainerRepository(){
         super("Container", null, Container.class);
+        that = this;
     }
 
 
@@ -96,11 +99,11 @@ public class ContainerRepository extends ModelRepository<Container> {
 
 
 
-private void addStorage(Context context){
-    setContainerDb(new ContainerDb(context, getRestAdapter()));
-      //allow data storage locally..
-      persistData(true);
-}
+    public void addStorage(Context context){
+          setContainerDb(new ContainerDb(context, getRestAdapter()));
+          //allow data storage locally..
+          persistData(true);
+    }
 
 
     public RestContract createContract() {

@@ -33,7 +33,7 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
   @Override
   public void onCreate(SQLiteDatabase db) {
                                                                                                                     
-    String CREATE_CompanyInfo_TABLE = "CREATE TABLE  CompanyInfo IF NOT EXISTS (  type TEXT, html TEXT, edited TEXT, id TEXT PRIMARY KEY)";
+    String CREATE_CompanyInfo_TABLE = "CREATE TABLE IF NOT EXISTS CompanyInfo (  type TEXT, html TEXT, edited TEXT, id TEXT PRIMARY KEY)";
     db.execSQL(CREATE_CompanyInfo_TABLE);
   }
 
@@ -41,7 +41,7 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS CompanyInfo");
+            //db.execSQL("DROP TABLE IF EXISTS CompanyInfo");
             // Create tables again
             onCreate(db);
     }
@@ -247,7 +247,7 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
     public DataList<CompanyInfo>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<CompanyInfo> modelList = new DataList<CompanyInfo>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM CompanyInfo WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM CompanyInfo WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

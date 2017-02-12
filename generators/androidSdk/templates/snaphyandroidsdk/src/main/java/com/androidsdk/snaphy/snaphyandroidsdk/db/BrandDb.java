@@ -33,7 +33,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
   @Override
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                                                                                                                                                                  
-    String CREATE_Brand_TABLE = "CREATE TABLE  Brand IF NOT EXISTS (  added TEXT, updated TEXT, name TEXT, image TEXT, trending TEXT, facebookUrl TEXT, googleUrl TEXT, instagramUrl TEXT, status TEXT, associatedEmail TEXT, id TEXT PRIMARY KEY)";
+    String CREATE_Brand_TABLE = "CREATE TABLE IF NOT EXISTS Brand (  added TEXT, updated TEXT, name TEXT, image TEXT, trending TEXT, facebookUrl TEXT, googleUrl TEXT, instagramUrl TEXT, status TEXT, associatedEmail TEXT, id TEXT PRIMARY KEY)";
     db.execSQL(CREATE_Brand_TABLE);
   }
 
@@ -41,7 +41,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS Brand");
+            //db.execSQL("DROP TABLE IF EXISTS Brand");
             // Create tables again
             onCreate(db);
     }
@@ -359,7 +359,7 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
     public DataList<Brand>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<Brand> modelList = new DataList<Brand>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Brand WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM Brand WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

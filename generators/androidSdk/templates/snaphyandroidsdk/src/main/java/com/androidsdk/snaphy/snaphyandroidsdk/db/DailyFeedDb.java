@@ -33,7 +33,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
   @Override
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                                                      
-    String CREATE_DailyFeed_TABLE = "CREATE TABLE  DailyFeed IF NOT EXISTS (  added TEXT, updated TEXT, title TEXT, description TEXT, image TEXT, id TEXT PRIMARY KEY, brandId TEXT)";
+    String CREATE_DailyFeed_TABLE = "CREATE TABLE IF NOT EXISTS DailyFeed (  added TEXT, updated TEXT, title TEXT, description TEXT, image TEXT, id TEXT PRIMARY KEY, brandId TEXT)";
     db.execSQL(CREATE_DailyFeed_TABLE);
   }
 
@@ -41,7 +41,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS DailyFeed");
+            //db.execSQL("DROP TABLE IF EXISTS DailyFeed");
             // Create tables again
             onCreate(db);
     }
@@ -303,7 +303,7 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
     public DataList<DailyFeed>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<DailyFeed> modelList = new DataList<DailyFeed>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM DailyFeed WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM DailyFeed WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

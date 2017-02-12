@@ -33,7 +33,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
   @Override
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                           
-    String CREATE_AdminEmail_TABLE = "CREATE TABLE  AdminEmail IF NOT EXISTS (  to TEXT, from TEXT, subject TEXT, text TEXT, html TEXT, id TEXT PRIMARY KEY)";
+    String CREATE_AdminEmail_TABLE = "CREATE TABLE IF NOT EXISTS AdminEmail (  to TEXT, from TEXT, subject TEXT, text TEXT, html TEXT, id TEXT PRIMARY KEY)";
     db.execSQL(CREATE_AdminEmail_TABLE);
   }
 
@@ -41,7 +41,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS AdminEmail");
+            //db.execSQL("DROP TABLE IF EXISTS AdminEmail");
             // Create tables again
             onCreate(db);
     }
@@ -319,7 +319,7 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
     public DataList<AdminEmail>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<AdminEmail> modelList = new DataList<AdminEmail>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM AdminEmail WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM AdminEmail WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

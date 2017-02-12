@@ -33,7 +33,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
   @Override
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-    String CREATE_Employee_TABLE = "CREATE TABLE  Employee IF NOT EXISTS (  username TEXT, firstName TEXT, lastName TEXT, added TEXT, updated TEXT, email TEXT, password TEXT, realm TEXT, credentials TEXT, challenges TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY)";
+    String CREATE_Employee_TABLE = "CREATE TABLE IF NOT EXISTS Employee (  username TEXT, firstName TEXT, lastName TEXT, added TEXT, updated TEXT, email TEXT, password TEXT, realm TEXT, credentials TEXT, challenges TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY)";
     db.execSQL(CREATE_Employee_TABLE);
   }
 
@@ -41,7 +41,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS Employee");
+            //db.execSQL("DROP TABLE IF EXISTS Employee");
             // Create tables again
             onCreate(db);
     }
@@ -503,7 +503,7 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
     public DataList<Employee>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<Employee> modelList = new DataList<Employee>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Employee WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM Employee WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

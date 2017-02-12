@@ -33,7 +33,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
   @Override
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-    String CREATE_BrandManager_TABLE = "CREATE TABLE  BrandManager IF NOT EXISTS (  firstName TEXT, lastName TEXT, email TEXT, password TEXT, restrictHotDeal TEXT, status TEXT, added TEXT, updated TEXT, realm TEXT, username TEXT, credentials TEXT, challenges TEXT, emailVerified TEXT, verificationToken TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, brandId TEXT)";
+    String CREATE_BrandManager_TABLE = "CREATE TABLE IF NOT EXISTS BrandManager (  firstName TEXT, lastName TEXT, email TEXT, password TEXT, restrictHotDeal TEXT, status TEXT, added TEXT, updated TEXT, realm TEXT, username TEXT, credentials TEXT, challenges TEXT, emailVerified TEXT, verificationToken TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, brandId TEXT)";
     db.execSQL(CREATE_BrandManager_TABLE);
   }
 
@@ -41,7 +41,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS BrandManager");
+            //db.execSQL("DROP TABLE IF EXISTS BrandManager");
             // Create tables again
             onCreate(db);
     }
@@ -543,7 +543,7 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
     public DataList<BrandManager>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<BrandManager> modelList = new DataList<BrandManager>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM BrandManager WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM BrandManager WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

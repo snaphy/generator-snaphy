@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.lang.reflect.Method;
-
+import android.util.Log;
 
 //Replaced by Custom ModelRepository method
 //import com.strongloop.android.loopback.ModelRepository;
@@ -49,8 +49,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.CompanyInfoDb;
 public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
 
+    private CompanyInfoRepository that;
+
     public CompanyInfoRepository(){
         super("CompanyInfo", null, CompanyInfo.class);
+        that = this;
     }
 
 
@@ -96,11 +99,11 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
 
 
-private void addStorage(Context context){
-    setCompanyInfoDb(new CompanyInfoDb(context, getRestAdapter()));
-      //allow data storage locally..
-      persistData(true);
-}
+    public void addStorage(Context context){
+          setCompanyInfoDb(new CompanyInfoDb(context, getRestAdapter()));
+          //allow data storage locally..
+          persistData(true);
+    }
 
 
     public RestContract createContract() {
@@ -303,9 +306,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    //CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    CompanyInfo companyInfo = companyInfoRepo.createObject(result);
+                                    // CompanyInfo companyInfo = companyInfoRepo.createObject(result);
+                                    CompanyInfo companyInfo = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -376,9 +380,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    //CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    CompanyInfo companyInfo = companyInfoRepo.createObject(result);
+                                    // CompanyInfo companyInfo = companyInfoRepo.createObject(result);
+                                    CompanyInfo companyInfo = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -501,9 +506,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    //CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    CompanyInfo companyInfo = companyInfoRepo.createObject(result);
+                                    // CompanyInfo companyInfo = companyInfoRepo.createObject(result);
+                                    CompanyInfo companyInfo = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -575,10 +581,11 @@ private void addStorage(Context context){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<CompanyInfo> companyInfoList = new DataList<CompanyInfo>();
-                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    //CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        CompanyInfo companyInfo = companyInfoRepo.createObject(obj);
+                                        //CompanyInfo companyInfo = companyInfoRepo.createObject(obj);
+                                        CompanyInfo companyInfo = that.createObject(obj);
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
@@ -647,9 +654,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    //CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    CompanyInfo companyInfo = companyInfoRepo.createObject(result);
+                                    // CompanyInfo companyInfo = companyInfoRepo.createObject(result);
+                                    CompanyInfo companyInfo = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -876,9 +884,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    //CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    CompanyInfo companyInfo = companyInfoRepo.createObject(result);
+                                    // CompanyInfo companyInfo = companyInfoRepo.createObject(result);
+                                    CompanyInfo companyInfo = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){

@@ -33,7 +33,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
   @Override
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                                
-    String CREATE_AmazonImage_TABLE = "CREATE TABLE  AmazonImage IF NOT EXISTS (  name TEXT, container TEXT, type TEXT, url TEXT, id TEXT PRIMARY KEY)";
+    String CREATE_AmazonImage_TABLE = "CREATE TABLE IF NOT EXISTS AmazonImage (  name TEXT, container TEXT, type TEXT, url TEXT, id TEXT PRIMARY KEY)";
     db.execSQL(CREATE_AmazonImage_TABLE);
   }
 
@@ -41,7 +41,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS AmazonImage");
+            //db.execSQL("DROP TABLE IF EXISTS AmazonImage");
             // Create tables again
             onCreate(db);
     }
@@ -263,7 +263,7 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
     public DataList<AmazonImage>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<AmazonImage> modelList = new DataList<AmazonImage>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM AmazonImage WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM AmazonImage WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

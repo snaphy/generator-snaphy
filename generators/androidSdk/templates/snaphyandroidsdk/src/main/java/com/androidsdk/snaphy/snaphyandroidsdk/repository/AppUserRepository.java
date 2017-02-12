@@ -24,14 +24,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.lang.reflect.Method;
-
+import android.util.Log;
 
 //Replaced by Custom  Repo methods
 // import com.strongloop.android.loopback.UserRepository;
 import com.strongloop.android.loopback.AccessTokenRepository;
 import com.strongloop.android.loopback.AccessToken;
 import android.content.SharedPreferences;
-import android.util.Log;
 import org.json.JSONException;
 import android.content.Context;
 
@@ -79,8 +78,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.AppUserDb;
 public class AppUserRepository extends UserRepository<AppUser> {
 
 
+    private AppUserRepository that;
+
     public AppUserRepository(){
         super("AppUser", null, AppUser.class);
+        that = this;
     }
 
 
@@ -89,6 +91,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
     		public AppUser cachedCurrentUser;
             private Object currentUserId;
             private boolean isCurrentUserIdLoaded;
+
     		public AppUser getCachedCurrentUser(){
     			return cachedCurrentUser;
     		}
@@ -111,7 +114,6 @@ public class AppUserRepository extends UserRepository<AppUser> {
                 }
 
                 HashMap<String, Object> hashMap = new HashMap<>();
-
                 this.findById((String)getCurrentUserId(), hashMap, new ObjectCallback<AppUser>() {
                     @Override
                     public void onSuccess(AppUser user){
@@ -128,7 +130,6 @@ public class AppUserRepository extends UserRepository<AppUser> {
                         callback.onFinally();
                     }
                 });
-
             }
 
             public Object getCurrentUserId(){
@@ -223,11 +224,11 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
 
 
-private void addStorage(Context context){
-    setAppUserDb(new AppUserDb(context, getRestAdapter()));
-      //allow data storage locally..
-      persistData(true);
-}
+    public void addStorage(Context context){
+          setAppUserDb(new AppUserDb(context, getRestAdapter()));
+          //allow data storage locally..
+          persistData(true);
+    }
 
 
     public RestContract createContract() {
@@ -838,9 +839,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    //AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AccessToken accessToken = accessTokenRepo.createObject(result);
+                                    // AccessToken accessToken = accessTokenRepo.createObject(result);
+                                    AccessToken accessToken = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -962,9 +964,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    //AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AccessToken accessToken = accessTokenRepo.createObject(result);
+                                    // AccessToken accessToken = accessTokenRepo.createObject(result);
+                                    AccessToken accessToken = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1036,9 +1039,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    //FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    // FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    FacebookAccessToken facebookAccessToken = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1160,9 +1164,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    //FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    // FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    FacebookAccessToken facebookAccessToken = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1234,9 +1239,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    //ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Chat chat = chatRepo.createObject(result);
+                                    // Chat chat = chatRepo.createObject(result);
+                                    Chat chat = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1358,9 +1364,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    //ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Chat chat = chatRepo.createObject(result);
+                                    // Chat chat = chatRepo.createObject(result);
+                                    Chat chat = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1432,9 +1439,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    //BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Brand brand = brandRepo.createObject(result);
+                                    // Brand brand = brandRepo.createObject(result);
+                                    Brand brand = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1556,9 +1564,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    //BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Brand brand = brandRepo.createObject(result);
+                                    // Brand brand = brandRepo.createObject(result);
+                                    Brand brand = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1630,9 +1639,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    //BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Brand brand = brandRepo.createObject(result);
+                                    // Brand brand = brandRepo.createObject(result);
+                                    Brand brand = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1807,10 +1817,11 @@ private void addStorage(Context context){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<AccessToken> accessTokenList = new DataList<AccessToken>();
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    //AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        AccessToken accessToken = accessTokenRepo.createObject(obj);
+                                        //AccessToken accessToken = accessTokenRepo.createObject(obj);
+                                        AccessToken accessToken = that.createObject(obj);
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
@@ -1881,9 +1892,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    //AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AccessToken accessToken = accessTokenRepo.createObject(result);
+                                    // AccessToken accessToken = accessTokenRepo.createObject(result);
+                                    AccessToken accessToken = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -2056,10 +2068,11 @@ private void addStorage(Context context){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<FacebookAccessToken> facebookAccessTokenList = new DataList<FacebookAccessToken>();
-                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    //FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(obj);
+                                        //FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(obj);
+                                        FacebookAccessToken facebookAccessToken = that.createObject(obj);
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
@@ -2130,9 +2143,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
+                                    //FacebookAccessTokenRepository facebookAccessTokenRepo = getRestAdapter().createRepository(FacebookAccessTokenRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    // FacebookAccessToken facebookAccessToken = facebookAccessTokenRepo.createObject(result);
+                                    FacebookAccessToken facebookAccessToken = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -2305,10 +2319,11 @@ private void addStorage(Context context){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<Chat> chatList = new DataList<Chat>();
-                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    //ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Chat chat = chatRepo.createObject(obj);
+                                        //Chat chat = chatRepo.createObject(obj);
+                                        Chat chat = that.createObject(obj);
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
@@ -2379,9 +2394,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    //ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Chat chat = chatRepo.createObject(result);
+                                    // Chat chat = chatRepo.createObject(result);
+                                    Chat chat = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -2554,10 +2570,11 @@ private void addStorage(Context context){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<Brand> brandList = new DataList<Brand>();
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    //BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Brand brand = brandRepo.createObject(obj);
+                                        //Brand brand = brandRepo.createObject(obj);
+                                        Brand brand = that.createObject(obj);
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
@@ -2628,9 +2645,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    //BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Brand brand = brandRepo.createObject(result);
+                                    // Brand brand = brandRepo.createObject(result);
+                                    Brand brand = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -2799,9 +2817,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    //AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AppUser appUser = appUserRepo.createObject(result);
+                                    // AppUser appUser = appUserRepo.createObject(result);
+                                    AppUser appUser = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -2872,9 +2891,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    //AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AppUser appUser = appUserRepo.createObject(result);
+                                    // AppUser appUser = appUserRepo.createObject(result);
+                                    AppUser appUser = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -2997,9 +3017,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    //AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AppUser appUser = appUserRepo.createObject(result);
+                                    // AppUser appUser = appUserRepo.createObject(result);
+                                    AppUser appUser = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -3071,10 +3092,11 @@ private void addStorage(Context context){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<AppUser> appUserList = new DataList<AppUser>();
-                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    //AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        AppUser appUser = appUserRepo.createObject(obj);
+                                        //AppUser appUser = appUserRepo.createObject(obj);
+                                        AppUser appUser = that.createObject(obj);
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
@@ -3143,9 +3165,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    //AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AppUser appUser = appUserRepo.createObject(result);
+                                    // AppUser appUser = appUserRepo.createObject(result);
+                                    AppUser appUser = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -3372,9 +3395,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    //AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AppUser appUser = appUserRepo.createObject(result);
+                                    // AppUser appUser = appUserRepo.createObject(result);
+                                    AppUser appUser = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -3758,10 +3782,11 @@ private void addStorage(Context context){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<AppUser> appUserList = new DataList<AppUser>();
-                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    //AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        AppUser appUser = appUserRepo.createObject(obj);
+                                        //AppUser appUser = appUserRepo.createObject(obj);
+                                        AppUser appUser = that.createObject(obj);
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){

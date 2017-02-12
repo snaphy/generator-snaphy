@@ -797,9 +797,9 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                                 callback.onSuccess(response);
                             <% }else{ %>
                                 if(response != null){
-                                    <%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
+                                    //<%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    //<%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(result);
+                                    // <%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(result);
                                     <%- type %> <%- lowercaseFirstLetter(type) %> = that.createObject(result);
 
                                       //Add to database if persistent storage required..
@@ -844,7 +844,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<<%- type %>> <%- lowercaseFirstLetter(type) %>List = new DataList<<%- type %>>();
-                                    <%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
+                                    //<%- type %>Repository <%- lowercaseFirstLetter(type) %>Repo = getRestAdapter().createRepository(<%- type %>Repository.class);
 
                                     for (Map<String, Object> obj : result) {
                                         //<%- type %> <%- lowercaseFirstLetter(type) %> = <%- lowercaseFirstLetter(type) %>Repo.createObject(obj);

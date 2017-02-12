@@ -33,7 +33,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
   @Override
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-    String CREATE_AppUser_TABLE = "CREATE TABLE  AppUser IF NOT EXISTS (  firstName TEXT, lastName TEXT, email TEXT, added TEXT, updated TEXT, registrationId TEXT, profilePic TEXT, realm TEXT, username TEXT, password TEXT, credentials TEXT, challenges TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY)";
+    String CREATE_AppUser_TABLE = "CREATE TABLE IF NOT EXISTS AppUser (  firstName TEXT, lastName TEXT, email TEXT, added TEXT, updated TEXT, registrationId TEXT, profilePic TEXT, realm TEXT, username TEXT, password TEXT, credentials TEXT, challenges TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY)";
     db.execSQL(CREATE_AppUser_TABLE);
   }
 
@@ -41,7 +41,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS AppUser");
+            //db.execSQL("DROP TABLE IF EXISTS AppUser");
             // Create tables again
             onCreate(db);
     }
@@ -551,7 +551,7 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
     public DataList<AppUser>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<AppUser> modelList = new DataList<AppUser>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM AppUser WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM AppUser WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

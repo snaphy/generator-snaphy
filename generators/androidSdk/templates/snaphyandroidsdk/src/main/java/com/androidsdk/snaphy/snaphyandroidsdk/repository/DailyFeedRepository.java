@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.lang.reflect.Method;
-
+import android.util.Log;
 
 //Replaced by Custom ModelRepository method
 //import com.strongloop.android.loopback.ModelRepository;
@@ -56,8 +56,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.DailyFeedDb;
 public class DailyFeedRepository extends ModelRepository<DailyFeed> {
 
 
+    private DailyFeedRepository that;
+
     public DailyFeedRepository(){
         super("DailyFeed", null, DailyFeed.class);
+        that = this;
     }
 
 
@@ -103,11 +106,11 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
 
 
 
-private void addStorage(Context context){
-    setDailyFeedDb(new DailyFeedDb(context, getRestAdapter()));
-      //allow data storage locally..
-      persistData(true);
-}
+    public void addStorage(Context context){
+          setDailyFeedDb(new DailyFeedDb(context, getRestAdapter()));
+          //allow data storage locally..
+          persistData(true);
+    }
 
 
     public RestContract createContract() {
@@ -346,9 +349,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    //BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Brand brand = brandRepo.createObject(result);
+                                    // Brand brand = brandRepo.createObject(result);
+                                    Brand brand = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -418,9 +422,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    //DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
+                                    // DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
+                                    DailyFeed dailyFeed = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -491,9 +496,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    //DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
+                                    // DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
+                                    DailyFeed dailyFeed = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -616,9 +622,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    //DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
+                                    // DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
+                                    DailyFeed dailyFeed = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -690,10 +697,11 @@ private void addStorage(Context context){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<DailyFeed> dailyFeedList = new DataList<DailyFeed>();
-                                    DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    //DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        DailyFeed dailyFeed = dailyFeedRepo.createObject(obj);
+                                        //DailyFeed dailyFeed = dailyFeedRepo.createObject(obj);
+                                        DailyFeed dailyFeed = that.createObject(obj);
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
@@ -762,9 +770,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    //DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
+                                    // DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
+                                    DailyFeed dailyFeed = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -991,9 +1000,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    //DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
+                                    // DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
+                                    DailyFeed dailyFeed = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){

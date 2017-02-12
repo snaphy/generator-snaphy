@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.lang.reflect.Method;
-
+import android.util.Log;
 
 //Replaced by Custom ModelRepository method
 //import com.strongloop.android.loopback.ModelRepository;
@@ -87,8 +87,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.BrandDb;
 public class BrandRepository extends ModelRepository<Brand> {
 
 
+    private BrandRepository that;
+
     public BrandRepository(){
         super("Brand", null, Brand.class);
+        that = this;
     }
 
 
@@ -134,11 +137,11 @@ public class BrandRepository extends ModelRepository<Brand> {
 
 
 
-private void addStorage(Context context){
-    setBrandDb(new BrandDb(context, getRestAdapter()));
-      //allow data storage locally..
-      persistData(true);
-}
+    public void addStorage(Context context){
+          setBrandDb(new BrandDb(context, getRestAdapter()));
+          //allow data storage locally..
+          persistData(true);
+    }
 
 
     public RestContract createContract() {
@@ -815,9 +818,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    //HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    HotDeal hotDeal = hotDealRepo.createObject(result);
+                                    // HotDeal hotDeal = hotDealRepo.createObject(result);
+                                    HotDeal hotDeal = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -939,9 +943,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    //HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    HotDeal hotDeal = hotDealRepo.createObject(result);
+                                    // HotDeal hotDeal = hotDealRepo.createObject(result);
+                                    HotDeal hotDeal = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1013,9 +1018,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    //ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Chat chat = chatRepo.createObject(result);
+                                    // Chat chat = chatRepo.createObject(result);
+                                    Chat chat = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1137,9 +1143,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    //ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Chat chat = chatRepo.createObject(result);
+                                    // Chat chat = chatRepo.createObject(result);
+                                    Chat chat = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1211,9 +1218,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    //AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AppUser appUser = appUserRepo.createObject(result);
+                                    // AppUser appUser = appUserRepo.createObject(result);
+                                    AppUser appUser = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1335,9 +1343,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    //AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AppUser appUser = appUserRepo.createObject(result);
+                                    // AppUser appUser = appUserRepo.createObject(result);
+                                    AppUser appUser = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1409,9 +1418,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    //AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AppUser appUser = appUserRepo.createObject(result);
+                                    // AppUser appUser = appUserRepo.createObject(result);
+                                    AppUser appUser = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1584,9 +1594,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    //DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
+                                    // DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
+                                    DailyFeed dailyFeed = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1708,9 +1719,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    //DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
+                                    // DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
+                                    DailyFeed dailyFeed = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1782,9 +1794,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
+                                    //BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    BrandManager brandManager = brandManagerRepo.createObject(result);
+                                    // BrandManager brandManager = brandManagerRepo.createObject(result);
+                                    BrandManager brandManager = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1906,9 +1919,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
+                                    //BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    BrandManager brandManager = brandManagerRepo.createObject(result);
+                                    // BrandManager brandManager = brandManagerRepo.createObject(result);
+                                    BrandManager brandManager = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -1980,9 +1994,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandVerificationRepository brandVerificationRepo = getRestAdapter().createRepository(BrandVerificationRepository.class);
+                                    //BrandVerificationRepository brandVerificationRepo = getRestAdapter().createRepository(BrandVerificationRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    BrandVerification brandVerification = brandVerificationRepo.createObject(result);
+                                    // BrandVerification brandVerification = brandVerificationRepo.createObject(result);
+                                    BrandVerification brandVerification = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -2054,9 +2069,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandVerificationRepository brandVerificationRepo = getRestAdapter().createRepository(BrandVerificationRepository.class);
+                                    //BrandVerificationRepository brandVerificationRepo = getRestAdapter().createRepository(BrandVerificationRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    BrandVerification brandVerification = brandVerificationRepo.createObject(result);
+                                    // BrandVerification brandVerification = brandVerificationRepo.createObject(result);
+                                    BrandVerification brandVerification = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -2128,9 +2144,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandVerificationRepository brandVerificationRepo = getRestAdapter().createRepository(BrandVerificationRepository.class);
+                                    //BrandVerificationRepository brandVerificationRepo = getRestAdapter().createRepository(BrandVerificationRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    BrandVerification brandVerification = brandVerificationRepo.createObject(result);
+                                    // BrandVerification brandVerification = brandVerificationRepo.createObject(result);
+                                    BrandVerification brandVerification = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -2250,10 +2267,11 @@ private void addStorage(Context context){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<HotDeal> hotDealList = new DataList<HotDeal>();
-                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    //HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        HotDeal hotDeal = hotDealRepo.createObject(obj);
+                                        //HotDeal hotDeal = hotDealRepo.createObject(obj);
+                                        HotDeal hotDeal = that.createObject(obj);
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
@@ -2324,9 +2342,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    //HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    HotDeal hotDeal = hotDealRepo.createObject(result);
+                                    // HotDeal hotDeal = hotDealRepo.createObject(result);
+                                    HotDeal hotDeal = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -2499,10 +2518,11 @@ private void addStorage(Context context){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<Chat> chatList = new DataList<Chat>();
-                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    //ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Chat chat = chatRepo.createObject(obj);
+                                        //Chat chat = chatRepo.createObject(obj);
+                                        Chat chat = that.createObject(obj);
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
@@ -2573,9 +2593,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    //ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Chat chat = chatRepo.createObject(result);
+                                    // Chat chat = chatRepo.createObject(result);
+                                    Chat chat = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -2748,10 +2769,11 @@ private void addStorage(Context context){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<AppUser> appUserList = new DataList<AppUser>();
-                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    //AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        AppUser appUser = appUserRepo.createObject(obj);
+                                        //AppUser appUser = appUserRepo.createObject(obj);
+                                        AppUser appUser = that.createObject(obj);
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
@@ -2822,9 +2844,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    //AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AppUser appUser = appUserRepo.createObject(result);
+                                    // AppUser appUser = appUserRepo.createObject(result);
+                                    AppUser appUser = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -2997,10 +3020,11 @@ private void addStorage(Context context){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<DailyFeed> dailyFeedList = new DataList<DailyFeed>();
-                                    DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    //DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        DailyFeed dailyFeed = dailyFeedRepo.createObject(obj);
+                                        //DailyFeed dailyFeed = dailyFeedRepo.createObject(obj);
+                                        DailyFeed dailyFeed = that.createObject(obj);
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
@@ -3071,9 +3095,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
+                                    //DailyFeedRepository dailyFeedRepo = getRestAdapter().createRepository(DailyFeedRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
+                                    // DailyFeed dailyFeed = dailyFeedRepo.createObject(result);
+                                    DailyFeed dailyFeed = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -3246,10 +3271,11 @@ private void addStorage(Context context){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<BrandManager> brandManagerList = new DataList<BrandManager>();
-                                    BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
+                                    //BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        BrandManager brandManager = brandManagerRepo.createObject(obj);
+                                        //BrandManager brandManager = brandManagerRepo.createObject(obj);
+                                        BrandManager brandManager = that.createObject(obj);
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
@@ -3320,9 +3346,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
+                                    //BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    BrandManager brandManager = brandManagerRepo.createObject(result);
+                                    // BrandManager brandManager = brandManagerRepo.createObject(result);
+                                    BrandManager brandManager = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -3491,9 +3518,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    //BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Brand brand = brandRepo.createObject(result);
+                                    // Brand brand = brandRepo.createObject(result);
+                                    Brand brand = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -3564,9 +3592,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    //BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Brand brand = brandRepo.createObject(result);
+                                    // Brand brand = brandRepo.createObject(result);
+                                    Brand brand = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -3689,9 +3718,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    //BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Brand brand = brandRepo.createObject(result);
+                                    // Brand brand = brandRepo.createObject(result);
+                                    Brand brand = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -3763,10 +3793,11 @@ private void addStorage(Context context){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<Brand> brandList = new DataList<Brand>();
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    //BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        Brand brand = brandRepo.createObject(obj);
+                                        //Brand brand = brandRepo.createObject(obj);
+                                        Brand brand = that.createObject(obj);
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
@@ -3835,9 +3866,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    //BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Brand brand = brandRepo.createObject(result);
+                                    // Brand brand = brandRepo.createObject(result);
+                                    Brand brand = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -4064,9 +4096,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    //BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Brand brand = brandRepo.createObject(result);
+                                    // Brand brand = brandRepo.createObject(result);
+                                    Brand brand = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -4397,9 +4430,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    //BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Brand brand = brandRepo.createObject(result);
+                                    // Brand brand = brandRepo.createObject(result);
+                                    Brand brand = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){

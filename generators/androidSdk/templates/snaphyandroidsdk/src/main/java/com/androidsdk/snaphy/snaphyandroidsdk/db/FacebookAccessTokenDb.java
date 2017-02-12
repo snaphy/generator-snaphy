@@ -33,7 +33,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
   @Override
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                           
-    String CREATE_FacebookAccessToken_TABLE = "CREATE TABLE  FacebookAccessToken IF NOT EXISTS (  FbUserId TEXT, token TEXT, expires TEXT, userId TEXT, type TEXT, appUserId TEXT)";
+    String CREATE_FacebookAccessToken_TABLE = "CREATE TABLE IF NOT EXISTS FacebookAccessToken (  FbUserId TEXT, token TEXT, expires TEXT, userId TEXT, type TEXT, appUserId TEXT)";
     db.execSQL(CREATE_FacebookAccessToken_TABLE);
   }
 
@@ -41,7 +41,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS FacebookAccessToken");
+            //db.execSQL("DROP TABLE IF EXISTS FacebookAccessToken");
             // Create tables again
             onCreate(db);
     }
@@ -287,7 +287,7 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
     public DataList<FacebookAccessToken>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<FacebookAccessToken> modelList = new DataList<FacebookAccessToken>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM FacebookAccessToken WHERE " + whereKey +"="+ whereKeyValue ;
+        String selectQuery = "SELECT  * FROM FacebookAccessToken WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

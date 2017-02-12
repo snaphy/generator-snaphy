@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.lang.reflect.Method;
-
+import android.util.Log;
 
 //Replaced by Custom ModelRepository method
 //import com.strongloop.android.loopback.ModelRepository;
@@ -56,8 +56,11 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.RoleMappingDb;
 public class RoleMappingRepository extends ModelRepository<RoleMapping> {
 
 
+    private RoleMappingRepository that;
+
     public RoleMappingRepository(){
         super("RoleMapping", null, RoleMapping.class);
+        that = this;
     }
 
 
@@ -103,11 +106,11 @@ public class RoleMappingRepository extends ModelRepository<RoleMapping> {
 
 
 
-private void addStorage(Context context){
-    setRoleMappingDb(new RoleMappingDb(context, getRestAdapter()));
-      //allow data storage locally..
-      persistData(true);
-}
+    public void addStorage(Context context){
+          setRoleMappingDb(new RoleMappingDb(context, getRestAdapter()));
+          //allow data storage locally..
+          persistData(true);
+    }
 
 
     public RestContract createContract() {
@@ -346,9 +349,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RoleRepository roleRepo = getRestAdapter().createRepository(RoleRepository.class);
+                                    //RoleRepository roleRepo = getRestAdapter().createRepository(RoleRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Role role = roleRepo.createObject(result);
+                                    // Role role = roleRepo.createObject(result);
+                                    Role role = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -418,9 +422,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
+                                    //RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    RoleMapping roleMapping = roleMappingRepo.createObject(result);
+                                    // RoleMapping roleMapping = roleMappingRepo.createObject(result);
+                                    RoleMapping roleMapping = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -491,9 +496,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
+                                    //RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    RoleMapping roleMapping = roleMappingRepo.createObject(result);
+                                    // RoleMapping roleMapping = roleMappingRepo.createObject(result);
+                                    RoleMapping roleMapping = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -616,9 +622,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
+                                    //RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    RoleMapping roleMapping = roleMappingRepo.createObject(result);
+                                    // RoleMapping roleMapping = roleMappingRepo.createObject(result);
+                                    RoleMapping roleMapping = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -690,10 +697,11 @@ private void addStorage(Context context){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
                                     DataList<RoleMapping> roleMappingList = new DataList<RoleMapping>();
-                                    RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
+                                    //RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
 
                                     for (Map<String, Object> obj : result) {
-                                        RoleMapping roleMapping = roleMappingRepo.createObject(obj);
+                                        //RoleMapping roleMapping = roleMappingRepo.createObject(obj);
+                                        RoleMapping roleMapping = that.createObject(obj);
 
                                             //Add to database if persistent storage required..
                                             if(isSTORE_LOCALLY()){
@@ -762,9 +770,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
+                                    //RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    RoleMapping roleMapping = roleMappingRepo.createObject(result);
+                                    // RoleMapping roleMapping = roleMappingRepo.createObject(result);
+                                    RoleMapping roleMapping = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
@@ -991,9 +1000,10 @@ private void addStorage(Context context){
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
+                                    //RoleMappingRepository roleMappingRepo = getRestAdapter().createRepository(RoleMappingRepository.class);
                                     Map<String, Object> result = Util.fromJson(response);
-                                    RoleMapping roleMapping = roleMappingRepo.createObject(result);
+                                    // RoleMapping roleMapping = roleMappingRepo.createObject(result);
+                                    RoleMapping roleMapping = that.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
