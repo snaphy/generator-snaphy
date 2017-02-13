@@ -58,7 +58,10 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
         <%} -%>
        <% i++; -%>
     <%} -%>
-    <% tableQuery = tableQuery + ")"; %>
+
+    <% 
+    //On insert always update the update data value to be 1 and on fetch change to 0
+    tableQuery = tableQuery + `, ${model.methods.updateDataProperty} NUMBER ` + ")"; %>
     String CREATE_<%- modelName %>_TABLE = "<%- tableQuery %>";
     db.execSQL(CREATE_<%- modelName %>_TABLE);
   }
@@ -136,6 +139,9 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
               values.put("<%-property%>", <%-property%>Data);
           <% } -%>
         <%}%>
+
+        //Add the updated data property value to be 1
+        value.put(<%- model.methods.updateDataProperty %>, 1);
         return values;
     }
 
@@ -347,6 +353,22 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
         // updating row
         return db.update("<%- modelName %>", values, "id = ?",
                 new String[] { id });
+    }
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(<%- model.methods.updateDataProperty %>, 0);
+        // updating row
+        return db.update("<%- modelName %>", values, "<%- model.methods.updateDataProperty %> = 1", null);
+    }
+
+    // Deleting by id
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete(TABLE, "<%- model.methods.updateDataProperty %> = 0", null);
+      db.close();
     }
 
 }

@@ -84,10 +84,8 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                         }
                                                 values.put("url", urlData);
                                 
-                                                            double priceData = 0;
-                        if(modelData.getPrice() != null){
-                          priceData = (double)modelData.getPrice();
-                        }
+                                                            double priceData;
+                        priceData = (double)modelData.getPrice();
                                                 values.put("price", priceData);
                                 
                                                             String statusData = "";
@@ -265,7 +263,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                         }
                                                 
                                 
-                                                            double priceData = double(0);
+                                                            double priceData = (double)0;
                           priceData = cursor.getInt(4);
                           priceData = (double)priceData;
                           hashMap.put("price", priceData);

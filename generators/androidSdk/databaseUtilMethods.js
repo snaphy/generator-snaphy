@@ -46,6 +46,8 @@ module.exports = function(){
       return type;
     },
 
+    updateDataProperty: "_DATA_UPDATED",
+
     getSqliteType: function(loopbackType, isArray){
       if(isArray){
         return "TEXT";

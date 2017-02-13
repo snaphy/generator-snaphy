@@ -29,7 +29,7 @@ var generateRepository = function(app, modelsRestDefinition){
     var AndroidModelPath       = path.join(__dirname, constants.androidMainPath, "models");
     var AndroidRepositoryPath  = path.join(__dirname, constants.androidMainPath, "repository");
 
-    //Clean Repository folder and rebuild..
+    //Clean Repository folder and rebuild....
     rimraf.sync(AndroidRepositoryPath);
     mkdirp.sync(AndroidRepositoryPath);
 
@@ -283,6 +283,8 @@ var generateImagePresenter = function(app, modelsRestDefinition){
     //Now write Model.java to the file..
     compileAndWrite({}, JsonObjectParser, callbacks, helper.capitalizeFirstLetter("JsonObjectParser") +".java");
 }
+
+
 
 
 //Custom Base Model.java and User.java
