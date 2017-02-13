@@ -60,13 +60,7 @@ public class ContainerRepository extends ModelRepository<Container> {
 
     public ContainerRepository(){
         super("Container", null, Container.class);
-        try{
-            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
-        }
-        catch (Exception e){
-            Log.e("Snaphy", e.toString());
-        }
+
     }
 
 
@@ -113,10 +107,17 @@ public class ContainerRepository extends ModelRepository<Container> {
 
 
     public void addStorage(Context context){
-          setContainerDb(new ContainerDb(context, DATABASE_NAME, getRestAdapter()));
-          //allow data storage locally..
-          persistData(true);
-          this.context = context;
+         try{
+            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
+         }
+         catch (Exception e){
+            Log.e("Snaphy", e.toString());
+         }
+         setContainerDb(new ContainerDb(context, DATABASE_NAME, getRestAdapter()));
+         //allow data storage locally..
+         persistData(true);
+         this.context = context;
     }
 
 

@@ -89,13 +89,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
     public AppUserRepository(){
         super("AppUser", null, AppUser.class);
-        try{
-            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
-        }
-        catch (Exception e){
-            Log.e("Snaphy", e.toString());
-        }
+
     }
 
 
@@ -238,10 +232,17 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
 
     public void addStorage(Context context){
-          setAppUserDb(new AppUserDb(context, DATABASE_NAME, getRestAdapter()));
-          //allow data storage locally..
-          persistData(true);
-          this.context = context;
+         try{
+            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
+         }
+         catch (Exception e){
+            Log.e("Snaphy", e.toString());
+         }
+         setAppUserDb(new AppUserDb(context, DATABASE_NAME, getRestAdapter()));
+         //allow data storage locally..
+         persistData(true);
+         this.context = context;
     }
 
 

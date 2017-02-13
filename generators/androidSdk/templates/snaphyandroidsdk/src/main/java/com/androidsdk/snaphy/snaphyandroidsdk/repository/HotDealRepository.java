@@ -74,13 +74,7 @@ public class HotDealRepository extends ModelRepository<HotDeal> {
 
     public HotDealRepository(){
         super("HotDeal", null, HotDeal.class);
-        try{
-            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
-        }
-        catch (Exception e){
-            Log.e("Snaphy", e.toString());
-        }
+
     }
 
 
@@ -127,10 +121,17 @@ public class HotDealRepository extends ModelRepository<HotDeal> {
 
 
     public void addStorage(Context context){
-          setHotDealDb(new HotDealDb(context, DATABASE_NAME, getRestAdapter()));
-          //allow data storage locally..
-          persistData(true);
-          this.context = context;
+         try{
+            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
+         }
+         catch (Exception e){
+            Log.e("Snaphy", e.toString());
+         }
+         setHotDealDb(new HotDealDb(context, DATABASE_NAME, getRestAdapter()));
+         //allow data storage locally..
+         persistData(true);
+         this.context = context;
     }
 
 

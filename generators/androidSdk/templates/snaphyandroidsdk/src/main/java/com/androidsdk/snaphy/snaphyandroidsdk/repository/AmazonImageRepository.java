@@ -60,13 +60,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
     public AmazonImageRepository(){
         super("AmazonImage", null, AmazonImage.class);
-        try{
-            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
-        }
-        catch (Exception e){
-            Log.e("Snaphy", e.toString());
-        }
+
     }
 
 
@@ -113,10 +107,17 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
 
     public void addStorage(Context context){
-          setAmazonImageDb(new AmazonImageDb(context, DATABASE_NAME, getRestAdapter()));
-          //allow data storage locally..
-          persistData(true);
-          this.context = context;
+         try{
+            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
+         }
+         catch (Exception e){
+            Log.e("Snaphy", e.toString());
+         }
+         setAmazonImageDb(new AmazonImageDb(context, DATABASE_NAME, getRestAdapter()));
+         //allow data storage locally..
+         persistData(true);
+         this.context = context;
     }
 
 

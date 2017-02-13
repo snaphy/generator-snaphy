@@ -74,13 +74,7 @@ public class ChatRepository extends ModelRepository<Chat> {
 
     public ChatRepository(){
         super("Chat", null, Chat.class);
-        try{
-            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
-        }
-        catch (Exception e){
-            Log.e("Snaphy", e.toString());
-        }
+
     }
 
 
@@ -127,10 +121,17 @@ public class ChatRepository extends ModelRepository<Chat> {
 
 
     public void addStorage(Context context){
-          setChatDb(new ChatDb(context, DATABASE_NAME, getRestAdapter()));
-          //allow data storage locally..
-          persistData(true);
-          this.context = context;
+         try{
+            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
+         }
+         catch (Exception e){
+            Log.e("Snaphy", e.toString());
+         }
+         setChatDb(new ChatDb(context, DATABASE_NAME, getRestAdapter()));
+         //allow data storage locally..
+         persistData(true);
+         this.context = context;
     }
 
 

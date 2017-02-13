@@ -67,13 +67,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
     public FacebookAccessTokenRepository(){
         super("FacebookAccessToken", null, FacebookAccessToken.class);
-        try{
-            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
-        }
-        catch (Exception e){
-            Log.e("Snaphy", e.toString());
-        }
+
     }
 
 
@@ -120,10 +114,17 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
 
     public void addStorage(Context context){
-          setFacebookAccessTokenDb(new FacebookAccessTokenDb(context, DATABASE_NAME, getRestAdapter()));
-          //allow data storage locally..
-          persistData(true);
-          this.context = context;
+         try{
+            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
+         }
+         catch (Exception e){
+            Log.e("Snaphy", e.toString());
+         }
+         setFacebookAccessTokenDb(new FacebookAccessTokenDb(context, DATABASE_NAME, getRestAdapter()));
+         //allow data storage locally..
+         persistData(true);
+         this.context = context;
     }
 
 

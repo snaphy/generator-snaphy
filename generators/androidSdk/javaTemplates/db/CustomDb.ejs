@@ -109,10 +109,8 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
                           <%-property%>Data = new Gson().toJson(modelData.get<%-capitalPropertyName%>(), HashMap.class);
                         }
                     <% }else if(model.properties[property].type === "number"){ -%>
-                        double <%-property%>Data = 0;
-                        if(modelData.get<%-capitalPropertyName%>() != null){
-                          <%-property%>Data = (double)modelData.get<%-capitalPropertyName%>();
-                        }
+                        double <%-property%>Data;
+                        <%-property%>Data = (double)modelData.get<%-capitalPropertyName%>();
                     <% }else if(model.properties[property].type === "boolean"){ -%>
                         int <%-property%>Data = 0;
                         if(modelData.get<%-capitalPropertyName%>()){
@@ -245,7 +243,7 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
                           }
                         }
                     <% }else if(model.properties[property].type === "number"){ -%>
-                        double <%-property%>Data = double(0);
+                        double <%-property%>Data = (double)0;
                           <%-property%>Data = cursor.getInt(<%- id %>);
                           <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) %>)<%-property%>Data;
                           hashMap.put("<%-property%>", <%-property%>Data);

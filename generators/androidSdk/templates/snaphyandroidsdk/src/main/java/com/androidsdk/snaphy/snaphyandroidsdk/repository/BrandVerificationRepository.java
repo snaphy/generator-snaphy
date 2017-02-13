@@ -41,25 +41,32 @@ import org.json.JSONObject;
 
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.CompanyInfo;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.BrandVerification;
 import android.content.Context;
-import com.androidsdk.snaphy.snaphyandroidsdk.db.CompanyInfoDb;
+import com.androidsdk.snaphy.snaphyandroidsdk.db.BrandVerificationDb;
 
 //Now import model of related models..
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Brand;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
+            
+        
+    
 
 
 
 
-public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
+
+public class BrandVerificationRepository extends ModelRepository<BrandVerification> {
 
 
     private Context context;
     private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
     private static String DATABASE_NAME;
 
-    public CompanyInfoRepository(){
-        super("CompanyInfo", null, CompanyInfo.class);
+    public BrandVerificationRepository(){
+        super("BrandVerification", null, BrandVerification.class);
 
     }
 
@@ -72,15 +79,15 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
 
 
-    public CompanyInfoDb getCompanyInfoDb() {
-      return companyInfoDb;
+    public BrandVerificationDb getBrandVerificationDb() {
+      return brandVerificationDb;
     }
 
-    public void setCompanyInfoDb(CompanyInfoDb companyInfoDb) {
-      this.companyInfoDb = companyInfoDb;
+    public void setBrandVerificationDb(BrandVerificationDb brandVerificationDb) {
+      this.brandVerificationDb = brandVerificationDb;
     }
 
-    private CompanyInfoDb companyInfoDb;
+    private BrandVerificationDb brandVerificationDb;
 
 
 
@@ -100,7 +107,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-          getCompanyInfoDb().reset__db();
+          getBrandVerificationDb().reset__db();
       }
     }
 
@@ -114,7 +121,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
          catch (Exception e){
             Log.e("Snaphy", e.toString());
          }
-         setCompanyInfoDb(new CompanyInfoDb(context, DATABASE_NAME, getRestAdapter()));
+         setBrandVerificationDb(new BrandVerificationDb(context, DATABASE_NAME, getRestAdapter()));
          //allow data storage locally..
          persistData(true);
          this.context = context;
@@ -128,7 +135,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "CompanyInfo.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandVerificationId/brand", "GET"), "BrandVerification.prototype.__get__brand");
     
 
     
@@ -137,7 +144,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "CompanyInfo.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "BrandVerification.create");
     
 
     
@@ -146,7 +153,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "CompanyInfo.upsert");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "BrandVerification.create");
     
 
     
@@ -155,7 +162,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "CompanyInfo.exists");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "BrandVerification.upsert");
     
 
     
@@ -164,7 +171,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "CompanyInfo.findById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "BrandVerification.exists");
     
 
     
@@ -173,7 +180,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "CompanyInfo.find");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "BrandVerification.findById");
     
 
     
@@ -182,7 +189,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "CompanyInfo.findOne");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "BrandVerification.find");
     
 
     
@@ -191,7 +198,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "CompanyInfo.updateAll");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "BrandVerification.findOne");
     
 
     
@@ -200,7 +207,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "CompanyInfo.deleteById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "BrandVerification.updateAll");
     
 
     
@@ -209,7 +216,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "CompanyInfo.count");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "BrandVerification.deleteById");
     
 
     
@@ -218,19 +225,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:companyInfoId", "PUT"), "CompanyInfo.prototype.updateAttributes");
-    
-
-    
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "CompanyInfo.getSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "BrandVerification.count");
     
 
     
@@ -239,7 +234,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "CompanyInfo.getAbsoluteSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandVerificationId", "PUT"), "BrandVerification.prototype.updateAttributes");
     
 
     
@@ -251,7 +246,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "CompanyInfo.getDetailSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "BrandVerification.getSchema");
     
 
     
@@ -260,7 +255,43 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "CompanyInfo.getModelRelationSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "BrandVerification.getAbsoluteSchema");
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "BrandVerification.getDetailSchema");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "BrandVerification.getModelRelationSchema");
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
     
 
     
@@ -273,8 +304,9 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 //override getNameForRestUrlMethod
     public String  getNameForRestUrl() {
         
-                return "CompanyInfos";
-            
+            //call super method instead..
+            return super.getNameForRestUrl();
+        
     }
 
 
@@ -286,8 +318,93 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
     
         
+            //Method get__brand definition
+            public void get__brand(  String brandVerificationId,  Boolean refresh, final ObjectCallback<Brand> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("brandVerificationId", brandVerificationId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__brand", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = brandRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //brandRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Brand brand = brandRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = brand.getClass().getMethod("save__db");
+                                                    method.invoke(brand);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(brand);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__brand definition ends here..
+
+            
+
+        
+    
+        
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<CompanyInfo> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<BrandVerification> callback){
 
                 /**
                 Call the onBefore event
@@ -321,27 +438,27 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    BrandVerificationRepository brandVerificationRepo = getRestAdapter().createRepository(BrandVerificationRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = companyInfoRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(companyInfoRepo, context);
+                                            Method method = brandVerificationRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandVerificationRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //companyInfoRepo.addStorage(context);
+                                        //brandVerificationRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    CompanyInfo companyInfo = companyInfoRepo.createObject(result);
+                                    BrandVerification brandVerification = brandVerificationRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = companyInfo.getClass().getMethod("save__db");
-                                                    method.invoke(companyInfo);
+                                                    Method method = brandVerification.getClass().getMethod("save__db");
+                                                    method.invoke(brandVerification);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -349,7 +466,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                                       }
 
-                                    callback.onSuccess(companyInfo);
+                                    callback.onSuccess(brandVerification);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -371,7 +488,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<CompanyInfo> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<BrandVerification> callback){
 
                 /**
                 Call the onBefore event
@@ -405,27 +522,27 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    BrandVerificationRepository brandVerificationRepo = getRestAdapter().createRepository(BrandVerificationRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = companyInfoRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(companyInfoRepo, context);
+                                            Method method = brandVerificationRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandVerificationRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //companyInfoRepo.addStorage(context);
+                                        //brandVerificationRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    CompanyInfo companyInfo = companyInfoRepo.createObject(result);
+                                    BrandVerification brandVerification = brandVerificationRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = companyInfo.getClass().getMethod("save__db");
-                                                    method.invoke(companyInfo);
+                                                    Method method = brandVerification.getClass().getMethod("save__db");
+                                                    method.invoke(brandVerification);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -433,7 +550,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                                       }
 
-                                    callback.onSuccess(companyInfo);
+                                    callback.onSuccess(brandVerification);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -505,7 +622,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<CompanyInfo> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<BrandVerification> callback){
 
                 /**
                 Call the onBefore event
@@ -541,27 +658,27 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    BrandVerificationRepository brandVerificationRepo = getRestAdapter().createRepository(BrandVerificationRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = companyInfoRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(companyInfoRepo, context);
+                                            Method method = brandVerificationRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandVerificationRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //companyInfoRepo.addStorage(context);
+                                        //brandVerificationRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    CompanyInfo companyInfo = companyInfoRepo.createObject(result);
+                                    BrandVerification brandVerification = brandVerificationRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = companyInfo.getClass().getMethod("save__db");
-                                                    method.invoke(companyInfo);
+                                                    Method method = brandVerification.getClass().getMethod("save__db");
+                                                    method.invoke(brandVerification);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -569,7 +686,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                                       }
 
-                                    callback.onSuccess(companyInfo);
+                                    callback.onSuccess(brandVerification);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -590,7 +707,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<CompanyInfo> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<BrandVerification> callback){
 
                 /**
                 Call the onBefore event
@@ -625,12 +742,12 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<CompanyInfo> companyInfoList = new DataList<CompanyInfo>();
-                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    DataList<BrandVerification> brandVerificationList = new DataList<BrandVerification>();
+                                    BrandVerificationRepository brandVerificationRepo = getRestAdapter().createRepository(BrandVerificationRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = companyInfoRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(companyInfoRepo, context);
+                                            Method method = brandVerificationRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandVerificationRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -638,23 +755,23 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        CompanyInfo companyInfo = companyInfoRepo.createObject(obj);
+                                        BrandVerification brandVerification = brandVerificationRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = companyInfo.getClass().getMethod("save__db");
-                                                      method.invoke(companyInfo);
+                                                      Method method = brandVerification.getClass().getMethod("save__db");
+                                                      method.invoke(brandVerification);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        companyInfoList.add(companyInfo);
+                                        brandVerificationList.add(brandVerification);
                                     }
-                                    callback.onSuccess(companyInfoList);
+                                    callback.onSuccess(brandVerificationList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -673,7 +790,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<CompanyInfo> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<BrandVerification> callback){
 
                 /**
                 Call the onBefore event
@@ -707,27 +824,27 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    BrandVerificationRepository brandVerificationRepo = getRestAdapter().createRepository(BrandVerificationRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = companyInfoRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(companyInfoRepo, context);
+                                            Method method = brandVerificationRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandVerificationRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //companyInfoRepo.addStorage(context);
+                                        //brandVerificationRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    CompanyInfo companyInfo = companyInfoRepo.createObject(result);
+                                    BrandVerification brandVerification = brandVerificationRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = companyInfo.getClass().getMethod("save__db");
-                                                    method.invoke(companyInfo);
+                                                    Method method = brandVerification.getClass().getMethod("save__db");
+                                                    method.invoke(brandVerification);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -735,7 +852,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                                       }
 
-                                    callback.onSuccess(companyInfo);
+                                    callback.onSuccess(brandVerification);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -911,7 +1028,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String companyInfoId,  Map<String,  ? extends Object> data, final ObjectCallback<CompanyInfo> callback){
+            public void updateAttributes(  String brandVerificationId,  Map<String,  ? extends Object> data, final ObjectCallback<BrandVerification> callback){
 
                 /**
                 Call the onBefore event
@@ -923,7 +1040,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("companyInfoId", companyInfoId);
+                        hashMapObject.put("brandVerificationId", brandVerificationId);
                 
                         hashMapObject.putAll(data);
                 
@@ -947,27 +1064,27 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CompanyInfoRepository companyInfoRepo = getRestAdapter().createRepository(CompanyInfoRepository.class);
+                                    BrandVerificationRepository brandVerificationRepo = getRestAdapter().createRepository(BrandVerificationRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = companyInfoRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(companyInfoRepo, context);
+                                            Method method = brandVerificationRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandVerificationRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //companyInfoRepo.addStorage(context);
+                                        //brandVerificationRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    CompanyInfo companyInfo = companyInfoRepo.createObject(result);
+                                    BrandVerification brandVerification = brandVerificationRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = companyInfo.getClass().getMethod("save__db");
-                                                    method.invoke(companyInfo);
+                                                    Method method = brandVerification.getClass().getMethod("save__db");
+                                                    method.invoke(brandVerification);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -975,7 +1092,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
                                       }
 
-                                    callback.onSuccess(companyInfo);
+                                    callback.onSuccess(brandVerification);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1192,6 +1309,16 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
             
 
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
 

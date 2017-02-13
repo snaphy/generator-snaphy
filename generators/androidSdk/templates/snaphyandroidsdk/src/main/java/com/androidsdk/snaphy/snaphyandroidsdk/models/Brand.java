@@ -981,6 +981,7 @@ public class Brand extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -1561,6 +1562,7 @@ public class Brand extends Model {
                             
                          
                             
+                        
                         
                         
                         
@@ -2219,6 +2221,7 @@ public class Brand extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -2799,6 +2802,7 @@ public class Brand extends Model {
                                     } //method def ends here.
                                  
                             
+                        
                         
                         
                         
@@ -3569,6 +3573,7 @@ public class Brand extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -3581,7 +3586,425 @@ public class Brand extends Model {
              
           
     
-         
+        
+        
+                
+                    //Define belongsTo relation method here..
+                    private transient BrandVerification  brandVerifications ;
+                    private String brandVerificationId;
+
+                    public String getBrandVerificationId(){
+                         return brandVerificationId;
+                    }
+
+                    public void setBrandVerificationId(Object brandVerificationId){
+                        if(brandVerificationId != null){
+                          this.brandVerificationId = brandVerificationId.toString();
+                        }
+                    }
+
+                    public BrandVerification getBrandVerifications() {
+                        //Adding database method for fetching from relation if not present..
+                        if(brandVerifications == null){
+                          BrandRepository brandRepository = (BrandRepository) getRepository();
+                          RestAdapter restAdapter = brandRepository.getRestAdapter();
+                          if(restAdapter != null){
+                            //Fetch locally from db
+                            brandVerifications = getBrandVerifications__db(restAdapter);
+                          }
+                        }
+                        return brandVerifications;
+                    }
+
+                    public void setBrandVerifications(BrandVerification brandVerifications) {
+                        this.brandVerifications = brandVerifications;
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setBrandVerifications(Map<String, Object> brandVerifications) {
+                        //First create a dummy Repo class object for customer.
+                        BrandVerificationRepository brandVerificationsRepository = new BrandVerificationRepository();
+                        BrandVerification brandVerifications1 = brandVerificationsRepository.createObject(brandVerifications);
+                        setBrandVerifications(brandVerifications1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setBrandVerifications(HashMap<String, Object> brandVerifications) {
+                        //First create a dummy Repo class object for customer.
+                        BrandVerificationRepository brandVerificationsRepository = new BrandVerificationRepository();
+                        BrandVerification brandVerifications1 = brandVerificationsRepository.createObject(brandVerifications);
+                        setBrandVerifications(brandVerifications1);
+                    }
+
+                    //Adding relation method..
+                    public void addRelation(BrandVerification brandVerifications) {
+                        that.setBrandVerifications(brandVerifications);
+                    }
+
+
+                    //Fetch related data from local database if present a brandVerificationId identifier as property for belongsTo
+                    public BrandVerification getBrandVerifications__db(RestAdapter restAdapter){
+                      if(brandVerificationId != null){
+                        BrandVerificationRepository brandVerificationsRepository = restAdapter.createRepository(BrandVerificationRepository.class);
+                        BrandVerification brandVerifications = (BrandVerification) brandVerificationsRepository.getBrandVerificationDb().get__db(brandVerificationId);
+                        if(brandVerifications != null){
+                          return brandVerifications;
+                        }else{
+                          return null;
+                        }
+                        }else{
+                          return null;
+                      }
+                    }
+                
+
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__brandVerifications( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<BrandVerification> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final BrandRepository  brandRepo = restAdapter.createRepository(BrandRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        brandRepo.get__brandVerifications( (String)that.getId(), refresh,  new ObjectCallback<BrandVerification> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(BrandVerification object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void create__brandVerifications( BrandVerification data,  RestAdapter restAdapter, final ObjectCallback<BrandVerification> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final BrandRepository  brandRepo = restAdapter.createRepository(BrandRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        brandRepo.create__brandVerifications( (String)that.getId(), data.convertMap(),  new ObjectCallback<BrandVerification> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(BrandVerification object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void update__brandVerifications( BrandVerification data,  RestAdapter restAdapter, final ObjectCallback<BrandVerification> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final BrandRepository  brandRepo = restAdapter.createRepository(BrandRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        brandRepo.update__brandVerifications( (String)that.getId(), data.convertMap(),  new ObjectCallback<BrandVerification> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(BrandVerification object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void destroy__brandVerifications( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final BrandRepository  brandRepo = restAdapter.createRepository(BrandRepository.class);
+                                        
+                                        
+
+
+
+                                        brandRepo.destroy__brandVerifications( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                 
+                 
+             
           
       
 

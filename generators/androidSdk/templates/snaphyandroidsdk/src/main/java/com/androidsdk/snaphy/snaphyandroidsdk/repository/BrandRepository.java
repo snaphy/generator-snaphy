@@ -83,6 +83,10 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.BrandDb;
     
 
     
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.BrandVerification;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandVerificationRepository;
+            
+        
     
 
 
@@ -98,13 +102,7 @@ public class BrandRepository extends ModelRepository<Brand> {
 
     public BrandRepository(){
         super("Brand", null, Brand.class);
-        try{
-            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
-        }
-        catch (Exception e){
-            Log.e("Snaphy", e.toString());
-        }
+
     }
 
 
@@ -151,10 +149,17 @@ public class BrandRepository extends ModelRepository<Brand> {
 
 
     public void addStorage(Context context){
-          setBrandDb(new BrandDb(context, DATABASE_NAME, getRestAdapter()));
-          //allow data storage locally..
-          persistData(true);
-          this.context = context;
+         try{
+            ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            DATABASE_NAME = (String) ai.metaData.get(METADATA_DATABASE_NAME_KEY);
+         }
+         catch (Exception e){
+            Log.e("Snaphy", e.toString());
+         }
+         setBrandDb(new BrandDb(context, DATABASE_NAME, getRestAdapter()));
+         //allow data storage locally..
+         persistData(true);
+         this.context = context;
     }
 
 
@@ -721,6 +726,9 @@ public class BrandRepository extends ModelRepository<Brand> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "Brand.getModelRelationSchema");
+    
+
+    
     
 
     
@@ -4924,6 +4932,8 @@ public class BrandRepository extends ModelRepository<Brand> {
 
             
 
+        
+    
         
     
         
