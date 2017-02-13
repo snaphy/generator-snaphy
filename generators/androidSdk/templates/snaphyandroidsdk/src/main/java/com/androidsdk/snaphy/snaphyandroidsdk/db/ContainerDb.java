@@ -32,8 +32,9 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                   
-    String CREATE_Container_TABLE = "CREATE TABLE IF NOT EXISTS Container (  id TEXT PRIMARY KEY)";
+                               
+    
+    String CREATE_Container_TABLE = "CREATE TABLE IF NOT EXISTS Container (  id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_Container_TABLE);
   }
 
@@ -74,6 +75,9 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
 
                                                 values.put("id", idData);
                   
+
+        //Add the updated data property value to be 1
+        value.put(_DATA_UPDATED, 1);
         return values;
     }
 
@@ -229,6 +233,24 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
         // updating row
         return db.update("Container", values, "id = ?",
                 new String[] { id });
+    }
+
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        return db.update("Container", values, "_DATA_UPDATED = 1", null);
+    }
+
+
+    // Delete Old data
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete("Container", "_DATA_UPDATED = 0", null);
+      db.close();
     }
 
 }

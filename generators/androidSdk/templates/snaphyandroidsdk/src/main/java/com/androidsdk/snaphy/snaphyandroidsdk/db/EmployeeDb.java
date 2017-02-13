@@ -32,8 +32,9 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-    String CREATE_Employee_TABLE = "CREATE TABLE IF NOT EXISTS Employee (  username TEXT, firstName TEXT, lastName TEXT, added TEXT, updated TEXT, email TEXT, password TEXT, realm TEXT, credentials TEXT, challenges TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY)";
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+    
+    String CREATE_Employee_TABLE = "CREATE TABLE IF NOT EXISTS Employee (  username TEXT, firstName TEXT, lastName TEXT, added TEXT, updated TEXT, email TEXT, password TEXT, realm TEXT, credentials TEXT, challenges TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_Employee_TABLE);
   }
 
@@ -228,6 +229,9 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
 
                                                 values.put("id", idData);
                   
+
+        //Add the updated data property value to be 1
+        value.put(_DATA_UPDATED, 1);
         return values;
     }
 
@@ -533,6 +537,24 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
         // updating row
         return db.update("Employee", values, "id = ?",
                 new String[] { id });
+    }
+
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        return db.update("Employee", values, "_DATA_UPDATED = 1", null);
+    }
+
+
+    // Delete Old data
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete("Employee", "_DATA_UPDATED = 0", null);
+      db.close();
     }
 
 }

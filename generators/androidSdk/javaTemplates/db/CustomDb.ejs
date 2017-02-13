@@ -141,7 +141,7 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
         <%}%>
 
         //Add the updated data property value to be 1
-        value.put(<%- model.methods.updateDataProperty %>, 1);
+        value.put("<%- model.methods.updateDataProperty %>", 1);
         return values;
     }
 
@@ -355,19 +355,21 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
                 new String[] { id });
     }
 
+
     // Updating updated data property to new contact
     public int checkOldData__db() {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(<%- model.methods.updateDataProperty %>, 0);
+        values.put("<%- model.methods.updateDataProperty %>", 0);
         // updating row
         return db.update("<%- modelName %>", values, "<%- model.methods.updateDataProperty %> = 1", null);
     }
 
-    // Deleting by id
+
+    // Delete Old data
     public void deleteOldData__db() {
       SQLiteDatabase db = this.getWritableDatabase();
-      db.delete(TABLE, "<%- model.methods.updateDataProperty %> = 0", null);
+      db.delete("<%- modelName %>", "<%- model.methods.updateDataProperty %> = 0", null);
       db.close();
     }
 

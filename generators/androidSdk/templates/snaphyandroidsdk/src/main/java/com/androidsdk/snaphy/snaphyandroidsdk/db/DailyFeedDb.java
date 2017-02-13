@@ -32,8 +32,9 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                                                     
-    String CREATE_DailyFeed_TABLE = "CREATE TABLE IF NOT EXISTS DailyFeed (  added TEXT, updated TEXT, title TEXT, description TEXT, image TEXT, id TEXT PRIMARY KEY, brandId TEXT)";
+                                                                                                                                                                                                 
+    
+    String CREATE_DailyFeed_TABLE = "CREATE TABLE IF NOT EXISTS DailyFeed (  added TEXT, updated TEXT, title TEXT, description TEXT, image TEXT, id TEXT PRIMARY KEY, brandId TEXT, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_DailyFeed_TABLE);
   }
 
@@ -118,6 +119,9 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
 
                                                 values.put("brandId", brandIdData);
                   
+
+        //Add the updated data property value to be 1
+        value.put(_DATA_UPDATED, 1);
         return values;
     }
 
@@ -333,6 +337,24 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
         // updating row
         return db.update("DailyFeed", values, "id = ?",
                 new String[] { id });
+    }
+
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        return db.update("DailyFeed", values, "_DATA_UPDATED = 1", null);
+    }
+
+
+    // Delete Old data
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete("DailyFeed", "_DATA_UPDATED = 0", null);
+      db.close();
     }
 
 }

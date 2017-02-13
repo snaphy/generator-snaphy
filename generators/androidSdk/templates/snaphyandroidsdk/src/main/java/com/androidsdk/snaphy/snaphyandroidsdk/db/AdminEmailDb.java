@@ -32,8 +32,9 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                          
-    String CREATE_AdminEmail_TABLE = "CREATE TABLE IF NOT EXISTS AdminEmail (  to TEXT, from TEXT, subject TEXT, text TEXT, html TEXT, id TEXT PRIMARY KEY)";
+                                                                                                                                                                      
+    
+    String CREATE_AdminEmail_TABLE = "CREATE TABLE IF NOT EXISTS AdminEmail (  to TEXT, from TEXT, subject TEXT, text TEXT, html TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_AdminEmail_TABLE);
   }
 
@@ -144,6 +145,9 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
 
                                                 values.put("id", idData);
                   
+
+        //Add the updated data property value to be 1
+        value.put(_DATA_UPDATED, 1);
         return values;
     }
 
@@ -349,6 +353,24 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
         // updating row
         return db.update("AdminEmail", values, "id = ?",
                 new String[] { id });
+    }
+
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        return db.update("AdminEmail", values, "_DATA_UPDATED = 1", null);
+    }
+
+
+    // Delete Old data
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete("AdminEmail", "_DATA_UPDATED = 0", null);
+      db.close();
     }
 
 }

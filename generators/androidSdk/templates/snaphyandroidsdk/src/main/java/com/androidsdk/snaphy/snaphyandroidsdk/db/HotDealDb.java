@@ -32,8 +32,9 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                                                                                                                                                                                            
-    String CREATE_HotDeal_TABLE = "CREATE TABLE IF NOT EXISTS HotDeal (  title TEXT, description TEXT, image TEXT, url TEXT, price NUMBER, status TEXT, expiryDate TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, categoryId TEXT, brandId TEXT)";
+                                                                                                                                                                                                                                                                                                                                        
+    
+    String CREATE_HotDeal_TABLE = "CREATE TABLE IF NOT EXISTS HotDeal (  title TEXT, description TEXT, image TEXT, url TEXT, price NUMBER, status TEXT, expiryDate TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, categoryId TEXT, brandId TEXT, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_HotDeal_TABLE);
   }
 
@@ -154,6 +155,9 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
 
                                                 values.put("brandId", brandIdData);
                   
+
+        //Add the updated data property value to be 1
+        value.put(_DATA_UPDATED, 1);
         return values;
     }
 
@@ -417,6 +421,24 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
         // updating row
         return db.update("HotDeal", values, "id = ?",
                 new String[] { id });
+    }
+
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        return db.update("HotDeal", values, "_DATA_UPDATED = 1", null);
+    }
+
+
+    // Delete Old data
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete("HotDeal", "_DATA_UPDATED = 0", null);
+      db.close();
     }
 
 }

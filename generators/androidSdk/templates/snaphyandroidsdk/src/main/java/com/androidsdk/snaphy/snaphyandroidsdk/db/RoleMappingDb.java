@@ -32,8 +32,9 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                    
-    String CREATE_RoleMapping_TABLE = "CREATE TABLE IF NOT EXISTS RoleMapping (  id TEXT PRIMARY KEY, principalType TEXT, principalId TEXT, roleId TEXT)";
+                                                                                                                
+    
+    String CREATE_RoleMapping_TABLE = "CREATE TABLE IF NOT EXISTS RoleMapping (  id TEXT PRIMARY KEY, principalType TEXT, principalId TEXT, roleId TEXT, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_RoleMapping_TABLE);
   }
 
@@ -108,6 +109,9 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
 
                                                 values.put("roleId", roleIdData);
                   
+
+        //Add the updated data property value to be 1
+        value.put(_DATA_UPDATED, 1);
         return values;
     }
 
@@ -293,6 +297,24 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
         // updating row
         return db.update("RoleMapping", values, "id = ?",
                 new String[] { id });
+    }
+
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        return db.update("RoleMapping", values, "_DATA_UPDATED = 1", null);
+    }
+
+
+    // Delete Old data
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete("RoleMapping", "_DATA_UPDATED = 0", null);
+      db.close();
     }
 
 }

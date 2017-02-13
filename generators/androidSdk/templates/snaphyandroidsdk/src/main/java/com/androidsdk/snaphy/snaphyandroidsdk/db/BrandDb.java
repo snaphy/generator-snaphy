@@ -32,8 +32,9 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                                                                                                                                                                 
-    String CREATE_Brand_TABLE = "CREATE TABLE IF NOT EXISTS Brand (  added TEXT, updated TEXT, name TEXT, image TEXT, trending TEXT, facebookUrl TEXT, googleUrl TEXT, instagramUrl TEXT, status TEXT, associatedEmail TEXT, id TEXT PRIMARY KEY)";
+                                                                                                                                                                                                                                                                                                             
+    
+    String CREATE_Brand_TABLE = "CREATE TABLE IF NOT EXISTS Brand (  added TEXT, updated TEXT, name TEXT, image TEXT, trending TEXT, facebookUrl TEXT, googleUrl TEXT, instagramUrl TEXT, status TEXT, associatedEmail TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_Brand_TABLE);
   }
 
@@ -134,6 +135,9 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
 
                                                 values.put("id", idData);
                   
+
+        //Add the updated data property value to be 1
+        value.put(_DATA_UPDATED, 1);
         return values;
     }
 
@@ -389,6 +393,24 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
         // updating row
         return db.update("Brand", values, "id = ?",
                 new String[] { id });
+    }
+
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        return db.update("Brand", values, "_DATA_UPDATED = 1", null);
+    }
+
+
+    // Delete Old data
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete("Brand", "_DATA_UPDATED = 0", null);
+      db.close();
     }
 
 }

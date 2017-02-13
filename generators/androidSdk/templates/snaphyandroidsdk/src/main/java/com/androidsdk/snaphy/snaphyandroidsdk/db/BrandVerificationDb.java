@@ -32,8 +32,9 @@ public class BrandVerificationDb extends DbHandler<BrandVerification, BrandVerif
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                                               
-    String CREATE_BrandVerification_TABLE = "CREATE TABLE IF NOT EXISTS BrandVerification (  code TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, brandId TEXT)";
+                                                                                                                                           
+    
+    String CREATE_BrandVerification_TABLE = "CREATE TABLE IF NOT EXISTS BrandVerification (  code TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, brandId TEXT, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_BrandVerification_TABLE);
   }
 
@@ -106,6 +107,9 @@ public class BrandVerificationDb extends DbHandler<BrandVerification, BrandVerif
 
                                                 values.put("brandId", brandIdData);
                   
+
+        //Add the updated data property value to be 1
+        value.put(_DATA_UPDATED, 1);
         return values;
     }
 
@@ -301,6 +305,24 @@ public class BrandVerificationDb extends DbHandler<BrandVerification, BrandVerif
         // updating row
         return db.update("BrandVerification", values, "id = ?",
                 new String[] { id });
+    }
+
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        return db.update("BrandVerification", values, "_DATA_UPDATED = 1", null);
+    }
+
+
+    // Delete Old data
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete("BrandVerification", "_DATA_UPDATED = 0", null);
+      db.close();
     }
 
 }

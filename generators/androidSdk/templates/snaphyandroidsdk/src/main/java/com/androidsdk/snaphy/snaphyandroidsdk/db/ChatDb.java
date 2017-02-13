@@ -32,8 +32,9 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                                                                                                                                                                 
-    String CREATE_Chat_TABLE = "CREATE TABLE IF NOT EXISTS Chat (  added TEXT, updated TEXT, message TEXT, type TEXT, image TEXT, from TEXT, guid TEXT, status TEXT, id TEXT PRIMARY KEY, appUserId TEXT, brandId TEXT)";
+                                                                                                                                                                                                                                                                                                             
+    
+    String CREATE_Chat_TABLE = "CREATE TABLE IF NOT EXISTS Chat (  added TEXT, updated TEXT, message TEXT, type TEXT, image TEXT, from TEXT, guid TEXT, status TEXT, id TEXT PRIMARY KEY, appUserId TEXT, brandId TEXT, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_Chat_TABLE);
   }
 
@@ -150,6 +151,9 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
 
                                                 values.put("brandId", brandIdData);
                   
+
+        //Add the updated data property value to be 1
+        value.put(_DATA_UPDATED, 1);
         return values;
     }
 
@@ -405,6 +409,24 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
         // updating row
         return db.update("Chat", values, "id = ?",
                 new String[] { id });
+    }
+
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        return db.update("Chat", values, "_DATA_UPDATED = 1", null);
+    }
+
+
+    // Delete Old data
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete("Chat", "_DATA_UPDATED = 0", null);
+      db.close();
     }
 
 }

@@ -32,8 +32,9 @@ public class StudentDb extends DbHandler<Student, StudentRepository> {
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                                                                                                                                                                                                                                                                             
-    String CREATE_Student_TABLE = "CREATE TABLE IF NOT EXISTS Student (  firstName TEXT, lastName TEXT, realm TEXT, username TEXT, password TEXT, credentials TEXT, challenges TEXT, email TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, brandId TEXT)";
+                                                                                                                                                                                                                                                                                                                                                                                                                         
+    
+    String CREATE_Student_TABLE = "CREATE TABLE IF NOT EXISTS Student (  firstName TEXT, lastName TEXT, realm TEXT, username TEXT, password TEXT, credentials TEXT, challenges TEXT, email TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, brandId TEXT, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_Student_TABLE);
   }
 
@@ -254,6 +255,9 @@ public class StudentDb extends DbHandler<Student, StudentRepository> {
 
                                                 values.put("brandId", brandIdData);
                   
+
+        //Add the updated data property value to be 1
+        value.put(_DATA_UPDATED, 1);
         return values;
     }
 
@@ -549,6 +553,24 @@ public class StudentDb extends DbHandler<Student, StudentRepository> {
         // updating row
         return db.update("Student", values, "id = ?",
                 new String[] { id });
+    }
+
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        return db.update("Student", values, "_DATA_UPDATED = 1", null);
+    }
+
+
+    // Delete Old data
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete("Student", "_DATA_UPDATED = 0", null);
+      db.close();
     }
 
 }

@@ -32,8 +32,9 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
   // Creating Tables
   @Override
   public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-    String CREATE_AppUser_TABLE = "CREATE TABLE IF NOT EXISTS AppUser (  firstName TEXT, lastName TEXT, email TEXT, added TEXT, updated TEXT, registrationId TEXT, profilePic TEXT, realm TEXT, username TEXT, password TEXT, credentials TEXT, challenges TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY)";
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+    
+    String CREATE_AppUser_TABLE = "CREATE TABLE IF NOT EXISTS AppUser (  firstName TEXT, lastName TEXT, email TEXT, added TEXT, updated TEXT, registrationId TEXT, profilePic TEXT, realm TEXT, username TEXT, password TEXT, credentials TEXT, challenges TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_AppUser_TABLE);
   }
 
@@ -256,6 +257,9 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
 
                                                 values.put("id", idData);
                   
+
+        //Add the updated data property value to be 1
+        value.put(_DATA_UPDATED, 1);
         return values;
     }
 
@@ -581,6 +585,24 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
         // updating row
         return db.update("AppUser", values, "id = ?",
                 new String[] { id });
+    }
+
+
+    // Updating updated data property to new contact
+    public int checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        return db.update("AppUser", values, "_DATA_UPDATED = 1", null);
+    }
+
+
+    // Delete Old data
+    public void deleteOldData__db() {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete("AppUser", "_DATA_UPDATED = 0", null);
+      db.close();
     }
 
 }
