@@ -21,6 +21,7 @@ var startServer = function(){
 };
 
 
+
 //Generate Repository Class file in java..
 var generateRepository = function(app, modelsRestDefinition){
     //Now compile the ejs template..
@@ -209,6 +210,26 @@ var generatePresenter = function(app, modelsRestDefinition){
 
 
 
+/*Generate the preenter file.*/
+var generateSocket = function(app, modelsRestDefinition){
+    //Compile the EJS template..
+    var OnDataTemplatePath = path.join(__dirname, constants.javaTemplates, "socket", "OnData.ejs");
+    //Compile the EJS template..
+    var SnaphySocketTemplatePath = path.join(__dirname, constants.javaTemplates, "socket", "SnaphySocket.ejs");
+    //Compile the EJS template..
+    var SubscribeTemplatePath = path.join(__dirname, constants.javaTemplates, "socket", "Subscribe.ejs");
+    //List path for adding list and subscribers..
+    var AndroidBaseModelPath       = path.join(__dirname, constants.androidMainPath, "socket");
+    //Create folder if not present..
+    mkdirp.sync(AndroidBaseModelPath);
+    //Now write Model.java to the file....
+    compileAndWrite({}, OnDataTemplatePath, AndroidBaseModelPath, helper.capitalizeFirstLetter("OnData") +".java");
+    compileAndWrite({}, SnaphySocketTemplatePath, AndroidBaseModelPath, helper.capitalizeFirstLetter("SnaphySocket") +".java");
+    compileAndWrite({}, SubscribeTemplatePath, AndroidBaseModelPath, helper.capitalizeFirstLetter("Subscribe") +".java");
+};
+
+
+
 /**
  * Add the database file for adding sqlite local storage of android device..
  * @param app
@@ -370,6 +391,7 @@ var init  = function(){
     generateCustomCallbacks(app, modelsRestDefinition);
     //Generate Presenter..
     generatePresenter(app, modelsRestDefinition);
+    generateSocket(app, modelsRestDefinition);
     //Generate database..Db Handler always call this method after  generateDbModel
     generateDatabase(app, modelsRestDefinition);
     //Generate Image model and Repository..
