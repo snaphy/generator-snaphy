@@ -95,7 +95,7 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
                   
 
         //Add the updated data property value to be 1
-        value.put(_DATA_UPDATED, 1);
+        values.put("_DATA_UPDATED", 1);
         return values;
     }
 

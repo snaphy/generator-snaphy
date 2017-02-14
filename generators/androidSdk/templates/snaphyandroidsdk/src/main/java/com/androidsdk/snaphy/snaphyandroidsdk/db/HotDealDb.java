@@ -157,7 +157,7 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
                   
 
         //Add the updated data property value to be 1
-        value.put(_DATA_UPDATED, 1);
+        values.put("_DATA_UPDATED", 1);
         return values;
     }
 

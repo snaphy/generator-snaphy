@@ -141,7 +141,7 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
         <%}%>
 
         //Add the updated data property value to be 1
-        value.put("<%- model.methods.updateDataProperty %>", 1);
+        values.put("<%- model.methods.updateDataProperty %>", 1);
         return values;
     }
 

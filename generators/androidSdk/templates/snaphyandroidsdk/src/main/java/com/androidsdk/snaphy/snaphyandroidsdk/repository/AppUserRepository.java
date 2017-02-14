@@ -63,15 +63,15 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.AppUserDb;
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Brand;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRepository;
             
         
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Chat;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.FollowBrand;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.FollowBrandRepository;
             
         
     
@@ -334,7 +334,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/:fk", "GET"), "AppUser.prototype.__findById__brands");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/followBrands/:fk", "GET"), "AppUser.prototype.__findById__followBrands");
     
 
     
@@ -343,7 +343,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/:fk", "DELETE"), "AppUser.prototype.__destroyById__brands");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/followBrands/:fk", "DELETE"), "AppUser.prototype.__destroyById__followBrands");
     
 
     
@@ -352,34 +352,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/:fk", "PUT"), "AppUser.prototype.__updateById__brands");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/rel/:fk", "PUT"), "AppUser.prototype.__link__brands");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/rel/:fk", "DELETE"), "AppUser.prototype.__unlink__brands");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/rel/:fk", "HEAD"), "AppUser.prototype.__exists__brands");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/followBrands/:fk", "PUT"), "AppUser.prototype.__updateById__followBrands");
     
 
     
@@ -496,7 +469,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands", "GET"), "AppUser.prototype.__get__brands");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/followBrands", "GET"), "AppUser.prototype.__get__followBrands");
     
 
     
@@ -505,7 +478,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands", "POST"), "AppUser.prototype.__create__brands");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/followBrands", "POST"), "AppUser.prototype.__create__followBrands");
     
 
     
@@ -514,7 +487,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands", "DELETE"), "AppUser.prototype.__delete__brands");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/followBrands", "DELETE"), "AppUser.prototype.__delete__followBrands");
     
 
     
@@ -523,7 +496,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/count", "GET"), "AppUser.prototype.__count__brands");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/followBrands/count", "GET"), "AppUser.prototype.__count__followBrands");
     
 
     
@@ -679,24 +652,6 @@ public class AppUserRepository extends UserRepository<AppUser> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/__connect__brands", "POST"), "AppUser.__connect__brands");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/__disconnect__brands", "POST"), "AppUser.__disconnect__brands");
-    
-
-    
-    
-
-    
-
-    
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchRecentAppUser", "POST"), "AppUser.fetchRecentAppUser");
     
 
@@ -752,36 +707,6 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/subscribe", "POST"), "AppUser.subscribe");
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
     
 
     
@@ -1477,8 +1402,8 @@ public class AppUserRepository extends UserRepository<AppUser> {
         
     
         
-            //Method findById__brands definition
-            public void findById__brands(  String appUserId,  String fk, final ObjectCallback<Brand> callback){
+            //Method findById__followBrands definition
+            public void findById__followBrands(  String appUserId,  String fk, final ObjectCallback<FollowBrand> callback){
 
                 /**
                 Call the onBefore event
@@ -1501,7 +1426,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__brands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__followBrands", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1514,27 +1439,27 @@ public class AppUserRepository extends UserRepository<AppUser> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    FollowBrandRepository followBrandRepo = getRestAdapter().createRepository(FollowBrandRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = brandRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(brandRepo, context);
+                                            Method method = followBrandRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(followBrandRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //brandRepo.addStorage(context);
+                                        //followBrandRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Brand brand = brandRepo.createObject(result);
+                                    FollowBrand followBrand = followBrandRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = brand.getClass().getMethod("save__db");
-                                                    method.invoke(brand);
+                                                    Method method = followBrand.getClass().getMethod("save__db");
+                                                    method.invoke(followBrand);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1542,7 +1467,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
                                       }
 
-                                    callback.onSuccess(brand);
+                                    callback.onSuccess(followBrand);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1555,15 +1480,15 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
                 
 
-            }//Method findById__brands definition ends here..
+            }//Method findById__followBrands definition ends here..
 
             
 
         
     
         
-            //Method destroyById__brands definition
-            public void destroyById__brands(  String appUserId,  String fk, final VoidCallback callback){
+            //Method destroyById__followBrands definition
+            public void destroyById__followBrands(  String appUserId,  String fk, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -1581,7 +1506,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
                 
 
                 
-                    invokeStaticMethod("prototype.__destroyById__brands", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroyById__followBrands", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -1603,15 +1528,15 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
                 
 
-            }//Method destroyById__brands definition ends here..
+            }//Method destroyById__followBrands definition ends here..
 
             
 
         
     
         
-            //Method updateById__brands definition
-            public void updateById__brands(  String appUserId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Brand> callback){
+            //Method updateById__followBrands definition
+            public void updateById__followBrands(  String appUserId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<FollowBrand> callback){
 
                 /**
                 Call the onBefore event
@@ -1636,7 +1561,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__brands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__followBrands", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1649,27 +1574,27 @@ public class AppUserRepository extends UserRepository<AppUser> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    FollowBrandRepository followBrandRepo = getRestAdapter().createRepository(FollowBrandRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = brandRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(brandRepo, context);
+                                            Method method = followBrandRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(followBrandRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //brandRepo.addStorage(context);
+                                        //followBrandRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Brand brand = brandRepo.createObject(result);
+                                    FollowBrand followBrand = followBrandRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = brand.getClass().getMethod("save__db");
-                                                    method.invoke(brand);
+                                                    Method method = followBrand.getClass().getMethod("save__db");
+                                                    method.invoke(followBrand);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1677,7 +1602,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
                                       }
 
-                                    callback.onSuccess(brand);
+                                    callback.onSuccess(followBrand);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1690,193 +1615,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
                 
 
-            }//Method updateById__brands definition ends here..
-
-            
-
-        
-    
-        
-            //Method link__brands definition
-            public void link__brands(  String appUserId,  String fk, final ObjectCallback<Brand> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("appUserId", appUserId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__link__brands", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = brandRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(brandRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //brandRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    Brand brand = brandRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = brand.getClass().getMethod("save__db");
-                                                    method.invoke(brand);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(brand);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method link__brands definition ends here..
-
-            
-
-        
-    
-        
-            //Method unlink__brands definition
-            public void unlink__brands(  String appUserId,  String fk, final VoidCallback callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("appUserId", appUserId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-                    invokeStaticMethod("prototype.__unlink__brands", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                                callback.onError(t);
-                                //Call the finally method..
-                                callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method unlink__brands definition ends here..
-
-            
-
-        
-    
-        
-            //Method exists__brands definition
-            public void exists__brands(  String appUserId,  String fk, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("appUserId", appUserId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("prototype.__exists__brands", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method exists__brands definition ends here..
+            }//Method updateById__followBrands definition ends here..
 
             
 
@@ -2690,8 +2429,8 @@ public class AppUserRepository extends UserRepository<AppUser> {
         
     
         
-            //Method get__brands definition
-            public void get__brands(  String appUserId,  Map<String,  ? extends Object> filter, final DataListCallback<Brand> callback){
+            //Method get__followBrands definition
+            public void get__followBrands(  String appUserId,  Map<String,  ? extends Object> filter, final DataListCallback<FollowBrand> callback){
 
                 /**
                 Call the onBefore event
@@ -2714,7 +2453,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
                 
 
                 
-                    invokeStaticMethod("prototype.__get__brands", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__followBrands", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -2728,12 +2467,12 @@ public class AppUserRepository extends UserRepository<AppUser> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<Brand> brandList = new DataList<Brand>();
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    DataList<FollowBrand> followBrandList = new DataList<FollowBrand>();
+                                    FollowBrandRepository followBrandRepo = getRestAdapter().createRepository(FollowBrandRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = brandRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(brandRepo, context);
+                                            Method method = followBrandRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(followBrandRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -2741,23 +2480,23 @@ public class AppUserRepository extends UserRepository<AppUser> {
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        Brand brand = brandRepo.createObject(obj);
+                                        FollowBrand followBrand = followBrandRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = brand.getClass().getMethod("save__db");
-                                                      method.invoke(brand);
+                                                      Method method = followBrand.getClass().getMethod("save__db");
+                                                      method.invoke(followBrand);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        brandList.add(brand);
+                                        followBrandList.add(followBrand);
                                     }
-                                    callback.onSuccess(brandList);
+                                    callback.onSuccess(followBrandList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -2768,15 +2507,15 @@ public class AppUserRepository extends UserRepository<AppUser> {
                     });
                 
 
-            }//Method get__brands definition ends here..
+            }//Method get__followBrands definition ends here..
 
             
 
         
     
         
-            //Method create__brands definition
-            public void create__brands(  String appUserId,  Map<String,  ? extends Object> data, final ObjectCallback<Brand> callback){
+            //Method create__followBrands definition
+            public void create__followBrands(  String appUserId,  Map<String,  ? extends Object> data, final ObjectCallback<FollowBrand> callback){
 
                 /**
                 Call the onBefore event
@@ -2799,7 +2538,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__brands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__followBrands", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -2812,27 +2551,27 @@ public class AppUserRepository extends UserRepository<AppUser> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    FollowBrandRepository followBrandRepo = getRestAdapter().createRepository(FollowBrandRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = brandRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(brandRepo, context);
+                                            Method method = followBrandRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(followBrandRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //brandRepo.addStorage(context);
+                                        //followBrandRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Brand brand = brandRepo.createObject(result);
+                                    FollowBrand followBrand = followBrandRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = brand.getClass().getMethod("save__db");
-                                                    method.invoke(brand);
+                                                    Method method = followBrand.getClass().getMethod("save__db");
+                                                    method.invoke(followBrand);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -2840,7 +2579,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
                                       }
 
-                                    callback.onSuccess(brand);
+                                    callback.onSuccess(followBrand);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -2853,15 +2592,15 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
                 
 
-            }//Method create__brands definition ends here..
+            }//Method create__followBrands definition ends here..
 
             
 
         
     
         
-            //Method delete__brands definition
-            public void delete__brands(  String appUserId, final VoidCallback callback){
+            //Method delete__followBrands definition
+            public void delete__followBrands(  String appUserId, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -2877,7 +2616,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
                 
 
                 
-                    invokeStaticMethod("prototype.__delete__brands", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__delete__followBrands", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -2899,15 +2638,15 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
                 
 
-            }//Method delete__brands definition ends here..
+            }//Method delete__followBrands definition ends here..
 
             
 
         
     
         
-            //Method count__brands definition
-            public void count__brands(  String appUserId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+            //Method count__followBrands definition
+            public void count__followBrands(  String appUserId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -2929,7 +2668,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
                 
                     
-                    invokeStaticMethod("prototype.__count__brands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__followBrands", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2952,7 +2691,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
                 
 
-            }//Method count__brands definition ends here..
+            }//Method count__followBrands definition ends here..
 
             
 
@@ -3870,112 +3609,6 @@ public class AppUserRepository extends UserRepository<AppUser> {
         
     
         
-            //Method __connect__brands definition
-            public void __connect__brands(  String id,  DataList<String> fk, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("id", id);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("__connect__brands", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method __connect__brands definition ends here..
-
-            
-
-        
-    
-        
-            //Method __disconnect__brands definition
-            public void __disconnect__brands(  String id,  DataList<String> fk, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("id", id);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("__disconnect__brands", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method __disconnect__brands definition ends here..
-
-            
-
-        
-    
-        
             //Method fetchRecentAppUser definition
             public void fetchRecentAppUser(  String brandId,  double limit,  String query, final DataListCallback<AppUser> callback){
 
@@ -4362,26 +3995,6 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
             
 
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
         
     
         

@@ -77,7 +77,7 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
                   
 
         //Add the updated data property value to be 1
-        value.put(_DATA_UPDATED, 1);
+        values.put("_DATA_UPDATED", 1);
         return values;
     }
 

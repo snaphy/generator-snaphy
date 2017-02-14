@@ -72,7 +72,7 @@ module.exports = yeoman.generators.Base.extend({
         var validationRule = /^[a-zA-Z_0-9]{3,}$/;
         var response = validationRule.test(input);
         if (response) {
-          done(true);
+          done(null, true);
         } else {
           done(chalk.red('Error:') + ' Spaces and special characters are not allowed!');
         }
@@ -91,7 +91,7 @@ module.exports = yeoman.generators.Base.extend({
         var patt = /^\/[A-Z_0-9a-z]{0}/;
         var response = patt.test(input);
         if (response) {
-          done(true);
+          done(null, true);
         } else {
           done(chalk.red('Error:') + ' please provide a correct route path!');
         }
@@ -121,7 +121,7 @@ module.exports = yeoman.generators.Base.extend({
         input = input.trim();
         var response = validateEmail(input);
         if (response) {
-          done(true);
+          done(null, true);
         } else {
           done(chalk.red('Error:') + ' please provide a correct email!');
         }
@@ -147,7 +147,7 @@ module.exports = yeoman.generators.Base.extend({
         if (err) throw err;
         process.chdir(rootPath + '/' + that.props.pluginName);
         console.info('\nDone! \nUse ' + chalk.red('' + that.props.pluginName + '/client') + ' folder to design the User Interface.\nUse ' + chalk.red('' + that.props.pluginName + '/backend') + ' folder to write the backend logic!.\n\n' );
-        done();
+        done(null, true);
       });
 
       var serverFile = "server/server.js";
