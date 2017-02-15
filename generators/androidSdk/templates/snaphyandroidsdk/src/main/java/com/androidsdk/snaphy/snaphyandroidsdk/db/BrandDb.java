@@ -48,6 +48,8 @@ public class BrandDb extends SQLiteOpenHelper {
     this.restAdapter = restAdapter;
     TABLE = "Brand";
     this.DATABASE_NAME = DATABASE_NAME;
+    SQLiteDatabase db = this.getWritableDatabase();
+    onCreate(db);
   }
 
   // Creating Tables
@@ -55,7 +57,7 @@ public class BrandDb extends SQLiteOpenHelper {
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                                                                                                                                                              
     
-    String CREATE_Brand_TABLE = "CREATE TABLE IF NOT EXISTS Brand (  added TEXT, updated TEXT, name TEXT, image TEXT, trending TEXT, facebookUrl TEXT, googleUrl TEXT, instagramUrl TEXT, status TEXT, associatedEmail TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+    String CREATE_Brand_TABLE = "CREATE TABLE IF NOT EXISTS Brand(  added TEXT, updated TEXT, name TEXT, image TEXT, trending TEXT, facebookUrl TEXT, googleUrl TEXT, instagramUrl TEXT, status TEXT, associatedEmail TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_Brand_TABLE);
   }
 
@@ -63,7 +65,7 @@ public class BrandDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS Brand");
+            //db.execSQL("DROP TABLE IF EXISTS Brand");
             // Create tables again
             onCreate(db);
     }

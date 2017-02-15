@@ -48,6 +48,8 @@ public class AdminEmailDb extends SQLiteOpenHelper {
     this.restAdapter = restAdapter;
     TABLE = "AdminEmail";
     this.DATABASE_NAME = DATABASE_NAME;
+    SQLiteDatabase db = this.getWritableDatabase();
+    onCreate(db);
   }
 
   // Creating Tables
@@ -55,7 +57,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                       
     
-    String CREATE_AdminEmail_TABLE = "CREATE TABLE IF NOT EXISTS AdminEmail (  to TEXT, from TEXT, subject TEXT, text TEXT, html TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+    String CREATE_AdminEmail_TABLE = "CREATE TABLE IF NOT EXISTS AdminEmail(  to TEXT, from TEXT, subject TEXT, text TEXT, html TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_AdminEmail_TABLE);
   }
 
@@ -63,7 +65,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS AdminEmail");
+            //db.execSQL("DROP TABLE IF EXISTS AdminEmail");
             // Create tables again
             onCreate(db);
     }

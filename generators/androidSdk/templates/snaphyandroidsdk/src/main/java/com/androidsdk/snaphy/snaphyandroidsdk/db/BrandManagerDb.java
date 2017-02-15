@@ -48,6 +48,8 @@ public class BrandManagerDb extends SQLiteOpenHelper {
     this.restAdapter = restAdapter;
     TABLE = "BrandManager";
     this.DATABASE_NAME = DATABASE_NAME;
+    SQLiteDatabase db = this.getWritableDatabase();
+    onCreate(db);
   }
 
   // Creating Tables
@@ -55,7 +57,7 @@ public class BrandManagerDb extends SQLiteOpenHelper {
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
     
-    String CREATE_BrandManager_TABLE = "CREATE TABLE IF NOT EXISTS BrandManager (  firstName TEXT, lastName TEXT, email TEXT, password TEXT, restrictHotDeal TEXT, status TEXT, added TEXT, updated TEXT, realm TEXT, username TEXT, credentials TEXT, challenges TEXT, emailVerified TEXT, verificationToken TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, brandId TEXT, _DATA_UPDATED NUMBER )";
+    String CREATE_BrandManager_TABLE = "CREATE TABLE IF NOT EXISTS BrandManager(  firstName TEXT, lastName TEXT, email TEXT, password TEXT, restrictHotDeal TEXT, status TEXT, added TEXT, updated TEXT, realm TEXT, username TEXT, credentials TEXT, challenges TEXT, emailVerified TEXT, verificationToken TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, brandId TEXT, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_BrandManager_TABLE);
   }
 
@@ -63,7 +65,7 @@ public class BrandManagerDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS BrandManager");
+            //db.execSQL("DROP TABLE IF EXISTS BrandManager");
             // Create tables again
             onCreate(db);
     }

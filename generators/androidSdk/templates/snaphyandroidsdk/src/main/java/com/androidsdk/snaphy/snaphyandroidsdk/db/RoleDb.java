@@ -48,6 +48,8 @@ public class RoleDb extends SQLiteOpenHelper {
     this.restAdapter = restAdapter;
     TABLE = "Role";
     this.DATABASE_NAME = DATABASE_NAME;
+    SQLiteDatabase db = this.getWritableDatabase();
+    onCreate(db);
   }
 
   // Creating Tables
@@ -55,7 +57,7 @@ public class RoleDb extends SQLiteOpenHelper {
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                            
     
-    String CREATE_Role_TABLE = "CREATE TABLE IF NOT EXISTS Role (  id TEXT PRIMARY KEY, name TEXT, description TEXT, created TEXT, modified TEXT, _DATA_UPDATED NUMBER )";
+    String CREATE_Role_TABLE = "CREATE TABLE IF NOT EXISTS Role(  id TEXT PRIMARY KEY, name TEXT, description TEXT, created TEXT, modified TEXT, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_Role_TABLE);
   }
 
@@ -63,7 +65,7 @@ public class RoleDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS Role");
+            //db.execSQL("DROP TABLE IF EXISTS Role");
             // Create tables again
             onCreate(db);
     }

@@ -48,6 +48,8 @@ public class FacebookAccessTokenDb extends SQLiteOpenHelper {
     this.restAdapter = restAdapter;
     TABLE = "FacebookAccessToken";
     this.DATABASE_NAME = DATABASE_NAME;
+    SQLiteDatabase db = this.getWritableDatabase();
+    onCreate(db);
   }
 
   // Creating Tables
@@ -55,7 +57,7 @@ public class FacebookAccessTokenDb extends SQLiteOpenHelper {
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                       
     
-    String CREATE_FacebookAccessToken_TABLE = "CREATE TABLE IF NOT EXISTS FacebookAccessToken (  FbUserId TEXT, token TEXT, expires TEXT, userId TEXT, type TEXT, appUserId TEXT, _DATA_UPDATED NUMBER )";
+    String CREATE_FacebookAccessToken_TABLE = "CREATE TABLE IF NOT EXISTS FacebookAccessToken(  FbUserId TEXT, token TEXT, expires TEXT, userId TEXT, type TEXT, appUserId TEXT, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_FacebookAccessToken_TABLE);
   }
 
@@ -63,7 +65,7 @@ public class FacebookAccessTokenDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS FacebookAccessToken");
+            //db.execSQL("DROP TABLE IF EXISTS FacebookAccessToken");
             // Create tables again
             onCreate(db);
     }

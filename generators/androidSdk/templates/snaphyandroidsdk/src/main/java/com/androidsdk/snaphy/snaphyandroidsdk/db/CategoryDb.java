@@ -48,6 +48,8 @@ public class CategoryDb extends SQLiteOpenHelper {
     this.restAdapter = restAdapter;
     TABLE = "Category";
     this.DATABASE_NAME = DATABASE_NAME;
+    SQLiteDatabase db = this.getWritableDatabase();
+    onCreate(db);
   }
 
   // Creating Tables
@@ -55,7 +57,7 @@ public class CategoryDb extends SQLiteOpenHelper {
   public void onCreate(SQLiteDatabase db) {
                                                                                                                 
     
-    String CREATE_Category_TABLE = "CREATE TABLE IF NOT EXISTS Category (  name TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+    String CREATE_Category_TABLE = "CREATE TABLE IF NOT EXISTS Category(  name TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_Category_TABLE);
   }
 
@@ -63,7 +65,7 @@ public class CategoryDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS Category");
+            //db.execSQL("DROP TABLE IF EXISTS Category");
             // Create tables again
             onCreate(db);
     }

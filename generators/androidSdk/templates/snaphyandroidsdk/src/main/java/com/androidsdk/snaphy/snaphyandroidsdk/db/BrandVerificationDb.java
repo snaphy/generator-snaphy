@@ -48,6 +48,8 @@ public class BrandVerificationDb extends SQLiteOpenHelper {
     this.restAdapter = restAdapter;
     TABLE = "BrandVerification";
     this.DATABASE_NAME = DATABASE_NAME;
+    SQLiteDatabase db = this.getWritableDatabase();
+    onCreate(db);
   }
 
   // Creating Tables
@@ -55,7 +57,7 @@ public class BrandVerificationDb extends SQLiteOpenHelper {
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                            
     
-    String CREATE_BrandVerification_TABLE = "CREATE TABLE IF NOT EXISTS BrandVerification (  code TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, brandId TEXT, _DATA_UPDATED NUMBER )";
+    String CREATE_BrandVerification_TABLE = "CREATE TABLE IF NOT EXISTS BrandVerification(  code TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, brandId TEXT, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_BrandVerification_TABLE);
   }
 
@@ -63,7 +65,7 @@ public class BrandVerificationDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS BrandVerification");
+            //db.execSQL("DROP TABLE IF EXISTS BrandVerification");
             // Create tables again
             onCreate(db);
     }

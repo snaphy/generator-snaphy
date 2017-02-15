@@ -48,6 +48,8 @@ public class HotDealDb extends SQLiteOpenHelper {
     this.restAdapter = restAdapter;
     TABLE = "HotDeal";
     this.DATABASE_NAME = DATABASE_NAME;
+    SQLiteDatabase db = this.getWritableDatabase();
+    onCreate(db);
   }
 
   // Creating Tables
@@ -55,7 +57,7 @@ public class HotDealDb extends SQLiteOpenHelper {
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                                                                                                                                                                                         
     
-    String CREATE_HotDeal_TABLE = "CREATE TABLE IF NOT EXISTS HotDeal (  title TEXT, description TEXT, image TEXT, url TEXT, price NUMBER, status TEXT, expiryDate TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, categoryId TEXT, brandId TEXT, _DATA_UPDATED NUMBER )";
+    String CREATE_HotDeal_TABLE = "CREATE TABLE IF NOT EXISTS HotDeal(  title TEXT, description TEXT, image TEXT, url TEXT, price NUMBER, status TEXT, expiryDate TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, categoryId TEXT, brandId TEXT, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_HotDeal_TABLE);
   }
 
@@ -63,7 +65,7 @@ public class HotDealDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS HotDeal");
+            //db.execSQL("DROP TABLE IF EXISTS HotDeal");
             // Create tables again
             onCreate(db);
     }

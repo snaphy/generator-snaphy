@@ -48,6 +48,8 @@ public class FollowBrandDb extends SQLiteOpenHelper {
     this.restAdapter = restAdapter;
     TABLE = "FollowBrand";
     this.DATABASE_NAME = DATABASE_NAME;
+    SQLiteDatabase db = this.getWritableDatabase();
+    onCreate(db);
   }
 
   // Creating Tables
@@ -55,7 +57,7 @@ public class FollowBrandDb extends SQLiteOpenHelper {
   public void onCreate(SQLiteDatabase db) {
                                                                                                                 
     
-    String CREATE_FollowBrand_TABLE = "CREATE TABLE IF NOT EXISTS FollowBrand (  added TEXT, id TEXT PRIMARY KEY, appUserId TEXT, brandId TEXT, _DATA_UPDATED NUMBER )";
+    String CREATE_FollowBrand_TABLE = "CREATE TABLE IF NOT EXISTS FollowBrand(  added TEXT, id TEXT PRIMARY KEY, appUserId TEXT, brandId TEXT, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_FollowBrand_TABLE);
   }
 
@@ -63,7 +65,7 @@ public class FollowBrandDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS FollowBrand");
+            //db.execSQL("DROP TABLE IF EXISTS FollowBrand");
             // Create tables again
             onCreate(db);
     }

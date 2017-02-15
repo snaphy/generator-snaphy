@@ -48,6 +48,8 @@ public class StudentDb extends SQLiteOpenHelper {
     this.restAdapter = restAdapter;
     TABLE = "Student";
     this.DATABASE_NAME = DATABASE_NAME;
+    SQLiteDatabase db = this.getWritableDatabase();
+    onCreate(db);
   }
 
   // Creating Tables
@@ -55,7 +57,7 @@ public class StudentDb extends SQLiteOpenHelper {
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                                                                                                                                                                                                                                                                          
     
-    String CREATE_Student_TABLE = "CREATE TABLE IF NOT EXISTS Student (  firstName TEXT, lastName TEXT, realm TEXT, username TEXT, password TEXT, credentials TEXT, challenges TEXT, email TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, brandId TEXT, _DATA_UPDATED NUMBER )";
+    String CREATE_Student_TABLE = "CREATE TABLE IF NOT EXISTS Student(  firstName TEXT, lastName TEXT, realm TEXT, username TEXT, password TEXT, credentials TEXT, challenges TEXT, email TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, brandId TEXT, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_Student_TABLE);
   }
 
@@ -63,7 +65,7 @@ public class StudentDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS Student");
+            //db.execSQL("DROP TABLE IF EXISTS Student");
             // Create tables again
             onCreate(db);
     }

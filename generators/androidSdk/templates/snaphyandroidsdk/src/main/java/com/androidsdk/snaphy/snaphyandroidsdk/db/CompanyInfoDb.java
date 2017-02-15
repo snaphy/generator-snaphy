@@ -48,6 +48,8 @@ public class CompanyInfoDb extends SQLiteOpenHelper {
     this.restAdapter = restAdapter;
     TABLE = "CompanyInfo";
     this.DATABASE_NAME = DATABASE_NAME;
+    SQLiteDatabase db = this.getWritableDatabase();
+    onCreate(db);
   }
 
   // Creating Tables
@@ -55,7 +57,7 @@ public class CompanyInfoDb extends SQLiteOpenHelper {
   public void onCreate(SQLiteDatabase db) {
                                                                                                                 
     
-    String CREATE_CompanyInfo_TABLE = "CREATE TABLE IF NOT EXISTS CompanyInfo (  type TEXT, html TEXT, edited TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+    String CREATE_CompanyInfo_TABLE = "CREATE TABLE IF NOT EXISTS CompanyInfo(  type TEXT, html TEXT, edited TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_CompanyInfo_TABLE);
   }
 
@@ -63,7 +65,7 @@ public class CompanyInfoDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS CompanyInfo");
+            //db.execSQL("DROP TABLE IF EXISTS CompanyInfo");
             // Create tables again
             onCreate(db);
     }

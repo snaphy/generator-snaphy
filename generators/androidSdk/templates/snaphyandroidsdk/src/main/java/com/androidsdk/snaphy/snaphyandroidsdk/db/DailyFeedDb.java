@@ -48,6 +48,8 @@ public class DailyFeedDb extends SQLiteOpenHelper {
     this.restAdapter = restAdapter;
     TABLE = "DailyFeed";
     this.DATABASE_NAME = DATABASE_NAME;
+    SQLiteDatabase db = this.getWritableDatabase();
+    onCreate(db);
   }
 
   // Creating Tables
@@ -55,7 +57,7 @@ public class DailyFeedDb extends SQLiteOpenHelper {
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                                                  
     
-    String CREATE_DailyFeed_TABLE = "CREATE TABLE IF NOT EXISTS DailyFeed (  added TEXT, updated TEXT, title TEXT, description TEXT, image TEXT, id TEXT PRIMARY KEY, brandId TEXT, _DATA_UPDATED NUMBER )";
+    String CREATE_DailyFeed_TABLE = "CREATE TABLE IF NOT EXISTS DailyFeed(  added TEXT, updated TEXT, title TEXT, description TEXT, image TEXT, id TEXT PRIMARY KEY, brandId TEXT, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_DailyFeed_TABLE);
   }
 
@@ -63,7 +65,7 @@ public class DailyFeedDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS DailyFeed");
+            //db.execSQL("DROP TABLE IF EXISTS DailyFeed");
             // Create tables again
             onCreate(db);
     }

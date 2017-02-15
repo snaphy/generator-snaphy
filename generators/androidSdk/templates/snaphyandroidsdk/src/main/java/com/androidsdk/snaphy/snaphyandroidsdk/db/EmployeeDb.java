@@ -48,6 +48,8 @@ public class EmployeeDb extends SQLiteOpenHelper {
     this.restAdapter = restAdapter;
     TABLE = "Employee";
     this.DATABASE_NAME = DATABASE_NAME;
+    SQLiteDatabase db = this.getWritableDatabase();
+    onCreate(db);
   }
 
   // Creating Tables
@@ -55,7 +57,7 @@ public class EmployeeDb extends SQLiteOpenHelper {
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                                                                                                                                                                                                                                                                                                     
     
-    String CREATE_Employee_TABLE = "CREATE TABLE IF NOT EXISTS Employee (  username TEXT, firstName TEXT, lastName TEXT, added TEXT, updated TEXT, email TEXT, password TEXT, realm TEXT, credentials TEXT, challenges TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+    String CREATE_Employee_TABLE = "CREATE TABLE IF NOT EXISTS Employee(  username TEXT, firstName TEXT, lastName TEXT, added TEXT, updated TEXT, email TEXT, password TEXT, realm TEXT, credentials TEXT, challenges TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_Employee_TABLE);
   }
 
@@ -63,7 +65,7 @@ public class EmployeeDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS Employee");
+            //db.execSQL("DROP TABLE IF EXISTS Employee");
             // Create tables again
             onCreate(db);
     }

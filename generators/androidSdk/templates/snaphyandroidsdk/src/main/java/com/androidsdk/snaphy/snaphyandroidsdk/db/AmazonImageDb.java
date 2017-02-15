@@ -48,6 +48,8 @@ public class AmazonImageDb extends SQLiteOpenHelper {
     this.restAdapter = restAdapter;
     TABLE = "AmazonImage";
     this.DATABASE_NAME = DATABASE_NAME;
+    SQLiteDatabase db = this.getWritableDatabase();
+    onCreate(db);
   }
 
   // Creating Tables
@@ -55,7 +57,7 @@ public class AmazonImageDb extends SQLiteOpenHelper {
   public void onCreate(SQLiteDatabase db) {
                                                                                                                                            
     
-    String CREATE_AmazonImage_TABLE = "CREATE TABLE IF NOT EXISTS AmazonImage (  name TEXT, container TEXT, type TEXT, url TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+    String CREATE_AmazonImage_TABLE = "CREATE TABLE IF NOT EXISTS AmazonImage(  name TEXT, container TEXT, type TEXT, url TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
     db.execSQL(CREATE_AmazonImage_TABLE);
   }
 
@@ -63,7 +65,7 @@ public class AmazonImageDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS AmazonImage");
+            //db.execSQL("DROP TABLE IF EXISTS AmazonImage");
             // Create tables again
             onCreate(db);
     }
