@@ -114,7 +114,7 @@ public class HotDealRepository extends ModelRepository<HotDeal> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-          getHotDealDb().reset__db();
+          getDb().reset__db();
       }
     }
 

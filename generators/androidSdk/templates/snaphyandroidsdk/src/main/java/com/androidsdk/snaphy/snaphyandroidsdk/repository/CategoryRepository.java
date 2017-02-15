@@ -107,7 +107,7 @@ public class CategoryRepository extends ModelRepository<Category> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-          getCategoryDb().reset__db();
+          getDb().reset__db();
       }
     }
 

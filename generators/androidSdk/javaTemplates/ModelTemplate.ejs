@@ -412,7 +412,7 @@ public class <%- modelName %> extends Model {
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             lowercaseFirstLetterRepository.get<%- modelName %>Db().delete__db(id);
+             lowercaseFirstLetterRepository.getDb().delete__db(id);
           }
       }
       //Also save to database..
@@ -425,7 +425,7 @@ public class <%- modelName %> extends Model {
       <%- modelName %>Repository lowercaseFirstLetterRepository = (<%- modelName %>Repository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          lowercaseFirstLetterRepository.get<%- modelName %>Db().upsert__db(id, this);
+          lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
         }
       }
     }
@@ -551,7 +551,7 @@ public class <%- modelName %> extends Model {
                     public <%- capitalcaseRelatedModelName %> get<%- capitalcaseRelationName %>__db(RestAdapter restAdapter){
                       if(<%- getForeignKeyName() %> != null){
                         <%- capitalcaseRelatedModelName %>Repository <%- relation %>Repository = restAdapter.createRepository(<%- capitalcaseRelatedModelName %>Repository.class);
-                        <%- capitalcaseRelatedModelName %> <%- relation %> = (<%- capitalcaseRelatedModelName %>) <%- relation %>Repository.get<%- capitalcaseRelatedModelName %>Db().get__db(<%- getForeignKeyName() %>);
+                        <%- capitalcaseRelatedModelName %> <%- relation %> = (<%- capitalcaseRelatedModelName %>) <%- relation %>Repository.getDb().get__db(<%- getForeignKeyName() %>);
                         if(<%- relation %> != null){
                           return <%- relation %>;
                         }else{
@@ -578,7 +578,7 @@ public class <%- modelName %> extends Model {
                                  //Fetch locally from db
                                  //<%- relation %> = get<%- capitalcaseRelationName %>__db(restAdapter);
                                  // Getting single cont
-                                 <%- relation %> = <%- lowercaseFirstLetter(capitalcaseRelatedModelName) %>Repository.get<%- capitalcaseRelatedModelName %>Db().getAll__db("<%- lowercaseFirstLetter(modelName) %>Id", that.getId().toString());
+                                 <%- relation %> = <%- lowercaseFirstLetter(capitalcaseRelatedModelName) %>Repository.getDb().getAll__db("<%- lowercaseFirstLetter(modelName) %>Id", that.getId().toString());
 
                                    //lowercaseFirstLetter(modelName)
                             }

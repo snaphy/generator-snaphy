@@ -107,7 +107,7 @@ public class BrandVerificationRepository extends ModelRepository<BrandVerificati
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-          getBrandVerificationDb().reset__db();
+          getDb().reset__db();
       }
     }
 

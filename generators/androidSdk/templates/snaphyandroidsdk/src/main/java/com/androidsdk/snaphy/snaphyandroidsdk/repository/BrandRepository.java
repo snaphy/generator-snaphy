@@ -142,7 +142,7 @@ public class BrandRepository extends ModelRepository<Brand> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-          getBrandDb().reset__db();
+          getDb().reset__db();
       }
     }
 

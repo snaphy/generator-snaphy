@@ -100,7 +100,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-          getAmazonImageDb().reset__db();
+          getDb().reset__db();
       }
     }
 

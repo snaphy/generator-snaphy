@@ -107,7 +107,7 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-          getDailyFeedDb().reset__db();
+          getDb().reset__db();
       }
     }
 

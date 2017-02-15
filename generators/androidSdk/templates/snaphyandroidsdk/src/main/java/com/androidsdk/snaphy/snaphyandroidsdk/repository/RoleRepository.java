@@ -107,7 +107,7 @@ public class RoleRepository extends ModelRepository<Role> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-          getRoleDb().reset__db();
+          getDb().reset__db();
       }
     }
 

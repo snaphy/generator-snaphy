@@ -107,7 +107,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-          getFacebookAccessTokenDb().reset__db();
+          getDb().reset__db();
       }
     }
 

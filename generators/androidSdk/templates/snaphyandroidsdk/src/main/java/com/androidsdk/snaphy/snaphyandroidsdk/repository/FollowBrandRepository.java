@@ -114,7 +114,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-          getFollowBrandDb().reset__db();
+          getDb().reset__db();
       }
     }
 

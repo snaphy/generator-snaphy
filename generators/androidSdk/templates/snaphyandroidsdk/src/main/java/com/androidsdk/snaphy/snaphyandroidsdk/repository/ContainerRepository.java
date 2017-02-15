@@ -100,7 +100,7 @@ public class ContainerRepository extends ModelRepository<Container> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-          getContainerDb().reset__db();
+          getDb().reset__db();
       }
     }
 

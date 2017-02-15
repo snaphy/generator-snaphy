@@ -100,7 +100,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-          getCompanyInfoDb().reset__db();
+          getDb().reset__db();
       }
     }
 

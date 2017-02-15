@@ -204,7 +204,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-          getEmployeeDb().reset__db();
+          getDb().reset__db();
       }
     }
 

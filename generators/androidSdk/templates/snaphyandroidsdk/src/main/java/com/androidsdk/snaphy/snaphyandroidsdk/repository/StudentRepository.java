@@ -211,7 +211,7 @@ public class StudentRepository extends UserRepository<Student> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-          getStudentDb().reset__db();
+          getDb().reset__db();
       }
     }
 

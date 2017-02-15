@@ -100,7 +100,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-          getAdminEmailDb().reset__db();
+          getDb().reset__db();
       }
     }
 

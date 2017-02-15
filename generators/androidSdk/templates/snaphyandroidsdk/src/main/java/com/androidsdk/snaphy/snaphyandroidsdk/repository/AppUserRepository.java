@@ -225,7 +225,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-          getAppUserDb().reset__db();
+          getDb().reset__db();
       }
     }
 

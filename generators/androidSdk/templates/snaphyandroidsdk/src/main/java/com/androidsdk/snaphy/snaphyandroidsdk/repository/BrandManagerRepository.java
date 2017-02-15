@@ -211,7 +211,7 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-          getBrandManagerDb().reset__db();
+          getDb().reset__db();
       }
     }
 

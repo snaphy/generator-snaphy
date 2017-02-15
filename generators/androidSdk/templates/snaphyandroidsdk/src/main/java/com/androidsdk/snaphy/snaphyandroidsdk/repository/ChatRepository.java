@@ -114,7 +114,7 @@ public class ChatRepository extends ModelRepository<Chat> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-          getChatDb().reset__db();
+          getDb().reset__db();
       }
     }
 

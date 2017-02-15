@@ -107,7 +107,7 @@ public class RoleMappingRepository extends ModelRepository<RoleMapping> {
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-          getRoleMappingDb().reset__db();
+          getDb().reset__db();
       }
     }
 
