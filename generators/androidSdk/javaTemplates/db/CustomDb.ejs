@@ -30,6 +30,7 @@ import com.strongloop.android.loopback.RestAdapter;
 public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelName %>Repository> {
   public <%- modelName %>Db(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "<%- modelName %>", DATABASE_NAME, restAdapter);
+    this.create__db();
   }
 
   // Creating Tables
@@ -76,6 +77,45 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
     }
 
 
+
+    private void create__db () {
+        SQLiteDatabase db = this.getWritableDatabase();
+        <%
+        var tableQuery = `CREATE TABLE IF NOT EXISTS ${modelName} ( `;
+        var i=0;
+        for( let property in model.properties) {
+        -%>
+            <% if(model.properties.hasOwnProperty(property)){
+                let isArray = model.properties[property].type instanceof Array;
+                if(i==0){
+                    if(property === "id"){
+                      tableQuery = `${tableQuery} ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)} PRIMARY KEY`;
+                    }else{
+                      tableQuery = `${tableQuery} ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)}`;
+                    }
+                }else{
+                  if(property === "id"){
+                    tableQuery = `${tableQuery}, ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)} PRIMARY KEY`;
+                  }else{
+                    tableQuery = `${tableQuery}, ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)}`;
+                  }
+                }
+            -%>
+            <%} -%>
+           <% i++; -%>
+        <%} -%>
+
+        <%
+        //On insert always update the update data value to be 1 and on fetch change to 0
+        tableQuery = tableQuery + `, ${model.methods.updateDataProperty} NUMBER ` + ")";
+        %>
+        String CREATE_<%- modelName %>_TABLE = "<%- tableQuery %>";
+        db.execSQL(CREATE_<%- modelName %>_TABLE);
+        db.close(); // Closing database connection
+    }
+
+
+
     public void insert__db (String id, <%- modelName %> modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
@@ -83,6 +123,8 @@ public class <%- modelName %>Db extends DbHandler<<%- modelName %>, <%- modelNam
         db.insert("<%- modelName %>", null, values);
         db.close(); // Closing database connection
     }
+
+
 
 
 

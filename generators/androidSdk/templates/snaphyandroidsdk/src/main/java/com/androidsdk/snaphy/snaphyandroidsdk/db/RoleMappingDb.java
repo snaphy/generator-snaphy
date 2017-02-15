@@ -290,23 +290,61 @@ public class RoleMappingDb extends DbHandler<RoleMapping, RoleMappingRepository>
     }
 
 
-    // Updating single contact
-    public int update__db(String id,   RoleMapping modelData) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = getContentValues(modelData);
-        // updating row
-        return db.update("RoleMapping", values, "id = ?",
-                new String[] { id });
+
+    /**
+     * Check count of database.
+     * @param whereKey
+     * @param whereKeyValue
+     * @return
+     */
+    public int count__db(String whereKey, String whereKeyValue){
+        String countQuery = "SELECT  * FROM RoleMapping WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+        return count;
     }
 
 
-    // Updating updated data property to new contact
-    public int checkOldData__db() {
+    // Updating updated data property to new contact with where clause..
+    public void checkOldData__db(String whereKey, String whereKeyValue) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("_DATA_UPDATED", 0);
         // updating row
-        return db.update("RoleMapping", values, "_DATA_UPDATED = 1", null);
+        db.update("RoleMapping", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+        db.close();
+    }
+
+
+    // Delete Old data with where clause
+    public void deleteOldData__db(String whereKey, String whereKeyValue) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("RoleMapping", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+        db.close();
+    }
+
+
+    // Updating single contact
+    public void update__db(String id,   RoleMapping modelData) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = getContentValues(modelData);
+        // updating row
+        db.update("RoleMapping", values, "id = ?",
+                new String[] { id });
+        db.close();
+    }
+
+
+    // Updating updated data property to new contact
+    public void checkOldData__db() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("_DATA_UPDATED", 0);
+        // updating row
+        db.update("RoleMapping", values, "_DATA_UPDATED = 1", null);
+        db.close();
     }
 
 
