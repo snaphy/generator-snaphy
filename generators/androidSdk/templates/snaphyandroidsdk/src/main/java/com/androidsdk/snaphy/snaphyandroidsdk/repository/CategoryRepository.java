@@ -79,7 +79,7 @@ public class CategoryRepository extends ModelRepository<Category> {
 
 
 
-    public CategoryDb getCategoryDb() {
+    public CategoryDb getDb() {
       return categoryDb;
     }
 

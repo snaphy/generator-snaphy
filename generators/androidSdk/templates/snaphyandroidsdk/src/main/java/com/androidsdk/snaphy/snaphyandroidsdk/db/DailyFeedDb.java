@@ -27,6 +27,7 @@ import com.strongloop.android.loopback.RestAdapter;
 public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
   public DailyFeedDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "DailyFeed", DATABASE_NAME, restAdapter);
+    this.create__db();
   }
 
   // Creating Tables
@@ -48,6 +49,18 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
     }
 
 
+
+    private void create__db () {
+        SQLiteDatabase db = this.getWritableDatabase();
+                                                                                                                                                                                                                                                                                                                     
+        
+        String CREATE_DailyFeed_TABLE = "CREATE TABLE IF NOT EXISTS DailyFeed (  added TEXT, updated TEXT, title TEXT, description TEXT, image TEXT, id TEXT PRIMARY KEY, brandId TEXT, _DATA_UPDATED NUMBER )";
+        db.execSQL(CREATE_DailyFeed_TABLE);
+        db.close(); // Closing database connection
+    }
+
+
+
     public void insert__db (String id, DailyFeed modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
@@ -55,6 +68,8 @@ public class DailyFeedDb extends DbHandler<DailyFeed, DailyFeedRepository> {
         db.insert("DailyFeed", null, values);
         db.close(); // Closing database connection
     }
+
+
 
 
 

@@ -86,7 +86,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
 
 
 
-    public FollowBrandDb getFollowBrandDb() {
+    public FollowBrandDb getDb() {
       return followBrandDb;
     }
 

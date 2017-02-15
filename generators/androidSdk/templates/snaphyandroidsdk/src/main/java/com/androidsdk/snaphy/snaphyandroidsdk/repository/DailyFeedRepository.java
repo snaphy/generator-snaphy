@@ -79,7 +79,7 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
 
 
 
-    public DailyFeedDb getDailyFeedDb() {
+    public DailyFeedDb getDb() {
       return dailyFeedDb;
     }
 

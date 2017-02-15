@@ -27,6 +27,7 @@ import com.strongloop.android.loopback.RestAdapter;
 public class BrandDb extends DbHandler<Brand, BrandRepository> {
   public BrandDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "Brand", DATABASE_NAME, restAdapter);
+    this.create__db();
   }
 
   // Creating Tables
@@ -48,6 +49,18 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
     }
 
 
+
+    private void create__db () {
+        SQLiteDatabase db = this.getWritableDatabase();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+        
+        String CREATE_Brand_TABLE = "CREATE TABLE IF NOT EXISTS Brand (  added TEXT, updated TEXT, name TEXT, image TEXT, trending TEXT, facebookUrl TEXT, googleUrl TEXT, instagramUrl TEXT, status TEXT, associatedEmail TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+        db.execSQL(CREATE_Brand_TABLE);
+        db.close(); // Closing database connection
+    }
+
+
+
     public void insert__db (String id, Brand modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
@@ -55,6 +68,8 @@ public class BrandDb extends DbHandler<Brand, BrandRepository> {
         db.insert("Brand", null, values);
         db.close(); // Closing database connection
     }
+
+
 
 
 

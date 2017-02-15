@@ -72,7 +72,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
 
 
-    public AdminEmailDb getAdminEmailDb() {
+    public AdminEmailDb getDb() {
       return adminEmailDb;
     }
 

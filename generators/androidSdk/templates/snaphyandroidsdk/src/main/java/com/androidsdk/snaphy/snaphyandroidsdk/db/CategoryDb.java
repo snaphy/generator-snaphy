@@ -27,6 +27,7 @@ import com.strongloop.android.loopback.RestAdapter;
 public class CategoryDb extends DbHandler<Category, CategoryRepository> {
   public CategoryDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "Category", DATABASE_NAME, restAdapter);
+    this.create__db();
   }
 
   // Creating Tables
@@ -48,6 +49,18 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
     }
 
 
+
+    private void create__db () {
+        SQLiteDatabase db = this.getWritableDatabase();
+                                                                                                                                                                                    
+        
+        String CREATE_Category_TABLE = "CREATE TABLE IF NOT EXISTS Category (  name TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+        db.execSQL(CREATE_Category_TABLE);
+        db.close(); // Closing database connection
+    }
+
+
+
     public void insert__db (String id, Category modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
@@ -55,6 +68,8 @@ public class CategoryDb extends DbHandler<Category, CategoryRepository> {
         db.insert("Category", null, values);
         db.close(); // Closing database connection
     }
+
+
 
 
 

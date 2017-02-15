@@ -72,7 +72,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
 
 
 
-    public CompanyInfoDb getCompanyInfoDb() {
+    public CompanyInfoDb getDb() {
       return companyInfoDb;
     }
 

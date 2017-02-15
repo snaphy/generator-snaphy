@@ -27,6 +27,7 @@ import com.strongloop.android.loopback.RestAdapter;
 public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerRepository> {
   public BrandManagerDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "BrandManager", DATABASE_NAME, restAdapter);
+    this.create__db();
   }
 
   // Creating Tables
@@ -48,6 +49,18 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
     }
 
 
+
+    private void create__db () {
+        SQLiteDatabase db = this.getWritableDatabase();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+        
+        String CREATE_BrandManager_TABLE = "CREATE TABLE IF NOT EXISTS BrandManager (  firstName TEXT, lastName TEXT, email TEXT, password TEXT, restrictHotDeal TEXT, status TEXT, added TEXT, updated TEXT, realm TEXT, username TEXT, credentials TEXT, challenges TEXT, emailVerified TEXT, verificationToken TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, brandId TEXT, _DATA_UPDATED NUMBER )";
+        db.execSQL(CREATE_BrandManager_TABLE);
+        db.close(); // Closing database connection
+    }
+
+
+
     public void insert__db (String id, BrandManager modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
@@ -55,6 +68,8 @@ public class BrandManagerDb extends DbHandler<BrandManager, BrandManagerReposito
         db.insert("BrandManager", null, values);
         db.close(); // Closing database connection
     }
+
+
 
 
 

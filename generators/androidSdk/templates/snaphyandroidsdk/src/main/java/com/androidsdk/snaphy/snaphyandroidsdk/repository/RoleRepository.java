@@ -79,7 +79,7 @@ public class RoleRepository extends ModelRepository<Role> {
 
 
 
-    public RoleDb getRoleDb() {
+    public RoleDb getDb() {
       return roleDb;
     }
 

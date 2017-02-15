@@ -27,6 +27,7 @@ import com.strongloop.android.loopback.RestAdapter;
 public class ContainerDb extends DbHandler<Container, ContainerRepository> {
   public ContainerDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "Container", DATABASE_NAME, restAdapter);
+    this.create__db();
   }
 
   // Creating Tables
@@ -48,6 +49,18 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
     }
 
 
+
+    private void create__db () {
+        SQLiteDatabase db = this.getWritableDatabase();
+                                                   
+        
+        String CREATE_Container_TABLE = "CREATE TABLE IF NOT EXISTS Container (  id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+        db.execSQL(CREATE_Container_TABLE);
+        db.close(); // Closing database connection
+    }
+
+
+
     public void insert__db (String id, Container modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
@@ -55,6 +68,8 @@ public class ContainerDb extends DbHandler<Container, ContainerRepository> {
         db.insert("Container", null, values);
         db.close(); // Closing database connection
     }
+
+
 
 
 

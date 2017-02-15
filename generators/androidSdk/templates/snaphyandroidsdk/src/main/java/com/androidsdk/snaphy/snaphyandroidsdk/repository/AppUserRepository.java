@@ -197,7 +197,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
 
 
-    public AppUserDb getAppUserDb() {
+    public AppUserDb getDb() {
       return appUserDb;
     }
 

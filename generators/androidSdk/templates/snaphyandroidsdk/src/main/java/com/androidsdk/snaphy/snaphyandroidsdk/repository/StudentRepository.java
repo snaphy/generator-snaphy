@@ -183,7 +183,7 @@ public class StudentRepository extends UserRepository<Student> {
 
 
 
-    public StudentDb getStudentDb() {
+    public StudentDb getDb() {
       return studentDb;
     }
 

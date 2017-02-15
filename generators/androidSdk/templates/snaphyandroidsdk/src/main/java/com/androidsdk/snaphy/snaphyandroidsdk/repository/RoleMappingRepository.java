@@ -79,7 +79,7 @@ public class RoleMappingRepository extends ModelRepository<RoleMapping> {
 
 
 
-    public RoleMappingDb getRoleMappingDb() {
+    public RoleMappingDb getDb() {
       return roleMappingDb;
     }
 

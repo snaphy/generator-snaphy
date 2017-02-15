@@ -79,7 +79,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
 
 
-    public FacebookAccessTokenDb getFacebookAccessTokenDb() {
+    public FacebookAccessTokenDb getDb() {
       return facebookAccessTokenDb;
     }
 

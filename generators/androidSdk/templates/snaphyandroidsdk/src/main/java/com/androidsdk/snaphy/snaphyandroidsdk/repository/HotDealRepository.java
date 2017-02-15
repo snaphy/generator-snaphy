@@ -86,7 +86,7 @@ public class HotDealRepository extends ModelRepository<HotDeal> {
 
 
 
-    public HotDealDb getHotDealDb() {
+    public HotDealDb getDb() {
       return hotDealDb;
     }
 

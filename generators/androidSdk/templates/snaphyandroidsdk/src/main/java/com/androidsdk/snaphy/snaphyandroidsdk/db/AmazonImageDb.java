@@ -27,6 +27,7 @@ import com.strongloop.android.loopback.RestAdapter;
 public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository> {
   public AmazonImageDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "AmazonImage", DATABASE_NAME, restAdapter);
+    this.create__db();
   }
 
   // Creating Tables
@@ -48,6 +49,18 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
     }
 
 
+
+    private void create__db () {
+        SQLiteDatabase db = this.getWritableDatabase();
+                                                                                                                                                                                                                               
+        
+        String CREATE_AmazonImage_TABLE = "CREATE TABLE IF NOT EXISTS AmazonImage (  name TEXT, container TEXT, type TEXT, url TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+        db.execSQL(CREATE_AmazonImage_TABLE);
+        db.close(); // Closing database connection
+    }
+
+
+
     public void insert__db (String id, AmazonImage modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
@@ -55,6 +68,8 @@ public class AmazonImageDb extends DbHandler<AmazonImage, AmazonImageRepository>
         db.insert("AmazonImage", null, values);
         db.close(); // Closing database connection
     }
+
+
 
 
 

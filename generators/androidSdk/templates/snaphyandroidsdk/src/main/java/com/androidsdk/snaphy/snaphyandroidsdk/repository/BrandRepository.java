@@ -114,7 +114,7 @@ public class BrandRepository extends ModelRepository<Brand> {
 
 
 
-    public BrandDb getBrandDb() {
+    public BrandDb getDb() {
       return brandDb;
     }
 

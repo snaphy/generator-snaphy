@@ -27,6 +27,7 @@ import com.strongloop.android.loopback.RestAdapter;
 public class FollowBrandDb extends DbHandler<FollowBrand, FollowBrandRepository> {
   public FollowBrandDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "FollowBrand", DATABASE_NAME, restAdapter);
+    this.create__db();
   }
 
   // Creating Tables
@@ -48,6 +49,18 @@ public class FollowBrandDb extends DbHandler<FollowBrand, FollowBrandRepository>
     }
 
 
+
+    private void create__db () {
+        SQLiteDatabase db = this.getWritableDatabase();
+                                                                                                                                                                                    
+        
+        String CREATE_FollowBrand_TABLE = "CREATE TABLE IF NOT EXISTS FollowBrand (  added TEXT, id TEXT PRIMARY KEY, appUserId TEXT, brandId TEXT, _DATA_UPDATED NUMBER )";
+        db.execSQL(CREATE_FollowBrand_TABLE);
+        db.close(); // Closing database connection
+    }
+
+
+
     public void insert__db (String id, FollowBrand modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
@@ -55,6 +68,8 @@ public class FollowBrandDb extends DbHandler<FollowBrand, FollowBrandRepository>
         db.insert("FollowBrand", null, values);
         db.close(); // Closing database connection
     }
+
+
 
 
 

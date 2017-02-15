@@ -79,7 +79,7 @@ public class BrandVerificationRepository extends ModelRepository<BrandVerificati
 
 
 
-    public BrandVerificationDb getBrandVerificationDb() {
+    public BrandVerificationDb getDb() {
       return brandVerificationDb;
     }
 

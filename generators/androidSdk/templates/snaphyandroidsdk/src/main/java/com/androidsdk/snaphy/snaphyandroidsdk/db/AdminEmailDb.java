@@ -27,6 +27,7 @@ import com.strongloop.android.loopback.RestAdapter;
 public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
   public AdminEmailDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "AdminEmail", DATABASE_NAME, restAdapter);
+    this.create__db();
   }
 
   // Creating Tables
@@ -48,6 +49,18 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
     }
 
 
+
+    private void create__db () {
+        SQLiteDatabase db = this.getWritableDatabase();
+                                                                                                                                                                                                                                                                          
+        
+        String CREATE_AdminEmail_TABLE = "CREATE TABLE IF NOT EXISTS AdminEmail (  to TEXT, from TEXT, subject TEXT, text TEXT, html TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+        db.execSQL(CREATE_AdminEmail_TABLE);
+        db.close(); // Closing database connection
+    }
+
+
+
     public void insert__db (String id, AdminEmail modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
@@ -55,6 +68,8 @@ public class AdminEmailDb extends DbHandler<AdminEmail, AdminEmailRepository> {
         db.insert("AdminEmail", null, values);
         db.close(); // Closing database connection
     }
+
+
 
 
 

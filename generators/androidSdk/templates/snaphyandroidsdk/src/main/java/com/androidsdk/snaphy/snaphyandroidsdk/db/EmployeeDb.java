@@ -27,6 +27,7 @@ import com.strongloop.android.loopback.RestAdapter;
 public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
   public EmployeeDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "Employee", DATABASE_NAME, restAdapter);
+    this.create__db();
   }
 
   // Creating Tables
@@ -48,6 +49,18 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
     }
 
 
+
+    private void create__db () {
+        SQLiteDatabase db = this.getWritableDatabase();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+        
+        String CREATE_Employee_TABLE = "CREATE TABLE IF NOT EXISTS Employee (  username TEXT, firstName TEXT, lastName TEXT, added TEXT, updated TEXT, email TEXT, password TEXT, realm TEXT, credentials TEXT, challenges TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+        db.execSQL(CREATE_Employee_TABLE);
+        db.close(); // Closing database connection
+    }
+
+
+
     public void insert__db (String id, Employee modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
@@ -55,6 +68,8 @@ public class EmployeeDb extends DbHandler<Employee, EmployeeRepository> {
         db.insert("Employee", null, values);
         db.close(); // Closing database connection
     }
+
+
 
 
 

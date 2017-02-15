@@ -27,6 +27,7 @@ import com.strongloop.android.loopback.RestAdapter;
 public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository> {
   public CompanyInfoDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "CompanyInfo", DATABASE_NAME, restAdapter);
+    this.create__db();
   }
 
   // Creating Tables
@@ -48,6 +49,18 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
     }
 
 
+
+    private void create__db () {
+        SQLiteDatabase db = this.getWritableDatabase();
+                                                                                                                                                                                    
+        
+        String CREATE_CompanyInfo_TABLE = "CREATE TABLE IF NOT EXISTS CompanyInfo (  type TEXT, html TEXT, edited TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+        db.execSQL(CREATE_CompanyInfo_TABLE);
+        db.close(); // Closing database connection
+    }
+
+
+
     public void insert__db (String id, CompanyInfo modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
@@ -55,6 +68,8 @@ public class CompanyInfoDb extends DbHandler<CompanyInfo, CompanyInfoRepository>
         db.insert("CompanyInfo", null, values);
         db.close(); // Closing database connection
     }
+
+
 
 
 

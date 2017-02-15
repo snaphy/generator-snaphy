@@ -86,7 +86,7 @@ public class ChatRepository extends ModelRepository<Chat> {
 
 
 
-    public ChatDb getChatDb() {
+    public ChatDb getDb() {
       return chatDb;
     }
 

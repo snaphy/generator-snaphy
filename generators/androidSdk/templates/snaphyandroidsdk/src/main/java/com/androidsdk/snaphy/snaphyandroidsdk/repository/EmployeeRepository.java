@@ -176,7 +176,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
 
 
-    public EmployeeDb getEmployeeDb() {
+    public EmployeeDb getDb() {
       return employeeDb;
     }
 

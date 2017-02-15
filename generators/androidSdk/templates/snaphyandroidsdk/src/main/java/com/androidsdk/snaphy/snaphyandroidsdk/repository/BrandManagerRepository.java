@@ -183,7 +183,7 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
 
 
 
-    public BrandManagerDb getBrandManagerDb() {
+    public BrandManagerDb getDb() {
       return brandManagerDb;
     }
 

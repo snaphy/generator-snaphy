@@ -27,6 +27,7 @@ import com.strongloop.android.loopback.RestAdapter;
 public class RoleDb extends DbHandler<Role, RoleRepository> {
   public RoleDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "Role", DATABASE_NAME, restAdapter);
+    this.create__db();
   }
 
   // Creating Tables
@@ -48,6 +49,18 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
     }
 
 
+
+    private void create__db () {
+        SQLiteDatabase db = this.getWritableDatabase();
+                                                                                                                                                                                                                               
+        
+        String CREATE_Role_TABLE = "CREATE TABLE IF NOT EXISTS Role (  id TEXT PRIMARY KEY, name TEXT, description TEXT, created TEXT, modified TEXT, _DATA_UPDATED NUMBER )";
+        db.execSQL(CREATE_Role_TABLE);
+        db.close(); // Closing database connection
+    }
+
+
+
     public void insert__db (String id, Role modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
@@ -55,6 +68,8 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
         db.insert("Role", null, values);
         db.close(); // Closing database connection
     }
+
+
 
 
 

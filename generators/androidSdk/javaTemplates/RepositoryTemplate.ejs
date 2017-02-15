@@ -366,7 +366,7 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
 
     public void reset__db(){
       if(isSTORE_LOCALLY()){
-          get<%- modelName %>Db().reset__db();
+          getDb().reset__db();
       }
     }
 

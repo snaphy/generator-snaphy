@@ -72,7 +72,7 @@ public class ContainerRepository extends ModelRepository<Container> {
 
 
 
-    public ContainerDb getContainerDb() {
+    public ContainerDb getDb() {
       return containerDb;
     }
 

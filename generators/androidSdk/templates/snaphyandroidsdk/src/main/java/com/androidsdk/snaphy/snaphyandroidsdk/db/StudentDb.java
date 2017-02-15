@@ -27,6 +27,7 @@ import com.strongloop.android.loopback.RestAdapter;
 public class StudentDb extends DbHandler<Student, StudentRepository> {
   public StudentDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "Student", DATABASE_NAME, restAdapter);
+    this.create__db();
   }
 
   // Creating Tables
@@ -48,6 +49,18 @@ public class StudentDb extends DbHandler<Student, StudentRepository> {
     }
 
 
+
+    private void create__db () {
+        SQLiteDatabase db = this.getWritableDatabase();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+        
+        String CREATE_Student_TABLE = "CREATE TABLE IF NOT EXISTS Student (  firstName TEXT, lastName TEXT, realm TEXT, username TEXT, password TEXT, credentials TEXT, challenges TEXT, email TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, brandId TEXT, _DATA_UPDATED NUMBER )";
+        db.execSQL(CREATE_Student_TABLE);
+        db.close(); // Closing database connection
+    }
+
+
+
     public void insert__db (String id, Student modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
@@ -55,6 +68,8 @@ public class StudentDb extends DbHandler<Student, StudentRepository> {
         db.insert("Student", null, values);
         db.close(); // Closing database connection
     }
+
+
 
 
 

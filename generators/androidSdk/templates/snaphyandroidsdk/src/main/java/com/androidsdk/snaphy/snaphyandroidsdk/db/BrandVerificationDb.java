@@ -27,6 +27,7 @@ import com.strongloop.android.loopback.RestAdapter;
 public class BrandVerificationDb extends DbHandler<BrandVerification, BrandVerificationRepository> {
   public BrandVerificationDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "BrandVerification", DATABASE_NAME, restAdapter);
+    this.create__db();
   }
 
   // Creating Tables
@@ -48,6 +49,18 @@ public class BrandVerificationDb extends DbHandler<BrandVerification, BrandVerif
     }
 
 
+
+    private void create__db () {
+        SQLiteDatabase db = this.getWritableDatabase();
+                                                                                                                                                                                                                               
+        
+        String CREATE_BrandVerification_TABLE = "CREATE TABLE IF NOT EXISTS BrandVerification (  code TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, brandId TEXT, _DATA_UPDATED NUMBER )";
+        db.execSQL(CREATE_BrandVerification_TABLE);
+        db.close(); // Closing database connection
+    }
+
+
+
     public void insert__db (String id, BrandVerification modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
@@ -55,6 +68,8 @@ public class BrandVerificationDb extends DbHandler<BrandVerification, BrandVerif
         db.insert("BrandVerification", null, values);
         db.close(); // Closing database connection
     }
+
+
 
 
 

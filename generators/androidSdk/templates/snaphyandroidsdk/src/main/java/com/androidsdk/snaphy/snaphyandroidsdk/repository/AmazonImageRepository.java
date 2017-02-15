@@ -72,7 +72,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
 
 
-    public AmazonImageDb getAmazonImageDb() {
+    public AmazonImageDb getDb() {
       return amazonImageDb;
     }
 

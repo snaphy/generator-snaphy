@@ -27,6 +27,7 @@ import com.strongloop.android.loopback.RestAdapter;
 public class ChatDb extends DbHandler<Chat, ChatRepository> {
   public ChatDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "Chat", DATABASE_NAME, restAdapter);
+    this.create__db();
   }
 
   // Creating Tables
@@ -48,6 +49,18 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
     }
 
 
+
+    private void create__db () {
+        SQLiteDatabase db = this.getWritableDatabase();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+        
+        String CREATE_Chat_TABLE = "CREATE TABLE IF NOT EXISTS Chat (  added TEXT, updated TEXT, message TEXT, type TEXT, image TEXT, from TEXT, guid TEXT, status TEXT, id TEXT PRIMARY KEY, appUserId TEXT, brandId TEXT, _DATA_UPDATED NUMBER )";
+        db.execSQL(CREATE_Chat_TABLE);
+        db.close(); // Closing database connection
+    }
+
+
+
     public void insert__db (String id, Chat modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
@@ -55,6 +68,8 @@ public class ChatDb extends DbHandler<Chat, ChatRepository> {
         db.insert("Chat", null, values);
         db.close(); // Closing database connection
     }
+
+
 
 
 

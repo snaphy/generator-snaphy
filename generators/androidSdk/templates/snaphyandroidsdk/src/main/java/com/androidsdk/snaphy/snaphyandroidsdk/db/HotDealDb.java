@@ -27,6 +27,7 @@ import com.strongloop.android.loopback.RestAdapter;
 public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
   public HotDealDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "HotDeal", DATABASE_NAME, restAdapter);
+    this.create__db();
   }
 
   // Creating Tables
@@ -48,6 +49,18 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
     }
 
 
+
+    private void create__db () {
+        SQLiteDatabase db = this.getWritableDatabase();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+        
+        String CREATE_HotDeal_TABLE = "CREATE TABLE IF NOT EXISTS HotDeal (  title TEXT, description TEXT, image TEXT, url TEXT, price NUMBER, status TEXT, expiryDate TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, categoryId TEXT, brandId TEXT, _DATA_UPDATED NUMBER )";
+        db.execSQL(CREATE_HotDeal_TABLE);
+        db.close(); // Closing database connection
+    }
+
+
+
     public void insert__db (String id, HotDeal modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
@@ -55,6 +68,8 @@ public class HotDealDb extends DbHandler<HotDeal, HotDealRepository> {
         db.insert("HotDeal", null, values);
         db.close(); // Closing database connection
     }
+
+
 
 
 

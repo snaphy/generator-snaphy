@@ -27,6 +27,7 @@ import com.strongloop.android.loopback.RestAdapter;
 public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
   public AppUserDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "AppUser", DATABASE_NAME, restAdapter);
+    this.create__db();
   }
 
   // Creating Tables
@@ -48,6 +49,18 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
     }
 
 
+
+    private void create__db () {
+        SQLiteDatabase db = this.getWritableDatabase();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+        
+        String CREATE_AppUser_TABLE = "CREATE TABLE IF NOT EXISTS AppUser (  firstName TEXT, lastName TEXT, email TEXT, added TEXT, updated TEXT, registrationId TEXT, profilePic TEXT, realm TEXT, username TEXT, password TEXT, credentials TEXT, challenges TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+        db.execSQL(CREATE_AppUser_TABLE);
+        db.close(); // Closing database connection
+    }
+
+
+
     public void insert__db (String id, AppUser modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
@@ -55,6 +68,8 @@ public class AppUserDb extends DbHandler<AppUser, AppUserRepository> {
         db.insert("AppUser", null, values);
         db.close(); // Closing database connection
     }
+
+
 
 
 

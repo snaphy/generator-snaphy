@@ -27,6 +27,7 @@ import com.strongloop.android.loopback.RestAdapter;
 public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, FacebookAccessTokenRepository> {
   public FacebookAccessTokenDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "FacebookAccessToken", DATABASE_NAME, restAdapter);
+    this.create__db();
   }
 
   // Creating Tables
@@ -48,6 +49,18 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
     }
 
 
+
+    private void create__db () {
+        SQLiteDatabase db = this.getWritableDatabase();
+                                                                                                                                                                                                                                                                          
+        
+        String CREATE_FacebookAccessToken_TABLE = "CREATE TABLE IF NOT EXISTS FacebookAccessToken (  FbUserId TEXT, token TEXT, expires TEXT, userId TEXT, type TEXT, appUserId TEXT, _DATA_UPDATED NUMBER )";
+        db.execSQL(CREATE_FacebookAccessToken_TABLE);
+        db.close(); // Closing database connection
+    }
+
+
+
     public void insert__db (String id, FacebookAccessToken modelData) {
         SQLiteDatabase db = this.getWritableDatabase();
         // Inserting Row
@@ -55,6 +68,8 @@ public class FacebookAccessTokenDb extends DbHandler<FacebookAccessToken, Facebo
         db.insert("FacebookAccessToken", null, values);
         db.close(); // Closing database connection
     }
+
+
 
 
 
