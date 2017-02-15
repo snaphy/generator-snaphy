@@ -65,7 +65,7 @@ public class RoleMappingDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            //db.execSQL("DROP TABLE IF EXISTS RoleMapping");
+            db.execSQL("DROP TABLE IF EXISTS RoleMapping");
             // Create tables again
             onCreate(db);
     }

@@ -65,7 +65,7 @@ public class CategoryDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            //db.execSQL("DROP TABLE IF EXISTS Category");
+            db.execSQL("DROP TABLE IF EXISTS Category");
             // Create tables again
             onCreate(db);
     }

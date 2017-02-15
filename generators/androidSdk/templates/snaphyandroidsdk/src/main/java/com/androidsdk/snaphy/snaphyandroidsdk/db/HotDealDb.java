@@ -65,7 +65,7 @@ public class HotDealDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            //db.execSQL("DROP TABLE IF EXISTS HotDeal");
+            db.execSQL("DROP TABLE IF EXISTS HotDeal");
             // Create tables again
             onCreate(db);
     }

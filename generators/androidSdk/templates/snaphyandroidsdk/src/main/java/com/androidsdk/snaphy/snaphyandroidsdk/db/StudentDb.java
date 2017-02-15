@@ -65,7 +65,7 @@ public class StudentDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            //db.execSQL("DROP TABLE IF EXISTS Student");
+            db.execSQL("DROP TABLE IF EXISTS Student");
             // Create tables again
             onCreate(db);
     }

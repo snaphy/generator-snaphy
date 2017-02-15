@@ -65,7 +65,7 @@ public class AppUserDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            //db.execSQL("DROP TABLE IF EXISTS AppUser");
+            db.execSQL("DROP TABLE IF EXISTS AppUser");
             // Create tables again
             onCreate(db);
     }

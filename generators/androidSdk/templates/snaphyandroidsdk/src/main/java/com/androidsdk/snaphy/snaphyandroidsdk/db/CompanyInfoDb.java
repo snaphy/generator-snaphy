@@ -65,7 +65,7 @@ public class CompanyInfoDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            //db.execSQL("DROP TABLE IF EXISTS CompanyInfo");
+            db.execSQL("DROP TABLE IF EXISTS CompanyInfo");
             // Create tables again
             onCreate(db);
     }

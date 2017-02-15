@@ -65,7 +65,7 @@ public class BrandDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            //db.execSQL("DROP TABLE IF EXISTS Brand");
+            db.execSQL("DROP TABLE IF EXISTS Brand");
             // Create tables again
             onCreate(db);
     }

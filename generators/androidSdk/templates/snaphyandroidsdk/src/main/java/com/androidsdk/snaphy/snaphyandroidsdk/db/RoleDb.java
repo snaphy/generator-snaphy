@@ -65,7 +65,7 @@ public class RoleDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            //db.execSQL("DROP TABLE IF EXISTS Role");
+            db.execSQL("DROP TABLE IF EXISTS Role");
             // Create tables again
             onCreate(db);
     }

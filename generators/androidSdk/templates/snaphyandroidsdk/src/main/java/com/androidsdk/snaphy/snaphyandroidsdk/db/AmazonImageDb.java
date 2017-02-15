@@ -65,7 +65,7 @@ public class AmazonImageDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            //db.execSQL("DROP TABLE IF EXISTS AmazonImage");
+            db.execSQL("DROP TABLE IF EXISTS AmazonImage");
             // Create tables again
             onCreate(db);
     }
