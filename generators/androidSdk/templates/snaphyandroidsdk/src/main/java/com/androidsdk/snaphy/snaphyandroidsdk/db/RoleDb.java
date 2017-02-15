@@ -24,10 +24,29 @@ import com.strongloop.android.loopback.RestAdapter;
 * Created by snaphy on 1/2/2017.
 */
 
-public class RoleDb extends DbHandler<Role, RoleRepository> {
+public class RoleDb extends SQLiteOpenHelper {
+
+    // All Static variables
+    // Database Version
+    private static final int DATABASE_VERSION = 1;
+
+    RestAdapter restAdapter;
+
+    private String TAG = "snaphy";
+    private String KEY_ID = "ID";
+    private String KEY_OBJECT = "OBJECT";
+
+    // Database Name
+    private static String DATABASE_NAME;
+
+    // Contacts table name
+    private static String TABLE;
+
   public RoleDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, "Role", DATABASE_NAME, restAdapter);
-    this.create__db();
+    TABLE = "Role";
+    this.DATABASE_NAME = DATABASE_NAME;
+    //this.create__db();
   }
 
   // Creating Tables
@@ -392,6 +411,49 @@ public class RoleDb extends DbHandler<Role, RoleRepository> {
       SQLiteDatabase db = this.getWritableDatabase();
       db.delete("Role", "_DATA_UPDATED = 0", null);
       db.close();
+    }
+
+
+    // Getting contacts Count
+    public int count__db() {
+        String countQuery = "SELECT  * FROM " + TABLE;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+        // return count
+        return count;
+    }
+
+
+    /**
+     * Get count by Id..
+     * @param id
+     * @return
+     */
+    public int count__db(String id){
+        String countQuery = "SELECT  * FROM " + TABLE  + " WHERE ID='" + id+"'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+        // return count
+        return count;
+    }
+
+
+    // Deleting by id
+    public void delete__db(String id) {
+      SQLiteDatabase db = this.getWritableDatabase();
+      db.delete(TABLE, KEY_ID + " = ?",
+      new String[] { id });
+      db.close();
+    }
+
+    public void reset__db(){
+       SQLiteDatabase db = this.getWritableDatabase();
+       db.delete(TABLE,null,null);
+       db.close();
     }
 
 }
