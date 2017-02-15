@@ -23,4 +23,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.strongloop:loopback-sdk-android:1.5.+'
     compile 'com.google.code.gson:gson:2.2.4'
+    compile ('io.socket:socket.io-client:0.8.3'){
+            exclude group: 'org.json', module: 'json'
+    }
 }
