@@ -146,7 +146,7 @@ public class CompanyInfo extends Model {
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             lowercaseFirstLetterRepository.getCompanyInfoDb().delete__db(id);
+             lowercaseFirstLetterRepository.getDb().delete__db(id);
           }
       }
       //Also save to database..
@@ -159,7 +159,7 @@ public class CompanyInfo extends Model {
       CompanyInfoRepository lowercaseFirstLetterRepository = (CompanyInfoRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          lowercaseFirstLetterRepository.getCompanyInfoDb().upsert__db(id, this);
+          lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
         }
       }
     }

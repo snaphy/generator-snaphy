@@ -167,7 +167,7 @@ public class AmazonImage extends Model {
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             lowercaseFirstLetterRepository.getAmazonImageDb().delete__db(id);
+             lowercaseFirstLetterRepository.getDb().delete__db(id);
           }
       }
       //Also save to database..
@@ -180,7 +180,7 @@ public class AmazonImage extends Model {
       AmazonImageRepository lowercaseFirstLetterRepository = (AmazonImageRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          lowercaseFirstLetterRepository.getAmazonImageDb().upsert__db(id, this);
+          lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
         }
       }
     }

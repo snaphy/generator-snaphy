@@ -324,7 +324,7 @@ public class AppUser extends User {
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             lowercaseFirstLetterRepository.getAppUserDb().delete__db(id);
+             lowercaseFirstLetterRepository.getDb().delete__db(id);
           }
       }
       //Also save to database..
@@ -337,7 +337,7 @@ public class AppUser extends User {
       AppUserRepository lowercaseFirstLetterRepository = (AppUserRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          lowercaseFirstLetterRepository.getAppUserDb().upsert__db(id, this);
+          lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
         }
       }
     }
@@ -384,7 +384,7 @@ public class AppUser extends User {
                                  //Fetch locally from db
                                  //facebookAccessToken = getFacebookAccessToken__db(restAdapter);
                                  // Getting single cont
-                                 facebookAccessToken = facebookAccessTokenRepository.getFacebookAccessTokenDb().getAll__db("appUserId", that.getId().toString());
+                                 facebookAccessToken = facebookAccessTokenRepository.getDb().getAll__db("appUserId", that.getId().toString());
 
                                    //lowercaseFirstLetter(modelName)
                             }
@@ -966,7 +966,7 @@ public class AppUser extends User {
                                  //Fetch locally from db
                                  //chats = getChats__db(restAdapter);
                                  // Getting single cont
-                                 chats = chatRepository.getChatDb().getAll__db("appUserId", that.getId().toString());
+                                 chats = chatRepository.getDb().getAll__db("appUserId", that.getId().toString());
 
                                    //lowercaseFirstLetter(modelName)
                             }
@@ -1548,7 +1548,7 @@ public class AppUser extends User {
                                  //Fetch locally from db
                                  //followBrands = getFollowBrands__db(restAdapter);
                                  // Getting single cont
-                                 followBrands = followBrandRepository.getFollowBrandDb().getAll__db("appUserId", that.getId().toString());
+                                 followBrands = followBrandRepository.getDb().getAll__db("appUserId", that.getId().toString());
 
                                    //lowercaseFirstLetter(modelName)
                             }

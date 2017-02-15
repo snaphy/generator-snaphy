@@ -219,7 +219,7 @@ public class Student extends User {
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             lowercaseFirstLetterRepository.getStudentDb().delete__db(id);
+             lowercaseFirstLetterRepository.getDb().delete__db(id);
           }
       }
       //Also save to database..
@@ -232,7 +232,7 @@ public class Student extends User {
       StudentRepository lowercaseFirstLetterRepository = (StudentRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          lowercaseFirstLetterRepository.getStudentDb().upsert__db(id, this);
+          lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
         }
       }
     }
@@ -321,7 +321,7 @@ public class Student extends User {
                     public Brand getBrand__db(RestAdapter restAdapter){
                       if(brandId != null){
                         BrandRepository brandRepository = restAdapter.createRepository(BrandRepository.class);
-                        Brand brand = (Brand) brandRepository.getBrandDb().get__db(brandId);
+                        Brand brand = (Brand) brandRepository.getDb().get__db(brandId);
                         if(brand != null){
                           return brand;
                         }else{

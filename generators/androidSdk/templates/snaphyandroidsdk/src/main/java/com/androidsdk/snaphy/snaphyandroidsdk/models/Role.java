@@ -132,7 +132,7 @@ public class Role extends Model {
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             lowercaseFirstLetterRepository.getRoleDb().delete__db(id);
+             lowercaseFirstLetterRepository.getDb().delete__db(id);
           }
       }
       //Also save to database..
@@ -145,7 +145,7 @@ public class Role extends Model {
       RoleRepository lowercaseFirstLetterRepository = (RoleRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          lowercaseFirstLetterRepository.getRoleDb().upsert__db(id, this);
+          lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
         }
       }
     }
@@ -189,7 +189,7 @@ public class Role extends Model {
                                  //Fetch locally from db
                                  //principals = getPrincipals__db(restAdapter);
                                  // Getting single cont
-                                 principals = roleMappingRepository.getRoleMappingDb().getAll__db("roleId", that.getId().toString());
+                                 principals = roleMappingRepository.getDb().getAll__db("roleId", that.getId().toString());
 
                                    //lowercaseFirstLetter(modelName)
                             }

@@ -153,7 +153,7 @@ public class Category extends Model {
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             lowercaseFirstLetterRepository.getCategoryDb().delete__db(id);
+             lowercaseFirstLetterRepository.getDb().delete__db(id);
           }
       }
       //Also save to database..
@@ -166,7 +166,7 @@ public class Category extends Model {
       CategoryRepository lowercaseFirstLetterRepository = (CategoryRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          lowercaseFirstLetterRepository.getCategoryDb().upsert__db(id, this);
+          lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
         }
       }
     }
@@ -210,7 +210,7 @@ public class Category extends Model {
                                  //Fetch locally from db
                                  //hotDeals = getHotDeals__db(restAdapter);
                                  // Getting single cont
-                                 hotDeals = hotDealRepository.getHotDealDb().getAll__db("categoryId", that.getId().toString());
+                                 hotDeals = hotDealRepository.getDb().getAll__db("categoryId", that.getId().toString());
 
                                    //lowercaseFirstLetter(modelName)
                             }

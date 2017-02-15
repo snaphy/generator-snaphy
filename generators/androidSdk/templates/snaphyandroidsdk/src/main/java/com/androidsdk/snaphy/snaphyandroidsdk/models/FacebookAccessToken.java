@@ -181,7 +181,7 @@ public class FacebookAccessToken extends Model {
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             lowercaseFirstLetterRepository.getFacebookAccessTokenDb().delete__db(id);
+             lowercaseFirstLetterRepository.getDb().delete__db(id);
           }
       }
       //Also save to database..
@@ -194,7 +194,7 @@ public class FacebookAccessToken extends Model {
       FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          lowercaseFirstLetterRepository.getFacebookAccessTokenDb().upsert__db(id, this);
+          lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
         }
       }
     }
@@ -280,7 +280,7 @@ public class FacebookAccessToken extends Model {
                     public AppUser getAppUser__db(RestAdapter restAdapter){
                       if(userId != null){
                         AppUserRepository appUserRepository = restAdapter.createRepository(AppUserRepository.class);
-                        AppUser appUser = (AppUser) appUserRepository.getAppUserDb().get__db(userId);
+                        AppUser appUser = (AppUser) appUserRepository.getDb().get__db(userId);
                         if(appUser != null){
                           return appUser;
                         }else{

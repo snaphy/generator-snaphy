@@ -335,7 +335,7 @@ public class Brand extends Model {
           //Delete from database..
           String id = getId().toString();
           if(id != null){
-             lowercaseFirstLetterRepository.getBrandDb().delete__db(id);
+             lowercaseFirstLetterRepository.getDb().delete__db(id);
           }
       }
       //Also save to database..
@@ -348,7 +348,7 @@ public class Brand extends Model {
       BrandRepository lowercaseFirstLetterRepository = (BrandRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
-          lowercaseFirstLetterRepository.getBrandDb().upsert__db(id, this);
+          lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
         }
       }
     }
@@ -392,7 +392,7 @@ public class Brand extends Model {
                                  //Fetch locally from db
                                  //hotDeals = getHotDeals__db(restAdapter);
                                  // Getting single cont
-                                 hotDeals = hotDealRepository.getHotDealDb().getAll__db("brandId", that.getId().toString());
+                                 hotDeals = hotDealRepository.getDb().getAll__db("brandId", that.getId().toString());
 
                                    //lowercaseFirstLetter(modelName)
                             }
@@ -994,7 +994,7 @@ public class Brand extends Model {
                                  //Fetch locally from db
                                  //chats = getChats__db(restAdapter);
                                  // Getting single cont
-                                 chats = chatRepository.getChatDb().getAll__db("brandId", that.getId().toString());
+                                 chats = chatRepository.getDb().getAll__db("brandId", that.getId().toString());
 
                                    //lowercaseFirstLetter(modelName)
                             }
@@ -1596,7 +1596,7 @@ public class Brand extends Model {
                                  //Fetch locally from db
                                  //dailyFeeds = getDailyFeeds__db(restAdapter);
                                  // Getting single cont
-                                 dailyFeeds = dailyFeedRepository.getDailyFeedDb().getAll__db("brandId", that.getId().toString());
+                                 dailyFeeds = dailyFeedRepository.getDb().getAll__db("brandId", that.getId().toString());
 
                                    //lowercaseFirstLetter(modelName)
                             }
@@ -2198,7 +2198,7 @@ public class Brand extends Model {
                                  //Fetch locally from db
                                  //brandManagers = getBrandManagers__db(restAdapter);
                                  // Getting single cont
-                                 brandManagers = brandManagerRepository.getBrandManagerDb().getAll__db("brandId", that.getId().toString());
+                                 brandManagers = brandManagerRepository.getDb().getAll__db("brandId", that.getId().toString());
 
                                    //lowercaseFirstLetter(modelName)
                             }
@@ -2842,7 +2842,7 @@ public class Brand extends Model {
                     public BrandVerification getBrandVerifications__db(RestAdapter restAdapter){
                       if(brandVerificationId != null){
                         BrandVerificationRepository brandVerificationsRepository = restAdapter.createRepository(BrandVerificationRepository.class);
-                        BrandVerification brandVerifications = (BrandVerification) brandVerificationsRepository.getBrandVerificationDb().get__db(brandVerificationId);
+                        BrandVerification brandVerifications = (BrandVerification) brandVerificationsRepository.getDb().get__db(brandVerificationId);
                         if(brandVerifications != null){
                           return brandVerifications;
                         }else{
@@ -3203,7 +3203,7 @@ public class Brand extends Model {
                                  //Fetch locally from db
                                  //followBrands = getFollowBrands__db(restAdapter);
                                  // Getting single cont
-                                 followBrands = followBrandRepository.getFollowBrandDb().getAll__db("brandId", that.getId().toString());
+                                 followBrands = followBrandRepository.getDb().getAll__db("brandId", that.getId().toString());
 
                                    //lowercaseFirstLetter(modelName)
                             }
