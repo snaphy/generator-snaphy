@@ -13,6 +13,7 @@ import android.database.Cursor;
 import java.lang.reflect.Method;
 import android.util.Log;
 import java.util.Map;
+import android.database.sqlite.SQLiteOpenHelper;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Student;
@@ -43,10 +44,10 @@ public class StudentDb extends SQLiteOpenHelper {
     private static String TABLE;
 
   public StudentDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
-    super(context, "Student", DATABASE_NAME, restAdapter);
+    super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    this.restAdapter = restAdapter;
     TABLE = "Student";
     this.DATABASE_NAME = DATABASE_NAME;
-    //this.create__db();
   }
 
   // Creating Tables
@@ -62,22 +63,10 @@ public class StudentDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            //db.execSQL("DROP TABLE IF EXISTS Student");
+            db.execSQL("DROP TABLE IF EXISTS Student");
             // Create tables again
             onCreate(db);
     }
-
-
-
-    private void create__db () {
-        SQLiteDatabase db = this.getWritableDatabase();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
-        
-        String CREATE_Student_TABLE = "CREATE TABLE IF NOT EXISTS Student (  firstName TEXT, lastName TEXT, realm TEXT, username TEXT, password TEXT, credentials TEXT, challenges TEXT, email TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, brandId TEXT, _DATA_UPDATED NUMBER )";
-        db.execSQL(CREATE_Student_TABLE);
-        db.close(); // Closing database connection
-    }
-
 
 
     public void insert__db (String id, Student modelData) {

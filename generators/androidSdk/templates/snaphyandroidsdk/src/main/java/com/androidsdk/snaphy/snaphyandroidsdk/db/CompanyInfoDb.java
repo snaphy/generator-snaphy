@@ -13,6 +13,7 @@ import android.database.Cursor;
 import java.lang.reflect.Method;
 import android.util.Log;
 import java.util.Map;
+import android.database.sqlite.SQLiteOpenHelper;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 import com.androidsdk.snaphy.snaphyandroidsdk.models.CompanyInfo;
@@ -43,10 +44,10 @@ public class CompanyInfoDb extends SQLiteOpenHelper {
     private static String TABLE;
 
   public CompanyInfoDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
-    super(context, "CompanyInfo", DATABASE_NAME, restAdapter);
+    super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    this.restAdapter = restAdapter;
     TABLE = "CompanyInfo";
     this.DATABASE_NAME = DATABASE_NAME;
-    //this.create__db();
   }
 
   // Creating Tables
@@ -62,22 +63,10 @@ public class CompanyInfoDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            //db.execSQL("DROP TABLE IF EXISTS CompanyInfo");
+            db.execSQL("DROP TABLE IF EXISTS CompanyInfo");
             // Create tables again
             onCreate(db);
     }
-
-
-
-    private void create__db () {
-        SQLiteDatabase db = this.getWritableDatabase();
-                                                                                                                                                                                    
-        
-        String CREATE_CompanyInfo_TABLE = "CREATE TABLE IF NOT EXISTS CompanyInfo (  type TEXT, html TEXT, edited TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
-        db.execSQL(CREATE_CompanyInfo_TABLE);
-        db.close(); // Closing database connection
-    }
-
 
 
     public void insert__db (String id, CompanyInfo modelData) {

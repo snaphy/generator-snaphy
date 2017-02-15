@@ -13,6 +13,7 @@ import android.database.Cursor;
 import java.lang.reflect.Method;
 import android.util.Log;
 import java.util.Map;
+import android.database.sqlite.SQLiteOpenHelper;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 import com.androidsdk.snaphy.snaphyandroidsdk.models.HotDeal;
@@ -43,10 +44,10 @@ public class HotDealDb extends SQLiteOpenHelper {
     private static String TABLE;
 
   public HotDealDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
-    super(context, "HotDeal", DATABASE_NAME, restAdapter);
+    super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    this.restAdapter = restAdapter;
     TABLE = "HotDeal";
     this.DATABASE_NAME = DATABASE_NAME;
-    //this.create__db();
   }
 
   // Creating Tables
@@ -62,22 +63,10 @@ public class HotDealDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            //db.execSQL("DROP TABLE IF EXISTS HotDeal");
+            db.execSQL("DROP TABLE IF EXISTS HotDeal");
             // Create tables again
             onCreate(db);
     }
-
-
-
-    private void create__db () {
-        SQLiteDatabase db = this.getWritableDatabase();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-        
-        String CREATE_HotDeal_TABLE = "CREATE TABLE IF NOT EXISTS HotDeal (  title TEXT, description TEXT, image TEXT, url TEXT, price NUMBER, status TEXT, expiryDate TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, categoryId TEXT, brandId TEXT, _DATA_UPDATED NUMBER )";
-        db.execSQL(CREATE_HotDeal_TABLE);
-        db.close(); // Closing database connection
-    }
-
 
 
     public void insert__db (String id, HotDeal modelData) {

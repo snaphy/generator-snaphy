@@ -13,6 +13,7 @@ import android.database.Cursor;
 import java.lang.reflect.Method;
 import android.util.Log;
 import java.util.Map;
+import android.database.sqlite.SQLiteOpenHelper;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 import com.androidsdk.snaphy.snaphyandroidsdk.models.RoleMapping;
@@ -43,10 +44,10 @@ public class RoleMappingDb extends SQLiteOpenHelper {
     private static String TABLE;
 
   public RoleMappingDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
-    super(context, "RoleMapping", DATABASE_NAME, restAdapter);
+    super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    this.restAdapter = restAdapter;
     TABLE = "RoleMapping";
     this.DATABASE_NAME = DATABASE_NAME;
-    //this.create__db();
   }
 
   // Creating Tables
@@ -62,22 +63,10 @@ public class RoleMappingDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            //db.execSQL("DROP TABLE IF EXISTS RoleMapping");
+            db.execSQL("DROP TABLE IF EXISTS RoleMapping");
             // Create tables again
             onCreate(db);
     }
-
-
-
-    private void create__db () {
-        SQLiteDatabase db = this.getWritableDatabase();
-                                                                                                                                                                                    
-        
-        String CREATE_RoleMapping_TABLE = "CREATE TABLE IF NOT EXISTS RoleMapping (  id TEXT PRIMARY KEY, principalType TEXT, principalId TEXT, roleId TEXT, _DATA_UPDATED NUMBER )";
-        db.execSQL(CREATE_RoleMapping_TABLE);
-        db.close(); // Closing database connection
-    }
-
 
 
     public void insert__db (String id, RoleMapping modelData) {

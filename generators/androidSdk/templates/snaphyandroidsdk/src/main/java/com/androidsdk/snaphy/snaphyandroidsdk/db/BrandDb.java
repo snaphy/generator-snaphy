@@ -13,6 +13,7 @@ import android.database.Cursor;
 import java.lang.reflect.Method;
 import android.util.Log;
 import java.util.Map;
+import android.database.sqlite.SQLiteOpenHelper;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Brand;
@@ -43,10 +44,10 @@ public class BrandDb extends SQLiteOpenHelper {
     private static String TABLE;
 
   public BrandDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
-    super(context, "Brand", DATABASE_NAME, restAdapter);
+    super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    this.restAdapter = restAdapter;
     TABLE = "Brand";
     this.DATABASE_NAME = DATABASE_NAME;
-    //this.create__db();
   }
 
   // Creating Tables
@@ -62,22 +63,10 @@ public class BrandDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            //db.execSQL("DROP TABLE IF EXISTS Brand");
+            db.execSQL("DROP TABLE IF EXISTS Brand");
             // Create tables again
             onCreate(db);
     }
-
-
-
-    private void create__db () {
-        SQLiteDatabase db = this.getWritableDatabase();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-        
-        String CREATE_Brand_TABLE = "CREATE TABLE IF NOT EXISTS Brand (  added TEXT, updated TEXT, name TEXT, image TEXT, trending TEXT, facebookUrl TEXT, googleUrl TEXT, instagramUrl TEXT, status TEXT, associatedEmail TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
-        db.execSQL(CREATE_Brand_TABLE);
-        db.close(); // Closing database connection
-    }
-
 
 
     public void insert__db (String id, Brand modelData) {

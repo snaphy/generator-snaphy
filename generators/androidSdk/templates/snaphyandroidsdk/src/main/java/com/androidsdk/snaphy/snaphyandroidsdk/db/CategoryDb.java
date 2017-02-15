@@ -13,6 +13,7 @@ import android.database.Cursor;
 import java.lang.reflect.Method;
 import android.util.Log;
 import java.util.Map;
+import android.database.sqlite.SQLiteOpenHelper;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Category;
@@ -43,10 +44,10 @@ public class CategoryDb extends SQLiteOpenHelper {
     private static String TABLE;
 
   public CategoryDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
-    super(context, "Category", DATABASE_NAME, restAdapter);
+    super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    this.restAdapter = restAdapter;
     TABLE = "Category";
     this.DATABASE_NAME = DATABASE_NAME;
-    //this.create__db();
   }
 
   // Creating Tables
@@ -62,22 +63,10 @@ public class CategoryDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            //db.execSQL("DROP TABLE IF EXISTS Category");
+            db.execSQL("DROP TABLE IF EXISTS Category");
             // Create tables again
             onCreate(db);
     }
-
-
-
-    private void create__db () {
-        SQLiteDatabase db = this.getWritableDatabase();
-                                                                                                                                                                                    
-        
-        String CREATE_Category_TABLE = "CREATE TABLE IF NOT EXISTS Category (  name TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
-        db.execSQL(CREATE_Category_TABLE);
-        db.close(); // Closing database connection
-    }
-
 
 
     public void insert__db (String id, Category modelData) {

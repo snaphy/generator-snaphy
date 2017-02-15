@@ -13,6 +13,7 @@ import android.database.Cursor;
 import java.lang.reflect.Method;
 import android.util.Log;
 import java.util.Map;
+import android.database.sqlite.SQLiteOpenHelper;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 import com.androidsdk.snaphy.snaphyandroidsdk.models.FacebookAccessToken;
@@ -43,10 +44,10 @@ public class FacebookAccessTokenDb extends SQLiteOpenHelper {
     private static String TABLE;
 
   public FacebookAccessTokenDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
-    super(context, "FacebookAccessToken", DATABASE_NAME, restAdapter);
+    super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    this.restAdapter = restAdapter;
     TABLE = "FacebookAccessToken";
     this.DATABASE_NAME = DATABASE_NAME;
-    //this.create__db();
   }
 
   // Creating Tables
@@ -62,22 +63,10 @@ public class FacebookAccessTokenDb extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // Drop older table if existed
-            //db.execSQL("DROP TABLE IF EXISTS FacebookAccessToken");
+            db.execSQL("DROP TABLE IF EXISTS FacebookAccessToken");
             // Create tables again
             onCreate(db);
     }
-
-
-
-    private void create__db () {
-        SQLiteDatabase db = this.getWritableDatabase();
-                                                                                                                                                                                                                                                                          
-        
-        String CREATE_FacebookAccessToken_TABLE = "CREATE TABLE IF NOT EXISTS FacebookAccessToken (  FbUserId TEXT, token TEXT, expires TEXT, userId TEXT, type TEXT, appUserId TEXT, _DATA_UPDATED NUMBER )";
-        db.execSQL(CREATE_FacebookAccessToken_TABLE);
-        db.close(); // Closing database connection
-    }
-
 
 
     public void insert__db (String id, FacebookAccessToken modelData) {
