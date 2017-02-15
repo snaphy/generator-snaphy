@@ -308,6 +308,18 @@ public class Employee extends User {
     }
 
 
+    public void delete__db(){
+      EmployeeRepository lowercaseFirstLetterRepository = (EmployeeRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+
+        if(getId() != null){
+            String id = getId().toString();
+          lowercaseFirstLetterRepository.getDb().delete__db(id);
+        }
+      }
+    }
+
+
     public void save__db(){
       if(getId() == null){
         return;

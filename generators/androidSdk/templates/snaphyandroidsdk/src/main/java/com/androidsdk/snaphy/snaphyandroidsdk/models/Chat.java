@@ -298,6 +298,18 @@ public class Chat extends Model {
     }
 
 
+    public void delete__db(){
+      ChatRepository lowercaseFirstLetterRepository = (ChatRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+
+        if(getId() != null){
+            String id = getId().toString();
+          lowercaseFirstLetterRepository.getDb().delete__db(id);
+        }
+      }
+    }
+
+
     public void save__db(){
       if(getId() == null){
         return;

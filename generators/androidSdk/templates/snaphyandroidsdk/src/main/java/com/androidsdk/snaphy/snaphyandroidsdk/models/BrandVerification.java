@@ -179,6 +179,18 @@ public class BrandVerification extends Model {
     }
 
 
+    public void delete__db(){
+      BrandVerificationRepository lowercaseFirstLetterRepository = (BrandVerificationRepository) getRepository();
+      if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+
+        if(getId() != null){
+            String id = getId().toString();
+          lowercaseFirstLetterRepository.getDb().delete__db(id);
+        }
+      }
+    }
+
+
     public void save__db(){
       if(getId() == null){
         return;
