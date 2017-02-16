@@ -139,19 +139,21 @@ public class AmazonImageDb extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getReadableDatabase();
             Cursor cursor = db.query("AmazonImage", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
-                cursor.moveToFirst();
-                HashMap<String, Object> hashMap = parseCursor(cursor);
-
-                cursor.close();
-                db.close(); // Closing database connection
-
-                if (hashMap != null) {
-                    AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);
-                    repo.addStorage(context);
-                    return (AmazonImage)repo.createObject(hashMap);
-                } else {
+                if (!(cursor.moveToFirst()) || cursor.getCount() == 0){
                     return null;
+                }else{
+                    HashMap<String, Object> hashMap = parseCursor(cursor);
+                    cursor.close();
+                    db.close(); // Closing database connection
+                    if (hashMap != null) {
+                        AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);
+                        repo.addStorage(context);
+                        return (AmazonImage)repo.createObject(hashMap);
+                    } else {
+                        return null;
+                    }
                 }
+
             } else {
                 return null;
             }
@@ -170,19 +172,23 @@ public class AmazonImageDb extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getReadableDatabase();
             Cursor cursor = db.query("AmazonImage", null, whereKey + "=?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
-                cursor.moveToFirst();
-                HashMap<String, Object> hashMap = parseCursor(cursor);
-
-                cursor.close();
-                db.close(); // Closing database connection
-
-                if (hashMap != null) {
-                    AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);
-                    repo.addStorage(context);
-                    return (AmazonImage)repo.createObject(hashMap);
-                } else {
+                if (!(cursor.moveToFirst()) || cursor.getCount() == 0){
                     return null;
+                }else{
+                    HashMap<String, Object> hashMap = parseCursor(cursor);
+
+                    cursor.close();
+                    db.close(); // Closing database connection
+
+                    if (hashMap != null) {
+                        AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);
+                        repo.addStorage(context);
+                        return (AmazonImage)repo.createObject(hashMap);
+                    } else {
+                        return null;
+                    }
                 }
+
             } else {
                 return null;
             }
@@ -272,9 +278,9 @@ public class AmazonImageDb extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
+        if (!(cursor.moveToFirst()) || cursor.getCount() == 0){
+            return (DataList<AmazonImage>) modelList;
+        }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
@@ -302,7 +308,9 @@ public class AmazonImageDb extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
+         if (!(cursor.moveToFirst()) || cursor.getCount() == 0){
+            return (DataList<AmazonImage>) modelList;
+         }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
@@ -312,7 +320,7 @@ public class AmazonImageDb extends SQLiteOpenHelper {
                     modelList.add((AmazonImage)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
-        }
+         }
         cursor.close();
         db.close();
         // return contact list

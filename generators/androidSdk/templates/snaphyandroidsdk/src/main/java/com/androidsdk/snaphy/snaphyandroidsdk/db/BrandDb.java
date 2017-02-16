@@ -175,19 +175,21 @@ public class BrandDb extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getReadableDatabase();
             Cursor cursor = db.query("Brand", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
-                cursor.moveToFirst();
-                HashMap<String, Object> hashMap = parseCursor(cursor);
-
-                cursor.close();
-                db.close(); // Closing database connection
-
-                if (hashMap != null) {
-                    BrandRepository repo = restAdapter.createRepository(BrandRepository.class);
-                    repo.addStorage(context);
-                    return (Brand)repo.createObject(hashMap);
-                } else {
+                if (!(cursor.moveToFirst()) || cursor.getCount() == 0){
                     return null;
+                }else{
+                    HashMap<String, Object> hashMap = parseCursor(cursor);
+                    cursor.close();
+                    db.close(); // Closing database connection
+                    if (hashMap != null) {
+                        BrandRepository repo = restAdapter.createRepository(BrandRepository.class);
+                        repo.addStorage(context);
+                        return (Brand)repo.createObject(hashMap);
+                    } else {
+                        return null;
+                    }
                 }
+
             } else {
                 return null;
             }
@@ -206,19 +208,23 @@ public class BrandDb extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getReadableDatabase();
             Cursor cursor = db.query("Brand", null, whereKey + "=?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
-                cursor.moveToFirst();
-                HashMap<String, Object> hashMap = parseCursor(cursor);
-
-                cursor.close();
-                db.close(); // Closing database connection
-
-                if (hashMap != null) {
-                    BrandRepository repo = restAdapter.createRepository(BrandRepository.class);
-                    repo.addStorage(context);
-                    return (Brand)repo.createObject(hashMap);
-                } else {
+                if (!(cursor.moveToFirst()) || cursor.getCount() == 0){
                     return null;
+                }else{
+                    HashMap<String, Object> hashMap = parseCursor(cursor);
+
+                    cursor.close();
+                    db.close(); // Closing database connection
+
+                    if (hashMap != null) {
+                        BrandRepository repo = restAdapter.createRepository(BrandRepository.class);
+                        repo.addStorage(context);
+                        return (Brand)repo.createObject(hashMap);
+                    } else {
+                        return null;
+                    }
                 }
+
             } else {
                 return null;
             }
@@ -368,9 +374,9 @@ public class BrandDb extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
+        if (!(cursor.moveToFirst()) || cursor.getCount() == 0){
+            return (DataList<Brand>) modelList;
+        }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
@@ -398,7 +404,9 @@ public class BrandDb extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
+         if (!(cursor.moveToFirst()) || cursor.getCount() == 0){
+            return (DataList<Brand>) modelList;
+         }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
@@ -408,7 +416,7 @@ public class BrandDb extends SQLiteOpenHelper {
                     modelList.add((Brand)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
-        }
+         }
         cursor.close();
         db.close();
         // return contact list
