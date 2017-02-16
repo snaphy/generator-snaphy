@@ -399,9 +399,10 @@ public class Brand extends Model {
 
                     public DataList< HotDeal > getHotDeals() {
                         //Check for pure case of hasMany
-                                                    if(that.getId() != null && hotDealRepository.getDb() != null){
-                                   //TODO: Modify foreign key name..
-                                   HotDealRepository hotDealRepository = (HotDealRepository) getRepository();
+                                                    //TODO: Modify foreign key name..
+                            HotDealRepository hotDealRepository = (HotDealRepository) getRepository();
+
+                            if(that.getId() != null && hotDealRepository.getDb() != null){
 
                                  //Fetch locally from db
                                  //hotDeals = getHotDeals__db(restAdapter);
@@ -1001,9 +1002,10 @@ public class Brand extends Model {
 
                     public DataList< Chat > getChats() {
                         //Check for pure case of hasMany
-                                                    if(that.getId() != null && chatRepository.getDb() != null){
-                                   //TODO: Modify foreign key name..
-                                   ChatRepository chatRepository = (ChatRepository) getRepository();
+                                                    //TODO: Modify foreign key name..
+                            ChatRepository chatRepository = (ChatRepository) getRepository();
+
+                            if(that.getId() != null && chatRepository.getDb() != null){
 
                                  //Fetch locally from db
                                  //chats = getChats__db(restAdapter);
@@ -1603,9 +1605,10 @@ public class Brand extends Model {
 
                     public DataList< DailyFeed > getDailyFeeds() {
                         //Check for pure case of hasMany
-                                                    if(that.getId() != null && dailyFeedRepository.getDb() != null){
-                                   //TODO: Modify foreign key name..
-                                   DailyFeedRepository dailyFeedRepository = (DailyFeedRepository) getRepository();
+                                                    //TODO: Modify foreign key name..
+                            DailyFeedRepository dailyFeedRepository = (DailyFeedRepository) getRepository();
+
+                            if(that.getId() != null && dailyFeedRepository.getDb() != null){
 
                                  //Fetch locally from db
                                  //dailyFeeds = getDailyFeeds__db(restAdapter);
@@ -2205,9 +2208,10 @@ public class Brand extends Model {
 
                     public DataList< BrandManager > getBrandManagers() {
                         //Check for pure case of hasMany
-                                                    if(that.getId() != null && brandManagerRepository.getDb() != null){
-                                   //TODO: Modify foreign key name..
-                                   BrandManagerRepository brandManagerRepository = (BrandManagerRepository) getRepository();
+                                                    //TODO: Modify foreign key name..
+                            BrandManagerRepository brandManagerRepository = (BrandManagerRepository) getRepository();
+
+                            if(that.getId() != null && brandManagerRepository.getDb() != null){
 
                                  //Fetch locally from db
                                  //brandManagers = getBrandManagers__db(restAdapter);
@@ -3218,9 +3222,10 @@ public class Brand extends Model {
 
                     public DataList< FollowBrand > getFollowBrands() {
                         //Check for pure case of hasMany
-                                                    if(that.getId() != null && followBrandRepository.getDb() != null){
-                                   //TODO: Modify foreign key name..
-                                   FollowBrandRepository followBrandRepository = (FollowBrandRepository) getRepository();
+                                                    //TODO: Modify foreign key name..
+                            FollowBrandRepository followBrandRepository = (FollowBrandRepository) getRepository();
+
+                            if(that.getId() != null && followBrandRepository.getDb() != null){
 
                                  //Fetch locally from db
                                  //followBrands = getFollowBrands__db(restAdapter);

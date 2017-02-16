@@ -217,9 +217,10 @@ public class Category extends Model {
 
                     public DataList< HotDeal > getHotDeals() {
                         //Check for pure case of hasMany
-                                                    if(that.getId() != null && hotDealRepository.getDb() != null){
-                                   //TODO: Modify foreign key name..
-                                   HotDealRepository hotDealRepository = (HotDealRepository) getRepository();
+                                                    //TODO: Modify foreign key name..
+                            HotDealRepository hotDealRepository = (HotDealRepository) getRepository();
+
+                            if(that.getId() != null && hotDealRepository.getDb() != null){
 
                                  //Fetch locally from db
                                  //hotDeals = getHotDeals__db(restAdapter);

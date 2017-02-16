@@ -391,9 +391,10 @@ public class AppUser extends User {
 
                     public DataList< FacebookAccessToken > getFacebookAccessToken() {
                         //Check for pure case of hasMany
-                                                    if(that.getId() != null && facebookAccessTokenRepository.getDb() != null){
-                                   //TODO: Modify foreign key name..
-                                   FacebookAccessTokenRepository facebookAccessTokenRepository = (FacebookAccessTokenRepository) getRepository();
+                                                    //TODO: Modify foreign key name..
+                            FacebookAccessTokenRepository facebookAccessTokenRepository = (FacebookAccessTokenRepository) getRepository();
+
+                            if(that.getId() != null && facebookAccessTokenRepository.getDb() != null){
 
                                  //Fetch locally from db
                                  //facebookAccessToken = getFacebookAccessToken__db(restAdapter);
@@ -973,9 +974,10 @@ public class AppUser extends User {
 
                     public DataList< Chat > getChats() {
                         //Check for pure case of hasMany
-                                                    if(that.getId() != null && chatRepository.getDb() != null){
-                                   //TODO: Modify foreign key name..
-                                   ChatRepository chatRepository = (ChatRepository) getRepository();
+                                                    //TODO: Modify foreign key name..
+                            ChatRepository chatRepository = (ChatRepository) getRepository();
+
+                            if(that.getId() != null && chatRepository.getDb() != null){
 
                                  //Fetch locally from db
                                  //chats = getChats__db(restAdapter);
@@ -1555,9 +1557,10 @@ public class AppUser extends User {
 
                     public DataList< FollowBrand > getFollowBrands() {
                         //Check for pure case of hasMany
-                                                    if(that.getId() != null && followBrandRepository.getDb() != null){
-                                   //TODO: Modify foreign key name..
-                                   FollowBrandRepository followBrandRepository = (FollowBrandRepository) getRepository();
+                                                    //TODO: Modify foreign key name..
+                            FollowBrandRepository followBrandRepository = (FollowBrandRepository) getRepository();
+
+                            if(that.getId() != null && followBrandRepository.getDb() != null){
 
                                  //Fetch locally from db
                                  //followBrands = getFollowBrands__db(restAdapter);

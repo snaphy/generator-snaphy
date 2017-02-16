@@ -196,9 +196,10 @@ public class Role extends Model {
 
                     public DataList< RoleMapping > getPrincipals() {
                         //Check for pure case of hasMany
-                                                    if(that.getId() != null && roleMappingRepository.getDb() != null){
-                                   //TODO: Modify foreign key name..
-                                   RoleMappingRepository roleMappingRepository = (RoleMappingRepository) getRepository();
+                                                    //TODO: Modify foreign key name..
+                            RoleMappingRepository roleMappingRepository = (RoleMappingRepository) getRepository();
+
+                            if(that.getId() != null && roleMappingRepository.getDb() != null){
 
                                  //Fetch locally from db
                                  //principals = getPrincipals__db(restAdapter);
