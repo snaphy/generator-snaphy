@@ -136,6 +136,7 @@ public class RoleMapping extends Model {
 
     public void save__db(String id){
       RoleMappingRepository lowercaseFirstLetterRepository = (RoleMappingRepository) getRepository();
+
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
@@ -197,6 +198,7 @@ public class RoleMapping extends Model {
                         //Adding database method for fetching from relation if not present..
                         if(role == null){
                           RoleMappingRepository roleMappingRepository = (RoleMappingRepository) getRepository();
+
                           RestAdapter restAdapter = roleMappingRepository.getRestAdapter();
                           if(restAdapter != null){
                             //Fetch locally from db
@@ -236,12 +238,19 @@ public class RoleMapping extends Model {
                     public Role getRole__db(RestAdapter restAdapter){
                       if(roleId != null){
                         RoleRepository roleRepository = restAdapter.createRepository(RoleRepository.class);
-                        Role role = (Role) roleRepository.getDb().get__db(roleId);
-                        if(role != null){
-                          return role;
-                        }else{
-                          return null;
-                        }
+                           RoleMappingRepository lowercaseFirstLetterRepository = (RoleMappingRepository) getRepository();
+                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                Context context = lowercaseFirstLetterRepository.getContext();
+                                if(context != null){
+                                    roleRepository.addStorage(context);
+                                    Role role = (Role) roleRepository.getDb().get__db(roleId);
+                                    return role;
+                                }else{
+                                    return null;
+                                }
+                          }else{
+                            return null;
+                          }
                         }else{
                           return null;
                       }

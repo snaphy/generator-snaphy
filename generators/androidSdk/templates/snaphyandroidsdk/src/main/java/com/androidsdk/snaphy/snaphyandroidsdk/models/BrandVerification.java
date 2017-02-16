@@ -171,6 +171,7 @@ public class BrandVerification extends Model {
 
     public void save__db(String id){
       BrandVerificationRepository lowercaseFirstLetterRepository = (BrandVerificationRepository) getRepository();
+
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
@@ -232,6 +233,7 @@ public class BrandVerification extends Model {
                         //Adding database method for fetching from relation if not present..
                         if(brand == null){
                           BrandVerificationRepository brandVerificationRepository = (BrandVerificationRepository) getRepository();
+
                           RestAdapter restAdapter = brandVerificationRepository.getRestAdapter();
                           if(restAdapter != null){
                             //Fetch locally from db
@@ -271,12 +273,19 @@ public class BrandVerification extends Model {
                     public Brand getBrand__db(RestAdapter restAdapter){
                       if(brandId != null){
                         BrandRepository brandRepository = restAdapter.createRepository(BrandRepository.class);
-                        Brand brand = (Brand) brandRepository.getDb().get__db(brandId);
-                        if(brand != null){
-                          return brand;
-                        }else{
-                          return null;
-                        }
+                           BrandVerificationRepository lowercaseFirstLetterRepository = (BrandVerificationRepository) getRepository();
+                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                Context context = lowercaseFirstLetterRepository.getContext();
+                                if(context != null){
+                                    brandRepository.addStorage(context);
+                                    Brand brand = (Brand) brandRepository.getDb().get__db(brandId);
+                                    return brand;
+                                }else{
+                                    return null;
+                                }
+                          }else{
+                            return null;
+                          }
                         }else{
                           return null;
                       }

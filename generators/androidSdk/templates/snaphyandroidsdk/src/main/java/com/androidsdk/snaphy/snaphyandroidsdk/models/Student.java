@@ -230,6 +230,7 @@ public class Student extends User {
 
     public void save__db(String id){
       StudentRepository lowercaseFirstLetterRepository = (StudentRepository) getRepository();
+
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
@@ -294,6 +295,7 @@ public class Student extends User {
                         //Adding database method for fetching from relation if not present..
                         if(brand == null){
                           StudentRepository studentRepository = (StudentRepository) getRepository();
+
                           RestAdapter restAdapter = studentRepository.getRestAdapter();
                           if(restAdapter != null){
                             //Fetch locally from db
@@ -333,12 +335,19 @@ public class Student extends User {
                     public Brand getBrand__db(RestAdapter restAdapter){
                       if(brandId != null){
                         BrandRepository brandRepository = restAdapter.createRepository(BrandRepository.class);
-                        Brand brand = (Brand) brandRepository.getDb().get__db(brandId);
-                        if(brand != null){
-                          return brand;
-                        }else{
-                          return null;
-                        }
+                           StudentRepository lowercaseFirstLetterRepository = (StudentRepository) getRepository();
+                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                Context context = lowercaseFirstLetterRepository.getContext();
+                                if(context != null){
+                                    brandRepository.addStorage(context);
+                                    Brand brand = (Brand) brandRepository.getDb().get__db(brandId);
+                                    return brand;
+                                }else{
+                                    return null;
+                                }
+                          }else{
+                            return null;
+                          }
                         }else{
                           return null;
                       }

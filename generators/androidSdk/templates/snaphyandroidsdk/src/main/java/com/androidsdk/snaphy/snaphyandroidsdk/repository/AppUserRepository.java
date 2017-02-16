@@ -93,6 +93,11 @@ public class AppUserRepository extends UserRepository<AppUser> {
     }
 
 
+    public void getContext(){
+        return context;
+    }
+
+
     
     		//Create public methods..
     		public AppUser cachedCurrentUser;

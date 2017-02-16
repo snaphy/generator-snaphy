@@ -71,6 +71,11 @@ public class DailyFeedRepository extends ModelRepository<DailyFeed> {
     }
 
 
+    public void getContext(){
+        return context;
+    }
+
+
     
 
 

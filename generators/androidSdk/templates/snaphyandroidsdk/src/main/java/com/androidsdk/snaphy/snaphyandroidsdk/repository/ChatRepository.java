@@ -78,6 +78,11 @@ public class ChatRepository extends ModelRepository<Chat> {
     }
 
 
+    public void getContext(){
+        return context;
+    }
+
+
     
 
 

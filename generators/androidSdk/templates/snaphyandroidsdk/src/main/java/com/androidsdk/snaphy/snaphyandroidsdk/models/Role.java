@@ -143,6 +143,7 @@ public class Role extends Model {
 
     public void save__db(String id){
       RoleRepository lowercaseFirstLetterRepository = (RoleRepository) getRepository();
+
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
@@ -203,7 +204,7 @@ public class Role extends Model {
                                  // Getting single cont
                                  principals = roleMappingRepository.getDb().getAll__db("roleId", that.getId().toString());
 
-                                   //lowercaseFirstLetter(modelName)
+                                 //lowercaseFirstLetter(modelName)
                             }
                                                 return principals;
                     }

@@ -157,6 +157,7 @@ public class CompanyInfo extends Model {
 
     public void save__db(String id){
       CompanyInfoRepository lowercaseFirstLetterRepository = (CompanyInfoRepository) getRepository();
+
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);

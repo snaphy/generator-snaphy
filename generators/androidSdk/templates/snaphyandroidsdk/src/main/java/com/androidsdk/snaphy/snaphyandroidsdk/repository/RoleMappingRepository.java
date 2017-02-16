@@ -71,6 +71,11 @@ public class RoleMappingRepository extends ModelRepository<RoleMapping> {
     }
 
 
+    public void getContext(){
+        return context;
+    }
+
+
     
 
 

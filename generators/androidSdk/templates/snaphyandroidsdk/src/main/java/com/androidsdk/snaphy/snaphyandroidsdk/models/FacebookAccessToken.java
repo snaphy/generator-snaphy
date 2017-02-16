@@ -192,6 +192,7 @@ public class FacebookAccessToken extends Model {
 
     public void save__db(String id){
       FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
+
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
@@ -253,6 +254,7 @@ public class FacebookAccessToken extends Model {
                         //Adding database method for fetching from relation if not present..
                         if(appUser == null){
                           FacebookAccessTokenRepository facebookAccessTokenRepository = (FacebookAccessTokenRepository) getRepository();
+
                           RestAdapter restAdapter = facebookAccessTokenRepository.getRestAdapter();
                           if(restAdapter != null){
                             //Fetch locally from db
@@ -292,12 +294,19 @@ public class FacebookAccessToken extends Model {
                     public AppUser getAppUser__db(RestAdapter restAdapter){
                       if(userId != null){
                         AppUserRepository appUserRepository = restAdapter.createRepository(AppUserRepository.class);
-                        AppUser appUser = (AppUser) appUserRepository.getDb().get__db(userId);
-                        if(appUser != null){
-                          return appUser;
-                        }else{
-                          return null;
-                        }
+                           FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
+                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                Context context = lowercaseFirstLetterRepository.getContext();
+                                if(context != null){
+                                    appUserRepository.addStorage(context);
+                                    AppUser appUser = (AppUser) appUserRepository.getDb().get__db(userId);
+                                    return appUser;
+                                }else{
+                                    return null;
+                                }
+                          }else{
+                            return null;
+                          }
                         }else{
                           return null;
                       }

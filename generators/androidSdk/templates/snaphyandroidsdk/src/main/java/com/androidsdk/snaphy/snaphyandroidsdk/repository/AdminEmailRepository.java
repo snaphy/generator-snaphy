@@ -64,6 +64,11 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
     }
 
 
+    public void getContext(){
+        return context;
+    }
+
+
     
 
 

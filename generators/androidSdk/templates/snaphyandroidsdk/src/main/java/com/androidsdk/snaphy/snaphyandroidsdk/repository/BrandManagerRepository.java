@@ -79,6 +79,11 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
     }
 
 
+    public void getContext(){
+        return context;
+    }
+
+
     
     		//Create public methods..
     		public BrandManager cachedCurrentUser;

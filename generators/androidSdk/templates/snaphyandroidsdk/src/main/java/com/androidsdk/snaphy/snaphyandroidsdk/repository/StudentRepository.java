@@ -79,6 +79,11 @@ public class StudentRepository extends UserRepository<Student> {
     }
 
 
+    public void getContext(){
+        return context;
+    }
+
+
     
     		//Create public methods..
     		public Student cachedCurrentUser;

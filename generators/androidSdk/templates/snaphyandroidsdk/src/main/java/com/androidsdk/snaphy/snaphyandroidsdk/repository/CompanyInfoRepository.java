@@ -64,6 +64,11 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     }
 
 
+    public void getContext(){
+        return context;
+    }
+
+
     
 
 

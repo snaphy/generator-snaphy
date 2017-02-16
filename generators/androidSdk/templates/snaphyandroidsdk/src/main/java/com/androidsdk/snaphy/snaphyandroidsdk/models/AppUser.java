@@ -335,6 +335,7 @@ public class AppUser extends User {
 
     public void save__db(String id){
       AppUserRepository lowercaseFirstLetterRepository = (AppUserRepository) getRepository();
+
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
@@ -398,7 +399,7 @@ public class AppUser extends User {
                                  // Getting single cont
                                  facebookAccessToken = facebookAccessTokenRepository.getDb().getAll__db("appUserId", that.getId().toString());
 
-                                   //lowercaseFirstLetter(modelName)
+                                 //lowercaseFirstLetter(modelName)
                             }
                                                 return facebookAccessToken;
                     }
@@ -980,7 +981,7 @@ public class AppUser extends User {
                                  // Getting single cont
                                  chats = chatRepository.getDb().getAll__db("appUserId", that.getId().toString());
 
-                                   //lowercaseFirstLetter(modelName)
+                                 //lowercaseFirstLetter(modelName)
                             }
                                                 return chats;
                     }
@@ -1562,7 +1563,7 @@ public class AppUser extends User {
                                  // Getting single cont
                                  followBrands = followBrandRepository.getDb().getAll__db("appUserId", that.getId().toString());
 
-                                   //lowercaseFirstLetter(modelName)
+                                 //lowercaseFirstLetter(modelName)
                             }
                                                 return followBrands;
                     }

@@ -71,6 +71,11 @@ public class RoleRepository extends ModelRepository<Role> {
     }
 
 
+    public void getContext(){
+        return context;
+    }
+
+
     
 
 

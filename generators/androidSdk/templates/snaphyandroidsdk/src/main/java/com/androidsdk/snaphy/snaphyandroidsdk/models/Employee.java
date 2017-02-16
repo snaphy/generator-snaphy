@@ -300,6 +300,7 @@ public class Employee extends User {
 
     public void save__db(String id){
       EmployeeRepository lowercaseFirstLetterRepository = (EmployeeRepository) getRepository();
+
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);

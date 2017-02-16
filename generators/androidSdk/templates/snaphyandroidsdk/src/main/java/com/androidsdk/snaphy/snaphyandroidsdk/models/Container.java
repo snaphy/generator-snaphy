@@ -94,6 +94,7 @@ public class Container extends Model {
 
     public void save__db(String id){
       ContainerRepository lowercaseFirstLetterRepository = (ContainerRepository) getRepository();
+
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);

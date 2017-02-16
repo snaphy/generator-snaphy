@@ -72,6 +72,11 @@ public class EmployeeRepository extends UserRepository<Employee> {
     }
 
 
+    public void getContext(){
+        return context;
+    }
+
+
     
     		//Create public methods..
     		public Employee cachedCurrentUser;

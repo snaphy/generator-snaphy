@@ -346,6 +346,7 @@ public class Brand extends Model {
 
     public void save__db(String id){
       BrandRepository lowercaseFirstLetterRepository = (BrandRepository) getRepository();
+
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
@@ -406,7 +407,7 @@ public class Brand extends Model {
                                  // Getting single cont
                                  hotDeals = hotDealRepository.getDb().getAll__db("brandId", that.getId().toString());
 
-                                   //lowercaseFirstLetter(modelName)
+                                 //lowercaseFirstLetter(modelName)
                             }
                                                 return hotDeals;
                     }
@@ -1008,7 +1009,7 @@ public class Brand extends Model {
                                  // Getting single cont
                                  chats = chatRepository.getDb().getAll__db("brandId", that.getId().toString());
 
-                                   //lowercaseFirstLetter(modelName)
+                                 //lowercaseFirstLetter(modelName)
                             }
                                                 return chats;
                     }
@@ -1610,7 +1611,7 @@ public class Brand extends Model {
                                  // Getting single cont
                                  dailyFeeds = dailyFeedRepository.getDb().getAll__db("brandId", that.getId().toString());
 
-                                   //lowercaseFirstLetter(modelName)
+                                 //lowercaseFirstLetter(modelName)
                             }
                                                 return dailyFeeds;
                     }
@@ -2212,7 +2213,7 @@ public class Brand extends Model {
                                  // Getting single cont
                                  brandManagers = brandManagerRepository.getDb().getAll__db("brandId", that.getId().toString());
 
-                                   //lowercaseFirstLetter(modelName)
+                                 //lowercaseFirstLetter(modelName)
                             }
                                                 return brandManagers;
                     }
@@ -2815,6 +2816,7 @@ public class Brand extends Model {
                         //Adding database method for fetching from relation if not present..
                         if(brandVerifications == null){
                           BrandRepository brandRepository = (BrandRepository) getRepository();
+
                           RestAdapter restAdapter = brandRepository.getRestAdapter();
                           if(restAdapter != null){
                             //Fetch locally from db
@@ -2854,12 +2856,19 @@ public class Brand extends Model {
                     public BrandVerification getBrandVerifications__db(RestAdapter restAdapter){
                       if(brandVerificationId != null){
                         BrandVerificationRepository brandVerificationsRepository = restAdapter.createRepository(BrandVerificationRepository.class);
-                        BrandVerification brandVerifications = (BrandVerification) brandVerificationsRepository.getDb().get__db(brandVerificationId);
-                        if(brandVerifications != null){
-                          return brandVerifications;
-                        }else{
-                          return null;
-                        }
+                           BrandRepository lowercaseFirstLetterRepository = (BrandRepository) getRepository();
+                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                Context context = lowercaseFirstLetterRepository.getContext();
+                                if(context != null){
+                                    brandVerificationsRepository.addStorage(context);
+                                    BrandVerification brandVerifications = (BrandVerification) brandVerificationsRepository.getDb().get__db(brandVerificationId);
+                                    return brandVerifications;
+                                }else{
+                                    return null;
+                                }
+                          }else{
+                            return null;
+                          }
                         }else{
                           return null;
                       }
@@ -3217,7 +3226,7 @@ public class Brand extends Model {
                                  // Getting single cont
                                  followBrands = followBrandRepository.getDb().getAll__db("brandId", that.getId().toString());
 
-                                   //lowercaseFirstLetter(modelName)
+                                 //lowercaseFirstLetter(modelName)
                             }
                                                 return followBrands;
                     }

@@ -164,6 +164,7 @@ public class Category extends Model {
 
     public void save__db(String id){
       CategoryRepository lowercaseFirstLetterRepository = (CategoryRepository) getRepository();
+
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
@@ -224,7 +225,7 @@ public class Category extends Model {
                                  // Getting single cont
                                  hotDeals = hotDealRepository.getDb().getAll__db("categoryId", that.getId().toString());
 
-                                   //lowercaseFirstLetter(modelName)
+                                 //lowercaseFirstLetter(modelName)
                             }
                                                 return hotDeals;
                     }

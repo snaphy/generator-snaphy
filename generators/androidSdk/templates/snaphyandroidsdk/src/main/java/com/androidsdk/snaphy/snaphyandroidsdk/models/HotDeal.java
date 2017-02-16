@@ -311,6 +311,7 @@ public class HotDeal extends Model {
 
     public void save__db(String id){
       HotDealRepository lowercaseFirstLetterRepository = (HotDealRepository) getRepository();
+
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
@@ -372,6 +373,7 @@ public class HotDeal extends Model {
                         //Adding database method for fetching from relation if not present..
                         if(category == null){
                           HotDealRepository hotDealRepository = (HotDealRepository) getRepository();
+
                           RestAdapter restAdapter = hotDealRepository.getRestAdapter();
                           if(restAdapter != null){
                             //Fetch locally from db
@@ -411,12 +413,19 @@ public class HotDeal extends Model {
                     public Category getCategory__db(RestAdapter restAdapter){
                       if(categoryId != null){
                         CategoryRepository categoryRepository = restAdapter.createRepository(CategoryRepository.class);
-                        Category category = (Category) categoryRepository.getDb().get__db(categoryId);
-                        if(category != null){
-                          return category;
-                        }else{
-                          return null;
-                        }
+                           HotDealRepository lowercaseFirstLetterRepository = (HotDealRepository) getRepository();
+                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                Context context = lowercaseFirstLetterRepository.getContext();
+                                if(context != null){
+                                    categoryRepository.addStorage(context);
+                                    Category category = (Category) categoryRepository.getDb().get__db(categoryId);
+                                    return category;
+                                }else{
+                                    return null;
+                                }
+                          }else{
+                            return null;
+                          }
                         }else{
                           return null;
                       }
@@ -558,6 +567,7 @@ public class HotDeal extends Model {
                         //Adding database method for fetching from relation if not present..
                         if(brand == null){
                           HotDealRepository hotDealRepository = (HotDealRepository) getRepository();
+
                           RestAdapter restAdapter = hotDealRepository.getRestAdapter();
                           if(restAdapter != null){
                             //Fetch locally from db
@@ -597,12 +607,19 @@ public class HotDeal extends Model {
                     public Brand getBrand__db(RestAdapter restAdapter){
                       if(brandId != null){
                         BrandRepository brandRepository = restAdapter.createRepository(BrandRepository.class);
-                        Brand brand = (Brand) brandRepository.getDb().get__db(brandId);
-                        if(brand != null){
-                          return brand;
-                        }else{
-                          return null;
-                        }
+                           HotDealRepository lowercaseFirstLetterRepository = (HotDealRepository) getRepository();
+                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                Context context = lowercaseFirstLetterRepository.getContext();
+                                if(context != null){
+                                    brandRepository.addStorage(context);
+                                    Brand brand = (Brand) brandRepository.getDb().get__db(brandId);
+                                    return brand;
+                                }else{
+                                    return null;
+                                }
+                          }else{
+                            return null;
+                          }
                         }else{
                           return null;
                       }

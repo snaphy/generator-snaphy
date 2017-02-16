@@ -178,6 +178,7 @@ public class AmazonImage extends Model {
 
     public void save__db(String id){
       AmazonImageRepository lowercaseFirstLetterRepository = (AmazonImageRepository) getRepository();
+
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);

@@ -290,6 +290,7 @@ public class Chat extends Model {
 
     public void save__db(String id){
       ChatRepository lowercaseFirstLetterRepository = (ChatRepository) getRepository();
+
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
@@ -351,6 +352,7 @@ public class Chat extends Model {
                         //Adding database method for fetching from relation if not present..
                         if(brand == null){
                           ChatRepository chatRepository = (ChatRepository) getRepository();
+
                           RestAdapter restAdapter = chatRepository.getRestAdapter();
                           if(restAdapter != null){
                             //Fetch locally from db
@@ -390,12 +392,19 @@ public class Chat extends Model {
                     public Brand getBrand__db(RestAdapter restAdapter){
                       if(brandId != null){
                         BrandRepository brandRepository = restAdapter.createRepository(BrandRepository.class);
-                        Brand brand = (Brand) brandRepository.getDb().get__db(brandId);
-                        if(brand != null){
-                          return brand;
-                        }else{
-                          return null;
-                        }
+                           ChatRepository lowercaseFirstLetterRepository = (ChatRepository) getRepository();
+                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                Context context = lowercaseFirstLetterRepository.getContext();
+                                if(context != null){
+                                    brandRepository.addStorage(context);
+                                    Brand brand = (Brand) brandRepository.getDb().get__db(brandId);
+                                    return brand;
+                                }else{
+                                    return null;
+                                }
+                          }else{
+                            return null;
+                          }
                         }else{
                           return null;
                       }
@@ -538,6 +547,7 @@ public class Chat extends Model {
                         //Adding database method for fetching from relation if not present..
                         if(appUser == null){
                           ChatRepository chatRepository = (ChatRepository) getRepository();
+
                           RestAdapter restAdapter = chatRepository.getRestAdapter();
                           if(restAdapter != null){
                             //Fetch locally from db
@@ -577,12 +587,19 @@ public class Chat extends Model {
                     public AppUser getAppUser__db(RestAdapter restAdapter){
                       if(appUserId != null){
                         AppUserRepository appUserRepository = restAdapter.createRepository(AppUserRepository.class);
-                        AppUser appUser = (AppUser) appUserRepository.getDb().get__db(appUserId);
-                        if(appUser != null){
-                          return appUser;
-                        }else{
-                          return null;
-                        }
+                           ChatRepository lowercaseFirstLetterRepository = (ChatRepository) getRepository();
+                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                Context context = lowercaseFirstLetterRepository.getContext();
+                                if(context != null){
+                                    appUserRepository.addStorage(context);
+                                    AppUser appUser = (AppUser) appUserRepository.getDb().get__db(appUserId);
+                                    return appUser;
+                                }else{
+                                    return null;
+                                }
+                          }else{
+                            return null;
+                          }
                         }else{
                           return null;
                       }
