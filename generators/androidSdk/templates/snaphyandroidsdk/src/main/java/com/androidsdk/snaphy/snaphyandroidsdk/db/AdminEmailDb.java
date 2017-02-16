@@ -541,7 +541,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
 
 
     // Deleting by id
-    public void delete__db(String id) {
+    public void delete__db(final String id) {
       new Thread(new Runnable() {
             @Override
             public void run() {
