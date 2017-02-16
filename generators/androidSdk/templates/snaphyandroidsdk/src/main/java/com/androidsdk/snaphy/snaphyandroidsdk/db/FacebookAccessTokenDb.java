@@ -27,8 +27,6 @@ import com.strongloop.android.loopback.RestAdapter;
 public class FacebookAccessTokenDb{
 
     // All Static variables
-
-
     RestAdapter restAdapter;
 
     private String TAG = "snaphy";
@@ -57,7 +55,7 @@ public class FacebookAccessTokenDb{
       public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                                                                                                                           
         
-        String CREATE_FacebookAccessToken_TABLE = "CREATE TABLE IF NOT EXISTS FacebookAccessToken(  FbUserId TEXT, token TEXT, expires TEXT, userId TEXT, type TEXT, appUserId TEXT, _DATA_UPDATED NUMBER )";
+        String CREATE_FacebookAccessToken_TABLE = "CREATE TABLE IF NOT EXISTS FacebookAccessToken(  `FbUserId` TEXT, `token` TEXT, `expires` TEXT, `userId` TEXT, `type` TEXT, `appUserId` TEXT, _DATA_UPDATED NUMBER )";
         db.execSQL(CREATE_FacebookAccessToken_TABLE);
       }
 

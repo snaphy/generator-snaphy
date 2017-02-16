@@ -27,8 +27,6 @@ import com.strongloop.android.loopback.RestAdapter;
 public class HotDealDb{
 
     // All Static variables
-
-
     RestAdapter restAdapter;
 
     private String TAG = "snaphy";
@@ -57,7 +55,7 @@ public class HotDealDb{
       public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
         
-        String CREATE_HotDeal_TABLE = "CREATE TABLE IF NOT EXISTS HotDeal(  title TEXT, description TEXT, image TEXT, url TEXT, price NUMBER, status TEXT, expiryDate TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, categoryId TEXT, brandId TEXT, _DATA_UPDATED NUMBER )";
+        String CREATE_HotDeal_TABLE = "CREATE TABLE IF NOT EXISTS HotDeal(  `title` TEXT, `description` TEXT, `image` TEXT, `url` TEXT, `price` NUMBER, `status` TEXT, `expiryDate` TEXT, `added` TEXT, `updated` TEXT, `id` TEXT PRIMARY KEY, `categoryId` TEXT, `brandId` TEXT, _DATA_UPDATED NUMBER )";
         db.execSQL(CREATE_HotDeal_TABLE);
       }
 

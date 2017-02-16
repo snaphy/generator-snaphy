@@ -27,8 +27,6 @@ import com.strongloop.android.loopback.RestAdapter;
 public class AmazonImageDb{
 
     // All Static variables
-
-
     RestAdapter restAdapter;
 
     private String TAG = "snaphy";
@@ -57,7 +55,7 @@ public class AmazonImageDb{
       public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                                                                                
         
-        String CREATE_AmazonImage_TABLE = "CREATE TABLE IF NOT EXISTS AmazonImage(  name TEXT, container TEXT, type TEXT, url TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+        String CREATE_AmazonImage_TABLE = "CREATE TABLE IF NOT EXISTS AmazonImage(  `name` TEXT, `container` TEXT, `type` TEXT, `url` TEXT, `id` TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
         db.execSQL(CREATE_AmazonImage_TABLE);
       }
 

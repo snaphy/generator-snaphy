@@ -27,8 +27,6 @@ import com.strongloop.android.loopback.RestAdapter;
 public class StudentDb{
 
     // All Static variables
-
-
     RestAdapter restAdapter;
 
     private String TAG = "snaphy";
@@ -57,7 +55,7 @@ public class StudentDb{
       public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
         
-        String CREATE_Student_TABLE = "CREATE TABLE IF NOT EXISTS Student(  firstName TEXT, lastName TEXT, realm TEXT, username TEXT, password TEXT, credentials TEXT, challenges TEXT, email TEXT, emailVerified TEXT, verificationToken TEXT, status TEXT, created TEXT, lastUpdated TEXT, id TEXT PRIMARY KEY, brandId TEXT, _DATA_UPDATED NUMBER )";
+        String CREATE_Student_TABLE = "CREATE TABLE IF NOT EXISTS Student(  `firstName` TEXT, `lastName` TEXT, `realm` TEXT, `username` TEXT, `password` TEXT, `credentials` TEXT, `challenges` TEXT, `email` TEXT, `emailVerified` TEXT, `verificationToken` TEXT, `status` TEXT, `created` TEXT, `lastUpdated` TEXT, `id` TEXT PRIMARY KEY, `brandId` TEXT, _DATA_UPDATED NUMBER )";
         db.execSQL(CREATE_Student_TABLE);
       }
 

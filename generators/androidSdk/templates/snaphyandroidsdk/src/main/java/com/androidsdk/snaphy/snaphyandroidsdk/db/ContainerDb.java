@@ -27,8 +27,6 @@ import com.strongloop.android.loopback.RestAdapter;
 public class ContainerDb{
 
     // All Static variables
-
-
     RestAdapter restAdapter;
 
     private String TAG = "snaphy";
@@ -57,7 +55,7 @@ public class ContainerDb{
       public void onCreate(SQLiteDatabase db) {
                                                    
         
-        String CREATE_Container_TABLE = "CREATE TABLE IF NOT EXISTS Container(  id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+        String CREATE_Container_TABLE = "CREATE TABLE IF NOT EXISTS Container(  `id` TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
         db.execSQL(CREATE_Container_TABLE);
       }
 

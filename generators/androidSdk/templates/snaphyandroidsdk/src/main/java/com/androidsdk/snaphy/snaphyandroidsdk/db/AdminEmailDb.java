@@ -27,8 +27,6 @@ import com.strongloop.android.loopback.RestAdapter;
 public class AdminEmailDb{
 
     // All Static variables
-
-
     RestAdapter restAdapter;
 
     private String TAG = "snaphy";
@@ -57,7 +55,7 @@ public class AdminEmailDb{
       public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                                                                                                                           
         
-        String CREATE_AdminEmail_TABLE = "CREATE TABLE IF NOT EXISTS AdminEmail(  to TEXT, from TEXT, subject TEXT, text TEXT, html TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+        String CREATE_AdminEmail_TABLE = "CREATE TABLE IF NOT EXISTS AdminEmail(  `to` TEXT, `from` TEXT, `subject` TEXT, `text` TEXT, `html` TEXT, `id` TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
         db.execSQL(CREATE_AdminEmail_TABLE);
       }
 

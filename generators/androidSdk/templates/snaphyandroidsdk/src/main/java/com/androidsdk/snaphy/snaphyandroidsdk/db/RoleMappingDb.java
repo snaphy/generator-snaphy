@@ -27,8 +27,6 @@ import com.strongloop.android.loopback.RestAdapter;
 public class RoleMappingDb{
 
     // All Static variables
-
-
     RestAdapter restAdapter;
 
     private String TAG = "snaphy";
@@ -57,7 +55,7 @@ public class RoleMappingDb{
       public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                                     
         
-        String CREATE_RoleMapping_TABLE = "CREATE TABLE IF NOT EXISTS RoleMapping(  id TEXT PRIMARY KEY, principalType TEXT, principalId TEXT, roleId TEXT, _DATA_UPDATED NUMBER )";
+        String CREATE_RoleMapping_TABLE = "CREATE TABLE IF NOT EXISTS RoleMapping(  `id` TEXT PRIMARY KEY, `principalType` TEXT, `principalId` TEXT, `roleId` TEXT, _DATA_UPDATED NUMBER )";
         db.execSQL(CREATE_RoleMapping_TABLE);
       }
 

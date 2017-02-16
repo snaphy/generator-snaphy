@@ -27,8 +27,6 @@ import com.strongloop.android.loopback.RestAdapter;
 public class BrandDb{
 
     // All Static variables
-
-
     RestAdapter restAdapter;
 
     private String TAG = "snaphy";
@@ -57,7 +55,7 @@ public class BrandDb{
       public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
         
-        String CREATE_Brand_TABLE = "CREATE TABLE IF NOT EXISTS Brand(  added TEXT, updated TEXT, name TEXT, image TEXT, trending TEXT, facebookUrl TEXT, googleUrl TEXT, instagramUrl TEXT, status TEXT, associatedEmail TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+        String CREATE_Brand_TABLE = "CREATE TABLE IF NOT EXISTS Brand(  `added` TEXT, `updated` TEXT, `name` TEXT, `image` TEXT, `trending` TEXT, `facebookUrl` TEXT, `googleUrl` TEXT, `instagramUrl` TEXT, `status` TEXT, `associatedEmail` TEXT, `id` TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
         db.execSQL(CREATE_Brand_TABLE);
       }
 

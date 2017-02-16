@@ -27,8 +27,6 @@ import com.strongloop.android.loopback.RestAdapter;
 public class ChatDb{
 
     // All Static variables
-
-
     RestAdapter restAdapter;
 
     private String TAG = "snaphy";
@@ -57,7 +55,7 @@ public class ChatDb{
       public void onCreate(SQLiteDatabase db) {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
         
-        String CREATE_Chat_TABLE = "CREATE TABLE IF NOT EXISTS Chat(  added TEXT, updated TEXT, message TEXT, type TEXT, image TEXT, from TEXT, guid TEXT, status TEXT, id TEXT PRIMARY KEY, appUserId TEXT, brandId TEXT, _DATA_UPDATED NUMBER )";
+        String CREATE_Chat_TABLE = "CREATE TABLE IF NOT EXISTS Chat(  `added` TEXT, `updated` TEXT, `message` TEXT, `type` TEXT, `image` TEXT, `from` TEXT, `guid` TEXT, `status` TEXT, `id` TEXT PRIMARY KEY, `appUserId` TEXT, `brandId` TEXT, _DATA_UPDATED NUMBER )";
         db.execSQL(CREATE_Chat_TABLE);
       }
 

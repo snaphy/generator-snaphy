@@ -52,7 +52,7 @@ public class DbHandler extends SQLiteOpenHelper {
                         //compileAndWrite(model, ModelDBTemplatePath, AndroidModelPath, helper.capitalizeFirstLetter(modelName) +"Db.java");
             -%>
                         <%
-                            var tableQuery = `CREATE \`TABLE\` IF NOT EXISTS ${modelName}( `;
+                            var tableQuery = `CREATE TABLE IF NOT EXISTS \`${modelName}\` ( `;
                             var i=0;
                             for( let property in model_.properties) { -%>
                                 <% if(model_.properties.hasOwnProperty(property)){
