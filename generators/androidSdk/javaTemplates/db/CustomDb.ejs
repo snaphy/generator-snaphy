@@ -28,7 +28,7 @@ import com.strongloop.android.loopback.RestAdapter;
 * Created by snaphy on 1/2/2017.
 */
 
-public class <%- modelName %>Db extends SQLiteOpenHelper {
+public class <%- modelName %>Db{
 
     // All Static variables
     // Database Version
@@ -52,59 +52,60 @@ public class <%- modelName %>Db extends SQLiteOpenHelper {
     this.restAdapter = restAdapter;
     TABLE = "<%- modelName %>";
     this.DATABASE_NAME = DATABASE_NAME;
-    SQLiteDatabase db = this.getWritableDatabase();
+    SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
     onCreate(db);
   }
 
-  // Creating Tables
-  @Override
-  public void onCreate(SQLiteDatabase db) {
-    <%
-    var tableQuery = `CREATE TABLE IF NOT EXISTS ${modelName}( `;
-    var i=0;
-    for( let property in model.properties) { -%>
-        <% if(model.properties.hasOwnProperty(property)){
-            let isArray = model.properties[property].type instanceof Array;
-            if(i==0){
-                if(property === "id"){
-                  tableQuery = `${tableQuery} ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)} PRIMARY KEY`;
+  /**
+      // Creating Tables
+      @Override
+      public void onCreate(SQLiteDatabase db) {
+        <%
+        var tableQuery = `CREATE TABLE IF NOT EXISTS ${modelName}( `;
+        var i=0;
+        for( let property in model.properties) { -%>
+            <% if(model.properties.hasOwnProperty(property)){
+                let isArray = model.properties[property].type instanceof Array;
+                if(i==0){
+                    if(property === "id"){
+                      tableQuery = `${tableQuery} ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)} PRIMARY KEY`;
+                    }else{
+                      tableQuery = `${tableQuery} ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)}`;
+                    }
                 }else{
-                  tableQuery = `${tableQuery} ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)}`;
+                  if(property === "id"){
+                    tableQuery = `${tableQuery}, ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)} PRIMARY KEY`;
+                  }else{
+                    tableQuery = `${tableQuery}, ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)}`;
+                  }
                 }
-            }else{
-              if(property === "id"){
-                tableQuery = `${tableQuery}, ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)} PRIMARY KEY`;
-              }else{
-                tableQuery = `${tableQuery}, ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)}`;
-              }
-            }
-        -%>
+            -%>
+            <%} -%>
+           <% i++; -%>
         <%} -%>
-       <% i++; -%>
-    <%} -%>
 
-    <% 
-    //On insert always update the update data value to be 1 and on fetch change to 0
-    tableQuery = tableQuery + `, ${model.methods.updateDataProperty} NUMBER ` + ")"; %>
-    String CREATE_<%- modelName %>_TABLE = "<%- tableQuery %>";
-    db.execSQL(CREATE_<%- modelName %>_TABLE);
-  }
+        <%
+        //On insert always update the update data value to be 1 and on fetch change to 0
+        tableQuery = tableQuery + `, ${model.methods.updateDataProperty} NUMBER ` + ")"; %>
+        String CREATE_<%- modelName %>_TABLE = "<%- tableQuery %>";
+        db.execSQL(CREATE_<%- modelName %>_TABLE);
+      }
 
-    // Upgrading database
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS <%- modelName %>");
-            // Create tables again
-            onCreate(db);
-    }
-
+        // Upgrading database
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS <%- modelName %>");
+                // Create tables again
+                onCreate(db);
+        }
+    **/
 
     public void insert__db (final String id, final <%- modelName %> modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
                 db.insert("<%- modelName %>", null, values);
@@ -182,7 +183,7 @@ public class <%- modelName %>Db extends SQLiteOpenHelper {
     // Getting single c
     public   <%- modelName %> get__db(String id) {
         if (id != null) {
-            SQLiteDatabase db = this.getReadableDatabase();
+            SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
             Cursor cursor = db.query("<%- modelName %>", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 if (!(cursor.moveToFirst()) || cursor.getCount() == 0){
@@ -215,7 +216,7 @@ public class <%- modelName %>Db extends SQLiteOpenHelper {
     // Getting single cont
     public   <%- modelName %> get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
-            SQLiteDatabase db = this.getReadableDatabase();
+            SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
             Cursor cursor = db.query("<%- modelName %>", null, whereKey + "=?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!(cursor.moveToFirst()) || cursor.getCount() == 0){
@@ -338,7 +339,7 @@ public class <%- modelName %>Db extends SQLiteOpenHelper {
         // Select All Query
         String selectQuery = "SELECT  * FROM <%- modelName %>";
 
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -370,7 +371,7 @@ public class <%- modelName %>Db extends SQLiteOpenHelper {
         // Select All Query
         String selectQuery = "SELECT  * FROM <%- modelName %> WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -408,7 +409,7 @@ public class <%- modelName %>Db extends SQLiteOpenHelper {
      */
     public int count__db(String whereKey, String whereKeyValue){
         String countQuery = "SELECT  * FROM <%- modelName %> WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
         cursor.close();
@@ -421,7 +422,7 @@ public class <%- modelName %>Db extends SQLiteOpenHelper {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
                 db.beginTransaction();
                 ContentValues values = new ContentValues();
@@ -442,7 +443,7 @@ public class <%- modelName %>Db extends SQLiteOpenHelper {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 db.delete("<%- modelName %>", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
@@ -459,7 +460,7 @@ public class <%- modelName %>Db extends SQLiteOpenHelper {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 ContentValues values = getContentValues(modelData);
                 // updating row
@@ -479,7 +480,7 @@ public class <%- modelName %>Db extends SQLiteOpenHelper {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 ContentValues values = new ContentValues();
                 values.put("<%- model.methods.updateDataProperty %>", 0);
@@ -499,7 +500,7 @@ public class <%- modelName %>Db extends SQLiteOpenHelper {
       new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 db.delete("<%- modelName %>", "<%- model.methods.updateDataProperty %> = 0", null);
                 db.setTransactionSuccessful();
@@ -514,7 +515,7 @@ public class <%- modelName %>Db extends SQLiteOpenHelper {
     // Getting contacts Count
     public int count__db() {
         String countQuery = "SELECT  * FROM " + TABLE;
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
         cursor.close();
@@ -530,7 +531,7 @@ public class <%- modelName %>Db extends SQLiteOpenHelper {
      */
     public int count__db(String id){
         String countQuery = "SELECT  * FROM " + TABLE  + " WHERE ID='" + id+"'";
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
         cursor.close();
@@ -545,7 +546,7 @@ public class <%- modelName %>Db extends SQLiteOpenHelper {
       new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 db.delete(TABLE, KEY_ID + " = ?",
                 new String[] { id });
@@ -560,7 +561,7 @@ public class <%- modelName %>Db extends SQLiteOpenHelper {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 db.delete(TABLE,null,null);
                 db.setTransactionSuccessful();
