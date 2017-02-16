@@ -16,7 +16,6 @@ import android.database.Cursor;
 import java.lang.reflect.Method;
 import android.util.Log;
 import java.util.Map;
-import android.database.sqlite.SQLiteOpenHelper;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 import com.androidsdk.snaphy.snaphyandroidsdk.models.<%- modelName %>;
@@ -31,8 +30,7 @@ import com.strongloop.android.loopback.RestAdapter;
 public class <%- modelName %>Db{
 
     // All Static variables
-    // Database Version
-    private static final int DATABASE_VERSION = 1;
+
 
     RestAdapter restAdapter;
 
@@ -53,7 +51,7 @@ public class <%- modelName %>Db{
     TABLE = "<%- modelName %>";
     this.DATABASE_NAME = DATABASE_NAME;
     SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-    onCreate(db);
+    DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
   /**

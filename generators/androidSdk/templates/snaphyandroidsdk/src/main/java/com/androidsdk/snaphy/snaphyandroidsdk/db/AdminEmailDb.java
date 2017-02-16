@@ -13,7 +13,6 @@ import android.database.Cursor;
 import java.lang.reflect.Method;
 import android.util.Log;
 import java.util.Map;
-import android.database.sqlite.SQLiteOpenHelper;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 import com.androidsdk.snaphy.snaphyandroidsdk.models.AdminEmail;
@@ -25,11 +24,10 @@ import com.strongloop.android.loopback.RestAdapter;
 * Created by snaphy on 1/2/2017.
 */
 
-public class AdminEmailDb extends SQLiteOpenHelper {
+public class AdminEmailDb{
 
     // All Static variables
-    // Database Version
-    private static final int DATABASE_VERSION = 1;
+
 
     RestAdapter restAdapter;
 
@@ -49,34 +47,35 @@ public class AdminEmailDb extends SQLiteOpenHelper {
     this.restAdapter = restAdapter;
     TABLE = "AdminEmail";
     this.DATABASE_NAME = DATABASE_NAME;
-    SQLiteDatabase db = this.getWritableDatabase();
-    onCreate(db);
+    SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+    DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
-  // Creating Tables
-  @Override
-  public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                      
-    
-    String CREATE_AdminEmail_TABLE = "CREATE TABLE IF NOT EXISTS AdminEmail(  to TEXT, from TEXT, subject TEXT, text TEXT, html TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
-    db.execSQL(CREATE_AdminEmail_TABLE);
-  }
+  /**
+      // Creating Tables
+      @Override
+      public void onCreate(SQLiteDatabase db) {
+                                                                                                                                                                                                                                                                          
+        
+        String CREATE_AdminEmail_TABLE = "CREATE TABLE IF NOT EXISTS AdminEmail(  to TEXT, from TEXT, subject TEXT, text TEXT, html TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+        db.execSQL(CREATE_AdminEmail_TABLE);
+      }
 
-    // Upgrading database
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS AdminEmail");
-            // Create tables again
-            onCreate(db);
-    }
-
+        // Upgrading database
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS AdminEmail");
+                // Create tables again
+                onCreate(db);
+        }
+    **/
 
     public void insert__db (final String id, final AdminEmail modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
                 db.insert("AdminEmail", null, values);
@@ -188,7 +187,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
     // Getting single c
     public   AdminEmail get__db(String id) {
         if (id != null) {
-            SQLiteDatabase db = this.getReadableDatabase();
+            SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
             Cursor cursor = db.query("AdminEmail", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 if (!(cursor.moveToFirst()) || cursor.getCount() == 0){
@@ -221,7 +220,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
     // Getting single cont
     public   AdminEmail get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
-            SQLiteDatabase db = this.getReadableDatabase();
+            SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
             Cursor cursor = db.query("AdminEmail", null, whereKey + "=?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!(cursor.moveToFirst()) || cursor.getCount() == 0){
@@ -338,7 +337,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
         // Select All Query
         String selectQuery = "SELECT  * FROM AdminEmail";
 
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -370,7 +369,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
         // Select All Query
         String selectQuery = "SELECT  * FROM AdminEmail WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -408,7 +407,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
      */
     public int count__db(String whereKey, String whereKeyValue){
         String countQuery = "SELECT  * FROM AdminEmail WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
         cursor.close();
@@ -421,7 +420,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
                 db.beginTransaction();
                 ContentValues values = new ContentValues();
@@ -442,7 +441,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 db.delete("AdminEmail", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
@@ -459,7 +458,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 ContentValues values = getContentValues(modelData);
                 // updating row
@@ -479,7 +478,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
@@ -499,7 +498,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
       new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 db.delete("AdminEmail", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
@@ -514,7 +513,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
     // Getting contacts Count
     public int count__db() {
         String countQuery = "SELECT  * FROM " + TABLE;
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
         cursor.close();
@@ -530,7 +529,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
      */
     public int count__db(String id){
         String countQuery = "SELECT  * FROM " + TABLE  + " WHERE ID='" + id+"'";
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
         cursor.close();
@@ -545,7 +544,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
       new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 db.delete(TABLE, KEY_ID + " = ?",
                 new String[] { id });
@@ -560,7 +559,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 db.delete(TABLE,null,null);
                 db.setTransactionSuccessful();

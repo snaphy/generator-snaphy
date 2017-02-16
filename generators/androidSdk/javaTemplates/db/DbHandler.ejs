@@ -12,10 +12,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbHandler extends SQLiteOpenHelper {
         private static DbHandler sInstance;
-        public static synchronized DbHandler getInstance(Context context, String DATABASE_NAME, int DATABASE_VERSION){
+        // Database Version
+        private static final int DATABASE_VERSION = 1;
+        public static synchronized DbHandler getInstance(Context context, String DATABASE_NAME){
             // Use the application context, which will ensure that you don't accidentally leak an Activity's context.
             if (sInstance == null) {
-                sInstance = new DbHandler(context.getApplicationContext(), DATABASE_NAME, DATABASE_VERSION);
+                sInstance = new DbHandler(context.getApplicationContext(), DATABASE_NAME);
             }
             return sInstance;
         }
@@ -110,7 +112,7 @@ public class DbHandler extends SQLiteOpenHelper {
         }
 
 
-        private DbHandler(Context context, String DATABASE_NAME, int DATABASE_VERSION) {
+        private DbHandler(Context context, String DATABASE_NAME) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
             SQLiteDatabase db = this.getWritableDatabase();
             onCreate(db);

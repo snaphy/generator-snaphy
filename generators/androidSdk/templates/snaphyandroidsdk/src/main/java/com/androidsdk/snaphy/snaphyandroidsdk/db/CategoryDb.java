@@ -13,7 +13,6 @@ import android.database.Cursor;
 import java.lang.reflect.Method;
 import android.util.Log;
 import java.util.Map;
-import android.database.sqlite.SQLiteOpenHelper;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Category;
@@ -25,11 +24,10 @@ import com.strongloop.android.loopback.RestAdapter;
 * Created by snaphy on 1/2/2017.
 */
 
-public class CategoryDb extends SQLiteOpenHelper {
+public class CategoryDb{
 
     // All Static variables
-    // Database Version
-    private static final int DATABASE_VERSION = 1;
+
 
     RestAdapter restAdapter;
 
@@ -49,34 +47,35 @@ public class CategoryDb extends SQLiteOpenHelper {
     this.restAdapter = restAdapter;
     TABLE = "Category";
     this.DATABASE_NAME = DATABASE_NAME;
-    SQLiteDatabase db = this.getWritableDatabase();
-    onCreate(db);
+    SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+    DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
-  // Creating Tables
-  @Override
-  public void onCreate(SQLiteDatabase db) {
-                                                                                                                
-    
-    String CREATE_Category_TABLE = "CREATE TABLE IF NOT EXISTS Category(  name TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
-    db.execSQL(CREATE_Category_TABLE);
-  }
+  /**
+      // Creating Tables
+      @Override
+      public void onCreate(SQLiteDatabase db) {
+                                                                                                                                                                                    
+        
+        String CREATE_Category_TABLE = "CREATE TABLE IF NOT EXISTS Category(  name TEXT, added TEXT, updated TEXT, id TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+        db.execSQL(CREATE_Category_TABLE);
+      }
 
-    // Upgrading database
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS Category");
-            // Create tables again
-            onCreate(db);
-    }
-
+        // Upgrading database
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS Category");
+                // Create tables again
+                onCreate(db);
+        }
+    **/
 
     public void insert__db (final String id, final Category modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
                 db.insert("Category", null, values);
@@ -136,7 +135,7 @@ public class CategoryDb extends SQLiteOpenHelper {
     // Getting single c
     public   Category get__db(String id) {
         if (id != null) {
-            SQLiteDatabase db = this.getReadableDatabase();
+            SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
             Cursor cursor = db.query("Category", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 if (!(cursor.moveToFirst()) || cursor.getCount() == 0){
@@ -169,7 +168,7 @@ public class CategoryDb extends SQLiteOpenHelper {
     // Getting single cont
     public   Category get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
-            SQLiteDatabase db = this.getReadableDatabase();
+            SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
             Cursor cursor = db.query("Category", null, whereKey + "=?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!(cursor.moveToFirst()) || cursor.getCount() == 0){
@@ -266,7 +265,7 @@ public class CategoryDb extends SQLiteOpenHelper {
         // Select All Query
         String selectQuery = "SELECT  * FROM Category";
 
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -298,7 +297,7 @@ public class CategoryDb extends SQLiteOpenHelper {
         // Select All Query
         String selectQuery = "SELECT  * FROM Category WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -336,7 +335,7 @@ public class CategoryDb extends SQLiteOpenHelper {
      */
     public int count__db(String whereKey, String whereKeyValue){
         String countQuery = "SELECT  * FROM Category WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
         cursor.close();
@@ -349,7 +348,7 @@ public class CategoryDb extends SQLiteOpenHelper {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
                 db.beginTransaction();
                 ContentValues values = new ContentValues();
@@ -370,7 +369,7 @@ public class CategoryDb extends SQLiteOpenHelper {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 db.delete("Category", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
@@ -387,7 +386,7 @@ public class CategoryDb extends SQLiteOpenHelper {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 ContentValues values = getContentValues(modelData);
                 // updating row
@@ -407,7 +406,7 @@ public class CategoryDb extends SQLiteOpenHelper {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
@@ -427,7 +426,7 @@ public class CategoryDb extends SQLiteOpenHelper {
       new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 db.delete("Category", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
@@ -442,7 +441,7 @@ public class CategoryDb extends SQLiteOpenHelper {
     // Getting contacts Count
     public int count__db() {
         String countQuery = "SELECT  * FROM " + TABLE;
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
         cursor.close();
@@ -458,7 +457,7 @@ public class CategoryDb extends SQLiteOpenHelper {
      */
     public int count__db(String id){
         String countQuery = "SELECT  * FROM " + TABLE  + " WHERE ID='" + id+"'";
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
         cursor.close();
@@ -473,7 +472,7 @@ public class CategoryDb extends SQLiteOpenHelper {
       new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 db.delete(TABLE, KEY_ID + " = ?",
                 new String[] { id });
@@ -488,7 +487,7 @@ public class CategoryDb extends SQLiteOpenHelper {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                SQLiteDatabase db = getWritableDatabase();
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 db.delete(TABLE,null,null);
                 db.setTransactionSuccessful();
