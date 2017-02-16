@@ -36,7 +36,7 @@ public class StudentDb extends SQLiteOpenHelper {
     private String TAG = "snaphy";
     private String KEY_ID = "ID";
     private String KEY_OBJECT = "OBJECT";
-
+    private Context context;
     // Database Name
     private static String DATABASE_NAME;
 
@@ -45,6 +45,7 @@ public class StudentDb extends SQLiteOpenHelper {
 
   public StudentDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    this.context = context;
     this.restAdapter = restAdapter;
     TABLE = "Student";
     this.DATABASE_NAME = DATABASE_NAME;
@@ -302,6 +303,7 @@ public class StudentDb extends SQLiteOpenHelper {
 
                 if (hashMap != null) {
                     StudentRepository repo = restAdapter.createRepository(StudentRepository.class);
+                    repo.addStorage(context);
                     return (Student)repo.createObject(hashMap);
                 } else {
                     return null;
@@ -332,6 +334,7 @@ public class StudentDb extends SQLiteOpenHelper {
 
                 if (hashMap != null) {
                     StudentRepository repo = restAdapter.createRepository(StudentRepository.class);
+                    repo.addStorage(context);
                     return (Student)repo.createObject(hashMap);
                 } else {
                     return null;
@@ -533,6 +536,7 @@ public class StudentDb extends SQLiteOpenHelper {
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     StudentRepository repo = restAdapter.createRepository(StudentRepository.class);
+                    repo.addStorage(context);
                     modelList.add((Student)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
@@ -560,6 +564,7 @@ public class StudentDb extends SQLiteOpenHelper {
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     StudentRepository repo = restAdapter.createRepository(StudentRepository.class);
+                    repo.addStorage(context);
                     modelList.add((Student)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
@@ -663,6 +668,7 @@ public class StudentDb extends SQLiteOpenHelper {
         // return count
         return count;
     }
+
 
 
     // Deleting by id

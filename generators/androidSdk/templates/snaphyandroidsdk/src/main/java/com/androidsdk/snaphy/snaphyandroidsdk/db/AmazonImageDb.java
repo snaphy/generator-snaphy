@@ -36,7 +36,7 @@ public class AmazonImageDb extends SQLiteOpenHelper {
     private String TAG = "snaphy";
     private String KEY_ID = "ID";
     private String KEY_OBJECT = "OBJECT";
-
+    private Context context;
     // Database Name
     private static String DATABASE_NAME;
 
@@ -45,6 +45,7 @@ public class AmazonImageDb extends SQLiteOpenHelper {
 
   public AmazonImageDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    this.context = context;
     this.restAdapter = restAdapter;
     TABLE = "AmazonImage";
     this.DATABASE_NAME = DATABASE_NAME;
@@ -146,6 +147,7 @@ public class AmazonImageDb extends SQLiteOpenHelper {
 
                 if (hashMap != null) {
                     AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);
+                    repo.addStorage(context);
                     return (AmazonImage)repo.createObject(hashMap);
                 } else {
                     return null;
@@ -176,6 +178,7 @@ public class AmazonImageDb extends SQLiteOpenHelper {
 
                 if (hashMap != null) {
                     AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);
+                    repo.addStorage(context);
                     return (AmazonImage)repo.createObject(hashMap);
                 } else {
                     return null;
@@ -277,6 +280,7 @@ public class AmazonImageDb extends SQLiteOpenHelper {
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);
+                    repo.addStorage(context);
                     modelList.add((AmazonImage)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
@@ -304,6 +308,7 @@ public class AmazonImageDb extends SQLiteOpenHelper {
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);
+                    repo.addStorage(context);
                     modelList.add((AmazonImage)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
@@ -407,6 +412,7 @@ public class AmazonImageDb extends SQLiteOpenHelper {
         // return count
         return count;
     }
+
 
 
     // Deleting by id

@@ -36,7 +36,7 @@ public class DailyFeedDb extends SQLiteOpenHelper {
     private String TAG = "snaphy";
     private String KEY_ID = "ID";
     private String KEY_OBJECT = "OBJECT";
-
+    private Context context;
     // Database Name
     private static String DATABASE_NAME;
 
@@ -45,6 +45,7 @@ public class DailyFeedDb extends SQLiteOpenHelper {
 
   public DailyFeedDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    this.context = context;
     this.restAdapter = restAdapter;
     TABLE = "DailyFeed";
     this.DATABASE_NAME = DATABASE_NAME;
@@ -166,6 +167,7 @@ public class DailyFeedDb extends SQLiteOpenHelper {
 
                 if (hashMap != null) {
                     DailyFeedRepository repo = restAdapter.createRepository(DailyFeedRepository.class);
+                    repo.addStorage(context);
                     return (DailyFeed)repo.createObject(hashMap);
                 } else {
                     return null;
@@ -196,6 +198,7 @@ public class DailyFeedDb extends SQLiteOpenHelper {
 
                 if (hashMap != null) {
                     DailyFeedRepository repo = restAdapter.createRepository(DailyFeedRepository.class);
+                    repo.addStorage(context);
                     return (DailyFeed)repo.createObject(hashMap);
                 } else {
                     return null;
@@ -317,6 +320,7 @@ public class DailyFeedDb extends SQLiteOpenHelper {
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     DailyFeedRepository repo = restAdapter.createRepository(DailyFeedRepository.class);
+                    repo.addStorage(context);
                     modelList.add((DailyFeed)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
@@ -344,6 +348,7 @@ public class DailyFeedDb extends SQLiteOpenHelper {
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     DailyFeedRepository repo = restAdapter.createRepository(DailyFeedRepository.class);
+                    repo.addStorage(context);
                     modelList.add((DailyFeed)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
@@ -447,6 +452,7 @@ public class DailyFeedDb extends SQLiteOpenHelper {
         // return count
         return count;
     }
+
 
 
     // Deleting by id

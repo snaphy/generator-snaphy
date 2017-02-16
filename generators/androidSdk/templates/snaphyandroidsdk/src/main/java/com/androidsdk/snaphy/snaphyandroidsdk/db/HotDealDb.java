@@ -36,7 +36,7 @@ public class HotDealDb extends SQLiteOpenHelper {
     private String TAG = "snaphy";
     private String KEY_ID = "ID";
     private String KEY_OBJECT = "OBJECT";
-
+    private Context context;
     // Database Name
     private static String DATABASE_NAME;
 
@@ -45,6 +45,7 @@ public class HotDealDb extends SQLiteOpenHelper {
 
   public HotDealDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    this.context = context;
     this.restAdapter = restAdapter;
     TABLE = "HotDeal";
     this.DATABASE_NAME = DATABASE_NAME;
@@ -202,6 +203,7 @@ public class HotDealDb extends SQLiteOpenHelper {
 
                 if (hashMap != null) {
                     HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
+                    repo.addStorage(context);
                     return (HotDeal)repo.createObject(hashMap);
                 } else {
                     return null;
@@ -232,6 +234,7 @@ public class HotDealDb extends SQLiteOpenHelper {
 
                 if (hashMap != null) {
                     HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
+                    repo.addStorage(context);
                     return (HotDeal)repo.createObject(hashMap);
                 } else {
                     return null;
@@ -401,6 +404,7 @@ public class HotDealDb extends SQLiteOpenHelper {
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
+                    repo.addStorage(context);
                     modelList.add((HotDeal)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
@@ -428,6 +432,7 @@ public class HotDealDb extends SQLiteOpenHelper {
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
+                    repo.addStorage(context);
                     modelList.add((HotDeal)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
@@ -531,6 +536,7 @@ public class HotDealDb extends SQLiteOpenHelper {
         // return count
         return count;
     }
+
 
 
     // Deleting by id

@@ -36,7 +36,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
     private String TAG = "snaphy";
     private String KEY_ID = "ID";
     private String KEY_OBJECT = "OBJECT";
-
+    private Context context;
     // Database Name
     private static String DATABASE_NAME;
 
@@ -45,6 +45,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
 
   public AdminEmailDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    this.context = context;
     this.restAdapter = restAdapter;
     TABLE = "AdminEmail";
     this.DATABASE_NAME = DATABASE_NAME;
@@ -192,6 +193,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
 
                 if (hashMap != null) {
                     AdminEmailRepository repo = restAdapter.createRepository(AdminEmailRepository.class);
+                    repo.addStorage(context);
                     return (AdminEmail)repo.createObject(hashMap);
                 } else {
                     return null;
@@ -222,6 +224,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
 
                 if (hashMap != null) {
                     AdminEmailRepository repo = restAdapter.createRepository(AdminEmailRepository.class);
+                    repo.addStorage(context);
                     return (AdminEmail)repo.createObject(hashMap);
                 } else {
                     return null;
@@ -333,6 +336,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     AdminEmailRepository repo = restAdapter.createRepository(AdminEmailRepository.class);
+                    repo.addStorage(context);
                     modelList.add((AdminEmail)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
@@ -360,6 +364,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     AdminEmailRepository repo = restAdapter.createRepository(AdminEmailRepository.class);
+                    repo.addStorage(context);
                     modelList.add((AdminEmail)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
@@ -463,6 +468,7 @@ public class AdminEmailDb extends SQLiteOpenHelper {
         // return count
         return count;
     }
+
 
 
     // Deleting by id

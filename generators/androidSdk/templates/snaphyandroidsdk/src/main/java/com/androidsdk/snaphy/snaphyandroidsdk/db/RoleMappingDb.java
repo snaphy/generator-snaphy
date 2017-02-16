@@ -36,7 +36,7 @@ public class RoleMappingDb extends SQLiteOpenHelper {
     private String TAG = "snaphy";
     private String KEY_ID = "ID";
     private String KEY_OBJECT = "OBJECT";
-
+    private Context context;
     // Database Name
     private static String DATABASE_NAME;
 
@@ -45,6 +45,7 @@ public class RoleMappingDb extends SQLiteOpenHelper {
 
   public RoleMappingDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    this.context = context;
     this.restAdapter = restAdapter;
     TABLE = "RoleMapping";
     this.DATABASE_NAME = DATABASE_NAME;
@@ -156,6 +157,7 @@ public class RoleMappingDb extends SQLiteOpenHelper {
 
                 if (hashMap != null) {
                     RoleMappingRepository repo = restAdapter.createRepository(RoleMappingRepository.class);
+                    repo.addStorage(context);
                     return (RoleMapping)repo.createObject(hashMap);
                 } else {
                     return null;
@@ -186,6 +188,7 @@ public class RoleMappingDb extends SQLiteOpenHelper {
 
                 if (hashMap != null) {
                     RoleMappingRepository repo = restAdapter.createRepository(RoleMappingRepository.class);
+                    repo.addStorage(context);
                     return (RoleMapping)repo.createObject(hashMap);
                 } else {
                     return null;
@@ -277,6 +280,7 @@ public class RoleMappingDb extends SQLiteOpenHelper {
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     RoleMappingRepository repo = restAdapter.createRepository(RoleMappingRepository.class);
+                    repo.addStorage(context);
                     modelList.add((RoleMapping)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
@@ -304,6 +308,7 @@ public class RoleMappingDb extends SQLiteOpenHelper {
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     RoleMappingRepository repo = restAdapter.createRepository(RoleMappingRepository.class);
+                    repo.addStorage(context);
                     modelList.add((RoleMapping)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
@@ -407,6 +412,7 @@ public class RoleMappingDb extends SQLiteOpenHelper {
         // return count
         return count;
     }
+
 
 
     // Deleting by id

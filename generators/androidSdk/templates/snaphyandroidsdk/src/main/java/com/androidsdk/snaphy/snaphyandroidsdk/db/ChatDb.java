@@ -36,7 +36,7 @@ public class ChatDb extends SQLiteOpenHelper {
     private String TAG = "snaphy";
     private String KEY_ID = "ID";
     private String KEY_OBJECT = "OBJECT";
-
+    private Context context;
     // Database Name
     private static String DATABASE_NAME;
 
@@ -45,6 +45,7 @@ public class ChatDb extends SQLiteOpenHelper {
 
   public ChatDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    this.context = context;
     this.restAdapter = restAdapter;
     TABLE = "Chat";
     this.DATABASE_NAME = DATABASE_NAME;
@@ -198,6 +199,7 @@ public class ChatDb extends SQLiteOpenHelper {
 
                 if (hashMap != null) {
                     ChatRepository repo = restAdapter.createRepository(ChatRepository.class);
+                    repo.addStorage(context);
                     return (Chat)repo.createObject(hashMap);
                 } else {
                     return null;
@@ -228,6 +230,7 @@ public class ChatDb extends SQLiteOpenHelper {
 
                 if (hashMap != null) {
                     ChatRepository repo = restAdapter.createRepository(ChatRepository.class);
+                    repo.addStorage(context);
                     return (Chat)repo.createObject(hashMap);
                 } else {
                     return null;
@@ -389,6 +392,7 @@ public class ChatDb extends SQLiteOpenHelper {
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     ChatRepository repo = restAdapter.createRepository(ChatRepository.class);
+                    repo.addStorage(context);
                     modelList.add((Chat)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
@@ -416,6 +420,7 @@ public class ChatDb extends SQLiteOpenHelper {
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     ChatRepository repo = restAdapter.createRepository(ChatRepository.class);
+                    repo.addStorage(context);
                     modelList.add((Chat)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
@@ -519,6 +524,7 @@ public class ChatDb extends SQLiteOpenHelper {
         // return count
         return count;
     }
+
 
 
     // Deleting by id

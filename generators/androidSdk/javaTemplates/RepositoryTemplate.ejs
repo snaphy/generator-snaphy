@@ -234,6 +234,11 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
     }
 
 
+    public void getContext(){
+        return context;
+    }
+
+
     <% if(model.base === "User" || modelName === "User"){ %>
     		//Create public methods..
     		public <%- modelName %> cachedCurrentUser;

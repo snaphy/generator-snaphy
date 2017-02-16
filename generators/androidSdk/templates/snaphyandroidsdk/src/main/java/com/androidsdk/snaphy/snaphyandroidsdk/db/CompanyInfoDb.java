@@ -36,7 +36,7 @@ public class CompanyInfoDb extends SQLiteOpenHelper {
     private String TAG = "snaphy";
     private String KEY_ID = "ID";
     private String KEY_OBJECT = "OBJECT";
-
+    private Context context;
     // Database Name
     private static String DATABASE_NAME;
 
@@ -45,6 +45,7 @@ public class CompanyInfoDb extends SQLiteOpenHelper {
 
   public CompanyInfoDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    this.context = context;
     this.restAdapter = restAdapter;
     TABLE = "CompanyInfo";
     this.DATABASE_NAME = DATABASE_NAME;
@@ -140,6 +141,7 @@ public class CompanyInfoDb extends SQLiteOpenHelper {
 
                 if (hashMap != null) {
                     CompanyInfoRepository repo = restAdapter.createRepository(CompanyInfoRepository.class);
+                    repo.addStorage(context);
                     return (CompanyInfo)repo.createObject(hashMap);
                 } else {
                     return null;
@@ -170,6 +172,7 @@ public class CompanyInfoDb extends SQLiteOpenHelper {
 
                 if (hashMap != null) {
                     CompanyInfoRepository repo = restAdapter.createRepository(CompanyInfoRepository.class);
+                    repo.addStorage(context);
                     return (CompanyInfo)repo.createObject(hashMap);
                 } else {
                     return null;
@@ -261,6 +264,7 @@ public class CompanyInfoDb extends SQLiteOpenHelper {
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     CompanyInfoRepository repo = restAdapter.createRepository(CompanyInfoRepository.class);
+                    repo.addStorage(context);
                     modelList.add((CompanyInfo)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
@@ -288,6 +292,7 @@ public class CompanyInfoDb extends SQLiteOpenHelper {
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
                     CompanyInfoRepository repo = restAdapter.createRepository(CompanyInfoRepository.class);
+                    repo.addStorage(context);
                     modelList.add((CompanyInfo)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
@@ -391,6 +396,7 @@ public class CompanyInfoDb extends SQLiteOpenHelper {
         // return count
         return count;
     }
+
 
 
     // Deleting by id
