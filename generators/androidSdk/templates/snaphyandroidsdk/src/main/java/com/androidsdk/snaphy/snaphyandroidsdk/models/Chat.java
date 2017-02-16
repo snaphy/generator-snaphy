@@ -396,7 +396,7 @@ public class Chat extends Model {
                            ChatRepository lowercaseFirstLetterRepository = (ChatRepository) getRepository();
                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                if(context != null && (Brand) brandRepository.getDb() != null){
+                                if(context != null && brandRepository.getDb() != null){
                                     brandRepository.addStorage(context);
                                     Brand brand = (Brand) brandRepository.getDb().get__db(brandId);
                                     return brand;
@@ -591,7 +591,7 @@ public class Chat extends Model {
                            ChatRepository lowercaseFirstLetterRepository = (ChatRepository) getRepository();
                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                if(context != null && (AppUser) appUserRepository.getDb() != null){
+                                if(context != null && appUserRepository.getDb() != null){
                                     appUserRepository.addStorage(context);
                                     AppUser appUser = (AppUser) appUserRepository.getDb().get__db(appUserId);
                                     return appUser;

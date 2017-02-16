@@ -2860,7 +2860,7 @@ public class Brand extends Model {
                            BrandRepository lowercaseFirstLetterRepository = (BrandRepository) getRepository();
                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                if(context != null && (BrandVerification) brandVerificationsRepository.getDb() != null){
+                                if(context != null && brandVerificationsRepository.getDb() != null){
                                     brandVerificationsRepository.addStorage(context);
                                     BrandVerification brandVerifications = (BrandVerification) brandVerificationsRepository.getDb().get__db(brandVerificationId);
                                     return brandVerifications;

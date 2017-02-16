@@ -249,7 +249,7 @@ public class FollowBrand extends Model {
                            FollowBrandRepository lowercaseFirstLetterRepository = (FollowBrandRepository) getRepository();
                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                if(context != null && (AppUser) appUserRepository.getDb() != null){
+                                if(context != null && appUserRepository.getDb() != null){
                                     appUserRepository.addStorage(context);
                                     AppUser appUser = (AppUser) appUserRepository.getDb().get__db(appUserId);
                                     return appUser;
@@ -446,7 +446,7 @@ public class FollowBrand extends Model {
                            FollowBrandRepository lowercaseFirstLetterRepository = (FollowBrandRepository) getRepository();
                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                if(context != null && (Brand) brandRepository.getDb() != null){
+                                if(context != null && brandRepository.getDb() != null){
                                     brandRepository.addStorage(context);
                                     Brand brand = (Brand) brandRepository.getDb().get__db(brandId);
                                     return brand;

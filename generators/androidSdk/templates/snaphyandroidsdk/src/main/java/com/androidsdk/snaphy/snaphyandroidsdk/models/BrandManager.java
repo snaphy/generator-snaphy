@@ -444,7 +444,7 @@ public class BrandManager extends User {
                            BrandManagerRepository lowercaseFirstLetterRepository = (BrandManagerRepository) getRepository();
                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                if(context != null && (Brand) brandRepository.getDb() != null){
+                                if(context != null && brandRepository.getDb() != null){
                                     brandRepository.addStorage(context);
                                     Brand brand = (Brand) brandRepository.getDb().get__db(brandId);
                                     return brand;

@@ -593,9 +593,10 @@ public class <%- modelName %> extends Model {
                     public DataList< <%- capitalcaseRelatedModelName %> > get<%- capitalcaseRelationName %>() {
                         //Check for pure case of hasMany
                         <% if(!model.relations[relation].through){ -%>
+                            //TODO: Modify foreign key name..
+                            <%- capitalcaseRelatedModelName %>Repository <%- lowercaseFirstLetter(capitalcaseRelatedModelName) %>Repository = (<%- capitalcaseRelatedModelName %>Repository) getRepository();
+
                             if(that.getId() != null && <%- lowercaseFirstLetter(capitalcaseRelatedModelName) %>Repository.getDb() != null){
-                                   //TODO: Modify foreign key name..
-                                   <%- capitalcaseRelatedModelName %>Repository <%- lowercaseFirstLetter(capitalcaseRelatedModelName) %>Repository = (<%- capitalcaseRelatedModelName %>Repository) getRepository();
 
                                  //Fetch locally from db
                                  //<%- relation %> = get<%- capitalcaseRelationName %>__db(restAdapter);

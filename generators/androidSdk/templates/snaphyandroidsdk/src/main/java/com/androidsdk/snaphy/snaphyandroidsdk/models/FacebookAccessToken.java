@@ -298,7 +298,7 @@ public class FacebookAccessToken extends Model {
                            FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                if(context != null && (AppUser) appUserRepository.getDb() != null){
+                                if(context != null && appUserRepository.getDb() != null){
                                     appUserRepository.addStorage(context);
                                     AppUser appUser = (AppUser) appUserRepository.getDb().get__db(userId);
                                     return appUser;

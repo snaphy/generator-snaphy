@@ -242,7 +242,7 @@ public class RoleMapping extends Model {
                            RoleMappingRepository lowercaseFirstLetterRepository = (RoleMappingRepository) getRepository();
                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                if(context != null && (Role) roleRepository.getDb() != null){
+                                if(context != null && roleRepository.getDb() != null){
                                     roleRepository.addStorage(context);
                                     Role role = (Role) roleRepository.getDb().get__db(roleId);
                                     return role;
