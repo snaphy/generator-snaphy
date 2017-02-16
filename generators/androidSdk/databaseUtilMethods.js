@@ -73,7 +73,7 @@ module.exports = function(){
     },
     createTableTypeQuery(property, type, isArray){
       type = this.getSqliteType(type, isArray);
-      return `${property} ${type}`;
+      return `\`${property}\` ${type}`;
     },
     capitalizeFirstLetter: function (string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
