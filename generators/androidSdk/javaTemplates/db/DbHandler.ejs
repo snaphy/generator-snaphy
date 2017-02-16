@@ -26,6 +26,7 @@ public class DbHandler extends SQLiteOpenHelper {
         public void onCreate(SQLiteDatabase db) {
 
             <%
+                var index=0;
                 var app = model.app;
                 var modelsRestDefinition = model.modelsRestDefinition;
                 var dbMethods = model.dbMethods;
@@ -71,9 +72,18 @@ public class DbHandler extends SQLiteOpenHelper {
                             <%} -%>
                             <% i++; -%>
                         <%} -%>
+
+                        <%
+                        //On insert always update the update data value to be 1 and on fetch change to 0
+                                tableQuery = tableQuery + `, ${model.methods.updateDataProperty} NUMBER ` + ")"; %>
+                        String CREATE_<%- modelName %>_TABLE_<%- index %> = "<%- tableQuery %>";
+                        db.execSQL(CREATE_<%- modelName %>_TABLE_<%- index %>);
+
+
             <%
                     }
                 }
+                index++;
             }
             -%>
 
