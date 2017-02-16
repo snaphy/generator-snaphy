@@ -75,7 +75,7 @@ public class DbHandler extends SQLiteOpenHelper {
 
                         <%
                         //On insert always update the update data value to be 1 and on fetch change to 0
-                                tableQuery = tableQuery + `, ${model.methods.updateDataProperty} NUMBER ` + ")"; %>
+                                tableQuery = tableQuery + `, ${model_.methods.updateDataProperty} NUMBER ` + ")"; %>
                         String CREATE_<%- modelName %>_TABLE_<%- index %> = "<%- tableQuery %>";
                         db.execSQL(CREATE_<%- modelName %>_TABLE_<%- index %>);
 
@@ -94,8 +94,17 @@ public class DbHandler extends SQLiteOpenHelper {
         // Upgrading database
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            // Drop older table if existed
-            db.execSQL("DROP TABLE IF EXISTS FollowBrand");
+            <%
+            for(var modelName in app.models) {
+                if (app.models.hasOwnProperty(modelName)) {
+            %>
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS <%- modelName %>");
+            <%
+                }
+            }
+            %>
+
             // Create tables again
             onCreate(db);
         }
