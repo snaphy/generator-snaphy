@@ -42,7 +42,7 @@ public class BrandVerificationDb{
     private static String TABLE;
 
   public BrandVerificationDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
-    super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    //super(context, DATABASE_NAME, null, DATABASE_VERSION);
     this.context = context;
     this.restAdapter = restAdapter;
     TABLE = "BrandVerification";
