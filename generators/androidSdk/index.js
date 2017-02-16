@@ -244,7 +244,9 @@ var generateDatabase = function(app, modelsRestDefinition){
     mkdirp.sync(AndroidBaseModelPath);
     //Now write Model.java to the file..
     compileAndWrite({
-        models: app.models
+        app: app,
+        dbMethods: dbMethods,
+        modelsRestDefinition: modelsRestDefinition
     }, PresenterTemplatePath, AndroidBaseModelPath, helper.capitalizeFirstLetter("DbHandler") +".java");
 
 
@@ -374,7 +376,7 @@ var compileAndWrite = function(model, templatePath, destinationFolder, fileName)
 var writeFile = function(filePath, data){
     fs.writeFileSync(filePath, data, 'utf8'
     );
-}
+};
 
 
 

@@ -26,14 +26,16 @@ public class DbHandler extends SQLiteOpenHelper {
         public void onCreate(SQLiteDatabase db) {
 
             <%
-
+                var app = model.app;
+                var modelsRestDefinition = model.modelsRestDefinition;
+                var dbMethods = model.dbMethods;
             for(var modelName in app.models){
                 if(app.models.hasOwnProperty(modelName)){
                     var modelObj = app.models[modelName];
                     var modelProperties = modelObj.definition.rawProperties;
                     //TODO: THIS LATER FOR EXCLUDING USER FROM LIST
                     if(modelsRestDefinition[modelName] !== undefined && modelName !== "User"){
-                        var model = {
+                        var model_ = {
                             name : modelName,
                             properties: modelProperties,
                             base: modelObj.definition.settings.base,
@@ -49,32 +51,30 @@ public class DbHandler extends SQLiteOpenHelper {
                         <%
                             var tableQuery = `CREATE TABLE IF NOT EXISTS ${modelName}( `;
                             var i=0;
-                            for( let property in model.properties) { -%>
-                                <% if(model.properties.hasOwnProperty(property)){
-                                    let isArray = model.properties[property].type instanceof Array;
+                            for( let property in model_.properties) { -%>
+                                <% if(model_.properties.hasOwnProperty(property)){
+                                    let isArray = model_.properties[property].type instanceof Array;
                                     if(i==0){
                                         if(property === "id"){
-                                          tableQuery = `${tableQuery} ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)} PRIMARY KEY`;
+                                          tableQuery = `${tableQuery} ${model_.methods.createTableTypeQuery(property, model_.properties[property].type, isArray)} PRIMARY KEY`;
                                         }else{
-                                          tableQuery = `${tableQuery} ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)}`;
+                                          tableQuery = `${tableQuery} ${model_.methods.createTableTypeQuery(property, model_.properties[property].type, isArray)}`;
                                         }
                                     }else{
                                       if(property === "id"){
-                                        tableQuery = `${tableQuery}, ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)} PRIMARY KEY`;
+                                        tableQuery = `${tableQuery}, ${model_.methods.createTableTypeQuery(property, model_.properties[property].type, isArray)} PRIMARY KEY`;
                                       }else{
-                                        tableQuery = `${tableQuery}, ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)}`;
+                                        tableQuery = `${tableQuery}, ${model_.methods.createTableTypeQuery(property, model_.properties[property].type, isArray)}`;
                                       }
                                     }
                                 -%>
-                                <%} -%>
-                               <% i++; -%>
                             <%} -%>
-
+                            <% i++; -%>
+                        <%} -%>
             <%
                     }
                 }
             }
-
             -%>
 
             String CREATE_FollowBrand_TABLE = "CREATE TABLE IF NOT EXISTS FollowBrand(  added TEXT, id TEXT PRIMARY KEY, appUserId TEXT, brandId TEXT, _DATA_UPDATED NUMBER )";
