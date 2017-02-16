@@ -71,7 +71,7 @@ public class BrandVerificationRepository extends ModelRepository<BrandVerificati
     }
 
 
-    public void getContext(){
+    public Context getContext(){
         return context;
     }
 

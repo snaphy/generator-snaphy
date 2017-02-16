@@ -78,7 +78,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     }
 
 
-    public void getContext(){
+    public Context getContext(){
         return context;
     }
 

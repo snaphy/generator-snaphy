@@ -71,7 +71,7 @@ public class CategoryRepository extends ModelRepository<Category> {
     }
 
 
-    public void getContext(){
+    public Context getContext(){
         return context;
     }
 

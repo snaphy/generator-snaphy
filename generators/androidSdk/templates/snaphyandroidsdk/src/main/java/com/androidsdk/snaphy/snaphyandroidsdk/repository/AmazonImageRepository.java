@@ -64,7 +64,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     }
 
 
-    public void getContext(){
+    public Context getContext(){
         return context;
     }
 

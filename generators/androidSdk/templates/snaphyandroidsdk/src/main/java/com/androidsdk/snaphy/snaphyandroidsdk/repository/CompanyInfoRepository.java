@@ -64,7 +64,7 @@ public class CompanyInfoRepository extends ModelRepository<CompanyInfo> {
     }
 
 
-    public void getContext(){
+    public Context getContext(){
         return context;
     }
 

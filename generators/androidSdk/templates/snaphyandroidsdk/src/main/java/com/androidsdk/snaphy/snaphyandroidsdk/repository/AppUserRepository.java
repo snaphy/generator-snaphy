@@ -93,7 +93,7 @@ public class AppUserRepository extends UserRepository<AppUser> {
     }
 
 
-    public void getContext(){
+    public Context getContext(){
         return context;
     }
 

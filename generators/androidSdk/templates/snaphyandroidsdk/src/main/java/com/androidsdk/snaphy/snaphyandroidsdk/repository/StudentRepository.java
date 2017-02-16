@@ -79,7 +79,7 @@ public class StudentRepository extends UserRepository<Student> {
     }
 
 
-    public void getContext(){
+    public Context getContext(){
         return context;
     }
 

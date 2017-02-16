@@ -64,7 +64,7 @@ public class ContainerRepository extends ModelRepository<Container> {
     }
 
 
-    public void getContext(){
+    public Context getContext(){
         return context;
     }
 

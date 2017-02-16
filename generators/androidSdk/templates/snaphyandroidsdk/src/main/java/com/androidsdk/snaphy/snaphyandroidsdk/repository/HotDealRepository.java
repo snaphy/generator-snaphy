@@ -78,7 +78,7 @@ public class HotDealRepository extends ModelRepository<HotDeal> {
     }
 
 
-    public void getContext(){
+    public Context getContext(){
         return context;
     }
 

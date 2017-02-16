@@ -71,7 +71,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     }
 
 
-    public void getContext(){
+    public Context getContext(){
         return context;
     }
 

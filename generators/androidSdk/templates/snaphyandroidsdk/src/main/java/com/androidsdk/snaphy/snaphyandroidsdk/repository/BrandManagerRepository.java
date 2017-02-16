@@ -79,7 +79,7 @@ public class BrandManagerRepository extends UserRepository<BrandManager> {
     }
 
 
-    public void getContext(){
+    public Context getContext(){
         return context;
     }
 

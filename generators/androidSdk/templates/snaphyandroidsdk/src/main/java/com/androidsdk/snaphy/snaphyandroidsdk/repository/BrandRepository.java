@@ -106,7 +106,7 @@ public class BrandRepository extends ModelRepository<Brand> {
     }
 
 
-    public void getContext(){
+    public Context getContext(){
         return context;
     }
 

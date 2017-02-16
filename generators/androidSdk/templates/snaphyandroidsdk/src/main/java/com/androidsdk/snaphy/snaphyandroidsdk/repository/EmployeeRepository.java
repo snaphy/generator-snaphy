@@ -72,7 +72,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     }
 
 
-    public void getContext(){
+    public Context getContext(){
         return context;
     }
 
