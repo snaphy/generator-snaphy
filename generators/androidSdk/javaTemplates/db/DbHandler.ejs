@@ -1,0 +1,99 @@
+package com.androidsdk.snaphy.snaphyandroidsdk.db;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+/**
+ * Created by robins on 16/2/17.
+ */
+
+
+
+public class DbHandler extends SQLiteOpenHelper {
+        private static DbHandler sInstance;
+        public static synchronized DbHandler getInstance(Context context, String DATABASE_NAME, int DATABASE_VERSION){
+            // Use the application context, which will ensure that you don't accidentally leak an Activity's context.
+            if (sInstance == null) {
+                sInstance = new DbHandler(context.getApplicationContext(), DATABASE_NAME, DATABASE_VERSION);
+            }
+            return sInstance;
+        }
+
+
+        // Creating Tables
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+
+            <%
+
+            for(var modelName in app.models){
+                if(app.models.hasOwnProperty(modelName)){
+                    var modelObj = app.models[modelName];
+                    var modelProperties = modelObj.definition.rawProperties;
+                    //TODO: THIS LATER FOR EXCLUDING USER FROM LIST
+                    if(modelsRestDefinition[modelName] !== undefined && modelName !== "User"){
+                        var model = {
+                            name : modelName,
+                            properties: modelProperties,
+                            base: modelObj.definition.settings.base,
+                            relations: modelObj.definition.settings.relations,
+                            allModels: app.models,
+                            restDefinition: modelsRestDefinition,
+                            methods: dbMethods.methods
+                        };
+                        //console.log(modelsRestDefinition);
+
+                        //compileAndWrite(model, ModelDBTemplatePath, AndroidModelPath, helper.capitalizeFirstLetter(modelName) +"Db.java");
+            -%>
+                        <%
+                            var tableQuery = `CREATE TABLE IF NOT EXISTS ${modelName}( `;
+                            var i=0;
+                            for( let property in model.properties) { -%>
+                                <% if(model.properties.hasOwnProperty(property)){
+                                    let isArray = model.properties[property].type instanceof Array;
+                                    if(i==0){
+                                        if(property === "id"){
+                                          tableQuery = `${tableQuery} ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)} PRIMARY KEY`;
+                                        }else{
+                                          tableQuery = `${tableQuery} ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)}`;
+                                        }
+                                    }else{
+                                      if(property === "id"){
+                                        tableQuery = `${tableQuery}, ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)} PRIMARY KEY`;
+                                      }else{
+                                        tableQuery = `${tableQuery}, ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)}`;
+                                      }
+                                    }
+                                -%>
+                                <%} -%>
+                               <% i++; -%>
+                            <%} -%>
+
+            <%
+                    }
+                }
+            }
+
+            -%>
+
+            String CREATE_FollowBrand_TABLE = "CREATE TABLE IF NOT EXISTS FollowBrand(  added TEXT, id TEXT PRIMARY KEY, appUserId TEXT, brandId TEXT, _DATA_UPDATED NUMBER )";
+            db.execSQL(CREATE_FollowBrand_TABLE);
+        }
+
+        // Upgrading database
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            // Drop older table if existed
+            db.execSQL("DROP TABLE IF EXISTS FollowBrand");
+            // Create tables again
+            onCreate(db);
+        }
+
+
+        private DbHandler(Context context, String DATABASE_NAME, int DATABASE_VERSION) {
+            super(context, DATABASE_NAME, null, DATABASE_VERSION);
+            SQLiteDatabase db = this.getWritableDatabase();
+            onCreate(db);
+        }
+}

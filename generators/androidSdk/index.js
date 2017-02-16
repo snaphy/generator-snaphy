@@ -235,7 +235,6 @@ var generateSocket = function(app, modelsRestDefinition){
  * @param app
  * @param modelsRestDefinition
  */
-/*
 var generateDatabase = function(app, modelsRestDefinition){
     //Compile the EJS template..
     var PresenterTemplatePath = path.join(__dirname, constants.javaTemplates, "db", "DbHandler.ejs");
@@ -244,10 +243,13 @@ var generateDatabase = function(app, modelsRestDefinition){
     //Create folder if not present..
     mkdirp.sync(AndroidBaseModelPath);
     //Now write Model.java to the file..
-    compileAndWrite({}, PresenterTemplatePath, AndroidBaseModelPath, helper.capitalizeFirstLetter("DbHandler") +".java");
+    compileAndWrite({
+        models: app.models
+    }, PresenterTemplatePath, AndroidBaseModelPath, helper.capitalizeFirstLetter("DbHandler") +".java");
+
+
 };
 
-*/
 
 
 var generateImagePresenter = function(app, modelsRestDefinition){
@@ -395,7 +397,7 @@ var init  = function(){
     generatePresenter(app, modelsRestDefinition);
     generateSocket(app, modelsRestDefinition);
     //Generate database..Db Handler always call this method after  generateDbModel
-    //generateDatabase(app, modelsRestDefinition);
+    generateDatabase(app, modelsRestDefinition);
     //Generate Image model and Repository..
     generateImagePresenter(app, modelsRestDefinition);
 

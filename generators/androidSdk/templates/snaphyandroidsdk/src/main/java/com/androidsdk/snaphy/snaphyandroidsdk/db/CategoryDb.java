@@ -266,7 +266,7 @@ public class CategoryDb extends SQLiteOpenHelper {
         // Select All Query
         String selectQuery = "SELECT  * FROM Category";
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -298,7 +298,7 @@ public class CategoryDb extends SQLiteOpenHelper {
         // Select All Query
         String selectQuery = "SELECT  * FROM Category WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);

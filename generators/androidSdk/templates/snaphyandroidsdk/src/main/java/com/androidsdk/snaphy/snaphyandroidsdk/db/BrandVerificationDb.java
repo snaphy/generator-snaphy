@@ -290,7 +290,7 @@ public class BrandVerificationDb extends SQLiteOpenHelper {
         // Select All Query
         String selectQuery = "SELECT  * FROM BrandVerification";
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -322,7 +322,7 @@ public class BrandVerificationDb extends SQLiteOpenHelper {
         // Select All Query
         String selectQuery = "SELECT  * FROM BrandVerification WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);

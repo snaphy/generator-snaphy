@@ -522,7 +522,7 @@ public class EmployeeDb extends SQLiteOpenHelper {
         // Select All Query
         String selectQuery = "SELECT  * FROM Employee";
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -554,7 +554,7 @@ public class EmployeeDb extends SQLiteOpenHelper {
         // Select All Query
         String selectQuery = "SELECT  * FROM Employee WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
