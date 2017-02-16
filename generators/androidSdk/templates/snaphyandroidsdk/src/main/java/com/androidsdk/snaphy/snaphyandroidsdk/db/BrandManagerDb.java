@@ -77,7 +77,7 @@ public class BrandManagerDb{
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
                 db.insert("BrandManager", null, values);
-                db.close(); // Closing database connection
+                //db.close(); // Closing database connection
             }
         }).start();
 
@@ -297,7 +297,7 @@ public class BrandManagerDb{
                 }else{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
                     if (hashMap != null) {
                         BrandManagerRepository repo = restAdapter.createRepository(BrandManagerRepository.class);
                         repo.addStorage(context);
@@ -331,7 +331,7 @@ public class BrandManagerDb{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
 
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
 
                     if (hashMap != null) {
                         BrandManagerRepository repo = restAdapter.createRepository(BrandManagerRepository.class);
@@ -579,7 +579,7 @@ public class BrandManagerDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<BrandManager>) modelList;
     }
@@ -614,7 +614,7 @@ public class BrandManagerDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<BrandManager>) modelList;
     }
@@ -651,7 +651,7 @@ public class BrandManagerDb{
                 db.update("BrandManager", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -668,7 +668,7 @@ public class BrandManagerDb{
                 db.delete("BrandManager", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -688,7 +688,7 @@ public class BrandManagerDb{
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -708,7 +708,7 @@ public class BrandManagerDb{
                 db.update("BrandManager", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -725,7 +725,7 @@ public class BrandManagerDb{
                 db.delete("BrandManager", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -772,7 +772,7 @@ public class BrandManagerDb{
                 new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
     }
@@ -786,7 +786,7 @@ public class BrandManagerDb{
                 db.delete(TABLE,null,null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 

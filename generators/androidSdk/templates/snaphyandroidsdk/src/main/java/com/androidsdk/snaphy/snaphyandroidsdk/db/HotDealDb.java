@@ -77,7 +77,7 @@ public class HotDealDb{
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
                 db.insert("HotDeal", null, values);
-                db.close(); // Closing database connection
+                //db.close(); // Closing database connection
             }
         }).start();
 
@@ -203,7 +203,7 @@ public class HotDealDb{
                 }else{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
                     if (hashMap != null) {
                         HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
                         repo.addStorage(context);
@@ -237,7 +237,7 @@ public class HotDealDb{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
 
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
 
                     if (hashMap != null) {
                         HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
@@ -423,7 +423,7 @@ public class HotDealDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<HotDeal>) modelList;
     }
@@ -458,7 +458,7 @@ public class HotDealDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<HotDeal>) modelList;
     }
@@ -495,7 +495,7 @@ public class HotDealDb{
                 db.update("HotDeal", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -512,7 +512,7 @@ public class HotDealDb{
                 db.delete("HotDeal", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -532,7 +532,7 @@ public class HotDealDb{
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -552,7 +552,7 @@ public class HotDealDb{
                 db.update("HotDeal", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -569,7 +569,7 @@ public class HotDealDb{
                 db.delete("HotDeal", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -616,7 +616,7 @@ public class HotDealDb{
                 new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
     }
@@ -630,7 +630,7 @@ public class HotDealDb{
                 db.delete(TABLE,null,null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 

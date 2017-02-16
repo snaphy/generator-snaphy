@@ -77,7 +77,7 @@ public class ContainerDb{
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
                 db.insert("Container", null, values);
-                db.close(); // Closing database connection
+                //db.close(); // Closing database connection
             }
         }).start();
 
@@ -123,7 +123,7 @@ public class ContainerDb{
                 }else{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
                     if (hashMap != null) {
                         ContainerRepository repo = restAdapter.createRepository(ContainerRepository.class);
                         repo.addStorage(context);
@@ -157,7 +157,7 @@ public class ContainerDb{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
 
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
 
                     if (hashMap != null) {
                         ContainerRepository repo = restAdapter.createRepository(ContainerRepository.class);
@@ -235,7 +235,7 @@ public class ContainerDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<Container>) modelList;
     }
@@ -270,7 +270,7 @@ public class ContainerDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<Container>) modelList;
     }
@@ -307,7 +307,7 @@ public class ContainerDb{
                 db.update("Container", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -324,7 +324,7 @@ public class ContainerDb{
                 db.delete("Container", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -344,7 +344,7 @@ public class ContainerDb{
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -364,7 +364,7 @@ public class ContainerDb{
                 db.update("Container", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -381,7 +381,7 @@ public class ContainerDb{
                 db.delete("Container", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -428,7 +428,7 @@ public class ContainerDb{
                 new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
     }
@@ -442,7 +442,7 @@ public class ContainerDb{
                 db.delete(TABLE,null,null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 

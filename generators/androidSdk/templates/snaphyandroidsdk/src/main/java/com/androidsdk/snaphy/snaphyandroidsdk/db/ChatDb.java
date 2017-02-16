@@ -77,7 +77,7 @@ public class ChatDb{
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
                 db.insert("Chat", null, values);
-                db.close(); // Closing database connection
+                //db.close(); // Closing database connection
             }
         }).start();
 
@@ -199,7 +199,7 @@ public class ChatDb{
                 }else{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
                     if (hashMap != null) {
                         ChatRepository repo = restAdapter.createRepository(ChatRepository.class);
                         repo.addStorage(context);
@@ -233,7 +233,7 @@ public class ChatDb{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
 
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
 
                     if (hashMap != null) {
                         ChatRepository repo = restAdapter.createRepository(ChatRepository.class);
@@ -411,7 +411,7 @@ public class ChatDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<Chat>) modelList;
     }
@@ -446,7 +446,7 @@ public class ChatDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<Chat>) modelList;
     }
@@ -483,7 +483,7 @@ public class ChatDb{
                 db.update("Chat", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -500,7 +500,7 @@ public class ChatDb{
                 db.delete("Chat", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -520,7 +520,7 @@ public class ChatDb{
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -540,7 +540,7 @@ public class ChatDb{
                 db.update("Chat", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -557,7 +557,7 @@ public class ChatDb{
                 db.delete("Chat", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -604,7 +604,7 @@ public class ChatDb{
                 new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
     }
@@ -618,7 +618,7 @@ public class ChatDb{
                 db.delete(TABLE,null,null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 

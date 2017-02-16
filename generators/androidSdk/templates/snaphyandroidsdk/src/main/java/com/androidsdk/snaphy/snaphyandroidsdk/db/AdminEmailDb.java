@@ -77,7 +77,7 @@ public class AdminEmailDb{
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
                 db.insert("AdminEmail", null, values);
-                db.close(); // Closing database connection
+                //db.close(); // Closing database connection
             }
         }).start();
 
@@ -193,7 +193,7 @@ public class AdminEmailDb{
                 }else{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
                     if (hashMap != null) {
                         AdminEmailRepository repo = restAdapter.createRepository(AdminEmailRepository.class);
                         repo.addStorage(context);
@@ -227,7 +227,7 @@ public class AdminEmailDb{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
 
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
 
                     if (hashMap != null) {
                         AdminEmailRepository repo = restAdapter.createRepository(AdminEmailRepository.class);
@@ -355,7 +355,7 @@ public class AdminEmailDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<AdminEmail>) modelList;
     }
@@ -390,7 +390,7 @@ public class AdminEmailDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<AdminEmail>) modelList;
     }
@@ -427,7 +427,7 @@ public class AdminEmailDb{
                 db.update("AdminEmail", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -444,7 +444,7 @@ public class AdminEmailDb{
                 db.delete("AdminEmail", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -464,7 +464,7 @@ public class AdminEmailDb{
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -484,7 +484,7 @@ public class AdminEmailDb{
                 db.update("AdminEmail", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -501,7 +501,7 @@ public class AdminEmailDb{
                 db.delete("AdminEmail", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -548,7 +548,7 @@ public class AdminEmailDb{
                 new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
     }
@@ -562,7 +562,7 @@ public class AdminEmailDb{
                 db.delete(TABLE,null,null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 

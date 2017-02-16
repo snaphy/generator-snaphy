@@ -77,7 +77,7 @@ public class AmazonImageDb{
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
                 db.insert("AmazonImage", null, values);
-                db.close(); // Closing database connection
+                //db.close(); // Closing database connection
             }
         }).start();
 
@@ -147,7 +147,7 @@ public class AmazonImageDb{
                 }else{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
                     if (hashMap != null) {
                         AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);
                         repo.addStorage(context);
@@ -181,7 +181,7 @@ public class AmazonImageDb{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
 
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
 
                     if (hashMap != null) {
                         AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);
@@ -299,7 +299,7 @@ public class AmazonImageDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<AmazonImage>) modelList;
     }
@@ -334,7 +334,7 @@ public class AmazonImageDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<AmazonImage>) modelList;
     }
@@ -371,7 +371,7 @@ public class AmazonImageDb{
                 db.update("AmazonImage", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -388,7 +388,7 @@ public class AmazonImageDb{
                 db.delete("AmazonImage", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -408,7 +408,7 @@ public class AmazonImageDb{
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -428,7 +428,7 @@ public class AmazonImageDb{
                 db.update("AmazonImage", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -445,7 +445,7 @@ public class AmazonImageDb{
                 db.delete("AmazonImage", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -492,7 +492,7 @@ public class AmazonImageDb{
                 new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
     }
@@ -506,7 +506,7 @@ public class AmazonImageDb{
                 db.delete(TABLE,null,null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 

@@ -77,7 +77,7 @@ public class DailyFeedDb{
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
                 db.insert("DailyFeed", null, values);
-                db.close(); // Closing database connection
+                //db.close(); // Closing database connection
             }
         }).start();
 
@@ -167,7 +167,7 @@ public class DailyFeedDb{
                 }else{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
                     if (hashMap != null) {
                         DailyFeedRepository repo = restAdapter.createRepository(DailyFeedRepository.class);
                         repo.addStorage(context);
@@ -201,7 +201,7 @@ public class DailyFeedDb{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
 
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
 
                     if (hashMap != null) {
                         DailyFeedRepository repo = restAdapter.createRepository(DailyFeedRepository.class);
@@ -339,7 +339,7 @@ public class DailyFeedDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<DailyFeed>) modelList;
     }
@@ -374,7 +374,7 @@ public class DailyFeedDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<DailyFeed>) modelList;
     }
@@ -411,7 +411,7 @@ public class DailyFeedDb{
                 db.update("DailyFeed", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -428,7 +428,7 @@ public class DailyFeedDb{
                 db.delete("DailyFeed", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -448,7 +448,7 @@ public class DailyFeedDb{
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -468,7 +468,7 @@ public class DailyFeedDb{
                 db.update("DailyFeed", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -485,7 +485,7 @@ public class DailyFeedDb{
                 db.delete("DailyFeed", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -532,7 +532,7 @@ public class DailyFeedDb{
                 new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
     }
@@ -546,7 +546,7 @@ public class DailyFeedDb{
                 db.delete(TABLE,null,null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 

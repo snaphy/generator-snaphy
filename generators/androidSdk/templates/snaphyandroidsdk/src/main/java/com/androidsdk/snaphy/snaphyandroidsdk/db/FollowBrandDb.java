@@ -77,7 +77,7 @@ public class FollowBrandDb{
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
                 db.insert("FollowBrand", null, values);
-                db.close(); // Closing database connection
+                //db.close(); // Closing database connection
             }
         }).start();
 
@@ -157,7 +157,7 @@ public class FollowBrandDb{
                 }else{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
                     if (hashMap != null) {
                         FollowBrandRepository repo = restAdapter.createRepository(FollowBrandRepository.class);
                         repo.addStorage(context);
@@ -191,7 +191,7 @@ public class FollowBrandDb{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
 
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
 
                     if (hashMap != null) {
                         FollowBrandRepository repo = restAdapter.createRepository(FollowBrandRepository.class);
@@ -299,7 +299,7 @@ public class FollowBrandDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<FollowBrand>) modelList;
     }
@@ -334,7 +334,7 @@ public class FollowBrandDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<FollowBrand>) modelList;
     }
@@ -371,7 +371,7 @@ public class FollowBrandDb{
                 db.update("FollowBrand", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -388,7 +388,7 @@ public class FollowBrandDb{
                 db.delete("FollowBrand", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -408,7 +408,7 @@ public class FollowBrandDb{
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -428,7 +428,7 @@ public class FollowBrandDb{
                 db.update("FollowBrand", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -445,7 +445,7 @@ public class FollowBrandDb{
                 db.delete("FollowBrand", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -492,7 +492,7 @@ public class FollowBrandDb{
                 new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
     }
@@ -506,7 +506,7 @@ public class FollowBrandDb{
                 db.delete(TABLE,null,null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 

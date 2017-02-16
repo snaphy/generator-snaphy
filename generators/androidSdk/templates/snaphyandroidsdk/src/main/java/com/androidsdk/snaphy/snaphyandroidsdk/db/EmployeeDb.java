@@ -77,7 +77,7 @@ public class EmployeeDb{
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
                 db.insert("Employee", null, values);
-                db.close(); // Closing database connection
+                //db.close(); // Closing database connection
             }
         }).start();
 
@@ -277,7 +277,7 @@ public class EmployeeDb{
                 }else{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
                     if (hashMap != null) {
                         EmployeeRepository repo = restAdapter.createRepository(EmployeeRepository.class);
                         repo.addStorage(context);
@@ -311,7 +311,7 @@ public class EmployeeDb{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
 
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
 
                     if (hashMap != null) {
                         EmployeeRepository repo = restAdapter.createRepository(EmployeeRepository.class);
@@ -539,7 +539,7 @@ public class EmployeeDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<Employee>) modelList;
     }
@@ -574,7 +574,7 @@ public class EmployeeDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<Employee>) modelList;
     }
@@ -611,7 +611,7 @@ public class EmployeeDb{
                 db.update("Employee", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -628,7 +628,7 @@ public class EmployeeDb{
                 db.delete("Employee", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -648,7 +648,7 @@ public class EmployeeDb{
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -668,7 +668,7 @@ public class EmployeeDb{
                 db.update("Employee", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -685,7 +685,7 @@ public class EmployeeDb{
                 db.delete("Employee", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -732,7 +732,7 @@ public class EmployeeDb{
                 new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
     }
@@ -746,7 +746,7 @@ public class EmployeeDb{
                 db.delete(TABLE,null,null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 

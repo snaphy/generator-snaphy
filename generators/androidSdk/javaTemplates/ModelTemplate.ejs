@@ -412,7 +412,7 @@ public class <%- modelName %> extends Model {
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
-          if(id != null){
+          if(id != null && lowercaseFirstLetterRepository.getDb() != null){
              lowercaseFirstLetterRepository.getDb().delete__db(id);
           }
       }
@@ -426,7 +426,7 @@ public class <%- modelName %> extends Model {
       <%- modelName %>Repository lowercaseFirstLetterRepository = (<%- modelName %>Repository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-        if(id != null){
+        if(id != null && lowercaseFirstLetterRepository.getDb() != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
         }
       }
@@ -437,7 +437,7 @@ public class <%- modelName %> extends Model {
       <%- modelName %>Repository lowercaseFirstLetterRepository = (<%- modelName %>Repository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
-        if(getId() != null){
+        if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
             String id = getId().toString();
           lowercaseFirstLetterRepository.getDb().delete__db(id);
         }
@@ -569,7 +569,7 @@ public class <%- modelName %> extends Model {
                            <%- modelName %>Repository lowercaseFirstLetterRepository = (<%- modelName %>Repository) getRepository();
                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                if(context != null){
+                                if(context != null && (<%- capitalcaseRelatedModelName %>) <%- relation %>Repository.getDb() != null){
                                     <%- relation %>Repository.addStorage(context);
                                     <%- capitalcaseRelatedModelName %> <%- relation %> = (<%- capitalcaseRelatedModelName %>) <%- relation %>Repository.getDb().get__db(<%- getForeignKeyName() %>);
                                     return <%- relation %>;
@@ -593,7 +593,7 @@ public class <%- modelName %> extends Model {
                     public DataList< <%- capitalcaseRelatedModelName %> > get<%- capitalcaseRelationName %>() {
                         //Check for pure case of hasMany
                         <% if(!model.relations[relation].through){ -%>
-                            if(that.getId() != null){
+                            if(that.getId() != null && <%- lowercaseFirstLetter(capitalcaseRelatedModelName) %>Repository.getDb() != null){
                                    //TODO: Modify foreign key name..
                                    <%- capitalcaseRelatedModelName %>Repository <%- lowercaseFirstLetter(capitalcaseRelatedModelName) %>Repository = (<%- capitalcaseRelatedModelName %>Repository) getRepository();
 

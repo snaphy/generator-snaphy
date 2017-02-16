@@ -77,7 +77,7 @@ public class BrandDb{
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
                 db.insert("Brand", null, values);
-                db.close(); // Closing database connection
+                //db.close(); // Closing database connection
             }
         }).start();
 
@@ -183,7 +183,7 @@ public class BrandDb{
                 }else{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
                     if (hashMap != null) {
                         BrandRepository repo = restAdapter.createRepository(BrandRepository.class);
                         repo.addStorage(context);
@@ -217,7 +217,7 @@ public class BrandDb{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
 
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
 
                     if (hashMap != null) {
                         BrandRepository repo = restAdapter.createRepository(BrandRepository.class);
@@ -395,7 +395,7 @@ public class BrandDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<Brand>) modelList;
     }
@@ -430,7 +430,7 @@ public class BrandDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<Brand>) modelList;
     }
@@ -467,7 +467,7 @@ public class BrandDb{
                 db.update("Brand", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -484,7 +484,7 @@ public class BrandDb{
                 db.delete("Brand", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -504,7 +504,7 @@ public class BrandDb{
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -524,7 +524,7 @@ public class BrandDb{
                 db.update("Brand", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -541,7 +541,7 @@ public class BrandDb{
                 db.delete("Brand", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -588,7 +588,7 @@ public class BrandDb{
                 new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
     }
@@ -602,7 +602,7 @@ public class BrandDb{
                 db.delete(TABLE,null,null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 

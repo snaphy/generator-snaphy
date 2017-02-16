@@ -77,7 +77,7 @@ public class BrandVerificationDb{
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
                 db.insert("BrandVerification", null, values);
-                db.close(); // Closing database connection
+                //db.close(); // Closing database connection
             }
         }).start();
 
@@ -155,7 +155,7 @@ public class BrandVerificationDb{
                 }else{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
                     if (hashMap != null) {
                         BrandVerificationRepository repo = restAdapter.createRepository(BrandVerificationRepository.class);
                         repo.addStorage(context);
@@ -189,7 +189,7 @@ public class BrandVerificationDb{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
 
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
 
                     if (hashMap != null) {
                         BrandVerificationRepository repo = restAdapter.createRepository(BrandVerificationRepository.class);
@@ -307,7 +307,7 @@ public class BrandVerificationDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<BrandVerification>) modelList;
     }
@@ -342,7 +342,7 @@ public class BrandVerificationDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<BrandVerification>) modelList;
     }
@@ -379,7 +379,7 @@ public class BrandVerificationDb{
                 db.update("BrandVerification", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -396,7 +396,7 @@ public class BrandVerificationDb{
                 db.delete("BrandVerification", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -416,7 +416,7 @@ public class BrandVerificationDb{
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -436,7 +436,7 @@ public class BrandVerificationDb{
                 db.update("BrandVerification", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -453,7 +453,7 @@ public class BrandVerificationDb{
                 db.delete("BrandVerification", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -500,7 +500,7 @@ public class BrandVerificationDb{
                 new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
     }
@@ -514,7 +514,7 @@ public class BrandVerificationDb{
                 db.delete(TABLE,null,null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 

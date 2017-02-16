@@ -77,7 +77,7 @@ public class StudentDb{
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
                 db.insert("Student", null, values);
-                db.close(); // Closing database connection
+                //db.close(); // Closing database connection
             }
         }).start();
 
@@ -303,7 +303,7 @@ public class StudentDb{
                 }else{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
                     if (hashMap != null) {
                         StudentRepository repo = restAdapter.createRepository(StudentRepository.class);
                         repo.addStorage(context);
@@ -337,7 +337,7 @@ public class StudentDb{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
 
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
 
                     if (hashMap != null) {
                         StudentRepository repo = restAdapter.createRepository(StudentRepository.class);
@@ -555,7 +555,7 @@ public class StudentDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<Student>) modelList;
     }
@@ -590,7 +590,7 @@ public class StudentDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<Student>) modelList;
     }
@@ -627,7 +627,7 @@ public class StudentDb{
                 db.update("Student", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -644,7 +644,7 @@ public class StudentDb{
                 db.delete("Student", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -664,7 +664,7 @@ public class StudentDb{
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -684,7 +684,7 @@ public class StudentDb{
                 db.update("Student", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -701,7 +701,7 @@ public class StudentDb{
                 db.delete("Student", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -748,7 +748,7 @@ public class StudentDb{
                 new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
     }
@@ -762,7 +762,7 @@ public class StudentDb{
                 db.delete(TABLE,null,null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 

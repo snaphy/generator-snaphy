@@ -77,7 +77,7 @@ public class FacebookAccessTokenDb{
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
                 db.insert("FacebookAccessToken", null, values);
-                db.close(); // Closing database connection
+                //db.close(); // Closing database connection
             }
         }).start();
 
@@ -161,7 +161,7 @@ public class FacebookAccessTokenDb{
                 }else{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
                     if (hashMap != null) {
                         FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
                         repo.addStorage(context);
@@ -195,7 +195,7 @@ public class FacebookAccessTokenDb{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
 
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
 
                     if (hashMap != null) {
                         FacebookAccessTokenRepository repo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
@@ -323,7 +323,7 @@ public class FacebookAccessTokenDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<FacebookAccessToken>) modelList;
     }
@@ -358,7 +358,7 @@ public class FacebookAccessTokenDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<FacebookAccessToken>) modelList;
     }
@@ -395,7 +395,7 @@ public class FacebookAccessTokenDb{
                 db.update("FacebookAccessToken", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -412,7 +412,7 @@ public class FacebookAccessTokenDb{
                 db.delete("FacebookAccessToken", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -432,7 +432,7 @@ public class FacebookAccessTokenDb{
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -452,7 +452,7 @@ public class FacebookAccessTokenDb{
                 db.update("FacebookAccessToken", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -469,7 +469,7 @@ public class FacebookAccessTokenDb{
                 db.delete("FacebookAccessToken", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -516,7 +516,7 @@ public class FacebookAccessTokenDb{
                 new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
     }
@@ -530,7 +530,7 @@ public class FacebookAccessTokenDb{
                 db.delete(TABLE,null,null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 

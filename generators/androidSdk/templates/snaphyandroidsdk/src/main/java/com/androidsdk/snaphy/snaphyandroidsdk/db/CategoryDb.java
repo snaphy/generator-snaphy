@@ -77,7 +77,7 @@ public class CategoryDb{
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
                 db.insert("Category", null, values);
-                db.close(); // Closing database connection
+                //db.close(); // Closing database connection
             }
         }).start();
 
@@ -141,7 +141,7 @@ public class CategoryDb{
                 }else{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
                     if (hashMap != null) {
                         CategoryRepository repo = restAdapter.createRepository(CategoryRepository.class);
                         repo.addStorage(context);
@@ -175,7 +175,7 @@ public class CategoryDb{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
 
                     cursor.close();
-                    db.close(); // Closing database connection
+                    //db.close(); // Closing database connection
 
                     if (hashMap != null) {
                         CategoryRepository repo = restAdapter.createRepository(CategoryRepository.class);
@@ -283,7 +283,7 @@ public class CategoryDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<Category>) modelList;
     }
@@ -318,7 +318,7 @@ public class CategoryDb{
         db.setTransactionSuccessful();
         db.endTransaction();
         cursor.close();
-        db.close();
+        //db.close();
         // return contact list
         return (DataList<Category>) modelList;
     }
@@ -355,7 +355,7 @@ public class CategoryDb{
                 db.update("Category", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -372,7 +372,7 @@ public class CategoryDb{
                 db.delete("Category", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -392,7 +392,7 @@ public class CategoryDb{
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -412,7 +412,7 @@ public class CategoryDb{
                 db.update("Category", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -429,7 +429,7 @@ public class CategoryDb{
                 db.delete("Category", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
@@ -476,7 +476,7 @@ public class CategoryDb{
                 new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
     }
@@ -490,7 +490,7 @@ public class CategoryDb{
                 db.delete(TABLE,null,null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-                db.close();
+                //db.close();
             }
         }).start();
 
