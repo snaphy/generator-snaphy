@@ -324,7 +324,7 @@ public class AppUser extends User {
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
-          if(id != null){
+          if(id != null && lowercaseFirstLetterRepository.getDb() != null){
              lowercaseFirstLetterRepository.getDb().delete__db(id);
           }
       }
@@ -338,7 +338,7 @@ public class AppUser extends User {
       AppUserRepository lowercaseFirstLetterRepository = (AppUserRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-        if(id != null){
+        if(id != null && lowercaseFirstLetterRepository.getDb() != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
         }
       }
@@ -349,7 +349,7 @@ public class AppUser extends User {
       AppUserRepository lowercaseFirstLetterRepository = (AppUserRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
-        if(getId() != null){
+        if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
             String id = getId().toString();
           lowercaseFirstLetterRepository.getDb().delete__db(id);
         }
@@ -391,7 +391,7 @@ public class AppUser extends User {
 
                     public DataList< FacebookAccessToken > getFacebookAccessToken() {
                         //Check for pure case of hasMany
-                                                    if(that.getId() != null){
+                                                    if(that.getId() != null && facebookAccessTokenRepository.getDb() != null){
                                    //TODO: Modify foreign key name..
                                    FacebookAccessTokenRepository facebookAccessTokenRepository = (FacebookAccessTokenRepository) getRepository();
 
@@ -973,7 +973,7 @@ public class AppUser extends User {
 
                     public DataList< Chat > getChats() {
                         //Check for pure case of hasMany
-                                                    if(that.getId() != null){
+                                                    if(that.getId() != null && chatRepository.getDb() != null){
                                    //TODO: Modify foreign key name..
                                    ChatRepository chatRepository = (ChatRepository) getRepository();
 
@@ -1555,7 +1555,7 @@ public class AppUser extends User {
 
                     public DataList< FollowBrand > getFollowBrands() {
                         //Check for pure case of hasMany
-                                                    if(that.getId() != null){
+                                                    if(that.getId() != null && followBrandRepository.getDb() != null){
                                    //TODO: Modify foreign key name..
                                    FollowBrandRepository followBrandRepository = (FollowBrandRepository) getRepository();
 

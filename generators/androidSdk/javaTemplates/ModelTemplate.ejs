@@ -569,7 +569,7 @@ public class <%- modelName %> extends Model {
                            <%- modelName %>Repository lowercaseFirstLetterRepository = (<%- modelName %>Repository) getRepository();
                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                if(context != null && (<%- capitalcaseRelatedModelName %>) <%- relation %>Repository.getDb() != null){
+                                if(context != null && <%- relation %>Repository.getDb() != null){
                                     <%- relation %>Repository.addStorage(context);
                                     <%- capitalcaseRelatedModelName %> <%- relation %> = (<%- capitalcaseRelatedModelName %>) <%- relation %>Repository.getDb().get__db(<%- getForeignKeyName() %>);
                                     return <%- relation %>;

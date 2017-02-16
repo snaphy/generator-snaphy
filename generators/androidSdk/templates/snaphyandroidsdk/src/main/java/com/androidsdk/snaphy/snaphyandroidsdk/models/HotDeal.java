@@ -300,7 +300,7 @@ public class HotDeal extends Model {
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
-          if(id != null){
+          if(id != null && lowercaseFirstLetterRepository.getDb() != null){
              lowercaseFirstLetterRepository.getDb().delete__db(id);
           }
       }
@@ -314,7 +314,7 @@ public class HotDeal extends Model {
       HotDealRepository lowercaseFirstLetterRepository = (HotDealRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-        if(id != null){
+        if(id != null && lowercaseFirstLetterRepository.getDb() != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
         }
       }
@@ -325,7 +325,7 @@ public class HotDeal extends Model {
       HotDealRepository lowercaseFirstLetterRepository = (HotDealRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
-        if(getId() != null){
+        if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
             String id = getId().toString();
           lowercaseFirstLetterRepository.getDb().delete__db(id);
         }
@@ -417,7 +417,7 @@ public class HotDeal extends Model {
                            HotDealRepository lowercaseFirstLetterRepository = (HotDealRepository) getRepository();
                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                if(context != null){
+                                if(context != null && (Category) categoryRepository.getDb() != null){
                                     categoryRepository.addStorage(context);
                                     Category category = (Category) categoryRepository.getDb().get__db(categoryId);
                                     return category;
@@ -611,7 +611,7 @@ public class HotDeal extends Model {
                            HotDealRepository lowercaseFirstLetterRepository = (HotDealRepository) getRepository();
                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                if(context != null){
+                                if(context != null && (Brand) brandRepository.getDb() != null){
                                     brandRepository.addStorage(context);
                                     Brand brand = (Brand) brandRepository.getDb().get__db(brandId);
                                     return brand;

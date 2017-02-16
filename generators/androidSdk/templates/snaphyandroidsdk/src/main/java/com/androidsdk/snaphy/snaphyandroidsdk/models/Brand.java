@@ -335,7 +335,7 @@ public class Brand extends Model {
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
-          if(id != null){
+          if(id != null && lowercaseFirstLetterRepository.getDb() != null){
              lowercaseFirstLetterRepository.getDb().delete__db(id);
           }
       }
@@ -349,7 +349,7 @@ public class Brand extends Model {
       BrandRepository lowercaseFirstLetterRepository = (BrandRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-        if(id != null){
+        if(id != null && lowercaseFirstLetterRepository.getDb() != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
         }
       }
@@ -360,7 +360,7 @@ public class Brand extends Model {
       BrandRepository lowercaseFirstLetterRepository = (BrandRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
-        if(getId() != null){
+        if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
             String id = getId().toString();
           lowercaseFirstLetterRepository.getDb().delete__db(id);
         }
@@ -399,7 +399,7 @@ public class Brand extends Model {
 
                     public DataList< HotDeal > getHotDeals() {
                         //Check for pure case of hasMany
-                                                    if(that.getId() != null){
+                                                    if(that.getId() != null && hotDealRepository.getDb() != null){
                                    //TODO: Modify foreign key name..
                                    HotDealRepository hotDealRepository = (HotDealRepository) getRepository();
 
@@ -1001,7 +1001,7 @@ public class Brand extends Model {
 
                     public DataList< Chat > getChats() {
                         //Check for pure case of hasMany
-                                                    if(that.getId() != null){
+                                                    if(that.getId() != null && chatRepository.getDb() != null){
                                    //TODO: Modify foreign key name..
                                    ChatRepository chatRepository = (ChatRepository) getRepository();
 
@@ -1603,7 +1603,7 @@ public class Brand extends Model {
 
                     public DataList< DailyFeed > getDailyFeeds() {
                         //Check for pure case of hasMany
-                                                    if(that.getId() != null){
+                                                    if(that.getId() != null && dailyFeedRepository.getDb() != null){
                                    //TODO: Modify foreign key name..
                                    DailyFeedRepository dailyFeedRepository = (DailyFeedRepository) getRepository();
 
@@ -2205,7 +2205,7 @@ public class Brand extends Model {
 
                     public DataList< BrandManager > getBrandManagers() {
                         //Check for pure case of hasMany
-                                                    if(that.getId() != null){
+                                                    if(that.getId() != null && brandManagerRepository.getDb() != null){
                                    //TODO: Modify foreign key name..
                                    BrandManagerRepository brandManagerRepository = (BrandManagerRepository) getRepository();
 
@@ -2860,7 +2860,7 @@ public class Brand extends Model {
                            BrandRepository lowercaseFirstLetterRepository = (BrandRepository) getRepository();
                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                if(context != null){
+                                if(context != null && (BrandVerification) brandVerificationsRepository.getDb() != null){
                                     brandVerificationsRepository.addStorage(context);
                                     BrandVerification brandVerifications = (BrandVerification) brandVerificationsRepository.getDb().get__db(brandVerificationId);
                                     return brandVerifications;
@@ -3218,7 +3218,7 @@ public class Brand extends Model {
 
                     public DataList< FollowBrand > getFollowBrands() {
                         //Check for pure case of hasMany
-                                                    if(that.getId() != null){
+                                                    if(that.getId() != null && followBrandRepository.getDb() != null){
                                    //TODO: Modify foreign key name..
                                    FollowBrandRepository followBrandRepository = (FollowBrandRepository) getRepository();
 

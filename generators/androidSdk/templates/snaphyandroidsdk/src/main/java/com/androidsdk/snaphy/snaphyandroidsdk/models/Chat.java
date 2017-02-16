@@ -279,7 +279,7 @@ public class Chat extends Model {
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
-          if(id != null){
+          if(id != null && lowercaseFirstLetterRepository.getDb() != null){
              lowercaseFirstLetterRepository.getDb().delete__db(id);
           }
       }
@@ -293,7 +293,7 @@ public class Chat extends Model {
       ChatRepository lowercaseFirstLetterRepository = (ChatRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-        if(id != null){
+        if(id != null && lowercaseFirstLetterRepository.getDb() != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
         }
       }
@@ -304,7 +304,7 @@ public class Chat extends Model {
       ChatRepository lowercaseFirstLetterRepository = (ChatRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
-        if(getId() != null){
+        if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
             String id = getId().toString();
           lowercaseFirstLetterRepository.getDb().delete__db(id);
         }
@@ -396,7 +396,7 @@ public class Chat extends Model {
                            ChatRepository lowercaseFirstLetterRepository = (ChatRepository) getRepository();
                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                if(context != null){
+                                if(context != null && (Brand) brandRepository.getDb() != null){
                                     brandRepository.addStorage(context);
                                     Brand brand = (Brand) brandRepository.getDb().get__db(brandId);
                                     return brand;
@@ -591,7 +591,7 @@ public class Chat extends Model {
                            ChatRepository lowercaseFirstLetterRepository = (ChatRepository) getRepository();
                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                if(context != null){
+                                if(context != null && (AppUser) appUserRepository.getDb() != null){
                                     appUserRepository.addStorage(context);
                                     AppUser appUser = (AppUser) appUserRepository.getDb().get__db(appUserId);
                                     return appUser;

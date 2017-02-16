@@ -132,7 +132,7 @@ public class Role extends Model {
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
-          if(id != null){
+          if(id != null && lowercaseFirstLetterRepository.getDb() != null){
              lowercaseFirstLetterRepository.getDb().delete__db(id);
           }
       }
@@ -146,7 +146,7 @@ public class Role extends Model {
       RoleRepository lowercaseFirstLetterRepository = (RoleRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-        if(id != null){
+        if(id != null && lowercaseFirstLetterRepository.getDb() != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
         }
       }
@@ -157,7 +157,7 @@ public class Role extends Model {
       RoleRepository lowercaseFirstLetterRepository = (RoleRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
-        if(getId() != null){
+        if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
             String id = getId().toString();
           lowercaseFirstLetterRepository.getDb().delete__db(id);
         }
@@ -196,7 +196,7 @@ public class Role extends Model {
 
                     public DataList< RoleMapping > getPrincipals() {
                         //Check for pure case of hasMany
-                                                    if(that.getId() != null){
+                                                    if(that.getId() != null && roleMappingRepository.getDb() != null){
                                    //TODO: Modify foreign key name..
                                    RoleMappingRepository roleMappingRepository = (RoleMappingRepository) getRepository();
 
