@@ -72,12 +72,18 @@ public class BrandManagerDb extends SQLiteOpenHelper {
     }
 
 
-    public void insert__db (String id, BrandManager modelData) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        // Inserting Row
-        ContentValues values = getContentValues(modelData);
-        db.insert("BrandManager", null, values);
-        db.close(); // Closing database connection
+    public void insert__db (final String id, final BrandManager modelData) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SQLiteDatabase db = getWritableDatabase();
+                // Inserting Row
+                ContentValues values = getContentValues(modelData);
+                db.insert("BrandManager", null, values);
+                db.close(); // Closing database connection
+            }
+        }).start();
+
     }
 
 
@@ -557,6 +563,8 @@ public class BrandManagerDb extends SQLiteOpenHelper {
         String selectQuery = "SELECT  * FROM BrandManager";
 
         SQLiteDatabase db = this.getWritableDatabase();
+        //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
+        db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (!(cursor.moveToFirst()) || cursor.getCount() == 0){
             return (DataList<BrandManager>) modelList;
@@ -571,6 +579,8 @@ public class BrandManagerDb extends SQLiteOpenHelper {
                 }
             } while (cursor.moveToNext());
         }
+        db.setTransactionSuccessful();
+        db.endTransaction();
         cursor.close();
         db.close();
         // return contact list
@@ -585,6 +595,8 @@ public class BrandManagerDb extends SQLiteOpenHelper {
         String selectQuery = "SELECT  * FROM BrandManager WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = this.getWritableDatabase();
+        //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
+        db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
@@ -601,6 +613,9 @@ public class BrandManagerDb extends SQLiteOpenHelper {
                 }
             } while (cursor.moveToNext());
          }
+
+        db.setTransactionSuccessful();
+        db.endTransaction();
         cursor.close();
         db.close();
         // return contact list
@@ -626,51 +641,97 @@ public class BrandManagerDb extends SQLiteOpenHelper {
 
 
     // Updating updated data property to new contact with where clause..
-    public void checkOldData__db(String whereKey, String whereKeyValue) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("_DATA_UPDATED", 0);
-        // updating row
-        db.update("BrandManager", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
-        db.close();
+    public void checkOldData__db(final String whereKey, final String whereKeyValue) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SQLiteDatabase db = getWritableDatabase();
+                //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
+                db.beginTransaction();
+                ContentValues values = new ContentValues();
+                values.put("_DATA_UPDATED", 0);
+                // updating row
+                db.update("BrandManager", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+                db.setTransactionSuccessful();
+                db.endTransaction();
+                db.close();
+            }
+        }).start();
+
     }
 
 
     // Delete Old data with where clause
-    public void deleteOldData__db(String whereKey, String whereKeyValue) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete("BrandManager", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
-        db.close();
+    public void deleteOldData__db(final String whereKey, final String whereKeyValue) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SQLiteDatabase db = getWritableDatabase();
+                db.beginTransaction();
+                db.delete("BrandManager", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+                db.setTransactionSuccessful();
+                db.endTransaction();
+                db.close();
+            }
+        }).start();
+
     }
 
 
     // Updating single contact
-    public void update__db(String id,   BrandManager modelData) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = getContentValues(modelData);
-        // updating row
-        db.update("BrandManager", values, "id = ?",
-                new String[] { id });
-        db.close();
+    public void update__db(final String id,   final BrandManager modelData) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SQLiteDatabase db = getWritableDatabase();
+                db.beginTransaction();
+                ContentValues values = getContentValues(modelData);
+                // updating row
+                db.update("BrandManager", values, "id = ?",
+                        new String[] { id });
+                db.setTransactionSuccessful();
+                db.endTransaction();
+                db.close();
+            }
+        }).start();
+
     }
 
 
     // Updating updated data property to new contact
     public void checkOldData__db() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("_DATA_UPDATED", 0);
-        // updating row
-        db.update("BrandManager", values, "_DATA_UPDATED = 1", null);
-        db.close();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SQLiteDatabase db = getWritableDatabase();
+                db.beginTransaction();
+                ContentValues values = new ContentValues();
+                values.put("_DATA_UPDATED", 0);
+                // updating row
+                db.update("BrandManager", values, "_DATA_UPDATED = 1", null);
+                db.setTransactionSuccessful();
+                db.endTransaction();
+                db.close();
+            }
+        }).start();
+
     }
 
 
     // Delete Old data
     public void deleteOldData__db() {
-      SQLiteDatabase db = this.getWritableDatabase();
-      db.delete("BrandManager", "_DATA_UPDATED = 0", null);
-      db.close();
+      new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SQLiteDatabase db = getWritableDatabase();
+                db.beginTransaction();
+                db.delete("BrandManager", "_DATA_UPDATED = 0", null);
+                db.setTransactionSuccessful();
+                db.endTransaction();
+                db.close();
+            }
+        }).start();
+
     }
 
 
@@ -705,16 +766,33 @@ public class BrandManagerDb extends SQLiteOpenHelper {
 
     // Deleting by id
     public void delete__db(String id) {
-      SQLiteDatabase db = this.getWritableDatabase();
-      db.delete(TABLE, KEY_ID + " = ?",
-      new String[] { id });
-      db.close();
+      new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SQLiteDatabase db = getWritableDatabase();
+                db.beginTransaction();
+                db.delete(TABLE, KEY_ID + " = ?",
+                new String[] { id });
+                db.setTransactionSuccessful();
+                db.endTransaction();
+                db.close();
+            }
+        }).start();
     }
 
     public void reset__db(){
-       SQLiteDatabase db = this.getWritableDatabase();
-       db.delete(TABLE,null,null);
-       db.close();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SQLiteDatabase db = getWritableDatabase();
+                db.beginTransaction();
+                db.delete(TABLE,null,null);
+                db.setTransactionSuccessful();
+                db.endTransaction();
+                db.close();
+            }
+        }).start();
+
     }
 
 }
