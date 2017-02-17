@@ -409,7 +409,7 @@ public class FacebookAccessTokenDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("FacebookAccessToken", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+                db.delete("FacebookAccessToken", "_DATA_UPDATED = 0 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();

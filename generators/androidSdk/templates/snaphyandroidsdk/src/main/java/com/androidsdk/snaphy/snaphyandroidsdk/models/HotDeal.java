@@ -538,6 +538,7 @@ public class HotDeal extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -698,6 +699,7 @@ public class HotDeal extends Model {
                                     } //method def ends here.
                                  
                             
+                        
                         
                         
                         

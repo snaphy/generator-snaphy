@@ -288,6 +288,15 @@ public class HotDealRepository extends ModelRepository<HotDeal> {
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDeals", "POST"), "HotDeal.getDeals");
+    
+
+    
+    
+
+    
+
+    
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "HotDeal.getDetailSchema");
     
 
@@ -1350,6 +1359,89 @@ public class HotDealRepository extends ModelRepository<HotDeal> {
 
         
     
+        
+    
+        
+            //Method getDeals definition
+            public void getDeals(  Map<String,  ? extends Object> filter, final DataListCallback<HotDeal> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("getDeals", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<HotDeal> hotDealList = new DataList<HotDeal>();
+                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hotDealRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        HotDeal hotDeal = hotDealRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = hotDeal.getClass().getMethod("save__db");
+                                                      method.invoke(hotDeal);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        hotDealList.add(hotDeal);
+                                    }
+                                    callback.onSuccess(hotDealList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method getDeals definition ends here..
+
+            
+
         
     
         

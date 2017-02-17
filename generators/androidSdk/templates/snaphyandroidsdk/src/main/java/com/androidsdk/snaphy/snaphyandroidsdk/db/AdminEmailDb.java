@@ -441,7 +441,7 @@ public class AdminEmailDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("AdminEmail", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+                db.delete("AdminEmail", "_DATA_UPDATED = 0 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();

@@ -497,7 +497,7 @@ public class ChatDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("Chat", "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+                db.delete("Chat", "_DATA_UPDATED = 0 AND " + whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
