@@ -345,6 +345,133 @@ public class DailyFeedDb{
     }
 
 
+
+    public String getWhereQuery(HashMap<String, Object> whereKeyValue){
+        //Prepare where key value
+        String where = "";
+        if(whereKeyValue.size() > 0){
+            where = where +  " WHERE ";
+        }
+        where = where + getWhere(whereKeyValue);
+        return where;
+    }
+
+
+     public String getWhere(HashMap<String, Object> whereKeyValue){
+        String where = "";
+        int i=0;
+        for(String key : whereKeyValue.keySet()){
+            Object o = whereKeyValue.get(key);
+            if(i==0){
+                where = where + " `" + key + "` = '"+ o.toString()+ "'";
+            }else{
+                where = where + " AND `" + key + "` = '"+ o.toString()+ "'";
+            }
+            i++;
+        }
+        return where;
+     }
+
+
+    // Getting All Data where
+    public DataList<DailyFeed>  getAll__db(HashMap<String, Object> whereKeyValue) {
+        DataList<DailyFeed> modelList = new DataList<DailyFeed>();
+        String whereQuery = getWhereQuery(whereKeyValue);
+        // Select All Query
+        String selectQuery = "SELECT  * FROM DailyFeed " + whereQuery;
+
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
+        //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
+        db.beginTransaction();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+         if (!(cursor.moveToFirst()) || cursor.getCount() == 0){
+            return (DataList<DailyFeed>) modelList;
+         }else{
+            do {
+
+                HashMap<String, Object> hashMap = parseCursor(cursor);
+                if(hashMap != null){
+                    DailyFeedRepository repo = restAdapter.createRepository(DailyFeedRepository.class);
+                    repo.addStorage(context);
+                    modelList.add((DailyFeed)repo.createObject(hashMap));
+                }
+            } while (cursor.moveToNext());
+         }
+
+        db.setTransactionSuccessful();
+        db.endTransaction();
+        cursor.close();
+        //db.close();
+        // return contact list
+        return (DataList<DailyFeed>) modelList;
+    }
+
+
+
+
+
+    /**
+     * Check count of database.
+     * @param whereKey
+     * @param whereKeyValue
+     * @return
+     */
+    public int count__db(HashMap<String, Object> whereKeyValue){
+        String whereQuery = getWhereQuery(whereKeyValue);
+        String countQuery = "SELECT  * FROM DailyFeed " + whereQuery ;
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+        return count;
+    }
+
+
+    // Updating updated data property to new contact with where clause..
+    public void checkOldData__db(final HashMap<String, Object> whereKeyValue) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+                //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
+                db.beginTransaction();
+                ContentValues values = new ContentValues();
+                values.put("_DATA_UPDATED", 0);
+                String where = getWhere(whereKeyValue);
+                // updating row
+                db.update("DailyFeed", values, "_DATA_UPDATED = 1 AND " + where, null);
+                db.setTransactionSuccessful();
+                db.endTransaction();
+                //db.close();
+            }
+        }).start();
+
+    }
+
+
+    // Delete Old data with where clause
+    public void deleteOldData__db(final HashMap<String, Object> whereKeyValue) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+                db.beginTransaction();
+                String where = getWhere(whereKeyValue);
+                db.delete("DailyFeed", "_DATA_UPDATED = 0 AND " + where , null);
+                db.setTransactionSuccessful();
+                db.endTransaction();
+                //db.close();
+            }
+        }).start();
+
+    }
+
+
+
+
+
     // Getting All Data where
     public DataList<DailyFeed>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<DailyFeed> modelList = new DataList<DailyFeed>();

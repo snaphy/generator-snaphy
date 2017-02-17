@@ -461,7 +461,7 @@ public class <%- modelName %> extends Model {
     <%# //Adding a BELONGS TO RELATIONSHIP EXAMPLE
         private Customer customer ;
 
-        public Customer getCustomer() {
+        public Customer ConCustomer() {
             return customer;
         }
 
@@ -569,6 +569,10 @@ public class <%- modelName %> extends Model {
                            <%- modelName %>Repository lowercaseFirstLetterRepository = (<%- modelName %>Repository) getRepository();
                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                 Context context = lowercaseFirstLetterRepository.getContext();
+                                if(<%- relation %>Repository.getDb() != null ){
+                                    <%- relation %>Repository.addStorage(context);
+                                }
+
                                 if(context != null && <%- relation %>Repository.getDb() != null){
                                     <%- relation %>Repository.addStorage(context);
                                     <%- capitalcaseRelatedModelName %> <%- relation %> = (<%- capitalcaseRelatedModelName %>) <%- relation %>Repository.getDb().get__db(<%- getForeignKeyName() %>);

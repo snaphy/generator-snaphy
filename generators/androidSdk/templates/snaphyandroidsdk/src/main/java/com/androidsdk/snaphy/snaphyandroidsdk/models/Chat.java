@@ -518,6 +518,7 @@ public class Chat extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -678,6 +679,7 @@ public class Chat extends Model {
                             
                          
                             
+                        
                         
                         
                         

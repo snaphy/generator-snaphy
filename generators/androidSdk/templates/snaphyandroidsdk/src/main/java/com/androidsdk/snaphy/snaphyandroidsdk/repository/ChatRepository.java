@@ -288,6 +288,15 @@ public class ChatRepository extends ModelRepository<Chat> {
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getMessages", "POST"), "Chat.getMessages");
+    
+
+    
+    
+
+    
+
+    
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "Chat.getDetailSchema");
     
 
@@ -1359,6 +1368,89 @@ public class ChatRepository extends ModelRepository<Chat> {
 
         
     
+        
+    
+        
+            //Method getMessages definition
+            public void getMessages(  Map<String,  ? extends Object> filter, final DataListCallback<Chat> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("getMessages", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<Chat> chatList = new DataList<Chat>();
+                                    ChatRepository chatRepo = getRestAdapter().createRepository(ChatRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = chatRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(chatRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        Chat chat = chatRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = chat.getClass().getMethod("save__db");
+                                                      method.invoke(chat);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        chatList.add(chat);
+                                    }
+                                    callback.onSuccess(chatList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method getMessages definition ends here..
+
+            
+
         
     
         
