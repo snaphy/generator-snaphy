@@ -341,28 +341,84 @@ public class RoleDb{
     }
 
 
+     //Now also accept gt and lt values
      public String getWhere(HashMap<String, Object> whereKeyValue){
         String where = "";
         int i=0;
         for(String key : whereKeyValue.keySet()){
             Object o = whereKeyValue.get(key);
-            if(i==0){
-                where = where + " `" + key + "` = '"+ o.toString()+ "'";
-            }else{
-                where = where + " AND `" + key + "` = '"+ o.toString()+ "'";
+            List<String> keyValue = getKeyValue(key, o);
+            if(keyValue != keyValue){
+                if(keyValue.size() != o){
+                    String key = keyValue.get(0);
+                    String value = keyValue.get(1);
+
+                    if(i==0){
+                        if(key.equals("gt")){
+                            where = where + " `" + key + "` >= '"+ value + "'";
+                        }else if(key.equals("lt")){
+                            where = where + " `" + key + "` <= '"+ value + "'";
+                        }else{
+                            where = where + " `" + key + "` = '"+ value + "'";
+                        }
+                    }else{
+                        if(key.equals("gt")){
+                            where = where + " AND `" + key + "` >= '"+ value + "'";
+                        }else if(key.equals("lt")){
+                            where = where + " AND `" + key + "` <= '"+ value + "'";
+                        }else{
+                            where = where + " AND `" + key + "` = '"+ value + "'";
+                        }
+                    }
+                    i++;
+                }
             }
-            i++;
         }
         return where;
      }
 
 
+
+
+    //first argument is key and second is value
+    public List<String> getKeyValue(String key, Object keyValue){
+        List<String> returnVal = new ArrayList();
+        try{
+            //Converting to nested hashmap
+            HashMap<String, Object> value = (HashMap<String, Object>)keyValue;
+            for(String key : value.keySet()){
+                Object o = value.get(key);
+                returnVal.add(key);
+                returnVal.add(o.toString());
+                return returnVal;
+            }
+        }catch(Exception e){
+            returnVal.add(key);
+            returnVal.add(keyValue.toString());
+            return returnVal;
+        }
+        return null;
+    }
+
+
+
     // Getting All Data where
     public DataList<Role>  getAll__db(HashMap<String, Object> whereKeyValue) {
+        return getAll__db(whereKeyValue, 0);
+    }
+
+
+    // Getting All Data where
+    public DataList<Role>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
         DataList<Role> modelList = new DataList<Role>();
         String whereQuery = getWhereQuery(whereKeyValue);
-        // Select All Query
-        String selectQuery = "SELECT  * FROM Role " + whereQuery;
+
+          if(limit != 0){
+                // Select All Query
+                String selectQuery = "SELECT  * FROM Role " + whereQuery + " " + LIMIT  + " " + limit;
+          }else{
+                String selectQuery = "SELECT  * FROM Role " + whereQuery;
+          }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -402,14 +458,30 @@ public class RoleDb{
      * @param whereKeyValue
      * @return
      */
-    public int count__db(HashMap<String, Object> whereKeyValue){
+    public int count__db(HashMap<String, Object> whereKeyValue, int limit){
         String whereQuery = getWhereQuery(whereKeyValue);
-        String countQuery = "SELECT  * FROM Role " + whereQuery ;
+        if(limit != 0){
+            String countQuery = "SELECT  * FROM Role " + whereQuery + " " + LIMIT  + " " + limit;
+        }else{
+            String countQuery = "SELECT  * FROM Role " + whereQuery;
+        }
+
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
         cursor.close();
         return count;
+    }
+
+
+    /**
+     * Check count of database.
+     * @param whereKey
+     * @param whereKeyValue
+     * @return
+     */
+    public int count__db(HashMap<String, Object> whereKeyValue){
+            return count__db(whereKeyValue, 0);
     }
 
 
