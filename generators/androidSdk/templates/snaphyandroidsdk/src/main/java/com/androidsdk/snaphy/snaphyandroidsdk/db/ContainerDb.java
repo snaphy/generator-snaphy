@@ -353,7 +353,7 @@ public class ContainerDb{
 
     // Getting All Data where
     public DataList<Container>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
-        return getAll__db(whereKeyValue, null, false, false, limit);
+        return getAll__db(whereKeyValue, null,  limit);
     }
 
 
@@ -419,7 +419,6 @@ public class ContainerDb{
 
     /**
      * Check count of database.
-     * @param whereKey
      * @param whereKeyValue
      * @return
      */

@@ -417,7 +417,7 @@ public class FollowBrandDb{
 
     // Getting All Data where
     public DataList<FollowBrand>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
-        return getAll__db(whereKeyValue, null, false, false, limit);
+        return getAll__db(whereKeyValue, null,  limit);
     }
 
 
@@ -483,7 +483,6 @@ public class FollowBrandDb{
 
     /**
      * Check count of database.
-     * @param whereKey
      * @param whereKeyValue
      * @return
      */

@@ -705,7 +705,7 @@ public class AppUserDb{
 
     // Getting All Data where
     public DataList<AppUser>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
-        return getAll__db(whereKeyValue, null, false, false, limit);
+        return getAll__db(whereKeyValue, null,  limit);
     }
 
 
@@ -771,7 +771,6 @@ public class AppUserDb{
 
     /**
      * Check count of database.
-     * @param whereKey
      * @param whereKeyValue
      * @return
      */

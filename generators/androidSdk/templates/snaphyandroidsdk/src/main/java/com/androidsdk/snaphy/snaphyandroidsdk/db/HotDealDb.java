@@ -541,7 +541,7 @@ public class HotDealDb{
 
     // Getting All Data where
     public DataList<HotDeal>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
-        return getAll__db(whereKeyValue, null, false, false, limit);
+        return getAll__db(whereKeyValue, null,  limit);
     }
 
 
@@ -607,7 +607,6 @@ public class HotDealDb{
 
     /**
      * Check count of database.
-     * @param whereKey
      * @param whereKeyValue
      * @return
      */

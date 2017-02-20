@@ -401,7 +401,7 @@ public class CategoryDb{
 
     // Getting All Data where
     public DataList<Category>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
-        return getAll__db(whereKeyValue, null, false, false, limit);
+        return getAll__db(whereKeyValue, null,  limit);
     }
 
 
@@ -467,7 +467,6 @@ public class CategoryDb{
 
     /**
      * Check count of database.
-     * @param whereKey
      * @param whereKeyValue
      * @return
      */

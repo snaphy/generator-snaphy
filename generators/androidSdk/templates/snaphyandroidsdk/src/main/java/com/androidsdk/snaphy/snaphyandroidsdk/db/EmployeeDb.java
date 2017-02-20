@@ -657,7 +657,7 @@ public class EmployeeDb{
 
     // Getting All Data where
     public DataList<Employee>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
-        return getAll__db(whereKeyValue, null, false, false, limit);
+        return getAll__db(whereKeyValue, null,  limit);
     }
 
 
@@ -723,7 +723,6 @@ public class EmployeeDb{
 
     /**
      * Check count of database.
-     * @param whereKey
      * @param whereKeyValue
      * @return
      */

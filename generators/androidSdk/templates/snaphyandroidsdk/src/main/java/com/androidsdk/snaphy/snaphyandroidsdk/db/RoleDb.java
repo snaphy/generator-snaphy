@@ -441,7 +441,7 @@ public class RoleDb{
 
     // Getting All Data where
     public DataList<Role>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
-        return getAll__db(whereKeyValue, null, false, false, limit);
+        return getAll__db(whereKeyValue, null,  limit);
     }
 
 
@@ -507,7 +507,6 @@ public class RoleDb{
 
     /**
      * Check count of database.
-     * @param whereKey
      * @param whereKeyValue
      * @return
      */
