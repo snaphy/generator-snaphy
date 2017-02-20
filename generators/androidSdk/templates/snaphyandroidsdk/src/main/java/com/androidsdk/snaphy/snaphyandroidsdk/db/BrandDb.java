@@ -484,12 +484,12 @@ public class BrandDb{
     public DataList<Brand>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
         DataList<Brand> modelList = new DataList<Brand>();
         String whereQuery = getWhereQuery(whereKeyValue);
-
+            String selectQuery;
           if(limit != 0){
                 // Select All Query
-                String selectQuery = "SELECT  * FROM Brand " + whereQuery + " " + LIMIT  + " " + limit;
+                selectQuery = "SELECT  * FROM Brand " + whereQuery + " LIMIT " + limit;
           }else{
-                String selectQuery = "SELECT  * FROM Brand " + whereQuery;
+                selectQuery = "SELECT  * FROM Brand " + whereQuery;
           }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -526,16 +526,17 @@ public class BrandDb{
 
     /**
      * Check count of database.
-     * @param whereKey
      * @param whereKeyValue
+     * @param limit
      * @return
      */
     public int count__db(HashMap<String, Object> whereKeyValue, int limit){
         String whereQuery = getWhereQuery(whereKeyValue);
+        String countQuery;
         if(limit != 0){
-            String countQuery = "SELECT  * FROM Brand " + whereQuery + " " + LIMIT  + " " + limit;
+            countQuery = "SELECT  * FROM Brand " + whereQuery + " LIMIT " + limit;
         }else{
-            String countQuery = "SELECT  * FROM Brand " + whereQuery;
+            countQuery = "SELECT  * FROM Brand " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

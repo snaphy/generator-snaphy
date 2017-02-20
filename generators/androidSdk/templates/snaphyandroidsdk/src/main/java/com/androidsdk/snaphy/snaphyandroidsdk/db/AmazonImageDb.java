@@ -388,12 +388,12 @@ public class AmazonImageDb{
     public DataList<AmazonImage>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
         DataList<AmazonImage> modelList = new DataList<AmazonImage>();
         String whereQuery = getWhereQuery(whereKeyValue);
-
+            String selectQuery;
           if(limit != 0){
                 // Select All Query
-                String selectQuery = "SELECT  * FROM AmazonImage " + whereQuery + " " + LIMIT  + " " + limit;
+                selectQuery = "SELECT  * FROM AmazonImage " + whereQuery + " LIMIT " + limit;
           }else{
-                String selectQuery = "SELECT  * FROM AmazonImage " + whereQuery;
+                selectQuery = "SELECT  * FROM AmazonImage " + whereQuery;
           }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -430,16 +430,17 @@ public class AmazonImageDb{
 
     /**
      * Check count of database.
-     * @param whereKey
      * @param whereKeyValue
+     * @param limit
      * @return
      */
     public int count__db(HashMap<String, Object> whereKeyValue, int limit){
         String whereQuery = getWhereQuery(whereKeyValue);
+        String countQuery;
         if(limit != 0){
-            String countQuery = "SELECT  * FROM AmazonImage " + whereQuery + " " + LIMIT  + " " + limit;
+            countQuery = "SELECT  * FROM AmazonImage " + whereQuery + " LIMIT " + limit;
         }else{
-            String countQuery = "SELECT  * FROM AmazonImage " + whereQuery;
+            countQuery = "SELECT  * FROM AmazonImage " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

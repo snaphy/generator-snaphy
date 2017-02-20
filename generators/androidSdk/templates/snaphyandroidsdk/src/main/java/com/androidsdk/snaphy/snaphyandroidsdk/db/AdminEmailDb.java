@@ -444,12 +444,12 @@ public class AdminEmailDb{
     public DataList<AdminEmail>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
         DataList<AdminEmail> modelList = new DataList<AdminEmail>();
         String whereQuery = getWhereQuery(whereKeyValue);
-
+            String selectQuery;
           if(limit != 0){
                 // Select All Query
-                String selectQuery = "SELECT  * FROM AdminEmail " + whereQuery + " " + LIMIT  + " " + limit;
+                selectQuery = "SELECT  * FROM AdminEmail " + whereQuery + " LIMIT " + limit;
           }else{
-                String selectQuery = "SELECT  * FROM AdminEmail " + whereQuery;
+                selectQuery = "SELECT  * FROM AdminEmail " + whereQuery;
           }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -486,16 +486,17 @@ public class AdminEmailDb{
 
     /**
      * Check count of database.
-     * @param whereKey
      * @param whereKeyValue
+     * @param limit
      * @return
      */
     public int count__db(HashMap<String, Object> whereKeyValue, int limit){
         String whereQuery = getWhereQuery(whereKeyValue);
+        String countQuery;
         if(limit != 0){
-            String countQuery = "SELECT  * FROM AdminEmail " + whereQuery + " " + LIMIT  + " " + limit;
+            countQuery = "SELECT  * FROM AdminEmail " + whereQuery + " LIMIT " + limit;
         }else{
-            String countQuery = "SELECT  * FROM AdminEmail " + whereQuery;
+            countQuery = "SELECT  * FROM AdminEmail " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

@@ -388,12 +388,12 @@ public class FollowBrandDb{
     public DataList<FollowBrand>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
         DataList<FollowBrand> modelList = new DataList<FollowBrand>();
         String whereQuery = getWhereQuery(whereKeyValue);
-
+            String selectQuery;
           if(limit != 0){
                 // Select All Query
-                String selectQuery = "SELECT  * FROM FollowBrand " + whereQuery + " " + LIMIT  + " " + limit;
+                selectQuery = "SELECT  * FROM FollowBrand " + whereQuery + " LIMIT " + limit;
           }else{
-                String selectQuery = "SELECT  * FROM FollowBrand " + whereQuery;
+                selectQuery = "SELECT  * FROM FollowBrand " + whereQuery;
           }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -430,16 +430,17 @@ public class FollowBrandDb{
 
     /**
      * Check count of database.
-     * @param whereKey
      * @param whereKeyValue
+     * @param limit
      * @return
      */
     public int count__db(HashMap<String, Object> whereKeyValue, int limit){
         String whereQuery = getWhereQuery(whereKeyValue);
+        String countQuery;
         if(limit != 0){
-            String countQuery = "SELECT  * FROM FollowBrand " + whereQuery + " " + LIMIT  + " " + limit;
+            countQuery = "SELECT  * FROM FollowBrand " + whereQuery + " LIMIT " + limit;
         }else{
-            String countQuery = "SELECT  * FROM FollowBrand " + whereQuery;
+            countQuery = "SELECT  * FROM FollowBrand " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

@@ -372,12 +372,12 @@ public class CompanyInfoDb{
     public DataList<CompanyInfo>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
         DataList<CompanyInfo> modelList = new DataList<CompanyInfo>();
         String whereQuery = getWhereQuery(whereKeyValue);
-
+            String selectQuery;
           if(limit != 0){
                 // Select All Query
-                String selectQuery = "SELECT  * FROM CompanyInfo " + whereQuery + " " + LIMIT  + " " + limit;
+                selectQuery = "SELECT  * FROM CompanyInfo " + whereQuery + " LIMIT " + limit;
           }else{
-                String selectQuery = "SELECT  * FROM CompanyInfo " + whereQuery;
+                selectQuery = "SELECT  * FROM CompanyInfo " + whereQuery;
           }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -414,16 +414,17 @@ public class CompanyInfoDb{
 
     /**
      * Check count of database.
-     * @param whereKey
      * @param whereKeyValue
+     * @param limit
      * @return
      */
     public int count__db(HashMap<String, Object> whereKeyValue, int limit){
         String whereQuery = getWhereQuery(whereKeyValue);
+        String countQuery;
         if(limit != 0){
-            String countQuery = "SELECT  * FROM CompanyInfo " + whereQuery + " " + LIMIT  + " " + limit;
+            countQuery = "SELECT  * FROM CompanyInfo " + whereQuery + " LIMIT " + limit;
         }else{
-            String countQuery = "SELECT  * FROM CompanyInfo " + whereQuery;
+            countQuery = "SELECT  * FROM CompanyInfo " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

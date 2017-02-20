@@ -412,12 +412,12 @@ public class FacebookAccessTokenDb{
     public DataList<FacebookAccessToken>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
         DataList<FacebookAccessToken> modelList = new DataList<FacebookAccessToken>();
         String whereQuery = getWhereQuery(whereKeyValue);
-
+            String selectQuery;
           if(limit != 0){
                 // Select All Query
-                String selectQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery + " " + LIMIT  + " " + limit;
+                selectQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery + " LIMIT " + limit;
           }else{
-                String selectQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery;
+                selectQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery;
           }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -454,16 +454,17 @@ public class FacebookAccessTokenDb{
 
     /**
      * Check count of database.
-     * @param whereKey
      * @param whereKeyValue
+     * @param limit
      * @return
      */
     public int count__db(HashMap<String, Object> whereKeyValue, int limit){
         String whereQuery = getWhereQuery(whereKeyValue);
+        String countQuery;
         if(limit != 0){
-            String countQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery + " " + LIMIT  + " " + limit;
+            countQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery + " LIMIT " + limit;
         }else{
-            String countQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery;
+            countQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

@@ -428,12 +428,12 @@ public class DailyFeedDb{
     public DataList<DailyFeed>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
         DataList<DailyFeed> modelList = new DataList<DailyFeed>();
         String whereQuery = getWhereQuery(whereKeyValue);
-
+            String selectQuery;
           if(limit != 0){
                 // Select All Query
-                String selectQuery = "SELECT  * FROM DailyFeed " + whereQuery + " " + LIMIT  + " " + limit;
+                selectQuery = "SELECT  * FROM DailyFeed " + whereQuery + " LIMIT " + limit;
           }else{
-                String selectQuery = "SELECT  * FROM DailyFeed " + whereQuery;
+                selectQuery = "SELECT  * FROM DailyFeed " + whereQuery;
           }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -470,16 +470,17 @@ public class DailyFeedDb{
 
     /**
      * Check count of database.
-     * @param whereKey
      * @param whereKeyValue
+     * @param limit
      * @return
      */
     public int count__db(HashMap<String, Object> whereKeyValue, int limit){
         String whereQuery = getWhereQuery(whereKeyValue);
+        String countQuery;
         if(limit != 0){
-            String countQuery = "SELECT  * FROM DailyFeed " + whereQuery + " " + LIMIT  + " " + limit;
+            countQuery = "SELECT  * FROM DailyFeed " + whereQuery + " LIMIT " + limit;
         }else{
-            String countQuery = "SELECT  * FROM DailyFeed " + whereQuery;
+            countQuery = "SELECT  * FROM DailyFeed " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

@@ -500,12 +500,12 @@ public class ChatDb{
     public DataList<Chat>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
         DataList<Chat> modelList = new DataList<Chat>();
         String whereQuery = getWhereQuery(whereKeyValue);
-
+            String selectQuery;
           if(limit != 0){
                 // Select All Query
-                String selectQuery = "SELECT  * FROM Chat " + whereQuery + " " + LIMIT  + " " + limit;
+                selectQuery = "SELECT  * FROM Chat " + whereQuery + " LIMIT " + limit;
           }else{
-                String selectQuery = "SELECT  * FROM Chat " + whereQuery;
+                selectQuery = "SELECT  * FROM Chat " + whereQuery;
           }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -542,16 +542,17 @@ public class ChatDb{
 
     /**
      * Check count of database.
-     * @param whereKey
      * @param whereKeyValue
+     * @param limit
      * @return
      */
     public int count__db(HashMap<String, Object> whereKeyValue, int limit){
         String whereQuery = getWhereQuery(whereKeyValue);
+        String countQuery;
         if(limit != 0){
-            String countQuery = "SELECT  * FROM Chat " + whereQuery + " " + LIMIT  + " " + limit;
+            countQuery = "SELECT  * FROM Chat " + whereQuery + " LIMIT " + limit;
         }else{
-            String countQuery = "SELECT  * FROM Chat " + whereQuery;
+            countQuery = "SELECT  * FROM Chat " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

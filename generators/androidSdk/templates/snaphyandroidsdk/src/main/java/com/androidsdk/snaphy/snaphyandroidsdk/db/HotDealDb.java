@@ -512,12 +512,12 @@ public class HotDealDb{
     public DataList<HotDeal>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
         DataList<HotDeal> modelList = new DataList<HotDeal>();
         String whereQuery = getWhereQuery(whereKeyValue);
-
+            String selectQuery;
           if(limit != 0){
                 // Select All Query
-                String selectQuery = "SELECT  * FROM HotDeal " + whereQuery + " " + LIMIT  + " " + limit;
+                selectQuery = "SELECT  * FROM HotDeal " + whereQuery + " LIMIT " + limit;
           }else{
-                String selectQuery = "SELECT  * FROM HotDeal " + whereQuery;
+                selectQuery = "SELECT  * FROM HotDeal " + whereQuery;
           }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -554,16 +554,17 @@ public class HotDealDb{
 
     /**
      * Check count of database.
-     * @param whereKey
      * @param whereKeyValue
+     * @param limit
      * @return
      */
     public int count__db(HashMap<String, Object> whereKeyValue, int limit){
         String whereQuery = getWhereQuery(whereKeyValue);
+        String countQuery;
         if(limit != 0){
-            String countQuery = "SELECT  * FROM HotDeal " + whereQuery + " " + LIMIT  + " " + limit;
+            countQuery = "SELECT  * FROM HotDeal " + whereQuery + " LIMIT " + limit;
         }else{
-            String countQuery = "SELECT  * FROM HotDeal " + whereQuery;
+            countQuery = "SELECT  * FROM HotDeal " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

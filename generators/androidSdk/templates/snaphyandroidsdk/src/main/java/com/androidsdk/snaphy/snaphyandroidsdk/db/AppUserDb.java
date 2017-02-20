@@ -676,12 +676,12 @@ public class AppUserDb{
     public DataList<AppUser>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
         DataList<AppUser> modelList = new DataList<AppUser>();
         String whereQuery = getWhereQuery(whereKeyValue);
-
+            String selectQuery;
           if(limit != 0){
                 // Select All Query
-                String selectQuery = "SELECT  * FROM AppUser " + whereQuery + " " + LIMIT  + " " + limit;
+                selectQuery = "SELECT  * FROM AppUser " + whereQuery + " LIMIT " + limit;
           }else{
-                String selectQuery = "SELECT  * FROM AppUser " + whereQuery;
+                selectQuery = "SELECT  * FROM AppUser " + whereQuery;
           }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -718,16 +718,17 @@ public class AppUserDb{
 
     /**
      * Check count of database.
-     * @param whereKey
      * @param whereKeyValue
+     * @param limit
      * @return
      */
     public int count__db(HashMap<String, Object> whereKeyValue, int limit){
         String whereQuery = getWhereQuery(whereKeyValue);
+        String countQuery;
         if(limit != 0){
-            String countQuery = "SELECT  * FROM AppUser " + whereQuery + " " + LIMIT  + " " + limit;
+            countQuery = "SELECT  * FROM AppUser " + whereQuery + " LIMIT " + limit;
         }else{
-            String countQuery = "SELECT  * FROM AppUser " + whereQuery;
+            countQuery = "SELECT  * FROM AppUser " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

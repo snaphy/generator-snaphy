@@ -372,12 +372,12 @@ public class CategoryDb{
     public DataList<Category>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
         DataList<Category> modelList = new DataList<Category>();
         String whereQuery = getWhereQuery(whereKeyValue);
-
+            String selectQuery;
           if(limit != 0){
                 // Select All Query
-                String selectQuery = "SELECT  * FROM Category " + whereQuery + " " + LIMIT  + " " + limit;
+                selectQuery = "SELECT  * FROM Category " + whereQuery + " LIMIT " + limit;
           }else{
-                String selectQuery = "SELECT  * FROM Category " + whereQuery;
+                selectQuery = "SELECT  * FROM Category " + whereQuery;
           }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -414,16 +414,17 @@ public class CategoryDb{
 
     /**
      * Check count of database.
-     * @param whereKey
      * @param whereKeyValue
+     * @param limit
      * @return
      */
     public int count__db(HashMap<String, Object> whereKeyValue, int limit){
         String whereQuery = getWhereQuery(whereKeyValue);
+        String countQuery;
         if(limit != 0){
-            String countQuery = "SELECT  * FROM Category " + whereQuery + " " + LIMIT  + " " + limit;
+            countQuery = "SELECT  * FROM Category " + whereQuery + " LIMIT " + limit;
         }else{
-            String countQuery = "SELECT  * FROM Category " + whereQuery;
+            countQuery = "SELECT  * FROM Category " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
