@@ -52,50 +52,6 @@ public class <%- modelName %>Db{
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
-  /**
-      // Creating Tables
-      @Override
-      public void onCreate(SQLiteDatabase db) {
-        <%
-        var tableQuery = `CREATE TABLE IF NOT EXISTS ${modelName}( `;
-        var i=0;
-        for( let property in model.properties) { -%>
-            <% if(model.properties.hasOwnProperty(property)){
-                let isArray = model.properties[property].type instanceof Array;
-                if(i==0){
-                    if(property === "id"){
-                      tableQuery = `${tableQuery} ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)} PRIMARY KEY`;
-                    }else{
-                      tableQuery = `${tableQuery} ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)}`;
-                    }
-                }else{
-                  if(property === "id"){
-                    tableQuery = `${tableQuery}, ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)} PRIMARY KEY`;
-                  }else{
-                    tableQuery = `${tableQuery}, ${model.methods.createTableTypeQuery(property, model.properties[property].type, isArray)}`;
-                  }
-                }
-            -%>
-            <%} -%>
-           <% i++; -%>
-        <%} -%>
-
-        <%
-        //On insert always update the update data value to be 1 and on fetch change to 0
-        tableQuery = tableQuery + `, ${model.methods.updateDataProperty} NUMBER ` + ")"; %>
-        String CREATE_<%- modelName %>_TABLE = "<%- tableQuery %>";
-        db.execSQL(CREATE_<%- modelName %>_TABLE);
-      }
-
-        // Upgrading database
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-                // Drop older table if existed
-                db.execSQL("DROP TABLE IF EXISTS <%- modelName %>");
-                // Create tables again
-                onCreate(db);
-        }
-    **/
 
     public void insert__db (final String id, final <%- modelName %> modelData) {
         new Thread(new Runnable() {
@@ -165,12 +121,12 @@ public class <%- modelName %>Db{
 
                     <% } -%>
               <% }//END IF-ELSE -%>
-              values.put("<%-property%>", <%-property%>Data);
+              values.put("`<%-property%>`", <%-property%>Data);
           <% } -%>
         <%}%>
 
         //Add the updated data property value to be 1
-        values.put("<%- model.methods.updateDataProperty %>", 1);
+        values.put("`<%- model.methods.updateDataProperty %>`", 1);
         return values;
     }
 
