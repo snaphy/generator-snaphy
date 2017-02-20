@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import android.database.Cursor;
 import java.lang.reflect.Method;
 import android.util.Log;
+import java.util.List;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
@@ -422,21 +423,21 @@ public class BrandDb{
             List<String> keyValue = getKeyValue(key, o);
             if(keyValue != keyValue){
                 if(keyValue.size() != o){
-                    String key = keyValue.get(0);
+                    String returnedKey = keyValue.get(0);
                     String value = keyValue.get(1);
 
                     if(i==0){
-                        if(key.equals("gt")){
+                        if(returnedKey.equals("gt")){
                             where = where + " `" + key + "` >= '"+ value + "'";
-                        }else if(key.equals("lt")){
+                        }else if(returnedKey.equals("lt")){
                             where = where + " `" + key + "` <= '"+ value + "'";
                         }else{
                             where = where + " `" + key + "` = '"+ value + "'";
                         }
                     }else{
-                        if(key.equals("gt")){
+                        if(returnedKey.equals("gt")){
                             where = where + " AND `" + key + "` >= '"+ value + "'";
-                        }else if(key.equals("lt")){
+                        }else if(returnedKey.equals("lt")){
                             where = where + " AND `" + key + "` <= '"+ value + "'";
                         }else{
                             where = where + " AND `" + key + "` = '"+ value + "'";
