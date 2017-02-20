@@ -417,6 +417,10 @@ public class HotDeal extends Model {
                            HotDealRepository lowercaseFirstLetterRepository = (HotDealRepository) getRepository();
                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                 Context context = lowercaseFirstLetterRepository.getContext();
+                                if(categoryRepository.getDb() == null ){
+                                    categoryRepository.addStorage(context);
+                                }
+
                                 if(context != null && categoryRepository.getDb() != null){
                                     categoryRepository.addStorage(context);
                                     Category category = (Category) categoryRepository.getDb().get__db(categoryId);
@@ -612,6 +616,10 @@ public class HotDeal extends Model {
                            HotDealRepository lowercaseFirstLetterRepository = (HotDealRepository) getRepository();
                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                 Context context = lowercaseFirstLetterRepository.getContext();
+                                if(brandRepository.getDb() == null ){
+                                    brandRepository.addStorage(context);
+                                }
+
                                 if(context != null && brandRepository.getDb() != null){
                                     brandRepository.addStorage(context);
                                     Brand brand = (Brand) brandRepository.getDb().get__db(brandId);

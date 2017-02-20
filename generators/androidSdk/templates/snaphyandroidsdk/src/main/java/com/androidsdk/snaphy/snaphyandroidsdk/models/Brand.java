@@ -66,6 +66,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
     
 
     
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.AppUserRepository;
+            
+
+        
+    
+
+    
             import com.androidsdk.snaphy.snaphyandroidsdk.repository.FollowBrandRepository;
             
 
@@ -713,6 +720,18 @@ public class Brand extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -951,6 +970,27 @@ public class Brand extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -1324,6 +1364,18 @@ public class Brand extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -1554,6 +1606,27 @@ public class Brand extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -1738,6 +1811,18 @@ public class Brand extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -1898,6 +1983,14 @@ public class Brand extends Model {
                                         });
                                     } //method def ends here.
                                  
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
                             
                          
                             
@@ -2185,6 +2278,19 @@ public class Brand extends Model {
                         
                         
                         
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                     
 
                 
@@ -2330,6 +2436,18 @@ public class Brand extends Model {
                     
 
                      
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
                             
                          
                             
@@ -2507,6 +2625,14 @@ public class Brand extends Model {
                                         });
                                     } //method def ends here.
                                  
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
                             
                          
                             
@@ -2788,6 +2914,19 @@ public class Brand extends Model {
                         
                         
                         
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                     
 
                 
@@ -2864,6 +3003,10 @@ public class Brand extends Model {
                            BrandRepository lowercaseFirstLetterRepository = (BrandRepository) getRepository();
                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                 Context context = lowercaseFirstLetterRepository.getContext();
+                                if(brandVerificationsRepository.getDb() == null ){
+                                    brandVerificationsRepository.addStorage(context);
+                                }
+
                                 if(context != null && brandVerificationsRepository.getDb() != null){
                                     brandVerificationsRepository.addStorage(context);
                                     BrandVerification brandVerifications = (BrandVerification) brandVerificationsRepository.getDb().get__db(brandVerificationId);
@@ -2893,6 +3036,18 @@ public class Brand extends Model {
                     
 
                      
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
                             
                          
                             
@@ -3174,6 +3329,27 @@ public class Brand extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -3207,6 +3383,753 @@ public class Brand extends Model {
                 
 
                  
+                 
+             
+          
+    
+        
+        
+                
+
+                
+                
+                    //TODO ADD BACKWARD COMPATIBILITY FOR hasManyThrough relationship..warning backward compatibility may leads to cyclic error..
+                    //Define belongsTo relation method here..
+                    private transient DataList<AppUser>  appUsers ;
+
+                    public DataList<AppUser> getAppUsers() {
+                        return appUsers;
+                    }
+
+
+                    public void setAppUsers(DataList<AppUser> appUsers) {
+                        boolean hashType = false;
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
+                        for(Object o: appUsers){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }else if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
+                        }
+
+                        if(hashType){
+                            setAppUsers1(hashMaps);
+                        }else{
+                            this.appUsers = appUsers;
+                        }
+                    }
+
+                    /*
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setAppUsers1(List<Map<String, Object>> appUsers) {
+                        //First create a dummy Repo class object for ..
+                        AppUserRepository appUsersRepository = new AppUserRepository();
+                        List<AppUser> result = new ArrayList<>();
+                        for (Map<String, Object> obj : appUsers) {
+                            //Also add relation to child type for two way communication..
+                            AppUser obj1 = appUsersRepository.createObject(obj);
+                            result.add(obj1);
+                        }
+                        setAppUsers(result);
+                    }
+
+                    */
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setAppUsers1(DataList<HashMap<String, Object>> appUsers) {
+                        //First create a dummy Repo class object for ..
+                        AppUserRepository appUsersRepository = new AppUserRepository();
+                        DataList<AppUser> result = new DataList<>();
+                        for (HashMap<String, Object> obj : appUsers) {
+                            //Also add relation to child type for two way communication..
+                            AppUser obj1 = appUsersRepository.createObject(obj);
+                            result.add(obj1);
+                        }
+                        setAppUsers(result);
+                    }
+
+
+                    //Adding relation method..
+                    public void addRelation(DataList<AppUser> appUsers, AppUser dummyClassInstance) {
+                        that.setAppUsers(appUsers);
+                    }
+
+
+                    //Adding relation method..
+                    //This will add a new data to the list relation object..
+                    public void addRelation(AppUser appUsers) {
+                        try{
+                            that.getAppUsers().add(appUsers);
+                        }catch(Exception e){
+                            DataList< AppUser> appUsers1 = new DataList();
+                            //Now add this item to list..
+                            appUsers1.add(appUsers);
+                            //Now set data....
+                            that.setAppUsers(appUsers1);
+                        }
+                    }
+
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void findById__appUsers( String fk,  RestAdapter restAdapter, final ObjectCallback<AppUser> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final BrandRepository  brandRepo = restAdapter.createRepository(BrandRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        brandRepo.findById__appUsers( (String)that.getId(), fk,  new ObjectCallback<AppUser> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(AppUser object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void destroyById__appUsers( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final BrandRepository  brandRepo = restAdapter.createRepository(BrandRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        brandRepo.destroyById__appUsers( (String)that.getId(), fk,  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void updateById__appUsers( String fk,  AppUser data,  RestAdapter restAdapter, final ObjectCallback<AppUser> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final BrandRepository  brandRepo = restAdapter.createRepository(BrandRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        brandRepo.updateById__appUsers( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<AppUser> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(AppUser object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void link__appUsers( String fk,  RestAdapter restAdapter, final ObjectCallback<AppUser> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final BrandRepository  brandRepo = restAdapter.createRepository(BrandRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        brandRepo.link__appUsers( (String)that.getId(), fk,  new ObjectCallback<AppUser> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(AppUser object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void unlink__appUsers( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final BrandRepository  brandRepo = restAdapter.createRepository(BrandRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        brandRepo.unlink__appUsers( (String)that.getId(), fk,  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void exists__appUsers( String fk,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final BrandRepository  brandRepo = restAdapter.createRepository(BrandRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        brandRepo.exists__appUsers( (String)that.getId(), fk,  new ObjectCallback<JSONObject>(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                        //Calling the finally..callback
+                                                        callback.onFinally();
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__appUsers( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<AppUser> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final BrandRepository  brandRepo = restAdapter.createRepository(BrandRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        brandRepo.get__appUsers( (String)that.getId(), filter,  new DataListCallback<AppUser> (){
+                                            
+
+                                            
+
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(DataList<AppUser> object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            AppUser obj = new AppUser();
+                                                            addRelation(object, obj);
+                                                            //Disabling two way communication for cyclic error..
+                                                            /*for (AppUser obj : object) {
+                                                                //Also add relation to child type for two way communication..
+                                                                obj.addRelation(that);
+                                                            }*/
+
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void create__appUsers( AppUser data,  RestAdapter restAdapter, final ObjectCallback<AppUser> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final BrandRepository  brandRepo = restAdapter.createRepository(BrandRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        brandRepo.create__appUsers( (String)that.getId(), data.convertMap(),  new ObjectCallback<AppUser> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(AppUser object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void delete__appUsers( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final BrandRepository  brandRepo = restAdapter.createRepository(BrandRepository.class);
+                                        
+                                        
+
+
+
+                                        brandRepo.delete__appUsers( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void count__appUsers( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final BrandRepository  brandRepo = restAdapter.createRepository(BrandRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        brandRepo.count__appUsers( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                        //Calling the finally..callback
+                                                        callback.onFinally();
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                 
+                
+                    //Define hasAndBelongsToMany..
+
                  
              
           
@@ -3344,6 +4267,18 @@ public class Brand extends Model {
                     
 
                      
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
                             
                          
                             
@@ -3535,6 +4470,14 @@ public class Brand extends Model {
                                         });
                                     } //method def ends here.
                                  
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
                             
                          
                             
@@ -3774,6 +4717,19 @@ public class Brand extends Model {
                                     } //method def ends here.
                                  
                             
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         

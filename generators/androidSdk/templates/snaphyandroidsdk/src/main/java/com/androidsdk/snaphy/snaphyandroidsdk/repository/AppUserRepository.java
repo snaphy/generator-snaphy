@@ -76,6 +76,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.AppUserDb;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Brand;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
+            
+        
+    
+
 
 
 
@@ -339,6 +346,60 @@ public class AppUserRepository extends UserRepository<AppUser> {
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/:fk", "GET"), "AppUser.prototype.__findById__brands");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/:fk", "DELETE"), "AppUser.prototype.__destroyById__brands");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/:fk", "PUT"), "AppUser.prototype.__updateById__brands");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/rel/:fk", "PUT"), "AppUser.prototype.__link__brands");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/rel/:fk", "DELETE"), "AppUser.prototype.__unlink__brands");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/rel/:fk", "HEAD"), "AppUser.prototype.__exists__brands");
+    
+
+    
+    
+
+    
+
+    
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/followBrands/:fk", "GET"), "AppUser.prototype.__findById__followBrands");
     
 
@@ -466,6 +527,42 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/chats/count", "GET"), "AppUser.prototype.__count__chats");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands", "GET"), "AppUser.prototype.__get__brands");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands", "POST"), "AppUser.prototype.__create__brands");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands", "DELETE"), "AppUser.prototype.__delete__brands");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/brands/count", "GET"), "AppUser.prototype.__count__brands");
     
 
     
@@ -657,6 +754,24 @@ public class AppUserRepository extends UserRepository<AppUser> {
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/__connect__brands", "POST"), "AppUser.__connect__brands");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/__disconnect__brands", "POST"), "AppUser.__disconnect__brands");
+    
+
+    
+    
+
+    
+
+    
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchRecentAppUser", "POST"), "AppUser.fetchRecentAppUser");
     
 
@@ -712,6 +827,39 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/subscribe", "POST"), "AppUser.subscribe");
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
     
 
     
@@ -1401,6 +1549,412 @@ public class AppUserRepository extends UserRepository<AppUser> {
                 
 
             }//Method updateById__chats definition ends here..
+
+            
+
+        
+    
+        
+            //Method findById__brands definition
+            public void findById__brands(  String appUserId,  String fk, final ObjectCallback<Brand> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__findById__brands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = brandRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //brandRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Brand brand = brandRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = brand.getClass().getMethod("save__db");
+                                                    method.invoke(brand);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(brand);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method findById__brands definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__brands definition
+            public void destroyById__brands(  String appUserId,  String fk, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__brands", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__brands definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__brands definition
+            public void updateById__brands(  String appUserId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Brand> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__updateById__brands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = brandRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //brandRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Brand brand = brandRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = brand.getClass().getMethod("save__db");
+                                                    method.invoke(brand);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(brand);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method updateById__brands definition ends here..
+
+            
+
+        
+    
+        
+            //Method link__brands definition
+            public void link__brands(  String appUserId,  String fk, final ObjectCallback<Brand> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__link__brands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = brandRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //brandRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Brand brand = brandRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = brand.getClass().getMethod("save__db");
+                                                    method.invoke(brand);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(brand);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method link__brands definition ends here..
+
+            
+
+        
+    
+        
+            //Method unlink__brands definition
+            public void unlink__brands(  String appUserId,  String fk, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__unlink__brands", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method unlink__brands definition ends here..
+
+            
+
+        
+    
+        
+            //Method exists__brands definition
+            public void exists__brands(  String appUserId,  String fk, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__exists__brands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method exists__brands definition ends here..
 
             
 
@@ -2428,6 +2982,275 @@ public class AppUserRepository extends UserRepository<AppUser> {
                 
 
             }//Method count__chats definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__brands definition
+            public void get__brands(  String appUserId,  Map<String,  ? extends Object> filter, final DataListCallback<Brand> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__brands", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<Brand> brandList = new DataList<Brand>();
+                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = brandRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        Brand brand = brandRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = brand.getClass().getMethod("save__db");
+                                                      method.invoke(brand);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        brandList.add(brand);
+                                    }
+                                    callback.onSuccess(brandList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method get__brands definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__brands definition
+            public void create__brands(  String appUserId,  Map<String,  ? extends Object> data, final ObjectCallback<Brand> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__brands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = brandRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //brandRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Brand brand = brandRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = brand.getClass().getMethod("save__db");
+                                                    method.invoke(brand);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(brand);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__brands definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__brands definition
+            public void delete__brands(  String appUserId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__brands", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__brands definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__brands definition
+            public void count__brands(  String appUserId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__brands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method count__brands definition ends here..
 
             
 
@@ -3614,6 +4437,112 @@ public class AppUserRepository extends UserRepository<AppUser> {
         
     
         
+            //Method __connect__brands definition
+            public void __connect__brands(  String id,  DataList<String> fk, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("id", id);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("__connect__brands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method __connect__brands definition ends here..
+
+            
+
+        
+    
+        
+            //Method __disconnect__brands definition
+            public void __disconnect__brands(  String id,  DataList<String> fk, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("id", id);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("__disconnect__brands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method __disconnect__brands definition ends here..
+
+            
+
+        
+    
+        
             //Method fetchRecentAppUser definition
             public void fetchRecentAppUser(  String brandId,  double limit,  String query, final DataListCallback<AppUser> callback){
 
@@ -4000,6 +4929,28 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
             
 
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
         

@@ -339,6 +339,10 @@ public class Student extends User {
                            StudentRepository lowercaseFirstLetterRepository = (StudentRepository) getRepository();
                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                 Context context = lowercaseFirstLetterRepository.getContext();
+                                if(brandRepository.getDb() == null ){
+                                    brandRepository.addStorage(context);
+                                }
+
                                 if(context != null && brandRepository.getDb() != null){
                                     brandRepository.addStorage(context);
                                     Brand brand = (Brand) brandRepository.getDb().get__db(brandId);
