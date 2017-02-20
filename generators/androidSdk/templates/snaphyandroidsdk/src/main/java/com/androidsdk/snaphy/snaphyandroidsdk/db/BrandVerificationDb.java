@@ -333,7 +333,7 @@ public class BrandVerificationDb{
             Object o = whereKeyValue.get(key);
             DataList<String> keyValue = getKeyValue(key, o);
             if(keyValue != keyValue){
-                if(keyValue.size() != o){
+                if(keyValue.size() != 0){
                     String returnedKey = keyValue.get(0);
                     String value = keyValue.get(1);
 
