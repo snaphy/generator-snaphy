@@ -298,7 +298,7 @@ public class StudentDb{
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
             Cursor cursor = db.query("Student", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
-                if (!(cursor.moveToFirst()) | cursor.getCount() == 0){
+                if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
                 }else{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
@@ -331,7 +331,7 @@ public class StudentDb{
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
             Cursor cursor = db.query("Student", null, whereKey + "=?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
-                if (!(cursor.moveToFirst()) | cursor.getCount() == 0){
+                if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
                 }else{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
@@ -539,7 +539,7 @@ public class StudentDb{
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
-        if (!(cursor.moveToFirst()) | cursor.getCount() == 0){
+        if (!cursor.moveToFirst() || cursor.getCount() == 0){
             return (DataList<Student>) modelList;
         }else{
             do {
@@ -602,7 +602,7 @@ public class StudentDb{
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-         if (!(cursor.moveToFirst()) | cursor.getCount() == 0){
+         if (!cursor.moveToFirst() || cursor.getCount() == 0){
             return (DataList<Student>) modelList;
          }else{
             do {
@@ -700,7 +700,7 @@ public class StudentDb{
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-         if (!(cursor.moveToFirst()) | cursor.getCount() == 0){
+         if (!cursor.moveToFirst() || cursor.getCount() == 0){
             return (DataList<Student>) modelList;
          }else{
             do {

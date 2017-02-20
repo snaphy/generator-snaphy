@@ -342,7 +342,7 @@ public class Brand extends Model {
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
-          if(id != null & lowercaseFirstLetterRepository.getDb() != null){
+          if(id != null && lowercaseFirstLetterRepository.getDb() != null){
              lowercaseFirstLetterRepository.getDb().delete__db(id);
           }
       }
@@ -356,7 +356,7 @@ public class Brand extends Model {
       BrandRepository lowercaseFirstLetterRepository = (BrandRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-        if(id != null & lowercaseFirstLetterRepository.getDb() != null){
+        if(id != null && lowercaseFirstLetterRepository.getDb() != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
         }
       }
@@ -367,7 +367,7 @@ public class Brand extends Model {
       BrandRepository lowercaseFirstLetterRepository = (BrandRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
-        if(getId() != null & lowercaseFirstLetterRepository.getDb() != null){
+        if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
             String id = getId().toString();
           lowercaseFirstLetterRepository.getDb().delete__db(id);
         }
@@ -409,7 +409,7 @@ public class Brand extends Model {
                                                     //TODO: Modify foreign key name..
                             HotDealRepository hotDealRepository = (HotDealRepository) getRepository();
 
-                            if(that.getId() != null & hotDealRepository.getDb() != null){
+                            if(that.getId() != null && hotDealRepository.getDb() != null){
 
                                  //Fetch locally from db
                                  //hotDeals = getHotDeals__db(restAdapter);
@@ -1045,7 +1045,7 @@ public class Brand extends Model {
                                                     //TODO: Modify foreign key name..
                             ChatRepository chatRepository = (ChatRepository) getRepository();
 
-                            if(that.getId() != null & chatRepository.getDb() != null){
+                            if(that.getId() != null && chatRepository.getDb() != null){
 
                                  //Fetch locally from db
                                  //chats = getChats__db(restAdapter);
@@ -1681,7 +1681,7 @@ public class Brand extends Model {
                                                     //TODO: Modify foreign key name..
                             DailyFeedRepository dailyFeedRepository = (DailyFeedRepository) getRepository();
 
-                            if(that.getId() != null & dailyFeedRepository.getDb() != null){
+                            if(that.getId() != null && dailyFeedRepository.getDb() != null){
 
                                  //Fetch locally from db
                                  //dailyFeeds = getDailyFeeds__db(restAdapter);
@@ -2317,7 +2317,7 @@ public class Brand extends Model {
                                                     //TODO: Modify foreign key name..
                             BrandManagerRepository brandManagerRepository = (BrandManagerRepository) getRepository();
 
-                            if(that.getId() != null & brandManagerRepository.getDb() != null){
+                            if(that.getId() != null && brandManagerRepository.getDb() != null){
 
                                  //Fetch locally from db
                                  //brandManagers = getBrandManagers__db(restAdapter);
@@ -3007,7 +3007,7 @@ public class Brand extends Model {
                                     brandVerificationsRepository.addStorage(context);
                                 }
 
-                                if(context != null & brandVerificationsRepository.getDb() != null){
+                                if(context != null && brandVerificationsRepository.getDb() != null){
                                     brandVerificationsRepository.addStorage(context);
                                     BrandVerification brandVerifications = (BrandVerification) brandVerificationsRepository.getDb().get__db(brandVerificationId);
                                     return brandVerifications;
@@ -4148,7 +4148,7 @@ public class Brand extends Model {
                                                     //TODO: Modify foreign key name..
                             FollowBrandRepository followBrandRepository = (FollowBrandRepository) getRepository();
 
-                            if(that.getId() != null & followBrandRepository.getDb() != null){
+                            if(that.getId() != null && followBrandRepository.getDb() != null){
 
                                  //Fetch locally from db
                                  //followBrands = getFollowBrands__db(restAdapter);

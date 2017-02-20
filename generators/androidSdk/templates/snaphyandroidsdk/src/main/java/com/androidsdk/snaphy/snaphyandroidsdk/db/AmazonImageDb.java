@@ -142,7 +142,7 @@ public class AmazonImageDb{
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
             Cursor cursor = db.query("AmazonImage", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
-                if (!(cursor.moveToFirst()) | cursor.getCount() == 0){
+                if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
                 }else{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
@@ -175,7 +175,7 @@ public class AmazonImageDb{
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
             Cursor cursor = db.query("AmazonImage", null, whereKey + "=?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
-                if (!(cursor.moveToFirst()) | cursor.getCount() == 0){
+                if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
                 }else{
                     HashMap<String, Object> hashMap = parseCursor(cursor);
@@ -283,7 +283,7 @@ public class AmazonImageDb{
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
-        if (!(cursor.moveToFirst()) | cursor.getCount() == 0){
+        if (!cursor.moveToFirst() || cursor.getCount() == 0){
             return (DataList<AmazonImage>) modelList;
         }else{
             do {
@@ -346,7 +346,7 @@ public class AmazonImageDb{
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-         if (!(cursor.moveToFirst()) | cursor.getCount() == 0){
+         if (!cursor.moveToFirst() || cursor.getCount() == 0){
             return (DataList<AmazonImage>) modelList;
          }else{
             do {
@@ -444,7 +444,7 @@ public class AmazonImageDb{
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
-         if (!(cursor.moveToFirst()) | cursor.getCount() == 0){
+         if (!cursor.moveToFirst() || cursor.getCount() == 0){
             return (DataList<AmazonImage>) modelList;
          }else{
             do {

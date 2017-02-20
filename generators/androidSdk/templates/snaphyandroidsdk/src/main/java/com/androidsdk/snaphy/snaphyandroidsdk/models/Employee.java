@@ -289,7 +289,7 @@ public class Employee extends User {
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
-          if(id != null & lowercaseFirstLetterRepository.getDb() != null){
+          if(id != null && lowercaseFirstLetterRepository.getDb() != null){
              lowercaseFirstLetterRepository.getDb().delete__db(id);
           }
       }
@@ -303,7 +303,7 @@ public class Employee extends User {
       EmployeeRepository lowercaseFirstLetterRepository = (EmployeeRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-        if(id != null & lowercaseFirstLetterRepository.getDb() != null){
+        if(id != null && lowercaseFirstLetterRepository.getDb() != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
         }
       }
@@ -314,7 +314,7 @@ public class Employee extends User {
       EmployeeRepository lowercaseFirstLetterRepository = (EmployeeRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
-        if(getId() != null & lowercaseFirstLetterRepository.getDb() != null){
+        if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
             String id = getId().toString();
           lowercaseFirstLetterRepository.getDb().delete__db(id);
         }

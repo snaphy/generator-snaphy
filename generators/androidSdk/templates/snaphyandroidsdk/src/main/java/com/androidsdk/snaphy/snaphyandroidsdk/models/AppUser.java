@@ -331,7 +331,7 @@ public class AppUser extends User {
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
-          if(id != null & lowercaseFirstLetterRepository.getDb() != null){
+          if(id != null && lowercaseFirstLetterRepository.getDb() != null){
              lowercaseFirstLetterRepository.getDb().delete__db(id);
           }
       }
@@ -345,7 +345,7 @@ public class AppUser extends User {
       AppUserRepository lowercaseFirstLetterRepository = (AppUserRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-        if(id != null & lowercaseFirstLetterRepository.getDb() != null){
+        if(id != null && lowercaseFirstLetterRepository.getDb() != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
         }
       }
@@ -356,7 +356,7 @@ public class AppUser extends User {
       AppUserRepository lowercaseFirstLetterRepository = (AppUserRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
-        if(getId() != null & lowercaseFirstLetterRepository.getDb() != null){
+        if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
             String id = getId().toString();
           lowercaseFirstLetterRepository.getDb().delete__db(id);
         }
@@ -401,7 +401,7 @@ public class AppUser extends User {
                                                     //TODO: Modify foreign key name..
                             FacebookAccessTokenRepository facebookAccessTokenRepository = (FacebookAccessTokenRepository) getRepository();
 
-                            if(that.getId() != null & facebookAccessTokenRepository.getDb() != null){
+                            if(that.getId() != null && facebookAccessTokenRepository.getDb() != null){
 
                                  //Fetch locally from db
                                  //facebookAccessToken = getFacebookAccessToken__db(restAdapter);
@@ -1017,7 +1017,7 @@ public class AppUser extends User {
                                                     //TODO: Modify foreign key name..
                             ChatRepository chatRepository = (ChatRepository) getRepository();
 
-                            if(that.getId() != null & chatRepository.getDb() != null){
+                            if(that.getId() != null && chatRepository.getDb() != null){
 
                                  //Fetch locally from db
                                  //chats = getChats__db(restAdapter);
@@ -1633,7 +1633,7 @@ public class AppUser extends User {
                                                     //TODO: Modify foreign key name..
                             FollowBrandRepository followBrandRepository = (FollowBrandRepository) getRepository();
 
-                            if(that.getId() != null & followBrandRepository.getDb() != null){
+                            if(that.getId() != null && followBrandRepository.getDb() != null){
 
                                  //Fetch locally from db
                                  //followBrands = getFollowBrands__db(restAdapter);

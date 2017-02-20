@@ -160,7 +160,7 @@ public class BrandVerification extends Model {
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
-          if(id != null & lowercaseFirstLetterRepository.getDb() != null){
+          if(id != null && lowercaseFirstLetterRepository.getDb() != null){
              lowercaseFirstLetterRepository.getDb().delete__db(id);
           }
       }
@@ -174,7 +174,7 @@ public class BrandVerification extends Model {
       BrandVerificationRepository lowercaseFirstLetterRepository = (BrandVerificationRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-        if(id != null & lowercaseFirstLetterRepository.getDb() != null){
+        if(id != null && lowercaseFirstLetterRepository.getDb() != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
         }
       }
@@ -185,7 +185,7 @@ public class BrandVerification extends Model {
       BrandVerificationRepository lowercaseFirstLetterRepository = (BrandVerificationRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
-        if(getId() != null & lowercaseFirstLetterRepository.getDb() != null){
+        if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
             String id = getId().toString();
           lowercaseFirstLetterRepository.getDb().delete__db(id);
         }
@@ -281,7 +281,7 @@ public class BrandVerification extends Model {
                                     brandRepository.addStorage(context);
                                 }
 
-                                if(context != null & brandRepository.getDb() != null){
+                                if(context != null && brandRepository.getDb() != null){
                                     brandRepository.addStorage(context);
                                     Brand brand = (Brand) brandRepository.getDb().get__db(brandId);
                                     return brand;

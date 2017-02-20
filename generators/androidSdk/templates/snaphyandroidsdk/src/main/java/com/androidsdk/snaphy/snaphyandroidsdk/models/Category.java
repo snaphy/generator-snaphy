@@ -153,7 +153,7 @@ public class Category extends Model {
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
-          if(id != null & lowercaseFirstLetterRepository.getDb() != null){
+          if(id != null && lowercaseFirstLetterRepository.getDb() != null){
              lowercaseFirstLetterRepository.getDb().delete__db(id);
           }
       }
@@ -167,7 +167,7 @@ public class Category extends Model {
       CategoryRepository lowercaseFirstLetterRepository = (CategoryRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-        if(id != null & lowercaseFirstLetterRepository.getDb() != null){
+        if(id != null && lowercaseFirstLetterRepository.getDb() != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
         }
       }
@@ -178,7 +178,7 @@ public class Category extends Model {
       CategoryRepository lowercaseFirstLetterRepository = (CategoryRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
-        if(getId() != null & lowercaseFirstLetterRepository.getDb() != null){
+        if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
             String id = getId().toString();
           lowercaseFirstLetterRepository.getDb().delete__db(id);
         }
@@ -220,7 +220,7 @@ public class Category extends Model {
                                                     //TODO: Modify foreign key name..
                             HotDealRepository hotDealRepository = (HotDealRepository) getRepository();
 
-                            if(that.getId() != null & hotDealRepository.getDb() != null){
+                            if(that.getId() != null && hotDealRepository.getDb() != null){
 
                                  //Fetch locally from db
                                  //hotDeals = getHotDeals__db(restAdapter);
