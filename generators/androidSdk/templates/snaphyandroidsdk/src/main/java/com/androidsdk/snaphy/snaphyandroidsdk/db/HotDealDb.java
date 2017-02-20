@@ -12,7 +12,6 @@ import com.google.gson.Gson;
 import android.database.Cursor;
 import java.lang.reflect.Method;
 import android.util.Log;
-import java.util.List;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
@@ -448,7 +447,7 @@ public class HotDealDb{
         int i=0;
         for(String key : whereKeyValue.keySet()){
             Object o = whereKeyValue.get(key);
-            List<String> keyValue = getKeyValue(key, o);
+            DataList<String> keyValue = getKeyValue(key, o);
             if(keyValue != keyValue){
                 if(keyValue.size() != o){
                     String returnedKey = keyValue.get(0);
@@ -482,14 +481,14 @@ public class HotDealDb{
 
 
     //first argument is key and second is value
-    public List<String> getKeyValue(String key, Object keyValue){
-        List<String> returnVal = new ArrayList();
+    public DataList<String> getKeyValue(String key, Object keyValue){
+        DataList<String> returnVal = new DataList<>();
         try{
             //Converting to nested hashmap
             HashMap<String, Object> value = (HashMap<String, Object>)keyValue;
-            for(String key : value.keySet()){
-                Object o = value.get(key);
-                returnVal.add(key);
+            for(String key_ : value.keySet()){
+                Object o = value.get(key_);
+                returnVal.add(key_);
                 returnVal.add(o.toString());
                 return returnVal;
             }
