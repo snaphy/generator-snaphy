@@ -49,25 +49,6 @@ public class ChatDb{
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
-  /**
-      // Creating Tables
-      @Override
-      public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-        
-        String CREATE_Chat_TABLE = "CREATE TABLE IF NOT EXISTS Chat(  `added` TEXT, `updated` TEXT, `message` TEXT, `type` TEXT, `image` TEXT, `from` TEXT, `guid` TEXT, `status` TEXT, `id` TEXT PRIMARY KEY, `appUserId` TEXT, `brandId` TEXT, _DATA_UPDATED NUMBER )";
-        db.execSQL(CREATE_Chat_TABLE);
-      }
-
-        // Upgrading database
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-                // Drop older table if existed
-                db.execSQL("DROP TABLE IF EXISTS Chat");
-                // Create tables again
-                onCreate(db);
-        }
-    **/
 
     public void insert__db (final String id, final Chat modelData) {
         new Thread(new Runnable() {
@@ -94,49 +75,49 @@ public class ChatDb{
                         if(modelData.getAdded() != null){
                           addedData = modelData.getAdded().toString();
                         }
-                                                values.put("added", addedData);
+                                                values.put("`added`", addedData);
                                 
                                                             String updatedData = "";
                         if(modelData.getUpdated() != null){
                           updatedData = modelData.getUpdated().toString();
                         }
-                                                values.put("updated", updatedData);
+                                                values.put("`updated`", updatedData);
                                 
                                                             String messageData = "";
                         if(modelData.getMessage() != null){
                           messageData = modelData.getMessage().toString();
                         }
-                                                values.put("message", messageData);
+                                                values.put("`message`", messageData);
                                 
                                                             String typeData = "";
                         if(modelData.getType() != null){
                           typeData = modelData.getType().toString();
                         }
-                                                values.put("type", typeData);
+                                                values.put("`type`", typeData);
                                 
                                                             String imageData = "";
                         if(modelData.getImage() != null){
                           imageData = new Gson().toJson(modelData.getImage(), HashMap.class);
                         }
-                                                values.put("image", imageData);
+                                                values.put("`image`", imageData);
                                 
                                                             String fromData = "";
                         if(modelData.getFrom() != null){
                           fromData = modelData.getFrom().toString();
                         }
-                                                values.put("from", fromData);
+                                                values.put("`from`", fromData);
                                 
                                                             String guidData = "";
                         if(modelData.getGuid() != null){
                           guidData = modelData.getGuid().toString();
                         }
-                                                values.put("guid", guidData);
+                                                values.put("`guid`", guidData);
                                 
                                                             String statusData = "";
                         if(modelData.getStatus() != null){
                           statusData = modelData.getStatus().toString();
                         }
-                                                values.put("status", statusData);
+                                                values.put("`status`", statusData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -150,7 +131,7 @@ public class ChatDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("id", idData);
+                                                values.put("`id`", idData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String appUserIdData = "";
@@ -164,7 +145,7 @@ public class ChatDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("appUserId", appUserIdData);
+                                                values.put("`appUserId`", appUserIdData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String brandIdData = "";
@@ -178,11 +159,11 @@ public class ChatDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("brandId", brandIdData);
+                                                values.put("`brandId`", brandIdData);
                   
 
         //Add the updated data property value to be 1
-        values.put("_DATA_UPDATED", 1);
+        values.put("`_DATA_UPDATED`", 1);
         return values;
     }
 
@@ -225,7 +206,7 @@ public class ChatDb{
     public   Chat get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("Chat", null, whereKey + "=?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("Chat", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -621,7 +602,7 @@ public class ChatDb{
     public DataList<Chat>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<Chat> modelList = new DataList<Chat>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Chat WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
+        String selectQuery = "SELECT  * FROM `Chat` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -660,7 +641,7 @@ public class ChatDb{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-        String countQuery = "SELECT  * FROM Chat WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
+        String countQuery = "SELECT  * FROM `Chat` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -680,7 +661,7 @@ public class ChatDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("Chat", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+                db.update("Chat", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -697,7 +678,7 @@ public class ChatDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("Chat", "_DATA_UPDATED = 0 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+                db.delete("Chat", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -766,7 +747,7 @@ public class ChatDb{
 
     // Getting contacts Count
     public int count__db() {
-        String countQuery = "SELECT  * FROM " + TABLE;
+        String countQuery = "SELECT  * FROM `" + TABLE + "`";
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -782,7 +763,7 @@ public class ChatDb{
      * @return
      */
     public int count__db(String id){
-        String countQuery = "SELECT  * FROM " + TABLE  + " WHERE ID='" + id+"'";
+        String countQuery = "SELECT  * FROM `" + TABLE  + "` WHERE ID='" + id+"'";
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();

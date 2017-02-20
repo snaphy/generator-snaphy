@@ -49,25 +49,6 @@ public class DailyFeedDb{
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
-  /**
-      // Creating Tables
-      @Override
-      public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                                                                                                                                                                     
-        
-        String CREATE_DailyFeed_TABLE = "CREATE TABLE IF NOT EXISTS DailyFeed(  `added` TEXT, `updated` TEXT, `title` TEXT, `description` TEXT, `image` TEXT, `id` TEXT PRIMARY KEY, `brandId` TEXT, _DATA_UPDATED NUMBER )";
-        db.execSQL(CREATE_DailyFeed_TABLE);
-      }
-
-        // Upgrading database
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-                // Drop older table if existed
-                db.execSQL("DROP TABLE IF EXISTS DailyFeed");
-                // Create tables again
-                onCreate(db);
-        }
-    **/
 
     public void insert__db (final String id, final DailyFeed modelData) {
         new Thread(new Runnable() {
@@ -94,31 +75,31 @@ public class DailyFeedDb{
                         if(modelData.getAdded() != null){
                           addedData = modelData.getAdded().toString();
                         }
-                                                values.put("added", addedData);
+                                                values.put("`added`", addedData);
                                 
                                                             String updatedData = "";
                         if(modelData.getUpdated() != null){
                           updatedData = modelData.getUpdated().toString();
                         }
-                                                values.put("updated", updatedData);
+                                                values.put("`updated`", updatedData);
                                 
                                                             String titleData = "";
                         if(modelData.getTitle() != null){
                           titleData = modelData.getTitle().toString();
                         }
-                                                values.put("title", titleData);
+                                                values.put("`title`", titleData);
                                 
                                                             String descriptionData = "";
                         if(modelData.getDescription() != null){
                           descriptionData = modelData.getDescription().toString();
                         }
-                                                values.put("description", descriptionData);
+                                                values.put("`description`", descriptionData);
                                 
                                                             String imageData = "";
                         if(modelData.getImage() != null){
                           imageData = new Gson().toJson(modelData.getImage(), HashMap.class);
                         }
-                                                values.put("image", imageData);
+                                                values.put("`image`", imageData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -132,7 +113,7 @@ public class DailyFeedDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("id", idData);
+                                                values.put("`id`", idData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String brandIdData = "";
@@ -146,11 +127,11 @@ public class DailyFeedDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("brandId", brandIdData);
+                                                values.put("`brandId`", brandIdData);
                   
 
         //Add the updated data property value to be 1
-        values.put("_DATA_UPDATED", 1);
+        values.put("`_DATA_UPDATED`", 1);
         return values;
     }
 
@@ -193,7 +174,7 @@ public class DailyFeedDb{
     public   DailyFeed get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("DailyFeed", null, whereKey + "=?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("DailyFeed", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -549,7 +530,7 @@ public class DailyFeedDb{
     public DataList<DailyFeed>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<DailyFeed> modelList = new DataList<DailyFeed>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM DailyFeed WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
+        String selectQuery = "SELECT  * FROM `DailyFeed` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -588,7 +569,7 @@ public class DailyFeedDb{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-        String countQuery = "SELECT  * FROM DailyFeed WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
+        String countQuery = "SELECT  * FROM `DailyFeed` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -608,7 +589,7 @@ public class DailyFeedDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("DailyFeed", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+                db.update("DailyFeed", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -625,7 +606,7 @@ public class DailyFeedDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("DailyFeed", "_DATA_UPDATED = 0 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+                db.delete("DailyFeed", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -694,7 +675,7 @@ public class DailyFeedDb{
 
     // Getting contacts Count
     public int count__db() {
-        String countQuery = "SELECT  * FROM " + TABLE;
+        String countQuery = "SELECT  * FROM `" + TABLE + "`";
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -710,7 +691,7 @@ public class DailyFeedDb{
      * @return
      */
     public int count__db(String id){
-        String countQuery = "SELECT  * FROM " + TABLE  + " WHERE ID='" + id+"'";
+        String countQuery = "SELECT  * FROM `" + TABLE  + "` WHERE ID='" + id+"'";
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();

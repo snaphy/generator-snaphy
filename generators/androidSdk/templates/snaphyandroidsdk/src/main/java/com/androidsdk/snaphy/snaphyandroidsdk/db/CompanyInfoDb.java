@@ -49,25 +49,6 @@ public class CompanyInfoDb{
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
-  /**
-      // Creating Tables
-      @Override
-      public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                                    
-        
-        String CREATE_CompanyInfo_TABLE = "CREATE TABLE IF NOT EXISTS CompanyInfo(  `type` TEXT, `html` TEXT, `edited` TEXT, `id` TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
-        db.execSQL(CREATE_CompanyInfo_TABLE);
-      }
-
-        // Upgrading database
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-                // Drop older table if existed
-                db.execSQL("DROP TABLE IF EXISTS CompanyInfo");
-                // Create tables again
-                onCreate(db);
-        }
-    **/
 
     public void insert__db (final String id, final CompanyInfo modelData) {
         new Thread(new Runnable() {
@@ -94,19 +75,19 @@ public class CompanyInfoDb{
                         if(modelData.getType() != null){
                           typeData = modelData.getType().toString();
                         }
-                                                values.put("type", typeData);
+                                                values.put("`type`", typeData);
                                 
                                                             String htmlData = "";
                         if(modelData.getHtml() != null){
                           htmlData = modelData.getHtml().toString();
                         }
-                                                values.put("html", htmlData);
+                                                values.put("`html`", htmlData);
                                 
                                                             String editedData = "";
                         if(modelData.getEdited() != null){
                           editedData = modelData.getEdited().toString();
                         }
-                                                values.put("edited", editedData);
+                                                values.put("`edited`", editedData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -120,11 +101,11 @@ public class CompanyInfoDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("id", idData);
+                                                values.put("`id`", idData);
                   
 
         //Add the updated data property value to be 1
-        values.put("_DATA_UPDATED", 1);
+        values.put("`_DATA_UPDATED`", 1);
         return values;
     }
 
@@ -167,7 +148,7 @@ public class CompanyInfoDb{
     public   CompanyInfo get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("CompanyInfo", null, whereKey + "=?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("CompanyInfo", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -493,7 +474,7 @@ public class CompanyInfoDb{
     public DataList<CompanyInfo>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<CompanyInfo> modelList = new DataList<CompanyInfo>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM CompanyInfo WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
+        String selectQuery = "SELECT  * FROM `CompanyInfo` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -532,7 +513,7 @@ public class CompanyInfoDb{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-        String countQuery = "SELECT  * FROM CompanyInfo WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
+        String countQuery = "SELECT  * FROM `CompanyInfo` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -552,7 +533,7 @@ public class CompanyInfoDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("CompanyInfo", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+                db.update("CompanyInfo", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -569,7 +550,7 @@ public class CompanyInfoDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("CompanyInfo", "_DATA_UPDATED = 0 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+                db.delete("CompanyInfo", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -638,7 +619,7 @@ public class CompanyInfoDb{
 
     // Getting contacts Count
     public int count__db() {
-        String countQuery = "SELECT  * FROM " + TABLE;
+        String countQuery = "SELECT  * FROM `" + TABLE + "`";
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -654,7 +635,7 @@ public class CompanyInfoDb{
      * @return
      */
     public int count__db(String id){
-        String countQuery = "SELECT  * FROM " + TABLE  + " WHERE ID='" + id+"'";
+        String countQuery = "SELECT  * FROM `" + TABLE  + "` WHERE ID='" + id+"'";
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();

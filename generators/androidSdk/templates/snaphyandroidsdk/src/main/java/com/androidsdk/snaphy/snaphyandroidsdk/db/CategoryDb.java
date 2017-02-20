@@ -49,25 +49,6 @@ public class CategoryDb{
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
-  /**
-      // Creating Tables
-      @Override
-      public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                                    
-        
-        String CREATE_Category_TABLE = "CREATE TABLE IF NOT EXISTS Category(  `name` TEXT, `added` TEXT, `updated` TEXT, `id` TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
-        db.execSQL(CREATE_Category_TABLE);
-      }
-
-        // Upgrading database
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-                // Drop older table if existed
-                db.execSQL("DROP TABLE IF EXISTS Category");
-                // Create tables again
-                onCreate(db);
-        }
-    **/
 
     public void insert__db (final String id, final Category modelData) {
         new Thread(new Runnable() {
@@ -94,19 +75,19 @@ public class CategoryDb{
                         if(modelData.getName() != null){
                           nameData = modelData.getName().toString();
                         }
-                                                values.put("name", nameData);
+                                                values.put("`name`", nameData);
                                 
                                                             String addedData = "";
                         if(modelData.getAdded() != null){
                           addedData = modelData.getAdded().toString();
                         }
-                                                values.put("added", addedData);
+                                                values.put("`added`", addedData);
                                 
                                                             String updatedData = "";
                         if(modelData.getUpdated() != null){
                           updatedData = modelData.getUpdated().toString();
                         }
-                                                values.put("updated", updatedData);
+                                                values.put("`updated`", updatedData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -120,11 +101,11 @@ public class CategoryDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("id", idData);
+                                                values.put("`id`", idData);
                   
 
         //Add the updated data property value to be 1
-        values.put("_DATA_UPDATED", 1);
+        values.put("`_DATA_UPDATED`", 1);
         return values;
     }
 
@@ -167,7 +148,7 @@ public class CategoryDb{
     public   Category get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("Category", null, whereKey + "=?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("Category", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -493,7 +474,7 @@ public class CategoryDb{
     public DataList<Category>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<Category> modelList = new DataList<Category>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Category WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
+        String selectQuery = "SELECT  * FROM `Category` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -532,7 +513,7 @@ public class CategoryDb{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-        String countQuery = "SELECT  * FROM Category WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
+        String countQuery = "SELECT  * FROM `Category` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -552,7 +533,7 @@ public class CategoryDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("Category", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+                db.update("Category", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -569,7 +550,7 @@ public class CategoryDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("Category", "_DATA_UPDATED = 0 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+                db.delete("Category", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -638,7 +619,7 @@ public class CategoryDb{
 
     // Getting contacts Count
     public int count__db() {
-        String countQuery = "SELECT  * FROM " + TABLE;
+        String countQuery = "SELECT  * FROM `" + TABLE + "`";
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -654,7 +635,7 @@ public class CategoryDb{
      * @return
      */
     public int count__db(String id){
-        String countQuery = "SELECT  * FROM " + TABLE  + " WHERE ID='" + id+"'";
+        String countQuery = "SELECT  * FROM `" + TABLE  + "` WHERE ID='" + id+"'";
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();

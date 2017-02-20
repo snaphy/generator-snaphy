@@ -49,25 +49,6 @@ public class BrandDb{
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
-  /**
-      // Creating Tables
-      @Override
-      public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-        
-        String CREATE_Brand_TABLE = "CREATE TABLE IF NOT EXISTS Brand(  `added` TEXT, `updated` TEXT, `name` TEXT, `image` TEXT, `trending` TEXT, `facebookUrl` TEXT, `googleUrl` TEXT, `instagramUrl` TEXT, `status` TEXT, `associatedEmail` TEXT, `id` TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
-        db.execSQL(CREATE_Brand_TABLE);
-      }
-
-        // Upgrading database
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-                // Drop older table if existed
-                db.execSQL("DROP TABLE IF EXISTS Brand");
-                // Create tables again
-                onCreate(db);
-        }
-    **/
 
     public void insert__db (final String id, final Brand modelData) {
         new Thread(new Runnable() {
@@ -94,61 +75,61 @@ public class BrandDb{
                         if(modelData.getAdded() != null){
                           addedData = modelData.getAdded().toString();
                         }
-                                                values.put("added", addedData);
+                                                values.put("`added`", addedData);
                                 
                                                             String updatedData = "";
                         if(modelData.getUpdated() != null){
                           updatedData = modelData.getUpdated().toString();
                         }
-                                                values.put("updated", updatedData);
+                                                values.put("`updated`", updatedData);
                                 
                                                             String nameData = "";
                         if(modelData.getName() != null){
                           nameData = modelData.getName().toString();
                         }
-                                                values.put("name", nameData);
+                                                values.put("`name`", nameData);
                                 
                                                             String imageData = "";
                         if(modelData.getImage() != null){
                           imageData = new Gson().toJson(modelData.getImage(), HashMap.class);
                         }
-                                                values.put("image", imageData);
+                                                values.put("`image`", imageData);
                                 
                                                             String trendingData = "";
                         if(modelData.getTrending() != null){
                           trendingData = modelData.getTrending().toString();
                         }
-                                                values.put("trending", trendingData);
+                                                values.put("`trending`", trendingData);
                                 
                                                             String facebookUrlData = "";
                         if(modelData.getFacebookUrl() != null){
                           facebookUrlData = modelData.getFacebookUrl().toString();
                         }
-                                                values.put("facebookUrl", facebookUrlData);
+                                                values.put("`facebookUrl`", facebookUrlData);
                                 
                                                             String googleUrlData = "";
                         if(modelData.getGoogleUrl() != null){
                           googleUrlData = modelData.getGoogleUrl().toString();
                         }
-                                                values.put("googleUrl", googleUrlData);
+                                                values.put("`googleUrl`", googleUrlData);
                                 
                                                             String instagramUrlData = "";
                         if(modelData.getInstagramUrl() != null){
                           instagramUrlData = modelData.getInstagramUrl().toString();
                         }
-                                                values.put("instagramUrl", instagramUrlData);
+                                                values.put("`instagramUrl`", instagramUrlData);
                                 
                                                             String statusData = "";
                         if(modelData.getStatus() != null){
                           statusData = modelData.getStatus().toString();
                         }
-                                                values.put("status", statusData);
+                                                values.put("`status`", statusData);
                                 
                                                             String associatedEmailData = "";
                         if(modelData.getAssociatedEmail() != null){
                           associatedEmailData = modelData.getAssociatedEmail().toString();
                         }
-                                                values.put("associatedEmail", associatedEmailData);
+                                                values.put("`associatedEmail`", associatedEmailData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -162,11 +143,11 @@ public class BrandDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("id", idData);
+                                                values.put("`id`", idData);
                   
 
         //Add the updated data property value to be 1
-        values.put("_DATA_UPDATED", 1);
+        values.put("`_DATA_UPDATED`", 1);
         return values;
     }
 
@@ -209,7 +190,7 @@ public class BrandDb{
     public   Brand get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("Brand", null, whereKey + "=?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("Brand", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -605,7 +586,7 @@ public class BrandDb{
     public DataList<Brand>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<Brand> modelList = new DataList<Brand>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Brand WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
+        String selectQuery = "SELECT  * FROM `Brand` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -644,7 +625,7 @@ public class BrandDb{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-        String countQuery = "SELECT  * FROM Brand WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
+        String countQuery = "SELECT  * FROM `Brand` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -664,7 +645,7 @@ public class BrandDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("Brand", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+                db.update("Brand", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -681,7 +662,7 @@ public class BrandDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("Brand", "_DATA_UPDATED = 0 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+                db.delete("Brand", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -750,7 +731,7 @@ public class BrandDb{
 
     // Getting contacts Count
     public int count__db() {
-        String countQuery = "SELECT  * FROM " + TABLE;
+        String countQuery = "SELECT  * FROM `" + TABLE + "`";
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -766,7 +747,7 @@ public class BrandDb{
      * @return
      */
     public int count__db(String id){
-        String countQuery = "SELECT  * FROM " + TABLE  + " WHERE ID='" + id+"'";
+        String countQuery = "SELECT  * FROM `" + TABLE  + "` WHERE ID='" + id+"'";
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();

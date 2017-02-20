@@ -392,21 +392,41 @@ public class <%- modelName %>Db{
 
     // Getting All Data where
     public DataList<<%- modelName %>>  getAll__db(HashMap<String, Object> whereKeyValue) {
-        return getAll__db(whereKeyValue, 0);
+        return getAll__db(whereKeyValue, null, false, false, 0);
     }
 
 
-    // Getting All Data where
-    public DataList<<%- modelName %>>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
+    // Getting All Data where and sort column according to date wise..
+    public DataList<<%- modelName %>>  getAll__db(HashMap<String, Object> whereKeyValue, String sortColumn, boolean isDesc, boolean isDate, int limit) {
         DataList<<%- modelName %>> modelList = new DataList<<%- modelName %>>();
         String whereQuery = getWhereQuery(whereKeyValue);
             String selectQuery;
-          if(limit != 0){
+        if(sortColumn != null){
+            if(isDate){
+                selectQuery = "SELECT  * FROM <%- modelName %> " + whereQuery  + "order  by datetime(`" +  sortColumn +  "`)" ;
+            }else{
+                selectQuery = "SELECT  * FROM <%- modelName %> " + whereQuery  + "order  by `" +  sortColumn +  "`)" ;
+            }
+
+            if(isDesc){
+                selectQuery = selectQuery + " DESC";
+            }else{
+                selectQuery = selectQuery + " ASC";
+            }
+
+            if(limit != 0){
+                // Select All Query
+                selectQuery = selectQuery +  " " + " LIMIT " + limit;
+            }
+        }else{
+            if(limit != 0){
                 // Select All Query
                 selectQuery = "SELECT  * FROM <%- modelName %> " + whereQuery + " LIMIT " + limit;
-          }else{
+            }else{
                 selectQuery = "SELECT  * FROM <%- modelName %> " + whereQuery;
-          }
+            }
+        }
+
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -437,7 +457,57 @@ public class <%- modelName %>Db{
     }
 
 
+    // Getting All Data where
+    public DataList<<%- modelName %>>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
+        return getAll__db(whereKeyValue, null, false, false, limit);
+    }
 
+
+
+
+
+    /**
+     * Check count of database.
+     * @param whereKeyValue
+     * @param limit
+     * @return
+     */
+    public int count__db(HashMap<String, Object> whereKeyValue, String sortColumn, boolean isDesc, boolean isDate, int limit){
+        String whereQuery = getWhereQuery(whereKeyValue);
+        String countQuery;
+        if(sortColumn != null){
+            if(isDate){
+                countQuery = "SELECT  * FROM <%- modelName %> " + whereQuery  + "order  by datetime(`" +  sortColumn +  "`)" ;
+            }else{
+                countQuery = "SELECT  * FROM <%- modelName %> " + whereQuery  + "order  by `" +  sortColumn +  "`)" ;
+            }
+
+            if(isDesc){
+                countQuery = countQuery + " DESC";
+            }else{
+                countQuery = countQuery + " ASC";
+            }
+
+            if(limit != 0){
+                // Select All Query
+                countQuery = countQuery +  " " + " LIMIT " + limit;
+            }
+        }else{
+            if(limit != 0){
+                // Select All Query
+                countQuery = "SELECT  * FROM <%- modelName %> " + whereQuery + " LIMIT " + limit;
+            }else{
+                countQuery = "SELECT  * FROM <%- modelName %> " + whereQuery;
+            }
+        }
+
+
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+        return count;
+    }
 
 
     /**

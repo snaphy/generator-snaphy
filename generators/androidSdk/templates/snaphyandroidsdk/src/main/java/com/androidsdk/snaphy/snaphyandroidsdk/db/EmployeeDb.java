@@ -49,25 +49,6 @@ public class EmployeeDb{
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
-  /**
-      // Creating Tables
-      @Override
-      public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-        
-        String CREATE_Employee_TABLE = "CREATE TABLE IF NOT EXISTS Employee(  `username` TEXT, `firstName` TEXT, `lastName` TEXT, `added` TEXT, `updated` TEXT, `email` TEXT, `password` TEXT, `realm` TEXT, `credentials` TEXT, `challenges` TEXT, `emailVerified` TEXT, `verificationToken` TEXT, `status` TEXT, `created` TEXT, `lastUpdated` TEXT, `id` TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
-        db.execSQL(CREATE_Employee_TABLE);
-      }
-
-        // Upgrading database
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-                // Drop older table if existed
-                db.execSQL("DROP TABLE IF EXISTS Employee");
-                // Create tables again
-                onCreate(db);
-        }
-    **/
 
     public void insert__db (final String id, final Employee modelData) {
         new Thread(new Runnable() {
@@ -94,43 +75,43 @@ public class EmployeeDb{
                         if(modelData.getUsername() != null){
                           usernameData = modelData.getUsername().toString();
                         }
-                                                values.put("username", usernameData);
+                                                values.put("`username`", usernameData);
                                 
                                                             String firstNameData = "";
                         if(modelData.getFirstName() != null){
                           firstNameData = modelData.getFirstName().toString();
                         }
-                                                values.put("firstName", firstNameData);
+                                                values.put("`firstName`", firstNameData);
                                 
                                                             String lastNameData = "";
                         if(modelData.getLastName() != null){
                           lastNameData = modelData.getLastName().toString();
                         }
-                                                values.put("lastName", lastNameData);
+                                                values.put("`lastName`", lastNameData);
                                 
                                                             String addedData = "";
                         if(modelData.getAdded() != null){
                           addedData = modelData.getAdded().toString();
                         }
-                                                values.put("added", addedData);
+                                                values.put("`added`", addedData);
                                 
                                                             String updatedData = "";
                         if(modelData.getUpdated() != null){
                           updatedData = modelData.getUpdated().toString();
                         }
-                                                values.put("updated", updatedData);
+                                                values.put("`updated`", updatedData);
                                 
                                                             String emailData = "";
                         if(modelData.getEmail() != null){
                           emailData = modelData.getEmail().toString();
                         }
-                                                values.put("email", emailData);
+                                                values.put("`email`", emailData);
                                 
                                                             String passwordData = "";
                         if(modelData.getPassword() != null){
                           passwordData = modelData.getPassword().toString();
                         }
-                                                values.put("password", passwordData);
+                                                values.put("`password`", passwordData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String realmData = "";
@@ -144,7 +125,7 @@ public class EmployeeDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("realm", realmData);
+                                                values.put("`realm`", realmData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String credentialsData = "";
@@ -158,7 +139,7 @@ public class EmployeeDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("credentials", credentialsData);
+                                                values.put("`credentials`", credentialsData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String challengesData = "";
@@ -172,7 +153,7 @@ public class EmployeeDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("challenges", challengesData);
+                                                values.put("`challenges`", challengesData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String emailVerifiedData = "";
@@ -186,7 +167,7 @@ public class EmployeeDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("emailVerified", emailVerifiedData);
+                                                values.put("`emailVerified`", emailVerifiedData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String verificationTokenData = "";
@@ -200,7 +181,7 @@ public class EmployeeDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("verificationToken", verificationTokenData);
+                                                values.put("`verificationToken`", verificationTokenData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String statusData = "";
@@ -214,7 +195,7 @@ public class EmployeeDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("status", statusData);
+                                                values.put("`status`", statusData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String createdData = "";
@@ -228,7 +209,7 @@ public class EmployeeDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("created", createdData);
+                                                values.put("`created`", createdData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String lastUpdatedData = "";
@@ -242,7 +223,7 @@ public class EmployeeDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("lastUpdated", lastUpdatedData);
+                                                values.put("`lastUpdated`", lastUpdatedData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -256,11 +237,11 @@ public class EmployeeDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("id", idData);
+                                                values.put("`id`", idData);
                   
 
         //Add the updated data property value to be 1
-        values.put("_DATA_UPDATED", 1);
+        values.put("`_DATA_UPDATED`", 1);
         return values;
     }
 
@@ -303,7 +284,7 @@ public class EmployeeDb{
     public   Employee get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("Employee", null, whereKey + "=?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("Employee", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -749,7 +730,7 @@ public class EmployeeDb{
     public DataList<Employee>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<Employee> modelList = new DataList<Employee>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Employee WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
+        String selectQuery = "SELECT  * FROM `Employee` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -788,7 +769,7 @@ public class EmployeeDb{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-        String countQuery = "SELECT  * FROM Employee WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
+        String countQuery = "SELECT  * FROM `Employee` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -808,7 +789,7 @@ public class EmployeeDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("Employee", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+                db.update("Employee", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -825,7 +806,7 @@ public class EmployeeDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("Employee", "_DATA_UPDATED = 0 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+                db.delete("Employee", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -894,7 +875,7 @@ public class EmployeeDb{
 
     // Getting contacts Count
     public int count__db() {
-        String countQuery = "SELECT  * FROM " + TABLE;
+        String countQuery = "SELECT  * FROM `" + TABLE + "`";
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -910,7 +891,7 @@ public class EmployeeDb{
      * @return
      */
     public int count__db(String id){
-        String countQuery = "SELECT  * FROM " + TABLE  + " WHERE ID='" + id+"'";
+        String countQuery = "SELECT  * FROM `" + TABLE  + "` WHERE ID='" + id+"'";
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();

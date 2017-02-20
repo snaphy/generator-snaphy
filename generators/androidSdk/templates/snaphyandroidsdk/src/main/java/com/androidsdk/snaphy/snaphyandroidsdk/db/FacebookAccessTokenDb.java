@@ -49,25 +49,6 @@ public class FacebookAccessTokenDb{
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
-  /**
-      // Creating Tables
-      @Override
-      public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                                                                                                                          
-        
-        String CREATE_FacebookAccessToken_TABLE = "CREATE TABLE IF NOT EXISTS FacebookAccessToken(  `FbUserId` TEXT, `token` TEXT, `expires` TEXT, `userId` TEXT, `type` TEXT, `appUserId` TEXT, _DATA_UPDATED NUMBER )";
-        db.execSQL(CREATE_FacebookAccessToken_TABLE);
-      }
-
-        // Upgrading database
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-                // Drop older table if existed
-                db.execSQL("DROP TABLE IF EXISTS FacebookAccessToken");
-                // Create tables again
-                onCreate(db);
-        }
-    **/
 
     public void insert__db (final String id, final FacebookAccessToken modelData) {
         new Thread(new Runnable() {
@@ -94,19 +75,19 @@ public class FacebookAccessTokenDb{
                         if(modelData.getFbUserId() != null){
                           FbUserIdData = modelData.getFbUserId().toString();
                         }
-                                                values.put("FbUserId", FbUserIdData);
+                                                values.put("`FbUserId`", FbUserIdData);
                                 
                                                             String tokenData = "";
                         if(modelData.getToken() != null){
                           tokenData = modelData.getToken().toString();
                         }
-                                                values.put("token", tokenData);
+                                                values.put("`token`", tokenData);
                                 
                                                             String expiresData = "";
                         if(modelData.getExpires() != null){
                           expiresData = modelData.getExpires().toString();
                         }
-                                                values.put("expires", expiresData);
+                                                values.put("`expires`", expiresData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String userIdData = "";
@@ -120,13 +101,13 @@ public class FacebookAccessTokenDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("userId", userIdData);
+                                                values.put("`userId`", userIdData);
                                 
                                                             String typeData = "";
                         if(modelData.getType() != null){
                           typeData = modelData.getType().toString();
                         }
-                                                values.put("type", typeData);
+                                                values.put("`type`", typeData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String appUserIdData = "";
@@ -140,11 +121,11 @@ public class FacebookAccessTokenDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("appUserId", appUserIdData);
+                                                values.put("`appUserId`", appUserIdData);
                   
 
         //Add the updated data property value to be 1
-        values.put("_DATA_UPDATED", 1);
+        values.put("`_DATA_UPDATED`", 1);
         return values;
     }
 
@@ -187,7 +168,7 @@ public class FacebookAccessTokenDb{
     public   FacebookAccessToken get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("FacebookAccessToken", null, whereKey + "=?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("FacebookAccessToken", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -533,7 +514,7 @@ public class FacebookAccessTokenDb{
     public DataList<FacebookAccessToken>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<FacebookAccessToken> modelList = new DataList<FacebookAccessToken>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM FacebookAccessToken WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
+        String selectQuery = "SELECT  * FROM `FacebookAccessToken` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -572,7 +553,7 @@ public class FacebookAccessTokenDb{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-        String countQuery = "SELECT  * FROM FacebookAccessToken WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
+        String countQuery = "SELECT  * FROM `FacebookAccessToken` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -592,7 +573,7 @@ public class FacebookAccessTokenDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("FacebookAccessToken", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+                db.update("FacebookAccessToken", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -609,7 +590,7 @@ public class FacebookAccessTokenDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("FacebookAccessToken", "_DATA_UPDATED = 0 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+                db.delete("FacebookAccessToken", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -678,7 +659,7 @@ public class FacebookAccessTokenDb{
 
     // Getting contacts Count
     public int count__db() {
-        String countQuery = "SELECT  * FROM " + TABLE;
+        String countQuery = "SELECT  * FROM `" + TABLE + "`";
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -694,7 +675,7 @@ public class FacebookAccessTokenDb{
      * @return
      */
     public int count__db(String id){
-        String countQuery = "SELECT  * FROM " + TABLE  + " WHERE ID='" + id+"'";
+        String countQuery = "SELECT  * FROM `" + TABLE  + "` WHERE ID='" + id+"'";
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();

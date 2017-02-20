@@ -49,25 +49,6 @@ public class BrandManagerDb{
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
-  /**
-      // Creating Tables
-      @Override
-      public void onCreate(SQLiteDatabase db) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-        
-        String CREATE_BrandManager_TABLE = "CREATE TABLE IF NOT EXISTS BrandManager(  `firstName` TEXT, `lastName` TEXT, `email` TEXT, `password` TEXT, `restrictHotDeal` TEXT, `status` TEXT, `added` TEXT, `updated` TEXT, `realm` TEXT, `username` TEXT, `credentials` TEXT, `challenges` TEXT, `emailVerified` TEXT, `verificationToken` TEXT, `created` TEXT, `lastUpdated` TEXT, `id` TEXT PRIMARY KEY, `brandId` TEXT, _DATA_UPDATED NUMBER )";
-        db.execSQL(CREATE_BrandManager_TABLE);
-      }
-
-        // Upgrading database
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-                // Drop older table if existed
-                db.execSQL("DROP TABLE IF EXISTS BrandManager");
-                // Create tables again
-                onCreate(db);
-        }
-    **/
 
     public void insert__db (final String id, final BrandManager modelData) {
         new Thread(new Runnable() {
@@ -94,49 +75,49 @@ public class BrandManagerDb{
                         if(modelData.getFirstName() != null){
                           firstNameData = modelData.getFirstName().toString();
                         }
-                                                values.put("firstName", firstNameData);
+                                                values.put("`firstName`", firstNameData);
                                 
                                                             String lastNameData = "";
                         if(modelData.getLastName() != null){
                           lastNameData = modelData.getLastName().toString();
                         }
-                                                values.put("lastName", lastNameData);
+                                                values.put("`lastName`", lastNameData);
                                 
                                                             String emailData = "";
                         if(modelData.getEmail() != null){
                           emailData = modelData.getEmail().toString();
                         }
-                                                values.put("email", emailData);
+                                                values.put("`email`", emailData);
                                 
                                                             String passwordData = "";
                         if(modelData.getPassword() != null){
                           passwordData = modelData.getPassword().toString();
                         }
-                                                values.put("password", passwordData);
+                                                values.put("`password`", passwordData);
                                 
                                                             String restrictHotDealData = "";
                         if(modelData.getRestrictHotDeal() != null){
                           restrictHotDealData = modelData.getRestrictHotDeal().toString();
                         }
-                                                values.put("restrictHotDeal", restrictHotDealData);
+                                                values.put("`restrictHotDeal`", restrictHotDealData);
                                 
                                                             String statusData = "";
                         if(modelData.getStatus() != null){
                           statusData = modelData.getStatus().toString();
                         }
-                                                values.put("status", statusData);
+                                                values.put("`status`", statusData);
                                 
                                                             String addedData = "";
                         if(modelData.getAdded() != null){
                           addedData = modelData.getAdded().toString();
                         }
-                                                values.put("added", addedData);
+                                                values.put("`added`", addedData);
                                 
                                                             String updatedData = "";
                         if(modelData.getUpdated() != null){
                           updatedData = modelData.getUpdated().toString();
                         }
-                                                values.put("updated", updatedData);
+                                                values.put("`updated`", updatedData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String realmData = "";
@@ -150,7 +131,7 @@ public class BrandManagerDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("realm", realmData);
+                                                values.put("`realm`", realmData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String usernameData = "";
@@ -164,7 +145,7 @@ public class BrandManagerDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("username", usernameData);
+                                                values.put("`username`", usernameData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String credentialsData = "";
@@ -178,7 +159,7 @@ public class BrandManagerDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("credentials", credentialsData);
+                                                values.put("`credentials`", credentialsData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String challengesData = "";
@@ -192,7 +173,7 @@ public class BrandManagerDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("challenges", challengesData);
+                                                values.put("`challenges`", challengesData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String emailVerifiedData = "";
@@ -206,7 +187,7 @@ public class BrandManagerDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("emailVerified", emailVerifiedData);
+                                                values.put("`emailVerified`", emailVerifiedData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String verificationTokenData = "";
@@ -220,7 +201,7 @@ public class BrandManagerDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("verificationToken", verificationTokenData);
+                                                values.put("`verificationToken`", verificationTokenData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String createdData = "";
@@ -234,7 +215,7 @@ public class BrandManagerDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("created", createdData);
+                                                values.put("`created`", createdData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String lastUpdatedData = "";
@@ -248,7 +229,7 @@ public class BrandManagerDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("lastUpdated", lastUpdatedData);
+                                                values.put("`lastUpdated`", lastUpdatedData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -262,7 +243,7 @@ public class BrandManagerDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("id", idData);
+                                                values.put("`id`", idData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String brandIdData = "";
@@ -276,11 +257,11 @@ public class BrandManagerDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("brandId", brandIdData);
+                                                values.put("`brandId`", brandIdData);
                   
 
         //Add the updated data property value to be 1
-        values.put("_DATA_UPDATED", 1);
+        values.put("`_DATA_UPDATED`", 1);
         return values;
     }
 
@@ -323,7 +304,7 @@ public class BrandManagerDb{
     public   BrandManager get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("BrandManager", null, whereKey + "=?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("BrandManager", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -789,7 +770,7 @@ public class BrandManagerDb{
     public DataList<BrandManager>  getAll__db(String whereKey, String whereKeyValue) {
         DataList<BrandManager> modelList = new DataList<BrandManager>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM BrandManager WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
+        String selectQuery = "SELECT  * FROM `BrandManager` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -828,7 +809,7 @@ public class BrandManagerDb{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-        String countQuery = "SELECT  * FROM BrandManager WHERE " + whereKey +"='"+ whereKeyValue + "'" ;
+        String countQuery = "SELECT  * FROM `BrandManager` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -848,7 +829,7 @@ public class BrandManagerDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("BrandManager", values, "_DATA_UPDATED = 1 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+                db.update("BrandManager", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -865,7 +846,7 @@ public class BrandManagerDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("BrandManager", "_DATA_UPDATED = 0 AND " + whereKey + " = ?", new String[]{whereKeyValue});
+                db.delete("BrandManager", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -934,7 +915,7 @@ public class BrandManagerDb{
 
     // Getting contacts Count
     public int count__db() {
-        String countQuery = "SELECT  * FROM " + TABLE;
+        String countQuery = "SELECT  * FROM `" + TABLE + "`";
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -950,7 +931,7 @@ public class BrandManagerDb{
      * @return
      */
     public int count__db(String id){
-        String countQuery = "SELECT  * FROM " + TABLE  + " WHERE ID='" + id+"'";
+        String countQuery = "SELECT  * FROM `" + TABLE  + "` WHERE ID='" + id+"'";
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
