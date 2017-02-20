@@ -125,7 +125,7 @@ public class RoleMapping extends Model {
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
-          if(id != null && lowercaseFirstLetterRepository.getDb() != null){
+          if(id != null & lowercaseFirstLetterRepository.getDb() != null){
              lowercaseFirstLetterRepository.getDb().delete__db(id);
           }
       }
@@ -139,7 +139,7 @@ public class RoleMapping extends Model {
       RoleMappingRepository lowercaseFirstLetterRepository = (RoleMappingRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-        if(id != null && lowercaseFirstLetterRepository.getDb() != null){
+        if(id != null & lowercaseFirstLetterRepository.getDb() != null){
           lowercaseFirstLetterRepository.getDb().upsert__db(id, this);
         }
       }
@@ -150,7 +150,7 @@ public class RoleMapping extends Model {
       RoleMappingRepository lowercaseFirstLetterRepository = (RoleMappingRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
-        if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
+        if(getId() != null & lowercaseFirstLetterRepository.getDb() != null){
             String id = getId().toString();
           lowercaseFirstLetterRepository.getDb().delete__db(id);
         }
@@ -246,7 +246,7 @@ public class RoleMapping extends Model {
                                     roleRepository.addStorage(context);
                                 }
 
-                                if(context != null && roleRepository.getDb() != null){
+                                if(context != null & roleRepository.getDb() != null){
                                     roleRepository.addStorage(context);
                                     Role role = (Role) roleRepository.getDb().get__db(roleId);
                                     return role;
