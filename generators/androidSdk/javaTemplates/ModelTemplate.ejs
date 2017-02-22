@@ -417,7 +417,7 @@ public class <%- modelName %> extends Model {
           }
       }
       //Also save to database..
-      super.save(callback);
+      super.destroy(callback);
     }
 
 
@@ -523,16 +523,21 @@ public class <%- modelName %> extends Model {
                     }
 
                     public <%- capitalcaseRelatedModelName %> get<%- capitalcaseRelationName %>() {
-                        //Adding database method for fetching from relation if not present..
-                        if(<%- relation %> == null){
-                          <%- modelName %>Repository <%- lowercaseFirstLetter(modelName) %>Repository = (<%- modelName %>Repository) getRepository();
+			try{
+				//Adding database method for fetching from relation if not present..
+		                if(<%- relation %> == null){
+		                  <%- modelName %>Repository <%- lowercaseFirstLetter(modelName) %>Repository = (<%- modelName %>Repository) getRepository();
 
-                          RestAdapter restAdapter = <%- lowercaseFirstLetter(modelName) %>Repository.getRestAdapter();
-                          if(restAdapter != null){
-                            //Fetch locally from db
-                            <%- relation %> = get<%- capitalcaseRelationName %>__db(restAdapter);
-                          }
-                        }
+		                  RestAdapter restAdapter = <%- lowercaseFirstLetter(modelName) %>Repository.getRestAdapter();
+		                  if(restAdapter != null){
+		                    //Fetch locally from db
+		                    <%- relation %> = get<%- capitalcaseRelationName %>__db(restAdapter);
+		                  }
+		                }
+			}catch(Exception e){
+				//Ignore
+			}
+		                
                         return <%- relation %>;
                     }
 
@@ -566,23 +571,29 @@ public class <%- modelName %> extends Model {
                     public <%- capitalcaseRelatedModelName %> get<%- capitalcaseRelationName %>__db(RestAdapter restAdapter){
                       if(<%- getForeignKeyName() %> != null){
                         <%- capitalcaseRelatedModelName %>Repository <%- relation %>Repository = restAdapter.createRepository(<%- capitalcaseRelatedModelName %>Repository.class);
-                           <%- modelName %>Repository lowercaseFirstLetterRepository = (<%- modelName %>Repository) getRepository();
-                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-                                Context context = lowercaseFirstLetterRepository.getContext();
-                                if(<%- relation %>Repository.getDb() == null ){
-                                    <%- relation %>Repository.addStorage(context);
-                                }
+			  try{
+				<%- modelName %>Repository lowercaseFirstLetterRepository = (<%- modelName %>Repository) getRepository();
+		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+		                        Context context = lowercaseFirstLetterRepository.getContext();
+		                        if(<%- relation %>Repository.getDb() == null ){
+		                            <%- relation %>Repository.addStorage(context);
+		                        }
 
-                                if(context != null && <%- relation %>Repository.getDb() != null){
-                                    <%- relation %>Repository.addStorage(context);
-                                    <%- capitalcaseRelatedModelName %> <%- relation %> = (<%- capitalcaseRelatedModelName %>) <%- relation %>Repository.getDb().get__db(<%- getForeignKeyName() %>);
-                                    return <%- relation %>;
-                                }else{
-                                    return null;
-                                }
-                          }else{
-                            return null;
-                          }
+		                        if(context != null && <%- relation %>Repository.getDb() != null){
+		                            <%- relation %>Repository.addStorage(context);
+		                            <%- capitalcaseRelatedModelName %> <%- relation %> = (<%- capitalcaseRelatedModelName %>) <%- relation %>Repository.getDb().get__db(<%- getForeignKeyName() %>);
+		                            return <%- relation %>;
+		                        }else{
+		                            return null;
+		                        }
+		                  }else{
+		                    return null;
+		                  }
+			  }catch(Exception e){
+				//Ignore exception..
+				return null;
+			  }		
+                           
                         }else{
                           return null;
                       }
