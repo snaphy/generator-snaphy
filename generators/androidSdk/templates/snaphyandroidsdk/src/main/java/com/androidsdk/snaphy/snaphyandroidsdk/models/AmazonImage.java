@@ -172,7 +172,7 @@ public class AmazonImage extends Model {
           }
       }
       //Also save to database..
-      super.save(callback);
+      super.destroy(callback);
     }
 
 

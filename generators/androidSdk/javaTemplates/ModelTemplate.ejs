@@ -537,7 +537,7 @@ public class <%- modelName %> extends Model {
 			}catch(Exception e){
 				//Ignore
 			}
-		                
+
                         return <%- relation %>;
                     }
 
@@ -592,8 +592,8 @@ public class <%- modelName %> extends Model {
 			  }catch(Exception e){
 				//Ignore exception..
 				return null;
-			  }		
-                           
+			  }
+
                         }else{
                           return null;
                       }
@@ -609,6 +609,7 @@ public class <%- modelName %> extends Model {
                         //Check for pure case of hasMany
                         <% if(!model.relations[relation].through){ -%>
                             //TODO: Modify foreign key name..
+                          try{
                             <%- capitalcaseRelatedModelName %>Repository <%- lowercaseFirstLetter(capitalcaseRelatedModelName) %>Repository = (<%- capitalcaseRelatedModelName %>Repository) getRepository();
 
                             if(that.getId() != null && <%- lowercaseFirstLetter(capitalcaseRelatedModelName) %>Repository.getDb() != null){
@@ -620,6 +621,7 @@ public class <%- modelName %> extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
+                          }catch(Exception e){//Ignore}
                         <%}-%>
                         return <%- relation %>;
                     }

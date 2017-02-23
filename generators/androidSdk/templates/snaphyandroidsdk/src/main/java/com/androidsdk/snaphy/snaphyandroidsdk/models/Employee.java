@@ -294,7 +294,7 @@ public class Employee extends User {
           }
       }
       //Also save to database..
-      super.save(callback);
+      super.destroy(callback);
     }
 
 

@@ -137,7 +137,7 @@ public class Role extends Model {
           }
       }
       //Also save to database..
-      super.save(callback);
+      super.destroy(callback);
     }
 
 
@@ -197,6 +197,7 @@ public class Role extends Model {
                     public DataList< RoleMapping > getPrincipals() {
                         //Check for pure case of hasMany
                                                     //TODO: Modify foreign key name..
+                          try{
                             RoleMappingRepository roleMappingRepository = (RoleMappingRepository) getRepository();
 
                             if(that.getId() != null && roleMappingRepository.getDb() != null){
@@ -208,6 +209,7 @@ public class Role extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
+                          }catch(Exception e){//Ignore}
                                                 return principals;
                     }
 

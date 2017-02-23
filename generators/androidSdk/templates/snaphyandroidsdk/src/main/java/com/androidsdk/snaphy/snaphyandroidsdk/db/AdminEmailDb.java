@@ -368,17 +368,17 @@ public class AdminEmailDb{
 
                     if(i==0){
                         if(returnedKey.equals("gt")){
-                            where = where + " `" + key + "` >= '"+ value + "'";
+                            where = where + " `" + key + "` > '"+ value + "'";
                         }else if(returnedKey.equals("lt")){
-                            where = where + " `" + key + "` <= '"+ value + "'";
+                            where = where + " `" + key + "` < '"+ value + "'";
                         }else{
                             where = where + " `" + key + "` = '"+ value + "'";
                         }
                     }else{
                         if(returnedKey.equals("gt")){
-                            where = where + " AND `" + key + "` >= '"+ value + "'";
+                            where = where + " AND `" + key + "` > '"+ value + "'";
                         }else if(returnedKey.equals("lt")){
-                            where = where + " AND `" + key + "` <= '"+ value + "'";
+                            where = where + " AND `" + key + "` < '"+ value + "'";
                         }else{
                             where = where + " AND `" + key + "` = '"+ value + "'";
                         }

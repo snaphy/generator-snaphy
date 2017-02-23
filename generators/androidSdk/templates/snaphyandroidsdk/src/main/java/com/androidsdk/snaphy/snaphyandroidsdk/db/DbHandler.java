@@ -51,88 +51,178 @@ public class DbHandler extends SQLiteOpenHelper {
                         db.execSQL(CREATE_Employee_TABLE_6);
 
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                        
-                        String CREATE_FacebookAccessToken_TABLE_7 = "CREATE TABLE IF NOT EXISTS `FacebookAccessToken` (  `FbUserId` TEXT, `token` TEXT, `expires` TEXT, `userId` TEXT, `type` TEXT, `appUserId` TEXT, _DATA_UPDATED NUMBER )";
-                        db.execSQL(CREATE_FacebookAccessToken_TABLE_7);
-
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                        
-                        String CREATE_AppUser_TABLE_8 = "CREATE TABLE IF NOT EXISTS `AppUser` (  `firstName` TEXT, `lastName` TEXT, `email` TEXT, `added` TEXT, `updated` TEXT, `registrationId` TEXT, `profilePic` TEXT, `realm` TEXT, `username` TEXT, `password` TEXT, `credentials` TEXT, `challenges` TEXT, `emailVerified` TEXT, `verificationToken` TEXT, `status` TEXT, `created` TEXT, `lastUpdated` TEXT, `id` TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
-                        db.execSQL(CREATE_AppUser_TABLE_8);
-
-
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
                         
-                        String CREATE_AmazonImage_TABLE_9 = "CREATE TABLE IF NOT EXISTS `AmazonImage` (  `name` TEXT, `container` TEXT, `type` TEXT, `url` TEXT, `id` TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
-                        db.execSQL(CREATE_AmazonImage_TABLE_9);
+                        String CREATE_AmazonImage_TABLE_7 = "CREATE TABLE IF NOT EXISTS `AmazonImage` (  `name` TEXT, `container` TEXT, `type` TEXT, `url` TEXT, `id` TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_AmazonImage_TABLE_7);
 
 
                                                                                                                                                     
                         
-                        String CREATE_container_TABLE_10 = "CREATE TABLE IF NOT EXISTS `container` (  `id` TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
-                        db.execSQL(CREATE_container_TABLE_10);
-
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                        
-                        String CREATE_HotDeal_TABLE_12 = "CREATE TABLE IF NOT EXISTS `HotDeal` (  `title` TEXT, `description` TEXT, `image` TEXT, `url` TEXT, `price` NUMBER, `status` TEXT, `expiryDate` TEXT, `added` TEXT, `updated` TEXT, `id` TEXT PRIMARY KEY, `categoryId` TEXT, `brandId` TEXT, _DATA_UPDATED NUMBER )";
-                        db.execSQL(CREATE_HotDeal_TABLE_12);
-
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                        
-                        String CREATE_Category_TABLE_13 = "CREATE TABLE IF NOT EXISTS `Category` (  `name` TEXT, `added` TEXT, `updated` TEXT, `id` TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
-                        db.execSQL(CREATE_Category_TABLE_13);
-
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                        
-                        String CREATE_Chat_TABLE_14 = "CREATE TABLE IF NOT EXISTS `Chat` (  `added` TEXT, `updated` TEXT, `message` TEXT, `type` TEXT, `image` TEXT, `from` TEXT, `guid` TEXT, `status` TEXT, `id` TEXT PRIMARY KEY, `appUserId` TEXT, `brandId` TEXT, _DATA_UPDATED NUMBER )";
-                        db.execSQL(CREATE_Chat_TABLE_14);
-
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                        
-                        String CREATE_Brand_TABLE_15 = "CREATE TABLE IF NOT EXISTS `Brand` (  `added` TEXT, `updated` TEXT, `name` TEXT, `image` TEXT, `trending` TEXT, `facebookUrl` TEXT, `googleUrl` TEXT, `instagramUrl` TEXT, `status` TEXT, `associatedEmail` TEXT, `id` TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
-                        db.execSQL(CREATE_Brand_TABLE_15);
-
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                        
-                        String CREATE_DailyFeed_TABLE_16 = "CREATE TABLE IF NOT EXISTS `DailyFeed` (  `added` TEXT, `updated` TEXT, `title` TEXT, `description` TEXT, `image` TEXT, `id` TEXT PRIMARY KEY, `brandId` TEXT, _DATA_UPDATED NUMBER )";
-                        db.execSQL(CREATE_DailyFeed_TABLE_16);
-
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                        
-                        String CREATE_BrandManager_TABLE_17 = "CREATE TABLE IF NOT EXISTS `BrandManager` (  `firstName` TEXT, `lastName` TEXT, `email` TEXT, `password` TEXT, `restrictHotDeal` TEXT, `status` TEXT, `added` TEXT, `updated` TEXT, `realm` TEXT, `username` TEXT, `credentials` TEXT, `challenges` TEXT, `emailVerified` TEXT, `verificationToken` TEXT, `created` TEXT, `lastUpdated` TEXT, `id` TEXT PRIMARY KEY, `brandId` TEXT, _DATA_UPDATED NUMBER )";
-                        db.execSQL(CREATE_BrandManager_TABLE_17);
+                        String CREATE_container_TABLE_8 = "CREATE TABLE IF NOT EXISTS `container` (  `id` TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_container_TABLE_8);
 
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
                         
-                        String CREATE_adminEmail_TABLE_18 = "CREATE TABLE IF NOT EXISTS `adminEmail` (  `to` TEXT, `from` TEXT, `subject` TEXT, `text` TEXT, `html` TEXT, `id` TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
-                        db.execSQL(CREATE_adminEmail_TABLE_18);
+                        String CREATE_adminEmail_TABLE_10 = "CREATE TABLE IF NOT EXISTS `adminEmail` (  `to` TEXT, `from` TEXT, `subject` TEXT, `text` TEXT, `html` TEXT, `id` TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_adminEmail_TABLE_10);
 
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                         
-                        String CREATE_BrandVerification_TABLE_20 = "CREATE TABLE IF NOT EXISTS `BrandVerification` (  `code` TEXT, `added` TEXT, `updated` TEXT, `id` TEXT PRIMARY KEY, `brandId` TEXT, _DATA_UPDATED NUMBER )";
-                        db.execSQL(CREATE_BrandVerification_TABLE_20);
+                        String CREATE_School_TABLE_13 = "CREATE TABLE IF NOT EXISTS `School` (  `name` TEXT, `logo` TEXT, `address` TEXT, `city` TEXT, `email` TEXT, `state` TEXT, `phoneNumber` TEXT, `comment` TEXT, `id` TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_School_TABLE_13);
 
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                         
-                        String CREATE_Student_TABLE_22 = "CREATE TABLE IF NOT EXISTS `Student` (  `firstName` TEXT, `lastName` TEXT, `realm` TEXT, `username` TEXT, `password` TEXT, `credentials` TEXT, `challenges` TEXT, `email` TEXT, `emailVerified` TEXT, `verificationToken` TEXT, `status` TEXT, `created` TEXT, `lastUpdated` TEXT, `id` TEXT PRIMARY KEY, `brandId` TEXT, _DATA_UPDATED NUMBER )";
-                        db.execSQL(CREATE_Student_TABLE_22);
+                        String CREATE_Admin_TABLE_14 = "CREATE TABLE IF NOT EXISTS `Admin` (  `added` TEXT, `updated` TEXT, `firstName` TEXT, `lastName` TEXT, `password` TEXT, `phoneNumber` TEXT, `email` TEXT, `realm` TEXT, `username` TEXT, `credentials` TEXT, `challenges` TEXT, `emailVerified` TEXT, `verificationToken` TEXT, `status` TEXT, `created` TEXT, `lastUpdated` TEXT, `id` TEXT PRIMARY KEY, `schoolId` TEXT, `teacherId` TEXT, `parentId` TEXT, `guestId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_Admin_TABLE_14);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_Teacher_TABLE_15 = "CREATE TABLE IF NOT EXISTS `Teacher` (  `added` TEXT, `updated` TEXT, `firstName` TEXT, `lastName` TEXT, `email` TEXT, `password` TEXT, `phoneNumber` TEXT, `realm` TEXT, `username` TEXT, `credentials` TEXT, `challenges` TEXT, `emailVerified` TEXT, `verificationToken` TEXT, `status` TEXT, `created` TEXT, `lastUpdated` TEXT, `id` TEXT PRIMARY KEY, `schoolId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_Teacher_TABLE_15);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_Student_TABLE_16 = "CREATE TABLE IF NOT EXISTS `Student` (  `added` TEXT, `updated` TEXT, `firstName` TEXT, `lastName` TEXT, `password` TEXT, `rollNumber` TEXT, `email` TEXT, `phoneNumber` TEXT, `realm` TEXT, `username` TEXT, `credentials` TEXT, `challenges` TEXT, `emailVerified` TEXT, `verificationToken` TEXT, `status` TEXT, `created` TEXT, `lastUpdated` TEXT, `id` TEXT PRIMARY KEY, `schoolId` TEXT, `parentId` TEXT, `ainakClassAndSectionId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_Student_TABLE_16);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_Parent_TABLE_17 = "CREATE TABLE IF NOT EXISTS `Parent` (  `added` TEXT, `updated` TEXT, `firstName` TEXT, `lastName` TEXT, `password` TEXT, `email` TEXT, `phoneNumber` TEXT, `realm` TEXT, `username` TEXT, `credentials` TEXT, `challenges` TEXT, `emailVerified` TEXT, `verificationToken` TEXT, `status` TEXT, `created` TEXT, `lastUpdated` TEXT, `id` TEXT PRIMARY KEY, `schoolId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_Parent_TABLE_17);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_Guest_TABLE_18 = "CREATE TABLE IF NOT EXISTS `Guest` (  `realm` TEXT, `username` TEXT, `password` TEXT, `credentials` TEXT, `challenges` TEXT, `email` TEXT, `emailVerified` TEXT, `verificationToken` TEXT, `status` TEXT, `created` TEXT, `lastUpdated` TEXT, `id` TEXT PRIMARY KEY, `schoolId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_Guest_TABLE_18);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_Event_TABLE_19 = "CREATE TABLE IF NOT EXISTS `Event` (  `added` TEXT, `updated` TEXT, `title` TEXT, `description` TEXT, `id` TEXT PRIMARY KEY, `schoolId` TEXT, `adminId` TEXT, `teacherId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_Event_TABLE_19);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_Notice_TABLE_20 = "CREATE TABLE IF NOT EXISTS `Notice` (  `added` TEXT, `updated` TEXT, `title` TEXT, `description` TEXT, `id` TEXT PRIMARY KEY, `schoolId` TEXT, `adminId` TEXT, `teacherId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_Notice_TABLE_20);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_Message_TABLE_21 = "CREATE TABLE IF NOT EXISTS `Message` (  `added` TEXT, `updated` TEXT, `description` TEXT, `to` TEXT, `from` TEXT, `id` TEXT PRIMARY KEY, `schoolId` TEXT, `adminId` TEXT, `teacherId` TEXT, `ainakClassAndSectionId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_Message_TABLE_21);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_Question_TABLE_22 = "CREATE TABLE IF NOT EXISTS `Question` (  `title` TEXT, `added` TEXT, `updated` TEXT, `from` TEXT, `id` TEXT PRIMARY KEY, `schoolId` TEXT, `adminId` TEXT, `parentId` TEXT, `teacherId` TEXT, `studentId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_Question_TABLE_22);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_Answer_TABLE_23 = "CREATE TABLE IF NOT EXISTS `Answer` (  `added` TEXT, `updated` TEXT, `description` TEXT, `from` TEXT, `id` TEXT PRIMARY KEY, `schoolId` TEXT, `adminId` TEXT, `teacherId` TEXT, `studentId` TEXT, `parentId` TEXT, `questionId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_Answer_TABLE_23);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_Blog_TABLE_24 = "CREATE TABLE IF NOT EXISTS `Blog` (  `title` TEXT, `description` TEXT, `added` TEXT, `updated` TEXT, `from` TEXT, `id` TEXT PRIMARY KEY, `schoolId` TEXT, `adminId` TEXT, `teacherId` TEXT, `studentId` TEXT, `parentId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_Blog_TABLE_24);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_HomeWork_TABLE_25 = "CREATE TABLE IF NOT EXISTS `HomeWork` (  `added` TEXT, `updated` TEXT, `title` TEXT, `description` TEXT, `attachment` TEXT, `from` TEXT, `id` TEXT PRIMARY KEY, `schoolId` TEXT, `adminId` TEXT, `teacherId` TEXT, `ainakClassAndSectionId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_HomeWork_TABLE_25);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_Calendar_TABLE_26 = "CREATE TABLE IF NOT EXISTS `Calendar` (  `added` TEXT, `updated` TEXT, `date` TEXT, `id` TEXT PRIMARY KEY, `schoolId` TEXT, `adminId` TEXT, `teacherId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_Calendar_TABLE_26);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_Attendance_TABLE_27 = "CREATE TABLE IF NOT EXISTS `Attendance` (  `date` TEXT, `added` TEXT, `updated` TEXT, `id` TEXT PRIMARY KEY, `schoolId` TEXT, `adminId` TEXT, `teacherId` TEXT, `ainakClassAndSectionId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_Attendance_TABLE_27);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_Reminder_TABLE_28 = "CREATE TABLE IF NOT EXISTS `Reminder` (  `added` TEXT, `updated` TEXT, `name` TEXT, `time` TEXT, `date` TEXT, `from` TEXT, `id` TEXT PRIMARY KEY, `schoolId` TEXT, `adminId` TEXT, `teacherId` TEXT, `studentId` TEXT, `parentId` TEXT, `calendarId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_Reminder_TABLE_28);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_CustomEvent_TABLE_29 = "CREATE TABLE IF NOT EXISTS `CustomEvent` (  `name` TEXT, `added` TEXT, `updated` TEXT, `id` TEXT PRIMARY KEY, `schoolId` TEXT, `adminId` TEXT, `teacherId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_CustomEvent_TABLE_29);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_Other_TABLE_30 = "CREATE TABLE IF NOT EXISTS `Other` (  `title` TEXT, `description` TEXT, `added` TEXT, `updated` TEXT, `type` TEXT, `from` TEXT, `to` TEXT, `id` TEXT PRIMARY KEY, `schoolId` TEXT, `calendarId` TEXT, `customEventId` TEXT, `adminId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_Other_TABLE_30);
 
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
                         
-                        String CREATE_FollowBrand_TABLE_23 = "CREATE TABLE IF NOT EXISTS `FollowBrand` (  `added` TEXT, `id` TEXT PRIMARY KEY, `appUserId` TEXT, `brandId` TEXT, _DATA_UPDATED NUMBER )";
-                        db.execSQL(CREATE_FollowBrand_TABLE_23);
+                        String CREATE_Setting_TABLE_31 = "CREATE TABLE IF NOT EXISTS `Setting` (  `removeBlog` NUMBER, `removeAskAndAnswer` NUMBER, `removeAttendance` NUMBER, `id` TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_Setting_TABLE_31);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_AinakClassAndSection_TABLE_32 = "CREATE TABLE IF NOT EXISTS `AinakClassAndSection` (  `added` TEXT, `updated` TEXT, `name` TEXT, `section` TEXT, `id` TEXT PRIMARY KEY, `schoolId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_AinakClassAndSection_TABLE_32);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_TeacherMessage_TABLE_33 = "CREATE TABLE IF NOT EXISTS `TeacherMessage` (  `added` TEXT, `id` TEXT PRIMARY KEY, `teacherId` TEXT, `messageId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_TeacherMessage_TABLE_33);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_StudentMessage_TABLE_34 = "CREATE TABLE IF NOT EXISTS `StudentMessage` (  `added` TEXT, `id` TEXT PRIMARY KEY, `messageId` TEXT, `studentId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_StudentMessage_TABLE_34);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_StudentAttendance_TABLE_35 = "CREATE TABLE IF NOT EXISTS `StudentAttendance` (  `added` TEXT, `id` TEXT PRIMARY KEY, `studentId` TEXT, `attendanceId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_StudentAttendance_TABLE_35);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_StudentHomework_TABLE_36 = "CREATE TABLE IF NOT EXISTS `StudentHomework` (  `added` TEXT, `id` TEXT PRIMARY KEY, `homeWorkId` TEXT, `studentId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_StudentHomework_TABLE_36);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_TeacherOther_TABLE_37 = "CREATE TABLE IF NOT EXISTS `TeacherOther` (  `added` TEXT, `id` TEXT PRIMARY KEY, `teacherId` TEXT, `otherId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_TeacherOther_TABLE_37);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_StudentOther_TABLE_38 = "CREATE TABLE IF NOT EXISTS `StudentOther` (  `added` TEXT, `id` TEXT PRIMARY KEY, `studentId` TEXT, `otherId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_StudentOther_TABLE_38);
 
 
             
@@ -164,12 +254,6 @@ public class DbHandler extends SQLiteOpenHelper {
                 db.execSQL("DROP TABLE IF EXISTS `Employee`");
             
                 // Drop older table if existed
-                db.execSQL("DROP TABLE IF EXISTS `FacebookAccessToken`");
-            
-                // Drop older table if existed
-                db.execSQL("DROP TABLE IF EXISTS `AppUser`");
-            
-                // Drop older table if existed
                 db.execSQL("DROP TABLE IF EXISTS `AmazonImage`");
             
                 // Drop older table if existed
@@ -179,40 +263,91 @@ public class DbHandler extends SQLiteOpenHelper {
                 db.execSQL("DROP TABLE IF EXISTS `Container`");
             
                 // Drop older table if existed
-                db.execSQL("DROP TABLE IF EXISTS `HotDeal`");
-            
-                // Drop older table if existed
-                db.execSQL("DROP TABLE IF EXISTS `Category`");
-            
-                // Drop older table if existed
-                db.execSQL("DROP TABLE IF EXISTS `Chat`");
-            
-                // Drop older table if existed
-                db.execSQL("DROP TABLE IF EXISTS `Brand`");
-            
-                // Drop older table if existed
-                db.execSQL("DROP TABLE IF EXISTS `DailyFeed`");
-            
-                // Drop older table if existed
-                db.execSQL("DROP TABLE IF EXISTS `BrandManager`");
-            
-                // Drop older table if existed
                 db.execSQL("DROP TABLE IF EXISTS `adminEmail`");
             
                 // Drop older table if existed
                 db.execSQL("DROP TABLE IF EXISTS `AdminEmail`");
             
                 // Drop older table if existed
-                db.execSQL("DROP TABLE IF EXISTS `BrandVerification`");
+                db.execSQL("DROP TABLE IF EXISTS `ResetPassword`");
             
                 // Drop older table if existed
-                db.execSQL("DROP TABLE IF EXISTS `ResetPassword`");
+                db.execSQL("DROP TABLE IF EXISTS `School`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `Admin`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `Teacher`");
             
                 // Drop older table if existed
                 db.execSQL("DROP TABLE IF EXISTS `Student`");
             
                 // Drop older table if existed
-                db.execSQL("DROP TABLE IF EXISTS `FollowBrand`");
+                db.execSQL("DROP TABLE IF EXISTS `Parent`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `Guest`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `Event`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `Notice`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `Message`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `Question`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `Answer`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `Blog`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `HomeWork`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `Calendar`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `Attendance`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `Reminder`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `CustomEvent`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `Other`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `Setting`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `AinakClassAndSection`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `TeacherMessage`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `StudentMessage`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `StudentAttendance`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `StudentHomework`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `TeacherOther`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `StudentOther`");
             
 
             // Create tables again

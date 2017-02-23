@@ -130,7 +130,7 @@ public class RoleMapping extends Model {
           }
       }
       //Also save to database..
-      super.save(callback);
+      super.destroy(callback);
     }
 
 
@@ -196,16 +196,21 @@ public class RoleMapping extends Model {
                     }
 
                     public Role getRole() {
-                        //Adding database method for fetching from relation if not present..
-                        if(role == null){
-                          RoleMappingRepository roleMappingRepository = (RoleMappingRepository) getRepository();
+			try{
+				//Adding database method for fetching from relation if not present..
+		                if(role == null){
+		                  RoleMappingRepository roleMappingRepository = (RoleMappingRepository) getRepository();
 
-                          RestAdapter restAdapter = roleMappingRepository.getRestAdapter();
-                          if(restAdapter != null){
-                            //Fetch locally from db
-                            role = getRole__db(restAdapter);
-                          }
-                        }
+		                  RestAdapter restAdapter = roleMappingRepository.getRestAdapter();
+		                  if(restAdapter != null){
+		                    //Fetch locally from db
+		                    role = getRole__db(restAdapter);
+		                  }
+		                }
+			}catch(Exception e){
+				//Ignore
+			}
+
                         return role;
                     }
 
@@ -239,23 +244,29 @@ public class RoleMapping extends Model {
                     public Role getRole__db(RestAdapter restAdapter){
                       if(roleId != null){
                         RoleRepository roleRepository = restAdapter.createRepository(RoleRepository.class);
-                           RoleMappingRepository lowercaseFirstLetterRepository = (RoleMappingRepository) getRepository();
-                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-                                Context context = lowercaseFirstLetterRepository.getContext();
-                                if(roleRepository.getDb() == null ){
-                                    roleRepository.addStorage(context);
-                                }
+			  try{
+				RoleMappingRepository lowercaseFirstLetterRepository = (RoleMappingRepository) getRepository();
+		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+		                        Context context = lowercaseFirstLetterRepository.getContext();
+		                        if(roleRepository.getDb() == null ){
+		                            roleRepository.addStorage(context);
+		                        }
 
-                                if(context != null && roleRepository.getDb() != null){
-                                    roleRepository.addStorage(context);
-                                    Role role = (Role) roleRepository.getDb().get__db(roleId);
-                                    return role;
-                                }else{
-                                    return null;
-                                }
-                          }else{
-                            return null;
-                          }
+		                        if(context != null && roleRepository.getDb() != null){
+		                            roleRepository.addStorage(context);
+		                            Role role = (Role) roleRepository.getDb().get__db(roleId);
+		                            return role;
+		                        }else{
+		                            return null;
+		                        }
+		                  }else{
+		                    return null;
+		                  }
+			  }catch(Exception e){
+				//Ignore exception..
+				return null;
+			  }
+
                         }else{
                           return null;
                       }
