@@ -210,6 +210,27 @@ public class Message extends Model {
             
 
             
+                private boolean sendSms;
+                /* Adding Getter and Setter methods */
+                public boolean getSendSms(){
+                    return sendSms;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setSendSms(boolean sendSms){
+                    this.sendSms = sendSms;
+                    //Update hashMap value..
+                    hashMap.put("sendSms", sendSms);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
             
         
     
@@ -1319,7 +1340,9 @@ public class Message extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return teacherMessages;
                     }
 
@@ -1893,7 +1916,9 @@ public class Message extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return studentMessages;
                     }
 

@@ -101,6 +101,14 @@ public class MessageDb{
                         }
                                                 values.put("`from`", fromData);
                                 
+                                                            int sendSmsData = 0;
+                        if(modelData.getSendSms()){
+                          sendSmsData = 1;
+                        }else{
+                          sendSmsData = 0;
+                        }
+                                                values.put("`sendSms`", sendSmsData);
+                                
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
@@ -301,9 +309,18 @@ public class MessageDb{
                         }
                                                 
                                 
+                                                            boolean sendSmsData = false;
+                        int tempsendSmsData = cursor.getInt(5);
+                        if( tempsendSmsData > 0){
+                          sendSmsData = true;
+                        }else{
+                          sendSmsData = false;
+                        }
+                                                
+                                
                                                             String idData = "";
-                        if(cursor.getString(5) != null){
-                          idData = cursor.getString(5);
+                        if(cursor.getString(6) != null){
+                          idData = cursor.getString(6);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -312,8 +329,8 @@ public class MessageDb{
                                                 
                                 
                                                             String schoolIdData = "";
-                        if(cursor.getString(6) != null){
-                          schoolIdData = cursor.getString(6);
+                        if(cursor.getString(7) != null){
+                          schoolIdData = cursor.getString(7);
                           if(schoolIdData != null){
                             schoolIdData = schoolIdData.toString();
                             hashMap.put("schoolId", schoolIdData);
@@ -322,8 +339,8 @@ public class MessageDb{
                                                 
                                 
                                                             String adminIdData = "";
-                        if(cursor.getString(7) != null){
-                          adminIdData = cursor.getString(7);
+                        if(cursor.getString(8) != null){
+                          adminIdData = cursor.getString(8);
                           if(adminIdData != null){
                             adminIdData = adminIdData.toString();
                             hashMap.put("adminId", adminIdData);
@@ -332,8 +349,8 @@ public class MessageDb{
                                                 
                                 
                                                             String teacherIdData = "";
-                        if(cursor.getString(8) != null){
-                          teacherIdData = cursor.getString(8);
+                        if(cursor.getString(9) != null){
+                          teacherIdData = cursor.getString(9);
                           if(teacherIdData != null){
                             teacherIdData = teacherIdData.toString();
                             hashMap.put("teacherId", teacherIdData);
@@ -342,8 +359,8 @@ public class MessageDb{
                                                 
                                 
                                                             String ainakClassAndSectionIdData = "";
-                        if(cursor.getString(9) != null){
-                          ainakClassAndSectionIdData = cursor.getString(9);
+                        if(cursor.getString(10) != null){
+                          ainakClassAndSectionIdData = cursor.getString(10);
                           if(ainakClassAndSectionIdData != null){
                             ainakClassAndSectionIdData = ainakClassAndSectionIdData.toString();
                             hashMap.put("ainakClassAndSectionId", ainakClassAndSectionIdData);

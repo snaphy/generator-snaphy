@@ -98,6 +98,27 @@ public class TeacherOther extends Model {
             
 
             
+                private String date;
+                /* Adding Getter and Setter methods */
+                public String getDate(){
+                    return date;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setDate(String date){
+                    this.date = date;
+                    //Update hashMap value..
+                    hashMap.put("date", date);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
             
         
     

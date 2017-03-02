@@ -2117,7 +2117,7 @@ public class HomeWorkRepository extends ModelRepository<HomeWork> {
     
         
             //Method saveHomeworkMethod definition
-            public void saveHomeworkMethod(  Object homework,  DataList<String> studentIdList, final ObjectCallback<JSONObject>  callback ){
+            public void saveHomeworkMethod(  Object homework, final ObjectCallback<HomeWork> callback){
 
                 /**
                 Call the onBefore event
@@ -2131,16 +2131,14 @@ public class HomeWorkRepository extends ModelRepository<HomeWork> {
                 
                         hashMapObject.put("homework", homework);
                 
-                        hashMapObject.put("studentIdList", studentIdList);
-                
 
                 
 
 
                 
+                    
                     
                     invokeStaticMethod("saveHomeworkMethod", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
                     
                         @Override
                         public void onError(Throwable t) {
@@ -2152,7 +2150,39 @@ public class HomeWorkRepository extends ModelRepository<HomeWork> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                callback.onSuccess(response);
+                                if(response != null){
+                                    HomeWorkRepository homeWorkRepo = getRestAdapter().createRepository(HomeWorkRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = homeWorkRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(homeWorkRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //homeWorkRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    HomeWork homeWork = homeWorkRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = homeWork.getClass().getMethod("save__db");
+                                                    method.invoke(homeWork);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(homeWork);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                             //Call the finally method..
                             callback.onFinally();

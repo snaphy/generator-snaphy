@@ -206,17 +206,17 @@ public class Teacher extends User {
             
 
             
-                private String firstName;
+                private String name;
                 /* Adding Getter and Setter methods */
-                public String getFirstName(){
-                    return firstName;
+                public String getName(){
+                    return name;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setFirstName(String firstName){
-                    this.firstName = firstName;
+                public void setName(String name){
+                    this.name = name;
                     //Update hashMap value..
-                    hashMap.put("firstName", firstName);
+                    hashMap.put("name", name);
                 }
 
             
@@ -227,17 +227,17 @@ public class Teacher extends User {
             
 
             
-                private String lastName;
+                private String username;
                 /* Adding Getter and Setter methods */
-                public String getLastName(){
-                    return lastName;
+                public String getUsername(){
+                    return username;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setLastName(String lastName){
-                    this.lastName = lastName;
+                public void setUsername(String username){
+                    this.username = username;
                     //Update hashMap value..
-                    hashMap.put("lastName", lastName);
+                    hashMap.put("username", username);
                 }
 
             
@@ -309,6 +309,83 @@ public class Teacher extends User {
     
         
             
+
+            
+                private String alternatePhoneNumber;
+                /* Adding Getter and Setter methods */
+                public String getAlternatePhoneNumber(){
+                    return alternatePhoneNumber;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setAlternatePhoneNumber(String alternatePhoneNumber){
+                    this.alternatePhoneNumber = alternatePhoneNumber;
+                    //Update hashMap value..
+                    hashMap.put("alternatePhoneNumber", alternatePhoneNumber);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String teacherClass;
+                /* Adding Getter and Setter methods */
+                public String getTeacherClass(){
+                    return teacherClass;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setTeacherClass(String teacherClass){
+                    this.teacherClass = teacherClass;
+                    //Update hashMap value..
+                    hashMap.put("teacherClass", teacherClass);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String teacherSection;
+                /* Adding Getter and Setter methods */
+                public String getTeacherSection(){
+                    return teacherSection;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setTeacherSection(String teacherSection){
+                    this.teacherSection = teacherSection;
+                    //Update hashMap value..
+                    hashMap.put("teacherSection", teacherSection);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String registrationId;
+                /* Adding Getter and Setter methods */
+                public String getRegistrationId(){
+                    return registrationId;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setRegistrationId(String registrationId){
+                    this.registrationId = registrationId;
+                    //Update hashMap value..
+                    hashMap.put("registrationId", registrationId);
+                }
 
             
             
@@ -811,6 +888,7 @@ public class Teacher extends User {
                             
                          
                             
+                        
                         
                         
                         
@@ -1405,6 +1483,7 @@ public class Teacher extends User {
                         
                         
                         
+                        
                     
 
                 
@@ -1438,7 +1517,9 @@ public class Teacher extends User {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return events;
                     }
 
@@ -2134,6 +2215,7 @@ public class Teacher extends User {
                         
                         
                         
+                        
                     
 
                 
@@ -2170,7 +2252,9 @@ public class Teacher extends User {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return notices;
                     }
 
@@ -2866,6 +2950,7 @@ public class Teacher extends User {
                         
                         
                         
+                        
                     
 
                 
@@ -2902,7 +2987,9 @@ public class Teacher extends User {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return teacherMessages;
                     }
 
@@ -3598,6 +3685,7 @@ public class Teacher extends User {
                         
                         
                         
+                        
                     
 
                 
@@ -3634,7 +3722,9 @@ public class Teacher extends User {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return questions;
                     }
 
@@ -4330,6 +4420,7 @@ public class Teacher extends User {
                         
                         
                         
+                        
                     
 
                 
@@ -4366,7 +4457,9 @@ public class Teacher extends User {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return answers;
                     }
 
@@ -5062,6 +5155,7 @@ public class Teacher extends User {
                         
                         
                         
+                        
                     
 
                 
@@ -5098,7 +5192,9 @@ public class Teacher extends User {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return blogs;
                     }
 
@@ -5794,6 +5890,7 @@ public class Teacher extends User {
                         
                         
                         
+                        
                     
 
                 
@@ -5830,7 +5927,9 @@ public class Teacher extends User {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return homeWork;
                     }
 
@@ -6526,6 +6625,7 @@ public class Teacher extends User {
                         
                         
                         
+                        
                     
 
                 
@@ -6562,7 +6662,9 @@ public class Teacher extends User {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return customEvents;
                     }
 
@@ -7258,6 +7360,7 @@ public class Teacher extends User {
                         
                         
                         
+                        
                     
 
                 
@@ -7294,7 +7397,9 @@ public class Teacher extends User {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return calendars;
                     }
 
@@ -7990,6 +8095,7 @@ public class Teacher extends User {
                         
                         
                         
+                        
                     
 
                 
@@ -8026,7 +8132,9 @@ public class Teacher extends User {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return attendances;
                     }
 
@@ -8722,6 +8830,7 @@ public class Teacher extends User {
                         
                         
                         
+                        
                     
 
                 
@@ -8758,7 +8867,9 @@ public class Teacher extends User {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return teacherOthers;
                     }
 
@@ -9454,6 +9565,7 @@ public class Teacher extends User {
                         
                         
                         
+                        
                     
 
                 
@@ -9490,7 +9602,9 @@ public class Teacher extends User {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return reminders;
                     }
 
@@ -10145,6 +10259,7 @@ public class Teacher extends User {
                             
                          
                             
+                        
                         
                         
                         

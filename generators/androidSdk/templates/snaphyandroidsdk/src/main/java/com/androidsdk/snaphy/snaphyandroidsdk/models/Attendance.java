@@ -1234,7 +1234,9 @@ public class Attendance extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return studentAttendances;
                     }
 

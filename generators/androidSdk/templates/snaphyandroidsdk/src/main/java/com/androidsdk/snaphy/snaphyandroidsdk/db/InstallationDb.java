@@ -175,7 +175,7 @@ public class InstallationDb{
 
                                                 values.put("`modified`", modifiedData);
                                 
-                                  String subscriptionsData;
+                                  String subscriptionsData = "";
                   if(modelData.getSubscriptions() != null){
                     subscriptionsData = new Gson().toJson(modelData.getSubscriptions(), DataList.class);
                   }

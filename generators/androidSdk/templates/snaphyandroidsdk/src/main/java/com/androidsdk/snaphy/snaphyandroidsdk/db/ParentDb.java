@@ -83,17 +83,17 @@ public class ParentDb{
                         }
                                                 values.put("`updated`", updatedData);
                                 
-                                                            String firstNameData = "";
-                        if(modelData.getFirstName() != null){
-                          firstNameData = modelData.getFirstName().toString();
+                                                            String nameData = "";
+                        if(modelData.getName() != null){
+                          nameData = modelData.getName().toString();
                         }
-                                                values.put("`firstName`", firstNameData);
+                                                values.put("`name`", nameData);
                                 
-                                                            String lastNameData = "";
-                        if(modelData.getLastName() != null){
-                          lastNameData = modelData.getLastName().toString();
+                                                            String usernameData = "";
+                        if(modelData.getUsername() != null){
+                          usernameData = modelData.getUsername().toString();
                         }
-                                                values.put("`lastName`", lastNameData);
+                                                values.put("`username`", usernameData);
                                 
                                                             String passwordData = "";
                         if(modelData.getPassword() != null){
@@ -107,11 +107,29 @@ public class ParentDb{
                         }
                                                 values.put("`email`", emailData);
                                 
+                                                            String addressData = "";
+                        if(modelData.getAddress() != null){
+                          addressData = modelData.getAddress().toString();
+                        }
+                                                values.put("`address`", addressData);
+                                
                                                             String phoneNumberData = "";
                         if(modelData.getPhoneNumber() != null){
                           phoneNumberData = modelData.getPhoneNumber().toString();
                         }
                                                 values.put("`phoneNumber`", phoneNumberData);
+                                
+                                                            String occupationData = "";
+                        if(modelData.getOccupation() != null){
+                          occupationData = modelData.getOccupation().toString();
+                        }
+                                                values.put("`occupation`", occupationData);
+                                
+                                                            String registrationIdData = "";
+                        if(modelData.getRegistrationId() != null){
+                          registrationIdData = modelData.getRegistrationId().toString();
+                        }
+                                                values.put("`registrationId`", registrationIdData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String realmData = "";
@@ -126,20 +144,6 @@ public class ParentDb{
                         }
 
                                                 values.put("`realm`", realmData);
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String usernameData = "";
-                        try {
-                              Method method = modelData.getClass().getMethod("getUsername");
-                              if(method.invoke(modelData) != null){
-                                //usernameData = modelData.getUsername().toString();
-                                usernameData = (String) method.invoke(modelData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                                values.put("`username`", usernameData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String credentialsData = "";
@@ -367,22 +371,22 @@ public class ParentDb{
                         }
                                                 
                                 
-                                                            String firstNameData = "";
+                                                            String nameData = "";
                         if(cursor.getString(2) != null){
-                          firstNameData = cursor.getString(2);
-                          if(firstNameData != null){
-                            firstNameData = (String)firstNameData;
-                            hashMap.put("firstName", firstNameData);
+                          nameData = cursor.getString(2);
+                          if(nameData != null){
+                            nameData = (String)nameData;
+                            hashMap.put("name", nameData);
                           }
                         }
                                                 
                                 
-                                                            String lastNameData = "";
+                                                            String usernameData = "";
                         if(cursor.getString(3) != null){
-                          lastNameData = cursor.getString(3);
-                          if(lastNameData != null){
-                            lastNameData = (String)lastNameData;
-                            hashMap.put("lastName", lastNameData);
+                          usernameData = cursor.getString(3);
+                          if(usernameData != null){
+                            usernameData = (String)usernameData;
+                            hashMap.put("username", usernameData);
                           }
                         }
                                                 
@@ -407,9 +411,19 @@ public class ParentDb{
                         }
                                                 
                                 
-                                                            String phoneNumberData = "";
+                                                            String addressData = "";
                         if(cursor.getString(6) != null){
-                          phoneNumberData = cursor.getString(6);
+                          addressData = cursor.getString(6);
+                          if(addressData != null){
+                            addressData = (String)addressData;
+                            hashMap.put("address", addressData);
+                          }
+                        }
+                                                
+                                
+                                                            String phoneNumberData = "";
+                        if(cursor.getString(7) != null){
+                          phoneNumberData = cursor.getString(7);
                           if(phoneNumberData != null){
                             phoneNumberData = (String)phoneNumberData;
                             hashMap.put("phoneNumber", phoneNumberData);
@@ -417,9 +431,29 @@ public class ParentDb{
                         }
                                                 
                                 
+                                                            String occupationData = "";
+                        if(cursor.getString(8) != null){
+                          occupationData = cursor.getString(8);
+                          if(occupationData != null){
+                            occupationData = (String)occupationData;
+                            hashMap.put("occupation", occupationData);
+                          }
+                        }
+                                                
+                                
+                                                            String registrationIdData = "";
+                        if(cursor.getString(9) != null){
+                          registrationIdData = cursor.getString(9);
+                          if(registrationIdData != null){
+                            registrationIdData = (String)registrationIdData;
+                            hashMap.put("registrationId", registrationIdData);
+                          }
+                        }
+                                                
+                                
                                                             String realmData = "";
-                        if(cursor.getString(7) != null){
-                          realmData = cursor.getString(7);
+                        if(cursor.getString(10) != null){
+                          realmData = cursor.getString(10);
                           if(realmData != null){
                             realmData = realmData.toString();
                             hashMap.put("realm", realmData);
@@ -427,19 +461,9 @@ public class ParentDb{
                         }
                                                 
                                 
-                                                            String usernameData = "";
-                        if(cursor.getString(8) != null){
-                          usernameData = cursor.getString(8);
-                          if(usernameData != null){
-                            usernameData = usernameData.toString();
-                            hashMap.put("username", usernameData);
-                          }
-                        }
-                                                
-                                
                                                             String credentialsData = "";
-                        if(cursor.getString(9) != null){
-                          credentialsData = cursor.getString(9);
+                        if(cursor.getString(11) != null){
+                          credentialsData = cursor.getString(11);
                           if(credentialsData != null){
                             credentialsData = credentialsData.toString();
                             hashMap.put("credentials", credentialsData);
@@ -448,8 +472,8 @@ public class ParentDb{
                                                 
                                 
                                                             String challengesData = "";
-                        if(cursor.getString(10) != null){
-                          challengesData = cursor.getString(10);
+                        if(cursor.getString(12) != null){
+                          challengesData = cursor.getString(12);
                           if(challengesData != null){
                             challengesData = challengesData.toString();
                             hashMap.put("challenges", challengesData);
@@ -458,8 +482,8 @@ public class ParentDb{
                                                 
                                 
                                                             String emailVerifiedData = "";
-                        if(cursor.getString(11) != null){
-                          emailVerifiedData = cursor.getString(11);
+                        if(cursor.getString(13) != null){
+                          emailVerifiedData = cursor.getString(13);
                           if(emailVerifiedData != null){
                             emailVerifiedData = emailVerifiedData.toString();
                             hashMap.put("emailVerified", emailVerifiedData);
@@ -468,8 +492,8 @@ public class ParentDb{
                                                 
                                 
                                                             String verificationTokenData = "";
-                        if(cursor.getString(12) != null){
-                          verificationTokenData = cursor.getString(12);
+                        if(cursor.getString(14) != null){
+                          verificationTokenData = cursor.getString(14);
                           if(verificationTokenData != null){
                             verificationTokenData = verificationTokenData.toString();
                             hashMap.put("verificationToken", verificationTokenData);
@@ -478,8 +502,8 @@ public class ParentDb{
                                                 
                                 
                                                             String statusData = "";
-                        if(cursor.getString(13) != null){
-                          statusData = cursor.getString(13);
+                        if(cursor.getString(15) != null){
+                          statusData = cursor.getString(15);
                           if(statusData != null){
                             statusData = statusData.toString();
                             hashMap.put("status", statusData);
@@ -488,8 +512,8 @@ public class ParentDb{
                                                 
                                 
                                                             String createdData = "";
-                        if(cursor.getString(14) != null){
-                          createdData = cursor.getString(14);
+                        if(cursor.getString(16) != null){
+                          createdData = cursor.getString(16);
                           if(createdData != null){
                             createdData = createdData.toString();
                             hashMap.put("created", createdData);
@@ -498,8 +522,8 @@ public class ParentDb{
                                                 
                                 
                                                             String lastUpdatedData = "";
-                        if(cursor.getString(15) != null){
-                          lastUpdatedData = cursor.getString(15);
+                        if(cursor.getString(17) != null){
+                          lastUpdatedData = cursor.getString(17);
                           if(lastUpdatedData != null){
                             lastUpdatedData = lastUpdatedData.toString();
                             hashMap.put("lastUpdated", lastUpdatedData);
@@ -508,8 +532,8 @@ public class ParentDb{
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(16) != null){
-                          idData = cursor.getString(16);
+                        if(cursor.getString(18) != null){
+                          idData = cursor.getString(18);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -518,8 +542,8 @@ public class ParentDb{
                                                 
                                 
                                                             String schoolIdData = "";
-                        if(cursor.getString(17) != null){
-                          schoolIdData = cursor.getString(17);
+                        if(cursor.getString(19) != null){
+                          schoolIdData = cursor.getString(19);
                           if(schoolIdData != null){
                             schoolIdData = schoolIdData.toString();
                             hashMap.put("schoolId", schoolIdData);

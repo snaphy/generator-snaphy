@@ -83,17 +83,17 @@ public class AdminDb{
                         }
                                                 values.put("`updated`", updatedData);
                                 
-                                                            String firstNameData = "";
-                        if(modelData.getFirstName() != null){
-                          firstNameData = modelData.getFirstName().toString();
+                                                            String nameData = "";
+                        if(modelData.getName() != null){
+                          nameData = modelData.getName().toString();
                         }
-                                                values.put("`firstName`", firstNameData);
+                                                values.put("`name`", nameData);
                                 
-                                                            String lastNameData = "";
-                        if(modelData.getLastName() != null){
-                          lastNameData = modelData.getLastName().toString();
+                                                            String usernameData = "";
+                        if(modelData.getUsername() != null){
+                          usernameData = modelData.getUsername().toString();
                         }
-                                                values.put("`lastName`", lastNameData);
+                                                values.put("`username`", usernameData);
                                 
                                                             String passwordData = "";
                         if(modelData.getPassword() != null){
@@ -113,6 +113,12 @@ public class AdminDb{
                         }
                                                 values.put("`email`", emailData);
                                 
+                                                            String registrationIdData = "";
+                        if(modelData.getRegistrationId() != null){
+                          registrationIdData = modelData.getRegistrationId().toString();
+                        }
+                                                values.put("`registrationId`", registrationIdData);
+                                
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String realmData = "";
                         try {
@@ -126,20 +132,6 @@ public class AdminDb{
                         }
 
                                                 values.put("`realm`", realmData);
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String usernameData = "";
-                        try {
-                              Method method = modelData.getClass().getMethod("getUsername");
-                              if(method.invoke(modelData) != null){
-                                //usernameData = modelData.getUsername().toString();
-                                usernameData = (String) method.invoke(modelData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                                values.put("`username`", usernameData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String credentialsData = "";
@@ -409,22 +401,22 @@ public class AdminDb{
                         }
                                                 
                                 
-                                                            String firstNameData = "";
+                                                            String nameData = "";
                         if(cursor.getString(2) != null){
-                          firstNameData = cursor.getString(2);
-                          if(firstNameData != null){
-                            firstNameData = (String)firstNameData;
-                            hashMap.put("firstName", firstNameData);
+                          nameData = cursor.getString(2);
+                          if(nameData != null){
+                            nameData = (String)nameData;
+                            hashMap.put("name", nameData);
                           }
                         }
                                                 
                                 
-                                                            String lastNameData = "";
+                                                            String usernameData = "";
                         if(cursor.getString(3) != null){
-                          lastNameData = cursor.getString(3);
-                          if(lastNameData != null){
-                            lastNameData = (String)lastNameData;
-                            hashMap.put("lastName", lastNameData);
+                          usernameData = cursor.getString(3);
+                          if(usernameData != null){
+                            usernameData = (String)usernameData;
+                            hashMap.put("username", usernameData);
                           }
                         }
                                                 
@@ -459,22 +451,22 @@ public class AdminDb{
                         }
                                                 
                                 
-                                                            String realmData = "";
+                                                            String registrationIdData = "";
                         if(cursor.getString(7) != null){
-                          realmData = cursor.getString(7);
-                          if(realmData != null){
-                            realmData = realmData.toString();
-                            hashMap.put("realm", realmData);
+                          registrationIdData = cursor.getString(7);
+                          if(registrationIdData != null){
+                            registrationIdData = (String)registrationIdData;
+                            hashMap.put("registrationId", registrationIdData);
                           }
                         }
                                                 
                                 
-                                                            String usernameData = "";
+                                                            String realmData = "";
                         if(cursor.getString(8) != null){
-                          usernameData = cursor.getString(8);
-                          if(usernameData != null){
-                            usernameData = usernameData.toString();
-                            hashMap.put("username", usernameData);
+                          realmData = cursor.getString(8);
+                          if(realmData != null){
+                            realmData = realmData.toString();
+                            hashMap.put("realm", realmData);
                           }
                         }
                                                 

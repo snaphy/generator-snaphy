@@ -1003,6 +1003,8 @@ public class School extends Model {
                         
                         
                         
+                        
+                        
                     
 
                 
@@ -1036,7 +1038,9 @@ public class School extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return teachers;
                     }
 
@@ -1768,6 +1772,8 @@ public class School extends Model {
                         
                         
                         
+                        
+                        
                     
 
                 
@@ -1804,7 +1810,9 @@ public class School extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return students;
                     }
 
@@ -2536,6 +2544,8 @@ public class School extends Model {
                         
                         
                         
+                        
+                        
                     
 
                 
@@ -2572,7 +2582,9 @@ public class School extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return parents;
                     }
 
@@ -3304,6 +3316,8 @@ public class School extends Model {
                         
                         
                         
+                        
+                        
                     
 
                 
@@ -3340,7 +3354,9 @@ public class School extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return guests;
                     }
 
@@ -4072,6 +4088,8 @@ public class School extends Model {
                         
                         
                         
+                        
+                        
                     
 
                 
@@ -4108,7 +4126,9 @@ public class School extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return ainakClassAndSections;
                     }
 
@@ -4840,6 +4860,8 @@ public class School extends Model {
                         
                         
                         
+                        
+                        
                     
 
                 
@@ -4876,7 +4898,9 @@ public class School extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return events;
                     }
 
@@ -5608,6 +5632,8 @@ public class School extends Model {
                         
                         
                         
+                        
+                        
                     
 
                 
@@ -5644,7 +5670,9 @@ public class School extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return notices;
                     }
 
@@ -6376,6 +6404,8 @@ public class School extends Model {
                         
                         
                         
+                        
+                        
                     
 
                 
@@ -6412,7 +6442,9 @@ public class School extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return messages;
                     }
 
@@ -7144,6 +7176,8 @@ public class School extends Model {
                         
                         
                         
+                        
+                        
                     
 
                 
@@ -7180,7 +7214,9 @@ public class School extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return questions;
                     }
 
@@ -7912,6 +7948,8 @@ public class School extends Model {
                         
                         
                         
+                        
+                        
                     
 
                 
@@ -7948,7 +7986,9 @@ public class School extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return answers;
                     }
 
@@ -8680,6 +8720,8 @@ public class School extends Model {
                         
                         
                         
+                        
+                        
                     
 
                 
@@ -8716,7 +8758,9 @@ public class School extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return blogs;
                     }
 
@@ -9448,6 +9492,8 @@ public class School extends Model {
                         
                         
                         
+                        
+                        
                     
 
                 
@@ -9484,7 +9530,9 @@ public class School extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return homeWork;
                     }
 
@@ -10216,6 +10264,8 @@ public class School extends Model {
                         
                         
                         
+                        
+                        
                     
 
                 
@@ -10252,7 +10302,9 @@ public class School extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return customEvents;
                     }
 
@@ -10984,6 +11036,8 @@ public class School extends Model {
                         
                         
                         
+                        
+                        
                     
 
                 
@@ -11020,7 +11074,9 @@ public class School extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return reminders;
                     }
 
@@ -11752,6 +11808,8 @@ public class School extends Model {
                         
                         
                         
+                        
+                        
                     
 
                 
@@ -11788,7 +11846,9 @@ public class School extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return calendars;
                     }
 
@@ -12520,6 +12580,8 @@ public class School extends Model {
                         
                         
                         
+                        
+                        
                     
 
                 
@@ -12556,7 +12618,9 @@ public class School extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return attendances;
                     }
 
@@ -13251,6 +13315,8 @@ public class School extends Model {
                             
                          
                             
+                        
+                        
                         
                         
                         

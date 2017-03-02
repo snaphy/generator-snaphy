@@ -59,6 +59,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.OtherRepository;
     
 
     
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.TeacherRepository;
+            
+
+        
+    
+
+    
             import com.androidsdk.snaphy.snaphyandroidsdk.repository.TeacherOtherRepository;
             
 
@@ -243,6 +250,13 @@ public class Other extends Model {
                     //Update hashMap value..
                     hashMap.put("to", to);
                 }
+
+            
+            
+        
+    
+        
+            
 
             
             
@@ -551,6 +565,8 @@ public class Other extends Model {
                             
                          
                             
+                         
+                            
                         
                         
                         
@@ -762,6 +778,8 @@ public class Other extends Model {
                                         });
                                     } //method def ends here.
                                  
+                            
+                         
                             
                          
                             
@@ -1039,6 +1057,8 @@ public class Other extends Model {
                             
                          
                             
+                         
+                            
                         
                         
                         
@@ -1283,6 +1303,254 @@ public class Other extends Model {
                             
                          
                             
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                 
+                 
+             
+          
+    
+        
+        
+                
+                    //Define belongsTo relation method here..
+                    private transient Teacher  teacher ;
+                    private String teacherId;
+
+                    public String getTeacherId(){
+                         return teacherId;
+                    }
+
+                    public void setTeacherId(Object teacherId){
+                        if(teacherId != null){
+                          this.teacherId = teacherId.toString();
+                        }
+                    }
+
+                    public Teacher getTeacher() {
+			try{
+				//Adding database method for fetching from relation if not present..
+		                if(teacher == null){
+		                  OtherRepository otherRepository = (OtherRepository) getRepository();
+
+		                  RestAdapter restAdapter = otherRepository.getRestAdapter();
+		                  if(restAdapter != null){
+		                    //Fetch locally from db
+		                    teacher = getTeacher__db(restAdapter);
+		                  }
+		                }
+			}catch(Exception e){
+				//Ignore
+			}
+
+                        return teacher;
+                    }
+
+                    public void setTeacher(Teacher teacher) {
+                        this.teacher = teacher;
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setTeacher(Map<String, Object> teacher) {
+                        //First create a dummy Repo class object for customer.
+                        TeacherRepository teacherRepository = new TeacherRepository();
+                        Teacher teacher1 = teacherRepository.createObject(teacher);
+                        setTeacher(teacher1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setTeacher(HashMap<String, Object> teacher) {
+                        //First create a dummy Repo class object for customer.
+                        TeacherRepository teacherRepository = new TeacherRepository();
+                        Teacher teacher1 = teacherRepository.createObject(teacher);
+                        setTeacher(teacher1);
+                    }
+
+                    //Adding relation method..
+                    public void addRelation(Teacher teacher) {
+                        that.setTeacher(teacher);
+                    }
+
+
+                    //Fetch related data from local database if present a teacherId identifier as property for belongsTo
+                    public Teacher getTeacher__db(RestAdapter restAdapter){
+                      if(teacherId != null){
+                        TeacherRepository teacherRepository = restAdapter.createRepository(TeacherRepository.class);
+			  try{
+				OtherRepository lowercaseFirstLetterRepository = (OtherRepository) getRepository();
+		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+		                        Context context = lowercaseFirstLetterRepository.getContext();
+		                        if(teacherRepository.getDb() == null ){
+		                            teacherRepository.addStorage(context);
+		                        }
+
+		                        if(context != null && teacherRepository.getDb() != null){
+		                            teacherRepository.addStorage(context);
+		                            Teacher teacher = (Teacher) teacherRepository.getDb().get__db(teacherId);
+		                            return teacher;
+		                        }else{
+		                            return null;
+		                        }
+		                  }else{
+		                    return null;
+		                  }
+			  }catch(Exception e){
+				//Ignore exception..
+				return null;
+			  }
+
+                        }else{
+                          return null;
+                      }
+                    }
+                
+
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__teacher( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Teacher> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final OtherRepository  otherRepo = restAdapter.createRepository(OtherRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        otherRepo.get__teacher( (String)that.getId(), refresh,  new ObjectCallback<Teacher> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Teacher object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
                         
                         
@@ -1353,7 +1621,9 @@ public class Other extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return teacherOthers;
                     }
 
@@ -1464,6 +1734,8 @@ public class Other extends Model {
                     
 
                      
+                            
+                         
                             
                          
                             
@@ -1925,7 +2197,9 @@ public class Other extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return studentOthers;
                     }
 
@@ -2036,6 +2310,8 @@ public class Other extends Model {
                     
 
                      
+                            
+                         
                             
                          
                             

@@ -185,17 +185,17 @@ public class Student extends User {
             
 
             
-                private String firstName;
+                private String name;
                 /* Adding Getter and Setter methods */
-                public String getFirstName(){
-                    return firstName;
+                public String getName(){
+                    return name;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setFirstName(String firstName){
-                    this.firstName = firstName;
+                public void setName(String name){
+                    this.name = name;
                     //Update hashMap value..
-                    hashMap.put("firstName", firstName);
+                    hashMap.put("name", name);
                 }
 
             
@@ -206,17 +206,17 @@ public class Student extends User {
             
 
             
-                private String lastName;
+                private String username;
                 /* Adding Getter and Setter methods */
-                public String getLastName(){
-                    return lastName;
+                public String getUsername(){
+                    return username;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setLastName(String lastName){
-                    this.lastName = lastName;
+                public void setUsername(String username){
+                    this.username = username;
                     //Update hashMap value..
-                    hashMap.put("lastName", lastName);
+                    hashMap.put("username", username);
                 }
 
             
@@ -290,6 +290,27 @@ public class Student extends User {
             
 
             
+                private String address;
+                /* Adding Getter and Setter methods */
+                public String getAddress(){
+                    return address;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setAddress(String address){
+                    this.address = address;
+                    //Update hashMap value..
+                    hashMap.put("address", address);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
                 private String phoneNumber;
                 /* Adding Getter and Setter methods */
                 public String getPhoneNumber(){
@@ -309,6 +330,41 @@ public class Student extends User {
     
         
             
+
+            
+                private String studentOccupation;
+                /* Adding Getter and Setter methods */
+                public String getStudentOccupation(){
+                    return studentOccupation;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setStudentOccupation(String studentOccupation){
+                    this.studentOccupation = studentOccupation;
+                    //Update hashMap value..
+                    hashMap.put("studentOccupation", studentOccupation);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String registrationId;
+                /* Adding Getter and Setter methods */
+                public String getRegistrationId(){
+                    return registrationId;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setRegistrationId(String registrationId){
+                    this.registrationId = registrationId;
+                    //Update hashMap value..
+                    hashMap.put("registrationId", registrationId);
+                }
 
             
             
@@ -1560,7 +1616,9 @@ public class Student extends User {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return questions;
                     }
 
@@ -2243,7 +2301,9 @@ public class Student extends User {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return answers;
                     }
 
@@ -2926,7 +2986,9 @@ public class Student extends User {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return blogs;
                     }
 
@@ -3609,7 +3671,9 @@ public class Student extends User {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return reminders;
                     }
 
@@ -4292,7 +4356,9 @@ public class Student extends User {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return studentMessages;
                     }
 
@@ -4975,7 +5041,9 @@ public class Student extends User {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return studentAttendances;
                     }
 
@@ -5658,7 +5726,9 @@ public class Student extends User {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return studentHomeworks;
                     }
 
@@ -6341,7 +6411,9 @@ public class Student extends User {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return studentOthers;
                     }
 

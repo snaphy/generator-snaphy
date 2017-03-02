@@ -512,7 +512,9 @@ public class Calendar extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return reminders;
                     }
 
@@ -1087,7 +1089,9 @@ public class Calendar extends Model {
 
                                  //lowercaseFirstLetter(modelName)
                             }
-                          }catch(Exception e){//Ignore}
+                          }catch(Exception e){
+                                //Ignore
+                          }
                                                 return others;
                     }
 

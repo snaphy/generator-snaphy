@@ -77,6 +77,12 @@ public class StudentOtherDb{
                         }
                                                 values.put("`added`", addedData);
                                 
+                                                            String dateData = "";
+                        if(modelData.getDate() != null){
+                          dateData = modelData.getDate().toString();
+                        }
+                                                values.put("`date`", dateData);
+                                
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
@@ -209,9 +215,19 @@ public class StudentOtherDb{
                         }
                                                 
                                 
-                                                            String idData = "";
+                                                            String dateData = "";
                         if(cursor.getString(1) != null){
-                          idData = cursor.getString(1);
+                          dateData = cursor.getString(1);
+                          if(dateData != null){
+                            dateData = (String)dateData;
+                            hashMap.put("date", dateData);
+                          }
+                        }
+                                                
+                                
+                                                            String idData = "";
+                        if(cursor.getString(2) != null){
+                          idData = cursor.getString(2);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -220,8 +236,8 @@ public class StudentOtherDb{
                                                 
                                 
                                                             String studentIdData = "";
-                        if(cursor.getString(2) != null){
-                          studentIdData = cursor.getString(2);
+                        if(cursor.getString(3) != null){
+                          studentIdData = cursor.getString(3);
                           if(studentIdData != null){
                             studentIdData = studentIdData.toString();
                             hashMap.put("studentId", studentIdData);
@@ -230,8 +246,8 @@ public class StudentOtherDb{
                                                 
                                 
                                                             String otherIdData = "";
-                        if(cursor.getString(3) != null){
-                          otherIdData = cursor.getString(3);
+                        if(cursor.getString(4) != null){
+                          otherIdData = cursor.getString(4);
                           if(otherIdData != null){
                             otherIdData = otherIdData.toString();
                             hashMap.put("otherId", otherIdData);

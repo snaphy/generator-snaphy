@@ -1407,6 +1407,15 @@ public class SchoolRepository extends ModelRepository<School> {
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/changeUserPassword", "POST"), "School.changeUserPassword");
+    
+
+    
+    
+
+    
+
+    
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "School.getSchema");
     
 
@@ -1438,6 +1447,9 @@ public class SchoolRepository extends ModelRepository<School> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "School.getModelRelationSchema");
+    
+
+    
     
 
     
@@ -10413,6 +10425,61 @@ public class SchoolRepository extends ModelRepository<School> {
         
     
         
+            //Method changeUserPassword definition
+            public void changeUserPassword(  String ownerType,  String ownerId,  String newPassword, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("ownerType", ownerType);
+                
+                        hashMapObject.put("ownerId", ownerId);
+                
+                        hashMapObject.put("newPassword", newPassword);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("changeUserPassword", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method changeUserPassword definition ends here..
+
+            
+
+        
+    
+        
             //Method getSchema definition
             public void getSchema( final ObjectCallback<JSONObject>  callback ){
 
@@ -10608,6 +10675,8 @@ public class SchoolRepository extends ModelRepository<School> {
 
             
 
+        
+    
         
     
         

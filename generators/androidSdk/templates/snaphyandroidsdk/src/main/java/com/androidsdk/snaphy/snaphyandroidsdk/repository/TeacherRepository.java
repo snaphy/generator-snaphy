@@ -1417,6 +1417,9 @@ public class TeacherRepository extends UserRepository<Teacher> {
 
     
     
+
+    
+    
     return contract;
     }
 
@@ -9188,6 +9191,8 @@ public class TeacherRepository extends UserRepository<Teacher> {
 
             
 
+        
+    
         
     
         

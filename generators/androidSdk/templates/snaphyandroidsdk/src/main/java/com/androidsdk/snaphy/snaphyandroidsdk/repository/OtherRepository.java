@@ -76,6 +76,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.OtherDb;
     
 
     
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Teacher;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.TeacherRepository;
+            
+        
+    
+
+    
             import com.androidsdk.snaphy.snaphyandroidsdk.models.TeacherOther;
             import com.androidsdk.snaphy.snaphyandroidsdk.repository.TeacherOtherRepository;
             
@@ -203,6 +210,15 @@ public class OtherRepository extends ModelRepository<Other> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:otherId/admin", "GET"), "Other.prototype.__get__admin");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:otherId/teacher", "GET"), "Other.prototype.__get__teacher");
     
 
     
@@ -893,6 +909,91 @@ public class OtherRepository extends ModelRepository<Other> {
                 
 
             }//Method get__admin definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__teacher definition
+            public void get__teacher(  String otherId,  Boolean refresh, final ObjectCallback<Teacher> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("otherId", otherId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__teacher", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    TeacherRepository teacherRepo = getRestAdapter().createRepository(TeacherRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = teacherRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(teacherRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //teacherRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Teacher teacher = teacherRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = teacher.getClass().getMethod("save__db");
+                                                    method.invoke(teacher);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(teacher);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__teacher definition ends here..
 
             
 

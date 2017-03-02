@@ -182,6 +182,20 @@ public class OtherDb{
                         }
 
                                                 values.put("`adminId`", adminIdData);
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String teacherIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getTeacherId");
+                              if(method.invoke(modelData) != null){
+                                //teacherIdData = modelData.getTeacherId().toString();
+                                teacherIdData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                                values.put("`teacherId`", teacherIdData);
                   
 
         //Add the updated data property value to be 1
@@ -379,6 +393,16 @@ public class OtherDb{
                           if(adminIdData != null){
                             adminIdData = adminIdData.toString();
                             hashMap.put("adminId", adminIdData);
+                          }
+                        }
+                                                
+                                
+                                                            String teacherIdData = "";
+                        if(cursor.getString(12) != null){
+                          teacherIdData = cursor.getString(12);
+                          if(teacherIdData != null){
+                            teacherIdData = teacherIdData.toString();
+                            hashMap.put("teacherId", teacherIdData);
                           }
                         }
                                                 

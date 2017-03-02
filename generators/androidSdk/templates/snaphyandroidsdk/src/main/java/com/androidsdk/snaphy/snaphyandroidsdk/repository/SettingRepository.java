@@ -47,6 +47,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.SettingDb;
 
 //Now import model of related models..
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.School;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.SchoolRepository;
+            
+        
+    
+
 
 
 
@@ -128,6 +135,15 @@ public class SettingRepository extends ModelRepository<Setting> {
 
     public RestContract createContract() {
     RestContract contract = super.createContract();
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:settingId/school", "GET"), "Setting.prototype.__get__school");
+    
+
+    
     
 
     
@@ -290,6 +306,91 @@ public class SettingRepository extends ModelRepository<Setting> {
 
 
 
+    
+        
+            //Method get__school definition
+            public void get__school(  String settingId,  Boolean refresh, final ObjectCallback<School> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("settingId", settingId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__school", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    SchoolRepository schoolRepo = getRestAdapter().createRepository(SchoolRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = schoolRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(schoolRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //schoolRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    School school = schoolRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = school.getClass().getMethod("save__db");
+                                                    method.invoke(school);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(school);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__school definition ends here..
+
+            
+
+        
     
         
             //Method create definition

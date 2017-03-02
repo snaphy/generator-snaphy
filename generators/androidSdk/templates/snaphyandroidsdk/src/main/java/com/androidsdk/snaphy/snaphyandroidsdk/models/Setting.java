@@ -30,6 +30,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.SettingRepository;
 
 //Now import repository of related models..
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.SchoolRepository;
+            
+
+        
+    
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -126,6 +133,34 @@ public class Setting extends Model {
             
 
             
+                private double totalSmsSent;
+                /* Adding Getter and Setter methods */
+                public double getTotalSmsSent(){
+                    return totalSmsSent;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setTotalSmsSent(double totalSmsSent){
+                    this.totalSmsSent = totalSmsSent;
+                    //Update hashMap value..
+                    hashMap.put("totalSmsSent", totalSmsSent);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+            
+        
+    
+        
+            
+
+            
             
         
     
@@ -198,6 +233,197 @@ public class Setting extends Model {
 
 
     //Now adding relations between related models
+    
+        
+        
+                
+                    //Define belongsTo relation method here..
+                    private transient School  school ;
+                    private String schoolId;
+
+                    public String getSchoolId(){
+                         return schoolId;
+                    }
+
+                    public void setSchoolId(Object schoolId){
+                        if(schoolId != null){
+                          this.schoolId = schoolId.toString();
+                        }
+                    }
+
+                    public School getSchool() {
+			try{
+				//Adding database method for fetching from relation if not present..
+		                if(school == null){
+		                  SettingRepository settingRepository = (SettingRepository) getRepository();
+
+		                  RestAdapter restAdapter = settingRepository.getRestAdapter();
+		                  if(restAdapter != null){
+		                    //Fetch locally from db
+		                    school = getSchool__db(restAdapter);
+		                  }
+		                }
+			}catch(Exception e){
+				//Ignore
+			}
+
+                        return school;
+                    }
+
+                    public void setSchool(School school) {
+                        this.school = school;
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setSchool(Map<String, Object> school) {
+                        //First create a dummy Repo class object for customer.
+                        SchoolRepository schoolRepository = new SchoolRepository();
+                        School school1 = schoolRepository.createObject(school);
+                        setSchool(school1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setSchool(HashMap<String, Object> school) {
+                        //First create a dummy Repo class object for customer.
+                        SchoolRepository schoolRepository = new SchoolRepository();
+                        School school1 = schoolRepository.createObject(school);
+                        setSchool(school1);
+                    }
+
+                    //Adding relation method..
+                    public void addRelation(School school) {
+                        that.setSchool(school);
+                    }
+
+
+                    //Fetch related data from local database if present a schoolId identifier as property for belongsTo
+                    public School getSchool__db(RestAdapter restAdapter){
+                      if(schoolId != null){
+                        SchoolRepository schoolRepository = restAdapter.createRepository(SchoolRepository.class);
+			  try{
+				SettingRepository lowercaseFirstLetterRepository = (SettingRepository) getRepository();
+		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+		                        Context context = lowercaseFirstLetterRepository.getContext();
+		                        if(schoolRepository.getDb() == null ){
+		                            schoolRepository.addStorage(context);
+		                        }
+
+		                        if(context != null && schoolRepository.getDb() != null){
+		                            schoolRepository.addStorage(context);
+		                            School school = (School) schoolRepository.getDb().get__db(schoolId);
+		                            return school;
+		                        }else{
+		                            return null;
+		                        }
+		                  }else{
+		                    return null;
+		                  }
+			  }catch(Exception e){
+				//Ignore exception..
+				return null;
+			  }
+
+                        }else{
+                          return null;
+                      }
+                    }
+                
+
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                    
+
+                                    //Write the method here..
+                                    public void get__school( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<School> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final SettingRepository  settingRepo = restAdapter.createRepository(SettingRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        settingRepo.get__school( (String)that.getId(), refresh,  new ObjectCallback<School> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(School object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                 
+                 
+             
+          
       
 
 }

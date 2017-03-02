@@ -95,6 +95,10 @@ public class SettingDb{
                         }
                                                 values.put("`removeAttendance`", removeAttendanceData);
                                 
+                                                            double totalSmsSentData;
+                        totalSmsSentData = (double)modelData.getTotalSmsSent();
+                                                values.put("`totalSmsSent`", totalSmsSentData);
+                                
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
@@ -108,6 +112,20 @@ public class SettingDb{
                         }
 
                                                 values.put("`id`", idData);
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String schoolIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getSchoolId");
+                              if(method.invoke(modelData) != null){
+                                //schoolIdData = modelData.getSchoolId().toString();
+                                schoolIdData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                                values.put("`schoolId`", schoolIdData);
                   
 
         //Add the updated data property value to be 1
@@ -216,12 +234,30 @@ public class SettingDb{
                         }
                                                 
                                 
+                                                            double totalSmsSentData = (double)0;
+                          totalSmsSentData = cursor.getInt(3);
+                          totalSmsSentData = (double)totalSmsSentData;
+                          hashMap.put("totalSmsSent", totalSmsSentData);
+
+
+                                                
+                                
                                                             String idData = "";
-                        if(cursor.getString(3) != null){
-                          idData = cursor.getString(3);
+                        if(cursor.getString(4) != null){
+                          idData = cursor.getString(4);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
+                          }
+                        }
+                                                
+                                
+                                                            String schoolIdData = "";
+                        if(cursor.getString(5) != null){
+                          schoolIdData = cursor.getString(5);
+                          if(schoolIdData != null){
+                            schoolIdData = schoolIdData.toString();
+                            hashMap.put("schoolId", schoolIdData);
                           }
                         }
                                                 

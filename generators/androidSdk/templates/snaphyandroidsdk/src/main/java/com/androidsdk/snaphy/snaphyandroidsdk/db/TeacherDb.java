@@ -83,17 +83,17 @@ public class TeacherDb{
                         }
                                                 values.put("`updated`", updatedData);
                                 
-                                                            String firstNameData = "";
-                        if(modelData.getFirstName() != null){
-                          firstNameData = modelData.getFirstName().toString();
+                                                            String nameData = "";
+                        if(modelData.getName() != null){
+                          nameData = modelData.getName().toString();
                         }
-                                                values.put("`firstName`", firstNameData);
+                                                values.put("`name`", nameData);
                                 
-                                                            String lastNameData = "";
-                        if(modelData.getLastName() != null){
-                          lastNameData = modelData.getLastName().toString();
+                                                            String usernameData = "";
+                        if(modelData.getUsername() != null){
+                          usernameData = modelData.getUsername().toString();
                         }
-                                                values.put("`lastName`", lastNameData);
+                                                values.put("`username`", usernameData);
                                 
                                                             String emailData = "";
                         if(modelData.getEmail() != null){
@@ -113,6 +113,30 @@ public class TeacherDb{
                         }
                                                 values.put("`phoneNumber`", phoneNumberData);
                                 
+                                                            String alternatePhoneNumberData = "";
+                        if(modelData.getAlternatePhoneNumber() != null){
+                          alternatePhoneNumberData = modelData.getAlternatePhoneNumber().toString();
+                        }
+                                                values.put("`alternatePhoneNumber`", alternatePhoneNumberData);
+                                
+                                                            String teacherClassData = "";
+                        if(modelData.getTeacherClass() != null){
+                          teacherClassData = modelData.getTeacherClass().toString();
+                        }
+                                                values.put("`teacherClass`", teacherClassData);
+                                
+                                                            String teacherSectionData = "";
+                        if(modelData.getTeacherSection() != null){
+                          teacherSectionData = modelData.getTeacherSection().toString();
+                        }
+                                                values.put("`teacherSection`", teacherSectionData);
+                                
+                                                            String registrationIdData = "";
+                        if(modelData.getRegistrationId() != null){
+                          registrationIdData = modelData.getRegistrationId().toString();
+                        }
+                                                values.put("`registrationId`", registrationIdData);
+                                
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String realmData = "";
                         try {
@@ -126,20 +150,6 @@ public class TeacherDb{
                         }
 
                                                 values.put("`realm`", realmData);
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String usernameData = "";
-                        try {
-                              Method method = modelData.getClass().getMethod("getUsername");
-                              if(method.invoke(modelData) != null){
-                                //usernameData = modelData.getUsername().toString();
-                                usernameData = (String) method.invoke(modelData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                                values.put("`username`", usernameData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String credentialsData = "";
@@ -367,22 +377,22 @@ public class TeacherDb{
                         }
                                                 
                                 
-                                                            String firstNameData = "";
+                                                            String nameData = "";
                         if(cursor.getString(2) != null){
-                          firstNameData = cursor.getString(2);
-                          if(firstNameData != null){
-                            firstNameData = (String)firstNameData;
-                            hashMap.put("firstName", firstNameData);
+                          nameData = cursor.getString(2);
+                          if(nameData != null){
+                            nameData = (String)nameData;
+                            hashMap.put("name", nameData);
                           }
                         }
                                                 
                                 
-                                                            String lastNameData = "";
+                                                            String usernameData = "";
                         if(cursor.getString(3) != null){
-                          lastNameData = cursor.getString(3);
-                          if(lastNameData != null){
-                            lastNameData = (String)lastNameData;
-                            hashMap.put("lastName", lastNameData);
+                          usernameData = cursor.getString(3);
+                          if(usernameData != null){
+                            usernameData = (String)usernameData;
+                            hashMap.put("username", usernameData);
                           }
                         }
                                                 
@@ -417,9 +427,49 @@ public class TeacherDb{
                         }
                                                 
                                 
-                                                            String realmData = "";
+                                                            String alternatePhoneNumberData = "";
                         if(cursor.getString(7) != null){
-                          realmData = cursor.getString(7);
+                          alternatePhoneNumberData = cursor.getString(7);
+                          if(alternatePhoneNumberData != null){
+                            alternatePhoneNumberData = (String)alternatePhoneNumberData;
+                            hashMap.put("alternatePhoneNumber", alternatePhoneNumberData);
+                          }
+                        }
+                                                
+                                
+                                                            String teacherClassData = "";
+                        if(cursor.getString(8) != null){
+                          teacherClassData = cursor.getString(8);
+                          if(teacherClassData != null){
+                            teacherClassData = (String)teacherClassData;
+                            hashMap.put("teacherClass", teacherClassData);
+                          }
+                        }
+                                                
+                                
+                                                            String teacherSectionData = "";
+                        if(cursor.getString(9) != null){
+                          teacherSectionData = cursor.getString(9);
+                          if(teacherSectionData != null){
+                            teacherSectionData = (String)teacherSectionData;
+                            hashMap.put("teacherSection", teacherSectionData);
+                          }
+                        }
+                                                
+                                
+                                                            String registrationIdData = "";
+                        if(cursor.getString(10) != null){
+                          registrationIdData = cursor.getString(10);
+                          if(registrationIdData != null){
+                            registrationIdData = (String)registrationIdData;
+                            hashMap.put("registrationId", registrationIdData);
+                          }
+                        }
+                                                
+                                
+                                                            String realmData = "";
+                        if(cursor.getString(11) != null){
+                          realmData = cursor.getString(11);
                           if(realmData != null){
                             realmData = realmData.toString();
                             hashMap.put("realm", realmData);
@@ -427,19 +477,9 @@ public class TeacherDb{
                         }
                                                 
                                 
-                                                            String usernameData = "";
-                        if(cursor.getString(8) != null){
-                          usernameData = cursor.getString(8);
-                          if(usernameData != null){
-                            usernameData = usernameData.toString();
-                            hashMap.put("username", usernameData);
-                          }
-                        }
-                                                
-                                
                                                             String credentialsData = "";
-                        if(cursor.getString(9) != null){
-                          credentialsData = cursor.getString(9);
+                        if(cursor.getString(12) != null){
+                          credentialsData = cursor.getString(12);
                           if(credentialsData != null){
                             credentialsData = credentialsData.toString();
                             hashMap.put("credentials", credentialsData);
@@ -448,8 +488,8 @@ public class TeacherDb{
                                                 
                                 
                                                             String challengesData = "";
-                        if(cursor.getString(10) != null){
-                          challengesData = cursor.getString(10);
+                        if(cursor.getString(13) != null){
+                          challengesData = cursor.getString(13);
                           if(challengesData != null){
                             challengesData = challengesData.toString();
                             hashMap.put("challenges", challengesData);
@@ -458,8 +498,8 @@ public class TeacherDb{
                                                 
                                 
                                                             String emailVerifiedData = "";
-                        if(cursor.getString(11) != null){
-                          emailVerifiedData = cursor.getString(11);
+                        if(cursor.getString(14) != null){
+                          emailVerifiedData = cursor.getString(14);
                           if(emailVerifiedData != null){
                             emailVerifiedData = emailVerifiedData.toString();
                             hashMap.put("emailVerified", emailVerifiedData);
@@ -468,8 +508,8 @@ public class TeacherDb{
                                                 
                                 
                                                             String verificationTokenData = "";
-                        if(cursor.getString(12) != null){
-                          verificationTokenData = cursor.getString(12);
+                        if(cursor.getString(15) != null){
+                          verificationTokenData = cursor.getString(15);
                           if(verificationTokenData != null){
                             verificationTokenData = verificationTokenData.toString();
                             hashMap.put("verificationToken", verificationTokenData);
@@ -478,8 +518,8 @@ public class TeacherDb{
                                                 
                                 
                                                             String statusData = "";
-                        if(cursor.getString(13) != null){
-                          statusData = cursor.getString(13);
+                        if(cursor.getString(16) != null){
+                          statusData = cursor.getString(16);
                           if(statusData != null){
                             statusData = statusData.toString();
                             hashMap.put("status", statusData);
@@ -488,8 +528,8 @@ public class TeacherDb{
                                                 
                                 
                                                             String createdData = "";
-                        if(cursor.getString(14) != null){
-                          createdData = cursor.getString(14);
+                        if(cursor.getString(17) != null){
+                          createdData = cursor.getString(17);
                           if(createdData != null){
                             createdData = createdData.toString();
                             hashMap.put("created", createdData);
@@ -498,8 +538,8 @@ public class TeacherDb{
                                                 
                                 
                                                             String lastUpdatedData = "";
-                        if(cursor.getString(15) != null){
-                          lastUpdatedData = cursor.getString(15);
+                        if(cursor.getString(18) != null){
+                          lastUpdatedData = cursor.getString(18);
                           if(lastUpdatedData != null){
                             lastUpdatedData = lastUpdatedData.toString();
                             hashMap.put("lastUpdated", lastUpdatedData);
@@ -508,8 +548,8 @@ public class TeacherDb{
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(16) != null){
-                          idData = cursor.getString(16);
+                        if(cursor.getString(19) != null){
+                          idData = cursor.getString(19);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -518,8 +558,8 @@ public class TeacherDb{
                                                 
                                 
                                                             String schoolIdData = "";
-                        if(cursor.getString(17) != null){
-                          schoolIdData = cursor.getString(17);
+                        if(cursor.getString(20) != null){
+                          schoolIdData = cursor.getString(20);
                           if(schoolIdData != null){
                             schoolIdData = schoolIdData.toString();
                             hashMap.put("schoolId", schoolIdData);
