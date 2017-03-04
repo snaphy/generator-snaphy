@@ -137,6 +137,12 @@ public class TeacherDb{
                         }
                                                 values.put("`registrationId`", registrationIdData);
                                 
+                                                            String addressData = "";
+                        if(modelData.getAddress() != null){
+                          addressData = modelData.getAddress().toString();
+                        }
+                                                values.put("`address`", addressData);
+                                
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String realmData = "";
                         try {
@@ -467,9 +473,19 @@ public class TeacherDb{
                         }
                                                 
                                 
-                                                            String realmData = "";
+                                                            String addressData = "";
                         if(cursor.getString(11) != null){
-                          realmData = cursor.getString(11);
+                          addressData = cursor.getString(11);
+                          if(addressData != null){
+                            addressData = (String)addressData;
+                            hashMap.put("address", addressData);
+                          }
+                        }
+                                                
+                                
+                                                            String realmData = "";
+                        if(cursor.getString(12) != null){
+                          realmData = cursor.getString(12);
                           if(realmData != null){
                             realmData = realmData.toString();
                             hashMap.put("realm", realmData);
@@ -478,8 +494,8 @@ public class TeacherDb{
                                                 
                                 
                                                             String credentialsData = "";
-                        if(cursor.getString(12) != null){
-                          credentialsData = cursor.getString(12);
+                        if(cursor.getString(13) != null){
+                          credentialsData = cursor.getString(13);
                           if(credentialsData != null){
                             credentialsData = credentialsData.toString();
                             hashMap.put("credentials", credentialsData);
@@ -488,8 +504,8 @@ public class TeacherDb{
                                                 
                                 
                                                             String challengesData = "";
-                        if(cursor.getString(13) != null){
-                          challengesData = cursor.getString(13);
+                        if(cursor.getString(14) != null){
+                          challengesData = cursor.getString(14);
                           if(challengesData != null){
                             challengesData = challengesData.toString();
                             hashMap.put("challenges", challengesData);
@@ -498,8 +514,8 @@ public class TeacherDb{
                                                 
                                 
                                                             String emailVerifiedData = "";
-                        if(cursor.getString(14) != null){
-                          emailVerifiedData = cursor.getString(14);
+                        if(cursor.getString(15) != null){
+                          emailVerifiedData = cursor.getString(15);
                           if(emailVerifiedData != null){
                             emailVerifiedData = emailVerifiedData.toString();
                             hashMap.put("emailVerified", emailVerifiedData);
@@ -508,8 +524,8 @@ public class TeacherDb{
                                                 
                                 
                                                             String verificationTokenData = "";
-                        if(cursor.getString(15) != null){
-                          verificationTokenData = cursor.getString(15);
+                        if(cursor.getString(16) != null){
+                          verificationTokenData = cursor.getString(16);
                           if(verificationTokenData != null){
                             verificationTokenData = verificationTokenData.toString();
                             hashMap.put("verificationToken", verificationTokenData);
@@ -518,8 +534,8 @@ public class TeacherDb{
                                                 
                                 
                                                             String statusData = "";
-                        if(cursor.getString(16) != null){
-                          statusData = cursor.getString(16);
+                        if(cursor.getString(17) != null){
+                          statusData = cursor.getString(17);
                           if(statusData != null){
                             statusData = statusData.toString();
                             hashMap.put("status", statusData);
@@ -528,8 +544,8 @@ public class TeacherDb{
                                                 
                                 
                                                             String createdData = "";
-                        if(cursor.getString(17) != null){
-                          createdData = cursor.getString(17);
+                        if(cursor.getString(18) != null){
+                          createdData = cursor.getString(18);
                           if(createdData != null){
                             createdData = createdData.toString();
                             hashMap.put("created", createdData);
@@ -538,8 +554,8 @@ public class TeacherDb{
                                                 
                                 
                                                             String lastUpdatedData = "";
-                        if(cursor.getString(18) != null){
-                          lastUpdatedData = cursor.getString(18);
+                        if(cursor.getString(19) != null){
+                          lastUpdatedData = cursor.getString(19);
                           if(lastUpdatedData != null){
                             lastUpdatedData = lastUpdatedData.toString();
                             hashMap.put("lastUpdated", lastUpdatedData);
@@ -548,8 +564,8 @@ public class TeacherDb{
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(19) != null){
-                          idData = cursor.getString(19);
+                        if(cursor.getString(20) != null){
+                          idData = cursor.getString(20);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -558,8 +574,8 @@ public class TeacherDb{
                                                 
                                 
                                                             String schoolIdData = "";
-                        if(cursor.getString(20) != null){
-                          schoolIdData = cursor.getString(20);
+                        if(cursor.getString(21) != null){
+                          schoolIdData = cursor.getString(21);
                           if(schoolIdData != null){
                             schoolIdData = schoolIdData.toString();
                             hashMap.put("schoolId", schoolIdData);

@@ -292,11 +292,11 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                 else{
                   String json = getSharedPreferences().getString(PROPERTY_CURRENT_USER_ID, null);
                   if(json == null){
-                      return;
+                      return null;
                   }
 
                   if(json.equals("[null]")){
-                      return;
+                      return null;
                   }
 
                   try{

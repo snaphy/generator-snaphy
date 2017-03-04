@@ -220,6 +220,27 @@ public class Admin extends User {
             
 
             
+                private String address;
+                /* Adding Getter and Setter methods */
+                public String getAddress(){
+                    return address;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setAddress(String address){
+                    this.address = address;
+                    //Update hashMap value..
+                    hashMap.put("address", address);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
                 private String username;
                 /* Adding Getter and Setter methods */
                 public String getUsername(){

@@ -2664,7 +2664,7 @@ public class MessageRepository extends ModelRepository<Message> {
     
         
             //Method saveTeacherMessageToServer definition
-            public void saveTeacherMessageToServer(  Object message,  DataList<String> teacherIdList, final ObjectCallback<JSONObject>  callback ){
+            public void saveTeacherMessageToServer(  Object message,  DataList<String> teacherIdList, final ObjectCallback<Message> callback){
 
                 /**
                 Call the onBefore event
@@ -2686,8 +2686,8 @@ public class MessageRepository extends ModelRepository<Message> {
 
                 
                     
-                    invokeStaticMethod("saveTeacherMessageToServer", hashMapObject, new Adapter.JsonObjectCallback() {
                     
+                    invokeStaticMethod("saveTeacherMessageToServer", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -2699,7 +2699,39 @@ public class MessageRepository extends ModelRepository<Message> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                callback.onSuccess(response);
+                                if(response != null){
+                                    MessageRepository messageRepo = getRestAdapter().createRepository(MessageRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = messageRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(messageRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //messageRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Message message = messageRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = message.getClass().getMethod("save__db");
+                                                    method.invoke(message);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(message);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                             //Call the finally method..
                             callback.onFinally();
@@ -2717,7 +2749,7 @@ public class MessageRepository extends ModelRepository<Message> {
     
         
             //Method saveStudentMessageToServer definition
-            public void saveStudentMessageToServer(  Object message,  DataList<String> studentIdList, final ObjectCallback<JSONObject>  callback ){
+            public void saveStudentMessageToServer(  Object message,  DataList<String> studentIdList, final ObjectCallback<Message> callback){
 
                 /**
                 Call the onBefore event
@@ -2739,8 +2771,8 @@ public class MessageRepository extends ModelRepository<Message> {
 
                 
                     
-                    invokeStaticMethod("saveStudentMessageToServer", hashMapObject, new Adapter.JsonObjectCallback() {
                     
+                    invokeStaticMethod("saveStudentMessageToServer", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -2752,7 +2784,39 @@ public class MessageRepository extends ModelRepository<Message> {
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                callback.onSuccess(response);
+                                if(response != null){
+                                    MessageRepository messageRepo = getRestAdapter().createRepository(MessageRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = messageRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(messageRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //messageRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Message message = messageRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = message.getClass().getMethod("save__db");
+                                                    method.invoke(message);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(message);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                             //Call the finally method..
                             callback.onFinally();

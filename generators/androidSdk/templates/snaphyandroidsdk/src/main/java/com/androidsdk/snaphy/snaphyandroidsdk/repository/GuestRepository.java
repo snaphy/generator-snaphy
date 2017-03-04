@@ -138,8 +138,28 @@ public class GuestRepository extends UserRepository<Guest> {
             }
 
             public Object getCurrentUserId(){
-                loadCurrentUserIdIfNotLoaded();
-                return currentUserId;
+                if(currentUserId != null){
+                  return currentUserId;
+                }
+                else{
+                  String json = getSharedPreferences().getString(PROPERTY_CURRENT_USER_ID, null);
+                  if(json == null){
+                      return;
+                  }
+
+                  if(json.equals("[null]")){
+                      return;
+                  }
+
+                  try{
+                      Object id = new JSONArray(json).get(0);
+                      return id;
+                  }catch(JSONException e){
+                      String msg = "Cannot parse user id '" + json + "'";
+                      Log.e("Snaphy", msg, e);
+                  }
+                }
+                return null;
             }
 
             public void setCurrentUserId(Object currentUserId){
@@ -155,29 +175,6 @@ public class GuestRepository extends UserRepository<Guest> {
                 editor.commit();
             }
 
-
-            //Add loadCurrentUserIdIfNotLoaded method..
-            private void loadCurrentUserIdIfNotLoaded(){
-                if(isCurrentUserIdLoaded) return;
-
-                isCurrentUserIdLoaded = true;
-                String json = getSharedPreferences().getString(PROPERTY_CURRENT_USER_ID, null);
-                if(json == null){
-                    return;
-                }
-
-                if(json.equals("[null]")){
-                    return;
-                }
-
-                try{
-                    Object id = new JSONArray(json).get(0);
-                    setCurrentUserId(id);
-                }catch(JSONException e){
-                    String msg = "Cannot parse user id '" + json + "'";
-                    Log.e("Snaphy", msg, e);
-                }
-            }
 
             private SharedPreferences getSharedPreferences() {
                 return getApplicationContext().getSharedPreferences(
