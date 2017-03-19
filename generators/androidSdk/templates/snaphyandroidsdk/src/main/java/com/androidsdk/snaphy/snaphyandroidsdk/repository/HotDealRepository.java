@@ -31,13 +31,8 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 
 
-//Replaced by Custom  Repo methods
-// import com.strongloop.android.loopback.UserRepository;
-import com.strongloop.android.loopback.AccessTokenRepository;
-import com.strongloop.android.loopback.AccessToken;
-import android.content.SharedPreferences;
-import org.json.JSONException;
-import android.content.Context;
+//Replaced by Custom ModelRepository method
+//import com.strongloop.android.loopback.ModelRepository;
 
 
 
@@ -46,28 +41,39 @@ import org.json.JSONObject;
 
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Employee;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.HotDeal;
 import android.content.Context;
-import com.androidsdk.snaphy.snaphyandroidsdk.db.EmployeeDb;
+import com.androidsdk.snaphy.snaphyandroidsdk.db.HotDealDb;
 
 //Now import model of related models..
 
     
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Category;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CategoryRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Brand;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
+            
+        
     
 
 
 
 
 
-public class EmployeeRepository extends UserRepository<Employee> {
+public class HotDealRepository extends ModelRepository<HotDeal> {
 
 
     private Context context;
     private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
     private static String DATABASE_NAME;
 
-    public EmployeeRepository(){
-        super("Employee", null, Employee.class);
+    public HotDealRepository(){
+        super("HotDeal", null, HotDeal.class);
 
     }
 
@@ -78,99 +84,6 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
 
     
-    		//Create public methods..
-    		public Employee cachedCurrentUser;
-            private Object currentUserId;
-            private boolean isCurrentUserIdLoaded;
-
-    		public Employee getCachedCurrentUser(){
-    			return cachedCurrentUser;
-    		}
-
-    		public void setCachedCurrentUser(Employee user){
-    			cachedCurrentUser = user;
-    		}
-
-    		/* public void setCurrentUserId(Object id){
-    			super.setCurrentUserId(id);
-    		} */
-
-            public void findCurrentUser(final ObjectCallback<Employee> callback){
-                //Call the onBefore method..
-                callback.onBefore();
-
-                if(getCurrentUserId() == null){
-                    callback.onSuccess(null);
-                    return;
-                }
-
-                HashMap<String, Object> hashMap = new HashMap<>();
-                this.findById((String)getCurrentUserId(), hashMap, new ObjectCallback<Employee>() {
-                    @Override
-                    public void onSuccess(Employee user){
-                        cachedCurrentUser = user;
-                        callback.onSuccess(user);
-                        //Call the finally method..
-                        callback.onFinally();
-                    }
-
-                    @Override
-                    public void onError(Throwable t){
-                        callback.onError(t);
-                        //Call the finally method..
-                        callback.onFinally();
-                    }
-                });
-            }
-
-            public Object getCurrentUserId(){
-                if(currentUserId != null){
-                  return currentUserId;
-                }
-                else{
-                  String json = getSharedPreferences().getString(PROPERTY_CURRENT_USER_ID, null);
-                  if(json == null){
-                      return null;
-                  }
-
-                  if(json.equals("[null]")){
-                      return null;
-                  }
-
-                  try{
-                      Object id = new JSONArray(json).get(0);
-                      return id;
-                  }catch(JSONException e){
-                      String msg = "Cannot parse user id '" + json + "'";
-                      Log.e("Snaphy", msg, e);
-                  }
-                }
-                return null;
-            }
-
-            public void setCurrentUserId(Object currentUserId){
-                this.currentUserId = currentUserId;
-                cachedCurrentUser = null;
-                saveCurrentUserId();
-            }
-
-            private void saveCurrentUserId(){
-                final SharedPreferences.Editor editor = getSharedPreferences().edit();
-                final String json = new JSONArray().put(getCurrentUserId()).toString();
-                editor.putString(PROPERTY_CURRENT_USER_ID, json);
-                editor.commit();
-            }
-
-
-            private SharedPreferences getSharedPreferences() {
-                return getApplicationContext().getSharedPreferences(
-                    SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
-            }
-
-
-
-
-    
 
 
 
@@ -178,15 +91,15 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
 
 
-    public EmployeeDb getDb() {
-      return employeeDb;
+    public HotDealDb getDb() {
+      return hotDealDb;
     }
 
-    public void setEmployeeDb(EmployeeDb employeeDb) {
-      this.employeeDb = employeeDb;
+    public void setHotDealDb(HotDealDb hotDealDb) {
+      this.hotDealDb = hotDealDb;
     }
 
-    private EmployeeDb employeeDb;
+    private HotDealDb hotDealDb;
 
 
 
@@ -220,7 +133,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
          catch (Exception e){
             Log.e("Snaphy", e.toString());
          }
-         setEmployeeDb(new EmployeeDb(context, DATABASE_NAME, getRestAdapter()));
+         setHotDealDb(new HotDealDb(context, DATABASE_NAME, getRestAdapter()));
          //allow data storage locally..
          persistData(true);
          this.context = context;
@@ -234,7 +147,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "GET"), "Employee.prototype.__findById__accessTokens");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hotDealId/category", "GET"), "HotDeal.prototype.__get__category");
     
 
     
@@ -243,7 +156,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "DELETE"), "Employee.prototype.__destroyById__accessTokens");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hotDealId/brand", "GET"), "HotDeal.prototype.__get__brand");
     
 
     
@@ -252,7 +165,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "PUT"), "Employee.prototype.__updateById__accessTokens");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "HotDeal.create");
     
 
     
@@ -261,7 +174,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "GET"), "Employee.prototype.__get__accessTokens");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "HotDeal.create");
     
 
     
@@ -270,7 +183,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "POST"), "Employee.prototype.__create__accessTokens");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "HotDeal.upsert");
     
 
     
@@ -279,7 +192,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "DELETE"), "Employee.prototype.__delete__accessTokens");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "HotDeal.exists");
     
 
     
@@ -288,7 +201,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/count", "GET"), "Employee.prototype.__count__accessTokens");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "HotDeal.findById");
     
 
     
@@ -297,7 +210,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Employee.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "HotDeal.find");
     
 
     
@@ -306,7 +219,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Employee.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "HotDeal.findOne");
     
 
     
@@ -315,7 +228,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Employee.upsert");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "HotDeal.updateAll");
     
 
     
@@ -324,7 +237,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Employee.exists");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "HotDeal.deleteById");
     
 
     
@@ -333,7 +246,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Employee.findById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "HotDeal.count");
     
 
     
@@ -342,25 +255,19 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Employee.find");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hotDealId", "PUT"), "HotDeal.prototype.updateAttributes");
     
 
     
     
 
     
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Employee.findOne");
-    
-
-    
     
 
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Employee.updateAll");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "HotDeal.getSchema");
     
 
     
@@ -369,16 +276,10 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Employee.deleteById");
-    
-
-    
-    
-
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "HotDeal.getAbsoluteSchema");
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Employee.count");
     
 
     
@@ -387,16 +288,16 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId", "PUT"), "Employee.prototype.updateAttributes");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDeals", "POST"), "HotDeal.getDeals");
     
 
     
     
 
     
-    
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "HotDeal.getDetailSchema");
     
 
     
@@ -405,43 +306,34 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/confirm", "GET"), "Employee.confirm");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "HotDeal.getModelRelationSchema");
     
 
-    
     
-
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/reset", "POST"), "Employee.resetPassword");
     
 
     
-    
-
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/isAdmin", "POST"), "Employee.isAdmin");
     
 
     
     
 
     
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Employee.getSchema");
     
 
     
     
 
     
+    
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Employee.getAbsoluteSchema");
     
 
     
@@ -451,18 +343,18 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
+    
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "Employee.getDetailSchema");
     
 
     
     
 
+    
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "Employee.getModelRelationSchema");
     
 
     
@@ -489,8 +381,8 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
     
         
-            //Method findById__accessTokens definition
-            public void findById__accessTokens(  String employeeId,  String fk, final ObjectCallback<AccessToken> callback){
+            //Method get__category definition
+            public void get__category(  String hotDealId,  Boolean refresh, final ObjectCallback<Category> callback){
 
                 /**
                 Call the onBefore event
@@ -502,9 +394,9 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("hotDealId", hotDealId);
                 
-                        hashMapObject.put("fk", fk);
+                        hashMapObject.put("refresh", refresh);
                 
 
                 
@@ -513,7 +405,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__category", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -526,27 +418,27 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    CategoryRepository categoryRepo = getRestAdapter().createRepository(CategoryRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(accessTokenRepo, context);
+                                            Method method = categoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(categoryRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //accessTokenRepo.addStorage(context);
+                                        //categoryRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AccessToken accessToken = accessTokenRepo.createObject(result);
+                                    Category category = categoryRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = accessToken.getClass().getMethod("save__db");
-                                                    method.invoke(accessToken);
+                                                    Method method = category.getClass().getMethod("save__db");
+                                                    method.invoke(category);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -554,7 +446,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                                       }
 
-                                    callback.onSuccess(accessToken);
+                                    callback.onSuccess(category);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -567,15 +459,15 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                 
 
-            }//Method findById__accessTokens definition ends here..
+            }//Method get__category definition ends here..
 
             
 
         
     
         
-            //Method destroyById__accessTokens definition
-            public void destroyById__accessTokens(  String employeeId,  String fk, final VoidCallback callback){
+            //Method get__brand definition
+            public void get__brand(  String hotDealId,  Boolean refresh, final ObjectCallback<Brand> callback){
 
                 /**
                 Call the onBefore event
@@ -587,59 +479,9 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("hotDealId", hotDealId);
                 
-                        hashMapObject.put("fk", fk);
-                
-
-                
-                    invokeStaticMethod("prototype.__destroyById__accessTokens", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                                callback.onError(t);
-                                //Call the finally method..
-                                callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method destroyById__accessTokens definition ends here..
-
-            
-
-        
-    
-        
-            //Method updateById__accessTokens definition
-            public void updateById__accessTokens(  String employeeId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("employeeId", employeeId);
-                
-                        hashMapObject.put("fk", fk);
-                
-                        hashMapObject.putAll(data);
+                        hashMapObject.put("refresh", refresh);
                 
 
                 
@@ -648,7 +490,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__brand", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -661,27 +503,27 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(accessTokenRepo, context);
+                                            Method method = brandRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //accessTokenRepo.addStorage(context);
+                                        //brandRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AccessToken accessToken = accessTokenRepo.createObject(result);
+                                    Brand brand = brandRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = accessToken.getClass().getMethod("save__db");
-                                                    method.invoke(accessToken);
+                                                    Method method = brand.getClass().getMethod("save__db");
+                                                    method.invoke(brand);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -689,7 +531,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                                       }
 
-                                    callback.onSuccess(accessToken);
+                                    callback.onSuccess(brand);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -702,276 +544,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                 
 
-            }//Method updateById__accessTokens definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__accessTokens definition
-            public void get__accessTokens(  String employeeId,  Map<String,  ? extends Object> filter, final DataListCallback<AccessToken> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("employeeId", employeeId);
-                
-                        hashMapObject.put("filter", filter);
-                
-
-                
-
-
-                
-
-                
-                    invokeStaticMethod("prototype.__get__accessTokens", hashMapObject, new Adapter.JsonArrayCallback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONArray response) {
-                            
-                                if(response != null){
-                                    //Now converting jsonObject to list
-                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<AccessToken> accessTokenList = new DataList<AccessToken>();
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(accessTokenRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-                                    }
-                                    for (Map<String, Object> obj : result) {
-
-                                        AccessToken accessToken = accessTokenRepo.createObject(obj);
-
-                                        //Add to database if persistent storage required..
-                                        if(isSTORE_LOCALLY()){
-                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                            try {
-                                                      Method method = accessToken.getClass().getMethod("save__db");
-                                                      method.invoke(accessToken);
-
-                                            } catch (Exception e) {
-                                                Log.e("Database Error", e.toString());
-                                            }
-                                        }
-
-                                        accessTokenList.add(accessToken);
-                                    }
-                                    callback.onSuccess(accessTokenList);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-            }//Method get__accessTokens definition ends here..
-
-            
-
-        
-    
-        
-            //Method create__accessTokens definition
-            public void create__accessTokens(  String employeeId,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("employeeId", employeeId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__create__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(accessTokenRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //accessTokenRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    AccessToken accessToken = accessTokenRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = accessToken.getClass().getMethod("save__db");
-                                                    method.invoke(accessToken);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(accessToken);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method create__accessTokens definition ends here..
-
-            
-
-        
-    
-        
-            //Method delete__accessTokens definition
-            public void delete__accessTokens(  String employeeId, final VoidCallback callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("employeeId", employeeId);
-                
-
-                
-                    invokeStaticMethod("prototype.__delete__accessTokens", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                                callback.onError(t);
-                                //Call the finally method..
-                                callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method delete__accessTokens definition ends here..
-
-            
-
-        
-    
-        
-            //Method count__accessTokens definition
-            public void count__accessTokens(  String employeeId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("employeeId", employeeId);
-                
-                        hashMapObject.put("where", where);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("prototype.__count__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method count__accessTokens definition ends here..
+            }//Method get__brand definition ends here..
 
             
 
@@ -979,7 +552,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<HotDeal> callback){
 
                 /**
                 Call the onBefore event
@@ -1013,27 +586,27 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(employeeRepo, context);
+                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hotDealRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //employeeRepo.addStorage(context);
+                                        //hotDealRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
+                                    HotDeal hotDeal = hotDealRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = employee.getClass().getMethod("save__db");
-                                                    method.invoke(employee);
+                                                    Method method = hotDeal.getClass().getMethod("save__db");
+                                                    method.invoke(hotDeal);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1041,7 +614,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                                       }
 
-                                    callback.onSuccess(employee);
+                                    callback.onSuccess(hotDeal);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1063,7 +636,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<HotDeal> callback){
 
                 /**
                 Call the onBefore event
@@ -1097,27 +670,27 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(employeeRepo, context);
+                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hotDealRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //employeeRepo.addStorage(context);
+                                        //hotDealRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
+                                    HotDeal hotDeal = hotDealRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = employee.getClass().getMethod("save__db");
-                                                    method.invoke(employee);
+                                                    Method method = hotDeal.getClass().getMethod("save__db");
+                                                    method.invoke(hotDeal);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1125,7 +698,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                                       }
 
-                                    callback.onSuccess(employee);
+                                    callback.onSuccess(hotDeal);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1197,7 +770,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Employee> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<HotDeal> callback){
 
                 /**
                 Call the onBefore event
@@ -1233,27 +806,27 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(employeeRepo, context);
+                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hotDealRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //employeeRepo.addStorage(context);
+                                        //hotDealRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
+                                    HotDeal hotDeal = hotDealRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = employee.getClass().getMethod("save__db");
-                                                    method.invoke(employee);
+                                                    Method method = hotDeal.getClass().getMethod("save__db");
+                                                    method.invoke(hotDeal);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1261,7 +834,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                                       }
 
-                                    callback.onSuccess(employee);
+                                    callback.onSuccess(hotDeal);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1282,7 +855,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Employee> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<HotDeal> callback){
 
                 /**
                 Call the onBefore event
@@ -1317,12 +890,12 @@ public class EmployeeRepository extends UserRepository<Employee> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<Employee> employeeList = new DataList<Employee>();
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    DataList<HotDeal> hotDealList = new DataList<HotDeal>();
+                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(employeeRepo, context);
+                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hotDealRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1330,23 +903,23 @@ public class EmployeeRepository extends UserRepository<Employee> {
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        Employee employee = employeeRepo.createObject(obj);
+                                        HotDeal hotDeal = hotDealRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = employee.getClass().getMethod("save__db");
-                                                      method.invoke(employee);
+                                                      Method method = hotDeal.getClass().getMethod("save__db");
+                                                      method.invoke(hotDeal);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        employeeList.add(employee);
+                                        hotDealList.add(hotDeal);
                                     }
-                                    callback.onSuccess(employeeList);
+                                    callback.onSuccess(hotDealList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1365,7 +938,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Employee> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<HotDeal> callback){
 
                 /**
                 Call the onBefore event
@@ -1399,27 +972,27 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(employeeRepo, context);
+                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hotDealRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //employeeRepo.addStorage(context);
+                                        //hotDealRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
+                                    HotDeal hotDeal = hotDealRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = employee.getClass().getMethod("save__db");
-                                                    method.invoke(employee);
+                                                    Method method = hotDeal.getClass().getMethod("save__db");
+                                                    method.invoke(hotDeal);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1427,7 +1000,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                                       }
 
-                                    callback.onSuccess(employee);
+                                    callback.onSuccess(hotDeal);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1603,7 +1176,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String employeeId,  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+            public void updateAttributes(  String hotDealId,  Map<String,  ? extends Object> data, final ObjectCallback<HotDeal> callback){
 
                 /**
                 Call the onBefore event
@@ -1615,7 +1188,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("hotDealId", hotDealId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1639,27 +1212,27 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(employeeRepo, context);
+                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hotDealRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //employeeRepo.addStorage(context);
+                                        //hotDealRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
+                                    HotDeal hotDeal = hotDealRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = employee.getClass().getMethod("save__db");
-                                                    method.invoke(employee);
+                                                    Method method = hotDeal.getClass().getMethod("save__db");
+                                                    method.invoke(hotDeal);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1667,7 +1240,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                                       }
 
-                                    callback.onSuccess(employee);
+                                    callback.onSuccess(hotDeal);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1686,155 +1259,6 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
         
     
-        
-    
-        
-    
-        
-    
-        
-            //Method confirm definition
-            public void confirm(  String uid,  String token,  String redirect, final VoidCallback callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("uid", uid);
-                
-                        hashMapObject.put("token", token);
-                
-                        hashMapObject.put("redirect", redirect);
-                
-
-                
-                    invokeStaticMethod("confirm", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                                callback.onError(t);
-                                //Call the finally method..
-                                callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method confirm definition ends here..
-
-            
-
-        
-    
-        
-            //Method resetPassword definition
-            public void resetPassword(  Map<String,  ? extends Object> options, final VoidCallback callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("options", options);
-                
-
-                
-                    invokeStaticMethod("resetPassword", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                                callback.onError(t);
-                                //Call the finally method..
-                                callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method resetPassword definition ends here..
-
-            
-
-        
-    
-        
-            //Method isAdmin definition
-            public void isAdmin( final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("isAdmin", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method isAdmin definition ends here..
-
-            
-
         
     
         
@@ -1938,6 +1362,89 @@ public class EmployeeRepository extends UserRepository<Employee> {
         
     
         
+            //Method getDeals definition
+            public void getDeals(  Map<String,  ? extends Object> filter, final DataListCallback<HotDeal> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("getDeals", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<HotDeal> hotDealList = new DataList<HotDeal>();
+                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hotDealRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        HotDeal hotDeal = hotDealRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = hotDeal.getClass().getMethod("save__db");
+                                                      method.invoke(hotDeal);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        hotDealList.add(hotDeal);
+                                    }
+                                    callback.onSuccess(hotDealList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method getDeals definition ends here..
+
+            
+
+        
+    
+        
             //Method getDetailSchema definition
             public void getDetailSchema( final ObjectCallback<JSONObject>  callback ){
 
@@ -2033,6 +1540,38 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
             
 
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
 

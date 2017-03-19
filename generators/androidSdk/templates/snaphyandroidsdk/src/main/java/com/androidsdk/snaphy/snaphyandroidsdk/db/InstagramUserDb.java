@@ -15,16 +15,16 @@ import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Container;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.InstagramUser;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.ContainerRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.InstagramUserRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
 
-public class ContainerDb{
+public class InstagramUserDb{
 
     // All Static variables
     RestAdapter restAdapter;
@@ -39,25 +39,25 @@ public class ContainerDb{
     // Contacts table name
     private static String TABLE;
 
-  public ContainerDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+  public InstagramUserDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     //super(context, DATABASE_NAME, null, DATABASE_VERSION);
     this.context = context;
     this.restAdapter = restAdapter;
-    TABLE = "Container";
+    TABLE = "InstagramUser";
     this.DATABASE_NAME = DATABASE_NAME;
     SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
 
-    public void insert__db (final String id, final Container modelData) {
+    public void insert__db (final String id, final InstagramUser modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
-                db.insert("Container", null, values);
+                db.insert("InstagramUser", null, values);
                 //db.close(); // Closing database connection
             }
         }).start();
@@ -68,9 +68,27 @@ public class ContainerDb{
 
 
 
-    public ContentValues getContentValues(Container modelData){
+    public ContentValues getContentValues(InstagramUser modelData){
       ContentValues values = new ContentValues();
                        
+                                                            String usernameData = "";
+                        if(modelData.getUsername() != null){
+                          usernameData = modelData.getUsername().toString();
+                        }
+                                                values.put("`username`", usernameData);
+                                
+                                                            String full_nameData = "";
+                        if(modelData.getFull_name() != null){
+                          full_nameData = modelData.getFull_name().toString();
+                        }
+                                                values.put("`full_name`", full_nameData);
+                                
+                                                            String profile_pictureData = "";
+                        if(modelData.getProfile_picture() != null){
+                          profile_pictureData = modelData.getProfile_picture().toString();
+                        }
+                                                values.put("`profile_picture`", profile_pictureData);
+                                
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
@@ -84,6 +102,34 @@ public class ContainerDb{
                         }
 
                                                 values.put("`id`", idData);
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String instagramPostIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getInstagramPostId");
+                              if(method.invoke(modelData) != null){
+                                //instagramPostIdData = modelData.getInstagramPostId().toString();
+                                instagramPostIdData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                                values.put("`instagramPostId`", instagramPostIdData);
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String instagramCaptionIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getInstagramCaptionId");
+                              if(method.invoke(modelData) != null){
+                                //instagramCaptionIdData = modelData.getInstagramCaptionId().toString();
+                                instagramCaptionIdData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                                values.put("`instagramCaptionId`", instagramCaptionIdData);
                   
 
         //Add the updated data property value to be 1
@@ -94,10 +140,10 @@ public class ContainerDb{
 
 
     // Getting single c
-    public   Container get__db(String id) {
+    public   InstagramUser get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("Container", null, "id=?", new String[]{id}, null, null, null, null);
+            Cursor cursor = db.query("InstagramUser", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -106,9 +152,9 @@ public class ContainerDb{
                     cursor.close();
                     //db.close(); // Closing database connection
                     if (hashMap != null) {
-                        ContainerRepository repo = restAdapter.createRepository(ContainerRepository.class);
+                        InstagramUserRepository repo = restAdapter.createRepository(InstagramUserRepository.class);
                         repo.addStorage(context);
-                        return (Container)repo.createObject(hashMap);
+                        return (InstagramUser)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -127,10 +173,10 @@ public class ContainerDb{
 
 
     // Getting single cont
-    public   Container get__db(String whereKey, String whereKeyValue) {
+    public   InstagramUser get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("Container", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("InstagramUser", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -141,9 +187,9 @@ public class ContainerDb{
                     //db.close(); // Closing database connection
 
                     if (hashMap != null) {
-                        ContainerRepository repo = restAdapter.createRepository(ContainerRepository.class);
+                        InstagramUserRepository repo = restAdapter.createRepository(InstagramUserRepository.class);
                         repo.addStorage(context);
-                        return (Container)repo.createObject(hashMap);
+                        return (InstagramUser)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -165,12 +211,62 @@ public class ContainerDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            String idData = "";
+                                                            String usernameData = "";
                         if(cursor.getString(0) != null){
-                          idData = cursor.getString(0);
+                          usernameData = cursor.getString(0);
+                          if(usernameData != null){
+                            usernameData = (String)usernameData;
+                            hashMap.put("username", usernameData);
+                          }
+                        }
+                                                
+                                
+                                                            String full_nameData = "";
+                        if(cursor.getString(1) != null){
+                          full_nameData = cursor.getString(1);
+                          if(full_nameData != null){
+                            full_nameData = (String)full_nameData;
+                            hashMap.put("full_name", full_nameData);
+                          }
+                        }
+                                                
+                                
+                                                            String profile_pictureData = "";
+                        if(cursor.getString(2) != null){
+                          profile_pictureData = cursor.getString(2);
+                          if(profile_pictureData != null){
+                            profile_pictureData = (String)profile_pictureData;
+                            hashMap.put("profile_picture", profile_pictureData);
+                          }
+                        }
+                                                
+                                
+                                                            String idData = "";
+                        if(cursor.getString(3) != null){
+                          idData = cursor.getString(3);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
+                          }
+                        }
+                                                
+                                
+                                                            String instagramPostIdData = "";
+                        if(cursor.getString(4) != null){
+                          instagramPostIdData = cursor.getString(4);
+                          if(instagramPostIdData != null){
+                            instagramPostIdData = instagramPostIdData.toString();
+                            hashMap.put("instagramPostId", instagramPostIdData);
+                          }
+                        }
+                                                
+                                
+                                                            String instagramCaptionIdData = "";
+                        if(cursor.getString(5) != null){
+                          instagramCaptionIdData = cursor.getString(5);
+                          if(instagramCaptionIdData != null){
+                            instagramCaptionIdData = instagramCaptionIdData.toString();
+                            hashMap.put("instagramCaptionId", instagramCaptionIdData);
                           }
                         }
                                                 
@@ -180,7 +276,7 @@ public class ContainerDb{
 
 
 
-    public void upsert__db(String id, Container model){
+    public void upsert__db(String id, InstagramUser model){
         if(count__db(id) != 0){
             update__db(id, model);
         }else{
@@ -191,25 +287,25 @@ public class ContainerDb{
 
 
     // Getting All Contacts
-    public DataList<Container>  getAll__db() {
-        DataList<Container> modelList = new DataList<Container>();
+    public DataList<InstagramUser>  getAll__db() {
+        DataList<InstagramUser> modelList = new DataList<InstagramUser>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Container";
+        String selectQuery = "SELECT  * FROM InstagramUser";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<Container>) modelList;
+            return (DataList<InstagramUser>) modelList;
         }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    ContainerRepository repo = restAdapter.createRepository(ContainerRepository.class);
+                    InstagramUserRepository repo = restAdapter.createRepository(InstagramUserRepository.class);
                     repo.addStorage(context);
-                    modelList.add((Container)repo.createObject(hashMap));
+                    modelList.add((InstagramUser)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }
@@ -218,7 +314,7 @@ public class ContainerDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<Container>) modelList;
+        return (DataList<InstagramUser>) modelList;
     }
 
 
@@ -296,19 +392,19 @@ public class ContainerDb{
 
 
     // Getting All Data where
-    public DataList<Container>  getAll__db(HashMap<String, Object> whereKeyValue) {
+    public DataList<InstagramUser>  getAll__db(HashMap<String, Object> whereKeyValue) {
         return getAll__db(whereKeyValue, null, 0);
     }
 
 
 
     // Getting All Data where and sort column according to date wise..
-    public DataList<Container>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
-        DataList<Container> modelList = new DataList<Container>();
+    public DataList<InstagramUser>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
+        DataList<InstagramUser> modelList = new DataList<InstagramUser>();
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM Container " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM InstagramUser " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit;
@@ -316,9 +412,9 @@ public class ContainerDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                selectQuery = "SELECT  * FROM Container " + whereQuery + " LIMIT " + limit;
+                selectQuery = "SELECT  * FROM InstagramUser " + whereQuery + " LIMIT " + limit;
             }else{
-                selectQuery = "SELECT  * FROM Container " + whereQuery;
+                selectQuery = "SELECT  * FROM InstagramUser " + whereQuery;
             }
         }
 
@@ -329,15 +425,15 @@ public class ContainerDb{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<Container>) modelList;
+            return (DataList<InstagramUser>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    ContainerRepository repo = restAdapter.createRepository(ContainerRepository.class);
+                    InstagramUserRepository repo = restAdapter.createRepository(InstagramUserRepository.class);
                     repo.addStorage(context);
-                    modelList.add((Container)repo.createObject(hashMap));
+                    modelList.add((InstagramUser)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
@@ -347,12 +443,12 @@ public class ContainerDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<Container>) modelList;
+        return (DataList<InstagramUser>) modelList;
     }
 
 
     // Getting All Data where
-    public DataList<Container>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
+    public DataList<InstagramUser>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
         return getAll__db(whereKeyValue, null,  limit);
     }
 
@@ -371,7 +467,7 @@ public class ContainerDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM Container " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM InstagramUser " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit;
@@ -379,9 +475,9 @@ public class ContainerDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM Container " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM InstagramUser " + whereQuery + " LIMIT " + limit;
             }else{
-                countQuery = "SELECT  * FROM Container " + whereQuery;
+                countQuery = "SELECT  * FROM InstagramUser " + whereQuery;
             }
         }
 
@@ -404,9 +500,9 @@ public class ContainerDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM Container " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM InstagramUser " + whereQuery + " LIMIT " + limit;
         }else{
-            countQuery = "SELECT  * FROM Container " + whereQuery;
+            countQuery = "SELECT  * FROM InstagramUser " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -439,7 +535,7 @@ public class ContainerDb{
                 values.put("_DATA_UPDATED", 0);
                 String where = getWhere(whereKeyValue);
                 // updating row
-                db.update("Container", values, "_DATA_UPDATED = 1 AND " + where, null);
+                db.update("InstagramUser", values, "_DATA_UPDATED = 1 AND " + where, null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -457,7 +553,7 @@ public class ContainerDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("Container", "_DATA_UPDATED = 0 AND " + where , null);
+                db.delete("InstagramUser", "_DATA_UPDATED = 0 AND " + where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -478,7 +574,7 @@ public class ContainerDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("Container", where , null);
+                db.delete("InstagramUser", where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
             }
@@ -492,10 +588,10 @@ public class ContainerDb{
 
 
     // Getting All Data where
-    public DataList<Container>  getAll__db(String whereKey, String whereKeyValue) {
-        DataList<Container> modelList = new DataList<Container>();
+    public DataList<InstagramUser>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<InstagramUser> modelList = new DataList<InstagramUser>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `Container` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String selectQuery = "SELECT  * FROM `InstagramUser` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -504,15 +600,15 @@ public class ContainerDb{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<Container>) modelList;
+            return (DataList<InstagramUser>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    ContainerRepository repo = restAdapter.createRepository(ContainerRepository.class);
+                    InstagramUserRepository repo = restAdapter.createRepository(InstagramUserRepository.class);
                     repo.addStorage(context);
-                    modelList.add((Container)repo.createObject(hashMap));
+                    modelList.add((InstagramUser)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
@@ -522,7 +618,7 @@ public class ContainerDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<Container>) modelList;
+        return (DataList<InstagramUser>) modelList;
     }
 
 
@@ -534,7 +630,7 @@ public class ContainerDb{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-        String countQuery = "SELECT  * FROM `Container` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String countQuery = "SELECT  * FROM `InstagramUser` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -554,7 +650,7 @@ public class ContainerDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("Container", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.update("InstagramUser", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -570,7 +666,7 @@ public class ContainerDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("Container", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.delete("InstagramUser", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -599,7 +695,7 @@ public class ContainerDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final Container modelData) {
+    public void update__db(final String id,   final InstagramUser modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -607,7 +703,7 @@ public class ContainerDb{
                 db.beginTransaction();
                 ContentValues values = getContentValues(modelData);
                 // updating row
-                db.update("Container", values, "id = ?",
+                db.update("InstagramUser", values, "id = ?",
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
@@ -628,7 +724,7 @@ public class ContainerDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("Container", values, "_DATA_UPDATED = 1", null);
+                db.update("InstagramUser", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -645,7 +741,7 @@ public class ContainerDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("Container", "_DATA_UPDATED = 0", null);
+                db.delete("InstagramUser", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();

@@ -15,16 +15,16 @@ import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Student;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.BrandManager;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.StudentRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandManagerRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
 
-public class StudentDb{
+public class BrandManagerDb{
 
     // All Static variables
     RestAdapter restAdapter;
@@ -39,25 +39,25 @@ public class StudentDb{
     // Contacts table name
     private static String TABLE;
 
-  public StudentDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+  public BrandManagerDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     //super(context, DATABASE_NAME, null, DATABASE_VERSION);
     this.context = context;
     this.restAdapter = restAdapter;
-    TABLE = "Student";
+    TABLE = "BrandManager";
     this.DATABASE_NAME = DATABASE_NAME;
     SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
 
-    public void insert__db (final String id, final Student modelData) {
+    public void insert__db (final String id, final BrandManager modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
-                db.insert("Student", null, values);
+                db.insert("BrandManager", null, values);
                 //db.close(); // Closing database connection
             }
         }).start();
@@ -68,7 +68,7 @@ public class StudentDb{
 
 
 
-    public ContentValues getContentValues(Student modelData){
+    public ContentValues getContentValues(BrandManager modelData){
       ContentValues values = new ContentValues();
                        
                                                             String firstNameData = "";
@@ -82,6 +82,42 @@ public class StudentDb{
                           lastNameData = modelData.getLastName().toString();
                         }
                                                 values.put("`lastName`", lastNameData);
+                                
+                                                            String emailData = "";
+                        if(modelData.getEmail() != null){
+                          emailData = modelData.getEmail().toString();
+                        }
+                                                values.put("`email`", emailData);
+                                
+                                                            String passwordData = "";
+                        if(modelData.getPassword() != null){
+                          passwordData = modelData.getPassword().toString();
+                        }
+                                                values.put("`password`", passwordData);
+                                
+                                                            String restrictHotDealData = "";
+                        if(modelData.getRestrictHotDeal() != null){
+                          restrictHotDealData = modelData.getRestrictHotDeal().toString();
+                        }
+                                                values.put("`restrictHotDeal`", restrictHotDealData);
+                                
+                                                            String statusData = "";
+                        if(modelData.getStatus() != null){
+                          statusData = modelData.getStatus().toString();
+                        }
+                                                values.put("`status`", statusData);
+                                
+                                                            String addedData = "";
+                        if(modelData.getAdded() != null){
+                          addedData = modelData.getAdded().toString();
+                        }
+                                                values.put("`added`", addedData);
+                                
+                                                            String updatedData = "";
+                        if(modelData.getUpdated() != null){
+                          updatedData = modelData.getUpdated().toString();
+                        }
+                                                values.put("`updated`", updatedData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String realmData = "";
@@ -112,20 +148,6 @@ public class StudentDb{
                                                 values.put("`username`", usernameData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String passwordData = "";
-                        try {
-                              Method method = modelData.getClass().getMethod("getPassword");
-                              if(method.invoke(modelData) != null){
-                                //passwordData = modelData.getPassword().toString();
-                                passwordData = (String) method.invoke(modelData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                                values.put("`password`", passwordData);
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String credentialsData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getCredentials");
@@ -154,20 +176,6 @@ public class StudentDb{
                                                 values.put("`challenges`", challengesData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String emailData = "";
-                        try {
-                              Method method = modelData.getClass().getMethod("getEmail");
-                              if(method.invoke(modelData) != null){
-                                //emailData = modelData.getEmail().toString();
-                                emailData = (String) method.invoke(modelData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                                values.put("`email`", emailData);
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String emailVerifiedData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getEmailVerified");
@@ -194,20 +202,6 @@ public class StudentDb{
                         }
 
                                                 values.put("`verificationToken`", verificationTokenData);
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String statusData = "";
-                        try {
-                              Method method = modelData.getClass().getMethod("getStatus");
-                              if(method.invoke(modelData) != null){
-                                //statusData = modelData.getStatus().toString();
-                                statusData = (String) method.invoke(modelData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                                values.put("`status`", statusData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String createdData = "";
@@ -274,10 +268,10 @@ public class StudentDb{
 
 
     // Getting single c
-    public   Student get__db(String id) {
+    public   BrandManager get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("Student", null, "id=?", new String[]{id}, null, null, null, null);
+            Cursor cursor = db.query("BrandManager", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -286,9 +280,9 @@ public class StudentDb{
                     cursor.close();
                     //db.close(); // Closing database connection
                     if (hashMap != null) {
-                        StudentRepository repo = restAdapter.createRepository(StudentRepository.class);
+                        BrandManagerRepository repo = restAdapter.createRepository(BrandManagerRepository.class);
                         repo.addStorage(context);
-                        return (Student)repo.createObject(hashMap);
+                        return (BrandManager)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -307,10 +301,10 @@ public class StudentDb{
 
 
     // Getting single cont
-    public   Student get__db(String whereKey, String whereKeyValue) {
+    public   BrandManager get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("Student", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("BrandManager", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -321,9 +315,9 @@ public class StudentDb{
                     //db.close(); // Closing database connection
 
                     if (hashMap != null) {
-                        StudentRepository repo = restAdapter.createRepository(StudentRepository.class);
+                        BrandManagerRepository repo = restAdapter.createRepository(BrandManagerRepository.class);
                         repo.addStorage(context);
-                        return (Student)repo.createObject(hashMap);
+                        return (BrandManager)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -365,9 +359,69 @@ public class StudentDb{
                         }
                                                 
                                 
-                                                            String realmData = "";
+                                                            String emailData = "";
                         if(cursor.getString(2) != null){
-                          realmData = cursor.getString(2);
+                          emailData = cursor.getString(2);
+                          if(emailData != null){
+                            emailData = (String)emailData;
+                            hashMap.put("email", emailData);
+                          }
+                        }
+                                                
+                                
+                                                            String passwordData = "";
+                        if(cursor.getString(3) != null){
+                          passwordData = cursor.getString(3);
+                          if(passwordData != null){
+                            passwordData = (String)passwordData;
+                            hashMap.put("password", passwordData);
+                          }
+                        }
+                                                
+                                
+                                                            String restrictHotDealData = "";
+                        if(cursor.getString(4) != null){
+                          restrictHotDealData = cursor.getString(4);
+                          if(restrictHotDealData != null){
+                            restrictHotDealData = (String)restrictHotDealData;
+                            hashMap.put("restrictHotDeal", restrictHotDealData);
+                          }
+                        }
+                                                
+                                
+                                                            String statusData = "";
+                        if(cursor.getString(5) != null){
+                          statusData = cursor.getString(5);
+                          if(statusData != null){
+                            statusData = (String)statusData;
+                            hashMap.put("status", statusData);
+                          }
+                        }
+                                                
+                                
+                                                            String addedData = "";
+                        if(cursor.getString(6) != null){
+                          addedData = cursor.getString(6);
+                          if(addedData != null){
+                            addedData = (String)addedData;
+                            hashMap.put("added", addedData);
+                          }
+                        }
+                                                
+                                
+                                                            String updatedData = "";
+                        if(cursor.getString(7) != null){
+                          updatedData = cursor.getString(7);
+                          if(updatedData != null){
+                            updatedData = (String)updatedData;
+                            hashMap.put("updated", updatedData);
+                          }
+                        }
+                                                
+                                
+                                                            String realmData = "";
+                        if(cursor.getString(8) != null){
+                          realmData = cursor.getString(8);
                           if(realmData != null){
                             realmData = realmData.toString();
                             hashMap.put("realm", realmData);
@@ -376,8 +430,8 @@ public class StudentDb{
                                                 
                                 
                                                             String usernameData = "";
-                        if(cursor.getString(3) != null){
-                          usernameData = cursor.getString(3);
+                        if(cursor.getString(9) != null){
+                          usernameData = cursor.getString(9);
                           if(usernameData != null){
                             usernameData = usernameData.toString();
                             hashMap.put("username", usernameData);
@@ -385,19 +439,9 @@ public class StudentDb{
                         }
                                                 
                                 
-                                                            String passwordData = "";
-                        if(cursor.getString(4) != null){
-                          passwordData = cursor.getString(4);
-                          if(passwordData != null){
-                            passwordData = passwordData.toString();
-                            hashMap.put("password", passwordData);
-                          }
-                        }
-                                                
-                                
                                                             String credentialsData = "";
-                        if(cursor.getString(5) != null){
-                          credentialsData = cursor.getString(5);
+                        if(cursor.getString(10) != null){
+                          credentialsData = cursor.getString(10);
                           if(credentialsData != null){
                             credentialsData = credentialsData.toString();
                             hashMap.put("credentials", credentialsData);
@@ -406,8 +450,8 @@ public class StudentDb{
                                                 
                                 
                                                             String challengesData = "";
-                        if(cursor.getString(6) != null){
-                          challengesData = cursor.getString(6);
+                        if(cursor.getString(11) != null){
+                          challengesData = cursor.getString(11);
                           if(challengesData != null){
                             challengesData = challengesData.toString();
                             hashMap.put("challenges", challengesData);
@@ -415,19 +459,9 @@ public class StudentDb{
                         }
                                                 
                                 
-                                                            String emailData = "";
-                        if(cursor.getString(7) != null){
-                          emailData = cursor.getString(7);
-                          if(emailData != null){
-                            emailData = emailData.toString();
-                            hashMap.put("email", emailData);
-                          }
-                        }
-                                                
-                                
                                                             String emailVerifiedData = "";
-                        if(cursor.getString(8) != null){
-                          emailVerifiedData = cursor.getString(8);
+                        if(cursor.getString(12) != null){
+                          emailVerifiedData = cursor.getString(12);
                           if(emailVerifiedData != null){
                             emailVerifiedData = emailVerifiedData.toString();
                             hashMap.put("emailVerified", emailVerifiedData);
@@ -436,8 +470,8 @@ public class StudentDb{
                                                 
                                 
                                                             String verificationTokenData = "";
-                        if(cursor.getString(9) != null){
-                          verificationTokenData = cursor.getString(9);
+                        if(cursor.getString(13) != null){
+                          verificationTokenData = cursor.getString(13);
                           if(verificationTokenData != null){
                             verificationTokenData = verificationTokenData.toString();
                             hashMap.put("verificationToken", verificationTokenData);
@@ -445,19 +479,9 @@ public class StudentDb{
                         }
                                                 
                                 
-                                                            String statusData = "";
-                        if(cursor.getString(10) != null){
-                          statusData = cursor.getString(10);
-                          if(statusData != null){
-                            statusData = statusData.toString();
-                            hashMap.put("status", statusData);
-                          }
-                        }
-                                                
-                                
                                                             String createdData = "";
-                        if(cursor.getString(11) != null){
-                          createdData = cursor.getString(11);
+                        if(cursor.getString(14) != null){
+                          createdData = cursor.getString(14);
                           if(createdData != null){
                             createdData = createdData.toString();
                             hashMap.put("created", createdData);
@@ -466,8 +490,8 @@ public class StudentDb{
                                                 
                                 
                                                             String lastUpdatedData = "";
-                        if(cursor.getString(12) != null){
-                          lastUpdatedData = cursor.getString(12);
+                        if(cursor.getString(15) != null){
+                          lastUpdatedData = cursor.getString(15);
                           if(lastUpdatedData != null){
                             lastUpdatedData = lastUpdatedData.toString();
                             hashMap.put("lastUpdated", lastUpdatedData);
@@ -476,8 +500,8 @@ public class StudentDb{
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(13) != null){
-                          idData = cursor.getString(13);
+                        if(cursor.getString(16) != null){
+                          idData = cursor.getString(16);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -486,8 +510,8 @@ public class StudentDb{
                                                 
                                 
                                                             String brandIdData = "";
-                        if(cursor.getString(14) != null){
-                          brandIdData = cursor.getString(14);
+                        if(cursor.getString(17) != null){
+                          brandIdData = cursor.getString(17);
                           if(brandIdData != null){
                             brandIdData = brandIdData.toString();
                             hashMap.put("brandId", brandIdData);
@@ -500,7 +524,7 @@ public class StudentDb{
 
 
 
-    public void upsert__db(String id, Student model){
+    public void upsert__db(String id, BrandManager model){
         if(count__db(id) != 0){
             update__db(id, model);
         }else{
@@ -511,25 +535,25 @@ public class StudentDb{
 
 
     // Getting All Contacts
-    public DataList<Student>  getAll__db() {
-        DataList<Student> modelList = new DataList<Student>();
+    public DataList<BrandManager>  getAll__db() {
+        DataList<BrandManager> modelList = new DataList<BrandManager>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Student";
+        String selectQuery = "SELECT  * FROM BrandManager";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<Student>) modelList;
+            return (DataList<BrandManager>) modelList;
         }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    StudentRepository repo = restAdapter.createRepository(StudentRepository.class);
+                    BrandManagerRepository repo = restAdapter.createRepository(BrandManagerRepository.class);
                     repo.addStorage(context);
-                    modelList.add((Student)repo.createObject(hashMap));
+                    modelList.add((BrandManager)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }
@@ -538,7 +562,7 @@ public class StudentDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<Student>) modelList;
+        return (DataList<BrandManager>) modelList;
     }
 
 
@@ -616,19 +640,19 @@ public class StudentDb{
 
 
     // Getting All Data where
-    public DataList<Student>  getAll__db(HashMap<String, Object> whereKeyValue) {
+    public DataList<BrandManager>  getAll__db(HashMap<String, Object> whereKeyValue) {
         return getAll__db(whereKeyValue, null, 0);
     }
 
 
 
     // Getting All Data where and sort column according to date wise..
-    public DataList<Student>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
-        DataList<Student> modelList = new DataList<Student>();
+    public DataList<BrandManager>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
+        DataList<BrandManager> modelList = new DataList<BrandManager>();
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM Student " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM BrandManager " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit;
@@ -636,9 +660,9 @@ public class StudentDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                selectQuery = "SELECT  * FROM Student " + whereQuery + " LIMIT " + limit;
+                selectQuery = "SELECT  * FROM BrandManager " + whereQuery + " LIMIT " + limit;
             }else{
-                selectQuery = "SELECT  * FROM Student " + whereQuery;
+                selectQuery = "SELECT  * FROM BrandManager " + whereQuery;
             }
         }
 
@@ -649,15 +673,15 @@ public class StudentDb{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<Student>) modelList;
+            return (DataList<BrandManager>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    StudentRepository repo = restAdapter.createRepository(StudentRepository.class);
+                    BrandManagerRepository repo = restAdapter.createRepository(BrandManagerRepository.class);
                     repo.addStorage(context);
-                    modelList.add((Student)repo.createObject(hashMap));
+                    modelList.add((BrandManager)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
@@ -667,12 +691,12 @@ public class StudentDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<Student>) modelList;
+        return (DataList<BrandManager>) modelList;
     }
 
 
     // Getting All Data where
-    public DataList<Student>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
+    public DataList<BrandManager>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
         return getAll__db(whereKeyValue, null,  limit);
     }
 
@@ -691,7 +715,7 @@ public class StudentDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM Student " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM BrandManager " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit;
@@ -699,9 +723,9 @@ public class StudentDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM Student " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM BrandManager " + whereQuery + " LIMIT " + limit;
             }else{
-                countQuery = "SELECT  * FROM Student " + whereQuery;
+                countQuery = "SELECT  * FROM BrandManager " + whereQuery;
             }
         }
 
@@ -724,9 +748,9 @@ public class StudentDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM Student " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM BrandManager " + whereQuery + " LIMIT " + limit;
         }else{
-            countQuery = "SELECT  * FROM Student " + whereQuery;
+            countQuery = "SELECT  * FROM BrandManager " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -759,7 +783,7 @@ public class StudentDb{
                 values.put("_DATA_UPDATED", 0);
                 String where = getWhere(whereKeyValue);
                 // updating row
-                db.update("Student", values, "_DATA_UPDATED = 1 AND " + where, null);
+                db.update("BrandManager", values, "_DATA_UPDATED = 1 AND " + where, null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -777,7 +801,7 @@ public class StudentDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("Student", "_DATA_UPDATED = 0 AND " + where , null);
+                db.delete("BrandManager", "_DATA_UPDATED = 0 AND " + where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -798,7 +822,7 @@ public class StudentDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("Student", where , null);
+                db.delete("BrandManager", where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
             }
@@ -812,10 +836,10 @@ public class StudentDb{
 
 
     // Getting All Data where
-    public DataList<Student>  getAll__db(String whereKey, String whereKeyValue) {
-        DataList<Student> modelList = new DataList<Student>();
+    public DataList<BrandManager>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<BrandManager> modelList = new DataList<BrandManager>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `Student` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String selectQuery = "SELECT  * FROM `BrandManager` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -824,15 +848,15 @@ public class StudentDb{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<Student>) modelList;
+            return (DataList<BrandManager>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    StudentRepository repo = restAdapter.createRepository(StudentRepository.class);
+                    BrandManagerRepository repo = restAdapter.createRepository(BrandManagerRepository.class);
                     repo.addStorage(context);
-                    modelList.add((Student)repo.createObject(hashMap));
+                    modelList.add((BrandManager)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
@@ -842,7 +866,7 @@ public class StudentDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<Student>) modelList;
+        return (DataList<BrandManager>) modelList;
     }
 
 
@@ -854,7 +878,7 @@ public class StudentDb{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-        String countQuery = "SELECT  * FROM `Student` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String countQuery = "SELECT  * FROM `BrandManager` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -874,7 +898,7 @@ public class StudentDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("Student", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.update("BrandManager", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -890,7 +914,7 @@ public class StudentDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("Student", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.delete("BrandManager", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -919,7 +943,7 @@ public class StudentDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final Student modelData) {
+    public void update__db(final String id,   final BrandManager modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -927,7 +951,7 @@ public class StudentDb{
                 db.beginTransaction();
                 ContentValues values = getContentValues(modelData);
                 // updating row
-                db.update("Student", values, "id = ?",
+                db.update("BrandManager", values, "id = ?",
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
@@ -948,7 +972,7 @@ public class StudentDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("Student", values, "_DATA_UPDATED = 1", null);
+                db.update("BrandManager", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -965,7 +989,7 @@ public class StudentDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("Student", "_DATA_UPDATED = 0", null);
+                db.delete("BrandManager", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();

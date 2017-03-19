@@ -26,7 +26,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.StudentRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandManagerRepository;
 
 //Now import repository of related models..
 
@@ -47,7 +47,7 @@ import java.util.Map;
 
 
 
-public class Student extends User {
+public class BrandManager extends User {
 
 
     //For converting all model values to hashMap
@@ -62,9 +62,9 @@ public class Student extends User {
         }
     }
 
-    private Student that ;
+    private BrandManager that ;
 
-    public Student (){
+    public BrandManager (){
         that = this;
     }
 
@@ -115,11 +115,18 @@ public class Student extends User {
             
 
             
-            
-        
-    
-        
-            
+                private String email;
+                /* Adding Getter and Setter methods */
+                public String getEmail(){
+                    return email;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setEmail(String email){
+                    this.email = email;
+                    //Update hashMap value..
+                    hashMap.put("email", email);
+                }
 
             
             
@@ -127,6 +134,104 @@ public class Student extends User {
     
         
             
+
+            
+                private String password;
+                /* Adding Getter and Setter methods */
+                public String getPassword(){
+                    return password;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setPassword(String password){
+                    this.password = password;
+                    //Update hashMap value..
+                    hashMap.put("password", password);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String restrictHotDeal;
+                /* Adding Getter and Setter methods */
+                public String getRestrictHotDeal(){
+                    return restrictHotDeal;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setRestrictHotDeal(String restrictHotDeal){
+                    this.restrictHotDeal = restrictHotDeal;
+                    //Update hashMap value..
+                    hashMap.put("restrictHotDeal", restrictHotDeal);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String status;
+                /* Adding Getter and Setter methods */
+                public String getStatus(){
+                    return status;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setStatus(String status){
+                    this.status = status;
+                    //Update hashMap value..
+                    hashMap.put("status", status);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String added;
+                /* Adding Getter and Setter methods */
+                public String getAdded(){
+                    return added;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setAdded(String added){
+                    this.added = added;
+                    //Update hashMap value..
+                    hashMap.put("added", added);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String updated;
+                /* Adding Getter and Setter methods */
+                public String getUpdated(){
+                    return updated;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setUpdated(String updated){
+                    this.updated = updated;
+                    //Update hashMap value..
+                    hashMap.put("updated", updated);
+                }
 
             
             
@@ -215,7 +320,7 @@ public class Student extends User {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      StudentRepository lowercaseFirstLetterRepository = (StudentRepository) getRepository();
+      BrandManagerRepository lowercaseFirstLetterRepository = (BrandManagerRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
@@ -230,7 +335,7 @@ public class Student extends User {
 
 
     public void save__db(String id){
-      StudentRepository lowercaseFirstLetterRepository = (StudentRepository) getRepository();
+      BrandManagerRepository lowercaseFirstLetterRepository = (BrandManagerRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -241,7 +346,7 @@ public class Student extends User {
 
 
     public void delete__db(){
-      StudentRepository lowercaseFirstLetterRepository = (StudentRepository) getRepository();
+      BrandManagerRepository lowercaseFirstLetterRepository = (BrandManagerRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
         if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -296,9 +401,9 @@ public class Student extends User {
 			try{
 				//Adding database method for fetching from relation if not present..
 		                if(brand == null){
-		                  StudentRepository studentRepository = (StudentRepository) getRepository();
+		                  BrandManagerRepository brandManagerRepository = (BrandManagerRepository) getRepository();
 
-		                  RestAdapter restAdapter = studentRepository.getRestAdapter();
+		                  RestAdapter restAdapter = brandManagerRepository.getRestAdapter();
 		                  if(restAdapter != null){
 		                    //Fetch locally from db
 		                    brand = getBrand__db(restAdapter);
@@ -342,7 +447,7 @@ public class Student extends User {
                       if(brandId != null){
                         BrandRepository brandRepository = restAdapter.createRepository(BrandRepository.class);
 			  try{
-				StudentRepository lowercaseFirstLetterRepository = (StudentRepository) getRepository();
+				BrandManagerRepository lowercaseFirstLetterRepository = (BrandManagerRepository) getRepository();
 		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 		                        Context context = lowercaseFirstLetterRepository.getContext();
 		                        if(brandRepository.getDb() == null ){
@@ -396,7 +501,7 @@ public class Student extends User {
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final StudentRepository  studentRepo = restAdapter.createRepository(StudentRepository.class);
+                                        final BrandManagerRepository  brandManagerRepo = restAdapter.createRepository(BrandManagerRepository.class);
                                         
                                         
                                         
@@ -405,7 +510,7 @@ public class Student extends User {
 
 
 
-                                        studentRepo.get__brand( (String)that.getId(), refresh,  new ObjectCallback<Brand> (){
+                                        brandManagerRepo.get__brand( (String)that.getId(), refresh,  new ObjectCallback<Brand> (){
                                             
 
                                             
@@ -453,6 +558,17 @@ public class Student extends User {
                             
                          
                             
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         

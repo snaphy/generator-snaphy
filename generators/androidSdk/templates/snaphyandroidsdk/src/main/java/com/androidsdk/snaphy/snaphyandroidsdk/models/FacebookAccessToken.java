@@ -26,15 +26,12 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.StudentRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.FacebookAccessTokenRepository;
 
 //Now import repository of related models..
 
     
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.AppUserRepository;
             
 
         
@@ -47,7 +44,7 @@ import java.util.Map;
 
 
 
-public class Student extends User {
+public class FacebookAccessToken extends Model {
 
 
     //For converting all model values to hashMap
@@ -62,9 +59,9 @@ public class Student extends User {
         }
     }
 
-    private Student that ;
+    private FacebookAccessToken that ;
 
-    public Student (){
+    public FacebookAccessToken (){
         that = this;
     }
 
@@ -73,17 +70,17 @@ public class Student extends User {
             
 
             
-                private String firstName;
+                private String FbUserId;
                 /* Adding Getter and Setter methods */
-                public String getFirstName(){
-                    return firstName;
+                public String getFbUserId(){
+                    return FbUserId;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setFirstName(String firstName){
-                    this.firstName = firstName;
+                public void setFbUserId(String FbUserId){
+                    this.FbUserId = FbUserId;
                     //Update hashMap value..
-                    hashMap.put("firstName", firstName);
+                    hashMap.put("FbUserId", FbUserId);
                 }
 
             
@@ -94,17 +91,38 @@ public class Student extends User {
             
 
             
-                private String lastName;
+                private String token;
                 /* Adding Getter and Setter methods */
-                public String getLastName(){
-                    return lastName;
+                public String getToken(){
+                    return token;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setLastName(String lastName){
-                    this.lastName = lastName;
+                public void setToken(String token){
+                    this.token = token;
                     //Update hashMap value..
-                    hashMap.put("lastName", lastName);
+                    hashMap.put("token", token);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String expires;
+                /* Adding Getter and Setter methods */
+                public String getExpires(){
+                    return expires;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setExpires(String expires){
+                    this.expires = expires;
+                    //Update hashMap value..
+                    hashMap.put("expires", expires);
                 }
 
             
@@ -122,74 +140,18 @@ public class Student extends User {
             
 
             
-            
-        
-    
-        
-            
+                private String type;
+                /* Adding Getter and Setter methods */
+                public String getType(){
+                    return type;
+                }
 
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
+                /* Adding Getter and Setter methods */
+                public void setType(String type){
+                    this.type = type;
+                    //Update hashMap value..
+                    hashMap.put("type", type);
+                }
 
             
             
@@ -215,7 +177,7 @@ public class Student extends User {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      StudentRepository lowercaseFirstLetterRepository = (StudentRepository) getRepository();
+      FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
@@ -230,7 +192,7 @@ public class Student extends User {
 
 
     public void save__db(String id){
-      StudentRepository lowercaseFirstLetterRepository = (StudentRepository) getRepository();
+      FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -241,7 +203,7 @@ public class Student extends User {
 
 
     public void delete__db(){
-      StudentRepository lowercaseFirstLetterRepository = (StudentRepository) getRepository();
+      FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
         if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -272,87 +234,84 @@ public class Student extends User {
 
     //Now adding relations between related models
     
-         
-          
-    
         
         
                 
                     //Define belongsTo relation method here..
-                    private transient Brand  brand ;
-                    private String brandId;
+                    private transient AppUser  appUser ;
+                    private String userId;
 
-                    public String getBrandId(){
-                         return brandId;
+                    public String getUserId(){
+                         return userId;
                     }
 
-                    public void setBrandId(Object brandId){
-                        if(brandId != null){
-                          this.brandId = brandId.toString();
+                    public void setUserId(Object userId){
+                        if(userId != null){
+                          this.userId = userId.toString();
                         }
                     }
 
-                    public Brand getBrand() {
+                    public AppUser getAppUser() {
 			try{
 				//Adding database method for fetching from relation if not present..
-		                if(brand == null){
-		                  StudentRepository studentRepository = (StudentRepository) getRepository();
+		                if(appUser == null){
+		                  FacebookAccessTokenRepository facebookAccessTokenRepository = (FacebookAccessTokenRepository) getRepository();
 
-		                  RestAdapter restAdapter = studentRepository.getRestAdapter();
+		                  RestAdapter restAdapter = facebookAccessTokenRepository.getRestAdapter();
 		                  if(restAdapter != null){
 		                    //Fetch locally from db
-		                    brand = getBrand__db(restAdapter);
+		                    appUser = getAppUser__db(restAdapter);
 		                  }
 		                }
 			}catch(Exception e){
 				//Ignore
 			}
 
-                        return brand;
+                        return appUser;
                     }
 
-                    public void setBrand(Brand brand) {
-                        this.brand = brand;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setBrand(Map<String, Object> brand) {
-                        //First create a dummy Repo class object for customer.
-                        BrandRepository brandRepository = new BrandRepository();
-                        Brand brand1 = brandRepository.createObject(brand);
-                        setBrand(brand1);
+                    public void setAppUser(AppUser appUser) {
+                        this.appUser = appUser;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setBrand(HashMap<String, Object> brand) {
+                    public void setAppUser(Map<String, Object> appUser) {
                         //First create a dummy Repo class object for customer.
-                        BrandRepository brandRepository = new BrandRepository();
-                        Brand brand1 = brandRepository.createObject(brand);
-                        setBrand(brand1);
+                        AppUserRepository appUserRepository = new AppUserRepository();
+                        AppUser appUser1 = appUserRepository.createObject(appUser);
+                        setAppUser(appUser1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setAppUser(HashMap<String, Object> appUser) {
+                        //First create a dummy Repo class object for customer.
+                        AppUserRepository appUserRepository = new AppUserRepository();
+                        AppUser appUser1 = appUserRepository.createObject(appUser);
+                        setAppUser(appUser1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Brand brand) {
-                        that.setBrand(brand);
+                    public void addRelation(AppUser appUser) {
+                        that.setAppUser(appUser);
                     }
 
 
-                    //Fetch related data from local database if present a brandId identifier as property for belongsTo
-                    public Brand getBrand__db(RestAdapter restAdapter){
-                      if(brandId != null){
-                        BrandRepository brandRepository = restAdapter.createRepository(BrandRepository.class);
+                    //Fetch related data from local database if present a userId identifier as property for belongsTo
+                    public AppUser getAppUser__db(RestAdapter restAdapter){
+                      if(userId != null){
+                        AppUserRepository appUserRepository = restAdapter.createRepository(AppUserRepository.class);
 			  try{
-				StudentRepository lowercaseFirstLetterRepository = (StudentRepository) getRepository();
+				FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
 		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 		                        Context context = lowercaseFirstLetterRepository.getContext();
-		                        if(brandRepository.getDb() == null ){
-		                            brandRepository.addStorage(context);
+		                        if(appUserRepository.getDb() == null ){
+		                            appUserRepository.addStorage(context);
 		                        }
 
-		                        if(context != null && brandRepository.getDb() != null){
-		                            brandRepository.addStorage(context);
-		                            Brand brand = (Brand) brandRepository.getDb().get__db(brandId);
-		                            return brand;
+		                        if(context != null && appUserRepository.getDb() != null){
+		                            appUserRepository.addStorage(context);
+		                            AppUser appUser = (AppUser) appUserRepository.getDb().get__db(userId);
+		                            return appUser;
 		                        }else{
 		                            return null;
 		                        }
@@ -382,21 +341,15 @@ public class Student extends User {
                     //Now add instance methods to fetch the related belongsTo Model..
                     
 
-                     
-                            
-                         
-                            
-                         
-                            
-                        
+                    
 
                                     //Write the method here..
-                                    public void get__brand( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Brand> callback) {
+                                    public void get__appUser( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<AppUser> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final StudentRepository  studentRepo = restAdapter.createRepository(StudentRepository.class);
+                                        final FacebookAccessTokenRepository  facebookAccessTokenRepo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
                                         
                                         
                                         
@@ -405,13 +358,13 @@ public class Student extends User {
 
 
 
-                                        studentRepo.get__brand( (String)that.getId(), refresh,  new ObjectCallback<Brand> (){
+                                        facebookAccessTokenRepo.get__appUser( (String)that.getId(), refresh,  new ObjectCallback<AppUser> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Brand object) {
+                                                    public void onSuccess(AppUser object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -445,14 +398,10 @@ public class Student extends User {
                                     } //method def ends here.
                                  
                             
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
+                        
+                        
+                        
+                        
                         
                         
                         

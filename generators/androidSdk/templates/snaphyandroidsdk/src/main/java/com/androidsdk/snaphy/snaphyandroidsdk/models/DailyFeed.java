@@ -26,12 +26,9 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.StudentRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.DailyFeedRepository;
 
 //Now import repository of related models..
-
-    
-    
 
     
             import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
@@ -47,7 +44,7 @@ import java.util.Map;
 
 
 
-public class Student extends User {
+public class DailyFeed extends Model {
 
 
     //For converting all model values to hashMap
@@ -62,9 +59,9 @@ public class Student extends User {
         }
     }
 
-    private Student that ;
+    private DailyFeed that ;
 
-    public Student (){
+    public DailyFeed (){
         that = this;
     }
 
@@ -73,17 +70,17 @@ public class Student extends User {
             
 
             
-                private String firstName;
+                private String added;
                 /* Adding Getter and Setter methods */
-                public String getFirstName(){
-                    return firstName;
+                public String getAdded(){
+                    return added;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setFirstName(String firstName){
-                    this.firstName = firstName;
+                public void setAdded(String added){
+                    this.added = added;
                     //Update hashMap value..
-                    hashMap.put("firstName", firstName);
+                    hashMap.put("added", added);
                 }
 
             
@@ -94,17 +91,17 @@ public class Student extends User {
             
 
             
-                private String lastName;
+                private String updated;
                 /* Adding Getter and Setter methods */
-                public String getLastName(){
-                    return lastName;
+                public String getUpdated(){
+                    return updated;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setLastName(String lastName){
-                    this.lastName = lastName;
+                public void setUpdated(String updated){
+                    this.updated = updated;
                     //Update hashMap value..
-                    hashMap.put("lastName", lastName);
+                    hashMap.put("updated", updated);
                 }
 
             
@@ -115,11 +112,18 @@ public class Student extends User {
             
 
             
-            
-        
-    
-        
-            
+                private String title;
+                /* Adding Getter and Setter methods */
+                public String getTitle(){
+                    return title;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setTitle(String title){
+                    this.title = title;
+                    //Update hashMap value..
+                    hashMap.put("title", title);
+                }
 
             
             
@@ -129,11 +133,18 @@ public class Student extends User {
             
 
             
-            
-        
-    
-        
-            
+                private String description;
+                /* Adding Getter and Setter methods */
+                public String getDescription(){
+                    return description;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setDescription(String description){
+                    this.description = description;
+                    //Update hashMap value..
+                    hashMap.put("description", description);
+                }
 
             
             
@@ -143,46 +154,18 @@ public class Student extends User {
             
 
             
-            
-        
-    
-        
-            
+                private Map<String, Object> image;
+                /* Adding Getter and Setter methods */
+                public Map<String, Object> getImage(){
+                    return image;
+                }
 
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
+                /* Adding Getter and Setter methods */
+                public void setImage(Map<String, Object> image){
+                    this.image = image;
+                    //Update Map value..
+                    hashMap.put("image", image);
+                }
 
             
             
@@ -215,7 +198,7 @@ public class Student extends User {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      StudentRepository lowercaseFirstLetterRepository = (StudentRepository) getRepository();
+      DailyFeedRepository lowercaseFirstLetterRepository = (DailyFeedRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
@@ -230,7 +213,7 @@ public class Student extends User {
 
 
     public void save__db(String id){
-      StudentRepository lowercaseFirstLetterRepository = (StudentRepository) getRepository();
+      DailyFeedRepository lowercaseFirstLetterRepository = (DailyFeedRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -241,7 +224,7 @@ public class Student extends User {
 
 
     public void delete__db(){
-      StudentRepository lowercaseFirstLetterRepository = (StudentRepository) getRepository();
+      DailyFeedRepository lowercaseFirstLetterRepository = (DailyFeedRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
         if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -272,9 +255,6 @@ public class Student extends User {
 
     //Now adding relations between related models
     
-         
-          
-    
         
         
                 
@@ -296,9 +276,9 @@ public class Student extends User {
 			try{
 				//Adding database method for fetching from relation if not present..
 		                if(brand == null){
-		                  StudentRepository studentRepository = (StudentRepository) getRepository();
+		                  DailyFeedRepository dailyFeedRepository = (DailyFeedRepository) getRepository();
 
-		                  RestAdapter restAdapter = studentRepository.getRestAdapter();
+		                  RestAdapter restAdapter = dailyFeedRepository.getRestAdapter();
 		                  if(restAdapter != null){
 		                    //Fetch locally from db
 		                    brand = getBrand__db(restAdapter);
@@ -342,7 +322,7 @@ public class Student extends User {
                       if(brandId != null){
                         BrandRepository brandRepository = restAdapter.createRepository(BrandRepository.class);
 			  try{
-				StudentRepository lowercaseFirstLetterRepository = (StudentRepository) getRepository();
+				DailyFeedRepository lowercaseFirstLetterRepository = (DailyFeedRepository) getRepository();
 		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 		                        Context context = lowercaseFirstLetterRepository.getContext();
 		                        if(brandRepository.getDb() == null ){
@@ -382,13 +362,7 @@ public class Student extends User {
                     //Now add instance methods to fetch the related belongsTo Model..
                     
 
-                     
-                            
-                         
-                            
-                         
-                            
-                        
+                    
 
                                     //Write the method here..
                                     public void get__brand( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Brand> callback) {
@@ -396,7 +370,7 @@ public class Student extends User {
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final StudentRepository  studentRepo = restAdapter.createRepository(StudentRepository.class);
+                                        final DailyFeedRepository  dailyFeedRepo = restAdapter.createRepository(DailyFeedRepository.class);
                                         
                                         
                                         
@@ -405,7 +379,7 @@ public class Student extends User {
 
 
 
-                                        studentRepo.get__brand( (String)that.getId(), refresh,  new ObjectCallback<Brand> (){
+                                        dailyFeedRepo.get__brand( (String)that.getId(), refresh,  new ObjectCallback<Brand> (){
                                             
 
                                             
@@ -445,14 +419,10 @@ public class Student extends User {
                                     } //method def ends here.
                                  
                             
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
+                        
+                        
+                        
+                        
                         
                         
                         

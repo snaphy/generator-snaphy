@@ -26,12 +26,9 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.StudentRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandVerificationRepository;
 
 //Now import repository of related models..
-
-    
-    
 
     
             import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
@@ -47,7 +44,7 @@ import java.util.Map;
 
 
 
-public class Student extends User {
+public class BrandVerification extends Model {
 
 
     //For converting all model values to hashMap
@@ -62,9 +59,9 @@ public class Student extends User {
         }
     }
 
-    private Student that ;
+    private BrandVerification that ;
 
-    public Student (){
+    public BrandVerification (){
         that = this;
     }
 
@@ -73,17 +70,17 @@ public class Student extends User {
             
 
             
-                private String firstName;
+                private String code;
                 /* Adding Getter and Setter methods */
-                public String getFirstName(){
-                    return firstName;
+                public String getCode(){
+                    return code;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setFirstName(String firstName){
-                    this.firstName = firstName;
+                public void setCode(String code){
+                    this.code = code;
                     //Update hashMap value..
-                    hashMap.put("firstName", firstName);
+                    hashMap.put("code", code);
                 }
 
             
@@ -94,17 +91,17 @@ public class Student extends User {
             
 
             
-                private String lastName;
+                private String added;
                 /* Adding Getter and Setter methods */
-                public String getLastName(){
-                    return lastName;
+                public String getAdded(){
+                    return added;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setLastName(String lastName){
-                    this.lastName = lastName;
+                public void setAdded(String added){
+                    this.added = added;
                     //Update hashMap value..
-                    hashMap.put("lastName", lastName);
+                    hashMap.put("added", added);
                 }
 
             
@@ -115,74 +112,18 @@ public class Student extends User {
             
 
             
-            
-        
-    
-        
-            
+                private String updated;
+                /* Adding Getter and Setter methods */
+                public String getUpdated(){
+                    return updated;
+                }
 
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
+                /* Adding Getter and Setter methods */
+                public void setUpdated(String updated){
+                    this.updated = updated;
+                    //Update hashMap value..
+                    hashMap.put("updated", updated);
+                }
 
             
             
@@ -215,7 +156,7 @@ public class Student extends User {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      StudentRepository lowercaseFirstLetterRepository = (StudentRepository) getRepository();
+      BrandVerificationRepository lowercaseFirstLetterRepository = (BrandVerificationRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
@@ -230,7 +171,7 @@ public class Student extends User {
 
 
     public void save__db(String id){
-      StudentRepository lowercaseFirstLetterRepository = (StudentRepository) getRepository();
+      BrandVerificationRepository lowercaseFirstLetterRepository = (BrandVerificationRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -241,7 +182,7 @@ public class Student extends User {
 
 
     public void delete__db(){
-      StudentRepository lowercaseFirstLetterRepository = (StudentRepository) getRepository();
+      BrandVerificationRepository lowercaseFirstLetterRepository = (BrandVerificationRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
         if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -272,9 +213,6 @@ public class Student extends User {
 
     //Now adding relations between related models
     
-         
-          
-    
         
         
                 
@@ -296,9 +234,9 @@ public class Student extends User {
 			try{
 				//Adding database method for fetching from relation if not present..
 		                if(brand == null){
-		                  StudentRepository studentRepository = (StudentRepository) getRepository();
+		                  BrandVerificationRepository brandVerificationRepository = (BrandVerificationRepository) getRepository();
 
-		                  RestAdapter restAdapter = studentRepository.getRestAdapter();
+		                  RestAdapter restAdapter = brandVerificationRepository.getRestAdapter();
 		                  if(restAdapter != null){
 		                    //Fetch locally from db
 		                    brand = getBrand__db(restAdapter);
@@ -342,7 +280,7 @@ public class Student extends User {
                       if(brandId != null){
                         BrandRepository brandRepository = restAdapter.createRepository(BrandRepository.class);
 			  try{
-				StudentRepository lowercaseFirstLetterRepository = (StudentRepository) getRepository();
+				BrandVerificationRepository lowercaseFirstLetterRepository = (BrandVerificationRepository) getRepository();
 		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 		                        Context context = lowercaseFirstLetterRepository.getContext();
 		                        if(brandRepository.getDb() == null ){
@@ -382,13 +320,7 @@ public class Student extends User {
                     //Now add instance methods to fetch the related belongsTo Model..
                     
 
-                     
-                            
-                         
-                            
-                         
-                            
-                        
+                    
 
                                     //Write the method here..
                                     public void get__brand( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Brand> callback) {
@@ -396,7 +328,7 @@ public class Student extends User {
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final StudentRepository  studentRepo = restAdapter.createRepository(StudentRepository.class);
+                                        final BrandVerificationRepository  brandVerificationRepo = restAdapter.createRepository(BrandVerificationRepository.class);
                                         
                                         
                                         
@@ -405,7 +337,7 @@ public class Student extends User {
 
 
 
-                                        studentRepo.get__brand( (String)that.getId(), refresh,  new ObjectCallback<Brand> (){
+                                        brandVerificationRepo.get__brand( (String)that.getId(), refresh,  new ObjectCallback<Brand> (){
                                             
 
                                             
@@ -445,14 +377,7 @@ public class Student extends User {
                                     } //method def ends here.
                                  
                             
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
+                        
                         
                         
                         

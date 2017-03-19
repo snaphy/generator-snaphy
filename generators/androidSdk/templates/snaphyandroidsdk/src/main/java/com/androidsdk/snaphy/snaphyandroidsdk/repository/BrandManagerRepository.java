@@ -46,9 +46,9 @@ import org.json.JSONObject;
 
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Student;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.BrandManager;
 import android.content.Context;
-import com.androidsdk.snaphy.snaphyandroidsdk.db.StudentDb;
+import com.androidsdk.snaphy.snaphyandroidsdk.db.BrandManagerDb;
 
 //Now import model of related models..
 
@@ -66,15 +66,15 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.StudentDb;
 
 
 
-public class StudentRepository extends UserRepository<Student> {
+public class BrandManagerRepository extends UserRepository<BrandManager> {
 
 
     private Context context;
     private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
     private static String DATABASE_NAME;
 
-    public StudentRepository(){
-        super("Student", null, Student.class);
+    public BrandManagerRepository(){
+        super("BrandManager", null, BrandManager.class);
 
     }
 
@@ -86,15 +86,15 @@ public class StudentRepository extends UserRepository<Student> {
 
     
     		//Create public methods..
-    		public Student cachedCurrentUser;
+    		public BrandManager cachedCurrentUser;
             private Object currentUserId;
             private boolean isCurrentUserIdLoaded;
 
-    		public Student getCachedCurrentUser(){
+    		public BrandManager getCachedCurrentUser(){
     			return cachedCurrentUser;
     		}
 
-    		public void setCachedCurrentUser(Student user){
+    		public void setCachedCurrentUser(BrandManager user){
     			cachedCurrentUser = user;
     		}
 
@@ -102,7 +102,7 @@ public class StudentRepository extends UserRepository<Student> {
     			super.setCurrentUserId(id);
     		} */
 
-            public void findCurrentUser(final ObjectCallback<Student> callback){
+            public void findCurrentUser(final ObjectCallback<BrandManager> callback){
                 //Call the onBefore method..
                 callback.onBefore();
 
@@ -112,9 +112,9 @@ public class StudentRepository extends UserRepository<Student> {
                 }
 
                 HashMap<String, Object> hashMap = new HashMap<>();
-                this.findById((String)getCurrentUserId(), hashMap, new ObjectCallback<Student>() {
+                this.findById((String)getCurrentUserId(), hashMap, new ObjectCallback<BrandManager>() {
                     @Override
-                    public void onSuccess(Student user){
+                    public void onSuccess(BrandManager user){
                         cachedCurrentUser = user;
                         callback.onSuccess(user);
                         //Call the finally method..
@@ -185,15 +185,15 @@ public class StudentRepository extends UserRepository<Student> {
 
 
 
-    public StudentDb getDb() {
-      return studentDb;
+    public BrandManagerDb getDb() {
+      return brandManagerDb;
     }
 
-    public void setStudentDb(StudentDb studentDb) {
-      this.studentDb = studentDb;
+    public void setBrandManagerDb(BrandManagerDb brandManagerDb) {
+      this.brandManagerDb = brandManagerDb;
     }
 
-    private StudentDb studentDb;
+    private BrandManagerDb brandManagerDb;
 
 
 
@@ -227,7 +227,7 @@ public class StudentRepository extends UserRepository<Student> {
          catch (Exception e){
             Log.e("Snaphy", e.toString());
          }
-         setStudentDb(new StudentDb(context, DATABASE_NAME, getRestAdapter()));
+         setBrandManagerDb(new BrandManagerDb(context, DATABASE_NAME, getRestAdapter()));
          //allow data storage locally..
          persistData(true);
          this.context = context;
@@ -241,7 +241,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:studentId/accessTokens/:fk", "GET"), "Student.prototype.__findById__accessTokens");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandManagerId/accessTokens/:fk", "GET"), "BrandManager.prototype.__findById__accessTokens");
     
 
     
@@ -250,7 +250,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:studentId/accessTokens/:fk", "DELETE"), "Student.prototype.__destroyById__accessTokens");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandManagerId/accessTokens/:fk", "DELETE"), "BrandManager.prototype.__destroyById__accessTokens");
     
 
     
@@ -259,7 +259,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:studentId/accessTokens/:fk", "PUT"), "Student.prototype.__updateById__accessTokens");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandManagerId/accessTokens/:fk", "PUT"), "BrandManager.prototype.__updateById__accessTokens");
     
 
     
@@ -268,7 +268,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:studentId/brand", "GET"), "Student.prototype.__get__brand");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandManagerId/brand", "GET"), "BrandManager.prototype.__get__brand");
     
 
     
@@ -277,7 +277,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:studentId/accessTokens", "GET"), "Student.prototype.__get__accessTokens");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandManagerId/accessTokens", "GET"), "BrandManager.prototype.__get__accessTokens");
     
 
     
@@ -286,7 +286,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:studentId/accessTokens", "POST"), "Student.prototype.__create__accessTokens");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandManagerId/accessTokens", "POST"), "BrandManager.prototype.__create__accessTokens");
     
 
     
@@ -295,7 +295,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:studentId/accessTokens", "DELETE"), "Student.prototype.__delete__accessTokens");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandManagerId/accessTokens", "DELETE"), "BrandManager.prototype.__delete__accessTokens");
     
 
     
@@ -304,7 +304,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:studentId/accessTokens/count", "GET"), "Student.prototype.__count__accessTokens");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandManagerId/accessTokens/count", "GET"), "BrandManager.prototype.__count__accessTokens");
     
 
     
@@ -313,7 +313,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Student.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "BrandManager.create");
     
 
     
@@ -322,7 +322,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Student.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "BrandManager.create");
     
 
     
@@ -331,7 +331,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Student.upsert");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "BrandManager.upsert");
     
 
     
@@ -340,7 +340,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Student.exists");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "BrandManager.exists");
     
 
     
@@ -349,7 +349,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Student.findById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "BrandManager.findById");
     
 
     
@@ -358,7 +358,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Student.find");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "BrandManager.find");
     
 
     
@@ -367,7 +367,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Student.findOne");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "BrandManager.findOne");
     
 
     
@@ -376,7 +376,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Student.updateAll");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "BrandManager.updateAll");
     
 
     
@@ -385,7 +385,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Student.deleteById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "BrandManager.deleteById");
     
 
     
@@ -394,7 +394,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Student.count");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "BrandManager.count");
     
 
     
@@ -403,7 +403,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:studentId", "PUT"), "Student.prototype.updateAttributes");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:brandManagerId", "PUT"), "BrandManager.prototype.updateAttributes");
     
 
     
@@ -421,7 +421,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/confirm", "GET"), "Student.confirm");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/confirm", "GET"), "BrandManager.confirm");
     
 
     
@@ -430,7 +430,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/reset", "POST"), "Student.resetPassword");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/reset", "POST"), "BrandManager.resetPassword");
     
 
     
@@ -439,7 +439,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Student.getSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "BrandManager.getSchema");
     
 
     
@@ -448,7 +448,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Student.getAbsoluteSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "BrandManager.getAbsoluteSchema");
     
 
     
@@ -460,7 +460,7 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "Student.getDetailSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/resetPasswordToken", "POST"), "BrandManager.resetPasswordToken");
     
 
     
@@ -469,7 +469,58 @@ public class StudentRepository extends UserRepository<Student> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "Student.getModelRelationSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/resetPassword", "POST"), "BrandManager.resetPassword");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "BrandManager.getDetailSchema");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "BrandManager.getModelRelationSchema");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/subscribe", "POST"), "BrandManager.subscribe");
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
     
 
     
@@ -497,7 +548,7 @@ public class StudentRepository extends UserRepository<Student> {
     
         
             //Method findById__accessTokens definition
-            public void findById__accessTokens(  String studentId,  String fk, final ObjectCallback<AccessToken> callback){
+            public void findById__accessTokens(  String brandManagerId,  String fk, final ObjectCallback<AccessToken> callback){
 
                 /**
                 Call the onBefore event
@@ -509,7 +560,7 @@ public class StudentRepository extends UserRepository<Student> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("studentId", studentId);
+                        hashMapObject.put("brandManagerId", brandManagerId);
                 
                         hashMapObject.put("fk", fk);
                 
@@ -582,7 +633,7 @@ public class StudentRepository extends UserRepository<Student> {
     
         
             //Method destroyById__accessTokens definition
-            public void destroyById__accessTokens(  String studentId,  String fk, final VoidCallback callback){
+            public void destroyById__accessTokens(  String brandManagerId,  String fk, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -594,7 +645,7 @@ public class StudentRepository extends UserRepository<Student> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("studentId", studentId);
+                        hashMapObject.put("brandManagerId", brandManagerId);
                 
                         hashMapObject.put("fk", fk);
                 
@@ -630,7 +681,7 @@ public class StudentRepository extends UserRepository<Student> {
     
         
             //Method updateById__accessTokens definition
-            public void updateById__accessTokens(  String studentId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
+            public void updateById__accessTokens(  String brandManagerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
 
                 /**
                 Call the onBefore event
@@ -642,7 +693,7 @@ public class StudentRepository extends UserRepository<Student> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("studentId", studentId);
+                        hashMapObject.put("brandManagerId", brandManagerId);
                 
                         hashMapObject.put("fk", fk);
                 
@@ -717,7 +768,7 @@ public class StudentRepository extends UserRepository<Student> {
     
         
             //Method get__brand definition
-            public void get__brand(  String studentId,  Boolean refresh, final ObjectCallback<Brand> callback){
+            public void get__brand(  String brandManagerId,  Boolean refresh, final ObjectCallback<Brand> callback){
 
                 /**
                 Call the onBefore event
@@ -729,7 +780,7 @@ public class StudentRepository extends UserRepository<Student> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("studentId", studentId);
+                        hashMapObject.put("brandManagerId", brandManagerId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -802,7 +853,7 @@ public class StudentRepository extends UserRepository<Student> {
     
         
             //Method get__accessTokens definition
-            public void get__accessTokens(  String studentId,  Map<String,  ? extends Object> filter, final DataListCallback<AccessToken> callback){
+            public void get__accessTokens(  String brandManagerId,  Map<String,  ? extends Object> filter, final DataListCallback<AccessToken> callback){
 
                 /**
                 Call the onBefore event
@@ -814,7 +865,7 @@ public class StudentRepository extends UserRepository<Student> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("studentId", studentId);
+                        hashMapObject.put("brandManagerId", brandManagerId);
                 
                         hashMapObject.put("filter", filter);
                 
@@ -887,7 +938,7 @@ public class StudentRepository extends UserRepository<Student> {
     
         
             //Method create__accessTokens definition
-            public void create__accessTokens(  String studentId,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
+            public void create__accessTokens(  String brandManagerId,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
 
                 /**
                 Call the onBefore event
@@ -899,7 +950,7 @@ public class StudentRepository extends UserRepository<Student> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("studentId", studentId);
+                        hashMapObject.put("brandManagerId", brandManagerId);
                 
                         hashMapObject.putAll(data);
                 
@@ -972,7 +1023,7 @@ public class StudentRepository extends UserRepository<Student> {
     
         
             //Method delete__accessTokens definition
-            public void delete__accessTokens(  String studentId, final VoidCallback callback){
+            public void delete__accessTokens(  String brandManagerId, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -984,7 +1035,7 @@ public class StudentRepository extends UserRepository<Student> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("studentId", studentId);
+                        hashMapObject.put("brandManagerId", brandManagerId);
                 
 
                 
@@ -1018,7 +1069,7 @@ public class StudentRepository extends UserRepository<Student> {
     
         
             //Method count__accessTokens definition
-            public void count__accessTokens(  String studentId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+            public void count__accessTokens(  String brandManagerId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -1030,7 +1081,7 @@ public class StudentRepository extends UserRepository<Student> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("studentId", studentId);
+                        hashMapObject.put("brandManagerId", brandManagerId);
                 
                         hashMapObject.put("where", where);
                 
@@ -1071,7 +1122,7 @@ public class StudentRepository extends UserRepository<Student> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Student> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<BrandManager> callback){
 
                 /**
                 Call the onBefore event
@@ -1105,27 +1156,27 @@ public class StudentRepository extends UserRepository<Student> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    StudentRepository studentRepo = getRestAdapter().createRepository(StudentRepository.class);
+                                    BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = studentRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(studentRepo, context);
+                                            Method method = brandManagerRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandManagerRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //studentRepo.addStorage(context);
+                                        //brandManagerRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Student student = studentRepo.createObject(result);
+                                    BrandManager brandManager = brandManagerRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = student.getClass().getMethod("save__db");
-                                                    method.invoke(student);
+                                                    Method method = brandManager.getClass().getMethod("save__db");
+                                                    method.invoke(brandManager);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1133,7 +1184,7 @@ public class StudentRepository extends UserRepository<Student> {
 
                                       }
 
-                                    callback.onSuccess(student);
+                                    callback.onSuccess(brandManager);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1155,7 +1206,7 @@ public class StudentRepository extends UserRepository<Student> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Student> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<BrandManager> callback){
 
                 /**
                 Call the onBefore event
@@ -1189,27 +1240,27 @@ public class StudentRepository extends UserRepository<Student> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    StudentRepository studentRepo = getRestAdapter().createRepository(StudentRepository.class);
+                                    BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = studentRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(studentRepo, context);
+                                            Method method = brandManagerRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandManagerRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //studentRepo.addStorage(context);
+                                        //brandManagerRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Student student = studentRepo.createObject(result);
+                                    BrandManager brandManager = brandManagerRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = student.getClass().getMethod("save__db");
-                                                    method.invoke(student);
+                                                    Method method = brandManager.getClass().getMethod("save__db");
+                                                    method.invoke(brandManager);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1217,7 +1268,7 @@ public class StudentRepository extends UserRepository<Student> {
 
                                       }
 
-                                    callback.onSuccess(student);
+                                    callback.onSuccess(brandManager);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1289,7 +1340,7 @@ public class StudentRepository extends UserRepository<Student> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Student> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<BrandManager> callback){
 
                 /**
                 Call the onBefore event
@@ -1325,27 +1376,27 @@ public class StudentRepository extends UserRepository<Student> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    StudentRepository studentRepo = getRestAdapter().createRepository(StudentRepository.class);
+                                    BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = studentRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(studentRepo, context);
+                                            Method method = brandManagerRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandManagerRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //studentRepo.addStorage(context);
+                                        //brandManagerRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Student student = studentRepo.createObject(result);
+                                    BrandManager brandManager = brandManagerRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = student.getClass().getMethod("save__db");
-                                                    method.invoke(student);
+                                                    Method method = brandManager.getClass().getMethod("save__db");
+                                                    method.invoke(brandManager);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1353,7 +1404,7 @@ public class StudentRepository extends UserRepository<Student> {
 
                                       }
 
-                                    callback.onSuccess(student);
+                                    callback.onSuccess(brandManager);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1374,7 +1425,7 @@ public class StudentRepository extends UserRepository<Student> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Student> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<BrandManager> callback){
 
                 /**
                 Call the onBefore event
@@ -1409,12 +1460,12 @@ public class StudentRepository extends UserRepository<Student> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<Student> studentList = new DataList<Student>();
-                                    StudentRepository studentRepo = getRestAdapter().createRepository(StudentRepository.class);
+                                    DataList<BrandManager> brandManagerList = new DataList<BrandManager>();
+                                    BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = studentRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(studentRepo, context);
+                                            Method method = brandManagerRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandManagerRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1422,23 +1473,23 @@ public class StudentRepository extends UserRepository<Student> {
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        Student student = studentRepo.createObject(obj);
+                                        BrandManager brandManager = brandManagerRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = student.getClass().getMethod("save__db");
-                                                      method.invoke(student);
+                                                      Method method = brandManager.getClass().getMethod("save__db");
+                                                      method.invoke(brandManager);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        studentList.add(student);
+                                        brandManagerList.add(brandManager);
                                     }
-                                    callback.onSuccess(studentList);
+                                    callback.onSuccess(brandManagerList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1457,7 +1508,7 @@ public class StudentRepository extends UserRepository<Student> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Student> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<BrandManager> callback){
 
                 /**
                 Call the onBefore event
@@ -1491,27 +1542,27 @@ public class StudentRepository extends UserRepository<Student> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    StudentRepository studentRepo = getRestAdapter().createRepository(StudentRepository.class);
+                                    BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = studentRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(studentRepo, context);
+                                            Method method = brandManagerRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandManagerRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //studentRepo.addStorage(context);
+                                        //brandManagerRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Student student = studentRepo.createObject(result);
+                                    BrandManager brandManager = brandManagerRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = student.getClass().getMethod("save__db");
-                                                    method.invoke(student);
+                                                    Method method = brandManager.getClass().getMethod("save__db");
+                                                    method.invoke(brandManager);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1519,7 +1570,7 @@ public class StudentRepository extends UserRepository<Student> {
 
                                       }
 
-                                    callback.onSuccess(student);
+                                    callback.onSuccess(brandManager);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1695,7 +1746,7 @@ public class StudentRepository extends UserRepository<Student> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String studentId,  Map<String,  ? extends Object> data, final ObjectCallback<Student> callback){
+            public void updateAttributes(  String brandManagerId,  Map<String,  ? extends Object> data, final ObjectCallback<BrandManager> callback){
 
                 /**
                 Call the onBefore event
@@ -1707,7 +1758,7 @@ public class StudentRepository extends UserRepository<Student> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("studentId", studentId);
+                        hashMapObject.put("brandManagerId", brandManagerId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1731,27 +1782,27 @@ public class StudentRepository extends UserRepository<Student> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    StudentRepository studentRepo = getRestAdapter().createRepository(StudentRepository.class);
+                                    BrandManagerRepository brandManagerRepo = getRestAdapter().createRepository(BrandManagerRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = studentRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(studentRepo, context);
+                                            Method method = brandManagerRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(brandManagerRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //studentRepo.addStorage(context);
+                                        //brandManagerRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Student student = studentRepo.createObject(result);
+                                    BrandManager brandManager = brandManagerRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = student.getClass().getMethod("save__db");
-                                                    method.invoke(student);
+                                                    Method method = brandManager.getClass().getMethod("save__db");
+                                                    method.invoke(brandManager);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1759,7 +1810,7 @@ public class StudentRepository extends UserRepository<Student> {
 
                                       }
 
-                                    callback.onSuccess(student);
+                                    callback.onSuccess(brandManager);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1981,6 +2032,58 @@ public class StudentRepository extends UserRepository<Student> {
         
     
         
+            //Method resetPasswordToken definition
+            public void resetPasswordToken(  String email, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("email", email);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("resetPasswordToken", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method resetPasswordToken definition ends here..
+
+            
+
+        
+    
+        
+        
             //Method getDetailSchema definition
             public void getDetailSchema( final ObjectCallback<JSONObject>  callback ){
 
@@ -2076,6 +2179,73 @@ public class StudentRepository extends UserRepository<Student> {
 
             
 
+        
+    
+        
+            //Method subscribe definition
+            public void subscribe(  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("subscribe", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method subscribe definition ends here..
+
+            
+
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
 
