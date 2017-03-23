@@ -5,6 +5,7 @@ import android.util.Log;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.Util;
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Model;
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.ModelRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 
 import org.json.JSONObject;
 
