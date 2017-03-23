@@ -194,12 +194,6 @@ public class SnaphySocket<M extends Model, R extends ModelRepository<M>> {
     }
 
 
-    public void leave(){
-        //socket.emit('leave', this.room);
-        socket.emit("leave", room);
-    }
-
-
 
     /**
      * Listen for real time data change for onNewData added, deleted and updated..
