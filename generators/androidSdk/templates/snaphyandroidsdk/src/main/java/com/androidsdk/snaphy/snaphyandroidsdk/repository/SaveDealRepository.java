@@ -41,9 +41,9 @@ import org.json.JSONObject;
 
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.FollowBrand;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.SaveDeal;
 import android.content.Context;
-import com.androidsdk.snaphy.snaphyandroidsdk.db.FollowBrandDb;
+import com.androidsdk.snaphy.snaphyandroidsdk.db.SaveDealDb;
 
 //Now import model of related models..
 
@@ -55,8 +55,8 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.FollowBrandDb;
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Brand;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.HotDeal;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.HotDealRepository;
             
         
     
@@ -65,15 +65,15 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.FollowBrandDb;
 
 
 
-public class FollowBrandRepository extends ModelRepository<FollowBrand> {
+public class SaveDealRepository extends ModelRepository<SaveDeal> {
 
 
     private Context context;
     private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
     private static String DATABASE_NAME;
 
-    public FollowBrandRepository(){
-        super("FollowBrand", null, FollowBrand.class);
+    public SaveDealRepository(){
+        super("SaveDeal", null, SaveDeal.class);
 
     }
 
@@ -91,15 +91,15 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
 
 
 
-    public FollowBrandDb getDb() {
-      return followBrandDb;
+    public SaveDealDb getDb() {
+      return saveDealDb;
     }
 
-    public void setFollowBrandDb(FollowBrandDb followBrandDb) {
-      this.followBrandDb = followBrandDb;
+    public void setSaveDealDb(SaveDealDb saveDealDb) {
+      this.saveDealDb = saveDealDb;
     }
 
-    private FollowBrandDb followBrandDb;
+    private SaveDealDb saveDealDb;
 
 
 
@@ -133,7 +133,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
          catch (Exception e){
             Log.e("Snaphy", e.toString());
          }
-         setFollowBrandDb(new FollowBrandDb(context, DATABASE_NAME, getRestAdapter()));
+         setSaveDealDb(new SaveDealDb(context, DATABASE_NAME, getRestAdapter()));
          //allow data storage locally..
          persistData(true);
          this.context = context;
@@ -147,7 +147,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:followBrandId/appUser", "GET"), "FollowBrand.prototype.__get__appUser");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:saveDealId/appUser", "GET"), "SaveDeal.prototype.__get__appUser");
     
 
     
@@ -156,7 +156,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:followBrandId/brand", "GET"), "FollowBrand.prototype.__get__brand");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:saveDealId/hotDeal", "GET"), "SaveDeal.prototype.__get__hotDeal");
     
 
     
@@ -165,7 +165,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "FollowBrand.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "SaveDeal.create");
     
 
     
@@ -174,7 +174,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "FollowBrand.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "SaveDeal.create");
     
 
     
@@ -183,7 +183,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "FollowBrand.upsert");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "SaveDeal.upsert");
     
 
     
@@ -192,7 +192,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "FollowBrand.exists");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "SaveDeal.exists");
     
 
     
@@ -201,7 +201,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "FollowBrand.findById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "SaveDeal.findById");
     
 
     
@@ -210,7 +210,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "FollowBrand.find");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "SaveDeal.find");
     
 
     
@@ -219,7 +219,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "FollowBrand.findOne");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "SaveDeal.findOne");
     
 
     
@@ -228,7 +228,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "FollowBrand.updateAll");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "SaveDeal.updateAll");
     
 
     
@@ -237,7 +237,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "FollowBrand.deleteById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "SaveDeal.deleteById");
     
 
     
@@ -246,7 +246,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "FollowBrand.count");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "SaveDeal.count");
     
 
     
@@ -255,28 +255,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:followBrandId", "PUT"), "FollowBrand.prototype.updateAttributes");
-    
-
-    
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "FollowBrand.getSchema");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "FollowBrand.getAbsoluteSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:saveDealId", "PUT"), "SaveDeal.prototype.updateAttributes");
     
 
     
@@ -288,7 +267,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/followBrands", "POST"), "FollowBrand.followBrands");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "SaveDeal.getSchema");
     
 
     
@@ -297,16 +276,10 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getBrands", "POST"), "FollowBrand.getBrands");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "SaveDeal.getAbsoluteSchema");
     
 
     
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/addBrands", "POST"), "FollowBrand.addBrands");
     
 
     
@@ -315,7 +288,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/removeBrands", "POST"), "FollowBrand.removeBrands");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/saveDeal", "POST"), "SaveDeal.saveDeal");
     
 
     
@@ -324,7 +297,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "FollowBrand.getDetailSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/removeDeal", "POST"), "SaveDeal.removeDeal");
     
 
     
@@ -333,7 +306,16 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "FollowBrand.getModelRelationSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "SaveDeal.getDetailSchema");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "SaveDeal.getModelRelationSchema");
     
 
     
@@ -409,7 +391,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
         
             //Method get__appUser definition
-            public void get__appUser(  String followBrandId,  Boolean refresh, final ObjectCallback<AppUser> callback){
+            public void get__appUser(  String saveDealId,  Boolean refresh, final ObjectCallback<AppUser> callback){
 
                 /**
                 Call the onBefore event
@@ -421,7 +403,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("followBrandId", followBrandId);
+                        hashMapObject.put("saveDealId", saveDealId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -493,8 +475,8 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
         
     
         
-            //Method get__brand definition
-            public void get__brand(  String followBrandId,  Boolean refresh, final ObjectCallback<Brand> callback){
+            //Method get__hotDeal definition
+            public void get__hotDeal(  String saveDealId,  Boolean refresh, final ObjectCallback<HotDeal> callback){
 
                 /**
                 Call the onBefore event
@@ -506,7 +488,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("followBrandId", followBrandId);
+                        hashMapObject.put("saveDealId", saveDealId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -517,7 +499,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__brand", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__hotDeal", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -530,27 +512,27 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BrandRepository brandRepo = getRestAdapter().createRepository(BrandRepository.class);
+                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = brandRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(brandRepo, context);
+                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hotDealRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //brandRepo.addStorage(context);
+                                        //hotDealRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Brand brand = brandRepo.createObject(result);
+                                    HotDeal hotDeal = hotDealRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = brand.getClass().getMethod("save__db");
-                                                    method.invoke(brand);
+                                                    Method method = hotDeal.getClass().getMethod("save__db");
+                                                    method.invoke(hotDeal);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -558,7 +540,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
 
                                       }
 
-                                    callback.onSuccess(brand);
+                                    callback.onSuccess(hotDeal);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -571,7 +553,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
 
                 
 
-            }//Method get__brand definition ends here..
+            }//Method get__hotDeal definition ends here..
 
             
 
@@ -579,7 +561,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<FollowBrand> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<SaveDeal> callback){
 
                 /**
                 Call the onBefore event
@@ -613,27 +595,27 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    FollowBrandRepository followBrandRepo = getRestAdapter().createRepository(FollowBrandRepository.class);
+                                    SaveDealRepository saveDealRepo = getRestAdapter().createRepository(SaveDealRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = followBrandRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(followBrandRepo, context);
+                                            Method method = saveDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(saveDealRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //followBrandRepo.addStorage(context);
+                                        //saveDealRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FollowBrand followBrand = followBrandRepo.createObject(result);
+                                    SaveDeal saveDeal = saveDealRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = followBrand.getClass().getMethod("save__db");
-                                                    method.invoke(followBrand);
+                                                    Method method = saveDeal.getClass().getMethod("save__db");
+                                                    method.invoke(saveDeal);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -641,7 +623,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
 
                                       }
 
-                                    callback.onSuccess(followBrand);
+                                    callback.onSuccess(saveDeal);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -663,7 +645,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<FollowBrand> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<SaveDeal> callback){
 
                 /**
                 Call the onBefore event
@@ -697,27 +679,27 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    FollowBrandRepository followBrandRepo = getRestAdapter().createRepository(FollowBrandRepository.class);
+                                    SaveDealRepository saveDealRepo = getRestAdapter().createRepository(SaveDealRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = followBrandRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(followBrandRepo, context);
+                                            Method method = saveDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(saveDealRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //followBrandRepo.addStorage(context);
+                                        //saveDealRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FollowBrand followBrand = followBrandRepo.createObject(result);
+                                    SaveDeal saveDeal = saveDealRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = followBrand.getClass().getMethod("save__db");
-                                                    method.invoke(followBrand);
+                                                    Method method = saveDeal.getClass().getMethod("save__db");
+                                                    method.invoke(saveDeal);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -725,7 +707,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
 
                                       }
 
-                                    callback.onSuccess(followBrand);
+                                    callback.onSuccess(saveDeal);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -797,7 +779,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<FollowBrand> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<SaveDeal> callback){
 
                 /**
                 Call the onBefore event
@@ -833,27 +815,27 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    FollowBrandRepository followBrandRepo = getRestAdapter().createRepository(FollowBrandRepository.class);
+                                    SaveDealRepository saveDealRepo = getRestAdapter().createRepository(SaveDealRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = followBrandRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(followBrandRepo, context);
+                                            Method method = saveDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(saveDealRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //followBrandRepo.addStorage(context);
+                                        //saveDealRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FollowBrand followBrand = followBrandRepo.createObject(result);
+                                    SaveDeal saveDeal = saveDealRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = followBrand.getClass().getMethod("save__db");
-                                                    method.invoke(followBrand);
+                                                    Method method = saveDeal.getClass().getMethod("save__db");
+                                                    method.invoke(saveDeal);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -861,7 +843,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
 
                                       }
 
-                                    callback.onSuccess(followBrand);
+                                    callback.onSuccess(saveDeal);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -882,7 +864,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<FollowBrand> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<SaveDeal> callback){
 
                 /**
                 Call the onBefore event
@@ -917,12 +899,12 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<FollowBrand> followBrandList = new DataList<FollowBrand>();
-                                    FollowBrandRepository followBrandRepo = getRestAdapter().createRepository(FollowBrandRepository.class);
+                                    DataList<SaveDeal> saveDealList = new DataList<SaveDeal>();
+                                    SaveDealRepository saveDealRepo = getRestAdapter().createRepository(SaveDealRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = followBrandRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(followBrandRepo, context);
+                                            Method method = saveDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(saveDealRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -930,23 +912,23 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        FollowBrand followBrand = followBrandRepo.createObject(obj);
+                                        SaveDeal saveDeal = saveDealRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = followBrand.getClass().getMethod("save__db");
-                                                      method.invoke(followBrand);
+                                                      Method method = saveDeal.getClass().getMethod("save__db");
+                                                      method.invoke(saveDeal);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        followBrandList.add(followBrand);
+                                        saveDealList.add(saveDeal);
                                     }
-                                    callback.onSuccess(followBrandList);
+                                    callback.onSuccess(saveDealList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -965,7 +947,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<FollowBrand> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<SaveDeal> callback){
 
                 /**
                 Call the onBefore event
@@ -999,27 +981,27 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    FollowBrandRepository followBrandRepo = getRestAdapter().createRepository(FollowBrandRepository.class);
+                                    SaveDealRepository saveDealRepo = getRestAdapter().createRepository(SaveDealRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = followBrandRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(followBrandRepo, context);
+                                            Method method = saveDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(saveDealRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //followBrandRepo.addStorage(context);
+                                        //saveDealRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FollowBrand followBrand = followBrandRepo.createObject(result);
+                                    SaveDeal saveDeal = saveDealRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = followBrand.getClass().getMethod("save__db");
-                                                    method.invoke(followBrand);
+                                                    Method method = saveDeal.getClass().getMethod("save__db");
+                                                    method.invoke(saveDeal);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1027,7 +1009,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
 
                                       }
 
-                                    callback.onSuccess(followBrand);
+                                    callback.onSuccess(saveDeal);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1203,7 +1185,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String followBrandId,  Map<String,  ? extends Object> data, final ObjectCallback<FollowBrand> callback){
+            public void updateAttributes(  String saveDealId,  Map<String,  ? extends Object> data, final ObjectCallback<SaveDeal> callback){
 
                 /**
                 Call the onBefore event
@@ -1215,7 +1197,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("followBrandId", followBrandId);
+                        hashMapObject.put("saveDealId", saveDealId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1239,27 +1221,27 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    FollowBrandRepository followBrandRepo = getRestAdapter().createRepository(FollowBrandRepository.class);
+                                    SaveDealRepository saveDealRepo = getRestAdapter().createRepository(SaveDealRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = followBrandRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(followBrandRepo, context);
+                                            Method method = saveDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(saveDealRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //followBrandRepo.addStorage(context);
+                                        //saveDealRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FollowBrand followBrand = followBrandRepo.createObject(result);
+                                    SaveDeal saveDeal = saveDealRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = followBrand.getClass().getMethod("save__db");
-                                                    method.invoke(followBrand);
+                                                    Method method = saveDeal.getClass().getMethod("save__db");
+                                                    method.invoke(saveDeal);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1267,7 +1249,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
 
                                       }
 
-                                    callback.onSuccess(followBrand);
+                                    callback.onSuccess(saveDeal);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1389,8 +1371,8 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
         
     
         
-            //Method followBrands definition
-            public void followBrands(  String appUserId,  DataList<String> brandList, final DataListCallback<FollowBrand> callback){
+            //Method saveDeal definition
+            public void saveDeal(  String appUserId,  String hotDealId, final ObjectCallback<SaveDeal> callback){
 
                 /**
                 Call the onBefore event
@@ -1404,175 +1386,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
                 
                         hashMapObject.put("appUserId", appUserId);
                 
-                        hashMapObject.put("brandList", brandList);
-                
-
-                
-
-
-                
-
-                
-                    invokeStaticMethod("followBrands", hashMapObject, new Adapter.JsonArrayCallback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONArray response) {
-                            
-                                if(response != null){
-                                    //Now converting jsonObject to list
-                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<FollowBrand> followBrandList = new DataList<FollowBrand>();
-                                    FollowBrandRepository followBrandRepo = getRestAdapter().createRepository(FollowBrandRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = followBrandRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(followBrandRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-                                    }
-                                    for (Map<String, Object> obj : result) {
-
-                                        FollowBrand followBrand = followBrandRepo.createObject(obj);
-
-                                        //Add to database if persistent storage required..
-                                        if(isSTORE_LOCALLY()){
-                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                            try {
-                                                      Method method = followBrand.getClass().getMethod("save__db");
-                                                      method.invoke(followBrand);
-
-                                            } catch (Exception e) {
-                                                Log.e("Database Error", e.toString());
-                                            }
-                                        }
-
-                                        followBrandList.add(followBrand);
-                                    }
-                                    callback.onSuccess(followBrandList);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-            }//Method followBrands definition ends here..
-
-            
-
-        
-    
-        
-            //Method getBrands definition
-            public void getBrands(  Map<String,  ? extends Object> filter, final DataListCallback<FollowBrand> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("filter", filter);
-                
-
-                
-
-
-                
-
-                
-                    invokeStaticMethod("getBrands", hashMapObject, new Adapter.JsonArrayCallback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONArray response) {
-                            
-                                if(response != null){
-                                    //Now converting jsonObject to list
-                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<FollowBrand> followBrandList = new DataList<FollowBrand>();
-                                    FollowBrandRepository followBrandRepo = getRestAdapter().createRepository(FollowBrandRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = followBrandRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(followBrandRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-                                    }
-                                    for (Map<String, Object> obj : result) {
-
-                                        FollowBrand followBrand = followBrandRepo.createObject(obj);
-
-                                        //Add to database if persistent storage required..
-                                        if(isSTORE_LOCALLY()){
-                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                            try {
-                                                      Method method = followBrand.getClass().getMethod("save__db");
-                                                      method.invoke(followBrand);
-
-                                            } catch (Exception e) {
-                                                Log.e("Database Error", e.toString());
-                                            }
-                                        }
-
-                                        followBrandList.add(followBrand);
-                                    }
-                                    callback.onSuccess(followBrandList);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-            }//Method getBrands definition ends here..
-
-            
-
-        
-    
-        
-            //Method addBrands definition
-            public void addBrands(  String appUserId,  String brandId, final ObjectCallback<FollowBrand> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("appUserId", appUserId);
-                
-                        hashMapObject.put("brandId", brandId);
+                        hashMapObject.put("hotDealId", hotDealId);
                 
 
                 
@@ -1581,7 +1395,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
                 
                     
                     
-                    invokeStaticMethod("addBrands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("saveDeal", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1594,27 +1408,27 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    FollowBrandRepository followBrandRepo = getRestAdapter().createRepository(FollowBrandRepository.class);
+                                    SaveDealRepository saveDealRepo = getRestAdapter().createRepository(SaveDealRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = followBrandRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(followBrandRepo, context);
+                                            Method method = saveDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(saveDealRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //followBrandRepo.addStorage(context);
+                                        //saveDealRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    FollowBrand followBrand = followBrandRepo.createObject(result);
+                                    SaveDeal saveDeal = saveDealRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = followBrand.getClass().getMethod("save__db");
-                                                    method.invoke(followBrand);
+                                                    Method method = saveDeal.getClass().getMethod("save__db");
+                                                    method.invoke(saveDeal);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1622,7 +1436,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
 
                                       }
 
-                                    callback.onSuccess(followBrand);
+                                    callback.onSuccess(saveDeal);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1635,15 +1449,15 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
 
                 
 
-            }//Method addBrands definition ends here..
+            }//Method saveDeal definition ends here..
 
             
 
         
     
         
-            //Method removeBrands definition
-            public void removeBrands(  String appUserId,  String brandId, final ObjectCallback<JSONObject>  callback ){
+            //Method removeDeal definition
+            public void removeDeal(  String appUserId,  String hotDealId, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -1657,7 +1471,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
                 
                         hashMapObject.put("appUserId", appUserId);
                 
-                        hashMapObject.put("brandId", brandId);
+                        hashMapObject.put("hotDealId", hotDealId);
                 
 
                 
@@ -1665,7 +1479,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
 
                 
                     
-                    invokeStaticMethod("removeBrands", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("removeDeal", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1688,7 +1502,7 @@ public class FollowBrandRepository extends ModelRepository<FollowBrand> {
 
                 
 
-            }//Method removeBrands definition ends here..
+            }//Method removeDeal definition ends here..
 
             
 

@@ -173,6 +173,35 @@ public class SnaphySocket<M extends Model, R extends ModelRepository<M>> {
 
 
     /**
+     * Subscriber fires when socket is disconnected.
+     * @param callback
+     * @return {SnaphyRealTime} Return self to maintain chaining.
+     */
+    public SnaphySocket onDisconnected(final VoidCallback callback){
+        callback.onBefore();
+        Emitter.Listener onDataAdded = new Emitter.Listener() {
+            @Override
+            public void call(final Object... args) {
+                callback.onSuccess();
+                callback.onFinally();
+            }
+        };
+
+
+        //On Data added
+        socket.on(Socket.EVENT_DISCONNECT, onDataAdded);
+        return this;
+    }
+
+
+    public void leave(){
+        //socket.emit('leave', this.room);
+        socket.emit("leave", room);
+    }
+
+
+
+    /**
      * Listen for real time data change for onNewData added, deleted and updated..
      * @param onDataReceived
      */

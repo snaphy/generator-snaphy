@@ -61,6 +61,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.AppUserRepository;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.SaveDealRepository;
+            
+
+        
+    
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -736,6 +743,12 @@ public class AppUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -966,6 +979,15 @@ public class AppUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
                         
                         
                         
@@ -1364,6 +1386,12 @@ public class AppUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -1586,6 +1614,15 @@ public class AppUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
                         
                         
                         
@@ -2000,6 +2037,12 @@ public class AppUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -2206,6 +2249,15 @@ public class AppUser extends User {
                                     } //method def ends here.
                                  
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
                         
                         
                         
@@ -2719,6 +2771,12 @@ public class AppUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -2933,6 +2991,15 @@ public class AppUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
                         
                         
                         
@@ -2984,6 +3051,641 @@ public class AppUser extends User {
                 
                     //Define hasAndBelongsToMany..
 
+                 
+             
+          
+    
+        
+        
+                
+
+                
+                    
+                    //Define hasMany relation method here..
+                    private transient DataList<SaveDeal>  saveDeals ;
+
+                    public DataList< SaveDeal > getSaveDeals() {
+                        //Check for pure case of hasMany
+                                                    //TODO: Modify foreign key name..
+                          try{
+                            SaveDealRepository saveDealRepository = (SaveDealRepository) getRepository();
+
+                            if(that.getId() != null && saveDealRepository.getDb() != null){
+
+                                 //Fetch locally from db
+                                 //saveDeals = getSaveDeals__db(restAdapter);
+                                 // Getting single cont
+                                 saveDeals = saveDealRepository.getDb().getAll__db("appUserId", that.getId().toString());
+
+                                 //lowercaseFirstLetter(modelName)
+                            }
+                          }catch(Exception e){
+                                //Ignore
+                          }
+                                                return saveDeals;
+                    }
+
+                    public void setSaveDeals(DataList<SaveDeal> saveDeals) {
+                        boolean hashType = false;
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
+                        for(Object o: saveDeals){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
+                        }
+
+                        if(hashType){
+                            setSaveDeals1(hashMaps);
+                        }else{
+                            this.saveDeals = saveDeals;
+                            //TODO: Warning move this to new thread
+                            for(SaveDeal data: saveDeals){
+                              try{
+                                data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
+                            }
+                        }
+                    }
+
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setSaveDeals1(List<Map<String, Object>> saveDeals) {
+                        //First create a dummy Repo class object for ..
+                        SaveDealRepository saveDealsRepository = new SaveDealRepository();
+                        List<SaveDeal> result = new ArrayList<>();
+                        for (Map<String, Object> obj : saveDeals) {
+                            //Also add relation to child type for two way communication..
+                            SaveDeal obj1 = saveDealsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setSaveDeals(result);
+
+                    }
+
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setSaveDeals1(DataList<HashMap<String, Object>> saveDeals) {
+                        //First create a dummy Repo class object for ..
+                        SaveDealRepository saveDealsRepository = new SaveDealRepository();
+                        DataList<SaveDeal> result = new DataList<>();
+                        for (HashMap<String, Object> obj : saveDeals) {
+                            //Also add relation to child type for two way communication..
+                            SaveDeal obj1 = saveDealsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setSaveDeals(result);
+
+                    }
+
+
+                    //Adding relation method..
+                    //Add a dummy class Name object to seperate data..
+                    public void addRelation(DataList<SaveDeal> saveDeals, SaveDeal dummyClassInstance) {
+                        that.setSaveDeals(saveDeals);
+
+                    }
+
+                    //Adding relation method..
+                    //This will add a new data to the list relation object..
+                    public void addRelation(SaveDeal saveDeals) {
+                        try{
+                            try{
+
+                                  //Save to database..
+                                  saveDeals.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
+                            that.getSaveDeals().add(saveDeals);
+                        }catch(Exception e){
+                            DataList< SaveDeal> saveDeals1 = new DataList();
+                            //Now add this item to list..
+                            saveDeals1.add(saveDeals);
+                            //Now set data....
+                            that.setSaveDeals(saveDeals1);
+                        }
+                    }
+
+
+
+
+                    
+                        //Implement logic for pure hasMany methods here....
+
+                    
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void findById__saveDeals( String fk,  RestAdapter restAdapter, final ObjectCallback<SaveDeal> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final AppUserRepository  appUserRepo = restAdapter.createRepository(AppUserRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        appUserRepo.findById__saveDeals( (String)that.getId(), fk,  new ObjectCallback<SaveDeal> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(SaveDeal object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void destroyById__saveDeals( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final AppUserRepository  appUserRepo = restAdapter.createRepository(AppUserRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        appUserRepo.destroyById__saveDeals( (String)that.getId(), fk,  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void updateById__saveDeals( String fk,  SaveDeal data,  RestAdapter restAdapter, final ObjectCallback<SaveDeal> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final AppUserRepository  appUserRepo = restAdapter.createRepository(AppUserRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        appUserRepo.updateById__saveDeals( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<SaveDeal> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(SaveDeal object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__saveDeals( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<SaveDeal> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final AppUserRepository  appUserRepo = restAdapter.createRepository(AppUserRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        appUserRepo.get__saveDeals( (String)that.getId(), filter,  new DataListCallback<SaveDeal> (){
+                                            
+
+                                            
+
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(DataList<SaveDeal> object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            SaveDeal obj = new SaveDeal();
+                                                            addRelation(object, obj);
+                                                            //Disabling two way communication for cyclic error..
+                                                            /*for (SaveDeal obj : object) {
+                                                                //Also add relation to child type for two way communication..
+                                                                obj.addRelation(that);
+                                                            }*/
+
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void create__saveDeals( SaveDeal data,  RestAdapter restAdapter, final ObjectCallback<SaveDeal> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final AppUserRepository  appUserRepo = restAdapter.createRepository(AppUserRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        appUserRepo.create__saveDeals( (String)that.getId(), data.convertMap(),  new ObjectCallback<SaveDeal> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(SaveDeal object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void delete__saveDeals( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final AppUserRepository  appUserRepo = restAdapter.createRepository(AppUserRepository.class);
+                                        
+                                        
+
+
+
+                                        appUserRepo.delete__saveDeals( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void count__saveDeals( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final AppUserRepository  appUserRepo = restAdapter.createRepository(AppUserRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        appUserRepo.count__saveDeals( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                        //Calling the finally..callback
+                                                        callback.onFinally();
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                
+                    //Define hasMany, hasManyThrough method here..
+
+                 
                  
              
           

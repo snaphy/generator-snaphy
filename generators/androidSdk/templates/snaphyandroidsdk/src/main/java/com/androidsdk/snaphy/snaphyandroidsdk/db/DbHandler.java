@@ -201,6 +201,12 @@ public class DbHandler extends SQLiteOpenHelper {
                         db.execSQL(CREATE_GoogleComment_TABLE_34);
 
 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+                        String CREATE_SaveDeal_TABLE_35 = "CREATE TABLE IF NOT EXISTS `SaveDeal` (  `added` TEXT, `id` TEXT PRIMARY KEY, `appUserId` TEXT, `hotDealId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_SaveDeal_TABLE_35);
+
+
             
         }
 
@@ -312,6 +318,9 @@ public class DbHandler extends SQLiteOpenHelper {
             
                 // Drop older table if existed
                 db.execSQL("DROP TABLE IF EXISTS `GoogleComment`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `SaveDeal`");
             
 
             // Create tables again

@@ -83,6 +83,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.AppUserDb;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.SaveDeal;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.SaveDealRepository;
+            
+        
+    
+
 
 
 
@@ -424,6 +431,33 @@ public class AppUserRepository extends UserRepository<AppUser> {
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/saveDeals/:fk", "GET"), "AppUser.prototype.__findById__saveDeals");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/saveDeals/:fk", "DELETE"), "AppUser.prototype.__destroyById__saveDeals");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/saveDeals/:fk", "PUT"), "AppUser.prototype.__updateById__saveDeals");
+    
+
+    
+    
+
+    
+
+    
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/accessTokens", "GET"), "AppUser.prototype.__get__accessTokens");
     
 
@@ -596,6 +630,42 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/followBrands/count", "GET"), "AppUser.prototype.__count__followBrands");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/saveDeals", "GET"), "AppUser.prototype.__get__saveDeals");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/saveDeals", "POST"), "AppUser.prototype.__create__saveDeals");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/saveDeals", "DELETE"), "AppUser.prototype.__delete__saveDeals");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:appUserId/saveDeals/count", "GET"), "AppUser.prototype.__count__saveDeals");
     
 
     
@@ -824,6 +894,9 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/subscribe", "POST"), "AppUser.subscribe");
+    
+
+    
     
 
     
@@ -2178,6 +2251,226 @@ public class AppUserRepository extends UserRepository<AppUser> {
         
     
         
+            //Method findById__saveDeals definition
+            public void findById__saveDeals(  String appUserId,  String fk, final ObjectCallback<SaveDeal> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__findById__saveDeals", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    SaveDealRepository saveDealRepo = getRestAdapter().createRepository(SaveDealRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = saveDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(saveDealRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //saveDealRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    SaveDeal saveDeal = saveDealRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = saveDeal.getClass().getMethod("save__db");
+                                                    method.invoke(saveDeal);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(saveDeal);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method findById__saveDeals definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__saveDeals definition
+            public void destroyById__saveDeals(  String appUserId,  String fk, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__saveDeals", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__saveDeals definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__saveDeals definition
+            public void updateById__saveDeals(  String appUserId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<SaveDeal> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__updateById__saveDeals", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    SaveDealRepository saveDealRepo = getRestAdapter().createRepository(SaveDealRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = saveDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(saveDealRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //saveDealRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    SaveDeal saveDeal = saveDealRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = saveDeal.getClass().getMethod("save__db");
+                                                    method.invoke(saveDeal);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(saveDeal);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method updateById__saveDeals definition ends here..
+
+            
+
+        
+    
+        
             //Method get__accessTokens definition
             public void get__accessTokens(  String appUserId,  Map<String,  ? extends Object> filter, final DataListCallback<AccessToken> callback){
 
@@ -3517,6 +3810,275 @@ public class AppUserRepository extends UserRepository<AppUser> {
                 
 
             }//Method count__followBrands definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__saveDeals definition
+            public void get__saveDeals(  String appUserId,  Map<String,  ? extends Object> filter, final DataListCallback<SaveDeal> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__saveDeals", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<SaveDeal> saveDealList = new DataList<SaveDeal>();
+                                    SaveDealRepository saveDealRepo = getRestAdapter().createRepository(SaveDealRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = saveDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(saveDealRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        SaveDeal saveDeal = saveDealRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = saveDeal.getClass().getMethod("save__db");
+                                                      method.invoke(saveDeal);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        saveDealList.add(saveDeal);
+                                    }
+                                    callback.onSuccess(saveDealList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method get__saveDeals definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__saveDeals definition
+            public void create__saveDeals(  String appUserId,  Map<String,  ? extends Object> data, final ObjectCallback<SaveDeal> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__saveDeals", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    SaveDealRepository saveDealRepo = getRestAdapter().createRepository(SaveDealRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = saveDealRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(saveDealRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //saveDealRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    SaveDeal saveDeal = saveDealRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = saveDeal.getClass().getMethod("save__db");
+                                                    method.invoke(saveDeal);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(saveDeal);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__saveDeals definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__saveDeals definition
+            public void delete__saveDeals(  String appUserId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__saveDeals", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__saveDeals definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__saveDeals definition
+            public void count__saveDeals(  String appUserId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("appUserId", appUserId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__saveDeals", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method count__saveDeals definition ends here..
 
             
 
@@ -4928,6 +5490,8 @@ public class AppUserRepository extends UserRepository<AppUser> {
 
             
 
+        
+    
         
     
         

@@ -26,7 +26,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.FollowBrandRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.SaveDealRepository;
 
 //Now import repository of related models..
 
@@ -38,7 +38,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.FollowBrandRepository;
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.HotDealRepository;
             
 
         
@@ -51,7 +51,7 @@ import java.util.Map;
 
 
 
-public class FollowBrand extends Model {
+public class SaveDeal extends Model {
 
 
     //For converting all model values to hashMap
@@ -66,9 +66,9 @@ public class FollowBrand extends Model {
         }
     }
 
-    private FollowBrand that ;
+    private SaveDeal that ;
 
-    public FollowBrand (){
+    public SaveDeal (){
         that = this;
     }
 
@@ -128,7 +128,7 @@ public class FollowBrand extends Model {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      FollowBrandRepository lowercaseFirstLetterRepository = (FollowBrandRepository) getRepository();
+      SaveDealRepository lowercaseFirstLetterRepository = (SaveDealRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
@@ -143,7 +143,7 @@ public class FollowBrand extends Model {
 
 
     public void save__db(String id){
-      FollowBrandRepository lowercaseFirstLetterRepository = (FollowBrandRepository) getRepository();
+      SaveDealRepository lowercaseFirstLetterRepository = (SaveDealRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -154,7 +154,7 @@ public class FollowBrand extends Model {
 
 
     public void delete__db(){
-      FollowBrandRepository lowercaseFirstLetterRepository = (FollowBrandRepository) getRepository();
+      SaveDealRepository lowercaseFirstLetterRepository = (SaveDealRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
         if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -206,9 +206,9 @@ public class FollowBrand extends Model {
 			try{
 				//Adding database method for fetching from relation if not present..
 		                if(appUser == null){
-		                  FollowBrandRepository followBrandRepository = (FollowBrandRepository) getRepository();
+		                  SaveDealRepository saveDealRepository = (SaveDealRepository) getRepository();
 
-		                  RestAdapter restAdapter = followBrandRepository.getRestAdapter();
+		                  RestAdapter restAdapter = saveDealRepository.getRestAdapter();
 		                  if(restAdapter != null){
 		                    //Fetch locally from db
 		                    appUser = getAppUser__db(restAdapter);
@@ -252,7 +252,7 @@ public class FollowBrand extends Model {
                       if(appUserId != null){
                         AppUserRepository appUserRepository = restAdapter.createRepository(AppUserRepository.class);
 			  try{
-				FollowBrandRepository lowercaseFirstLetterRepository = (FollowBrandRepository) getRepository();
+				SaveDealRepository lowercaseFirstLetterRepository = (SaveDealRepository) getRepository();
 		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 		                        Context context = lowercaseFirstLetterRepository.getContext();
 		                        if(appUserRepository.getDb() == null ){
@@ -300,7 +300,7 @@ public class FollowBrand extends Model {
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final FollowBrandRepository  followBrandRepo = restAdapter.createRepository(FollowBrandRepository.class);
+                                        final SaveDealRepository  saveDealRepo = restAdapter.createRepository(SaveDealRepository.class);
                                         
                                         
                                         
@@ -309,7 +309,7 @@ public class FollowBrand extends Model {
 
 
 
-                                        followBrandRepo.get__appUser( (String)that.getId(), refresh,  new ObjectCallback<AppUser> (){
+                                        saveDealRepo.get__appUser( (String)that.getId(), refresh,  new ObjectCallback<AppUser> (){
                                             
 
                                             
@@ -387,8 +387,6 @@ public class FollowBrand extends Model {
                         
                         
                         
-                        
-                        
                     
 
                 
@@ -402,80 +400,80 @@ public class FollowBrand extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient Brand  brand ;
-                    private String brandId;
+                    private transient HotDeal  hotDeal ;
+                    private String hotDealId;
 
-                    public String getBrandId(){
-                         return brandId;
+                    public String getHotDealId(){
+                         return hotDealId;
                     }
 
-                    public void setBrandId(Object brandId){
-                        if(brandId != null){
-                          this.brandId = brandId.toString();
+                    public void setHotDealId(Object hotDealId){
+                        if(hotDealId != null){
+                          this.hotDealId = hotDealId.toString();
                         }
                     }
 
-                    public Brand getBrand() {
+                    public HotDeal getHotDeal() {
 			try{
 				//Adding database method for fetching from relation if not present..
-		                if(brand == null){
-		                  FollowBrandRepository followBrandRepository = (FollowBrandRepository) getRepository();
+		                if(hotDeal == null){
+		                  SaveDealRepository saveDealRepository = (SaveDealRepository) getRepository();
 
-		                  RestAdapter restAdapter = followBrandRepository.getRestAdapter();
+		                  RestAdapter restAdapter = saveDealRepository.getRestAdapter();
 		                  if(restAdapter != null){
 		                    //Fetch locally from db
-		                    brand = getBrand__db(restAdapter);
+		                    hotDeal = getHotDeal__db(restAdapter);
 		                  }
 		                }
 			}catch(Exception e){
 				//Ignore
 			}
 
-                        return brand;
+                        return hotDeal;
                     }
 
-                    public void setBrand(Brand brand) {
-                        this.brand = brand;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setBrand(Map<String, Object> brand) {
-                        //First create a dummy Repo class object for customer.
-                        BrandRepository brandRepository = new BrandRepository();
-                        Brand brand1 = brandRepository.createObject(brand);
-                        setBrand(brand1);
+                    public void setHotDeal(HotDeal hotDeal) {
+                        this.hotDeal = hotDeal;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setBrand(HashMap<String, Object> brand) {
+                    public void setHotDeal(Map<String, Object> hotDeal) {
                         //First create a dummy Repo class object for customer.
-                        BrandRepository brandRepository = new BrandRepository();
-                        Brand brand1 = brandRepository.createObject(brand);
-                        setBrand(brand1);
+                        HotDealRepository hotDealRepository = new HotDealRepository();
+                        HotDeal hotDeal1 = hotDealRepository.createObject(hotDeal);
+                        setHotDeal(hotDeal1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setHotDeal(HashMap<String, Object> hotDeal) {
+                        //First create a dummy Repo class object for customer.
+                        HotDealRepository hotDealRepository = new HotDealRepository();
+                        HotDeal hotDeal1 = hotDealRepository.createObject(hotDeal);
+                        setHotDeal(hotDeal1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Brand brand) {
-                        that.setBrand(brand);
+                    public void addRelation(HotDeal hotDeal) {
+                        that.setHotDeal(hotDeal);
                     }
 
 
-                    //Fetch related data from local database if present a brandId identifier as property for belongsTo
-                    public Brand getBrand__db(RestAdapter restAdapter){
-                      if(brandId != null){
-                        BrandRepository brandRepository = restAdapter.createRepository(BrandRepository.class);
+                    //Fetch related data from local database if present a hotDealId identifier as property for belongsTo
+                    public HotDeal getHotDeal__db(RestAdapter restAdapter){
+                      if(hotDealId != null){
+                        HotDealRepository hotDealRepository = restAdapter.createRepository(HotDealRepository.class);
 			  try{
-				FollowBrandRepository lowercaseFirstLetterRepository = (FollowBrandRepository) getRepository();
+				SaveDealRepository lowercaseFirstLetterRepository = (SaveDealRepository) getRepository();
 		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 		                        Context context = lowercaseFirstLetterRepository.getContext();
-		                        if(brandRepository.getDb() == null ){
-		                            brandRepository.addStorage(context);
+		                        if(hotDealRepository.getDb() == null ){
+		                            hotDealRepository.addStorage(context);
 		                        }
 
-		                        if(context != null && brandRepository.getDb() != null){
-		                            brandRepository.addStorage(context);
-		                            Brand brand = (Brand) brandRepository.getDb().get__db(brandId);
-		                            return brand;
+		                        if(context != null && hotDealRepository.getDb() != null){
+		                            hotDealRepository.addStorage(context);
+		                            HotDeal hotDeal = (HotDeal) hotDealRepository.getDb().get__db(hotDealId);
+		                            return hotDeal;
 		                        }else{
 		                            return null;
 		                        }
@@ -510,12 +508,12 @@ public class FollowBrand extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__brand( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Brand> callback) {
+                                    public void get__hotDeal( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<HotDeal> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final FollowBrandRepository  followBrandRepo = restAdapter.createRepository(FollowBrandRepository.class);
+                                        final SaveDealRepository  saveDealRepo = restAdapter.createRepository(SaveDealRepository.class);
                                         
                                         
                                         
@@ -524,13 +522,13 @@ public class FollowBrand extends Model {
 
 
 
-                                        followBrandRepo.get__brand( (String)that.getId(), refresh,  new ObjectCallback<Brand> (){
+                                        saveDealRepo.get__hotDeal( (String)that.getId(), refresh,  new ObjectCallback<HotDeal> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Brand object) {
+                                                    public void onSuccess(HotDeal object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -564,8 +562,6 @@ public class FollowBrand extends Model {
                                     } //method def ends here.
                                  
                             
-                        
-                        
                         
                         
                         
