@@ -137,7 +137,7 @@ public class <%- modelName %>Db{
             var getForeignKeyName = function (model, relation) {
               var foreignKey = model.relations[relation].foreignKey;
               if (!foreignKey) {
-                foreignKey = lowercaseFirstLetter(relation) + "Id";
+                foreignKey = lowercaseFirstLetter(model.relations[relation].model) + "Id";
               }
               return foreignKey;
             };
