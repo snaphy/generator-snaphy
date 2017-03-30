@@ -320,6 +320,7 @@ public class PostDb{
                         }else{
                           anonymousData = false;
                         }
+                        hashMap.put("anonymous", anonymousData);
                                                 
                                 
                                                             String statusData = "";

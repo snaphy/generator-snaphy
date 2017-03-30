@@ -259,6 +259,7 @@ public class PostDetailDb{
                         }else{
                           hasAcceptedAnswerData = false;
                         }
+                        hashMap.put("hasAcceptedAnswer", hasAcceptedAnswerData);
                                                 
                                 
                                                             double totalSaveData = (double)0;
