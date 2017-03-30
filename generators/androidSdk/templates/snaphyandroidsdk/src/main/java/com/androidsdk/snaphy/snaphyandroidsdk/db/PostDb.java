@@ -181,13 +181,13 @@ public class PostDb{
                   
         
           
-                    String postDetailsIdData = "";
+                    String postDetailIdData = "";
                     try {
-                        Method method = modelData.getClass().getMethod("getPostDetailsId");
+                        Method method = modelData.getClass().getMethod("getPostDetailId");
                         if(method.invoke(modelData) != null){
-                          //postDetailsIdData = modelData.getPostDetailsId().toString();
-                          postDetailsIdData = (String) method.invoke(modelData);
-                          values.put("`postDetailsId`", postDetailsIdData);
+                          //postDetailIdData = modelData.getPostDetailId().toString();
+                          postDetailIdData = (String) method.invoke(modelData);
+                          values.put("`postDetailId`", postDetailIdData);
                         }
                     } catch (Exception e) {
                       Log.e("Database Error", e.toString());

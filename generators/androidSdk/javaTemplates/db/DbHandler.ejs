@@ -81,7 +81,7 @@ public class DbHandler extends SQLiteOpenHelper {
                           var getForeignKeyName = function (model, relation) {
                             var foreignKey = model.relations[relation].foreignKey;
                             if (!foreignKey) {
-                              foreignKey = lowercaseFirstLetter(model.relations[relation].model) + "Id";
+                              foreignKey = model_.methods.lowercaseFirstLetter(model.relations[relation].model) + "Id";
                             }
                             return foreignKey;
                           };

@@ -119,7 +119,7 @@ public class DbHandler extends SQLiteOpenHelper {
                         
 
                         
-                        String CREATE_Post_TABLE_22 = "CREATE TABLE IF NOT EXISTS `Post` (  `heading` TEXT, `description` TEXT, `added` TEXT, `postImages` TEXT, `anonymous` NUMBER, `status` TEXT, `latest` TEXT, `unsolved` TEXT, `trending` TEXT, `posted` TEXT, `saved` TEXT, `id` TEXT PRIMARY KEY, `customerId` TEXT, postDetailsId TEXT , _DATA_UPDATED NUMBER )";
+                        String CREATE_Post_TABLE_22 = "CREATE TABLE IF NOT EXISTS `Post` (  `heading` TEXT, `description` TEXT, `added` TEXT, `postImages` TEXT, `anonymous` NUMBER, `status` TEXT, `latest` TEXT, `unsolved` TEXT, `trending` TEXT, `posted` TEXT, `saved` TEXT, `id` TEXT PRIMARY KEY, `customerId` TEXT, postDetailId TEXT , _DATA_UPDATED NUMBER )";
                         db.execSQL(CREATE_Post_TABLE_22);
 
 
@@ -135,7 +135,7 @@ public class DbHandler extends SQLiteOpenHelper {
                         
 
                         
-                        String CREATE_Comment_TABLE_24 = "CREATE TABLE IF NOT EXISTS `Comment` (  `answer` TEXT, `status` TEXT, `id` TEXT PRIMARY KEY, `postId` TEXT, `customerId` TEXT, commentDetailsId TEXT , postSubscribersId TEXT , postDetailsId TEXT , _DATA_UPDATED NUMBER )";
+                        String CREATE_Comment_TABLE_24 = "CREATE TABLE IF NOT EXISTS `Comment` (  `answer` TEXT, `status` TEXT, `id` TEXT PRIMARY KEY, `postId` TEXT, `customerId` TEXT, commentDetailId TEXT , postSubscriberId TEXT , postDetailId TEXT , _DATA_UPDATED NUMBER )";
                         db.execSQL(CREATE_Comment_TABLE_24);
 
 
@@ -167,7 +167,7 @@ public class DbHandler extends SQLiteOpenHelper {
                         
 
                         
-                        String CREATE_SavePost_TABLE_28 = "CREATE TABLE IF NOT EXISTS `SavePost` (  `added` TEXT, `id` TEXT PRIMARY KEY, `postId` TEXT, `customerId` TEXT, postSubscribersId TEXT , _DATA_UPDATED NUMBER )";
+                        String CREATE_SavePost_TABLE_28 = "CREATE TABLE IF NOT EXISTS `SavePost` (  `added` TEXT, `id` TEXT PRIMARY KEY, `postId` TEXT, `customerId` TEXT, postSubscriberId TEXT , _DATA_UPDATED NUMBER )";
                         db.execSQL(CREATE_SavePost_TABLE_28);
 
 
@@ -175,7 +175,7 @@ public class DbHandler extends SQLiteOpenHelper {
                         
 
                         
-                        String CREATE_LikePost_TABLE_29 = "CREATE TABLE IF NOT EXISTS `LikePost` (  `added` TEXT, `id` TEXT PRIMARY KEY, `postId` TEXT, `customerId` TEXT, postSubscribersId TEXT , _DATA_UPDATED NUMBER )";
+                        String CREATE_LikePost_TABLE_29 = "CREATE TABLE IF NOT EXISTS `LikePost` (  `added` TEXT, `id` TEXT PRIMARY KEY, `postId` TEXT, `customerId` TEXT, postSubscriberId TEXT , _DATA_UPDATED NUMBER )";
                         db.execSQL(CREATE_LikePost_TABLE_29);
 
 

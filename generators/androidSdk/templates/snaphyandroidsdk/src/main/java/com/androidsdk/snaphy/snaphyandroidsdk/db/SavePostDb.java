@@ -125,13 +125,13 @@ public class SavePostDb{
                   
         
           
-                    String postSubscribersIdData = "";
+                    String postSubscriberIdData = "";
                     try {
-                        Method method = modelData.getClass().getMethod("getPostSubscribersId");
+                        Method method = modelData.getClass().getMethod("getPostSubscriberId");
                         if(method.invoke(modelData) != null){
-                          //postSubscribersIdData = modelData.getPostSubscribersId().toString();
-                          postSubscribersIdData = (String) method.invoke(modelData);
-                          values.put("`postSubscribersId`", postSubscribersIdData);
+                          //postSubscriberIdData = modelData.getPostSubscriberId().toString();
+                          postSubscriberIdData = (String) method.invoke(modelData);
+                          values.put("`postSubscriberId`", postSubscriberIdData);
                         }
                     } catch (Exception e) {
                       Log.e("Database Error", e.toString());

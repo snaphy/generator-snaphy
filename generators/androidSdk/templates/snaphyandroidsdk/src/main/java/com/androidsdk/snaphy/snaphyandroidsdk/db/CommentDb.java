@@ -132,37 +132,37 @@ public class CommentDb{
                   
         
           
-                    String commentDetailsIdData = "";
+                    String commentDetailIdData = "";
                     try {
-                        Method method = modelData.getClass().getMethod("getCommentDetailsId");
+                        Method method = modelData.getClass().getMethod("getCommentDetailId");
                         if(method.invoke(modelData) != null){
-                          //commentDetailsIdData = modelData.getCommentDetailsId().toString();
-                          commentDetailsIdData = (String) method.invoke(modelData);
-                          values.put("`commentDetailsId`", commentDetailsIdData);
+                          //commentDetailIdData = modelData.getCommentDetailId().toString();
+                          commentDetailIdData = (String) method.invoke(modelData);
+                          values.put("`commentDetailId`", commentDetailIdData);
                         }
                     } catch (Exception e) {
                       Log.e("Database Error", e.toString());
                     }
           
-                    String postSubscribersIdData = "";
+                    String postSubscriberIdData = "";
                     try {
-                        Method method = modelData.getClass().getMethod("getPostSubscribersId");
+                        Method method = modelData.getClass().getMethod("getPostSubscriberId");
                         if(method.invoke(modelData) != null){
-                          //postSubscribersIdData = modelData.getPostSubscribersId().toString();
-                          postSubscribersIdData = (String) method.invoke(modelData);
-                          values.put("`postSubscribersId`", postSubscribersIdData);
+                          //postSubscriberIdData = modelData.getPostSubscriberId().toString();
+                          postSubscriberIdData = (String) method.invoke(modelData);
+                          values.put("`postSubscriberId`", postSubscriberIdData);
                         }
                     } catch (Exception e) {
                       Log.e("Database Error", e.toString());
                     }
           
-                    String postDetailsIdData = "";
+                    String postDetailIdData = "";
                     try {
-                        Method method = modelData.getClass().getMethod("getPostDetailsId");
+                        Method method = modelData.getClass().getMethod("getPostDetailId");
                         if(method.invoke(modelData) != null){
-                          //postDetailsIdData = modelData.getPostDetailsId().toString();
-                          postDetailsIdData = (String) method.invoke(modelData);
-                          values.put("`postDetailsId`", postDetailsIdData);
+                          //postDetailIdData = modelData.getPostDetailId().toString();
+                          postDetailIdData = (String) method.invoke(modelData);
+                          values.put("`postDetailId`", postDetailIdData);
                         }
                     } catch (Exception e) {
                       Log.e("Database Error", e.toString());
