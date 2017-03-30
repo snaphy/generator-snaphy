@@ -84,8 +84,8 @@ public class AdminEmailDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`to`", toData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String fromData = "";
@@ -100,8 +100,8 @@ public class AdminEmailDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`from`", fromData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String subjectData = "";
@@ -116,8 +116,8 @@ public class AdminEmailDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`subject`", subjectData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String textData = "";
@@ -132,8 +132,8 @@ public class AdminEmailDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`text`", textData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String htmlData = "";
@@ -148,8 +148,8 @@ public class AdminEmailDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`html`", htmlData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -164,8 +164,8 @@ public class AdminEmailDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`id`", idData);
+                                                 
+                
                   
 
         //Add the updated data property value to be 1

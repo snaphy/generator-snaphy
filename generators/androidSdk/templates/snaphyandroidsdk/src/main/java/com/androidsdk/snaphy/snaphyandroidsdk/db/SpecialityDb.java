@@ -76,8 +76,8 @@ public class SpecialityDb{
                           nameData = modelData.getName().toString();
                           values.put("`name`", nameData);
                         }
-                                                //Removed Commented..
-              //values.put("`name`", nameData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -92,8 +92,8 @@ public class SpecialityDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`id`", idData);
+                                                 
+                
                   
 
         //Add the updated data property value to be 1

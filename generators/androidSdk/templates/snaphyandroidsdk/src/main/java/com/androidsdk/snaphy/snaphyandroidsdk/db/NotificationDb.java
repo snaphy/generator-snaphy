@@ -84,8 +84,8 @@ public class NotificationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`alert`", alertData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String badgeData = "";
@@ -100,8 +100,8 @@ public class NotificationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`badge`", badgeData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String categoryData = "";
@@ -116,8 +116,8 @@ public class NotificationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`category`", categoryData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String collapseKeyData = "";
@@ -132,8 +132,8 @@ public class NotificationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`collapseKey`", collapseKeyData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String contentAvailableData = "";
@@ -148,8 +148,8 @@ public class NotificationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`contentAvailable`", contentAvailableData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String createdData = "";
@@ -164,8 +164,8 @@ public class NotificationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`created`", createdData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String delayWhileIdleData = "";
@@ -180,8 +180,8 @@ public class NotificationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`delayWhileIdle`", delayWhileIdleData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String deviceTokenData = "";
@@ -196,8 +196,8 @@ public class NotificationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`deviceToken`", deviceTokenData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String deviceTypeData = "";
@@ -212,8 +212,8 @@ public class NotificationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`deviceType`", deviceTypeData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String expirationIntervalData = "";
@@ -228,8 +228,8 @@ public class NotificationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`expirationInterval`", expirationIntervalData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String expirationTimeData = "";
@@ -244,8 +244,8 @@ public class NotificationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`expirationTime`", expirationTimeData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String modifiedData = "";
@@ -260,8 +260,8 @@ public class NotificationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`modified`", modifiedData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String scheduledTimeData = "";
@@ -276,8 +276,8 @@ public class NotificationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`scheduledTime`", scheduledTimeData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String soundData = "";
@@ -292,8 +292,8 @@ public class NotificationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`sound`", soundData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String statusData = "";
@@ -308,15 +308,15 @@ public class NotificationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`status`", statusData);
+                                                 
+                
                                 
                                   String urlArgsData = "";
                   if(modelData.getUrlArgs() != null){
                     urlArgsData = new Gson().toJson(modelData.getUrlArgs(), DataList.class);
                   }
-                            //Removed Commented..
-              //values.put("`urlArgs`", urlArgsData);
+                             
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -331,8 +331,8 @@ public class NotificationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`id`", idData);
+                                                 
+                
                   
 
         //Add the updated data property value to be 1

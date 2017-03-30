@@ -126,8 +126,41 @@ public class <%- modelName %>Db{
 
                     <% } -%>
               <% }//END IF-ELSE -%>
-              //Removed Commented..
-              //values.put("`<%-property%>`", <%-property%>Data);
+               <%
+                 function lowercaseFirstLetter(string) {
+                   return string.charAt(0).toLowerCase() + string.slice(1);
+                 }
+                  //Prepare method for get foreign key..
+                  var getForeignKeyName = function (model, relation) {
+                    var foreignKey = model.relations[relation].foreignKey;
+                    if (!foreignKey) {
+                      foreignKey = lowercaseFirstLetter(relation) + "Id";
+                    }
+                    return foreignKey;
+                  };
+               %>
+                <%
+                  for(var relation in model.relations) {
+                      if(model.relations.hasOwnProperty(relation)) {
+                        if (model.relations[relation].type === "hasOne") {
+                        var capitalPropertyName = model.methods.capitalizeFirstLetter(getForeignKeyName(model, relation));
+                %>
+                          String <%- getForeignKeyName(model, relation) %>Data = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("get<%-capitalPropertyName%>");
+                              if(method.invoke(modelData) != null){
+                                //<%-getForeignKeyName(model, relation)%>Data = modelData.get<%-capitalPropertyName%>().toString();
+                                <%-getForeignKeyName(model, relation)%>Data = (String) method.invoke(modelData);
+                                values.put("`<%-getForeignKeyName(model, relation)%>`", <%-getForeignKeyName(model, relation)%>Data);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                <%
+                        }
+                      }
+                  }
+                %>
           <% } -%>
         <%}%>
 

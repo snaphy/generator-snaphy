@@ -74,32 +74,32 @@ public class CommentDetailDb{
                                                             double totalLikeData;
                         totalLikeData = (double)modelData.getTotalLike();
                         values.put("`totalLike`", totalLikeData);
-                                                //Removed Commented..
-              //values.put("`totalLike`", totalLikeData);
+                                                 
+                
                                 
                                                             String addedData = "";
                         if(modelData.getAdded() != null){
                           addedData = modelData.getAdded().toString();
                           values.put("`added`", addedData);
                         }
-                                                //Removed Commented..
-              //values.put("`added`", addedData);
+                                                 
+                
                                 
                                                             String updatedData = "";
                         if(modelData.getUpdated() != null){
                           updatedData = modelData.getUpdated().toString();
                           values.put("`updated`", updatedData);
                         }
-                                                //Removed Commented..
-              //values.put("`updated`", updatedData);
+                                                 
+                
                                 
                                                             String statusData = "";
                         if(modelData.getStatus() != null){
                           statusData = modelData.getStatus().toString();
                           values.put("`status`", statusData);
                         }
-                                                //Removed Commented..
-              //values.put("`status`", statusData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -114,8 +114,8 @@ public class CommentDetailDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`id`", idData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String commentIdData = "";
@@ -130,8 +130,8 @@ public class CommentDetailDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`commentId`", commentIdData);
+                                                 
+                
                   
 
         //Add the updated data property value to be 1

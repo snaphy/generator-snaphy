@@ -76,31 +76,79 @@ public class PostDb{
                           headingData = modelData.getHeading().toString();
                           values.put("`heading`", headingData);
                         }
-                                                //Removed Commented..
-              //values.put("`heading`", headingData);
+                                                 
+                
+                          String postDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //postDetailsIdData = modelData.getPostDetailsId().toString();
+                                postDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`postDetailsId`", postDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
                                 
                                                             String descriptionData = "";
                         if(modelData.getDescription() != null){
                           descriptionData = modelData.getDescription().toString();
                           values.put("`description`", descriptionData);
                         }
-                                                //Removed Commented..
-              //values.put("`description`", descriptionData);
+                                                 
+                
+                          String postDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //postDetailsIdData = modelData.getPostDetailsId().toString();
+                                postDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`postDetailsId`", postDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
                                 
                                                             String addedData = "";
                         if(modelData.getAdded() != null){
                           addedData = modelData.getAdded().toString();
                           values.put("`added`", addedData);
                         }
-                                                //Removed Commented..
-              //values.put("`added`", addedData);
+                                                 
+                
+                          String postDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //postDetailsIdData = modelData.getPostDetailsId().toString();
+                                postDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`postDetailsId`", postDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
                                 
                                   String postImagesData = "";
                   if(modelData.getPostImages() != null){
                     postImagesData = new Gson().toJson(modelData.getPostImages(), DataList.class);
                   }
-                            //Removed Commented..
-              //values.put("`postImages`", postImagesData);
+                             
+                
+                          String postDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //postDetailsIdData = modelData.getPostDetailsId().toString();
+                                postDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`postDetailsId`", postDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
                                 
                                                             int anonymousData = 0;
                         if(modelData.getAnonymous()){
@@ -109,56 +157,140 @@ public class PostDb{
                           anonymousData = 0;
                         }
                         values.put("`anonymous`", anonymousData);
-                                                //Removed Commented..
-              //values.put("`anonymous`", anonymousData);
+                                                 
+                
+                          String postDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //postDetailsIdData = modelData.getPostDetailsId().toString();
+                                postDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`postDetailsId`", postDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
                                 
                                                             String statusData = "";
                         if(modelData.getStatus() != null){
                           statusData = modelData.getStatus().toString();
                           values.put("`status`", statusData);
                         }
-                                                //Removed Commented..
-              //values.put("`status`", statusData);
+                                                 
+                
+                          String postDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //postDetailsIdData = modelData.getPostDetailsId().toString();
+                                postDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`postDetailsId`", postDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
                                 
                                                             String latestData = "";
                         if(modelData.getLatest() != null){
                           latestData = modelData.getLatest().toString();
                           values.put("`latest`", latestData);
                         }
-                                                //Removed Commented..
-              //values.put("`latest`", latestData);
+                                                 
+                
+                          String postDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //postDetailsIdData = modelData.getPostDetailsId().toString();
+                                postDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`postDetailsId`", postDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
                                 
                                                             String unsolvedData = "";
                         if(modelData.getUnsolved() != null){
                           unsolvedData = modelData.getUnsolved().toString();
                           values.put("`unsolved`", unsolvedData);
                         }
-                                                //Removed Commented..
-              //values.put("`unsolved`", unsolvedData);
+                                                 
+                
+                          String postDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //postDetailsIdData = modelData.getPostDetailsId().toString();
+                                postDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`postDetailsId`", postDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
                                 
                                                             String trendingData = "";
                         if(modelData.getTrending() != null){
                           trendingData = modelData.getTrending().toString();
                           values.put("`trending`", trendingData);
                         }
-                                                //Removed Commented..
-              //values.put("`trending`", trendingData);
+                                                 
+                
+                          String postDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //postDetailsIdData = modelData.getPostDetailsId().toString();
+                                postDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`postDetailsId`", postDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
                                 
                                                             String postedData = "";
                         if(modelData.getPosted() != null){
                           postedData = modelData.getPosted().toString();
                           values.put("`posted`", postedData);
                         }
-                                                //Removed Commented..
-              //values.put("`posted`", postedData);
+                                                 
+                
+                          String postDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //postDetailsIdData = modelData.getPostDetailsId().toString();
+                                postDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`postDetailsId`", postDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
                                 
                                                             String savedData = "";
                         if(modelData.getSaved() != null){
                           savedData = modelData.getSaved().toString();
                           values.put("`saved`", savedData);
                         }
-                                                //Removed Commented..
-              //values.put("`saved`", savedData);
+                                                 
+                
+                          String postDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //postDetailsIdData = modelData.getPostDetailsId().toString();
+                                postDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`postDetailsId`", postDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -173,8 +305,20 @@ public class PostDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`id`", idData);
+                                                 
+                
+                          String postDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //postDetailsIdData = modelData.getPostDetailsId().toString();
+                                postDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`postDetailsId`", postDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String customerIdData = "";
@@ -189,8 +333,20 @@ public class PostDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`customerId`", customerIdData);
+                                                 
+                
+                          String postDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //postDetailsIdData = modelData.getPostDetailsId().toString();
+                                postDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`postDetailsId`", postDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
                   
 
         //Add the updated data property value to be 1

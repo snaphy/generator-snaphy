@@ -76,38 +76,38 @@ public class PaymentDb{
                           bookDetailData = new Gson().toJson(modelData.getBookDetail(), HashMap.class);
                           values.put("`bookDetail`", bookDetailData);
                         }
-                                                //Removed Commented..
-              //values.put("`bookDetail`", bookDetailData);
+                                                 
+                
                                 
                                                             String addressData = "";
                         if(modelData.getAddress() != null){
                           addressData = modelData.getAddress().toString();
                           values.put("`address`", addressData);
                         }
-                                                //Removed Commented..
-              //values.put("`address`", addressData);
+                                                 
+                
                                 
                                                             String phoneNumberData = "";
                         if(modelData.getPhoneNumber() != null){
                           phoneNumberData = modelData.getPhoneNumber().toString();
                           values.put("`phoneNumber`", phoneNumberData);
                         }
-                                                //Removed Commented..
-              //values.put("`phoneNumber`", phoneNumberData);
+                                                 
+                
                                 
                                                             String emailData = "";
                         if(modelData.getEmail() != null){
                           emailData = modelData.getEmail().toString();
                           values.put("`email`", emailData);
                         }
-                                                //Removed Commented..
-              //values.put("`email`", emailData);
+                                                 
+                
                                 
                                                             double amountData;
                         amountData = (double)modelData.getAmount();
                         values.put("`amount`", amountData);
-                                                //Removed Commented..
-              //values.put("`amount`", amountData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -122,8 +122,8 @@ public class PaymentDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`id`", idData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String bookIdData = "";
@@ -138,8 +138,8 @@ public class PaymentDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`bookId`", bookIdData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String customerIdData = "";
@@ -154,8 +154,8 @@ public class PaymentDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`customerId`", customerIdData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String orderIdData = "";
@@ -170,8 +170,8 @@ public class PaymentDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`orderId`", orderIdData);
+                                                 
+                
                   
 
         //Add the updated data property value to be 1

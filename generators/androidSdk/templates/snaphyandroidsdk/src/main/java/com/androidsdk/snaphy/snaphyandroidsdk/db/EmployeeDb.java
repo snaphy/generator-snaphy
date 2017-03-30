@@ -76,56 +76,56 @@ public class EmployeeDb{
                           usernameData = modelData.getUsername().toString();
                           values.put("`username`", usernameData);
                         }
-                                                //Removed Commented..
-              //values.put("`username`", usernameData);
+                                                 
+                
                                 
                                                             String firstNameData = "";
                         if(modelData.getFirstName() != null){
                           firstNameData = modelData.getFirstName().toString();
                           values.put("`firstName`", firstNameData);
                         }
-                                                //Removed Commented..
-              //values.put("`firstName`", firstNameData);
+                                                 
+                
                                 
                                                             String lastNameData = "";
                         if(modelData.getLastName() != null){
                           lastNameData = modelData.getLastName().toString();
                           values.put("`lastName`", lastNameData);
                         }
-                                                //Removed Commented..
-              //values.put("`lastName`", lastNameData);
+                                                 
+                
                                 
                                                             String dateData = "";
                         if(modelData.getDate() != null){
                           dateData = modelData.getDate().toString();
                           values.put("`date`", dateData);
                         }
-                                                //Removed Commented..
-              //values.put("`date`", dateData);
+                                                 
+                
                                 
                                                             String updatedData = "";
                         if(modelData.getUpdated() != null){
                           updatedData = modelData.getUpdated().toString();
                           values.put("`updated`", updatedData);
                         }
-                                                //Removed Commented..
-              //values.put("`updated`", updatedData);
+                                                 
+                
                                 
                                                             String emailData = "";
                         if(modelData.getEmail() != null){
                           emailData = modelData.getEmail().toString();
                           values.put("`email`", emailData);
                         }
-                                                //Removed Commented..
-              //values.put("`email`", emailData);
+                                                 
+                
                                 
                                                             String passwordData = "";
                         if(modelData.getPassword() != null){
                           passwordData = modelData.getPassword().toString();
                           values.put("`password`", passwordData);
                         }
-                                                //Removed Commented..
-              //values.put("`password`", passwordData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String realmData = "";
@@ -140,8 +140,8 @@ public class EmployeeDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`realm`", realmData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String credentialsData = "";
@@ -156,8 +156,8 @@ public class EmployeeDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`credentials`", credentialsData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String challengesData = "";
@@ -172,8 +172,8 @@ public class EmployeeDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`challenges`", challengesData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String emailVerifiedData = "";
@@ -188,8 +188,8 @@ public class EmployeeDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`emailVerified`", emailVerifiedData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String verificationTokenData = "";
@@ -204,8 +204,8 @@ public class EmployeeDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`verificationToken`", verificationTokenData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String statusData = "";
@@ -220,8 +220,8 @@ public class EmployeeDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`status`", statusData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String createdData = "";
@@ -236,8 +236,8 @@ public class EmployeeDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`created`", createdData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String lastUpdatedData = "";
@@ -252,8 +252,8 @@ public class EmployeeDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`lastUpdated`", lastUpdatedData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -268,8 +268,8 @@ public class EmployeeDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`id`", idData);
+                                                 
+                
                   
 
         //Add the updated data property value to be 1

@@ -76,24 +76,24 @@ public class FacebookAccessTokenDb{
                           FbUserIdData = modelData.getFbUserId().toString();
                           values.put("`FbUserId`", FbUserIdData);
                         }
-                                                //Removed Commented..
-              //values.put("`FbUserId`", FbUserIdData);
+                                                 
+                
                                 
                                                             String tokenData = "";
                         if(modelData.getToken() != null){
                           tokenData = modelData.getToken().toString();
                           values.put("`token`", tokenData);
                         }
-                                                //Removed Commented..
-              //values.put("`token`", tokenData);
+                                                 
+                
                                 
                                                             String expiresData = "";
                         if(modelData.getExpires() != null){
                           expiresData = modelData.getExpires().toString();
                           values.put("`expires`", expiresData);
                         }
-                                                //Removed Commented..
-              //values.put("`expires`", expiresData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String userIdData = "";
@@ -108,16 +108,16 @@ public class FacebookAccessTokenDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`userId`", userIdData);
+                                                 
+                
                                 
                                                             String typeData = "";
                         if(modelData.getType() != null){
                           typeData = modelData.getType().toString();
                           values.put("`type`", typeData);
                         }
-                                                //Removed Commented..
-              //values.put("`type`", typeData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String customerIdData = "";
@@ -132,8 +132,8 @@ public class FacebookAccessTokenDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`customerId`", customerIdData);
+                                                 
+                
                   
 
         //Add the updated data property value to be 1

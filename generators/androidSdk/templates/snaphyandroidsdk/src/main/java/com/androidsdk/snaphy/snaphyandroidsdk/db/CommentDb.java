@@ -76,16 +76,88 @@ public class CommentDb{
                           answerData = modelData.getAnswer().toString();
                           values.put("`answer`", answerData);
                         }
-                                                //Removed Commented..
-              //values.put("`answer`", answerData);
+                                                 
+                
+                          String commentDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getCommentDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //commentDetailsIdData = modelData.getCommentDetailsId().toString();
+                                commentDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`commentDetailsId`", commentDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
+                          String postSubscribersIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostSubscribersId");
+                              if(method.invoke(modelData) != null){
+                                //postSubscribersIdData = modelData.getPostSubscribersId().toString();
+                                postSubscribersIdData = (String) method.invoke(modelData);
+                                values.put("`postSubscribersId`", postSubscribersIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
+                          String postDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //postDetailsIdData = modelData.getPostDetailsId().toString();
+                                postDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`postDetailsId`", postDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
                                 
                                                             String statusData = "";
                         if(modelData.getStatus() != null){
                           statusData = modelData.getStatus().toString();
                           values.put("`status`", statusData);
                         }
-                                                //Removed Commented..
-              //values.put("`status`", statusData);
+                                                 
+                
+                          String commentDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getCommentDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //commentDetailsIdData = modelData.getCommentDetailsId().toString();
+                                commentDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`commentDetailsId`", commentDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
+                          String postSubscribersIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostSubscribersId");
+                              if(method.invoke(modelData) != null){
+                                //postSubscribersIdData = modelData.getPostSubscribersId().toString();
+                                postSubscribersIdData = (String) method.invoke(modelData);
+                                values.put("`postSubscribersId`", postSubscribersIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
+                          String postDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //postDetailsIdData = modelData.getPostDetailsId().toString();
+                                postDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`postDetailsId`", postDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -100,8 +172,44 @@ public class CommentDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`id`", idData);
+                                                 
+                
+                          String commentDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getCommentDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //commentDetailsIdData = modelData.getCommentDetailsId().toString();
+                                commentDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`commentDetailsId`", commentDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
+                          String postSubscribersIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostSubscribersId");
+                              if(method.invoke(modelData) != null){
+                                //postSubscribersIdData = modelData.getPostSubscribersId().toString();
+                                postSubscribersIdData = (String) method.invoke(modelData);
+                                values.put("`postSubscribersId`", postSubscribersIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
+                          String postDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //postDetailsIdData = modelData.getPostDetailsId().toString();
+                                postDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`postDetailsId`", postDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String postIdData = "";
@@ -116,8 +224,44 @@ public class CommentDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`postId`", postIdData);
+                                                 
+                
+                          String commentDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getCommentDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //commentDetailsIdData = modelData.getCommentDetailsId().toString();
+                                commentDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`commentDetailsId`", commentDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
+                          String postSubscribersIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostSubscribersId");
+                              if(method.invoke(modelData) != null){
+                                //postSubscribersIdData = modelData.getPostSubscribersId().toString();
+                                postSubscribersIdData = (String) method.invoke(modelData);
+                                values.put("`postSubscribersId`", postSubscribersIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
+                          String postDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //postDetailsIdData = modelData.getPostDetailsId().toString();
+                                postDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`postDetailsId`", postDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String customerIdData = "";
@@ -132,8 +276,44 @@ public class CommentDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`customerId`", customerIdData);
+                                                 
+                
+                          String commentDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getCommentDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //commentDetailsIdData = modelData.getCommentDetailsId().toString();
+                                commentDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`commentDetailsId`", commentDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
+                          String postSubscribersIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostSubscribersId");
+                              if(method.invoke(modelData) != null){
+                                //postSubscribersIdData = modelData.getPostSubscribersId().toString();
+                                postSubscribersIdData = (String) method.invoke(modelData);
+                                values.put("`postSubscribersId`", postSubscribersIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
+                          String postDetailsIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostDetailsId");
+                              if(method.invoke(modelData) != null){
+                                //postDetailsIdData = modelData.getPostDetailsId().toString();
+                                postDetailsIdData = (String) method.invoke(modelData);
+                                values.put("`postDetailsId`", postDetailsIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
                   
 
         //Add the updated data property value to be 1

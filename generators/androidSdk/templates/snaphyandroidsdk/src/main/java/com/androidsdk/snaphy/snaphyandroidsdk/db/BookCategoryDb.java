@@ -76,24 +76,24 @@ public class BookCategoryDb{
                           nameData = modelData.getName().toString();
                           values.put("`name`", nameData);
                         }
-                                                //Removed Commented..
-              //values.put("`name`", nameData);
+                                                 
+                
                                 
                                                             String addedData = "";
                         if(modelData.getAdded() != null){
                           addedData = modelData.getAdded().toString();
                           values.put("`added`", addedData);
                         }
-                                                //Removed Commented..
-              //values.put("`added`", addedData);
+                                                 
+                
                                 
                                                             String updatedData = "";
                         if(modelData.getUpdated() != null){
                           updatedData = modelData.getUpdated().toString();
                           values.put("`updated`", updatedData);
                         }
-                                                //Removed Commented..
-              //values.put("`updated`", updatedData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -108,8 +108,8 @@ public class BookCategoryDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`id`", idData);
+                                                 
+                
                   
 
         //Add the updated data property value to be 1

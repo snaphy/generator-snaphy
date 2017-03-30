@@ -76,54 +76,54 @@ public class OrderDb{
                           orderNumberData = modelData.getOrderNumber().toString();
                           values.put("`orderNumber`", orderNumberData);
                         }
-                                                //Removed Commented..
-              //values.put("`orderNumber`", orderNumberData);
+                                                 
+                
                                 
                                                             String transactionIdData = "";
                         if(modelData.getTransactionId() != null){
                           transactionIdData = modelData.getTransactionId().toString();
                           values.put("`transactionId`", transactionIdData);
                         }
-                                                //Removed Commented..
-              //values.put("`transactionId`", transactionIdData);
+                                                 
+                
                                 
                                                             String orderStatusData = "";
                         if(modelData.getOrderStatus() != null){
                           orderStatusData = modelData.getOrderStatus().toString();
                           values.put("`orderStatus`", orderStatusData);
                         }
-                                                //Removed Commented..
-              //values.put("`orderStatus`", orderStatusData);
+                                                 
+                
                                 
                                                             String paymentStatusData = "";
                         if(modelData.getPaymentStatus() != null){
                           paymentStatusData = modelData.getPaymentStatus().toString();
                           values.put("`paymentStatus`", paymentStatusData);
                         }
-                                                //Removed Commented..
-              //values.put("`paymentStatus`", paymentStatusData);
+                                                 
+                
                                 
                                                             String errorMessageData = "";
                         if(modelData.getErrorMessage() != null){
                           errorMessageData = modelData.getErrorMessage().toString();
                           values.put("`errorMessage`", errorMessageData);
                         }
-                                                //Removed Commented..
-              //values.put("`errorMessage`", errorMessageData);
+                                                 
+                
                                 
                                                             double amountData;
                         amountData = (double)modelData.getAmount();
                         values.put("`amount`", amountData);
-                                                //Removed Commented..
-              //values.put("`amount`", amountData);
+                                                 
+                
                                 
                                                             String typeData = "";
                         if(modelData.getType() != null){
                           typeData = modelData.getType().toString();
                           values.put("`type`", typeData);
                         }
-                                                //Removed Commented..
-              //values.put("`type`", typeData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -138,8 +138,8 @@ public class OrderDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`id`", idData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String bookIdData = "";
@@ -154,8 +154,8 @@ public class OrderDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`bookId`", bookIdData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String customerIdData = "";
@@ -170,8 +170,8 @@ public class OrderDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`customerId`", customerIdData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String paymentIdData = "";
@@ -186,8 +186,8 @@ public class OrderDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`paymentId`", paymentIdData);
+                                                 
+                
                   
 
         //Add the updated data property value to be 1

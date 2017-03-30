@@ -84,8 +84,8 @@ public class ApplicationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`id`", idData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String realmData = "";
@@ -100,8 +100,8 @@ public class ApplicationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`realm`", realmData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String nameData = "";
@@ -116,8 +116,8 @@ public class ApplicationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`name`", nameData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String descriptionData = "";
@@ -132,8 +132,8 @@ public class ApplicationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`description`", descriptionData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String iconData = "";
@@ -148,8 +148,8 @@ public class ApplicationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`icon`", iconData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String ownerData = "";
@@ -164,15 +164,15 @@ public class ApplicationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`owner`", ownerData);
+                                                 
+                
                                 
                                   String collaboratorsData = "";
                   if(modelData.getCollaborators() != null){
                     collaboratorsData = new Gson().toJson(modelData.getCollaborators(), DataList.class);
                   }
-                            //Removed Commented..
-              //values.put("`collaborators`", collaboratorsData);
+                             
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String emailData = "";
@@ -187,8 +187,8 @@ public class ApplicationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`email`", emailData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String emailVerifiedData = "";
@@ -203,8 +203,8 @@ public class ApplicationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`emailVerified`", emailVerifiedData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String urlData = "";
@@ -219,22 +219,22 @@ public class ApplicationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`url`", urlData);
+                                                 
+                
                                 
                                   String callbackUrlsData = "";
                   if(modelData.getCallbackUrls() != null){
                     callbackUrlsData = new Gson().toJson(modelData.getCallbackUrls(), DataList.class);
                   }
-                            //Removed Commented..
-              //values.put("`callbackUrls`", callbackUrlsData);
+                             
+                
                                 
                                   String permissionsData = "";
                   if(modelData.getPermissions() != null){
                     permissionsData = new Gson().toJson(modelData.getPermissions(), DataList.class);
                   }
-                            //Removed Commented..
-              //values.put("`permissions`", permissionsData);
+                             
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String clientKeyData = "";
@@ -249,8 +249,8 @@ public class ApplicationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`clientKey`", clientKeyData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String javaScriptKeyData = "";
@@ -265,8 +265,8 @@ public class ApplicationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`javaScriptKey`", javaScriptKeyData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String restApiKeyData = "";
@@ -281,8 +281,8 @@ public class ApplicationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`restApiKey`", restApiKeyData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String windowsKeyData = "";
@@ -297,8 +297,8 @@ public class ApplicationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`windowsKey`", windowsKeyData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String masterKeyData = "";
@@ -313,8 +313,8 @@ public class ApplicationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`masterKey`", masterKeyData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String pushSettingsData = "";
@@ -329,8 +329,8 @@ public class ApplicationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`pushSettings`", pushSettingsData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String authenticationEnabledData = "";
@@ -345,8 +345,8 @@ public class ApplicationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`authenticationEnabled`", authenticationEnabledData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String anonymousAllowedData = "";
@@ -361,15 +361,15 @@ public class ApplicationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`anonymousAllowed`", anonymousAllowedData);
+                                                 
+                
                                 
                                   String authenticationSchemesData = "";
                   if(modelData.getAuthenticationSchemes() != null){
                     authenticationSchemesData = new Gson().toJson(modelData.getAuthenticationSchemes(), DataList.class);
                   }
-                            //Removed Commented..
-              //values.put("`authenticationSchemes`", authenticationSchemesData);
+                             
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String statusData = "";
@@ -384,8 +384,8 @@ public class ApplicationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`status`", statusData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String createdData = "";
@@ -400,8 +400,8 @@ public class ApplicationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`created`", createdData);
+                                                 
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String modifiedData = "";
@@ -416,8 +416,8 @@ public class ApplicationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`modified`", modifiedData);
+                                                 
+                
                   
 
         //Add the updated data property value to be 1

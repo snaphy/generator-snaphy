@@ -76,8 +76,20 @@ public class LikePostDb{
                           addedData = modelData.getAdded().toString();
                           values.put("`added`", addedData);
                         }
-                                                //Removed Commented..
-              //values.put("`added`", addedData);
+                                                 
+                
+                          String postSubscribersIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostSubscribersId");
+                              if(method.invoke(modelData) != null){
+                                //postSubscribersIdData = modelData.getPostSubscribersId().toString();
+                                postSubscribersIdData = (String) method.invoke(modelData);
+                                values.put("`postSubscribersId`", postSubscribersIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -92,8 +104,20 @@ public class LikePostDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`id`", idData);
+                                                 
+                
+                          String postSubscribersIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostSubscribersId");
+                              if(method.invoke(modelData) != null){
+                                //postSubscribersIdData = modelData.getPostSubscribersId().toString();
+                                postSubscribersIdData = (String) method.invoke(modelData);
+                                values.put("`postSubscribersId`", postSubscribersIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String postIdData = "";
@@ -108,8 +132,20 @@ public class LikePostDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`postId`", postIdData);
+                                                 
+                
+                          String postSubscribersIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostSubscribersId");
+                              if(method.invoke(modelData) != null){
+                                //postSubscribersIdData = modelData.getPostSubscribersId().toString();
+                                postSubscribersIdData = (String) method.invoke(modelData);
+                                values.put("`postSubscribersId`", postSubscribersIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String customerIdData = "";
@@ -124,8 +160,20 @@ public class LikePostDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                //Removed Commented..
-              //values.put("`customerId`", customerIdData);
+                                                 
+                
+                          String postSubscribersIdData = "";
+                          try {
+                              Method method = modelData.getClass().getMethod("getPostSubscribersId");
+                              if(method.invoke(modelData) != null){
+                                //postSubscribersIdData = modelData.getPostSubscribersId().toString();
+                                postSubscribersIdData = (String) method.invoke(modelData);
+                                values.put("`postSubscribersId`", postSubscribersIdData);
+                              }
+                          } catch (Exception e) {
+                            Log.e("Database Error", e.toString());
+                          }
+                
                   
 
         //Add the updated data property value to be 1
