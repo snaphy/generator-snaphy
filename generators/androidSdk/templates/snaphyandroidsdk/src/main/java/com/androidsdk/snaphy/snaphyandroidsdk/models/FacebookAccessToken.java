@@ -252,20 +252,20 @@ public class FacebookAccessToken extends Model {
                     }
 
                     public Customer getCustomer() {
-			try{
-				//Adding database method for fetching from relation if not present..
-		                if(customer == null){
-		                  FacebookAccessTokenRepository facebookAccessTokenRepository = (FacebookAccessTokenRepository) getRepository();
+                        try{
+                          //Adding database method for fetching from relation if not present..
+                                      if(customer == null){
+                                        FacebookAccessTokenRepository facebookAccessTokenRepository = (FacebookAccessTokenRepository) getRepository();
 
-		                  RestAdapter restAdapter = facebookAccessTokenRepository.getRestAdapter();
-		                  if(restAdapter != null){
-		                    //Fetch locally from db
-		                    customer = getCustomer__db(restAdapter);
-		                  }
-		                }
-			}catch(Exception e){
-				//Ignore
-			}
+                                        RestAdapter restAdapter = facebookAccessTokenRepository.getRestAdapter();
+                                        if(restAdapter != null){
+                                          //Fetch locally from db
+                                          customer = getCustomer__db(restAdapter);
+                                        }
+                                      }
+                        }catch(Exception e){
+                          //Ignore
+                        }
 
                         return customer;
                     }
@@ -300,28 +300,28 @@ public class FacebookAccessToken extends Model {
                     public Customer getCustomer__db(RestAdapter restAdapter){
                       if(userId != null){
                         CustomerRepository customerRepository = restAdapter.createRepository(CustomerRepository.class);
-			  try{
-				FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
-		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-		                        Context context = lowercaseFirstLetterRepository.getContext();
-		                        if(customerRepository.getDb() == null ){
-		                            customerRepository.addStorage(context);
-		                        }
+                            try{
+                            FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
+                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                                Context context = lowercaseFirstLetterRepository.getContext();
+                                                if(customerRepository.getDb() == null ){
+                                                    customerRepository.addStorage(context);
+                                                }
 
-		                        if(context != null && customerRepository.getDb() != null){
-		                            customerRepository.addStorage(context);
-		                            Customer customer = (Customer) customerRepository.getDb().get__db(userId);
-		                            return customer;
-		                        }else{
-		                            return null;
-		                        }
-		                  }else{
-		                    return null;
-		                  }
-			  }catch(Exception e){
-				//Ignore exception..
-				return null;
-			  }
+                                                if(context != null && customerRepository.getDb() != null){
+                                                    customerRepository.addStorage(context);
+                                                    Customer customer = (Customer) customerRepository.getDb().get__db(userId);
+                                                    return customer;
+                                                }else{
+                                                    return null;
+                                                }
+                                          }else{
+                                            return null;
+                                          }
+                            }catch(Exception e){
+                            //Ignore exception..
+                            return null;
+                            }
 
                         }else{
                           return null;

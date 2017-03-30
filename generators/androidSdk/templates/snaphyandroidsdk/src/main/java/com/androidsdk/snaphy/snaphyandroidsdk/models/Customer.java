@@ -545,20 +545,20 @@ public class Customer extends User {
                     }
 
                     public FacebookAccessToken getFacebookAccessToken() {
-			try{
-				//Adding database method for fetching from relation if not present..
-		                if(facebookAccessToken == null){
-		                  CustomerRepository customerRepository = (CustomerRepository) getRepository();
+                        try{
+                          //Adding database method for fetching from relation if not present..
+                                      if(facebookAccessToken == null){
+                                        CustomerRepository customerRepository = (CustomerRepository) getRepository();
 
-		                  RestAdapter restAdapter = customerRepository.getRestAdapter();
-		                  if(restAdapter != null){
-		                    //Fetch locally from db
-		                    facebookAccessToken = getFacebookAccessToken__db(restAdapter);
-		                  }
-		                }
-			}catch(Exception e){
-				//Ignore
-			}
+                                        RestAdapter restAdapter = customerRepository.getRestAdapter();
+                                        if(restAdapter != null){
+                                          //Fetch locally from db
+                                          facebookAccessToken = getFacebookAccessToken__db(restAdapter);
+                                        }
+                                      }
+                        }catch(Exception e){
+                          //Ignore
+                        }
 
                         return facebookAccessToken;
                     }
@@ -593,28 +593,28 @@ public class Customer extends User {
                     public FacebookAccessToken getFacebookAccessToken__db(RestAdapter restAdapter){
                       if(facebookAccessTokenId != null){
                         FacebookAccessTokenRepository facebookAccessTokenRepository = restAdapter.createRepository(FacebookAccessTokenRepository.class);
-			  try{
-				CustomerRepository lowercaseFirstLetterRepository = (CustomerRepository) getRepository();
-		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-		                        Context context = lowercaseFirstLetterRepository.getContext();
-		                        if(facebookAccessTokenRepository.getDb() == null ){
-		                            facebookAccessTokenRepository.addStorage(context);
-		                        }
+                            try{
+                            CustomerRepository lowercaseFirstLetterRepository = (CustomerRepository) getRepository();
+                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                                Context context = lowercaseFirstLetterRepository.getContext();
+                                                if(facebookAccessTokenRepository.getDb() == null ){
+                                                    facebookAccessTokenRepository.addStorage(context);
+                                                }
 
-		                        if(context != null && facebookAccessTokenRepository.getDb() != null){
-		                            facebookAccessTokenRepository.addStorage(context);
-		                            FacebookAccessToken facebookAccessToken = (FacebookAccessToken) facebookAccessTokenRepository.getDb().get__db(facebookAccessTokenId);
-		                            return facebookAccessToken;
-		                        }else{
-		                            return null;
-		                        }
-		                  }else{
-		                    return null;
-		                  }
-			  }catch(Exception e){
-				//Ignore exception..
-				return null;
-			  }
+                                                if(context != null && facebookAccessTokenRepository.getDb() != null){
+                                                    facebookAccessTokenRepository.addStorage(context);
+                                                    FacebookAccessToken facebookAccessToken = (FacebookAccessToken) facebookAccessTokenRepository.getDb().get__db(facebookAccessTokenId);
+                                                    return facebookAccessToken;
+                                                }else{
+                                                    return null;
+                                                }
+                                          }else{
+                                            return null;
+                                          }
+                            }catch(Exception e){
+                            //Ignore exception..
+                            return null;
+                            }
 
                         }else{
                           return null;

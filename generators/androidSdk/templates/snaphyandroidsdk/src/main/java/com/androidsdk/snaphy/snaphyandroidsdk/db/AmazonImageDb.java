@@ -74,26 +74,34 @@ public class AmazonImageDb{
                                                             String nameData = "";
                         if(modelData.getName() != null){
                           nameData = modelData.getName().toString();
+                          values.put("`name`", nameData);
                         }
-                                                values.put("`name`", nameData);
+                                                //Removed Commented..
+              //values.put("`name`", nameData);
                                 
                                                             String containerData = "";
                         if(modelData.getContainer() != null){
                           containerData = modelData.getContainer().toString();
+                          values.put("`container`", containerData);
                         }
-                                                values.put("`container`", containerData);
+                                                //Removed Commented..
+              //values.put("`container`", containerData);
                                 
                                                             String typeData = "";
                         if(modelData.getType() != null){
                           typeData = modelData.getType().toString();
+                          values.put("`type`", typeData);
                         }
-                                                values.put("`type`", typeData);
+                                                //Removed Commented..
+              //values.put("`type`", typeData);
                                 
                                                             String urlData = "";
                         if(modelData.getUrl() != null){
                           urlData = new Gson().toJson(modelData.getUrl(), HashMap.class);
+                          values.put("`url`", urlData);
                         }
-                                                values.put("`url`", urlData);
+                                                //Removed Commented..
+              //values.put("`url`", urlData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -102,12 +110,14 @@ public class AmazonImageDb{
                               if(method.invoke(modelData) != null){
                                 //idData = modelData.getId().toString();
                                 idData = (String) method.invoke(modelData);
+                                values.put("`id`", idData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("`id`", idData);
+                                                //Removed Commented..
+              //values.put("`id`", idData);
                   
 
         //Add the updated data property value to be 1

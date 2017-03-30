@@ -329,20 +329,20 @@ public class PostDetail extends Model {
                     }
 
                     public Post getPost() {
-			try{
-				//Adding database method for fetching from relation if not present..
-		                if(post == null){
-		                  PostDetailRepository postDetailRepository = (PostDetailRepository) getRepository();
+                        try{
+                          //Adding database method for fetching from relation if not present..
+                                      if(post == null){
+                                        PostDetailRepository postDetailRepository = (PostDetailRepository) getRepository();
 
-		                  RestAdapter restAdapter = postDetailRepository.getRestAdapter();
-		                  if(restAdapter != null){
-		                    //Fetch locally from db
-		                    post = getPost__db(restAdapter);
-		                  }
-		                }
-			}catch(Exception e){
-				//Ignore
-			}
+                                        RestAdapter restAdapter = postDetailRepository.getRestAdapter();
+                                        if(restAdapter != null){
+                                          //Fetch locally from db
+                                          post = getPost__db(restAdapter);
+                                        }
+                                      }
+                        }catch(Exception e){
+                          //Ignore
+                        }
 
                         return post;
                     }
@@ -377,28 +377,28 @@ public class PostDetail extends Model {
                     public Post getPost__db(RestAdapter restAdapter){
                       if(postId != null){
                         PostRepository postRepository = restAdapter.createRepository(PostRepository.class);
-			  try{
-				PostDetailRepository lowercaseFirstLetterRepository = (PostDetailRepository) getRepository();
-		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-		                        Context context = lowercaseFirstLetterRepository.getContext();
-		                        if(postRepository.getDb() == null ){
-		                            postRepository.addStorage(context);
-		                        }
+                            try{
+                            PostDetailRepository lowercaseFirstLetterRepository = (PostDetailRepository) getRepository();
+                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                                Context context = lowercaseFirstLetterRepository.getContext();
+                                                if(postRepository.getDb() == null ){
+                                                    postRepository.addStorage(context);
+                                                }
 
-		                        if(context != null && postRepository.getDb() != null){
-		                            postRepository.addStorage(context);
-		                            Post post = (Post) postRepository.getDb().get__db(postId);
-		                            return post;
-		                        }else{
-		                            return null;
-		                        }
-		                  }else{
-		                    return null;
-		                  }
-			  }catch(Exception e){
-				//Ignore exception..
-				return null;
-			  }
+                                                if(context != null && postRepository.getDb() != null){
+                                                    postRepository.addStorage(context);
+                                                    Post post = (Post) postRepository.getDb().get__db(postId);
+                                                    return post;
+                                                }else{
+                                                    return null;
+                                                }
+                                          }else{
+                                            return null;
+                                          }
+                            }catch(Exception e){
+                            //Ignore exception..
+                            return null;
+                            }
 
                         }else{
                           return null;
@@ -532,20 +532,20 @@ public class PostDetail extends Model {
                     }
 
                     public Comment getComment() {
-			try{
-				//Adding database method for fetching from relation if not present..
-		                if(comment == null){
-		                  PostDetailRepository postDetailRepository = (PostDetailRepository) getRepository();
+                        try{
+                          //Adding database method for fetching from relation if not present..
+                                      if(comment == null){
+                                        PostDetailRepository postDetailRepository = (PostDetailRepository) getRepository();
 
-		                  RestAdapter restAdapter = postDetailRepository.getRestAdapter();
-		                  if(restAdapter != null){
-		                    //Fetch locally from db
-		                    comment = getComment__db(restAdapter);
-		                  }
-		                }
-			}catch(Exception e){
-				//Ignore
-			}
+                                        RestAdapter restAdapter = postDetailRepository.getRestAdapter();
+                                        if(restAdapter != null){
+                                          //Fetch locally from db
+                                          comment = getComment__db(restAdapter);
+                                        }
+                                      }
+                        }catch(Exception e){
+                          //Ignore
+                        }
 
                         return comment;
                     }
@@ -580,28 +580,28 @@ public class PostDetail extends Model {
                     public Comment getComment__db(RestAdapter restAdapter){
                       if(commentId != null){
                         CommentRepository commentRepository = restAdapter.createRepository(CommentRepository.class);
-			  try{
-				PostDetailRepository lowercaseFirstLetterRepository = (PostDetailRepository) getRepository();
-		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-		                        Context context = lowercaseFirstLetterRepository.getContext();
-		                        if(commentRepository.getDb() == null ){
-		                            commentRepository.addStorage(context);
-		                        }
+                            try{
+                            PostDetailRepository lowercaseFirstLetterRepository = (PostDetailRepository) getRepository();
+                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                                Context context = lowercaseFirstLetterRepository.getContext();
+                                                if(commentRepository.getDb() == null ){
+                                                    commentRepository.addStorage(context);
+                                                }
 
-		                        if(context != null && commentRepository.getDb() != null){
-		                            commentRepository.addStorage(context);
-		                            Comment comment = (Comment) commentRepository.getDb().get__db(commentId);
-		                            return comment;
-		                        }else{
-		                            return null;
-		                        }
-		                  }else{
-		                    return null;
-		                  }
-			  }catch(Exception e){
-				//Ignore exception..
-				return null;
-			  }
+                                                if(context != null && commentRepository.getDb() != null){
+                                                    commentRepository.addStorage(context);
+                                                    Comment comment = (Comment) commentRepository.getDb().get__db(commentId);
+                                                    return comment;
+                                                }else{
+                                                    return null;
+                                                }
+                                          }else{
+                                            return null;
+                                          }
+                            }catch(Exception e){
+                            //Ignore exception..
+                            return null;
+                            }
 
                         }else{
                           return null;

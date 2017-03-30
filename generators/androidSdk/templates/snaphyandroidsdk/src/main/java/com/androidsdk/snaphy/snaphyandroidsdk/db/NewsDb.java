@@ -74,50 +74,66 @@ public class NewsDb{
                                                             String titleData = "";
                         if(modelData.getTitle() != null){
                           titleData = modelData.getTitle().toString();
+                          values.put("`title`", titleData);
                         }
-                                                values.put("`title`", titleData);
+                                                //Removed Commented..
+              //values.put("`title`", titleData);
                                 
                                                             String descriptionData = "";
                         if(modelData.getDescription() != null){
                           descriptionData = modelData.getDescription().toString();
+                          values.put("`description`", descriptionData);
                         }
-                                                values.put("`description`", descriptionData);
+                                                //Removed Commented..
+              //values.put("`description`", descriptionData);
                                 
                                                             String urlData = "";
                         if(modelData.getUrl() != null){
                           urlData = modelData.getUrl().toString();
+                          values.put("`url`", urlData);
                         }
-                                                values.put("`url`", urlData);
+                                                //Removed Commented..
+              //values.put("`url`", urlData);
                                 
                                                             String statusData = "";
                         if(modelData.getStatus() != null){
                           statusData = modelData.getStatus().toString();
+                          values.put("`status`", statusData);
                         }
-                                                values.put("`status`", statusData);
+                                                //Removed Commented..
+              //values.put("`status`", statusData);
                                 
                                                             String typeData = "";
                         if(modelData.getType() != null){
                           typeData = modelData.getType().toString();
+                          values.put("`type`", typeData);
                         }
-                                                values.put("`type`", typeData);
+                                                //Removed Commented..
+              //values.put("`type`", typeData);
                                 
                                                             String imageData = "";
                         if(modelData.getImage() != null){
                           imageData = new Gson().toJson(modelData.getImage(), HashMap.class);
+                          values.put("`image`", imageData);
                         }
-                                                values.put("`image`", imageData);
+                                                //Removed Commented..
+              //values.put("`image`", imageData);
                                 
                                                             String addedData = "";
                         if(modelData.getAdded() != null){
                           addedData = modelData.getAdded().toString();
+                          values.put("`added`", addedData);
                         }
-                                                values.put("`added`", addedData);
+                                                //Removed Commented..
+              //values.put("`added`", addedData);
                                 
                                                             String updatedData = "";
                         if(modelData.getUpdated() != null){
                           updatedData = modelData.getUpdated().toString();
+                          values.put("`updated`", updatedData);
                         }
-                                                values.put("`updated`", updatedData);
+                                                //Removed Commented..
+              //values.put("`updated`", updatedData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -126,12 +142,14 @@ public class NewsDb{
                               if(method.invoke(modelData) != null){
                                 //idData = modelData.getId().toString();
                                 idData = (String) method.invoke(modelData);
+                                values.put("`id`", idData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("`id`", idData);
+                                                //Removed Commented..
+              //values.put("`id`", idData);
                   
 
         //Add the updated data property value to be 1

@@ -74,20 +74,26 @@ public class BookCategoryDb{
                                                             String nameData = "";
                         if(modelData.getName() != null){
                           nameData = modelData.getName().toString();
+                          values.put("`name`", nameData);
                         }
-                                                values.put("`name`", nameData);
+                                                //Removed Commented..
+              //values.put("`name`", nameData);
                                 
                                                             String addedData = "";
                         if(modelData.getAdded() != null){
                           addedData = modelData.getAdded().toString();
+                          values.put("`added`", addedData);
                         }
-                                                values.put("`added`", addedData);
+                                                //Removed Commented..
+              //values.put("`added`", addedData);
                                 
                                                             String updatedData = "";
                         if(modelData.getUpdated() != null){
                           updatedData = modelData.getUpdated().toString();
+                          values.put("`updated`", updatedData);
                         }
-                                                values.put("`updated`", updatedData);
+                                                //Removed Commented..
+              //values.put("`updated`", updatedData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -96,12 +102,14 @@ public class BookCategoryDb{
                               if(method.invoke(modelData) != null){
                                 //idData = modelData.getId().toString();
                                 idData = (String) method.invoke(modelData);
+                                values.put("`id`", idData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("`id`", idData);
+                                                //Removed Commented..
+              //values.put("`id`", idData);
                   
 
         //Add the updated data property value to be 1

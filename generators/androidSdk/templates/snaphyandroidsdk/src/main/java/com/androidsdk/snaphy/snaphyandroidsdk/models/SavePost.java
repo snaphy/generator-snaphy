@@ -210,20 +210,20 @@ public class SavePost extends Model {
                     }
 
                     public Post getPost() {
-			try{
-				//Adding database method for fetching from relation if not present..
-		                if(post == null){
-		                  SavePostRepository savePostRepository = (SavePostRepository) getRepository();
+                        try{
+                          //Adding database method for fetching from relation if not present..
+                                      if(post == null){
+                                        SavePostRepository savePostRepository = (SavePostRepository) getRepository();
 
-		                  RestAdapter restAdapter = savePostRepository.getRestAdapter();
-		                  if(restAdapter != null){
-		                    //Fetch locally from db
-		                    post = getPost__db(restAdapter);
-		                  }
-		                }
-			}catch(Exception e){
-				//Ignore
-			}
+                                        RestAdapter restAdapter = savePostRepository.getRestAdapter();
+                                        if(restAdapter != null){
+                                          //Fetch locally from db
+                                          post = getPost__db(restAdapter);
+                                        }
+                                      }
+                        }catch(Exception e){
+                          //Ignore
+                        }
 
                         return post;
                     }
@@ -258,28 +258,28 @@ public class SavePost extends Model {
                     public Post getPost__db(RestAdapter restAdapter){
                       if(postId != null){
                         PostRepository postRepository = restAdapter.createRepository(PostRepository.class);
-			  try{
-				SavePostRepository lowercaseFirstLetterRepository = (SavePostRepository) getRepository();
-		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-		                        Context context = lowercaseFirstLetterRepository.getContext();
-		                        if(postRepository.getDb() == null ){
-		                            postRepository.addStorage(context);
-		                        }
+                            try{
+                            SavePostRepository lowercaseFirstLetterRepository = (SavePostRepository) getRepository();
+                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                                Context context = lowercaseFirstLetterRepository.getContext();
+                                                if(postRepository.getDb() == null ){
+                                                    postRepository.addStorage(context);
+                                                }
 
-		                        if(context != null && postRepository.getDb() != null){
-		                            postRepository.addStorage(context);
-		                            Post post = (Post) postRepository.getDb().get__db(postId);
-		                            return post;
-		                        }else{
-		                            return null;
-		                        }
-		                  }else{
-		                    return null;
-		                  }
-			  }catch(Exception e){
-				//Ignore exception..
-				return null;
-			  }
+                                                if(context != null && postRepository.getDb() != null){
+                                                    postRepository.addStorage(context);
+                                                    Post post = (Post) postRepository.getDb().get__db(postId);
+                                                    return post;
+                                                }else{
+                                                    return null;
+                                                }
+                                          }else{
+                                            return null;
+                                          }
+                            }catch(Exception e){
+                            //Ignore exception..
+                            return null;
+                            }
 
                         }else{
                           return null;
@@ -426,20 +426,20 @@ public class SavePost extends Model {
                     }
 
                     public Customer getCustomer() {
-			try{
-				//Adding database method for fetching from relation if not present..
-		                if(customer == null){
-		                  SavePostRepository savePostRepository = (SavePostRepository) getRepository();
+                        try{
+                          //Adding database method for fetching from relation if not present..
+                                      if(customer == null){
+                                        SavePostRepository savePostRepository = (SavePostRepository) getRepository();
 
-		                  RestAdapter restAdapter = savePostRepository.getRestAdapter();
-		                  if(restAdapter != null){
-		                    //Fetch locally from db
-		                    customer = getCustomer__db(restAdapter);
-		                  }
-		                }
-			}catch(Exception e){
-				//Ignore
-			}
+                                        RestAdapter restAdapter = savePostRepository.getRestAdapter();
+                                        if(restAdapter != null){
+                                          //Fetch locally from db
+                                          customer = getCustomer__db(restAdapter);
+                                        }
+                                      }
+                        }catch(Exception e){
+                          //Ignore
+                        }
 
                         return customer;
                     }
@@ -474,28 +474,28 @@ public class SavePost extends Model {
                     public Customer getCustomer__db(RestAdapter restAdapter){
                       if(customerId != null){
                         CustomerRepository customerRepository = restAdapter.createRepository(CustomerRepository.class);
-			  try{
-				SavePostRepository lowercaseFirstLetterRepository = (SavePostRepository) getRepository();
-		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-		                        Context context = lowercaseFirstLetterRepository.getContext();
-		                        if(customerRepository.getDb() == null ){
-		                            customerRepository.addStorage(context);
-		                        }
+                            try{
+                            SavePostRepository lowercaseFirstLetterRepository = (SavePostRepository) getRepository();
+                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                                Context context = lowercaseFirstLetterRepository.getContext();
+                                                if(customerRepository.getDb() == null ){
+                                                    customerRepository.addStorage(context);
+                                                }
 
-		                        if(context != null && customerRepository.getDb() != null){
-		                            customerRepository.addStorage(context);
-		                            Customer customer = (Customer) customerRepository.getDb().get__db(customerId);
-		                            return customer;
-		                        }else{
-		                            return null;
-		                        }
-		                  }else{
-		                    return null;
-		                  }
-			  }catch(Exception e){
-				//Ignore exception..
-				return null;
-			  }
+                                                if(context != null && customerRepository.getDb() != null){
+                                                    customerRepository.addStorage(context);
+                                                    Customer customer = (Customer) customerRepository.getDb().get__db(customerId);
+                                                    return customer;
+                                                }else{
+                                                    return null;
+                                                }
+                                          }else{
+                                            return null;
+                                          }
+                            }catch(Exception e){
+                            //Ignore exception..
+                            return null;
+                            }
 
                         }else{
                           return null;
@@ -642,20 +642,20 @@ public class SavePost extends Model {
                     }
 
                     public PostSubscriber getPostSubscribers() {
-			try{
-				//Adding database method for fetching from relation if not present..
-		                if(postSubscribers == null){
-		                  SavePostRepository savePostRepository = (SavePostRepository) getRepository();
+                        try{
+                          //Adding database method for fetching from relation if not present..
+                                      if(postSubscribers == null){
+                                        SavePostRepository savePostRepository = (SavePostRepository) getRepository();
 
-		                  RestAdapter restAdapter = savePostRepository.getRestAdapter();
-		                  if(restAdapter != null){
-		                    //Fetch locally from db
-		                    postSubscribers = getPostSubscribers__db(restAdapter);
-		                  }
-		                }
-			}catch(Exception e){
-				//Ignore
-			}
+                                        RestAdapter restAdapter = savePostRepository.getRestAdapter();
+                                        if(restAdapter != null){
+                                          //Fetch locally from db
+                                          postSubscribers = getPostSubscribers__db(restAdapter);
+                                        }
+                                      }
+                        }catch(Exception e){
+                          //Ignore
+                        }
 
                         return postSubscribers;
                     }
@@ -690,28 +690,28 @@ public class SavePost extends Model {
                     public PostSubscriber getPostSubscribers__db(RestAdapter restAdapter){
                       if(postSubscriberId != null){
                         PostSubscriberRepository postSubscribersRepository = restAdapter.createRepository(PostSubscriberRepository.class);
-			  try{
-				SavePostRepository lowercaseFirstLetterRepository = (SavePostRepository) getRepository();
-		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-		                        Context context = lowercaseFirstLetterRepository.getContext();
-		                        if(postSubscribersRepository.getDb() == null ){
-		                            postSubscribersRepository.addStorage(context);
-		                        }
+                            try{
+                            SavePostRepository lowercaseFirstLetterRepository = (SavePostRepository) getRepository();
+                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                                Context context = lowercaseFirstLetterRepository.getContext();
+                                                if(postSubscribersRepository.getDb() == null ){
+                                                    postSubscribersRepository.addStorage(context);
+                                                }
 
-		                        if(context != null && postSubscribersRepository.getDb() != null){
-		                            postSubscribersRepository.addStorage(context);
-		                            PostSubscriber postSubscribers = (PostSubscriber) postSubscribersRepository.getDb().get__db(postSubscriberId);
-		                            return postSubscribers;
-		                        }else{
-		                            return null;
-		                        }
-		                  }else{
-		                    return null;
-		                  }
-			  }catch(Exception e){
-				//Ignore exception..
-				return null;
-			  }
+                                                if(context != null && postSubscribersRepository.getDb() != null){
+                                                    postSubscribersRepository.addStorage(context);
+                                                    PostSubscriber postSubscribers = (PostSubscriber) postSubscribersRepository.getDb().get__db(postSubscriberId);
+                                                    return postSubscribers;
+                                                }else{
+                                                    return null;
+                                                }
+                                          }else{
+                                            return null;
+                                          }
+                            }catch(Exception e){
+                            //Ignore exception..
+                            return null;
+                            }
 
                         }else{
                           return null;

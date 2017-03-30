@@ -74,14 +74,18 @@ public class CommentDb{
                                                             String answerData = "";
                         if(modelData.getAnswer() != null){
                           answerData = modelData.getAnswer().toString();
+                          values.put("`answer`", answerData);
                         }
-                                                values.put("`answer`", answerData);
+                                                //Removed Commented..
+              //values.put("`answer`", answerData);
                                 
                                                             String statusData = "";
                         if(modelData.getStatus() != null){
                           statusData = modelData.getStatus().toString();
+                          values.put("`status`", statusData);
                         }
-                                                values.put("`status`", statusData);
+                                                //Removed Commented..
+              //values.put("`status`", statusData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -90,12 +94,14 @@ public class CommentDb{
                               if(method.invoke(modelData) != null){
                                 //idData = modelData.getId().toString();
                                 idData = (String) method.invoke(modelData);
+                                values.put("`id`", idData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("`id`", idData);
+                                                //Removed Commented..
+              //values.put("`id`", idData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String postIdData = "";
@@ -104,12 +110,14 @@ public class CommentDb{
                               if(method.invoke(modelData) != null){
                                 //postIdData = modelData.getPostId().toString();
                                 postIdData = (String) method.invoke(modelData);
+                                values.put("`postId`", postIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("`postId`", postIdData);
+                                                //Removed Commented..
+              //values.put("`postId`", postIdData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String customerIdData = "";
@@ -118,12 +126,14 @@ public class CommentDb{
                               if(method.invoke(modelData) != null){
                                 //customerIdData = modelData.getCustomerId().toString();
                                 customerIdData = (String) method.invoke(modelData);
+                                values.put("`customerId`", customerIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("`customerId`", customerIdData);
+                                                //Removed Commented..
+              //values.put("`customerId`", customerIdData);
                   
 
         //Add the updated data property value to be 1

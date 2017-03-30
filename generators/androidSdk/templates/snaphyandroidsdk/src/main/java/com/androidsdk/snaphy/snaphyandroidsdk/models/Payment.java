@@ -301,20 +301,20 @@ public class Payment extends Model {
                     }
 
                     public Book getBook() {
-			try{
-				//Adding database method for fetching from relation if not present..
-		                if(book == null){
-		                  PaymentRepository paymentRepository = (PaymentRepository) getRepository();
+                        try{
+                          //Adding database method for fetching from relation if not present..
+                                      if(book == null){
+                                        PaymentRepository paymentRepository = (PaymentRepository) getRepository();
 
-		                  RestAdapter restAdapter = paymentRepository.getRestAdapter();
-		                  if(restAdapter != null){
-		                    //Fetch locally from db
-		                    book = getBook__db(restAdapter);
-		                  }
-		                }
-			}catch(Exception e){
-				//Ignore
-			}
+                                        RestAdapter restAdapter = paymentRepository.getRestAdapter();
+                                        if(restAdapter != null){
+                                          //Fetch locally from db
+                                          book = getBook__db(restAdapter);
+                                        }
+                                      }
+                        }catch(Exception e){
+                          //Ignore
+                        }
 
                         return book;
                     }
@@ -349,28 +349,28 @@ public class Payment extends Model {
                     public Book getBook__db(RestAdapter restAdapter){
                       if(bookId != null){
                         BookRepository bookRepository = restAdapter.createRepository(BookRepository.class);
-			  try{
-				PaymentRepository lowercaseFirstLetterRepository = (PaymentRepository) getRepository();
-		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-		                        Context context = lowercaseFirstLetterRepository.getContext();
-		                        if(bookRepository.getDb() == null ){
-		                            bookRepository.addStorage(context);
-		                        }
+                            try{
+                            PaymentRepository lowercaseFirstLetterRepository = (PaymentRepository) getRepository();
+                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                                Context context = lowercaseFirstLetterRepository.getContext();
+                                                if(bookRepository.getDb() == null ){
+                                                    bookRepository.addStorage(context);
+                                                }
 
-		                        if(context != null && bookRepository.getDb() != null){
-		                            bookRepository.addStorage(context);
-		                            Book book = (Book) bookRepository.getDb().get__db(bookId);
-		                            return book;
-		                        }else{
-		                            return null;
-		                        }
-		                  }else{
-		                    return null;
-		                  }
-			  }catch(Exception e){
-				//Ignore exception..
-				return null;
-			  }
+                                                if(context != null && bookRepository.getDb() != null){
+                                                    bookRepository.addStorage(context);
+                                                    Book book = (Book) bookRepository.getDb().get__db(bookId);
+                                                    return book;
+                                                }else{
+                                                    return null;
+                                                }
+                                          }else{
+                                            return null;
+                                          }
+                            }catch(Exception e){
+                            //Ignore exception..
+                            return null;
+                            }
 
                         }else{
                           return null;
@@ -511,20 +511,20 @@ public class Payment extends Model {
                     }
 
                     public Customer getCustomer() {
-			try{
-				//Adding database method for fetching from relation if not present..
-		                if(customer == null){
-		                  PaymentRepository paymentRepository = (PaymentRepository) getRepository();
+                        try{
+                          //Adding database method for fetching from relation if not present..
+                                      if(customer == null){
+                                        PaymentRepository paymentRepository = (PaymentRepository) getRepository();
 
-		                  RestAdapter restAdapter = paymentRepository.getRestAdapter();
-		                  if(restAdapter != null){
-		                    //Fetch locally from db
-		                    customer = getCustomer__db(restAdapter);
-		                  }
-		                }
-			}catch(Exception e){
-				//Ignore
-			}
+                                        RestAdapter restAdapter = paymentRepository.getRestAdapter();
+                                        if(restAdapter != null){
+                                          //Fetch locally from db
+                                          customer = getCustomer__db(restAdapter);
+                                        }
+                                      }
+                        }catch(Exception e){
+                          //Ignore
+                        }
 
                         return customer;
                     }
@@ -559,28 +559,28 @@ public class Payment extends Model {
                     public Customer getCustomer__db(RestAdapter restAdapter){
                       if(customerId != null){
                         CustomerRepository customerRepository = restAdapter.createRepository(CustomerRepository.class);
-			  try{
-				PaymentRepository lowercaseFirstLetterRepository = (PaymentRepository) getRepository();
-		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-		                        Context context = lowercaseFirstLetterRepository.getContext();
-		                        if(customerRepository.getDb() == null ){
-		                            customerRepository.addStorage(context);
-		                        }
+                            try{
+                            PaymentRepository lowercaseFirstLetterRepository = (PaymentRepository) getRepository();
+                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                                Context context = lowercaseFirstLetterRepository.getContext();
+                                                if(customerRepository.getDb() == null ){
+                                                    customerRepository.addStorage(context);
+                                                }
 
-		                        if(context != null && customerRepository.getDb() != null){
-		                            customerRepository.addStorage(context);
-		                            Customer customer = (Customer) customerRepository.getDb().get__db(customerId);
-		                            return customer;
-		                        }else{
-		                            return null;
-		                        }
-		                  }else{
-		                    return null;
-		                  }
-			  }catch(Exception e){
-				//Ignore exception..
-				return null;
-			  }
+                                                if(context != null && customerRepository.getDb() != null){
+                                                    customerRepository.addStorage(context);
+                                                    Customer customer = (Customer) customerRepository.getDb().get__db(customerId);
+                                                    return customer;
+                                                }else{
+                                                    return null;
+                                                }
+                                          }else{
+                                            return null;
+                                          }
+                            }catch(Exception e){
+                            //Ignore exception..
+                            return null;
+                            }
 
                         }else{
                           return null;
@@ -721,20 +721,20 @@ public class Payment extends Model {
                     }
 
                     public Order getOrder() {
-			try{
-				//Adding database method for fetching from relation if not present..
-		                if(order == null){
-		                  PaymentRepository paymentRepository = (PaymentRepository) getRepository();
+                        try{
+                          //Adding database method for fetching from relation if not present..
+                                      if(order == null){
+                                        PaymentRepository paymentRepository = (PaymentRepository) getRepository();
 
-		                  RestAdapter restAdapter = paymentRepository.getRestAdapter();
-		                  if(restAdapter != null){
-		                    //Fetch locally from db
-		                    order = getOrder__db(restAdapter);
-		                  }
-		                }
-			}catch(Exception e){
-				//Ignore
-			}
+                                        RestAdapter restAdapter = paymentRepository.getRestAdapter();
+                                        if(restAdapter != null){
+                                          //Fetch locally from db
+                                          order = getOrder__db(restAdapter);
+                                        }
+                                      }
+                        }catch(Exception e){
+                          //Ignore
+                        }
 
                         return order;
                     }
@@ -769,28 +769,28 @@ public class Payment extends Model {
                     public Order getOrder__db(RestAdapter restAdapter){
                       if(orderId != null){
                         OrderRepository orderRepository = restAdapter.createRepository(OrderRepository.class);
-			  try{
-				PaymentRepository lowercaseFirstLetterRepository = (PaymentRepository) getRepository();
-		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-		                        Context context = lowercaseFirstLetterRepository.getContext();
-		                        if(orderRepository.getDb() == null ){
-		                            orderRepository.addStorage(context);
-		                        }
+                            try{
+                            PaymentRepository lowercaseFirstLetterRepository = (PaymentRepository) getRepository();
+                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                                Context context = lowercaseFirstLetterRepository.getContext();
+                                                if(orderRepository.getDb() == null ){
+                                                    orderRepository.addStorage(context);
+                                                }
 
-		                        if(context != null && orderRepository.getDb() != null){
-		                            orderRepository.addStorage(context);
-		                            Order order = (Order) orderRepository.getDb().get__db(orderId);
-		                            return order;
-		                        }else{
-		                            return null;
-		                        }
-		                  }else{
-		                    return null;
-		                  }
-			  }catch(Exception e){
-				//Ignore exception..
-				return null;
-			  }
+                                                if(context != null && orderRepository.getDb() != null){
+                                                    orderRepository.addStorage(context);
+                                                    Order order = (Order) orderRepository.getDb().get__db(orderId);
+                                                    return order;
+                                                }else{
+                                                    return null;
+                                                }
+                                          }else{
+                                            return null;
+                                          }
+                            }catch(Exception e){
+                            //Ignore exception..
+                            return null;
+                            }
 
                         }else{
                           return null;

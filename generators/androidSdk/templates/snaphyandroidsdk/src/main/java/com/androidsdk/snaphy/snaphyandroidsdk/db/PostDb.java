@@ -74,26 +74,33 @@ public class PostDb{
                                                             String headingData = "";
                         if(modelData.getHeading() != null){
                           headingData = modelData.getHeading().toString();
+                          values.put("`heading`", headingData);
                         }
-                                                values.put("`heading`", headingData);
+                                                //Removed Commented..
+              //values.put("`heading`", headingData);
                                 
                                                             String descriptionData = "";
                         if(modelData.getDescription() != null){
                           descriptionData = modelData.getDescription().toString();
+                          values.put("`description`", descriptionData);
                         }
-                                                values.put("`description`", descriptionData);
+                                                //Removed Commented..
+              //values.put("`description`", descriptionData);
                                 
                                                             String addedData = "";
                         if(modelData.getAdded() != null){
                           addedData = modelData.getAdded().toString();
+                          values.put("`added`", addedData);
                         }
-                                                values.put("`added`", addedData);
+                                                //Removed Commented..
+              //values.put("`added`", addedData);
                                 
                                   String postImagesData = "";
                   if(modelData.getPostImages() != null){
                     postImagesData = new Gson().toJson(modelData.getPostImages(), DataList.class);
                   }
-                            values.put("`postImages`", postImagesData);
+                            //Removed Commented..
+              //values.put("`postImages`", postImagesData);
                                 
                                                             int anonymousData = 0;
                         if(modelData.getAnonymous()){
@@ -101,43 +108,57 @@ public class PostDb{
                         }else{
                           anonymousData = 0;
                         }
-                                                values.put("`anonymous`", anonymousData);
+                        values.put("`anonymous`", anonymousData);
+                                                //Removed Commented..
+              //values.put("`anonymous`", anonymousData);
                                 
                                                             String statusData = "";
                         if(modelData.getStatus() != null){
                           statusData = modelData.getStatus().toString();
+                          values.put("`status`", statusData);
                         }
-                                                values.put("`status`", statusData);
+                                                //Removed Commented..
+              //values.put("`status`", statusData);
                                 
                                                             String latestData = "";
                         if(modelData.getLatest() != null){
                           latestData = modelData.getLatest().toString();
+                          values.put("`latest`", latestData);
                         }
-                                                values.put("`latest`", latestData);
+                                                //Removed Commented..
+              //values.put("`latest`", latestData);
                                 
                                                             String unsolvedData = "";
                         if(modelData.getUnsolved() != null){
                           unsolvedData = modelData.getUnsolved().toString();
+                          values.put("`unsolved`", unsolvedData);
                         }
-                                                values.put("`unsolved`", unsolvedData);
+                                                //Removed Commented..
+              //values.put("`unsolved`", unsolvedData);
                                 
                                                             String trendingData = "";
                         if(modelData.getTrending() != null){
                           trendingData = modelData.getTrending().toString();
+                          values.put("`trending`", trendingData);
                         }
-                                                values.put("`trending`", trendingData);
+                                                //Removed Commented..
+              //values.put("`trending`", trendingData);
                                 
                                                             String postedData = "";
                         if(modelData.getPosted() != null){
                           postedData = modelData.getPosted().toString();
+                          values.put("`posted`", postedData);
                         }
-                                                values.put("`posted`", postedData);
+                                                //Removed Commented..
+              //values.put("`posted`", postedData);
                                 
                                                             String savedData = "";
                         if(modelData.getSaved() != null){
                           savedData = modelData.getSaved().toString();
+                          values.put("`saved`", savedData);
                         }
-                                                values.put("`saved`", savedData);
+                                                //Removed Commented..
+              //values.put("`saved`", savedData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -146,12 +167,14 @@ public class PostDb{
                               if(method.invoke(modelData) != null){
                                 //idData = modelData.getId().toString();
                                 idData = (String) method.invoke(modelData);
+                                values.put("`id`", idData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("`id`", idData);
+                                                //Removed Commented..
+              //values.put("`id`", idData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String customerIdData = "";
@@ -160,12 +183,14 @@ public class PostDb{
                               if(method.invoke(modelData) != null){
                                 //customerIdData = modelData.getCustomerId().toString();
                                 customerIdData = (String) method.invoke(modelData);
+                                values.put("`customerId`", customerIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("`customerId`", customerIdData);
+                                                //Removed Commented..
+              //values.put("`customerId`", customerIdData);
                   
 
         //Add the updated data property value to be 1

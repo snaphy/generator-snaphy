@@ -73,7 +73,9 @@ public class PostDetailDb{
                        
                                                             double totalLikeData;
                         totalLikeData = (double)modelData.getTotalLike();
-                                                values.put("`totalLike`", totalLikeData);
+                        values.put("`totalLike`", totalLikeData);
+                                                //Removed Commented..
+              //values.put("`totalLike`", totalLikeData);
                                 
                                                             int hasAcceptedAnswerData = 0;
                         if(modelData.getHasAcceptedAnswer()){
@@ -81,35 +83,47 @@ public class PostDetailDb{
                         }else{
                           hasAcceptedAnswerData = 0;
                         }
-                                                values.put("`hasAcceptedAnswer`", hasAcceptedAnswerData);
+                        values.put("`hasAcceptedAnswer`", hasAcceptedAnswerData);
+                                                //Removed Commented..
+              //values.put("`hasAcceptedAnswer`", hasAcceptedAnswerData);
                                 
                                                             double totalSaveData;
                         totalSaveData = (double)modelData.getTotalSave();
-                                                values.put("`totalSave`", totalSaveData);
+                        values.put("`totalSave`", totalSaveData);
+                                                //Removed Commented..
+              //values.put("`totalSave`", totalSaveData);
                                 
                                                             String addedData = "";
                         if(modelData.getAdded() != null){
                           addedData = modelData.getAdded().toString();
+                          values.put("`added`", addedData);
                         }
-                                                values.put("`added`", addedData);
+                                                //Removed Commented..
+              //values.put("`added`", addedData);
                                 
                                                             String updatedData = "";
                         if(modelData.getUpdated() != null){
                           updatedData = modelData.getUpdated().toString();
+                          values.put("`updated`", updatedData);
                         }
-                                                values.put("`updated`", updatedData);
+                                                //Removed Commented..
+              //values.put("`updated`", updatedData);
                                 
                                                             String typeData = "";
                         if(modelData.getType() != null){
                           typeData = modelData.getType().toString();
+                          values.put("`type`", typeData);
                         }
-                                                values.put("`type`", typeData);
+                                                //Removed Commented..
+              //values.put("`type`", typeData);
                                 
                                                             String statusData = "";
                         if(modelData.getStatus() != null){
                           statusData = modelData.getStatus().toString();
+                          values.put("`status`", statusData);
                         }
-                                                values.put("`status`", statusData);
+                                                //Removed Commented..
+              //values.put("`status`", statusData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -118,12 +132,14 @@ public class PostDetailDb{
                               if(method.invoke(modelData) != null){
                                 //idData = modelData.getId().toString();
                                 idData = (String) method.invoke(modelData);
+                                values.put("`id`", idData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("`id`", idData);
+                                                //Removed Commented..
+              //values.put("`id`", idData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String postIdData = "";
@@ -132,12 +148,14 @@ public class PostDetailDb{
                               if(method.invoke(modelData) != null){
                                 //postIdData = modelData.getPostId().toString();
                                 postIdData = (String) method.invoke(modelData);
+                                values.put("`postId`", postIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("`postId`", postIdData);
+                                                //Removed Commented..
+              //values.put("`postId`", postIdData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String commentIdData = "";
@@ -146,12 +164,14 @@ public class PostDetailDb{
                               if(method.invoke(modelData) != null){
                                 //commentIdData = modelData.getCommentId().toString();
                                 commentIdData = (String) method.invoke(modelData);
+                                values.put("`commentId`", commentIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("`commentId`", commentIdData);
+                                                //Removed Commented..
+              //values.put("`commentId`", commentIdData);
                   
 
         //Add the updated data property value to be 1

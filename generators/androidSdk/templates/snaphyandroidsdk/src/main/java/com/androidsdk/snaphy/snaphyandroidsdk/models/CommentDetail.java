@@ -252,20 +252,20 @@ public class CommentDetail extends Model {
                     }
 
                     public Comment getComment() {
-			try{
-				//Adding database method for fetching from relation if not present..
-		                if(comment == null){
-		                  CommentDetailRepository commentDetailRepository = (CommentDetailRepository) getRepository();
+                        try{
+                          //Adding database method for fetching from relation if not present..
+                                      if(comment == null){
+                                        CommentDetailRepository commentDetailRepository = (CommentDetailRepository) getRepository();
 
-		                  RestAdapter restAdapter = commentDetailRepository.getRestAdapter();
-		                  if(restAdapter != null){
-		                    //Fetch locally from db
-		                    comment = getComment__db(restAdapter);
-		                  }
-		                }
-			}catch(Exception e){
-				//Ignore
-			}
+                                        RestAdapter restAdapter = commentDetailRepository.getRestAdapter();
+                                        if(restAdapter != null){
+                                          //Fetch locally from db
+                                          comment = getComment__db(restAdapter);
+                                        }
+                                      }
+                        }catch(Exception e){
+                          //Ignore
+                        }
 
                         return comment;
                     }
@@ -300,28 +300,28 @@ public class CommentDetail extends Model {
                     public Comment getComment__db(RestAdapter restAdapter){
                       if(commentId != null){
                         CommentRepository commentRepository = restAdapter.createRepository(CommentRepository.class);
-			  try{
-				CommentDetailRepository lowercaseFirstLetterRepository = (CommentDetailRepository) getRepository();
-		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-		                        Context context = lowercaseFirstLetterRepository.getContext();
-		                        if(commentRepository.getDb() == null ){
-		                            commentRepository.addStorage(context);
-		                        }
+                            try{
+                            CommentDetailRepository lowercaseFirstLetterRepository = (CommentDetailRepository) getRepository();
+                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                                Context context = lowercaseFirstLetterRepository.getContext();
+                                                if(commentRepository.getDb() == null ){
+                                                    commentRepository.addStorage(context);
+                                                }
 
-		                        if(context != null && commentRepository.getDb() != null){
-		                            commentRepository.addStorage(context);
-		                            Comment comment = (Comment) commentRepository.getDb().get__db(commentId);
-		                            return comment;
-		                        }else{
-		                            return null;
-		                        }
-		                  }else{
-		                    return null;
-		                  }
-			  }catch(Exception e){
-				//Ignore exception..
-				return null;
-			  }
+                                                if(context != null && commentRepository.getDb() != null){
+                                                    commentRepository.addStorage(context);
+                                                    Comment comment = (Comment) commentRepository.getDb().get__db(commentId);
+                                                    return comment;
+                                                }else{
+                                                    return null;
+                                                }
+                                          }else{
+                                            return null;
+                                          }
+                            }catch(Exception e){
+                            //Ignore exception..
+                            return null;
+                            }
 
                         }else{
                           return null;

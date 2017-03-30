@@ -350,20 +350,20 @@ public class Book extends Model {
                     }
 
                     public BookCategory getBookCategory() {
-			try{
-				//Adding database method for fetching from relation if not present..
-		                if(bookCategory == null){
-		                  BookRepository bookRepository = (BookRepository) getRepository();
+                        try{
+                          //Adding database method for fetching from relation if not present..
+                                      if(bookCategory == null){
+                                        BookRepository bookRepository = (BookRepository) getRepository();
 
-		                  RestAdapter restAdapter = bookRepository.getRestAdapter();
-		                  if(restAdapter != null){
-		                    //Fetch locally from db
-		                    bookCategory = getBookCategory__db(restAdapter);
-		                  }
-		                }
-			}catch(Exception e){
-				//Ignore
-			}
+                                        RestAdapter restAdapter = bookRepository.getRestAdapter();
+                                        if(restAdapter != null){
+                                          //Fetch locally from db
+                                          bookCategory = getBookCategory__db(restAdapter);
+                                        }
+                                      }
+                        }catch(Exception e){
+                          //Ignore
+                        }
 
                         return bookCategory;
                     }
@@ -398,28 +398,28 @@ public class Book extends Model {
                     public BookCategory getBookCategory__db(RestAdapter restAdapter){
                       if(bookCategoryId != null){
                         BookCategoryRepository bookCategoryRepository = restAdapter.createRepository(BookCategoryRepository.class);
-			  try{
-				BookRepository lowercaseFirstLetterRepository = (BookRepository) getRepository();
-		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-		                        Context context = lowercaseFirstLetterRepository.getContext();
-		                        if(bookCategoryRepository.getDb() == null ){
-		                            bookCategoryRepository.addStorage(context);
-		                        }
+                            try{
+                            BookRepository lowercaseFirstLetterRepository = (BookRepository) getRepository();
+                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                                Context context = lowercaseFirstLetterRepository.getContext();
+                                                if(bookCategoryRepository.getDb() == null ){
+                                                    bookCategoryRepository.addStorage(context);
+                                                }
 
-		                        if(context != null && bookCategoryRepository.getDb() != null){
-		                            bookCategoryRepository.addStorage(context);
-		                            BookCategory bookCategory = (BookCategory) bookCategoryRepository.getDb().get__db(bookCategoryId);
-		                            return bookCategory;
-		                        }else{
-		                            return null;
-		                        }
-		                  }else{
-		                    return null;
-		                  }
-			  }catch(Exception e){
-				//Ignore exception..
-				return null;
-			  }
+                                                if(context != null && bookCategoryRepository.getDb() != null){
+                                                    bookCategoryRepository.addStorage(context);
+                                                    BookCategory bookCategory = (BookCategory) bookCategoryRepository.getDb().get__db(bookCategoryId);
+                                                    return bookCategory;
+                                                }else{
+                                                    return null;
+                                                }
+                                          }else{
+                                            return null;
+                                          }
+                            }catch(Exception e){
+                            //Ignore exception..
+                            return null;
+                            }
 
                         }else{
                           return null;

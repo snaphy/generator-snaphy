@@ -54,7 +54,8 @@ public class DbHandler extends SQLiteOpenHelper {
                         <%
                             var tableQuery = `CREATE TABLE IF NOT EXISTS \`${modelName}\` ( `;
                             var i=0;
-                            for( let property in model_.properties) { -%>
+                            for( let property in model_.properties) {
+                        -%>
                                 <% if(model_.properties.hasOwnProperty(property)){
                                     let isArray = model_.properties[property].type instanceof Array;
                                     if(i==0){
@@ -74,6 +75,24 @@ public class DbHandler extends SQLiteOpenHelper {
                             <%} -%>
                             <% i++; -%>
                         <%} -%>
+
+                        <%
+                          //Prepare method for get foreign key..
+                          var getForeignKeyName = function (model_, relation) {
+                            var foreignKey = model_.relations[relation].foreignKey;
+                            if (!foreignKey) {
+                              foreignKey = model_.methods.lowercaseFirstLetter(relation) + "Id";
+                            }
+                            return foreignKey;
+                          };
+                          for(var relation in model_.relations) {
+                              if(model_.relations.hasOwnProperty(relation)) {
+                                if (model_.relations[relation].type === "hasOne") {
+                                  tableQuery = `${tableQuery}, ${getForeignKeyName(model_, relation)} TEXT `;
+                                }
+                              }
+                          }
+                        %>
 
                         <%
                         //On insert always update the update data value to be 1 and on fetch change to 0

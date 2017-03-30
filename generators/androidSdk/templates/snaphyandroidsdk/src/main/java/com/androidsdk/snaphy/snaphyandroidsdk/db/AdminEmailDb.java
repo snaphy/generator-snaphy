@@ -78,12 +78,14 @@ public class AdminEmailDb{
                               if(method.invoke(modelData) != null){
                                 //toData = modelData.getTo().toString();
                                 toData = (String) method.invoke(modelData);
+                                values.put("`to`", toData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("`to`", toData);
+                                                //Removed Commented..
+              //values.put("`to`", toData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String fromData = "";
@@ -92,12 +94,14 @@ public class AdminEmailDb{
                               if(method.invoke(modelData) != null){
                                 //fromData = modelData.getFrom().toString();
                                 fromData = (String) method.invoke(modelData);
+                                values.put("`from`", fromData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("`from`", fromData);
+                                                //Removed Commented..
+              //values.put("`from`", fromData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String subjectData = "";
@@ -106,12 +110,14 @@ public class AdminEmailDb{
                               if(method.invoke(modelData) != null){
                                 //subjectData = modelData.getSubject().toString();
                                 subjectData = (String) method.invoke(modelData);
+                                values.put("`subject`", subjectData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("`subject`", subjectData);
+                                                //Removed Commented..
+              //values.put("`subject`", subjectData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String textData = "";
@@ -120,12 +126,14 @@ public class AdminEmailDb{
                               if(method.invoke(modelData) != null){
                                 //textData = modelData.getText().toString();
                                 textData = (String) method.invoke(modelData);
+                                values.put("`text`", textData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("`text`", textData);
+                                                //Removed Commented..
+              //values.put("`text`", textData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String htmlData = "";
@@ -134,12 +142,14 @@ public class AdminEmailDb{
                               if(method.invoke(modelData) != null){
                                 //htmlData = modelData.getHtml().toString();
                                 htmlData = (String) method.invoke(modelData);
+                                values.put("`html`", htmlData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("`html`", htmlData);
+                                                //Removed Commented..
+              //values.put("`html`", htmlData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -148,12 +158,14 @@ public class AdminEmailDb{
                               if(method.invoke(modelData) != null){
                                 //idData = modelData.getId().toString();
                                 idData = (String) method.invoke(modelData);
+                                values.put("`id`", idData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
                         }
 
-                                                values.put("`id`", idData);
+                                                //Removed Commented..
+              //values.put("`id`", idData);
                   
 
         //Add the updated data property value to be 1
