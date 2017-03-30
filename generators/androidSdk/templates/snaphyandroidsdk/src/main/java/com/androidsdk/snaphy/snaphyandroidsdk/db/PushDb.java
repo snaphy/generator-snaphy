@@ -84,10 +84,10 @@ public class PushDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                   
-
+        
+          
         //Add the updated data property value to be 1
         values.put("`_DATA_UPDATED`", 1);
         return values;

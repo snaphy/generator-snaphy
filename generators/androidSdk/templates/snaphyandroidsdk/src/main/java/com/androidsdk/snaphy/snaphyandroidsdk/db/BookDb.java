@@ -76,64 +76,56 @@ public class BookDb{
                           titleData = modelData.getTitle().toString();
                           values.put("`title`", titleData);
                         }
-                                                 
-                
+                                  
                                 
                                                             String descriptionData = "";
                         if(modelData.getDescription() != null){
                           descriptionData = modelData.getDescription().toString();
                           values.put("`description`", descriptionData);
                         }
-                                                 
-                
+                                  
                                 
                                                             String statusData = "";
                         if(modelData.getStatus() != null){
                           statusData = modelData.getStatus().toString();
                           values.put("`status`", statusData);
                         }
-                                                 
-                
+                                  
                                 
                                                             String frontCoverData = "";
                         if(modelData.getFrontCover() != null){
                           frontCoverData = new Gson().toJson(modelData.getFrontCover(), HashMap.class);
                           values.put("`frontCover`", frontCoverData);
                         }
-                                                 
-                
+                                  
                                 
                                                             String backCoverData = "";
                         if(modelData.getBackCover() != null){
                           backCoverData = new Gson().toJson(modelData.getBackCover(), HashMap.class);
                           values.put("`backCover`", backCoverData);
                         }
-                                                 
-                
+                                  
                                 
                                                             String uploadBookData = "";
                         if(modelData.getUploadBook() != null){
                           uploadBookData = new Gson().toJson(modelData.getUploadBook(), HashMap.class);
                           values.put("`uploadBook`", uploadBookData);
                         }
-                                                 
-                
+                                  
                                 
                                                             String addedData = "";
                         if(modelData.getAdded() != null){
                           addedData = modelData.getAdded().toString();
                           values.put("`added`", addedData);
                         }
-                                                 
-                
+                                  
                                 
                                                             String updatedData = "";
                         if(modelData.getUpdated() != null){
                           updatedData = modelData.getUpdated().toString();
                           values.put("`updated`", updatedData);
                         }
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -148,8 +140,7 @@ public class BookDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String bookCategoryIdData = "";
@@ -164,10 +155,10 @@ public class BookDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                   
-
+        
+          
         //Add the updated data property value to be 1
         values.put("`_DATA_UPDATED`", 1);
         return values;

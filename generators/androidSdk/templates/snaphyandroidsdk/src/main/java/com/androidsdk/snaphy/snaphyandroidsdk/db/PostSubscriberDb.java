@@ -76,8 +76,7 @@ public class PostSubscriberDb{
                           typeData = modelData.getType().toString();
                           values.put("`type`", typeData);
                         }
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -92,8 +91,7 @@ public class PostSubscriberDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String postIdData = "";
@@ -108,8 +106,7 @@ public class PostSubscriberDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String customerIdData = "";
@@ -124,8 +121,7 @@ public class PostSubscriberDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String commentIdData = "";
@@ -140,8 +136,7 @@ public class PostSubscriberDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String likePostIdData = "";
@@ -156,8 +151,7 @@ public class PostSubscriberDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String savePostIdData = "";
@@ -172,10 +166,10 @@ public class PostSubscriberDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                   
-
+        
+          
         //Add the updated data property value to be 1
         values.put("`_DATA_UPDATED`", 1);
         return values;

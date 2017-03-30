@@ -76,8 +76,7 @@ public class InstallationDb{
                           statusData = modelData.getStatus().toString();
                           values.put("`status`", statusData);
                         }
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String appIdData = "";
@@ -92,8 +91,7 @@ public class InstallationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String appVersionData = "";
@@ -108,8 +106,7 @@ public class InstallationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String badgeData = "";
@@ -124,8 +121,7 @@ public class InstallationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String createdData = "";
@@ -140,8 +136,7 @@ public class InstallationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String deviceTokenData = "";
@@ -156,8 +151,7 @@ public class InstallationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String deviceTypeData = "";
@@ -172,8 +166,7 @@ public class InstallationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String modifiedData = "";
@@ -188,15 +181,13 @@ public class InstallationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                   String subscriptionsData = "";
                   if(modelData.getSubscriptions() != null){
                     subscriptionsData = new Gson().toJson(modelData.getSubscriptions(), DataList.class);
                   }
-                             
-                
+              
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String timeZoneData = "";
@@ -211,8 +202,7 @@ public class InstallationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String userIdData = "";
@@ -227,8 +217,7 @@ public class InstallationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -243,10 +232,10 @@ public class InstallationDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                   
-
+        
+          
         //Add the updated data property value to be 1
         values.put("`_DATA_UPDATED`", 1);
         return values;

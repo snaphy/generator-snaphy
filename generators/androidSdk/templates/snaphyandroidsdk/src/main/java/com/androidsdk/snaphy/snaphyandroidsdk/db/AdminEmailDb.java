@@ -84,8 +84,7 @@ public class AdminEmailDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String fromData = "";
@@ -100,8 +99,7 @@ public class AdminEmailDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String subjectData = "";
@@ -116,8 +114,7 @@ public class AdminEmailDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String textData = "";
@@ -132,8 +129,7 @@ public class AdminEmailDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String htmlData = "";
@@ -148,8 +144,7 @@ public class AdminEmailDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -164,10 +159,10 @@ public class AdminEmailDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                   
-
+        
+          
         //Add the updated data property value to be 1
         values.put("`_DATA_UPDATED`", 1);
         return values;

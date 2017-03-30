@@ -76,64 +76,56 @@ public class NewsDb{
                           titleData = modelData.getTitle().toString();
                           values.put("`title`", titleData);
                         }
-                                                 
-                
+                                  
                                 
                                                             String descriptionData = "";
                         if(modelData.getDescription() != null){
                           descriptionData = modelData.getDescription().toString();
                           values.put("`description`", descriptionData);
                         }
-                                                 
-                
+                                  
                                 
                                                             String urlData = "";
                         if(modelData.getUrl() != null){
                           urlData = modelData.getUrl().toString();
                           values.put("`url`", urlData);
                         }
-                                                 
-                
+                                  
                                 
                                                             String statusData = "";
                         if(modelData.getStatus() != null){
                           statusData = modelData.getStatus().toString();
                           values.put("`status`", statusData);
                         }
-                                                 
-                
+                                  
                                 
                                                             String typeData = "";
                         if(modelData.getType() != null){
                           typeData = modelData.getType().toString();
                           values.put("`type`", typeData);
                         }
-                                                 
-                
+                                  
                                 
                                                             String imageData = "";
                         if(modelData.getImage() != null){
                           imageData = new Gson().toJson(modelData.getImage(), HashMap.class);
                           values.put("`image`", imageData);
                         }
-                                                 
-                
+                                  
                                 
                                                             String addedData = "";
                         if(modelData.getAdded() != null){
                           addedData = modelData.getAdded().toString();
                           values.put("`added`", addedData);
                         }
-                                                 
-                
+                                  
                                 
                                                             String updatedData = "";
                         if(modelData.getUpdated() != null){
                           updatedData = modelData.getUpdated().toString();
                           values.put("`updated`", updatedData);
                         }
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -148,10 +140,10 @@ public class NewsDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                   
-
+        
+          
         //Add the updated data property value to be 1
         values.put("`_DATA_UPDATED`", 1);
         return values;

@@ -76,20 +76,7 @@ public class SavePostDb{
                           addedData = modelData.getAdded().toString();
                           values.put("`added`", addedData);
                         }
-                                                 
-                
-                          String postSubscribersIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getPostSubscribersId");
-                              if(method.invoke(modelData) != null){
-                                //postSubscribersIdData = modelData.getPostSubscribersId().toString();
-                                postSubscribersIdData = (String) method.invoke(modelData);
-                                values.put("`postSubscribersId`", postSubscribersIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -104,20 +91,7 @@ public class SavePostDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
-                          String postSubscribersIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getPostSubscribersId");
-                              if(method.invoke(modelData) != null){
-                                //postSubscribersIdData = modelData.getPostSubscribersId().toString();
-                                postSubscribersIdData = (String) method.invoke(modelData);
-                                values.put("`postSubscribersId`", postSubscribersIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String postIdData = "";
@@ -132,20 +106,7 @@ public class SavePostDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
-                          String postSubscribersIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getPostSubscribersId");
-                              if(method.invoke(modelData) != null){
-                                //postSubscribersIdData = modelData.getPostSubscribersId().toString();
-                                postSubscribersIdData = (String) method.invoke(modelData);
-                                values.put("`postSubscribersId`", postSubscribersIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String customerIdData = "";
@@ -160,22 +121,22 @@ public class SavePostDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
-                          String postSubscribersIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getPostSubscribersId");
-                              if(method.invoke(modelData) != null){
-                                //postSubscribersIdData = modelData.getPostSubscribersId().toString();
-                                postSubscribersIdData = (String) method.invoke(modelData);
-                                values.put("`postSubscribersId`", postSubscribersIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                   
-
+        
+          
+                    String postSubscribersIdData = "";
+                    try {
+                        Method method = modelData.getClass().getMethod("getPostSubscribersId");
+                        if(method.invoke(modelData) != null){
+                          //postSubscribersIdData = modelData.getPostSubscribersId().toString();
+                          postSubscribersIdData = (String) method.invoke(modelData);
+                          values.put("`postSubscribersId`", postSubscribersIdData);
+                        }
+                    } catch (Exception e) {
+                      Log.e("Database Error", e.toString());
+                    }
+          
         //Add the updated data property value to be 1
         values.put("`_DATA_UPDATED`", 1);
         return values;

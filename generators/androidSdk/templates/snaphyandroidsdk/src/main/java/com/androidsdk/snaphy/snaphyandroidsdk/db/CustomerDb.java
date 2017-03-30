@@ -76,238 +76,82 @@ public class CustomerDb{
                           dateData = modelData.getDate().toString();
                           values.put("`date`", dateData);
                         }
-                                                 
-                
-                          String facebookAccessTokenIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
-                              if(method.invoke(modelData) != null){
-                                //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
-                                facebookAccessTokenIdData = (String) method.invoke(modelData);
-                                values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             String lastModifiedData = "";
                         if(modelData.getLastModified() != null){
                           lastModifiedData = modelData.getLastModified().toString();
                           values.put("`lastModified`", lastModifiedData);
                         }
-                                                 
-                
-                          String facebookAccessTokenIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
-                              if(method.invoke(modelData) != null){
-                                //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
-                                facebookAccessTokenIdData = (String) method.invoke(modelData);
-                                values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             String emailData = "";
                         if(modelData.getEmail() != null){
                           emailData = modelData.getEmail().toString();
                           values.put("`email`", emailData);
                         }
-                                                 
-                
-                          String facebookAccessTokenIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
-                              if(method.invoke(modelData) != null){
-                                //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
-                                facebookAccessTokenIdData = (String) method.invoke(modelData);
-                                values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             String firstNameData = "";
                         if(modelData.getFirstName() != null){
                           firstNameData = modelData.getFirstName().toString();
                           values.put("`firstName`", firstNameData);
                         }
-                                                 
-                
-                          String facebookAccessTokenIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
-                              if(method.invoke(modelData) != null){
-                                //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
-                                facebookAccessTokenIdData = (String) method.invoke(modelData);
-                                values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             String lastNameData = "";
                         if(modelData.getLastName() != null){
                           lastNameData = modelData.getLastName().toString();
                           values.put("`lastName`", lastNameData);
                         }
-                                                 
-                
-                          String facebookAccessTokenIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
-                              if(method.invoke(modelData) != null){
-                                //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
-                                facebookAccessTokenIdData = (String) method.invoke(modelData);
-                                values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             String mciNumberData = "";
                         if(modelData.getMciNumber() != null){
                           mciNumberData = modelData.getMciNumber().toString();
                           values.put("`mciNumber`", mciNumberData);
                         }
-                                                 
-                
-                          String facebookAccessTokenIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
-                              if(method.invoke(modelData) != null){
-                                //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
-                                facebookAccessTokenIdData = (String) method.invoke(modelData);
-                                values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             String phoneNumberData = "";
                         if(modelData.getPhoneNumber() != null){
                           phoneNumberData = modelData.getPhoneNumber().toString();
                           values.put("`phoneNumber`", phoneNumberData);
                         }
-                                                 
-                
-                          String facebookAccessTokenIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
-                              if(method.invoke(modelData) != null){
-                                //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
-                                facebookAccessTokenIdData = (String) method.invoke(modelData);
-                                values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             String statusData = "";
                         if(modelData.getStatus() != null){
                           statusData = modelData.getStatus().toString();
                           values.put("`status`", statusData);
                         }
-                                                 
-                
-                          String facebookAccessTokenIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
-                              if(method.invoke(modelData) != null){
-                                //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
-                                facebookAccessTokenIdData = (String) method.invoke(modelData);
-                                values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             String registrationIdData = "";
                         if(modelData.getRegistrationId() != null){
                           registrationIdData = modelData.getRegistrationId().toString();
                           values.put("`registrationId`", registrationIdData);
                         }
-                                                 
-                
-                          String facebookAccessTokenIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
-                              if(method.invoke(modelData) != null){
-                                //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
-                                facebookAccessTokenIdData = (String) method.invoke(modelData);
-                                values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             String profilePicData = "";
                         if(modelData.getProfilePic() != null){
                           profilePicData = new Gson().toJson(modelData.getProfilePic(), HashMap.class);
                           values.put("`profilePic`", profilePicData);
                         }
-                                                 
-                
-                          String facebookAccessTokenIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
-                              if(method.invoke(modelData) != null){
-                                //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
-                                facebookAccessTokenIdData = (String) method.invoke(modelData);
-                                values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             String currentCityData = "";
                         if(modelData.getCurrentCity() != null){
                           currentCityData = modelData.getCurrentCity().toString();
                           values.put("`currentCity`", currentCityData);
                         }
-                                                 
-                
-                          String facebookAccessTokenIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
-                              if(method.invoke(modelData) != null){
-                                //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
-                                facebookAccessTokenIdData = (String) method.invoke(modelData);
-                                values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             double workExperienceData;
                         workExperienceData = (double)modelData.getWorkExperience();
                         values.put("`workExperience`", workExperienceData);
-                                                 
-                
-                          String facebookAccessTokenIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
-                              if(method.invoke(modelData) != null){
-                                //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
-                                facebookAccessTokenIdData = (String) method.invoke(modelData);
-                                values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String realmData = "";
@@ -322,20 +166,7 @@ public class CustomerDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
-                          String facebookAccessTokenIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
-                              if(method.invoke(modelData) != null){
-                                //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
-                                facebookAccessTokenIdData = (String) method.invoke(modelData);
-                                values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String usernameData = "";
@@ -350,20 +181,7 @@ public class CustomerDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
-                          String facebookAccessTokenIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
-                              if(method.invoke(modelData) != null){
-                                //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
-                                facebookAccessTokenIdData = (String) method.invoke(modelData);
-                                values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String passwordData = "";
@@ -378,20 +196,7 @@ public class CustomerDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
-                          String facebookAccessTokenIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
-                              if(method.invoke(modelData) != null){
-                                //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
-                                facebookAccessTokenIdData = (String) method.invoke(modelData);
-                                values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String credentialsData = "";
@@ -406,20 +211,7 @@ public class CustomerDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
-                          String facebookAccessTokenIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
-                              if(method.invoke(modelData) != null){
-                                //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
-                                facebookAccessTokenIdData = (String) method.invoke(modelData);
-                                values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String challengesData = "";
@@ -434,20 +226,7 @@ public class CustomerDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
-                          String facebookAccessTokenIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
-                              if(method.invoke(modelData) != null){
-                                //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
-                                facebookAccessTokenIdData = (String) method.invoke(modelData);
-                                values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String emailVerifiedData = "";
@@ -462,20 +241,7 @@ public class CustomerDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
-                          String facebookAccessTokenIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
-                              if(method.invoke(modelData) != null){
-                                //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
-                                facebookAccessTokenIdData = (String) method.invoke(modelData);
-                                values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String verificationTokenData = "";
@@ -490,20 +256,7 @@ public class CustomerDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
-                          String facebookAccessTokenIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
-                              if(method.invoke(modelData) != null){
-                                //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
-                                facebookAccessTokenIdData = (String) method.invoke(modelData);
-                                values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String createdData = "";
@@ -518,20 +271,7 @@ public class CustomerDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
-                          String facebookAccessTokenIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
-                              if(method.invoke(modelData) != null){
-                                //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
-                                facebookAccessTokenIdData = (String) method.invoke(modelData);
-                                values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String lastUpdatedData = "";
@@ -546,20 +286,7 @@ public class CustomerDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
-                          String facebookAccessTokenIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
-                              if(method.invoke(modelData) != null){
-                                //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
-                                facebookAccessTokenIdData = (String) method.invoke(modelData);
-                                values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -574,22 +301,22 @@ public class CustomerDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
-                          String facebookAccessTokenIdData = "";
-                          try {
-                              Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
-                              if(method.invoke(modelData) != null){
-                                //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
-                                facebookAccessTokenIdData = (String) method.invoke(modelData);
-                                values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
-                              }
-                          } catch (Exception e) {
-                            Log.e("Database Error", e.toString());
-                          }
-                
+                                  
                   
-
+        
+          
+                    String facebookAccessTokenIdData = "";
+                    try {
+                        Method method = modelData.getClass().getMethod("getFacebookAccessTokenId");
+                        if(method.invoke(modelData) != null){
+                          //facebookAccessTokenIdData = modelData.getFacebookAccessTokenId().toString();
+                          facebookAccessTokenIdData = (String) method.invoke(modelData);
+                          values.put("`facebookAccessTokenId`", facebookAccessTokenIdData);
+                        }
+                    } catch (Exception e) {
+                      Log.e("Database Error", e.toString());
+                    }
+          
         //Add the updated data property value to be 1
         values.put("`_DATA_UPDATED`", 1);
         return values;

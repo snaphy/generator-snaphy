@@ -76,54 +76,47 @@ public class OrderDb{
                           orderNumberData = modelData.getOrderNumber().toString();
                           values.put("`orderNumber`", orderNumberData);
                         }
-                                                 
-                
+                                  
                                 
                                                             String transactionIdData = "";
                         if(modelData.getTransactionId() != null){
                           transactionIdData = modelData.getTransactionId().toString();
                           values.put("`transactionId`", transactionIdData);
                         }
-                                                 
-                
+                                  
                                 
                                                             String orderStatusData = "";
                         if(modelData.getOrderStatus() != null){
                           orderStatusData = modelData.getOrderStatus().toString();
                           values.put("`orderStatus`", orderStatusData);
                         }
-                                                 
-                
+                                  
                                 
                                                             String paymentStatusData = "";
                         if(modelData.getPaymentStatus() != null){
                           paymentStatusData = modelData.getPaymentStatus().toString();
                           values.put("`paymentStatus`", paymentStatusData);
                         }
-                                                 
-                
+                                  
                                 
                                                             String errorMessageData = "";
                         if(modelData.getErrorMessage() != null){
                           errorMessageData = modelData.getErrorMessage().toString();
                           values.put("`errorMessage`", errorMessageData);
                         }
-                                                 
-                
+                                  
                                 
                                                             double amountData;
                         amountData = (double)modelData.getAmount();
                         values.put("`amount`", amountData);
-                                                 
-                
+                                  
                                 
                                                             String typeData = "";
                         if(modelData.getType() != null){
                           typeData = modelData.getType().toString();
                           values.put("`type`", typeData);
                         }
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -138,8 +131,7 @@ public class OrderDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String bookIdData = "";
@@ -154,8 +146,7 @@ public class OrderDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String customerIdData = "";
@@ -170,8 +161,7 @@ public class OrderDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String paymentIdData = "";
@@ -186,10 +176,10 @@ public class OrderDb{
                           Log.e("Database Error", e.toString());
                         }
 
-                                                 
-                
+                                  
                   
-
+        
+          
         //Add the updated data property value to be 1
         values.put("`_DATA_UPDATED`", 1);
         return values;
