@@ -227,7 +227,10 @@ public class BookCategoryDb{
                           }
                         }
                                                 
-                  
+                  //End for loop
+         
+          
+
         return hashMap;
     }//parseCursor
 

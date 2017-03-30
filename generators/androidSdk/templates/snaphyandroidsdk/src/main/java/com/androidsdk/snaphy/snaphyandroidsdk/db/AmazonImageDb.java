@@ -244,7 +244,10 @@ public class AmazonImageDb{
                           }
                         }
                                                 
-                  
+                  //End for loop
+         
+          
+
         return hashMap;
     }//parseCursor
 

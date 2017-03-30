@@ -244,7 +244,10 @@ public class AmazonPdfDb{
                           }
                         }
                                                 
-                  
+                  //End for loop
+         
+          
+
         return hashMap;
     }//parseCursor
 

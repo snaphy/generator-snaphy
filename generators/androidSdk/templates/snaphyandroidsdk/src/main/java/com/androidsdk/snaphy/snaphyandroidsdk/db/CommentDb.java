@@ -296,7 +296,55 @@ public class CommentDb{
                           }
                         }
                                                 
-                  
+                  //End for loop
+         
+          
+                    String commentDetailIdData = "";
+                    int commentDetailIdindex = cursor.getColumnIndex(commentDetailId);
+                    if(commentDetailIdindex >= 0){
+
+                        if(cursor.getString(commentDetailIdindex) != null){
+                          commentDetailIdData = cursor.getString(commentDetailIdindex);
+                          if(commentDetailIdData != null){
+                            commentDetailIdData = commentDetailIdData.toString();
+                            hashMap.put("commentDetailId", commentDetailIdData);
+                          }
+                        }
+
+                    }
+
+          
+                    String postSubscriberIdData = "";
+                    int postSubscriberIdindex = cursor.getColumnIndex(postSubscriberId);
+                    if(postSubscriberIdindex >= 0){
+
+                        if(cursor.getString(postSubscriberIdindex) != null){
+                          postSubscriberIdData = cursor.getString(postSubscriberIdindex);
+                          if(postSubscriberIdData != null){
+                            postSubscriberIdData = postSubscriberIdData.toString();
+                            hashMap.put("postSubscriberId", postSubscriberIdData);
+                          }
+                        }
+
+                    }
+
+          
+                    String postDetailIdData = "";
+                    int postDetailIdindex = cursor.getColumnIndex(postDetailId);
+                    if(postDetailIdindex >= 0){
+
+                        if(cursor.getString(postDetailIdindex) != null){
+                          postDetailIdData = cursor.getString(postDetailIdindex);
+                          if(postDetailIdData != null){
+                            postDetailIdData = postDetailIdData.toString();
+                            hashMap.put("postDetailId", postDetailIdData);
+                          }
+                        }
+
+                    }
+
+          
+
         return hashMap;
     }//parseCursor
 

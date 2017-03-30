@@ -265,7 +265,10 @@ public class CommentDetailDb{
                           }
                         }
                                                 
-                  
+                  //End for loop
+         
+          
+
         return hashMap;
     }//parseCursor
 

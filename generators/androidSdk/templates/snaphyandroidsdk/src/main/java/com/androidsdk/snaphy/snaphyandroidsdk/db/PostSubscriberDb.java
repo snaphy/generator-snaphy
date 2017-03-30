@@ -318,7 +318,10 @@ public class PostSubscriberDb{
                           }
                         }
                                                 
-                  
+                  //End for loop
+         
+          
+
         return hashMap;
     }//parseCursor
 

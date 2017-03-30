@@ -400,7 +400,25 @@ public class PostDb{
                           }
                         }
                                                 
-                  
+                  //End for loop
+         
+          
+                    String postDetailIdData = "";
+                    int postDetailIdindex = cursor.getColumnIndex(postDetailId);
+                    if(postDetailIdindex >= 0){
+
+                        if(cursor.getString(postDetailIdindex) != null){
+                          postDetailIdData = cursor.getString(postDetailIdindex);
+                          if(postDetailIdData != null){
+                            postDetailIdData = postDetailIdData.toString();
+                            hashMap.put("postDetailId", postDetailIdData);
+                          }
+                        }
+
+                    }
+
+          
+
         return hashMap;
     }//parseCursor
 

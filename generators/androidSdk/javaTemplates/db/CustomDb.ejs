@@ -329,13 +329,19 @@ public class <%- modelName %>Db{
                   var capitalPropertyName = model.methods.capitalizeFirstLetter(getForeignKeyName(model, relation));
           %>
                     String <%-getForeignKeyName(model, relation)%>Data = "";
-                    if(cursor.getString(<%-getForeignKeyName(model, relation)%>) != null){
-                      <%-getForeignKeyName(model, relation)%>Data = cursor.getString(<%-getForeignKeyName(model, relation)%>);
-                      if(<%-getForeignKeyName(model, relation)%>Data != null){
-                        <%-getForeignKeyName(model, relation)%>Data = <%-getForeignKeyName(model, relation)%>Data.toString();
-                        hashMap.put("<%-getForeignKeyName(model, relation)%>", <%-getForeignKeyName(model, relation)%>Data);
-                      }
+                    int <%-getForeignKeyName(model, relation)%>index = cursor.getColumnIndex(<%-getForeignKeyName(model, relation)%>);
+                    if(<%-getForeignKeyName(model, relation)%>index >= 0){
+
+                        if(cursor.getString(<%-getForeignKeyName(model, relation)%>index) != null){
+                          <%-getForeignKeyName(model, relation)%>Data = cursor.getString(<%-getForeignKeyName(model, relation)%>index);
+                          if(<%-getForeignKeyName(model, relation)%>Data != null){
+                            <%-getForeignKeyName(model, relation)%>Data = <%-getForeignKeyName(model, relation)%>Data.toString();
+                            hashMap.put("<%-getForeignKeyName(model, relation)%>", <%-getForeignKeyName(model, relation)%>Data);
+                          }
+                        }
+
                     }
+
           <%
                   }
                 }

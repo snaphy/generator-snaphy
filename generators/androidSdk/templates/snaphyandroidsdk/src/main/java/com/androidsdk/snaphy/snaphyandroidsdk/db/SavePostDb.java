@@ -255,7 +255,25 @@ public class SavePostDb{
                           }
                         }
                                                 
-                  
+                  //End for loop
+         
+          
+                    String postSubscriberIdData = "";
+                    int postSubscriberIdindex = cursor.getColumnIndex(postSubscriberId);
+                    if(postSubscriberIdindex >= 0){
+
+                        if(cursor.getString(postSubscriberIdindex) != null){
+                          postSubscriberIdData = cursor.getString(postSubscriberIdindex);
+                          if(postSubscriberIdData != null){
+                            postSubscriberIdData = postSubscriberIdData.toString();
+                            hashMap.put("postSubscriberId", postSubscriberIdData);
+                          }
+                        }
+
+                    }
+
+          
+
         return hashMap;
     }//parseCursor
 

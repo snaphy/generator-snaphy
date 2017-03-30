@@ -301,7 +301,10 @@ public class AdminEmailDb{
                           }
                         }
                                                 
-                  
+                  //End for loop
+         
+          
+
         return hashMap;
     }//parseCursor
 

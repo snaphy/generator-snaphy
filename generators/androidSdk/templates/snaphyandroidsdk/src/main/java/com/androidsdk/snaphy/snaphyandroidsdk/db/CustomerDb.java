@@ -613,7 +613,25 @@ public class CustomerDb{
                           }
                         }
                                                 
-                  
+                  //End for loop
+         
+          
+                    String facebookAccessTokenIdData = "";
+                    int facebookAccessTokenIdindex = cursor.getColumnIndex(facebookAccessTokenId);
+                    if(facebookAccessTokenIdindex >= 0){
+
+                        if(cursor.getString(facebookAccessTokenIdindex) != null){
+                          facebookAccessTokenIdData = cursor.getString(facebookAccessTokenIdindex);
+                          if(facebookAccessTokenIdData != null){
+                            facebookAccessTokenIdData = facebookAccessTokenIdData.toString();
+                            hashMap.put("facebookAccessTokenId", facebookAccessTokenIdData);
+                          }
+                        }
+
+                    }
+
+          
+
         return hashMap;
     }//parseCursor
 

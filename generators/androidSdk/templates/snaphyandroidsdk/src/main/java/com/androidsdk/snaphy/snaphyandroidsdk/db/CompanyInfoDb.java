@@ -227,7 +227,10 @@ public class CompanyInfoDb{
                           }
                         }
                                                 
-                  
+                  //End for loop
+         
+          
+
         return hashMap;
     }//parseCursor
 

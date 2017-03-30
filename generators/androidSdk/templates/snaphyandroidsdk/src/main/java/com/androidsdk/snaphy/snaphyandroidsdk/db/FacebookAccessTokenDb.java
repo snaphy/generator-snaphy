@@ -269,7 +269,10 @@ public class FacebookAccessTokenDb{
                           }
                         }
                                                 
-                  
+                  //End for loop
+         
+          
+
         return hashMap;
     }//parseCursor
 
