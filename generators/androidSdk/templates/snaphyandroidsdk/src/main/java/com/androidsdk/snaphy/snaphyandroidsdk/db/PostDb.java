@@ -95,6 +95,7 @@ public class PostDb{
                                   String postImagesData = "";
                   if(modelData.getPostImages() != null){
                     postImagesData = new Gson().toJson(modelData.getPostImages(), DataList.class);
+                    values.put("`postImages`", postImagesData);
                   }
               
                                 

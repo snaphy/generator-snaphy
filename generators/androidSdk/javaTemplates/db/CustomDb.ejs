@@ -296,6 +296,7 @@ public class <%- modelName %>Db{
                         }else{
                           <%-property%>Data = false;
                         }
+                        hashMap.put("<%-property%>", <%-property%>Data);
                     <% }else{ -%>
                         String <%-property%>Data = "";
                         if(cursor.getString(<%- id %>) != null){

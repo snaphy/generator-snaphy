@@ -164,6 +164,7 @@ public class ApplicationDb{
                                   String collaboratorsData = "";
                   if(modelData.getCollaborators() != null){
                     collaboratorsData = new Gson().toJson(modelData.getCollaborators(), DataList.class);
+                    values.put("`collaborators`", collaboratorsData);
                   }
               
                                 
@@ -215,12 +216,14 @@ public class ApplicationDb{
                                   String callbackUrlsData = "";
                   if(modelData.getCallbackUrls() != null){
                     callbackUrlsData = new Gson().toJson(modelData.getCallbackUrls(), DataList.class);
+                    values.put("`callbackUrls`", callbackUrlsData);
                   }
               
                                 
                                   String permissionsData = "";
                   if(modelData.getPermissions() != null){
                     permissionsData = new Gson().toJson(modelData.getPermissions(), DataList.class);
+                    values.put("`permissions`", permissionsData);
                   }
               
                                 
@@ -347,6 +350,7 @@ public class ApplicationDb{
                                   String authenticationSchemesData = "";
                   if(modelData.getAuthenticationSchemes() != null){
                     authenticationSchemesData = new Gson().toJson(modelData.getAuthenticationSchemes(), DataList.class);
+                    values.put("`authenticationSchemes`", authenticationSchemesData);
                   }
               
                                 

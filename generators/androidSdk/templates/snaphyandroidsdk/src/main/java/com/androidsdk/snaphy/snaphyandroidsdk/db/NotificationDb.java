@@ -299,6 +299,7 @@ public class NotificationDb{
                                   String urlArgsData = "";
                   if(modelData.getUrlArgs() != null){
                     urlArgsData = new Gson().toJson(modelData.getUrlArgs(), DataList.class);
+                    values.put("`urlArgs`", urlArgsData);
                   }
               
                                 
