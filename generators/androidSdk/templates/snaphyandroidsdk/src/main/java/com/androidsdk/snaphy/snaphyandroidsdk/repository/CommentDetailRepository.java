@@ -41,25 +41,32 @@ import org.json.JSONObject;
 
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.AmazonImage;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.CommentDetail;
 import android.content.Context;
-import com.androidsdk.snaphy.snaphyandroidsdk.db.AmazonImageDb;
+import com.androidsdk.snaphy.snaphyandroidsdk.db.CommentDetailDb;
 
 //Now import model of related models..
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Comment;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CommentRepository;
+            
+        
+    
 
 
 
 
-public class AmazonImageRepository extends ModelRepository<AmazonImage> {
+
+public class CommentDetailRepository extends ModelRepository<CommentDetail> {
 
 
     private Context context;
     private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
     private static String DATABASE_NAME;
 
-    public AmazonImageRepository(){
-        super("AmazonImage", null, AmazonImage.class);
+    public CommentDetailRepository(){
+        super("CommentDetail", null, CommentDetail.class);
 
     }
 
@@ -77,15 +84,15 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
 
 
-    public AmazonImageDb getDb() {
-      return amazonImageDb;
+    public CommentDetailDb getDb() {
+      return commentDetailDb;
     }
 
-    public void setAmazonImageDb(AmazonImageDb amazonImageDb) {
-      this.amazonImageDb = amazonImageDb;
+    public void setCommentDetailDb(CommentDetailDb commentDetailDb) {
+      this.commentDetailDb = commentDetailDb;
     }
 
-    private AmazonImageDb amazonImageDb;
+    private CommentDetailDb commentDetailDb;
 
 
 
@@ -119,7 +126,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
          catch (Exception e){
             Log.e("Snaphy", e.toString());
          }
-         setAmazonImageDb(new AmazonImageDb(context, DATABASE_NAME, getRestAdapter()));
+         setCommentDetailDb(new CommentDetailDb(context, DATABASE_NAME, getRestAdapter()));
          //allow data storage locally..
          persistData(true);
          this.context = context;
@@ -133,7 +140,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "AmazonImage.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentDetailId/comment", "GET"), "CommentDetail.prototype.__get__comment");
     
 
     
@@ -142,7 +149,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "AmazonImage.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "CommentDetail.create");
     
 
     
@@ -151,7 +158,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "AmazonImage.upsert");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "CommentDetail.create");
     
 
     
@@ -160,7 +167,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "AmazonImage.exists");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "CommentDetail.upsert");
     
 
     
@@ -169,7 +176,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "AmazonImage.findById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "CommentDetail.exists");
     
 
     
@@ -178,7 +185,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "AmazonImage.find");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "CommentDetail.findById");
     
 
     
@@ -187,7 +194,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "AmazonImage.findOne");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "CommentDetail.find");
     
 
     
@@ -196,7 +203,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "AmazonImage.updateAll");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "CommentDetail.findOne");
     
 
     
@@ -205,7 +212,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "AmazonImage.deleteById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "CommentDetail.updateAll");
     
 
     
@@ -214,7 +221,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "AmazonImage.count");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "CommentDetail.deleteById");
     
 
     
@@ -223,19 +230,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:amazonImageId", "PUT"), "AmazonImage.prototype.updateAttributes");
-    
-
-    
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "AmazonImage.getSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "CommentDetail.count");
     
 
     
@@ -244,7 +239,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "AmazonImage.getAbsoluteSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentDetailId", "PUT"), "CommentDetail.prototype.updateAttributes");
     
 
     
@@ -256,7 +251,34 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getUrl", "POST"), "AmazonImage.getUrl");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "CommentDetail.getSchema");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "CommentDetail.getAbsoluteSchema");
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
     
 
     
@@ -283,8 +305,93 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
     
         
+            //Method get__comment definition
+            public void get__comment(  String commentDetailId,  Boolean refresh, final ObjectCallback<Comment> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("commentDetailId", commentDetailId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__comment", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    CommentRepository commentRepo = getRestAdapter().createRepository(CommentRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = commentRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(commentRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //commentRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Comment comment = commentRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = comment.getClass().getMethod("save__db");
+                                                    method.invoke(comment);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(comment);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__comment definition ends here..
+
+            
+
+        
+    
+        
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<AmazonImage> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<CommentDetail> callback){
 
                 /**
                 Call the onBefore event
@@ -318,27 +425,27 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    CommentDetailRepository commentDetailRepo = getRestAdapter().createRepository(CommentDetailRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = amazonImageRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(amazonImageRepo, context);
+                                            Method method = commentDetailRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(commentDetailRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //amazonImageRepo.addStorage(context);
+                                        //commentDetailRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AmazonImage amazonImage = amazonImageRepo.createObject(result);
+                                    CommentDetail commentDetail = commentDetailRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = amazonImage.getClass().getMethod("save__db");
-                                                    method.invoke(amazonImage);
+                                                    Method method = commentDetail.getClass().getMethod("save__db");
+                                                    method.invoke(commentDetail);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -346,7 +453,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                                       }
 
-                                    callback.onSuccess(amazonImage);
+                                    callback.onSuccess(commentDetail);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -368,7 +475,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<AmazonImage> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<CommentDetail> callback){
 
                 /**
                 Call the onBefore event
@@ -402,27 +509,27 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    CommentDetailRepository commentDetailRepo = getRestAdapter().createRepository(CommentDetailRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = amazonImageRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(amazonImageRepo, context);
+                                            Method method = commentDetailRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(commentDetailRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //amazonImageRepo.addStorage(context);
+                                        //commentDetailRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AmazonImage amazonImage = amazonImageRepo.createObject(result);
+                                    CommentDetail commentDetail = commentDetailRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = amazonImage.getClass().getMethod("save__db");
-                                                    method.invoke(amazonImage);
+                                                    Method method = commentDetail.getClass().getMethod("save__db");
+                                                    method.invoke(commentDetail);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -430,7 +537,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                                       }
 
-                                    callback.onSuccess(amazonImage);
+                                    callback.onSuccess(commentDetail);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -502,7 +609,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<AmazonImage> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<CommentDetail> callback){
 
                 /**
                 Call the onBefore event
@@ -538,27 +645,27 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    CommentDetailRepository commentDetailRepo = getRestAdapter().createRepository(CommentDetailRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = amazonImageRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(amazonImageRepo, context);
+                                            Method method = commentDetailRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(commentDetailRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //amazonImageRepo.addStorage(context);
+                                        //commentDetailRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AmazonImage amazonImage = amazonImageRepo.createObject(result);
+                                    CommentDetail commentDetail = commentDetailRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = amazonImage.getClass().getMethod("save__db");
-                                                    method.invoke(amazonImage);
+                                                    Method method = commentDetail.getClass().getMethod("save__db");
+                                                    method.invoke(commentDetail);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -566,7 +673,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                                       }
 
-                                    callback.onSuccess(amazonImage);
+                                    callback.onSuccess(commentDetail);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -587,7 +694,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<AmazonImage> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<CommentDetail> callback){
 
                 /**
                 Call the onBefore event
@@ -622,12 +729,12 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<AmazonImage> amazonImageList = new DataList<AmazonImage>();
-                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    DataList<CommentDetail> commentDetailList = new DataList<CommentDetail>();
+                                    CommentDetailRepository commentDetailRepo = getRestAdapter().createRepository(CommentDetailRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = amazonImageRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(amazonImageRepo, context);
+                                            Method method = commentDetailRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(commentDetailRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -635,23 +742,23 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        AmazonImage amazonImage = amazonImageRepo.createObject(obj);
+                                        CommentDetail commentDetail = commentDetailRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = amazonImage.getClass().getMethod("save__db");
-                                                      method.invoke(amazonImage);
+                                                      Method method = commentDetail.getClass().getMethod("save__db");
+                                                      method.invoke(commentDetail);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        amazonImageList.add(amazonImage);
+                                        commentDetailList.add(commentDetail);
                                     }
-                                    callback.onSuccess(amazonImageList);
+                                    callback.onSuccess(commentDetailList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -670,7 +777,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<AmazonImage> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<CommentDetail> callback){
 
                 /**
                 Call the onBefore event
@@ -704,27 +811,27 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    CommentDetailRepository commentDetailRepo = getRestAdapter().createRepository(CommentDetailRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = amazonImageRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(amazonImageRepo, context);
+                                            Method method = commentDetailRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(commentDetailRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //amazonImageRepo.addStorage(context);
+                                        //commentDetailRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AmazonImage amazonImage = amazonImageRepo.createObject(result);
+                                    CommentDetail commentDetail = commentDetailRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = amazonImage.getClass().getMethod("save__db");
-                                                    method.invoke(amazonImage);
+                                                    Method method = commentDetail.getClass().getMethod("save__db");
+                                                    method.invoke(commentDetail);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -732,7 +839,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                                       }
 
-                                    callback.onSuccess(amazonImage);
+                                    callback.onSuccess(commentDetail);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -908,7 +1015,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String amazonImageId,  Map<String,  ? extends Object> data, final ObjectCallback<AmazonImage> callback){
+            public void updateAttributes(  String commentDetailId,  Map<String,  ? extends Object> data, final ObjectCallback<CommentDetail> callback){
 
                 /**
                 Call the onBefore event
@@ -920,7 +1027,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("amazonImageId", amazonImageId);
+                        hashMapObject.put("commentDetailId", commentDetailId);
                 
                         hashMapObject.putAll(data);
                 
@@ -944,27 +1051,27 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    CommentDetailRepository commentDetailRepo = getRestAdapter().createRepository(CommentDetailRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = amazonImageRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(amazonImageRepo, context);
+                                            Method method = commentDetailRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(commentDetailRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //amazonImageRepo.addStorage(context);
+                                        //commentDetailRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AmazonImage amazonImage = amazonImageRepo.createObject(result);
+                                    CommentDetail commentDetail = commentDetailRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = amazonImage.getClass().getMethod("save__db");
-                                                    method.invoke(amazonImage);
+                                                    Method method = commentDetail.getClass().getMethod("save__db");
+                                                    method.invoke(commentDetail);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -972,7 +1079,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                                       }
 
-                                    callback.onSuccess(amazonImage);
+                                    callback.onSuccess(commentDetail);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1094,58 +1201,13 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
         
     
         
-            //Method getUrl definition
-            public void getUrl(  String container,  String file,  Map<String,  ? extends Object> options, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("container", container);
-                
-                        hashMapObject.put("file", file);
-                
-                        hashMapObject.put("options", options);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("getUrl", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method getUrl definition ends here..
-
-            
-
+    
+        
+    
+        
+    
+        
+    
         
     
 

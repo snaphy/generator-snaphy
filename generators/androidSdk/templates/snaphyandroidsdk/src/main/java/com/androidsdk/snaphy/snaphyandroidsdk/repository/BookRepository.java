@@ -41,43 +41,29 @@ import org.json.JSONObject;
 
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Comment;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Book;
 import android.content.Context;
-import com.androidsdk.snaphy.snaphyandroidsdk.db.CommentDb;
+import com.androidsdk.snaphy.snaphyandroidsdk.db.BookDb;
 
 //Now import model of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Post;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PostRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.BookCategory;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BookCategoryRepository;
             
         
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Payment;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PaymentRepository;
             
         
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.CommentDetail;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CommentDetailRepository;
-            
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.PostSubscriber;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PostSubscriberRepository;
-            
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.PostDetail;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PostDetailRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Order;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.OrderRepository;
             
         
     
@@ -86,15 +72,15 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.CommentDb;
 
 
 
-public class CommentRepository extends ModelRepository<Comment> {
+public class BookRepository extends ModelRepository<Book> {
 
 
     private Context context;
     private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
     private static String DATABASE_NAME;
 
-    public CommentRepository(){
-        super("Comment", null, Comment.class);
+    public BookRepository(){
+        super("Book", null, Book.class);
 
     }
 
@@ -112,15 +98,15 @@ public class CommentRepository extends ModelRepository<Comment> {
 
 
 
-    public CommentDb getDb() {
-      return commentDb;
+    public BookDb getDb() {
+      return bookDb;
     }
 
-    public void setCommentDb(CommentDb commentDb) {
-      this.commentDb = commentDb;
+    public void setBookDb(BookDb bookDb) {
+      this.bookDb = bookDb;
     }
 
-    private CommentDb commentDb;
+    private BookDb bookDb;
 
 
 
@@ -154,7 +140,7 @@ public class CommentRepository extends ModelRepository<Comment> {
          catch (Exception e){
             Log.e("Snaphy", e.toString());
          }
-         setCommentDb(new CommentDb(context, DATABASE_NAME, getRestAdapter()));
+         setBookDb(new BookDb(context, DATABASE_NAME, getRestAdapter()));
          //allow data storage locally..
          persistData(true);
          this.context = context;
@@ -168,7 +154,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentId/post", "GET"), "Comment.prototype.__get__post");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookId/bookCategory", "GET"), "Book.prototype.__get__bookCategory");
     
 
     
@@ -177,7 +163,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentId/customer", "GET"), "Comment.prototype.__get__customer");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookId/payments/:fk", "GET"), "Book.prototype.__findById__payments");
     
 
     
@@ -186,7 +172,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentId/postDetails", "GET"), "Comment.prototype.__get__postDetails");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookId/payments/:fk", "DELETE"), "Book.prototype.__destroyById__payments");
     
 
     
@@ -195,7 +181,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentId/postDetails", "POST"), "Comment.prototype.__create__postDetails");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookId/payments/:fk", "PUT"), "Book.prototype.__updateById__payments");
     
 
     
@@ -204,7 +190,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentId/postDetails", "PUT"), "Comment.prototype.__update__postDetails");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookId/orders/:fk", "GET"), "Book.prototype.__findById__orders");
     
 
     
@@ -213,7 +199,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentId/postDetails", "DELETE"), "Comment.prototype.__destroy__postDetails");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookId/orders/:fk", "DELETE"), "Book.prototype.__destroyById__orders");
     
 
     
@@ -222,7 +208,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentId/commentDetails", "GET"), "Comment.prototype.__get__commentDetails");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookId/orders/:fk", "PUT"), "Book.prototype.__updateById__orders");
     
 
     
@@ -231,7 +217,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentId/commentDetails", "POST"), "Comment.prototype.__create__commentDetails");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookId/payments", "GET"), "Book.prototype.__get__payments");
     
 
     
@@ -240,7 +226,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentId/commentDetails", "PUT"), "Comment.prototype.__update__commentDetails");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookId/payments", "POST"), "Book.prototype.__create__payments");
     
 
     
@@ -249,7 +235,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentId/commentDetails", "DELETE"), "Comment.prototype.__destroy__commentDetails");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookId/payments", "DELETE"), "Book.prototype.__delete__payments");
     
 
     
@@ -258,7 +244,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentId/postSubscribers", "GET"), "Comment.prototype.__get__postSubscribers");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookId/payments/count", "GET"), "Book.prototype.__count__payments");
     
 
     
@@ -267,7 +253,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentId/postSubscribers", "POST"), "Comment.prototype.__create__postSubscribers");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookId/orders", "GET"), "Book.prototype.__get__orders");
     
 
     
@@ -276,7 +262,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentId/postSubscribers", "PUT"), "Comment.prototype.__update__postSubscribers");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookId/orders", "POST"), "Book.prototype.__create__orders");
     
 
     
@@ -285,7 +271,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentId/postSubscribers", "DELETE"), "Comment.prototype.__destroy__postSubscribers");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookId/orders", "DELETE"), "Book.prototype.__delete__orders");
     
 
     
@@ -294,7 +280,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Comment.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookId/orders/count", "GET"), "Book.prototype.__count__orders");
     
 
     
@@ -303,7 +289,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Comment.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Book.create");
     
 
     
@@ -312,7 +298,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Comment.upsert");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Book.create");
     
 
     
@@ -321,7 +307,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Comment.exists");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Book.upsert");
     
 
     
@@ -330,7 +316,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Comment.findById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Book.exists");
     
 
     
@@ -339,7 +325,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Comment.find");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Book.findById");
     
 
     
@@ -348,7 +334,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Comment.findOne");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Book.find");
     
 
     
@@ -357,7 +343,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Comment.updateAll");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Book.findOne");
     
 
     
@@ -366,7 +352,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Comment.deleteById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Book.updateAll");
     
 
     
@@ -375,7 +361,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Comment.count");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Book.deleteById");
     
 
     
@@ -384,43 +370,16 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:commentId", "PUT"), "Comment.prototype.updateAttributes");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Book.count");
     
 
     
     
 
     
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Comment.getSchema");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Comment.getAbsoluteSchema");
-    
-
-    
-    
-
-    
-    
 
     
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/score", "POST"), "Comment.fetchPostCommments");
-    
-
-    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookId", "PUT"), "Book.prototype.updateAttributes");
     
 
     
@@ -430,18 +389,18 @@ public class CommentRepository extends ModelRepository<Comment> {
     
 
     
-    
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Book.getSchema");
     
 
     
     
 
-    
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Book.getAbsoluteSchema");
     
 
     
@@ -501,8 +460,8 @@ public class CommentRepository extends ModelRepository<Comment> {
 
     
         
-            //Method get__post definition
-            public void get__post(  String commentId,  Boolean refresh, final ObjectCallback<Post> callback){
+            //Method get__bookCategory definition
+            public void get__bookCategory(  String bookId,  Boolean refresh, final ObjectCallback<BookCategory> callback){
 
                 /**
                 Call the onBefore event
@@ -514,7 +473,7 @@ public class CommentRepository extends ModelRepository<Comment> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("commentId", commentId);
+                        hashMapObject.put("bookId", bookId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -525,7 +484,7 @@ public class CommentRepository extends ModelRepository<Comment> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__post", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__bookCategory", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -538,27 +497,27 @@ public class CommentRepository extends ModelRepository<Comment> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    PostRepository postRepo = getRestAdapter().createRepository(PostRepository.class);
+                                    BookCategoryRepository bookCategoryRepo = getRestAdapter().createRepository(BookCategoryRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = postRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(postRepo, context);
+                                            Method method = bookCategoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(bookCategoryRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //postRepo.addStorage(context);
+                                        //bookCategoryRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Post post = postRepo.createObject(result);
+                                    BookCategory bookCategory = bookCategoryRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = post.getClass().getMethod("save__db");
-                                                    method.invoke(post);
+                                                    Method method = bookCategory.getClass().getMethod("save__db");
+                                                    method.invoke(bookCategory);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -566,7 +525,7 @@ public class CommentRepository extends ModelRepository<Comment> {
 
                                       }
 
-                                    callback.onSuccess(post);
+                                    callback.onSuccess(bookCategory);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -579,15 +538,15 @@ public class CommentRepository extends ModelRepository<Comment> {
 
                 
 
-            }//Method get__post definition ends here..
+            }//Method get__bookCategory definition ends here..
 
             
 
         
     
         
-            //Method get__customer definition
-            public void get__customer(  String commentId,  Boolean refresh, final ObjectCallback<Customer> callback){
+            //Method findById__payments definition
+            public void findById__payments(  String bookId,  String fk, final ObjectCallback<Payment> callback){
 
                 /**
                 Call the onBefore event
@@ -599,9 +558,9 @@ public class CommentRepository extends ModelRepository<Comment> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("commentId", commentId);
+                        hashMapObject.put("bookId", bookId);
                 
-                        hashMapObject.put("refresh", refresh);
+                        hashMapObject.put("fk", fk);
                 
 
                 
@@ -610,7 +569,7 @@ public class CommentRepository extends ModelRepository<Comment> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__payments", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -623,27 +582,27 @@ public class CommentRepository extends ModelRepository<Comment> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    PaymentRepository paymentRepo = getRestAdapter().createRepository(PaymentRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = customerRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(customerRepo, context);
+                                            Method method = paymentRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(paymentRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //customerRepo.addStorage(context);
+                                        //paymentRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Customer customer = customerRepo.createObject(result);
+                                    Payment payment = paymentRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = customer.getClass().getMethod("save__db");
-                                                    method.invoke(customer);
+                                                    Method method = payment.getClass().getMethod("save__db");
+                                                    method.invoke(payment);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -651,7 +610,7 @@ public class CommentRepository extends ModelRepository<Comment> {
 
                                       }
 
-                                    callback.onSuccess(customer);
+                                    callback.onSuccess(payment);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -664,15 +623,15 @@ public class CommentRepository extends ModelRepository<Comment> {
 
                 
 
-            }//Method get__customer definition ends here..
+            }//Method findById__payments definition ends here..
 
             
 
         
     
         
-            //Method get__postDetails definition
-            public void get__postDetails(  String commentId,  Boolean refresh, final ObjectCallback<PostDetail> callback){
+            //Method destroyById__payments definition
+            public void destroyById__payments(  String bookId,  String fk, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -684,266 +643,13 @@ public class CommentRepository extends ModelRepository<Comment> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("commentId", commentId);
+                        hashMapObject.put("bookId", bookId);
                 
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__postDetails", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    PostDetailRepository postDetailRepo = getRestAdapter().createRepository(PostDetailRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = postDetailRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(postDetailRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //postDetailRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    PostDetail postDetail = postDetailRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = postDetail.getClass().getMethod("save__db");
-                                                    method.invoke(postDetail);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(postDetail);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
+                        hashMapObject.put("fk", fk);
                 
 
                 
-
-            }//Method get__postDetails definition ends here..
-
-            
-
-        
-    
-        
-            //Method create__postDetails definition
-            public void create__postDetails(  String commentId,  Map<String,  ? extends Object> data, final ObjectCallback<PostDetail> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("commentId", commentId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__create__postDetails", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    PostDetailRepository postDetailRepo = getRestAdapter().createRepository(PostDetailRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = postDetailRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(postDetailRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //postDetailRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    PostDetail postDetail = postDetailRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = postDetail.getClass().getMethod("save__db");
-                                                    method.invoke(postDetail);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(postDetail);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method create__postDetails definition ends here..
-
-            
-
-        
-    
-        
-            //Method update__postDetails definition
-            public void update__postDetails(  String commentId,  Map<String,  ? extends Object> data, final ObjectCallback<PostDetail> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("commentId", commentId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__update__postDetails", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    PostDetailRepository postDetailRepo = getRestAdapter().createRepository(PostDetailRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = postDetailRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(postDetailRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //postDetailRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    PostDetail postDetail = postDetailRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = postDetail.getClass().getMethod("save__db");
-                                                    method.invoke(postDetail);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(postDetail);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method update__postDetails definition ends here..
-
-            
-
-        
-    
-        
-            //Method destroy__postDetails definition
-            public void destroy__postDetails(  String commentId, final VoidCallback callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("commentId", commentId);
-                
-
-                
-                    invokeStaticMethod("prototype.__destroy__postDetails", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroyById__payments", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -965,15 +671,15 @@ public class CommentRepository extends ModelRepository<Comment> {
 
                 
 
-            }//Method destroy__postDetails definition ends here..
+            }//Method destroyById__payments definition ends here..
 
             
 
         
     
         
-            //Method get__commentDetails definition
-            public void get__commentDetails(  String commentId,  Boolean refresh, final ObjectCallback<CommentDetail> callback){
+            //Method updateById__payments definition
+            public void updateById__payments(  String bookId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Payment> callback){
 
                 /**
                 Call the onBefore event
@@ -985,92 +691,9 @@ public class CommentRepository extends ModelRepository<Comment> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("commentId", commentId);
+                        hashMapObject.put("bookId", bookId);
                 
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__commentDetails", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    CommentDetailRepository commentDetailRepo = getRestAdapter().createRepository(CommentDetailRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = commentDetailRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(commentDetailRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //commentDetailRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    CommentDetail commentDetail = commentDetailRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = commentDetail.getClass().getMethod("save__db");
-                                                    method.invoke(commentDetail);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(commentDetail);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method get__commentDetails definition ends here..
-
-            
-
-        
-    
-        
-            //Method create__commentDetails definition
-            public void create__commentDetails(  String commentId,  Map<String,  ? extends Object> data, final ObjectCallback<CommentDetail> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("commentId", commentId);
+                        hashMapObject.put("fk", fk);
                 
                         hashMapObject.putAll(data);
                 
@@ -1081,7 +704,7 @@ public class CommentRepository extends ModelRepository<Comment> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__commentDetails", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__payments", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1094,27 +717,27 @@ public class CommentRepository extends ModelRepository<Comment> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CommentDetailRepository commentDetailRepo = getRestAdapter().createRepository(CommentDetailRepository.class);
+                                    PaymentRepository paymentRepo = getRestAdapter().createRepository(PaymentRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = commentDetailRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(commentDetailRepo, context);
+                                            Method method = paymentRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(paymentRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //commentDetailRepo.addStorage(context);
+                                        //paymentRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    CommentDetail commentDetail = commentDetailRepo.createObject(result);
+                                    Payment payment = paymentRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = commentDetail.getClass().getMethod("save__db");
-                                                    method.invoke(commentDetail);
+                                                    Method method = payment.getClass().getMethod("save__db");
+                                                    method.invoke(payment);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1122,7 +745,7 @@ public class CommentRepository extends ModelRepository<Comment> {
 
                                       }
 
-                                    callback.onSuccess(commentDetail);
+                                    callback.onSuccess(payment);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1135,15 +758,15 @@ public class CommentRepository extends ModelRepository<Comment> {
 
                 
 
-            }//Method create__commentDetails definition ends here..
+            }//Method updateById__payments definition ends here..
 
             
 
         
     
         
-            //Method update__commentDetails definition
-            public void update__commentDetails(  String commentId,  Map<String,  ? extends Object> data, final ObjectCallback<CommentDetail> callback){
+            //Method findById__orders definition
+            public void findById__orders(  String bookId,  String fk, final ObjectCallback<Order> callback){
 
                 /**
                 Call the onBefore event
@@ -1155,9 +778,9 @@ public class CommentRepository extends ModelRepository<Comment> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("commentId", commentId);
+                        hashMapObject.put("bookId", bookId);
                 
-                        hashMapObject.putAll(data);
+                        hashMapObject.put("fk", fk);
                 
 
                 
@@ -1166,7 +789,7 @@ public class CommentRepository extends ModelRepository<Comment> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__update__commentDetails", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__orders", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1179,27 +802,27 @@ public class CommentRepository extends ModelRepository<Comment> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CommentDetailRepository commentDetailRepo = getRestAdapter().createRepository(CommentDetailRepository.class);
+                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = commentDetailRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(commentDetailRepo, context);
+                                            Method method = orderRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(orderRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //commentDetailRepo.addStorage(context);
+                                        //orderRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    CommentDetail commentDetail = commentDetailRepo.createObject(result);
+                                    Order order = orderRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = commentDetail.getClass().getMethod("save__db");
-                                                    method.invoke(commentDetail);
+                                                    Method method = order.getClass().getMethod("save__db");
+                                                    method.invoke(order);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1207,7 +830,7 @@ public class CommentRepository extends ModelRepository<Comment> {
 
                                       }
 
-                                    callback.onSuccess(commentDetail);
+                                    callback.onSuccess(order);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1220,15 +843,15 @@ public class CommentRepository extends ModelRepository<Comment> {
 
                 
 
-            }//Method update__commentDetails definition ends here..
+            }//Method findById__orders definition ends here..
 
             
 
         
     
         
-            //Method destroy__commentDetails definition
-            public void destroy__commentDetails(  String commentId, final VoidCallback callback){
+            //Method destroyById__orders definition
+            public void destroyById__orders(  String bookId,  String fk, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -1240,11 +863,13 @@ public class CommentRepository extends ModelRepository<Comment> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("commentId", commentId);
+                        hashMapObject.put("bookId", bookId);
+                
+                        hashMapObject.put("fk", fk);
                 
 
                 
-                    invokeStaticMethod("prototype.__destroy__commentDetails", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroyById__orders", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -1266,15 +891,15 @@ public class CommentRepository extends ModelRepository<Comment> {
 
                 
 
-            }//Method destroy__commentDetails definition ends here..
+            }//Method destroyById__orders definition ends here..
 
             
 
         
     
         
-            //Method get__postSubscribers definition
-            public void get__postSubscribers(  String commentId,  Boolean refresh, final ObjectCallback<PostSubscriber> callback){
+            //Method updateById__orders definition
+            public void updateById__orders(  String bookId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Order> callback){
 
                 /**
                 Call the onBefore event
@@ -1286,92 +911,9 @@ public class CommentRepository extends ModelRepository<Comment> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("commentId", commentId);
+                        hashMapObject.put("bookId", bookId);
                 
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__postSubscribers", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    PostSubscriberRepository postSubscriberRepo = getRestAdapter().createRepository(PostSubscriberRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = postSubscriberRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(postSubscriberRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //postSubscriberRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    PostSubscriber postSubscriber = postSubscriberRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = postSubscriber.getClass().getMethod("save__db");
-                                                    method.invoke(postSubscriber);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(postSubscriber);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method get__postSubscribers definition ends here..
-
-            
-
-        
-    
-        
-            //Method create__postSubscribers definition
-            public void create__postSubscribers(  String commentId,  Map<String,  ? extends Object> data, final ObjectCallback<PostSubscriber> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("commentId", commentId);
+                        hashMapObject.put("fk", fk);
                 
                         hashMapObject.putAll(data);
                 
@@ -1382,7 +924,7 @@ public class CommentRepository extends ModelRepository<Comment> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__postSubscribers", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__orders", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1395,27 +937,27 @@ public class CommentRepository extends ModelRepository<Comment> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    PostSubscriberRepository postSubscriberRepo = getRestAdapter().createRepository(PostSubscriberRepository.class);
+                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = postSubscriberRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(postSubscriberRepo, context);
+                                            Method method = orderRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(orderRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //postSubscriberRepo.addStorage(context);
+                                        //orderRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    PostSubscriber postSubscriber = postSubscriberRepo.createObject(result);
+                                    Order order = orderRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = postSubscriber.getClass().getMethod("save__db");
-                                                    method.invoke(postSubscriber);
+                                                    Method method = order.getClass().getMethod("save__db");
+                                                    method.invoke(order);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1423,7 +965,7 @@ public class CommentRepository extends ModelRepository<Comment> {
 
                                       }
 
-                                    callback.onSuccess(postSubscriber);
+                                    callback.onSuccess(order);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1436,15 +978,15 @@ public class CommentRepository extends ModelRepository<Comment> {
 
                 
 
-            }//Method create__postSubscribers definition ends here..
+            }//Method updateById__orders definition ends here..
 
             
 
         
     
         
-            //Method update__postSubscribers definition
-            public void update__postSubscribers(  String commentId,  Map<String,  ? extends Object> data, final ObjectCallback<PostSubscriber> callback){
+            //Method get__payments definition
+            public void get__payments(  String bookId,  Map<String,  ? extends Object> filter, final DataListCallback<Payment> callback){
 
                 /**
                 Call the onBefore event
@@ -1456,7 +998,92 @@ public class CommentRepository extends ModelRepository<Comment> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("commentId", commentId);
+                        hashMapObject.put("bookId", bookId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__payments", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<Payment> paymentList = new DataList<Payment>();
+                                    PaymentRepository paymentRepo = getRestAdapter().createRepository(PaymentRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = paymentRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(paymentRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        Payment payment = paymentRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = payment.getClass().getMethod("save__db");
+                                                      method.invoke(payment);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        paymentList.add(payment);
+                                    }
+                                    callback.onSuccess(paymentList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method get__payments definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__payments definition
+            public void create__payments(  String bookId,  Map<String,  ? extends Object> data, final ObjectCallback<Payment> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("bookId", bookId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1467,7 +1094,7 @@ public class CommentRepository extends ModelRepository<Comment> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__update__postSubscribers", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__payments", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1480,27 +1107,27 @@ public class CommentRepository extends ModelRepository<Comment> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    PostSubscriberRepository postSubscriberRepo = getRestAdapter().createRepository(PostSubscriberRepository.class);
+                                    PaymentRepository paymentRepo = getRestAdapter().createRepository(PaymentRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = postSubscriberRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(postSubscriberRepo, context);
+                                            Method method = paymentRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(paymentRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //postSubscriberRepo.addStorage(context);
+                                        //paymentRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    PostSubscriber postSubscriber = postSubscriberRepo.createObject(result);
+                                    Payment payment = paymentRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = postSubscriber.getClass().getMethod("save__db");
-                                                    method.invoke(postSubscriber);
+                                                    Method method = payment.getClass().getMethod("save__db");
+                                                    method.invoke(payment);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1508,7 +1135,7 @@ public class CommentRepository extends ModelRepository<Comment> {
 
                                       }
 
-                                    callback.onSuccess(postSubscriber);
+                                    callback.onSuccess(payment);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1521,15 +1148,15 @@ public class CommentRepository extends ModelRepository<Comment> {
 
                 
 
-            }//Method update__postSubscribers definition ends here..
+            }//Method create__payments definition ends here..
 
             
 
         
     
         
-            //Method destroy__postSubscribers definition
-            public void destroy__postSubscribers(  String commentId, final VoidCallback callback){
+            //Method delete__payments definition
+            public void delete__payments(  String bookId, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -1541,11 +1168,11 @@ public class CommentRepository extends ModelRepository<Comment> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("commentId", commentId);
+                        hashMapObject.put("bookId", bookId);
                 
 
                 
-                    invokeStaticMethod("prototype.__destroy__postSubscribers", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__delete__payments", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -1567,7 +1194,329 @@ public class CommentRepository extends ModelRepository<Comment> {
 
                 
 
-            }//Method destroy__postSubscribers definition ends here..
+            }//Method delete__payments definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__payments definition
+            public void count__payments(  String bookId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("bookId", bookId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__payments", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method count__payments definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__orders definition
+            public void get__orders(  String bookId,  Map<String,  ? extends Object> filter, final DataListCallback<Order> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("bookId", bookId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__orders", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<Order> orderList = new DataList<Order>();
+                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = orderRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(orderRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        Order order = orderRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = order.getClass().getMethod("save__db");
+                                                      method.invoke(order);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        orderList.add(order);
+                                    }
+                                    callback.onSuccess(orderList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method get__orders definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__orders definition
+            public void create__orders(  String bookId,  Map<String,  ? extends Object> data, final ObjectCallback<Order> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("bookId", bookId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__orders", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = orderRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(orderRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //orderRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Order order = orderRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = order.getClass().getMethod("save__db");
+                                                    method.invoke(order);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(order);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__orders definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__orders definition
+            public void delete__orders(  String bookId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("bookId", bookId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__orders", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__orders definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__orders definition
+            public void count__orders(  String bookId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("bookId", bookId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__orders", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method count__orders definition ends here..
 
             
 
@@ -1575,7 +1524,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Comment> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Book> callback){
 
                 /**
                 Call the onBefore event
@@ -1609,27 +1558,27 @@ public class CommentRepository extends ModelRepository<Comment> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CommentRepository commentRepo = getRestAdapter().createRepository(CommentRepository.class);
+                                    BookRepository bookRepo = getRestAdapter().createRepository(BookRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = commentRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(commentRepo, context);
+                                            Method method = bookRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(bookRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //commentRepo.addStorage(context);
+                                        //bookRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Comment comment = commentRepo.createObject(result);
+                                    Book book = bookRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = comment.getClass().getMethod("save__db");
-                                                    method.invoke(comment);
+                                                    Method method = book.getClass().getMethod("save__db");
+                                                    method.invoke(book);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1637,7 +1586,7 @@ public class CommentRepository extends ModelRepository<Comment> {
 
                                       }
 
-                                    callback.onSuccess(comment);
+                                    callback.onSuccess(book);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1659,7 +1608,7 @@ public class CommentRepository extends ModelRepository<Comment> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Comment> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Book> callback){
 
                 /**
                 Call the onBefore event
@@ -1693,27 +1642,27 @@ public class CommentRepository extends ModelRepository<Comment> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CommentRepository commentRepo = getRestAdapter().createRepository(CommentRepository.class);
+                                    BookRepository bookRepo = getRestAdapter().createRepository(BookRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = commentRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(commentRepo, context);
+                                            Method method = bookRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(bookRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //commentRepo.addStorage(context);
+                                        //bookRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Comment comment = commentRepo.createObject(result);
+                                    Book book = bookRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = comment.getClass().getMethod("save__db");
-                                                    method.invoke(comment);
+                                                    Method method = book.getClass().getMethod("save__db");
+                                                    method.invoke(book);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1721,7 +1670,7 @@ public class CommentRepository extends ModelRepository<Comment> {
 
                                       }
 
-                                    callback.onSuccess(comment);
+                                    callback.onSuccess(book);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1793,7 +1742,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Comment> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Book> callback){
 
                 /**
                 Call the onBefore event
@@ -1829,27 +1778,27 @@ public class CommentRepository extends ModelRepository<Comment> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CommentRepository commentRepo = getRestAdapter().createRepository(CommentRepository.class);
+                                    BookRepository bookRepo = getRestAdapter().createRepository(BookRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = commentRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(commentRepo, context);
+                                            Method method = bookRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(bookRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //commentRepo.addStorage(context);
+                                        //bookRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Comment comment = commentRepo.createObject(result);
+                                    Book book = bookRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = comment.getClass().getMethod("save__db");
-                                                    method.invoke(comment);
+                                                    Method method = book.getClass().getMethod("save__db");
+                                                    method.invoke(book);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1857,7 +1806,7 @@ public class CommentRepository extends ModelRepository<Comment> {
 
                                       }
 
-                                    callback.onSuccess(comment);
+                                    callback.onSuccess(book);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1878,7 +1827,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Comment> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Book> callback){
 
                 /**
                 Call the onBefore event
@@ -1913,12 +1862,12 @@ public class CommentRepository extends ModelRepository<Comment> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<Comment> commentList = new DataList<Comment>();
-                                    CommentRepository commentRepo = getRestAdapter().createRepository(CommentRepository.class);
+                                    DataList<Book> bookList = new DataList<Book>();
+                                    BookRepository bookRepo = getRestAdapter().createRepository(BookRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = commentRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(commentRepo, context);
+                                            Method method = bookRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(bookRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1926,23 +1875,23 @@ public class CommentRepository extends ModelRepository<Comment> {
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        Comment comment = commentRepo.createObject(obj);
+                                        Book book = bookRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = comment.getClass().getMethod("save__db");
-                                                      method.invoke(comment);
+                                                      Method method = book.getClass().getMethod("save__db");
+                                                      method.invoke(book);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        commentList.add(comment);
+                                        bookList.add(book);
                                     }
-                                    callback.onSuccess(commentList);
+                                    callback.onSuccess(bookList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1961,7 +1910,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Comment> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Book> callback){
 
                 /**
                 Call the onBefore event
@@ -1995,27 +1944,27 @@ public class CommentRepository extends ModelRepository<Comment> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CommentRepository commentRepo = getRestAdapter().createRepository(CommentRepository.class);
+                                    BookRepository bookRepo = getRestAdapter().createRepository(BookRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = commentRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(commentRepo, context);
+                                            Method method = bookRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(bookRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //commentRepo.addStorage(context);
+                                        //bookRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Comment comment = commentRepo.createObject(result);
+                                    Book book = bookRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = comment.getClass().getMethod("save__db");
-                                                    method.invoke(comment);
+                                                    Method method = book.getClass().getMethod("save__db");
+                                                    method.invoke(book);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -2023,7 +1972,7 @@ public class CommentRepository extends ModelRepository<Comment> {
 
                                       }
 
-                                    callback.onSuccess(comment);
+                                    callback.onSuccess(book);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -2199,7 +2148,7 @@ public class CommentRepository extends ModelRepository<Comment> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String commentId,  Map<String,  ? extends Object> data, final ObjectCallback<Comment> callback){
+            public void updateAttributes(  String bookId,  Map<String,  ? extends Object> data, final ObjectCallback<Book> callback){
 
                 /**
                 Call the onBefore event
@@ -2211,7 +2160,7 @@ public class CommentRepository extends ModelRepository<Comment> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("commentId", commentId);
+                        hashMapObject.put("bookId", bookId);
                 
                         hashMapObject.putAll(data);
                 
@@ -2235,27 +2184,27 @@ public class CommentRepository extends ModelRepository<Comment> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CommentRepository commentRepo = getRestAdapter().createRepository(CommentRepository.class);
+                                    BookRepository bookRepo = getRestAdapter().createRepository(BookRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = commentRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(commentRepo, context);
+                                            Method method = bookRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(bookRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //commentRepo.addStorage(context);
+                                        //bookRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Comment comment = commentRepo.createObject(result);
+                                    Book book = bookRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = comment.getClass().getMethod("save__db");
-                                                    method.invoke(comment);
+                                                    Method method = book.getClass().getMethod("save__db");
+                                                    method.invoke(book);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -2263,7 +2212,7 @@ public class CommentRepository extends ModelRepository<Comment> {
 
                                       }
 
-                                    callback.onSuccess(comment);
+                                    callback.onSuccess(book);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -2380,113 +2329,6 @@ public class CommentRepository extends ModelRepository<Comment> {
 
             
 
-        
-    
-        
-    
-        
-            //Method fetchPostCommments definition
-            public void fetchPostCommments(  String postId,  double skip,  double limit,  DataList<String> exceptCommentIdList, final DataListCallback<Comment> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("postId", postId);
-                
-                        hashMapObject.put("skip", skip);
-                
-                        hashMapObject.put("limit", limit);
-                
-                        hashMapObject.put("exceptCommentIdList", exceptCommentIdList);
-                
-
-                
-
-
-                
-
-                
-                    invokeStaticMethod("fetchPostCommments", hashMapObject, new Adapter.JsonArrayCallback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONArray response) {
-                            
-                                if(response != null){
-                                    //Now converting jsonObject to list
-                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<Comment> commentList = new DataList<Comment>();
-                                    CommentRepository commentRepo = getRestAdapter().createRepository(CommentRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = commentRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(commentRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-                                    }
-                                    for (Map<String, Object> obj : result) {
-
-                                        Comment comment = commentRepo.createObject(obj);
-
-                                        //Add to database if persistent storage required..
-                                        if(isSTORE_LOCALLY()){
-                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                            try {
-                                                      Method method = comment.getClass().getMethod("save__db");
-                                                      method.invoke(comment);
-
-                                            } catch (Exception e) {
-                                                Log.e("Database Error", e.toString());
-                                            }
-                                        }
-
-                                        commentList.add(comment);
-                                    }
-                                    callback.onSuccess(commentList);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-            }//Method fetchPostCommments definition ends here..
-
-            
-
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
         
     
         

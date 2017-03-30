@@ -15,16 +15,16 @@ import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Employee;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
 
-public class EmployeeDb{
+public class CustomerDb{
 
     // All Static variables
     RestAdapter restAdapter;
@@ -39,25 +39,25 @@ public class EmployeeDb{
     // Contacts table name
     private static String TABLE;
 
-  public EmployeeDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+  public CustomerDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     //super(context, DATABASE_NAME, null, DATABASE_VERSION);
     this.context = context;
     this.restAdapter = restAdapter;
-    TABLE = "Employee";
+    TABLE = "Customer";
     this.DATABASE_NAME = DATABASE_NAME;
     SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
 
-    public void insert__db (final String id, final Employee modelData) {
+    public void insert__db (final String id, final Customer modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
-                db.insert("Employee", null, values);
+                db.insert("Customer", null, values);
                 //db.close(); // Closing database connection
             }
         }).start();
@@ -68,14 +68,26 @@ public class EmployeeDb{
 
 
 
-    public ContentValues getContentValues(Employee modelData){
+    public ContentValues getContentValues(Customer modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String usernameData = "";
-                        if(modelData.getUsername() != null){
-                          usernameData = modelData.getUsername().toString();
+                                                            String dateData = "";
+                        if(modelData.getDate() != null){
+                          dateData = modelData.getDate().toString();
                         }
-                                                values.put("`username`", usernameData);
+                                                values.put("`date`", dateData);
+                                
+                                                            String lastModifiedData = "";
+                        if(modelData.getLastModified() != null){
+                          lastModifiedData = modelData.getLastModified().toString();
+                        }
+                                                values.put("`lastModified`", lastModifiedData);
+                                
+                                                            String emailData = "";
+                        if(modelData.getEmail() != null){
+                          emailData = modelData.getEmail().toString();
+                        }
+                                                values.put("`email`", emailData);
                                 
                                                             String firstNameData = "";
                         if(modelData.getFirstName() != null){
@@ -89,29 +101,45 @@ public class EmployeeDb{
                         }
                                                 values.put("`lastName`", lastNameData);
                                 
-                                                            String dateData = "";
-                        if(modelData.getDate() != null){
-                          dateData = modelData.getDate().toString();
+                                                            String mciNumberData = "";
+                        if(modelData.getMciNumber() != null){
+                          mciNumberData = modelData.getMciNumber().toString();
                         }
-                                                values.put("`date`", dateData);
+                                                values.put("`mciNumber`", mciNumberData);
                                 
-                                                            String updatedData = "";
-                        if(modelData.getUpdated() != null){
-                          updatedData = modelData.getUpdated().toString();
+                                                            String phoneNumberData = "";
+                        if(modelData.getPhoneNumber() != null){
+                          phoneNumberData = modelData.getPhoneNumber().toString();
                         }
-                                                values.put("`updated`", updatedData);
+                                                values.put("`phoneNumber`", phoneNumberData);
                                 
-                                                            String emailData = "";
-                        if(modelData.getEmail() != null){
-                          emailData = modelData.getEmail().toString();
+                                                            String statusData = "";
+                        if(modelData.getStatus() != null){
+                          statusData = modelData.getStatus().toString();
                         }
-                                                values.put("`email`", emailData);
+                                                values.put("`status`", statusData);
                                 
-                                                            String passwordData = "";
-                        if(modelData.getPassword() != null){
-                          passwordData = modelData.getPassword().toString();
+                                                            String registrationIdData = "";
+                        if(modelData.getRegistrationId() != null){
+                          registrationIdData = modelData.getRegistrationId().toString();
                         }
-                                                values.put("`password`", passwordData);
+                                                values.put("`registrationId`", registrationIdData);
+                                
+                                                            String profilePicData = "";
+                        if(modelData.getProfilePic() != null){
+                          profilePicData = new Gson().toJson(modelData.getProfilePic(), HashMap.class);
+                        }
+                                                values.put("`profilePic`", profilePicData);
+                                
+                                                            String currentCityData = "";
+                        if(modelData.getCurrentCity() != null){
+                          currentCityData = modelData.getCurrentCity().toString();
+                        }
+                                                values.put("`currentCity`", currentCityData);
+                                
+                                                            double workExperienceData;
+                        workExperienceData = (double)modelData.getWorkExperience();
+                                                values.put("`workExperience`", workExperienceData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String realmData = "";
@@ -126,6 +154,34 @@ public class EmployeeDb{
                         }
 
                                                 values.put("`realm`", realmData);
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String usernameData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getUsername");
+                              if(method.invoke(modelData) != null){
+                                //usernameData = modelData.getUsername().toString();
+                                usernameData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                                values.put("`username`", usernameData);
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String passwordData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getPassword");
+                              if(method.invoke(modelData) != null){
+                                //passwordData = modelData.getPassword().toString();
+                                passwordData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                                values.put("`password`", passwordData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String credentialsData = "";
@@ -184,20 +240,6 @@ public class EmployeeDb{
                                                 values.put("`verificationToken`", verificationTokenData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String statusData = "";
-                        try {
-                              Method method = modelData.getClass().getMethod("getStatus");
-                              if(method.invoke(modelData) != null){
-                                //statusData = modelData.getStatus().toString();
-                                statusData = (String) method.invoke(modelData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                                values.put("`status`", statusData);
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String createdData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getCreated");
@@ -248,10 +290,10 @@ public class EmployeeDb{
 
 
     // Getting single c
-    public   Employee get__db(String id) {
+    public   Customer get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("Employee", null, "id=?", new String[]{id}, null, null, null, null);
+            Cursor cursor = db.query("Customer", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -260,9 +302,9 @@ public class EmployeeDb{
                     cursor.close();
                     //db.close(); // Closing database connection
                     if (hashMap != null) {
-                        EmployeeRepository repo = restAdapter.createRepository(EmployeeRepository.class);
+                        CustomerRepository repo = restAdapter.createRepository(CustomerRepository.class);
                         repo.addStorage(context);
-                        return (Employee)repo.createObject(hashMap);
+                        return (Customer)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -281,10 +323,10 @@ public class EmployeeDb{
 
 
     // Getting single cont
-    public   Employee get__db(String whereKey, String whereKeyValue) {
+    public   Customer get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("Employee", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("Customer", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -295,9 +337,9 @@ public class EmployeeDb{
                     //db.close(); // Closing database connection
 
                     if (hashMap != null) {
-                        EmployeeRepository repo = restAdapter.createRepository(EmployeeRepository.class);
+                        CustomerRepository repo = restAdapter.createRepository(CustomerRepository.class);
                         repo.addStorage(context);
-                        return (Employee)repo.createObject(hashMap);
+                        return (Customer)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -319,19 +361,39 @@ public class EmployeeDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            String usernameData = "";
+                                                            String dateData = "";
                         if(cursor.getString(0) != null){
-                          usernameData = cursor.getString(0);
-                          if(usernameData != null){
-                            usernameData = (String)usernameData;
-                            hashMap.put("username", usernameData);
+                          dateData = cursor.getString(0);
+                          if(dateData != null){
+                            dateData = (String)dateData;
+                            hashMap.put("date", dateData);
+                          }
+                        }
+                                                
+                                
+                                                            String lastModifiedData = "";
+                        if(cursor.getString(1) != null){
+                          lastModifiedData = cursor.getString(1);
+                          if(lastModifiedData != null){
+                            lastModifiedData = (String)lastModifiedData;
+                            hashMap.put("lastModified", lastModifiedData);
+                          }
+                        }
+                                                
+                                
+                                                            String emailData = "";
+                        if(cursor.getString(2) != null){
+                          emailData = cursor.getString(2);
+                          if(emailData != null){
+                            emailData = (String)emailData;
+                            hashMap.put("email", emailData);
                           }
                         }
                                                 
                                 
                                                             String firstNameData = "";
-                        if(cursor.getString(1) != null){
-                          firstNameData = cursor.getString(1);
+                        if(cursor.getString(3) != null){
+                          firstNameData = cursor.getString(3);
                           if(firstNameData != null){
                             firstNameData = (String)firstNameData;
                             hashMap.put("firstName", firstNameData);
@@ -340,8 +402,8 @@ public class EmployeeDb{
                                                 
                                 
                                                             String lastNameData = "";
-                        if(cursor.getString(2) != null){
-                          lastNameData = cursor.getString(2);
+                        if(cursor.getString(4) != null){
+                          lastNameData = cursor.getString(4);
                           if(lastNameData != null){
                             lastNameData = (String)lastNameData;
                             hashMap.put("lastName", lastNameData);
@@ -349,49 +411,77 @@ public class EmployeeDb{
                         }
                                                 
                                 
-                                                            String dateData = "";
-                        if(cursor.getString(3) != null){
-                          dateData = cursor.getString(3);
-                          if(dateData != null){
-                            dateData = (String)dateData;
-                            hashMap.put("date", dateData);
-                          }
-                        }
-                                                
-                                
-                                                            String updatedData = "";
-                        if(cursor.getString(4) != null){
-                          updatedData = cursor.getString(4);
-                          if(updatedData != null){
-                            updatedData = (String)updatedData;
-                            hashMap.put("updated", updatedData);
-                          }
-                        }
-                                                
-                                
-                                                            String emailData = "";
+                                                            String mciNumberData = "";
                         if(cursor.getString(5) != null){
-                          emailData = cursor.getString(5);
-                          if(emailData != null){
-                            emailData = (String)emailData;
-                            hashMap.put("email", emailData);
+                          mciNumberData = cursor.getString(5);
+                          if(mciNumberData != null){
+                            mciNumberData = (String)mciNumberData;
+                            hashMap.put("mciNumber", mciNumberData);
                           }
                         }
                                                 
                                 
-                                                            String passwordData = "";
+                                                            String phoneNumberData = "";
                         if(cursor.getString(6) != null){
-                          passwordData = cursor.getString(6);
-                          if(passwordData != null){
-                            passwordData = (String)passwordData;
-                            hashMap.put("password", passwordData);
+                          phoneNumberData = cursor.getString(6);
+                          if(phoneNumberData != null){
+                            phoneNumberData = (String)phoneNumberData;
+                            hashMap.put("phoneNumber", phoneNumberData);
                           }
                         }
+                                                
+                                
+                                                            String statusData = "";
+                        if(cursor.getString(7) != null){
+                          statusData = cursor.getString(7);
+                          if(statusData != null){
+                            statusData = (String)statusData;
+                            hashMap.put("status", statusData);
+                          }
+                        }
+                                                
+                                
+                                                            String registrationIdData = "";
+                        if(cursor.getString(8) != null){
+                          registrationIdData = cursor.getString(8);
+                          if(registrationIdData != null){
+                            registrationIdData = (String)registrationIdData;
+                            hashMap.put("registrationId", registrationIdData);
+                          }
+                        }
+                                                
+                                
+                                                            Map<String, Object> profilePicData = new HashMap<>();
+                        if(cursor.getString(9) != null){
+                          profilePicData = new Gson().fromJson(cursor.getString(9), Map.class);
+                          if(profilePicData != null){
+                            profilePicData = (Map<String, Object>)profilePicData;
+                            hashMap.put("profilePic", profilePicData);
+                          }
+                        }
+                                                
+                                
+                                                            String currentCityData = "";
+                        if(cursor.getString(10) != null){
+                          currentCityData = cursor.getString(10);
+                          if(currentCityData != null){
+                            currentCityData = (String)currentCityData;
+                            hashMap.put("currentCity", currentCityData);
+                          }
+                        }
+                                                
+                                
+                                                            double workExperienceData = (double)0;
+                          workExperienceData = cursor.getInt(11);
+                          workExperienceData = (double)workExperienceData;
+                          hashMap.put("workExperience", workExperienceData);
+
+
                                                 
                                 
                                                             String realmData = "";
-                        if(cursor.getString(7) != null){
-                          realmData = cursor.getString(7);
+                        if(cursor.getString(12) != null){
+                          realmData = cursor.getString(12);
                           if(realmData != null){
                             realmData = realmData.toString();
                             hashMap.put("realm", realmData);
@@ -399,9 +489,29 @@ public class EmployeeDb{
                         }
                                                 
                                 
+                                                            String usernameData = "";
+                        if(cursor.getString(13) != null){
+                          usernameData = cursor.getString(13);
+                          if(usernameData != null){
+                            usernameData = usernameData.toString();
+                            hashMap.put("username", usernameData);
+                          }
+                        }
+                                                
+                                
+                                                            String passwordData = "";
+                        if(cursor.getString(14) != null){
+                          passwordData = cursor.getString(14);
+                          if(passwordData != null){
+                            passwordData = passwordData.toString();
+                            hashMap.put("password", passwordData);
+                          }
+                        }
+                                                
+                                
                                                             String credentialsData = "";
-                        if(cursor.getString(8) != null){
-                          credentialsData = cursor.getString(8);
+                        if(cursor.getString(15) != null){
+                          credentialsData = cursor.getString(15);
                           if(credentialsData != null){
                             credentialsData = credentialsData.toString();
                             hashMap.put("credentials", credentialsData);
@@ -410,8 +520,8 @@ public class EmployeeDb{
                                                 
                                 
                                                             String challengesData = "";
-                        if(cursor.getString(9) != null){
-                          challengesData = cursor.getString(9);
+                        if(cursor.getString(16) != null){
+                          challengesData = cursor.getString(16);
                           if(challengesData != null){
                             challengesData = challengesData.toString();
                             hashMap.put("challenges", challengesData);
@@ -420,8 +530,8 @@ public class EmployeeDb{
                                                 
                                 
                                                             String emailVerifiedData = "";
-                        if(cursor.getString(10) != null){
-                          emailVerifiedData = cursor.getString(10);
+                        if(cursor.getString(17) != null){
+                          emailVerifiedData = cursor.getString(17);
                           if(emailVerifiedData != null){
                             emailVerifiedData = emailVerifiedData.toString();
                             hashMap.put("emailVerified", emailVerifiedData);
@@ -430,8 +540,8 @@ public class EmployeeDb{
                                                 
                                 
                                                             String verificationTokenData = "";
-                        if(cursor.getString(11) != null){
-                          verificationTokenData = cursor.getString(11);
+                        if(cursor.getString(18) != null){
+                          verificationTokenData = cursor.getString(18);
                           if(verificationTokenData != null){
                             verificationTokenData = verificationTokenData.toString();
                             hashMap.put("verificationToken", verificationTokenData);
@@ -439,19 +549,9 @@ public class EmployeeDb{
                         }
                                                 
                                 
-                                                            String statusData = "";
-                        if(cursor.getString(12) != null){
-                          statusData = cursor.getString(12);
-                          if(statusData != null){
-                            statusData = statusData.toString();
-                            hashMap.put("status", statusData);
-                          }
-                        }
-                                                
-                                
                                                             String createdData = "";
-                        if(cursor.getString(13) != null){
-                          createdData = cursor.getString(13);
+                        if(cursor.getString(19) != null){
+                          createdData = cursor.getString(19);
                           if(createdData != null){
                             createdData = createdData.toString();
                             hashMap.put("created", createdData);
@@ -460,8 +560,8 @@ public class EmployeeDb{
                                                 
                                 
                                                             String lastUpdatedData = "";
-                        if(cursor.getString(14) != null){
-                          lastUpdatedData = cursor.getString(14);
+                        if(cursor.getString(20) != null){
+                          lastUpdatedData = cursor.getString(20);
                           if(lastUpdatedData != null){
                             lastUpdatedData = lastUpdatedData.toString();
                             hashMap.put("lastUpdated", lastUpdatedData);
@@ -470,8 +570,8 @@ public class EmployeeDb{
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(15) != null){
-                          idData = cursor.getString(15);
+                        if(cursor.getString(21) != null){
+                          idData = cursor.getString(21);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -484,7 +584,7 @@ public class EmployeeDb{
 
 
 
-    public void upsert__db(String id, Employee model){
+    public void upsert__db(String id, Customer model){
         if(count__db(id) != 0){
             update__db(id, model);
         }else{
@@ -495,25 +595,25 @@ public class EmployeeDb{
 
 
     // Getting All Contacts
-    public DataList<Employee>  getAll__db() {
-        DataList<Employee> modelList = new DataList<Employee>();
+    public DataList<Customer>  getAll__db() {
+        DataList<Customer> modelList = new DataList<Customer>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Employee";
+        String selectQuery = "SELECT  * FROM Customer";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<Employee>) modelList;
+            return (DataList<Customer>) modelList;
         }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    EmployeeRepository repo = restAdapter.createRepository(EmployeeRepository.class);
+                    CustomerRepository repo = restAdapter.createRepository(CustomerRepository.class);
                     repo.addStorage(context);
-                    modelList.add((Employee)repo.createObject(hashMap));
+                    modelList.add((Customer)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }
@@ -522,7 +622,7 @@ public class EmployeeDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<Employee>) modelList;
+        return (DataList<Customer>) modelList;
     }
 
 
@@ -600,19 +700,19 @@ public class EmployeeDb{
 
 
     // Getting All Data where
-    public DataList<Employee>  getAll__db(HashMap<String, Object> whereKeyValue) {
+    public DataList<Customer>  getAll__db(HashMap<String, Object> whereKeyValue) {
         return getAll__db(whereKeyValue, null, 0);
     }
 
 
 
     // Getting All Data where and sort column according to date wise..
-    public DataList<Employee>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
-        DataList<Employee> modelList = new DataList<Employee>();
+    public DataList<Customer>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
+        DataList<Customer> modelList = new DataList<Customer>();
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM Employee " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM Customer " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit;
@@ -620,9 +720,9 @@ public class EmployeeDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                selectQuery = "SELECT  * FROM Employee " + whereQuery + " LIMIT " + limit;
+                selectQuery = "SELECT  * FROM Customer " + whereQuery + " LIMIT " + limit;
             }else{
-                selectQuery = "SELECT  * FROM Employee " + whereQuery;
+                selectQuery = "SELECT  * FROM Customer " + whereQuery;
             }
         }
 
@@ -633,15 +733,15 @@ public class EmployeeDb{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<Employee>) modelList;
+            return (DataList<Customer>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    EmployeeRepository repo = restAdapter.createRepository(EmployeeRepository.class);
+                    CustomerRepository repo = restAdapter.createRepository(CustomerRepository.class);
                     repo.addStorage(context);
-                    modelList.add((Employee)repo.createObject(hashMap));
+                    modelList.add((Customer)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
@@ -651,12 +751,12 @@ public class EmployeeDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<Employee>) modelList;
+        return (DataList<Customer>) modelList;
     }
 
 
     // Getting All Data where
-    public DataList<Employee>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
+    public DataList<Customer>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
         return getAll__db(whereKeyValue, null,  limit);
     }
 
@@ -675,7 +775,7 @@ public class EmployeeDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM Employee " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM Customer " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit;
@@ -683,9 +783,9 @@ public class EmployeeDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM Employee " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM Customer " + whereQuery + " LIMIT " + limit;
             }else{
-                countQuery = "SELECT  * FROM Employee " + whereQuery;
+                countQuery = "SELECT  * FROM Customer " + whereQuery;
             }
         }
 
@@ -708,9 +808,9 @@ public class EmployeeDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM Employee " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM Customer " + whereQuery + " LIMIT " + limit;
         }else{
-            countQuery = "SELECT  * FROM Employee " + whereQuery;
+            countQuery = "SELECT  * FROM Customer " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -743,7 +843,7 @@ public class EmployeeDb{
                 values.put("_DATA_UPDATED", 0);
                 String where = getWhere(whereKeyValue);
                 // updating row
-                db.update("Employee", values, "_DATA_UPDATED = 1 AND " + where, null);
+                db.update("Customer", values, "_DATA_UPDATED = 1 AND " + where, null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -761,7 +861,7 @@ public class EmployeeDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("Employee", "_DATA_UPDATED = 0 AND " + where , null);
+                db.delete("Customer", "_DATA_UPDATED = 0 AND " + where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -782,7 +882,7 @@ public class EmployeeDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("Employee", where , null);
+                db.delete("Customer", where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
             }
@@ -796,10 +896,10 @@ public class EmployeeDb{
 
 
     // Getting All Data where
-    public DataList<Employee>  getAll__db(String whereKey, String whereKeyValue) {
-        DataList<Employee> modelList = new DataList<Employee>();
+    public DataList<Customer>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<Customer> modelList = new DataList<Customer>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `Employee` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String selectQuery = "SELECT  * FROM `Customer` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -808,15 +908,15 @@ public class EmployeeDb{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<Employee>) modelList;
+            return (DataList<Customer>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    EmployeeRepository repo = restAdapter.createRepository(EmployeeRepository.class);
+                    CustomerRepository repo = restAdapter.createRepository(CustomerRepository.class);
                     repo.addStorage(context);
-                    modelList.add((Employee)repo.createObject(hashMap));
+                    modelList.add((Customer)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
@@ -826,7 +926,7 @@ public class EmployeeDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<Employee>) modelList;
+        return (DataList<Customer>) modelList;
     }
 
 
@@ -838,7 +938,7 @@ public class EmployeeDb{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-        String countQuery = "SELECT  * FROM `Employee` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String countQuery = "SELECT  * FROM `Customer` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -858,7 +958,7 @@ public class EmployeeDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("Employee", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.update("Customer", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -874,7 +974,7 @@ public class EmployeeDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("Employee", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.delete("Customer", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -903,7 +1003,7 @@ public class EmployeeDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final Employee modelData) {
+    public void update__db(final String id,   final Customer modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -911,7 +1011,7 @@ public class EmployeeDb{
                 db.beginTransaction();
                 ContentValues values = getContentValues(modelData);
                 // updating row
-                db.update("Employee", values, "id = ?",
+                db.update("Customer", values, "id = ?",
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
@@ -932,7 +1032,7 @@ public class EmployeeDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("Employee", values, "_DATA_UPDATED = 1", null);
+                db.update("Customer", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -949,7 +1049,7 @@ public class EmployeeDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("Employee", "_DATA_UPDATED = 0", null);
+                db.delete("Customer", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();

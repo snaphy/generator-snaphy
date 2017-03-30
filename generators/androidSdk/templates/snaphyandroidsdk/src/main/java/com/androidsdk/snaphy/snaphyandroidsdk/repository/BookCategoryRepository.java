@@ -31,13 +31,8 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 
 
-//Replaced by Custom  Repo methods
-// import com.strongloop.android.loopback.UserRepository;
-import com.strongloop.android.loopback.AccessTokenRepository;
-import com.strongloop.android.loopback.AccessToken;
-import android.content.SharedPreferences;
-import org.json.JSONException;
-import android.content.Context;
+//Replaced by Custom ModelRepository method
+//import com.strongloop.android.loopback.ModelRepository;
 
 
 
@@ -46,28 +41,32 @@ import org.json.JSONObject;
 
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Employee;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.BookCategory;
 import android.content.Context;
-import com.androidsdk.snaphy.snaphyandroidsdk.db.EmployeeDb;
+import com.androidsdk.snaphy.snaphyandroidsdk.db.BookCategoryDb;
 
 //Now import model of related models..
 
     
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Book;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BookRepository;
+            
+        
     
 
 
 
 
 
-public class EmployeeRepository extends UserRepository<Employee> {
+public class BookCategoryRepository extends ModelRepository<BookCategory> {
 
 
     private Context context;
     private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
     private static String DATABASE_NAME;
 
-    public EmployeeRepository(){
-        super("Employee", null, Employee.class);
+    public BookCategoryRepository(){
+        super("BookCategory", null, BookCategory.class);
 
     }
 
@@ -78,99 +77,6 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
 
     
-    		//Create public methods..
-    		public Employee cachedCurrentUser;
-            private Object currentUserId;
-            private boolean isCurrentUserIdLoaded;
-
-    		public Employee getCachedCurrentUser(){
-    			return cachedCurrentUser;
-    		}
-
-    		public void setCachedCurrentUser(Employee user){
-    			cachedCurrentUser = user;
-    		}
-
-    		/* public void setCurrentUserId(Object id){
-    			super.setCurrentUserId(id);
-    		} */
-
-            public void findCurrentUser(final ObjectCallback<Employee> callback){
-                //Call the onBefore method..
-                callback.onBefore();
-
-                if(getCurrentUserId() == null){
-                    callback.onSuccess(null);
-                    return;
-                }
-
-                HashMap<String, Object> hashMap = new HashMap<>();
-                this.findById((String)getCurrentUserId(), hashMap, new ObjectCallback<Employee>() {
-                    @Override
-                    public void onSuccess(Employee user){
-                        cachedCurrentUser = user;
-                        callback.onSuccess(user);
-                        //Call the finally method..
-                        callback.onFinally();
-                    }
-
-                    @Override
-                    public void onError(Throwable t){
-                        callback.onError(t);
-                        //Call the finally method..
-                        callback.onFinally();
-                    }
-                });
-            }
-
-            public Object getCurrentUserId(){
-                if(currentUserId != null){
-                  return currentUserId;
-                }
-                else{
-                  String json = getSharedPreferences().getString(PROPERTY_CURRENT_USER_ID, null);
-                  if(json == null){
-                      return null;
-                  }
-
-                  if(json.equals("[null]")){
-                      return null;
-                  }
-
-                  try{
-                      Object id = new JSONArray(json).get(0);
-                      return id;
-                  }catch(JSONException e){
-                      String msg = "Cannot parse user id '" + json + "'";
-                      Log.e("Snaphy", msg, e);
-                  }
-                }
-                return null;
-            }
-
-            public void setCurrentUserId(Object currentUserId){
-                this.currentUserId = currentUserId;
-                cachedCurrentUser = null;
-                saveCurrentUserId();
-            }
-
-            private void saveCurrentUserId(){
-                final SharedPreferences.Editor editor = getSharedPreferences().edit();
-                final String json = new JSONArray().put(getCurrentUserId()).toString();
-                editor.putString(PROPERTY_CURRENT_USER_ID, json);
-                editor.commit();
-            }
-
-
-            private SharedPreferences getSharedPreferences() {
-                return getApplicationContext().getSharedPreferences(
-                    SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
-            }
-
-
-
-
-    
 
 
 
@@ -178,15 +84,15 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
 
 
-    public EmployeeDb getDb() {
-      return employeeDb;
+    public BookCategoryDb getDb() {
+      return bookCategoryDb;
     }
 
-    public void setEmployeeDb(EmployeeDb employeeDb) {
-      this.employeeDb = employeeDb;
+    public void setBookCategoryDb(BookCategoryDb bookCategoryDb) {
+      this.bookCategoryDb = bookCategoryDb;
     }
 
-    private EmployeeDb employeeDb;
+    private BookCategoryDb bookCategoryDb;
 
 
 
@@ -220,7 +126,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
          catch (Exception e){
             Log.e("Snaphy", e.toString());
          }
-         setEmployeeDb(new EmployeeDb(context, DATABASE_NAME, getRestAdapter()));
+         setBookCategoryDb(new BookCategoryDb(context, DATABASE_NAME, getRestAdapter()));
          //allow data storage locally..
          persistData(true);
          this.context = context;
@@ -234,7 +140,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "GET"), "Employee.prototype.__findById__accessTokens");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookCategoryId/books/:fk", "GET"), "BookCategory.prototype.__findById__books");
     
 
     
@@ -243,7 +149,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "DELETE"), "Employee.prototype.__destroyById__accessTokens");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookCategoryId/books/:fk", "DELETE"), "BookCategory.prototype.__destroyById__books");
     
 
     
@@ -252,7 +158,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "PUT"), "Employee.prototype.__updateById__accessTokens");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookCategoryId/books/:fk", "PUT"), "BookCategory.prototype.__updateById__books");
     
 
     
@@ -261,7 +167,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "GET"), "Employee.prototype.__get__accessTokens");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookCategoryId/books", "GET"), "BookCategory.prototype.__get__books");
     
 
     
@@ -270,7 +176,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "POST"), "Employee.prototype.__create__accessTokens");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookCategoryId/books", "POST"), "BookCategory.prototype.__create__books");
     
 
     
@@ -279,7 +185,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens", "DELETE"), "Employee.prototype.__delete__accessTokens");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookCategoryId/books", "DELETE"), "BookCategory.prototype.__delete__books");
     
 
     
@@ -288,7 +194,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/count", "GET"), "Employee.prototype.__count__accessTokens");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookCategoryId/books/count", "GET"), "BookCategory.prototype.__count__books");
     
 
     
@@ -297,7 +203,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Employee.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "BookCategory.create");
     
 
     
@@ -306,7 +212,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Employee.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "BookCategory.create");
     
 
     
@@ -315,7 +221,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Employee.upsert");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "BookCategory.upsert");
     
 
     
@@ -324,7 +230,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Employee.exists");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "BookCategory.exists");
     
 
     
@@ -333,7 +239,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Employee.findById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "BookCategory.findById");
     
 
     
@@ -342,7 +248,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Employee.find");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "BookCategory.find");
     
 
     
@@ -351,7 +257,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Employee.findOne");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "BookCategory.findOne");
     
 
     
@@ -360,7 +266,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Employee.updateAll");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "BookCategory.updateAll");
     
 
     
@@ -369,7 +275,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Employee.deleteById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "BookCategory.deleteById");
     
 
     
@@ -378,7 +284,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Employee.count");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "BookCategory.count");
     
 
     
@@ -387,7 +293,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId", "PUT"), "Employee.prototype.updateAttributes");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:bookCategoryId", "PUT"), "BookCategory.prototype.updateAttributes");
     
 
     
@@ -397,54 +303,33 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/confirm", "GET"), "Employee.confirm");
-    
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "BookCategory.getSchema");
     
 
     
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/reset", "POST"), "Employee.resetPassword");
-    
-
-    
     
 
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Employee.getSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "BookCategory.getAbsoluteSchema");
     
 
     
     
 
     
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Employee.getAbsoluteSchema");
     
 
     
-    
 
     
-    
-
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchBookList", "POST"), "BookCategory.fetchBookList");
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/isAdmin", "POST"), "Employee.isAdmin");
     
 
     
@@ -471,8 +356,8 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
     
         
-            //Method findById__accessTokens definition
-            public void findById__accessTokens(  String employeeId,  String fk, final ObjectCallback<AccessToken> callback){
+            //Method findById__books definition
+            public void findById__books(  String bookCategoryId,  String fk, final ObjectCallback<Book> callback){
 
                 /**
                 Call the onBefore event
@@ -484,7 +369,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("bookCategoryId", bookCategoryId);
                 
                         hashMapObject.put("fk", fk);
                 
@@ -495,7 +380,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__books", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -508,27 +393,27 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    BookRepository bookRepo = getRestAdapter().createRepository(BookRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(accessTokenRepo, context);
+                                            Method method = bookRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(bookRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //accessTokenRepo.addStorage(context);
+                                        //bookRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AccessToken accessToken = accessTokenRepo.createObject(result);
+                                    Book book = bookRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = accessToken.getClass().getMethod("save__db");
-                                                    method.invoke(accessToken);
+                                                    Method method = book.getClass().getMethod("save__db");
+                                                    method.invoke(book);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -536,7 +421,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                                       }
 
-                                    callback.onSuccess(accessToken);
+                                    callback.onSuccess(book);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -549,15 +434,15 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                 
 
-            }//Method findById__accessTokens definition ends here..
+            }//Method findById__books definition ends here..
 
             
 
         
     
         
-            //Method destroyById__accessTokens definition
-            public void destroyById__accessTokens(  String employeeId,  String fk, final VoidCallback callback){
+            //Method destroyById__books definition
+            public void destroyById__books(  String bookCategoryId,  String fk, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -569,13 +454,13 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("bookCategoryId", bookCategoryId);
                 
                         hashMapObject.put("fk", fk);
                 
 
                 
-                    invokeStaticMethod("prototype.__destroyById__accessTokens", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroyById__books", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -597,15 +482,15 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                 
 
-            }//Method destroyById__accessTokens definition ends here..
+            }//Method destroyById__books definition ends here..
 
             
 
         
     
         
-            //Method updateById__accessTokens definition
-            public void updateById__accessTokens(  String employeeId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
+            //Method updateById__books definition
+            public void updateById__books(  String bookCategoryId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Book> callback){
 
                 /**
                 Call the onBefore event
@@ -617,7 +502,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("bookCategoryId", bookCategoryId);
                 
                         hashMapObject.put("fk", fk);
                 
@@ -630,7 +515,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__books", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -643,27 +528,27 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    BookRepository bookRepo = getRestAdapter().createRepository(BookRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(accessTokenRepo, context);
+                                            Method method = bookRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(bookRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //accessTokenRepo.addStorage(context);
+                                        //bookRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AccessToken accessToken = accessTokenRepo.createObject(result);
+                                    Book book = bookRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = accessToken.getClass().getMethod("save__db");
-                                                    method.invoke(accessToken);
+                                                    Method method = book.getClass().getMethod("save__db");
+                                                    method.invoke(book);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -671,7 +556,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                                       }
 
-                                    callback.onSuccess(accessToken);
+                                    callback.onSuccess(book);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -684,15 +569,15 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                 
 
-            }//Method updateById__accessTokens definition ends here..
+            }//Method updateById__books definition ends here..
 
             
 
         
     
         
-            //Method get__accessTokens definition
-            public void get__accessTokens(  String employeeId,  Map<String,  ? extends Object> filter, final DataListCallback<AccessToken> callback){
+            //Method get__books definition
+            public void get__books(  String bookCategoryId,  Map<String,  ? extends Object> filter, final DataListCallback<Book> callback){
 
                 /**
                 Call the onBefore event
@@ -704,7 +589,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("bookCategoryId", bookCategoryId);
                 
                         hashMapObject.put("filter", filter);
                 
@@ -715,7 +600,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 
 
                 
-                    invokeStaticMethod("prototype.__get__accessTokens", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__books", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -729,12 +614,12 @@ public class EmployeeRepository extends UserRepository<Employee> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<AccessToken> accessTokenList = new DataList<AccessToken>();
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    DataList<Book> bookList = new DataList<Book>();
+                                    BookRepository bookRepo = getRestAdapter().createRepository(BookRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(accessTokenRepo, context);
+                                            Method method = bookRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(bookRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -742,23 +627,23 @@ public class EmployeeRepository extends UserRepository<Employee> {
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        AccessToken accessToken = accessTokenRepo.createObject(obj);
+                                        Book book = bookRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = accessToken.getClass().getMethod("save__db");
-                                                      method.invoke(accessToken);
+                                                      Method method = book.getClass().getMethod("save__db");
+                                                      method.invoke(book);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        accessTokenList.add(accessToken);
+                                        bookList.add(book);
                                     }
-                                    callback.onSuccess(accessTokenList);
+                                    callback.onSuccess(bookList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -769,15 +654,15 @@ public class EmployeeRepository extends UserRepository<Employee> {
                     });
                 
 
-            }//Method get__accessTokens definition ends here..
+            }//Method get__books definition ends here..
 
             
 
         
     
         
-            //Method create__accessTokens definition
-            public void create__accessTokens(  String employeeId,  Map<String,  ? extends Object> data, final ObjectCallback<AccessToken> callback){
+            //Method create__books definition
+            public void create__books(  String bookCategoryId,  Map<String,  ? extends Object> data, final ObjectCallback<Book> callback){
 
                 /**
                 Call the onBefore event
@@ -789,7 +674,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("bookCategoryId", bookCategoryId);
                 
                         hashMapObject.putAll(data);
                 
@@ -800,7 +685,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__books", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -813,27 +698,27 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AccessTokenRepository accessTokenRepo = getRestAdapter().createRepository(AccessTokenRepository.class);
+                                    BookRepository bookRepo = getRestAdapter().createRepository(BookRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = accessTokenRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(accessTokenRepo, context);
+                                            Method method = bookRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(bookRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //accessTokenRepo.addStorage(context);
+                                        //bookRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AccessToken accessToken = accessTokenRepo.createObject(result);
+                                    Book book = bookRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = accessToken.getClass().getMethod("save__db");
-                                                    method.invoke(accessToken);
+                                                    Method method = book.getClass().getMethod("save__db");
+                                                    method.invoke(book);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -841,7 +726,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                                       }
 
-                                    callback.onSuccess(accessToken);
+                                    callback.onSuccess(book);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -854,15 +739,15 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                 
 
-            }//Method create__accessTokens definition ends here..
+            }//Method create__books definition ends here..
 
             
 
         
     
         
-            //Method delete__accessTokens definition
-            public void delete__accessTokens(  String employeeId, final VoidCallback callback){
+            //Method delete__books definition
+            public void delete__books(  String bookCategoryId, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -874,11 +759,11 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("bookCategoryId", bookCategoryId);
                 
 
                 
-                    invokeStaticMethod("prototype.__delete__accessTokens", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__delete__books", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -900,15 +785,15 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                 
 
-            }//Method delete__accessTokens definition ends here..
+            }//Method delete__books definition ends here..
 
             
 
         
     
         
-            //Method count__accessTokens definition
-            public void count__accessTokens(  String employeeId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+            //Method count__books definition
+            public void count__books(  String bookCategoryId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -920,7 +805,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("bookCategoryId", bookCategoryId);
                 
                         hashMapObject.put("where", where);
                 
@@ -930,7 +815,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                 
                     
-                    invokeStaticMethod("prototype.__count__accessTokens", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__books", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -953,7 +838,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                 
 
-            }//Method count__accessTokens definition ends here..
+            }//Method count__books definition ends here..
 
             
 
@@ -961,7 +846,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<BookCategory> callback){
 
                 /**
                 Call the onBefore event
@@ -995,27 +880,27 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    BookCategoryRepository bookCategoryRepo = getRestAdapter().createRepository(BookCategoryRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(employeeRepo, context);
+                                            Method method = bookCategoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(bookCategoryRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //employeeRepo.addStorage(context);
+                                        //bookCategoryRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
+                                    BookCategory bookCategory = bookCategoryRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = employee.getClass().getMethod("save__db");
-                                                    method.invoke(employee);
+                                                    Method method = bookCategory.getClass().getMethod("save__db");
+                                                    method.invoke(bookCategory);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1023,7 +908,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                                       }
 
-                                    callback.onSuccess(employee);
+                                    callback.onSuccess(bookCategory);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1045,7 +930,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<BookCategory> callback){
 
                 /**
                 Call the onBefore event
@@ -1079,27 +964,27 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    BookCategoryRepository bookCategoryRepo = getRestAdapter().createRepository(BookCategoryRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(employeeRepo, context);
+                                            Method method = bookCategoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(bookCategoryRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //employeeRepo.addStorage(context);
+                                        //bookCategoryRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
+                                    BookCategory bookCategory = bookCategoryRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = employee.getClass().getMethod("save__db");
-                                                    method.invoke(employee);
+                                                    Method method = bookCategory.getClass().getMethod("save__db");
+                                                    method.invoke(bookCategory);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1107,7 +992,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                                       }
 
-                                    callback.onSuccess(employee);
+                                    callback.onSuccess(bookCategory);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1179,7 +1064,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Employee> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<BookCategory> callback){
 
                 /**
                 Call the onBefore event
@@ -1215,27 +1100,27 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    BookCategoryRepository bookCategoryRepo = getRestAdapter().createRepository(BookCategoryRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(employeeRepo, context);
+                                            Method method = bookCategoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(bookCategoryRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //employeeRepo.addStorage(context);
+                                        //bookCategoryRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
+                                    BookCategory bookCategory = bookCategoryRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = employee.getClass().getMethod("save__db");
-                                                    method.invoke(employee);
+                                                    Method method = bookCategory.getClass().getMethod("save__db");
+                                                    method.invoke(bookCategory);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1243,7 +1128,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                                       }
 
-                                    callback.onSuccess(employee);
+                                    callback.onSuccess(bookCategory);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1264,7 +1149,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Employee> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<BookCategory> callback){
 
                 /**
                 Call the onBefore event
@@ -1299,12 +1184,12 @@ public class EmployeeRepository extends UserRepository<Employee> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<Employee> employeeList = new DataList<Employee>();
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    DataList<BookCategory> bookCategoryList = new DataList<BookCategory>();
+                                    BookCategoryRepository bookCategoryRepo = getRestAdapter().createRepository(BookCategoryRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(employeeRepo, context);
+                                            Method method = bookCategoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(bookCategoryRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1312,23 +1197,23 @@ public class EmployeeRepository extends UserRepository<Employee> {
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        Employee employee = employeeRepo.createObject(obj);
+                                        BookCategory bookCategory = bookCategoryRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = employee.getClass().getMethod("save__db");
-                                                      method.invoke(employee);
+                                                      Method method = bookCategory.getClass().getMethod("save__db");
+                                                      method.invoke(bookCategory);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        employeeList.add(employee);
+                                        bookCategoryList.add(bookCategory);
                                     }
-                                    callback.onSuccess(employeeList);
+                                    callback.onSuccess(bookCategoryList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1347,7 +1232,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Employee> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<BookCategory> callback){
 
                 /**
                 Call the onBefore event
@@ -1381,27 +1266,27 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    BookCategoryRepository bookCategoryRepo = getRestAdapter().createRepository(BookCategoryRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(employeeRepo, context);
+                                            Method method = bookCategoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(bookCategoryRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //employeeRepo.addStorage(context);
+                                        //bookCategoryRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
+                                    BookCategory bookCategory = bookCategoryRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = employee.getClass().getMethod("save__db");
-                                                    method.invoke(employee);
+                                                    Method method = bookCategory.getClass().getMethod("save__db");
+                                                    method.invoke(bookCategory);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1409,7 +1294,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                                       }
 
-                                    callback.onSuccess(employee);
+                                    callback.onSuccess(bookCategory);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1585,7 +1470,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String employeeId,  Map<String,  ? extends Object> data, final ObjectCallback<Employee> callback){
+            public void updateAttributes(  String bookCategoryId,  Map<String,  ? extends Object> data, final ObjectCallback<BookCategory> callback){
 
                 /**
                 Call the onBefore event
@@ -1597,7 +1482,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("employeeId", employeeId);
+                        hashMapObject.put("bookCategoryId", bookCategoryId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1621,27 +1506,27 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    EmployeeRepository employeeRepo = getRestAdapter().createRepository(EmployeeRepository.class);
+                                    BookCategoryRepository bookCategoryRepo = getRestAdapter().createRepository(BookCategoryRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = employeeRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(employeeRepo, context);
+                                            Method method = bookCategoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(bookCategoryRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //employeeRepo.addStorage(context);
+                                        //bookCategoryRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Employee employee = employeeRepo.createObject(result);
+                                    BookCategory bookCategory = bookCategoryRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = employee.getClass().getMethod("save__db");
-                                                    method.invoke(employee);
+                                                    Method method = bookCategory.getClass().getMethod("save__db");
+                                                    method.invoke(bookCategory);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1649,7 +1534,7 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
                                       }
 
-                                    callback.onSuccess(employee);
+                                    callback.onSuccess(bookCategory);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1668,106 +1553,6 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
         
     
-        
-    
-        
-    
-        
-    
-        
-            //Method confirm definition
-            public void confirm(  String uid,  String token,  String redirect, final VoidCallback callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("uid", uid);
-                
-                        hashMapObject.put("token", token);
-                
-                        hashMapObject.put("redirect", redirect);
-                
-
-                
-                    invokeStaticMethod("confirm", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                                callback.onError(t);
-                                //Call the finally method..
-                                callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method confirm definition ends here..
-
-            
-
-        
-    
-        
-            //Method resetPassword definition
-            public void resetPassword(  Map<String,  ? extends Object> options, final VoidCallback callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("options", options);
-                
-
-                
-                    invokeStaticMethod("resetPassword", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                                callback.onError(t);
-                                //Call the finally method..
-                                callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method resetPassword definition ends here..
-
-            
-
         
     
         
@@ -1871,8 +1656,8 @@ public class EmployeeRepository extends UserRepository<Employee> {
         
     
         
-            //Method isAdmin definition
-            public void isAdmin( final ObjectCallback<JSONObject>  callback ){
+            //Method fetchBookList definition
+            public void fetchBookList(  String customerId, final DataListCallback<BookCategory> callback){
 
                 /**
                 Call the onBefore event
@@ -1884,15 +1669,16 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
+                        hashMapObject.put("customerId", customerId);
+                
 
                 
 
 
                 
-                    
-                    invokeStaticMethod("isAdmin", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
+
+                
+                    invokeStaticMethod("fetchBookList", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -1901,9 +1687,44 @@ public class EmployeeRepository extends UserRepository<Employee> {
                         }
 
                         @Override
-                        public void onSuccess(JSONObject response) {
+                        public void onSuccess(JSONArray response) {
                             
-                                callback.onSuccess(response);
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<BookCategory> bookCategoryList = new DataList<BookCategory>();
+                                    BookCategoryRepository bookCategoryRepo = getRestAdapter().createRepository(BookCategoryRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = bookCategoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(bookCategoryRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        BookCategory bookCategory = bookCategoryRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = bookCategory.getClass().getMethod("save__db");
+                                                      method.invoke(bookCategory);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        bookCategoryList.add(bookCategory);
+                                    }
+                                    callback.onSuccess(bookCategoryList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                             //Call the finally method..
                             callback.onFinally();
@@ -1911,12 +1732,12 @@ public class EmployeeRepository extends UserRepository<Employee> {
                     });
                 
 
-                
-
-            }//Method isAdmin definition ends here..
+            }//Method fetchBookList definition ends here..
 
             
 
+        
+    
         
     
 

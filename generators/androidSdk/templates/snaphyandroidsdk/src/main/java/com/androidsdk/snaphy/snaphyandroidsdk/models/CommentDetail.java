@@ -26,12 +26,12 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.FacebookAccessTokenRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.CommentDetailRepository;
 
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CommentRepository;
             
 
         
@@ -44,7 +44,7 @@ import java.util.Map;
 
 
 
-public class FacebookAccessToken extends Model {
+public class CommentDetail extends Model {
 
 
     //For converting all model values to hashMap
@@ -59,9 +59,9 @@ public class FacebookAccessToken extends Model {
         }
     }
 
-    private FacebookAccessToken that ;
+    private CommentDetail that ;
 
-    public FacebookAccessToken (){
+    public CommentDetail (){
         that = this;
     }
 
@@ -70,17 +70,17 @@ public class FacebookAccessToken extends Model {
             
 
             
-                private String FbUserId;
+                private double totalLike;
                 /* Adding Getter and Setter methods */
-                public String getFbUserId(){
-                    return FbUserId;
+                public double getTotalLike(){
+                    return totalLike;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setFbUserId(String FbUserId){
-                    this.FbUserId = FbUserId;
+                public void setTotalLike(double totalLike){
+                    this.totalLike = totalLike;
                     //Update hashMap value..
-                    hashMap.put("FbUserId", FbUserId);
+                    hashMap.put("totalLike", totalLike);
                 }
 
             
@@ -91,17 +91,17 @@ public class FacebookAccessToken extends Model {
             
 
             
-                private String token;
+                private String added;
                 /* Adding Getter and Setter methods */
-                public String getToken(){
-                    return token;
+                public String getAdded(){
+                    return added;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setToken(String token){
-                    this.token = token;
+                public void setAdded(String added){
+                    this.added = added;
                     //Update hashMap value..
-                    hashMap.put("token", token);
+                    hashMap.put("added", added);
                 }
 
             
@@ -112,17 +112,17 @@ public class FacebookAccessToken extends Model {
             
 
             
-                private String expires;
+                private String updated;
                 /* Adding Getter and Setter methods */
-                public String getExpires(){
-                    return expires;
+                public String getUpdated(){
+                    return updated;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setExpires(String expires){
-                    this.expires = expires;
+                public void setUpdated(String updated){
+                    this.updated = updated;
                     //Update hashMap value..
-                    hashMap.put("expires", expires);
+                    hashMap.put("updated", updated);
                 }
 
             
@@ -133,25 +133,25 @@ public class FacebookAccessToken extends Model {
             
 
             
+                private String status;
+                /* Adding Getter and Setter methods */
+                public String getStatus(){
+                    return status;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setStatus(String status){
+                    this.status = status;
+                    //Update hashMap value..
+                    hashMap.put("status", status);
+                }
+
+            
             
         
     
         
             
-
-            
-                private String type;
-                /* Adding Getter and Setter methods */
-                public String getType(){
-                    return type;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setType(String type){
-                    this.type = type;
-                    //Update hashMap value..
-                    hashMap.put("type", type);
-                }
 
             
             
@@ -177,7 +177,7 @@ public class FacebookAccessToken extends Model {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
+      CommentDetailRepository lowercaseFirstLetterRepository = (CommentDetailRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
@@ -192,7 +192,7 @@ public class FacebookAccessToken extends Model {
 
 
     public void save__db(String id){
-      FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
+      CommentDetailRepository lowercaseFirstLetterRepository = (CommentDetailRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -203,7 +203,7 @@ public class FacebookAccessToken extends Model {
 
 
     public void delete__db(){
-      FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
+      CommentDetailRepository lowercaseFirstLetterRepository = (CommentDetailRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
         if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -238,80 +238,80 @@ public class FacebookAccessToken extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient Customer  customer ;
-                    private String userId;
+                    private transient Comment  comment ;
+                    private String commentId;
 
-                    public String getUserId(){
-                         return userId;
+                    public String getCommentId(){
+                         return commentId;
                     }
 
-                    public void setUserId(Object userId){
-                        if(userId != null){
-                          this.userId = userId.toString();
+                    public void setCommentId(Object commentId){
+                        if(commentId != null){
+                          this.commentId = commentId.toString();
                         }
                     }
 
-                    public Customer getCustomer() {
+                    public Comment getComment() {
 			try{
 				//Adding database method for fetching from relation if not present..
-		                if(customer == null){
-		                  FacebookAccessTokenRepository facebookAccessTokenRepository = (FacebookAccessTokenRepository) getRepository();
+		                if(comment == null){
+		                  CommentDetailRepository commentDetailRepository = (CommentDetailRepository) getRepository();
 
-		                  RestAdapter restAdapter = facebookAccessTokenRepository.getRestAdapter();
+		                  RestAdapter restAdapter = commentDetailRepository.getRestAdapter();
 		                  if(restAdapter != null){
 		                    //Fetch locally from db
-		                    customer = getCustomer__db(restAdapter);
+		                    comment = getComment__db(restAdapter);
 		                  }
 		                }
 			}catch(Exception e){
 				//Ignore
 			}
 
-                        return customer;
+                        return comment;
                     }
 
-                    public void setCustomer(Customer customer) {
-                        this.customer = customer;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setCustomer(Map<String, Object> customer) {
-                        //First create a dummy Repo class object for customer.
-                        CustomerRepository customerRepository = new CustomerRepository();
-                        Customer customer1 = customerRepository.createObject(customer);
-                        setCustomer(customer1);
+                    public void setComment(Comment comment) {
+                        this.comment = comment;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setCustomer(HashMap<String, Object> customer) {
+                    public void setComment(Map<String, Object> comment) {
                         //First create a dummy Repo class object for customer.
-                        CustomerRepository customerRepository = new CustomerRepository();
-                        Customer customer1 = customerRepository.createObject(customer);
-                        setCustomer(customer1);
+                        CommentRepository commentRepository = new CommentRepository();
+                        Comment comment1 = commentRepository.createObject(comment);
+                        setComment(comment1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setComment(HashMap<String, Object> comment) {
+                        //First create a dummy Repo class object for customer.
+                        CommentRepository commentRepository = new CommentRepository();
+                        Comment comment1 = commentRepository.createObject(comment);
+                        setComment(comment1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Customer customer) {
-                        that.setCustomer(customer);
+                    public void addRelation(Comment comment) {
+                        that.setComment(comment);
                     }
 
 
-                    //Fetch related data from local database if present a userId identifier as property for belongsTo
-                    public Customer getCustomer__db(RestAdapter restAdapter){
-                      if(userId != null){
-                        CustomerRepository customerRepository = restAdapter.createRepository(CustomerRepository.class);
+                    //Fetch related data from local database if present a commentId identifier as property for belongsTo
+                    public Comment getComment__db(RestAdapter restAdapter){
+                      if(commentId != null){
+                        CommentRepository commentRepository = restAdapter.createRepository(CommentRepository.class);
 			  try{
-				FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
+				CommentDetailRepository lowercaseFirstLetterRepository = (CommentDetailRepository) getRepository();
 		                  if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 		                        Context context = lowercaseFirstLetterRepository.getContext();
-		                        if(customerRepository.getDb() == null ){
-		                            customerRepository.addStorage(context);
+		                        if(commentRepository.getDb() == null ){
+		                            commentRepository.addStorage(context);
 		                        }
 
-		                        if(context != null && customerRepository.getDb() != null){
-		                            customerRepository.addStorage(context);
-		                            Customer customer = (Customer) customerRepository.getDb().get__db(userId);
-		                            return customer;
+		                        if(context != null && commentRepository.getDb() != null){
+		                            commentRepository.addStorage(context);
+		                            Comment comment = (Comment) commentRepository.getDb().get__db(commentId);
+		                            return comment;
 		                        }else{
 		                            return null;
 		                        }
@@ -344,12 +344,12 @@ public class FacebookAccessToken extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
+                                    public void get__comment( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Comment> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final FacebookAccessTokenRepository  facebookAccessTokenRepo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
+                                        final CommentDetailRepository  commentDetailRepo = restAdapter.createRepository(CommentDetailRepository.class);
                                         
                                         
                                         
@@ -358,13 +358,13 @@ public class FacebookAccessToken extends Model {
 
 
 
-                                        facebookAccessTokenRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
+                                        commentDetailRepo.get__comment( (String)that.getId(), refresh,  new ObjectCallback<Comment> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Customer object) {
+                                                    public void onSuccess(Comment object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);

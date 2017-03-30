@@ -1,10 +1,7 @@
 package com.androidsdk.snaphy.snaphyandroidsdk.db;
 
 
-<%
- /*-------PURE JAVASCRIPT METHODS-------------------*/
- var modelName = model.methods.capitalizeFirstLetter(model.name);
-%>
+
 
 
 import android.content.Context;
@@ -18,16 +15,16 @@ import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.<%- modelName %>;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Payment;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.<%- modelName %>Repository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.PaymentRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
 
-public class <%- modelName %>Db{
+public class PaymentDb{
 
     // All Static variables
     RestAdapter restAdapter;
@@ -42,25 +39,25 @@ public class <%- modelName %>Db{
     // Contacts table name
     private static String TABLE;
 
-  public <%- modelName %>Db(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+  public PaymentDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     //super(context, DATABASE_NAME, null, DATABASE_VERSION);
     this.context = context;
     this.restAdapter = restAdapter;
-    TABLE = "<%- modelName %>";
+    TABLE = "Payment";
     this.DATABASE_NAME = DATABASE_NAME;
     SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
 
-    public void insert__db (final String id, final <%- modelName %> modelData) {
+    public void insert__db (final String id, final Payment modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
-                db.insert("<%- modelName %>", null, values);
+                db.insert("Payment", null, values);
                 //db.close(); // Closing database connection
             }
         }).start();
@@ -71,72 +68,106 @@ public class <%- modelName %>Db{
 
 
 
-    public ContentValues getContentValues(<%- modelName %> modelData){
+    public ContentValues getContentValues(Payment modelData){
       ContentValues values = new ContentValues();
-         <%
-          for( let property in model.properties) { -%>
-              <% if(model.properties.hasOwnProperty(property)){
-                  let isArray = model.properties[property].type instanceof Array;
-                  var capitalPropertyName = model.methods.capitalizeFirstLetter(property);
-              -%>
-
-                <% if(isArray){ -%>
-                  String <%-property%>Data = "";
-                  if(modelData.get<%-capitalPropertyName%>() != null){
-                    <%-property%>Data = new Gson().toJson(modelData.get<%-capitalPropertyName%>(), DataList.class);
-                  }
-              <% }else{ -%>
-                    <% if(model.properties[property].type === "string" || model.properties[property].type === "date"){ -%>
-                        String <%-property%>Data = "";
-                        if(modelData.get<%-capitalPropertyName%>() != null){
-                          <%-property%>Data = modelData.get<%-capitalPropertyName%>().toString();
+                       
+                                                            String bookDetailData = "";
+                        if(modelData.getBookDetail() != null){
+                          bookDetailData = new Gson().toJson(modelData.getBookDetail(), HashMap.class);
                         }
-                    <% }else if(model.properties[property].type === "object" || model.properties[property].type === "geopoint"){ -%>
-                        String <%-property%>Data = "";
-                        if(modelData.get<%-capitalPropertyName%>() != null){
-                          <%-property%>Data = new Gson().toJson(modelData.get<%-capitalPropertyName%>(), HashMap.class);
+                                                values.put("`bookDetail`", bookDetailData);
+                                
+                                                            String addressData = "";
+                        if(modelData.getAddress() != null){
+                          addressData = modelData.getAddress().toString();
                         }
-                    <% }else if(model.properties[property].type === "number"){ -%>
-                        double <%-property%>Data;
-                        <%-property%>Data = (double)modelData.get<%-capitalPropertyName%>();
-                    <% }else if(model.properties[property].type === "boolean"){ -%>
-                        int <%-property%>Data = 0;
-                        if(modelData.get<%-capitalPropertyName%>()){
-                          <%-property%>Data = 1;
-                        }else{
-                          <%-property%>Data = 0;
+                                                values.put("`address`", addressData);
+                                
+                                                            String phoneNumberData = "";
+                        if(modelData.getPhoneNumber() != null){
+                          phoneNumberData = modelData.getPhoneNumber().toString();
                         }
-                    <% }else{ -%>
-                        //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String <%-property%>Data = "";
+                                                values.put("`phoneNumber`", phoneNumberData);
+                                
+                                                            String emailData = "";
+                        if(modelData.getEmail() != null){
+                          emailData = modelData.getEmail().toString();
+                        }
+                                                values.put("`email`", emailData);
+                                
+                                                            double amountData;
+                        amountData = (double)modelData.getAmount();
+                                                values.put("`amount`", amountData);
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String idData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("get<%-capitalPropertyName%>");
+                              Method method = modelData.getClass().getMethod("getId");
                               if(method.invoke(modelData) != null){
-                                //<%-property%>Data = modelData.get<%-capitalPropertyName%>().toString();
-                                <%-property%>Data = (String) method.invoke(modelData);
+                                //idData = modelData.getId().toString();
+                                idData = (String) method.invoke(modelData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
                         }
 
-                    <% } -%>
-              <% }//END IF-ELSE -%>
-              values.put("`<%-property%>`", <%-property%>Data);
-          <% } -%>
-        <%}%>
+                                                values.put("`id`", idData);
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String bookIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getBookId");
+                              if(method.invoke(modelData) != null){
+                                //bookIdData = modelData.getBookId().toString();
+                                bookIdData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                                values.put("`bookId`", bookIdData);
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String customerIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getCustomerId");
+                              if(method.invoke(modelData) != null){
+                                //customerIdData = modelData.getCustomerId().toString();
+                                customerIdData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                                values.put("`customerId`", customerIdData);
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String orderIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getOrderId");
+                              if(method.invoke(modelData) != null){
+                                //orderIdData = modelData.getOrderId().toString();
+                                orderIdData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                                values.put("`orderId`", orderIdData);
+                  
 
         //Add the updated data property value to be 1
-        values.put("`<%- model.methods.updateDataProperty %>`", 1);
+        values.put("`_DATA_UPDATED`", 1);
         return values;
     }
 
 
 
     // Getting single c
-    public   <%- modelName %> get__db(String id) {
+    public   Payment get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("<%- modelName %>", null, "id=?", new String[]{id}, null, null, null, null);
+            Cursor cursor = db.query("Payment", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -145,9 +176,9 @@ public class <%- modelName %>Db{
                     cursor.close();
                     //db.close(); // Closing database connection
                     if (hashMap != null) {
-                        <%- modelName %>Repository repo = restAdapter.createRepository(<%- modelName %>Repository.class);
+                        PaymentRepository repo = restAdapter.createRepository(PaymentRepository.class);
                         repo.addStorage(context);
-                        return (<%- modelName %>)repo.createObject(hashMap);
+                        return (Payment)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -166,10 +197,10 @@ public class <%- modelName %>Db{
 
 
     // Getting single cont
-    public   <%- modelName %> get__db(String whereKey, String whereKeyValue) {
+    public   Payment get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("<%- modelName %>", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("Payment", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -180,9 +211,9 @@ public class <%- modelName %>Db{
                     //db.close(); // Closing database connection
 
                     if (hashMap != null) {
-                        <%- modelName %>Repository repo = restAdapter.createRepository(<%- modelName %>Repository.class);
+                        PaymentRepository repo = restAdapter.createRepository(PaymentRepository.class);
                         repo.addStorage(context);
-                        return (<%- modelName %>)repo.createObject(hashMap);
+                        return (Payment)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -203,79 +234,101 @@ public class <%- modelName %>Db{
     private HashMap<String, Object> parseCursor(Cursor cursor ){
       HashMap<String, Object> hashMap = new HashMap<>();
 
-        <%
-          //Increment after each loop
-          var id=0;
-          for( let property in model.properties) {
-        -%>
-              <% if(model.properties.hasOwnProperty(property)){
-                  let isArray = model.properties[property].type instanceof Array;
-                  var capitalPropertyName = model.methods.capitalizeFirstLetter(property);
-              -%>
-
-                <% if(isArray){ -%>
-                  <%- model.methods.getJavaType(model.properties[property].type[0], isArray) %> <%-property%>Data = new DataList<>();
-                  if(cursor.getString(<%- id %>) != null){
-                    <%-property%>Data = new Gson().fromJson(cursor.getString(<%- id %>), DataList.class);
-                    if(<%-property%>Data != null){
-                      <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type[0], isArray) %>)<%-property%>Data;
-                      hashMap.put("<%-property%>", <%-property%>Data);
-                    }
-                  }
-              <% }else{ -%>
-                    <% if(model.properties[property].type === "string" || model.properties[property].type === "date"){ -%>
-                        String <%-property%>Data = "";
-                        if(cursor.getString(<%- id %>) != null){
-                          <%-property%>Data = cursor.getString(<%- id %>);
-                          if(<%-property%>Data != null){
-                            <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) %>)<%-property%>Data;
-                            hashMap.put("<%-property%>", <%-property%>Data);
+                      
+                                                            Map<String, Object> bookDetailData = new HashMap<>();
+                        if(cursor.getString(0) != null){
+                          bookDetailData = new Gson().fromJson(cursor.getString(0), Map.class);
+                          if(bookDetailData != null){
+                            bookDetailData = (Map<String, Object>)bookDetailData;
+                            hashMap.put("bookDetail", bookDetailData);
                           }
                         }
-                    <% }else if(model.properties[property].type === "object" || model.properties[property].type === "geopoint"){ -%>
-                        <%- model.methods.getJavaType(model.properties[property].type, false) %> <%-property%>Data = new HashMap<>();
-                        if(cursor.getString(<%- id %>) != null){
-                          <%-property%>Data = new Gson().fromJson(cursor.getString(<%- id %>), Map.class);
-                          if(<%-property%>Data != null){
-                            <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) %>)<%-property%>Data;
-                            hashMap.put("<%-property%>", <%-property%>Data);
+                                                
+                                
+                                                            String addressData = "";
+                        if(cursor.getString(1) != null){
+                          addressData = cursor.getString(1);
+                          if(addressData != null){
+                            addressData = (String)addressData;
+                            hashMap.put("address", addressData);
                           }
                         }
-                    <% }else if(model.properties[property].type === "number"){ -%>
-                        double <%-property%>Data = (double)0;
-                          <%-property%>Data = cursor.getInt(<%- id %>);
-                          <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) %>)<%-property%>Data;
-                          hashMap.put("<%-property%>", <%-property%>Data);
-
-
-                    <% }else if(model.properties[property].type === "boolean"){ -%>
-                        boolean <%-property%>Data = false;
-                        int temp<%-property%>Data = cursor.getInt(<%- id %>);
-                        if( temp<%-property%>Data > 0){
-                          <%-property%>Data = true;
-                        }else{
-                          <%-property%>Data = false;
-                        }
-                    <% }else{ -%>
-                        String <%-property%>Data = "";
-                        if(cursor.getString(<%- id %>) != null){
-                          <%-property%>Data = cursor.getString(<%- id %>);
-                          if(<%-property%>Data != null){
-                            <%-property%>Data = <%-property%>Data.toString();
-                            hashMap.put("<%-property%>", <%-property%>Data);
+                                                
+                                
+                                                            String phoneNumberData = "";
+                        if(cursor.getString(2) != null){
+                          phoneNumberData = cursor.getString(2);
+                          if(phoneNumberData != null){
+                            phoneNumberData = (String)phoneNumberData;
+                            hashMap.put("phoneNumber", phoneNumberData);
                           }
                         }
-                    <% } -%>
-              <% }//END IF-ELSE -%>
-              <% id++; %>
-          <% } -%>
-        <%}%>
+                                                
+                                
+                                                            String emailData = "";
+                        if(cursor.getString(3) != null){
+                          emailData = cursor.getString(3);
+                          if(emailData != null){
+                            emailData = (String)emailData;
+                            hashMap.put("email", emailData);
+                          }
+                        }
+                                                
+                                
+                                                            double amountData = (double)0;
+                          amountData = cursor.getInt(4);
+                          amountData = (double)amountData;
+                          hashMap.put("amount", amountData);
+
+
+                                                
+                                
+                                                            String idData = "";
+                        if(cursor.getString(5) != null){
+                          idData = cursor.getString(5);
+                          if(idData != null){
+                            idData = idData.toString();
+                            hashMap.put("id", idData);
+                          }
+                        }
+                                                
+                                
+                                                            String bookIdData = "";
+                        if(cursor.getString(6) != null){
+                          bookIdData = cursor.getString(6);
+                          if(bookIdData != null){
+                            bookIdData = bookIdData.toString();
+                            hashMap.put("bookId", bookIdData);
+                          }
+                        }
+                                                
+                                
+                                                            String customerIdData = "";
+                        if(cursor.getString(7) != null){
+                          customerIdData = cursor.getString(7);
+                          if(customerIdData != null){
+                            customerIdData = customerIdData.toString();
+                            hashMap.put("customerId", customerIdData);
+                          }
+                        }
+                                                
+                                
+                                                            String orderIdData = "";
+                        if(cursor.getString(8) != null){
+                          orderIdData = cursor.getString(8);
+                          if(orderIdData != null){
+                            orderIdData = orderIdData.toString();
+                            hashMap.put("orderId", orderIdData);
+                          }
+                        }
+                                                
+                  
         return hashMap;
     }//parseCursor
 
 
 
-    public void upsert__db(String id, <%- modelName %> model){
+    public void upsert__db(String id, Payment model){
         if(count__db(id) != 0){
             update__db(id, model);
         }else{
@@ -286,25 +339,25 @@ public class <%- modelName %>Db{
 
 
     // Getting All Contacts
-    public DataList<<%- modelName %>>  getAll__db() {
-        DataList<<%- modelName %>> modelList = new DataList<<%- modelName %>>();
+    public DataList<Payment>  getAll__db() {
+        DataList<Payment> modelList = new DataList<Payment>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM <%- modelName %>";
+        String selectQuery = "SELECT  * FROM Payment";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<<%- modelName %>>) modelList;
+            return (DataList<Payment>) modelList;
         }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    <%- modelName %>Repository repo = restAdapter.createRepository(<%- modelName %>Repository.class);
+                    PaymentRepository repo = restAdapter.createRepository(PaymentRepository.class);
                     repo.addStorage(context);
-                    modelList.add((<%- modelName %>)repo.createObject(hashMap));
+                    modelList.add((Payment)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }
@@ -313,7 +366,7 @@ public class <%- modelName %>Db{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<<%- modelName %>>) modelList;
+        return (DataList<Payment>) modelList;
     }
 
 
@@ -391,19 +444,19 @@ public class <%- modelName %>Db{
 
 
     // Getting All Data where
-    public DataList<<%- modelName %>>  getAll__db(HashMap<String, Object> whereKeyValue) {
+    public DataList<Payment>  getAll__db(HashMap<String, Object> whereKeyValue) {
         return getAll__db(whereKeyValue, null, 0);
     }
 
 
 
     // Getting All Data where and sort column according to date wise..
-    public DataList<<%- modelName %>>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
-        DataList<<%- modelName %>> modelList = new DataList<<%- modelName %>>();
+    public DataList<Payment>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
+        DataList<Payment> modelList = new DataList<Payment>();
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM <%- modelName %> " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM Payment " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit;
@@ -411,9 +464,9 @@ public class <%- modelName %>Db{
         }else{
             if(limit != 0){
                 // Select All Query
-                selectQuery = "SELECT  * FROM <%- modelName %> " + whereQuery + " LIMIT " + limit;
+                selectQuery = "SELECT  * FROM Payment " + whereQuery + " LIMIT " + limit;
             }else{
-                selectQuery = "SELECT  * FROM <%- modelName %> " + whereQuery;
+                selectQuery = "SELECT  * FROM Payment " + whereQuery;
             }
         }
 
@@ -424,15 +477,15 @@ public class <%- modelName %>Db{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<<%- modelName %>>) modelList;
+            return (DataList<Payment>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    <%- modelName %>Repository repo = restAdapter.createRepository(<%- modelName %>Repository.class);
+                    PaymentRepository repo = restAdapter.createRepository(PaymentRepository.class);
                     repo.addStorage(context);
-                    modelList.add((<%- modelName %>)repo.createObject(hashMap));
+                    modelList.add((Payment)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
@@ -442,12 +495,12 @@ public class <%- modelName %>Db{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<<%- modelName %>>) modelList;
+        return (DataList<Payment>) modelList;
     }
 
 
     // Getting All Data where
-    public DataList<<%- modelName %>>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
+    public DataList<Payment>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
         return getAll__db(whereKeyValue, null,  limit);
     }
 
@@ -466,7 +519,7 @@ public class <%- modelName %>Db{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM <%- modelName %> " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM Payment " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit;
@@ -474,9 +527,9 @@ public class <%- modelName %>Db{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM <%- modelName %> " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM Payment " + whereQuery + " LIMIT " + limit;
             }else{
-                countQuery = "SELECT  * FROM <%- modelName %> " + whereQuery;
+                countQuery = "SELECT  * FROM Payment " + whereQuery;
             }
         }
 
@@ -499,9 +552,9 @@ public class <%- modelName %>Db{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM <%- modelName %> " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM Payment " + whereQuery + " LIMIT " + limit;
         }else{
-            countQuery = "SELECT  * FROM <%- modelName %> " + whereQuery;
+            countQuery = "SELECT  * FROM Payment " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -534,7 +587,7 @@ public class <%- modelName %>Db{
                 values.put("_DATA_UPDATED", 0);
                 String where = getWhere(whereKeyValue);
                 // updating row
-                db.update("<%- modelName %>", values, "_DATA_UPDATED = 1 AND " + where, null);
+                db.update("Payment", values, "_DATA_UPDATED = 1 AND " + where, null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -552,7 +605,7 @@ public class <%- modelName %>Db{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("<%- modelName %>", "_DATA_UPDATED = 0 AND " + where , null);
+                db.delete("Payment", "_DATA_UPDATED = 0 AND " + where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -573,7 +626,7 @@ public class <%- modelName %>Db{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("<%- modelName %>", where , null);
+                db.delete("Payment", where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
             }
@@ -587,10 +640,10 @@ public class <%- modelName %>Db{
 
 
     // Getting All Data where
-    public DataList<<%- modelName %>>  getAll__db(String whereKey, String whereKeyValue) {
-        DataList<<%- modelName %>> modelList = new DataList<<%- modelName %>>();
+    public DataList<Payment>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<Payment> modelList = new DataList<Payment>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `<%- modelName %>` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String selectQuery = "SELECT  * FROM `Payment` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -599,15 +652,15 @@ public class <%- modelName %>Db{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<<%- modelName %>>) modelList;
+            return (DataList<Payment>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    <%- modelName %>Repository repo = restAdapter.createRepository(<%- modelName %>Repository.class);
+                    PaymentRepository repo = restAdapter.createRepository(PaymentRepository.class);
                     repo.addStorage(context);
-                    modelList.add((<%- modelName %>)repo.createObject(hashMap));
+                    modelList.add((Payment)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
@@ -617,7 +670,7 @@ public class <%- modelName %>Db{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<<%- modelName %>>) modelList;
+        return (DataList<Payment>) modelList;
     }
 
 
@@ -629,7 +682,7 @@ public class <%- modelName %>Db{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-        String countQuery = "SELECT  * FROM `<%- modelName %>` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String countQuery = "SELECT  * FROM `Payment` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -649,7 +702,7 @@ public class <%- modelName %>Db{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("<%- modelName %>", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.update("Payment", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -665,7 +718,7 @@ public class <%- modelName %>Db{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("<%- modelName %>", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.delete("Payment", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -673,26 +726,6 @@ public class <%- modelName %>Db{
         }).start();
 
     }
-
-
-    //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final <%- modelName %> modelData ){
-      new Thread(new Runnable(){
-        @Override
-        public void run(){
-          SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-          db.beginTransaction();
-          ContentValues values = getContentValues(modelData);
-          String where = getWhere(whereKeyValue);
-          db.update("<%- modelName %>", values, where, null);
-          db.setTransactionSuccessful();
-          db.endTransaction();
-          //db.close();
-        }
-
-      }).start();
-    }
-
 
 
 
@@ -714,7 +747,7 @@ public class <%- modelName %>Db{
 
 
     // Updating single contact
-    public void update__db(final String id,   final <%- modelName %> modelData) {
+    public void update__db(final String id,   final Payment modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -722,7 +755,7 @@ public class <%- modelName %>Db{
                 db.beginTransaction();
                 ContentValues values = getContentValues(modelData);
                 // updating row
-                db.update("<%- modelName %>", values, "id = ?",
+                db.update("Payment", values, "id = ?",
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
@@ -741,9 +774,9 @@ public class <%- modelName %>Db{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 ContentValues values = new ContentValues();
-                values.put("<%- model.methods.updateDataProperty %>", 0);
+                values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("<%- modelName %>", values, "<%- model.methods.updateDataProperty %> = 1", null);
+                db.update("Payment", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -760,7 +793,7 @@ public class <%- modelName %>Db{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("<%- modelName %>", "<%- model.methods.updateDataProperty %> = 0", null);
+                db.delete("Payment", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();

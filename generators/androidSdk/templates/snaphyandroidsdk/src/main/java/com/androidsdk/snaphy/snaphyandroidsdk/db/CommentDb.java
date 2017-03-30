@@ -71,17 +71,17 @@ public class CommentDb{
     public ContentValues getContentValues(Comment modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String usernameData = "";
-                        if(modelData.getUsername() != null){
-                          usernameData = modelData.getUsername().toString();
+                                                            String answerData = "";
+                        if(modelData.getAnswer() != null){
+                          answerData = modelData.getAnswer().toString();
                         }
-                                                values.put("`username`", usernameData);
+                                                values.put("`answer`", answerData);
                                 
-                                                            String descriptionData = "";
-                        if(modelData.getDescription() != null){
-                          descriptionData = modelData.getDescription().toString();
+                                                            String statusData = "";
+                        if(modelData.getStatus() != null){
+                          statusData = modelData.getStatus().toString();
                         }
-                                                values.put("`description`", descriptionData);
+                                                values.put("`status`", statusData);
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -96,6 +96,34 @@ public class CommentDb{
                         }
 
                                                 values.put("`id`", idData);
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String postIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getPostId");
+                              if(method.invoke(modelData) != null){
+                                //postIdData = modelData.getPostId().toString();
+                                postIdData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                                values.put("`postId`", postIdData);
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String customerIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getCustomerId");
+                              if(method.invoke(modelData) != null){
+                                //customerIdData = modelData.getCustomerId().toString();
+                                customerIdData = (String) method.invoke(modelData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                                values.put("`customerId`", customerIdData);
                   
 
         //Add the updated data property value to be 1
@@ -177,22 +205,22 @@ public class CommentDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            String usernameData = "";
+                                                            String answerData = "";
                         if(cursor.getString(0) != null){
-                          usernameData = cursor.getString(0);
-                          if(usernameData != null){
-                            usernameData = (String)usernameData;
-                            hashMap.put("username", usernameData);
+                          answerData = cursor.getString(0);
+                          if(answerData != null){
+                            answerData = (String)answerData;
+                            hashMap.put("answer", answerData);
                           }
                         }
                                                 
                                 
-                                                            String descriptionData = "";
+                                                            String statusData = "";
                         if(cursor.getString(1) != null){
-                          descriptionData = cursor.getString(1);
-                          if(descriptionData != null){
-                            descriptionData = (String)descriptionData;
-                            hashMap.put("description", descriptionData);
+                          statusData = cursor.getString(1);
+                          if(statusData != null){
+                            statusData = (String)statusData;
+                            hashMap.put("status", statusData);
                           }
                         }
                                                 
@@ -203,6 +231,26 @@ public class CommentDb{
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
+                          }
+                        }
+                                                
+                                
+                                                            String postIdData = "";
+                        if(cursor.getString(3) != null){
+                          postIdData = cursor.getString(3);
+                          if(postIdData != null){
+                            postIdData = postIdData.toString();
+                            hashMap.put("postId", postIdData);
+                          }
+                        }
+                                                
+                                
+                                                            String customerIdData = "";
+                        if(cursor.getString(4) != null){
+                          customerIdData = cursor.getString(4);
+                          if(customerIdData != null){
+                            customerIdData = customerIdData.toString();
+                            hashMap.put("customerId", customerIdData);
                           }
                         }
                                                 

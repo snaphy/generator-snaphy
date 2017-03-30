@@ -41,9 +41,9 @@ import org.json.JSONObject;
 
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.AmazonImage;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.AmazonPdf;
 import android.content.Context;
-import com.androidsdk.snaphy.snaphyandroidsdk.db.AmazonImageDb;
+import com.androidsdk.snaphy.snaphyandroidsdk.db.AmazonPdfDb;
 
 //Now import model of related models..
 
@@ -51,15 +51,15 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.AmazonImageDb;
 
 
 
-public class AmazonImageRepository extends ModelRepository<AmazonImage> {
+public class AmazonPdfRepository extends ModelRepository<AmazonPdf> {
 
 
     private Context context;
     private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
     private static String DATABASE_NAME;
 
-    public AmazonImageRepository(){
-        super("AmazonImage", null, AmazonImage.class);
+    public AmazonPdfRepository(){
+        super("AmazonPdf", null, AmazonPdf.class);
 
     }
 
@@ -77,15 +77,15 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
 
 
-    public AmazonImageDb getDb() {
-      return amazonImageDb;
+    public AmazonPdfDb getDb() {
+      return amazonPdfDb;
     }
 
-    public void setAmazonImageDb(AmazonImageDb amazonImageDb) {
-      this.amazonImageDb = amazonImageDb;
+    public void setAmazonPdfDb(AmazonPdfDb amazonPdfDb) {
+      this.amazonPdfDb = amazonPdfDb;
     }
 
-    private AmazonImageDb amazonImageDb;
+    private AmazonPdfDb amazonPdfDb;
 
 
 
@@ -119,7 +119,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
          catch (Exception e){
             Log.e("Snaphy", e.toString());
          }
-         setAmazonImageDb(new AmazonImageDb(context, DATABASE_NAME, getRestAdapter()));
+         setAmazonPdfDb(new AmazonPdfDb(context, DATABASE_NAME, getRestAdapter()));
          //allow data storage locally..
          persistData(true);
          this.context = context;
@@ -133,7 +133,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "AmazonImage.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "AmazonPdf.create");
     
 
     
@@ -142,7 +142,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "AmazonImage.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "AmazonPdf.create");
     
 
     
@@ -151,7 +151,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "AmazonImage.upsert");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "AmazonPdf.upsert");
     
 
     
@@ -160,7 +160,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "AmazonImage.exists");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "AmazonPdf.exists");
     
 
     
@@ -169,7 +169,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "AmazonImage.findById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "AmazonPdf.findById");
     
 
     
@@ -178,7 +178,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "AmazonImage.find");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "AmazonPdf.find");
     
 
     
@@ -187,7 +187,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "AmazonImage.findOne");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "AmazonPdf.findOne");
     
 
     
@@ -196,7 +196,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "AmazonImage.updateAll");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "AmazonPdf.updateAll");
     
 
     
@@ -205,7 +205,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "AmazonImage.deleteById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "AmazonPdf.deleteById");
     
 
     
@@ -214,7 +214,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "AmazonImage.count");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "AmazonPdf.count");
     
 
     
@@ -223,28 +223,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:amazonImageId", "PUT"), "AmazonImage.prototype.updateAttributes");
-    
-
-    
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "AmazonImage.getSchema");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "AmazonImage.getAbsoluteSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:amazonPdfId", "PUT"), "AmazonPdf.prototype.updateAttributes");
     
 
     
@@ -256,7 +235,19 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getUrl", "POST"), "AmazonImage.getUrl");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "AmazonPdf.getSchema");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "AmazonPdf.getAbsoluteSchema");
+    
+
+    
     
 
     
@@ -284,7 +275,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<AmazonImage> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<AmazonPdf> callback){
 
                 /**
                 Call the onBefore event
@@ -318,27 +309,27 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    AmazonPdfRepository amazonPdfRepo = getRestAdapter().createRepository(AmazonPdfRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = amazonImageRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(amazonImageRepo, context);
+                                            Method method = amazonPdfRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(amazonPdfRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //amazonImageRepo.addStorage(context);
+                                        //amazonPdfRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AmazonImage amazonImage = amazonImageRepo.createObject(result);
+                                    AmazonPdf amazonPdf = amazonPdfRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = amazonImage.getClass().getMethod("save__db");
-                                                    method.invoke(amazonImage);
+                                                    Method method = amazonPdf.getClass().getMethod("save__db");
+                                                    method.invoke(amazonPdf);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -346,7 +337,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                                       }
 
-                                    callback.onSuccess(amazonImage);
+                                    callback.onSuccess(amazonPdf);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -368,7 +359,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<AmazonImage> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<AmazonPdf> callback){
 
                 /**
                 Call the onBefore event
@@ -402,27 +393,27 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    AmazonPdfRepository amazonPdfRepo = getRestAdapter().createRepository(AmazonPdfRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = amazonImageRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(amazonImageRepo, context);
+                                            Method method = amazonPdfRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(amazonPdfRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //amazonImageRepo.addStorage(context);
+                                        //amazonPdfRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AmazonImage amazonImage = amazonImageRepo.createObject(result);
+                                    AmazonPdf amazonPdf = amazonPdfRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = amazonImage.getClass().getMethod("save__db");
-                                                    method.invoke(amazonImage);
+                                                    Method method = amazonPdf.getClass().getMethod("save__db");
+                                                    method.invoke(amazonPdf);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -430,7 +421,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                                       }
 
-                                    callback.onSuccess(amazonImage);
+                                    callback.onSuccess(amazonPdf);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -502,7 +493,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<AmazonImage> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<AmazonPdf> callback){
 
                 /**
                 Call the onBefore event
@@ -538,27 +529,27 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    AmazonPdfRepository amazonPdfRepo = getRestAdapter().createRepository(AmazonPdfRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = amazonImageRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(amazonImageRepo, context);
+                                            Method method = amazonPdfRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(amazonPdfRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //amazonImageRepo.addStorage(context);
+                                        //amazonPdfRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AmazonImage amazonImage = amazonImageRepo.createObject(result);
+                                    AmazonPdf amazonPdf = amazonPdfRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = amazonImage.getClass().getMethod("save__db");
-                                                    method.invoke(amazonImage);
+                                                    Method method = amazonPdf.getClass().getMethod("save__db");
+                                                    method.invoke(amazonPdf);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -566,7 +557,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                                       }
 
-                                    callback.onSuccess(amazonImage);
+                                    callback.onSuccess(amazonPdf);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -587,7 +578,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<AmazonImage> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<AmazonPdf> callback){
 
                 /**
                 Call the onBefore event
@@ -622,12 +613,12 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<AmazonImage> amazonImageList = new DataList<AmazonImage>();
-                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    DataList<AmazonPdf> amazonPdfList = new DataList<AmazonPdf>();
+                                    AmazonPdfRepository amazonPdfRepo = getRestAdapter().createRepository(AmazonPdfRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = amazonImageRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(amazonImageRepo, context);
+                                            Method method = amazonPdfRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(amazonPdfRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -635,23 +626,23 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        AmazonImage amazonImage = amazonImageRepo.createObject(obj);
+                                        AmazonPdf amazonPdf = amazonPdfRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = amazonImage.getClass().getMethod("save__db");
-                                                      method.invoke(amazonImage);
+                                                      Method method = amazonPdf.getClass().getMethod("save__db");
+                                                      method.invoke(amazonPdf);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        amazonImageList.add(amazonImage);
+                                        amazonPdfList.add(amazonPdf);
                                     }
-                                    callback.onSuccess(amazonImageList);
+                                    callback.onSuccess(amazonPdfList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -670,7 +661,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<AmazonImage> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<AmazonPdf> callback){
 
                 /**
                 Call the onBefore event
@@ -704,27 +695,27 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    AmazonPdfRepository amazonPdfRepo = getRestAdapter().createRepository(AmazonPdfRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = amazonImageRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(amazonImageRepo, context);
+                                            Method method = amazonPdfRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(amazonPdfRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //amazonImageRepo.addStorage(context);
+                                        //amazonPdfRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AmazonImage amazonImage = amazonImageRepo.createObject(result);
+                                    AmazonPdf amazonPdf = amazonPdfRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = amazonImage.getClass().getMethod("save__db");
-                                                    method.invoke(amazonImage);
+                                                    Method method = amazonPdf.getClass().getMethod("save__db");
+                                                    method.invoke(amazonPdf);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -732,7 +723,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                                       }
 
-                                    callback.onSuccess(amazonImage);
+                                    callback.onSuccess(amazonPdf);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -908,7 +899,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String amazonImageId,  Map<String,  ? extends Object> data, final ObjectCallback<AmazonImage> callback){
+            public void updateAttributes(  String amazonPdfId,  Map<String,  ? extends Object> data, final ObjectCallback<AmazonPdf> callback){
 
                 /**
                 Call the onBefore event
@@ -920,7 +911,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("amazonImageId", amazonImageId);
+                        hashMapObject.put("amazonPdfId", amazonPdfId);
                 
                         hashMapObject.putAll(data);
                 
@@ -944,27 +935,27 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AmazonImageRepository amazonImageRepo = getRestAdapter().createRepository(AmazonImageRepository.class);
+                                    AmazonPdfRepository amazonPdfRepo = getRestAdapter().createRepository(AmazonPdfRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = amazonImageRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(amazonImageRepo, context);
+                                            Method method = amazonPdfRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(amazonPdfRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //amazonImageRepo.addStorage(context);
+                                        //amazonPdfRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AmazonImage amazonImage = amazonImageRepo.createObject(result);
+                                    AmazonPdf amazonPdf = amazonPdfRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = amazonImage.getClass().getMethod("save__db");
-                                                    method.invoke(amazonImage);
+                                                    Method method = amazonPdf.getClass().getMethod("save__db");
+                                                    method.invoke(amazonPdf);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -972,7 +963,7 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
                                       }
 
-                                    callback.onSuccess(amazonImage);
+                                    callback.onSuccess(amazonPdf);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1091,61 +1082,6 @@ public class AmazonImageRepository extends ModelRepository<AmazonImage> {
 
         
     
-        
-    
-        
-            //Method getUrl definition
-            public void getUrl(  String container,  String file,  Map<String,  ? extends Object> options, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("container", container);
-                
-                        hashMapObject.put("file", file);
-                
-                        hashMapObject.put("options", options);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("getUrl", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method getUrl definition ends here..
-
-            
-
         
     
 

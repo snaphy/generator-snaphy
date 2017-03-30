@@ -26,12 +26,9 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.InstallationRepository;
 
 //Now import repository of related models..
-
-    
-    
 
 
 import java.util.ArrayList;
@@ -40,7 +37,7 @@ import java.util.Map;
 
 
 
-public class Employee extends User {
+public class Installation extends Model {
 
 
     //For converting all model values to hashMap
@@ -55,9 +52,9 @@ public class Employee extends User {
         }
     }
 
-    private Employee that ;
+    private Installation that ;
 
-    public Employee (){
+    public Installation (){
         that = this;
     }
 
@@ -66,143 +63,17 @@ public class Employee extends User {
             
 
             
-                private String username;
+                private String status;
                 /* Adding Getter and Setter methods */
-                public String getUsername(){
-                    return username;
+                public String getStatus(){
+                    return status;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setUsername(String username){
-                    this.username = username;
+                public void setStatus(String status){
+                    this.status = status;
                     //Update hashMap value..
-                    hashMap.put("username", username);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private String firstName;
-                /* Adding Getter and Setter methods */
-                public String getFirstName(){
-                    return firstName;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setFirstName(String firstName){
-                    this.firstName = firstName;
-                    //Update hashMap value..
-                    hashMap.put("firstName", firstName);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private String lastName;
-                /* Adding Getter and Setter methods */
-                public String getLastName(){
-                    return lastName;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setLastName(String lastName){
-                    this.lastName = lastName;
-                    //Update hashMap value..
-                    hashMap.put("lastName", lastName);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private String date;
-                /* Adding Getter and Setter methods */
-                public String getDate(){
-                    return date;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setDate(String date){
-                    this.date = date;
-                    //Update hashMap value..
-                    hashMap.put("date", date);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private String updated;
-                /* Adding Getter and Setter methods */
-                public String getUpdated(){
-                    return updated;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setUpdated(String updated){
-                    this.updated = updated;
-                    //Update hashMap value..
-                    hashMap.put("updated", updated);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private String email;
-                /* Adding Getter and Setter methods */
-                public String getEmail(){
-                    return email;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setEmail(String email){
-                    this.email = email;
-                    //Update hashMap value..
-                    hashMap.put("email", email);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private String password;
-                /* Adding Getter and Setter methods */
-                public String getPassword(){
-                    return password;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setPassword(String password){
-                    this.password = password;
-                    //Update hashMap value..
-                    hashMap.put("password", password);
+                    hashMap.put("status", status);
                 }
 
             
@@ -245,6 +116,36 @@ public class Employee extends User {
         
     
         
+            
+
+            
+            
+        
+    
+        
+            
+
+            
+            
+        
+    
+        
+            
+
+                private DataList<Object> subscriptions;
+                /* Adding Getter and Setter methods */
+                public DataList<Object> getSubscriptions(){
+                    return subscriptions;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setSubscriptions(DataList<Object> subscriptions){
+                    this.subscriptions = subscriptions;
+
+                    //TODO change this to custom array with double quotes escaped if error occured when sending to server..
+                    hashMap.put("subscriptions", subscriptions);
+                }
+
             
 
             
@@ -285,7 +186,7 @@ public class Employee extends User {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      EmployeeRepository lowercaseFirstLetterRepository = (EmployeeRepository) getRepository();
+      InstallationRepository lowercaseFirstLetterRepository = (InstallationRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
@@ -300,7 +201,7 @@ public class Employee extends User {
 
 
     public void save__db(String id){
-      EmployeeRepository lowercaseFirstLetterRepository = (EmployeeRepository) getRepository();
+      InstallationRepository lowercaseFirstLetterRepository = (InstallationRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -311,7 +212,7 @@ public class Employee extends User {
 
 
     public void delete__db(){
-      EmployeeRepository lowercaseFirstLetterRepository = (EmployeeRepository) getRepository();
+      InstallationRepository lowercaseFirstLetterRepository = (InstallationRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
         if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -341,9 +242,6 @@ public class Employee extends User {
 
 
     //Now adding relations between related models
-    
-         
-          
       
 
 }

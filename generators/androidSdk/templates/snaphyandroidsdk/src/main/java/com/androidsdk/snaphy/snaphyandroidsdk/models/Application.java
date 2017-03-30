@@ -26,12 +26,9 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.EmployeeRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.ApplicationRepository;
 
 //Now import repository of related models..
-
-    
-    
 
 
 import java.util.ArrayList;
@@ -40,7 +37,7 @@ import java.util.Map;
 
 
 
-public class Employee extends User {
+public class Application extends Model {
 
 
     //For converting all model values to hashMap
@@ -55,9 +52,9 @@ public class Employee extends User {
         }
     }
 
-    private Employee that ;
+    private Application that ;
 
-    public Employee (){
+    public Application (){
         that = this;
     }
 
@@ -66,18 +63,11 @@ public class Employee extends User {
             
 
             
-                private String username;
-                /* Adding Getter and Setter methods */
-                public String getUsername(){
-                    return username;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setUsername(String username){
-                    this.username = username;
-                    //Update hashMap value..
-                    hashMap.put("username", username);
-                }
+            
+        
+    
+        
+            
 
             
             
@@ -87,18 +77,11 @@ public class Employee extends User {
             
 
             
-                private String firstName;
-                /* Adding Getter and Setter methods */
-                public String getFirstName(){
-                    return firstName;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setFirstName(String firstName){
-                    this.firstName = firstName;
-                    //Update hashMap value..
-                    hashMap.put("firstName", firstName);
-                }
+            
+        
+    
+        
+            
 
             
             
@@ -108,18 +91,34 @@ public class Employee extends User {
             
 
             
-                private String lastName;
+            
+        
+    
+        
+            
+
+            
+            
+        
+    
+        
+            
+
+                private DataList<Object> collaborators;
                 /* Adding Getter and Setter methods */
-                public String getLastName(){
-                    return lastName;
+                public DataList<Object> getCollaborators(){
+                    return collaborators;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setLastName(String lastName){
-                    this.lastName = lastName;
-                    //Update hashMap value..
-                    hashMap.put("lastName", lastName);
+                public void setCollaborators(DataList<Object> collaborators){
+                    this.collaborators = collaborators;
+
+                    //TODO change this to custom array with double quotes escaped if error occured when sending to server..
+                    hashMap.put("collaborators", collaborators);
                 }
+
+            
 
             
             
@@ -129,18 +128,11 @@ public class Employee extends User {
             
 
             
-                private String date;
-                /* Adding Getter and Setter methods */
-                public String getDate(){
-                    return date;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setDate(String date){
-                    this.date = date;
-                    //Update hashMap value..
-                    hashMap.put("date", date);
-                }
+            
+        
+    
+        
+            
 
             
             
@@ -150,18 +142,27 @@ public class Employee extends User {
             
 
             
-                private String updated;
+            
+        
+    
+        
+            
+
+                private DataList<Object> callbackUrls;
                 /* Adding Getter and Setter methods */
-                public String getUpdated(){
-                    return updated;
+                public DataList<Object> getCallbackUrls(){
+                    return callbackUrls;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setUpdated(String updated){
-                    this.updated = updated;
-                    //Update hashMap value..
-                    hashMap.put("updated", updated);
+                public void setCallbackUrls(DataList<Object> callbackUrls){
+                    this.callbackUrls = callbackUrls;
+
+                    //TODO change this to custom array with double quotes escaped if error occured when sending to server..
+                    hashMap.put("callbackUrls", callbackUrls);
                 }
+
+            
 
             
             
@@ -170,40 +171,21 @@ public class Employee extends User {
         
             
 
-            
-                private String email;
+                private DataList<Object> permissions;
                 /* Adding Getter and Setter methods */
-                public String getEmail(){
-                    return email;
+                public DataList<Object> getPermissions(){
+                    return permissions;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setEmail(String email){
-                    this.email = email;
-                    //Update hashMap value..
-                    hashMap.put("email", email);
+                public void setPermissions(DataList<Object> permissions){
+                    this.permissions = permissions;
+
+                    //TODO change this to custom array with double quotes escaped if error occured when sending to server..
+                    hashMap.put("permissions", permissions);
                 }
 
             
-            
-        
-    
-        
-            
-
-            
-                private String password;
-                /* Adding Getter and Setter methods */
-                public String getPassword(){
-                    return password;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setPassword(String password){
-                    this.password = password;
-                    //Update hashMap value..
-                    hashMap.put("password", password);
-                }
 
             
             
@@ -245,6 +227,43 @@ public class Employee extends User {
         
     
         
+            
+
+            
+            
+        
+    
+        
+            
+
+            
+            
+        
+    
+        
+            
+
+            
+            
+        
+    
+        
+            
+
+                private DataList<Object> authenticationSchemes;
+                /* Adding Getter and Setter methods */
+                public DataList<Object> getAuthenticationSchemes(){
+                    return authenticationSchemes;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setAuthenticationSchemes(DataList<Object> authenticationSchemes){
+                    this.authenticationSchemes = authenticationSchemes;
+
+                    //TODO change this to custom array with double quotes escaped if error occured when sending to server..
+                    hashMap.put("authenticationSchemes", authenticationSchemes);
+                }
+
             
 
             
@@ -285,7 +304,7 @@ public class Employee extends User {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      EmployeeRepository lowercaseFirstLetterRepository = (EmployeeRepository) getRepository();
+      ApplicationRepository lowercaseFirstLetterRepository = (ApplicationRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
@@ -300,7 +319,7 @@ public class Employee extends User {
 
 
     public void save__db(String id){
-      EmployeeRepository lowercaseFirstLetterRepository = (EmployeeRepository) getRepository();
+      ApplicationRepository lowercaseFirstLetterRepository = (ApplicationRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -311,7 +330,7 @@ public class Employee extends User {
 
 
     public void delete__db(){
-      EmployeeRepository lowercaseFirstLetterRepository = (EmployeeRepository) getRepository();
+      ApplicationRepository lowercaseFirstLetterRepository = (ApplicationRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
         if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -341,9 +360,6 @@ public class Employee extends User {
 
 
     //Now adding relations between related models
-    
-         
-          
       
 
 }
