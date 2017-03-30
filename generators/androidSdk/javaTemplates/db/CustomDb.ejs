@@ -90,15 +90,18 @@ public class <%- modelName %>Db{
                         String <%-property%>Data = "";
                         if(modelData.get<%-capitalPropertyName%>() != null){
                           <%-property%>Data = modelData.get<%-capitalPropertyName%>().toString();
+                          values.put("`<%-property%>`", <%-property%>Data);
                         }
                     <% }else if(model.properties[property].type === "object" || model.properties[property].type === "geopoint"){ -%>
                         String <%-property%>Data = "";
                         if(modelData.get<%-capitalPropertyName%>() != null){
                           <%-property%>Data = new Gson().toJson(modelData.get<%-capitalPropertyName%>(), HashMap.class);
+                          values.put("`<%-property%>`", <%-property%>Data);
                         }
                     <% }else if(model.properties[property].type === "number"){ -%>
                         double <%-property%>Data;
                         <%-property%>Data = (double)modelData.get<%-capitalPropertyName%>();
+                        values.put("`<%-property%>`", <%-property%>Data);
                     <% }else if(model.properties[property].type === "boolean"){ -%>
                         int <%-property%>Data = 0;
                         if(modelData.get<%-capitalPropertyName%>()){
@@ -106,6 +109,7 @@ public class <%- modelName %>Db{
                         }else{
                           <%-property%>Data = 0;
                         }
+                        values.put("`<%-property%>`", <%-property%>Data);
                     <% }else{ -%>
                         //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String <%-property%>Data = "";
@@ -114,6 +118,7 @@ public class <%- modelName %>Db{
                               if(method.invoke(modelData) != null){
                                 //<%-property%>Data = modelData.get<%-capitalPropertyName%>().toString();
                                 <%-property%>Data = (String) method.invoke(modelData);
+                                values.put("`<%-property%>`", <%-property%>Data);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -121,7 +126,8 @@ public class <%- modelName %>Db{
 
                     <% } -%>
               <% }//END IF-ELSE -%>
-              values.put("`<%-property%>`", <%-property%>Data);
+              //Removed Commented..
+              //values.put("`<%-property%>`", <%-property%>Data);
           <% } -%>
         <%}%>
 

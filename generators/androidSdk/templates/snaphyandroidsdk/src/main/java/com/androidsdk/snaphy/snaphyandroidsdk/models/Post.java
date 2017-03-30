@@ -233,14 +233,14 @@ public class Post extends Model {
             
 
             
-                private boolean latest;
+                private String latest;
                 /* Adding Getter and Setter methods */
-                public boolean getLatest(){
+                public String getLatest(){
                     return latest;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setLatest(boolean latest){
+                public void setLatest(String latest){
                     this.latest = latest;
                     //Update hashMap value..
                     hashMap.put("latest", latest);
@@ -254,14 +254,14 @@ public class Post extends Model {
             
 
             
-                private boolean unsolved;
+                private String unsolved;
                 /* Adding Getter and Setter methods */
-                public boolean getUnsolved(){
+                public String getUnsolved(){
                     return unsolved;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setUnsolved(boolean unsolved){
+                public void setUnsolved(String unsolved){
                     this.unsolved = unsolved;
                     //Update hashMap value..
                     hashMap.put("unsolved", unsolved);
@@ -275,14 +275,14 @@ public class Post extends Model {
             
 
             
-                private boolean trending;
+                private String trending;
                 /* Adding Getter and Setter methods */
-                public boolean getTrending(){
+                public String getTrending(){
                     return trending;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setTrending(boolean trending){
+                public void setTrending(String trending){
                     this.trending = trending;
                     //Update hashMap value..
                     hashMap.put("trending", trending);
@@ -296,14 +296,14 @@ public class Post extends Model {
             
 
             
-                private boolean posted;
+                private String posted;
                 /* Adding Getter and Setter methods */
-                public boolean getPosted(){
+                public String getPosted(){
                     return posted;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setPosted(boolean posted){
+                public void setPosted(String posted){
                     this.posted = posted;
                     //Update hashMap value..
                     hashMap.put("posted", posted);
@@ -317,14 +317,14 @@ public class Post extends Model {
             
 
             
-                private boolean saved;
+                private String saved;
                 /* Adding Getter and Setter methods */
-                public boolean getSaved(){
+                public String getSaved(){
                     return saved;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setSaved(boolean saved){
+                public void setSaved(String saved){
                     this.saved = saved;
                     //Update hashMap value..
                     hashMap.put("saved", saved);

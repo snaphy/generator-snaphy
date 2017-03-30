@@ -668,6 +668,26 @@ public class FacebookAccessTokenDb{
     }
 
 
+    //Update multiple data at once..
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final FacebookAccessToken modelData ){
+      new Thread(new Runnable(){
+        @Override
+        public void run(){
+          SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+          db.beginTransaction();
+          ContentValues values = getContentValues(modelData);
+          String where = getWhere(whereKeyValue);
+          db.update("FacebookAccessToken", values, where, null);
+          db.setTransactionSuccessful();
+          db.endTransaction();
+          //db.close();
+        }
+
+      }).start();
+    }
+
+
+
 
     // Deleting by whereKey and whereKeyValue
     public void delete__db(final String whereKey, final String whereKeyValue) {

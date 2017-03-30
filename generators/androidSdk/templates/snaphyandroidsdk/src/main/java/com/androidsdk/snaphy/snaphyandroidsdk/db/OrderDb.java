@@ -760,6 +760,26 @@ public class OrderDb{
     }
 
 
+    //Update multiple data at once..
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final Order modelData ){
+      new Thread(new Runnable(){
+        @Override
+        public void run(){
+          SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+          db.beginTransaction();
+          ContentValues values = getContentValues(modelData);
+          String where = getWhere(whereKeyValue);
+          db.update("Order", values, where, null);
+          db.setTransactionSuccessful();
+          db.endTransaction();
+          //db.close();
+        }
+
+      }).start();
+    }
+
+
+
 
     // Deleting by whereKey and whereKeyValue
     public void delete__db(final String whereKey, final String whereKeyValue) {

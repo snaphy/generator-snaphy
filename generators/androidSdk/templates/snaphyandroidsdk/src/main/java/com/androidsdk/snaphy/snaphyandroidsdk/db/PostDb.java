@@ -109,43 +109,33 @@ public class PostDb{
                         }
                                                 values.put("`status`", statusData);
                                 
-                                                            int latestData = 0;
-                        if(modelData.getLatest()){
-                          latestData = 1;
-                        }else{
-                          latestData = 0;
+                                                            String latestData = "";
+                        if(modelData.getLatest() != null){
+                          latestData = modelData.getLatest().toString();
                         }
                                                 values.put("`latest`", latestData);
                                 
-                                                            int unsolvedData = 0;
-                        if(modelData.getUnsolved()){
-                          unsolvedData = 1;
-                        }else{
-                          unsolvedData = 0;
+                                                            String unsolvedData = "";
+                        if(modelData.getUnsolved() != null){
+                          unsolvedData = modelData.getUnsolved().toString();
                         }
                                                 values.put("`unsolved`", unsolvedData);
                                 
-                                                            int trendingData = 0;
-                        if(modelData.getTrending()){
-                          trendingData = 1;
-                        }else{
-                          trendingData = 0;
+                                                            String trendingData = "";
+                        if(modelData.getTrending() != null){
+                          trendingData = modelData.getTrending().toString();
                         }
                                                 values.put("`trending`", trendingData);
                                 
-                                                            int postedData = 0;
-                        if(modelData.getPosted()){
-                          postedData = 1;
-                        }else{
-                          postedData = 0;
+                                                            String postedData = "";
+                        if(modelData.getPosted() != null){
+                          postedData = modelData.getPosted().toString();
                         }
                                                 values.put("`posted`", postedData);
                                 
-                                                            int savedData = 0;
-                        if(modelData.getSaved()){
-                          savedData = 1;
-                        }else{
-                          savedData = 0;
+                                                            String savedData = "";
+                        if(modelData.getSaved() != null){
+                          savedData = modelData.getSaved().toString();
                         }
                                                 values.put("`saved`", savedData);
                                 
@@ -316,48 +306,53 @@ public class PostDb{
                         }
                                                 
                                 
-                                                            boolean latestData = false;
-                        int templatestData = cursor.getInt(6);
-                        if( templatestData > 0){
-                          latestData = true;
-                        }else{
-                          latestData = false;
+                                                            String latestData = "";
+                        if(cursor.getString(6) != null){
+                          latestData = cursor.getString(6);
+                          if(latestData != null){
+                            latestData = (String)latestData;
+                            hashMap.put("latest", latestData);
+                          }
                         }
                                                 
                                 
-                                                            boolean unsolvedData = false;
-                        int tempunsolvedData = cursor.getInt(7);
-                        if( tempunsolvedData > 0){
-                          unsolvedData = true;
-                        }else{
-                          unsolvedData = false;
+                                                            String unsolvedData = "";
+                        if(cursor.getString(7) != null){
+                          unsolvedData = cursor.getString(7);
+                          if(unsolvedData != null){
+                            unsolvedData = (String)unsolvedData;
+                            hashMap.put("unsolved", unsolvedData);
+                          }
                         }
                                                 
                                 
-                                                            boolean trendingData = false;
-                        int temptrendingData = cursor.getInt(8);
-                        if( temptrendingData > 0){
-                          trendingData = true;
-                        }else{
-                          trendingData = false;
+                                                            String trendingData = "";
+                        if(cursor.getString(8) != null){
+                          trendingData = cursor.getString(8);
+                          if(trendingData != null){
+                            trendingData = (String)trendingData;
+                            hashMap.put("trending", trendingData);
+                          }
                         }
                                                 
                                 
-                                                            boolean postedData = false;
-                        int temppostedData = cursor.getInt(9);
-                        if( temppostedData > 0){
-                          postedData = true;
-                        }else{
-                          postedData = false;
+                                                            String postedData = "";
+                        if(cursor.getString(9) != null){
+                          postedData = cursor.getString(9);
+                          if(postedData != null){
+                            postedData = (String)postedData;
+                            hashMap.put("posted", postedData);
+                          }
                         }
                                                 
                                 
-                                                            boolean savedData = false;
-                        int tempsavedData = cursor.getInt(10);
-                        if( tempsavedData > 0){
-                          savedData = true;
-                        }else{
-                          savedData = false;
+                                                            String savedData = "";
+                        if(cursor.getString(10) != null){
+                          savedData = cursor.getString(10);
+                          if(savedData != null){
+                            savedData = (String)savedData;
+                            hashMap.put("saved", savedData);
+                          }
                         }
                                                 
                                 
@@ -784,6 +779,26 @@ public class PostDb{
         }).start();
 
     }
+
+
+    //Update multiple data at once..
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final Post modelData ){
+      new Thread(new Runnable(){
+        @Override
+        public void run(){
+          SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+          db.beginTransaction();
+          ContentValues values = getContentValues(modelData);
+          String where = getWhere(whereKeyValue);
+          db.update("Post", values, where, null);
+          db.setTransactionSuccessful();
+          db.endTransaction();
+          //db.close();
+        }
+
+      }).start();
+    }
+
 
 
 
