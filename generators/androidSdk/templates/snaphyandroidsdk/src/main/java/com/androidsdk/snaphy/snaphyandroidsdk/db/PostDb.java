@@ -404,7 +404,7 @@ public class PostDb{
          
           
                     String postDetailIdData = "";
-                    int postDetailIdindex = cursor.getColumnIndex(postDetailId);
+                    int postDetailIdindex = cursor.getColumnIndex("postDetailId");
                     if(postDetailIdindex >= 0){
 
                         if(cursor.getString(postDetailIdindex) != null){

@@ -259,7 +259,7 @@ public class SavePostDb{
          
           
                     String postSubscriberIdData = "";
-                    int postSubscriberIdindex = cursor.getColumnIndex(postSubscriberId);
+                    int postSubscriberIdindex = cursor.getColumnIndex("postSubscriberId");
                     if(postSubscriberIdindex >= 0){
 
                         if(cursor.getString(postSubscriberIdindex) != null){

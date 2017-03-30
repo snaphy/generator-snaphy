@@ -84,6 +84,7 @@ public class <%- modelName %>Db{
                   String <%-property%>Data = "";
                   if(modelData.get<%-capitalPropertyName%>() != null){
                     <%-property%>Data = new Gson().toJson(modelData.get<%-capitalPropertyName%>(), DataList.class);
+                    values.put("`<%-property%>`", <%-property%>Data);
                   }
               <% }else{ -%>
                     <% if(model.properties[property].type === "string" || model.properties[property].type === "date"){ -%>
@@ -329,7 +330,7 @@ public class <%- modelName %>Db{
                   var capitalPropertyName = model.methods.capitalizeFirstLetter(getForeignKeyName(model, relation));
           %>
                     String <%-getForeignKeyName(model, relation)%>Data = "";
-                    int <%-getForeignKeyName(model, relation)%>index = cursor.getColumnIndex(<%-getForeignKeyName(model, relation)%>);
+                    int <%-getForeignKeyName(model, relation)%>index = cursor.getColumnIndex("<%-getForeignKeyName(model, relation)%>");
                     if(<%-getForeignKeyName(model, relation)%>index >= 0){
 
                         if(cursor.getString(<%-getForeignKeyName(model, relation)%>index) != null){

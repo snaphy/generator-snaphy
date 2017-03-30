@@ -300,7 +300,7 @@ public class CommentDb{
          
           
                     String commentDetailIdData = "";
-                    int commentDetailIdindex = cursor.getColumnIndex(commentDetailId);
+                    int commentDetailIdindex = cursor.getColumnIndex("commentDetailId");
                     if(commentDetailIdindex >= 0){
 
                         if(cursor.getString(commentDetailIdindex) != null){
@@ -315,7 +315,7 @@ public class CommentDb{
 
           
                     String postSubscriberIdData = "";
-                    int postSubscriberIdindex = cursor.getColumnIndex(postSubscriberId);
+                    int postSubscriberIdindex = cursor.getColumnIndex("postSubscriberId");
                     if(postSubscriberIdindex >= 0){
 
                         if(cursor.getString(postSubscriberIdindex) != null){
@@ -330,7 +330,7 @@ public class CommentDb{
 
           
                     String postDetailIdData = "";
-                    int postDetailIdindex = cursor.getColumnIndex(postDetailId);
+                    int postDetailIdindex = cursor.getColumnIndex("postDetailId");
                     if(postDetailIdindex >= 0){
 
                         if(cursor.getString(postDetailIdindex) != null){

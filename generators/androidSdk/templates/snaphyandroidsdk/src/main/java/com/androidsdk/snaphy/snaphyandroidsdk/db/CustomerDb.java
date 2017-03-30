@@ -617,7 +617,7 @@ public class CustomerDb{
          
           
                     String facebookAccessTokenIdData = "";
-                    int facebookAccessTokenIdindex = cursor.getColumnIndex(facebookAccessTokenId);
+                    int facebookAccessTokenIdindex = cursor.getColumnIndex("facebookAccessTokenId");
                     if(facebookAccessTokenIdindex >= 0){
 
                         if(cursor.getString(facebookAccessTokenIdindex) != null){
