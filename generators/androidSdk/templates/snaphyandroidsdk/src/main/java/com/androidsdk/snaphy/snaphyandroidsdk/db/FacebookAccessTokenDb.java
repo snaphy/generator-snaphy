@@ -57,7 +57,7 @@ public class FacebookAccessTokenDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
-                db.insert("FacebookAccessToken", null, values);
+                db.insert("`FacebookAccessToken`", null, values);
                 //db.close(); // Closing database connection
             }
         }).start();
@@ -560,7 +560,7 @@ public class FacebookAccessTokenDb{
                 values.put("_DATA_UPDATED", 0);
                 String where = getWhere(whereKeyValue);
                 // updating row
-                db.update("FacebookAccessToken", values, "_DATA_UPDATED = 1 AND " + where, null);
+                db.update("`FacebookAccessToken`", values, "_DATA_UPDATED = 1 AND " + where, null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -578,7 +578,7 @@ public class FacebookAccessTokenDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("FacebookAccessToken", "_DATA_UPDATED = 0 AND " + where , null);
+                db.delete("`FacebookAccessToken`", "_DATA_UPDATED = 0 AND " + where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -599,7 +599,7 @@ public class FacebookAccessTokenDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("FacebookAccessToken", where , null);
+                db.delete("`FacebookAccessToken`", where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
             }
@@ -675,7 +675,7 @@ public class FacebookAccessTokenDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("FacebookAccessToken", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.update("`FacebookAccessToken`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -691,7 +691,7 @@ public class FacebookAccessTokenDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("FacebookAccessToken", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.delete("`FacebookAccessToken`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -710,7 +710,7 @@ public class FacebookAccessTokenDb{
           db.beginTransaction();
           ContentValues values = getContentValues(modelData);
           String where = getWhere(whereKeyValue);
-          db.update("FacebookAccessToken", values, where, null);
+          db.update("`FacebookAccessToken`", values, where, null);
           db.setTransactionSuccessful();
           db.endTransaction();
           //db.close();
@@ -748,7 +748,7 @@ public class FacebookAccessTokenDb{
                 db.beginTransaction();
                 ContentValues values = getContentValues(modelData);
                 // updating row
-                db.update("FacebookAccessToken", values, "id = ?",
+                db.update("`FacebookAccessToken`", values, "id = ?",
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
@@ -769,7 +769,7 @@ public class FacebookAccessTokenDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("FacebookAccessToken", values, "_DATA_UPDATED = 1", null);
+                db.update("`FacebookAccessToken`", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -786,7 +786,7 @@ public class FacebookAccessTokenDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("FacebookAccessToken", "_DATA_UPDATED = 0", null);
+                db.delete("`FacebookAccessToken`", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();

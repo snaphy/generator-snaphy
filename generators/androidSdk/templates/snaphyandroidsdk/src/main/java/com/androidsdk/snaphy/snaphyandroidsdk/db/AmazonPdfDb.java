@@ -57,7 +57,7 @@ public class AmazonPdfDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
-                db.insert("AmazonPdf", null, values);
+                db.insert("`AmazonPdf`", null, values);
                 //db.close(); // Closing database connection
             }
         }).start();
@@ -535,7 +535,7 @@ public class AmazonPdfDb{
                 values.put("_DATA_UPDATED", 0);
                 String where = getWhere(whereKeyValue);
                 // updating row
-                db.update("AmazonPdf", values, "_DATA_UPDATED = 1 AND " + where, null);
+                db.update("`AmazonPdf`", values, "_DATA_UPDATED = 1 AND " + where, null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -553,7 +553,7 @@ public class AmazonPdfDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("AmazonPdf", "_DATA_UPDATED = 0 AND " + where , null);
+                db.delete("`AmazonPdf`", "_DATA_UPDATED = 0 AND " + where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -574,7 +574,7 @@ public class AmazonPdfDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("AmazonPdf", where , null);
+                db.delete("`AmazonPdf`", where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
             }
@@ -650,7 +650,7 @@ public class AmazonPdfDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("AmazonPdf", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.update("`AmazonPdf`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -666,7 +666,7 @@ public class AmazonPdfDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("AmazonPdf", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.delete("`AmazonPdf`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -685,7 +685,7 @@ public class AmazonPdfDb{
           db.beginTransaction();
           ContentValues values = getContentValues(modelData);
           String where = getWhere(whereKeyValue);
-          db.update("AmazonPdf", values, where, null);
+          db.update("`AmazonPdf`", values, where, null);
           db.setTransactionSuccessful();
           db.endTransaction();
           //db.close();
@@ -723,7 +723,7 @@ public class AmazonPdfDb{
                 db.beginTransaction();
                 ContentValues values = getContentValues(modelData);
                 // updating row
-                db.update("AmazonPdf", values, "id = ?",
+                db.update("`AmazonPdf`", values, "id = ?",
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
@@ -744,7 +744,7 @@ public class AmazonPdfDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("AmazonPdf", values, "_DATA_UPDATED = 1", null);
+                db.update("`AmazonPdf`", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -761,7 +761,7 @@ public class AmazonPdfDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("AmazonPdf", "_DATA_UPDATED = 0", null);
+                db.delete("`AmazonPdf`", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();

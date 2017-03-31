@@ -57,7 +57,7 @@ public class CompanyInfoDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
-                db.insert("CompanyInfo", null, values);
+                db.insert("`CompanyInfo`", null, values);
                 //db.close(); // Closing database connection
             }
         }).start();
@@ -518,7 +518,7 @@ public class CompanyInfoDb{
                 values.put("_DATA_UPDATED", 0);
                 String where = getWhere(whereKeyValue);
                 // updating row
-                db.update("CompanyInfo", values, "_DATA_UPDATED = 1 AND " + where, null);
+                db.update("`CompanyInfo`", values, "_DATA_UPDATED = 1 AND " + where, null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -536,7 +536,7 @@ public class CompanyInfoDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("CompanyInfo", "_DATA_UPDATED = 0 AND " + where , null);
+                db.delete("`CompanyInfo`", "_DATA_UPDATED = 0 AND " + where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -557,7 +557,7 @@ public class CompanyInfoDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("CompanyInfo", where , null);
+                db.delete("`CompanyInfo`", where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
             }
@@ -633,7 +633,7 @@ public class CompanyInfoDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("CompanyInfo", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.update("`CompanyInfo`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -649,7 +649,7 @@ public class CompanyInfoDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("CompanyInfo", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.delete("`CompanyInfo`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -668,7 +668,7 @@ public class CompanyInfoDb{
           db.beginTransaction();
           ContentValues values = getContentValues(modelData);
           String where = getWhere(whereKeyValue);
-          db.update("CompanyInfo", values, where, null);
+          db.update("`CompanyInfo`", values, where, null);
           db.setTransactionSuccessful();
           db.endTransaction();
           //db.close();
@@ -706,7 +706,7 @@ public class CompanyInfoDb{
                 db.beginTransaction();
                 ContentValues values = getContentValues(modelData);
                 // updating row
-                db.update("CompanyInfo", values, "id = ?",
+                db.update("`CompanyInfo`", values, "id = ?",
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
@@ -727,7 +727,7 @@ public class CompanyInfoDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("CompanyInfo", values, "_DATA_UPDATED = 1", null);
+                db.update("`CompanyInfo`", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -744,7 +744,7 @@ public class CompanyInfoDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("CompanyInfo", "_DATA_UPDATED = 0", null);
+                db.delete("`CompanyInfo`", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();

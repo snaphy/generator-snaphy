@@ -57,7 +57,7 @@ public class PostSubscriberDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
-                db.insert("PostSubscriber", null, values);
+                db.insert("`PostSubscriber`", null, values);
                 //db.close(); // Closing database connection
             }
         }).start();
@@ -609,7 +609,7 @@ public class PostSubscriberDb{
                 values.put("_DATA_UPDATED", 0);
                 String where = getWhere(whereKeyValue);
                 // updating row
-                db.update("PostSubscriber", values, "_DATA_UPDATED = 1 AND " + where, null);
+                db.update("`PostSubscriber`", values, "_DATA_UPDATED = 1 AND " + where, null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -627,7 +627,7 @@ public class PostSubscriberDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("PostSubscriber", "_DATA_UPDATED = 0 AND " + where , null);
+                db.delete("`PostSubscriber`", "_DATA_UPDATED = 0 AND " + where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -648,7 +648,7 @@ public class PostSubscriberDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("PostSubscriber", where , null);
+                db.delete("`PostSubscriber`", where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
             }
@@ -724,7 +724,7 @@ public class PostSubscriberDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("PostSubscriber", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.update("`PostSubscriber`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -740,7 +740,7 @@ public class PostSubscriberDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("PostSubscriber", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.delete("`PostSubscriber`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -759,7 +759,7 @@ public class PostSubscriberDb{
           db.beginTransaction();
           ContentValues values = getContentValues(modelData);
           String where = getWhere(whereKeyValue);
-          db.update("PostSubscriber", values, where, null);
+          db.update("`PostSubscriber`", values, where, null);
           db.setTransactionSuccessful();
           db.endTransaction();
           //db.close();
@@ -797,7 +797,7 @@ public class PostSubscriberDb{
                 db.beginTransaction();
                 ContentValues values = getContentValues(modelData);
                 // updating row
-                db.update("PostSubscriber", values, "id = ?",
+                db.update("`PostSubscriber`", values, "id = ?",
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
@@ -818,7 +818,7 @@ public class PostSubscriberDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("PostSubscriber", values, "_DATA_UPDATED = 1", null);
+                db.update("`PostSubscriber`", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -835,7 +835,7 @@ public class PostSubscriberDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("PostSubscriber", "_DATA_UPDATED = 0", null);
+                db.delete("`PostSubscriber`", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
