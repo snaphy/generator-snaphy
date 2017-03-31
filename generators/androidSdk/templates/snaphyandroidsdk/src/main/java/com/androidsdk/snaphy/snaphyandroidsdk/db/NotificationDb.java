@@ -641,25 +641,48 @@ public class NotificationDb{
             if(keyValue != null){
                 if(keyValue.size() != 0){
                     String returnedKey = keyValue.get(0);
-                    String value = keyValue.get(1);
+                    try{
+                        int value = Integer.parseInt(keyValue.get(1));
+                        if(i==0){
+                            if(returnedKey.equals("gt")){
+                                where = where + " `" + key + "` > "+ value + "";
+                            }else if(returnedKey.equals("lt")){
+                                where = where + " `" + key + "` < "+ value + "";
+                            }else{
+                                where = where + " `" + key + "` = "+ value + "";
+                            }
+                        }else{
+                            if(returnedKey.equals("gt")){
+                                where = where + " AND `" + key + "` > "+ value + "";
+                            }else if(returnedKey.equals("lt")){
+                                where = where + " AND `" + key + "` < "+ value + "";
+                            }else{
+                                where = where + " AND `" + key + "` = "+ value + "";
+                            }
+                        }
 
-                    if(i==0){
-                        if(returnedKey.equals("gt")){
-                            where = where + " `" + key + "` > '"+ value + "'";
-                        }else if(returnedKey.equals("lt")){
-                            where = where + " `" + key + "` < '"+ value + "'";
-                        }else{
-                            where = where + " `" + key + "` = '"+ value + "'";
-                        }
-                    }else{
-                        if(returnedKey.equals("gt")){
-                            where = where + " AND `" + key + "` > '"+ value + "'";
-                        }else if(returnedKey.equals("lt")){
-                            where = where + " AND `" + key + "` < '"+ value + "'";
-                        }else{
-                            where = where + " AND `" + key + "` = '"+ value + "'";
-                        }
+                    }catch{
+                      String value = keyValue.get(1);
+                      if(i==0){
+                          if(returnedKey.equals("gt")){
+                              where = where + " `" + key + "` > '"+ value + "'";
+                          }else if(returnedKey.equals("lt")){
+                              where = where + " `" + key + "` < '"+ value + "'";
+                          }else{
+                              where = where + " `" + key + "` = '"+ value + "'";
+                          }
+                      }else{
+                          if(returnedKey.equals("gt")){
+                              where = where + " AND `" + key + "` > '"+ value + "'";
+                          }else if(returnedKey.equals("lt")){
+                              where = where + " AND `" + key + "` < '"+ value + "'";
+                          }else{
+                              where = where + " AND `" + key + "` = '"+ value + "'";
+                          }
+                      }
+
                     }
+
                     i++;
                 }
             }

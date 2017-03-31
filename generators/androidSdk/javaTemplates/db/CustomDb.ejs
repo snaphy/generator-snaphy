@@ -60,7 +60,7 @@ public class <%- modelName %>Db{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
-                db.insert("<%- modelName %>", null, values);
+                db.insert("`<%- modelName %>`", null, values);
                 //db.close(); // Closing database connection
             }
         }).start();
@@ -637,7 +637,7 @@ public class <%- modelName %>Db{
                 values.put("_DATA_UPDATED", 0);
                 String where = getWhere(whereKeyValue);
                 // updating row
-                db.update("<%- modelName %>", values, "_DATA_UPDATED = 1 AND " + where, null);
+                db.update("`<%- modelName %>`", values, "_DATA_UPDATED = 1 AND " + where, null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -655,7 +655,7 @@ public class <%- modelName %>Db{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("<%- modelName %>", "_DATA_UPDATED = 0 AND " + where , null);
+                db.delete("`<%- modelName %>`", "_DATA_UPDATED = 0 AND " + where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -676,7 +676,7 @@ public class <%- modelName %>Db{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("<%- modelName %>", where , null);
+                db.delete("`<%- modelName %>`", where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
             }
@@ -752,7 +752,7 @@ public class <%- modelName %>Db{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("<%- modelName %>", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.update("`<%- modelName %>`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -768,7 +768,7 @@ public class <%- modelName %>Db{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("<%- modelName %>", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.delete("`<%- modelName %>`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -787,7 +787,7 @@ public class <%- modelName %>Db{
           db.beginTransaction();
           ContentValues values = getContentValues(modelData);
           String where = getWhere(whereKeyValue);
-          db.update("<%- modelName %>", values, where, null);
+          db.update("`<%- modelName %>`", values, where, null);
           db.setTransactionSuccessful();
           db.endTransaction();
           //db.close();
@@ -825,7 +825,7 @@ public class <%- modelName %>Db{
                 db.beginTransaction();
                 ContentValues values = getContentValues(modelData);
                 // updating row
-                db.update("<%- modelName %>", values, "id = ?",
+                db.update("`<%- modelName %>`", values, "id = ?",
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
@@ -846,7 +846,7 @@ public class <%- modelName %>Db{
                 ContentValues values = new ContentValues();
                 values.put("<%- model.methods.updateDataProperty %>", 0);
                 // updating row
-                db.update("<%- modelName %>", values, "<%- model.methods.updateDataProperty %> = 1", null);
+                db.update("`<%- modelName %>`", values, "<%- model.methods.updateDataProperty %> = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -863,7 +863,7 @@ public class <%- modelName %>Db{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("<%- modelName %>", "<%- model.methods.updateDataProperty %> = 0", null);
+                db.delete("`<%- modelName %>`", "<%- model.methods.updateDataProperty %> = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
