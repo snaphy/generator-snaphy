@@ -209,7 +209,7 @@ public class <%- modelName %>Db{
     public   <%- modelName %> get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("<%- modelName %>", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`<%- modelName %>`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -369,7 +369,7 @@ public class <%- modelName %>Db{
     public DataList<<%- modelName %>>  getAll__db() {
         DataList<<%- modelName %>> modelList = new DataList<<%- modelName %>>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM <%- modelName %>";
+        String selectQuery = "SELECT  * FROM `<%- modelName %>`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -439,7 +439,7 @@ public class <%- modelName %>Db{
                             }
                         }
 
-                    }catch{
+                    }catch(Exception e){
                       String value = keyValue.get(1);
                       if(i==0){
                           if(returnedKey.equals("gt")){
@@ -506,7 +506,7 @@ public class <%- modelName %>Db{
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM <%- modelName %> " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `<%- modelName %>` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit;
@@ -569,7 +569,7 @@ public class <%- modelName %>Db{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM <%- modelName %> " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `<%- modelName %>` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit;
@@ -577,9 +577,9 @@ public class <%- modelName %>Db{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM <%- modelName %> " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `<%- modelName %>` " + whereQuery + " LIMIT " + limit;
             }else{
-                countQuery = "SELECT  * FROM <%- modelName %> " + whereQuery;
+                countQuery = "SELECT  * FROM `<%- modelName %>` " + whereQuery;
             }
         }
 
@@ -602,9 +602,9 @@ public class <%- modelName %>Db{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM <%- modelName %> " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `<%- modelName %>` " + whereQuery + " LIMIT " + limit;
         }else{
-            countQuery = "SELECT  * FROM <%- modelName %> " + whereQuery;
+            countQuery = "SELECT  * FROM `<%- modelName %>` " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

@@ -320,7 +320,7 @@ public class CompanyInfoDb{
                             }
                         }
 
-                    }catch{
+                    }catch(Exception e){
                       String value = keyValue.get(1);
                       if(i==0){
                           if(returnedKey.equals("gt")){
