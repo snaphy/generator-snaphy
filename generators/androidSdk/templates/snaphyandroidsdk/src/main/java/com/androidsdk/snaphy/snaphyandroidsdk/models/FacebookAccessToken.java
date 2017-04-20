@@ -31,7 +31,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.FacebookAccessTokenRepo
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.AppUserRepository;
             
 
         
@@ -238,7 +238,7 @@ public class FacebookAccessToken extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient Customer  customer ;
+                    private transient AppUser  appUser ;
                     private String userId;
 
                     public String getUserId(){
@@ -251,67 +251,67 @@ public class FacebookAccessToken extends Model {
                         }
                     }
 
-                    public Customer getCustomer() {
+                    public AppUser getAppUser() {
                         try{
                           //Adding database method for fetching from relation if not present..
-                                      if(customer == null){
+                                      if(appUser == null){
                                         FacebookAccessTokenRepository facebookAccessTokenRepository = (FacebookAccessTokenRepository) getRepository();
 
                                         RestAdapter restAdapter = facebookAccessTokenRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
-                                          customer = getCustomer__db(restAdapter);
+                                          appUser = getAppUser__db(restAdapter);
                                         }
                                       }
                         }catch(Exception e){
                           //Ignore
                         }
 
-                        return customer;
+                        return appUser;
                     }
 
-                    public void setCustomer(Customer customer) {
-                        this.customer = customer;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setCustomer(Map<String, Object> customer) {
-                        //First create a dummy Repo class object for customer.
-                        CustomerRepository customerRepository = new CustomerRepository();
-                        Customer customer1 = customerRepository.createObject(customer);
-                        setCustomer(customer1);
+                    public void setAppUser(AppUser appUser) {
+                        this.appUser = appUser;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setCustomer(HashMap<String, Object> customer) {
+                    public void setAppUser(Map<String, Object> appUser) {
                         //First create a dummy Repo class object for customer.
-                        CustomerRepository customerRepository = new CustomerRepository();
-                        Customer customer1 = customerRepository.createObject(customer);
-                        setCustomer(customer1);
+                        AppUserRepository appUserRepository = new AppUserRepository();
+                        AppUser appUser1 = appUserRepository.createObject(appUser);
+                        setAppUser(appUser1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setAppUser(HashMap<String, Object> appUser) {
+                        //First create a dummy Repo class object for customer.
+                        AppUserRepository appUserRepository = new AppUserRepository();
+                        AppUser appUser1 = appUserRepository.createObject(appUser);
+                        setAppUser(appUser1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Customer customer) {
-                        that.setCustomer(customer);
+                    public void addRelation(AppUser appUser) {
+                        that.setAppUser(appUser);
                     }
 
 
                     //Fetch related data from local database if present a userId identifier as property for belongsTo
-                    public Customer getCustomer__db(RestAdapter restAdapter){
+                    public AppUser getAppUser__db(RestAdapter restAdapter){
                       if(userId != null){
-                        CustomerRepository customerRepository = restAdapter.createRepository(CustomerRepository.class);
+                        AppUserRepository appUserRepository = restAdapter.createRepository(AppUserRepository.class);
                             try{
                             FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
                                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                                if(customerRepository.getDb() == null ){
-                                                    customerRepository.addStorage(context);
+                                                if(appUserRepository.getDb() == null ){
+                                                    appUserRepository.addStorage(context);
                                                 }
 
-                                                if(context != null && customerRepository.getDb() != null){
-                                                    customerRepository.addStorage(context);
-                                                    Customer customer = (Customer) customerRepository.getDb().get__db(userId);
-                                                    return customer;
+                                                if(context != null && appUserRepository.getDb() != null){
+                                                    appUserRepository.addStorage(context);
+                                                    AppUser appUser = (AppUser) appUserRepository.getDb().get__db(userId);
+                                                    return appUser;
                                                 }else{
                                                     return null;
                                                 }
@@ -344,7 +344,7 @@ public class FacebookAccessToken extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
+                                    public void get__appUser( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<AppUser> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -358,13 +358,13 @@ public class FacebookAccessToken extends Model {
 
 
 
-                                        facebookAccessTokenRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
+                                        facebookAccessTokenRepo.get__appUser( (String)that.getId(), refresh,  new ObjectCallback<AppUser> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Customer object) {
+                                                    public void onSuccess(AppUser object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -398,6 +398,11 @@ public class FacebookAccessToken extends Model {
                                     } //method def ends here.
                                  
                             
+                        
+                        
+                        
+                        
+                        
                         
                         
                         

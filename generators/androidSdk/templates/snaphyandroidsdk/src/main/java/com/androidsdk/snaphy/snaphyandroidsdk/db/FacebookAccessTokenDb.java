@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import android.database.Cursor;
 import java.lang.reflect.Method;
 import android.util.Log;
@@ -115,13 +116,13 @@ public class FacebookAccessTokenDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String customerIdData = "";
+                        String appUserIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getCustomerId");
+                              Method method = modelData.getClass().getMethod("getAppUserId");
                               if(method.invoke(modelData) != null){
-                                //customerIdData = modelData.getCustomerId().toString();
-                                customerIdData = (String) method.invoke(modelData);
-                                values.put("`customerId`", customerIdData);
+                                //appUserIdData = modelData.getAppUserId().toString();
+                                appUserIdData = (String) method.invoke(modelData);
+                                values.put("`appUserId`", appUserIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -260,12 +261,12 @@ public class FacebookAccessTokenDb{
                         }
                                                 
                                 
-                                                            String customerIdData = "";
+                                                            String appUserIdData = "";
                         if(cursor.getString(5) != null){
-                          customerIdData = cursor.getString(5);
-                          if(customerIdData != null){
-                            customerIdData = customerIdData.toString();
-                            hashMap.put("customerId", customerIdData);
+                          appUserIdData = cursor.getString(5);
+                          if(appUserIdData != null){
+                            appUserIdData = appUserIdData.toString();
+                            hashMap.put("appUserId", appUserIdData);
                           }
                         }
                                                 

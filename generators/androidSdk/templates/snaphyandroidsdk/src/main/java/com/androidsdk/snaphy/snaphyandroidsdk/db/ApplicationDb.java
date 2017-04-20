@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import android.database.Cursor;
 import java.lang.reflect.Method;
 import android.util.Log;
@@ -163,7 +164,10 @@ public class ApplicationDb{
                                 
                                   String collaboratorsData = "";
                   if(modelData.getCollaborators() != null){
-                    collaboratorsData = new Gson().toJson(modelData.getCollaborators(), DataList.class);
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                    Gson gson = gsonBuilder.create();
+                    collaboratorsData = gson.toJson(modelData.getCollaborators(), DataList.class);
                     values.put("`collaborators`", collaboratorsData);
                   }
               
@@ -215,14 +219,20 @@ public class ApplicationDb{
                                 
                                   String callbackUrlsData = "";
                   if(modelData.getCallbackUrls() != null){
-                    callbackUrlsData = new Gson().toJson(modelData.getCallbackUrls(), DataList.class);
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                    Gson gson = gsonBuilder.create();
+                    callbackUrlsData = gson.toJson(modelData.getCallbackUrls(), DataList.class);
                     values.put("`callbackUrls`", callbackUrlsData);
                   }
               
                                 
                                   String permissionsData = "";
                   if(modelData.getPermissions() != null){
-                    permissionsData = new Gson().toJson(modelData.getPermissions(), DataList.class);
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                    Gson gson = gsonBuilder.create();
+                    permissionsData = gson.toJson(modelData.getPermissions(), DataList.class);
                     values.put("`permissions`", permissionsData);
                   }
               
@@ -349,7 +359,10 @@ public class ApplicationDb{
                                 
                                   String authenticationSchemesData = "";
                   if(modelData.getAuthenticationSchemes() != null){
-                    authenticationSchemesData = new Gson().toJson(modelData.getAuthenticationSchemes(), DataList.class);
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                    Gson gson = gsonBuilder.create();
+                    authenticationSchemesData = gson.toJson(modelData.getAuthenticationSchemes(), DataList.class);
                     values.put("`authenticationSchemes`", authenticationSchemesData);
                   }
               
@@ -542,7 +555,10 @@ public class ApplicationDb{
                                 
                                   DataList<Object> collaboratorsData = new DataList<>();
                   if(cursor.getString(6) != null){
-                    collaboratorsData = new Gson().fromJson(cursor.getString(6), DataList.class);
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                    Gson gson = gsonBuilder.create();
+                    collaboratorsData = gson.fromJson(cursor.getString(6), DataList.class);
                     if(collaboratorsData != null){
                       collaboratorsData = (DataList<Object>)collaboratorsData;
                       hashMap.put("collaborators", collaboratorsData);
@@ -582,7 +598,10 @@ public class ApplicationDb{
                                 
                                   DataList<Object> callbackUrlsData = new DataList<>();
                   if(cursor.getString(10) != null){
-                    callbackUrlsData = new Gson().fromJson(cursor.getString(10), DataList.class);
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                    Gson gson = gsonBuilder.create();
+                    callbackUrlsData = gson.fromJson(cursor.getString(10), DataList.class);
                     if(callbackUrlsData != null){
                       callbackUrlsData = (DataList<Object>)callbackUrlsData;
                       hashMap.put("callbackUrls", callbackUrlsData);
@@ -592,7 +611,10 @@ public class ApplicationDb{
                                 
                                   DataList<Object> permissionsData = new DataList<>();
                   if(cursor.getString(11) != null){
-                    permissionsData = new Gson().fromJson(cursor.getString(11), DataList.class);
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                    Gson gson = gsonBuilder.create();
+                    permissionsData = gson.fromJson(cursor.getString(11), DataList.class);
                     if(permissionsData != null){
                       permissionsData = (DataList<Object>)permissionsData;
                       hashMap.put("permissions", permissionsData);
@@ -682,7 +704,10 @@ public class ApplicationDb{
                                 
                                   DataList<Object> authenticationSchemesData = new DataList<>();
                   if(cursor.getString(20) != null){
-                    authenticationSchemesData = new Gson().fromJson(cursor.getString(20), DataList.class);
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                    Gson gson = gsonBuilder.create();
+                    authenticationSchemesData = gson.fromJson(cursor.getString(20), DataList.class);
                     if(authenticationSchemesData != null){
                       authenticationSchemesData = (DataList<Object>)authenticationSchemesData;
                       hashMap.put("authenticationSchemes", authenticationSchemesData);

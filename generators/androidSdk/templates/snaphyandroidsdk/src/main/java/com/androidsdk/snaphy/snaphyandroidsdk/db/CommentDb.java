@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import android.database.Cursor;
 import java.lang.reflect.Method;
 import android.util.Log;
@@ -71,17 +72,17 @@ public class CommentDb{
     public ContentValues getContentValues(Comment modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String answerData = "";
-                        if(modelData.getAnswer() != null){
-                          answerData = modelData.getAnswer().toString();
-                          values.put("`answer`", answerData);
+                                                            String usernameData = "";
+                        if(modelData.getUsername() != null){
+                          usernameData = modelData.getUsername().toString();
+                          values.put("`username`", usernameData);
                         }
                                   
                                 
-                                                            String statusData = "";
-                        if(modelData.getStatus() != null){
-                          statusData = modelData.getStatus().toString();
-                          values.put("`status`", statusData);
+                                                            String descriptionData = "";
+                        if(modelData.getDescription() != null){
+                          descriptionData = modelData.getDescription().toString();
+                          values.put("`description`", descriptionData);
                         }
                                   
                                 
@@ -99,74 +100,8 @@ public class CommentDb{
                         }
 
                                   
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String postIdData = "";
-                        try {
-                              Method method = modelData.getClass().getMethod("getPostId");
-                              if(method.invoke(modelData) != null){
-                                //postIdData = modelData.getPostId().toString();
-                                postIdData = (String) method.invoke(modelData);
-                                values.put("`postId`", postIdData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String customerIdData = "";
-                        try {
-                              Method method = modelData.getClass().getMethod("getCustomerId");
-                              if(method.invoke(modelData) != null){
-                                //customerIdData = modelData.getCustomerId().toString();
-                                customerIdData = (String) method.invoke(modelData);
-                                values.put("`customerId`", customerIdData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
                   
         
-          
-                    String commentDetailIdData = "";
-                    try {
-                        Method method = modelData.getClass().getMethod("getCommentDetailId");
-                        if(method.invoke(modelData) != null){
-                          //commentDetailIdData = modelData.getCommentDetailId().toString();
-                          commentDetailIdData = (String) method.invoke(modelData);
-                          values.put("`commentDetailId`", commentDetailIdData);
-                        }
-                    } catch (Exception e) {
-                      Log.e("Database Error", e.toString());
-                    }
-          
-                    String postSubscriberIdData = "";
-                    try {
-                        Method method = modelData.getClass().getMethod("getPostSubscriberId");
-                        if(method.invoke(modelData) != null){
-                          //postSubscriberIdData = modelData.getPostSubscriberId().toString();
-                          postSubscriberIdData = (String) method.invoke(modelData);
-                          values.put("`postSubscriberId`", postSubscriberIdData);
-                        }
-                    } catch (Exception e) {
-                      Log.e("Database Error", e.toString());
-                    }
-          
-                    String postDetailIdData = "";
-                    try {
-                        Method method = modelData.getClass().getMethod("getPostDetailId");
-                        if(method.invoke(modelData) != null){
-                          //postDetailIdData = modelData.getPostDetailId().toString();
-                          postDetailIdData = (String) method.invoke(modelData);
-                          values.put("`postDetailId`", postDetailIdData);
-                        }
-                    } catch (Exception e) {
-                      Log.e("Database Error", e.toString());
-                    }
           
         //Add the updated data property value to be 1
         values.put("`_DATA_UPDATED`", 1);
@@ -247,22 +182,22 @@ public class CommentDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            String answerData = "";
+                                                            String usernameData = "";
                         if(cursor.getString(0) != null){
-                          answerData = cursor.getString(0);
-                          if(answerData != null){
-                            answerData = (String)answerData;
-                            hashMap.put("answer", answerData);
+                          usernameData = cursor.getString(0);
+                          if(usernameData != null){
+                            usernameData = (String)usernameData;
+                            hashMap.put("username", usernameData);
                           }
                         }
                                                 
                                 
-                                                            String statusData = "";
+                                                            String descriptionData = "";
                         if(cursor.getString(1) != null){
-                          statusData = cursor.getString(1);
-                          if(statusData != null){
-                            statusData = (String)statusData;
-                            hashMap.put("status", statusData);
+                          descriptionData = cursor.getString(1);
+                          if(descriptionData != null){
+                            descriptionData = (String)descriptionData;
+                            hashMap.put("description", descriptionData);
                           }
                         }
                                                 
@@ -276,73 +211,8 @@ public class CommentDb{
                           }
                         }
                                                 
-                                
-                                                            String postIdData = "";
-                        if(cursor.getString(3) != null){
-                          postIdData = cursor.getString(3);
-                          if(postIdData != null){
-                            postIdData = postIdData.toString();
-                            hashMap.put("postId", postIdData);
-                          }
-                        }
-                                                
-                                
-                                                            String customerIdData = "";
-                        if(cursor.getString(4) != null){
-                          customerIdData = cursor.getString(4);
-                          if(customerIdData != null){
-                            customerIdData = customerIdData.toString();
-                            hashMap.put("customerId", customerIdData);
-                          }
-                        }
-                                                
                   //End for loop
          
-          
-                    String commentDetailIdData = "";
-                    int commentDetailIdindex = cursor.getColumnIndex("commentDetailId");
-                    if(commentDetailIdindex >= 0){
-
-                        if(cursor.getString(commentDetailIdindex) != null){
-                          commentDetailIdData = cursor.getString(commentDetailIdindex);
-                          if(commentDetailIdData != null){
-                            commentDetailIdData = commentDetailIdData.toString();
-                            hashMap.put("commentDetailId", commentDetailIdData);
-                          }
-                        }
-
-                    }
-
-          
-                    String postSubscriberIdData = "";
-                    int postSubscriberIdindex = cursor.getColumnIndex("postSubscriberId");
-                    if(postSubscriberIdindex >= 0){
-
-                        if(cursor.getString(postSubscriberIdindex) != null){
-                          postSubscriberIdData = cursor.getString(postSubscriberIdindex);
-                          if(postSubscriberIdData != null){
-                            postSubscriberIdData = postSubscriberIdData.toString();
-                            hashMap.put("postSubscriberId", postSubscriberIdData);
-                          }
-                        }
-
-                    }
-
-          
-                    String postDetailIdData = "";
-                    int postDetailIdindex = cursor.getColumnIndex("postDetailId");
-                    if(postDetailIdindex >= 0){
-
-                        if(cursor.getString(postDetailIdindex) != null){
-                          postDetailIdData = cursor.getString(postDetailIdindex);
-                          if(postDetailIdData != null){
-                            postDetailIdData = postDetailIdData.toString();
-                            hashMap.put("postDetailId", postDetailIdData);
-                          }
-                        }
-
-                    }
-
           
 
         return hashMap;

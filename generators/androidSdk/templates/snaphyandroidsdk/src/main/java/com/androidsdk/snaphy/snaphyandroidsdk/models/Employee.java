@@ -129,17 +129,17 @@ public class Employee extends User {
             
 
             
-                private String date;
+                private String added;
                 /* Adding Getter and Setter methods */
-                public String getDate(){
-                    return date;
+                public String getAdded(){
+                    return added;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setDate(String date){
-                    this.date = date;
+                public void setAdded(String added){
+                    this.added = added;
                     //Update hashMap value..
-                    hashMap.put("date", date);
+                    hashMap.put("added", added);
                 }
 
             

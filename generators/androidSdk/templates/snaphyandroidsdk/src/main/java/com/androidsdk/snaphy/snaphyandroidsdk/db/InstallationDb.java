@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import android.database.Cursor;
 import java.lang.reflect.Method;
 import android.util.Log;
@@ -185,7 +186,10 @@ public class InstallationDb{
                                 
                                   String subscriptionsData = "";
                   if(modelData.getSubscriptions() != null){
-                    subscriptionsData = new Gson().toJson(modelData.getSubscriptions(), DataList.class);
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                    Gson gson = gsonBuilder.create();
+                    subscriptionsData = gson.toJson(modelData.getSubscriptions(), DataList.class);
                     values.put("`subscriptions`", subscriptionsData);
                   }
               
@@ -398,7 +402,10 @@ public class InstallationDb{
                                 
                                   DataList<Object> subscriptionsData = new DataList<>();
                   if(cursor.getString(8) != null){
-                    subscriptionsData = new Gson().fromJson(cursor.getString(8), DataList.class);
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                    Gson gson = gsonBuilder.create();
+                    subscriptionsData = gson.fromJson(cursor.getString(8), DataList.class);
                     if(subscriptionsData != null){
                       subscriptionsData = (DataList<Object>)subscriptionsData;
                       hashMap.put("subscriptions", subscriptionsData);

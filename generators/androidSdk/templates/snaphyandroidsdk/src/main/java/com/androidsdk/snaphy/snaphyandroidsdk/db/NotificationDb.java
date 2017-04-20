@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import android.database.Cursor;
 import java.lang.reflect.Method;
 import android.util.Log;
@@ -298,7 +299,10 @@ public class NotificationDb{
                                 
                                   String urlArgsData = "";
                   if(modelData.getUrlArgs() != null){
-                    urlArgsData = new Gson().toJson(modelData.getUrlArgs(), DataList.class);
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                    Gson gson = gsonBuilder.create();
+                    urlArgsData = gson.toJson(modelData.getUrlArgs(), DataList.class);
                     values.put("`urlArgs`", urlArgsData);
                   }
               
@@ -551,7 +555,10 @@ public class NotificationDb{
                                 
                                   DataList<Object> urlArgsData = new DataList<>();
                   if(cursor.getString(15) != null){
-                    urlArgsData = new Gson().fromJson(cursor.getString(15), DataList.class);
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                    Gson gson = gsonBuilder.create();
+                    urlArgsData = gson.fromJson(cursor.getString(15), DataList.class);
                     if(urlArgsData != null){
                       urlArgsData = (DataList<Object>)urlArgsData;
                       hashMap.put("urlArgs", urlArgsData);

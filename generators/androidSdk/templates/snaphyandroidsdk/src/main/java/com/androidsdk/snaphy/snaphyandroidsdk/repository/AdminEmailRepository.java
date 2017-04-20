@@ -163,7 +163,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/sendMciOnHold", "POST"), "adminEmail.sendMciOnHold");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/VerifyAccount", "POST"), "adminEmail.VerifyAccount");
     
 
     
@@ -172,7 +172,52 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/sendMciAllow", "POST"), "adminEmail.sendMciAllow");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/ResetPassword", "POST"), "adminEmail.ResetPassword");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "adminEmail.getDetailSchema");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "adminEmail.getModelRelationSchema");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/sendMail", "POST"), "adminEmail.sendMail");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/VerifyAccount", "POST"), "adminEmail.VerifyAccount");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/ResetPassword", "POST"), "adminEmail.ResetPassword");
     
 
     
@@ -363,8 +408,8 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
         
     
         
-            //Method sendMciOnHold definition
-            public void sendMciOnHold(  DataList<String> to,  String subject,  Map<String,  ? extends Object> templateOptions, final ObjectCallback<JSONObject>  callback ){
+            //Method VerifyAccount definition
+            public void VerifyAccount(  DataList<String> to,  String subject,  Map<String,  ? extends Object> templateOptions, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -388,7 +433,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
                 
                     
-                    invokeStaticMethod("sendMciOnHold", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("VerifyAccount", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -411,15 +456,15 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
                 
 
-            }//Method sendMciOnHold definition ends here..
+            }//Method VerifyAccount definition ends here..
 
             
 
         
     
         
-            //Method sendMciAllow definition
-            public void sendMciAllow(  DataList<String> to,  String subject,  Map<String,  ? extends Object> templateOptions, final ObjectCallback<JSONObject>  callback ){
+            //Method ResetPassword definition
+            public void ResetPassword(  DataList<String> to,  String subject,  Map<String,  ? extends Object> templateOptions, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -443,7 +488,7 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
                 
                     
-                    invokeStaticMethod("sendMciAllow", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("ResetPassword", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -466,12 +511,113 @@ public class AdminEmailRepository extends ModelRepository<AdminEmail> {
 
                 
 
-            }//Method sendMciAllow definition ends here..
+            }//Method ResetPassword definition ends here..
 
             
 
         
     
+        
+            //Method getDetailSchema definition
+            public void getDetailSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getDetailSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method getDetailSchema definition ends here..
+
+            
+
+        
+    
+        
+            //Method getModelRelationSchema definition
+            public void getModelRelationSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getModelRelationSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method getModelRelationSchema definition ends here..
+
+            
+
+        
+    
+        
+        
+        
         
             //Method getMailSchema definition
             public void getMailSchema( final ObjectCallback<JSONObject>  callback ){

@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import android.database.Cursor;
 import java.lang.reflect.Method;
 import android.util.Log;
@@ -92,10 +93,10 @@ public class EmployeeDb{
                         }
                                   
                                 
-                                                            String dateData = "";
-                        if(modelData.getDate() != null){
-                          dateData = modelData.getDate().toString();
-                          values.put("`date`", dateData);
+                                                            String addedData = "";
+                        if(modelData.getAdded() != null){
+                          addedData = modelData.getAdded().toString();
+                          values.put("`added`", addedData);
                         }
                                   
                                 
@@ -366,12 +367,12 @@ public class EmployeeDb{
                         }
                                                 
                                 
-                                                            String dateData = "";
+                                                            String addedData = "";
                         if(cursor.getString(3) != null){
-                          dateData = cursor.getString(3);
-                          if(dateData != null){
-                            dateData = (String)dateData;
-                            hashMap.put("date", dateData);
+                          addedData = cursor.getString(3);
+                          if(addedData != null){
+                            addedData = (String)addedData;
+                            hashMap.put("added", addedData);
                           }
                         }
                                                 

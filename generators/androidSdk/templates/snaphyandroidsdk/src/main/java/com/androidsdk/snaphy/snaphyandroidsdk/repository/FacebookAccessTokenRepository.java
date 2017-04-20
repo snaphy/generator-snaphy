@@ -48,8 +48,8 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.FacebookAccessTokenDb;
 //Now import model of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Customer;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.AppUser;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.AppUserRepository;
             
         
     
@@ -140,7 +140,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:facebookAccessTokenId/customer", "GET"), "FacebookAccessToken.prototype.__get__customer");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:facebookAccessTokenId/appUser", "GET"), "FacebookAccessToken.prototype.__get__appUser");
     
 
     
@@ -270,6 +270,33 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
     
 
     
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "FacebookAccessToken.getDetailSchema");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "FacebookAccessToken.getModelRelationSchema");
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
     
 
     
@@ -305,8 +332,8 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
     
         
-            //Method get__customer definition
-            public void get__customer(  String facebookAccessTokenId,  Boolean refresh, final ObjectCallback<Customer> callback){
+            //Method get__appUser definition
+            public void get__appUser(  String facebookAccessTokenId,  Boolean refresh, final ObjectCallback<AppUser> callback){
 
                 /**
                 Call the onBefore event
@@ -329,7 +356,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__customer", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__appUser", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -342,27 +369,27 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    CustomerRepository customerRepo = getRestAdapter().createRepository(CustomerRepository.class);
+                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = customerRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(customerRepo, context);
+                                            Method method = appUserRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(appUserRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //customerRepo.addStorage(context);
+                                        //appUserRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Customer customer = customerRepo.createObject(result);
+                                    AppUser appUser = appUserRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = customer.getClass().getMethod("save__db");
-                                                    method.invoke(customer);
+                                                    Method method = appUser.getClass().getMethod("save__db");
+                                                    method.invoke(appUser);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -370,7 +397,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                                       }
 
-                                    callback.onSuccess(customer);
+                                    callback.onSuccess(appUser);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -383,7 +410,7 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
                 
 
-            }//Method get__customer definition ends here..
+            }//Method get__appUser definition ends here..
 
             
 
@@ -1196,6 +1223,110 @@ public class FacebookAccessTokenRepository extends ModelRepository<FacebookAcces
 
             
 
+        
+    
+        
+    
+        
+            //Method getDetailSchema definition
+            public void getDetailSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getDetailSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method getDetailSchema definition ends here..
+
+            
+
+        
+    
+        
+            //Method getModelRelationSchema definition
+            public void getModelRelationSchema( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getModelRelationSchema", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method getModelRelationSchema definition ends here..
+
+            
+
+        
+    
+        
+    
         
     
         
