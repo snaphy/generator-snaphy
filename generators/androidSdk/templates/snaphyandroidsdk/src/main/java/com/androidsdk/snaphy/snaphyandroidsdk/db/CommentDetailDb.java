@@ -173,7 +173,7 @@ public class CommentDetailDb{
     public   CommentDetail get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("CommentDetail", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`CommentDetail`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -288,7 +288,7 @@ public class CommentDetailDb{
     public DataList<CommentDetail>  getAll__db() {
         DataList<CommentDetail> modelList = new DataList<CommentDetail>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM CommentDetail";
+        String selectQuery = "SELECT  * FROM `CommentDetail`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -425,7 +425,7 @@ public class CommentDetailDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM CommentDetail " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `CommentDetail` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit;
@@ -488,7 +488,7 @@ public class CommentDetailDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM CommentDetail " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `CommentDetail` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit;
@@ -496,9 +496,9 @@ public class CommentDetailDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM CommentDetail " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `CommentDetail` " + whereQuery + " LIMIT " + limit;
             }else{
-                countQuery = "SELECT  * FROM CommentDetail " + whereQuery;
+                countQuery = "SELECT  * FROM `CommentDetail` " + whereQuery;
             }
         }
 
@@ -521,9 +521,9 @@ public class CommentDetailDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM CommentDetail " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `CommentDetail` " + whereQuery + " LIMIT " + limit;
         }else{
-            countQuery = "SELECT  * FROM CommentDetail " + whereQuery;
+            countQuery = "SELECT  * FROM `CommentDetail` " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

@@ -71,6 +71,13 @@ public class OrderDb{
     public ContentValues getContentValues(Order modelData){
       ContentValues values = new ContentValues();
                        
+                                                            String addedData = "";
+                        if(modelData.getAdded() != null){
+                          addedData = modelData.getAdded().toString();
+                          values.put("`added`", addedData);
+                        }
+                                  
+                                
                                                             String orderNumberData = "";
                         if(modelData.getOrderNumber() != null){
                           orderNumberData = modelData.getOrderNumber().toString();
@@ -224,7 +231,7 @@ public class OrderDb{
     public   Order get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("Order", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`Order`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -259,9 +266,19 @@ public class OrderDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            String orderNumberData = "";
+                                                            String addedData = "";
                         if(cursor.getString(0) != null){
-                          orderNumberData = cursor.getString(0);
+                          addedData = cursor.getString(0);
+                          if(addedData != null){
+                            addedData = (String)addedData;
+                            hashMap.put("added", addedData);
+                          }
+                        }
+                                                
+                                
+                                                            String orderNumberData = "";
+                        if(cursor.getString(1) != null){
+                          orderNumberData = cursor.getString(1);
                           if(orderNumberData != null){
                             orderNumberData = (String)orderNumberData;
                             hashMap.put("orderNumber", orderNumberData);
@@ -270,8 +287,8 @@ public class OrderDb{
                                                 
                                 
                                                             String transactionIdData = "";
-                        if(cursor.getString(1) != null){
-                          transactionIdData = cursor.getString(1);
+                        if(cursor.getString(2) != null){
+                          transactionIdData = cursor.getString(2);
                           if(transactionIdData != null){
                             transactionIdData = (String)transactionIdData;
                             hashMap.put("transactionId", transactionIdData);
@@ -280,8 +297,8 @@ public class OrderDb{
                                                 
                                 
                                                             String orderStatusData = "";
-                        if(cursor.getString(2) != null){
-                          orderStatusData = cursor.getString(2);
+                        if(cursor.getString(3) != null){
+                          orderStatusData = cursor.getString(3);
                           if(orderStatusData != null){
                             orderStatusData = (String)orderStatusData;
                             hashMap.put("orderStatus", orderStatusData);
@@ -290,8 +307,8 @@ public class OrderDb{
                                                 
                                 
                                                             String paymentStatusData = "";
-                        if(cursor.getString(3) != null){
-                          paymentStatusData = cursor.getString(3);
+                        if(cursor.getString(4) != null){
+                          paymentStatusData = cursor.getString(4);
                           if(paymentStatusData != null){
                             paymentStatusData = (String)paymentStatusData;
                             hashMap.put("paymentStatus", paymentStatusData);
@@ -300,8 +317,8 @@ public class OrderDb{
                                                 
                                 
                                                             String errorMessageData = "";
-                        if(cursor.getString(4) != null){
-                          errorMessageData = cursor.getString(4);
+                        if(cursor.getString(5) != null){
+                          errorMessageData = cursor.getString(5);
                           if(errorMessageData != null){
                             errorMessageData = (String)errorMessageData;
                             hashMap.put("errorMessage", errorMessageData);
@@ -310,7 +327,7 @@ public class OrderDb{
                                                 
                                 
                                                             double amountData = (double)0;
-                          amountData = cursor.getInt(5);
+                          amountData = cursor.getInt(6);
                           amountData = (double)amountData;
                           hashMap.put("amount", amountData);
 
@@ -318,8 +335,8 @@ public class OrderDb{
                                                 
                                 
                                                             String typeData = "";
-                        if(cursor.getString(6) != null){
-                          typeData = cursor.getString(6);
+                        if(cursor.getString(7) != null){
+                          typeData = cursor.getString(7);
                           if(typeData != null){
                             typeData = (String)typeData;
                             hashMap.put("type", typeData);
@@ -328,8 +345,8 @@ public class OrderDb{
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(7) != null){
-                          idData = cursor.getString(7);
+                        if(cursor.getString(8) != null){
+                          idData = cursor.getString(8);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -338,8 +355,8 @@ public class OrderDb{
                                                 
                                 
                                                             String bookIdData = "";
-                        if(cursor.getString(8) != null){
-                          bookIdData = cursor.getString(8);
+                        if(cursor.getString(9) != null){
+                          bookIdData = cursor.getString(9);
                           if(bookIdData != null){
                             bookIdData = bookIdData.toString();
                             hashMap.put("bookId", bookIdData);
@@ -348,8 +365,8 @@ public class OrderDb{
                                                 
                                 
                                                             String customerIdData = "";
-                        if(cursor.getString(9) != null){
-                          customerIdData = cursor.getString(9);
+                        if(cursor.getString(10) != null){
+                          customerIdData = cursor.getString(10);
                           if(customerIdData != null){
                             customerIdData = customerIdData.toString();
                             hashMap.put("customerId", customerIdData);
@@ -358,8 +375,8 @@ public class OrderDb{
                                                 
                                 
                                                             String paymentIdData = "";
-                        if(cursor.getString(10) != null){
-                          paymentIdData = cursor.getString(10);
+                        if(cursor.getString(11) != null){
+                          paymentIdData = cursor.getString(11);
                           if(paymentIdData != null){
                             paymentIdData = paymentIdData.toString();
                             hashMap.put("paymentId", paymentIdData);
@@ -389,7 +406,7 @@ public class OrderDb{
     public DataList<Order>  getAll__db() {
         DataList<Order> modelList = new DataList<Order>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Order";
+        String selectQuery = "SELECT  * FROM `Order`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -526,7 +543,7 @@ public class OrderDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM Order " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `Order` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit;
@@ -589,7 +606,7 @@ public class OrderDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM Order " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `Order` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit;
@@ -597,9 +614,9 @@ public class OrderDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM Order " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `Order` " + whereQuery + " LIMIT " + limit;
             }else{
-                countQuery = "SELECT  * FROM Order " + whereQuery;
+                countQuery = "SELECT  * FROM `Order` " + whereQuery;
             }
         }
 
@@ -622,9 +639,9 @@ public class OrderDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM Order " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `Order` " + whereQuery + " LIMIT " + limit;
         }else{
-            countQuery = "SELECT  * FROM Order " + whereQuery;
+            countQuery = "SELECT  * FROM `Order` " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

@@ -175,7 +175,7 @@ public class FacebookAccessTokenDb{
     public   FacebookAccessToken get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("FacebookAccessToken", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`FacebookAccessToken`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -292,7 +292,7 @@ public class FacebookAccessTokenDb{
     public DataList<FacebookAccessToken>  getAll__db() {
         DataList<FacebookAccessToken> modelList = new DataList<FacebookAccessToken>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM FacebookAccessToken";
+        String selectQuery = "SELECT  * FROM `FacebookAccessToken`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -429,7 +429,7 @@ public class FacebookAccessTokenDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit;
@@ -492,7 +492,7 @@ public class FacebookAccessTokenDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit;
@@ -500,9 +500,9 @@ public class FacebookAccessTokenDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery + " LIMIT " + limit;
             }else{
-                countQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery;
+                countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery;
             }
         }
 
@@ -525,9 +525,9 @@ public class FacebookAccessTokenDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery + " LIMIT " + limit;
         }else{
-            countQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery;
+            countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

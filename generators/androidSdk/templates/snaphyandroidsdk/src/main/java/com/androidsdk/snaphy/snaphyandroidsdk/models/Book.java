@@ -231,6 +231,27 @@ public class Book extends Model {
             
 
             
+                private String savedCategoryId;
+                /* Adding Getter and Setter methods */
+                public String getSavedCategoryId(){
+                    return savedCategoryId;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setSavedCategoryId(String savedCategoryId){
+                    this.savedCategoryId = savedCategoryId;
+                    //Update hashMap value..
+                    hashMap.put("savedCategoryId", savedCategoryId);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
                 private String updated;
                 /* Adding Getter and Setter methods */
                 public String getUpdated(){

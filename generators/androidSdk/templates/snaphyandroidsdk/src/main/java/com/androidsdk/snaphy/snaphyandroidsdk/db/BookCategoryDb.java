@@ -153,7 +153,7 @@ public class BookCategoryDb{
     public   BookCategory get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("BookCategory", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`BookCategory`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -250,7 +250,7 @@ public class BookCategoryDb{
     public DataList<BookCategory>  getAll__db() {
         DataList<BookCategory> modelList = new DataList<BookCategory>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM BookCategory";
+        String selectQuery = "SELECT  * FROM `BookCategory`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -387,7 +387,7 @@ public class BookCategoryDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM BookCategory " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `BookCategory` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit;
@@ -450,7 +450,7 @@ public class BookCategoryDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM BookCategory " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `BookCategory` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit;
@@ -458,9 +458,9 @@ public class BookCategoryDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM BookCategory " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `BookCategory` " + whereQuery + " LIMIT " + limit;
             }else{
-                countQuery = "SELECT  * FROM BookCategory " + whereQuery;
+                countQuery = "SELECT  * FROM `BookCategory` " + whereQuery;
             }
         }
 
@@ -483,9 +483,9 @@ public class BookCategoryDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM BookCategory " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `BookCategory` " + whereQuery + " LIMIT " + limit;
         }else{
-            countQuery = "SELECT  * FROM BookCategory " + whereQuery;
+            countQuery = "SELECT  * FROM `BookCategory` " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

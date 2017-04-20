@@ -61,13 +61,6 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.PaymentDb;
         
     
 
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Order;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.OrderRepository;
-            
-        
-    
-
 
 
 
@@ -164,15 +157,6 @@ public class PaymentRepository extends ModelRepository<Payment> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:paymentId/customer", "GET"), "Payment.prototype.__get__customer");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:paymentId/order", "GET"), "Payment.prototype.__get__order");
     
 
     
@@ -537,91 +521,6 @@ public class PaymentRepository extends ModelRepository<Payment> {
                 
 
             }//Method get__customer definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__order definition
-            public void get__order(  String paymentId,  Boolean refresh, final ObjectCallback<Order> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("paymentId", paymentId);
-                
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__order", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    OrderRepository orderRepo = getRestAdapter().createRepository(OrderRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = orderRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(orderRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //orderRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    Order order = orderRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = order.getClass().getMethod("save__db");
-                                                    method.invoke(order);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(order);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method get__order definition ends here..
 
             
 

@@ -188,7 +188,7 @@ public class NewsDb{
     public   News get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("News", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`News`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -335,7 +335,7 @@ public class NewsDb{
     public DataList<News>  getAll__db() {
         DataList<News> modelList = new DataList<News>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM News";
+        String selectQuery = "SELECT  * FROM `News`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -472,7 +472,7 @@ public class NewsDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM News " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `News` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit;
@@ -535,7 +535,7 @@ public class NewsDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM News " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `News` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit;
@@ -543,9 +543,9 @@ public class NewsDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM News " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `News` " + whereQuery + " LIMIT " + limit;
             }else{
-                countQuery = "SELECT  * FROM News " + whereQuery;
+                countQuery = "SELECT  * FROM `News` " + whereQuery;
             }
         }
 
@@ -568,9 +568,9 @@ public class NewsDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM News " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `News` " + whereQuery + " LIMIT " + limit;
         }else{
-            countQuery = "SELECT  * FROM News " + whereQuery;
+            countQuery = "SELECT  * FROM `News` " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

@@ -281,7 +281,7 @@ public class InstallationDb{
     public   Installation get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("Installation", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`Installation`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -458,7 +458,7 @@ public class InstallationDb{
     public DataList<Installation>  getAll__db() {
         DataList<Installation> modelList = new DataList<Installation>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Installation";
+        String selectQuery = "SELECT  * FROM `Installation`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -595,7 +595,7 @@ public class InstallationDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM Installation " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `Installation` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit;
@@ -658,7 +658,7 @@ public class InstallationDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM Installation " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `Installation` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit;
@@ -666,9 +666,9 @@ public class InstallationDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM Installation " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `Installation` " + whereQuery + " LIMIT " + limit;
             }else{
-                countQuery = "SELECT  * FROM Installation " + whereQuery;
+                countQuery = "SELECT  * FROM `Installation` " + whereQuery;
             }
         }
 
@@ -691,9 +691,9 @@ public class InstallationDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM Installation " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `Installation` " + whereQuery + " LIMIT " + limit;
         }else{
-            countQuery = "SELECT  * FROM Installation " + whereQuery;
+            countQuery = "SELECT  * FROM `Installation` " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

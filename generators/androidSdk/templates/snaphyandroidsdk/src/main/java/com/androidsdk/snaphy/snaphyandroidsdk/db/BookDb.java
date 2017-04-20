@@ -120,6 +120,13 @@ public class BookDb{
                         }
                                   
                                 
+                                                            String savedCategoryIdData = "";
+                        if(modelData.getSavedCategoryId() != null){
+                          savedCategoryIdData = modelData.getSavedCategoryId().toString();
+                          values.put("`savedCategoryId`", savedCategoryIdData);
+                        }
+                                  
+                                
                                                             String updatedData = "";
                         if(modelData.getUpdated() != null){
                           updatedData = modelData.getUpdated().toString();
@@ -203,7 +210,7 @@ public class BookDb{
     public   Book get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("Book", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`Book`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -308,9 +315,19 @@ public class BookDb{
                         }
                                                 
                                 
-                                                            String updatedData = "";
+                                                            String savedCategoryIdData = "";
                         if(cursor.getString(7) != null){
-                          updatedData = cursor.getString(7);
+                          savedCategoryIdData = cursor.getString(7);
+                          if(savedCategoryIdData != null){
+                            savedCategoryIdData = (String)savedCategoryIdData;
+                            hashMap.put("savedCategoryId", savedCategoryIdData);
+                          }
+                        }
+                                                
+                                
+                                                            String updatedData = "";
+                        if(cursor.getString(8) != null){
+                          updatedData = cursor.getString(8);
                           if(updatedData != null){
                             updatedData = (String)updatedData;
                             hashMap.put("updated", updatedData);
@@ -319,8 +336,8 @@ public class BookDb{
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(8) != null){
-                          idData = cursor.getString(8);
+                        if(cursor.getString(9) != null){
+                          idData = cursor.getString(9);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -329,8 +346,8 @@ public class BookDb{
                                                 
                                 
                                                             String bookCategoryIdData = "";
-                        if(cursor.getString(9) != null){
-                          bookCategoryIdData = cursor.getString(9);
+                        if(cursor.getString(10) != null){
+                          bookCategoryIdData = cursor.getString(10);
                           if(bookCategoryIdData != null){
                             bookCategoryIdData = bookCategoryIdData.toString();
                             hashMap.put("bookCategoryId", bookCategoryIdData);
@@ -360,7 +377,7 @@ public class BookDb{
     public DataList<Book>  getAll__db() {
         DataList<Book> modelList = new DataList<Book>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Book";
+        String selectQuery = "SELECT  * FROM `Book`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -497,7 +514,7 @@ public class BookDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM Book " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `Book` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit;
@@ -560,7 +577,7 @@ public class BookDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM Book " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `Book` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit;
@@ -568,9 +585,9 @@ public class BookDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM Book " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `Book` " + whereQuery + " LIMIT " + limit;
             }else{
-                countQuery = "SELECT  * FROM Book " + whereQuery;
+                countQuery = "SELECT  * FROM `Book` " + whereQuery;
             }
         }
 
@@ -593,9 +610,9 @@ public class BookDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM Book " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `Book` " + whereQuery + " LIMIT " + limit;
         }else{
-            countQuery = "SELECT  * FROM Book " + whereQuery;
+            countQuery = "SELECT  * FROM `Book` " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

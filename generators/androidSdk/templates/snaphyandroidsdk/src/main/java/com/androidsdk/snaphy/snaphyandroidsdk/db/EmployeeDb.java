@@ -301,7 +301,7 @@ public class EmployeeDb{
     public   Employee get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("Employee", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`Employee`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -518,7 +518,7 @@ public class EmployeeDb{
     public DataList<Employee>  getAll__db() {
         DataList<Employee> modelList = new DataList<Employee>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Employee";
+        String selectQuery = "SELECT  * FROM `Employee`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -655,7 +655,7 @@ public class EmployeeDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM Employee " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `Employee` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit;
@@ -718,7 +718,7 @@ public class EmployeeDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM Employee " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `Employee` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit;
@@ -726,9 +726,9 @@ public class EmployeeDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM Employee " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `Employee` " + whereQuery + " LIMIT " + limit;
             }else{
-                countQuery = "SELECT  * FROM Employee " + whereQuery;
+                countQuery = "SELECT  * FROM `Employee` " + whereQuery;
             }
         }
 
@@ -751,9 +751,9 @@ public class EmployeeDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM Employee " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `Employee` " + whereQuery + " LIMIT " + limit;
         }else{
-            countQuery = "SELECT  * FROM Employee " + whereQuery;
+            countQuery = "SELECT  * FROM `Employee` " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

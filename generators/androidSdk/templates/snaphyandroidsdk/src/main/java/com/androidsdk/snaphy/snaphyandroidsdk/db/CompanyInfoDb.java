@@ -153,7 +153,7 @@ public class CompanyInfoDb{
     public   CompanyInfo get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("CompanyInfo", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`CompanyInfo`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -250,7 +250,7 @@ public class CompanyInfoDb{
     public DataList<CompanyInfo>  getAll__db() {
         DataList<CompanyInfo> modelList = new DataList<CompanyInfo>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM CompanyInfo";
+        String selectQuery = "SELECT  * FROM `CompanyInfo`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -387,7 +387,7 @@ public class CompanyInfoDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM CompanyInfo " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `CompanyInfo` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit;
@@ -450,7 +450,7 @@ public class CompanyInfoDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM CompanyInfo " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `CompanyInfo` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit;
@@ -458,9 +458,9 @@ public class CompanyInfoDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM CompanyInfo " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `CompanyInfo` " + whereQuery + " LIMIT " + limit;
             }else{
-                countQuery = "SELECT  * FROM CompanyInfo " + whereQuery;
+                countQuery = "SELECT  * FROM `CompanyInfo` " + whereQuery;
             }
         }
 
@@ -483,9 +483,9 @@ public class CompanyInfoDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM CompanyInfo " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `CompanyInfo` " + whereQuery + " LIMIT " + limit;
         }else{
-            countQuery = "SELECT  * FROM CompanyInfo " + whereQuery;
+            countQuery = "SELECT  * FROM `CompanyInfo` " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

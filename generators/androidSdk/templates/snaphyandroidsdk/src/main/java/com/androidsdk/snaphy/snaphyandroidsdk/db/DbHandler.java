@@ -155,11 +155,11 @@ public class DbHandler extends SQLiteOpenHelper {
                         db.execSQL(CREATE_News_TABLE_26);
 
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                         
 
                         
-                        String CREATE_Book_TABLE_27 = "CREATE TABLE IF NOT EXISTS `Book` (  `title` TEXT, `description` TEXT, `status` TEXT, `frontCover` TEXT, `backCover` TEXT, `uploadBook` TEXT, `added` TEXT, `updated` TEXT, `id` TEXT PRIMARY KEY, `bookCategoryId` TEXT, _DATA_UPDATED NUMBER )";
+                        String CREATE_Book_TABLE_27 = "CREATE TABLE IF NOT EXISTS `Book` (  `title` TEXT, `description` TEXT, `status` TEXT, `frontCover` TEXT, `backCover` TEXT, `uploadBook` TEXT, `added` TEXT, `savedCategoryId` TEXT, `updated` TEXT, `id` TEXT PRIMARY KEY, `bookCategoryId` TEXT, _DATA_UPDATED NUMBER )";
                         db.execSQL(CREATE_Book_TABLE_27);
 
 
@@ -223,16 +223,32 @@ public class DbHandler extends SQLiteOpenHelper {
                         
 
                         
-                        String CREATE_Payment_TABLE_35 = "CREATE TABLE IF NOT EXISTS `Payment` (  `bookDetail` TEXT, `address` TEXT, `phoneNumber` TEXT, `email` TEXT, `amount` NUMBER, `id` TEXT PRIMARY KEY, `bookId` TEXT, `customerId` TEXT, `orderId` TEXT, _DATA_UPDATED NUMBER )";
+                        String CREATE_Payment_TABLE_35 = "CREATE TABLE IF NOT EXISTS `Payment` (  `bookDetail` TEXT, `address` TEXT, `status` NUMBER, `phoneNumber` TEXT, `email` TEXT, `amount` NUMBER, `id` TEXT PRIMARY KEY, `bookId` TEXT, `customerId` TEXT, _DATA_UPDATED NUMBER )";
                         db.execSQL(CREATE_Payment_TABLE_35);
 
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                         
 
                         
-                        String CREATE_Order_TABLE_36 = "CREATE TABLE IF NOT EXISTS `Order` (  `orderNumber` TEXT, `transactionId` TEXT, `orderStatus` TEXT, `paymentStatus` TEXT, `errorMessage` TEXT, `amount` NUMBER, `type` TEXT, `id` TEXT PRIMARY KEY, `bookId` TEXT, `customerId` TEXT, `paymentId` TEXT, _DATA_UPDATED NUMBER )";
+                        String CREATE_Order_TABLE_36 = "CREATE TABLE IF NOT EXISTS `Order` (  `added` TEXT, `orderNumber` TEXT, `transactionId` TEXT, `orderStatus` TEXT, `paymentStatus` TEXT, `errorMessage` TEXT, `amount` NUMBER, `type` TEXT, `id` TEXT PRIMARY KEY, `bookId` TEXT, `customerId` TEXT, `paymentId` TEXT, _DATA_UPDATED NUMBER )";
                         db.execSQL(CREATE_Order_TABLE_36);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+
+                        
+                        String CREATE_DummyCustomerSpeciality_TABLE_37 = "CREATE TABLE IF NOT EXISTS `DummyCustomerSpeciality` (  `customerId` TEXT, `specialityId` TEXT, `added` TEXT, `id` TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_DummyCustomerSpeciality_TABLE_37);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+
+                        
+                        String CREATE_DummyCustomerQualification_TABLE_38 = "CREATE TABLE IF NOT EXISTS `DummyCustomerQualification` (  `customerId` TEXT, `qualificationId` TEXT, `added` TEXT, `id` TEXT PRIMARY KEY, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_DummyCustomerQualification_TABLE_38);
 
 
             
@@ -352,6 +368,12 @@ public class DbHandler extends SQLiteOpenHelper {
             
                 // Drop older table if existed
                 db.execSQL("DROP TABLE IF EXISTS `Order`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `DummyCustomerSpeciality`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `DummyCustomerQualification`");
             
 
             // Create tables again

@@ -44,13 +44,6 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.PaymentRepository;
         
     
 
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.OrderRepository;
-            
-
-        
-    
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -126,6 +119,27 @@ public class Payment extends Model {
             
 
             
+                private boolean status;
+                /* Adding Getter and Setter methods */
+                public boolean getStatus(){
+                    return status;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setStatus(boolean status){
+                    this.status = status;
+                    //Update hashMap value..
+                    hashMap.put("status", status);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
                 private String phoneNumber;
                 /* Adding Getter and Setter methods */
                 public String getPhoneNumber(){
@@ -180,13 +194,6 @@ public class Payment extends Model {
                     //Update hashMap value..
                     hashMap.put("amount", amount);
                 }
-
-            
-            
-        
-    
-        
-            
 
             
             
@@ -449,8 +456,6 @@ public class Payment extends Model {
                             
                          
                             
-                         
-                            
                         
                         
                         
@@ -626,218 +631,6 @@ public class Payment extends Model {
                                                 @Override
                                                 
                                                     public void onSuccess(Customer object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                         
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    
-
-                
-
-                 
-                 
-             
-          
-    
-        
-        
-                
-                    //Define belongsTo relation method here..
-                    private transient Order  order ;
-                    private String orderId;
-
-                    public String getOrderId(){
-                         return orderId;
-                    }
-
-                    public void setOrderId(Object orderId){
-                        if(orderId != null){
-                          this.orderId = orderId.toString();
-                        }
-                    }
-
-                    public Order getOrder() {
-                        try{
-                          //Adding database method for fetching from relation if not present..
-                                      if(order == null){
-                                        PaymentRepository paymentRepository = (PaymentRepository) getRepository();
-
-                                        RestAdapter restAdapter = paymentRepository.getRestAdapter();
-                                        if(restAdapter != null){
-                                          //Fetch locally from db
-                                          order = getOrder__db(restAdapter);
-                                        }
-                                      }
-                        }catch(Exception e){
-                          //Ignore
-                        }
-
-                        return order;
-                    }
-
-                    public void setOrder(Order order) {
-                        this.order = order;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setOrder(Map<String, Object> order) {
-                        //First create a dummy Repo class object for customer.
-                        OrderRepository orderRepository = new OrderRepository();
-                        Order order1 = orderRepository.createObject(order);
-                        setOrder(order1);
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setOrder(HashMap<String, Object> order) {
-                        //First create a dummy Repo class object for customer.
-                        OrderRepository orderRepository = new OrderRepository();
-                        Order order1 = orderRepository.createObject(order);
-                        setOrder(order1);
-                    }
-
-                    //Adding relation method..
-                    public void addRelation(Order order) {
-                        that.setOrder(order);
-                    }
-
-
-                    //Fetch related data from local database if present a orderId identifier as property for belongsTo
-                    public Order getOrder__db(RestAdapter restAdapter){
-                      if(orderId != null){
-                        OrderRepository orderRepository = restAdapter.createRepository(OrderRepository.class);
-                            try{
-                            PaymentRepository lowercaseFirstLetterRepository = (PaymentRepository) getRepository();
-                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-                                                Context context = lowercaseFirstLetterRepository.getContext();
-                                                if(orderRepository.getDb() == null ){
-                                                    orderRepository.addStorage(context);
-                                                }
-
-                                                if(context != null && orderRepository.getDb() != null){
-                                                    orderRepository.addStorage(context);
-                                                    Order order = (Order) orderRepository.getDb().get__db(orderId);
-                                                    return order;
-                                                }else{
-                                                    return null;
-                                                }
-                                          }else{
-                                            return null;
-                                          }
-                            }catch(Exception e){
-                            //Ignore exception..
-                            return null;
-                            }
-
-                        }else{
-                          return null;
-                      }
-                    }
-                
-
-                
-                
-
-
-
-
-
-
-
-                    //Now add instance methods to fetch the related belongsTo Model..
-                    
-
-                     
-                            
-                         
-                            
-                        
-
-                                    //Write the method here..
-                                    public void get__order( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Order> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final PaymentRepository  paymentRepo = restAdapter.createRepository(PaymentRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        paymentRepo.get__order( (String)that.getId(), refresh,  new ObjectCallback<Order> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(Order object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);

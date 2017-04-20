@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import android.database.Cursor;
 import java.lang.reflect.Method;
 import android.util.Log;
@@ -83,7 +84,10 @@ public class <%- modelName %>Db{
                 <% if(isArray){ -%>
                   String <%-property%>Data = "";
                   if(modelData.get<%-capitalPropertyName%>() != null){
-                    <%-property%>Data = new Gson().toJson(modelData.get<%-capitalPropertyName%>(), DataList.class);
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                    Gson gson = gsonBuilder.create();
+                    <%-property%>Data = gson.toJson(modelData.get<%-capitalPropertyName%>(), DataList.class);
                     values.put("`<%-property%>`", <%-property%>Data);
                   }
               <% }else{ -%>
@@ -96,7 +100,10 @@ public class <%- modelName %>Db{
                     <% }else if(model.properties[property].type === "object" || model.properties[property].type === "geopoint"){ -%>
                         String <%-property%>Data = "";
                         if(modelData.get<%-capitalPropertyName%>() != null){
-                          <%-property%>Data = new Gson().toJson(modelData.get<%-capitalPropertyName%>(), HashMap.class);
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                          <%-property%>Data = gson.toJson(modelData.get<%-capitalPropertyName%>(), HashMap.class);
                           values.put("`<%-property%>`", <%-property%>Data);
                         }
                     <% }else if(model.properties[property].type === "number"){ -%>
@@ -256,7 +263,10 @@ public class <%- modelName %>Db{
                 <% if(isArray){ -%>
                   <%- model.methods.getJavaType(model.properties[property].type[0], isArray) %> <%-property%>Data = new DataList<>();
                   if(cursor.getString(<%- id %>) != null){
-                    <%-property%>Data = new Gson().fromJson(cursor.getString(<%- id %>), DataList.class);
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                    Gson gson = gsonBuilder.create();
+                    <%-property%>Data = gson.fromJson(cursor.getString(<%- id %>), DataList.class);
                     if(<%-property%>Data != null){
                       <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type[0], isArray) %>)<%-property%>Data;
                       hashMap.put("<%-property%>", <%-property%>Data);
@@ -275,7 +285,10 @@ public class <%- modelName %>Db{
                     <% }else if(model.properties[property].type === "object" || model.properties[property].type === "geopoint"){ -%>
                         <%- model.methods.getJavaType(model.properties[property].type, false) %> <%-property%>Data = new HashMap<>();
                         if(cursor.getString(<%- id %>) != null){
-                          <%-property%>Data = new Gson().fromJson(cursor.getString(<%- id %>), Map.class);
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                           <%-property%>Data = gson.fromJson(cursor.getString(<%- id %>), Map.class);
                           if(<%-property%>Data != null){
                             <%-property%>Data = (<%- model.methods.getJavaType(model.properties[property].type, false) %>)<%-property%>Data;
                             hashMap.put("<%-property%>", <%-property%>Data);

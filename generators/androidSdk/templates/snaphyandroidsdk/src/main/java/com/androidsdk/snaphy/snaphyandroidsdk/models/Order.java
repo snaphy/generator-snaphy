@@ -84,6 +84,27 @@ public class Order extends Model {
             
 
             
+                private String added;
+                /* Adding Getter and Setter methods */
+                public String getAdded(){
+                    return added;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setAdded(String added){
+                    this.added = added;
+                    //Update hashMap value..
+                    hashMap.put("added", added);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
                 private String orderNumber;
                 /* Adding Getter and Setter methods */
                 public String getOrderNumber(){
@@ -526,7 +547,6 @@ public class Order extends Model {
                         
                         
                         
-                        
                     
 
                 
@@ -737,7 +757,6 @@ public class Order extends Model {
                         
                         
                         
-                        
                     
 
                 
@@ -915,7 +934,6 @@ public class Order extends Model {
                                     } //method def ends here.
                                  
                             
-                        
                         
                         
                         

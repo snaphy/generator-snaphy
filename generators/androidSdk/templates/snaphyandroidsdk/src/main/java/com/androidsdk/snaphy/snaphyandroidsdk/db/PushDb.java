@@ -132,7 +132,7 @@ public class PushDb{
     public   Push get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("Push", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`Push`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -199,7 +199,7 @@ public class PushDb{
     public DataList<Push>  getAll__db() {
         DataList<Push> modelList = new DataList<Push>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Push";
+        String selectQuery = "SELECT  * FROM `Push`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -336,7 +336,7 @@ public class PushDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM Push " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `Push` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit;
@@ -399,7 +399,7 @@ public class PushDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM Push " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `Push` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit;
@@ -407,9 +407,9 @@ public class PushDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM Push " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `Push` " + whereQuery + " LIMIT " + limit;
             }else{
-                countQuery = "SELECT  * FROM Push " + whereQuery;
+                countQuery = "SELECT  * FROM `Push` " + whereQuery;
             }
         }
 
@@ -432,9 +432,9 @@ public class PushDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM Push " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `Push` " + whereQuery + " LIMIT " + limit;
         }else{
-            countQuery = "SELECT  * FROM Push " + whereQuery;
+            countQuery = "SELECT  * FROM `Push` " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

@@ -364,7 +364,7 @@ public class NotificationDb{
     public   Notification get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("Notification", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`Notification`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -591,7 +591,7 @@ public class NotificationDb{
     public DataList<Notification>  getAll__db() {
         DataList<Notification> modelList = new DataList<Notification>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Notification";
+        String selectQuery = "SELECT  * FROM `Notification`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -728,7 +728,7 @@ public class NotificationDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM Notification " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `Notification` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit;
@@ -791,7 +791,7 @@ public class NotificationDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM Notification " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `Notification` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit;
@@ -799,9 +799,9 @@ public class NotificationDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM Notification " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `Notification` " + whereQuery + " LIMIT " + limit;
             }else{
-                countQuery = "SELECT  * FROM Notification " + whereQuery;
+                countQuery = "SELECT  * FROM `Notification` " + whereQuery;
             }
         }
 
@@ -824,9 +824,9 @@ public class NotificationDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM Notification " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `Notification` " + whereQuery + " LIMIT " + limit;
         }else{
-            countQuery = "SELECT  * FROM Notification " + whereQuery;
+            countQuery = "SELECT  * FROM `Notification` " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

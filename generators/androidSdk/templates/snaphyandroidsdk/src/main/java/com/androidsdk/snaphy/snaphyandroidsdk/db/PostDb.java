@@ -238,7 +238,7 @@ public class PostDb{
     public   Post get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("Post", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`Post`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -440,7 +440,7 @@ public class PostDb{
     public DataList<Post>  getAll__db() {
         DataList<Post> modelList = new DataList<Post>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM Post";
+        String selectQuery = "SELECT  * FROM `Post`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -577,7 +577,7 @@ public class PostDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM Post " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `Post` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit;
@@ -640,7 +640,7 @@ public class PostDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM Post " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `Post` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit;
@@ -648,9 +648,9 @@ public class PostDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM Post " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `Post` " + whereQuery + " LIMIT " + limit;
             }else{
-                countQuery = "SELECT  * FROM Post " + whereQuery;
+                countQuery = "SELECT  * FROM `Post` " + whereQuery;
             }
         }
 
@@ -673,9 +673,9 @@ public class PostDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM Post " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `Post` " + whereQuery + " LIMIT " + limit;
         }else{
-            countQuery = "SELECT  * FROM Post " + whereQuery;
+            countQuery = "SELECT  * FROM `Post` " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
