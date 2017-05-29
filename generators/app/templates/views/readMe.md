@@ -11,23 +11,5 @@
 ###TemplateSettings    
 1) header -> header of the template
 2) main -> Interacting with the main template of the plugin.
-3) For adding more ejs based routes through backend..
-
-```
- "routes":[{
-    "routeExposure": "/brand",
-    "state": "brand/",
-    "activate": true
-  }]
-```
-To write some plugin only for a specific brand add below lines in conf.json file of that plugin. 
-```
-"load":{
-    "root": true,
-    "brand": false
-  },
-```
-
-Here, root and are two different states  serving data.
     
     
