@@ -26,11 +26,11 @@
   },
   "RoleMapping": {
     "dataSource": "mongodb",
-    "public": false
+    "public": true
   },
   "Role": {
     "dataSource": "mongodb",
-    "public": false
+    "public": true
   },
   "CompanyInfo": {
     "dataSource": "mongodb",
@@ -48,32 +48,32 @@
     "dataSource": "mongodb",
     "public": true
   },
+  "AmazonImage": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "adminEmail": {
+    "dataSource": "mongodb",
+    "public": true
+  },
   "container": {
     "dataSource": "Image",
     "public": true
   },
-  "HotDeal": {
+  "application": {
     "dataSource": "mongodb",
     "public": true
   },
-  "Category": {
+  "installation": {
     "dataSource": "mongodb",
     "public": true
   },
-  "Chat": {
+  "notification": {
     "dataSource": "mongodb",
     "public": true
   },
-  "Brand": {
-    "dataSource": "mongodb",
-    "public": true
-  },
-  "DailyFeed": {
-    "dataSource": "mongodb",
-    "public": true
-  },
-  "BrandManager": {
-    "dataSource": "mongodb",
+  "push": {
+    "dataSource": "push",
     "public": true
   }
 }

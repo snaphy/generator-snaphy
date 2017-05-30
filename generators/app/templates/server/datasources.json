@@ -17,8 +17,35 @@
     "name": "Image",
     "connector": "loopback-component-storage",
     "provider": "amazon",
-    "key": "qoW/iNDapviJoK4qFqpGnxd9hFXo0YtRRYZixZUs",
-    "keyId": "AKIAIGCDVLPUKMT6FGMQ",
+    "key": "AMAZON_ACCESS_KEY",
+    "keyId": "AMAZON_SECRET_KEY_ID",
     "maxFileSize": "35485760"
+  },
+  "GoogleEmail": {
+    "name": "GoogleEmail",
+    "defaultForType": "mail",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "SMTP",
+        "host": "smtp.zoho.com",
+        "aliases": [
+          "Zoho Mail"
+        ],
+        "secure": true,
+        "port": 465,
+        "auth": {
+          "user": "test@email.com",
+          "pass": "EMAIL_PASSWORD"
+        }
+      }
+    ]
+  },
+  "push": {
+    "name": "push",
+    "connector": "loopback-component-push",
+    "installation": "installation",
+    "notification": "notification",
+    "application": "application"
   }
 }

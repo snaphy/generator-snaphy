@@ -1,9 +1,9 @@
-# dashboard plugin for Snaphy
+# analytics plugin for Snaphy
 
 
-###A plugin for generating the dashboard 
+###A plugin for generating the analytics 
 
-###This plugin is exposed on  `/dashboard` route
+###This plugin is exposed on  `/analytics` route
 
 
 

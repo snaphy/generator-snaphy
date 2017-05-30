@@ -24,5 +24,6 @@ boot(app, __dirname, function(err) {
 
 	// start the server if `$ node server.js`
 	if (require.main === module)
-		app.start();
+		//Now memoizing the listen http Server.
+		app.start = app.start();
 });
