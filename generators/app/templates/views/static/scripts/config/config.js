@@ -59,6 +59,14 @@ angular.module($snaphy.getModuleName())
 
     formlyConfig.setType({
         name: 'select',
+        /*
+        * "model":{
+              "model": "Model Name"
+               "value": "id" //property name of value
+               "name": "name" //property name of display select
+               "filter":{} //filter to fetch the data..
+           }
+        * */
         template: '<div ng-class="{\'form-group\': !options.templateOptions.inline, \'inline-elements\': options.templateOptions.inline}">' +
             '<div ng-class="options.templateOptions.colSize">' +
             '<div class="form-material" ng-class="options.templateOptions.color">' +
@@ -70,7 +78,7 @@ angular.module($snaphy.getModuleName())
             '</div>' +
             '</div>' +
             '</div>',
-        controller: ["$scope", "$http", function($scope, $http) {
+        controller: ["$scope", "$http", 'Database', function($scope, $http, Database) {
             //Set default value for label..
             if ($scope.options.templateOptions.size === undefined) {
                 $scope.options.templateOptions.size = 1;
@@ -78,6 +86,37 @@ angular.module($snaphy.getModuleName())
 
             if ($scope.options.templateOptions.colSize === undefined) {
                 $scope.options.templateOptions.colSize = "col-sm-12";
+            }
+
+            if($scope.options.templateOptions.model){
+                if($scope.options.templateOptions.model.model){
+                    var modelService = Database.loadDb($scope.options.templateOptions.model.model);
+                    var filter = $scope.options.templateOptions.model.filter || {};
+                    modelService.find({
+                        filter: filter
+                    }, function(values){
+                        console.log(values);
+                        if(values){
+                            $scope.options.templateOptions.options = $scope.options.templateOptions.options || [];
+                            var valueKey = $scope.options.templateOptions.model.value;
+                            var nameKey = $scope.options.templateOptions.model.name || valueKey;
+                            if(valueKey){
+                                values.forEach(function(value){
+                                    if(value[valueKey] !== undefined && value[nameKey] !== undefined){
+                                        $scope.options.templateOptions.options.push({
+                                            id: value[valueKey],
+                                            name: value[nameKey]
+                                        });
+                                    }
+                                });
+                            }
+
+                        }
+                    }, function(error){
+                       console.error(error);
+                    });
+                }
+
             }
 
 

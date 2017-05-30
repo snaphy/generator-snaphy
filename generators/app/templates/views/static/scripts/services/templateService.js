@@ -53,24 +53,30 @@ angular.module($snaphy.getModuleName())
        notify: notify
     };
 }])//factory database..
+    
+    
 
 
 //Service for initilize the dashboard.
 .factory('Initialize', [function(){
-    //Init method should be called only once..
-    let loadEventFired = false;
-    const load = function(){
-        if(!loadEventFired){
-            jQuery(function() {
-                console.log("Getting called");
-                App.init();
-                App.layout('side_scroll_on');
-            });
-            loadEventFired = true;
-        }
+    var load =  function() {
+        //Init method should be called only once..
+        let loadEventFired = false;
+        return {
+            load: function () {
+                if (!loadEventFired) {
+                    //do your will
+                    jQuery(function () {
+                        App.init();
+                        App.layout('side_scroll_on');
+                    });
+                    loadEventFired = true;
+                }
+            }
+        };
     };
-
-    return{
+    load = load();
+    return {
         load: load
     };
 }])//factory database..

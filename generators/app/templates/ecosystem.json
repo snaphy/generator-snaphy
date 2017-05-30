@@ -1,7 +1,7 @@
 {
   "apps" : [
     {
-      "name"      : "<%= props.applicationName %>",
+      "name"      : "server",
       "script"    : "server/server.js",
       "env": {
         "COMMON_VARIABLE": "true"
@@ -13,12 +13,12 @@
   ],
   "deploy" : {
     "production" : {
-      "user" : "SERVER_HOST_USERNAME",
-      "host" : "SERVER_HOST_IP_ADDRESS",
+      "user" : "robins",
+      "host" : "162.243.243.185",
       "ref"  : "origin/master",
-      "repo" : "git@github.com:kishors/BZRReleaseBck.git",
-      "path" : "/var/www/production",
-      "post-deploy" : "git submodule update --init --recursive; npm install; pm2 startOrRestart ecosystem.json --env production"
+      "repo" : "GIT_HUB_REPOSITORY",
+      "path" : "SERVER_PROJECT_PATH",
+      "post-deploy" : "git submodule update --init --recursive; git submodule init; git submodule update; npm install;  sudo apt-get install imageMagick; pm2 startOrRestart ecosystem.json --env production"
     }
   }
 }

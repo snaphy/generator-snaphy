@@ -22,13 +22,13 @@ module.exports = yeoman.generators.Base.extend({
       default: "snaphyDemo",
       validate: function(input) {
         // Declare function as asynchronous, and save the done callback
-        var done = this.async();
+        const done = this.async();
         //trim the input
         input = input.trim();
-        var validationRule = /^[a-zA-Z_0-9]{3,}$/;
-        var response = validationRule.test(input);
+        const validationRule = /^[a-zA-Z_0-9]{3,}$/;
+        const response = validationRule.test(input);
         if (response) {
-          done(true);
+          done(null, true);
         } else {
           done(chalk.red('Error:') + ' Spaces and special characters are not allowed!');
         }
@@ -50,7 +50,7 @@ module.exports = yeoman.generators.Base.extend({
 
       this.log(yosay('\nDone! \nNow type ' + chalk.red('$ cd ' + this.props.applicationName + ' && slc run') + ' to start the application\n\n'));
 
-      done();
+      done(null, true);
     }.bind(this));
   },
 

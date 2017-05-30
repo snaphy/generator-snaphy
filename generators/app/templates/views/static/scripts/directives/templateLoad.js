@@ -9,11 +9,54 @@ angular.module($snaphy.getModuleName())
         link: function(scope, iElement, iAttrs) {
             setTimeout(function() {
                 // Initialize app when page loads
-                Initialize.load();
-            }, 200);
+                Initialize.load.load();
+            }, 400);
         }
     };
 }])
+
+//For loading side bar nav menu add on anchor eleement with data-toggle value nav-submenu
+/**
+* <a snaphy-load-nav class="nav-submenu" ng-click="scroll()" data-toggle="nav-submenu" style="cursor:pointer;"><i class="si si-bar-chart"></i><span class="sidebar-mini-hide">Manage Data</span></a>
+**/
+ .directive('snaphyLoadNav', [function() {
+    return {
+        restrict: 'A',
+        link: function(scope, iElement, iAttrs) {
+            var $lHtml = jQuery('html');
+            jQuery(iElement).on('click', function(e){
+                // Stop default behaviour
+                e.stopPropagation();
+
+                // Get link
+                var $link = jQuery(this);
+
+                // Get link's parent
+                var $parentLi = $link.parent('li');
+
+                if ($parentLi.hasClass('open')) { // If submenu is open, close it..
+                    $parentLi.removeClass('open');
+                } else { // .. else if submenu is closed, close all other (same level) submenus first before open it
+                    $link
+                        .closest('ul')
+                        .find('> li')
+                        .removeClass('open');
+
+                    $parentLi
+                        .addClass('open');
+                }
+                // Remove focus from submenu link
+                if ($lHtml.hasClass('no-focus')) {
+                    $link.blur();
+                }
+            });
+        }
+    };
+}])
+
+
+
+
 
 
 /*To hide the tooltip if somebody clickes it.*/
