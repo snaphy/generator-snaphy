@@ -5,7 +5,8 @@
 /*jslint browser: true*/
 var settings = {
   "homeState" : "dashboard",
-  "loginEnabled": false
+  "companyName" : "Snaphy",
+  "loginEnabled": true
 };
 
 

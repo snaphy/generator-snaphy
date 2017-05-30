@@ -12,6 +12,18 @@ const getError = function(message){
 };
 
 
+function guid() {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4();
+}
+
+
+
 /**
  * Validate presense of a properties by checking for value in both currentInstance and instance
  * @param  {Object} instance        loopback ctx.instance object.
@@ -35,29 +47,8 @@ const validate = function(instance, currentInstance, prop){
 };
 
 
-/**
- * //Copying one object to another..
- * @param original
- * @param context {*}
- * @param key
- * @returns {*}
- */
-var extend = function(original, context, key) {
-    for (key in context) {
-        if (context.hasOwnProperty(key)) {
-            if (Object.prototype.toString.call(context[key]) === '[object Object]') {
-                original[key] = extend(original[key] || {}, context[key]);
-            } else {
-                original[key] = context[key];
-            }
-        }
-    }
-    return original;
-};
-
-
 module.exports = {
   getError: getError,
   validate: validate,
-  extend: extend
+  guid: guid
 };

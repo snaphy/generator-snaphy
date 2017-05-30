@@ -110,6 +110,7 @@ module.exports = function(server) {
     return tableObj;
   }
 
+  
 
   const getValidationObj = function(modelName){
     const {json} = getValidationPath(modelName);

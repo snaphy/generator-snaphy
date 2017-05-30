@@ -1,7 +1,12 @@
 {
   "name": "dashboard",
   "routeExposure": "/dashboard",
-  "defaultTemplate": "true",
   "activate": true,
-  "services": {}
+  "load":{
+    "root":true
+  },
+  "services": {},
+  "pluginDependencies": {
+    "login": "^2.0.0"
+  }
 }

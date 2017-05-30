@@ -8,8 +8,6 @@ const {join} = require("path");
 const _ = require("lodash");
 
 
-
-
 const rootPath = process.cwd();
 
 console.log(rootPath);

@@ -1,15 +1,9 @@
 {
-  "css": {
-  },
   "js": {
     "/dashboard/scripts/routes/dashboard.js":"dashboardRoute",
     "/dashboard/scripts/controllers/dashboard.js": "dashboardController"
   },
-  "moduleDependencies":{
-
-  },
   "settings": ["/dashboard/admin-panel-setting.js"],
-
   "bodystructure": {
     "asidebarHook": [],
     "sidebarHook": ["/dashboard/views/sidebarHook.html"],

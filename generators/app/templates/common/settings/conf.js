@@ -14,8 +14,9 @@ module.exports = (server) => {
   const TABLE_PATH = join(__dirname, "../../common/table");
   const SETTING_PATH = join(__dirname, "../../common/settings");
 
+
   //Write all the plugins name whose load priority is to be set...
-  const PLUGIN_PRIORITY = [];
+  const PLUGIN_PRIORITY = ["cache", "home", "dashboard", "login"];
 
   return {
     NAME,
@@ -33,3 +34,4 @@ module.exports = (server) => {
     AUTHOR
   }
 };
+
