@@ -14,7 +14,7 @@
 
   const rootPath = process.cwd();
 
-  console.log(rootPath);
+  console.log("Your base path: " + chalk.red(rootPath));
 
   module.exports = yeoman.generators.Base.extend({
     prompting: function () {
@@ -31,7 +31,7 @@
           name: "submodule",
           choices: ["install", "update", "nothing"],
           default: "update",
-          message: "Do you want to install npm or update?"
+          message: "Do you want to install submodule or update?"
         }
       ];
 
@@ -49,9 +49,7 @@
       };
       if(that.props.submodule === "update"){
         const gitModulePath = join(rootPath, ".gitmodules");
-
-        var cfg = ini.parseSync(gitModulePath);
-        console.log(cfg);
+        const cfg = ini.parseSync(gitModulePath);
         for(const submoduleName in cfg){
           if(cfg.hasOwnProperty(submoduleName)){
             const submodule = cfg[submoduleName];
@@ -59,15 +57,6 @@
             installUpdateSubmodule(submodule.url, submodule.path, that);
           }
         }
-          /*if(packageFile.dependencies){
-            _.forEach(packageFile.dependencies, function(value, key) {
-              if(key && value){
-                let moduleName = `${key}@${value}`;
-                console.info(`Installing plugin ${moduleName}`);
-                installNpmModule(moduleName, that);
-              }
-            });
-          }*/
 
       } //if
 
@@ -78,4 +67,5 @@
       }
     }
   });
+
 })();
