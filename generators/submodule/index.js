@@ -10,6 +10,7 @@
   let fs  = require("fs");
   const {join} = require("path");
   const _ = require("lodash");
+  const ini = require('node-ini');
 
   const rootPath = process.cwd();
 
@@ -36,20 +37,27 @@
 
       this.prompt(prompts, function (props) {
         this.props = props;
-        done();
+        done(null, true);
       }.bind(this));
     },
 
 
     install: function () {
       let that = this;
-      const installNpmModule = function(moduleName, that){
-        that.spawnCommandSync("npm", ["install", moduleName, "--prefix", "../../../", "--save"], {});
+      const installUpdateSubmodule = function(moduleUrl, path, that){
+        that.spawnCommandSync("git", ["submodule", "add",  "--force", moduleUrl, path], {});
       };
-      if(that.props.npmInstall === "update"){
-        let packageFile = require(join(rootPath, ".gitmodules"));
-        if(packageFile){
-          console.log(packageFile);
+      if(that.props.submodule === "update"){
+        const gitModulePath = join(rootPath, ".gitmodules");
+
+        var cfg = ini.parseSync(gitModulePath);
+        console.log(cfg);
+        for(const submodule in cfg){
+          if(cfg.hasOwnProperty(submodule)){
+            console.info(`Installing submodule ${submodule.url}`);
+            installUpdateSubmodule(submodule.url, submodule.path, that);
+          }
+        }
           /*if(packageFile.dependencies){
             _.forEach(packageFile.dependencies, function(value, key) {
               if(key && value){
@@ -59,7 +67,7 @@
               }
             });
           }*/
-        }//if packageFile
+
       } //if
 
       if(that.props.npmInstall === "install"){
