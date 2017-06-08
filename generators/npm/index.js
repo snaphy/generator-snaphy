@@ -10,7 +10,7 @@ const _ = require("lodash");
 
 const rootPath = process.cwd();
 
-console.log(rootPath);
+//console.log(rootPath);
 
 
 module.exports = yeoman.generators.Base.extend({
