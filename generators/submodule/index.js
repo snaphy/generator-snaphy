@@ -52,8 +52,9 @@
 
         var cfg = ini.parseSync(gitModulePath);
         console.log(cfg);
-        for(const submodule in cfg){
-          if(cfg.hasOwnProperty(submodule)){
+        for(const submoduleName in cfg){
+          if(cfg.hasOwnProperty(submoduleName)){
+            const submodule = cfg[submoduleName];
             console.info(`Installing submodule ${submodule.url}`);
             installUpdateSubmodule(submodule.url, submodule.path, that);
           }
