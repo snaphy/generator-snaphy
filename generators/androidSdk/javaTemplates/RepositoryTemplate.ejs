@@ -313,12 +313,12 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
             public void setCurrentUserId(Object currentUserId){
                 this.currentUserId = currentUserId;
                 cachedCurrentUser = null;
-                saveCurrentUserId();
+                saveCurrentUserId(currentUserId);
             }
 
-            private void saveCurrentUserId(){
+            private void saveCurrentUserId(Object currentUserId){
                 final SharedPreferences.Editor editor = getSharedPreferences().edit();
-                final String json = new JSONArray().put(getCurrentUserId()).toString();
+                final String json = new JSONArray().put(currentUserId).toString();
                 editor.putString(PROPERTY_CURRENT_USER_ID, json);
                 editor.commit();
             }
@@ -328,10 +328,6 @@ public class <%- modelName %>Repository extends ModelRepository<<%- modelName %>
                 return getApplicationContext().getSharedPreferences(
                     SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
             }
-
-
-
-
     <% } %>
 
 
