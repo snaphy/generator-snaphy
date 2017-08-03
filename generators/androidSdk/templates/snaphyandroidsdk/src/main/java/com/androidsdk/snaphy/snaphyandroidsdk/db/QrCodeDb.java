@@ -52,13 +52,13 @@ public class QrCodeDb{
   }
 
 
-    public void insert__db (final String id, final QrCode modelData) {
+    public void insert__db (final String id, final QrCode _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 db.insert("`QrCode`", null, values);
                 //db.close(); // Closing database connection
             }
@@ -70,71 +70,71 @@ public class QrCodeDb{
 
 
 
-    public ContentValues getContentValues(QrCode modelData){
+    public ContentValues getContentValues(QrCode _modelData){
       ContentValues values = new ContentValues();
                        
                                                             double serial_numberData;
-                        serial_numberData = (double)modelData.getSerial_number();
+                        serial_numberData = (double)_modelData.getSerial_number();
                         values.put("`serial_number`", serial_numberData);
                                   
                                 
                                                             String activation_statusData = "";
-                        if(modelData.getActivation_status() != null){
-                          activation_statusData = modelData.getActivation_status().toString();
+                        if(_modelData.getActivation_status() != null){
+                          activation_statusData = _modelData.getActivation_status().toString();
                           values.put("`activation_status`", activation_statusData);
                         }
                                   
                                 
                                                             String active_onData = "";
-                        if(modelData.getActive_on() != null){
-                          active_onData = modelData.getActive_on().toString();
+                        if(_modelData.getActive_on() != null){
+                          active_onData = _modelData.getActive_on().toString();
                           values.put("`active_on`", active_onData);
                         }
                                   
                                 
                                                             String scan_statusData = "";
-                        if(modelData.getScan_status() != null){
-                          scan_statusData = modelData.getScan_status().toString();
+                        if(_modelData.getScan_status() != null){
+                          scan_statusData = _modelData.getScan_status().toString();
                           values.put("`scan_status`", scan_statusData);
                         }
                                   
                                 
                                                             String addedData = "";
-                        if(modelData.getAdded() != null){
-                          addedData = modelData.getAdded().toString();
+                        if(_modelData.getAdded() != null){
+                          addedData = _modelData.getAdded().toString();
                           values.put("`added`", addedData);
                         }
                                   
                                 
                                                             String updatedData = "";
-                        if(modelData.getUpdated() != null){
-                          updatedData = modelData.getUpdated().toString();
+                        if(_modelData.getUpdated() != null){
+                          updatedData = _modelData.getUpdated().toString();
                           values.put("`updated`", updatedData);
                         }
                                   
                                 
                                                             double pointsData;
-                        pointsData = (double)modelData.getPoints();
+                        pointsData = (double)_modelData.getPoints();
                         values.put("`points`", pointsData);
                                   
                                 
                                                             String scanned_onData = "";
-                        if(modelData.getScanned_on() != null){
-                          scanned_onData = modelData.getScanned_on().toString();
+                        if(_modelData.getScanned_on() != null){
+                          scanned_onData = _modelData.getScanned_on().toString();
                           values.put("`scanned_on`", scanned_onData);
                         }
                                   
                                 
                                                             String redeemed_onData = "";
-                        if(modelData.getRedeemed_on() != null){
-                          redeemed_onData = modelData.getRedeemed_on().toString();
+                        if(_modelData.getRedeemed_on() != null){
+                          redeemed_onData = _modelData.getRedeemed_on().toString();
                           values.put("`redeemed_on`", redeemed_onData);
                         }
                                   
                                 
                                                             String redeemStatusData = "";
-                        if(modelData.getRedeemStatus() != null){
-                          redeemStatusData = modelData.getRedeemStatus().toString();
+                        if(_modelData.getRedeemStatus() != null){
+                          redeemStatusData = _modelData.getRedeemStatus().toString();
                           values.put("`redeemStatus`", redeemStatusData);
                         }
                                   
@@ -142,10 +142,10 @@ public class QrCodeDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String is_deletedData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getIs_deleted");
-                              if(method.invoke(modelData) != null){
-                                //is_deletedData = modelData.getIs_deleted().toString();
-                                is_deletedData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getIs_deleted");
+                              if(method.invoke(_modelData) != null){
+                                //is_deletedData = _modelData.getIs_deleted().toString();
+                                is_deletedData = (String) method.invoke(_modelData);
                                 values.put("`is_deleted`", is_deletedData);
                               }
                         } catch (Exception e) {
@@ -157,10 +157,10 @@ public class QrCodeDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getId");
-                              if(method.invoke(modelData) != null){
-                                //idData = modelData.getId().toString();
-                                idData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getId");
+                              if(method.invoke(_modelData) != null){
+                                //idData = _modelData.getId().toString();
+                                idData = (String) method.invoke(_modelData);
                                 values.put("`id`", idData);
                               }
                         } catch (Exception e) {
@@ -172,10 +172,10 @@ public class QrCodeDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String retailerIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getRetailerId");
-                              if(method.invoke(modelData) != null){
-                                //retailerIdData = modelData.getRetailerId().toString();
-                                retailerIdData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getRetailerId");
+                              if(method.invoke(_modelData) != null){
+                                //retailerIdData = _modelData.getRetailerId().toString();
+                                retailerIdData = (String) method.invoke(_modelData);
                                 values.put("`retailerId`", retailerIdData);
                               }
                         } catch (Exception e) {
@@ -187,10 +187,10 @@ public class QrCodeDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String departmentIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getDepartmentId");
-                              if(method.invoke(modelData) != null){
-                                //departmentIdData = modelData.getDepartmentId().toString();
-                                departmentIdData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getDepartmentId");
+                              if(method.invoke(_modelData) != null){
+                                //departmentIdData = _modelData.getDepartmentId().toString();
+                                departmentIdData = (String) method.invoke(_modelData);
                                 values.put("`departmentId`", departmentIdData);
                               }
                         } catch (Exception e) {
@@ -202,10 +202,10 @@ public class QrCodeDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String productIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getProductId");
-                              if(method.invoke(modelData) != null){
-                                //productIdData = modelData.getProductId().toString();
-                                productIdData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getProductId");
+                              if(method.invoke(_modelData) != null){
+                                //productIdData = _modelData.getProductId().toString();
+                                productIdData = (String) method.invoke(_modelData);
                                 values.put("`productId`", productIdData);
                               }
                         } catch (Exception e) {
@@ -217,10 +217,10 @@ public class QrCodeDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String transactionIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getTransactionId");
-                              if(method.invoke(modelData) != null){
-                                //transactionIdData = modelData.getTransactionId().toString();
-                                transactionIdData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getTransactionId");
+                              if(method.invoke(_modelData) != null){
+                                //transactionIdData = _modelData.getTransactionId().toString();
+                                transactionIdData = (String) method.invoke(_modelData);
                                 values.put("`transactionId`", transactionIdData);
                               }
                         } catch (Exception e) {
@@ -232,10 +232,10 @@ public class QrCodeDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String qrCodeGroupIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getQrCodeGroupId");
-                              if(method.invoke(modelData) != null){
-                                //qrCodeGroupIdData = modelData.getQrCodeGroupId().toString();
-                                qrCodeGroupIdData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getQrCodeGroupId");
+                              if(method.invoke(_modelData) != null){
+                                //qrCodeGroupIdData = _modelData.getQrCodeGroupId().toString();
+                                qrCodeGroupIdData = (String) method.invoke(_modelData);
                                 values.put("`qrCodeGroupId`", qrCodeGroupIdData);
                               }
                         } catch (Exception e) {
@@ -923,13 +923,13 @@ public class QrCodeDb{
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final QrCode modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final QrCode _modelData ){
       new Thread(new Runnable(){
         @Override
         public void run(){
           SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
           db.beginTransaction();
-          ContentValues values = getContentValues(modelData);
+          ContentValues values = getContentValues(_modelData);
           String where = getWhere(whereKeyValue);
           db.update("`QrCode`", values, where, null);
           db.setTransactionSuccessful();
@@ -961,13 +961,13 @@ public class QrCodeDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final QrCode modelData) {
+    public void update__db(final String id,   final QrCode _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 // updating row
                 db.update("`QrCode`", values, "id = ?",
                         new String[] { id });

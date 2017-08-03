@@ -52,13 +52,13 @@ public class CounterDb{
   }
 
 
-    public void insert__db (final String id, final Counter modelData) {
+    public void insert__db (final String id, final Counter _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 db.insert("`Counter`", null, values);
                 //db.close(); // Closing database connection
             }
@@ -70,17 +70,17 @@ public class CounterDb{
 
 
 
-    public ContentValues getContentValues(Counter modelData){
+    public ContentValues getContentValues(Counter _modelData){
       ContentValues values = new ContentValues();
                        
                                                             double valueData;
-                        valueData = (double)modelData.getValue();
+                        valueData = (double)_modelData.getValue();
                         values.put("`value`", valueData);
                                   
                                 
                                                             String collectionData = "";
-                        if(modelData.getCollection() != null){
-                          collectionData = modelData.getCollection().toString();
+                        if(_modelData.getCollection() != null){
+                          collectionData = _modelData.getCollection().toString();
                           values.put("`collection`", collectionData);
                         }
                                   
@@ -88,10 +88,10 @@ public class CounterDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getId");
-                              if(method.invoke(modelData) != null){
-                                //idData = modelData.getId().toString();
-                                idData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getId");
+                              if(method.invoke(_modelData) != null){
+                                //idData = _modelData.getId().toString();
+                                idData = (String) method.invoke(_modelData);
                                 values.put("`id`", idData);
                               }
                         } catch (Exception e) {
@@ -641,13 +641,13 @@ public class CounterDb{
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final Counter modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final Counter _modelData ){
       new Thread(new Runnable(){
         @Override
         public void run(){
           SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
           db.beginTransaction();
-          ContentValues values = getContentValues(modelData);
+          ContentValues values = getContentValues(_modelData);
           String where = getWhere(whereKeyValue);
           db.update("`Counter`", values, where, null);
           db.setTransactionSuccessful();
@@ -679,13 +679,13 @@ public class CounterDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final Counter modelData) {
+    public void update__db(final String id,   final Counter _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 // updating row
                 db.update("`Counter`", values, "id = ?",
                         new String[] { id });

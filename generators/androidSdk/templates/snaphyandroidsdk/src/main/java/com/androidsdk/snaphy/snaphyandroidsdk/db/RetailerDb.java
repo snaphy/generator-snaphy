@@ -52,13 +52,13 @@ public class RetailerDb{
   }
 
 
-    public void insert__db (final String id, final Retailer modelData) {
+    public void insert__db (final String id, final Retailer _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 db.insert("`Retailer`", null, values);
                 //db.close(); // Closing database connection
             }
@@ -70,122 +70,122 @@ public class RetailerDb{
 
 
 
-    public ContentValues getContentValues(Retailer modelData){
+    public ContentValues getContentValues(Retailer _modelData){
       ContentValues values = new ContentValues();
                        
                                                             String retailer_numberData = "";
-                        if(modelData.getRetailer_number() != null){
-                          retailer_numberData = modelData.getRetailer_number().toString();
+                        if(_modelData.getRetailer_number() != null){
+                          retailer_numberData = _modelData.getRetailer_number().toString();
                           values.put("`retailer_number`", retailer_numberData);
                         }
                                   
                                 
                                                             String nameData = "";
-                        if(modelData.getName() != null){
-                          nameData = modelData.getName().toString();
+                        if(_modelData.getName() != null){
+                          nameData = _modelData.getName().toString();
                           values.put("`name`", nameData);
                         }
                                   
                                 
                                                             String emailData = "";
-                        if(modelData.getEmail() != null){
-                          emailData = modelData.getEmail().toString();
+                        if(_modelData.getEmail() != null){
+                          emailData = _modelData.getEmail().toString();
                           values.put("`email`", emailData);
                         }
                                   
                                 
                                                             String shop_nameData = "";
-                        if(modelData.getShop_name() != null){
-                          shop_nameData = modelData.getShop_name().toString();
+                        if(_modelData.getShop_name() != null){
+                          shop_nameData = _modelData.getShop_name().toString();
                           values.put("`shop_name`", shop_nameData);
                         }
                                   
                                 
                                                             String shop_addressData = "";
-                        if(modelData.getShop_address() != null){
-                          shop_addressData = modelData.getShop_address().toString();
+                        if(_modelData.getShop_address() != null){
+                          shop_addressData = _modelData.getShop_address().toString();
                           values.put("`shop_address`", shop_addressData);
                         }
                                   
                                 
                                                             String contact_numberData = "";
-                        if(modelData.getContact_number() != null){
-                          contact_numberData = modelData.getContact_number().toString();
+                        if(_modelData.getContact_number() != null){
+                          contact_numberData = _modelData.getContact_number().toString();
                           values.put("`contact_number`", contact_numberData);
                         }
                                   
                                 
                                                             String tin_numberData = "";
-                        if(modelData.getTin_number() != null){
-                          tin_numberData = modelData.getTin_number().toString();
+                        if(_modelData.getTin_number() != null){
+                          tin_numberData = _modelData.getTin_number().toString();
                           values.put("`tin_number`", tin_numberData);
                         }
                                   
                                 
                                                             String verification_statusData = "";
-                        if(modelData.getVerification_status() != null){
-                          verification_statusData = modelData.getVerification_status().toString();
+                        if(_modelData.getVerification_status() != null){
+                          verification_statusData = _modelData.getVerification_status().toString();
                           values.put("`verification_status`", verification_statusData);
                         }
                                   
                                 
                                                             String addedData = "";
-                        if(modelData.getAdded() != null){
-                          addedData = modelData.getAdded().toString();
+                        if(_modelData.getAdded() != null){
+                          addedData = _modelData.getAdded().toString();
                           values.put("`added`", addedData);
                         }
                                   
                                 
                                                             String updatedData = "";
-                        if(modelData.getUpdated() != null){
-                          updatedData = modelData.getUpdated().toString();
+                        if(_modelData.getUpdated() != null){
+                          updatedData = _modelData.getUpdated().toString();
                           values.put("`updated`", updatedData);
                         }
                                   
                                 
                                                             String statusData = "";
-                        if(modelData.getStatus() != null){
-                          statusData = modelData.getStatus().toString();
+                        if(_modelData.getStatus() != null){
+                          statusData = _modelData.getStatus().toString();
                           values.put("`status`", statusData);
                         }
                                   
                                 
                                                             String shop_imageData = "";
-                        if(modelData.getShop_image() != null){
+                        if(_modelData.getShop_image() != null){
                           GsonBuilder gsonBuilder = new GsonBuilder();
                           gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                           Gson gson = gsonBuilder.create();
-                          shop_imageData = gson.toJson(modelData.getShop_image(), HashMap.class);
+                          shop_imageData = gson.toJson(_modelData.getShop_image(), HashMap.class);
                           values.put("`shop_image`", shop_imageData);
                         }
                                   
                                 
                                                             String profile_picData = "";
-                        if(modelData.getProfile_pic() != null){
+                        if(_modelData.getProfile_pic() != null){
                           GsonBuilder gsonBuilder = new GsonBuilder();
                           gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                           Gson gson = gsonBuilder.create();
-                          profile_picData = gson.toJson(modelData.getProfile_pic(), HashMap.class);
+                          profile_picData = gson.toJson(_modelData.getProfile_pic(), HashMap.class);
                           values.put("`profile_pic`", profile_picData);
                         }
                                   
                                 
                                                             String tin_imageData = "";
-                        if(modelData.getTin_image() != null){
+                        if(_modelData.getTin_image() != null){
                           GsonBuilder gsonBuilder = new GsonBuilder();
                           gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                           Gson gson = gsonBuilder.create();
-                          tin_imageData = gson.toJson(modelData.getTin_image(), HashMap.class);
+                          tin_imageData = gson.toJson(_modelData.getTin_image(), HashMap.class);
                           values.put("`tin_image`", tin_imageData);
                         }
                                   
                                 
                                   String departmentIdData = "";
-                  if(modelData.getDepartmentId() != null){
+                  if(_modelData.getDepartmentId() != null){
                     GsonBuilder gsonBuilder = new GsonBuilder();
                     gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                     Gson gson = gsonBuilder.create();
-                    departmentIdData = gson.toJson(modelData.getDepartmentId(), DataList.class);
+                    departmentIdData = gson.toJson(_modelData.getDepartmentId(), DataList.class);
                     values.put("`departmentId`", departmentIdData);
                   }
               
@@ -193,10 +193,10 @@ public class RetailerDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String realmData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getRealm");
-                              if(method.invoke(modelData) != null){
-                                //realmData = modelData.getRealm().toString();
-                                realmData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getRealm");
+                              if(method.invoke(_modelData) != null){
+                                //realmData = _modelData.getRealm().toString();
+                                realmData = (String) method.invoke(_modelData);
                                 values.put("`realm`", realmData);
                               }
                         } catch (Exception e) {
@@ -208,10 +208,10 @@ public class RetailerDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String usernameData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getUsername");
-                              if(method.invoke(modelData) != null){
-                                //usernameData = modelData.getUsername().toString();
-                                usernameData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getUsername");
+                              if(method.invoke(_modelData) != null){
+                                //usernameData = _modelData.getUsername().toString();
+                                usernameData = (String) method.invoke(_modelData);
                                 values.put("`username`", usernameData);
                               }
                         } catch (Exception e) {
@@ -223,10 +223,10 @@ public class RetailerDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String passwordData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getPassword");
-                              if(method.invoke(modelData) != null){
-                                //passwordData = modelData.getPassword().toString();
-                                passwordData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getPassword");
+                              if(method.invoke(_modelData) != null){
+                                //passwordData = _modelData.getPassword().toString();
+                                passwordData = (String) method.invoke(_modelData);
                                 values.put("`password`", passwordData);
                               }
                         } catch (Exception e) {
@@ -238,10 +238,10 @@ public class RetailerDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String credentialsData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getCredentials");
-                              if(method.invoke(modelData) != null){
-                                //credentialsData = modelData.getCredentials().toString();
-                                credentialsData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getCredentials");
+                              if(method.invoke(_modelData) != null){
+                                //credentialsData = _modelData.getCredentials().toString();
+                                credentialsData = (String) method.invoke(_modelData);
                                 values.put("`credentials`", credentialsData);
                               }
                         } catch (Exception e) {
@@ -253,10 +253,10 @@ public class RetailerDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String challengesData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getChallenges");
-                              if(method.invoke(modelData) != null){
-                                //challengesData = modelData.getChallenges().toString();
-                                challengesData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getChallenges");
+                              if(method.invoke(_modelData) != null){
+                                //challengesData = _modelData.getChallenges().toString();
+                                challengesData = (String) method.invoke(_modelData);
                                 values.put("`challenges`", challengesData);
                               }
                         } catch (Exception e) {
@@ -268,10 +268,10 @@ public class RetailerDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String emailVerifiedData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getEmailVerified");
-                              if(method.invoke(modelData) != null){
-                                //emailVerifiedData = modelData.getEmailVerified().toString();
-                                emailVerifiedData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getEmailVerified");
+                              if(method.invoke(_modelData) != null){
+                                //emailVerifiedData = _modelData.getEmailVerified().toString();
+                                emailVerifiedData = (String) method.invoke(_modelData);
                                 values.put("`emailVerified`", emailVerifiedData);
                               }
                         } catch (Exception e) {
@@ -283,10 +283,10 @@ public class RetailerDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String verificationTokenData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getVerificationToken");
-                              if(method.invoke(modelData) != null){
-                                //verificationTokenData = modelData.getVerificationToken().toString();
-                                verificationTokenData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getVerificationToken");
+                              if(method.invoke(_modelData) != null){
+                                //verificationTokenData = _modelData.getVerificationToken().toString();
+                                verificationTokenData = (String) method.invoke(_modelData);
                                 values.put("`verificationToken`", verificationTokenData);
                               }
                         } catch (Exception e) {
@@ -298,10 +298,10 @@ public class RetailerDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String createdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getCreated");
-                              if(method.invoke(modelData) != null){
-                                //createdData = modelData.getCreated().toString();
-                                createdData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getCreated");
+                              if(method.invoke(_modelData) != null){
+                                //createdData = _modelData.getCreated().toString();
+                                createdData = (String) method.invoke(_modelData);
                                 values.put("`created`", createdData);
                               }
                         } catch (Exception e) {
@@ -313,10 +313,10 @@ public class RetailerDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String lastUpdatedData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getLastUpdated");
-                              if(method.invoke(modelData) != null){
-                                //lastUpdatedData = modelData.getLastUpdated().toString();
-                                lastUpdatedData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getLastUpdated");
+                              if(method.invoke(_modelData) != null){
+                                //lastUpdatedData = _modelData.getLastUpdated().toString();
+                                lastUpdatedData = (String) method.invoke(_modelData);
                                 values.put("`lastUpdated`", lastUpdatedData);
                               }
                         } catch (Exception e) {
@@ -328,10 +328,10 @@ public class RetailerDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getId");
-                              if(method.invoke(modelData) != null){
-                                //idData = modelData.getId().toString();
-                                idData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getId");
+                              if(method.invoke(_modelData) != null){
+                                //idData = _modelData.getId().toString();
+                                idData = (String) method.invoke(_modelData);
                                 values.put("`id`", idData);
                               }
                         } catch (Exception e) {
@@ -343,10 +343,10 @@ public class RetailerDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String stateIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getStateId");
-                              if(method.invoke(modelData) != null){
-                                //stateIdData = modelData.getStateId().toString();
-                                stateIdData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getStateId");
+                              if(method.invoke(_modelData) != null){
+                                //stateIdData = _modelData.getStateId().toString();
+                                stateIdData = (String) method.invoke(_modelData);
                                 values.put("`stateId`", stateIdData);
                               }
                         } catch (Exception e) {
@@ -358,10 +358,10 @@ public class RetailerDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String cityIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getCityId");
-                              if(method.invoke(modelData) != null){
-                                //cityIdData = modelData.getCityId().toString();
-                                cityIdData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getCityId");
+                              if(method.invoke(_modelData) != null){
+                                //cityIdData = _modelData.getCityId().toString();
+                                cityIdData = (String) method.invoke(_modelData);
                                 values.put("`cityId`", cityIdData);
                               }
                         } catch (Exception e) {
@@ -1165,13 +1165,13 @@ public class RetailerDb{
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final Retailer modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final Retailer _modelData ){
       new Thread(new Runnable(){
         @Override
         public void run(){
           SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
           db.beginTransaction();
-          ContentValues values = getContentValues(modelData);
+          ContentValues values = getContentValues(_modelData);
           String where = getWhere(whereKeyValue);
           db.update("`Retailer`", values, where, null);
           db.setTransactionSuccessful();
@@ -1203,13 +1203,13 @@ public class RetailerDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final Retailer modelData) {
+    public void update__db(final String id,   final Retailer _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 // updating row
                 db.update("`Retailer`", values, "id = ?",
                         new String[] { id });

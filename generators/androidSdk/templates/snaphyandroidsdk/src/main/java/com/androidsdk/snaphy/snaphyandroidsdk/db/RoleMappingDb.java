@@ -52,13 +52,13 @@ public class RoleMappingDb{
   }
 
 
-    public void insert__db (final String id, final RoleMapping modelData) {
+    public void insert__db (final String id, final RoleMapping _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 db.insert("`RoleMapping`", null, values);
                 //db.close(); // Closing database connection
             }
@@ -70,16 +70,16 @@ public class RoleMappingDb{
 
 
 
-    public ContentValues getContentValues(RoleMapping modelData){
+    public ContentValues getContentValues(RoleMapping _modelData){
       ContentValues values = new ContentValues();
                        
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getId");
-                              if(method.invoke(modelData) != null){
-                                //idData = modelData.getId().toString();
-                                idData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getId");
+                              if(method.invoke(_modelData) != null){
+                                //idData = _modelData.getId().toString();
+                                idData = (String) method.invoke(_modelData);
                                 values.put("`id`", idData);
                               }
                         } catch (Exception e) {
@@ -89,8 +89,8 @@ public class RoleMappingDb{
                                   
                                 
                                                             String principalTypeData = "";
-                        if(modelData.getPrincipalType() != null){
-                          principalTypeData = modelData.getPrincipalType().toString();
+                        if(_modelData.getPrincipalType() != null){
+                          principalTypeData = _modelData.getPrincipalType().toString();
                           values.put("`principalType`", principalTypeData);
                         }
                                   
@@ -98,10 +98,10 @@ public class RoleMappingDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String principalIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getPrincipalId");
-                              if(method.invoke(modelData) != null){
-                                //principalIdData = modelData.getPrincipalId().toString();
-                                principalIdData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getPrincipalId");
+                              if(method.invoke(_modelData) != null){
+                                //principalIdData = _modelData.getPrincipalId().toString();
+                                principalIdData = (String) method.invoke(_modelData);
                                 values.put("`principalId`", principalIdData);
                               }
                         } catch (Exception e) {
@@ -113,10 +113,10 @@ public class RoleMappingDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String roleIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getRoleId");
-                              if(method.invoke(modelData) != null){
-                                //roleIdData = modelData.getRoleId().toString();
-                                roleIdData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getRoleId");
+                              if(method.invoke(_modelData) != null){
+                                //roleIdData = _modelData.getRoleId().toString();
+                                roleIdData = (String) method.invoke(_modelData);
                                 values.put("`roleId`", roleIdData);
                               }
                         } catch (Exception e) {
@@ -678,13 +678,13 @@ public class RoleMappingDb{
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final RoleMapping modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final RoleMapping _modelData ){
       new Thread(new Runnable(){
         @Override
         public void run(){
           SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
           db.beginTransaction();
-          ContentValues values = getContentValues(modelData);
+          ContentValues values = getContentValues(_modelData);
           String where = getWhere(whereKeyValue);
           db.update("`RoleMapping`", values, where, null);
           db.setTransactionSuccessful();
@@ -716,13 +716,13 @@ public class RoleMappingDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final RoleMapping modelData) {
+    public void update__db(final String id,   final RoleMapping _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 // updating row
                 db.update("`RoleMapping`", values, "id = ?",
                         new String[] { id });

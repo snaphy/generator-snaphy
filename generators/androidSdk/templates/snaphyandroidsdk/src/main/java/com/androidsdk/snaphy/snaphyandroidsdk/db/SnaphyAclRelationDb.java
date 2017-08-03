@@ -52,13 +52,13 @@ public class SnaphyAclRelationDb{
   }
 
 
-    public void insert__db (final String id, final SnaphyAclRelation modelData) {
+    public void insert__db (final String id, final SnaphyAclRelation _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 db.insert("`SnaphyAclRelation`", null, values);
                 //db.close(); // Closing database connection
             }
@@ -70,19 +70,19 @@ public class SnaphyAclRelationDb{
 
 
 
-    public ContentValues getContentValues(SnaphyAclRelation modelData){
+    public ContentValues getContentValues(SnaphyAclRelation _modelData){
       ContentValues values = new ContentValues();
                        
                                                             String relationData = "";
-                        if(modelData.getRelation() != null){
-                          relationData = modelData.getRelation().toString();
+                        if(_modelData.getRelation() != null){
+                          relationData = _modelData.getRelation().toString();
                           values.put("`relation`", relationData);
                         }
                                   
                                 
                                                             String executeData = "";
-                        if(modelData.getExecute() != null){
-                          executeData = modelData.getExecute().toString();
+                        if(_modelData.getExecute() != null){
+                          executeData = _modelData.getExecute().toString();
                           values.put("`execute`", executeData);
                         }
                                   
@@ -90,10 +90,10 @@ public class SnaphyAclRelationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String is_deletedData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getIs_deleted");
-                              if(method.invoke(modelData) != null){
-                                //is_deletedData = modelData.getIs_deleted().toString();
-                                is_deletedData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getIs_deleted");
+                              if(method.invoke(_modelData) != null){
+                                //is_deletedData = _modelData.getIs_deleted().toString();
+                                is_deletedData = (String) method.invoke(_modelData);
                                 values.put("`is_deleted`", is_deletedData);
                               }
                         } catch (Exception e) {
@@ -105,10 +105,10 @@ public class SnaphyAclRelationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String addedData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getAdded");
-                              if(method.invoke(modelData) != null){
-                                //addedData = modelData.getAdded().toString();
-                                addedData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getAdded");
+                              if(method.invoke(_modelData) != null){
+                                //addedData = _modelData.getAdded().toString();
+                                addedData = (String) method.invoke(_modelData);
                                 values.put("`added`", addedData);
                               }
                         } catch (Exception e) {
@@ -120,10 +120,10 @@ public class SnaphyAclRelationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String updatedData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getUpdated");
-                              if(method.invoke(modelData) != null){
-                                //updatedData = modelData.getUpdated().toString();
-                                updatedData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getUpdated");
+                              if(method.invoke(_modelData) != null){
+                                //updatedData = _modelData.getUpdated().toString();
+                                updatedData = (String) method.invoke(_modelData);
                                 values.put("`updated`", updatedData);
                               }
                         } catch (Exception e) {
@@ -135,10 +135,10 @@ public class SnaphyAclRelationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getId");
-                              if(method.invoke(modelData) != null){
-                                //idData = modelData.getId().toString();
-                                idData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getId");
+                              if(method.invoke(_modelData) != null){
+                                //idData = _modelData.getId().toString();
+                                idData = (String) method.invoke(_modelData);
                                 values.put("`id`", idData);
                               }
                         } catch (Exception e) {
@@ -150,10 +150,10 @@ public class SnaphyAclRelationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String snaphyAclIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getSnaphyAclId");
-                              if(method.invoke(modelData) != null){
-                                //snaphyAclIdData = modelData.getSnaphyAclId().toString();
-                                snaphyAclIdData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getSnaphyAclId");
+                              if(method.invoke(_modelData) != null){
+                                //snaphyAclIdData = _modelData.getSnaphyAclId().toString();
+                                snaphyAclIdData = (String) method.invoke(_modelData);
                                 values.put("`snaphyAclId`", snaphyAclIdData);
                               }
                         } catch (Exception e) {
@@ -745,13 +745,13 @@ public class SnaphyAclRelationDb{
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final SnaphyAclRelation modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final SnaphyAclRelation _modelData ){
       new Thread(new Runnable(){
         @Override
         public void run(){
           SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
           db.beginTransaction();
-          ContentValues values = getContentValues(modelData);
+          ContentValues values = getContentValues(_modelData);
           String where = getWhere(whereKeyValue);
           db.update("`SnaphyAclRelation`", values, where, null);
           db.setTransactionSuccessful();
@@ -783,13 +783,13 @@ public class SnaphyAclRelationDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final SnaphyAclRelation modelData) {
+    public void update__db(final String id,   final SnaphyAclRelation _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 // updating row
                 db.update("`SnaphyAclRelation`", values, "id = ?",
                         new String[] { id });

@@ -52,13 +52,13 @@ public class EarningHistoryDb{
   }
 
 
-    public void insert__db (final String id, final EarningHistory modelData) {
+    public void insert__db (final String id, final EarningHistory _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 db.insert("`EarningHistory`", null, values);
                 //db.close(); // Closing database connection
             }
@@ -70,33 +70,33 @@ public class EarningHistoryDb{
 
 
 
-    public ContentValues getContentValues(EarningHistory modelData){
+    public ContentValues getContentValues(EarningHistory _modelData){
       ContentValues values = new ContentValues();
                        
                                                             String addedData = "";
-                        if(modelData.getAdded() != null){
-                          addedData = modelData.getAdded().toString();
+                        if(_modelData.getAdded() != null){
+                          addedData = _modelData.getAdded().toString();
                           values.put("`added`", addedData);
                         }
                                   
                                 
                                                             String statusData = "";
-                        if(modelData.getStatus() != null){
-                          statusData = modelData.getStatus().toString();
+                        if(_modelData.getStatus() != null){
+                          statusData = _modelData.getStatus().toString();
                           values.put("`status`", statusData);
                         }
                                   
                                 
                                                             String reasonForFailureData = "";
-                        if(modelData.getReasonForFailure() != null){
-                          reasonForFailureData = modelData.getReasonForFailure().toString();
+                        if(_modelData.getReasonForFailure() != null){
+                          reasonForFailureData = _modelData.getReasonForFailure().toString();
                           values.put("`reasonForFailure`", reasonForFailureData);
                         }
                                   
                                 
                                                             String earning_history_numberData = "";
-                        if(modelData.getEarning_history_number() != null){
-                          earning_history_numberData = modelData.getEarning_history_number().toString();
+                        if(_modelData.getEarning_history_number() != null){
+                          earning_history_numberData = _modelData.getEarning_history_number().toString();
                           values.put("`earning_history_number`", earning_history_numberData);
                         }
                                   
@@ -104,10 +104,10 @@ public class EarningHistoryDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String is_deletedData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getIs_deleted");
-                              if(method.invoke(modelData) != null){
-                                //is_deletedData = modelData.getIs_deleted().toString();
-                                is_deletedData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getIs_deleted");
+                              if(method.invoke(_modelData) != null){
+                                //is_deletedData = _modelData.getIs_deleted().toString();
+                                is_deletedData = (String) method.invoke(_modelData);
                                 values.put("`is_deleted`", is_deletedData);
                               }
                         } catch (Exception e) {
@@ -119,10 +119,10 @@ public class EarningHistoryDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String updatedData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getUpdated");
-                              if(method.invoke(modelData) != null){
-                                //updatedData = modelData.getUpdated().toString();
-                                updatedData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getUpdated");
+                              if(method.invoke(_modelData) != null){
+                                //updatedData = _modelData.getUpdated().toString();
+                                updatedData = (String) method.invoke(_modelData);
                                 values.put("`updated`", updatedData);
                               }
                         } catch (Exception e) {
@@ -134,10 +134,10 @@ public class EarningHistoryDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getId");
-                              if(method.invoke(modelData) != null){
-                                //idData = modelData.getId().toString();
-                                idData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getId");
+                              if(method.invoke(_modelData) != null){
+                                //idData = _modelData.getId().toString();
+                                idData = (String) method.invoke(_modelData);
                                 values.put("`id`", idData);
                               }
                         } catch (Exception e) {
@@ -149,10 +149,10 @@ public class EarningHistoryDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String qrCodeIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getQrCodeId");
-                              if(method.invoke(modelData) != null){
-                                //qrCodeIdData = modelData.getQrCodeId().toString();
-                                qrCodeIdData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getQrCodeId");
+                              if(method.invoke(_modelData) != null){
+                                //qrCodeIdData = _modelData.getQrCodeId().toString();
+                                qrCodeIdData = (String) method.invoke(_modelData);
                                 values.put("`qrCodeId`", qrCodeIdData);
                               }
                         } catch (Exception e) {
@@ -164,10 +164,10 @@ public class EarningHistoryDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String retailerIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getRetailerId");
-                              if(method.invoke(modelData) != null){
-                                //retailerIdData = modelData.getRetailerId().toString();
-                                retailerIdData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getRetailerId");
+                              if(method.invoke(_modelData) != null){
+                                //retailerIdData = _modelData.getRetailerId().toString();
+                                retailerIdData = (String) method.invoke(_modelData);
                                 values.put("`retailerId`", retailerIdData);
                               }
                         } catch (Exception e) {
@@ -179,10 +179,10 @@ public class EarningHistoryDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String departmentIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getDepartmentId");
-                              if(method.invoke(modelData) != null){
-                                //departmentIdData = modelData.getDepartmentId().toString();
-                                departmentIdData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getDepartmentId");
+                              if(method.invoke(_modelData) != null){
+                                //departmentIdData = _modelData.getDepartmentId().toString();
+                                departmentIdData = (String) method.invoke(_modelData);
                                 values.put("`departmentId`", departmentIdData);
                               }
                         } catch (Exception e) {
@@ -804,13 +804,13 @@ public class EarningHistoryDb{
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final EarningHistory modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final EarningHistory _modelData ){
       new Thread(new Runnable(){
         @Override
         public void run(){
           SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
           db.beginTransaction();
-          ContentValues values = getContentValues(modelData);
+          ContentValues values = getContentValues(_modelData);
           String where = getWhere(whereKeyValue);
           db.update("`EarningHistory`", values, where, null);
           db.setTransactionSuccessful();
@@ -842,13 +842,13 @@ public class EarningHistoryDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final EarningHistory modelData) {
+    public void update__db(final String id,   final EarningHistory _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 // updating row
                 db.update("`EarningHistory`", values, "id = ?",
                         new String[] { id });

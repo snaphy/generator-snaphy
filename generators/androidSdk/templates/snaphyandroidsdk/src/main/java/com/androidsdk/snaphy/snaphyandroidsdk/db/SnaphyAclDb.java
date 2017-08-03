@@ -52,13 +52,13 @@ public class SnaphyAclDb{
   }
 
 
-    public void insert__db (final String id, final SnaphyAcl modelData) {
+    public void insert__db (final String id, final SnaphyAcl _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 db.insert("`SnaphyAcl`", null, values);
                 //db.close(); // Closing database connection
             }
@@ -70,61 +70,61 @@ public class SnaphyAclDb{
 
 
 
-    public ContentValues getContentValues(SnaphyAcl modelData){
+    public ContentValues getContentValues(SnaphyAcl _modelData){
       ContentValues values = new ContentValues();
                        
                                                             String addedData = "";
-                        if(modelData.getAdded() != null){
-                          addedData = modelData.getAdded().toString();
+                        if(_modelData.getAdded() != null){
+                          addedData = _modelData.getAdded().toString();
                           values.put("`added`", addedData);
                         }
                                   
                                 
                                                             String updatedData = "";
-                        if(modelData.getUpdated() != null){
-                          updatedData = modelData.getUpdated().toString();
+                        if(_modelData.getUpdated() != null){
+                          updatedData = _modelData.getUpdated().toString();
                           values.put("`updated`", updatedData);
                         }
                                   
                                 
                                                             String modelData = "";
-                        if(modelData.getModel() != null){
-                          modelData = modelData.getModel().toString();
+                        if(_modelData.getModel() != null){
+                          modelData = _modelData.getModel().toString();
                           values.put("`model`", modelData);
                         }
                                   
                                 
                                                             String readData = "";
-                        if(modelData.getRead() != null){
-                          readData = modelData.getRead().toString();
+                        if(_modelData.getRead() != null){
+                          readData = _modelData.getRead().toString();
                           values.put("`read`", readData);
                         }
                                   
                                 
                                                             String createData = "";
-                        if(modelData.getCreate() != null){
-                          createData = modelData.getCreate().toString();
+                        if(_modelData.getCreate() != null){
+                          createData = _modelData.getCreate().toString();
                           values.put("`create`", createData);
                         }
                                   
                                 
                                                             String editData = "";
-                        if(modelData.getEdit() != null){
-                          editData = modelData.getEdit().toString();
+                        if(_modelData.getEdit() != null){
+                          editData = _modelData.getEdit().toString();
                           values.put("`edit`", editData);
                         }
                                   
                                 
                                                             String deleteData = "";
-                        if(modelData.getDelete() != null){
-                          deleteData = modelData.getDelete().toString();
+                        if(_modelData.getDelete() != null){
+                          deleteData = _modelData.getDelete().toString();
                           values.put("`delete`", deleteData);
                         }
                                   
                                 
                                                             String roleData = "";
-                        if(modelData.getRole() != null){
-                          roleData = modelData.getRole().toString();
+                        if(_modelData.getRole() != null){
+                          roleData = _modelData.getRole().toString();
                           values.put("`role`", roleData);
                         }
                                   
@@ -132,10 +132,10 @@ public class SnaphyAclDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String is_deletedData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getIs_deleted");
-                              if(method.invoke(modelData) != null){
-                                //is_deletedData = modelData.getIs_deleted().toString();
-                                is_deletedData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getIs_deleted");
+                              if(method.invoke(_modelData) != null){
+                                //is_deletedData = _modelData.getIs_deleted().toString();
+                                is_deletedData = (String) method.invoke(_modelData);
                                 values.put("`is_deleted`", is_deletedData);
                               }
                         } catch (Exception e) {
@@ -147,10 +147,10 @@ public class SnaphyAclDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getId");
-                              if(method.invoke(modelData) != null){
-                                //idData = modelData.getId().toString();
-                                idData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getId");
+                              if(method.invoke(_modelData) != null){
+                                //idData = _modelData.getId().toString();
+                                idData = (String) method.invoke(_modelData);
                                 values.put("`id`", idData);
                               }
                         } catch (Exception e) {
@@ -772,13 +772,13 @@ public class SnaphyAclDb{
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final SnaphyAcl modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final SnaphyAcl _modelData ){
       new Thread(new Runnable(){
         @Override
         public void run(){
           SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
           db.beginTransaction();
-          ContentValues values = getContentValues(modelData);
+          ContentValues values = getContentValues(_modelData);
           String where = getWhere(whereKeyValue);
           db.update("`SnaphyAcl`", values, where, null);
           db.setTransactionSuccessful();
@@ -810,13 +810,13 @@ public class SnaphyAclDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final SnaphyAcl modelData) {
+    public void update__db(final String id,   final SnaphyAcl _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 // updating row
                 db.update("`SnaphyAcl`", values, "id = ?",
                         new String[] { id });

@@ -571,13 +571,7 @@ public class Employee extends Model {
                     //Now add instance methods to fetch the related belongsTo Model..
                     
 
-                     
-                            
-                         
-                            
-                         
-                            
-                        
+                    
 
                                     //Write the method here..
                                     public void get__department( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Department> callback) {
@@ -634,25 +628,6 @@ public class Employee extends Model {
                                     } //method def ends here.
                                  
                             
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
                         
                         
                         

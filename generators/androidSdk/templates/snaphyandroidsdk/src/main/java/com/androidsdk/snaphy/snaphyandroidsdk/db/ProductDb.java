@@ -52,13 +52,13 @@ public class ProductDb{
   }
 
 
-    public void insert__db (final String id, final Product modelData) {
+    public void insert__db (final String id, final Product _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 db.insert("`Product`", null, values);
                 //db.close(); // Closing database connection
             }
@@ -70,67 +70,67 @@ public class ProductDb{
 
 
 
-    public ContentValues getContentValues(Product modelData){
+    public ContentValues getContentValues(Product _modelData){
       ContentValues values = new ContentValues();
                        
                                                             String product_numberData = "";
-                        if(modelData.getProduct_number() != null){
-                          product_numberData = modelData.getProduct_number().toString();
+                        if(_modelData.getProduct_number() != null){
+                          product_numberData = _modelData.getProduct_number().toString();
                           values.put("`product_number`", product_numberData);
                         }
                                   
                                 
                                                             String nameData = "";
-                        if(modelData.getName() != null){
-                          nameData = modelData.getName().toString();
+                        if(_modelData.getName() != null){
+                          nameData = _modelData.getName().toString();
                           values.put("`name`", nameData);
                         }
                                   
                                 
                                                             String product_codeData = "";
-                        if(modelData.getProduct_code() != null){
-                          product_codeData = modelData.getProduct_code().toString();
+                        if(_modelData.getProduct_code() != null){
+                          product_codeData = _modelData.getProduct_code().toString();
                           values.put("`product_code`", product_codeData);
                         }
                                   
                                 
                                                             double priceData;
-                        priceData = (double)modelData.getPrice();
+                        priceData = (double)_modelData.getPrice();
                         values.put("`price`", priceData);
                                   
                                 
                                                             String commentsData = "";
-                        if(modelData.getComments() != null){
-                          commentsData = modelData.getComments().toString();
+                        if(_modelData.getComments() != null){
+                          commentsData = _modelData.getComments().toString();
                           values.put("`comments`", commentsData);
                         }
                                   
                                 
                                                             double pointsData;
-                        pointsData = (double)modelData.getPoints();
+                        pointsData = (double)_modelData.getPoints();
                         values.put("`points`", pointsData);
                                   
                                 
                                                             String imageData = "";
-                        if(modelData.getImage() != null){
+                        if(_modelData.getImage() != null){
                           GsonBuilder gsonBuilder = new GsonBuilder();
                           gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                           Gson gson = gsonBuilder.create();
-                          imageData = gson.toJson(modelData.getImage(), HashMap.class);
+                          imageData = gson.toJson(_modelData.getImage(), HashMap.class);
                           values.put("`image`", imageData);
                         }
                                   
                                 
                                                             String addedData = "";
-                        if(modelData.getAdded() != null){
-                          addedData = modelData.getAdded().toString();
+                        if(_modelData.getAdded() != null){
+                          addedData = _modelData.getAdded().toString();
                           values.put("`added`", addedData);
                         }
                                   
                                 
                                                             String updatedData = "";
-                        if(modelData.getUpdated() != null){
-                          updatedData = modelData.getUpdated().toString();
+                        if(_modelData.getUpdated() != null){
+                          updatedData = _modelData.getUpdated().toString();
                           values.put("`updated`", updatedData);
                         }
                                   
@@ -138,10 +138,10 @@ public class ProductDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String is_deletedData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getIs_deleted");
-                              if(method.invoke(modelData) != null){
-                                //is_deletedData = modelData.getIs_deleted().toString();
-                                is_deletedData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getIs_deleted");
+                              if(method.invoke(_modelData) != null){
+                                //is_deletedData = _modelData.getIs_deleted().toString();
+                                is_deletedData = (String) method.invoke(_modelData);
                                 values.put("`is_deleted`", is_deletedData);
                               }
                         } catch (Exception e) {
@@ -153,10 +153,10 @@ public class ProductDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getId");
-                              if(method.invoke(modelData) != null){
-                                //idData = modelData.getId().toString();
-                                idData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getId");
+                              if(method.invoke(_modelData) != null){
+                                //idData = _modelData.getId().toString();
+                                idData = (String) method.invoke(_modelData);
                                 values.put("`id`", idData);
                               }
                         } catch (Exception e) {
@@ -168,10 +168,10 @@ public class ProductDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String departmentIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getDepartmentId");
-                              if(method.invoke(modelData) != null){
-                                //departmentIdData = modelData.getDepartmentId().toString();
-                                departmentIdData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getDepartmentId");
+                              if(method.invoke(_modelData) != null){
+                                //departmentIdData = _modelData.getDepartmentId().toString();
+                                departmentIdData = (String) method.invoke(_modelData);
                                 values.put("`departmentId`", departmentIdData);
                               }
                         } catch (Exception e) {
@@ -183,10 +183,10 @@ public class ProductDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String categoryIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getCategoryId");
-                              if(method.invoke(modelData) != null){
-                                //categoryIdData = modelData.getCategoryId().toString();
-                                categoryIdData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getCategoryId");
+                              if(method.invoke(_modelData) != null){
+                                //categoryIdData = _modelData.getCategoryId().toString();
+                                categoryIdData = (String) method.invoke(_modelData);
                                 values.put("`categoryId`", categoryIdData);
                               }
                         } catch (Exception e) {
@@ -198,10 +198,10 @@ public class ProductDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String subCategory1IdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getSubCategory1Id");
-                              if(method.invoke(modelData) != null){
-                                //subCategory1IdData = modelData.getSubCategory1Id().toString();
-                                subCategory1IdData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getSubCategory1Id");
+                              if(method.invoke(_modelData) != null){
+                                //subCategory1IdData = _modelData.getSubCategory1Id().toString();
+                                subCategory1IdData = (String) method.invoke(_modelData);
                                 values.put("`subCategory1Id`", subCategory1IdData);
                               }
                         } catch (Exception e) {
@@ -213,10 +213,10 @@ public class ProductDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String subCategory2IdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getSubCategory2Id");
-                              if(method.invoke(modelData) != null){
-                                //subCategory2IdData = modelData.getSubCategory2Id().toString();
-                                subCategory2IdData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getSubCategory2Id");
+                              if(method.invoke(_modelData) != null){
+                                //subCategory2IdData = _modelData.getSubCategory2Id().toString();
+                                subCategory2IdData = (String) method.invoke(_modelData);
                                 values.put("`subCategory2Id`", subCategory2IdData);
                               }
                         } catch (Exception e) {
@@ -887,13 +887,13 @@ public class ProductDb{
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final Product modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final Product _modelData ){
       new Thread(new Runnable(){
         @Override
         public void run(){
           SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
           db.beginTransaction();
-          ContentValues values = getContentValues(modelData);
+          ContentValues values = getContentValues(_modelData);
           String where = getWhere(whereKeyValue);
           db.update("`Product`", values, where, null);
           db.setTransactionSuccessful();
@@ -925,13 +925,13 @@ public class ProductDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final Product modelData) {
+    public void update__db(final String id,   final Product _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 // updating row
                 db.update("`Product`", values, "id = ?",
                         new String[] { id });

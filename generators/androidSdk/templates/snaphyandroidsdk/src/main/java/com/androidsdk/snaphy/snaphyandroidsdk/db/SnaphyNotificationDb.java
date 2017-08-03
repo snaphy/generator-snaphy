@@ -52,13 +52,13 @@ public class SnaphyNotificationDb{
   }
 
 
-    public void insert__db (final String id, final SnaphyNotification modelData) {
+    public void insert__db (final String id, final SnaphyNotification _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 db.insert("`SnaphyNotification`", null, values);
                 //db.close(); // Closing database connection
             }
@@ -70,50 +70,50 @@ public class SnaphyNotificationDb{
 
 
 
-    public ContentValues getContentValues(SnaphyNotification modelData){
+    public ContentValues getContentValues(SnaphyNotification _modelData){
       ContentValues values = new ContentValues();
                        
                                                             String titleData = "";
-                        if(modelData.getTitle() != null){
-                          titleData = modelData.getTitle().toString();
+                        if(_modelData.getTitle() != null){
+                          titleData = _modelData.getTitle().toString();
                           values.put("`title`", titleData);
                         }
                                   
                                 
                                                             String descriptionData = "";
-                        if(modelData.getDescription() != null){
-                          descriptionData = modelData.getDescription().toString();
+                        if(_modelData.getDescription() != null){
+                          descriptionData = _modelData.getDescription().toString();
                           values.put("`description`", descriptionData);
                         }
                                   
                                 
                                                             String onClickData = "";
-                        if(modelData.getOnClick() != null){
+                        if(_modelData.getOnClick() != null){
                           GsonBuilder gsonBuilder = new GsonBuilder();
                           gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                           Gson gson = gsonBuilder.create();
-                          onClickData = gson.toJson(modelData.getOnClick(), HashMap.class);
+                          onClickData = gson.toJson(_modelData.getOnClick(), HashMap.class);
                           values.put("`onClick`", onClickData);
                         }
                                   
                                 
                                                             String addedData = "";
-                        if(modelData.getAdded() != null){
-                          addedData = modelData.getAdded().toString();
+                        if(_modelData.getAdded() != null){
+                          addedData = _modelData.getAdded().toString();
                           values.put("`added`", addedData);
                         }
                                   
                                 
                                                             String updatedData = "";
-                        if(modelData.getUpdated() != null){
-                          updatedData = modelData.getUpdated().toString();
+                        if(_modelData.getUpdated() != null){
+                          updatedData = _modelData.getUpdated().toString();
                           values.put("`updated`", updatedData);
                         }
                                   
                                 
                                                             String statusData = "";
-                        if(modelData.getStatus() != null){
-                          statusData = modelData.getStatus().toString();
+                        if(_modelData.getStatus() != null){
+                          statusData = _modelData.getStatus().toString();
                           values.put("`status`", statusData);
                         }
                                   
@@ -121,10 +121,10 @@ public class SnaphyNotificationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String is_deletedData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getIs_deleted");
-                              if(method.invoke(modelData) != null){
-                                //is_deletedData = modelData.getIs_deleted().toString();
-                                is_deletedData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getIs_deleted");
+                              if(method.invoke(_modelData) != null){
+                                //is_deletedData = _modelData.getIs_deleted().toString();
+                                is_deletedData = (String) method.invoke(_modelData);
                                 values.put("`is_deleted`", is_deletedData);
                               }
                         } catch (Exception e) {
@@ -136,10 +136,10 @@ public class SnaphyNotificationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getId");
-                              if(method.invoke(modelData) != null){
-                                //idData = modelData.getId().toString();
-                                idData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getId");
+                              if(method.invoke(_modelData) != null){
+                                //idData = _modelData.getId().toString();
+                                idData = (String) method.invoke(_modelData);
                                 values.put("`id`", idData);
                               }
                         } catch (Exception e) {
@@ -744,13 +744,13 @@ public class SnaphyNotificationDb{
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final SnaphyNotification modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final SnaphyNotification _modelData ){
       new Thread(new Runnable(){
         @Override
         public void run(){
           SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
           db.beginTransaction();
-          ContentValues values = getContentValues(modelData);
+          ContentValues values = getContentValues(_modelData);
           String where = getWhere(whereKeyValue);
           db.update("`SnaphyNotification`", values, where, null);
           db.setTransactionSuccessful();
@@ -782,13 +782,13 @@ public class SnaphyNotificationDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final SnaphyNotification modelData) {
+    public void update__db(final String id,   final SnaphyNotification _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 // updating row
                 db.update("`SnaphyNotification`", values, "id = ?",
                         new String[] { id });

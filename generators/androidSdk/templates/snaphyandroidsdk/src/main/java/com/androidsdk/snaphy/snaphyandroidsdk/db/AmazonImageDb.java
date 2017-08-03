@@ -52,13 +52,13 @@ public class AmazonImageDb{
   }
 
 
-    public void insert__db (final String id, final AmazonImage modelData) {
+    public void insert__db (final String id, final AmazonImage _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 db.insert("`AmazonImage`", null, values);
                 //db.close(); // Closing database connection
             }
@@ -70,36 +70,36 @@ public class AmazonImageDb{
 
 
 
-    public ContentValues getContentValues(AmazonImage modelData){
+    public ContentValues getContentValues(AmazonImage _modelData){
       ContentValues values = new ContentValues();
                        
                                                             String nameData = "";
-                        if(modelData.getName() != null){
-                          nameData = modelData.getName().toString();
+                        if(_modelData.getName() != null){
+                          nameData = _modelData.getName().toString();
                           values.put("`name`", nameData);
                         }
                                   
                                 
                                                             String containerData = "";
-                        if(modelData.getContainer() != null){
-                          containerData = modelData.getContainer().toString();
+                        if(_modelData.getContainer() != null){
+                          containerData = _modelData.getContainer().toString();
                           values.put("`container`", containerData);
                         }
                                   
                                 
                                                             String typeData = "";
-                        if(modelData.getType() != null){
-                          typeData = modelData.getType().toString();
+                        if(_modelData.getType() != null){
+                          typeData = _modelData.getType().toString();
                           values.put("`type`", typeData);
                         }
                                   
                                 
                                                             String urlData = "";
-                        if(modelData.getUrl() != null){
+                        if(_modelData.getUrl() != null){
                           GsonBuilder gsonBuilder = new GsonBuilder();
                           gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                           Gson gson = gsonBuilder.create();
-                          urlData = gson.toJson(modelData.getUrl(), HashMap.class);
+                          urlData = gson.toJson(_modelData.getUrl(), HashMap.class);
                           values.put("`url`", urlData);
                         }
                                   
@@ -107,10 +107,10 @@ public class AmazonImageDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String is_deletedData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getIs_deleted");
-                              if(method.invoke(modelData) != null){
-                                //is_deletedData = modelData.getIs_deleted().toString();
-                                is_deletedData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getIs_deleted");
+                              if(method.invoke(_modelData) != null){
+                                //is_deletedData = _modelData.getIs_deleted().toString();
+                                is_deletedData = (String) method.invoke(_modelData);
                                 values.put("`is_deleted`", is_deletedData);
                               }
                         } catch (Exception e) {
@@ -122,10 +122,10 @@ public class AmazonImageDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String addedData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getAdded");
-                              if(method.invoke(modelData) != null){
-                                //addedData = modelData.getAdded().toString();
-                                addedData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getAdded");
+                              if(method.invoke(_modelData) != null){
+                                //addedData = _modelData.getAdded().toString();
+                                addedData = (String) method.invoke(_modelData);
                                 values.put("`added`", addedData);
                               }
                         } catch (Exception e) {
@@ -137,10 +137,10 @@ public class AmazonImageDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String updatedData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getUpdated");
-                              if(method.invoke(modelData) != null){
-                                //updatedData = modelData.getUpdated().toString();
-                                updatedData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getUpdated");
+                              if(method.invoke(_modelData) != null){
+                                //updatedData = _modelData.getUpdated().toString();
+                                updatedData = (String) method.invoke(_modelData);
                                 values.put("`updated`", updatedData);
                               }
                         } catch (Exception e) {
@@ -152,10 +152,10 @@ public class AmazonImageDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getId");
-                              if(method.invoke(modelData) != null){
-                                //idData = modelData.getId().toString();
-                                idData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getId");
+                              if(method.invoke(_modelData) != null){
+                                //idData = _modelData.getId().toString();
+                                idData = (String) method.invoke(_modelData);
                                 values.put("`id`", idData);
                               }
                         } catch (Exception e) {
@@ -760,13 +760,13 @@ public class AmazonImageDb{
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final AmazonImage modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final AmazonImage _modelData ){
       new Thread(new Runnable(){
         @Override
         public void run(){
           SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
           db.beginTransaction();
-          ContentValues values = getContentValues(modelData);
+          ContentValues values = getContentValues(_modelData);
           String where = getWhere(whereKeyValue);
           db.update("`AmazonImage`", values, where, null);
           db.setTransactionSuccessful();
@@ -798,13 +798,13 @@ public class AmazonImageDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final AmazonImage modelData) {
+    public void update__db(final String id,   final AmazonImage _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 // updating row
                 db.update("`AmazonImage`", values, "id = ?",
                         new String[] { id });

@@ -52,13 +52,13 @@ public class ApplicationDb{
   }
 
 
-    public void insert__db (final String id, final Application modelData) {
+    public void insert__db (final String id, final Application _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 db.insert("`Application`", null, values);
                 //db.close(); // Closing database connection
             }
@@ -70,16 +70,16 @@ public class ApplicationDb{
 
 
 
-    public ContentValues getContentValues(Application modelData){
+    public ContentValues getContentValues(Application _modelData){
       ContentValues values = new ContentValues();
                        
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getId");
-                              if(method.invoke(modelData) != null){
-                                //idData = modelData.getId().toString();
-                                idData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getId");
+                              if(method.invoke(_modelData) != null){
+                                //idData = _modelData.getId().toString();
+                                idData = (String) method.invoke(_modelData);
                                 values.put("`id`", idData);
                               }
                         } catch (Exception e) {
@@ -91,10 +91,10 @@ public class ApplicationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String realmData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getRealm");
-                              if(method.invoke(modelData) != null){
-                                //realmData = modelData.getRealm().toString();
-                                realmData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getRealm");
+                              if(method.invoke(_modelData) != null){
+                                //realmData = _modelData.getRealm().toString();
+                                realmData = (String) method.invoke(_modelData);
                                 values.put("`realm`", realmData);
                               }
                         } catch (Exception e) {
@@ -106,10 +106,10 @@ public class ApplicationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String nameData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getName");
-                              if(method.invoke(modelData) != null){
-                                //nameData = modelData.getName().toString();
-                                nameData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getName");
+                              if(method.invoke(_modelData) != null){
+                                //nameData = _modelData.getName().toString();
+                                nameData = (String) method.invoke(_modelData);
                                 values.put("`name`", nameData);
                               }
                         } catch (Exception e) {
@@ -121,10 +121,10 @@ public class ApplicationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String descriptionData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getDescription");
-                              if(method.invoke(modelData) != null){
-                                //descriptionData = modelData.getDescription().toString();
-                                descriptionData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getDescription");
+                              if(method.invoke(_modelData) != null){
+                                //descriptionData = _modelData.getDescription().toString();
+                                descriptionData = (String) method.invoke(_modelData);
                                 values.put("`description`", descriptionData);
                               }
                         } catch (Exception e) {
@@ -136,10 +136,10 @@ public class ApplicationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String iconData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getIcon");
-                              if(method.invoke(modelData) != null){
-                                //iconData = modelData.getIcon().toString();
-                                iconData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getIcon");
+                              if(method.invoke(_modelData) != null){
+                                //iconData = _modelData.getIcon().toString();
+                                iconData = (String) method.invoke(_modelData);
                                 values.put("`icon`", iconData);
                               }
                         } catch (Exception e) {
@@ -151,10 +151,10 @@ public class ApplicationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String ownerData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getOwner");
-                              if(method.invoke(modelData) != null){
-                                //ownerData = modelData.getOwner().toString();
-                                ownerData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getOwner");
+                              if(method.invoke(_modelData) != null){
+                                //ownerData = _modelData.getOwner().toString();
+                                ownerData = (String) method.invoke(_modelData);
                                 values.put("`owner`", ownerData);
                               }
                         } catch (Exception e) {
@@ -164,11 +164,11 @@ public class ApplicationDb{
                                   
                                 
                                   String collaboratorsData = "";
-                  if(modelData.getCollaborators() != null){
+                  if(_modelData.getCollaborators() != null){
                     GsonBuilder gsonBuilder = new GsonBuilder();
                     gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                     Gson gson = gsonBuilder.create();
-                    collaboratorsData = gson.toJson(modelData.getCollaborators(), DataList.class);
+                    collaboratorsData = gson.toJson(_modelData.getCollaborators(), DataList.class);
                     values.put("`collaborators`", collaboratorsData);
                   }
               
@@ -176,10 +176,10 @@ public class ApplicationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String emailData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getEmail");
-                              if(method.invoke(modelData) != null){
-                                //emailData = modelData.getEmail().toString();
-                                emailData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getEmail");
+                              if(method.invoke(_modelData) != null){
+                                //emailData = _modelData.getEmail().toString();
+                                emailData = (String) method.invoke(_modelData);
                                 values.put("`email`", emailData);
                               }
                         } catch (Exception e) {
@@ -191,10 +191,10 @@ public class ApplicationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String emailVerifiedData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getEmailVerified");
-                              if(method.invoke(modelData) != null){
-                                //emailVerifiedData = modelData.getEmailVerified().toString();
-                                emailVerifiedData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getEmailVerified");
+                              if(method.invoke(_modelData) != null){
+                                //emailVerifiedData = _modelData.getEmailVerified().toString();
+                                emailVerifiedData = (String) method.invoke(_modelData);
                                 values.put("`emailVerified`", emailVerifiedData);
                               }
                         } catch (Exception e) {
@@ -206,10 +206,10 @@ public class ApplicationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String urlData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getUrl");
-                              if(method.invoke(modelData) != null){
-                                //urlData = modelData.getUrl().toString();
-                                urlData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getUrl");
+                              if(method.invoke(_modelData) != null){
+                                //urlData = _modelData.getUrl().toString();
+                                urlData = (String) method.invoke(_modelData);
                                 values.put("`url`", urlData);
                               }
                         } catch (Exception e) {
@@ -219,21 +219,21 @@ public class ApplicationDb{
                                   
                                 
                                   String callbackUrlsData = "";
-                  if(modelData.getCallbackUrls() != null){
+                  if(_modelData.getCallbackUrls() != null){
                     GsonBuilder gsonBuilder = new GsonBuilder();
                     gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                     Gson gson = gsonBuilder.create();
-                    callbackUrlsData = gson.toJson(modelData.getCallbackUrls(), DataList.class);
+                    callbackUrlsData = gson.toJson(_modelData.getCallbackUrls(), DataList.class);
                     values.put("`callbackUrls`", callbackUrlsData);
                   }
               
                                 
                                   String permissionsData = "";
-                  if(modelData.getPermissions() != null){
+                  if(_modelData.getPermissions() != null){
                     GsonBuilder gsonBuilder = new GsonBuilder();
                     gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                     Gson gson = gsonBuilder.create();
-                    permissionsData = gson.toJson(modelData.getPermissions(), DataList.class);
+                    permissionsData = gson.toJson(_modelData.getPermissions(), DataList.class);
                     values.put("`permissions`", permissionsData);
                   }
               
@@ -241,10 +241,10 @@ public class ApplicationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String clientKeyData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getClientKey");
-                              if(method.invoke(modelData) != null){
-                                //clientKeyData = modelData.getClientKey().toString();
-                                clientKeyData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getClientKey");
+                              if(method.invoke(_modelData) != null){
+                                //clientKeyData = _modelData.getClientKey().toString();
+                                clientKeyData = (String) method.invoke(_modelData);
                                 values.put("`clientKey`", clientKeyData);
                               }
                         } catch (Exception e) {
@@ -256,10 +256,10 @@ public class ApplicationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String javaScriptKeyData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getJavaScriptKey");
-                              if(method.invoke(modelData) != null){
-                                //javaScriptKeyData = modelData.getJavaScriptKey().toString();
-                                javaScriptKeyData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getJavaScriptKey");
+                              if(method.invoke(_modelData) != null){
+                                //javaScriptKeyData = _modelData.getJavaScriptKey().toString();
+                                javaScriptKeyData = (String) method.invoke(_modelData);
                                 values.put("`javaScriptKey`", javaScriptKeyData);
                               }
                         } catch (Exception e) {
@@ -271,10 +271,10 @@ public class ApplicationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String restApiKeyData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getRestApiKey");
-                              if(method.invoke(modelData) != null){
-                                //restApiKeyData = modelData.getRestApiKey().toString();
-                                restApiKeyData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getRestApiKey");
+                              if(method.invoke(_modelData) != null){
+                                //restApiKeyData = _modelData.getRestApiKey().toString();
+                                restApiKeyData = (String) method.invoke(_modelData);
                                 values.put("`restApiKey`", restApiKeyData);
                               }
                         } catch (Exception e) {
@@ -286,10 +286,10 @@ public class ApplicationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String windowsKeyData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getWindowsKey");
-                              if(method.invoke(modelData) != null){
-                                //windowsKeyData = modelData.getWindowsKey().toString();
-                                windowsKeyData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getWindowsKey");
+                              if(method.invoke(_modelData) != null){
+                                //windowsKeyData = _modelData.getWindowsKey().toString();
+                                windowsKeyData = (String) method.invoke(_modelData);
                                 values.put("`windowsKey`", windowsKeyData);
                               }
                         } catch (Exception e) {
@@ -301,10 +301,10 @@ public class ApplicationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String masterKeyData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getMasterKey");
-                              if(method.invoke(modelData) != null){
-                                //masterKeyData = modelData.getMasterKey().toString();
-                                masterKeyData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getMasterKey");
+                              if(method.invoke(_modelData) != null){
+                                //masterKeyData = _modelData.getMasterKey().toString();
+                                masterKeyData = (String) method.invoke(_modelData);
                                 values.put("`masterKey`", masterKeyData);
                               }
                         } catch (Exception e) {
@@ -316,10 +316,10 @@ public class ApplicationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String pushSettingsData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getPushSettings");
-                              if(method.invoke(modelData) != null){
-                                //pushSettingsData = modelData.getPushSettings().toString();
-                                pushSettingsData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getPushSettings");
+                              if(method.invoke(_modelData) != null){
+                                //pushSettingsData = _modelData.getPushSettings().toString();
+                                pushSettingsData = (String) method.invoke(_modelData);
                                 values.put("`pushSettings`", pushSettingsData);
                               }
                         } catch (Exception e) {
@@ -331,10 +331,10 @@ public class ApplicationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String authenticationEnabledData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getAuthenticationEnabled");
-                              if(method.invoke(modelData) != null){
-                                //authenticationEnabledData = modelData.getAuthenticationEnabled().toString();
-                                authenticationEnabledData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getAuthenticationEnabled");
+                              if(method.invoke(_modelData) != null){
+                                //authenticationEnabledData = _modelData.getAuthenticationEnabled().toString();
+                                authenticationEnabledData = (String) method.invoke(_modelData);
                                 values.put("`authenticationEnabled`", authenticationEnabledData);
                               }
                         } catch (Exception e) {
@@ -346,10 +346,10 @@ public class ApplicationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String anonymousAllowedData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getAnonymousAllowed");
-                              if(method.invoke(modelData) != null){
-                                //anonymousAllowedData = modelData.getAnonymousAllowed().toString();
-                                anonymousAllowedData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getAnonymousAllowed");
+                              if(method.invoke(_modelData) != null){
+                                //anonymousAllowedData = _modelData.getAnonymousAllowed().toString();
+                                anonymousAllowedData = (String) method.invoke(_modelData);
                                 values.put("`anonymousAllowed`", anonymousAllowedData);
                               }
                         } catch (Exception e) {
@@ -359,11 +359,11 @@ public class ApplicationDb{
                                   
                                 
                                   String authenticationSchemesData = "";
-                  if(modelData.getAuthenticationSchemes() != null){
+                  if(_modelData.getAuthenticationSchemes() != null){
                     GsonBuilder gsonBuilder = new GsonBuilder();
                     gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                     Gson gson = gsonBuilder.create();
-                    authenticationSchemesData = gson.toJson(modelData.getAuthenticationSchemes(), DataList.class);
+                    authenticationSchemesData = gson.toJson(_modelData.getAuthenticationSchemes(), DataList.class);
                     values.put("`authenticationSchemes`", authenticationSchemesData);
                   }
               
@@ -371,10 +371,10 @@ public class ApplicationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String statusData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getStatus");
-                              if(method.invoke(modelData) != null){
-                                //statusData = modelData.getStatus().toString();
-                                statusData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getStatus");
+                              if(method.invoke(_modelData) != null){
+                                //statusData = _modelData.getStatus().toString();
+                                statusData = (String) method.invoke(_modelData);
                                 values.put("`status`", statusData);
                               }
                         } catch (Exception e) {
@@ -386,10 +386,10 @@ public class ApplicationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String createdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getCreated");
-                              if(method.invoke(modelData) != null){
-                                //createdData = modelData.getCreated().toString();
-                                createdData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getCreated");
+                              if(method.invoke(_modelData) != null){
+                                //createdData = _modelData.getCreated().toString();
+                                createdData = (String) method.invoke(_modelData);
                                 values.put("`created`", createdData);
                               }
                         } catch (Exception e) {
@@ -401,10 +401,10 @@ public class ApplicationDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String modifiedData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getModified");
-                              if(method.invoke(modelData) != null){
-                                //modifiedData = modelData.getModified().toString();
-                                modifiedData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getModified");
+                              if(method.invoke(_modelData) != null){
+                                //modifiedData = _modelData.getModified().toString();
+                                modifiedData = (String) method.invoke(_modelData);
                                 values.put("`modified`", modifiedData);
                               }
                         } catch (Exception e) {
@@ -1178,13 +1178,13 @@ public class ApplicationDb{
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final Application modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final Application _modelData ){
       new Thread(new Runnable(){
         @Override
         public void run(){
           SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
           db.beginTransaction();
-          ContentValues values = getContentValues(modelData);
+          ContentValues values = getContentValues(_modelData);
           String where = getWhere(whereKeyValue);
           db.update("`Application`", values, where, null);
           db.setTransactionSuccessful();
@@ -1216,13 +1216,13 @@ public class ApplicationDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final Application modelData) {
+    public void update__db(final String id,   final Application _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 // updating row
                 db.update("`Application`", values, "id = ?",
                         new String[] { id });

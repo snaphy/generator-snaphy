@@ -544,13 +544,7 @@ public class Customer extends Model {
                     //Now add instance methods to fetch the related belongsTo Model..
                     
 
-                     
-                            
-                         
-                            
-                         
-                            
-                        
+                    
 
                                     //Write the method here..
                                     public void findById__facebookAccessToken( String fk,  RestAdapter restAdapter, final ObjectCallback<FacebookAccessToken> callback) {
@@ -710,14 +704,6 @@ public class Customer extends Model {
                                         });
                                     } //method def ends here.
                                  
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
                             
                         
 
@@ -925,19 +911,6 @@ public class Customer extends Model {
                                     } //method def ends here.
                                  
                             
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
                         
                         
                         

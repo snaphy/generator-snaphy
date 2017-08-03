@@ -52,13 +52,13 @@ public class TransactionDb{
   }
 
 
-    public void insert__db (final String id, final Transaction modelData) {
+    public void insert__db (final String id, final Transaction _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 db.insert("`Transaction`", null, values);
                 //db.close(); // Closing database connection
             }
@@ -70,50 +70,50 @@ public class TransactionDb{
 
 
 
-    public ContentValues getContentValues(Transaction modelData){
+    public ContentValues getContentValues(Transaction _modelData){
       ContentValues values = new ContentValues();
                        
                                                             String transactionStatusData = "";
-                        if(modelData.getTransactionStatus() != null){
-                          transactionStatusData = modelData.getTransactionStatus().toString();
+                        if(_modelData.getTransactionStatus() != null){
+                          transactionStatusData = _modelData.getTransactionStatus().toString();
                           values.put("`transactionStatus`", transactionStatusData);
                         }
                                   
                                 
                                                             String transaction_numberData = "";
-                        if(modelData.getTransaction_number() != null){
-                          transaction_numberData = modelData.getTransaction_number().toString();
+                        if(_modelData.getTransaction_number() != null){
+                          transaction_numberData = _modelData.getTransaction_number().toString();
                           values.put("`transaction_number`", transaction_numberData);
                         }
                                   
                                 
                                                             String paytm_transaction_idData = "";
-                        if(modelData.getPaytm_transaction_id() != null){
-                          paytm_transaction_idData = modelData.getPaytm_transaction_id().toString();
+                        if(_modelData.getPaytm_transaction_id() != null){
+                          paytm_transaction_idData = _modelData.getPaytm_transaction_id().toString();
                           values.put("`paytm_transaction_id`", paytm_transaction_idData);
                         }
                                   
                                 
                                                             double total_pointsData;
-                        total_pointsData = (double)modelData.getTotal_points();
+                        total_pointsData = (double)_modelData.getTotal_points();
                         values.put("`total_points`", total_pointsData);
                                   
                                 
                                                             double total_amountData;
-                        total_amountData = (double)modelData.getTotal_amount();
+                        total_amountData = (double)_modelData.getTotal_amount();
                         values.put("`total_amount`", total_amountData);
                                   
                                 
                                                             String addedData = "";
-                        if(modelData.getAdded() != null){
-                          addedData = modelData.getAdded().toString();
+                        if(_modelData.getAdded() != null){
+                          addedData = _modelData.getAdded().toString();
                           values.put("`added`", addedData);
                         }
                                   
                                 
                                                             String updatedData = "";
-                        if(modelData.getUpdated() != null){
-                          updatedData = modelData.getUpdated().toString();
+                        if(_modelData.getUpdated() != null){
+                          updatedData = _modelData.getUpdated().toString();
                           values.put("`updated`", updatedData);
                         }
                                   
@@ -121,10 +121,10 @@ public class TransactionDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String is_deletedData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getIs_deleted");
-                              if(method.invoke(modelData) != null){
-                                //is_deletedData = modelData.getIs_deleted().toString();
-                                is_deletedData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getIs_deleted");
+                              if(method.invoke(_modelData) != null){
+                                //is_deletedData = _modelData.getIs_deleted().toString();
+                                is_deletedData = (String) method.invoke(_modelData);
                                 values.put("`is_deleted`", is_deletedData);
                               }
                         } catch (Exception e) {
@@ -136,10 +136,10 @@ public class TransactionDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getId");
-                              if(method.invoke(modelData) != null){
-                                //idData = modelData.getId().toString();
-                                idData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getId");
+                              if(method.invoke(_modelData) != null){
+                                //idData = _modelData.getId().toString();
+                                idData = (String) method.invoke(_modelData);
                                 values.put("`id`", idData);
                               }
                         } catch (Exception e) {
@@ -151,10 +151,10 @@ public class TransactionDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String retailerIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getRetailerId");
-                              if(method.invoke(modelData) != null){
-                                //retailerIdData = modelData.getRetailerId().toString();
-                                retailerIdData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getRetailerId");
+                              if(method.invoke(_modelData) != null){
+                                //retailerIdData = _modelData.getRetailerId().toString();
+                                retailerIdData = (String) method.invoke(_modelData);
                                 values.put("`retailerId`", retailerIdData);
                               }
                         } catch (Exception e) {
@@ -166,10 +166,10 @@ public class TransactionDb{
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String departmentIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getDepartmentId");
-                              if(method.invoke(modelData) != null){
-                                //departmentIdData = modelData.getDepartmentId().toString();
-                                departmentIdData = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("getDepartmentId");
+                              if(method.invoke(_modelData) != null){
+                                //departmentIdData = _modelData.getDepartmentId().toString();
+                                departmentIdData = (String) method.invoke(_modelData);
                                 values.put("`departmentId`", departmentIdData);
                               }
                         } catch (Exception e) {
@@ -797,13 +797,13 @@ public class TransactionDb{
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final Transaction modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final Transaction _modelData ){
       new Thread(new Runnable(){
         @Override
         public void run(){
           SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
           db.beginTransaction();
-          ContentValues values = getContentValues(modelData);
+          ContentValues values = getContentValues(_modelData);
           String where = getWhere(whereKeyValue);
           db.update("`Transaction`", values, where, null);
           db.setTransactionSuccessful();
@@ -835,13 +835,13 @@ public class TransactionDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final Transaction modelData) {
+    public void update__db(final String id,   final Transaction _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 // updating row
                 db.update("`Transaction`", values, "id = ?",
                         new String[] { id });
