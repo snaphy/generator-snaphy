@@ -41,22 +41,22 @@ import org.json.JSONObject;
 
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.InstagramPost;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.SnaphyAcl;
 import android.content.Context;
-import com.androidsdk.snaphy.snaphyandroidsdk.db.InstagramPostDb;
+import com.androidsdk.snaphy.snaphyandroidsdk.db.SnaphyAclDb;
 
 //Now import model of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.InstagramUser;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.InstagramUserRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.SnaphyAclProp;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.SnaphyAclPropRepository;
             
         
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.InstagramCaption;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.InstagramCaptionRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.SnaphyAclRelation;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.SnaphyAclRelationRepository;
             
         
     
@@ -65,15 +65,15 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.InstagramPostDb;
 
 
 
-public class InstagramPostRepository extends ModelRepository<InstagramPost> {
+public class SnaphyAclRepository extends ModelRepository<SnaphyAcl> {
 
 
     private Context context;
     private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
     private static String DATABASE_NAME;
 
-    public InstagramPostRepository(){
-        super("InstagramPost", null, InstagramPost.class);
+    public SnaphyAclRepository(){
+        super("SnaphyAcl", null, SnaphyAcl.class);
 
     }
 
@@ -91,15 +91,15 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
 
 
 
-    public InstagramPostDb getDb() {
-      return instagramPostDb;
+    public SnaphyAclDb getDb() {
+      return snaphyAclDb;
     }
 
-    public void setInstagramPostDb(InstagramPostDb instagramPostDb) {
-      this.instagramPostDb = instagramPostDb;
+    public void setSnaphyAclDb(SnaphyAclDb snaphyAclDb) {
+      this.snaphyAclDb = snaphyAclDb;
     }
 
-    private InstagramPostDb instagramPostDb;
+    private SnaphyAclDb snaphyAclDb;
 
 
 
@@ -133,7 +133,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
          catch (Exception e){
             Log.e("Snaphy", e.toString());
          }
-         setInstagramPostDb(new InstagramPostDb(context, DATABASE_NAME, getRestAdapter()));
+         setSnaphyAclDb(new SnaphyAclDb(context, DATABASE_NAME, getRestAdapter()));
          //allow data storage locally..
          persistData(true);
          this.context = context;
@@ -147,7 +147,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:instagramPostId/user", "GET"), "InstagramPost.prototype.__get__user");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:snaphyAclId/snaphyAclProps/:fk", "GET"), "SnaphyAcl.prototype.__findById__snaphyAclProps");
     
 
     
@@ -156,7 +156,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:instagramPostId/user", "POST"), "InstagramPost.prototype.__create__user");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:snaphyAclId/snaphyAclProps/:fk", "DELETE"), "SnaphyAcl.prototype.__destroyById__snaphyAclProps");
     
 
     
@@ -165,7 +165,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:instagramPostId/user", "PUT"), "InstagramPost.prototype.__update__user");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:snaphyAclId/snaphyAclProps/:fk", "PUT"), "SnaphyAcl.prototype.__updateById__snaphyAclProps");
     
 
     
@@ -174,7 +174,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:instagramPostId/user", "DELETE"), "InstagramPost.prototype.__destroy__user");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:snaphyAclId/snaphyAclRelations/:fk", "GET"), "SnaphyAcl.prototype.__findById__snaphyAclRelations");
     
 
     
@@ -183,7 +183,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:instagramPostId/caption", "GET"), "InstagramPost.prototype.__get__caption");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:snaphyAclId/snaphyAclRelations/:fk", "DELETE"), "SnaphyAcl.prototype.__destroyById__snaphyAclRelations");
     
 
     
@@ -192,7 +192,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:instagramPostId/caption", "POST"), "InstagramPost.prototype.__create__caption");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:snaphyAclId/snaphyAclRelations/:fk", "PUT"), "SnaphyAcl.prototype.__updateById__snaphyAclRelations");
     
 
     
@@ -201,7 +201,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:instagramPostId/caption", "PUT"), "InstagramPost.prototype.__update__caption");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:snaphyAclId/snaphyAclProps", "GET"), "SnaphyAcl.prototype.__get__snaphyAclProps");
     
 
     
@@ -210,7 +210,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:instagramPostId/caption", "DELETE"), "InstagramPost.prototype.__destroy__caption");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:snaphyAclId/snaphyAclProps", "POST"), "SnaphyAcl.prototype.__create__snaphyAclProps");
     
 
     
@@ -219,7 +219,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "InstagramPost.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:snaphyAclId/snaphyAclProps", "DELETE"), "SnaphyAcl.prototype.__delete__snaphyAclProps");
     
 
     
@@ -228,7 +228,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "InstagramPost.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:snaphyAclId/snaphyAclProps/count", "GET"), "SnaphyAcl.prototype.__count__snaphyAclProps");
     
 
     
@@ -237,7 +237,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "InstagramPost.upsert");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:snaphyAclId/snaphyAclRelations", "GET"), "SnaphyAcl.prototype.__get__snaphyAclRelations");
     
 
     
@@ -246,7 +246,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "InstagramPost.exists");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:snaphyAclId/snaphyAclRelations", "POST"), "SnaphyAcl.prototype.__create__snaphyAclRelations");
     
 
     
@@ -255,7 +255,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "InstagramPost.findById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:snaphyAclId/snaphyAclRelations", "DELETE"), "SnaphyAcl.prototype.__delete__snaphyAclRelations");
     
 
     
@@ -264,7 +264,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "InstagramPost.find");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:snaphyAclId/snaphyAclRelations/count", "GET"), "SnaphyAcl.prototype.__count__snaphyAclRelations");
     
 
     
@@ -273,7 +273,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "InstagramPost.findOne");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "SnaphyAcl.create");
     
 
     
@@ -282,7 +282,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "InstagramPost.updateAll");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "SnaphyAcl.create");
     
 
     
@@ -291,7 +291,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "InstagramPost.deleteById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "SnaphyAcl.upsert");
     
 
     
@@ -300,7 +300,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "InstagramPost.count");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "SnaphyAcl.exists");
     
 
     
@@ -309,31 +309,52 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:instagramPostId", "PUT"), "InstagramPost.prototype.updateAttributes");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "SnaphyAcl.findById");
     
 
     
     
 
     
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "SnaphyAcl.find");
+    
+
+    
+    
+
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "SnaphyAcl.findOne");
+    
+
+    
+    
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "InstagramPost.getSchema");
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "SnaphyAcl.updateAll");
     
 
     
+    
+
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "SnaphyAcl.deleteById");
+    
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "InstagramPost.getAbsoluteSchema");
+    
+
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "SnaphyAcl.count");
     
 
     
@@ -342,19 +363,28 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "InstagramPost.getDetailSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:snaphyAclId", "PUT"), "SnaphyAcl.prototype.updateAttributes");
     
 
+    
+    
+
+    
     
+
     
 
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "SnaphyAcl.getSchema");
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "InstagramPost.getModelRelationSchema");
+    
+
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "SnaphyAcl.getAbsoluteSchema");
     
 
     
@@ -364,12 +394,18 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
 
     
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "SnaphyAcl.getDetailSchema");
     
 
     
+    
+
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "SnaphyAcl.getModelRelationSchema");
     
 
     
@@ -402,8 +438,8 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
 
     
         
-            //Method get__user definition
-            public void get__user(  String instagramPostId,  Boolean refresh, final ObjectCallback<InstagramUser> callback){
+            //Method findById__snaphyAclProps definition
+            public void findById__snaphyAclProps(  String snaphyAclId,  String fk, final ObjectCallback<SnaphyAclProp> callback){
 
                 /**
                 Call the onBefore event
@@ -415,9 +451,9 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("instagramPostId", instagramPostId);
+                        hashMapObject.put("snaphyAclId", snaphyAclId);
                 
-                        hashMapObject.put("refresh", refresh);
+                        hashMapObject.put("fk", fk);
                 
 
                 
@@ -426,7 +462,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__user", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__snaphyAclProps", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -439,27 +475,27 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    InstagramUserRepository instagramUserRepo = getRestAdapter().createRepository(InstagramUserRepository.class);
+                                    SnaphyAclPropRepository snaphyAclPropRepo = getRestAdapter().createRepository(SnaphyAclPropRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = instagramUserRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(instagramUserRepo, context);
+                                            Method method = snaphyAclPropRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(snaphyAclPropRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //instagramUserRepo.addStorage(context);
+                                        //snaphyAclPropRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    InstagramUser instagramUser = instagramUserRepo.createObject(result);
+                                    SnaphyAclProp snaphyAclProp = snaphyAclPropRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = instagramUser.getClass().getMethod("save__db");
-                                                    method.invoke(instagramUser);
+                                                    Method method = snaphyAclProp.getClass().getMethod("save__db");
+                                                    method.invoke(snaphyAclProp);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -467,7 +503,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
 
                                       }
 
-                                    callback.onSuccess(instagramUser);
+                                    callback.onSuccess(snaphyAclProp);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -480,15 +516,15 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
 
                 
 
-            }//Method get__user definition ends here..
+            }//Method findById__snaphyAclProps definition ends here..
 
             
 
         
     
         
-            //Method create__user definition
-            public void create__user(  String instagramPostId,  Map<String,  ? extends Object> data, final ObjectCallback<InstagramUser> callback){
+            //Method destroyById__snaphyAclProps definition
+            public void destroyById__snaphyAclProps(  String snaphyAclId,  String fk, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -500,181 +536,13 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("instagramPostId", instagramPostId);
+                        hashMapObject.put("snaphyAclId", snaphyAclId);
                 
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__create__user", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    InstagramUserRepository instagramUserRepo = getRestAdapter().createRepository(InstagramUserRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = instagramUserRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(instagramUserRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //instagramUserRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    InstagramUser instagramUser = instagramUserRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = instagramUser.getClass().getMethod("save__db");
-                                                    method.invoke(instagramUser);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(instagramUser);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
+                        hashMapObject.put("fk", fk);
                 
 
                 
-
-            }//Method create__user definition ends here..
-
-            
-
-        
-    
-        
-            //Method update__user definition
-            public void update__user(  String instagramPostId,  Map<String,  ? extends Object> data, final ObjectCallback<InstagramUser> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("instagramPostId", instagramPostId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__update__user", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    InstagramUserRepository instagramUserRepo = getRestAdapter().createRepository(InstagramUserRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = instagramUserRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(instagramUserRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //instagramUserRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    InstagramUser instagramUser = instagramUserRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = instagramUser.getClass().getMethod("save__db");
-                                                    method.invoke(instagramUser);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(instagramUser);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method update__user definition ends here..
-
-            
-
-        
-    
-        
-            //Method destroy__user definition
-            public void destroy__user(  String instagramPostId, final VoidCallback callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("instagramPostId", instagramPostId);
-                
-
-                
-                    invokeStaticMethod("prototype.__destroy__user", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroyById__snaphyAclProps", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -696,15 +564,15 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
 
                 
 
-            }//Method destroy__user definition ends here..
+            }//Method destroyById__snaphyAclProps definition ends here..
 
             
 
         
     
         
-            //Method get__caption definition
-            public void get__caption(  String instagramPostId,  Boolean refresh, final ObjectCallback<InstagramCaption> callback){
+            //Method updateById__snaphyAclProps definition
+            public void updateById__snaphyAclProps(  String snaphyAclId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<SnaphyAclProp> callback){
 
                 /**
                 Call the onBefore event
@@ -716,92 +584,9 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("instagramPostId", instagramPostId);
+                        hashMapObject.put("snaphyAclId", snaphyAclId);
                 
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__caption", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    InstagramCaptionRepository instagramCaptionRepo = getRestAdapter().createRepository(InstagramCaptionRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = instagramCaptionRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(instagramCaptionRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //instagramCaptionRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    InstagramCaption instagramCaption = instagramCaptionRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = instagramCaption.getClass().getMethod("save__db");
-                                                    method.invoke(instagramCaption);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(instagramCaption);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method get__caption definition ends here..
-
-            
-
-        
-    
-        
-            //Method create__caption definition
-            public void create__caption(  String instagramPostId,  Map<String,  ? extends Object> data, final ObjectCallback<InstagramCaption> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("instagramPostId", instagramPostId);
+                        hashMapObject.put("fk", fk);
                 
                         hashMapObject.putAll(data);
                 
@@ -812,7 +597,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__caption", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__snaphyAclProps", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -825,27 +610,27 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    InstagramCaptionRepository instagramCaptionRepo = getRestAdapter().createRepository(InstagramCaptionRepository.class);
+                                    SnaphyAclPropRepository snaphyAclPropRepo = getRestAdapter().createRepository(SnaphyAclPropRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = instagramCaptionRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(instagramCaptionRepo, context);
+                                            Method method = snaphyAclPropRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(snaphyAclPropRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //instagramCaptionRepo.addStorage(context);
+                                        //snaphyAclPropRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    InstagramCaption instagramCaption = instagramCaptionRepo.createObject(result);
+                                    SnaphyAclProp snaphyAclProp = snaphyAclPropRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = instagramCaption.getClass().getMethod("save__db");
-                                                    method.invoke(instagramCaption);
+                                                    Method method = snaphyAclProp.getClass().getMethod("save__db");
+                                                    method.invoke(snaphyAclProp);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -853,7 +638,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
 
                                       }
 
-                                    callback.onSuccess(instagramCaption);
+                                    callback.onSuccess(snaphyAclProp);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -866,15 +651,15 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
 
                 
 
-            }//Method create__caption definition ends here..
+            }//Method updateById__snaphyAclProps definition ends here..
 
             
 
         
     
         
-            //Method update__caption definition
-            public void update__caption(  String instagramPostId,  Map<String,  ? extends Object> data, final ObjectCallback<InstagramCaption> callback){
+            //Method findById__snaphyAclRelations definition
+            public void findById__snaphyAclRelations(  String snaphyAclId,  String fk, final ObjectCallback<SnaphyAclRelation> callback){
 
                 /**
                 Call the onBefore event
@@ -886,9 +671,9 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("instagramPostId", instagramPostId);
+                        hashMapObject.put("snaphyAclId", snaphyAclId);
                 
-                        hashMapObject.putAll(data);
+                        hashMapObject.put("fk", fk);
                 
 
                 
@@ -897,7 +682,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__update__caption", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__snaphyAclRelations", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -910,27 +695,27 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    InstagramCaptionRepository instagramCaptionRepo = getRestAdapter().createRepository(InstagramCaptionRepository.class);
+                                    SnaphyAclRelationRepository snaphyAclRelationRepo = getRestAdapter().createRepository(SnaphyAclRelationRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = instagramCaptionRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(instagramCaptionRepo, context);
+                                            Method method = snaphyAclRelationRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(snaphyAclRelationRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //instagramCaptionRepo.addStorage(context);
+                                        //snaphyAclRelationRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    InstagramCaption instagramCaption = instagramCaptionRepo.createObject(result);
+                                    SnaphyAclRelation snaphyAclRelation = snaphyAclRelationRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = instagramCaption.getClass().getMethod("save__db");
-                                                    method.invoke(instagramCaption);
+                                                    Method method = snaphyAclRelation.getClass().getMethod("save__db");
+                                                    method.invoke(snaphyAclRelation);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -938,7 +723,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
 
                                       }
 
-                                    callback.onSuccess(instagramCaption);
+                                    callback.onSuccess(snaphyAclRelation);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -951,15 +736,15 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
 
                 
 
-            }//Method update__caption definition ends here..
+            }//Method findById__snaphyAclRelations definition ends here..
 
             
 
         
     
         
-            //Method destroy__caption definition
-            public void destroy__caption(  String instagramPostId, final VoidCallback callback){
+            //Method destroyById__snaphyAclRelations definition
+            public void destroyById__snaphyAclRelations(  String snaphyAclId,  String fk, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -971,11 +756,13 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("instagramPostId", instagramPostId);
+                        hashMapObject.put("snaphyAclId", snaphyAclId);
+                
+                        hashMapObject.put("fk", fk);
                 
 
                 
-                    invokeStaticMethod("prototype.__destroy__caption", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroyById__snaphyAclRelations", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -997,7 +784,632 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
 
                 
 
-            }//Method destroy__caption definition ends here..
+            }//Method destroyById__snaphyAclRelations definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__snaphyAclRelations definition
+            public void updateById__snaphyAclRelations(  String snaphyAclId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<SnaphyAclRelation> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("snaphyAclId", snaphyAclId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__updateById__snaphyAclRelations", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    SnaphyAclRelationRepository snaphyAclRelationRepo = getRestAdapter().createRepository(SnaphyAclRelationRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = snaphyAclRelationRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(snaphyAclRelationRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //snaphyAclRelationRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    SnaphyAclRelation snaphyAclRelation = snaphyAclRelationRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = snaphyAclRelation.getClass().getMethod("save__db");
+                                                    method.invoke(snaphyAclRelation);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(snaphyAclRelation);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method updateById__snaphyAclRelations definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__snaphyAclProps definition
+            public void get__snaphyAclProps(  String snaphyAclId,  Map<String,  ? extends Object> filter, final DataListCallback<SnaphyAclProp> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("snaphyAclId", snaphyAclId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__snaphyAclProps", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<SnaphyAclProp> snaphyAclPropList = new DataList<SnaphyAclProp>();
+                                    SnaphyAclPropRepository snaphyAclPropRepo = getRestAdapter().createRepository(SnaphyAclPropRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = snaphyAclPropRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(snaphyAclPropRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        SnaphyAclProp snaphyAclProp = snaphyAclPropRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = snaphyAclProp.getClass().getMethod("save__db");
+                                                      method.invoke(snaphyAclProp);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        snaphyAclPropList.add(snaphyAclProp);
+                                    }
+                                    callback.onSuccess(snaphyAclPropList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method get__snaphyAclProps definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__snaphyAclProps definition
+            public void create__snaphyAclProps(  String snaphyAclId,  Map<String,  ? extends Object> data, final ObjectCallback<SnaphyAclProp> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("snaphyAclId", snaphyAclId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__snaphyAclProps", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    SnaphyAclPropRepository snaphyAclPropRepo = getRestAdapter().createRepository(SnaphyAclPropRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = snaphyAclPropRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(snaphyAclPropRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //snaphyAclPropRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    SnaphyAclProp snaphyAclProp = snaphyAclPropRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = snaphyAclProp.getClass().getMethod("save__db");
+                                                    method.invoke(snaphyAclProp);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(snaphyAclProp);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__snaphyAclProps definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__snaphyAclProps definition
+            public void delete__snaphyAclProps(  String snaphyAclId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("snaphyAclId", snaphyAclId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__snaphyAclProps", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__snaphyAclProps definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__snaphyAclProps definition
+            public void count__snaphyAclProps(  String snaphyAclId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("snaphyAclId", snaphyAclId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__snaphyAclProps", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method count__snaphyAclProps definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__snaphyAclRelations definition
+            public void get__snaphyAclRelations(  String snaphyAclId,  Map<String,  ? extends Object> filter, final DataListCallback<SnaphyAclRelation> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("snaphyAclId", snaphyAclId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__snaphyAclRelations", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<SnaphyAclRelation> snaphyAclRelationList = new DataList<SnaphyAclRelation>();
+                                    SnaphyAclRelationRepository snaphyAclRelationRepo = getRestAdapter().createRepository(SnaphyAclRelationRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = snaphyAclRelationRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(snaphyAclRelationRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        SnaphyAclRelation snaphyAclRelation = snaphyAclRelationRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = snaphyAclRelation.getClass().getMethod("save__db");
+                                                      method.invoke(snaphyAclRelation);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        snaphyAclRelationList.add(snaphyAclRelation);
+                                    }
+                                    callback.onSuccess(snaphyAclRelationList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method get__snaphyAclRelations definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__snaphyAclRelations definition
+            public void create__snaphyAclRelations(  String snaphyAclId,  Map<String,  ? extends Object> data, final ObjectCallback<SnaphyAclRelation> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("snaphyAclId", snaphyAclId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__snaphyAclRelations", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    SnaphyAclRelationRepository snaphyAclRelationRepo = getRestAdapter().createRepository(SnaphyAclRelationRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = snaphyAclRelationRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(snaphyAclRelationRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //snaphyAclRelationRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    SnaphyAclRelation snaphyAclRelation = snaphyAclRelationRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = snaphyAclRelation.getClass().getMethod("save__db");
+                                                    method.invoke(snaphyAclRelation);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(snaphyAclRelation);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__snaphyAclRelations definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__snaphyAclRelations definition
+            public void delete__snaphyAclRelations(  String snaphyAclId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("snaphyAclId", snaphyAclId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__snaphyAclRelations", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__snaphyAclRelations definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__snaphyAclRelations definition
+            public void count__snaphyAclRelations(  String snaphyAclId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("snaphyAclId", snaphyAclId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__snaphyAclRelations", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method count__snaphyAclRelations definition ends here..
 
             
 
@@ -1005,7 +1417,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<InstagramPost> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<SnaphyAcl> callback){
 
                 /**
                 Call the onBefore event
@@ -1039,27 +1451,27 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    InstagramPostRepository instagramPostRepo = getRestAdapter().createRepository(InstagramPostRepository.class);
+                                    SnaphyAclRepository snaphyAclRepo = getRestAdapter().createRepository(SnaphyAclRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = instagramPostRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(instagramPostRepo, context);
+                                            Method method = snaphyAclRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(snaphyAclRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //instagramPostRepo.addStorage(context);
+                                        //snaphyAclRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    InstagramPost instagramPost = instagramPostRepo.createObject(result);
+                                    SnaphyAcl snaphyAcl = snaphyAclRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = instagramPost.getClass().getMethod("save__db");
-                                                    method.invoke(instagramPost);
+                                                    Method method = snaphyAcl.getClass().getMethod("save__db");
+                                                    method.invoke(snaphyAcl);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1067,7 +1479,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
 
                                       }
 
-                                    callback.onSuccess(instagramPost);
+                                    callback.onSuccess(snaphyAcl);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1089,7 +1501,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<InstagramPost> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<SnaphyAcl> callback){
 
                 /**
                 Call the onBefore event
@@ -1123,27 +1535,27 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    InstagramPostRepository instagramPostRepo = getRestAdapter().createRepository(InstagramPostRepository.class);
+                                    SnaphyAclRepository snaphyAclRepo = getRestAdapter().createRepository(SnaphyAclRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = instagramPostRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(instagramPostRepo, context);
+                                            Method method = snaphyAclRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(snaphyAclRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //instagramPostRepo.addStorage(context);
+                                        //snaphyAclRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    InstagramPost instagramPost = instagramPostRepo.createObject(result);
+                                    SnaphyAcl snaphyAcl = snaphyAclRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = instagramPost.getClass().getMethod("save__db");
-                                                    method.invoke(instagramPost);
+                                                    Method method = snaphyAcl.getClass().getMethod("save__db");
+                                                    method.invoke(snaphyAcl);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1151,7 +1563,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
 
                                       }
 
-                                    callback.onSuccess(instagramPost);
+                                    callback.onSuccess(snaphyAcl);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1223,7 +1635,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<InstagramPost> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<SnaphyAcl> callback){
 
                 /**
                 Call the onBefore event
@@ -1259,27 +1671,27 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    InstagramPostRepository instagramPostRepo = getRestAdapter().createRepository(InstagramPostRepository.class);
+                                    SnaphyAclRepository snaphyAclRepo = getRestAdapter().createRepository(SnaphyAclRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = instagramPostRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(instagramPostRepo, context);
+                                            Method method = snaphyAclRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(snaphyAclRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //instagramPostRepo.addStorage(context);
+                                        //snaphyAclRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    InstagramPost instagramPost = instagramPostRepo.createObject(result);
+                                    SnaphyAcl snaphyAcl = snaphyAclRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = instagramPost.getClass().getMethod("save__db");
-                                                    method.invoke(instagramPost);
+                                                    Method method = snaphyAcl.getClass().getMethod("save__db");
+                                                    method.invoke(snaphyAcl);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1287,7 +1699,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
 
                                       }
 
-                                    callback.onSuccess(instagramPost);
+                                    callback.onSuccess(snaphyAcl);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1308,7 +1720,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<InstagramPost> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<SnaphyAcl> callback){
 
                 /**
                 Call the onBefore event
@@ -1343,12 +1755,12 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<InstagramPost> instagramPostList = new DataList<InstagramPost>();
-                                    InstagramPostRepository instagramPostRepo = getRestAdapter().createRepository(InstagramPostRepository.class);
+                                    DataList<SnaphyAcl> snaphyAclList = new DataList<SnaphyAcl>();
+                                    SnaphyAclRepository snaphyAclRepo = getRestAdapter().createRepository(SnaphyAclRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = instagramPostRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(instagramPostRepo, context);
+                                            Method method = snaphyAclRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(snaphyAclRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1356,23 +1768,23 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        InstagramPost instagramPost = instagramPostRepo.createObject(obj);
+                                        SnaphyAcl snaphyAcl = snaphyAclRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = instagramPost.getClass().getMethod("save__db");
-                                                      method.invoke(instagramPost);
+                                                      Method method = snaphyAcl.getClass().getMethod("save__db");
+                                                      method.invoke(snaphyAcl);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        instagramPostList.add(instagramPost);
+                                        snaphyAclList.add(snaphyAcl);
                                     }
-                                    callback.onSuccess(instagramPostList);
+                                    callback.onSuccess(snaphyAclList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1391,7 +1803,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<InstagramPost> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<SnaphyAcl> callback){
 
                 /**
                 Call the onBefore event
@@ -1425,27 +1837,27 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    InstagramPostRepository instagramPostRepo = getRestAdapter().createRepository(InstagramPostRepository.class);
+                                    SnaphyAclRepository snaphyAclRepo = getRestAdapter().createRepository(SnaphyAclRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = instagramPostRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(instagramPostRepo, context);
+                                            Method method = snaphyAclRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(snaphyAclRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //instagramPostRepo.addStorage(context);
+                                        //snaphyAclRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    InstagramPost instagramPost = instagramPostRepo.createObject(result);
+                                    SnaphyAcl snaphyAcl = snaphyAclRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = instagramPost.getClass().getMethod("save__db");
-                                                    method.invoke(instagramPost);
+                                                    Method method = snaphyAcl.getClass().getMethod("save__db");
+                                                    method.invoke(snaphyAcl);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1453,7 +1865,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
 
                                       }
 
-                                    callback.onSuccess(instagramPost);
+                                    callback.onSuccess(snaphyAcl);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1629,7 +2041,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String instagramPostId,  Map<String,  ? extends Object> data, final ObjectCallback<InstagramPost> callback){
+            public void updateAttributes(  String snaphyAclId,  Map<String,  ? extends Object> data, final ObjectCallback<SnaphyAcl> callback){
 
                 /**
                 Call the onBefore event
@@ -1641,7 +2053,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("instagramPostId", instagramPostId);
+                        hashMapObject.put("snaphyAclId", snaphyAclId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1665,27 +2077,27 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    InstagramPostRepository instagramPostRepo = getRestAdapter().createRepository(InstagramPostRepository.class);
+                                    SnaphyAclRepository snaphyAclRepo = getRestAdapter().createRepository(SnaphyAclRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = instagramPostRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(instagramPostRepo, context);
+                                            Method method = snaphyAclRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(snaphyAclRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //instagramPostRepo.addStorage(context);
+                                        //snaphyAclRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    InstagramPost instagramPost = instagramPostRepo.createObject(result);
+                                    SnaphyAcl snaphyAcl = snaphyAclRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = instagramPost.getClass().getMethod("save__db");
-                                                    method.invoke(instagramPost);
+                                                    Method method = snaphyAcl.getClass().getMethod("save__db");
+                                                    method.invoke(snaphyAcl);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1693,7 +2105,7 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
 
                                       }
 
-                                    callback.onSuccess(instagramPost);
+                                    callback.onSuccess(snaphyAcl);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1910,18 +2322,6 @@ public class InstagramPostRepository extends ModelRepository<InstagramPost> {
 
             
 
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
         
     
         

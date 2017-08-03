@@ -31,7 +31,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.FacebookAccessTokenRepo
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.AppUserRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
             
 
         
@@ -164,6 +164,27 @@ public class FacebookAccessToken extends Model {
             
         
     
+        
+            
+
+            
+            
+        
+    
+        
+            
+
+            
+            
+        
+    
+        
+            
+
+            
+            
+        
+    
 
 
     //------------------------------------Database Method---------------------------------------------------
@@ -238,7 +259,7 @@ public class FacebookAccessToken extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient AppUser  appUser ;
+                    private transient Customer  customer ;
                     private String userId;
 
                     public String getUserId(){
@@ -251,67 +272,67 @@ public class FacebookAccessToken extends Model {
                         }
                     }
 
-                    public AppUser getAppUser() {
+                    public Customer getCustomer() {
                         try{
                           //Adding database method for fetching from relation if not present..
-                                      if(appUser == null){
+                                      if(customer == null){
                                         FacebookAccessTokenRepository facebookAccessTokenRepository = (FacebookAccessTokenRepository) getRepository();
 
                                         RestAdapter restAdapter = facebookAccessTokenRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
-                                          appUser = getAppUser__db(restAdapter);
+                                          customer = getCustomer__db(restAdapter);
                                         }
                                       }
                         }catch(Exception e){
                           //Ignore
                         }
 
-                        return appUser;
+                        return customer;
                     }
 
-                    public void setAppUser(AppUser appUser) {
-                        this.appUser = appUser;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setAppUser(Map<String, Object> appUser) {
-                        //First create a dummy Repo class object for customer.
-                        AppUserRepository appUserRepository = new AppUserRepository();
-                        AppUser appUser1 = appUserRepository.createObject(appUser);
-                        setAppUser(appUser1);
+                    public void setCustomer(Customer customer) {
+                        this.customer = customer;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setAppUser(HashMap<String, Object> appUser) {
+                    public void setCustomer(Map<String, Object> customer) {
                         //First create a dummy Repo class object for customer.
-                        AppUserRepository appUserRepository = new AppUserRepository();
-                        AppUser appUser1 = appUserRepository.createObject(appUser);
-                        setAppUser(appUser1);
+                        CustomerRepository customerRepository = new CustomerRepository();
+                        Customer customer1 = customerRepository.createObject(customer);
+                        setCustomer(customer1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setCustomer(HashMap<String, Object> customer) {
+                        //First create a dummy Repo class object for customer.
+                        CustomerRepository customerRepository = new CustomerRepository();
+                        Customer customer1 = customerRepository.createObject(customer);
+                        setCustomer(customer1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(AppUser appUser) {
-                        that.setAppUser(appUser);
+                    public void addRelation(Customer customer) {
+                        that.setCustomer(customer);
                     }
 
 
                     //Fetch related data from local database if present a userId identifier as property for belongsTo
-                    public AppUser getAppUser__db(RestAdapter restAdapter){
+                    public Customer getCustomer__db(RestAdapter restAdapter){
                       if(userId != null){
-                        AppUserRepository appUserRepository = restAdapter.createRepository(AppUserRepository.class);
+                        CustomerRepository customerRepository = restAdapter.createRepository(CustomerRepository.class);
                             try{
                             FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
                                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                                if(appUserRepository.getDb() == null ){
-                                                    appUserRepository.addStorage(context);
+                                                if(customerRepository.getDb() == null ){
+                                                    customerRepository.addStorage(context);
                                                 }
 
-                                                if(context != null && appUserRepository.getDb() != null){
-                                                    appUserRepository.addStorage(context);
-                                                    AppUser appUser = (AppUser) appUserRepository.getDb().get__db(userId);
-                                                    return appUser;
+                                                if(context != null && customerRepository.getDb() != null){
+                                                    customerRepository.addStorage(context);
+                                                    Customer customer = (Customer) customerRepository.getDb().get__db(userId);
+                                                    return customer;
                                                 }else{
                                                     return null;
                                                 }
@@ -344,7 +365,7 @@ public class FacebookAccessToken extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__appUser( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<AppUser> callback) {
+                                    public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -358,13 +379,13 @@ public class FacebookAccessToken extends Model {
 
 
 
-                                        facebookAccessTokenRepo.get__appUser( (String)that.getId(), refresh,  new ObjectCallback<AppUser> (){
+                                        facebookAccessTokenRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(AppUser object) {
+                                                    public void onSuccess(Customer object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);

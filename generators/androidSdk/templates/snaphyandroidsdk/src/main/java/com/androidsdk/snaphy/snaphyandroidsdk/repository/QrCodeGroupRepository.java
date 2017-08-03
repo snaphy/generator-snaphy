@@ -41,22 +41,29 @@ import org.json.JSONObject;
 
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.SaveDeal;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.QrCodeGroup;
 import android.content.Context;
-import com.androidsdk.snaphy.snaphyandroidsdk.db.SaveDealDb;
+import com.androidsdk.snaphy.snaphyandroidsdk.db.QrCodeGroupDb;
 
 //Now import model of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.AppUser;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.AppUserRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Department;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.DepartmentRepository;
             
         
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.HotDeal;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.HotDealRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Product;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ProductRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.QrCode;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.QrCodeRepository;
             
         
     
@@ -65,15 +72,15 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.SaveDealDb;
 
 
 
-public class SaveDealRepository extends ModelRepository<SaveDeal> {
+public class QrCodeGroupRepository extends ModelRepository<QrCodeGroup> {
 
 
     private Context context;
     private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
     private static String DATABASE_NAME;
 
-    public SaveDealRepository(){
-        super("SaveDeal", null, SaveDeal.class);
+    public QrCodeGroupRepository(){
+        super("QrCodeGroup", null, QrCodeGroup.class);
 
     }
 
@@ -91,15 +98,15 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
 
 
 
-    public SaveDealDb getDb() {
-      return saveDealDb;
+    public QrCodeGroupDb getDb() {
+      return qrCodeGroupDb;
     }
 
-    public void setSaveDealDb(SaveDealDb saveDealDb) {
-      this.saveDealDb = saveDealDb;
+    public void setQrCodeGroupDb(QrCodeGroupDb qrCodeGroupDb) {
+      this.qrCodeGroupDb = qrCodeGroupDb;
     }
 
-    private SaveDealDb saveDealDb;
+    private QrCodeGroupDb qrCodeGroupDb;
 
 
 
@@ -133,7 +140,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
          catch (Exception e){
             Log.e("Snaphy", e.toString());
          }
-         setSaveDealDb(new SaveDealDb(context, DATABASE_NAME, getRestAdapter()));
+         setQrCodeGroupDb(new QrCodeGroupDb(context, DATABASE_NAME, getRestAdapter()));
          //allow data storage locally..
          persistData(true);
          this.context = context;
@@ -147,7 +154,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:saveDealId/appUser", "GET"), "SaveDeal.prototype.__get__appUser");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:qrCodeGroupId/department", "GET"), "QrCodeGroup.prototype.__get__department");
     
 
     
@@ -156,7 +163,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:saveDealId/hotDeal", "GET"), "SaveDeal.prototype.__get__hotDeal");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:qrCodeGroupId/product", "GET"), "QrCodeGroup.prototype.__get__product");
     
 
     
@@ -165,7 +172,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "SaveDeal.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:qrCodeGroupId/qrCodes/:fk", "GET"), "QrCodeGroup.prototype.__findById__qrCodes");
     
 
     
@@ -174,7 +181,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "SaveDeal.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:qrCodeGroupId/qrCodes/:fk", "DELETE"), "QrCodeGroup.prototype.__destroyById__qrCodes");
     
 
     
@@ -183,7 +190,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "SaveDeal.upsert");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:qrCodeGroupId/qrCodes/:fk", "PUT"), "QrCodeGroup.prototype.__updateById__qrCodes");
     
 
     
@@ -192,7 +199,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "SaveDeal.exists");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:qrCodeGroupId/qrCodes", "GET"), "QrCodeGroup.prototype.__get__qrCodes");
     
 
     
@@ -201,7 +208,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "SaveDeal.findById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:qrCodeGroupId/qrCodes", "POST"), "QrCodeGroup.prototype.__create__qrCodes");
     
 
     
@@ -210,7 +217,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "SaveDeal.find");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:qrCodeGroupId/qrCodes", "DELETE"), "QrCodeGroup.prototype.__delete__qrCodes");
     
 
     
@@ -219,7 +226,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "SaveDeal.findOne");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:qrCodeGroupId/qrCodes/count", "GET"), "QrCodeGroup.prototype.__count__qrCodes");
     
 
     
@@ -228,7 +235,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "SaveDeal.updateAll");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "QrCodeGroup.create");
     
 
     
@@ -237,7 +244,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "SaveDeal.deleteById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "QrCodeGroup.create");
     
 
     
@@ -246,7 +253,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "SaveDeal.count");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "QrCodeGroup.upsert");
     
 
     
@@ -255,7 +262,70 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:saveDealId", "PUT"), "SaveDeal.prototype.updateAttributes");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "QrCodeGroup.exists");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "QrCodeGroup.findById");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "QrCodeGroup.find");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "QrCodeGroup.findOne");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "QrCodeGroup.updateAll");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "QrCodeGroup.deleteById");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "QrCodeGroup.count");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:qrCodeGroupId", "PUT"), "QrCodeGroup.prototype.updateAttributes");
     
 
     
@@ -267,7 +337,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "SaveDeal.getSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "QrCodeGroup.getSchema");
     
 
     
@@ -276,7 +346,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "SaveDeal.getAbsoluteSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "QrCodeGroup.getAbsoluteSchema");
     
 
     
@@ -288,7 +358,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/saveDeal", "POST"), "SaveDeal.saveDeal");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "QrCodeGroup.getDetailSchema");
     
 
     
@@ -297,25 +367,10 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/removeDeal", "POST"), "SaveDeal.removeDeal");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "QrCodeGroup.getModelRelationSchema");
     
 
     
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "SaveDeal.getDetailSchema");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "SaveDeal.getModelRelationSchema");
     
 
     
@@ -390,8 +445,8 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
 
     
         
-            //Method get__appUser definition
-            public void get__appUser(  String saveDealId,  Boolean refresh, final ObjectCallback<AppUser> callback){
+            //Method get__department definition
+            public void get__department(  String qrCodeGroupId,  Boolean refresh, final ObjectCallback<Department> callback){
 
                 /**
                 Call the onBefore event
@@ -403,7 +458,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("saveDealId", saveDealId);
+                        hashMapObject.put("qrCodeGroupId", qrCodeGroupId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -414,7 +469,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__appUser", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__department", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -427,27 +482,27 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    AppUserRepository appUserRepo = getRestAdapter().createRepository(AppUserRepository.class);
+                                    DepartmentRepository departmentRepo = getRestAdapter().createRepository(DepartmentRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = appUserRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(appUserRepo, context);
+                                            Method method = departmentRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(departmentRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //appUserRepo.addStorage(context);
+                                        //departmentRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    AppUser appUser = appUserRepo.createObject(result);
+                                    Department department = departmentRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = appUser.getClass().getMethod("save__db");
-                                                    method.invoke(appUser);
+                                                    Method method = department.getClass().getMethod("save__db");
+                                                    method.invoke(department);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -455,7 +510,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
 
                                       }
 
-                                    callback.onSuccess(appUser);
+                                    callback.onSuccess(department);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -468,15 +523,15 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
 
                 
 
-            }//Method get__appUser definition ends here..
+            }//Method get__department definition ends here..
 
             
 
         
     
         
-            //Method get__hotDeal definition
-            public void get__hotDeal(  String saveDealId,  Boolean refresh, final ObjectCallback<HotDeal> callback){
+            //Method get__product definition
+            public void get__product(  String qrCodeGroupId,  Boolean refresh, final ObjectCallback<Product> callback){
 
                 /**
                 Call the onBefore event
@@ -488,7 +543,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("saveDealId", saveDealId);
+                        hashMapObject.put("qrCodeGroupId", qrCodeGroupId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -499,7 +554,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__hotDeal", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__product", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -512,27 +567,27 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    ProductRepository productRepo = getRestAdapter().createRepository(ProductRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(hotDealRepo, context);
+                                            Method method = productRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(productRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //hotDealRepo.addStorage(context);
+                                        //productRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    HotDeal hotDeal = hotDealRepo.createObject(result);
+                                    Product product = productRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = hotDeal.getClass().getMethod("save__db");
-                                                    method.invoke(hotDeal);
+                                                    Method method = product.getClass().getMethod("save__db");
+                                                    method.invoke(product);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -540,7 +595,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
 
                                       }
 
-                                    callback.onSuccess(hotDeal);
+                                    callback.onSuccess(product);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -553,7 +608,496 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
 
                 
 
-            }//Method get__hotDeal definition ends here..
+            }//Method get__product definition ends here..
+
+            
+
+        
+    
+        
+            //Method findById__qrCodes definition
+            public void findById__qrCodes(  String qrCodeGroupId,  String fk, final ObjectCallback<QrCode> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("qrCodeGroupId", qrCodeGroupId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__findById__qrCodes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    QrCodeRepository qrCodeRepo = getRestAdapter().createRepository(QrCodeRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = qrCodeRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(qrCodeRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //qrCodeRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    QrCode qrCode = qrCodeRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = qrCode.getClass().getMethod("save__db");
+                                                    method.invoke(qrCode);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(qrCode);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method findById__qrCodes definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__qrCodes definition
+            public void destroyById__qrCodes(  String qrCodeGroupId,  String fk, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("qrCodeGroupId", qrCodeGroupId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__qrCodes", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__qrCodes definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__qrCodes definition
+            public void updateById__qrCodes(  String qrCodeGroupId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<QrCode> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("qrCodeGroupId", qrCodeGroupId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__updateById__qrCodes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    QrCodeRepository qrCodeRepo = getRestAdapter().createRepository(QrCodeRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = qrCodeRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(qrCodeRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //qrCodeRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    QrCode qrCode = qrCodeRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = qrCode.getClass().getMethod("save__db");
+                                                    method.invoke(qrCode);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(qrCode);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method updateById__qrCodes definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__qrCodes definition
+            public void get__qrCodes(  String qrCodeGroupId,  Map<String,  ? extends Object> filter, final DataListCallback<QrCode> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("qrCodeGroupId", qrCodeGroupId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__qrCodes", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<QrCode> qrCodeList = new DataList<QrCode>();
+                                    QrCodeRepository qrCodeRepo = getRestAdapter().createRepository(QrCodeRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = qrCodeRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(qrCodeRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        QrCode qrCode = qrCodeRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = qrCode.getClass().getMethod("save__db");
+                                                      method.invoke(qrCode);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        qrCodeList.add(qrCode);
+                                    }
+                                    callback.onSuccess(qrCodeList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method get__qrCodes definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__qrCodes definition
+            public void create__qrCodes(  String qrCodeGroupId,  Map<String,  ? extends Object> data, final ObjectCallback<QrCode> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("qrCodeGroupId", qrCodeGroupId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__qrCodes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    QrCodeRepository qrCodeRepo = getRestAdapter().createRepository(QrCodeRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = qrCodeRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(qrCodeRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //qrCodeRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    QrCode qrCode = qrCodeRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = qrCode.getClass().getMethod("save__db");
+                                                    method.invoke(qrCode);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(qrCode);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__qrCodes definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__qrCodes definition
+            public void delete__qrCodes(  String qrCodeGroupId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("qrCodeGroupId", qrCodeGroupId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__qrCodes", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__qrCodes definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__qrCodes definition
+            public void count__qrCodes(  String qrCodeGroupId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("qrCodeGroupId", qrCodeGroupId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__qrCodes", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method count__qrCodes definition ends here..
 
             
 
@@ -561,7 +1105,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<SaveDeal> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<QrCodeGroup> callback){
 
                 /**
                 Call the onBefore event
@@ -595,27 +1139,27 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    SaveDealRepository saveDealRepo = getRestAdapter().createRepository(SaveDealRepository.class);
+                                    QrCodeGroupRepository qrCodeGroupRepo = getRestAdapter().createRepository(QrCodeGroupRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = saveDealRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(saveDealRepo, context);
+                                            Method method = qrCodeGroupRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(qrCodeGroupRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //saveDealRepo.addStorage(context);
+                                        //qrCodeGroupRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    SaveDeal saveDeal = saveDealRepo.createObject(result);
+                                    QrCodeGroup qrCodeGroup = qrCodeGroupRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = saveDeal.getClass().getMethod("save__db");
-                                                    method.invoke(saveDeal);
+                                                    Method method = qrCodeGroup.getClass().getMethod("save__db");
+                                                    method.invoke(qrCodeGroup);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -623,7 +1167,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
 
                                       }
 
-                                    callback.onSuccess(saveDeal);
+                                    callback.onSuccess(qrCodeGroup);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -645,7 +1189,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<SaveDeal> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<QrCodeGroup> callback){
 
                 /**
                 Call the onBefore event
@@ -679,27 +1223,27 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    SaveDealRepository saveDealRepo = getRestAdapter().createRepository(SaveDealRepository.class);
+                                    QrCodeGroupRepository qrCodeGroupRepo = getRestAdapter().createRepository(QrCodeGroupRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = saveDealRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(saveDealRepo, context);
+                                            Method method = qrCodeGroupRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(qrCodeGroupRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //saveDealRepo.addStorage(context);
+                                        //qrCodeGroupRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    SaveDeal saveDeal = saveDealRepo.createObject(result);
+                                    QrCodeGroup qrCodeGroup = qrCodeGroupRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = saveDeal.getClass().getMethod("save__db");
-                                                    method.invoke(saveDeal);
+                                                    Method method = qrCodeGroup.getClass().getMethod("save__db");
+                                                    method.invoke(qrCodeGroup);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -707,7 +1251,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
 
                                       }
 
-                                    callback.onSuccess(saveDeal);
+                                    callback.onSuccess(qrCodeGroup);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -779,7 +1323,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<SaveDeal> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<QrCodeGroup> callback){
 
                 /**
                 Call the onBefore event
@@ -815,27 +1359,27 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    SaveDealRepository saveDealRepo = getRestAdapter().createRepository(SaveDealRepository.class);
+                                    QrCodeGroupRepository qrCodeGroupRepo = getRestAdapter().createRepository(QrCodeGroupRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = saveDealRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(saveDealRepo, context);
+                                            Method method = qrCodeGroupRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(qrCodeGroupRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //saveDealRepo.addStorage(context);
+                                        //qrCodeGroupRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    SaveDeal saveDeal = saveDealRepo.createObject(result);
+                                    QrCodeGroup qrCodeGroup = qrCodeGroupRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = saveDeal.getClass().getMethod("save__db");
-                                                    method.invoke(saveDeal);
+                                                    Method method = qrCodeGroup.getClass().getMethod("save__db");
+                                                    method.invoke(qrCodeGroup);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -843,7 +1387,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
 
                                       }
 
-                                    callback.onSuccess(saveDeal);
+                                    callback.onSuccess(qrCodeGroup);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -864,7 +1408,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<SaveDeal> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<QrCodeGroup> callback){
 
                 /**
                 Call the onBefore event
@@ -899,12 +1443,12 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<SaveDeal> saveDealList = new DataList<SaveDeal>();
-                                    SaveDealRepository saveDealRepo = getRestAdapter().createRepository(SaveDealRepository.class);
+                                    DataList<QrCodeGroup> qrCodeGroupList = new DataList<QrCodeGroup>();
+                                    QrCodeGroupRepository qrCodeGroupRepo = getRestAdapter().createRepository(QrCodeGroupRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = saveDealRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(saveDealRepo, context);
+                                            Method method = qrCodeGroupRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(qrCodeGroupRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -912,23 +1456,23 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        SaveDeal saveDeal = saveDealRepo.createObject(obj);
+                                        QrCodeGroup qrCodeGroup = qrCodeGroupRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = saveDeal.getClass().getMethod("save__db");
-                                                      method.invoke(saveDeal);
+                                                      Method method = qrCodeGroup.getClass().getMethod("save__db");
+                                                      method.invoke(qrCodeGroup);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        saveDealList.add(saveDeal);
+                                        qrCodeGroupList.add(qrCodeGroup);
                                     }
-                                    callback.onSuccess(saveDealList);
+                                    callback.onSuccess(qrCodeGroupList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -947,7 +1491,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<SaveDeal> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<QrCodeGroup> callback){
 
                 /**
                 Call the onBefore event
@@ -981,27 +1525,27 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    SaveDealRepository saveDealRepo = getRestAdapter().createRepository(SaveDealRepository.class);
+                                    QrCodeGroupRepository qrCodeGroupRepo = getRestAdapter().createRepository(QrCodeGroupRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = saveDealRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(saveDealRepo, context);
+                                            Method method = qrCodeGroupRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(qrCodeGroupRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //saveDealRepo.addStorage(context);
+                                        //qrCodeGroupRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    SaveDeal saveDeal = saveDealRepo.createObject(result);
+                                    QrCodeGroup qrCodeGroup = qrCodeGroupRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = saveDeal.getClass().getMethod("save__db");
-                                                    method.invoke(saveDeal);
+                                                    Method method = qrCodeGroup.getClass().getMethod("save__db");
+                                                    method.invoke(qrCodeGroup);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1009,7 +1553,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
 
                                       }
 
-                                    callback.onSuccess(saveDeal);
+                                    callback.onSuccess(qrCodeGroup);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1185,7 +1729,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String saveDealId,  Map<String,  ? extends Object> data, final ObjectCallback<SaveDeal> callback){
+            public void updateAttributes(  String qrCodeGroupId,  Map<String,  ? extends Object> data, final ObjectCallback<QrCodeGroup> callback){
 
                 /**
                 Call the onBefore event
@@ -1197,7 +1741,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("saveDealId", saveDealId);
+                        hashMapObject.put("qrCodeGroupId", qrCodeGroupId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1221,27 +1765,27 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    SaveDealRepository saveDealRepo = getRestAdapter().createRepository(SaveDealRepository.class);
+                                    QrCodeGroupRepository qrCodeGroupRepo = getRestAdapter().createRepository(QrCodeGroupRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = saveDealRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(saveDealRepo, context);
+                                            Method method = qrCodeGroupRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(qrCodeGroupRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //saveDealRepo.addStorage(context);
+                                        //qrCodeGroupRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    SaveDeal saveDeal = saveDealRepo.createObject(result);
+                                    QrCodeGroup qrCodeGroup = qrCodeGroupRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = saveDeal.getClass().getMethod("save__db");
-                                                    method.invoke(saveDeal);
+                                                    Method method = qrCodeGroup.getClass().getMethod("save__db");
+                                                    method.invoke(qrCodeGroup);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1249,7 +1793,7 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
 
                                       }
 
-                                    callback.onSuccess(saveDeal);
+                                    callback.onSuccess(qrCodeGroup);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1371,144 +1915,6 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
         
     
         
-            //Method saveDeal definition
-            public void saveDeal(  String appUserId,  String hotDealId, final ObjectCallback<SaveDeal> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("appUserId", appUserId);
-                
-                        hashMapObject.put("hotDealId", hotDealId);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("saveDeal", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    SaveDealRepository saveDealRepo = getRestAdapter().createRepository(SaveDealRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = saveDealRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(saveDealRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //saveDealRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    SaveDeal saveDeal = saveDealRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = saveDeal.getClass().getMethod("save__db");
-                                                    method.invoke(saveDeal);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(saveDeal);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method saveDeal definition ends here..
-
-            
-
-        
-    
-        
-            //Method removeDeal definition
-            public void removeDeal(  String appUserId,  String hotDealId, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("appUserId", appUserId);
-                
-                        hashMapObject.put("hotDealId", hotDealId);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("removeDeal", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method removeDeal definition ends here..
-
-            
-
-        
-    
-        
             //Method getDetailSchema definition
             public void getDetailSchema( final ObjectCallback<JSONObject>  callback ){
 
@@ -1604,6 +2010,8 @@ public class SaveDealRepository extends ModelRepository<SaveDeal> {
 
             
 
+        
+    
         
     
         

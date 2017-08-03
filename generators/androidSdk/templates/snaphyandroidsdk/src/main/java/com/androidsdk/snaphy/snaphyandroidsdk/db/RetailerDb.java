@@ -180,20 +180,15 @@ public class RetailerDb{
                         }
                                   
                                 
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String is_deletedData = "";
-                        try {
-                              Method method = modelData.getClass().getMethod("getIs_deleted");
-                              if(method.invoke(modelData) != null){
-                                //is_deletedData = modelData.getIs_deleted().toString();
-                                is_deletedData = (String) method.invoke(modelData);
-                                values.put("`is_deleted`", is_deletedData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
+                                  String departmentIdData = "";
+                  if(modelData.getDepartmentId() != null){
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                    Gson gson = gsonBuilder.create();
+                    departmentIdData = gson.toJson(modelData.getDepartmentId(), DataList.class);
+                    values.put("`departmentId`", departmentIdData);
+                  }
+              
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String realmData = "";
@@ -605,15 +600,18 @@ public class RetailerDb{
                         }
                                                 
                                 
-                                                            String is_deletedData = "";
-                        if(cursor.getString(14) != null){
-                          is_deletedData = cursor.getString(14);
-                          if(is_deletedData != null){
-                            is_deletedData = is_deletedData.toString();
-                            hashMap.put("is_deleted", is_deletedData);
-                          }
-                        }
-                                                
+                                  DataList<String> departmentIdData = new DataList<>();
+                  if(cursor.getString(14) != null){
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                    Gson gson = gsonBuilder.create();
+                    departmentIdData = gson.fromJson(cursor.getString(14), DataList.class);
+                    if(departmentIdData != null){
+                      departmentIdData = (DataList<String>)departmentIdData;
+                      hashMap.put("departmentId", departmentIdData);
+                    }
+                  }
+                            
                                 
                                                             String realmData = "";
                         if(cursor.getString(15) != null){

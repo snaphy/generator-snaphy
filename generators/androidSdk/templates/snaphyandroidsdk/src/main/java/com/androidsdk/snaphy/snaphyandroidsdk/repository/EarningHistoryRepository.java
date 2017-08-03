@@ -41,25 +41,46 @@ import org.json.JSONObject;
 
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.GoogleComment;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.EarningHistory;
 import android.content.Context;
-import com.androidsdk.snaphy.snaphyandroidsdk.db.GoogleCommentDb;
+import com.androidsdk.snaphy.snaphyandroidsdk.db.EarningHistoryDb;
 
 //Now import model of related models..
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.QrCode;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.QrCodeRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Retailer;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RetailerRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Department;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.DepartmentRepository;
+            
+        
+    
 
 
 
 
-public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
+
+public class EarningHistoryRepository extends ModelRepository<EarningHistory> {
 
 
     private Context context;
     private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
     private static String DATABASE_NAME;
 
-    public GoogleCommentRepository(){
-        super("GoogleComment", null, GoogleComment.class);
+    public EarningHistoryRepository(){
+        super("EarningHistory", null, EarningHistory.class);
 
     }
 
@@ -77,15 +98,15 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
 
 
 
-    public GoogleCommentDb getDb() {
-      return googleCommentDb;
+    public EarningHistoryDb getDb() {
+      return earningHistoryDb;
     }
 
-    public void setGoogleCommentDb(GoogleCommentDb googleCommentDb) {
-      this.googleCommentDb = googleCommentDb;
+    public void setEarningHistoryDb(EarningHistoryDb earningHistoryDb) {
+      this.earningHistoryDb = earningHistoryDb;
     }
 
-    private GoogleCommentDb googleCommentDb;
+    private EarningHistoryDb earningHistoryDb;
 
 
 
@@ -119,7 +140,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
          catch (Exception e){
             Log.e("Snaphy", e.toString());
          }
-         setGoogleCommentDb(new GoogleCommentDb(context, DATABASE_NAME, getRestAdapter()));
+         setEarningHistoryDb(new EarningHistoryDb(context, DATABASE_NAME, getRestAdapter()));
          //allow data storage locally..
          persistData(true);
          this.context = context;
@@ -133,7 +154,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "GoogleComment.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:earningHistoryId/qrCode", "GET"), "EarningHistory.prototype.__get__qrCode");
     
 
     
@@ -142,7 +163,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "GoogleComment.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:earningHistoryId/retailer", "GET"), "EarningHistory.prototype.__get__retailer");
     
 
     
@@ -151,7 +172,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "GoogleComment.upsert");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:earningHistoryId/department", "GET"), "EarningHistory.prototype.__get__department");
     
 
     
@@ -160,7 +181,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "GoogleComment.exists");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "EarningHistory.create");
     
 
     
@@ -169,7 +190,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "GoogleComment.findById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "EarningHistory.create");
     
 
     
@@ -178,7 +199,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "GoogleComment.find");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "EarningHistory.upsert");
     
 
     
@@ -187,7 +208,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "GoogleComment.findOne");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "EarningHistory.exists");
     
 
     
@@ -196,7 +217,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "GoogleComment.updateAll");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "EarningHistory.findById");
     
 
     
@@ -205,7 +226,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "GoogleComment.deleteById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "EarningHistory.find");
     
 
     
@@ -214,7 +235,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "GoogleComment.count");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "EarningHistory.findOne");
     
 
     
@@ -223,7 +244,34 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:googleCommentId", "PUT"), "GoogleComment.prototype.updateAttributes");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "EarningHistory.updateAll");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "EarningHistory.deleteById");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "EarningHistory.count");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:earningHistoryId", "PUT"), "EarningHistory.prototype.updateAttributes");
     
 
     
@@ -235,7 +283,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "GoogleComment.getSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "EarningHistory.getSchema");
     
 
     
@@ -244,7 +292,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "GoogleComment.getAbsoluteSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "EarningHistory.getAbsoluteSchema");
     
 
     
@@ -256,7 +304,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "GoogleComment.getDetailSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "EarningHistory.getDetailSchema");
     
 
     
@@ -265,7 +313,40 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "GoogleComment.getModelRelationSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "EarningHistory.getModelRelationSchema");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findHistory", "POST"), "EarningHistory.findHistory");
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
     
 
     
@@ -292,8 +373,263 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
 
     
         
+            //Method get__qrCode definition
+            public void get__qrCode(  String earningHistoryId,  Boolean refresh, final ObjectCallback<QrCode> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("earningHistoryId", earningHistoryId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__qrCode", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    QrCodeRepository qrCodeRepo = getRestAdapter().createRepository(QrCodeRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = qrCodeRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(qrCodeRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //qrCodeRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    QrCode qrCode = qrCodeRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = qrCode.getClass().getMethod("save__db");
+                                                    method.invoke(qrCode);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(qrCode);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__qrCode definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__retailer definition
+            public void get__retailer(  String earningHistoryId,  Boolean refresh, final ObjectCallback<Retailer> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("earningHistoryId", earningHistoryId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__retailer", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    RetailerRepository retailerRepo = getRestAdapter().createRepository(RetailerRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = retailerRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(retailerRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //retailerRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Retailer retailer = retailerRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = retailer.getClass().getMethod("save__db");
+                                                    method.invoke(retailer);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(retailer);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__retailer definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__department definition
+            public void get__department(  String earningHistoryId,  Boolean refresh, final ObjectCallback<Department> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("earningHistoryId", earningHistoryId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__department", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    DepartmentRepository departmentRepo = getRestAdapter().createRepository(DepartmentRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = departmentRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(departmentRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //departmentRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Department department = departmentRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = department.getClass().getMethod("save__db");
+                                                    method.invoke(department);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(department);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__department definition ends here..
+
+            
+
+        
+    
+        
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<GoogleComment> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<EarningHistory> callback){
 
                 /**
                 Call the onBefore event
@@ -327,27 +663,27 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    GoogleCommentRepository googleCommentRepo = getRestAdapter().createRepository(GoogleCommentRepository.class);
+                                    EarningHistoryRepository earningHistoryRepo = getRestAdapter().createRepository(EarningHistoryRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = googleCommentRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(googleCommentRepo, context);
+                                            Method method = earningHistoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(earningHistoryRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //googleCommentRepo.addStorage(context);
+                                        //earningHistoryRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    GoogleComment googleComment = googleCommentRepo.createObject(result);
+                                    EarningHistory earningHistory = earningHistoryRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = googleComment.getClass().getMethod("save__db");
-                                                    method.invoke(googleComment);
+                                                    Method method = earningHistory.getClass().getMethod("save__db");
+                                                    method.invoke(earningHistory);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -355,7 +691,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
 
                                       }
 
-                                    callback.onSuccess(googleComment);
+                                    callback.onSuccess(earningHistory);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -377,7 +713,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<GoogleComment> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<EarningHistory> callback){
 
                 /**
                 Call the onBefore event
@@ -411,27 +747,27 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    GoogleCommentRepository googleCommentRepo = getRestAdapter().createRepository(GoogleCommentRepository.class);
+                                    EarningHistoryRepository earningHistoryRepo = getRestAdapter().createRepository(EarningHistoryRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = googleCommentRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(googleCommentRepo, context);
+                                            Method method = earningHistoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(earningHistoryRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //googleCommentRepo.addStorage(context);
+                                        //earningHistoryRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    GoogleComment googleComment = googleCommentRepo.createObject(result);
+                                    EarningHistory earningHistory = earningHistoryRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = googleComment.getClass().getMethod("save__db");
-                                                    method.invoke(googleComment);
+                                                    Method method = earningHistory.getClass().getMethod("save__db");
+                                                    method.invoke(earningHistory);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -439,7 +775,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
 
                                       }
 
-                                    callback.onSuccess(googleComment);
+                                    callback.onSuccess(earningHistory);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -511,7 +847,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<GoogleComment> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<EarningHistory> callback){
 
                 /**
                 Call the onBefore event
@@ -547,27 +883,27 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    GoogleCommentRepository googleCommentRepo = getRestAdapter().createRepository(GoogleCommentRepository.class);
+                                    EarningHistoryRepository earningHistoryRepo = getRestAdapter().createRepository(EarningHistoryRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = googleCommentRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(googleCommentRepo, context);
+                                            Method method = earningHistoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(earningHistoryRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //googleCommentRepo.addStorage(context);
+                                        //earningHistoryRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    GoogleComment googleComment = googleCommentRepo.createObject(result);
+                                    EarningHistory earningHistory = earningHistoryRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = googleComment.getClass().getMethod("save__db");
-                                                    method.invoke(googleComment);
+                                                    Method method = earningHistory.getClass().getMethod("save__db");
+                                                    method.invoke(earningHistory);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -575,7 +911,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
 
                                       }
 
-                                    callback.onSuccess(googleComment);
+                                    callback.onSuccess(earningHistory);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -596,7 +932,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<GoogleComment> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<EarningHistory> callback){
 
                 /**
                 Call the onBefore event
@@ -631,12 +967,12 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<GoogleComment> googleCommentList = new DataList<GoogleComment>();
-                                    GoogleCommentRepository googleCommentRepo = getRestAdapter().createRepository(GoogleCommentRepository.class);
+                                    DataList<EarningHistory> earningHistoryList = new DataList<EarningHistory>();
+                                    EarningHistoryRepository earningHistoryRepo = getRestAdapter().createRepository(EarningHistoryRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = googleCommentRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(googleCommentRepo, context);
+                                            Method method = earningHistoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(earningHistoryRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -644,23 +980,23 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        GoogleComment googleComment = googleCommentRepo.createObject(obj);
+                                        EarningHistory earningHistory = earningHistoryRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = googleComment.getClass().getMethod("save__db");
-                                                      method.invoke(googleComment);
+                                                      Method method = earningHistory.getClass().getMethod("save__db");
+                                                      method.invoke(earningHistory);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        googleCommentList.add(googleComment);
+                                        earningHistoryList.add(earningHistory);
                                     }
-                                    callback.onSuccess(googleCommentList);
+                                    callback.onSuccess(earningHistoryList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -679,7 +1015,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<GoogleComment> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<EarningHistory> callback){
 
                 /**
                 Call the onBefore event
@@ -713,27 +1049,27 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    GoogleCommentRepository googleCommentRepo = getRestAdapter().createRepository(GoogleCommentRepository.class);
+                                    EarningHistoryRepository earningHistoryRepo = getRestAdapter().createRepository(EarningHistoryRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = googleCommentRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(googleCommentRepo, context);
+                                            Method method = earningHistoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(earningHistoryRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //googleCommentRepo.addStorage(context);
+                                        //earningHistoryRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    GoogleComment googleComment = googleCommentRepo.createObject(result);
+                                    EarningHistory earningHistory = earningHistoryRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = googleComment.getClass().getMethod("save__db");
-                                                    method.invoke(googleComment);
+                                                    Method method = earningHistory.getClass().getMethod("save__db");
+                                                    method.invoke(earningHistory);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -741,7 +1077,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
 
                                       }
 
-                                    callback.onSuccess(googleComment);
+                                    callback.onSuccess(earningHistory);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -917,7 +1253,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String googleCommentId,  Map<String,  ? extends Object> data, final ObjectCallback<GoogleComment> callback){
+            public void updateAttributes(  String earningHistoryId,  Map<String,  ? extends Object> data, final ObjectCallback<EarningHistory> callback){
 
                 /**
                 Call the onBefore event
@@ -929,7 +1265,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("googleCommentId", googleCommentId);
+                        hashMapObject.put("earningHistoryId", earningHistoryId);
                 
                         hashMapObject.putAll(data);
                 
@@ -953,27 +1289,27 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    GoogleCommentRepository googleCommentRepo = getRestAdapter().createRepository(GoogleCommentRepository.class);
+                                    EarningHistoryRepository earningHistoryRepo = getRestAdapter().createRepository(EarningHistoryRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = googleCommentRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(googleCommentRepo, context);
+                                            Method method = earningHistoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(earningHistoryRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //googleCommentRepo.addStorage(context);
+                                        //earningHistoryRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    GoogleComment googleComment = googleCommentRepo.createObject(result);
+                                    EarningHistory earningHistory = earningHistoryRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = googleComment.getClass().getMethod("save__db");
-                                                    method.invoke(googleComment);
+                                                    Method method = earningHistory.getClass().getMethod("save__db");
+                                                    method.invoke(earningHistory);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -981,7 +1317,7 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
 
                                       }
 
-                                    callback.onSuccess(googleComment);
+                                    callback.onSuccess(earningHistory);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1198,6 +1534,81 @@ public class GoogleCommentRepository extends ModelRepository<GoogleComment> {
 
             
 
+        
+    
+        
+            //Method findHistory definition
+            public void findHistory(  Map<String,  ? extends Object> ctx,  String departmentId,  String status,  String cursor,  double limit, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("ctx", ctx);
+                
+                        hashMapObject.put("departmentId", departmentId);
+                
+                        hashMapObject.put("status", status);
+                
+                        hashMapObject.put("cursor", cursor);
+                
+                        hashMapObject.put("limit", limit);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("findHistory", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method findHistory definition ends here..
+
+            
+
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
 

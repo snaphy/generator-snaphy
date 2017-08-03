@@ -55,13 +55,13 @@ public class <%- modelName %>Db{
   }
 
 
-    public void insert__db (final String id, final <%- modelName %> modelData) {
+    public void insert__db (final String id, final <%- modelName %> _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 db.insert("`<%- modelName %>`", null, values);
                 //db.close(); // Closing database connection
             }
@@ -73,7 +73,7 @@ public class <%- modelName %>Db{
 
 
 
-    public ContentValues getContentValues(<%- modelName %> modelData){
+    public ContentValues getContentValues(<%- modelName %> _modelData){
       ContentValues values = new ContentValues();
          <%
           for( let property in model.properties) { -%>
@@ -84,36 +84,36 @@ public class <%- modelName %>Db{
 
                 <% if(isArray){ -%>
                   String <%-property%>Data = "";
-                  if(modelData.get<%-capitalPropertyName%>() != null){
+                  if(_modelData.get<%-capitalPropertyName%>() != null){
                     GsonBuilder gsonBuilder = new GsonBuilder();
                     gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                     Gson gson = gsonBuilder.create();
-                    <%-property%>Data = gson.toJson(modelData.get<%-capitalPropertyName%>(), DataList.class);
+                    <%-property%>Data = gson.toJson(_modelData.get<%-capitalPropertyName%>(), DataList.class);
                     values.put("`<%-property%>`", <%-property%>Data);
                   }
               <% }else{ -%>
                     <% if(model.properties[property].type === "string" || model.properties[property].type === "date"){ -%>
                         String <%-property%>Data = "";
-                        if(modelData.get<%-capitalPropertyName%>() != null){
-                          <%-property%>Data = modelData.get<%-capitalPropertyName%>().toString();
+                        if(_modelData.get<%-capitalPropertyName%>() != null){
+                          <%-property%>Data = _modelData.get<%-capitalPropertyName%>().toString();
                           values.put("`<%-property%>`", <%-property%>Data);
                         }
                     <% }else if(model.properties[property].type === "object" || model.properties[property].type === "geopoint"){ -%>
                         String <%-property%>Data = "";
-                        if(modelData.get<%-capitalPropertyName%>() != null){
+                        if(_modelData.get<%-capitalPropertyName%>() != null){
                           GsonBuilder gsonBuilder = new GsonBuilder();
                           gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                           Gson gson = gsonBuilder.create();
-                          <%-property%>Data = gson.toJson(modelData.get<%-capitalPropertyName%>(), HashMap.class);
+                          <%-property%>Data = gson.toJson(_modelData.get<%-capitalPropertyName%>(), HashMap.class);
                           values.put("`<%-property%>`", <%-property%>Data);
                         }
                     <% }else if(model.properties[property].type === "number"){ -%>
                         double <%-property%>Data;
-                        <%-property%>Data = (double)modelData.get<%-capitalPropertyName%>();
+                        <%-property%>Data = (double)_modelData.get<%-capitalPropertyName%>();
                         values.put("`<%-property%>`", <%-property%>Data);
                     <% }else if(model.properties[property].type === "boolean"){ -%>
                         int <%-property%>Data = 0;
-                        if(modelData.get<%-capitalPropertyName%>()){
+                        if(_modelData.get<%-capitalPropertyName%>()){
                           <%-property%>Data = 1;
                         }else{
                           <%-property%>Data = 0;
@@ -123,10 +123,10 @@ public class <%- modelName %>Db{
                         //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String <%-property%>Data = "";
                         try {
-                              Method method = modelData.getClass().getMethod("get<%-capitalPropertyName%>");
-                              if(method.invoke(modelData) != null){
-                                //<%-property%>Data = modelData.get<%-capitalPropertyName%>().toString();
-                                <%-property%>Data = (String) method.invoke(modelData);
+                              Method method = _modelData.getClass().getMethod("get<%-capitalPropertyName%>");
+                              if(method.invoke(_modelData) != null){
+                                //<%-property%>Data = _modelData.get<%-capitalPropertyName%>().toString();
+                                <%-property%>Data = (String) method.invoke(_modelData);
                                 values.put("`<%-property%>`", <%-property%>Data);
                               }
                         } catch (Exception e) {
@@ -159,10 +159,10 @@ public class <%- modelName %>Db{
           %>
                     String <%- getForeignKeyName(model, relation) %>Data = "";
                     try {
-                        Method method = modelData.getClass().getMethod("get<%-capitalPropertyName%>");
-                        if(method.invoke(modelData) != null){
-                          //<%-getForeignKeyName(model, relation)%>Data = modelData.get<%-capitalPropertyName%>().toString();
-                          <%-getForeignKeyName(model, relation)%>Data = (String) method.invoke(modelData);
+                        Method method = _modelData.getClass().getMethod("get<%-capitalPropertyName%>");
+                        if(method.invoke(_modelData) != null){
+                          //<%-getForeignKeyName(model, relation)%>Data = _modelData.get<%-capitalPropertyName%>().toString();
+                          <%-getForeignKeyName(model, relation)%>Data = (String) method.invoke(_modelData);
                           values.put("`<%-getForeignKeyName(model, relation)%>`", <%-getForeignKeyName(model, relation)%>Data);
                         }
                     } catch (Exception e) {
@@ -793,13 +793,13 @@ public class <%- modelName %>Db{
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final <%- modelName %> modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final <%- modelName %> _modelData ){
       new Thread(new Runnable(){
         @Override
         public void run(){
           SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
           db.beginTransaction();
-          ContentValues values = getContentValues(modelData);
+          ContentValues values = getContentValues(_modelData);
           String where = getWhere(whereKeyValue);
           db.update("`<%- modelName %>`", values, where, null);
           db.setTransactionSuccessful();
@@ -831,13 +831,13 @@ public class <%- modelName %>Db{
 
 
     // Updating single contact
-    public void update__db(final String id,   final <%- modelName %> modelData) {
+    public void update__db(final String id,   final <%- modelName %> _modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                ContentValues values = getContentValues(modelData);
+                ContentValues values = getContentValues(_modelData);
                 // updating row
                 db.update("`<%- modelName %>`", values, "id = ?",
                         new String[] { id });

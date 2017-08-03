@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
+import com.google.gson.LongSerializationPolicy;
 import com.google.gson.GsonBuilder;
 import android.database.Cursor;
 import java.lang.reflect.Method;
@@ -72,10 +73,24 @@ public class EmployeeDb{
     public ContentValues getContentValues(Employee modelData){
       ContentValues values = new ContentValues();
                        
+                                                            String employee_numberData = "";
+                        if(modelData.getEmployee_number() != null){
+                          employee_numberData = modelData.getEmployee_number().toString();
+                          values.put("`employee_number`", employee_numberData);
+                        }
+                                  
+                                
                                                             String usernameData = "";
                         if(modelData.getUsername() != null){
                           usernameData = modelData.getUsername().toString();
                           values.put("`username`", usernameData);
+                        }
+                                  
+                                
+                                                            String passwordData = "";
+                        if(modelData.getPassword() != null){
+                          passwordData = modelData.getPassword().toString();
+                          values.put("`password`", passwordData);
                         }
                                   
                                 
@@ -90,6 +105,13 @@ public class EmployeeDb{
                         if(modelData.getLastName() != null){
                           lastNameData = modelData.getLastName().toString();
                           values.put("`lastName`", lastNameData);
+                        }
+                                  
+                                
+                                                            String addressData = "";
+                        if(modelData.getAddress() != null){
+                          addressData = modelData.getAddress().toString();
+                          values.put("`address`", addressData);
                         }
                                   
                                 
@@ -114,11 +136,29 @@ public class EmployeeDb{
                         }
                                   
                                 
-                                                            String passwordData = "";
-                        if(modelData.getPassword() != null){
-                          passwordData = modelData.getPassword().toString();
-                          values.put("`password`", passwordData);
+                                                            String contactData = "";
+                        if(modelData.getContact() != null){
+                          contactData = modelData.getContact().toString();
+                          values.put("`contact`", contactData);
                         }
+                                  
+                                
+                                                            int is_deletedData = 0;
+                        if(modelData.getIs_deleted()){
+                          is_deletedData = 1;
+                        }else{
+                          is_deletedData = 0;
+                        }
+                        values.put("`is_deleted`", is_deletedData);
+                                  
+                                
+                                                            int isAdminData = 0;
+                        if(modelData.getIsAdmin()){
+                          isAdminData = 1;
+                        }else{
+                          isAdminData = 0;
+                        }
+                        values.put("`isAdmin`", isAdminData);
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
@@ -255,6 +295,21 @@ public class EmployeeDb{
                         }
 
                                   
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String departmentIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getDepartmentId");
+                              if(method.invoke(modelData) != null){
+                                //departmentIdData = modelData.getDepartmentId().toString();
+                                departmentIdData = (String) method.invoke(modelData);
+                                values.put("`departmentId`", departmentIdData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                  
                   
         
           
@@ -337,9 +392,19 @@ public class EmployeeDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            String usernameData = "";
+                                                            String employee_numberData = "";
                         if(cursor.getString(0) != null){
-                          usernameData = cursor.getString(0);
+                          employee_numberData = cursor.getString(0);
+                          if(employee_numberData != null){
+                            employee_numberData = (String)employee_numberData;
+                            hashMap.put("employee_number", employee_numberData);
+                          }
+                        }
+                                                
+                                
+                                                            String usernameData = "";
+                        if(cursor.getString(1) != null){
+                          usernameData = cursor.getString(1);
                           if(usernameData != null){
                             usernameData = (String)usernameData;
                             hashMap.put("username", usernameData);
@@ -347,9 +412,19 @@ public class EmployeeDb{
                         }
                                                 
                                 
+                                                            String passwordData = "";
+                        if(cursor.getString(2) != null){
+                          passwordData = cursor.getString(2);
+                          if(passwordData != null){
+                            passwordData = (String)passwordData;
+                            hashMap.put("password", passwordData);
+                          }
+                        }
+                                                
+                                
                                                             String firstNameData = "";
-                        if(cursor.getString(1) != null){
-                          firstNameData = cursor.getString(1);
+                        if(cursor.getString(3) != null){
+                          firstNameData = cursor.getString(3);
                           if(firstNameData != null){
                             firstNameData = (String)firstNameData;
                             hashMap.put("firstName", firstNameData);
@@ -358,8 +433,8 @@ public class EmployeeDb{
                                                 
                                 
                                                             String lastNameData = "";
-                        if(cursor.getString(2) != null){
-                          lastNameData = cursor.getString(2);
+                        if(cursor.getString(4) != null){
+                          lastNameData = cursor.getString(4);
                           if(lastNameData != null){
                             lastNameData = (String)lastNameData;
                             hashMap.put("lastName", lastNameData);
@@ -367,9 +442,19 @@ public class EmployeeDb{
                         }
                                                 
                                 
+                                                            String addressData = "";
+                        if(cursor.getString(5) != null){
+                          addressData = cursor.getString(5);
+                          if(addressData != null){
+                            addressData = (String)addressData;
+                            hashMap.put("address", addressData);
+                          }
+                        }
+                                                
+                                
                                                             String addedData = "";
-                        if(cursor.getString(3) != null){
-                          addedData = cursor.getString(3);
+                        if(cursor.getString(6) != null){
+                          addedData = cursor.getString(6);
                           if(addedData != null){
                             addedData = (String)addedData;
                             hashMap.put("added", addedData);
@@ -378,8 +463,8 @@ public class EmployeeDb{
                                                 
                                 
                                                             String updatedData = "";
-                        if(cursor.getString(4) != null){
-                          updatedData = cursor.getString(4);
+                        if(cursor.getString(7) != null){
+                          updatedData = cursor.getString(7);
                           if(updatedData != null){
                             updatedData = (String)updatedData;
                             hashMap.put("updated", updatedData);
@@ -388,8 +473,8 @@ public class EmployeeDb{
                                                 
                                 
                                                             String emailData = "";
-                        if(cursor.getString(5) != null){
-                          emailData = cursor.getString(5);
+                        if(cursor.getString(8) != null){
+                          emailData = cursor.getString(8);
                           if(emailData != null){
                             emailData = (String)emailData;
                             hashMap.put("email", emailData);
@@ -397,19 +482,39 @@ public class EmployeeDb{
                         }
                                                 
                                 
-                                                            String passwordData = "";
-                        if(cursor.getString(6) != null){
-                          passwordData = cursor.getString(6);
-                          if(passwordData != null){
-                            passwordData = (String)passwordData;
-                            hashMap.put("password", passwordData);
+                                                            String contactData = "";
+                        if(cursor.getString(9) != null){
+                          contactData = cursor.getString(9);
+                          if(contactData != null){
+                            contactData = (String)contactData;
+                            hashMap.put("contact", contactData);
                           }
                         }
                                                 
                                 
+                                                            boolean is_deletedData = false;
+                        int tempis_deletedData = cursor.getInt(10);
+                        if( tempis_deletedData > 0){
+                          is_deletedData = true;
+                        }else{
+                          is_deletedData = false;
+                        }
+                        hashMap.put("is_deleted", is_deletedData);
+                                                
+                                
+                                                            boolean isAdminData = false;
+                        int tempisAdminData = cursor.getInt(11);
+                        if( tempisAdminData > 0){
+                          isAdminData = true;
+                        }else{
+                          isAdminData = false;
+                        }
+                        hashMap.put("isAdmin", isAdminData);
+                                                
+                                
                                                             String realmData = "";
-                        if(cursor.getString(7) != null){
-                          realmData = cursor.getString(7);
+                        if(cursor.getString(12) != null){
+                          realmData = cursor.getString(12);
                           if(realmData != null){
                             realmData = realmData.toString();
                             hashMap.put("realm", realmData);
@@ -418,8 +523,8 @@ public class EmployeeDb{
                                                 
                                 
                                                             String credentialsData = "";
-                        if(cursor.getString(8) != null){
-                          credentialsData = cursor.getString(8);
+                        if(cursor.getString(13) != null){
+                          credentialsData = cursor.getString(13);
                           if(credentialsData != null){
                             credentialsData = credentialsData.toString();
                             hashMap.put("credentials", credentialsData);
@@ -428,8 +533,8 @@ public class EmployeeDb{
                                                 
                                 
                                                             String challengesData = "";
-                        if(cursor.getString(9) != null){
-                          challengesData = cursor.getString(9);
+                        if(cursor.getString(14) != null){
+                          challengesData = cursor.getString(14);
                           if(challengesData != null){
                             challengesData = challengesData.toString();
                             hashMap.put("challenges", challengesData);
@@ -438,8 +543,8 @@ public class EmployeeDb{
                                                 
                                 
                                                             String emailVerifiedData = "";
-                        if(cursor.getString(10) != null){
-                          emailVerifiedData = cursor.getString(10);
+                        if(cursor.getString(15) != null){
+                          emailVerifiedData = cursor.getString(15);
                           if(emailVerifiedData != null){
                             emailVerifiedData = emailVerifiedData.toString();
                             hashMap.put("emailVerified", emailVerifiedData);
@@ -448,8 +553,8 @@ public class EmployeeDb{
                                                 
                                 
                                                             String verificationTokenData = "";
-                        if(cursor.getString(11) != null){
-                          verificationTokenData = cursor.getString(11);
+                        if(cursor.getString(16) != null){
+                          verificationTokenData = cursor.getString(16);
                           if(verificationTokenData != null){
                             verificationTokenData = verificationTokenData.toString();
                             hashMap.put("verificationToken", verificationTokenData);
@@ -458,8 +563,8 @@ public class EmployeeDb{
                                                 
                                 
                                                             String statusData = "";
-                        if(cursor.getString(12) != null){
-                          statusData = cursor.getString(12);
+                        if(cursor.getString(17) != null){
+                          statusData = cursor.getString(17);
                           if(statusData != null){
                             statusData = statusData.toString();
                             hashMap.put("status", statusData);
@@ -468,8 +573,8 @@ public class EmployeeDb{
                                                 
                                 
                                                             String createdData = "";
-                        if(cursor.getString(13) != null){
-                          createdData = cursor.getString(13);
+                        if(cursor.getString(18) != null){
+                          createdData = cursor.getString(18);
                           if(createdData != null){
                             createdData = createdData.toString();
                             hashMap.put("created", createdData);
@@ -478,8 +583,8 @@ public class EmployeeDb{
                                                 
                                 
                                                             String lastUpdatedData = "";
-                        if(cursor.getString(14) != null){
-                          lastUpdatedData = cursor.getString(14);
+                        if(cursor.getString(19) != null){
+                          lastUpdatedData = cursor.getString(19);
                           if(lastUpdatedData != null){
                             lastUpdatedData = lastUpdatedData.toString();
                             hashMap.put("lastUpdated", lastUpdatedData);
@@ -488,11 +593,21 @@ public class EmployeeDb{
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(15) != null){
-                          idData = cursor.getString(15);
+                        if(cursor.getString(20) != null){
+                          idData = cursor.getString(20);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
+                          }
+                        }
+                                                
+                                
+                                                            String departmentIdData = "";
+                        if(cursor.getString(21) != null){
+                          departmentIdData = cursor.getString(21);
+                          if(departmentIdData != null){
+                            departmentIdData = departmentIdData.toString();
+                            hashMap.put("departmentId", departmentIdData);
                           }
                         }
                                                 

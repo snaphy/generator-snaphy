@@ -54,6 +54,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.RetailerRepository;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.DepartmentRepository;
+            
+
+        
+    
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,7 +68,7 @@ import java.util.Map;
 
 
 
-public class Retailer extends Model {
+public class Retailer extends User {
 
 
     //For converting all model values to hashMap
@@ -380,6 +387,22 @@ public class Retailer extends Model {
         
             
 
+                private DataList<String> departmentId;
+                /* Adding Getter and Setter methods */
+                public DataList<String> getDepartmentId(){
+                    return departmentId;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setDepartmentId(DataList<String> departmentId){
+                    this.departmentId = departmentId;
+
+                    //TODO change this to custom array with double quotes escaped if error occured when sending to server..
+                    hashMap.put("departmentId", departmentId);
+                }
+
+            
+
             
             
         
@@ -660,6 +683,12 @@ public class Retailer extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -747,6 +776,15 @@ public class Retailer extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
                         
                         
                         
@@ -1115,6 +1153,12 @@ public class Retailer extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -1329,6 +1373,15 @@ public class Retailer extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
                         
                         
                         
@@ -1531,6 +1584,12 @@ public class Retailer extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -1691,6 +1750,14 @@ public class Retailer extends Model {
                                         });
                                     } //method def ends here.
                                  
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
                             
                          
                             
@@ -1914,6 +1981,607 @@ public class Retailer extends Model {
                                     } //method def ends here.
                                  
                             
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                
+                    //Define hasMany, hasManyThrough method here..
+
+                 
+                 
+             
+          
+    
+        
+        
+                
+
+                
+                    
+                    //Define hasMany relation method here..
+                    private transient DataList<Department>  department ;
+
+                    public DataList< Department > getDepartment() {
+                        //Check for pure case of hasMany
+                                                    //TODO: Modify foreign key name..
+                          try{
+                            DepartmentRepository departmentRepository = (DepartmentRepository) getRepository();
+
+                            if(that.getId() != null && departmentRepository.getDb() != null){
+
+                                 //Fetch locally from db
+                                 //department = getDepartment__db(restAdapter);
+                                 // Getting single cont
+                                 department = departmentRepository.getDb().getAll__db("retailerId", that.getId().toString());
+
+                                 //lowercaseFirstLetter(modelName)
+                            }
+                          }catch(Exception e){
+                                //Ignore
+                          }
+                                                return department;
+                    }
+
+                    public void setDepartment(DataList<Department> department) {
+                        boolean hashType = false;
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
+                        for(Object o: department){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
+                        }
+
+                        if(hashType){
+                            setDepartment1(hashMaps);
+                        }else{
+                            this.department = department;
+                            //TODO: Warning move this to new thread
+                            for(Department data: department){
+                              try{
+                                data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
+                            }
+                        }
+                    }
+
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setDepartment1(List<Map<String, Object>> department) {
+                        //First create a dummy Repo class object for ..
+                        DepartmentRepository departmentRepository = new DepartmentRepository();
+                        List<Department> result = new ArrayList<>();
+                        for (Map<String, Object> obj : department) {
+                            //Also add relation to child type for two way communication..
+                            Department obj1 = departmentRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setDepartment(result);
+
+                    }
+
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setDepartment1(DataList<HashMap<String, Object>> department) {
+                        //First create a dummy Repo class object for ..
+                        DepartmentRepository departmentRepository = new DepartmentRepository();
+                        DataList<Department> result = new DataList<>();
+                        for (HashMap<String, Object> obj : department) {
+                            //Also add relation to child type for two way communication..
+                            Department obj1 = departmentRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setDepartment(result);
+
+                    }
+
+
+                    //Adding relation method..
+                    //Add a dummy class Name object to seperate data..
+                    public void addRelation(DataList<Department> department, Department dummyClassInstance) {
+                        that.setDepartment(department);
+
+                    }
+
+                    //Adding relation method..
+                    //This will add a new data to the list relation object..
+                    public void addRelation(Department department) {
+                        try{
+                            try{
+
+                                  //Save to database..
+                                  department.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
+                            that.getDepartment().add(department);
+                        }catch(Exception e){
+                            DataList< Department> department1 = new DataList();
+                            //Now add this item to list..
+                            department1.add(department);
+                            //Now set data....
+                            that.setDepartment(department1);
+                        }
+                    }
+
+
+
+
+                    
+                        //Implement logic for pure hasMany methods here....
+
+                    
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void findById__department( String fk,  RestAdapter restAdapter, final ObjectCallback<Department> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final RetailerRepository  retailerRepo = restAdapter.createRepository(RetailerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        retailerRepo.findById__department( (String)that.getId(), fk,  new ObjectCallback<Department> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Department object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void destroyById__department( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final RetailerRepository  retailerRepo = restAdapter.createRepository(RetailerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        retailerRepo.destroyById__department( (String)that.getId(), fk,  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void updateById__department( String fk,  Department data,  RestAdapter restAdapter, final ObjectCallback<Department> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final RetailerRepository  retailerRepo = restAdapter.createRepository(RetailerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        retailerRepo.updateById__department( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Department> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Department object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__department( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Department> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final RetailerRepository  retailerRepo = restAdapter.createRepository(RetailerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        retailerRepo.get__department( (String)that.getId(), filter,  new DataListCallback<Department> (){
+                                            
+
+                                            
+
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(DataList<Department> object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            Department obj = new Department();
+                                                            addRelation(object, obj);
+                                                            //Disabling two way communication for cyclic error..
+                                                            /*for (Department obj : object) {
+                                                                //Also add relation to child type for two way communication..
+                                                                obj.addRelation(that);
+                                                            }*/
+
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void create__department( Department data,  RestAdapter restAdapter, final ObjectCallback<Department> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final RetailerRepository  retailerRepo = restAdapter.createRepository(RetailerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        retailerRepo.create__department( (String)that.getId(), data.convertMap(),  new ObjectCallback<Department> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Department object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void delete__department( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final RetailerRepository  retailerRepo = restAdapter.createRepository(RetailerRepository.class);
+                                        
+                                        
+
+
+
+                                        retailerRepo.delete__department( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void count__department( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final RetailerRepository  retailerRepo = restAdapter.createRepository(RetailerRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        retailerRepo.count__department( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                        //Calling the finally..callback
+                                                        callback.onFinally();
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
                         
                         
                         

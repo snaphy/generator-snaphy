@@ -73,6 +73,13 @@ public class TransactionDb{
     public ContentValues getContentValues(Transaction modelData){
       ContentValues values = new ContentValues();
                        
+                                                            String transactionStatusData = "";
+                        if(modelData.getTransactionStatus() != null){
+                          transactionStatusData = modelData.getTransactionStatus().toString();
+                          values.put("`transactionStatus`", transactionStatusData);
+                        }
+                                  
+                                
                                                             String transaction_numberData = "";
                         if(modelData.getTransaction_number() != null){
                           transaction_numberData = modelData.getTransaction_number().toString();
@@ -252,9 +259,19 @@ public class TransactionDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            String transaction_numberData = "";
+                                                            String transactionStatusData = "";
                         if(cursor.getString(0) != null){
-                          transaction_numberData = cursor.getString(0);
+                          transactionStatusData = cursor.getString(0);
+                          if(transactionStatusData != null){
+                            transactionStatusData = (String)transactionStatusData;
+                            hashMap.put("transactionStatus", transactionStatusData);
+                          }
+                        }
+                                                
+                                
+                                                            String transaction_numberData = "";
+                        if(cursor.getString(1) != null){
+                          transaction_numberData = cursor.getString(1);
                           if(transaction_numberData != null){
                             transaction_numberData = (String)transaction_numberData;
                             hashMap.put("transaction_number", transaction_numberData);
@@ -263,8 +280,8 @@ public class TransactionDb{
                                                 
                                 
                                                             String paytm_transaction_idData = "";
-                        if(cursor.getString(1) != null){
-                          paytm_transaction_idData = cursor.getString(1);
+                        if(cursor.getString(2) != null){
+                          paytm_transaction_idData = cursor.getString(2);
                           if(paytm_transaction_idData != null){
                             paytm_transaction_idData = (String)paytm_transaction_idData;
                             hashMap.put("paytm_transaction_id", paytm_transaction_idData);
@@ -273,7 +290,7 @@ public class TransactionDb{
                                                 
                                 
                                                             double total_pointsData = (double)0;
-                          total_pointsData = cursor.getInt(2);
+                          total_pointsData = cursor.getInt(3);
                           total_pointsData = (double)total_pointsData;
                           hashMap.put("total_points", total_pointsData);
 
@@ -281,7 +298,7 @@ public class TransactionDb{
                                                 
                                 
                                                             double total_amountData = (double)0;
-                          total_amountData = cursor.getInt(3);
+                          total_amountData = cursor.getInt(4);
                           total_amountData = (double)total_amountData;
                           hashMap.put("total_amount", total_amountData);
 
@@ -289,8 +306,8 @@ public class TransactionDb{
                                                 
                                 
                                                             String addedData = "";
-                        if(cursor.getString(4) != null){
-                          addedData = cursor.getString(4);
+                        if(cursor.getString(5) != null){
+                          addedData = cursor.getString(5);
                           if(addedData != null){
                             addedData = (String)addedData;
                             hashMap.put("added", addedData);
@@ -299,8 +316,8 @@ public class TransactionDb{
                                                 
                                 
                                                             String updatedData = "";
-                        if(cursor.getString(5) != null){
-                          updatedData = cursor.getString(5);
+                        if(cursor.getString(6) != null){
+                          updatedData = cursor.getString(6);
                           if(updatedData != null){
                             updatedData = (String)updatedData;
                             hashMap.put("updated", updatedData);
@@ -309,8 +326,8 @@ public class TransactionDb{
                                                 
                                 
                                                             String is_deletedData = "";
-                        if(cursor.getString(6) != null){
-                          is_deletedData = cursor.getString(6);
+                        if(cursor.getString(7) != null){
+                          is_deletedData = cursor.getString(7);
                           if(is_deletedData != null){
                             is_deletedData = is_deletedData.toString();
                             hashMap.put("is_deleted", is_deletedData);
@@ -319,8 +336,8 @@ public class TransactionDb{
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(7) != null){
-                          idData = cursor.getString(7);
+                        if(cursor.getString(8) != null){
+                          idData = cursor.getString(8);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -329,8 +346,8 @@ public class TransactionDb{
                                                 
                                 
                                                             String retailerIdData = "";
-                        if(cursor.getString(8) != null){
-                          retailerIdData = cursor.getString(8);
+                        if(cursor.getString(9) != null){
+                          retailerIdData = cursor.getString(9);
                           if(retailerIdData != null){
                             retailerIdData = retailerIdData.toString();
                             hashMap.put("retailerId", retailerIdData);
@@ -339,8 +356,8 @@ public class TransactionDb{
                                                 
                                 
                                                             String departmentIdData = "";
-                        if(cursor.getString(9) != null){
-                          departmentIdData = cursor.getString(9);
+                        if(cursor.getString(10) != null){
+                          departmentIdData = cursor.getString(10);
                           if(departmentIdData != null){
                             departmentIdData = departmentIdData.toString();
                             hashMap.put("departmentId", departmentIdData);

@@ -26,26 +26,19 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.TransactionRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.SnaphyAclRepository;
 
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.RetailerRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.SnaphyAclPropRepository;
             
 
         
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.DepartmentRepository;
-            
-
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.QrCodeRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.SnaphyAclRelationRepository;
             
 
         
@@ -58,7 +51,7 @@ import java.util.Map;
 
 
 
-public class Transaction extends Model {
+public class SnaphyAcl extends Model {
 
 
     //For converting all model values to hashMap
@@ -73,117 +66,12 @@ public class Transaction extends Model {
         }
     }
 
-    private Transaction that ;
+    private SnaphyAcl that ;
 
-    public Transaction (){
+    public SnaphyAcl (){
         that = this;
     }
 
-    
-        
-            
-
-            
-                private String transactionStatus;
-                /* Adding Getter and Setter methods */
-                public String getTransactionStatus(){
-                    return transactionStatus;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setTransactionStatus(String transactionStatus){
-                    this.transactionStatus = transactionStatus;
-                    //Update hashMap value..
-                    hashMap.put("transactionStatus", transactionStatus);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private String transaction_number;
-                /* Adding Getter and Setter methods */
-                public String getTransaction_number(){
-                    return transaction_number;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setTransaction_number(String transaction_number){
-                    this.transaction_number = transaction_number;
-                    //Update hashMap value..
-                    hashMap.put("transaction_number", transaction_number);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private String paytm_transaction_id;
-                /* Adding Getter and Setter methods */
-                public String getPaytm_transaction_id(){
-                    return paytm_transaction_id;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setPaytm_transaction_id(String paytm_transaction_id){
-                    this.paytm_transaction_id = paytm_transaction_id;
-                    //Update hashMap value..
-                    hashMap.put("paytm_transaction_id", paytm_transaction_id);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private double total_points;
-                /* Adding Getter and Setter methods */
-                public double getTotal_points(){
-                    return total_points;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setTotal_points(double total_points){
-                    this.total_points = total_points;
-                    //Update hashMap value..
-                    hashMap.put("total_points", total_points);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private double total_amount;
-                /* Adding Getter and Setter methods */
-                public double getTotal_amount(){
-                    return total_amount;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setTotal_amount(double total_amount){
-                    this.total_amount = total_amount;
-                    //Update hashMap value..
-                    hashMap.put("total_amount", total_amount);
-                }
-
-            
-            
-        
     
         
             
@@ -231,11 +119,123 @@ public class Transaction extends Model {
             
 
             
+                private String model;
+                /* Adding Getter and Setter methods */
+                public String getModel(){
+                    return model;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setModel(String model){
+                    this.model = model;
+                    //Update hashMap value..
+                    hashMap.put("model", model);
+                }
+
+            
             
         
     
         
             
+
+            
+                private String read;
+                /* Adding Getter and Setter methods */
+                public String getRead(){
+                    return read;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setRead(String read){
+                    this.read = read;
+                    //Update hashMap value..
+                    hashMap.put("read", read);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String create;
+                /* Adding Getter and Setter methods */
+                public String getCreate(){
+                    return create;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setCreate(String create){
+                    this.create = create;
+                    //Update hashMap value..
+                    hashMap.put("create", create);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String edit;
+                /* Adding Getter and Setter methods */
+                public String getEdit(){
+                    return edit;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setEdit(String edit){
+                    this.edit = edit;
+                    //Update hashMap value..
+                    hashMap.put("edit", edit);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String delete;
+                /* Adding Getter and Setter methods */
+                public String getDelete(){
+                    return delete;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setDelete(String delete){
+                    this.delete = delete;
+                    //Update hashMap value..
+                    hashMap.put("delete", delete);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String role;
+                /* Adding Getter and Setter methods */
+                public String getRole(){
+                    return role;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setRole(String role){
+                    this.role = role;
+                    //Update hashMap value..
+                    hashMap.put("role", role);
+                }
 
             
             
@@ -268,7 +268,7 @@ public class Transaction extends Model {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      TransactionRepository lowercaseFirstLetterRepository = (TransactionRepository) getRepository();
+      SnaphyAclRepository lowercaseFirstLetterRepository = (SnaphyAclRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
@@ -283,7 +283,7 @@ public class Transaction extends Model {
 
 
     public void save__db(String id){
-      TransactionRepository lowercaseFirstLetterRepository = (TransactionRepository) getRepository();
+      SnaphyAclRepository lowercaseFirstLetterRepository = (SnaphyAclRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -294,7 +294,7 @@ public class Transaction extends Model {
 
 
     public void delete__db(){
-      TransactionRepository lowercaseFirstLetterRepository = (TransactionRepository) getRepository();
+      SnaphyAclRepository lowercaseFirstLetterRepository = (SnaphyAclRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
         if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -328,485 +328,37 @@ public class Transaction extends Model {
         
         
                 
-                    //Define belongsTo relation method here..
-                    private transient Retailer  retailer ;
-                    private String retailerId;
-
-                    public String getRetailerId(){
-                         return retailerId;
-                    }
-
-                    public void setRetailerId(Object retailerId){
-                        if(retailerId != null){
-                          this.retailerId = retailerId.toString();
-                        }
-                    }
-
-                    public Retailer getRetailer() {
-                        try{
-                          //Adding database method for fetching from relation if not present..
-                                      if(retailer == null){
-                                        TransactionRepository transactionRepository = (TransactionRepository) getRepository();
-
-                                        RestAdapter restAdapter = transactionRepository.getRestAdapter();
-                                        if(restAdapter != null){
-                                          //Fetch locally from db
-                                          retailer = getRetailer__db(restAdapter);
-                                        }
-                                      }
-                        }catch(Exception e){
-                          //Ignore
-                        }
-
-                        return retailer;
-                    }
-
-                    public void setRetailer(Retailer retailer) {
-                        this.retailer = retailer;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setRetailer(Map<String, Object> retailer) {
-                        //First create a dummy Repo class object for customer.
-                        RetailerRepository retailerRepository = new RetailerRepository();
-                        Retailer retailer1 = retailerRepository.createObject(retailer);
-                        setRetailer(retailer1);
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setRetailer(HashMap<String, Object> retailer) {
-                        //First create a dummy Repo class object for customer.
-                        RetailerRepository retailerRepository = new RetailerRepository();
-                        Retailer retailer1 = retailerRepository.createObject(retailer);
-                        setRetailer(retailer1);
-                    }
-
-                    //Adding relation method..
-                    public void addRelation(Retailer retailer) {
-                        that.setRetailer(retailer);
-                    }
-
-
-                    //Fetch related data from local database if present a retailerId identifier as property for belongsTo
-                    public Retailer getRetailer__db(RestAdapter restAdapter){
-                      if(retailerId != null){
-                        RetailerRepository retailerRepository = restAdapter.createRepository(RetailerRepository.class);
-                            try{
-                            TransactionRepository lowercaseFirstLetterRepository = (TransactionRepository) getRepository();
-                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-                                                Context context = lowercaseFirstLetterRepository.getContext();
-                                                if(retailerRepository.getDb() == null ){
-                                                    retailerRepository.addStorage(context);
-                                                }
-
-                                                if(context != null && retailerRepository.getDb() != null){
-                                                    retailerRepository.addStorage(context);
-                                                    Retailer retailer = (Retailer) retailerRepository.getDb().get__db(retailerId);
-                                                    return retailer;
-                                                }else{
-                                                    return null;
-                                                }
-                                          }else{
-                                            return null;
-                                          }
-                            }catch(Exception e){
-                            //Ignore exception..
-                            return null;
-                            }
-
-                        }else{
-                          return null;
-                      }
-                    }
-                
-
-                
-                
-
-
-
-
-
-
-
-                    //Now add instance methods to fetch the related belongsTo Model..
-                    
-
-                    
-
-                                    //Write the method here..
-                                    public void get__retailer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Retailer> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final TransactionRepository  transactionRepo = restAdapter.createRepository(TransactionRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        transactionRepo.get__retailer( (String)that.getId(), refresh,  new ObjectCallback<Retailer> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(Retailer object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    
-
-                
-
-                 
-                 
-             
-          
-    
-        
-        
-                
-                    //Define belongsTo relation method here..
-                    private transient Department  department ;
-                    private String departmentId;
-
-                    public String getDepartmentId(){
-                         return departmentId;
-                    }
-
-                    public void setDepartmentId(Object departmentId){
-                        if(departmentId != null){
-                          this.departmentId = departmentId.toString();
-                        }
-                    }
-
-                    public Department getDepartment() {
-                        try{
-                          //Adding database method for fetching from relation if not present..
-                                      if(department == null){
-                                        TransactionRepository transactionRepository = (TransactionRepository) getRepository();
-
-                                        RestAdapter restAdapter = transactionRepository.getRestAdapter();
-                                        if(restAdapter != null){
-                                          //Fetch locally from db
-                                          department = getDepartment__db(restAdapter);
-                                        }
-                                      }
-                        }catch(Exception e){
-                          //Ignore
-                        }
-
-                        return department;
-                    }
-
-                    public void setDepartment(Department department) {
-                        this.department = department;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setDepartment(Map<String, Object> department) {
-                        //First create a dummy Repo class object for customer.
-                        DepartmentRepository departmentRepository = new DepartmentRepository();
-                        Department department1 = departmentRepository.createObject(department);
-                        setDepartment(department1);
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setDepartment(HashMap<String, Object> department) {
-                        //First create a dummy Repo class object for customer.
-                        DepartmentRepository departmentRepository = new DepartmentRepository();
-                        Department department1 = departmentRepository.createObject(department);
-                        setDepartment(department1);
-                    }
-
-                    //Adding relation method..
-                    public void addRelation(Department department) {
-                        that.setDepartment(department);
-                    }
-
-
-                    //Fetch related data from local database if present a departmentId identifier as property for belongsTo
-                    public Department getDepartment__db(RestAdapter restAdapter){
-                      if(departmentId != null){
-                        DepartmentRepository departmentRepository = restAdapter.createRepository(DepartmentRepository.class);
-                            try{
-                            TransactionRepository lowercaseFirstLetterRepository = (TransactionRepository) getRepository();
-                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-                                                Context context = lowercaseFirstLetterRepository.getContext();
-                                                if(departmentRepository.getDb() == null ){
-                                                    departmentRepository.addStorage(context);
-                                                }
-
-                                                if(context != null && departmentRepository.getDb() != null){
-                                                    departmentRepository.addStorage(context);
-                                                    Department department = (Department) departmentRepository.getDb().get__db(departmentId);
-                                                    return department;
-                                                }else{
-                                                    return null;
-                                                }
-                                          }else{
-                                            return null;
-                                          }
-                            }catch(Exception e){
-                            //Ignore exception..
-                            return null;
-                            }
-
-                        }else{
-                          return null;
-                      }
-                    }
-                
-
-                
-                
-
-
-
-
-
-
-
-                    //Now add instance methods to fetch the related belongsTo Model..
-                    
-
-                     
-                            
-                        
-
-                                    //Write the method here..
-                                    public void get__department( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Department> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final TransactionRepository  transactionRepo = restAdapter.createRepository(TransactionRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        transactionRepo.get__department( (String)that.getId(), refresh,  new ObjectCallback<Department> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(Department object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    
-
-                
-
-                 
-                 
-             
-          
-    
-        
-        
-                
 
                 
                     
                     //Define hasMany relation method here..
-                    private transient DataList<QrCode>  qrCodes ;
+                    private transient DataList<SnaphyAclProp>  snaphyAclProps ;
 
-                    public DataList< QrCode > getQrCodes() {
+                    public DataList< SnaphyAclProp > getSnaphyAclProps() {
                         //Check for pure case of hasMany
                                                     //TODO: Modify foreign key name..
                           try{
-                            QrCodeRepository qrCodeRepository = (QrCodeRepository) getRepository();
+                            SnaphyAclPropRepository snaphyAclPropRepository = (SnaphyAclPropRepository) getRepository();
 
-                            if(that.getId() != null && qrCodeRepository.getDb() != null){
+                            if(that.getId() != null && snaphyAclPropRepository.getDb() != null){
 
                                  //Fetch locally from db
-                                 //qrCodes = getQrCodes__db(restAdapter);
+                                 //snaphyAclProps = getSnaphyAclProps__db(restAdapter);
                                  // Getting single cont
-                                 qrCodes = qrCodeRepository.getDb().getAll__db("transactionId", that.getId().toString());
+                                 snaphyAclProps = snaphyAclPropRepository.getDb().getAll__db("snaphyAclId", that.getId().toString());
 
                                  //lowercaseFirstLetter(modelName)
                             }
                           }catch(Exception e){
                                 //Ignore
                           }
-                                                return qrCodes;
+                                                return snaphyAclProps;
                     }
 
-                    public void setQrCodes(DataList<QrCode> qrCodes) {
+                    public void setSnaphyAclProps(DataList<SnaphyAclProp> snaphyAclProps) {
                         boolean hashType = false;
                         DataList<HashMap<String, Object>> hashMaps = new DataList<>();
-                        for(Object o: qrCodes){
+                        for(Object o: snaphyAclProps){
                             if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
@@ -815,11 +367,11 @@ public class Transaction extends Model {
                         }
 
                         if(hashType){
-                            setQrCodes1(hashMaps);
+                            setSnaphyAclProps1(hashMaps);
                         }else{
-                            this.qrCodes = qrCodes;
+                            this.snaphyAclProps = snaphyAclProps;
                             //TODO: Warning move this to new thread
-                            for(QrCode data: qrCodes){
+                            for(SnaphyAclProp data: snaphyAclProps){
                               try{
                                 data.save__db();
                               } catch (NoSuchMethodError e) {
@@ -830,63 +382,63 @@ public class Transaction extends Model {
                     }
 
                 /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setQrCodes1(List<Map<String, Object>> qrCodes) {
+                    public void setSnaphyAclProps1(List<Map<String, Object>> snaphyAclProps) {
                         //First create a dummy Repo class object for ..
-                        QrCodeRepository qrCodesRepository = new QrCodeRepository();
-                        List<QrCode> result = new ArrayList<>();
-                        for (Map<String, Object> obj : qrCodes) {
+                        SnaphyAclPropRepository snaphyAclPropsRepository = new SnaphyAclPropRepository();
+                        List<SnaphyAclProp> result = new ArrayList<>();
+                        for (Map<String, Object> obj : snaphyAclProps) {
                             //Also add relation to child type for two way communication..
-                            QrCode obj1 = qrCodesRepository.createObject(obj);
+                            SnaphyAclProp obj1 = snaphyAclPropsRepository.createObject(obj);
                             result.add(obj1);
 
                         }
-                        setQrCodes(result);
+                        setSnaphyAclProps(result);
 
                     }
 
                 */
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setQrCodes1(DataList<HashMap<String, Object>> qrCodes) {
+                    public void setSnaphyAclProps1(DataList<HashMap<String, Object>> snaphyAclProps) {
                         //First create a dummy Repo class object for ..
-                        QrCodeRepository qrCodesRepository = new QrCodeRepository();
-                        DataList<QrCode> result = new DataList<>();
-                        for (HashMap<String, Object> obj : qrCodes) {
+                        SnaphyAclPropRepository snaphyAclPropsRepository = new SnaphyAclPropRepository();
+                        DataList<SnaphyAclProp> result = new DataList<>();
+                        for (HashMap<String, Object> obj : snaphyAclProps) {
                             //Also add relation to child type for two way communication..
-                            QrCode obj1 = qrCodesRepository.createObject(obj);
+                            SnaphyAclProp obj1 = snaphyAclPropsRepository.createObject(obj);
                             result.add(obj1);
 
                         }
-                        setQrCodes(result);
+                        setSnaphyAclProps(result);
 
                     }
 
 
                     //Adding relation method..
                     //Add a dummy class Name object to seperate data..
-                    public void addRelation(DataList<QrCode> qrCodes, QrCode dummyClassInstance) {
-                        that.setQrCodes(qrCodes);
+                    public void addRelation(DataList<SnaphyAclProp> snaphyAclProps, SnaphyAclProp dummyClassInstance) {
+                        that.setSnaphyAclProps(snaphyAclProps);
 
                     }
 
                     //Adding relation method..
                     //This will add a new data to the list relation object..
-                    public void addRelation(QrCode qrCodes) {
+                    public void addRelation(SnaphyAclProp snaphyAclProps) {
                         try{
                             try{
 
                                   //Save to database..
-                                  qrCodes.save__db();
+                                  snaphyAclProps.save__db();
                             }catch (NoSuchMethodError e) {
                               // ignore
                             }
-                            that.getQrCodes().add(qrCodes);
+                            that.getSnaphyAclProps().add(snaphyAclProps);
                         }catch(Exception e){
-                            DataList< QrCode> qrCodes1 = new DataList();
+                            DataList< SnaphyAclProp> snaphyAclProps1 = new DataList();
                             //Now add this item to list..
-                            qrCodes1.add(qrCodes);
+                            snaphyAclProps1.add(snaphyAclProps);
                             //Now set data....
-                            that.setQrCodes(qrCodes1);
+                            that.setSnaphyAclProps(snaphyAclProps1);
                         }
                     }
 
@@ -909,19 +461,15 @@ public class Transaction extends Model {
                     //Now add instance methods to fetch the related belongsTo Model..
                     
 
-                     
-                            
-                         
-                            
-                        
+                    
 
                                     //Write the method here..
-                                    public void findById__qrCodes( String fk,  RestAdapter restAdapter, final ObjectCallback<QrCode> callback) {
+                                    public void findById__snaphyAclProps( String fk,  RestAdapter restAdapter, final ObjectCallback<SnaphyAclProp> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final TransactionRepository  transactionRepo = restAdapter.createRepository(TransactionRepository.class);
+                                        final SnaphyAclRepository  snaphyAclRepo = restAdapter.createRepository(SnaphyAclRepository.class);
                                         
                                         
                                         
@@ -930,13 +478,13 @@ public class Transaction extends Model {
 
 
 
-                                        transactionRepo.findById__qrCodes( (String)that.getId(), fk,  new ObjectCallback<QrCode> (){
+                                        snaphyAclRepo.findById__snaphyAclProps( (String)that.getId(), fk,  new ObjectCallback<SnaphyAclProp> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(QrCode object) {
+                                                    public void onSuccess(SnaphyAclProp object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -973,12 +521,12 @@ public class Transaction extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__qrCodes( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__snaphyAclProps( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final TransactionRepository  transactionRepo = restAdapter.createRepository(TransactionRepository.class);
+                                        final SnaphyAclRepository  snaphyAclRepo = restAdapter.createRepository(SnaphyAclRepository.class);
                                         
                                         
                                         
@@ -987,7 +535,7 @@ public class Transaction extends Model {
 
 
 
-                                        transactionRepo.destroyById__qrCodes( (String)that.getId(), fk,  new VoidCallback (){
+                                        snaphyAclRepo.destroyById__snaphyAclProps( (String)that.getId(), fk,  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -1017,12 +565,12 @@ public class Transaction extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__qrCodes( String fk,  QrCode data,  RestAdapter restAdapter, final ObjectCallback<QrCode> callback) {
+                                    public void updateById__snaphyAclProps( String fk,  SnaphyAclProp data,  RestAdapter restAdapter, final ObjectCallback<SnaphyAclProp> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final TransactionRepository  transactionRepo = restAdapter.createRepository(TransactionRepository.class);
+                                        final SnaphyAclRepository  snaphyAclRepo = restAdapter.createRepository(SnaphyAclRepository.class);
                                         
                                         
                                         
@@ -1034,13 +582,13 @@ public class Transaction extends Model {
 
 
 
-                                        transactionRepo.updateById__qrCodes( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<QrCode> (){
+                                        snaphyAclRepo.updateById__snaphyAclProps( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<SnaphyAclProp> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(QrCode object) {
+                                                    public void onSuccess(SnaphyAclProp object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -1074,15 +622,21 @@ public class Transaction extends Model {
                                     } //method def ends here.
                                  
                             
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
-                                    public void get__qrCodes( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<QrCode> callback) {
+                                    public void get__snaphyAclProps( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<SnaphyAclProp> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final TransactionRepository  transactionRepo = restAdapter.createRepository(TransactionRepository.class);
+                                        final SnaphyAclRepository  snaphyAclRepo = restAdapter.createRepository(SnaphyAclRepository.class);
                                         
                                         
                                         
@@ -1091,7 +645,7 @@ public class Transaction extends Model {
 
 
 
-                                        transactionRepo.get__qrCodes( (String)that.getId(), filter,  new DataListCallback<QrCode> (){
+                                        snaphyAclRepo.get__snaphyAclProps( (String)that.getId(), filter,  new DataListCallback<SnaphyAclProp> (){
                                             
 
                                             
@@ -1100,13 +654,13 @@ public class Transaction extends Model {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(DataList<QrCode> object) {
+                                                    public void onSuccess(DataList<SnaphyAclProp> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
-                                                            QrCode obj = new QrCode();
+                                                            SnaphyAclProp obj = new SnaphyAclProp();
                                                             addRelation(object, obj);
                                                             //Disabling two way communication for cyclic error..
-                                                            /*for (QrCode obj : object) {
+                                                            /*for (SnaphyAclProp obj : object) {
                                                                 //Also add relation to child type for two way communication..
                                                                 obj.addRelation(that);
                                                             }*/
@@ -1139,12 +693,12 @@ public class Transaction extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__qrCodes( QrCode data,  RestAdapter restAdapter, final ObjectCallback<QrCode> callback) {
+                                    public void create__snaphyAclProps( SnaphyAclProp data,  RestAdapter restAdapter, final ObjectCallback<SnaphyAclProp> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final TransactionRepository  transactionRepo = restAdapter.createRepository(TransactionRepository.class);
+                                        final SnaphyAclRepository  snaphyAclRepo = restAdapter.createRepository(SnaphyAclRepository.class);
                                         
                                         
                                         
@@ -1153,13 +707,13 @@ public class Transaction extends Model {
 
 
 
-                                        transactionRepo.create__qrCodes( (String)that.getId(), data.convertMap(),  new ObjectCallback<QrCode> (){
+                                        snaphyAclRepo.create__snaphyAclProps( (String)that.getId(), data.convertMap(),  new ObjectCallback<SnaphyAclProp> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(QrCode object) {
+                                                    public void onSuccess(SnaphyAclProp object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -1196,18 +750,18 @@ public class Transaction extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__qrCodes( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__snaphyAclProps( RestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final TransactionRepository  transactionRepo = restAdapter.createRepository(TransactionRepository.class);
+                                        final SnaphyAclRepository  snaphyAclRepo = restAdapter.createRepository(SnaphyAclRepository.class);
                                         
                                         
 
 
 
-                                        transactionRepo.delete__qrCodes( (String)that.getId(),  new VoidCallback (){
+                                        snaphyAclRepo.delete__snaphyAclProps( (String)that.getId(),  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -1237,12 +791,12 @@ public class Transaction extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__qrCodes( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__snaphyAclProps( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final TransactionRepository  transactionRepo = restAdapter.createRepository(TransactionRepository.class);
+                                        final SnaphyAclRepository  snaphyAclRepo = restAdapter.createRepository(SnaphyAclRepository.class);
                                         
                                         
                                         
@@ -1251,7 +805,7 @@ public class Transaction extends Model {
 
 
 
-                                        transactionRepo.count__qrCodes( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
+                                        snaphyAclRepo.count__snaphyAclProps( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
@@ -1280,6 +834,14 @@ public class Transaction extends Model {
                                     } //method def ends here.
                                  
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
                         
                         
@@ -1295,6 +857,540 @@ public class Transaction extends Model {
                         
                         
                         
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                
+                    //Define hasMany, hasManyThrough method here..
+
+                 
+                 
+             
+          
+    
+        
+        
+                
+
+                
+                    
+                    //Define hasMany relation method here..
+                    private transient DataList<SnaphyAclRelation>  snaphyAclRelations ;
+
+                    public DataList< SnaphyAclRelation > getSnaphyAclRelations() {
+                        //Check for pure case of hasMany
+                                                    //TODO: Modify foreign key name..
+                          try{
+                            SnaphyAclRelationRepository snaphyAclRelationRepository = (SnaphyAclRelationRepository) getRepository();
+
+                            if(that.getId() != null && snaphyAclRelationRepository.getDb() != null){
+
+                                 //Fetch locally from db
+                                 //snaphyAclRelations = getSnaphyAclRelations__db(restAdapter);
+                                 // Getting single cont
+                                 snaphyAclRelations = snaphyAclRelationRepository.getDb().getAll__db("snaphyAclId", that.getId().toString());
+
+                                 //lowercaseFirstLetter(modelName)
+                            }
+                          }catch(Exception e){
+                                //Ignore
+                          }
+                                                return snaphyAclRelations;
+                    }
+
+                    public void setSnaphyAclRelations(DataList<SnaphyAclRelation> snaphyAclRelations) {
+                        boolean hashType = false;
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
+                        for(Object o: snaphyAclRelations){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
+                        }
+
+                        if(hashType){
+                            setSnaphyAclRelations1(hashMaps);
+                        }else{
+                            this.snaphyAclRelations = snaphyAclRelations;
+                            //TODO: Warning move this to new thread
+                            for(SnaphyAclRelation data: snaphyAclRelations){
+                              try{
+                                data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
+                            }
+                        }
+                    }
+
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setSnaphyAclRelations1(List<Map<String, Object>> snaphyAclRelations) {
+                        //First create a dummy Repo class object for ..
+                        SnaphyAclRelationRepository snaphyAclRelationsRepository = new SnaphyAclRelationRepository();
+                        List<SnaphyAclRelation> result = new ArrayList<>();
+                        for (Map<String, Object> obj : snaphyAclRelations) {
+                            //Also add relation to child type for two way communication..
+                            SnaphyAclRelation obj1 = snaphyAclRelationsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setSnaphyAclRelations(result);
+
+                    }
+
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setSnaphyAclRelations1(DataList<HashMap<String, Object>> snaphyAclRelations) {
+                        //First create a dummy Repo class object for ..
+                        SnaphyAclRelationRepository snaphyAclRelationsRepository = new SnaphyAclRelationRepository();
+                        DataList<SnaphyAclRelation> result = new DataList<>();
+                        for (HashMap<String, Object> obj : snaphyAclRelations) {
+                            //Also add relation to child type for two way communication..
+                            SnaphyAclRelation obj1 = snaphyAclRelationsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setSnaphyAclRelations(result);
+
+                    }
+
+
+                    //Adding relation method..
+                    //Add a dummy class Name object to seperate data..
+                    public void addRelation(DataList<SnaphyAclRelation> snaphyAclRelations, SnaphyAclRelation dummyClassInstance) {
+                        that.setSnaphyAclRelations(snaphyAclRelations);
+
+                    }
+
+                    //Adding relation method..
+                    //This will add a new data to the list relation object..
+                    public void addRelation(SnaphyAclRelation snaphyAclRelations) {
+                        try{
+                            try{
+
+                                  //Save to database..
+                                  snaphyAclRelations.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
+                            that.getSnaphyAclRelations().add(snaphyAclRelations);
+                        }catch(Exception e){
+                            DataList< SnaphyAclRelation> snaphyAclRelations1 = new DataList();
+                            //Now add this item to list..
+                            snaphyAclRelations1.add(snaphyAclRelations);
+                            //Now set data....
+                            that.setSnaphyAclRelations(snaphyAclRelations1);
+                        }
+                    }
+
+
+
+
+                    
+                        //Implement logic for pure hasMany methods here....
+
+                    
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void findById__snaphyAclRelations( String fk,  RestAdapter restAdapter, final ObjectCallback<SnaphyAclRelation> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final SnaphyAclRepository  snaphyAclRepo = restAdapter.createRepository(SnaphyAclRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        snaphyAclRepo.findById__snaphyAclRelations( (String)that.getId(), fk,  new ObjectCallback<SnaphyAclRelation> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(SnaphyAclRelation object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void destroyById__snaphyAclRelations( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final SnaphyAclRepository  snaphyAclRepo = restAdapter.createRepository(SnaphyAclRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        snaphyAclRepo.destroyById__snaphyAclRelations( (String)that.getId(), fk,  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void updateById__snaphyAclRelations( String fk,  SnaphyAclRelation data,  RestAdapter restAdapter, final ObjectCallback<SnaphyAclRelation> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final SnaphyAclRepository  snaphyAclRepo = restAdapter.createRepository(SnaphyAclRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        snaphyAclRepo.updateById__snaphyAclRelations( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<SnaphyAclRelation> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(SnaphyAclRelation object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__snaphyAclRelations( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<SnaphyAclRelation> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final SnaphyAclRepository  snaphyAclRepo = restAdapter.createRepository(SnaphyAclRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        snaphyAclRepo.get__snaphyAclRelations( (String)that.getId(), filter,  new DataListCallback<SnaphyAclRelation> (){
+                                            
+
+                                            
+
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(DataList<SnaphyAclRelation> object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            SnaphyAclRelation obj = new SnaphyAclRelation();
+                                                            addRelation(object, obj);
+                                                            //Disabling two way communication for cyclic error..
+                                                            /*for (SnaphyAclRelation obj : object) {
+                                                                //Also add relation to child type for two way communication..
+                                                                obj.addRelation(that);
+                                                            }*/
+
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void create__snaphyAclRelations( SnaphyAclRelation data,  RestAdapter restAdapter, final ObjectCallback<SnaphyAclRelation> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final SnaphyAclRepository  snaphyAclRepo = restAdapter.createRepository(SnaphyAclRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        snaphyAclRepo.create__snaphyAclRelations( (String)that.getId(), data.convertMap(),  new ObjectCallback<SnaphyAclRelation> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(SnaphyAclRelation object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void delete__snaphyAclRelations( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final SnaphyAclRepository  snaphyAclRepo = restAdapter.createRepository(SnaphyAclRepository.class);
+                                        
+                                        
+
+
+
+                                        snaphyAclRepo.delete__snaphyAclRelations( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void count__snaphyAclRelations( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final SnaphyAclRepository  snaphyAclRepo = restAdapter.createRepository(SnaphyAclRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        snaphyAclRepo.count__snaphyAclRelations( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                        //Calling the finally..callback
+                                                        callback.onFinally();
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
                         
                         
                         

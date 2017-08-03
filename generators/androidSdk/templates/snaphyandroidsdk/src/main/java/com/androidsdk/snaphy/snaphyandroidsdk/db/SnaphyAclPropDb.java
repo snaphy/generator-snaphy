@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
+import com.google.gson.LongSerializationPolicy;
 import com.google.gson.GsonBuilder;
 import android.database.Cursor;
 import java.lang.reflect.Method;
@@ -16,16 +17,16 @@ import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.SaveDeal;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.SnaphyAclProp;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.SaveDealRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.SnaphyAclPropRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
 
-public class SaveDealDb{
+public class SnaphyAclPropDb{
 
     // All Static variables
     RestAdapter restAdapter;
@@ -40,25 +41,25 @@ public class SaveDealDb{
     // Contacts table name
     private static String TABLE;
 
-  public SaveDealDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+  public SnaphyAclPropDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     //super(context, DATABASE_NAME, null, DATABASE_VERSION);
     this.context = context;
     this.restAdapter = restAdapter;
-    TABLE = "SaveDeal";
+    TABLE = "SnaphyAclProp";
     this.DATABASE_NAME = DATABASE_NAME;
     SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
 
-    public void insert__db (final String id, final SaveDeal modelData) {
+    public void insert__db (final String id, final SnaphyAclProp modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
-                db.insert("`SaveDeal`", null, values);
+                db.insert("`SnaphyAclProp`", null, values);
                 //db.close(); // Closing database connection
             }
         }).start();
@@ -69,14 +70,73 @@ public class SaveDealDb{
 
 
 
-    public ContentValues getContentValues(SaveDeal modelData){
+    public ContentValues getContentValues(SnaphyAclProp modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String addedData = "";
-                        if(modelData.getAdded() != null){
-                          addedData = modelData.getAdded().toString();
-                          values.put("`added`", addedData);
+                                                            String nameData = "";
+                        if(modelData.getName() != null){
+                          nameData = modelData.getName().toString();
+                          values.put("`name`", nameData);
                         }
+                                  
+                                
+                                                            String readData = "";
+                        if(modelData.getRead() != null){
+                          readData = modelData.getRead().toString();
+                          values.put("`read`", readData);
+                        }
+                                  
+                                
+                                                            String writeData = "";
+                        if(modelData.getWrite() != null){
+                          writeData = modelData.getWrite().toString();
+                          values.put("`write`", writeData);
+                        }
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String is_deletedData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getIs_deleted");
+                              if(method.invoke(modelData) != null){
+                                //is_deletedData = modelData.getIs_deleted().toString();
+                                is_deletedData = (String) method.invoke(modelData);
+                                values.put("`is_deleted`", is_deletedData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String addedData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getAdded");
+                              if(method.invoke(modelData) != null){
+                                //addedData = modelData.getAdded().toString();
+                                addedData = (String) method.invoke(modelData);
+                                values.put("`added`", addedData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String updatedData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getUpdated");
+                              if(method.invoke(modelData) != null){
+                                //updatedData = modelData.getUpdated().toString();
+                                updatedData = (String) method.invoke(modelData);
+                                values.put("`updated`", updatedData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
@@ -95,28 +155,13 @@ public class SaveDealDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String appUserIdData = "";
+                        String snaphyAclIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getAppUserId");
+                              Method method = modelData.getClass().getMethod("getSnaphyAclId");
                               if(method.invoke(modelData) != null){
-                                //appUserIdData = modelData.getAppUserId().toString();
-                                appUserIdData = (String) method.invoke(modelData);
-                                values.put("`appUserId`", appUserIdData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String hotDealIdData = "";
-                        try {
-                              Method method = modelData.getClass().getMethod("getHotDealId");
-                              if(method.invoke(modelData) != null){
-                                //hotDealIdData = modelData.getHotDealId().toString();
-                                hotDealIdData = (String) method.invoke(modelData);
-                                values.put("`hotDealId`", hotDealIdData);
+                                //snaphyAclIdData = modelData.getSnaphyAclId().toString();
+                                snaphyAclIdData = (String) method.invoke(modelData);
+                                values.put("`snaphyAclId`", snaphyAclIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -134,10 +179,10 @@ public class SaveDealDb{
 
 
     // Getting single c
-    public   SaveDeal get__db(String id) {
+    public   SnaphyAclProp get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("SaveDeal", null, "id=?", new String[]{id}, null, null, null, null);
+            Cursor cursor = db.query("SnaphyAclProp", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -146,9 +191,9 @@ public class SaveDealDb{
                     cursor.close();
                     //db.close(); // Closing database connection
                     if (hashMap != null) {
-                        SaveDealRepository repo = restAdapter.createRepository(SaveDealRepository.class);
+                        SnaphyAclPropRepository repo = restAdapter.createRepository(SnaphyAclPropRepository.class);
                         repo.addStorage(context);
-                        return (SaveDeal)repo.createObject(hashMap);
+                        return (SnaphyAclProp)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -167,10 +212,10 @@ public class SaveDealDb{
 
 
     // Getting single cont
-    public   SaveDeal get__db(String whereKey, String whereKeyValue) {
+    public   SnaphyAclProp get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("`SaveDeal`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`SnaphyAclProp`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -181,9 +226,9 @@ public class SaveDealDb{
                     //db.close(); // Closing database connection
 
                     if (hashMap != null) {
-                        SaveDealRepository repo = restAdapter.createRepository(SaveDealRepository.class);
+                        SnaphyAclPropRepository repo = restAdapter.createRepository(SnaphyAclPropRepository.class);
                         repo.addStorage(context);
-                        return (SaveDeal)repo.createObject(hashMap);
+                        return (SnaphyAclProp)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -205,19 +250,69 @@ public class SaveDealDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            String addedData = "";
+                                                            String nameData = "";
                         if(cursor.getString(0) != null){
-                          addedData = cursor.getString(0);
+                          nameData = cursor.getString(0);
+                          if(nameData != null){
+                            nameData = (String)nameData;
+                            hashMap.put("name", nameData);
+                          }
+                        }
+                                                
+                                
+                                                            String readData = "";
+                        if(cursor.getString(1) != null){
+                          readData = cursor.getString(1);
+                          if(readData != null){
+                            readData = (String)readData;
+                            hashMap.put("read", readData);
+                          }
+                        }
+                                                
+                                
+                                                            String writeData = "";
+                        if(cursor.getString(2) != null){
+                          writeData = cursor.getString(2);
+                          if(writeData != null){
+                            writeData = (String)writeData;
+                            hashMap.put("write", writeData);
+                          }
+                        }
+                                                
+                                
+                                                            String is_deletedData = "";
+                        if(cursor.getString(3) != null){
+                          is_deletedData = cursor.getString(3);
+                          if(is_deletedData != null){
+                            is_deletedData = is_deletedData.toString();
+                            hashMap.put("is_deleted", is_deletedData);
+                          }
+                        }
+                                                
+                                
+                                                            String addedData = "";
+                        if(cursor.getString(4) != null){
+                          addedData = cursor.getString(4);
                           if(addedData != null){
-                            addedData = (String)addedData;
+                            addedData = addedData.toString();
                             hashMap.put("added", addedData);
                           }
                         }
                                                 
                                 
+                                                            String updatedData = "";
+                        if(cursor.getString(5) != null){
+                          updatedData = cursor.getString(5);
+                          if(updatedData != null){
+                            updatedData = updatedData.toString();
+                            hashMap.put("updated", updatedData);
+                          }
+                        }
+                                                
+                                
                                                             String idData = "";
-                        if(cursor.getString(1) != null){
-                          idData = cursor.getString(1);
+                        if(cursor.getString(6) != null){
+                          idData = cursor.getString(6);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -225,22 +320,12 @@ public class SaveDealDb{
                         }
                                                 
                                 
-                                                            String appUserIdData = "";
-                        if(cursor.getString(2) != null){
-                          appUserIdData = cursor.getString(2);
-                          if(appUserIdData != null){
-                            appUserIdData = appUserIdData.toString();
-                            hashMap.put("appUserId", appUserIdData);
-                          }
-                        }
-                                                
-                                
-                                                            String hotDealIdData = "";
-                        if(cursor.getString(3) != null){
-                          hotDealIdData = cursor.getString(3);
-                          if(hotDealIdData != null){
-                            hotDealIdData = hotDealIdData.toString();
-                            hashMap.put("hotDealId", hotDealIdData);
+                                                            String snaphyAclIdData = "";
+                        if(cursor.getString(7) != null){
+                          snaphyAclIdData = cursor.getString(7);
+                          if(snaphyAclIdData != null){
+                            snaphyAclIdData = snaphyAclIdData.toString();
+                            hashMap.put("snaphyAclId", snaphyAclIdData);
                           }
                         }
                                                 
@@ -253,7 +338,7 @@ public class SaveDealDb{
 
 
 
-    public void upsert__db(String id, SaveDeal model){
+    public void upsert__db(String id, SnaphyAclProp model){
         if(count__db(id) != 0){
             update__db(id, model);
         }else{
@@ -264,25 +349,25 @@ public class SaveDealDb{
 
 
     // Getting All Contacts
-    public DataList<SaveDeal>  getAll__db() {
-        DataList<SaveDeal> modelList = new DataList<SaveDeal>();
+    public DataList<SnaphyAclProp>  getAll__db() {
+        DataList<SnaphyAclProp> modelList = new DataList<SnaphyAclProp>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `SaveDeal`";
+        String selectQuery = "SELECT  * FROM `SnaphyAclProp`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<SaveDeal>) modelList;
+            return (DataList<SnaphyAclProp>) modelList;
         }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    SaveDealRepository repo = restAdapter.createRepository(SaveDealRepository.class);
+                    SnaphyAclPropRepository repo = restAdapter.createRepository(SnaphyAclPropRepository.class);
                     repo.addStorage(context);
-                    modelList.add((SaveDeal)repo.createObject(hashMap));
+                    modelList.add((SnaphyAclProp)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }
@@ -291,7 +376,7 @@ public class SaveDealDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<SaveDeal>) modelList;
+        return (DataList<SnaphyAclProp>) modelList;
     }
 
 
@@ -392,19 +477,19 @@ public class SaveDealDb{
 
 
     // Getting All Data where
-    public DataList<SaveDeal>  getAll__db(HashMap<String, Object> whereKeyValue) {
+    public DataList<SnaphyAclProp>  getAll__db(HashMap<String, Object> whereKeyValue) {
         return getAll__db(whereKeyValue, null, 0);
     }
 
 
 
     // Getting All Data where and sort column according to date wise..
-    public DataList<SaveDeal>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
-        DataList<SaveDeal> modelList = new DataList<SaveDeal>();
+    public DataList<SnaphyAclProp>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
+        DataList<SnaphyAclProp> modelList = new DataList<SnaphyAclProp>();
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM `SaveDeal` " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `SnaphyAclProp` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit;
@@ -412,9 +497,9 @@ public class SaveDealDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                selectQuery = "SELECT  * FROM SaveDeal " + whereQuery + " LIMIT " + limit;
+                selectQuery = "SELECT  * FROM SnaphyAclProp " + whereQuery + " LIMIT " + limit;
             }else{
-                selectQuery = "SELECT  * FROM SaveDeal " + whereQuery;
+                selectQuery = "SELECT  * FROM SnaphyAclProp " + whereQuery;
             }
         }
 
@@ -425,15 +510,15 @@ public class SaveDealDb{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<SaveDeal>) modelList;
+            return (DataList<SnaphyAclProp>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    SaveDealRepository repo = restAdapter.createRepository(SaveDealRepository.class);
+                    SnaphyAclPropRepository repo = restAdapter.createRepository(SnaphyAclPropRepository.class);
                     repo.addStorage(context);
-                    modelList.add((SaveDeal)repo.createObject(hashMap));
+                    modelList.add((SnaphyAclProp)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
@@ -443,12 +528,12 @@ public class SaveDealDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<SaveDeal>) modelList;
+        return (DataList<SnaphyAclProp>) modelList;
     }
 
 
     // Getting All Data where
-    public DataList<SaveDeal>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
+    public DataList<SnaphyAclProp>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
         return getAll__db(whereKeyValue, null,  limit);
     }
 
@@ -467,7 +552,7 @@ public class SaveDealDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM `SaveDeal` " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `SnaphyAclProp` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit;
@@ -475,9 +560,9 @@ public class SaveDealDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM `SaveDeal` " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `SnaphyAclProp` " + whereQuery + " LIMIT " + limit;
             }else{
-                countQuery = "SELECT  * FROM `SaveDeal` " + whereQuery;
+                countQuery = "SELECT  * FROM `SnaphyAclProp` " + whereQuery;
             }
         }
 
@@ -500,9 +585,9 @@ public class SaveDealDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM `SaveDeal` " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `SnaphyAclProp` " + whereQuery + " LIMIT " + limit;
         }else{
-            countQuery = "SELECT  * FROM `SaveDeal` " + whereQuery;
+            countQuery = "SELECT  * FROM `SnaphyAclProp` " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -535,7 +620,7 @@ public class SaveDealDb{
                 values.put("_DATA_UPDATED", 0);
                 String where = getWhere(whereKeyValue);
                 // updating row
-                db.update("`SaveDeal`", values, "_DATA_UPDATED = 1 AND " + where, null);
+                db.update("`SnaphyAclProp`", values, "_DATA_UPDATED = 1 AND " + where, null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -553,7 +638,7 @@ public class SaveDealDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("`SaveDeal`", "_DATA_UPDATED = 0 AND " + where , null);
+                db.delete("`SnaphyAclProp`", "_DATA_UPDATED = 0 AND " + where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -574,7 +659,7 @@ public class SaveDealDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("`SaveDeal`", where , null);
+                db.delete("`SnaphyAclProp`", where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
             }
@@ -588,10 +673,10 @@ public class SaveDealDb{
 
 
     // Getting All Data where
-    public DataList<SaveDeal>  getAll__db(String whereKey, String whereKeyValue) {
-        DataList<SaveDeal> modelList = new DataList<SaveDeal>();
+    public DataList<SnaphyAclProp>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<SnaphyAclProp> modelList = new DataList<SnaphyAclProp>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `SaveDeal` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String selectQuery = "SELECT  * FROM `SnaphyAclProp` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -600,15 +685,15 @@ public class SaveDealDb{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<SaveDeal>) modelList;
+            return (DataList<SnaphyAclProp>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    SaveDealRepository repo = restAdapter.createRepository(SaveDealRepository.class);
+                    SnaphyAclPropRepository repo = restAdapter.createRepository(SnaphyAclPropRepository.class);
                     repo.addStorage(context);
-                    modelList.add((SaveDeal)repo.createObject(hashMap));
+                    modelList.add((SnaphyAclProp)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
@@ -618,7 +703,7 @@ public class SaveDealDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<SaveDeal>) modelList;
+        return (DataList<SnaphyAclProp>) modelList;
     }
 
 
@@ -630,7 +715,7 @@ public class SaveDealDb{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-        String countQuery = "SELECT  * FROM `SaveDeal` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String countQuery = "SELECT  * FROM `SnaphyAclProp` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -650,7 +735,7 @@ public class SaveDealDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("`SaveDeal`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.update("`SnaphyAclProp`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -666,7 +751,7 @@ public class SaveDealDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("`SaveDeal`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.delete("`SnaphyAclProp`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -677,7 +762,7 @@ public class SaveDealDb{
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final SaveDeal modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final SnaphyAclProp modelData ){
       new Thread(new Runnable(){
         @Override
         public void run(){
@@ -685,7 +770,7 @@ public class SaveDealDb{
           db.beginTransaction();
           ContentValues values = getContentValues(modelData);
           String where = getWhere(whereKeyValue);
-          db.update("`SaveDeal`", values, where, null);
+          db.update("`SnaphyAclProp`", values, where, null);
           db.setTransactionSuccessful();
           db.endTransaction();
           //db.close();
@@ -715,7 +800,7 @@ public class SaveDealDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final SaveDeal modelData) {
+    public void update__db(final String id,   final SnaphyAclProp modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -723,7 +808,7 @@ public class SaveDealDb{
                 db.beginTransaction();
                 ContentValues values = getContentValues(modelData);
                 // updating row
-                db.update("`SaveDeal`", values, "id = ?",
+                db.update("`SnaphyAclProp`", values, "id = ?",
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
@@ -744,7 +829,7 @@ public class SaveDealDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("`SaveDeal`", values, "_DATA_UPDATED = 1", null);
+                db.update("`SnaphyAclProp`", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -761,7 +846,7 @@ public class SaveDealDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("`SaveDeal`", "_DATA_UPDATED = 0", null);
+                db.delete("`SnaphyAclProp`", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();

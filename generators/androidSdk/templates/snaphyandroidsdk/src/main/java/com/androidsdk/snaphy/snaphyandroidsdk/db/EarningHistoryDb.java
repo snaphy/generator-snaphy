@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
+import com.google.gson.LongSerializationPolicy;
 import com.google.gson.GsonBuilder;
 import android.database.Cursor;
 import java.lang.reflect.Method;
@@ -16,16 +17,16 @@ import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.InstagramUser;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.EarningHistory;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.InstagramUserRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.EarningHistoryRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
 
-public class InstagramUserDb{
+public class EarningHistoryDb{
 
     // All Static variables
     RestAdapter restAdapter;
@@ -40,25 +41,25 @@ public class InstagramUserDb{
     // Contacts table name
     private static String TABLE;
 
-  public InstagramUserDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+  public EarningHistoryDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     //super(context, DATABASE_NAME, null, DATABASE_VERSION);
     this.context = context;
     this.restAdapter = restAdapter;
-    TABLE = "InstagramUser";
+    TABLE = "EarningHistory";
     this.DATABASE_NAME = DATABASE_NAME;
     SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
 
-    public void insert__db (final String id, final InstagramUser modelData) {
+    public void insert__db (final String id, final EarningHistory modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
-                db.insert("`InstagramUser`", null, values);
+                db.insert("`EarningHistory`", null, values);
                 //db.close(); // Closing database connection
             }
         }).start();
@@ -69,28 +70,65 @@ public class InstagramUserDb{
 
 
 
-    public ContentValues getContentValues(InstagramUser modelData){
+    public ContentValues getContentValues(EarningHistory modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String usernameData = "";
-                        if(modelData.getUsername() != null){
-                          usernameData = modelData.getUsername().toString();
-                          values.put("`username`", usernameData);
+                                                            String addedData = "";
+                        if(modelData.getAdded() != null){
+                          addedData = modelData.getAdded().toString();
+                          values.put("`added`", addedData);
                         }
                                   
                                 
-                                                            String full_nameData = "";
-                        if(modelData.getFull_name() != null){
-                          full_nameData = modelData.getFull_name().toString();
-                          values.put("`full_name`", full_nameData);
+                                                            String statusData = "";
+                        if(modelData.getStatus() != null){
+                          statusData = modelData.getStatus().toString();
+                          values.put("`status`", statusData);
                         }
                                   
                                 
-                                                            String profile_pictureData = "";
-                        if(modelData.getProfile_picture() != null){
-                          profile_pictureData = modelData.getProfile_picture().toString();
-                          values.put("`profile_picture`", profile_pictureData);
+                                                            String reasonForFailureData = "";
+                        if(modelData.getReasonForFailure() != null){
+                          reasonForFailureData = modelData.getReasonForFailure().toString();
+                          values.put("`reasonForFailure`", reasonForFailureData);
                         }
+                                  
+                                
+                                                            String earning_history_numberData = "";
+                        if(modelData.getEarning_history_number() != null){
+                          earning_history_numberData = modelData.getEarning_history_number().toString();
+                          values.put("`earning_history_number`", earning_history_numberData);
+                        }
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String is_deletedData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getIs_deleted");
+                              if(method.invoke(modelData) != null){
+                                //is_deletedData = modelData.getIs_deleted().toString();
+                                is_deletedData = (String) method.invoke(modelData);
+                                values.put("`is_deleted`", is_deletedData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String updatedData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getUpdated");
+                              if(method.invoke(modelData) != null){
+                                //updatedData = modelData.getUpdated().toString();
+                                updatedData = (String) method.invoke(modelData);
+                                values.put("`updated`", updatedData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
@@ -109,13 +147,13 @@ public class InstagramUserDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String instagramPostIdData = "";
+                        String qrCodeIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getInstagramPostId");
+                              Method method = modelData.getClass().getMethod("getQrCodeId");
                               if(method.invoke(modelData) != null){
-                                //instagramPostIdData = modelData.getInstagramPostId().toString();
-                                instagramPostIdData = (String) method.invoke(modelData);
-                                values.put("`instagramPostId`", instagramPostIdData);
+                                //qrCodeIdData = modelData.getQrCodeId().toString();
+                                qrCodeIdData = (String) method.invoke(modelData);
+                                values.put("`qrCodeId`", qrCodeIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -124,13 +162,28 @@ public class InstagramUserDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String instagramCaptionIdData = "";
+                        String retailerIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getInstagramCaptionId");
+                              Method method = modelData.getClass().getMethod("getRetailerId");
                               if(method.invoke(modelData) != null){
-                                //instagramCaptionIdData = modelData.getInstagramCaptionId().toString();
-                                instagramCaptionIdData = (String) method.invoke(modelData);
-                                values.put("`instagramCaptionId`", instagramCaptionIdData);
+                                //retailerIdData = modelData.getRetailerId().toString();
+                                retailerIdData = (String) method.invoke(modelData);
+                                values.put("`retailerId`", retailerIdData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String departmentIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getDepartmentId");
+                              if(method.invoke(modelData) != null){
+                                //departmentIdData = modelData.getDepartmentId().toString();
+                                departmentIdData = (String) method.invoke(modelData);
+                                values.put("`departmentId`", departmentIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -148,10 +201,10 @@ public class InstagramUserDb{
 
 
     // Getting single c
-    public   InstagramUser get__db(String id) {
+    public   EarningHistory get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("InstagramUser", null, "id=?", new String[]{id}, null, null, null, null);
+            Cursor cursor = db.query("EarningHistory", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -160,9 +213,9 @@ public class InstagramUserDb{
                     cursor.close();
                     //db.close(); // Closing database connection
                     if (hashMap != null) {
-                        InstagramUserRepository repo = restAdapter.createRepository(InstagramUserRepository.class);
+                        EarningHistoryRepository repo = restAdapter.createRepository(EarningHistoryRepository.class);
                         repo.addStorage(context);
-                        return (InstagramUser)repo.createObject(hashMap);
+                        return (EarningHistory)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -181,10 +234,10 @@ public class InstagramUserDb{
 
 
     // Getting single cont
-    public   InstagramUser get__db(String whereKey, String whereKeyValue) {
+    public   EarningHistory get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("`InstagramUser`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`EarningHistory`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -195,9 +248,9 @@ public class InstagramUserDb{
                     //db.close(); // Closing database connection
 
                     if (hashMap != null) {
-                        InstagramUserRepository repo = restAdapter.createRepository(InstagramUserRepository.class);
+                        EarningHistoryRepository repo = restAdapter.createRepository(EarningHistoryRepository.class);
                         repo.addStorage(context);
-                        return (InstagramUser)repo.createObject(hashMap);
+                        return (EarningHistory)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -219,39 +272,69 @@ public class InstagramUserDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            String usernameData = "";
+                                                            String addedData = "";
                         if(cursor.getString(0) != null){
-                          usernameData = cursor.getString(0);
-                          if(usernameData != null){
-                            usernameData = (String)usernameData;
-                            hashMap.put("username", usernameData);
+                          addedData = cursor.getString(0);
+                          if(addedData != null){
+                            addedData = (String)addedData;
+                            hashMap.put("added", addedData);
                           }
                         }
                                                 
                                 
-                                                            String full_nameData = "";
+                                                            String statusData = "";
                         if(cursor.getString(1) != null){
-                          full_nameData = cursor.getString(1);
-                          if(full_nameData != null){
-                            full_nameData = (String)full_nameData;
-                            hashMap.put("full_name", full_nameData);
+                          statusData = cursor.getString(1);
+                          if(statusData != null){
+                            statusData = (String)statusData;
+                            hashMap.put("status", statusData);
                           }
                         }
                                                 
                                 
-                                                            String profile_pictureData = "";
+                                                            String reasonForFailureData = "";
                         if(cursor.getString(2) != null){
-                          profile_pictureData = cursor.getString(2);
-                          if(profile_pictureData != null){
-                            profile_pictureData = (String)profile_pictureData;
-                            hashMap.put("profile_picture", profile_pictureData);
+                          reasonForFailureData = cursor.getString(2);
+                          if(reasonForFailureData != null){
+                            reasonForFailureData = (String)reasonForFailureData;
+                            hashMap.put("reasonForFailure", reasonForFailureData);
+                          }
+                        }
+                                                
+                                
+                                                            String earning_history_numberData = "";
+                        if(cursor.getString(3) != null){
+                          earning_history_numberData = cursor.getString(3);
+                          if(earning_history_numberData != null){
+                            earning_history_numberData = (String)earning_history_numberData;
+                            hashMap.put("earning_history_number", earning_history_numberData);
+                          }
+                        }
+                                                
+                                
+                                                            String is_deletedData = "";
+                        if(cursor.getString(4) != null){
+                          is_deletedData = cursor.getString(4);
+                          if(is_deletedData != null){
+                            is_deletedData = is_deletedData.toString();
+                            hashMap.put("is_deleted", is_deletedData);
+                          }
+                        }
+                                                
+                                
+                                                            String updatedData = "";
+                        if(cursor.getString(5) != null){
+                          updatedData = cursor.getString(5);
+                          if(updatedData != null){
+                            updatedData = updatedData.toString();
+                            hashMap.put("updated", updatedData);
                           }
                         }
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(3) != null){
-                          idData = cursor.getString(3);
+                        if(cursor.getString(6) != null){
+                          idData = cursor.getString(6);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -259,22 +342,32 @@ public class InstagramUserDb{
                         }
                                                 
                                 
-                                                            String instagramPostIdData = "";
-                        if(cursor.getString(4) != null){
-                          instagramPostIdData = cursor.getString(4);
-                          if(instagramPostIdData != null){
-                            instagramPostIdData = instagramPostIdData.toString();
-                            hashMap.put("instagramPostId", instagramPostIdData);
+                                                            String qrCodeIdData = "";
+                        if(cursor.getString(7) != null){
+                          qrCodeIdData = cursor.getString(7);
+                          if(qrCodeIdData != null){
+                            qrCodeIdData = qrCodeIdData.toString();
+                            hashMap.put("qrCodeId", qrCodeIdData);
                           }
                         }
                                                 
                                 
-                                                            String instagramCaptionIdData = "";
-                        if(cursor.getString(5) != null){
-                          instagramCaptionIdData = cursor.getString(5);
-                          if(instagramCaptionIdData != null){
-                            instagramCaptionIdData = instagramCaptionIdData.toString();
-                            hashMap.put("instagramCaptionId", instagramCaptionIdData);
+                                                            String retailerIdData = "";
+                        if(cursor.getString(8) != null){
+                          retailerIdData = cursor.getString(8);
+                          if(retailerIdData != null){
+                            retailerIdData = retailerIdData.toString();
+                            hashMap.put("retailerId", retailerIdData);
+                          }
+                        }
+                                                
+                                
+                                                            String departmentIdData = "";
+                        if(cursor.getString(9) != null){
+                          departmentIdData = cursor.getString(9);
+                          if(departmentIdData != null){
+                            departmentIdData = departmentIdData.toString();
+                            hashMap.put("departmentId", departmentIdData);
                           }
                         }
                                                 
@@ -287,7 +380,7 @@ public class InstagramUserDb{
 
 
 
-    public void upsert__db(String id, InstagramUser model){
+    public void upsert__db(String id, EarningHistory model){
         if(count__db(id) != 0){
             update__db(id, model);
         }else{
@@ -298,25 +391,25 @@ public class InstagramUserDb{
 
 
     // Getting All Contacts
-    public DataList<InstagramUser>  getAll__db() {
-        DataList<InstagramUser> modelList = new DataList<InstagramUser>();
+    public DataList<EarningHistory>  getAll__db() {
+        DataList<EarningHistory> modelList = new DataList<EarningHistory>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `InstagramUser`";
+        String selectQuery = "SELECT  * FROM `EarningHistory`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<InstagramUser>) modelList;
+            return (DataList<EarningHistory>) modelList;
         }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    InstagramUserRepository repo = restAdapter.createRepository(InstagramUserRepository.class);
+                    EarningHistoryRepository repo = restAdapter.createRepository(EarningHistoryRepository.class);
                     repo.addStorage(context);
-                    modelList.add((InstagramUser)repo.createObject(hashMap));
+                    modelList.add((EarningHistory)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }
@@ -325,7 +418,7 @@ public class InstagramUserDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<InstagramUser>) modelList;
+        return (DataList<EarningHistory>) modelList;
     }
 
 
@@ -426,19 +519,19 @@ public class InstagramUserDb{
 
 
     // Getting All Data where
-    public DataList<InstagramUser>  getAll__db(HashMap<String, Object> whereKeyValue) {
+    public DataList<EarningHistory>  getAll__db(HashMap<String, Object> whereKeyValue) {
         return getAll__db(whereKeyValue, null, 0);
     }
 
 
 
     // Getting All Data where and sort column according to date wise..
-    public DataList<InstagramUser>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
-        DataList<InstagramUser> modelList = new DataList<InstagramUser>();
+    public DataList<EarningHistory>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
+        DataList<EarningHistory> modelList = new DataList<EarningHistory>();
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM `InstagramUser` " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `EarningHistory` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit;
@@ -446,9 +539,9 @@ public class InstagramUserDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                selectQuery = "SELECT  * FROM InstagramUser " + whereQuery + " LIMIT " + limit;
+                selectQuery = "SELECT  * FROM EarningHistory " + whereQuery + " LIMIT " + limit;
             }else{
-                selectQuery = "SELECT  * FROM InstagramUser " + whereQuery;
+                selectQuery = "SELECT  * FROM EarningHistory " + whereQuery;
             }
         }
 
@@ -459,15 +552,15 @@ public class InstagramUserDb{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<InstagramUser>) modelList;
+            return (DataList<EarningHistory>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    InstagramUserRepository repo = restAdapter.createRepository(InstagramUserRepository.class);
+                    EarningHistoryRepository repo = restAdapter.createRepository(EarningHistoryRepository.class);
                     repo.addStorage(context);
-                    modelList.add((InstagramUser)repo.createObject(hashMap));
+                    modelList.add((EarningHistory)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
@@ -477,12 +570,12 @@ public class InstagramUserDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<InstagramUser>) modelList;
+        return (DataList<EarningHistory>) modelList;
     }
 
 
     // Getting All Data where
-    public DataList<InstagramUser>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
+    public DataList<EarningHistory>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
         return getAll__db(whereKeyValue, null,  limit);
     }
 
@@ -501,7 +594,7 @@ public class InstagramUserDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM `InstagramUser` " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `EarningHistory` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit;
@@ -509,9 +602,9 @@ public class InstagramUserDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM `InstagramUser` " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `EarningHistory` " + whereQuery + " LIMIT " + limit;
             }else{
-                countQuery = "SELECT  * FROM `InstagramUser` " + whereQuery;
+                countQuery = "SELECT  * FROM `EarningHistory` " + whereQuery;
             }
         }
 
@@ -534,9 +627,9 @@ public class InstagramUserDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM `InstagramUser` " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `EarningHistory` " + whereQuery + " LIMIT " + limit;
         }else{
-            countQuery = "SELECT  * FROM `InstagramUser` " + whereQuery;
+            countQuery = "SELECT  * FROM `EarningHistory` " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -569,7 +662,7 @@ public class InstagramUserDb{
                 values.put("_DATA_UPDATED", 0);
                 String where = getWhere(whereKeyValue);
                 // updating row
-                db.update("`InstagramUser`", values, "_DATA_UPDATED = 1 AND " + where, null);
+                db.update("`EarningHistory`", values, "_DATA_UPDATED = 1 AND " + where, null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -587,7 +680,7 @@ public class InstagramUserDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("`InstagramUser`", "_DATA_UPDATED = 0 AND " + where , null);
+                db.delete("`EarningHistory`", "_DATA_UPDATED = 0 AND " + where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -608,7 +701,7 @@ public class InstagramUserDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("`InstagramUser`", where , null);
+                db.delete("`EarningHistory`", where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
             }
@@ -622,10 +715,10 @@ public class InstagramUserDb{
 
 
     // Getting All Data where
-    public DataList<InstagramUser>  getAll__db(String whereKey, String whereKeyValue) {
-        DataList<InstagramUser> modelList = new DataList<InstagramUser>();
+    public DataList<EarningHistory>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<EarningHistory> modelList = new DataList<EarningHistory>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `InstagramUser` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String selectQuery = "SELECT  * FROM `EarningHistory` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -634,15 +727,15 @@ public class InstagramUserDb{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<InstagramUser>) modelList;
+            return (DataList<EarningHistory>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    InstagramUserRepository repo = restAdapter.createRepository(InstagramUserRepository.class);
+                    EarningHistoryRepository repo = restAdapter.createRepository(EarningHistoryRepository.class);
                     repo.addStorage(context);
-                    modelList.add((InstagramUser)repo.createObject(hashMap));
+                    modelList.add((EarningHistory)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
@@ -652,7 +745,7 @@ public class InstagramUserDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<InstagramUser>) modelList;
+        return (DataList<EarningHistory>) modelList;
     }
 
 
@@ -664,7 +757,7 @@ public class InstagramUserDb{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-        String countQuery = "SELECT  * FROM `InstagramUser` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String countQuery = "SELECT  * FROM `EarningHistory` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -684,7 +777,7 @@ public class InstagramUserDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("`InstagramUser`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.update("`EarningHistory`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -700,7 +793,7 @@ public class InstagramUserDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("`InstagramUser`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.delete("`EarningHistory`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -711,7 +804,7 @@ public class InstagramUserDb{
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final InstagramUser modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final EarningHistory modelData ){
       new Thread(new Runnable(){
         @Override
         public void run(){
@@ -719,7 +812,7 @@ public class InstagramUserDb{
           db.beginTransaction();
           ContentValues values = getContentValues(modelData);
           String where = getWhere(whereKeyValue);
-          db.update("`InstagramUser`", values, where, null);
+          db.update("`EarningHistory`", values, where, null);
           db.setTransactionSuccessful();
           db.endTransaction();
           //db.close();
@@ -749,7 +842,7 @@ public class InstagramUserDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final InstagramUser modelData) {
+    public void update__db(final String id,   final EarningHistory modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -757,7 +850,7 @@ public class InstagramUserDb{
                 db.beginTransaction();
                 ContentValues values = getContentValues(modelData);
                 // updating row
-                db.update("`InstagramUser`", values, "id = ?",
+                db.update("`EarningHistory`", values, "id = ?",
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
@@ -778,7 +871,7 @@ public class InstagramUserDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("`InstagramUser`", values, "_DATA_UPDATED = 1", null);
+                db.update("`EarningHistory`", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -795,7 +888,7 @@ public class InstagramUserDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("`InstagramUser`", "_DATA_UPDATED = 0", null);
+                db.delete("`EarningHistory`", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();

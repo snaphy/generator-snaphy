@@ -69,8 +69,22 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.ProductDb;
     
 
     
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Department;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.DepartmentRepository;
+            
+        
+    
+
+    
             import com.androidsdk.snaphy.snaphyandroidsdk.models.QrCode;
             import com.androidsdk.snaphy.snaphyandroidsdk.repository.QrCodeRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.QrCodeGroup;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.QrCodeGroupRepository;
             
         
     
@@ -161,6 +175,15 @@ public class ProductRepository extends ModelRepository<Product> {
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:productId/department", "GET"), "Product.prototype.__get__department");
+    
+
+    
+    
+
+    
+
+    
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:productId/qrCodes/:fk", "GET"), "Product.prototype.__findById__qrCodes");
     
 
@@ -215,6 +238,33 @@ public class ProductRepository extends ModelRepository<Product> {
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:productId/qrCodeGroups/:fk", "GET"), "Product.prototype.__findById__qrCodeGroups");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:productId/qrCodeGroups/:fk", "DELETE"), "Product.prototype.__destroyById__qrCodeGroups");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:productId/qrCodeGroups/:fk", "PUT"), "Product.prototype.__updateById__qrCodeGroups");
+    
+
+    
+    
+
+    
+
+    
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:productId/qrCodes", "GET"), "Product.prototype.__get__qrCodes");
     
 
@@ -243,6 +293,42 @@ public class ProductRepository extends ModelRepository<Product> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:productId/qrCodes/count", "GET"), "Product.prototype.__count__qrCodes");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:productId/qrCodeGroups", "GET"), "Product.prototype.__get__qrCodeGroups");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:productId/qrCodeGroups", "POST"), "Product.prototype.__create__qrCodeGroups");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:productId/qrCodeGroups", "DELETE"), "Product.prototype.__delete__qrCodeGroups");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:productId/qrCodeGroups/count", "GET"), "Product.prototype.__count__qrCodeGroups");
     
 
     
@@ -463,6 +549,33 @@ public class ProductRepository extends ModelRepository<Product> {
 
     
     
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
     return contract;
     }
 
@@ -483,6 +596,91 @@ public class ProductRepository extends ModelRepository<Product> {
 
 
 
+    
+        
+            //Method get__department definition
+            public void get__department(  String productId,  Boolean refresh, final ObjectCallback<Department> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("productId", productId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__department", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    DepartmentRepository departmentRepo = getRestAdapter().createRepository(DepartmentRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = departmentRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(departmentRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //departmentRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Department department = departmentRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = department.getClass().getMethod("save__db");
+                                                    method.invoke(department);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(department);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__department definition ends here..
+
+            
+
+        
     
         
             //Method findById__qrCodes definition
@@ -960,6 +1158,226 @@ public class ProductRepository extends ModelRepository<Product> {
         
     
         
+            //Method findById__qrCodeGroups definition
+            public void findById__qrCodeGroups(  String productId,  String fk, final ObjectCallback<QrCodeGroup> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("productId", productId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__findById__qrCodeGroups", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    QrCodeGroupRepository qrCodeGroupRepo = getRestAdapter().createRepository(QrCodeGroupRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = qrCodeGroupRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(qrCodeGroupRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //qrCodeGroupRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    QrCodeGroup qrCodeGroup = qrCodeGroupRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = qrCodeGroup.getClass().getMethod("save__db");
+                                                    method.invoke(qrCodeGroup);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(qrCodeGroup);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method findById__qrCodeGroups definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__qrCodeGroups definition
+            public void destroyById__qrCodeGroups(  String productId,  String fk, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("productId", productId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__qrCodeGroups", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__qrCodeGroups definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__qrCodeGroups definition
+            public void updateById__qrCodeGroups(  String productId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<QrCodeGroup> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("productId", productId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__updateById__qrCodeGroups", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    QrCodeGroupRepository qrCodeGroupRepo = getRestAdapter().createRepository(QrCodeGroupRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = qrCodeGroupRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(qrCodeGroupRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //qrCodeGroupRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    QrCodeGroup qrCodeGroup = qrCodeGroupRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = qrCodeGroup.getClass().getMethod("save__db");
+                                                    method.invoke(qrCodeGroup);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(qrCodeGroup);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method updateById__qrCodeGroups definition ends here..
+
+            
+
+        
+    
+        
             //Method get__qrCodes definition
             public void get__qrCodes(  String productId,  Map<String,  ? extends Object> filter, final DataListCallback<QrCode> callback){
 
@@ -1223,6 +1641,275 @@ public class ProductRepository extends ModelRepository<Product> {
                 
 
             }//Method count__qrCodes definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__qrCodeGroups definition
+            public void get__qrCodeGroups(  String productId,  Map<String,  ? extends Object> filter, final DataListCallback<QrCodeGroup> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("productId", productId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__qrCodeGroups", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<QrCodeGroup> qrCodeGroupList = new DataList<QrCodeGroup>();
+                                    QrCodeGroupRepository qrCodeGroupRepo = getRestAdapter().createRepository(QrCodeGroupRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = qrCodeGroupRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(qrCodeGroupRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        QrCodeGroup qrCodeGroup = qrCodeGroupRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = qrCodeGroup.getClass().getMethod("save__db");
+                                                      method.invoke(qrCodeGroup);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        qrCodeGroupList.add(qrCodeGroup);
+                                    }
+                                    callback.onSuccess(qrCodeGroupList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method get__qrCodeGroups definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__qrCodeGroups definition
+            public void create__qrCodeGroups(  String productId,  Map<String,  ? extends Object> data, final ObjectCallback<QrCodeGroup> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("productId", productId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__qrCodeGroups", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    QrCodeGroupRepository qrCodeGroupRepo = getRestAdapter().createRepository(QrCodeGroupRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = qrCodeGroupRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(qrCodeGroupRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //qrCodeGroupRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    QrCodeGroup qrCodeGroup = qrCodeGroupRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = qrCodeGroup.getClass().getMethod("save__db");
+                                                    method.invoke(qrCodeGroup);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(qrCodeGroup);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__qrCodeGroups definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__qrCodeGroups definition
+            public void delete__qrCodeGroups(  String productId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("productId", productId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__qrCodeGroups", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__qrCodeGroups definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__qrCodeGroups definition
+            public void count__qrCodeGroups(  String productId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("productId", productId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__qrCodeGroups", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method count__qrCodeGroups definition ends here..
 
             
 
@@ -2135,6 +2822,24 @@ public class ProductRepository extends ModelRepository<Product> {
 
             
 
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
         

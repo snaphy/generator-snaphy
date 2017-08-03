@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
+import com.google.gson.LongSerializationPolicy;
 import com.google.gson.GsonBuilder;
 import android.database.Cursor;
 import java.lang.reflect.Method;
@@ -91,6 +92,21 @@ public class CategoryDb{
                           updatedData = modelData.getUpdated().toString();
                           values.put("`updated`", updatedData);
                         }
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String is_deletedData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getIs_deleted");
+                              if(method.invoke(modelData) != null){
+                                //is_deletedData = modelData.getIs_deleted().toString();
+                                is_deletedData = (String) method.invoke(modelData);
+                                values.put("`is_deleted`", is_deletedData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
@@ -219,9 +235,19 @@ public class CategoryDb{
                         }
                                                 
                                 
-                                                            String idData = "";
+                                                            String is_deletedData = "";
                         if(cursor.getString(3) != null){
-                          idData = cursor.getString(3);
+                          is_deletedData = cursor.getString(3);
+                          if(is_deletedData != null){
+                            is_deletedData = is_deletedData.toString();
+                            hashMap.put("is_deleted", is_deletedData);
+                          }
+                        }
+                                                
+                                
+                                                            String idData = "";
+                        if(cursor.getString(4) != null){
+                          idData = cursor.getString(4);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);

@@ -132,6 +132,13 @@ public class QrCodeDb{
                         }
                                   
                                 
+                                                            String redeemStatusData = "";
+                        if(modelData.getRedeemStatus() != null){
+                          redeemStatusData = modelData.getRedeemStatus().toString();
+                          values.put("`redeemStatus`", redeemStatusData);
+                        }
+                                  
+                                
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String is_deletedData = "";
                         try {
@@ -178,6 +185,21 @@ public class QrCodeDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String departmentIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getDepartmentId");
+                              if(method.invoke(modelData) != null){
+                                //departmentIdData = modelData.getDepartmentId().toString();
+                                departmentIdData = (String) method.invoke(modelData);
+                                values.put("`departmentId`", departmentIdData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String productIdData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getProductId");
@@ -200,6 +222,21 @@ public class QrCodeDb{
                                 //transactionIdData = modelData.getTransactionId().toString();
                                 transactionIdData = (String) method.invoke(modelData);
                                 values.put("`transactionId`", transactionIdData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String qrCodeGroupIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getQrCodeGroupId");
+                              if(method.invoke(modelData) != null){
+                                //qrCodeGroupIdData = modelData.getQrCodeGroupId().toString();
+                                qrCodeGroupIdData = (String) method.invoke(modelData);
+                                values.put("`qrCodeGroupId`", qrCodeGroupIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -374,9 +411,19 @@ public class QrCodeDb{
                         }
                                                 
                                 
-                                                            String is_deletedData = "";
+                                                            String redeemStatusData = "";
                         if(cursor.getString(9) != null){
-                          is_deletedData = cursor.getString(9);
+                          redeemStatusData = cursor.getString(9);
+                          if(redeemStatusData != null){
+                            redeemStatusData = (String)redeemStatusData;
+                            hashMap.put("redeemStatus", redeemStatusData);
+                          }
+                        }
+                                                
+                                
+                                                            String is_deletedData = "";
+                        if(cursor.getString(10) != null){
+                          is_deletedData = cursor.getString(10);
                           if(is_deletedData != null){
                             is_deletedData = is_deletedData.toString();
                             hashMap.put("is_deleted", is_deletedData);
@@ -385,8 +432,8 @@ public class QrCodeDb{
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(10) != null){
-                          idData = cursor.getString(10);
+                        if(cursor.getString(11) != null){
+                          idData = cursor.getString(11);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -395,8 +442,8 @@ public class QrCodeDb{
                                                 
                                 
                                                             String retailerIdData = "";
-                        if(cursor.getString(11) != null){
-                          retailerIdData = cursor.getString(11);
+                        if(cursor.getString(12) != null){
+                          retailerIdData = cursor.getString(12);
                           if(retailerIdData != null){
                             retailerIdData = retailerIdData.toString();
                             hashMap.put("retailerId", retailerIdData);
@@ -404,9 +451,19 @@ public class QrCodeDb{
                         }
                                                 
                                 
+                                                            String departmentIdData = "";
+                        if(cursor.getString(13) != null){
+                          departmentIdData = cursor.getString(13);
+                          if(departmentIdData != null){
+                            departmentIdData = departmentIdData.toString();
+                            hashMap.put("departmentId", departmentIdData);
+                          }
+                        }
+                                                
+                                
                                                             String productIdData = "";
-                        if(cursor.getString(12) != null){
-                          productIdData = cursor.getString(12);
+                        if(cursor.getString(14) != null){
+                          productIdData = cursor.getString(14);
                           if(productIdData != null){
                             productIdData = productIdData.toString();
                             hashMap.put("productId", productIdData);
@@ -415,11 +472,21 @@ public class QrCodeDb{
                                                 
                                 
                                                             String transactionIdData = "";
-                        if(cursor.getString(13) != null){
-                          transactionIdData = cursor.getString(13);
+                        if(cursor.getString(15) != null){
+                          transactionIdData = cursor.getString(15);
                           if(transactionIdData != null){
                             transactionIdData = transactionIdData.toString();
                             hashMap.put("transactionId", transactionIdData);
+                          }
+                        }
+                                                
+                                
+                                                            String qrCodeGroupIdData = "";
+                        if(cursor.getString(16) != null){
+                          qrCodeGroupIdData = cursor.getString(16);
+                          if(qrCodeGroupIdData != null){
+                            qrCodeGroupIdData = qrCodeGroupIdData.toString();
+                            hashMap.put("qrCodeGroupId", qrCodeGroupIdData);
                           }
                         }
                                                 

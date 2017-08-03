@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
+import com.google.gson.LongSerializationPolicy;
 import com.google.gson.GsonBuilder;
 import android.database.Cursor;
 import java.lang.reflect.Method;
@@ -16,16 +17,16 @@ import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.GoogleObject;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.SnaphyAclRelation;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.GoogleObjectRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.SnaphyAclRelationRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
 
-public class GoogleObjectDb{
+public class SnaphyAclRelationDb{
 
     // All Static variables
     RestAdapter restAdapter;
@@ -40,25 +41,25 @@ public class GoogleObjectDb{
     // Contacts table name
     private static String TABLE;
 
-  public GoogleObjectDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+  public SnaphyAclRelationDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     //super(context, DATABASE_NAME, null, DATABASE_VERSION);
     this.context = context;
     this.restAdapter = restAdapter;
-    TABLE = "GoogleObject";
+    TABLE = "SnaphyAclRelation";
     this.DATABASE_NAME = DATABASE_NAME;
     SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
 
-    public void insert__db (final String id, final GoogleObject modelData) {
+    public void insert__db (final String id, final SnaphyAclRelation modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
-                db.insert("`GoogleObject`", null, values);
+                db.insert("`SnaphyAclRelation`", null, values);
                 //db.close(); // Closing database connection
             }
         }).start();
@@ -69,45 +70,67 @@ public class GoogleObjectDb{
 
 
 
-    public ContentValues getContentValues(GoogleObject modelData){
+    public ContentValues getContentValues(SnaphyAclRelation modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String urlData = "";
-                        if(modelData.getUrl() != null){
-                          urlData = modelData.getUrl().toString();
-                          values.put("`url`", urlData);
+                                                            String relationData = "";
+                        if(modelData.getRelation() != null){
+                          relationData = modelData.getRelation().toString();
+                          values.put("`relation`", relationData);
                         }
                                   
                                 
-                                                            String repliesData = "";
-                        if(modelData.getReplies() != null){
-                          GsonBuilder gsonBuilder = new GsonBuilder();
-                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-                          Gson gson = gsonBuilder.create();
-                          repliesData = gson.toJson(modelData.getReplies(), HashMap.class);
-                          values.put("`replies`", repliesData);
+                                                            String executeData = "";
+                        if(modelData.getExecute() != null){
+                          executeData = modelData.getExecute().toString();
+                          values.put("`execute`", executeData);
                         }
                                   
                                 
-                                                            String plusonersData = "";
-                        if(modelData.getPlusoners() != null){
-                          GsonBuilder gsonBuilder = new GsonBuilder();
-                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-                          Gson gson = gsonBuilder.create();
-                          plusonersData = gson.toJson(modelData.getPlusoners(), HashMap.class);
-                          values.put("`plusoners`", plusonersData);
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String is_deletedData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getIs_deleted");
+                              if(method.invoke(modelData) != null){
+                                //is_deletedData = modelData.getIs_deleted().toString();
+                                is_deletedData = (String) method.invoke(modelData);
+                                values.put("`is_deleted`", is_deletedData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
                         }
+
                                   
                                 
-                                  String attachmentsData = "";
-                  if(modelData.getAttachments() != null){
-                    GsonBuilder gsonBuilder = new GsonBuilder();
-                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-                    Gson gson = gsonBuilder.create();
-                    attachmentsData = gson.toJson(modelData.getAttachments(), DataList.class);
-                    values.put("`attachments`", attachmentsData);
-                  }
-              
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String addedData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getAdded");
+                              if(method.invoke(modelData) != null){
+                                //addedData = modelData.getAdded().toString();
+                                addedData = (String) method.invoke(modelData);
+                                values.put("`added`", addedData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String updatedData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getUpdated");
+                              if(method.invoke(modelData) != null){
+                                //updatedData = modelData.getUpdated().toString();
+                                updatedData = (String) method.invoke(modelData);
+                                values.put("`updated`", updatedData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -125,13 +148,13 @@ public class GoogleObjectDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String googlePostIdData = "";
+                        String snaphyAclIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getGooglePostId");
+                              Method method = modelData.getClass().getMethod("getSnaphyAclId");
                               if(method.invoke(modelData) != null){
-                                //googlePostIdData = modelData.getGooglePostId().toString();
-                                googlePostIdData = (String) method.invoke(modelData);
-                                values.put("`googlePostId`", googlePostIdData);
+                                //snaphyAclIdData = modelData.getSnaphyAclId().toString();
+                                snaphyAclIdData = (String) method.invoke(modelData);
+                                values.put("`snaphyAclId`", snaphyAclIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -149,10 +172,10 @@ public class GoogleObjectDb{
 
 
     // Getting single c
-    public   GoogleObject get__db(String id) {
+    public   SnaphyAclRelation get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("GoogleObject", null, "id=?", new String[]{id}, null, null, null, null);
+            Cursor cursor = db.query("SnaphyAclRelation", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -161,9 +184,9 @@ public class GoogleObjectDb{
                     cursor.close();
                     //db.close(); // Closing database connection
                     if (hashMap != null) {
-                        GoogleObjectRepository repo = restAdapter.createRepository(GoogleObjectRepository.class);
+                        SnaphyAclRelationRepository repo = restAdapter.createRepository(SnaphyAclRelationRepository.class);
                         repo.addStorage(context);
-                        return (GoogleObject)repo.createObject(hashMap);
+                        return (SnaphyAclRelation)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -182,10 +205,10 @@ public class GoogleObjectDb{
 
 
     // Getting single cont
-    public   GoogleObject get__db(String whereKey, String whereKeyValue) {
+    public   SnaphyAclRelation get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("`GoogleObject`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`SnaphyAclRelation`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -196,9 +219,9 @@ public class GoogleObjectDb{
                     //db.close(); // Closing database connection
 
                     if (hashMap != null) {
-                        GoogleObjectRepository repo = restAdapter.createRepository(GoogleObjectRepository.class);
+                        SnaphyAclRelationRepository repo = restAdapter.createRepository(SnaphyAclRelationRepository.class);
                         repo.addStorage(context);
-                        return (GoogleObject)repo.createObject(hashMap);
+                        return (SnaphyAclRelation)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -220,58 +243,59 @@ public class GoogleObjectDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            String urlData = "";
+                                                            String relationData = "";
                         if(cursor.getString(0) != null){
-                          urlData = cursor.getString(0);
-                          if(urlData != null){
-                            urlData = (String)urlData;
-                            hashMap.put("url", urlData);
+                          relationData = cursor.getString(0);
+                          if(relationData != null){
+                            relationData = (String)relationData;
+                            hashMap.put("relation", relationData);
                           }
                         }
                                                 
                                 
-                                                            Map<String, Object> repliesData = new HashMap<>();
+                                                            String executeData = "";
                         if(cursor.getString(1) != null){
-                          GsonBuilder gsonBuilder = new GsonBuilder();
-                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-                          Gson gson = gsonBuilder.create();
-                           repliesData = gson.fromJson(cursor.getString(1), Map.class);
-                          if(repliesData != null){
-                            repliesData = (Map<String, Object>)repliesData;
-                            hashMap.put("replies", repliesData);
+                          executeData = cursor.getString(1);
+                          if(executeData != null){
+                            executeData = (String)executeData;
+                            hashMap.put("execute", executeData);
                           }
                         }
                                                 
                                 
-                                                            Map<String, Object> plusonersData = new HashMap<>();
+                                                            String is_deletedData = "";
                         if(cursor.getString(2) != null){
-                          GsonBuilder gsonBuilder = new GsonBuilder();
-                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-                          Gson gson = gsonBuilder.create();
-                           plusonersData = gson.fromJson(cursor.getString(2), Map.class);
-                          if(plusonersData != null){
-                            plusonersData = (Map<String, Object>)plusonersData;
-                            hashMap.put("plusoners", plusonersData);
+                          is_deletedData = cursor.getString(2);
+                          if(is_deletedData != null){
+                            is_deletedData = is_deletedData.toString();
+                            hashMap.put("is_deleted", is_deletedData);
                           }
                         }
                                                 
                                 
-                                  DataList<Map<String, Object>> attachmentsData = new DataList<>();
-                  if(cursor.getString(3) != null){
-                    GsonBuilder gsonBuilder = new GsonBuilder();
-                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-                    Gson gson = gsonBuilder.create();
-                    attachmentsData = gson.fromJson(cursor.getString(3), DataList.class);
-                    if(attachmentsData != null){
-                      attachmentsData = (DataList<Map<String, Object>>)attachmentsData;
-                      hashMap.put("attachments", attachmentsData);
-                    }
-                  }
-                            
+                                                            String addedData = "";
+                        if(cursor.getString(3) != null){
+                          addedData = cursor.getString(3);
+                          if(addedData != null){
+                            addedData = addedData.toString();
+                            hashMap.put("added", addedData);
+                          }
+                        }
+                                                
+                                
+                                                            String updatedData = "";
+                        if(cursor.getString(4) != null){
+                          updatedData = cursor.getString(4);
+                          if(updatedData != null){
+                            updatedData = updatedData.toString();
+                            hashMap.put("updated", updatedData);
+                          }
+                        }
+                                                
                                 
                                                             String idData = "";
-                        if(cursor.getString(4) != null){
-                          idData = cursor.getString(4);
+                        if(cursor.getString(5) != null){
+                          idData = cursor.getString(5);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -279,12 +303,12 @@ public class GoogleObjectDb{
                         }
                                                 
                                 
-                                                            String googlePostIdData = "";
-                        if(cursor.getString(5) != null){
-                          googlePostIdData = cursor.getString(5);
-                          if(googlePostIdData != null){
-                            googlePostIdData = googlePostIdData.toString();
-                            hashMap.put("googlePostId", googlePostIdData);
+                                                            String snaphyAclIdData = "";
+                        if(cursor.getString(6) != null){
+                          snaphyAclIdData = cursor.getString(6);
+                          if(snaphyAclIdData != null){
+                            snaphyAclIdData = snaphyAclIdData.toString();
+                            hashMap.put("snaphyAclId", snaphyAclIdData);
                           }
                         }
                                                 
@@ -297,7 +321,7 @@ public class GoogleObjectDb{
 
 
 
-    public void upsert__db(String id, GoogleObject model){
+    public void upsert__db(String id, SnaphyAclRelation model){
         if(count__db(id) != 0){
             update__db(id, model);
         }else{
@@ -308,25 +332,25 @@ public class GoogleObjectDb{
 
 
     // Getting All Contacts
-    public DataList<GoogleObject>  getAll__db() {
-        DataList<GoogleObject> modelList = new DataList<GoogleObject>();
+    public DataList<SnaphyAclRelation>  getAll__db() {
+        DataList<SnaphyAclRelation> modelList = new DataList<SnaphyAclRelation>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `GoogleObject`";
+        String selectQuery = "SELECT  * FROM `SnaphyAclRelation`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<GoogleObject>) modelList;
+            return (DataList<SnaphyAclRelation>) modelList;
         }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    GoogleObjectRepository repo = restAdapter.createRepository(GoogleObjectRepository.class);
+                    SnaphyAclRelationRepository repo = restAdapter.createRepository(SnaphyAclRelationRepository.class);
                     repo.addStorage(context);
-                    modelList.add((GoogleObject)repo.createObject(hashMap));
+                    modelList.add((SnaphyAclRelation)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }
@@ -335,7 +359,7 @@ public class GoogleObjectDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<GoogleObject>) modelList;
+        return (DataList<SnaphyAclRelation>) modelList;
     }
 
 
@@ -436,19 +460,19 @@ public class GoogleObjectDb{
 
 
     // Getting All Data where
-    public DataList<GoogleObject>  getAll__db(HashMap<String, Object> whereKeyValue) {
+    public DataList<SnaphyAclRelation>  getAll__db(HashMap<String, Object> whereKeyValue) {
         return getAll__db(whereKeyValue, null, 0);
     }
 
 
 
     // Getting All Data where and sort column according to date wise..
-    public DataList<GoogleObject>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
-        DataList<GoogleObject> modelList = new DataList<GoogleObject>();
+    public DataList<SnaphyAclRelation>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
+        DataList<SnaphyAclRelation> modelList = new DataList<SnaphyAclRelation>();
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM `GoogleObject` " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `SnaphyAclRelation` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit;
@@ -456,9 +480,9 @@ public class GoogleObjectDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                selectQuery = "SELECT  * FROM GoogleObject " + whereQuery + " LIMIT " + limit;
+                selectQuery = "SELECT  * FROM SnaphyAclRelation " + whereQuery + " LIMIT " + limit;
             }else{
-                selectQuery = "SELECT  * FROM GoogleObject " + whereQuery;
+                selectQuery = "SELECT  * FROM SnaphyAclRelation " + whereQuery;
             }
         }
 
@@ -469,15 +493,15 @@ public class GoogleObjectDb{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<GoogleObject>) modelList;
+            return (DataList<SnaphyAclRelation>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    GoogleObjectRepository repo = restAdapter.createRepository(GoogleObjectRepository.class);
+                    SnaphyAclRelationRepository repo = restAdapter.createRepository(SnaphyAclRelationRepository.class);
                     repo.addStorage(context);
-                    modelList.add((GoogleObject)repo.createObject(hashMap));
+                    modelList.add((SnaphyAclRelation)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
@@ -487,12 +511,12 @@ public class GoogleObjectDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<GoogleObject>) modelList;
+        return (DataList<SnaphyAclRelation>) modelList;
     }
 
 
     // Getting All Data where
-    public DataList<GoogleObject>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
+    public DataList<SnaphyAclRelation>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
         return getAll__db(whereKeyValue, null,  limit);
     }
 
@@ -511,7 +535,7 @@ public class GoogleObjectDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM `GoogleObject` " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `SnaphyAclRelation` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit;
@@ -519,9 +543,9 @@ public class GoogleObjectDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM `GoogleObject` " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `SnaphyAclRelation` " + whereQuery + " LIMIT " + limit;
             }else{
-                countQuery = "SELECT  * FROM `GoogleObject` " + whereQuery;
+                countQuery = "SELECT  * FROM `SnaphyAclRelation` " + whereQuery;
             }
         }
 
@@ -544,9 +568,9 @@ public class GoogleObjectDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM `GoogleObject` " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `SnaphyAclRelation` " + whereQuery + " LIMIT " + limit;
         }else{
-            countQuery = "SELECT  * FROM `GoogleObject` " + whereQuery;
+            countQuery = "SELECT  * FROM `SnaphyAclRelation` " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -579,7 +603,7 @@ public class GoogleObjectDb{
                 values.put("_DATA_UPDATED", 0);
                 String where = getWhere(whereKeyValue);
                 // updating row
-                db.update("`GoogleObject`", values, "_DATA_UPDATED = 1 AND " + where, null);
+                db.update("`SnaphyAclRelation`", values, "_DATA_UPDATED = 1 AND " + where, null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -597,7 +621,7 @@ public class GoogleObjectDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("`GoogleObject`", "_DATA_UPDATED = 0 AND " + where , null);
+                db.delete("`SnaphyAclRelation`", "_DATA_UPDATED = 0 AND " + where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -618,7 +642,7 @@ public class GoogleObjectDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("`GoogleObject`", where , null);
+                db.delete("`SnaphyAclRelation`", where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
             }
@@ -632,10 +656,10 @@ public class GoogleObjectDb{
 
 
     // Getting All Data where
-    public DataList<GoogleObject>  getAll__db(String whereKey, String whereKeyValue) {
-        DataList<GoogleObject> modelList = new DataList<GoogleObject>();
+    public DataList<SnaphyAclRelation>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<SnaphyAclRelation> modelList = new DataList<SnaphyAclRelation>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `GoogleObject` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String selectQuery = "SELECT  * FROM `SnaphyAclRelation` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -644,15 +668,15 @@ public class GoogleObjectDb{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<GoogleObject>) modelList;
+            return (DataList<SnaphyAclRelation>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    GoogleObjectRepository repo = restAdapter.createRepository(GoogleObjectRepository.class);
+                    SnaphyAclRelationRepository repo = restAdapter.createRepository(SnaphyAclRelationRepository.class);
                     repo.addStorage(context);
-                    modelList.add((GoogleObject)repo.createObject(hashMap));
+                    modelList.add((SnaphyAclRelation)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
@@ -662,7 +686,7 @@ public class GoogleObjectDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<GoogleObject>) modelList;
+        return (DataList<SnaphyAclRelation>) modelList;
     }
 
 
@@ -674,7 +698,7 @@ public class GoogleObjectDb{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-        String countQuery = "SELECT  * FROM `GoogleObject` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String countQuery = "SELECT  * FROM `SnaphyAclRelation` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -694,7 +718,7 @@ public class GoogleObjectDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("`GoogleObject`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.update("`SnaphyAclRelation`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -710,7 +734,7 @@ public class GoogleObjectDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("`GoogleObject`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.delete("`SnaphyAclRelation`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -721,7 +745,7 @@ public class GoogleObjectDb{
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final GoogleObject modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final SnaphyAclRelation modelData ){
       new Thread(new Runnable(){
         @Override
         public void run(){
@@ -729,7 +753,7 @@ public class GoogleObjectDb{
           db.beginTransaction();
           ContentValues values = getContentValues(modelData);
           String where = getWhere(whereKeyValue);
-          db.update("`GoogleObject`", values, where, null);
+          db.update("`SnaphyAclRelation`", values, where, null);
           db.setTransactionSuccessful();
           db.endTransaction();
           //db.close();
@@ -759,7 +783,7 @@ public class GoogleObjectDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final GoogleObject modelData) {
+    public void update__db(final String id,   final SnaphyAclRelation modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -767,7 +791,7 @@ public class GoogleObjectDb{
                 db.beginTransaction();
                 ContentValues values = getContentValues(modelData);
                 // updating row
-                db.update("`GoogleObject`", values, "id = ?",
+                db.update("`SnaphyAclRelation`", values, "id = ?",
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
@@ -788,7 +812,7 @@ public class GoogleObjectDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("`GoogleObject`", values, "_DATA_UPDATED = 1", null);
+                db.update("`SnaphyAclRelation`", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -805,7 +829,7 @@ public class GoogleObjectDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("`GoogleObject`", "_DATA_UPDATED = 0", null);
+                db.delete("`SnaphyAclRelation`", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();

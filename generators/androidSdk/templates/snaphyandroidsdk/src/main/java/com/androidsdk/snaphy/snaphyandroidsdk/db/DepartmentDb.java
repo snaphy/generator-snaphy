@@ -111,6 +111,21 @@ public class DepartmentDb{
                         }
                                   
                                 
+                                                            double totalEarnedData;
+                        totalEarnedData = (double)modelData.getTotalEarned();
+                        values.put("`totalEarned`", totalEarnedData);
+                                  
+                                
+                                                            double totalRedeemedData;
+                        totalRedeemedData = (double)modelData.getTotalRedeemed();
+                        values.put("`totalRedeemed`", totalRedeemedData);
+                                  
+                                
+                                                            double totalBalanceData;
+                        totalBalanceData = (double)modelData.getTotalBalance();
+                        values.put("`totalBalance`", totalBalanceData);
+                                  
+                                
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String is_deletedData = "";
                         try {
@@ -134,6 +149,21 @@ public class DepartmentDb{
                                 //idData = modelData.getId().toString();
                                 idData = (String) method.invoke(modelData);
                                 values.put("`id`", idData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String retailerIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getRetailerId");
+                              if(method.invoke(modelData) != null){
+                                //retailerIdData = modelData.getRetailerId().toString();
+                                retailerIdData = (String) method.invoke(modelData);
+                                values.put("`retailerId`", retailerIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -275,9 +305,33 @@ public class DepartmentDb{
                         }
                                                 
                                 
+                                                            double totalEarnedData = (double)0;
+                          totalEarnedData = cursor.getInt(5);
+                          totalEarnedData = (double)totalEarnedData;
+                          hashMap.put("totalEarned", totalEarnedData);
+
+
+                                                
+                                
+                                                            double totalRedeemedData = (double)0;
+                          totalRedeemedData = cursor.getInt(6);
+                          totalRedeemedData = (double)totalRedeemedData;
+                          hashMap.put("totalRedeemed", totalRedeemedData);
+
+
+                                                
+                                
+                                                            double totalBalanceData = (double)0;
+                          totalBalanceData = cursor.getInt(7);
+                          totalBalanceData = (double)totalBalanceData;
+                          hashMap.put("totalBalance", totalBalanceData);
+
+
+                                                
+                                
                                                             String is_deletedData = "";
-                        if(cursor.getString(5) != null){
-                          is_deletedData = cursor.getString(5);
+                        if(cursor.getString(8) != null){
+                          is_deletedData = cursor.getString(8);
                           if(is_deletedData != null){
                             is_deletedData = is_deletedData.toString();
                             hashMap.put("is_deleted", is_deletedData);
@@ -286,11 +340,21 @@ public class DepartmentDb{
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(6) != null){
-                          idData = cursor.getString(6);
+                        if(cursor.getString(9) != null){
+                          idData = cursor.getString(9);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
+                          }
+                        }
+                                                
+                                
+                                                            String retailerIdData = "";
+                        if(cursor.getString(10) != null){
+                          retailerIdData = cursor.getString(10);
+                          if(retailerIdData != null){
+                            retailerIdData = retailerIdData.toString();
+                            hashMap.put("retailerId", retailerIdData);
                           }
                         }
                                                 

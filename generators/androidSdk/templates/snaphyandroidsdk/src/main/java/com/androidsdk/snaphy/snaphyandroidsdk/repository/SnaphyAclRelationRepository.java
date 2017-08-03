@@ -41,25 +41,32 @@ import org.json.JSONObject;
 
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.GoogleObject;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.SnaphyAclRelation;
 import android.content.Context;
-import com.androidsdk.snaphy.snaphyandroidsdk.db.GoogleObjectDb;
+import com.androidsdk.snaphy.snaphyandroidsdk.db.SnaphyAclRelationDb;
 
 //Now import model of related models..
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.SnaphyAcl;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.SnaphyAclRepository;
+            
+        
+    
 
 
 
 
-public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
+
+public class SnaphyAclRelationRepository extends ModelRepository<SnaphyAclRelation> {
 
 
     private Context context;
     private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
     private static String DATABASE_NAME;
 
-    public GoogleObjectRepository(){
-        super("GoogleObject", null, GoogleObject.class);
+    public SnaphyAclRelationRepository(){
+        super("SnaphyAclRelation", null, SnaphyAclRelation.class);
 
     }
 
@@ -77,15 +84,15 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
 
 
 
-    public GoogleObjectDb getDb() {
-      return googleObjectDb;
+    public SnaphyAclRelationDb getDb() {
+      return snaphyAclRelationDb;
     }
 
-    public void setGoogleObjectDb(GoogleObjectDb googleObjectDb) {
-      this.googleObjectDb = googleObjectDb;
+    public void setSnaphyAclRelationDb(SnaphyAclRelationDb snaphyAclRelationDb) {
+      this.snaphyAclRelationDb = snaphyAclRelationDb;
     }
 
-    private GoogleObjectDb googleObjectDb;
+    private SnaphyAclRelationDb snaphyAclRelationDb;
 
 
 
@@ -119,7 +126,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
          catch (Exception e){
             Log.e("Snaphy", e.toString());
          }
-         setGoogleObjectDb(new GoogleObjectDb(context, DATABASE_NAME, getRestAdapter()));
+         setSnaphyAclRelationDb(new SnaphyAclRelationDb(context, DATABASE_NAME, getRestAdapter()));
          //allow data storage locally..
          persistData(true);
          this.context = context;
@@ -133,7 +140,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "GoogleObject.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:snaphyAclRelationId/snaphyAcl", "GET"), "SnaphyAclRelation.prototype.__get__snaphyAcl");
     
 
     
@@ -142,7 +149,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "GoogleObject.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "SnaphyAclRelation.create");
     
 
     
@@ -151,7 +158,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "GoogleObject.upsert");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "SnaphyAclRelation.create");
     
 
     
@@ -160,7 +167,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "GoogleObject.exists");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "SnaphyAclRelation.upsert");
     
 
     
@@ -169,7 +176,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "GoogleObject.findById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "SnaphyAclRelation.exists");
     
 
     
@@ -178,7 +185,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "GoogleObject.find");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "SnaphyAclRelation.findById");
     
 
     
@@ -187,7 +194,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "GoogleObject.findOne");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "SnaphyAclRelation.find");
     
 
     
@@ -196,7 +203,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "GoogleObject.updateAll");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "SnaphyAclRelation.findOne");
     
 
     
@@ -205,7 +212,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "GoogleObject.deleteById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "SnaphyAclRelation.updateAll");
     
 
     
@@ -214,7 +221,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "GoogleObject.count");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "SnaphyAclRelation.deleteById");
     
 
     
@@ -223,19 +230,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:googleObjectId", "PUT"), "GoogleObject.prototype.updateAttributes");
-    
-
-    
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "GoogleObject.getSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "SnaphyAclRelation.count");
     
 
     
@@ -244,7 +239,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "GoogleObject.getAbsoluteSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:snaphyAclRelationId", "PUT"), "SnaphyAclRelation.prototype.updateAttributes");
     
 
     
@@ -256,7 +251,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "GoogleObject.getDetailSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "SnaphyAclRelation.getSchema");
     
 
     
@@ -265,7 +260,37 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "GoogleObject.getModelRelationSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "SnaphyAclRelation.getAbsoluteSchema");
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "SnaphyAclRelation.getDetailSchema");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "SnaphyAclRelation.getModelRelationSchema");
+    
+
+    
+    
+
+    
+    
+
+    
     
 
     
@@ -307,8 +332,93 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
 
     
         
+            //Method get__snaphyAcl definition
+            public void get__snaphyAcl(  String snaphyAclRelationId,  Boolean refresh, final ObjectCallback<SnaphyAcl> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("snaphyAclRelationId", snaphyAclRelationId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__snaphyAcl", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    SnaphyAclRepository snaphyAclRepo = getRestAdapter().createRepository(SnaphyAclRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = snaphyAclRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(snaphyAclRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //snaphyAclRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    SnaphyAcl snaphyAcl = snaphyAclRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = snaphyAcl.getClass().getMethod("save__db");
+                                                    method.invoke(snaphyAcl);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(snaphyAcl);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__snaphyAcl definition ends here..
+
+            
+
+        
+    
+        
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<GoogleObject> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<SnaphyAclRelation> callback){
 
                 /**
                 Call the onBefore event
@@ -342,27 +452,27 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    GoogleObjectRepository googleObjectRepo = getRestAdapter().createRepository(GoogleObjectRepository.class);
+                                    SnaphyAclRelationRepository snaphyAclRelationRepo = getRestAdapter().createRepository(SnaphyAclRelationRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = googleObjectRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(googleObjectRepo, context);
+                                            Method method = snaphyAclRelationRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(snaphyAclRelationRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //googleObjectRepo.addStorage(context);
+                                        //snaphyAclRelationRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    GoogleObject googleObject = googleObjectRepo.createObject(result);
+                                    SnaphyAclRelation snaphyAclRelation = snaphyAclRelationRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = googleObject.getClass().getMethod("save__db");
-                                                    method.invoke(googleObject);
+                                                    Method method = snaphyAclRelation.getClass().getMethod("save__db");
+                                                    method.invoke(snaphyAclRelation);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -370,7 +480,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
 
                                       }
 
-                                    callback.onSuccess(googleObject);
+                                    callback.onSuccess(snaphyAclRelation);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -392,7 +502,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<GoogleObject> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<SnaphyAclRelation> callback){
 
                 /**
                 Call the onBefore event
@@ -426,27 +536,27 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    GoogleObjectRepository googleObjectRepo = getRestAdapter().createRepository(GoogleObjectRepository.class);
+                                    SnaphyAclRelationRepository snaphyAclRelationRepo = getRestAdapter().createRepository(SnaphyAclRelationRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = googleObjectRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(googleObjectRepo, context);
+                                            Method method = snaphyAclRelationRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(snaphyAclRelationRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //googleObjectRepo.addStorage(context);
+                                        //snaphyAclRelationRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    GoogleObject googleObject = googleObjectRepo.createObject(result);
+                                    SnaphyAclRelation snaphyAclRelation = snaphyAclRelationRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = googleObject.getClass().getMethod("save__db");
-                                                    method.invoke(googleObject);
+                                                    Method method = snaphyAclRelation.getClass().getMethod("save__db");
+                                                    method.invoke(snaphyAclRelation);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -454,7 +564,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
 
                                       }
 
-                                    callback.onSuccess(googleObject);
+                                    callback.onSuccess(snaphyAclRelation);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -526,7 +636,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<GoogleObject> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<SnaphyAclRelation> callback){
 
                 /**
                 Call the onBefore event
@@ -562,27 +672,27 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    GoogleObjectRepository googleObjectRepo = getRestAdapter().createRepository(GoogleObjectRepository.class);
+                                    SnaphyAclRelationRepository snaphyAclRelationRepo = getRestAdapter().createRepository(SnaphyAclRelationRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = googleObjectRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(googleObjectRepo, context);
+                                            Method method = snaphyAclRelationRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(snaphyAclRelationRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //googleObjectRepo.addStorage(context);
+                                        //snaphyAclRelationRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    GoogleObject googleObject = googleObjectRepo.createObject(result);
+                                    SnaphyAclRelation snaphyAclRelation = snaphyAclRelationRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = googleObject.getClass().getMethod("save__db");
-                                                    method.invoke(googleObject);
+                                                    Method method = snaphyAclRelation.getClass().getMethod("save__db");
+                                                    method.invoke(snaphyAclRelation);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -590,7 +700,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
 
                                       }
 
-                                    callback.onSuccess(googleObject);
+                                    callback.onSuccess(snaphyAclRelation);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -611,7 +721,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<GoogleObject> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<SnaphyAclRelation> callback){
 
                 /**
                 Call the onBefore event
@@ -646,12 +756,12 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<GoogleObject> googleObjectList = new DataList<GoogleObject>();
-                                    GoogleObjectRepository googleObjectRepo = getRestAdapter().createRepository(GoogleObjectRepository.class);
+                                    DataList<SnaphyAclRelation> snaphyAclRelationList = new DataList<SnaphyAclRelation>();
+                                    SnaphyAclRelationRepository snaphyAclRelationRepo = getRestAdapter().createRepository(SnaphyAclRelationRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = googleObjectRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(googleObjectRepo, context);
+                                            Method method = snaphyAclRelationRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(snaphyAclRelationRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -659,23 +769,23 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        GoogleObject googleObject = googleObjectRepo.createObject(obj);
+                                        SnaphyAclRelation snaphyAclRelation = snaphyAclRelationRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = googleObject.getClass().getMethod("save__db");
-                                                      method.invoke(googleObject);
+                                                      Method method = snaphyAclRelation.getClass().getMethod("save__db");
+                                                      method.invoke(snaphyAclRelation);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        googleObjectList.add(googleObject);
+                                        snaphyAclRelationList.add(snaphyAclRelation);
                                     }
-                                    callback.onSuccess(googleObjectList);
+                                    callback.onSuccess(snaphyAclRelationList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -694,7 +804,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<GoogleObject> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<SnaphyAclRelation> callback){
 
                 /**
                 Call the onBefore event
@@ -728,27 +838,27 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    GoogleObjectRepository googleObjectRepo = getRestAdapter().createRepository(GoogleObjectRepository.class);
+                                    SnaphyAclRelationRepository snaphyAclRelationRepo = getRestAdapter().createRepository(SnaphyAclRelationRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = googleObjectRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(googleObjectRepo, context);
+                                            Method method = snaphyAclRelationRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(snaphyAclRelationRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //googleObjectRepo.addStorage(context);
+                                        //snaphyAclRelationRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    GoogleObject googleObject = googleObjectRepo.createObject(result);
+                                    SnaphyAclRelation snaphyAclRelation = snaphyAclRelationRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = googleObject.getClass().getMethod("save__db");
-                                                    method.invoke(googleObject);
+                                                    Method method = snaphyAclRelation.getClass().getMethod("save__db");
+                                                    method.invoke(snaphyAclRelation);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -756,7 +866,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
 
                                       }
 
-                                    callback.onSuccess(googleObject);
+                                    callback.onSuccess(snaphyAclRelation);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -932,7 +1042,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String googleObjectId,  Map<String,  ? extends Object> data, final ObjectCallback<GoogleObject> callback){
+            public void updateAttributes(  String snaphyAclRelationId,  Map<String,  ? extends Object> data, final ObjectCallback<SnaphyAclRelation> callback){
 
                 /**
                 Call the onBefore event
@@ -944,7 +1054,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("googleObjectId", googleObjectId);
+                        hashMapObject.put("snaphyAclRelationId", snaphyAclRelationId);
                 
                         hashMapObject.putAll(data);
                 
@@ -968,27 +1078,27 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    GoogleObjectRepository googleObjectRepo = getRestAdapter().createRepository(GoogleObjectRepository.class);
+                                    SnaphyAclRelationRepository snaphyAclRelationRepo = getRestAdapter().createRepository(SnaphyAclRelationRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = googleObjectRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(googleObjectRepo, context);
+                                            Method method = snaphyAclRelationRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(snaphyAclRelationRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //googleObjectRepo.addStorage(context);
+                                        //snaphyAclRelationRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    GoogleObject googleObject = googleObjectRepo.createObject(result);
+                                    SnaphyAclRelation snaphyAclRelation = snaphyAclRelationRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = googleObject.getClass().getMethod("save__db");
-                                                    method.invoke(googleObject);
+                                                    Method method = snaphyAclRelation.getClass().getMethod("save__db");
+                                                    method.invoke(snaphyAclRelation);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -996,7 +1106,7 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
 
                                       }
 
-                                    callback.onSuccess(googleObject);
+                                    callback.onSuccess(snaphyAclRelation);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1213,6 +1323,12 @@ public class GoogleObjectRepository extends ModelRepository<GoogleObject> {
 
             
 
+        
+    
+        
+    
+        
+    
         
     
         

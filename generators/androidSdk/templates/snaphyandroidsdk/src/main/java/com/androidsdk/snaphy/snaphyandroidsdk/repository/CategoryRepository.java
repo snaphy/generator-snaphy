@@ -48,8 +48,8 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.CategoryDb;
 //Now import model of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.HotDeal;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.HotDealRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Product;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ProductRepository;
             
         
     
@@ -140,7 +140,7 @@ public class CategoryRepository extends ModelRepository<Category> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/hotDeals/:fk", "GET"), "Category.prototype.__findById__hotDeals");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/products/:fk", "GET"), "Category.prototype.__findById__products");
     
 
     
@@ -149,7 +149,7 @@ public class CategoryRepository extends ModelRepository<Category> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/hotDeals/:fk", "DELETE"), "Category.prototype.__destroyById__hotDeals");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/products/:fk", "DELETE"), "Category.prototype.__destroyById__products");
     
 
     
@@ -158,7 +158,7 @@ public class CategoryRepository extends ModelRepository<Category> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/hotDeals/:fk", "PUT"), "Category.prototype.__updateById__hotDeals");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/products/:fk", "PUT"), "Category.prototype.__updateById__products");
     
 
     
@@ -167,7 +167,7 @@ public class CategoryRepository extends ModelRepository<Category> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/hotDeals", "GET"), "Category.prototype.__get__hotDeals");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/products", "GET"), "Category.prototype.__get__products");
     
 
     
@@ -176,7 +176,7 @@ public class CategoryRepository extends ModelRepository<Category> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/hotDeals", "POST"), "Category.prototype.__create__hotDeals");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/products", "POST"), "Category.prototype.__create__products");
     
 
     
@@ -185,7 +185,7 @@ public class CategoryRepository extends ModelRepository<Category> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/hotDeals", "DELETE"), "Category.prototype.__delete__hotDeals");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/products", "DELETE"), "Category.prototype.__delete__products");
     
 
     
@@ -194,7 +194,7 @@ public class CategoryRepository extends ModelRepository<Category> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/hotDeals/count", "GET"), "Category.prototype.__count__hotDeals");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:categoryId/products/count", "GET"), "Category.prototype.__count__products");
     
 
     
@@ -365,8 +365,8 @@ public class CategoryRepository extends ModelRepository<Category> {
 
     
         
-            //Method findById__hotDeals definition
-            public void findById__hotDeals(  String categoryId,  String fk, final ObjectCallback<HotDeal> callback){
+            //Method findById__products definition
+            public void findById__products(  String categoryId,  String fk, final ObjectCallback<Product> callback){
 
                 /**
                 Call the onBefore event
@@ -389,7 +389,7 @@ public class CategoryRepository extends ModelRepository<Category> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__hotDeals", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__products", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -402,27 +402,27 @@ public class CategoryRepository extends ModelRepository<Category> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    ProductRepository productRepo = getRestAdapter().createRepository(ProductRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(hotDealRepo, context);
+                                            Method method = productRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(productRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //hotDealRepo.addStorage(context);
+                                        //productRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    HotDeal hotDeal = hotDealRepo.createObject(result);
+                                    Product product = productRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = hotDeal.getClass().getMethod("save__db");
-                                                    method.invoke(hotDeal);
+                                                    Method method = product.getClass().getMethod("save__db");
+                                                    method.invoke(product);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -430,7 +430,7 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                                       }
 
-                                    callback.onSuccess(hotDeal);
+                                    callback.onSuccess(product);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -443,15 +443,15 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                 
 
-            }//Method findById__hotDeals definition ends here..
+            }//Method findById__products definition ends here..
 
             
 
         
     
         
-            //Method destroyById__hotDeals definition
-            public void destroyById__hotDeals(  String categoryId,  String fk, final VoidCallback callback){
+            //Method destroyById__products definition
+            public void destroyById__products(  String categoryId,  String fk, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -469,7 +469,7 @@ public class CategoryRepository extends ModelRepository<Category> {
                 
 
                 
-                    invokeStaticMethod("prototype.__destroyById__hotDeals", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroyById__products", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -491,15 +491,15 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                 
 
-            }//Method destroyById__hotDeals definition ends here..
+            }//Method destroyById__products definition ends here..
 
             
 
         
     
         
-            //Method updateById__hotDeals definition
-            public void updateById__hotDeals(  String categoryId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<HotDeal> callback){
+            //Method updateById__products definition
+            public void updateById__products(  String categoryId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Product> callback){
 
                 /**
                 Call the onBefore event
@@ -524,7 +524,7 @@ public class CategoryRepository extends ModelRepository<Category> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__hotDeals", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__products", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -537,27 +537,27 @@ public class CategoryRepository extends ModelRepository<Category> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    ProductRepository productRepo = getRestAdapter().createRepository(ProductRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(hotDealRepo, context);
+                                            Method method = productRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(productRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //hotDealRepo.addStorage(context);
+                                        //productRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    HotDeal hotDeal = hotDealRepo.createObject(result);
+                                    Product product = productRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = hotDeal.getClass().getMethod("save__db");
-                                                    method.invoke(hotDeal);
+                                                    Method method = product.getClass().getMethod("save__db");
+                                                    method.invoke(product);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -565,7 +565,7 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                                       }
 
-                                    callback.onSuccess(hotDeal);
+                                    callback.onSuccess(product);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -578,15 +578,15 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                 
 
-            }//Method updateById__hotDeals definition ends here..
+            }//Method updateById__products definition ends here..
 
             
 
         
     
         
-            //Method get__hotDeals definition
-            public void get__hotDeals(  String categoryId,  Map<String,  ? extends Object> filter, final DataListCallback<HotDeal> callback){
+            //Method get__products definition
+            public void get__products(  String categoryId,  Map<String,  ? extends Object> filter, final DataListCallback<Product> callback){
 
                 /**
                 Call the onBefore event
@@ -609,7 +609,7 @@ public class CategoryRepository extends ModelRepository<Category> {
                 
 
                 
-                    invokeStaticMethod("prototype.__get__hotDeals", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__products", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -623,12 +623,12 @@ public class CategoryRepository extends ModelRepository<Category> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<HotDeal> hotDealList = new DataList<HotDeal>();
-                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    DataList<Product> productList = new DataList<Product>();
+                                    ProductRepository productRepo = getRestAdapter().createRepository(ProductRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(hotDealRepo, context);
+                                            Method method = productRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(productRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -636,23 +636,23 @@ public class CategoryRepository extends ModelRepository<Category> {
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        HotDeal hotDeal = hotDealRepo.createObject(obj);
+                                        Product product = productRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = hotDeal.getClass().getMethod("save__db");
-                                                      method.invoke(hotDeal);
+                                                      Method method = product.getClass().getMethod("save__db");
+                                                      method.invoke(product);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        hotDealList.add(hotDeal);
+                                        productList.add(product);
                                     }
-                                    callback.onSuccess(hotDealList);
+                                    callback.onSuccess(productList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -663,15 +663,15 @@ public class CategoryRepository extends ModelRepository<Category> {
                     });
                 
 
-            }//Method get__hotDeals definition ends here..
+            }//Method get__products definition ends here..
 
             
 
         
     
         
-            //Method create__hotDeals definition
-            public void create__hotDeals(  String categoryId,  Map<String,  ? extends Object> data, final ObjectCallback<HotDeal> callback){
+            //Method create__products definition
+            public void create__products(  String categoryId,  Map<String,  ? extends Object> data, final ObjectCallback<Product> callback){
 
                 /**
                 Call the onBefore event
@@ -694,7 +694,7 @@ public class CategoryRepository extends ModelRepository<Category> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__hotDeals", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__products", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -707,27 +707,27 @@ public class CategoryRepository extends ModelRepository<Category> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    HotDealRepository hotDealRepo = getRestAdapter().createRepository(HotDealRepository.class);
+                                    ProductRepository productRepo = getRestAdapter().createRepository(ProductRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = hotDealRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(hotDealRepo, context);
+                                            Method method = productRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(productRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //hotDealRepo.addStorage(context);
+                                        //productRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    HotDeal hotDeal = hotDealRepo.createObject(result);
+                                    Product product = productRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = hotDeal.getClass().getMethod("save__db");
-                                                    method.invoke(hotDeal);
+                                                    Method method = product.getClass().getMethod("save__db");
+                                                    method.invoke(product);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -735,7 +735,7 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                                       }
 
-                                    callback.onSuccess(hotDeal);
+                                    callback.onSuccess(product);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -748,15 +748,15 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                 
 
-            }//Method create__hotDeals definition ends here..
+            }//Method create__products definition ends here..
 
             
 
         
     
         
-            //Method delete__hotDeals definition
-            public void delete__hotDeals(  String categoryId, final VoidCallback callback){
+            //Method delete__products definition
+            public void delete__products(  String categoryId, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -772,7 +772,7 @@ public class CategoryRepository extends ModelRepository<Category> {
                 
 
                 
-                    invokeStaticMethod("prototype.__delete__hotDeals", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__delete__products", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -794,15 +794,15 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                 
 
-            }//Method delete__hotDeals definition ends here..
+            }//Method delete__products definition ends here..
 
             
 
         
     
         
-            //Method count__hotDeals definition
-            public void count__hotDeals(  String categoryId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+            //Method count__products definition
+            public void count__products(  String categoryId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -824,7 +824,7 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                 
                     
-                    invokeStaticMethod("prototype.__count__hotDeals", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__products", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -847,7 +847,7 @@ public class CategoryRepository extends ModelRepository<Category> {
 
                 
 
-            }//Method count__hotDeals definition ends here..
+            }//Method count__products definition ends here..
 
             
 

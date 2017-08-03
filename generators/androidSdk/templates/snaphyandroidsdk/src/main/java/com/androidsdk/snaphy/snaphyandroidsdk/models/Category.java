@@ -31,7 +31,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.CategoryRepository;
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.HotDealRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ProductRepository;
             
 
         
@@ -136,6 +136,13 @@ public class Category extends Model {
             
         
     
+        
+            
+
+            
+            
+        
+    
 
 
     //------------------------------------Database Method---------------------------------------------------
@@ -213,33 +220,33 @@ public class Category extends Model {
                 
                     
                     //Define hasMany relation method here..
-                    private transient DataList<HotDeal>  hotDeals ;
+                    private transient DataList<Product>  products ;
 
-                    public DataList< HotDeal > getHotDeals() {
+                    public DataList< Product > getProducts() {
                         //Check for pure case of hasMany
                                                     //TODO: Modify foreign key name..
                           try{
-                            HotDealRepository hotDealRepository = (HotDealRepository) getRepository();
+                            ProductRepository productRepository = (ProductRepository) getRepository();
 
-                            if(that.getId() != null && hotDealRepository.getDb() != null){
+                            if(that.getId() != null && productRepository.getDb() != null){
 
                                  //Fetch locally from db
-                                 //hotDeals = getHotDeals__db(restAdapter);
+                                 //products = getProducts__db(restAdapter);
                                  // Getting single cont
-                                 hotDeals = hotDealRepository.getDb().getAll__db("categoryId", that.getId().toString());
+                                 products = productRepository.getDb().getAll__db("categoryId", that.getId().toString());
 
                                  //lowercaseFirstLetter(modelName)
                             }
                           }catch(Exception e){
                                 //Ignore
                           }
-                                                return hotDeals;
+                                                return products;
                     }
 
-                    public void setHotDeals(DataList<HotDeal> hotDeals) {
+                    public void setProducts(DataList<Product> products) {
                         boolean hashType = false;
                         DataList<HashMap<String, Object>> hashMaps = new DataList<>();
-                        for(Object o: hotDeals){
+                        for(Object o: products){
                             if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
@@ -248,11 +255,11 @@ public class Category extends Model {
                         }
 
                         if(hashType){
-                            setHotDeals1(hashMaps);
+                            setProducts1(hashMaps);
                         }else{
-                            this.hotDeals = hotDeals;
+                            this.products = products;
                             //TODO: Warning move this to new thread
-                            for(HotDeal data: hotDeals){
+                            for(Product data: products){
                               try{
                                 data.save__db();
                               } catch (NoSuchMethodError e) {
@@ -263,63 +270,63 @@ public class Category extends Model {
                     }
 
                 /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setHotDeals1(List<Map<String, Object>> hotDeals) {
+                    public void setProducts1(List<Map<String, Object>> products) {
                         //First create a dummy Repo class object for ..
-                        HotDealRepository hotDealsRepository = new HotDealRepository();
-                        List<HotDeal> result = new ArrayList<>();
-                        for (Map<String, Object> obj : hotDeals) {
+                        ProductRepository productsRepository = new ProductRepository();
+                        List<Product> result = new ArrayList<>();
+                        for (Map<String, Object> obj : products) {
                             //Also add relation to child type for two way communication..
-                            HotDeal obj1 = hotDealsRepository.createObject(obj);
+                            Product obj1 = productsRepository.createObject(obj);
                             result.add(obj1);
 
                         }
-                        setHotDeals(result);
+                        setProducts(result);
 
                     }
 
                 */
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setHotDeals1(DataList<HashMap<String, Object>> hotDeals) {
+                    public void setProducts1(DataList<HashMap<String, Object>> products) {
                         //First create a dummy Repo class object for ..
-                        HotDealRepository hotDealsRepository = new HotDealRepository();
-                        DataList<HotDeal> result = new DataList<>();
-                        for (HashMap<String, Object> obj : hotDeals) {
+                        ProductRepository productsRepository = new ProductRepository();
+                        DataList<Product> result = new DataList<>();
+                        for (HashMap<String, Object> obj : products) {
                             //Also add relation to child type for two way communication..
-                            HotDeal obj1 = hotDealsRepository.createObject(obj);
+                            Product obj1 = productsRepository.createObject(obj);
                             result.add(obj1);
 
                         }
-                        setHotDeals(result);
+                        setProducts(result);
 
                     }
 
 
                     //Adding relation method..
                     //Add a dummy class Name object to seperate data..
-                    public void addRelation(DataList<HotDeal> hotDeals, HotDeal dummyClassInstance) {
-                        that.setHotDeals(hotDeals);
+                    public void addRelation(DataList<Product> products, Product dummyClassInstance) {
+                        that.setProducts(products);
 
                     }
 
                     //Adding relation method..
                     //This will add a new data to the list relation object..
-                    public void addRelation(HotDeal hotDeals) {
+                    public void addRelation(Product products) {
                         try{
                             try{
 
                                   //Save to database..
-                                  hotDeals.save__db();
+                                  products.save__db();
                             }catch (NoSuchMethodError e) {
                               // ignore
                             }
-                            that.getHotDeals().add(hotDeals);
+                            that.getProducts().add(products);
                         }catch(Exception e){
-                            DataList< HotDeal> hotDeals1 = new DataList();
+                            DataList< Product> products1 = new DataList();
                             //Now add this item to list..
-                            hotDeals1.add(hotDeals);
+                            products1.add(products);
                             //Now set data....
-                            that.setHotDeals(hotDeals1);
+                            that.setProducts(products1);
                         }
                     }
 
@@ -345,7 +352,7 @@ public class Category extends Model {
                     
 
                                     //Write the method here..
-                                    public void findById__hotDeals( String fk,  RestAdapter restAdapter, final ObjectCallback<HotDeal> callback) {
+                                    public void findById__products( String fk,  RestAdapter restAdapter, final ObjectCallback<Product> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -359,13 +366,13 @@ public class Category extends Model {
 
 
 
-                                        categoryRepo.findById__hotDeals( (String)that.getId(), fk,  new ObjectCallback<HotDeal> (){
+                                        categoryRepo.findById__products( (String)that.getId(), fk,  new ObjectCallback<Product> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(HotDeal object) {
+                                                    public void onSuccess(Product object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -402,7 +409,7 @@ public class Category extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__hotDeals( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__products( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -416,7 +423,7 @@ public class Category extends Model {
 
 
 
-                                        categoryRepo.destroyById__hotDeals( (String)that.getId(), fk,  new VoidCallback (){
+                                        categoryRepo.destroyById__products( (String)that.getId(), fk,  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -446,7 +453,7 @@ public class Category extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__hotDeals( String fk,  HotDeal data,  RestAdapter restAdapter, final ObjectCallback<HotDeal> callback) {
+                                    public void updateById__products( String fk,  Product data,  RestAdapter restAdapter, final ObjectCallback<Product> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -463,13 +470,13 @@ public class Category extends Model {
 
 
 
-                                        categoryRepo.updateById__hotDeals( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<HotDeal> (){
+                                        categoryRepo.updateById__products( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Product> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(HotDeal object) {
+                                                    public void onSuccess(Product object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -506,7 +513,7 @@ public class Category extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__hotDeals( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<HotDeal> callback) {
+                                    public void get__products( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Product> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -520,7 +527,7 @@ public class Category extends Model {
 
 
 
-                                        categoryRepo.get__hotDeals( (String)that.getId(), filter,  new DataListCallback<HotDeal> (){
+                                        categoryRepo.get__products( (String)that.getId(), filter,  new DataListCallback<Product> (){
                                             
 
                                             
@@ -529,13 +536,13 @@ public class Category extends Model {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(DataList<HotDeal> object) {
+                                                    public void onSuccess(DataList<Product> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
-                                                            HotDeal obj = new HotDeal();
+                                                            Product obj = new Product();
                                                             addRelation(object, obj);
                                                             //Disabling two way communication for cyclic error..
-                                                            /*for (HotDeal obj : object) {
+                                                            /*for (Product obj : object) {
                                                                 //Also add relation to child type for two way communication..
                                                                 obj.addRelation(that);
                                                             }*/
@@ -568,7 +575,7 @@ public class Category extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__hotDeals( HotDeal data,  RestAdapter restAdapter, final ObjectCallback<HotDeal> callback) {
+                                    public void create__products( Product data,  RestAdapter restAdapter, final ObjectCallback<Product> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -582,13 +589,13 @@ public class Category extends Model {
 
 
 
-                                        categoryRepo.create__hotDeals( (String)that.getId(), data.convertMap(),  new ObjectCallback<HotDeal> (){
+                                        categoryRepo.create__products( (String)that.getId(), data.convertMap(),  new ObjectCallback<Product> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(HotDeal object) {
+                                                    public void onSuccess(Product object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -625,7 +632,7 @@ public class Category extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__hotDeals( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__products( RestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -636,7 +643,7 @@ public class Category extends Model {
 
 
 
-                                        categoryRepo.delete__hotDeals( (String)that.getId(),  new VoidCallback (){
+                                        categoryRepo.delete__products( (String)that.getId(),  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -666,7 +673,7 @@ public class Category extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__hotDeals( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__products( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -680,7 +687,7 @@ public class Category extends Model {
 
 
 
-                                        categoryRepo.count__hotDeals( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
+                                        categoryRepo.count__products( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             

@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
+import com.google.gson.LongSerializationPolicy;
 import com.google.gson.GsonBuilder;
 import android.database.Cursor;
 import java.lang.reflect.Method;
@@ -72,6 +73,15 @@ public class AdminEmailDb{
     public ContentValues getContentValues(AdminEmail modelData){
       ContentValues values = new ContentValues();
                        
+                                                            int is_deletedData = 0;
+                        if(modelData.getIs_deleted()){
+                          is_deletedData = 1;
+                        }else{
+                          is_deletedData = 0;
+                        }
+                        values.put("`is_deleted`", is_deletedData);
+                                  
+                                
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String toData = "";
                         try {
@@ -243,9 +253,19 @@ public class AdminEmailDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
+                                                            boolean is_deletedData = false;
+                        int tempis_deletedData = cursor.getInt(0);
+                        if( tempis_deletedData > 0){
+                          is_deletedData = true;
+                        }else{
+                          is_deletedData = false;
+                        }
+                        hashMap.put("is_deleted", is_deletedData);
+                                                
+                                
                                                             String toData = "";
-                        if(cursor.getString(0) != null){
-                          toData = cursor.getString(0);
+                        if(cursor.getString(1) != null){
+                          toData = cursor.getString(1);
                           if(toData != null){
                             toData = toData.toString();
                             hashMap.put("to", toData);
@@ -254,8 +274,8 @@ public class AdminEmailDb{
                                                 
                                 
                                                             String fromData = "";
-                        if(cursor.getString(1) != null){
-                          fromData = cursor.getString(1);
+                        if(cursor.getString(2) != null){
+                          fromData = cursor.getString(2);
                           if(fromData != null){
                             fromData = fromData.toString();
                             hashMap.put("from", fromData);
@@ -264,8 +284,8 @@ public class AdminEmailDb{
                                                 
                                 
                                                             String subjectData = "";
-                        if(cursor.getString(2) != null){
-                          subjectData = cursor.getString(2);
+                        if(cursor.getString(3) != null){
+                          subjectData = cursor.getString(3);
                           if(subjectData != null){
                             subjectData = subjectData.toString();
                             hashMap.put("subject", subjectData);
@@ -274,8 +294,8 @@ public class AdminEmailDb{
                                                 
                                 
                                                             String textData = "";
-                        if(cursor.getString(3) != null){
-                          textData = cursor.getString(3);
+                        if(cursor.getString(4) != null){
+                          textData = cursor.getString(4);
                           if(textData != null){
                             textData = textData.toString();
                             hashMap.put("text", textData);
@@ -284,8 +304,8 @@ public class AdminEmailDb{
                                                 
                                 
                                                             String htmlData = "";
-                        if(cursor.getString(4) != null){
-                          htmlData = cursor.getString(4);
+                        if(cursor.getString(5) != null){
+                          htmlData = cursor.getString(5);
                           if(htmlData != null){
                             htmlData = htmlData.toString();
                             hashMap.put("html", htmlData);
@@ -294,8 +314,8 @@ public class AdminEmailDb{
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(5) != null){
-                          idData = cursor.getString(5);
+                        if(cursor.getString(6) != null){
+                          idData = cursor.getString(6);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);

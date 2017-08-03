@@ -31,13 +31,8 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 
 
-//Replaced by Custom  Repo methods
-// import com.strongloop.android.loopback.UserRepository;
-import com.strongloop.android.loopback.AccessTokenRepository;
-import com.strongloop.android.loopback.AccessToken;
-import android.content.SharedPreferences;
-import org.json.JSONException;
-import android.content.Context;
+//Replaced by Custom ModelRepository method
+//import com.strongloop.android.loopback.ModelRepository;
 
 
 
@@ -55,11 +50,18 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.EmployeeDb;
     
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Department;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.DepartmentRepository;
+            
+        
+    
 
 
 
 
-public class EmployeeRepository extends UserRepository<Employee> {
+
+public class EmployeeRepository extends ModelRepository<Employee> {
 
 
     private Context context;
@@ -75,99 +77,6 @@ public class EmployeeRepository extends UserRepository<Employee> {
     public Context getContext(){
         return context;
     }
-
-
-    
-    		//Create public methods..
-    		public Employee cachedCurrentUser;
-            private Object currentUserId;
-            private boolean isCurrentUserIdLoaded;
-
-    		public Employee getCachedCurrentUser(){
-    			return cachedCurrentUser;
-    		}
-
-    		public void setCachedCurrentUser(Employee user){
-    			cachedCurrentUser = user;
-    		}
-
-    		/* public void setCurrentUserId(Object id){
-    			super.setCurrentUserId(id);
-    		} */
-
-            public void findCurrentUser(final ObjectCallback<Employee> callback){
-                //Call the onBefore method..
-                callback.onBefore();
-
-                if(getCurrentUserId() == null){
-                    callback.onSuccess(null);
-                    return;
-                }
-
-                HashMap<String, Object> hashMap = new HashMap<>();
-                this.findById((String)getCurrentUserId(), hashMap, new ObjectCallback<Employee>() {
-                    @Override
-                    public void onSuccess(Employee user){
-                        cachedCurrentUser = user;
-                        callback.onSuccess(user);
-                        //Call the finally method..
-                        callback.onFinally();
-                    }
-
-                    @Override
-                    public void onError(Throwable t){
-                        callback.onError(t);
-                        //Call the finally method..
-                        callback.onFinally();
-                    }
-                });
-            }
-
-            public Object getCurrentUserId(){
-                if(currentUserId != null){
-                  return currentUserId;
-                }
-                else{
-                  String json = getSharedPreferences().getString(PROPERTY_CURRENT_USER_ID, null);
-                  if(json == null){
-                      return null;
-                  }
-
-                  if(json.equals("[null]")){
-                      return null;
-                  }
-
-                  try{
-                      Object id = new JSONArray(json).get(0);
-                      return id;
-                  }catch(JSONException e){
-                      String msg = "Cannot parse user id '" + json + "'";
-                      Log.e("Snaphy", msg, e);
-                  }
-                }
-                return null;
-            }
-
-            public void setCurrentUserId(Object currentUserId){
-                this.currentUserId = currentUserId;
-                cachedCurrentUser = null;
-                saveCurrentUserId();
-            }
-
-            private void saveCurrentUserId(){
-                final SharedPreferences.Editor editor = getSharedPreferences().edit();
-                final String json = new JSONArray().put(getCurrentUserId()).toString();
-                editor.putString(PROPERTY_CURRENT_USER_ID, json);
-                editor.commit();
-            }
-
-
-            private SharedPreferences getSharedPreferences() {
-                return getApplicationContext().getSharedPreferences(
-                    SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
-            }
-
-
 
 
     
@@ -253,6 +162,15 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/accessTokens/:fk", "PUT"), "Employee.prototype.__updateById__accessTokens");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:employeeId/department", "GET"), "Employee.prototype.__get__department");
     
 
     
@@ -432,6 +350,15 @@ public class EmployeeRepository extends UserRepository<Employee> {
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAuthorisedRoles", "POST"), "Employee.getAuthorisedRoles");
+    
+
+    
+    
+
+    
+
+    
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Employee.getSchema");
     
 
@@ -463,6 +390,30 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "Employee.getModelRelationSchema");
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
     
 
     
@@ -703,6 +654,91 @@ public class EmployeeRepository extends UserRepository<Employee> {
                 
 
             }//Method updateById__accessTokens definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__department definition
+            public void get__department(  String employeeId,  Boolean refresh, final ObjectCallback<Department> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("employeeId", employeeId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__department", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    DepartmentRepository departmentRepo = getRestAdapter().createRepository(DepartmentRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = departmentRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(departmentRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //departmentRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Department department = departmentRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = department.getClass().getMethod("save__db");
+                                                    method.invoke(department);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(department);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__department definition ends here..
 
             
 
@@ -1838,6 +1874,52 @@ public class EmployeeRepository extends UserRepository<Employee> {
         
     
         
+            //Method getAuthorisedRoles definition
+            public void getAuthorisedRoles( final ObjectCallback<JSONArray> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("getAuthorisedRoles", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method getAuthorisedRoles definition ends here..
+
+            
+
+        
+    
+        
             //Method getSchema definition
             public void getSchema( final ObjectCallback<JSONObject>  callback ){
 
@@ -2033,6 +2115,22 @@ public class EmployeeRepository extends UserRepository<Employee> {
 
             
 
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
 

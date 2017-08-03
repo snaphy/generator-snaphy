@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
+import com.google.gson.LongSerializationPolicy;
 import com.google.gson.GsonBuilder;
 import android.database.Cursor;
 import java.lang.reflect.Method;
@@ -101,6 +102,51 @@ public class AmazonImageDb{
                           urlData = gson.toJson(modelData.getUrl(), HashMap.class);
                           values.put("`url`", urlData);
                         }
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String is_deletedData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getIs_deleted");
+                              if(method.invoke(modelData) != null){
+                                //is_deletedData = modelData.getIs_deleted().toString();
+                                is_deletedData = (String) method.invoke(modelData);
+                                values.put("`is_deleted`", is_deletedData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String addedData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getAdded");
+                              if(method.invoke(modelData) != null){
+                                //addedData = modelData.getAdded().toString();
+                                addedData = (String) method.invoke(modelData);
+                                values.put("`added`", addedData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String updatedData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getUpdated");
+                              if(method.invoke(modelData) != null){
+                                //updatedData = modelData.getUpdated().toString();
+                                updatedData = (String) method.invoke(modelData);
+                                values.put("`updated`", updatedData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
@@ -242,9 +288,39 @@ public class AmazonImageDb{
                         }
                                                 
                                 
-                                                            String idData = "";
+                                                            String is_deletedData = "";
                         if(cursor.getString(4) != null){
-                          idData = cursor.getString(4);
+                          is_deletedData = cursor.getString(4);
+                          if(is_deletedData != null){
+                            is_deletedData = is_deletedData.toString();
+                            hashMap.put("is_deleted", is_deletedData);
+                          }
+                        }
+                                                
+                                
+                                                            String addedData = "";
+                        if(cursor.getString(5) != null){
+                          addedData = cursor.getString(5);
+                          if(addedData != null){
+                            addedData = addedData.toString();
+                            hashMap.put("added", addedData);
+                          }
+                        }
+                                                
+                                
+                                                            String updatedData = "";
+                        if(cursor.getString(6) != null){
+                          updatedData = cursor.getString(6);
+                          if(updatedData != null){
+                            updatedData = updatedData.toString();
+                            hashMap.put("updated", updatedData);
+                          }
+                        }
+                                                
+                                
+                                                            String idData = "";
+                        if(cursor.getString(7) != null){
+                          idData = cursor.getString(7);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);

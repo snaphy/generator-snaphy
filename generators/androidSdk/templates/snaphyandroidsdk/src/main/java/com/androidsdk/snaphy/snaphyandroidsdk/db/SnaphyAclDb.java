@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
+import com.google.gson.LongSerializationPolicy;
 import com.google.gson.GsonBuilder;
 import android.database.Cursor;
 import java.lang.reflect.Method;
@@ -16,16 +17,16 @@ import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Comment;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.SnaphyAcl;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.CommentRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.SnaphyAclRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
 
-public class CommentDb{
+public class SnaphyAclDb{
 
     // All Static variables
     RestAdapter restAdapter;
@@ -40,25 +41,25 @@ public class CommentDb{
     // Contacts table name
     private static String TABLE;
 
-  public CommentDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+  public SnaphyAclDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     //super(context, DATABASE_NAME, null, DATABASE_VERSION);
     this.context = context;
     this.restAdapter = restAdapter;
-    TABLE = "Comment";
+    TABLE = "SnaphyAcl";
     this.DATABASE_NAME = DATABASE_NAME;
     SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
 
-    public void insert__db (final String id, final Comment modelData) {
+    public void insert__db (final String id, final SnaphyAcl modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
-                db.insert("`Comment`", null, values);
+                db.insert("`SnaphyAcl`", null, values);
                 //db.close(); // Closing database connection
             }
         }).start();
@@ -69,21 +70,78 @@ public class CommentDb{
 
 
 
-    public ContentValues getContentValues(Comment modelData){
+    public ContentValues getContentValues(SnaphyAcl modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String usernameData = "";
-                        if(modelData.getUsername() != null){
-                          usernameData = modelData.getUsername().toString();
-                          values.put("`username`", usernameData);
+                                                            String addedData = "";
+                        if(modelData.getAdded() != null){
+                          addedData = modelData.getAdded().toString();
+                          values.put("`added`", addedData);
                         }
                                   
                                 
-                                                            String descriptionData = "";
-                        if(modelData.getDescription() != null){
-                          descriptionData = modelData.getDescription().toString();
-                          values.put("`description`", descriptionData);
+                                                            String updatedData = "";
+                        if(modelData.getUpdated() != null){
+                          updatedData = modelData.getUpdated().toString();
+                          values.put("`updated`", updatedData);
                         }
+                                  
+                                
+                                                            String modelData = "";
+                        if(modelData.getModel() != null){
+                          modelData = modelData.getModel().toString();
+                          values.put("`model`", modelData);
+                        }
+                                  
+                                
+                                                            String readData = "";
+                        if(modelData.getRead() != null){
+                          readData = modelData.getRead().toString();
+                          values.put("`read`", readData);
+                        }
+                                  
+                                
+                                                            String createData = "";
+                        if(modelData.getCreate() != null){
+                          createData = modelData.getCreate().toString();
+                          values.put("`create`", createData);
+                        }
+                                  
+                                
+                                                            String editData = "";
+                        if(modelData.getEdit() != null){
+                          editData = modelData.getEdit().toString();
+                          values.put("`edit`", editData);
+                        }
+                                  
+                                
+                                                            String deleteData = "";
+                        if(modelData.getDelete() != null){
+                          deleteData = modelData.getDelete().toString();
+                          values.put("`delete`", deleteData);
+                        }
+                                  
+                                
+                                                            String roleData = "";
+                        if(modelData.getRole() != null){
+                          roleData = modelData.getRole().toString();
+                          values.put("`role`", roleData);
+                        }
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String is_deletedData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getIs_deleted");
+                              if(method.invoke(modelData) != null){
+                                //is_deletedData = modelData.getIs_deleted().toString();
+                                is_deletedData = (String) method.invoke(modelData);
+                                values.put("`is_deleted`", is_deletedData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
@@ -111,10 +169,10 @@ public class CommentDb{
 
 
     // Getting single c
-    public   Comment get__db(String id) {
+    public   SnaphyAcl get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("Comment", null, "id=?", new String[]{id}, null, null, null, null);
+            Cursor cursor = db.query("SnaphyAcl", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -123,9 +181,9 @@ public class CommentDb{
                     cursor.close();
                     //db.close(); // Closing database connection
                     if (hashMap != null) {
-                        CommentRepository repo = restAdapter.createRepository(CommentRepository.class);
+                        SnaphyAclRepository repo = restAdapter.createRepository(SnaphyAclRepository.class);
                         repo.addStorage(context);
-                        return (Comment)repo.createObject(hashMap);
+                        return (SnaphyAcl)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -144,10 +202,10 @@ public class CommentDb{
 
 
     // Getting single cont
-    public   Comment get__db(String whereKey, String whereKeyValue) {
+    public   SnaphyAcl get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("`Comment`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`SnaphyAcl`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -158,9 +216,9 @@ public class CommentDb{
                     //db.close(); // Closing database connection
 
                     if (hashMap != null) {
-                        CommentRepository repo = restAdapter.createRepository(CommentRepository.class);
+                        SnaphyAclRepository repo = restAdapter.createRepository(SnaphyAclRepository.class);
                         repo.addStorage(context);
-                        return (Comment)repo.createObject(hashMap);
+                        return (SnaphyAcl)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -182,29 +240,99 @@ public class CommentDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            String usernameData = "";
+                                                            String addedData = "";
                         if(cursor.getString(0) != null){
-                          usernameData = cursor.getString(0);
-                          if(usernameData != null){
-                            usernameData = (String)usernameData;
-                            hashMap.put("username", usernameData);
+                          addedData = cursor.getString(0);
+                          if(addedData != null){
+                            addedData = (String)addedData;
+                            hashMap.put("added", addedData);
                           }
                         }
                                                 
                                 
-                                                            String descriptionData = "";
+                                                            String updatedData = "";
                         if(cursor.getString(1) != null){
-                          descriptionData = cursor.getString(1);
-                          if(descriptionData != null){
-                            descriptionData = (String)descriptionData;
-                            hashMap.put("description", descriptionData);
+                          updatedData = cursor.getString(1);
+                          if(updatedData != null){
+                            updatedData = (String)updatedData;
+                            hashMap.put("updated", updatedData);
+                          }
+                        }
+                                                
+                                
+                                                            String modelData = "";
+                        if(cursor.getString(2) != null){
+                          modelData = cursor.getString(2);
+                          if(modelData != null){
+                            modelData = (String)modelData;
+                            hashMap.put("model", modelData);
+                          }
+                        }
+                                                
+                                
+                                                            String readData = "";
+                        if(cursor.getString(3) != null){
+                          readData = cursor.getString(3);
+                          if(readData != null){
+                            readData = (String)readData;
+                            hashMap.put("read", readData);
+                          }
+                        }
+                                                
+                                
+                                                            String createData = "";
+                        if(cursor.getString(4) != null){
+                          createData = cursor.getString(4);
+                          if(createData != null){
+                            createData = (String)createData;
+                            hashMap.put("create", createData);
+                          }
+                        }
+                                                
+                                
+                                                            String editData = "";
+                        if(cursor.getString(5) != null){
+                          editData = cursor.getString(5);
+                          if(editData != null){
+                            editData = (String)editData;
+                            hashMap.put("edit", editData);
+                          }
+                        }
+                                                
+                                
+                                                            String deleteData = "";
+                        if(cursor.getString(6) != null){
+                          deleteData = cursor.getString(6);
+                          if(deleteData != null){
+                            deleteData = (String)deleteData;
+                            hashMap.put("delete", deleteData);
+                          }
+                        }
+                                                
+                                
+                                                            String roleData = "";
+                        if(cursor.getString(7) != null){
+                          roleData = cursor.getString(7);
+                          if(roleData != null){
+                            roleData = (String)roleData;
+                            hashMap.put("role", roleData);
+                          }
+                        }
+                                                
+                                
+                                                            String is_deletedData = "";
+                        if(cursor.getString(8) != null){
+                          is_deletedData = cursor.getString(8);
+                          if(is_deletedData != null){
+                            is_deletedData = is_deletedData.toString();
+                            hashMap.put("is_deleted", is_deletedData);
                           }
                         }
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(2) != null){
-                          idData = cursor.getString(2);
+                        if(cursor.getString(9) != null){
+                          idData = cursor.getString(9);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -220,7 +348,7 @@ public class CommentDb{
 
 
 
-    public void upsert__db(String id, Comment model){
+    public void upsert__db(String id, SnaphyAcl model){
         if(count__db(id) != 0){
             update__db(id, model);
         }else{
@@ -231,25 +359,25 @@ public class CommentDb{
 
 
     // Getting All Contacts
-    public DataList<Comment>  getAll__db() {
-        DataList<Comment> modelList = new DataList<Comment>();
+    public DataList<SnaphyAcl>  getAll__db() {
+        DataList<SnaphyAcl> modelList = new DataList<SnaphyAcl>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `Comment`";
+        String selectQuery = "SELECT  * FROM `SnaphyAcl`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<Comment>) modelList;
+            return (DataList<SnaphyAcl>) modelList;
         }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    CommentRepository repo = restAdapter.createRepository(CommentRepository.class);
+                    SnaphyAclRepository repo = restAdapter.createRepository(SnaphyAclRepository.class);
                     repo.addStorage(context);
-                    modelList.add((Comment)repo.createObject(hashMap));
+                    modelList.add((SnaphyAcl)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }
@@ -258,7 +386,7 @@ public class CommentDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<Comment>) modelList;
+        return (DataList<SnaphyAcl>) modelList;
     }
 
 
@@ -359,19 +487,19 @@ public class CommentDb{
 
 
     // Getting All Data where
-    public DataList<Comment>  getAll__db(HashMap<String, Object> whereKeyValue) {
+    public DataList<SnaphyAcl>  getAll__db(HashMap<String, Object> whereKeyValue) {
         return getAll__db(whereKeyValue, null, 0);
     }
 
 
 
     // Getting All Data where and sort column according to date wise..
-    public DataList<Comment>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
-        DataList<Comment> modelList = new DataList<Comment>();
+    public DataList<SnaphyAcl>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
+        DataList<SnaphyAcl> modelList = new DataList<SnaphyAcl>();
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM `Comment` " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `SnaphyAcl` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit;
@@ -379,9 +507,9 @@ public class CommentDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                selectQuery = "SELECT  * FROM Comment " + whereQuery + " LIMIT " + limit;
+                selectQuery = "SELECT  * FROM SnaphyAcl " + whereQuery + " LIMIT " + limit;
             }else{
-                selectQuery = "SELECT  * FROM Comment " + whereQuery;
+                selectQuery = "SELECT  * FROM SnaphyAcl " + whereQuery;
             }
         }
 
@@ -392,15 +520,15 @@ public class CommentDb{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<Comment>) modelList;
+            return (DataList<SnaphyAcl>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    CommentRepository repo = restAdapter.createRepository(CommentRepository.class);
+                    SnaphyAclRepository repo = restAdapter.createRepository(SnaphyAclRepository.class);
                     repo.addStorage(context);
-                    modelList.add((Comment)repo.createObject(hashMap));
+                    modelList.add((SnaphyAcl)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
@@ -410,12 +538,12 @@ public class CommentDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<Comment>) modelList;
+        return (DataList<SnaphyAcl>) modelList;
     }
 
 
     // Getting All Data where
-    public DataList<Comment>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
+    public DataList<SnaphyAcl>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
         return getAll__db(whereKeyValue, null,  limit);
     }
 
@@ -434,7 +562,7 @@ public class CommentDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM `Comment` " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `SnaphyAcl` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit;
@@ -442,9 +570,9 @@ public class CommentDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM `Comment` " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `SnaphyAcl` " + whereQuery + " LIMIT " + limit;
             }else{
-                countQuery = "SELECT  * FROM `Comment` " + whereQuery;
+                countQuery = "SELECT  * FROM `SnaphyAcl` " + whereQuery;
             }
         }
 
@@ -467,9 +595,9 @@ public class CommentDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM `Comment` " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `SnaphyAcl` " + whereQuery + " LIMIT " + limit;
         }else{
-            countQuery = "SELECT  * FROM `Comment` " + whereQuery;
+            countQuery = "SELECT  * FROM `SnaphyAcl` " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -502,7 +630,7 @@ public class CommentDb{
                 values.put("_DATA_UPDATED", 0);
                 String where = getWhere(whereKeyValue);
                 // updating row
-                db.update("`Comment`", values, "_DATA_UPDATED = 1 AND " + where, null);
+                db.update("`SnaphyAcl`", values, "_DATA_UPDATED = 1 AND " + where, null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -520,7 +648,7 @@ public class CommentDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("`Comment`", "_DATA_UPDATED = 0 AND " + where , null);
+                db.delete("`SnaphyAcl`", "_DATA_UPDATED = 0 AND " + where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -541,7 +669,7 @@ public class CommentDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("`Comment`", where , null);
+                db.delete("`SnaphyAcl`", where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
             }
@@ -555,10 +683,10 @@ public class CommentDb{
 
 
     // Getting All Data where
-    public DataList<Comment>  getAll__db(String whereKey, String whereKeyValue) {
-        DataList<Comment> modelList = new DataList<Comment>();
+    public DataList<SnaphyAcl>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<SnaphyAcl> modelList = new DataList<SnaphyAcl>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `Comment` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String selectQuery = "SELECT  * FROM `SnaphyAcl` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -567,15 +695,15 @@ public class CommentDb{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<Comment>) modelList;
+            return (DataList<SnaphyAcl>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    CommentRepository repo = restAdapter.createRepository(CommentRepository.class);
+                    SnaphyAclRepository repo = restAdapter.createRepository(SnaphyAclRepository.class);
                     repo.addStorage(context);
-                    modelList.add((Comment)repo.createObject(hashMap));
+                    modelList.add((SnaphyAcl)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
@@ -585,7 +713,7 @@ public class CommentDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<Comment>) modelList;
+        return (DataList<SnaphyAcl>) modelList;
     }
 
 
@@ -597,7 +725,7 @@ public class CommentDb{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-        String countQuery = "SELECT  * FROM `Comment` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String countQuery = "SELECT  * FROM `SnaphyAcl` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -617,7 +745,7 @@ public class CommentDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("`Comment`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.update("`SnaphyAcl`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -633,7 +761,7 @@ public class CommentDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("`Comment`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.delete("`SnaphyAcl`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -644,7 +772,7 @@ public class CommentDb{
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final Comment modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final SnaphyAcl modelData ){
       new Thread(new Runnable(){
         @Override
         public void run(){
@@ -652,7 +780,7 @@ public class CommentDb{
           db.beginTransaction();
           ContentValues values = getContentValues(modelData);
           String where = getWhere(whereKeyValue);
-          db.update("`Comment`", values, where, null);
+          db.update("`SnaphyAcl`", values, where, null);
           db.setTransactionSuccessful();
           db.endTransaction();
           //db.close();
@@ -682,7 +810,7 @@ public class CommentDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final Comment modelData) {
+    public void update__db(final String id,   final SnaphyAcl modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -690,7 +818,7 @@ public class CommentDb{
                 db.beginTransaction();
                 ContentValues values = getContentValues(modelData);
                 // updating row
-                db.update("`Comment`", values, "id = ?",
+                db.update("`SnaphyAcl`", values, "id = ?",
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
@@ -711,7 +839,7 @@ public class CommentDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("`Comment`", values, "_DATA_UPDATED = 1", null);
+                db.update("`SnaphyAcl`", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -728,7 +856,7 @@ public class CommentDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("`Comment`", "_DATA_UPDATED = 0", null);
+                db.delete("`SnaphyAcl`", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();

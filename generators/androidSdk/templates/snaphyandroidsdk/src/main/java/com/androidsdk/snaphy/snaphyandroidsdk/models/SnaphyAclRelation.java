@@ -26,12 +26,12 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.DailyFeedRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.SnaphyAclRelationRepository;
 
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BrandRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.SnaphyAclRepository;
             
 
         
@@ -44,7 +44,7 @@ import java.util.Map;
 
 
 
-public class DailyFeed extends Model {
+public class SnaphyAclRelation extends Model {
 
 
     //For converting all model values to hashMap
@@ -59,9 +59,9 @@ public class DailyFeed extends Model {
         }
     }
 
-    private DailyFeed that ;
+    private SnaphyAclRelation that ;
 
-    public DailyFeed (){
+    public SnaphyAclRelation (){
         that = this;
     }
 
@@ -70,17 +70,17 @@ public class DailyFeed extends Model {
             
 
             
-                private String added;
+                private String relation;
                 /* Adding Getter and Setter methods */
-                public String getAdded(){
-                    return added;
+                public String getRelation(){
+                    return relation;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setAdded(String added){
-                    this.added = added;
+                public void setRelation(String relation){
+                    this.relation = relation;
                     //Update hashMap value..
-                    hashMap.put("added", added);
+                    hashMap.put("relation", relation);
                 }
 
             
@@ -91,17 +91,17 @@ public class DailyFeed extends Model {
             
 
             
-                private String updated;
+                private String execute;
                 /* Adding Getter and Setter methods */
-                public String getUpdated(){
-                    return updated;
+                public String getExecute(){
+                    return execute;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setUpdated(String updated){
-                    this.updated = updated;
+                public void setExecute(String execute){
+                    this.execute = execute;
                     //Update hashMap value..
-                    hashMap.put("updated", updated);
+                    hashMap.put("execute", execute);
                 }
 
             
@@ -112,20 +112,6 @@ public class DailyFeed extends Model {
             
 
             
-                private String title;
-                /* Adding Getter and Setter methods */
-                public String getTitle(){
-                    return title;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setTitle(String title){
-                    this.title = title;
-                    //Update hashMap value..
-                    hashMap.put("title", title);
-                }
-
-            
             
         
     
@@ -133,39 +119,11 @@ public class DailyFeed extends Model {
             
 
             
-                private String description;
-                /* Adding Getter and Setter methods */
-                public String getDescription(){
-                    return description;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setDescription(String description){
-                    this.description = description;
-                    //Update hashMap value..
-                    hashMap.put("description", description);
-                }
-
-            
             
         
     
         
             
-
-            
-                private Map<String, Object> image;
-                /* Adding Getter and Setter methods */
-                public Map<String, Object> getImage(){
-                    return image;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setImage(Map<String, Object> image){
-                    this.image = image;
-                    //Update Map value..
-                    hashMap.put("image", image);
-                }
 
             
             
@@ -198,7 +156,7 @@ public class DailyFeed extends Model {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      DailyFeedRepository lowercaseFirstLetterRepository = (DailyFeedRepository) getRepository();
+      SnaphyAclRelationRepository lowercaseFirstLetterRepository = (SnaphyAclRelationRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
@@ -213,7 +171,7 @@ public class DailyFeed extends Model {
 
 
     public void save__db(String id){
-      DailyFeedRepository lowercaseFirstLetterRepository = (DailyFeedRepository) getRepository();
+      SnaphyAclRelationRepository lowercaseFirstLetterRepository = (SnaphyAclRelationRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -224,7 +182,7 @@ public class DailyFeed extends Model {
 
 
     public void delete__db(){
-      DailyFeedRepository lowercaseFirstLetterRepository = (DailyFeedRepository) getRepository();
+      SnaphyAclRelationRepository lowercaseFirstLetterRepository = (SnaphyAclRelationRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
         if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -259,80 +217,80 @@ public class DailyFeed extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient Brand  brand ;
-                    private String brandId;
+                    private transient SnaphyAcl  snaphyAcl ;
+                    private String snaphyAclId;
 
-                    public String getBrandId(){
-                         return brandId;
+                    public String getSnaphyAclId(){
+                         return snaphyAclId;
                     }
 
-                    public void setBrandId(Object brandId){
-                        if(brandId != null){
-                          this.brandId = brandId.toString();
+                    public void setSnaphyAclId(Object snaphyAclId){
+                        if(snaphyAclId != null){
+                          this.snaphyAclId = snaphyAclId.toString();
                         }
                     }
 
-                    public Brand getBrand() {
+                    public SnaphyAcl getSnaphyAcl() {
                         try{
                           //Adding database method for fetching from relation if not present..
-                                      if(brand == null){
-                                        DailyFeedRepository dailyFeedRepository = (DailyFeedRepository) getRepository();
+                                      if(snaphyAcl == null){
+                                        SnaphyAclRelationRepository snaphyAclRelationRepository = (SnaphyAclRelationRepository) getRepository();
 
-                                        RestAdapter restAdapter = dailyFeedRepository.getRestAdapter();
+                                        RestAdapter restAdapter = snaphyAclRelationRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
-                                          brand = getBrand__db(restAdapter);
+                                          snaphyAcl = getSnaphyAcl__db(restAdapter);
                                         }
                                       }
                         }catch(Exception e){
                           //Ignore
                         }
 
-                        return brand;
+                        return snaphyAcl;
                     }
 
-                    public void setBrand(Brand brand) {
-                        this.brand = brand;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setBrand(Map<String, Object> brand) {
-                        //First create a dummy Repo class object for customer.
-                        BrandRepository brandRepository = new BrandRepository();
-                        Brand brand1 = brandRepository.createObject(brand);
-                        setBrand(brand1);
+                    public void setSnaphyAcl(SnaphyAcl snaphyAcl) {
+                        this.snaphyAcl = snaphyAcl;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setBrand(HashMap<String, Object> brand) {
+                    public void setSnaphyAcl(Map<String, Object> snaphyAcl) {
                         //First create a dummy Repo class object for customer.
-                        BrandRepository brandRepository = new BrandRepository();
-                        Brand brand1 = brandRepository.createObject(brand);
-                        setBrand(brand1);
+                        SnaphyAclRepository snaphyAclRepository = new SnaphyAclRepository();
+                        SnaphyAcl snaphyAcl1 = snaphyAclRepository.createObject(snaphyAcl);
+                        setSnaphyAcl(snaphyAcl1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setSnaphyAcl(HashMap<String, Object> snaphyAcl) {
+                        //First create a dummy Repo class object for customer.
+                        SnaphyAclRepository snaphyAclRepository = new SnaphyAclRepository();
+                        SnaphyAcl snaphyAcl1 = snaphyAclRepository.createObject(snaphyAcl);
+                        setSnaphyAcl(snaphyAcl1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Brand brand) {
-                        that.setBrand(brand);
+                    public void addRelation(SnaphyAcl snaphyAcl) {
+                        that.setSnaphyAcl(snaphyAcl);
                     }
 
 
-                    //Fetch related data from local database if present a brandId identifier as property for belongsTo
-                    public Brand getBrand__db(RestAdapter restAdapter){
-                      if(brandId != null){
-                        BrandRepository brandRepository = restAdapter.createRepository(BrandRepository.class);
+                    //Fetch related data from local database if present a snaphyAclId identifier as property for belongsTo
+                    public SnaphyAcl getSnaphyAcl__db(RestAdapter restAdapter){
+                      if(snaphyAclId != null){
+                        SnaphyAclRepository snaphyAclRepository = restAdapter.createRepository(SnaphyAclRepository.class);
                             try{
-                            DailyFeedRepository lowercaseFirstLetterRepository = (DailyFeedRepository) getRepository();
+                            SnaphyAclRelationRepository lowercaseFirstLetterRepository = (SnaphyAclRelationRepository) getRepository();
                                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                                if(brandRepository.getDb() == null ){
-                                                    brandRepository.addStorage(context);
+                                                if(snaphyAclRepository.getDb() == null ){
+                                                    snaphyAclRepository.addStorage(context);
                                                 }
 
-                                                if(context != null && brandRepository.getDb() != null){
-                                                    brandRepository.addStorage(context);
-                                                    Brand brand = (Brand) brandRepository.getDb().get__db(brandId);
-                                                    return brand;
+                                                if(context != null && snaphyAclRepository.getDb() != null){
+                                                    snaphyAclRepository.addStorage(context);
+                                                    SnaphyAcl snaphyAcl = (SnaphyAcl) snaphyAclRepository.getDb().get__db(snaphyAclId);
+                                                    return snaphyAcl;
                                                 }else{
                                                     return null;
                                                 }
@@ -365,12 +323,12 @@ public class DailyFeed extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__brand( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Brand> callback) {
+                                    public void get__snaphyAcl( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<SnaphyAcl> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final DailyFeedRepository  dailyFeedRepo = restAdapter.createRepository(DailyFeedRepository.class);
+                                        final SnaphyAclRelationRepository  snaphyAclRelationRepo = restAdapter.createRepository(SnaphyAclRelationRepository.class);
                                         
                                         
                                         
@@ -379,13 +337,13 @@ public class DailyFeed extends Model {
 
 
 
-                                        dailyFeedRepo.get__brand( (String)that.getId(), refresh,  new ObjectCallback<Brand> (){
+                                        snaphyAclRelationRepo.get__snaphyAcl( (String)that.getId(), refresh,  new ObjectCallback<SnaphyAcl> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Brand object) {
+                                                    public void onSuccess(SnaphyAcl object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);

@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
 import java.util.HashMap;
 import com.google.gson.Gson;
+import com.google.gson.LongSerializationPolicy;
 import com.google.gson.GsonBuilder;
 import android.database.Cursor;
 import java.lang.reflect.Method;
@@ -16,16 +17,16 @@ import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.HotDeal;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.QrCodeGroup;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.HotDealRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.QrCodeGroupRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
 
-public class HotDealDb{
+public class QrCodeGroupDb{
 
     // All Static variables
     RestAdapter restAdapter;
@@ -40,25 +41,25 @@ public class HotDealDb{
     // Contacts table name
     private static String TABLE;
 
-  public HotDealDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+  public QrCodeGroupDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     //super(context, DATABASE_NAME, null, DATABASE_VERSION);
     this.context = context;
     this.restAdapter = restAdapter;
-    TABLE = "HotDeal";
+    TABLE = "QrCodeGroup";
     this.DATABASE_NAME = DATABASE_NAME;
     SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
 
-    public void insert__db (final String id, final HotDeal modelData) {
+    public void insert__db (final String id, final QrCodeGroup modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 // Inserting Row
                 ContentValues values = getContentValues(modelData);
-                db.insert("`HotDeal`", null, values);
+                db.insert("`QrCodeGroup`", null, values);
                 //db.close(); // Closing database connection
             }
         }).start();
@@ -69,56 +70,13 @@ public class HotDealDb{
 
 
 
-    public ContentValues getContentValues(HotDeal modelData){
+    public ContentValues getContentValues(QrCodeGroup modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String titleData = "";
-                        if(modelData.getTitle() != null){
-                          titleData = modelData.getTitle().toString();
-                          values.put("`title`", titleData);
-                        }
-                                  
-                                
-                                                            String descriptionData = "";
-                        if(modelData.getDescription() != null){
-                          descriptionData = modelData.getDescription().toString();
-                          values.put("`description`", descriptionData);
-                        }
-                                  
-                                
-                                                            String imageData = "";
-                        if(modelData.getImage() != null){
-                          GsonBuilder gsonBuilder = new GsonBuilder();
-                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-                          Gson gson = gsonBuilder.create();
-                          imageData = gson.toJson(modelData.getImage(), HashMap.class);
-                          values.put("`image`", imageData);
-                        }
-                                  
-                                
-                                                            String urlData = "";
-                        if(modelData.getUrl() != null){
-                          urlData = modelData.getUrl().toString();
-                          values.put("`url`", urlData);
-                        }
-                                  
-                                
-                                                            double priceData;
-                        priceData = (double)modelData.getPrice();
-                        values.put("`price`", priceData);
-                                  
-                                
-                                                            String statusData = "";
-                        if(modelData.getStatus() != null){
-                          statusData = modelData.getStatus().toString();
-                          values.put("`status`", statusData);
-                        }
-                                  
-                                
-                                                            String expiryDateData = "";
-                        if(modelData.getExpiryDate() != null){
-                          expiryDateData = modelData.getExpiryDate().toString();
-                          values.put("`expiryDate`", expiryDateData);
+                                                            String group_numberData = "";
+                        if(modelData.getGroup_number() != null){
+                          group_numberData = modelData.getGroup_number().toString();
+                          values.put("`group_number`", group_numberData);
                         }
                                   
                                 
@@ -134,6 +92,40 @@ public class HotDealDb{
                           updatedData = modelData.getUpdated().toString();
                           values.put("`updated`", updatedData);
                         }
+                                  
+                                
+                                                            double total_generatedData;
+                        total_generatedData = (double)modelData.getTotal_generated();
+                        values.put("`total_generated`", total_generatedData);
+                                  
+                                
+                                                            String active_onData = "";
+                        if(modelData.getActive_on() != null){
+                          active_onData = modelData.getActive_on().toString();
+                          values.put("`active_on`", active_onData);
+                        }
+                                  
+                                
+                                                            String activation_statusData = "";
+                        if(modelData.getActivation_status() != null){
+                          activation_statusData = modelData.getActivation_status().toString();
+                          values.put("`activation_status`", activation_statusData);
+                        }
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String is_deletedData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getIs_deleted");
+                              if(method.invoke(modelData) != null){
+                                //is_deletedData = modelData.getIs_deleted().toString();
+                                is_deletedData = (String) method.invoke(modelData);
+                                values.put("`is_deleted`", is_deletedData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
@@ -152,13 +144,13 @@ public class HotDealDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String categoryIdData = "";
+                        String departmentIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getCategoryId");
+                              Method method = modelData.getClass().getMethod("getDepartmentId");
                               if(method.invoke(modelData) != null){
-                                //categoryIdData = modelData.getCategoryId().toString();
-                                categoryIdData = (String) method.invoke(modelData);
-                                values.put("`categoryId`", categoryIdData);
+                                //departmentIdData = modelData.getDepartmentId().toString();
+                                departmentIdData = (String) method.invoke(modelData);
+                                values.put("`departmentId`", departmentIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -167,13 +159,13 @@ public class HotDealDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String brandIdData = "";
+                        String productIdData = "";
                         try {
-                              Method method = modelData.getClass().getMethod("getBrandId");
+                              Method method = modelData.getClass().getMethod("getProductId");
                               if(method.invoke(modelData) != null){
-                                //brandIdData = modelData.getBrandId().toString();
-                                brandIdData = (String) method.invoke(modelData);
-                                values.put("`brandId`", brandIdData);
+                                //productIdData = modelData.getProductId().toString();
+                                productIdData = (String) method.invoke(modelData);
+                                values.put("`productId`", productIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -191,10 +183,10 @@ public class HotDealDb{
 
 
     // Getting single c
-    public   HotDeal get__db(String id) {
+    public   QrCodeGroup get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("HotDeal", null, "id=?", new String[]{id}, null, null, null, null);
+            Cursor cursor = db.query("QrCodeGroup", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -203,9 +195,9 @@ public class HotDealDb{
                     cursor.close();
                     //db.close(); // Closing database connection
                     if (hashMap != null) {
-                        HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
+                        QrCodeGroupRepository repo = restAdapter.createRepository(QrCodeGroupRepository.class);
                         repo.addStorage(context);
-                        return (HotDeal)repo.createObject(hashMap);
+                        return (QrCodeGroup)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -224,10 +216,10 @@ public class HotDealDb{
 
 
     // Getting single cont
-    public   HotDeal get__db(String whereKey, String whereKeyValue) {
+    public   QrCodeGroup get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("`HotDeal`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`QrCodeGroup`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -238,9 +230,9 @@ public class HotDealDb{
                     //db.close(); // Closing database connection
 
                     if (hashMap != null) {
-                        HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
+                        QrCodeGroupRepository repo = restAdapter.createRepository(QrCodeGroupRepository.class);
                         repo.addStorage(context);
-                        return (HotDeal)repo.createObject(hashMap);
+                        return (QrCodeGroup)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -262,80 +254,19 @@ public class HotDealDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            String titleData = "";
+                                                            String group_numberData = "";
                         if(cursor.getString(0) != null){
-                          titleData = cursor.getString(0);
-                          if(titleData != null){
-                            titleData = (String)titleData;
-                            hashMap.put("title", titleData);
-                          }
-                        }
-                                                
-                                
-                                                            String descriptionData = "";
-                        if(cursor.getString(1) != null){
-                          descriptionData = cursor.getString(1);
-                          if(descriptionData != null){
-                            descriptionData = (String)descriptionData;
-                            hashMap.put("description", descriptionData);
-                          }
-                        }
-                                                
-                                
-                                                            Map<String, Object> imageData = new HashMap<>();
-                        if(cursor.getString(2) != null){
-                          GsonBuilder gsonBuilder = new GsonBuilder();
-                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-                          Gson gson = gsonBuilder.create();
-                           imageData = gson.fromJson(cursor.getString(2), Map.class);
-                          if(imageData != null){
-                            imageData = (Map<String, Object>)imageData;
-                            hashMap.put("image", imageData);
-                          }
-                        }
-                                                
-                                
-                                                            String urlData = "";
-                        if(cursor.getString(3) != null){
-                          urlData = cursor.getString(3);
-                          if(urlData != null){
-                            urlData = (String)urlData;
-                            hashMap.put("url", urlData);
-                          }
-                        }
-                                                
-                                
-                                                            double priceData = (double)0;
-                          priceData = cursor.getInt(4);
-                          priceData = (double)priceData;
-                          hashMap.put("price", priceData);
-
-
-                                                
-                                
-                                                            String statusData = "";
-                        if(cursor.getString(5) != null){
-                          statusData = cursor.getString(5);
-                          if(statusData != null){
-                            statusData = (String)statusData;
-                            hashMap.put("status", statusData);
-                          }
-                        }
-                                                
-                                
-                                                            String expiryDateData = "";
-                        if(cursor.getString(6) != null){
-                          expiryDateData = cursor.getString(6);
-                          if(expiryDateData != null){
-                            expiryDateData = (String)expiryDateData;
-                            hashMap.put("expiryDate", expiryDateData);
+                          group_numberData = cursor.getString(0);
+                          if(group_numberData != null){
+                            group_numberData = (String)group_numberData;
+                            hashMap.put("group_number", group_numberData);
                           }
                         }
                                                 
                                 
                                                             String addedData = "";
-                        if(cursor.getString(7) != null){
-                          addedData = cursor.getString(7);
+                        if(cursor.getString(1) != null){
+                          addedData = cursor.getString(1);
                           if(addedData != null){
                             addedData = (String)addedData;
                             hashMap.put("added", addedData);
@@ -344,8 +275,8 @@ public class HotDealDb{
                                                 
                                 
                                                             String updatedData = "";
-                        if(cursor.getString(8) != null){
-                          updatedData = cursor.getString(8);
+                        if(cursor.getString(2) != null){
+                          updatedData = cursor.getString(2);
                           if(updatedData != null){
                             updatedData = (String)updatedData;
                             hashMap.put("updated", updatedData);
@@ -353,9 +284,47 @@ public class HotDealDb{
                         }
                                                 
                                 
+                                                            double total_generatedData = (double)0;
+                          total_generatedData = cursor.getInt(3);
+                          total_generatedData = (double)total_generatedData;
+                          hashMap.put("total_generated", total_generatedData);
+
+
+                                                
+                                
+                                                            String active_onData = "";
+                        if(cursor.getString(4) != null){
+                          active_onData = cursor.getString(4);
+                          if(active_onData != null){
+                            active_onData = (String)active_onData;
+                            hashMap.put("active_on", active_onData);
+                          }
+                        }
+                                                
+                                
+                                                            String activation_statusData = "";
+                        if(cursor.getString(5) != null){
+                          activation_statusData = cursor.getString(5);
+                          if(activation_statusData != null){
+                            activation_statusData = (String)activation_statusData;
+                            hashMap.put("activation_status", activation_statusData);
+                          }
+                        }
+                                                
+                                
+                                                            String is_deletedData = "";
+                        if(cursor.getString(6) != null){
+                          is_deletedData = cursor.getString(6);
+                          if(is_deletedData != null){
+                            is_deletedData = is_deletedData.toString();
+                            hashMap.put("is_deleted", is_deletedData);
+                          }
+                        }
+                                                
+                                
                                                             String idData = "";
-                        if(cursor.getString(9) != null){
-                          idData = cursor.getString(9);
+                        if(cursor.getString(7) != null){
+                          idData = cursor.getString(7);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -363,22 +332,22 @@ public class HotDealDb{
                         }
                                                 
                                 
-                                                            String categoryIdData = "";
-                        if(cursor.getString(10) != null){
-                          categoryIdData = cursor.getString(10);
-                          if(categoryIdData != null){
-                            categoryIdData = categoryIdData.toString();
-                            hashMap.put("categoryId", categoryIdData);
+                                                            String departmentIdData = "";
+                        if(cursor.getString(8) != null){
+                          departmentIdData = cursor.getString(8);
+                          if(departmentIdData != null){
+                            departmentIdData = departmentIdData.toString();
+                            hashMap.put("departmentId", departmentIdData);
                           }
                         }
                                                 
                                 
-                                                            String brandIdData = "";
-                        if(cursor.getString(11) != null){
-                          brandIdData = cursor.getString(11);
-                          if(brandIdData != null){
-                            brandIdData = brandIdData.toString();
-                            hashMap.put("brandId", brandIdData);
+                                                            String productIdData = "";
+                        if(cursor.getString(9) != null){
+                          productIdData = cursor.getString(9);
+                          if(productIdData != null){
+                            productIdData = productIdData.toString();
+                            hashMap.put("productId", productIdData);
                           }
                         }
                                                 
@@ -391,7 +360,7 @@ public class HotDealDb{
 
 
 
-    public void upsert__db(String id, HotDeal model){
+    public void upsert__db(String id, QrCodeGroup model){
         if(count__db(id) != 0){
             update__db(id, model);
         }else{
@@ -402,25 +371,25 @@ public class HotDealDb{
 
 
     // Getting All Contacts
-    public DataList<HotDeal>  getAll__db() {
-        DataList<HotDeal> modelList = new DataList<HotDeal>();
+    public DataList<QrCodeGroup>  getAll__db() {
+        DataList<QrCodeGroup> modelList = new DataList<QrCodeGroup>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `HotDeal`";
+        String selectQuery = "SELECT  * FROM `QrCodeGroup`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<HotDeal>) modelList;
+            return (DataList<QrCodeGroup>) modelList;
         }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
+                    QrCodeGroupRepository repo = restAdapter.createRepository(QrCodeGroupRepository.class);
                     repo.addStorage(context);
-                    modelList.add((HotDeal)repo.createObject(hashMap));
+                    modelList.add((QrCodeGroup)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }
@@ -429,7 +398,7 @@ public class HotDealDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<HotDeal>) modelList;
+        return (DataList<QrCodeGroup>) modelList;
     }
 
 
@@ -530,19 +499,19 @@ public class HotDealDb{
 
 
     // Getting All Data where
-    public DataList<HotDeal>  getAll__db(HashMap<String, Object> whereKeyValue) {
+    public DataList<QrCodeGroup>  getAll__db(HashMap<String, Object> whereKeyValue) {
         return getAll__db(whereKeyValue, null, 0);
     }
 
 
 
     // Getting All Data where and sort column according to date wise..
-    public DataList<HotDeal>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
-        DataList<HotDeal> modelList = new DataList<HotDeal>();
+    public DataList<QrCodeGroup>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
+        DataList<QrCodeGroup> modelList = new DataList<QrCodeGroup>();
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM `HotDeal` " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `QrCodeGroup` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit;
@@ -550,9 +519,9 @@ public class HotDealDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                selectQuery = "SELECT  * FROM HotDeal " + whereQuery + " LIMIT " + limit;
+                selectQuery = "SELECT  * FROM QrCodeGroup " + whereQuery + " LIMIT " + limit;
             }else{
-                selectQuery = "SELECT  * FROM HotDeal " + whereQuery;
+                selectQuery = "SELECT  * FROM QrCodeGroup " + whereQuery;
             }
         }
 
@@ -563,15 +532,15 @@ public class HotDealDb{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<HotDeal>) modelList;
+            return (DataList<QrCodeGroup>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
+                    QrCodeGroupRepository repo = restAdapter.createRepository(QrCodeGroupRepository.class);
                     repo.addStorage(context);
-                    modelList.add((HotDeal)repo.createObject(hashMap));
+                    modelList.add((QrCodeGroup)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
@@ -581,12 +550,12 @@ public class HotDealDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<HotDeal>) modelList;
+        return (DataList<QrCodeGroup>) modelList;
     }
 
 
     // Getting All Data where
-    public DataList<HotDeal>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
+    public DataList<QrCodeGroup>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
         return getAll__db(whereKeyValue, null,  limit);
     }
 
@@ -605,7 +574,7 @@ public class HotDealDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM `HotDeal` " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `QrCodeGroup` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit;
@@ -613,9 +582,9 @@ public class HotDealDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM `HotDeal` " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `QrCodeGroup` " + whereQuery + " LIMIT " + limit;
             }else{
-                countQuery = "SELECT  * FROM `HotDeal` " + whereQuery;
+                countQuery = "SELECT  * FROM `QrCodeGroup` " + whereQuery;
             }
         }
 
@@ -638,9 +607,9 @@ public class HotDealDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM `HotDeal` " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `QrCodeGroup` " + whereQuery + " LIMIT " + limit;
         }else{
-            countQuery = "SELECT  * FROM `HotDeal` " + whereQuery;
+            countQuery = "SELECT  * FROM `QrCodeGroup` " + whereQuery;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -673,7 +642,7 @@ public class HotDealDb{
                 values.put("_DATA_UPDATED", 0);
                 String where = getWhere(whereKeyValue);
                 // updating row
-                db.update("`HotDeal`", values, "_DATA_UPDATED = 1 AND " + where, null);
+                db.update("`QrCodeGroup`", values, "_DATA_UPDATED = 1 AND " + where, null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -691,7 +660,7 @@ public class HotDealDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("`HotDeal`", "_DATA_UPDATED = 0 AND " + where , null);
+                db.delete("`QrCodeGroup`", "_DATA_UPDATED = 0 AND " + where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -712,7 +681,7 @@ public class HotDealDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("`HotDeal`", where , null);
+                db.delete("`QrCodeGroup`", where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
             }
@@ -726,10 +695,10 @@ public class HotDealDb{
 
 
     // Getting All Data where
-    public DataList<HotDeal>  getAll__db(String whereKey, String whereKeyValue) {
-        DataList<HotDeal> modelList = new DataList<HotDeal>();
+    public DataList<QrCodeGroup>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<QrCodeGroup> modelList = new DataList<QrCodeGroup>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `HotDeal` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String selectQuery = "SELECT  * FROM `QrCodeGroup` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -738,15 +707,15 @@ public class HotDealDb{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<HotDeal>) modelList;
+            return (DataList<QrCodeGroup>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    HotDealRepository repo = restAdapter.createRepository(HotDealRepository.class);
+                    QrCodeGroupRepository repo = restAdapter.createRepository(QrCodeGroupRepository.class);
                     repo.addStorage(context);
-                    modelList.add((HotDeal)repo.createObject(hashMap));
+                    modelList.add((QrCodeGroup)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
@@ -756,7 +725,7 @@ public class HotDealDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<HotDeal>) modelList;
+        return (DataList<QrCodeGroup>) modelList;
     }
 
 
@@ -768,7 +737,7 @@ public class HotDealDb{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-        String countQuery = "SELECT  * FROM `HotDeal` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String countQuery = "SELECT  * FROM `QrCodeGroup` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -788,7 +757,7 @@ public class HotDealDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("`HotDeal`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.update("`QrCodeGroup`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -804,7 +773,7 @@ public class HotDealDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("`HotDeal`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.delete("`QrCodeGroup`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -815,7 +784,7 @@ public class HotDealDb{
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final HotDeal modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final QrCodeGroup modelData ){
       new Thread(new Runnable(){
         @Override
         public void run(){
@@ -823,7 +792,7 @@ public class HotDealDb{
           db.beginTransaction();
           ContentValues values = getContentValues(modelData);
           String where = getWhere(whereKeyValue);
-          db.update("`HotDeal`", values, where, null);
+          db.update("`QrCodeGroup`", values, where, null);
           db.setTransactionSuccessful();
           db.endTransaction();
           //db.close();
@@ -853,7 +822,7 @@ public class HotDealDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final HotDeal modelData) {
+    public void update__db(final String id,   final QrCodeGroup modelData) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -861,7 +830,7 @@ public class HotDealDb{
                 db.beginTransaction();
                 ContentValues values = getContentValues(modelData);
                 // updating row
-                db.update("`HotDeal`", values, "id = ?",
+                db.update("`QrCodeGroup`", values, "id = ?",
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
@@ -882,7 +851,7 @@ public class HotDealDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("`HotDeal`", values, "_DATA_UPDATED = 1", null);
+                db.update("`QrCodeGroup`", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -899,7 +868,7 @@ public class HotDealDb{
             public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("`HotDeal`", "_DATA_UPDATED = 0", null);
+                db.delete("`QrCodeGroup`", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();

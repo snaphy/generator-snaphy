@@ -434,7 +434,7 @@ public class CustomerRepository extends ModelRepository<Customer> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/loginWithGoogle", "POST"), "Customer.loginWithGoogle");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/requestOtp", "POST"), "Customer.requestOtp");
     
 
     
@@ -443,7 +443,7 @@ public class CustomerRepository extends ModelRepository<Customer> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/loginWithFb", "POST"), "Customer.loginWithFb");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/retryOtp", "POST"), "Customer.retryOtp");
     
 
     
@@ -452,7 +452,7 @@ public class CustomerRepository extends ModelRepository<Customer> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/loginWithInstagram", "POST"), "Customer.loginWithInstagram");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/loginWithOtp", "POST"), "Customer.loginWithOtp");
     
 
     
@@ -2478,8 +2478,8 @@ public class CustomerRepository extends ModelRepository<Customer> {
         
     
         
-            //Method loginWithGoogle definition
-            public void loginWithGoogle(  String accessToken, final ObjectCallback<JSONObject>  callback ){
+            //Method requestOtp definition
+            public void requestOtp(  String number, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -2491,7 +2491,7 @@ public class CustomerRepository extends ModelRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("accessToken", accessToken);
+                        hashMapObject.put("number", number);
                 
 
                 
@@ -2499,7 +2499,7 @@ public class CustomerRepository extends ModelRepository<Customer> {
 
                 
                     
-                    invokeStaticMethod("loginWithGoogle", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("requestOtp", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2522,15 +2522,15 @@ public class CustomerRepository extends ModelRepository<Customer> {
 
                 
 
-            }//Method loginWithGoogle definition ends here..
+            }//Method requestOtp definition ends here..
 
             
 
         
     
         
-            //Method loginWithFb definition
-            public void loginWithFb(  String external_access_token, final ObjectCallback<JSONObject>  callback ){
+            //Method retryOtp definition
+            public void retryOtp(  String number, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -2542,7 +2542,7 @@ public class CustomerRepository extends ModelRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("external_access_token", external_access_token);
+                        hashMapObject.put("number", number);
                 
 
                 
@@ -2550,7 +2550,7 @@ public class CustomerRepository extends ModelRepository<Customer> {
 
                 
                     
-                    invokeStaticMethod("loginWithFb", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("retryOtp", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2573,15 +2573,15 @@ public class CustomerRepository extends ModelRepository<Customer> {
 
                 
 
-            }//Method loginWithFb definition ends here..
+            }//Method retryOtp definition ends here..
 
             
 
         
     
         
-            //Method loginWithInstagram definition
-            public void loginWithInstagram(  String accessToken,  String userId, final ObjectCallback<JSONObject>  callback ){
+            //Method loginWithOtp definition
+            public void loginWithOtp(  String number,  String otp, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -2593,9 +2593,9 @@ public class CustomerRepository extends ModelRepository<Customer> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("accessToken", accessToken);
+                        hashMapObject.put("number", number);
                 
-                        hashMapObject.put("userId", userId);
+                        hashMapObject.put("otp", otp);
                 
 
                 
@@ -2603,7 +2603,7 @@ public class CustomerRepository extends ModelRepository<Customer> {
 
                 
                     
-                    invokeStaticMethod("loginWithInstagram", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("loginWithOtp", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2626,7 +2626,7 @@ public class CustomerRepository extends ModelRepository<Customer> {
 
                 
 
-            }//Method loginWithInstagram definition ends here..
+            }//Method loginWithOtp definition ends here..
 
             
 

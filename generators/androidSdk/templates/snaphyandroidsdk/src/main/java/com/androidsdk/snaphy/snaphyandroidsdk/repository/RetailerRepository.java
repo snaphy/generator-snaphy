@@ -31,8 +31,13 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 
 
-//Replaced by Custom ModelRepository method
-//import com.strongloop.android.loopback.ModelRepository;
+//Replaced by Custom  Repo methods
+// import com.strongloop.android.loopback.UserRepository;
+import com.strongloop.android.loopback.AccessTokenRepository;
+import com.strongloop.android.loopback.AccessToken;
+import android.content.SharedPreferences;
+import org.json.JSONException;
+import android.content.Context;
 
 
 
@@ -71,11 +76,18 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.RetailerDb;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Department;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.DepartmentRepository;
+            
+        
+    
 
 
 
 
-public class RetailerRepository extends ModelRepository<Retailer> {
+
+public class RetailerRepository extends UserRepository<Retailer> {
 
 
     private Context context;
@@ -91,6 +103,99 @@ public class RetailerRepository extends ModelRepository<Retailer> {
     public Context getContext(){
         return context;
     }
+
+
+    
+    		//Create public methods..
+    		public Retailer cachedCurrentUser;
+            private Object currentUserId;
+            private boolean isCurrentUserIdLoaded;
+
+    		public Retailer getCachedCurrentUser(){
+    			return cachedCurrentUser;
+    		}
+
+    		public void setCachedCurrentUser(Retailer user){
+    			cachedCurrentUser = user;
+    		}
+
+    		/* public void setCurrentUserId(Object id){
+    			super.setCurrentUserId(id);
+    		} */
+
+            public void findCurrentUser(final ObjectCallback<Retailer> callback){
+                //Call the onBefore method..
+                callback.onBefore();
+
+                if(getCurrentUserId() == null){
+                    callback.onSuccess(null);
+                    return;
+                }
+
+                HashMap<String, Object> hashMap = new HashMap<>();
+                this.findById((String)getCurrentUserId(), hashMap, new ObjectCallback<Retailer>() {
+                    @Override
+                    public void onSuccess(Retailer user){
+                        cachedCurrentUser = user;
+                        callback.onSuccess(user);
+                        //Call the finally method..
+                        callback.onFinally();
+                    }
+
+                    @Override
+                    public void onError(Throwable t){
+                        callback.onError(t);
+                        //Call the finally method..
+                        callback.onFinally();
+                    }
+                });
+            }
+
+            public Object getCurrentUserId(){
+                if(currentUserId != null){
+                  return currentUserId;
+                }
+                else{
+                  String json = getSharedPreferences().getString(PROPERTY_CURRENT_USER_ID, null);
+                  if(json == null){
+                      return null;
+                  }
+
+                  if(json.equals("[null]")){
+                      return null;
+                  }
+
+                  try{
+                      Object id = new JSONArray(json).get(0);
+                      return id;
+                  }catch(JSONException e){
+                      String msg = "Cannot parse user id '" + json + "'";
+                      Log.e("Snaphy", msg, e);
+                  }
+                }
+                return null;
+            }
+
+            public void setCurrentUserId(Object currentUserId){
+                this.currentUserId = currentUserId;
+                cachedCurrentUser = null;
+                saveCurrentUserId();
+            }
+
+            private void saveCurrentUserId(){
+                final SharedPreferences.Editor editor = getSharedPreferences().edit();
+                final String json = new JSONArray().put(getCurrentUserId()).toString();
+                editor.putString(PROPERTY_CURRENT_USER_ID, json);
+                editor.commit();
+            }
+
+
+            private SharedPreferences getSharedPreferences() {
+                return getApplicationContext().getSharedPreferences(
+                    SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
+            }
+
+
 
 
     
@@ -211,6 +316,33 @@ public class RetailerRepository extends ModelRepository<Retailer> {
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:retailerId/department/:fk", "GET"), "Retailer.prototype.__findById__department");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:retailerId/department/:fk", "DELETE"), "Retailer.prototype.__destroyById__department");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:retailerId/department/:fk", "PUT"), "Retailer.prototype.__updateById__department");
+    
+
+    
+    
+
+    
+
+    
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:retailerId/city", "GET"), "Retailer.prototype.__get__city");
     
 
@@ -311,6 +443,42 @@ public class RetailerRepository extends ModelRepository<Retailer> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:retailerId/qrCodes/count", "GET"), "Retailer.prototype.__count__qrCodes");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:retailerId/department", "GET"), "Retailer.prototype.__get__department");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:retailerId/department", "POST"), "Retailer.prototype.__create__department");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:retailerId/department", "DELETE"), "Retailer.prototype.__delete__department");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:retailerId/department/count", "GET"), "Retailer.prototype.__count__department");
     
 
     
@@ -512,6 +680,9 @@ public class RetailerRepository extends ModelRepository<Retailer> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "Retailer.getModelRelationSchema");
+    
+
+    
     
 
     
@@ -1026,6 +1197,226 @@ public class RetailerRepository extends ModelRepository<Retailer> {
                 
 
             }//Method updateById__qrCodes definition ends here..
+
+            
+
+        
+    
+        
+            //Method findById__department definition
+            public void findById__department(  String retailerId,  String fk, final ObjectCallback<Department> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("retailerId", retailerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__findById__department", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    DepartmentRepository departmentRepo = getRestAdapter().createRepository(DepartmentRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = departmentRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(departmentRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //departmentRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Department department = departmentRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = department.getClass().getMethod("save__db");
+                                                    method.invoke(department);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(department);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method findById__department definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__department definition
+            public void destroyById__department(  String retailerId,  String fk, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("retailerId", retailerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__department", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__department definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__department definition
+            public void updateById__department(  String retailerId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Department> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("retailerId", retailerId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__updateById__department", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    DepartmentRepository departmentRepo = getRestAdapter().createRepository(DepartmentRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = departmentRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(departmentRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //departmentRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Department department = departmentRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = department.getClass().getMethod("save__db");
+                                                    method.invoke(department);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(department);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method updateById__department definition ends here..
 
             
 
@@ -1869,6 +2260,275 @@ public class RetailerRepository extends ModelRepository<Retailer> {
                 
 
             }//Method count__qrCodes definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__department definition
+            public void get__department(  String retailerId,  Map<String,  ? extends Object> filter, final DataListCallback<Department> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("retailerId", retailerId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__department", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<Department> departmentList = new DataList<Department>();
+                                    DepartmentRepository departmentRepo = getRestAdapter().createRepository(DepartmentRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = departmentRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(departmentRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        Department department = departmentRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = department.getClass().getMethod("save__db");
+                                                      method.invoke(department);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        departmentList.add(department);
+                                    }
+                                    callback.onSuccess(departmentList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method get__department definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__department definition
+            public void create__department(  String retailerId,  Map<String,  ? extends Object> data, final ObjectCallback<Department> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("retailerId", retailerId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__department", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    DepartmentRepository departmentRepo = getRestAdapter().createRepository(DepartmentRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = departmentRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(departmentRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //departmentRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Department department = departmentRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = department.getClass().getMethod("save__db");
+                                                    method.invoke(department);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(department);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__department definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__department definition
+            public void delete__department(  String retailerId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("retailerId", retailerId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__department", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__department definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__department definition
+            public void count__department(  String retailerId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("retailerId", retailerId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__department", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method count__department definition ends here..
 
             
 
@@ -3150,6 +3810,8 @@ public class RetailerRepository extends ModelRepository<Retailer> {
 
             
 
+        
+    
         
     
         

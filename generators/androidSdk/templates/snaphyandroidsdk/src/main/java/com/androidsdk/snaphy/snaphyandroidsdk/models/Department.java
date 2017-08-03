@@ -44,6 +44,20 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.DepartmentRepository;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.QrCodeGroupRepository;
+            
+
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ProductRepository;
+            
+
+        
+    
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -173,6 +187,76 @@ public class Department extends Model {
                     //Update hashMap value..
                     hashMap.put("updated", updated);
                 }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private double totalEarned;
+                /* Adding Getter and Setter methods */
+                public double getTotalEarned(){
+                    return totalEarned;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setTotalEarned(double totalEarned){
+                    this.totalEarned = totalEarned;
+                    //Update hashMap value..
+                    hashMap.put("totalEarned", totalEarned);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private double totalRedeemed;
+                /* Adding Getter and Setter methods */
+                public double getTotalRedeemed(){
+                    return totalRedeemed;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setTotalRedeemed(double totalRedeemed){
+                    this.totalRedeemed = totalRedeemed;
+                    //Update hashMap value..
+                    hashMap.put("totalRedeemed", totalRedeemed);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private double totalBalance;
+                /* Adding Getter and Setter methods */
+                public double getTotalBalance(){
+                    return totalBalance;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setTotalBalance(double totalBalance){
+                    this.totalBalance = totalBalance;
+                    //Update hashMap value..
+                    hashMap.put("totalBalance", totalBalance);
+                }
+
+            
+            
+        
+    
+        
+            
 
             
             
@@ -565,6 +649,18 @@ public class Department extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -779,6 +875,35 @@ public class Department extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -953,6 +1078,12 @@ public class Department extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -1113,6 +1244,20 @@ public class Department extends Model {
                                         });
                                     } //method def ends here.
                                  
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
                             
                          
                             
@@ -1328,6 +1473,1207 @@ public class Department extends Model {
                                     } //method def ends here.
                                  
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                
+                    //Define hasMany, hasManyThrough method here..
+
+                 
+                 
+             
+          
+    
+        
+        
+                
+
+                
+                    
+                    //Define hasMany relation method here..
+                    private transient DataList<QrCodeGroup>  qrCodeGroups ;
+
+                    public DataList< QrCodeGroup > getQrCodeGroups() {
+                        //Check for pure case of hasMany
+                                                    //TODO: Modify foreign key name..
+                          try{
+                            QrCodeGroupRepository qrCodeGroupRepository = (QrCodeGroupRepository) getRepository();
+
+                            if(that.getId() != null && qrCodeGroupRepository.getDb() != null){
+
+                                 //Fetch locally from db
+                                 //qrCodeGroups = getQrCodeGroups__db(restAdapter);
+                                 // Getting single cont
+                                 qrCodeGroups = qrCodeGroupRepository.getDb().getAll__db("departmentId", that.getId().toString());
+
+                                 //lowercaseFirstLetter(modelName)
+                            }
+                          }catch(Exception e){
+                                //Ignore
+                          }
+                                                return qrCodeGroups;
+                    }
+
+                    public void setQrCodeGroups(DataList<QrCodeGroup> qrCodeGroups) {
+                        boolean hashType = false;
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
+                        for(Object o: qrCodeGroups){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
+                        }
+
+                        if(hashType){
+                            setQrCodeGroups1(hashMaps);
+                        }else{
+                            this.qrCodeGroups = qrCodeGroups;
+                            //TODO: Warning move this to new thread
+                            for(QrCodeGroup data: qrCodeGroups){
+                              try{
+                                data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
+                            }
+                        }
+                    }
+
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setQrCodeGroups1(List<Map<String, Object>> qrCodeGroups) {
+                        //First create a dummy Repo class object for ..
+                        QrCodeGroupRepository qrCodeGroupsRepository = new QrCodeGroupRepository();
+                        List<QrCodeGroup> result = new ArrayList<>();
+                        for (Map<String, Object> obj : qrCodeGroups) {
+                            //Also add relation to child type for two way communication..
+                            QrCodeGroup obj1 = qrCodeGroupsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setQrCodeGroups(result);
+
+                    }
+
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setQrCodeGroups1(DataList<HashMap<String, Object>> qrCodeGroups) {
+                        //First create a dummy Repo class object for ..
+                        QrCodeGroupRepository qrCodeGroupsRepository = new QrCodeGroupRepository();
+                        DataList<QrCodeGroup> result = new DataList<>();
+                        for (HashMap<String, Object> obj : qrCodeGroups) {
+                            //Also add relation to child type for two way communication..
+                            QrCodeGroup obj1 = qrCodeGroupsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setQrCodeGroups(result);
+
+                    }
+
+
+                    //Adding relation method..
+                    //Add a dummy class Name object to seperate data..
+                    public void addRelation(DataList<QrCodeGroup> qrCodeGroups, QrCodeGroup dummyClassInstance) {
+                        that.setQrCodeGroups(qrCodeGroups);
+
+                    }
+
+                    //Adding relation method..
+                    //This will add a new data to the list relation object..
+                    public void addRelation(QrCodeGroup qrCodeGroups) {
+                        try{
+                            try{
+
+                                  //Save to database..
+                                  qrCodeGroups.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
+                            that.getQrCodeGroups().add(qrCodeGroups);
+                        }catch(Exception e){
+                            DataList< QrCodeGroup> qrCodeGroups1 = new DataList();
+                            //Now add this item to list..
+                            qrCodeGroups1.add(qrCodeGroups);
+                            //Now set data....
+                            that.setQrCodeGroups(qrCodeGroups1);
+                        }
+                    }
+
+
+
+
+                    
+                        //Implement logic for pure hasMany methods here....
+
+                    
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void findById__qrCodeGroups( String fk,  RestAdapter restAdapter, final ObjectCallback<QrCodeGroup> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final DepartmentRepository  departmentRepo = restAdapter.createRepository(DepartmentRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        departmentRepo.findById__qrCodeGroups( (String)that.getId(), fk,  new ObjectCallback<QrCodeGroup> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(QrCodeGroup object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void destroyById__qrCodeGroups( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final DepartmentRepository  departmentRepo = restAdapter.createRepository(DepartmentRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        departmentRepo.destroyById__qrCodeGroups( (String)that.getId(), fk,  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void updateById__qrCodeGroups( String fk,  QrCodeGroup data,  RestAdapter restAdapter, final ObjectCallback<QrCodeGroup> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final DepartmentRepository  departmentRepo = restAdapter.createRepository(DepartmentRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        departmentRepo.updateById__qrCodeGroups( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<QrCodeGroup> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(QrCodeGroup object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__qrCodeGroups( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<QrCodeGroup> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final DepartmentRepository  departmentRepo = restAdapter.createRepository(DepartmentRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        departmentRepo.get__qrCodeGroups( (String)that.getId(), filter,  new DataListCallback<QrCodeGroup> (){
+                                            
+
+                                            
+
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(DataList<QrCodeGroup> object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            QrCodeGroup obj = new QrCodeGroup();
+                                                            addRelation(object, obj);
+                                                            //Disabling two way communication for cyclic error..
+                                                            /*for (QrCodeGroup obj : object) {
+                                                                //Also add relation to child type for two way communication..
+                                                                obj.addRelation(that);
+                                                            }*/
+
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void create__qrCodeGroups( QrCodeGroup data,  RestAdapter restAdapter, final ObjectCallback<QrCodeGroup> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final DepartmentRepository  departmentRepo = restAdapter.createRepository(DepartmentRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        departmentRepo.create__qrCodeGroups( (String)that.getId(), data.convertMap(),  new ObjectCallback<QrCodeGroup> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(QrCodeGroup object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void delete__qrCodeGroups( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final DepartmentRepository  departmentRepo = restAdapter.createRepository(DepartmentRepository.class);
+                                        
+                                        
+
+
+
+                                        departmentRepo.delete__qrCodeGroups( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void count__qrCodeGroups( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final DepartmentRepository  departmentRepo = restAdapter.createRepository(DepartmentRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        departmentRepo.count__qrCodeGroups( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                        //Calling the finally..callback
+                                                        callback.onFinally();
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                
+                    //Define hasMany, hasManyThrough method here..
+
+                 
+                 
+             
+          
+    
+        
+        
+                
+
+                
+                    
+                    //Define hasMany relation method here..
+                    private transient DataList<Product>  products ;
+
+                    public DataList< Product > getProducts() {
+                        //Check for pure case of hasMany
+                                                    //TODO: Modify foreign key name..
+                          try{
+                            ProductRepository productRepository = (ProductRepository) getRepository();
+
+                            if(that.getId() != null && productRepository.getDb() != null){
+
+                                 //Fetch locally from db
+                                 //products = getProducts__db(restAdapter);
+                                 // Getting single cont
+                                 products = productRepository.getDb().getAll__db("departmentId", that.getId().toString());
+
+                                 //lowercaseFirstLetter(modelName)
+                            }
+                          }catch(Exception e){
+                                //Ignore
+                          }
+                                                return products;
+                    }
+
+                    public void setProducts(DataList<Product> products) {
+                        boolean hashType = false;
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
+                        for(Object o: products){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
+                        }
+
+                        if(hashType){
+                            setProducts1(hashMaps);
+                        }else{
+                            this.products = products;
+                            //TODO: Warning move this to new thread
+                            for(Product data: products){
+                              try{
+                                data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
+                            }
+                        }
+                    }
+
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setProducts1(List<Map<String, Object>> products) {
+                        //First create a dummy Repo class object for ..
+                        ProductRepository productsRepository = new ProductRepository();
+                        List<Product> result = new ArrayList<>();
+                        for (Map<String, Object> obj : products) {
+                            //Also add relation to child type for two way communication..
+                            Product obj1 = productsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setProducts(result);
+
+                    }
+
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setProducts1(DataList<HashMap<String, Object>> products) {
+                        //First create a dummy Repo class object for ..
+                        ProductRepository productsRepository = new ProductRepository();
+                        DataList<Product> result = new DataList<>();
+                        for (HashMap<String, Object> obj : products) {
+                            //Also add relation to child type for two way communication..
+                            Product obj1 = productsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setProducts(result);
+
+                    }
+
+
+                    //Adding relation method..
+                    //Add a dummy class Name object to seperate data..
+                    public void addRelation(DataList<Product> products, Product dummyClassInstance) {
+                        that.setProducts(products);
+
+                    }
+
+                    //Adding relation method..
+                    //This will add a new data to the list relation object..
+                    public void addRelation(Product products) {
+                        try{
+                            try{
+
+                                  //Save to database..
+                                  products.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
+                            that.getProducts().add(products);
+                        }catch(Exception e){
+                            DataList< Product> products1 = new DataList();
+                            //Now add this item to list..
+                            products1.add(products);
+                            //Now set data....
+                            that.setProducts(products1);
+                        }
+                    }
+
+
+
+
+                    
+                        //Implement logic for pure hasMany methods here....
+
+                    
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void findById__products( String fk,  RestAdapter restAdapter, final ObjectCallback<Product> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final DepartmentRepository  departmentRepo = restAdapter.createRepository(DepartmentRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        departmentRepo.findById__products( (String)that.getId(), fk,  new ObjectCallback<Product> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Product object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void destroyById__products( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final DepartmentRepository  departmentRepo = restAdapter.createRepository(DepartmentRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        departmentRepo.destroyById__products( (String)that.getId(), fk,  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void updateById__products( String fk,  Product data,  RestAdapter restAdapter, final ObjectCallback<Product> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final DepartmentRepository  departmentRepo = restAdapter.createRepository(DepartmentRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        departmentRepo.updateById__products( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Product> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Product object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__products( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Product> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final DepartmentRepository  departmentRepo = restAdapter.createRepository(DepartmentRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        departmentRepo.get__products( (String)that.getId(), filter,  new DataListCallback<Product> (){
+                                            
+
+                                            
+
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(DataList<Product> object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            Product obj = new Product();
+                                                            addRelation(object, obj);
+                                                            //Disabling two way communication for cyclic error..
+                                                            /*for (Product obj : object) {
+                                                                //Also add relation to child type for two way communication..
+                                                                obj.addRelation(that);
+                                                            }*/
+
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void create__products( Product data,  RestAdapter restAdapter, final ObjectCallback<Product> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final DepartmentRepository  departmentRepo = restAdapter.createRepository(DepartmentRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        departmentRepo.create__products( (String)that.getId(), data.convertMap(),  new ObjectCallback<Product> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Product object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void delete__products( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final DepartmentRepository  departmentRepo = restAdapter.createRepository(DepartmentRepository.class);
+                                        
+                                        
+
+
+
+                                        departmentRepo.delete__products( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void count__products( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final DepartmentRepository  departmentRepo = restAdapter.createRepository(DepartmentRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        departmentRepo.count__products( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                        //Calling the finally..callback
+                                                        callback.onFinally();
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         

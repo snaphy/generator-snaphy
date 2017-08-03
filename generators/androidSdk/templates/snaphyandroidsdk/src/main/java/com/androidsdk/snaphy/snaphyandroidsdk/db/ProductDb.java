@@ -166,6 +166,21 @@ public class ProductDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String departmentIdData = "";
+                        try {
+                              Method method = modelData.getClass().getMethod("getDepartmentId");
+                              if(method.invoke(modelData) != null){
+                                //departmentIdData = modelData.getDepartmentId().toString();
+                                departmentIdData = (String) method.invoke(modelData);
+                                values.put("`departmentId`", departmentIdData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String categoryIdData = "";
                         try {
                               Method method = modelData.getClass().getMethod("getCategoryId");
@@ -400,9 +415,19 @@ public class ProductDb{
                         }
                                                 
                                 
-                                                            String categoryIdData = "";
+                                                            String departmentIdData = "";
                         if(cursor.getString(11) != null){
-                          categoryIdData = cursor.getString(11);
+                          departmentIdData = cursor.getString(11);
+                          if(departmentIdData != null){
+                            departmentIdData = departmentIdData.toString();
+                            hashMap.put("departmentId", departmentIdData);
+                          }
+                        }
+                                                
+                                
+                                                            String categoryIdData = "";
+                        if(cursor.getString(12) != null){
+                          categoryIdData = cursor.getString(12);
                           if(categoryIdData != null){
                             categoryIdData = categoryIdData.toString();
                             hashMap.put("categoryId", categoryIdData);
@@ -411,8 +436,8 @@ public class ProductDb{
                                                 
                                 
                                                             String subCategory1IdData = "";
-                        if(cursor.getString(12) != null){
-                          subCategory1IdData = cursor.getString(12);
+                        if(cursor.getString(13) != null){
+                          subCategory1IdData = cursor.getString(13);
                           if(subCategory1IdData != null){
                             subCategory1IdData = subCategory1IdData.toString();
                             hashMap.put("subCategory1Id", subCategory1IdData);
@@ -421,8 +446,8 @@ public class ProductDb{
                                                 
                                 
                                                             String subCategory2IdData = "";
-                        if(cursor.getString(13) != null){
-                          subCategory2IdData = cursor.getString(13);
+                        if(cursor.getString(14) != null){
+                          subCategory2IdData = cursor.getString(14);
                           if(subCategory2IdData != null){
                             subCategory2IdData = subCategory2IdData.toString();
                             hashMap.put("subCategory2Id", subCategory2IdData);

@@ -55,6 +55,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.QrCodeDb;
     
 
     
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Department;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.DepartmentRepository;
+            
+        
+    
+
+    
             import com.androidsdk.snaphy.snaphyandroidsdk.models.Product;
             import com.androidsdk.snaphy.snaphyandroidsdk.repository.ProductRepository;
             
@@ -64,6 +71,20 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.QrCodeDb;
     
             import com.androidsdk.snaphy.snaphyandroidsdk.models.Transaction;
             import com.androidsdk.snaphy.snaphyandroidsdk.repository.TransactionRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.QrCodeGroup;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.QrCodeGroupRepository;
+            
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.EarningHistory;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.EarningHistoryRepository;
             
         
     
@@ -163,6 +184,15 @@ public class QrCodeRepository extends ModelRepository<QrCode> {
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:qrCodeId/department", "GET"), "QrCode.prototype.__get__department");
+    
+
+    
+    
+
+    
+
+    
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:qrCodeId/product", "GET"), "QrCode.prototype.__get__product");
     
 
@@ -173,6 +203,78 @@ public class QrCodeRepository extends ModelRepository<QrCode> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:qrCodeId/transaction", "GET"), "QrCode.prototype.__get__transaction");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:qrCodeId/qrCodeGroup", "GET"), "QrCode.prototype.__get__qrCodeGroup");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:qrCodeId/earningHistories/:fk", "GET"), "QrCode.prototype.__findById__earningHistories");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:qrCodeId/earningHistories/:fk", "DELETE"), "QrCode.prototype.__destroyById__earningHistories");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:qrCodeId/earningHistories/:fk", "PUT"), "QrCode.prototype.__updateById__earningHistories");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:qrCodeId/earningHistories", "GET"), "QrCode.prototype.__get__earningHistories");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:qrCodeId/earningHistories", "POST"), "QrCode.prototype.__create__earningHistories");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:qrCodeId/earningHistories", "DELETE"), "QrCode.prototype.__delete__earningHistories");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:qrCodeId/earningHistories/count", "GET"), "QrCode.prototype.__count__earningHistories");
     
 
     
@@ -314,6 +416,42 @@ public class QrCodeRepository extends ModelRepository<QrCode> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "QrCode.getModelRelationSchema");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/qrCodeScan", "POST"), "QrCode.qrCodeScan");
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
     
 
     
@@ -497,6 +635,91 @@ public class QrCodeRepository extends ModelRepository<QrCode> {
         
     
         
+            //Method get__department definition
+            public void get__department(  String qrCodeId,  Boolean refresh, final ObjectCallback<Department> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("qrCodeId", qrCodeId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__department", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    DepartmentRepository departmentRepo = getRestAdapter().createRepository(DepartmentRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = departmentRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(departmentRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //departmentRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Department department = departmentRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = department.getClass().getMethod("save__db");
+                                                    method.invoke(department);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(department);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__department definition ends here..
+
+            
+
+        
+    
+        
             //Method get__product definition
             public void get__product(  String qrCodeId,  Boolean refresh, final ObjectCallback<Product> callback){
 
@@ -661,6 +884,580 @@ public class QrCodeRepository extends ModelRepository<QrCode> {
                 
 
             }//Method get__transaction definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__qrCodeGroup definition
+            public void get__qrCodeGroup(  String qrCodeId,  Boolean refresh, final ObjectCallback<QrCodeGroup> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("qrCodeId", qrCodeId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__qrCodeGroup", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    QrCodeGroupRepository qrCodeGroupRepo = getRestAdapter().createRepository(QrCodeGroupRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = qrCodeGroupRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(qrCodeGroupRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //qrCodeGroupRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    QrCodeGroup qrCodeGroup = qrCodeGroupRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = qrCodeGroup.getClass().getMethod("save__db");
+                                                    method.invoke(qrCodeGroup);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(qrCodeGroup);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__qrCodeGroup definition ends here..
+
+            
+
+        
+    
+        
+            //Method findById__earningHistories definition
+            public void findById__earningHistories(  String qrCodeId,  String fk, final ObjectCallback<EarningHistory> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("qrCodeId", qrCodeId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__findById__earningHistories", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    EarningHistoryRepository earningHistoryRepo = getRestAdapter().createRepository(EarningHistoryRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = earningHistoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(earningHistoryRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //earningHistoryRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    EarningHistory earningHistory = earningHistoryRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = earningHistory.getClass().getMethod("save__db");
+                                                    method.invoke(earningHistory);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(earningHistory);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method findById__earningHistories definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__earningHistories definition
+            public void destroyById__earningHistories(  String qrCodeId,  String fk, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("qrCodeId", qrCodeId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__earningHistories", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__earningHistories definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__earningHistories definition
+            public void updateById__earningHistories(  String qrCodeId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<EarningHistory> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("qrCodeId", qrCodeId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__updateById__earningHistories", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    EarningHistoryRepository earningHistoryRepo = getRestAdapter().createRepository(EarningHistoryRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = earningHistoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(earningHistoryRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //earningHistoryRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    EarningHistory earningHistory = earningHistoryRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = earningHistory.getClass().getMethod("save__db");
+                                                    method.invoke(earningHistory);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(earningHistory);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method updateById__earningHistories definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__earningHistories definition
+            public void get__earningHistories(  String qrCodeId,  Map<String,  ? extends Object> filter, final DataListCallback<EarningHistory> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("qrCodeId", qrCodeId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__earningHistories", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<EarningHistory> earningHistoryList = new DataList<EarningHistory>();
+                                    EarningHistoryRepository earningHistoryRepo = getRestAdapter().createRepository(EarningHistoryRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = earningHistoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(earningHistoryRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        EarningHistory earningHistory = earningHistoryRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = earningHistory.getClass().getMethod("save__db");
+                                                      method.invoke(earningHistory);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        earningHistoryList.add(earningHistory);
+                                    }
+                                    callback.onSuccess(earningHistoryList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method get__earningHistories definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__earningHistories definition
+            public void create__earningHistories(  String qrCodeId,  Map<String,  ? extends Object> data, final ObjectCallback<EarningHistory> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("qrCodeId", qrCodeId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__earningHistories", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    EarningHistoryRepository earningHistoryRepo = getRestAdapter().createRepository(EarningHistoryRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = earningHistoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(earningHistoryRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //earningHistoryRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    EarningHistory earningHistory = earningHistoryRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = earningHistory.getClass().getMethod("save__db");
+                                                    method.invoke(earningHistory);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(earningHistory);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__earningHistories definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__earningHistories definition
+            public void delete__earningHistories(  String qrCodeId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("qrCodeId", qrCodeId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__earningHistories", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__earningHistories definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__earningHistories definition
+            public void count__earningHistories(  String qrCodeId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("qrCodeId", qrCodeId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__earningHistories", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method count__earningHistories definition ends here..
 
             
 
@@ -1573,6 +2370,109 @@ public class QrCodeRepository extends ModelRepository<QrCode> {
 
             
 
+        
+    
+        
+            //Method qrCodeScan definition
+            public void qrCodeScan(  Map<String,  ? extends Object> ctx,  DataList<String> qrCodeIds, final DataListCallback<EarningHistory> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("ctx", ctx);
+                
+                        hashMapObject.put("qrCodeIds", qrCodeIds);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("qrCodeScan", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<EarningHistory> earningHistoryList = new DataList<EarningHistory>();
+                                    EarningHistoryRepository earningHistoryRepo = getRestAdapter().createRepository(EarningHistoryRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = earningHistoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(earningHistoryRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        EarningHistory earningHistory = earningHistoryRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = earningHistory.getClass().getMethod("save__db");
+                                                      method.invoke(earningHistory);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        earningHistoryList.add(earningHistory);
+                                    }
+                                    callback.onSuccess(earningHistoryList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method qrCodeScan definition ends here..
+
+            
+
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
         
