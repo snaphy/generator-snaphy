@@ -63,27 +63,6 @@ public class AdminEmail extends Model {
             
 
             
-                private boolean is_deleted;
-                /* Adding Getter and Setter methods */
-                public boolean getIs_deleted(){
-                    return is_deleted;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setIs_deleted(boolean is_deleted){
-                    this.is_deleted = is_deleted;
-                    //Update hashMap value..
-                    hashMap.put("is_deleted", is_deleted);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
             
         
     

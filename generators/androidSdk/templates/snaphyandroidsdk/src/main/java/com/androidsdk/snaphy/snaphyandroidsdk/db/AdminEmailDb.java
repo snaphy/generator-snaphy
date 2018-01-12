@@ -73,15 +73,6 @@ public class AdminEmailDb{
     public ContentValues getContentValues(AdminEmail _modelData){
       ContentValues values = new ContentValues();
                        
-                                                            int is_deletedData = 0;
-                        if(_modelData.getIs_deleted()){
-                          is_deletedData = 1;
-                        }else{
-                          is_deletedData = 0;
-                        }
-                        values.put("`is_deleted`", is_deletedData);
-                                  
-                                
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String toData = "";
                         try {
@@ -253,19 +244,9 @@ public class AdminEmailDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            boolean is_deletedData = false;
-                        int tempis_deletedData = cursor.getInt(0);
-                        if( tempis_deletedData > 0){
-                          is_deletedData = true;
-                        }else{
-                          is_deletedData = false;
-                        }
-                        hashMap.put("is_deleted", is_deletedData);
-                                                
-                                
                                                             String toData = "";
-                        if(cursor.getString(1) != null){
-                          toData = cursor.getString(1);
+                        if(cursor.getString(0) != null){
+                          toData = cursor.getString(0);
                           if(toData != null){
                             toData = toData.toString();
                             hashMap.put("to", toData);
@@ -274,8 +255,8 @@ public class AdminEmailDb{
                                                 
                                 
                                                             String fromData = "";
-                        if(cursor.getString(2) != null){
-                          fromData = cursor.getString(2);
+                        if(cursor.getString(1) != null){
+                          fromData = cursor.getString(1);
                           if(fromData != null){
                             fromData = fromData.toString();
                             hashMap.put("from", fromData);
@@ -284,8 +265,8 @@ public class AdminEmailDb{
                                                 
                                 
                                                             String subjectData = "";
-                        if(cursor.getString(3) != null){
-                          subjectData = cursor.getString(3);
+                        if(cursor.getString(2) != null){
+                          subjectData = cursor.getString(2);
                           if(subjectData != null){
                             subjectData = subjectData.toString();
                             hashMap.put("subject", subjectData);
@@ -294,8 +275,8 @@ public class AdminEmailDb{
                                                 
                                 
                                                             String textData = "";
-                        if(cursor.getString(4) != null){
-                          textData = cursor.getString(4);
+                        if(cursor.getString(3) != null){
+                          textData = cursor.getString(3);
                           if(textData != null){
                             textData = textData.toString();
                             hashMap.put("text", textData);
@@ -304,8 +285,8 @@ public class AdminEmailDb{
                                                 
                                 
                                                             String htmlData = "";
-                        if(cursor.getString(5) != null){
-                          htmlData = cursor.getString(5);
+                        if(cursor.getString(4) != null){
+                          htmlData = cursor.getString(4);
                           if(htmlData != null){
                             htmlData = htmlData.toString();
                             hashMap.put("html", htmlData);
@@ -314,8 +295,8 @@ public class AdminEmailDb{
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(6) != null){
-                          idData = cursor.getString(6);
+                        if(cursor.getString(5) != null){
+                          idData = cursor.getString(5);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -471,13 +452,13 @@ public class AdminEmailDb{
 
     // Getting All Data where
     public DataList<AdminEmail>  getAll__db(HashMap<String, Object> whereKeyValue) {
-        return getAll__db(whereKeyValue, null, 0);
+        return getAll__db(whereKeyValue, null, 0, 0);
     }
 
 
 
     // Getting All Data where and sort column according to date wise..
-    public DataList<AdminEmail>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
+    public DataList<AdminEmail>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip) {
         DataList<AdminEmail> modelList = new DataList<AdminEmail>();
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
@@ -485,14 +466,16 @@ public class AdminEmailDb{
             selectQuery = "SELECT  * FROM `AdminEmail` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
-                selectQuery = selectQuery +  " " + " LIMIT " + limit;
+                selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
+            }else{
+                selectQuery = selectQuery +  " " + " OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
-                selectQuery = "SELECT  * FROM AdminEmail " + whereQuery + " LIMIT " + limit;
+                selectQuery = "SELECT  * FROM AdminEmail " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM AdminEmail " + whereQuery;
+                selectQuery = "SELECT  * FROM AdminEmail " + whereQuery  + " OFFSET " + skip;
             }
         }
 
@@ -525,9 +508,10 @@ public class AdminEmailDb{
     }
 
 
+
     // Getting All Data where
-    public DataList<AdminEmail>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
-        return getAll__db(whereKeyValue, null,  limit);
+    public DataList<AdminEmail>  getAll__db(HashMap<String, Object> whereKeyValue, int limit, int skip) {
+        return getAll__db(whereKeyValue, null,  limit, skip);
     }
 
 
@@ -541,21 +525,23 @@ public class AdminEmailDb{
      * @param limit
      * @return
      */
-    public int count__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit){
+    public int count__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip){
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
             countQuery = "SELECT  * FROM `AdminEmail` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
-                countQuery = countQuery +  " " + " LIMIT " + limit;
+                countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
+            }else{
+                countQuery = countQuery +  " " + " OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM `AdminEmail` " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `AdminEmail` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `AdminEmail` " + whereQuery;
+                countQuery = "SELECT  * FROM `AdminEmail` " + whereQuery + " OFFSET " + skip;
             }
         }
 
@@ -568,19 +554,20 @@ public class AdminEmailDb{
     }
 
 
+
     /**
      * Check count of database.
      * @param whereKeyValue
      * @param limit
      * @return
      */
-    public int count__db(HashMap<String, Object> whereKeyValue, int limit){
+    public int count__db(HashMap<String, Object> whereKeyValue, int limit, int skip){
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM `AdminEmail` " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `AdminEmail` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `AdminEmail` " + whereQuery;
+            countQuery = "SELECT  * FROM `AdminEmail` " + whereQuery + " OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -597,7 +584,7 @@ public class AdminEmailDb{
      * @return
      */
     public int count__db(HashMap<String, Object> whereKeyValue){
-            return count__db(whereKeyValue, 0);
+            return count__db(whereKeyValue, 0, 0);
     }
 
 

@@ -394,13 +394,13 @@ public class RoleMappingDb{
 
     // Getting All Data where
     public DataList<RoleMapping>  getAll__db(HashMap<String, Object> whereKeyValue) {
-        return getAll__db(whereKeyValue, null, 0);
+        return getAll__db(whereKeyValue, null, 0, 0);
     }
 
 
 
     // Getting All Data where and sort column according to date wise..
-    public DataList<RoleMapping>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
+    public DataList<RoleMapping>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip) {
         DataList<RoleMapping> modelList = new DataList<RoleMapping>();
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
@@ -408,14 +408,16 @@ public class RoleMappingDb{
             selectQuery = "SELECT  * FROM `RoleMapping` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
-                selectQuery = selectQuery +  " " + " LIMIT " + limit;
+                selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
+            }else{
+                selectQuery = selectQuery +  " " + " OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
-                selectQuery = "SELECT  * FROM RoleMapping " + whereQuery + " LIMIT " + limit;
+                selectQuery = "SELECT  * FROM RoleMapping " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM RoleMapping " + whereQuery;
+                selectQuery = "SELECT  * FROM RoleMapping " + whereQuery  + " OFFSET " + skip;
             }
         }
 
@@ -448,9 +450,10 @@ public class RoleMappingDb{
     }
 
 
+
     // Getting All Data where
-    public DataList<RoleMapping>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
-        return getAll__db(whereKeyValue, null,  limit);
+    public DataList<RoleMapping>  getAll__db(HashMap<String, Object> whereKeyValue, int limit, int skip) {
+        return getAll__db(whereKeyValue, null,  limit, skip);
     }
 
 
@@ -464,21 +467,23 @@ public class RoleMappingDb{
      * @param limit
      * @return
      */
-    public int count__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit){
+    public int count__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip){
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
             countQuery = "SELECT  * FROM `RoleMapping` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
-                countQuery = countQuery +  " " + " LIMIT " + limit;
+                countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
+            }else{
+                countQuery = countQuery +  " " + " OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM `RoleMapping` " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `RoleMapping` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `RoleMapping` " + whereQuery;
+                countQuery = "SELECT  * FROM `RoleMapping` " + whereQuery + " OFFSET " + skip;
             }
         }
 
@@ -491,19 +496,20 @@ public class RoleMappingDb{
     }
 
 
+
     /**
      * Check count of database.
      * @param whereKeyValue
      * @param limit
      * @return
      */
-    public int count__db(HashMap<String, Object> whereKeyValue, int limit){
+    public int count__db(HashMap<String, Object> whereKeyValue, int limit, int skip){
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM `RoleMapping` " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `RoleMapping` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `RoleMapping` " + whereQuery;
+            countQuery = "SELECT  * FROM `RoleMapping` " + whereQuery + " OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -520,7 +526,7 @@ public class RoleMappingDb{
      * @return
      */
     public int count__db(HashMap<String, Object> whereKeyValue){
-            return count__db(whereKeyValue, 0);
+            return count__db(whereKeyValue, 0, 0);
     }
 
 

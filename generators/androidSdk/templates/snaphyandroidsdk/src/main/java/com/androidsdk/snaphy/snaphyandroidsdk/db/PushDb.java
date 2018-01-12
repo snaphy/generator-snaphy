@@ -327,13 +327,13 @@ public class PushDb{
 
     // Getting All Data where
     public DataList<Push>  getAll__db(HashMap<String, Object> whereKeyValue) {
-        return getAll__db(whereKeyValue, null, 0);
+        return getAll__db(whereKeyValue, null, 0, 0);
     }
 
 
 
     // Getting All Data where and sort column according to date wise..
-    public DataList<Push>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
+    public DataList<Push>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip) {
         DataList<Push> modelList = new DataList<Push>();
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
@@ -341,14 +341,16 @@ public class PushDb{
             selectQuery = "SELECT  * FROM `Push` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
-                selectQuery = selectQuery +  " " + " LIMIT " + limit;
+                selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
+            }else{
+                selectQuery = selectQuery +  " " + " OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
-                selectQuery = "SELECT  * FROM Push " + whereQuery + " LIMIT " + limit;
+                selectQuery = "SELECT  * FROM Push " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM Push " + whereQuery;
+                selectQuery = "SELECT  * FROM Push " + whereQuery  + " OFFSET " + skip;
             }
         }
 
@@ -381,9 +383,10 @@ public class PushDb{
     }
 
 
+
     // Getting All Data where
-    public DataList<Push>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
-        return getAll__db(whereKeyValue, null,  limit);
+    public DataList<Push>  getAll__db(HashMap<String, Object> whereKeyValue, int limit, int skip) {
+        return getAll__db(whereKeyValue, null,  limit, skip);
     }
 
 
@@ -397,21 +400,23 @@ public class PushDb{
      * @param limit
      * @return
      */
-    public int count__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit){
+    public int count__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip){
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
             countQuery = "SELECT  * FROM `Push` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
-                countQuery = countQuery +  " " + " LIMIT " + limit;
+                countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
+            }else{
+                countQuery = countQuery +  " " + " OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM `Push` " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `Push` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `Push` " + whereQuery;
+                countQuery = "SELECT  * FROM `Push` " + whereQuery + " OFFSET " + skip;
             }
         }
 
@@ -424,19 +429,20 @@ public class PushDb{
     }
 
 
+
     /**
      * Check count of database.
      * @param whereKeyValue
      * @param limit
      * @return
      */
-    public int count__db(HashMap<String, Object> whereKeyValue, int limit){
+    public int count__db(HashMap<String, Object> whereKeyValue, int limit, int skip){
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM `Push` " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `Push` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `Push` " + whereQuery;
+            countQuery = "SELECT  * FROM `Push` " + whereQuery + " OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -453,7 +459,7 @@ public class PushDb{
      * @return
      */
     public int count__db(HashMap<String, Object> whereKeyValue){
-            return count__db(whereKeyValue, 0);
+            return count__db(whereKeyValue, 0, 0);
     }
 
 

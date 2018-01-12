@@ -126,6 +126,27 @@ public class SnaphyNotification extends Model {
             
 
             
+                private Map<String, Object> options;
+                /* Adding Getter and Setter methods */
+                public Map<String, Object> getOptions(){
+                    return options;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setOptions(Map<String, Object> options){
+                    this.options = options;
+                    //Update Map value..
+                    hashMap.put("options", options);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
                 private String added;
                 /* Adding Getter and Setter methods */
                 public String getAdded(){

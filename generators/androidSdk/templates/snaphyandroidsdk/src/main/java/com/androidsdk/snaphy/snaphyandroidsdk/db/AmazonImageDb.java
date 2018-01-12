@@ -105,51 +105,6 @@ public class AmazonImageDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String is_deletedData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getIs_deleted");
-                              if(method.invoke(_modelData) != null){
-                                //is_deletedData = _modelData.getIs_deleted().toString();
-                                is_deletedData = (String) method.invoke(_modelData);
-                                values.put("`is_deleted`", is_deletedData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String addedData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getAdded");
-                              if(method.invoke(_modelData) != null){
-                                //addedData = _modelData.getAdded().toString();
-                                addedData = (String) method.invoke(_modelData);
-                                values.put("`added`", addedData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String updatedData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getUpdated");
-                              if(method.invoke(_modelData) != null){
-                                //updatedData = _modelData.getUpdated().toString();
-                                updatedData = (String) method.invoke(_modelData);
-                                values.put("`updated`", updatedData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
                               Method method = _modelData.getClass().getMethod("getId");
@@ -288,39 +243,9 @@ public class AmazonImageDb{
                         }
                                                 
                                 
-                                                            String is_deletedData = "";
-                        if(cursor.getString(4) != null){
-                          is_deletedData = cursor.getString(4);
-                          if(is_deletedData != null){
-                            is_deletedData = is_deletedData.toString();
-                            hashMap.put("is_deleted", is_deletedData);
-                          }
-                        }
-                                                
-                                
-                                                            String addedData = "";
-                        if(cursor.getString(5) != null){
-                          addedData = cursor.getString(5);
-                          if(addedData != null){
-                            addedData = addedData.toString();
-                            hashMap.put("added", addedData);
-                          }
-                        }
-                                                
-                                
-                                                            String updatedData = "";
-                        if(cursor.getString(6) != null){
-                          updatedData = cursor.getString(6);
-                          if(updatedData != null){
-                            updatedData = updatedData.toString();
-                            hashMap.put("updated", updatedData);
-                          }
-                        }
-                                                
-                                
                                                             String idData = "";
-                        if(cursor.getString(7) != null){
-                          idData = cursor.getString(7);
+                        if(cursor.getString(4) != null){
+                          idData = cursor.getString(4);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -476,13 +401,13 @@ public class AmazonImageDb{
 
     // Getting All Data where
     public DataList<AmazonImage>  getAll__db(HashMap<String, Object> whereKeyValue) {
-        return getAll__db(whereKeyValue, null, 0);
+        return getAll__db(whereKeyValue, null, 0, 0);
     }
 
 
 
     // Getting All Data where and sort column according to date wise..
-    public DataList<AmazonImage>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
+    public DataList<AmazonImage>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip) {
         DataList<AmazonImage> modelList = new DataList<AmazonImage>();
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
@@ -490,14 +415,16 @@ public class AmazonImageDb{
             selectQuery = "SELECT  * FROM `AmazonImage` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
-                selectQuery = selectQuery +  " " + " LIMIT " + limit;
+                selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
+            }else{
+                selectQuery = selectQuery +  " " + " OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
-                selectQuery = "SELECT  * FROM AmazonImage " + whereQuery + " LIMIT " + limit;
+                selectQuery = "SELECT  * FROM AmazonImage " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM AmazonImage " + whereQuery;
+                selectQuery = "SELECT  * FROM AmazonImage " + whereQuery  + " OFFSET " + skip;
             }
         }
 
@@ -530,9 +457,10 @@ public class AmazonImageDb{
     }
 
 
+
     // Getting All Data where
-    public DataList<AmazonImage>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
-        return getAll__db(whereKeyValue, null,  limit);
+    public DataList<AmazonImage>  getAll__db(HashMap<String, Object> whereKeyValue, int limit, int skip) {
+        return getAll__db(whereKeyValue, null,  limit, skip);
     }
 
 
@@ -546,21 +474,23 @@ public class AmazonImageDb{
      * @param limit
      * @return
      */
-    public int count__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit){
+    public int count__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip){
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
             countQuery = "SELECT  * FROM `AmazonImage` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
-                countQuery = countQuery +  " " + " LIMIT " + limit;
+                countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
+            }else{
+                countQuery = countQuery +  " " + " OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM `AmazonImage` " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `AmazonImage` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `AmazonImage` " + whereQuery;
+                countQuery = "SELECT  * FROM `AmazonImage` " + whereQuery + " OFFSET " + skip;
             }
         }
 
@@ -573,19 +503,20 @@ public class AmazonImageDb{
     }
 
 
+
     /**
      * Check count of database.
      * @param whereKeyValue
      * @param limit
      * @return
      */
-    public int count__db(HashMap<String, Object> whereKeyValue, int limit){
+    public int count__db(HashMap<String, Object> whereKeyValue, int limit, int skip){
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM `AmazonImage` " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `AmazonImage` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `AmazonImage` " + whereQuery;
+            countQuery = "SELECT  * FROM `AmazonImage` " + whereQuery + " OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -602,7 +533,7 @@ public class AmazonImageDb{
      * @return
      */
     public int count__db(HashMap<String, Object> whereKeyValue){
-            return count__db(whereKeyValue, 0);
+            return count__db(whereKeyValue, 0, 0);
     }
 
 

@@ -94,19 +94,11 @@ public class FacebookAccessTokenDb{
                         }
                                   
                                 
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String userIdData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getUserId");
-                              if(method.invoke(_modelData) != null){
-                                //userIdData = _modelData.getUserId().toString();
-                                userIdData = (String) method.invoke(_modelData);
-                                values.put("`userId`", userIdData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
+                                                            String userIdData = "";
+                        if(_modelData.getUserId() != null){
+                          userIdData = _modelData.getUserId().toString();
+                          values.put("`userId`", userIdData);
                         }
-
                                   
                                 
                                                             String typeData = "";
@@ -114,66 +106,6 @@ public class FacebookAccessTokenDb{
                           typeData = _modelData.getType().toString();
                           values.put("`type`", typeData);
                         }
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String is_deletedData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getIs_deleted");
-                              if(method.invoke(_modelData) != null){
-                                //is_deletedData = _modelData.getIs_deleted().toString();
-                                is_deletedData = (String) method.invoke(_modelData);
-                                values.put("`is_deleted`", is_deletedData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String addedData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getAdded");
-                              if(method.invoke(_modelData) != null){
-                                //addedData = _modelData.getAdded().toString();
-                                addedData = (String) method.invoke(_modelData);
-                                values.put("`added`", addedData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String updatedData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getUpdated");
-                              if(method.invoke(_modelData) != null){
-                                //updatedData = _modelData.getUpdated().toString();
-                                updatedData = (String) method.invoke(_modelData);
-                                values.put("`updated`", updatedData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String customerIdData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getCustomerId");
-                              if(method.invoke(_modelData) != null){
-                                //customerIdData = _modelData.getCustomerId().toString();
-                                customerIdData = (String) method.invoke(_modelData);
-                                values.put("`customerId`", customerIdData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
                                   
                   
         
@@ -291,7 +223,7 @@ public class FacebookAccessTokenDb{
                         if(cursor.getString(3) != null){
                           userIdData = cursor.getString(3);
                           if(userIdData != null){
-                            userIdData = userIdData.toString();
+                            userIdData = (String)userIdData;
                             hashMap.put("userId", userIdData);
                           }
                         }
@@ -303,46 +235,6 @@ public class FacebookAccessTokenDb{
                           if(typeData != null){
                             typeData = (String)typeData;
                             hashMap.put("type", typeData);
-                          }
-                        }
-                                                
-                                
-                                                            String is_deletedData = "";
-                        if(cursor.getString(5) != null){
-                          is_deletedData = cursor.getString(5);
-                          if(is_deletedData != null){
-                            is_deletedData = is_deletedData.toString();
-                            hashMap.put("is_deleted", is_deletedData);
-                          }
-                        }
-                                                
-                                
-                                                            String addedData = "";
-                        if(cursor.getString(6) != null){
-                          addedData = cursor.getString(6);
-                          if(addedData != null){
-                            addedData = addedData.toString();
-                            hashMap.put("added", addedData);
-                          }
-                        }
-                                                
-                                
-                                                            String updatedData = "";
-                        if(cursor.getString(7) != null){
-                          updatedData = cursor.getString(7);
-                          if(updatedData != null){
-                            updatedData = updatedData.toString();
-                            hashMap.put("updated", updatedData);
-                          }
-                        }
-                                                
-                                
-                                                            String customerIdData = "";
-                        if(cursor.getString(8) != null){
-                          customerIdData = cursor.getString(8);
-                          if(customerIdData != null){
-                            customerIdData = customerIdData.toString();
-                            hashMap.put("customerId", customerIdData);
                           }
                         }
                                                 
@@ -495,13 +387,13 @@ public class FacebookAccessTokenDb{
 
     // Getting All Data where
     public DataList<FacebookAccessToken>  getAll__db(HashMap<String, Object> whereKeyValue) {
-        return getAll__db(whereKeyValue, null, 0);
+        return getAll__db(whereKeyValue, null, 0, 0);
     }
 
 
 
     // Getting All Data where and sort column according to date wise..
-    public DataList<FacebookAccessToken>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
+    public DataList<FacebookAccessToken>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip) {
         DataList<FacebookAccessToken> modelList = new DataList<FacebookAccessToken>();
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
@@ -509,14 +401,16 @@ public class FacebookAccessTokenDb{
             selectQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
-                selectQuery = selectQuery +  " " + " LIMIT " + limit;
+                selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
+            }else{
+                selectQuery = selectQuery +  " " + " OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
-                selectQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery + " LIMIT " + limit;
+                selectQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery;
+                selectQuery = "SELECT  * FROM FacebookAccessToken " + whereQuery  + " OFFSET " + skip;
             }
         }
 
@@ -549,9 +443,10 @@ public class FacebookAccessTokenDb{
     }
 
 
+
     // Getting All Data where
-    public DataList<FacebookAccessToken>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
-        return getAll__db(whereKeyValue, null,  limit);
+    public DataList<FacebookAccessToken>  getAll__db(HashMap<String, Object> whereKeyValue, int limit, int skip) {
+        return getAll__db(whereKeyValue, null,  limit, skip);
     }
 
 
@@ -565,21 +460,23 @@ public class FacebookAccessTokenDb{
      * @param limit
      * @return
      */
-    public int count__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit){
+    public int count__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip){
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
             countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
-                countQuery = countQuery +  " " + " LIMIT " + limit;
+                countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
+            }else{
+                countQuery = countQuery +  " " + " OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery;
+                countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery + " OFFSET " + skip;
             }
         }
 
@@ -592,19 +489,20 @@ public class FacebookAccessTokenDb{
     }
 
 
+
     /**
      * Check count of database.
      * @param whereKeyValue
      * @param limit
      * @return
      */
-    public int count__db(HashMap<String, Object> whereKeyValue, int limit){
+    public int count__db(HashMap<String, Object> whereKeyValue, int limit, int skip){
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery;
+            countQuery = "SELECT  * FROM `FacebookAccessToken` " + whereQuery + " OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -621,7 +519,7 @@ public class FacebookAccessTokenDb{
      * @return
      */
     public int count__db(HashMap<String, Object> whereKeyValue){
-            return count__db(whereKeyValue, 0);
+            return count__db(whereKeyValue, 0, 0);
     }
 
 

@@ -97,6 +97,16 @@ public class SnaphyNotificationDb{
                         }
                                   
                                 
+                                                            String optionsData = "";
+                        if(_modelData.getOptions() != null){
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                          optionsData = gson.toJson(_modelData.getOptions(), HashMap.class);
+                          values.put("`options`", optionsData);
+                        }
+                                  
+                                
                                                             String addedData = "";
                         if(_modelData.getAdded() != null){
                           addedData = _modelData.getAdded().toString();
@@ -262,9 +272,22 @@ public class SnaphyNotificationDb{
                         }
                                                 
                                 
-                                                            String addedData = "";
+                                                            Map<String, Object> optionsData = new HashMap<>();
                         if(cursor.getString(3) != null){
-                          addedData = cursor.getString(3);
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                           optionsData = gson.fromJson(cursor.getString(3), Map.class);
+                          if(optionsData != null){
+                            optionsData = (Map<String, Object>)optionsData;
+                            hashMap.put("options", optionsData);
+                          }
+                        }
+                                                
+                                
+                                                            String addedData = "";
+                        if(cursor.getString(4) != null){
+                          addedData = cursor.getString(4);
                           if(addedData != null){
                             addedData = (String)addedData;
                             hashMap.put("added", addedData);
@@ -273,8 +296,8 @@ public class SnaphyNotificationDb{
                                                 
                                 
                                                             String updatedData = "";
-                        if(cursor.getString(4) != null){
-                          updatedData = cursor.getString(4);
+                        if(cursor.getString(5) != null){
+                          updatedData = cursor.getString(5);
                           if(updatedData != null){
                             updatedData = (String)updatedData;
                             hashMap.put("updated", updatedData);
@@ -283,8 +306,8 @@ public class SnaphyNotificationDb{
                                                 
                                 
                                                             String statusData = "";
-                        if(cursor.getString(5) != null){
-                          statusData = cursor.getString(5);
+                        if(cursor.getString(6) != null){
+                          statusData = cursor.getString(6);
                           if(statusData != null){
                             statusData = (String)statusData;
                             hashMap.put("status", statusData);
@@ -293,8 +316,8 @@ public class SnaphyNotificationDb{
                                                 
                                 
                                                             String is_deletedData = "";
-                        if(cursor.getString(6) != null){
-                          is_deletedData = cursor.getString(6);
+                        if(cursor.getString(7) != null){
+                          is_deletedData = cursor.getString(7);
                           if(is_deletedData != null){
                             is_deletedData = is_deletedData.toString();
                             hashMap.put("is_deleted", is_deletedData);
@@ -303,8 +326,8 @@ public class SnaphyNotificationDb{
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(7) != null){
-                          idData = cursor.getString(7);
+                        if(cursor.getString(8) != null){
+                          idData = cursor.getString(8);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -460,13 +483,13 @@ public class SnaphyNotificationDb{
 
     // Getting All Data where
     public DataList<SnaphyNotification>  getAll__db(HashMap<String, Object> whereKeyValue) {
-        return getAll__db(whereKeyValue, null, 0);
+        return getAll__db(whereKeyValue, null, 0, 0);
     }
 
 
 
     // Getting All Data where and sort column according to date wise..
-    public DataList<SnaphyNotification>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
+    public DataList<SnaphyNotification>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip) {
         DataList<SnaphyNotification> modelList = new DataList<SnaphyNotification>();
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
@@ -474,14 +497,16 @@ public class SnaphyNotificationDb{
             selectQuery = "SELECT  * FROM `SnaphyNotification` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
-                selectQuery = selectQuery +  " " + " LIMIT " + limit;
+                selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
+            }else{
+                selectQuery = selectQuery +  " " + " OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
-                selectQuery = "SELECT  * FROM SnaphyNotification " + whereQuery + " LIMIT " + limit;
+                selectQuery = "SELECT  * FROM SnaphyNotification " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM SnaphyNotification " + whereQuery;
+                selectQuery = "SELECT  * FROM SnaphyNotification " + whereQuery  + " OFFSET " + skip;
             }
         }
 
@@ -514,9 +539,10 @@ public class SnaphyNotificationDb{
     }
 
 
+
     // Getting All Data where
-    public DataList<SnaphyNotification>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
-        return getAll__db(whereKeyValue, null,  limit);
+    public DataList<SnaphyNotification>  getAll__db(HashMap<String, Object> whereKeyValue, int limit, int skip) {
+        return getAll__db(whereKeyValue, null,  limit, skip);
     }
 
 
@@ -530,21 +556,23 @@ public class SnaphyNotificationDb{
      * @param limit
      * @return
      */
-    public int count__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit){
+    public int count__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip){
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
             countQuery = "SELECT  * FROM `SnaphyNotification` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
-                countQuery = countQuery +  " " + " LIMIT " + limit;
+                countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
+            }else{
+                countQuery = countQuery +  " " + " OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM `SnaphyNotification` " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `SnaphyNotification` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `SnaphyNotification` " + whereQuery;
+                countQuery = "SELECT  * FROM `SnaphyNotification` " + whereQuery + " OFFSET " + skip;
             }
         }
 
@@ -557,19 +585,20 @@ public class SnaphyNotificationDb{
     }
 
 
+
     /**
      * Check count of database.
      * @param whereKeyValue
      * @param limit
      * @return
      */
-    public int count__db(HashMap<String, Object> whereKeyValue, int limit){
+    public int count__db(HashMap<String, Object> whereKeyValue, int limit, int skip){
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM `SnaphyNotification` " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `SnaphyNotification` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `SnaphyNotification` " + whereQuery;
+            countQuery = "SELECT  * FROM `SnaphyNotification` " + whereQuery + " OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -586,7 +615,7 @@ public class SnaphyNotificationDb{
      * @return
      */
     public int count__db(HashMap<String, Object> whereKeyValue){
-            return count__db(whereKeyValue, 0);
+            return count__db(whereKeyValue, 0, 0);
     }
 
 

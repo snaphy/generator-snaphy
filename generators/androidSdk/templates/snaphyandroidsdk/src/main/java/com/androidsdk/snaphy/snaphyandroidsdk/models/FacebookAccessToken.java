@@ -30,13 +30,6 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.FacebookAccessTokenRepo
 
 //Now import repository of related models..
 
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.CustomerRepository;
-            
-
-        
-    
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -133,6 +126,20 @@ public class FacebookAccessToken extends Model {
             
 
             
+                private String userId;
+                /* Adding Getter and Setter methods */
+                public String getUserId(){
+                    return userId;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setUserId(String userId){
+                    this.userId = userId;
+                    //Update hashMap value..
+                    hashMap.put("userId", userId);
+                }
+
+            
             
         
     
@@ -152,34 +159,6 @@ public class FacebookAccessToken extends Model {
                     //Update hashMap value..
                     hashMap.put("type", type);
                 }
-
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
-
-            
-            
-        
-    
-        
-            
 
             
             
@@ -254,205 +233,6 @@ public class FacebookAccessToken extends Model {
 
 
     //Now adding relations between related models
-    
-        
-        
-                
-                    //Define belongsTo relation method here..
-                    private transient Customer  customer ;
-                    private String userId;
-
-                    public String getUserId(){
-                         return userId;
-                    }
-
-                    public void setUserId(Object userId){
-                        if(userId != null){
-                          this.userId = userId.toString();
-                        }
-                    }
-
-                    public Customer getCustomer() {
-                        try{
-                          //Adding database method for fetching from relation if not present..
-                                      if(customer == null){
-                                        FacebookAccessTokenRepository facebookAccessTokenRepository = (FacebookAccessTokenRepository) getRepository();
-
-                                        RestAdapter restAdapter = facebookAccessTokenRepository.getRestAdapter();
-                                        if(restAdapter != null){
-                                          //Fetch locally from db
-                                          customer = getCustomer__db(restAdapter);
-                                        }
-                                      }
-                        }catch(Exception e){
-                          //Ignore
-                        }
-
-                        return customer;
-                    }
-
-                    public void setCustomer(Customer customer) {
-                        this.customer = customer;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setCustomer(Map<String, Object> customer) {
-                        //First create a dummy Repo class object for customer.
-                        CustomerRepository customerRepository = new CustomerRepository();
-                        Customer customer1 = customerRepository.createObject(customer);
-                        setCustomer(customer1);
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setCustomer(HashMap<String, Object> customer) {
-                        //First create a dummy Repo class object for customer.
-                        CustomerRepository customerRepository = new CustomerRepository();
-                        Customer customer1 = customerRepository.createObject(customer);
-                        setCustomer(customer1);
-                    }
-
-                    //Adding relation method..
-                    public void addRelation(Customer customer) {
-                        that.setCustomer(customer);
-                    }
-
-
-                    //Fetch related data from local database if present a userId identifier as property for belongsTo
-                    public Customer getCustomer__db(RestAdapter restAdapter){
-                      if(userId != null){
-                        CustomerRepository customerRepository = restAdapter.createRepository(CustomerRepository.class);
-                            try{
-                            FacebookAccessTokenRepository lowercaseFirstLetterRepository = (FacebookAccessTokenRepository) getRepository();
-                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-                                                Context context = lowercaseFirstLetterRepository.getContext();
-                                                if(customerRepository.getDb() == null ){
-                                                    customerRepository.addStorage(context);
-                                                }
-
-                                                if(context != null && customerRepository.getDb() != null){
-                                                    customerRepository.addStorage(context);
-                                                    Customer customer = (Customer) customerRepository.getDb().get__db(userId);
-                                                    return customer;
-                                                }else{
-                                                    return null;
-                                                }
-                                          }else{
-                                            return null;
-                                          }
-                            }catch(Exception e){
-                            //Ignore exception..
-                            return null;
-                            }
-
-                        }else{
-                          return null;
-                      }
-                    }
-                
-
-                
-                
-
-
-
-
-
-
-
-                    //Now add instance methods to fetch the related belongsTo Model..
-                    
-
-                    
-
-                                    //Write the method here..
-                                    public void get__customer( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Customer> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final FacebookAccessTokenRepository  facebookAccessTokenRepo = restAdapter.createRepository(FacebookAccessTokenRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        facebookAccessTokenRepo.get__customer( (String)that.getId(), refresh,  new ObjectCallback<Customer> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(Customer object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    
-
-                
-
-                 
-                 
-             
-          
       
 
 }

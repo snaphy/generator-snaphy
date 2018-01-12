@@ -95,21 +95,6 @@ public class StateDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String is_deletedData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getIs_deleted");
-                              if(method.invoke(_modelData) != null){
-                                //is_deletedData = _modelData.getIs_deleted().toString();
-                                is_deletedData = (String) method.invoke(_modelData);
-                                values.put("`is_deleted`", is_deletedData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
                               Method method = _modelData.getClass().getMethod("getId");
@@ -235,19 +220,9 @@ public class StateDb{
                         }
                                                 
                                 
-                                                            String is_deletedData = "";
-                        if(cursor.getString(3) != null){
-                          is_deletedData = cursor.getString(3);
-                          if(is_deletedData != null){
-                            is_deletedData = is_deletedData.toString();
-                            hashMap.put("is_deleted", is_deletedData);
-                          }
-                        }
-                                                
-                                
                                                             String idData = "";
-                        if(cursor.getString(4) != null){
-                          idData = cursor.getString(4);
+                        if(cursor.getString(3) != null){
+                          idData = cursor.getString(3);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -403,13 +378,13 @@ public class StateDb{
 
     // Getting All Data where
     public DataList<State>  getAll__db(HashMap<String, Object> whereKeyValue) {
-        return getAll__db(whereKeyValue, null, 0);
+        return getAll__db(whereKeyValue, null, 0, 0);
     }
 
 
 
     // Getting All Data where and sort column according to date wise..
-    public DataList<State>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit) {
+    public DataList<State>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip) {
         DataList<State> modelList = new DataList<State>();
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
@@ -417,14 +392,16 @@ public class StateDb{
             selectQuery = "SELECT  * FROM `State` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
-                selectQuery = selectQuery +  " " + " LIMIT " + limit;
+                selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
+            }else{
+                selectQuery = selectQuery +  " " + " OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
-                selectQuery = "SELECT  * FROM State " + whereQuery + " LIMIT " + limit;
+                selectQuery = "SELECT  * FROM State " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM State " + whereQuery;
+                selectQuery = "SELECT  * FROM State " + whereQuery  + " OFFSET " + skip;
             }
         }
 
@@ -457,9 +434,10 @@ public class StateDb{
     }
 
 
+
     // Getting All Data where
-    public DataList<State>  getAll__db(HashMap<String, Object> whereKeyValue, int limit) {
-        return getAll__db(whereKeyValue, null,  limit);
+    public DataList<State>  getAll__db(HashMap<String, Object> whereKeyValue, int limit, int skip) {
+        return getAll__db(whereKeyValue, null,  limit, skip);
     }
 
 
@@ -473,21 +451,23 @@ public class StateDb{
      * @param limit
      * @return
      */
-    public int count__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit){
+    public int count__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip){
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
             countQuery = "SELECT  * FROM `State` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
-                countQuery = countQuery +  " " + " LIMIT " + limit;
+                countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
+            }else{
+                countQuery = countQuery +  " " + " OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM `State` " + whereQuery + " LIMIT " + limit;
+                countQuery = "SELECT  * FROM `State` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `State` " + whereQuery;
+                countQuery = "SELECT  * FROM `State` " + whereQuery + " OFFSET " + skip;
             }
         }
 
@@ -500,19 +480,20 @@ public class StateDb{
     }
 
 
+
     /**
      * Check count of database.
      * @param whereKeyValue
      * @param limit
      * @return
      */
-    public int count__db(HashMap<String, Object> whereKeyValue, int limit){
+    public int count__db(HashMap<String, Object> whereKeyValue, int limit, int skip){
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM `State` " + whereQuery + " LIMIT " + limit;
+            countQuery = "SELECT  * FROM `State` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `State` " + whereQuery;
+            countQuery = "SELECT  * FROM `State` " + whereQuery + " OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -529,7 +510,7 @@ public class StateDb{
      * @return
      */
     public int count__db(HashMap<String, Object> whereKeyValue){
-            return count__db(whereKeyValue, 0);
+            return count__db(whereKeyValue, 0, 0);
     }
 
 
