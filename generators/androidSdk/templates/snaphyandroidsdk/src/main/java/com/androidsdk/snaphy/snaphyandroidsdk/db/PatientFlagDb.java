@@ -123,21 +123,6 @@ public class PatientFlagDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String patientIdData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getPatientId");
-                              if(method.invoke(_modelData) != null){
-                                //patientIdData = _modelData.getPatientId().toString();
-                                patientIdData = (String) method.invoke(_modelData);
-                                values.put("`patientId`", patientIdData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String patientSecurityIdData = "";
                         try {
                               Method method = _modelData.getClass().getMethod("getPatientSecurityId");
@@ -281,19 +266,9 @@ public class PatientFlagDb{
                         }
                                                 
                                 
-                                                            String patientIdData = "";
-                        if(cursor.getString(5) != null){
-                          patientIdData = cursor.getString(5);
-                          if(patientIdData != null){
-                            patientIdData = patientIdData.toString();
-                            hashMap.put("patientId", patientIdData);
-                          }
-                        }
-                                                
-                                
                                                             String patientSecurityIdData = "";
-                        if(cursor.getString(6) != null){
-                          patientSecurityIdData = cursor.getString(6);
+                        if(cursor.getString(5) != null){
+                          patientSecurityIdData = cursor.getString(5);
                           if(patientSecurityIdData != null){
                             patientSecurityIdData = patientSecurityIdData.toString();
                             hashMap.put("patientSecurityId", patientSecurityIdData);
@@ -465,14 +440,14 @@ public class PatientFlagDb{
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = selectQuery +  " " + " OFFSET " + skip;
+                selectQuery = selectQuery +  " " + " LIMIT -1 OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 selectQuery = "SELECT  * FROM PatientFlag " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM PatientFlag " + whereQuery  + " OFFSET " + skip;
+                selectQuery = "SELECT  * FROM PatientFlag " + whereQuery  + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -531,14 +506,14 @@ public class PatientFlagDb{
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = countQuery +  " " + " OFFSET " + skip;
+                countQuery = countQuery + " LIMIT -1  OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 countQuery = "SELECT  * FROM `PatientFlag` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `PatientFlag` " + whereQuery + " OFFSET " + skip;
+                countQuery = "SELECT  * FROM `PatientFlag` " + whereQuery + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -564,7 +539,7 @@ public class PatientFlagDb{
         if(limit != 0){
             countQuery = "SELECT  * FROM `PatientFlag` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `PatientFlag` " + whereQuery + " OFFSET " + skip;
+            countQuery = "SELECT  * FROM `PatientFlag` " + whereQuery + " LIMIT -1 OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

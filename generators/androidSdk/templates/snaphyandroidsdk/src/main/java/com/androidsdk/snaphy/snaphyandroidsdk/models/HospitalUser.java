@@ -117,6 +117,20 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.HospitalUserRepository;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ReferPatientRepository;
+            
+
+        
+    
+
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatItemRepository;
+            
+
+        
+    
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -150,38 +164,17 @@ public class HospitalUser extends User {
             
 
             
-                private String unique_number;
+                private String added;
                 /* Adding Getter and Setter methods */
-                public String getUnique_number(){
-                    return unique_number;
+                public String getAdded(){
+                    return added;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setUnique_number(String unique_number){
-                    this.unique_number = unique_number;
+                public void setAdded(String added){
+                    this.added = added;
                     //Update hashMap value..
-                    hashMap.put("unique_number", unique_number);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private Map<String, Object> profilePic;
-                /* Adding Getter and Setter methods */
-                public Map<String, Object> getProfilePic(){
-                    return profilePic;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setProfilePic(Map<String, Object> profilePic){
-                    this.profilePic = profilePic;
-                    //Update Map value..
-                    hashMap.put("profilePic", profilePic);
+                    hashMap.put("added", added);
                 }
 
             
@@ -234,27 +227,6 @@ public class HospitalUser extends User {
             
 
             
-                private String gender;
-                /* Adding Getter and Setter methods */
-                public String getGender(){
-                    return gender;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setGender(String gender){
-                    this.gender = gender;
-                    //Update hashMap value..
-                    hashMap.put("gender", gender);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
                 private String contactNumber;
                 /* Adding Getter and Setter methods */
                 public String getContactNumber(){
@@ -287,6 +259,111 @@ public class HospitalUser extends User {
                     this.designation = designation;
                     //Update hashMap value..
                     hashMap.put("designation", designation);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String gender;
+                /* Adding Getter and Setter methods */
+                public String getGender(){
+                    return gender;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setGender(String gender){
+                    this.gender = gender;
+                    //Update hashMap value..
+                    hashMap.put("gender", gender);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String updated;
+                /* Adding Getter and Setter methods */
+                public String getUpdated(){
+                    return updated;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setUpdated(String updated){
+                    this.updated = updated;
+                    //Update hashMap value..
+                    hashMap.put("updated", updated);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private boolean isDoctor;
+                /* Adding Getter and Setter methods */
+                public boolean getIsDoctor(){
+                    return isDoctor;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setIsDoctor(boolean isDoctor){
+                    this.isDoctor = isDoctor;
+                    //Update hashMap value..
+                    hashMap.put("isDoctor", isDoctor);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String unique_number;
+                /* Adding Getter and Setter methods */
+                public String getUnique_number(){
+                    return unique_number;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setUnique_number(String unique_number){
+                    this.unique_number = unique_number;
+                    //Update hashMap value..
+                    hashMap.put("unique_number", unique_number);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private Map<String, Object> profilePic;
+                /* Adding Getter and Setter methods */
+                public Map<String, Object> getProfilePic(){
+                    return profilePic;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setProfilePic(Map<String, Object> profilePic){
+                    this.profilePic = profilePic;
+                    //Update Map value..
+                    hashMap.put("profilePic", profilePic);
                 }
 
             
@@ -360,6 +437,27 @@ public class HospitalUser extends User {
             
 
             
+                private Map<String, Object> image;
+                /* Adding Getter and Setter methods */
+                public Map<String, Object> getImage(){
+                    return image;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setImage(Map<String, Object> image){
+                    this.image = image;
+                    //Update Map value..
+                    hashMap.put("image", image);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
                 private double yearOfExperience;
                 /* Adding Getter and Setter methods */
                 public double getYearOfExperience(){
@@ -392,90 +490,6 @@ public class HospitalUser extends User {
                     this.yearOfBirth = yearOfBirth;
                     //Update hashMap value..
                     hashMap.put("yearOfBirth", yearOfBirth);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private String added;
-                /* Adding Getter and Setter methods */
-                public String getAdded(){
-                    return added;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setAdded(String added){
-                    this.added = added;
-                    //Update hashMap value..
-                    hashMap.put("added", added);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private String updated;
-                /* Adding Getter and Setter methods */
-                public String getUpdated(){
-                    return updated;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setUpdated(String updated){
-                    this.updated = updated;
-                    //Update hashMap value..
-                    hashMap.put("updated", updated);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private boolean isDoctor;
-                /* Adding Getter and Setter methods */
-                public boolean getIsDoctor(){
-                    return isDoctor;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setIsDoctor(boolean isDoctor){
-                    this.isDoctor = isDoctor;
-                    //Update hashMap value..
-                    hashMap.put("isDoctor", isDoctor);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private Map<String, Object> image;
-                /* Adding Getter and Setter methods */
-                public Map<String, Object> getImage(){
-                    return image;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setImage(Map<String, Object> image){
-                    this.image = image;
-                    //Update Map value..
-                    hashMap.put("image", image);
                 }
 
             
@@ -1066,6 +1080,18 @@ public class HospitalUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -1320,6 +1346,24 @@ public class HospitalUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -1756,6 +1800,18 @@ public class HospitalUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -2002,6 +2058,24 @@ public class HospitalUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -2446,6 +2520,18 @@ public class HospitalUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -2684,6 +2770,24 @@ public class HospitalUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -3039,6 +3143,36 @@ public class HospitalUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -3496,6 +3630,18 @@ public class HospitalUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -3718,6 +3864,24 @@ public class HospitalUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -4186,6 +4350,18 @@ public class HospitalUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -4400,6 +4576,24 @@ public class HospitalUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -4876,6 +5070,18 @@ public class HospitalUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -5082,6 +5288,24 @@ public class HospitalUser extends User {
                                     } //method def ends here.
                                  
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -5534,6 +5758,18 @@ public class HospitalUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -5764,6 +6000,24 @@ public class HospitalUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -6119,6 +6373,36 @@ public class HospitalUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -6471,6 +6755,36 @@ public class HospitalUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -6823,6 +7137,36 @@ public class HospitalUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -7175,6 +7519,36 @@ public class HospitalUser extends User {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -7237,6 +7611,1430 @@ public class HospitalUser extends User {
                     
 
                 
+
+                 
+                 
+             
+          
+    
+        
+        
+                
+
+                
+                    
+                    //Define hasMany relation method here..
+                    private transient DataList<ReferPatient>  referPatients ;
+
+                    public DataList< ReferPatient > getReferPatients() {
+                        //Check for pure case of hasMany
+                                                    //TODO: Modify foreign key name..
+                          try{
+                            ReferPatientRepository referPatientRepository = (ReferPatientRepository) getRepository();
+
+                            if(that.getId() != null && referPatientRepository.getDb() != null){
+
+                                 //Fetch locally from db
+                                 //referPatients = getReferPatients__db(restAdapter);
+                                 // Getting single cont
+                                 referPatients = referPatientRepository.getDb().getAll__db("hospitalUserId", that.getId().toString());
+
+                                 //lowercaseFirstLetter(modelName)
+                            }
+                          }catch(Exception e){
+                                //Ignore
+                          }
+                                                return referPatients;
+                    }
+
+                    public void setReferPatients(DataList<ReferPatient> referPatients) {
+                        boolean hashType = false;
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
+                        for(Object o: referPatients){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
+                        }
+
+                        if(hashType){
+                            setReferPatients1(hashMaps);
+                        }else{
+                            this.referPatients = referPatients;
+                            //TODO: Warning move this to new thread
+                            for(ReferPatient data: referPatients){
+                              try{
+                                data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
+                            }
+                        }
+                    }
+
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setReferPatients1(List<Map<String, Object>> referPatients) {
+                        //First create a dummy Repo class object for ..
+                        ReferPatientRepository referPatientsRepository = new ReferPatientRepository();
+                        List<ReferPatient> result = new ArrayList<>();
+                        for (Map<String, Object> obj : referPatients) {
+                            //Also add relation to child type for two way communication..
+                            ReferPatient obj1 = referPatientsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setReferPatients(result);
+
+                    }
+
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setReferPatients1(DataList<HashMap<String, Object>> referPatients) {
+                        //First create a dummy Repo class object for ..
+                        ReferPatientRepository referPatientsRepository = new ReferPatientRepository();
+                        DataList<ReferPatient> result = new DataList<>();
+                        for (HashMap<String, Object> obj : referPatients) {
+                            //Also add relation to child type for two way communication..
+                            ReferPatient obj1 = referPatientsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setReferPatients(result);
+
+                    }
+
+
+                    //Adding relation method..
+                    //Add a dummy class Name object to seperate data..
+                    public void addRelation(DataList<ReferPatient> referPatients, ReferPatient dummyClassInstance) {
+                        that.setReferPatients(referPatients);
+
+                    }
+
+                    //Adding relation method..
+                    //This will add a new data to the list relation object..
+                    public void addRelation(ReferPatient referPatients) {
+                        try{
+                            try{
+
+                                  //Save to database..
+                                  referPatients.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
+                            that.getReferPatients().add(referPatients);
+                        }catch(Exception e){
+                            DataList< ReferPatient> referPatients1 = new DataList();
+                            //Now add this item to list..
+                            referPatients1.add(referPatients);
+                            //Now set data....
+                            that.setReferPatients(referPatients1);
+                        }
+                    }
+
+
+
+
+                    
+                        //Implement logic for pure hasMany methods here....
+
+                    
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void findById__referPatients( String fk,  RestAdapter restAdapter, final ObjectCallback<ReferPatient> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final HospitalUserRepository  hospitalUserRepo = restAdapter.createRepository(HospitalUserRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        hospitalUserRepo.findById__referPatients( (String)that.getId(), fk,  new ObjectCallback<ReferPatient> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(ReferPatient object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void destroyById__referPatients( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final HospitalUserRepository  hospitalUserRepo = restAdapter.createRepository(HospitalUserRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        hospitalUserRepo.destroyById__referPatients( (String)that.getId(), fk,  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void updateById__referPatients( String fk,  ReferPatient data,  RestAdapter restAdapter, final ObjectCallback<ReferPatient> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final HospitalUserRepository  hospitalUserRepo = restAdapter.createRepository(HospitalUserRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        hospitalUserRepo.updateById__referPatients( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<ReferPatient> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(ReferPatient object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__referPatients( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<ReferPatient> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final HospitalUserRepository  hospitalUserRepo = restAdapter.createRepository(HospitalUserRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        hospitalUserRepo.get__referPatients( (String)that.getId(), filter,  new DataListCallback<ReferPatient> (){
+                                            
+
+                                            
+
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(DataList<ReferPatient> object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            ReferPatient obj = new ReferPatient();
+                                                            addRelation(object, obj);
+                                                            //Disabling two way communication for cyclic error..
+                                                            /*for (ReferPatient obj : object) {
+                                                                //Also add relation to child type for two way communication..
+                                                                obj.addRelation(that);
+                                                            }*/
+
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void create__referPatients( ReferPatient data,  RestAdapter restAdapter, final ObjectCallback<ReferPatient> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final HospitalUserRepository  hospitalUserRepo = restAdapter.createRepository(HospitalUserRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        hospitalUserRepo.create__referPatients( (String)that.getId(), data.convertMap(),  new ObjectCallback<ReferPatient> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(ReferPatient object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void delete__referPatients( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final HospitalUserRepository  hospitalUserRepo = restAdapter.createRepository(HospitalUserRepository.class);
+                                        
+                                        
+
+
+
+                                        hospitalUserRepo.delete__referPatients( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void count__referPatients( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final HospitalUserRepository  hospitalUserRepo = restAdapter.createRepository(HospitalUserRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        hospitalUserRepo.count__referPatients( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                        //Calling the finally..callback
+                                                        callback.onFinally();
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                
+                    //Define hasMany, hasManyThrough method here..
+
+                 
+                 
+             
+          
+    
+        
+        
+                
+
+                
+                    
+                    //Define hasMany relation method here..
+                    private transient DataList<ChatItem>  chatItems ;
+
+                    public DataList< ChatItem > getChatItems() {
+                        //Check for pure case of hasMany
+                                                    //TODO: Modify foreign key name..
+                          try{
+                            ChatItemRepository chatItemRepository = (ChatItemRepository) getRepository();
+
+                            if(that.getId() != null && chatItemRepository.getDb() != null){
+
+                                 //Fetch locally from db
+                                 //chatItems = getChatItems__db(restAdapter);
+                                 // Getting single cont
+                                 chatItems = chatItemRepository.getDb().getAll__db("hospitalUserId", that.getId().toString());
+
+                                 //lowercaseFirstLetter(modelName)
+                            }
+                          }catch(Exception e){
+                                //Ignore
+                          }
+                                                return chatItems;
+                    }
+
+                    public void setChatItems(DataList<ChatItem> chatItems) {
+                        boolean hashType = false;
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
+                        for(Object o: chatItems){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
+                        }
+
+                        if(hashType){
+                            setChatItems1(hashMaps);
+                        }else{
+                            this.chatItems = chatItems;
+                            //TODO: Warning move this to new thread
+                            for(ChatItem data: chatItems){
+                              try{
+                                data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
+                            }
+                        }
+                    }
+
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setChatItems1(List<Map<String, Object>> chatItems) {
+                        //First create a dummy Repo class object for ..
+                        ChatItemRepository chatItemsRepository = new ChatItemRepository();
+                        List<ChatItem> result = new ArrayList<>();
+                        for (Map<String, Object> obj : chatItems) {
+                            //Also add relation to child type for two way communication..
+                            ChatItem obj1 = chatItemsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setChatItems(result);
+
+                    }
+
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setChatItems1(DataList<HashMap<String, Object>> chatItems) {
+                        //First create a dummy Repo class object for ..
+                        ChatItemRepository chatItemsRepository = new ChatItemRepository();
+                        DataList<ChatItem> result = new DataList<>();
+                        for (HashMap<String, Object> obj : chatItems) {
+                            //Also add relation to child type for two way communication..
+                            ChatItem obj1 = chatItemsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setChatItems(result);
+
+                    }
+
+
+                    //Adding relation method..
+                    //Add a dummy class Name object to seperate data..
+                    public void addRelation(DataList<ChatItem> chatItems, ChatItem dummyClassInstance) {
+                        that.setChatItems(chatItems);
+
+                    }
+
+                    //Adding relation method..
+                    //This will add a new data to the list relation object..
+                    public void addRelation(ChatItem chatItems) {
+                        try{
+                            try{
+
+                                  //Save to database..
+                                  chatItems.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
+                            that.getChatItems().add(chatItems);
+                        }catch(Exception e){
+                            DataList< ChatItem> chatItems1 = new DataList();
+                            //Now add this item to list..
+                            chatItems1.add(chatItems);
+                            //Now set data....
+                            that.setChatItems(chatItems1);
+                        }
+                    }
+
+
+
+
+                    
+                        //Implement logic for pure hasMany methods here....
+
+                    
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void findById__chatItems( String fk,  RestAdapter restAdapter, final ObjectCallback<ChatItem> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final HospitalUserRepository  hospitalUserRepo = restAdapter.createRepository(HospitalUserRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        hospitalUserRepo.findById__chatItems( (String)that.getId(), fk,  new ObjectCallback<ChatItem> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(ChatItem object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void destroyById__chatItems( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final HospitalUserRepository  hospitalUserRepo = restAdapter.createRepository(HospitalUserRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        hospitalUserRepo.destroyById__chatItems( (String)that.getId(), fk,  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void updateById__chatItems( String fk,  ChatItem data,  RestAdapter restAdapter, final ObjectCallback<ChatItem> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final HospitalUserRepository  hospitalUserRepo = restAdapter.createRepository(HospitalUserRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        hospitalUserRepo.updateById__chatItems( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<ChatItem> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(ChatItem object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__chatItems( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<ChatItem> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final HospitalUserRepository  hospitalUserRepo = restAdapter.createRepository(HospitalUserRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        hospitalUserRepo.get__chatItems( (String)that.getId(), filter,  new DataListCallback<ChatItem> (){
+                                            
+
+                                            
+
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(DataList<ChatItem> object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            ChatItem obj = new ChatItem();
+                                                            addRelation(object, obj);
+                                                            //Disabling two way communication for cyclic error..
+                                                            /*for (ChatItem obj : object) {
+                                                                //Also add relation to child type for two way communication..
+                                                                obj.addRelation(that);
+                                                            }*/
+
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void create__chatItems( ChatItem data,  RestAdapter restAdapter, final ObjectCallback<ChatItem> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final HospitalUserRepository  hospitalUserRepo = restAdapter.createRepository(HospitalUserRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        hospitalUserRepo.create__chatItems( (String)that.getId(), data.convertMap(),  new ObjectCallback<ChatItem> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(ChatItem object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void delete__chatItems( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final HospitalUserRepository  hospitalUserRepo = restAdapter.createRepository(HospitalUserRepository.class);
+                                        
+                                        
+
+
+
+                                        hospitalUserRepo.delete__chatItems( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void count__chatItems( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final HospitalUserRepository  hospitalUserRepo = restAdapter.createRepository(HospitalUserRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        hospitalUserRepo.count__chatItems( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                        //Calling the finally..callback
+                                                        callback.onFinally();
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                
+                    //Define hasMany, hasManyThrough method here..
 
                  
                  

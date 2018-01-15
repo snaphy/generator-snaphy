@@ -990,9 +990,6 @@ public class PatientRepository extends UserRepository<Patient> {
 
     
     
-
-    
-    
     return contract;
     }
 
@@ -5267,8 +5264,6 @@ public class PatientRepository extends UserRepository<Patient> {
         
     
         
-        
-    
         
     
         

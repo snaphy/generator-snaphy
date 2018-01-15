@@ -87,9 +87,11 @@ public class HospitalUserEducationDb{
                         }
                                   
                                 
-                                                            double yearOfGraduationData;
-                        yearOfGraduationData = (double)_modelData.getYearOfGraduation();
-                        values.put("`yearOfGraduation`", yearOfGraduationData);
+                                                            String collegeNameData = "";
+                        if(_modelData.getCollegeName() != null){
+                          collegeNameData = _modelData.getCollegeName().toString();
+                          values.put("`collegeName`", collegeNameData);
+                        }
                                   
                                 
                                                             String degreeNameData = "";
@@ -99,11 +101,9 @@ public class HospitalUserEducationDb{
                         }
                                   
                                 
-                                                            String collegeNameData = "";
-                        if(_modelData.getCollegeName() != null){
-                          collegeNameData = _modelData.getCollegeName().toString();
-                          values.put("`collegeName`", collegeNameData);
-                        }
+                                                            double yearOfGraduationData;
+                        yearOfGraduationData = (double)_modelData.getYearOfGraduation();
+                        values.put("`yearOfGraduation`", yearOfGraduationData);
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
@@ -267,12 +267,14 @@ public class HospitalUserEducationDb{
                         }
                                                 
                                 
-                                                            double yearOfGraduationData = (double)0;
-                          yearOfGraduationData = cursor.getInt(2);
-                          yearOfGraduationData = (double)yearOfGraduationData;
-                          hashMap.put("yearOfGraduation", yearOfGraduationData);
-
-
+                                                            String collegeNameData = "";
+                        if(cursor.getString(2) != null){
+                          collegeNameData = cursor.getString(2);
+                          if(collegeNameData != null){
+                            collegeNameData = (String)collegeNameData;
+                            hashMap.put("collegeName", collegeNameData);
+                          }
+                        }
                                                 
                                 
                                                             String degreeNameData = "";
@@ -285,14 +287,12 @@ public class HospitalUserEducationDb{
                         }
                                                 
                                 
-                                                            String collegeNameData = "";
-                        if(cursor.getString(4) != null){
-                          collegeNameData = cursor.getString(4);
-                          if(collegeNameData != null){
-                            collegeNameData = (String)collegeNameData;
-                            hashMap.put("collegeName", collegeNameData);
-                          }
-                        }
+                                                            double yearOfGraduationData = (double)0;
+                          yearOfGraduationData = cursor.getInt(4);
+                          yearOfGraduationData = (double)yearOfGraduationData;
+                          hashMap.put("yearOfGraduation", yearOfGraduationData);
+
+
                                                 
                                 
                                                             String idData = "";
@@ -499,14 +499,14 @@ public class HospitalUserEducationDb{
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = selectQuery +  " " + " OFFSET " + skip;
+                selectQuery = selectQuery +  " " + " LIMIT -1 OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 selectQuery = "SELECT  * FROM HospitalUserEducation " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM HospitalUserEducation " + whereQuery  + " OFFSET " + skip;
+                selectQuery = "SELECT  * FROM HospitalUserEducation " + whereQuery  + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -565,14 +565,14 @@ public class HospitalUserEducationDb{
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = countQuery +  " " + " OFFSET " + skip;
+                countQuery = countQuery + " LIMIT -1  OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 countQuery = "SELECT  * FROM `HospitalUserEducation` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `HospitalUserEducation` " + whereQuery + " OFFSET " + skip;
+                countQuery = "SELECT  * FROM `HospitalUserEducation` " + whereQuery + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -598,7 +598,7 @@ public class HospitalUserEducationDb{
         if(limit != 0){
             countQuery = "SELECT  * FROM `HospitalUserEducation` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `HospitalUserEducation` " + whereQuery + " OFFSET " + skip;
+            countQuery = "SELECT  * FROM `HospitalUserEducation` " + whereQuery + " LIMIT -1 OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

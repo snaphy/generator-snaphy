@@ -140,17 +140,17 @@ public class HospitalUserSetting extends Model {
             
 
             
-                private String relationshipWithHospital;
+                private double consultationFees;
                 /* Adding Getter and Setter methods */
-                public String getRelationshipWithHospital(){
-                    return relationshipWithHospital;
+                public double getConsultationFees(){
+                    return consultationFees;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setRelationshipWithHospital(String relationshipWithHospital){
-                    this.relationshipWithHospital = relationshipWithHospital;
+                public void setConsultationFees(double consultationFees){
+                    this.consultationFees = consultationFees;
                     //Update hashMap value..
-                    hashMap.put("relationshipWithHospital", relationshipWithHospital);
+                    hashMap.put("consultationFees", consultationFees);
                 }
 
             
@@ -182,17 +182,17 @@ public class HospitalUserSetting extends Model {
             
 
             
-                private double consultationFees;
+                private String relationshipWithHospital;
                 /* Adding Getter and Setter methods */
-                public double getConsultationFees(){
-                    return consultationFees;
+                public String getRelationshipWithHospital(){
+                    return relationshipWithHospital;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setConsultationFees(double consultationFees){
-                    this.consultationFees = consultationFees;
+                public void setRelationshipWithHospital(String relationshipWithHospital){
+                    this.relationshipWithHospital = relationshipWithHospital;
                     //Update hashMap value..
-                    hashMap.put("consultationFees", consultationFees);
+                    hashMap.put("relationshipWithHospital", relationshipWithHospital);
                 }
 
             
@@ -236,6 +236,29 @@ public class HospitalUserSetting extends Model {
                     //Update hashMap value..
                     hashMap.put("followUpDays", followUpDays);
                 }
+
+            
+            
+        
+    
+        
+            
+
+                private DataList<Map<String, Object>> hospitalUserList;
+                /* Adding Getter and Setter methods */
+                public DataList<Map<String, Object>> getHospitalUserList(){
+                    return hospitalUserList;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setHospitalUserList(DataList<Map<String, Object>> hospitalUserList){
+                    this.hospitalUserList = hospitalUserList;
+
+                    //TODO change this to custom array with double quotes escaped if error occured when sending to server..
+                    hashMap.put("hospitalUserList", hospitalUserList);
+                }
+
+            
 
             
             
@@ -538,6 +561,7 @@ public class HospitalUserSetting extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -713,6 +737,7 @@ public class HospitalUserSetting extends Model {
                                     } //method def ends here.
                                  
                             
+                        
                         
                         
                         

@@ -175,7 +175,7 @@ public class DbHandler extends SQLiteOpenHelper {
                         
 
                         
-                        String CREATE_PatientGroup_TABLE_28 = "CREATE TABLE IF NOT EXISTS `PatientGroup` (  `unique_number` TEXT, `patientContactNumber` TEXT, `name` TEXT, `lama` NUMBER, `status` TEXT, `hasDischarged` NUMBER, `hasConsulted` NUMBER, `facility` TEXT, `relationLogs` TEXT, `diagnosis` TEXT, `admittedOn` TEXT, `added` TEXT, `updated` TEXT, `dischargedOn` TEXT, `consultedOn` TEXT, `patientOtherContactNumber` TEXT, `flaggedInSameHospital` NUMBER, `bedNumber` TEXT, `opdCode` TEXT, `opdNumber` NUMBER, `opdTokenNumber` TEXT, `addedBy` TEXT, `isDocumentScanned` NUMBER, `isRepeatCustomer` NUMBER, `isFollowUp` NUMBER, `lastFollowUpDate` TEXT, `actualFollowUp` NUMBER, `consultationFees` NUMBER, `followUpFees` NUMBER, `followUpDays` NUMBER, `nextFollowUpDate` TEXT, `isNew` NUMBER, `isFlagged` NUMBER, `flaggedFor` TEXT, `pincodeNumber` TEXT, `hashObject` TEXT, `id` TEXT PRIMARY KEY, `patientId` TEXT, `aadharId` TEXT, `hospitalId` TEXT, `ipdBedLogId` TEXT, `ipdBedId` TEXT, `opdTokenLogId` TEXT, `patientSecurityId` TEXT, `hospitalUserId` TEXT, `stateId` TEXT, `pincodeId` TEXT, `talukId` TEXT, `districtId` TEXT, _DATA_UPDATED NUMBER )";
+                        String CREATE_PatientGroup_TABLE_28 = "CREATE TABLE IF NOT EXISTS `PatientGroup` (  `added` TEXT, `updated` TEXT, `unique_number` TEXT, `patientContactNumber` TEXT, `name` TEXT, `lama` NUMBER, `status` TEXT, `hasDischarged` NUMBER, `hasConsulted` NUMBER, `facility` TEXT, `relationLogs` TEXT, `diagnosis` TEXT, `admittedOn` TEXT, `dischargedOn` TEXT, `consultedOn` TEXT, `patientOtherContactNumber` TEXT, `flaggedInSameHospital` NUMBER, `bedNumber` TEXT, `opdCode` TEXT, `opdNumber` NUMBER, `opdTokenNumber` TEXT, `addedBy` TEXT, `isDocumentScanned` NUMBER, `isRepeatCustomer` NUMBER, `isFollowUp` NUMBER, `lastFollowUpDate` TEXT, `actualFollowUp` NUMBER, `consultationFees` NUMBER, `followUpFees` NUMBER, `followUpDays` NUMBER, `nextFollowUpDate` TEXT, `isNew` NUMBER, `isFlagged` NUMBER, `flaggedFor` TEXT, `pincodeNumber` TEXT, `hashObject` TEXT, `id` TEXT PRIMARY KEY, `patientId` TEXT, `aadharId` TEXT, `hospitalId` TEXT, `ipdBedLogId` TEXT, `ipdBedId` TEXT, `opdTokenLogId` TEXT, `patientSecurityId` TEXT, `hospitalUserId` TEXT, `stateId` TEXT, `pincodeId` TEXT, `talukId` TEXT, `districtId` TEXT, _DATA_UPDATED NUMBER )";
                         db.execSQL(CREATE_PatientGroup_TABLE_28);
 
 
@@ -251,11 +251,11 @@ public class DbHandler extends SQLiteOpenHelper {
                         db.execSQL(CREATE_Flag_TABLE_37);
 
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                         
 
                         
-                        String CREATE_PatientFlag_TABLE_38 = "CREATE TABLE IF NOT EXISTS `PatientFlag` (  `added` TEXT, `updated` TEXT, `severityPoints` NUMBER, `id` TEXT PRIMARY KEY, `flagId` TEXT, `patientId` TEXT, `patientSecurityId` TEXT, _DATA_UPDATED NUMBER )";
+                        String CREATE_PatientFlag_TABLE_38 = "CREATE TABLE IF NOT EXISTS `PatientFlag` (  `added` TEXT, `updated` TEXT, `severityPoints` NUMBER, `id` TEXT PRIMARY KEY, `flagId` TEXT, `patientSecurityId` TEXT, _DATA_UPDATED NUMBER )";
                         db.execSQL(CREATE_PatientFlag_TABLE_38);
 
 
@@ -279,7 +279,7 @@ public class DbHandler extends SQLiteOpenHelper {
                         
 
                         
-                        String CREATE_HospitalUser_TABLE_41 = "CREATE TABLE IF NOT EXISTS `HospitalUser` (  `unique_number` TEXT, `profilePic` TEXT, `firstName` TEXT, `lastName` TEXT, `gender` TEXT, `contactNumber` TEXT, `designation` TEXT, `registrationNumber` TEXT, `registrationYear` NUMBER, `email` TEXT, `yearOfExperience` NUMBER, `yearOfBirth` NUMBER, `added` TEXT, `updated` TEXT, `isDoctor` NUMBER, `image` TEXT, `registeredStatus` TEXT, `authenticationStatus` TEXT, `realm` TEXT, `username` TEXT, `password` TEXT, `credentials` TEXT, `challenges` TEXT, `emailVerified` TEXT, `verificationToken` TEXT, `status` TEXT, `created` TEXT, `lastUpdated` TEXT, `id` TEXT PRIMARY KEY, `registrationCouncilId` TEXT, `stateId` TEXT, `pincodeId` TEXT, `talukId` TEXT, `districtId` TEXT, _DATA_UPDATED NUMBER )";
+                        String CREATE_HospitalUser_TABLE_41 = "CREATE TABLE IF NOT EXISTS `HospitalUser` (  `added` TEXT, `firstName` TEXT, `lastName` TEXT, `contactNumber` TEXT, `designation` TEXT, `gender` TEXT, `updated` TEXT, `isDoctor` NUMBER, `unique_number` TEXT, `profilePic` TEXT, `registrationNumber` TEXT, `registrationYear` NUMBER, `email` TEXT, `image` TEXT, `yearOfExperience` NUMBER, `yearOfBirth` NUMBER, `registeredStatus` TEXT, `authenticationStatus` TEXT, `realm` TEXT, `username` TEXT, `password` TEXT, `credentials` TEXT, `challenges` TEXT, `emailVerified` TEXT, `verificationToken` TEXT, `status` TEXT, `created` TEXT, `lastUpdated` TEXT, `id` TEXT PRIMARY KEY, `registrationCouncilId` TEXT, `stateId` TEXT, `pincodeId` TEXT, `talukId` TEXT, `districtId` TEXT, _DATA_UPDATED NUMBER )";
                         db.execSQL(CREATE_HospitalUser_TABLE_41);
 
 
@@ -299,11 +299,11 @@ public class DbHandler extends SQLiteOpenHelper {
                         db.execSQL(CREATE_HospitalUserSpecialization_TABLE_43);
 
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                         
 
                         
-                        String CREATE_HospitalUserSetting_TABLE_44 = "CREATE TABLE IF NOT EXISTS `HospitalUserSetting` (  `added` TEXT, `updated` TEXT, `userRole` TEXT, `relationshipWithHospital` TEXT, `code` TEXT, `consultationFees` NUMBER, `followUpFees` NUMBER, `followUpDays` NUMBER, `id` TEXT PRIMARY KEY, `hospitalUserId` TEXT, `hospitalId` TEXT, _DATA_UPDATED NUMBER )";
+                        String CREATE_HospitalUserSetting_TABLE_44 = "CREATE TABLE IF NOT EXISTS `HospitalUserSetting` (  `added` TEXT, `updated` TEXT, `userRole` TEXT, `consultationFees` NUMBER, `code` TEXT, `relationshipWithHospital` TEXT, `followUpFees` NUMBER, `followUpDays` NUMBER, `hospitalUserList` TEXT, `id` TEXT PRIMARY KEY, `hospitalUserId` TEXT, `hospitalId` TEXT, _DATA_UPDATED NUMBER )";
                         db.execSQL(CREATE_HospitalUserSetting_TABLE_44);
 
 
@@ -311,7 +311,7 @@ public class DbHandler extends SQLiteOpenHelper {
                         
 
                         
-                        String CREATE_HospitalUserEducation_TABLE_45 = "CREATE TABLE IF NOT EXISTS `HospitalUserEducation` (  `added` TEXT, `updated` TEXT, `yearOfGraduation` NUMBER, `degreeName` TEXT, `collegeName` TEXT, `id` TEXT PRIMARY KEY, `hospitalUserId` TEXT, `collegeId` TEXT, `degreeId` TEXT, _DATA_UPDATED NUMBER )";
+                        String CREATE_HospitalUserEducation_TABLE_45 = "CREATE TABLE IF NOT EXISTS `HospitalUserEducation` (  `added` TEXT, `updated` TEXT, `collegeName` TEXT, `degreeName` TEXT, `yearOfGraduation` NUMBER, `id` TEXT PRIMARY KEY, `hospitalUserId` TEXT, `collegeId` TEXT, `degreeId` TEXT, _DATA_UPDATED NUMBER )";
                         db.execSQL(CREATE_HospitalUserEducation_TABLE_45);
 
 
@@ -419,11 +419,11 @@ public class DbHandler extends SQLiteOpenHelper {
                         db.execSQL(CREATE_ImportData_TABLE_58);
 
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                         
 
                         
-                        String CREATE_ReferPatient_TABLE_59 = "CREATE TABLE IF NOT EXISTS `ReferPatient` (  `reason` TEXT, `unique_number` TEXT, `isRefered` NUMBER, `isConsulted` NUMBER, `listOfRecords` TEXT, `added` TEXT, `updated` TEXT, `description` TEXT, `id` TEXT PRIMARY KEY, `patientGroupId` TEXT, `patientId` TEXT, `referedHospitalId` TEXT, `referedHospitalUserId` TEXT, `repliedHospitalId` TEXT, `repliedHospitalUserId` TEXT, _DATA_UPDATED NUMBER )";
+                        String CREATE_ReferPatient_TABLE_59 = "CREATE TABLE IF NOT EXISTS `ReferPatient` (  `reason` TEXT, `unique_number` TEXT, `isRefered` NUMBER, `isConsulted` NUMBER, `listOfRecords` TEXT, `added` TEXT, `updated` TEXT, `description` TEXT, `id` TEXT PRIMARY KEY, `patientGroupId` TEXT, `patientId` TEXT, `hospitalReferById` TEXT, `hospitalUserReferById` TEXT, `hospitalReferToId` TEXT, `hospitalUserReferToId` TEXT, `hospitalId` TEXT, `hospitalUserId` TEXT, _DATA_UPDATED NUMBER )";
                         db.execSQL(CREATE_ReferPatient_TABLE_59);
 
 
@@ -457,6 +457,14 @@ public class DbHandler extends SQLiteOpenHelper {
                         
                         String CREATE_IpdCategory_TABLE_63 = "CREATE TABLE IF NOT EXISTS `IpdCategory` (  `added` TEXT, `updated` TEXT, `name` TEXT, `id` TEXT PRIMARY KEY, `hospitalId` TEXT, _DATA_UPDATED NUMBER )";
                         db.execSQL(CREATE_IpdCategory_TABLE_63);
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+
+                        
+                        String CREATE_ChatItem_TABLE_64 = "CREATE TABLE IF NOT EXISTS `ChatItem` (  `added` TEXT, `updated` TEXT, `type` TEXT, `message` TEXT, `image` TEXT, `id` TEXT PRIMARY KEY, `hospitalUserId` TEXT, `patientGroupId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_ChatItem_TABLE_64);
 
 
             
@@ -657,6 +665,9 @@ public class DbHandler extends SQLiteOpenHelper {
             
                 // Drop older table if existed
                 db.execSQL("DROP TABLE IF EXISTS `IpdCategory`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `ChatItem`");
             
 
             // Create tables again

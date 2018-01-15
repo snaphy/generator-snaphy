@@ -640,14 +640,14 @@ public class PatientSecurityDb{
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = selectQuery +  " " + " OFFSET " + skip;
+                selectQuery = selectQuery +  " " + " LIMIT -1 OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 selectQuery = "SELECT  * FROM PatientSecurity " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM PatientSecurity " + whereQuery  + " OFFSET " + skip;
+                selectQuery = "SELECT  * FROM PatientSecurity " + whereQuery  + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -706,14 +706,14 @@ public class PatientSecurityDb{
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = countQuery +  " " + " OFFSET " + skip;
+                countQuery = countQuery + " LIMIT -1  OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 countQuery = "SELECT  * FROM `PatientSecurity` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `PatientSecurity` " + whereQuery + " OFFSET " + skip;
+                countQuery = "SELECT  * FROM `PatientSecurity` " + whereQuery + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -739,7 +739,7 @@ public class PatientSecurityDb{
         if(limit != 0){
             countQuery = "SELECT  * FROM `PatientSecurity` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `PatientSecurity` " + whereQuery + " OFFSET " + skip;
+            countQuery = "SELECT  * FROM `PatientSecurity` " + whereQuery + " LIMIT -1 OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

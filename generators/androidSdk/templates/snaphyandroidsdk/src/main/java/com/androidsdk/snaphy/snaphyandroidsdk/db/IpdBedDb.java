@@ -436,14 +436,14 @@ public class IpdBedDb{
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = selectQuery +  " " + " OFFSET " + skip;
+                selectQuery = selectQuery +  " " + " LIMIT -1 OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 selectQuery = "SELECT  * FROM IpdBed " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM IpdBed " + whereQuery  + " OFFSET " + skip;
+                selectQuery = "SELECT  * FROM IpdBed " + whereQuery  + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -502,14 +502,14 @@ public class IpdBedDb{
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = countQuery +  " " + " OFFSET " + skip;
+                countQuery = countQuery + " LIMIT -1  OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 countQuery = "SELECT  * FROM `IpdBed` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `IpdBed` " + whereQuery + " OFFSET " + skip;
+                countQuery = "SELECT  * FROM `IpdBed` " + whereQuery + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -535,7 +535,7 @@ public class IpdBedDb{
         if(limit != 0){
             countQuery = "SELECT  * FROM `IpdBed` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `IpdBed` " + whereQuery + " OFFSET " + skip;
+            countQuery = "SELECT  * FROM `IpdBed` " + whereQuery + " LIMIT -1 OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

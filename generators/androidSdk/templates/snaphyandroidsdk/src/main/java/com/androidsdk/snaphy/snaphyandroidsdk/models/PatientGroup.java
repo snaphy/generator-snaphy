@@ -135,6 +135,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.PatientGroupRepository;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatItemRepository;
+            
+
+        
+    
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -163,6 +170,48 @@ public class PatientGroup extends Model {
         that = this;
     }
 
+    
+        
+            
+
+            
+                private String added;
+                /* Adding Getter and Setter methods */
+                public String getAdded(){
+                    return added;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setAdded(String added){
+                    this.added = added;
+                    //Update hashMap value..
+                    hashMap.put("added", added);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String updated;
+                /* Adding Getter and Setter methods */
+                public String getUpdated(){
+                    return updated;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setUpdated(String updated){
+                    this.updated = updated;
+                    //Update hashMap value..
+                    hashMap.put("updated", updated);
+                }
+
+            
+            
+        
     
         
             
@@ -389,48 +438,6 @@ public class PatientGroup extends Model {
                     this.admittedOn = admittedOn;
                     //Update hashMap value..
                     hashMap.put("admittedOn", admittedOn);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private String added;
-                /* Adding Getter and Setter methods */
-                public String getAdded(){
-                    return added;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setAdded(String added){
-                    this.added = added;
-                    //Update hashMap value..
-                    hashMap.put("added", added);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private String updated;
-                /* Adding Getter and Setter methods */
-                public String getUpdated(){
-                    return updated;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setUpdated(String updated){
-                    this.updated = updated;
-                    //Update hashMap value..
-                    hashMap.put("updated", updated);
                 }
 
             
@@ -1283,6 +1290,21 @@ public class PatientGroup extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
                         
                         
                         
@@ -1609,6 +1631,21 @@ public class PatientGroup extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
                         
                         
                         
@@ -1935,6 +1972,21 @@ public class PatientGroup extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
                         
                         
                         
@@ -2261,6 +2313,21 @@ public class PatientGroup extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
                         
                         
                         
@@ -2587,6 +2654,21 @@ public class PatientGroup extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
                         
                         
                         
@@ -2913,6 +2995,21 @@ public class PatientGroup extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
                         
                         
                         
@@ -3239,6 +3336,21 @@ public class PatientGroup extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
                         
                         
                         
@@ -3565,6 +3677,21 @@ public class PatientGroup extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
                         
                         
                         
@@ -3891,6 +4018,21 @@ public class PatientGroup extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
                         
                         
                         
@@ -4322,6 +4464,12 @@ public class PatientGroup extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -4544,6 +4692,15 @@ public class PatientGroup extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
                         
                         
                         
@@ -4986,6 +5143,12 @@ public class PatientGroup extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -5200,6 +5363,15 @@ public class PatientGroup extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
                         
                         
                         
@@ -5529,6 +5701,21 @@ public class PatientGroup extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
                         
                         
                         
@@ -5855,6 +6042,21 @@ public class PatientGroup extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
                         
                         
                         
@@ -6181,6 +6383,21 @@ public class PatientGroup extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
                         
                         
                         
@@ -6628,6 +6845,12 @@ public class PatientGroup extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -6834,6 +7057,686 @@ public class PatientGroup extends Model {
                                     } //method def ends here.
                                  
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                
+                    //Define hasMany, hasManyThrough method here..
+
+                 
+                 
+             
+          
+    
+        
+        
+                
+
+                
+                    
+                    //Define hasMany relation method here..
+                    private transient DataList<ChatItem>  chatItems ;
+
+                    public DataList< ChatItem > getChatItems() {
+                        //Check for pure case of hasMany
+                                                    //TODO: Modify foreign key name..
+                          try{
+                            ChatItemRepository chatItemRepository = (ChatItemRepository) getRepository();
+
+                            if(that.getId() != null && chatItemRepository.getDb() != null){
+
+                                 //Fetch locally from db
+                                 //chatItems = getChatItems__db(restAdapter);
+                                 // Getting single cont
+                                 chatItems = chatItemRepository.getDb().getAll__db("patientGroupId", that.getId().toString());
+
+                                 //lowercaseFirstLetter(modelName)
+                            }
+                          }catch(Exception e){
+                                //Ignore
+                          }
+                                                return chatItems;
+                    }
+
+                    public void setChatItems(DataList<ChatItem> chatItems) {
+                        boolean hashType = false;
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
+                        for(Object o: chatItems){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
+                        }
+
+                        if(hashType){
+                            setChatItems1(hashMaps);
+                        }else{
+                            this.chatItems = chatItems;
+                            //TODO: Warning move this to new thread
+                            for(ChatItem data: chatItems){
+                              try{
+                                data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
+                            }
+                        }
+                    }
+
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setChatItems1(List<Map<String, Object>> chatItems) {
+                        //First create a dummy Repo class object for ..
+                        ChatItemRepository chatItemsRepository = new ChatItemRepository();
+                        List<ChatItem> result = new ArrayList<>();
+                        for (Map<String, Object> obj : chatItems) {
+                            //Also add relation to child type for two way communication..
+                            ChatItem obj1 = chatItemsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setChatItems(result);
+
+                    }
+
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setChatItems1(DataList<HashMap<String, Object>> chatItems) {
+                        //First create a dummy Repo class object for ..
+                        ChatItemRepository chatItemsRepository = new ChatItemRepository();
+                        DataList<ChatItem> result = new DataList<>();
+                        for (HashMap<String, Object> obj : chatItems) {
+                            //Also add relation to child type for two way communication..
+                            ChatItem obj1 = chatItemsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setChatItems(result);
+
+                    }
+
+
+                    //Adding relation method..
+                    //Add a dummy class Name object to seperate data..
+                    public void addRelation(DataList<ChatItem> chatItems, ChatItem dummyClassInstance) {
+                        that.setChatItems(chatItems);
+
+                    }
+
+                    //Adding relation method..
+                    //This will add a new data to the list relation object..
+                    public void addRelation(ChatItem chatItems) {
+                        try{
+                            try{
+
+                                  //Save to database..
+                                  chatItems.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
+                            that.getChatItems().add(chatItems);
+                        }catch(Exception e){
+                            DataList< ChatItem> chatItems1 = new DataList();
+                            //Now add this item to list..
+                            chatItems1.add(chatItems);
+                            //Now set data....
+                            that.setChatItems(chatItems1);
+                        }
+                    }
+
+
+
+
+                    
+                        //Implement logic for pure hasMany methods here....
+
+                    
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void findById__chatItems( String fk,  RestAdapter restAdapter, final ObjectCallback<ChatItem> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final PatientGroupRepository  patientGroupRepo = restAdapter.createRepository(PatientGroupRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        patientGroupRepo.findById__chatItems( (String)that.getId(), fk,  new ObjectCallback<ChatItem> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(ChatItem object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void destroyById__chatItems( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final PatientGroupRepository  patientGroupRepo = restAdapter.createRepository(PatientGroupRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        patientGroupRepo.destroyById__chatItems( (String)that.getId(), fk,  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void updateById__chatItems( String fk,  ChatItem data,  RestAdapter restAdapter, final ObjectCallback<ChatItem> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final PatientGroupRepository  patientGroupRepo = restAdapter.createRepository(PatientGroupRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        patientGroupRepo.updateById__chatItems( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<ChatItem> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(ChatItem object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__chatItems( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<ChatItem> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final PatientGroupRepository  patientGroupRepo = restAdapter.createRepository(PatientGroupRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        patientGroupRepo.get__chatItems( (String)that.getId(), filter,  new DataListCallback<ChatItem> (){
+                                            
+
+                                            
+
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(DataList<ChatItem> object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            ChatItem obj = new ChatItem();
+                                                            addRelation(object, obj);
+                                                            //Disabling two way communication for cyclic error..
+                                                            /*for (ChatItem obj : object) {
+                                                                //Also add relation to child type for two way communication..
+                                                                obj.addRelation(that);
+                                                            }*/
+
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void create__chatItems( ChatItem data,  RestAdapter restAdapter, final ObjectCallback<ChatItem> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final PatientGroupRepository  patientGroupRepo = restAdapter.createRepository(PatientGroupRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        patientGroupRepo.create__chatItems( (String)that.getId(), data.convertMap(),  new ObjectCallback<ChatItem> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(ChatItem object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void delete__chatItems( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final PatientGroupRepository  patientGroupRepo = restAdapter.createRepository(PatientGroupRepository.class);
+                                        
+                                        
+
+
+
+                                        patientGroupRepo.delete__chatItems( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void count__chatItems( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final PatientGroupRepository  patientGroupRepo = restAdapter.createRepository(PatientGroupRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        patientGroupRepo.count__chatItems( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                        //Calling the finally..callback
+                                                        callback.onFinally();
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
                         
                         
                         

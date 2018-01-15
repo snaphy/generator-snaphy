@@ -94,11 +94,9 @@ public class HospitalUserSettingDb{
                         }
                                   
                                 
-                                                            String relationshipWithHospitalData = "";
-                        if(_modelData.getRelationshipWithHospital() != null){
-                          relationshipWithHospitalData = _modelData.getRelationshipWithHospital().toString();
-                          values.put("`relationshipWithHospital`", relationshipWithHospitalData);
-                        }
+                                                            double consultationFeesData;
+                        consultationFeesData = (double)_modelData.getConsultationFees();
+                        values.put("`consultationFees`", consultationFeesData);
                                   
                                 
                                                             String codeData = "";
@@ -108,9 +106,11 @@ public class HospitalUserSettingDb{
                         }
                                   
                                 
-                                                            double consultationFeesData;
-                        consultationFeesData = (double)_modelData.getConsultationFees();
-                        values.put("`consultationFees`", consultationFeesData);
+                                                            String relationshipWithHospitalData = "";
+                        if(_modelData.getRelationshipWithHospital() != null){
+                          relationshipWithHospitalData = _modelData.getRelationshipWithHospital().toString();
+                          values.put("`relationshipWithHospital`", relationshipWithHospitalData);
+                        }
                                   
                                 
                                                             double followUpFeesData;
@@ -122,6 +122,16 @@ public class HospitalUserSettingDb{
                         followUpDaysData = (double)_modelData.getFollowUpDays();
                         values.put("`followUpDays`", followUpDaysData);
                                   
+                                
+                                  String hospitalUserListData = "";
+                  if(_modelData.getHospitalUserList() != null){
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                    Gson gson = gsonBuilder.create();
+                    hospitalUserListData = gson.toJson(_modelData.getHospitalUserList(), DataList.class);
+                    values.put("`hospitalUserList`", hospitalUserListData);
+                  }
+              
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -279,14 +289,12 @@ public class HospitalUserSettingDb{
                         }
                                                 
                                 
-                                                            String relationshipWithHospitalData = "";
-                        if(cursor.getString(3) != null){
-                          relationshipWithHospitalData = cursor.getString(3);
-                          if(relationshipWithHospitalData != null){
-                            relationshipWithHospitalData = (String)relationshipWithHospitalData;
-                            hashMap.put("relationshipWithHospital", relationshipWithHospitalData);
-                          }
-                        }
+                                                            double consultationFeesData = (double)0;
+                          consultationFeesData = cursor.getInt(3);
+                          consultationFeesData = (double)consultationFeesData;
+                          hashMap.put("consultationFees", consultationFeesData);
+
+
                                                 
                                 
                                                             String codeData = "";
@@ -299,12 +307,14 @@ public class HospitalUserSettingDb{
                         }
                                                 
                                 
-                                                            double consultationFeesData = (double)0;
-                          consultationFeesData = cursor.getInt(5);
-                          consultationFeesData = (double)consultationFeesData;
-                          hashMap.put("consultationFees", consultationFeesData);
-
-
+                                                            String relationshipWithHospitalData = "";
+                        if(cursor.getString(5) != null){
+                          relationshipWithHospitalData = cursor.getString(5);
+                          if(relationshipWithHospitalData != null){
+                            relationshipWithHospitalData = (String)relationshipWithHospitalData;
+                            hashMap.put("relationshipWithHospital", relationshipWithHospitalData);
+                          }
+                        }
                                                 
                                 
                                                             double followUpFeesData = (double)0;
@@ -323,9 +333,22 @@ public class HospitalUserSettingDb{
 
                                                 
                                 
+                                  DataList<Map<String, Object>> hospitalUserListData = new DataList<>();
+                  if(cursor.getString(8) != null){
+                    GsonBuilder gsonBuilder = new GsonBuilder();
+                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                    Gson gson = gsonBuilder.create();
+                    hospitalUserListData = gson.fromJson(cursor.getString(8), DataList.class);
+                    if(hospitalUserListData != null){
+                      hospitalUserListData = (DataList<Map<String, Object>>)hospitalUserListData;
+                      hashMap.put("hospitalUserList", hospitalUserListData);
+                    }
+                  }
+                            
+                                
                                                             String idData = "";
-                        if(cursor.getString(8) != null){
-                          idData = cursor.getString(8);
+                        if(cursor.getString(9) != null){
+                          idData = cursor.getString(9);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -334,8 +357,8 @@ public class HospitalUserSettingDb{
                                                 
                                 
                                                             String hospitalUserIdData = "";
-                        if(cursor.getString(9) != null){
-                          hospitalUserIdData = cursor.getString(9);
+                        if(cursor.getString(10) != null){
+                          hospitalUserIdData = cursor.getString(10);
                           if(hospitalUserIdData != null){
                             hospitalUserIdData = hospitalUserIdData.toString();
                             hashMap.put("hospitalUserId", hospitalUserIdData);
@@ -344,8 +367,8 @@ public class HospitalUserSettingDb{
                                                 
                                 
                                                             String hospitalIdData = "";
-                        if(cursor.getString(10) != null){
-                          hospitalIdData = cursor.getString(10);
+                        if(cursor.getString(11) != null){
+                          hospitalIdData = cursor.getString(11);
                           if(hospitalIdData != null){
                             hospitalIdData = hospitalIdData.toString();
                             hashMap.put("hospitalId", hospitalIdData);
@@ -517,14 +540,14 @@ public class HospitalUserSettingDb{
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = selectQuery +  " " + " OFFSET " + skip;
+                selectQuery = selectQuery +  " " + " LIMIT -1 OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 selectQuery = "SELECT  * FROM HospitalUserSetting " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM HospitalUserSetting " + whereQuery  + " OFFSET " + skip;
+                selectQuery = "SELECT  * FROM HospitalUserSetting " + whereQuery  + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -583,14 +606,14 @@ public class HospitalUserSettingDb{
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = countQuery +  " " + " OFFSET " + skip;
+                countQuery = countQuery + " LIMIT -1  OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 countQuery = "SELECT  * FROM `HospitalUserSetting` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `HospitalUserSetting` " + whereQuery + " OFFSET " + skip;
+                countQuery = "SELECT  * FROM `HospitalUserSetting` " + whereQuery + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -616,7 +639,7 @@ public class HospitalUserSettingDb{
         if(limit != 0){
             countQuery = "SELECT  * FROM `HospitalUserSetting` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `HospitalUserSetting` " + whereQuery + " OFFSET " + skip;
+            countQuery = "SELECT  * FROM `HospitalUserSetting` " + whereQuery + " LIMIT -1 OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

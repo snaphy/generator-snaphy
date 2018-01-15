@@ -193,7 +193,7 @@ public class ReferPatientRepository extends ModelRepository<ReferPatient> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:referPatientId/referedHospital", "GET"), "ReferPatient.prototype.__get__referedHospital");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:referPatientId/hospitalReferBy", "GET"), "ReferPatient.prototype.__get__hospitalReferBy");
     
 
     
@@ -202,7 +202,7 @@ public class ReferPatientRepository extends ModelRepository<ReferPatient> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:referPatientId/referedHospitalUser", "GET"), "ReferPatient.prototype.__get__referedHospitalUser");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:referPatientId/hospitalUserReferBy", "GET"), "ReferPatient.prototype.__get__hospitalUserReferBy");
     
 
     
@@ -211,7 +211,7 @@ public class ReferPatientRepository extends ModelRepository<ReferPatient> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:referPatientId/repliedHospital", "GET"), "ReferPatient.prototype.__get__repliedHospital");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:referPatientId/hospitalReferTo", "GET"), "ReferPatient.prototype.__get__hospitalReferTo");
     
 
     
@@ -220,7 +220,7 @@ public class ReferPatientRepository extends ModelRepository<ReferPatient> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:referPatientId/repliedHospitalUser", "GET"), "ReferPatient.prototype.__get__repliedHospitalUser");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:referPatientId/hospitalUserReferTo", "GET"), "ReferPatient.prototype.__get__hospitalUserReferTo");
     
 
     
@@ -362,6 +362,81 @@ public class ReferPatientRepository extends ModelRepository<ReferPatient> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "ReferPatient.getModelRelationSchema");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/referAdmittedPatient", "POST"), "ReferPatient.referAdmittedPatient");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchReferedPatient", "POST"), "ReferPatient.fetchReferedPatient");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/shareConsult", "POST"), "ReferPatient.shareConsult");
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
     
 
     
@@ -558,8 +633,8 @@ public class ReferPatientRepository extends ModelRepository<ReferPatient> {
         
     
         
-            //Method get__referedHospital definition
-            public void get__referedHospital(  String referPatientId,  Boolean refresh, final ObjectCallback<Hospital> callback){
+            //Method get__hospitalReferBy definition
+            public void get__hospitalReferBy(  String referPatientId,  Boolean refresh, final ObjectCallback<Hospital> callback){
 
                 /**
                 Call the onBefore event
@@ -582,7 +657,7 @@ public class ReferPatientRepository extends ModelRepository<ReferPatient> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__referedHospital", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__hospitalReferBy", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -636,15 +711,15 @@ public class ReferPatientRepository extends ModelRepository<ReferPatient> {
 
                 
 
-            }//Method get__referedHospital definition ends here..
+            }//Method get__hospitalReferBy definition ends here..
 
             
 
         
     
         
-            //Method get__referedHospitalUser definition
-            public void get__referedHospitalUser(  String referPatientId,  Boolean refresh, final ObjectCallback<HospitalUser> callback){
+            //Method get__hospitalUserReferBy definition
+            public void get__hospitalUserReferBy(  String referPatientId,  Boolean refresh, final ObjectCallback<HospitalUser> callback){
 
                 /**
                 Call the onBefore event
@@ -667,7 +742,7 @@ public class ReferPatientRepository extends ModelRepository<ReferPatient> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__referedHospitalUser", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__hospitalUserReferBy", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -721,15 +796,15 @@ public class ReferPatientRepository extends ModelRepository<ReferPatient> {
 
                 
 
-            }//Method get__referedHospitalUser definition ends here..
+            }//Method get__hospitalUserReferBy definition ends here..
 
             
 
         
     
         
-            //Method get__repliedHospital definition
-            public void get__repliedHospital(  String referPatientId,  Boolean refresh, final ObjectCallback<Hospital> callback){
+            //Method get__hospitalReferTo definition
+            public void get__hospitalReferTo(  String referPatientId,  Boolean refresh, final ObjectCallback<Hospital> callback){
 
                 /**
                 Call the onBefore event
@@ -752,7 +827,7 @@ public class ReferPatientRepository extends ModelRepository<ReferPatient> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__repliedHospital", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__hospitalReferTo", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -806,15 +881,15 @@ public class ReferPatientRepository extends ModelRepository<ReferPatient> {
 
                 
 
-            }//Method get__repliedHospital definition ends here..
+            }//Method get__hospitalReferTo definition ends here..
 
             
 
         
     
         
-            //Method get__repliedHospitalUser definition
-            public void get__repliedHospitalUser(  String referPatientId,  Boolean refresh, final ObjectCallback<HospitalUser> callback){
+            //Method get__hospitalUserReferTo definition
+            public void get__hospitalUserReferTo(  String referPatientId,  Boolean refresh, final ObjectCallback<HospitalUser> callback){
 
                 /**
                 Call the onBefore event
@@ -837,7 +912,7 @@ public class ReferPatientRepository extends ModelRepository<ReferPatient> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__repliedHospitalUser", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__hospitalUserReferTo", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -891,7 +966,7 @@ public class ReferPatientRepository extends ModelRepository<ReferPatient> {
 
                 
 
-            }//Method get__repliedHospitalUser definition ends here..
+            }//Method get__hospitalUserReferTo definition ends here..
 
             
 
@@ -1804,6 +1879,295 @@ public class ReferPatientRepository extends ModelRepository<ReferPatient> {
 
             
 
+        
+    
+        
+            //Method referAdmittedPatient definition
+            public void referAdmittedPatient(  Map<String,  ? extends Object> ctx,  Map<String,  ? extends Object> referPatientObj, final ObjectCallback<ReferPatient> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("ctx", ctx);
+                
+                        hashMapObject.put("referPatientObj", referPatientObj);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("referAdmittedPatient", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    ReferPatientRepository referPatientRepo = getRestAdapter().createRepository(ReferPatientRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = referPatientRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(referPatientRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //referPatientRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    ReferPatient referPatient = referPatientRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = referPatient.getClass().getMethod("save__db");
+                                                    method.invoke(referPatient);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(referPatient);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method referAdmittedPatient definition ends here..
+
+            
+
+        
+    
+        
+            //Method fetchReferedPatient definition
+            public void fetchReferedPatient(  Map<String,  ? extends Object> ctx,  String referPatientId, final ObjectCallback<ReferPatient> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("ctx", ctx);
+                
+                        hashMapObject.put("referPatientId", referPatientId);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("fetchReferedPatient", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    ReferPatientRepository referPatientRepo = getRestAdapter().createRepository(ReferPatientRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = referPatientRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(referPatientRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //referPatientRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    ReferPatient referPatient = referPatientRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = referPatient.getClass().getMethod("save__db");
+                                                    method.invoke(referPatient);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(referPatient);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method fetchReferedPatient definition ends here..
+
+            
+
+        
+    
+        
+            //Method shareConsult definition
+            public void shareConsult(  Map<String,  ? extends Object> ctx,  String referPatientId,  Map<String,  ? extends Object> referObj, final ObjectCallback<ReferPatient> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("ctx", ctx);
+                
+                        hashMapObject.put("referPatientId", referPatientId);
+                
+                        hashMapObject.put("referObj", referObj);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("shareConsult", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    ReferPatientRepository referPatientRepo = getRestAdapter().createRepository(ReferPatientRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = referPatientRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(referPatientRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //referPatientRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    ReferPatient referPatient = referPatientRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = referPatient.getClass().getMethod("save__db");
+                                                    method.invoke(referPatient);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(referPatient);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method shareConsult definition ends here..
+
+            
+
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
 

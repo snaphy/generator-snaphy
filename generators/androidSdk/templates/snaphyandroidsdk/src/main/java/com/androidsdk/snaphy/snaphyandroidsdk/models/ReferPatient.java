@@ -320,6 +320,20 @@ public class ReferPatient extends Model {
             
         
     
+        
+            
+
+            
+            
+        
+    
+        
+            
+
+            
+            
+        
+    
 
 
     //------------------------------------Database Method---------------------------------------------------
@@ -582,6 +596,25 @@ public class ReferPatient extends Model {
                         
                         
                         
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                     
 
                 
@@ -783,6 +816,25 @@ public class ReferPatient extends Model {
                         
                         
                         
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                     
 
                 
@@ -796,7 +848,7 @@ public class ReferPatient extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient Hospital  referedHospital ;
+                    private transient Hospital  hospitalReferBy ;
                     private String hospitalId;
 
                     public String getHospitalId(){
@@ -809,67 +861,67 @@ public class ReferPatient extends Model {
                         }
                     }
 
-                    public Hospital getReferedHospital() {
+                    public Hospital getHospitalReferBy() {
                         try{
                           //Adding database method for fetching from relation if not present..
-                                      if(referedHospital == null){
+                                      if(hospitalReferBy == null){
                                         ReferPatientRepository referPatientRepository = (ReferPatientRepository) getRepository();
 
                                         RestAdapter restAdapter = referPatientRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
-                                          referedHospital = getReferedHospital__db(restAdapter);
+                                          hospitalReferBy = getHospitalReferBy__db(restAdapter);
                                         }
                                       }
                         }catch(Exception e){
                           //Ignore
                         }
 
-                        return referedHospital;
+                        return hospitalReferBy;
                     }
 
-                    public void setReferedHospital(Hospital referedHospital) {
-                        this.referedHospital = referedHospital;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setReferedHospital(Map<String, Object> referedHospital) {
-                        //First create a dummy Repo class object for customer.
-                        HospitalRepository referedHospitalRepository = new HospitalRepository();
-                        Hospital referedHospital1 = referedHospitalRepository.createObject(referedHospital);
-                        setReferedHospital(referedHospital1);
+                    public void setHospitalReferBy(Hospital hospitalReferBy) {
+                        this.hospitalReferBy = hospitalReferBy;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setReferedHospital(HashMap<String, Object> referedHospital) {
+                    public void setHospitalReferBy(Map<String, Object> hospitalReferBy) {
                         //First create a dummy Repo class object for customer.
-                        HospitalRepository referedHospitalRepository = new HospitalRepository();
-                        Hospital referedHospital1 = referedHospitalRepository.createObject(referedHospital);
-                        setReferedHospital(referedHospital1);
+                        HospitalRepository hospitalReferByRepository = new HospitalRepository();
+                        Hospital hospitalReferBy1 = hospitalReferByRepository.createObject(hospitalReferBy);
+                        setHospitalReferBy(hospitalReferBy1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setHospitalReferBy(HashMap<String, Object> hospitalReferBy) {
+                        //First create a dummy Repo class object for customer.
+                        HospitalRepository hospitalReferByRepository = new HospitalRepository();
+                        Hospital hospitalReferBy1 = hospitalReferByRepository.createObject(hospitalReferBy);
+                        setHospitalReferBy(hospitalReferBy1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Hospital referedHospital) {
-                        that.setReferedHospital(referedHospital);
+                    public void addRelation(Hospital hospitalReferBy) {
+                        that.setHospitalReferBy(hospitalReferBy);
                     }
 
 
                     //Fetch related data from local database if present a hospitalId identifier as property for belongsTo
-                    public Hospital getReferedHospital__db(RestAdapter restAdapter){
+                    public Hospital getHospitalReferBy__db(RestAdapter restAdapter){
                       if(hospitalId != null){
-                        HospitalRepository referedHospitalRepository = restAdapter.createRepository(HospitalRepository.class);
+                        HospitalRepository hospitalReferByRepository = restAdapter.createRepository(HospitalRepository.class);
                             try{
                             ReferPatientRepository lowercaseFirstLetterRepository = (ReferPatientRepository) getRepository();
                                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                                if(referedHospitalRepository.getDb() == null ){
-                                                    referedHospitalRepository.addStorage(context);
+                                                if(hospitalReferByRepository.getDb() == null ){
+                                                    hospitalReferByRepository.addStorage(context);
                                                 }
 
-                                                if(context != null && referedHospitalRepository.getDb() != null){
-                                                    referedHospitalRepository.addStorage(context);
-                                                    Hospital referedHospital = (Hospital) referedHospitalRepository.getDb().get__db(hospitalId);
-                                                    return referedHospital;
+                                                if(context != null && hospitalReferByRepository.getDb() != null){
+                                                    hospitalReferByRepository.addStorage(context);
+                                                    Hospital hospitalReferBy = (Hospital) hospitalReferByRepository.getDb().get__db(hospitalId);
+                                                    return hospitalReferBy;
                                                 }else{
                                                     return null;
                                                 }
@@ -906,7 +958,7 @@ public class ReferPatient extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__referedHospital( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
+                                    public void get__hospitalReferBy( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -920,7 +972,7 @@ public class ReferPatient extends Model {
 
 
 
-                                        referPatientRepo.get__referedHospital( (String)that.getId(), refresh,  new ObjectCallback<Hospital> (){
+                                        referPatientRepo.get__hospitalReferBy( (String)that.getId(), refresh,  new ObjectCallback<Hospital> (){
                                             
 
                                             
@@ -984,6 +1036,25 @@ public class ReferPatient extends Model {
                         
                         
                         
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                     
 
                 
@@ -997,7 +1068,7 @@ public class ReferPatient extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient HospitalUser  referedHospitalUser ;
+                    private transient HospitalUser  hospitalUserReferBy ;
                     private String hospitalUserId;
 
                     public String getHospitalUserId(){
@@ -1010,67 +1081,67 @@ public class ReferPatient extends Model {
                         }
                     }
 
-                    public HospitalUser getReferedHospitalUser() {
+                    public HospitalUser getHospitalUserReferBy() {
                         try{
                           //Adding database method for fetching from relation if not present..
-                                      if(referedHospitalUser == null){
+                                      if(hospitalUserReferBy == null){
                                         ReferPatientRepository referPatientRepository = (ReferPatientRepository) getRepository();
 
                                         RestAdapter restAdapter = referPatientRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
-                                          referedHospitalUser = getReferedHospitalUser__db(restAdapter);
+                                          hospitalUserReferBy = getHospitalUserReferBy__db(restAdapter);
                                         }
                                       }
                         }catch(Exception e){
                           //Ignore
                         }
 
-                        return referedHospitalUser;
+                        return hospitalUserReferBy;
                     }
 
-                    public void setReferedHospitalUser(HospitalUser referedHospitalUser) {
-                        this.referedHospitalUser = referedHospitalUser;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setReferedHospitalUser(Map<String, Object> referedHospitalUser) {
-                        //First create a dummy Repo class object for customer.
-                        HospitalUserRepository referedHospitalUserRepository = new HospitalUserRepository();
-                        HospitalUser referedHospitalUser1 = referedHospitalUserRepository.createObject(referedHospitalUser);
-                        setReferedHospitalUser(referedHospitalUser1);
+                    public void setHospitalUserReferBy(HospitalUser hospitalUserReferBy) {
+                        this.hospitalUserReferBy = hospitalUserReferBy;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setReferedHospitalUser(HashMap<String, Object> referedHospitalUser) {
+                    public void setHospitalUserReferBy(Map<String, Object> hospitalUserReferBy) {
                         //First create a dummy Repo class object for customer.
-                        HospitalUserRepository referedHospitalUserRepository = new HospitalUserRepository();
-                        HospitalUser referedHospitalUser1 = referedHospitalUserRepository.createObject(referedHospitalUser);
-                        setReferedHospitalUser(referedHospitalUser1);
+                        HospitalUserRepository hospitalUserReferByRepository = new HospitalUserRepository();
+                        HospitalUser hospitalUserReferBy1 = hospitalUserReferByRepository.createObject(hospitalUserReferBy);
+                        setHospitalUserReferBy(hospitalUserReferBy1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setHospitalUserReferBy(HashMap<String, Object> hospitalUserReferBy) {
+                        //First create a dummy Repo class object for customer.
+                        HospitalUserRepository hospitalUserReferByRepository = new HospitalUserRepository();
+                        HospitalUser hospitalUserReferBy1 = hospitalUserReferByRepository.createObject(hospitalUserReferBy);
+                        setHospitalUserReferBy(hospitalUserReferBy1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(HospitalUser referedHospitalUser) {
-                        that.setReferedHospitalUser(referedHospitalUser);
+                    public void addRelation(HospitalUser hospitalUserReferBy) {
+                        that.setHospitalUserReferBy(hospitalUserReferBy);
                     }
 
 
                     //Fetch related data from local database if present a hospitalUserId identifier as property for belongsTo
-                    public HospitalUser getReferedHospitalUser__db(RestAdapter restAdapter){
+                    public HospitalUser getHospitalUserReferBy__db(RestAdapter restAdapter){
                       if(hospitalUserId != null){
-                        HospitalUserRepository referedHospitalUserRepository = restAdapter.createRepository(HospitalUserRepository.class);
+                        HospitalUserRepository hospitalUserReferByRepository = restAdapter.createRepository(HospitalUserRepository.class);
                             try{
                             ReferPatientRepository lowercaseFirstLetterRepository = (ReferPatientRepository) getRepository();
                                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                                if(referedHospitalUserRepository.getDb() == null ){
-                                                    referedHospitalUserRepository.addStorage(context);
+                                                if(hospitalUserReferByRepository.getDb() == null ){
+                                                    hospitalUserReferByRepository.addStorage(context);
                                                 }
 
-                                                if(context != null && referedHospitalUserRepository.getDb() != null){
-                                                    referedHospitalUserRepository.addStorage(context);
-                                                    HospitalUser referedHospitalUser = (HospitalUser) referedHospitalUserRepository.getDb().get__db(hospitalUserId);
-                                                    return referedHospitalUser;
+                                                if(context != null && hospitalUserReferByRepository.getDb() != null){
+                                                    hospitalUserReferByRepository.addStorage(context);
+                                                    HospitalUser hospitalUserReferBy = (HospitalUser) hospitalUserReferByRepository.getDb().get__db(hospitalUserId);
+                                                    return hospitalUserReferBy;
                                                 }else{
                                                     return null;
                                                 }
@@ -1109,7 +1180,7 @@ public class ReferPatient extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__referedHospitalUser( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
+                                    public void get__hospitalUserReferBy( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1123,7 +1194,7 @@ public class ReferPatient extends Model {
 
 
 
-                                        referPatientRepo.get__referedHospitalUser( (String)that.getId(), refresh,  new ObjectCallback<HospitalUser> (){
+                                        referPatientRepo.get__hospitalUserReferBy( (String)that.getId(), refresh,  new ObjectCallback<HospitalUser> (){
                                             
 
                                             
@@ -1185,6 +1256,25 @@ public class ReferPatient extends Model {
                         
                         
                         
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                     
 
                 
@@ -1198,7 +1288,7 @@ public class ReferPatient extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient Hospital  repliedHospital ;
+                    private transient Hospital  hospitalReferTo ;
                     private String hospitalId;
 
                     public String getHospitalId(){
@@ -1211,67 +1301,67 @@ public class ReferPatient extends Model {
                         }
                     }
 
-                    public Hospital getRepliedHospital() {
+                    public Hospital getHospitalReferTo() {
                         try{
                           //Adding database method for fetching from relation if not present..
-                                      if(repliedHospital == null){
+                                      if(hospitalReferTo == null){
                                         ReferPatientRepository referPatientRepository = (ReferPatientRepository) getRepository();
 
                                         RestAdapter restAdapter = referPatientRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
-                                          repliedHospital = getRepliedHospital__db(restAdapter);
+                                          hospitalReferTo = getHospitalReferTo__db(restAdapter);
                                         }
                                       }
                         }catch(Exception e){
                           //Ignore
                         }
 
-                        return repliedHospital;
+                        return hospitalReferTo;
                     }
 
-                    public void setRepliedHospital(Hospital repliedHospital) {
-                        this.repliedHospital = repliedHospital;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setRepliedHospital(Map<String, Object> repliedHospital) {
-                        //First create a dummy Repo class object for customer.
-                        HospitalRepository repliedHospitalRepository = new HospitalRepository();
-                        Hospital repliedHospital1 = repliedHospitalRepository.createObject(repliedHospital);
-                        setRepliedHospital(repliedHospital1);
+                    public void setHospitalReferTo(Hospital hospitalReferTo) {
+                        this.hospitalReferTo = hospitalReferTo;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setRepliedHospital(HashMap<String, Object> repliedHospital) {
+                    public void setHospitalReferTo(Map<String, Object> hospitalReferTo) {
                         //First create a dummy Repo class object for customer.
-                        HospitalRepository repliedHospitalRepository = new HospitalRepository();
-                        Hospital repliedHospital1 = repliedHospitalRepository.createObject(repliedHospital);
-                        setRepliedHospital(repliedHospital1);
+                        HospitalRepository hospitalReferToRepository = new HospitalRepository();
+                        Hospital hospitalReferTo1 = hospitalReferToRepository.createObject(hospitalReferTo);
+                        setHospitalReferTo(hospitalReferTo1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setHospitalReferTo(HashMap<String, Object> hospitalReferTo) {
+                        //First create a dummy Repo class object for customer.
+                        HospitalRepository hospitalReferToRepository = new HospitalRepository();
+                        Hospital hospitalReferTo1 = hospitalReferToRepository.createObject(hospitalReferTo);
+                        setHospitalReferTo(hospitalReferTo1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Hospital repliedHospital) {
-                        that.setRepliedHospital(repliedHospital);
+                    public void addRelation(Hospital hospitalReferTo) {
+                        that.setHospitalReferTo(hospitalReferTo);
                     }
 
 
                     //Fetch related data from local database if present a hospitalId identifier as property for belongsTo
-                    public Hospital getRepliedHospital__db(RestAdapter restAdapter){
+                    public Hospital getHospitalReferTo__db(RestAdapter restAdapter){
                       if(hospitalId != null){
-                        HospitalRepository repliedHospitalRepository = restAdapter.createRepository(HospitalRepository.class);
+                        HospitalRepository hospitalReferToRepository = restAdapter.createRepository(HospitalRepository.class);
                             try{
                             ReferPatientRepository lowercaseFirstLetterRepository = (ReferPatientRepository) getRepository();
                                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                                if(repliedHospitalRepository.getDb() == null ){
-                                                    repliedHospitalRepository.addStorage(context);
+                                                if(hospitalReferToRepository.getDb() == null ){
+                                                    hospitalReferToRepository.addStorage(context);
                                                 }
 
-                                                if(context != null && repliedHospitalRepository.getDb() != null){
-                                                    repliedHospitalRepository.addStorage(context);
-                                                    Hospital repliedHospital = (Hospital) repliedHospitalRepository.getDb().get__db(hospitalId);
-                                                    return repliedHospital;
+                                                if(context != null && hospitalReferToRepository.getDb() != null){
+                                                    hospitalReferToRepository.addStorage(context);
+                                                    Hospital hospitalReferTo = (Hospital) hospitalReferToRepository.getDb().get__db(hospitalId);
+                                                    return hospitalReferTo;
                                                 }else{
                                                     return null;
                                                 }
@@ -1312,7 +1402,7 @@ public class ReferPatient extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__repliedHospital( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
+                                    public void get__hospitalReferTo( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1326,7 +1416,7 @@ public class ReferPatient extends Model {
 
 
 
-                                        referPatientRepo.get__repliedHospital( (String)that.getId(), refresh,  new ObjectCallback<Hospital> (){
+                                        referPatientRepo.get__hospitalReferTo( (String)that.getId(), refresh,  new ObjectCallback<Hospital> (){
                                             
 
                                             
@@ -1386,6 +1476,25 @@ public class ReferPatient extends Model {
                         
                         
                         
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                     
 
                 
@@ -1399,7 +1508,7 @@ public class ReferPatient extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient HospitalUser  repliedHospitalUser ;
+                    private transient HospitalUser  hospitalUserReferTo ;
                     private String hospitalUserId;
 
                     public String getHospitalUserId(){
@@ -1412,67 +1521,67 @@ public class ReferPatient extends Model {
                         }
                     }
 
-                    public HospitalUser getRepliedHospitalUser() {
+                    public HospitalUser getHospitalUserReferTo() {
                         try{
                           //Adding database method for fetching from relation if not present..
-                                      if(repliedHospitalUser == null){
+                                      if(hospitalUserReferTo == null){
                                         ReferPatientRepository referPatientRepository = (ReferPatientRepository) getRepository();
 
                                         RestAdapter restAdapter = referPatientRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
-                                          repliedHospitalUser = getRepliedHospitalUser__db(restAdapter);
+                                          hospitalUserReferTo = getHospitalUserReferTo__db(restAdapter);
                                         }
                                       }
                         }catch(Exception e){
                           //Ignore
                         }
 
-                        return repliedHospitalUser;
+                        return hospitalUserReferTo;
                     }
 
-                    public void setRepliedHospitalUser(HospitalUser repliedHospitalUser) {
-                        this.repliedHospitalUser = repliedHospitalUser;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setRepliedHospitalUser(Map<String, Object> repliedHospitalUser) {
-                        //First create a dummy Repo class object for customer.
-                        HospitalUserRepository repliedHospitalUserRepository = new HospitalUserRepository();
-                        HospitalUser repliedHospitalUser1 = repliedHospitalUserRepository.createObject(repliedHospitalUser);
-                        setRepliedHospitalUser(repliedHospitalUser1);
+                    public void setHospitalUserReferTo(HospitalUser hospitalUserReferTo) {
+                        this.hospitalUserReferTo = hospitalUserReferTo;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setRepliedHospitalUser(HashMap<String, Object> repliedHospitalUser) {
+                    public void setHospitalUserReferTo(Map<String, Object> hospitalUserReferTo) {
                         //First create a dummy Repo class object for customer.
-                        HospitalUserRepository repliedHospitalUserRepository = new HospitalUserRepository();
-                        HospitalUser repliedHospitalUser1 = repliedHospitalUserRepository.createObject(repliedHospitalUser);
-                        setRepliedHospitalUser(repliedHospitalUser1);
+                        HospitalUserRepository hospitalUserReferToRepository = new HospitalUserRepository();
+                        HospitalUser hospitalUserReferTo1 = hospitalUserReferToRepository.createObject(hospitalUserReferTo);
+                        setHospitalUserReferTo(hospitalUserReferTo1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setHospitalUserReferTo(HashMap<String, Object> hospitalUserReferTo) {
+                        //First create a dummy Repo class object for customer.
+                        HospitalUserRepository hospitalUserReferToRepository = new HospitalUserRepository();
+                        HospitalUser hospitalUserReferTo1 = hospitalUserReferToRepository.createObject(hospitalUserReferTo);
+                        setHospitalUserReferTo(hospitalUserReferTo1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(HospitalUser repliedHospitalUser) {
-                        that.setRepliedHospitalUser(repliedHospitalUser);
+                    public void addRelation(HospitalUser hospitalUserReferTo) {
+                        that.setHospitalUserReferTo(hospitalUserReferTo);
                     }
 
 
                     //Fetch related data from local database if present a hospitalUserId identifier as property for belongsTo
-                    public HospitalUser getRepliedHospitalUser__db(RestAdapter restAdapter){
+                    public HospitalUser getHospitalUserReferTo__db(RestAdapter restAdapter){
                       if(hospitalUserId != null){
-                        HospitalUserRepository repliedHospitalUserRepository = restAdapter.createRepository(HospitalUserRepository.class);
+                        HospitalUserRepository hospitalUserReferToRepository = restAdapter.createRepository(HospitalUserRepository.class);
                             try{
                             ReferPatientRepository lowercaseFirstLetterRepository = (ReferPatientRepository) getRepository();
                                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                                if(repliedHospitalUserRepository.getDb() == null ){
-                                                    repliedHospitalUserRepository.addStorage(context);
+                                                if(hospitalUserReferToRepository.getDb() == null ){
+                                                    hospitalUserReferToRepository.addStorage(context);
                                                 }
 
-                                                if(context != null && repliedHospitalUserRepository.getDb() != null){
-                                                    repliedHospitalUserRepository.addStorage(context);
-                                                    HospitalUser repliedHospitalUser = (HospitalUser) repliedHospitalUserRepository.getDb().get__db(hospitalUserId);
-                                                    return repliedHospitalUser;
+                                                if(context != null && hospitalUserReferToRepository.getDb() != null){
+                                                    hospitalUserReferToRepository.addStorage(context);
+                                                    HospitalUser hospitalUserReferTo = (HospitalUser) hospitalUserReferToRepository.getDb().get__db(hospitalUserId);
+                                                    return hospitalUserReferTo;
                                                 }else{
                                                     return null;
                                                 }
@@ -1515,7 +1624,7 @@ public class ReferPatient extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__repliedHospitalUser( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
+                                    public void get__hospitalUserReferTo( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1529,7 +1638,7 @@ public class ReferPatient extends Model {
 
 
 
-                                        referPatientRepo.get__repliedHospitalUser( (String)that.getId(), refresh,  new ObjectCallback<HospitalUser> (){
+                                        referPatientRepo.get__hospitalUserReferTo( (String)that.getId(), refresh,  new ObjectCallback<HospitalUser> (){
                                             
 
                                             
@@ -1569,6 +1678,25 @@ public class ReferPatient extends Model {
                                     } //method def ends here.
                                  
                             
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         

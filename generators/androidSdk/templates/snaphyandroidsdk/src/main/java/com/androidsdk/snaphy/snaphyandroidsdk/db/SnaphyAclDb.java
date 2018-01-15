@@ -504,14 +504,14 @@ public class SnaphyAclDb{
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = selectQuery +  " " + " OFFSET " + skip;
+                selectQuery = selectQuery +  " " + " LIMIT -1 OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 selectQuery = "SELECT  * FROM SnaphyAcl " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM SnaphyAcl " + whereQuery  + " OFFSET " + skip;
+                selectQuery = "SELECT  * FROM SnaphyAcl " + whereQuery  + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -570,14 +570,14 @@ public class SnaphyAclDb{
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = countQuery +  " " + " OFFSET " + skip;
+                countQuery = countQuery + " LIMIT -1  OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 countQuery = "SELECT  * FROM `SnaphyAcl` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `SnaphyAcl` " + whereQuery + " OFFSET " + skip;
+                countQuery = "SELECT  * FROM `SnaphyAcl` " + whereQuery + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -603,7 +603,7 @@ public class SnaphyAclDb{
         if(limit != 0){
             countQuery = "SELECT  * FROM `SnaphyAcl` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `SnaphyAcl` " + whereQuery + " OFFSET " + skip;
+            countQuery = "SELECT  * FROM `SnaphyAcl` " + whereQuery + " LIMIT -1 OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

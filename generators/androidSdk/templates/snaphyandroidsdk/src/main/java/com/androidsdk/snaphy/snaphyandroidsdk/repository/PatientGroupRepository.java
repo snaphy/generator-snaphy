@@ -152,6 +152,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.PatientGroupDb;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.ChatItem;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatItemRepository;
+            
+        
+    
+
 
 
 
@@ -427,6 +434,33 @@ public class PatientGroupRepository extends ModelRepository<PatientGroup> {
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:patientGroupId/chatItems/:fk", "GET"), "PatientGroup.prototype.__findById__chatItems");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:patientGroupId/chatItems/:fk", "DELETE"), "PatientGroup.prototype.__destroyById__chatItems");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:patientGroupId/chatItems/:fk", "PUT"), "PatientGroup.prototype.__updateById__chatItems");
+    
+
+    
+    
+
+    
+
+    
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:patientGroupId/patientDocuments", "GET"), "PatientGroup.prototype.__get__patientDocuments");
     
 
@@ -527,6 +561,42 @@ public class PatientGroupRepository extends ModelRepository<PatientGroup> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:patientGroupId/bills/count", "GET"), "PatientGroup.prototype.__count__bills");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:patientGroupId/chatItems", "GET"), "PatientGroup.prototype.__get__chatItems");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:patientGroupId/chatItems", "POST"), "PatientGroup.prototype.__create__chatItems");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:patientGroupId/chatItems", "DELETE"), "PatientGroup.prototype.__delete__chatItems");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:patientGroupId/chatItems/count", "GET"), "PatientGroup.prototype.__count__chatItems");
     
 
     
@@ -812,6 +882,9 @@ public class PatientGroupRepository extends ModelRepository<PatientGroup> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchPatientByIdOffline", "POST"), "PatientGroup.fetchPatientByIdOffline");
+    
+
+    
     
 
     
@@ -2683,6 +2756,226 @@ public class PatientGroupRepository extends ModelRepository<PatientGroup> {
         
     
         
+            //Method findById__chatItems definition
+            public void findById__chatItems(  String patientGroupId,  String fk, final ObjectCallback<ChatItem> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("patientGroupId", patientGroupId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__findById__chatItems", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    ChatItemRepository chatItemRepo = getRestAdapter().createRepository(ChatItemRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = chatItemRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(chatItemRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //chatItemRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    ChatItem chatItem = chatItemRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = chatItem.getClass().getMethod("save__db");
+                                                    method.invoke(chatItem);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(chatItem);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method findById__chatItems definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__chatItems definition
+            public void destroyById__chatItems(  String patientGroupId,  String fk, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("patientGroupId", patientGroupId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__chatItems", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__chatItems definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__chatItems definition
+            public void updateById__chatItems(  String patientGroupId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<ChatItem> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("patientGroupId", patientGroupId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__updateById__chatItems", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    ChatItemRepository chatItemRepo = getRestAdapter().createRepository(ChatItemRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = chatItemRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(chatItemRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //chatItemRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    ChatItem chatItem = chatItemRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = chatItem.getClass().getMethod("save__db");
+                                                    method.invoke(chatItem);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(chatItem);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method updateById__chatItems definition ends here..
+
+            
+
+        
+    
+        
             //Method get__patientDocuments definition
             public void get__patientDocuments(  String patientGroupId,  Map<String,  ? extends Object> filter, final DataListCallback<PatientDocument> callback){
 
@@ -3484,6 +3777,275 @@ public class PatientGroupRepository extends ModelRepository<PatientGroup> {
                 
 
             }//Method count__bills definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__chatItems definition
+            public void get__chatItems(  String patientGroupId,  Map<String,  ? extends Object> filter, final DataListCallback<ChatItem> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("patientGroupId", patientGroupId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__chatItems", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<ChatItem> chatItemList = new DataList<ChatItem>();
+                                    ChatItemRepository chatItemRepo = getRestAdapter().createRepository(ChatItemRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = chatItemRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(chatItemRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        ChatItem chatItem = chatItemRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = chatItem.getClass().getMethod("save__db");
+                                                      method.invoke(chatItem);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        chatItemList.add(chatItem);
+                                    }
+                                    callback.onSuccess(chatItemList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method get__chatItems definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__chatItems definition
+            public void create__chatItems(  String patientGroupId,  Map<String,  ? extends Object> data, final ObjectCallback<ChatItem> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("patientGroupId", patientGroupId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__chatItems", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    ChatItemRepository chatItemRepo = getRestAdapter().createRepository(ChatItemRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = chatItemRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(chatItemRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //chatItemRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    ChatItem chatItem = chatItemRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = chatItem.getClass().getMethod("save__db");
+                                                    method.invoke(chatItem);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(chatItem);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__chatItems definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__chatItems definition
+            public void delete__chatItems(  String patientGroupId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("patientGroupId", patientGroupId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__chatItems", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__chatItems definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__chatItems definition
+            public void count__chatItems(  String patientGroupId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("patientGroupId", patientGroupId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__chatItems", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method count__chatItems definition ends here..
 
             
 
@@ -5475,6 +6037,8 @@ public class PatientGroupRepository extends ModelRepository<PatientGroup> {
 
             
 
+        
+    
         
     
         

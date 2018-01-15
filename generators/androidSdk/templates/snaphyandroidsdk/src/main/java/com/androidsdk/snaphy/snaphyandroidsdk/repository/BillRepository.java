@@ -1835,7 +1835,7 @@ public class BillRepository extends ModelRepository<Bill> {
     
         
             //Method fetchBillHistory definition
-            public void fetchBillHistory(  Map<String,  ? extends Object> ctx,  String patientGroupId,  String type, final DataListCallback<Bill> callback){
+            public void fetchBillHistory(  Map<String,  ? extends Object> ctx,  String patientGroupId,  String type,  double skip,  double limit, final DataListCallback<Bill> callback){
 
                 /**
                 Call the onBefore event
@@ -1852,6 +1852,10 @@ public class BillRepository extends ModelRepository<Bill> {
                         hashMapObject.put("patientGroupId", patientGroupId);
                 
                         hashMapObject.put("type", type);
+                
+                        hashMapObject.put("skip", skip);
+                
+                        hashMapObject.put("limit", limit);
                 
 
                 

@@ -662,14 +662,14 @@ public class EmployeeDb{
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = selectQuery +  " " + " OFFSET " + skip;
+                selectQuery = selectQuery +  " " + " LIMIT -1 OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 selectQuery = "SELECT  * FROM Employee " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM Employee " + whereQuery  + " OFFSET " + skip;
+                selectQuery = "SELECT  * FROM Employee " + whereQuery  + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -728,14 +728,14 @@ public class EmployeeDb{
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = countQuery +  " " + " OFFSET " + skip;
+                countQuery = countQuery + " LIMIT -1  OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 countQuery = "SELECT  * FROM `Employee` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `Employee` " + whereQuery + " OFFSET " + skip;
+                countQuery = "SELECT  * FROM `Employee` " + whereQuery + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -761,7 +761,7 @@ public class EmployeeDb{
         if(limit != 0){
             countQuery = "SELECT  * FROM `Employee` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `Employee` " + whereQuery + " OFFSET " + skip;
+            countQuery = "SELECT  * FROM `Employee` " + whereQuery + " LIMIT -1 OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

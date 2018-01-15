@@ -477,14 +477,14 @@ public class SnaphyAclRelationDb{
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = selectQuery +  " " + " OFFSET " + skip;
+                selectQuery = selectQuery +  " " + " LIMIT -1 OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 selectQuery = "SELECT  * FROM SnaphyAclRelation " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM SnaphyAclRelation " + whereQuery  + " OFFSET " + skip;
+                selectQuery = "SELECT  * FROM SnaphyAclRelation " + whereQuery  + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -543,14 +543,14 @@ public class SnaphyAclRelationDb{
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = countQuery +  " " + " OFFSET " + skip;
+                countQuery = countQuery + " LIMIT -1  OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 countQuery = "SELECT  * FROM `SnaphyAclRelation` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `SnaphyAclRelation` " + whereQuery + " OFFSET " + skip;
+                countQuery = "SELECT  * FROM `SnaphyAclRelation` " + whereQuery + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -576,7 +576,7 @@ public class SnaphyAclRelationDb{
         if(limit != 0){
             countQuery = "SELECT  * FROM `SnaphyAclRelation` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `SnaphyAclRelation` " + whereQuery + " OFFSET " + skip;
+            countQuery = "SELECT  * FROM `SnaphyAclRelation` " + whereQuery + " LIMIT -1 OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

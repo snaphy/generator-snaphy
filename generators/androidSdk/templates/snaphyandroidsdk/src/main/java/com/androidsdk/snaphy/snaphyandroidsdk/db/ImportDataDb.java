@@ -343,14 +343,14 @@ public class ImportDataDb{
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = selectQuery +  " " + " OFFSET " + skip;
+                selectQuery = selectQuery +  " " + " LIMIT -1 OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 selectQuery = "SELECT  * FROM ImportData " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM ImportData " + whereQuery  + " OFFSET " + skip;
+                selectQuery = "SELECT  * FROM ImportData " + whereQuery  + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -409,14 +409,14 @@ public class ImportDataDb{
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = countQuery +  " " + " OFFSET " + skip;
+                countQuery = countQuery + " LIMIT -1  OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 countQuery = "SELECT  * FROM `ImportData` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `ImportData` " + whereQuery + " OFFSET " + skip;
+                countQuery = "SELECT  * FROM `ImportData` " + whereQuery + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -442,7 +442,7 @@ public class ImportDataDb{
         if(limit != 0){
             countQuery = "SELECT  * FROM `ImportData` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `ImportData` " + whereQuery + " OFFSET " + skip;
+            countQuery = "SELECT  * FROM `ImportData` " + whereQuery + " LIMIT -1 OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

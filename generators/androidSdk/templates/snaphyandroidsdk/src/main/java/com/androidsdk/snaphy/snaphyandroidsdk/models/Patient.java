@@ -1424,7 +1424,6 @@ public class Patient extends User {
                         
                         
                         
-                        
                     
 
                 
@@ -1681,7 +1680,6 @@ public class Patient extends User {
                             
                          
                             
-                        
                         
                         
                         
@@ -2326,7 +2324,6 @@ public class Patient extends User {
                             
                          
                             
-                        
                         
                         
                         
@@ -3038,7 +3035,6 @@ public class Patient extends User {
                         
                         
                         
-                        
                     
 
                 
@@ -3295,7 +3291,6 @@ public class Patient extends User {
                             
                          
                             
-                        
                         
                         
                         
@@ -3677,7 +3672,6 @@ public class Patient extends User {
                         
                         
                         
-                        
                     
 
                 
@@ -3931,7 +3925,6 @@ public class Patient extends User {
                             
                          
                             
-                        
                         
                         
                         
@@ -4313,7 +4306,6 @@ public class Patient extends User {
                         
                         
                         
-                        
                     
 
                 
@@ -4567,7 +4559,6 @@ public class Patient extends User {
                             
                          
                             
-                        
                         
                         
                         
@@ -5212,7 +5203,6 @@ public class Patient extends User {
                                     } //method def ends here.
                                  
                             
-                        
                         
                         
                         

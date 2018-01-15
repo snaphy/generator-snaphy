@@ -73,6 +73,20 @@ public class PatientGroupDb{
     public ContentValues getContentValues(PatientGroup _modelData){
       ContentValues values = new ContentValues();
                        
+                                                            String addedData = "";
+                        if(_modelData.getAdded() != null){
+                          addedData = _modelData.getAdded().toString();
+                          values.put("`added`", addedData);
+                        }
+                                  
+                                
+                                                            String updatedData = "";
+                        if(_modelData.getUpdated() != null){
+                          updatedData = _modelData.getUpdated().toString();
+                          values.put("`updated`", updatedData);
+                        }
+                                  
+                                
                                                             String unique_numberData = "";
                         if(_modelData.getUnique_number() != null){
                           unique_numberData = _modelData.getUnique_number().toString();
@@ -156,20 +170,6 @@ public class PatientGroupDb{
                         if(_modelData.getAdmittedOn() != null){
                           admittedOnData = _modelData.getAdmittedOn().toString();
                           values.put("`admittedOn`", admittedOnData);
-                        }
-                                  
-                                
-                                                            String addedData = "";
-                        if(_modelData.getAdded() != null){
-                          addedData = _modelData.getAdded().toString();
-                          values.put("`added`", addedData);
-                        }
-                                  
-                                
-                                                            String updatedData = "";
-                        if(_modelData.getUpdated() != null){
-                          updatedData = _modelData.getUpdated().toString();
-                          values.put("`updated`", updatedData);
                         }
                                   
                                 
@@ -631,9 +631,29 @@ public class PatientGroupDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            String unique_numberData = "";
+                                                            String addedData = "";
                         if(cursor.getString(0) != null){
-                          unique_numberData = cursor.getString(0);
+                          addedData = cursor.getString(0);
+                          if(addedData != null){
+                            addedData = (String)addedData;
+                            hashMap.put("added", addedData);
+                          }
+                        }
+                                                
+                                
+                                                            String updatedData = "";
+                        if(cursor.getString(1) != null){
+                          updatedData = cursor.getString(1);
+                          if(updatedData != null){
+                            updatedData = (String)updatedData;
+                            hashMap.put("updated", updatedData);
+                          }
+                        }
+                                                
+                                
+                                                            String unique_numberData = "";
+                        if(cursor.getString(2) != null){
+                          unique_numberData = cursor.getString(2);
                           if(unique_numberData != null){
                             unique_numberData = (String)unique_numberData;
                             hashMap.put("unique_number", unique_numberData);
@@ -642,8 +662,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String patientContactNumberData = "";
-                        if(cursor.getString(1) != null){
-                          patientContactNumberData = cursor.getString(1);
+                        if(cursor.getString(3) != null){
+                          patientContactNumberData = cursor.getString(3);
                           if(patientContactNumberData != null){
                             patientContactNumberData = (String)patientContactNumberData;
                             hashMap.put("patientContactNumber", patientContactNumberData);
@@ -652,8 +672,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String nameData = "";
-                        if(cursor.getString(2) != null){
-                          nameData = cursor.getString(2);
+                        if(cursor.getString(4) != null){
+                          nameData = cursor.getString(4);
                           if(nameData != null){
                             nameData = (String)nameData;
                             hashMap.put("name", nameData);
@@ -662,7 +682,7 @@ public class PatientGroupDb{
                                                 
                                 
                                                             boolean lamaData = false;
-                        int templamaData = cursor.getInt(3);
+                        int templamaData = cursor.getInt(5);
                         if( templamaData > 0){
                           lamaData = true;
                         }else{
@@ -672,8 +692,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String statusData = "";
-                        if(cursor.getString(4) != null){
-                          statusData = cursor.getString(4);
+                        if(cursor.getString(6) != null){
+                          statusData = cursor.getString(6);
                           if(statusData != null){
                             statusData = (String)statusData;
                             hashMap.put("status", statusData);
@@ -682,7 +702,7 @@ public class PatientGroupDb{
                                                 
                                 
                                                             boolean hasDischargedData = false;
-                        int temphasDischargedData = cursor.getInt(5);
+                        int temphasDischargedData = cursor.getInt(7);
                         if( temphasDischargedData > 0){
                           hasDischargedData = true;
                         }else{
@@ -692,7 +712,7 @@ public class PatientGroupDb{
                                                 
                                 
                                                             boolean hasConsultedData = false;
-                        int temphasConsultedData = cursor.getInt(6);
+                        int temphasConsultedData = cursor.getInt(8);
                         if( temphasConsultedData > 0){
                           hasConsultedData = true;
                         }else{
@@ -702,8 +722,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String facilityData = "";
-                        if(cursor.getString(7) != null){
-                          facilityData = cursor.getString(7);
+                        if(cursor.getString(9) != null){
+                          facilityData = cursor.getString(9);
                           if(facilityData != null){
                             facilityData = (String)facilityData;
                             hashMap.put("facility", facilityData);
@@ -712,11 +732,11 @@ public class PatientGroupDb{
                                                 
                                 
                                                             Map<String, Object> relationLogsData = new HashMap<>();
-                        if(cursor.getString(8) != null){
+                        if(cursor.getString(10) != null){
                           GsonBuilder gsonBuilder = new GsonBuilder();
                           gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                           Gson gson = gsonBuilder.create();
-                           relationLogsData = gson.fromJson(cursor.getString(8), Map.class);
+                           relationLogsData = gson.fromJson(cursor.getString(10), Map.class);
                           if(relationLogsData != null){
                             relationLogsData = (Map<String, Object>)relationLogsData;
                             hashMap.put("relationLogs", relationLogsData);
@@ -725,8 +745,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String diagnosisData = "";
-                        if(cursor.getString(9) != null){
-                          diagnosisData = cursor.getString(9);
+                        if(cursor.getString(11) != null){
+                          diagnosisData = cursor.getString(11);
                           if(diagnosisData != null){
                             diagnosisData = (String)diagnosisData;
                             hashMap.put("diagnosis", diagnosisData);
@@ -735,31 +755,11 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String admittedOnData = "";
-                        if(cursor.getString(10) != null){
-                          admittedOnData = cursor.getString(10);
+                        if(cursor.getString(12) != null){
+                          admittedOnData = cursor.getString(12);
                           if(admittedOnData != null){
                             admittedOnData = (String)admittedOnData;
                             hashMap.put("admittedOn", admittedOnData);
-                          }
-                        }
-                                                
-                                
-                                                            String addedData = "";
-                        if(cursor.getString(11) != null){
-                          addedData = cursor.getString(11);
-                          if(addedData != null){
-                            addedData = (String)addedData;
-                            hashMap.put("added", addedData);
-                          }
-                        }
-                                                
-                                
-                                                            String updatedData = "";
-                        if(cursor.getString(12) != null){
-                          updatedData = cursor.getString(12);
-                          if(updatedData != null){
-                            updatedData = (String)updatedData;
-                            hashMap.put("updated", updatedData);
                           }
                         }
                                                 
@@ -1281,14 +1281,14 @@ public class PatientGroupDb{
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = selectQuery +  " " + " OFFSET " + skip;
+                selectQuery = selectQuery +  " " + " LIMIT -1 OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 selectQuery = "SELECT  * FROM PatientGroup " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM PatientGroup " + whereQuery  + " OFFSET " + skip;
+                selectQuery = "SELECT  * FROM PatientGroup " + whereQuery  + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -1347,14 +1347,14 @@ public class PatientGroupDb{
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = countQuery +  " " + " OFFSET " + skip;
+                countQuery = countQuery + " LIMIT -1  OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 countQuery = "SELECT  * FROM `PatientGroup` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `PatientGroup` " + whereQuery + " OFFSET " + skip;
+                countQuery = "SELECT  * FROM `PatientGroup` " + whereQuery + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -1380,7 +1380,7 @@ public class PatientGroupDb{
         if(limit != 0){
             countQuery = "SELECT  * FROM `PatientGroup` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `PatientGroup` " + whereQuery + " OFFSET " + skip;
+            countQuery = "SELECT  * FROM `PatientGroup` " + whereQuery + " LIMIT -1 OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

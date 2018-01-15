@@ -124,6 +124,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.HospitalDb;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.ReferPatient;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ReferPatientRepository;
+            
+        
+    
+
 
 
 
@@ -363,6 +370,33 @@ public class HospitalRepository extends ModelRepository<Hospital> {
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/referPatients/:fk", "GET"), "Hospital.prototype.__findById__referPatients");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/referPatients/:fk", "DELETE"), "Hospital.prototype.__destroyById__referPatients");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/referPatients/:fk", "PUT"), "Hospital.prototype.__updateById__referPatients");
+    
+
+    
+    
+
+    
+
+    
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/billCategories/:fk", "GET"), "Hospital.prototype.__findById__billCategories");
     
 
@@ -553,6 +587,42 @@ public class HospitalRepository extends ModelRepository<Hospital> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/hospitalUserSettings/count", "GET"), "Hospital.prototype.__count__hospitalUserSettings");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/referPatients", "GET"), "Hospital.prototype.__get__referPatients");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/referPatients", "POST"), "Hospital.prototype.__create__referPatients");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/referPatients", "DELETE"), "Hospital.prototype.__delete__referPatients");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/referPatients/count", "GET"), "Hospital.prototype.__count__referPatients");
     
 
     
@@ -2226,6 +2296,226 @@ public class HospitalRepository extends ModelRepository<Hospital> {
         
     
         
+            //Method findById__referPatients definition
+            public void findById__referPatients(  String hospitalId,  String fk, final ObjectCallback<ReferPatient> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("hospitalId", hospitalId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__findById__referPatients", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    ReferPatientRepository referPatientRepo = getRestAdapter().createRepository(ReferPatientRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = referPatientRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(referPatientRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //referPatientRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    ReferPatient referPatient = referPatientRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = referPatient.getClass().getMethod("save__db");
+                                                    method.invoke(referPatient);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(referPatient);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method findById__referPatients definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__referPatients definition
+            public void destroyById__referPatients(  String hospitalId,  String fk, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("hospitalId", hospitalId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__referPatients", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__referPatients definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__referPatients definition
+            public void updateById__referPatients(  String hospitalId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<ReferPatient> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("hospitalId", hospitalId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__updateById__referPatients", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    ReferPatientRepository referPatientRepo = getRestAdapter().createRepository(ReferPatientRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = referPatientRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(referPatientRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //referPatientRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    ReferPatient referPatient = referPatientRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = referPatient.getClass().getMethod("save__db");
+                                                    method.invoke(referPatient);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(referPatient);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method updateById__referPatients definition ends here..
+
+            
+
+        
+    
+        
             //Method findById__billCategories definition
             public void findById__billCategories(  String hospitalId,  String fk, final ObjectCallback<BillCategory> callback){
 
@@ -3736,6 +4026,275 @@ public class HospitalRepository extends ModelRepository<Hospital> {
                 
 
             }//Method count__hospitalUserSettings definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__referPatients definition
+            public void get__referPatients(  String hospitalId,  Map<String,  ? extends Object> filter, final DataListCallback<ReferPatient> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("hospitalId", hospitalId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__referPatients", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<ReferPatient> referPatientList = new DataList<ReferPatient>();
+                                    ReferPatientRepository referPatientRepo = getRestAdapter().createRepository(ReferPatientRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = referPatientRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(referPatientRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        ReferPatient referPatient = referPatientRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = referPatient.getClass().getMethod("save__db");
+                                                      method.invoke(referPatient);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        referPatientList.add(referPatient);
+                                    }
+                                    callback.onSuccess(referPatientList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method get__referPatients definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__referPatients definition
+            public void create__referPatients(  String hospitalId,  Map<String,  ? extends Object> data, final ObjectCallback<ReferPatient> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("hospitalId", hospitalId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__referPatients", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    ReferPatientRepository referPatientRepo = getRestAdapter().createRepository(ReferPatientRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = referPatientRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(referPatientRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //referPatientRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    ReferPatient referPatient = referPatientRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = referPatient.getClass().getMethod("save__db");
+                                                    method.invoke(referPatient);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(referPatient);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__referPatients definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__referPatients definition
+            public void delete__referPatients(  String hospitalId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("hospitalId", hospitalId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__referPatients", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__referPatients definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__referPatients definition
+            public void count__referPatients(  String hospitalId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("hospitalId", hospitalId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__referPatients", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method count__referPatients definition ends here..
 
             
 

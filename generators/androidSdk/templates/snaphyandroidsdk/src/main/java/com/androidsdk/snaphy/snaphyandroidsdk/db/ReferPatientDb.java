@@ -182,13 +182,13 @@ public class ReferPatientDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String referedHospitalIdData = "";
+                        String hospitalReferByIdData = "";
                         try {
-                              Method method = _modelData.getClass().getMethod("getReferedHospitalId");
+                              Method method = _modelData.getClass().getMethod("getHospitalReferById");
                               if(method.invoke(_modelData) != null){
-                                //referedHospitalIdData = _modelData.getReferedHospitalId().toString();
-                                referedHospitalIdData = (String) method.invoke(_modelData);
-                                values.put("`referedHospitalId`", referedHospitalIdData);
+                                //hospitalReferByIdData = _modelData.getHospitalReferById().toString();
+                                hospitalReferByIdData = (String) method.invoke(_modelData);
+                                values.put("`hospitalReferById`", hospitalReferByIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -197,13 +197,13 @@ public class ReferPatientDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String referedHospitalUserIdData = "";
+                        String hospitalUserReferByIdData = "";
                         try {
-                              Method method = _modelData.getClass().getMethod("getReferedHospitalUserId");
+                              Method method = _modelData.getClass().getMethod("getHospitalUserReferById");
                               if(method.invoke(_modelData) != null){
-                                //referedHospitalUserIdData = _modelData.getReferedHospitalUserId().toString();
-                                referedHospitalUserIdData = (String) method.invoke(_modelData);
-                                values.put("`referedHospitalUserId`", referedHospitalUserIdData);
+                                //hospitalUserReferByIdData = _modelData.getHospitalUserReferById().toString();
+                                hospitalUserReferByIdData = (String) method.invoke(_modelData);
+                                values.put("`hospitalUserReferById`", hospitalUserReferByIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -212,13 +212,13 @@ public class ReferPatientDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String repliedHospitalIdData = "";
+                        String hospitalReferToIdData = "";
                         try {
-                              Method method = _modelData.getClass().getMethod("getRepliedHospitalId");
+                              Method method = _modelData.getClass().getMethod("getHospitalReferToId");
                               if(method.invoke(_modelData) != null){
-                                //repliedHospitalIdData = _modelData.getRepliedHospitalId().toString();
-                                repliedHospitalIdData = (String) method.invoke(_modelData);
-                                values.put("`repliedHospitalId`", repliedHospitalIdData);
+                                //hospitalReferToIdData = _modelData.getHospitalReferToId().toString();
+                                hospitalReferToIdData = (String) method.invoke(_modelData);
+                                values.put("`hospitalReferToId`", hospitalReferToIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -227,13 +227,43 @@ public class ReferPatientDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String repliedHospitalUserIdData = "";
+                        String hospitalUserReferToIdData = "";
                         try {
-                              Method method = _modelData.getClass().getMethod("getRepliedHospitalUserId");
+                              Method method = _modelData.getClass().getMethod("getHospitalUserReferToId");
                               if(method.invoke(_modelData) != null){
-                                //repliedHospitalUserIdData = _modelData.getRepliedHospitalUserId().toString();
-                                repliedHospitalUserIdData = (String) method.invoke(_modelData);
-                                values.put("`repliedHospitalUserId`", repliedHospitalUserIdData);
+                                //hospitalUserReferToIdData = _modelData.getHospitalUserReferToId().toString();
+                                hospitalUserReferToIdData = (String) method.invoke(_modelData);
+                                values.put("`hospitalUserReferToId`", hospitalUserReferToIdData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String hospitalIdData = "";
+                        try {
+                              Method method = _modelData.getClass().getMethod("getHospitalId");
+                              if(method.invoke(_modelData) != null){
+                                //hospitalIdData = _modelData.getHospitalId().toString();
+                                hospitalIdData = (String) method.invoke(_modelData);
+                                values.put("`hospitalId`", hospitalIdData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String hospitalUserIdData = "";
+                        try {
+                              Method method = _modelData.getClass().getMethod("getHospitalUserId");
+                              if(method.invoke(_modelData) != null){
+                                //hospitalUserIdData = _modelData.getHospitalUserId().toString();
+                                hospitalUserIdData = (String) method.invoke(_modelData);
+                                values.put("`hospitalUserId`", hospitalUserIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -435,42 +465,62 @@ public class ReferPatientDb{
                         }
                                                 
                                 
-                                                            String referedHospitalIdData = "";
+                                                            String hospitalReferByIdData = "";
                         if(cursor.getString(11) != null){
-                          referedHospitalIdData = cursor.getString(11);
-                          if(referedHospitalIdData != null){
-                            referedHospitalIdData = referedHospitalIdData.toString();
-                            hashMap.put("referedHospitalId", referedHospitalIdData);
+                          hospitalReferByIdData = cursor.getString(11);
+                          if(hospitalReferByIdData != null){
+                            hospitalReferByIdData = hospitalReferByIdData.toString();
+                            hashMap.put("hospitalReferById", hospitalReferByIdData);
                           }
                         }
                                                 
                                 
-                                                            String referedHospitalUserIdData = "";
+                                                            String hospitalUserReferByIdData = "";
                         if(cursor.getString(12) != null){
-                          referedHospitalUserIdData = cursor.getString(12);
-                          if(referedHospitalUserIdData != null){
-                            referedHospitalUserIdData = referedHospitalUserIdData.toString();
-                            hashMap.put("referedHospitalUserId", referedHospitalUserIdData);
+                          hospitalUserReferByIdData = cursor.getString(12);
+                          if(hospitalUserReferByIdData != null){
+                            hospitalUserReferByIdData = hospitalUserReferByIdData.toString();
+                            hashMap.put("hospitalUserReferById", hospitalUserReferByIdData);
                           }
                         }
                                                 
                                 
-                                                            String repliedHospitalIdData = "";
+                                                            String hospitalReferToIdData = "";
                         if(cursor.getString(13) != null){
-                          repliedHospitalIdData = cursor.getString(13);
-                          if(repliedHospitalIdData != null){
-                            repliedHospitalIdData = repliedHospitalIdData.toString();
-                            hashMap.put("repliedHospitalId", repliedHospitalIdData);
+                          hospitalReferToIdData = cursor.getString(13);
+                          if(hospitalReferToIdData != null){
+                            hospitalReferToIdData = hospitalReferToIdData.toString();
+                            hashMap.put("hospitalReferToId", hospitalReferToIdData);
                           }
                         }
                                                 
                                 
-                                                            String repliedHospitalUserIdData = "";
+                                                            String hospitalUserReferToIdData = "";
                         if(cursor.getString(14) != null){
-                          repliedHospitalUserIdData = cursor.getString(14);
-                          if(repliedHospitalUserIdData != null){
-                            repliedHospitalUserIdData = repliedHospitalUserIdData.toString();
-                            hashMap.put("repliedHospitalUserId", repliedHospitalUserIdData);
+                          hospitalUserReferToIdData = cursor.getString(14);
+                          if(hospitalUserReferToIdData != null){
+                            hospitalUserReferToIdData = hospitalUserReferToIdData.toString();
+                            hashMap.put("hospitalUserReferToId", hospitalUserReferToIdData);
+                          }
+                        }
+                                                
+                                
+                                                            String hospitalIdData = "";
+                        if(cursor.getString(15) != null){
+                          hospitalIdData = cursor.getString(15);
+                          if(hospitalIdData != null){
+                            hospitalIdData = hospitalIdData.toString();
+                            hashMap.put("hospitalId", hospitalIdData);
+                          }
+                        }
+                                                
+                                
+                                                            String hospitalUserIdData = "";
+                        if(cursor.getString(16) != null){
+                          hospitalUserIdData = cursor.getString(16);
+                          if(hospitalUserIdData != null){
+                            hospitalUserIdData = hospitalUserIdData.toString();
+                            hashMap.put("hospitalUserId", hospitalUserIdData);
                           }
                         }
                                                 
@@ -639,14 +689,14 @@ public class ReferPatientDb{
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = selectQuery +  " " + " OFFSET " + skip;
+                selectQuery = selectQuery +  " " + " LIMIT -1 OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 selectQuery = "SELECT  * FROM ReferPatient " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM ReferPatient " + whereQuery  + " OFFSET " + skip;
+                selectQuery = "SELECT  * FROM ReferPatient " + whereQuery  + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -705,14 +755,14 @@ public class ReferPatientDb{
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = countQuery +  " " + " OFFSET " + skip;
+                countQuery = countQuery + " LIMIT -1  OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 countQuery = "SELECT  * FROM `ReferPatient` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `ReferPatient` " + whereQuery + " OFFSET " + skip;
+                countQuery = "SELECT  * FROM `ReferPatient` " + whereQuery + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -738,7 +788,7 @@ public class ReferPatientDb{
         if(limit != 0){
             countQuery = "SELECT  * FROM `ReferPatient` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `ReferPatient` " + whereQuery + " OFFSET " + skip;
+            countQuery = "SELECT  * FROM `ReferPatient` " + whereQuery + " LIMIT -1 OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

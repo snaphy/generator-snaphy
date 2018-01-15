@@ -2460,7 +2460,7 @@ public class BillCategoryRepository extends ModelRepository<BillCategory> {
     
         
             //Method fetchBillCategory definition
-            public void fetchBillCategory(  String hospiitalId, final DataListCallback<BillCategory> callback){
+            public void fetchBillCategory(  String hospitalId, final DataListCallback<BillCategory> callback){
 
                 /**
                 Call the onBefore event
@@ -2472,7 +2472,7 @@ public class BillCategoryRepository extends ModelRepository<BillCategory> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("hospiitalId", hospiitalId);
+                        hashMapObject.put("hospitalId", hospitalId);
                 
 
                 

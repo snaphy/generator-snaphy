@@ -26,19 +26,19 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.PatientFlagRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.ChatItemRepository;
 
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.FlagRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.HospitalUserRepository;
             
 
         
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PatientSecurityRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PatientGroupRepository;
             
 
         
@@ -51,7 +51,7 @@ import java.util.Map;
 
 
 
-public class PatientFlag extends Model {
+public class ChatItem extends Model {
 
 
     //For converting all model values to hashMap
@@ -66,9 +66,9 @@ public class PatientFlag extends Model {
         }
     }
 
-    private PatientFlag that ;
+    private ChatItem that ;
 
-    public PatientFlag (){
+    public ChatItem (){
         that = this;
     }
 
@@ -119,17 +119,45 @@ public class PatientFlag extends Model {
             
 
             
-                private double severityPoints;
+            
+        
+    
+        
+            
+
+            
+                private String message;
                 /* Adding Getter and Setter methods */
-                public double getSeverityPoints(){
-                    return severityPoints;
+                public String getMessage(){
+                    return message;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setSeverityPoints(double severityPoints){
-                    this.severityPoints = severityPoints;
+                public void setMessage(String message){
+                    this.message = message;
                     //Update hashMap value..
-                    hashMap.put("severityPoints", severityPoints);
+                    hashMap.put("message", message);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private Map<String, Object> image;
+                /* Adding Getter and Setter methods */
+                public Map<String, Object> getImage(){
+                    return image;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setImage(Map<String, Object> image){
+                    this.image = image;
+                    //Update Map value..
+                    hashMap.put("image", image);
                 }
 
             
@@ -170,7 +198,7 @@ public class PatientFlag extends Model {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      PatientFlagRepository lowercaseFirstLetterRepository = (PatientFlagRepository) getRepository();
+      ChatItemRepository lowercaseFirstLetterRepository = (ChatItemRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
@@ -185,7 +213,7 @@ public class PatientFlag extends Model {
 
 
     public void save__db(String id){
-      PatientFlagRepository lowercaseFirstLetterRepository = (PatientFlagRepository) getRepository();
+      ChatItemRepository lowercaseFirstLetterRepository = (ChatItemRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -196,7 +224,7 @@ public class PatientFlag extends Model {
 
 
     public void delete__db(){
-      PatientFlagRepository lowercaseFirstLetterRepository = (PatientFlagRepository) getRepository();
+      ChatItemRepository lowercaseFirstLetterRepository = (ChatItemRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
         if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -231,80 +259,80 @@ public class PatientFlag extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient Flag  flag ;
-                    private String flagId;
+                    private transient HospitalUser  hospitalUser ;
+                    private String hospitalUserId;
 
-                    public String getFlagId(){
-                         return flagId;
+                    public String getHospitalUserId(){
+                         return hospitalUserId;
                     }
 
-                    public void setFlagId(Object flagId){
-                        if(flagId != null){
-                          this.flagId = flagId.toString();
+                    public void setHospitalUserId(Object hospitalUserId){
+                        if(hospitalUserId != null){
+                          this.hospitalUserId = hospitalUserId.toString();
                         }
                     }
 
-                    public Flag getFlag() {
+                    public HospitalUser getHospitalUser() {
                         try{
                           //Adding database method for fetching from relation if not present..
-                                      if(flag == null){
-                                        PatientFlagRepository patientFlagRepository = (PatientFlagRepository) getRepository();
+                                      if(hospitalUser == null){
+                                        ChatItemRepository chatItemRepository = (ChatItemRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientFlagRepository.getRestAdapter();
+                                        RestAdapter restAdapter = chatItemRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
-                                          flag = getFlag__db(restAdapter);
+                                          hospitalUser = getHospitalUser__db(restAdapter);
                                         }
                                       }
                         }catch(Exception e){
                           //Ignore
                         }
 
-                        return flag;
+                        return hospitalUser;
                     }
 
-                    public void setFlag(Flag flag) {
-                        this.flag = flag;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setFlag(Map<String, Object> flag) {
-                        //First create a dummy Repo class object for customer.
-                        FlagRepository flagRepository = new FlagRepository();
-                        Flag flag1 = flagRepository.createObject(flag);
-                        setFlag(flag1);
+                    public void setHospitalUser(HospitalUser hospitalUser) {
+                        this.hospitalUser = hospitalUser;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setFlag(HashMap<String, Object> flag) {
+                    public void setHospitalUser(Map<String, Object> hospitalUser) {
                         //First create a dummy Repo class object for customer.
-                        FlagRepository flagRepository = new FlagRepository();
-                        Flag flag1 = flagRepository.createObject(flag);
-                        setFlag(flag1);
+                        HospitalUserRepository hospitalUserRepository = new HospitalUserRepository();
+                        HospitalUser hospitalUser1 = hospitalUserRepository.createObject(hospitalUser);
+                        setHospitalUser(hospitalUser1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setHospitalUser(HashMap<String, Object> hospitalUser) {
+                        //First create a dummy Repo class object for customer.
+                        HospitalUserRepository hospitalUserRepository = new HospitalUserRepository();
+                        HospitalUser hospitalUser1 = hospitalUserRepository.createObject(hospitalUser);
+                        setHospitalUser(hospitalUser1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Flag flag) {
-                        that.setFlag(flag);
+                    public void addRelation(HospitalUser hospitalUser) {
+                        that.setHospitalUser(hospitalUser);
                     }
 
 
-                    //Fetch related data from local database if present a flagId identifier as property for belongsTo
-                    public Flag getFlag__db(RestAdapter restAdapter){
-                      if(flagId != null){
-                        FlagRepository flagRepository = restAdapter.createRepository(FlagRepository.class);
+                    //Fetch related data from local database if present a hospitalUserId identifier as property for belongsTo
+                    public HospitalUser getHospitalUser__db(RestAdapter restAdapter){
+                      if(hospitalUserId != null){
+                        HospitalUserRepository hospitalUserRepository = restAdapter.createRepository(HospitalUserRepository.class);
                             try{
-                            PatientFlagRepository lowercaseFirstLetterRepository = (PatientFlagRepository) getRepository();
+                            ChatItemRepository lowercaseFirstLetterRepository = (ChatItemRepository) getRepository();
                                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                                if(flagRepository.getDb() == null ){
-                                                    flagRepository.addStorage(context);
+                                                if(hospitalUserRepository.getDb() == null ){
+                                                    hospitalUserRepository.addStorage(context);
                                                 }
 
-                                                if(context != null && flagRepository.getDb() != null){
-                                                    flagRepository.addStorage(context);
-                                                    Flag flag = (Flag) flagRepository.getDb().get__db(flagId);
-                                                    return flag;
+                                                if(context != null && hospitalUserRepository.getDb() != null){
+                                                    hospitalUserRepository.addStorage(context);
+                                                    HospitalUser hospitalUser = (HospitalUser) hospitalUserRepository.getDb().get__db(hospitalUserId);
+                                                    return hospitalUser;
                                                 }else{
                                                     return null;
                                                 }
@@ -337,12 +365,12 @@ public class PatientFlag extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__flag( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Flag> callback) {
+                                    public void get__hospitalUser( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final PatientFlagRepository  patientFlagRepo = restAdapter.createRepository(PatientFlagRepository.class);
+                                        final ChatItemRepository  chatItemRepo = restAdapter.createRepository(ChatItemRepository.class);
                                         
                                         
                                         
@@ -351,13 +379,13 @@ public class PatientFlag extends Model {
 
 
 
-                                        patientFlagRepo.get__flag( (String)that.getId(), refresh,  new ObjectCallback<Flag> (){
+                                        chatItemRepo.get__hospitalUser( (String)that.getId(), refresh,  new ObjectCallback<HospitalUser> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Flag object) {
+                                                    public void onSuccess(HospitalUser object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -440,80 +468,80 @@ public class PatientFlag extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient PatientSecurity  patientSecurity ;
-                    private String patientSecurityId;
+                    private transient PatientGroup  patientGroup ;
+                    private String patientGroupId;
 
-                    public String getPatientSecurityId(){
-                         return patientSecurityId;
+                    public String getPatientGroupId(){
+                         return patientGroupId;
                     }
 
-                    public void setPatientSecurityId(Object patientSecurityId){
-                        if(patientSecurityId != null){
-                          this.patientSecurityId = patientSecurityId.toString();
+                    public void setPatientGroupId(Object patientGroupId){
+                        if(patientGroupId != null){
+                          this.patientGroupId = patientGroupId.toString();
                         }
                     }
 
-                    public PatientSecurity getPatientSecurity() {
+                    public PatientGroup getPatientGroup() {
                         try{
                           //Adding database method for fetching from relation if not present..
-                                      if(patientSecurity == null){
-                                        PatientFlagRepository patientFlagRepository = (PatientFlagRepository) getRepository();
+                                      if(patientGroup == null){
+                                        ChatItemRepository chatItemRepository = (ChatItemRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientFlagRepository.getRestAdapter();
+                                        RestAdapter restAdapter = chatItemRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
-                                          patientSecurity = getPatientSecurity__db(restAdapter);
+                                          patientGroup = getPatientGroup__db(restAdapter);
                                         }
                                       }
                         }catch(Exception e){
                           //Ignore
                         }
 
-                        return patientSecurity;
+                        return patientGroup;
                     }
 
-                    public void setPatientSecurity(PatientSecurity patientSecurity) {
-                        this.patientSecurity = patientSecurity;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setPatientSecurity(Map<String, Object> patientSecurity) {
-                        //First create a dummy Repo class object for customer.
-                        PatientSecurityRepository patientSecurityRepository = new PatientSecurityRepository();
-                        PatientSecurity patientSecurity1 = patientSecurityRepository.createObject(patientSecurity);
-                        setPatientSecurity(patientSecurity1);
+                    public void setPatientGroup(PatientGroup patientGroup) {
+                        this.patientGroup = patientGroup;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setPatientSecurity(HashMap<String, Object> patientSecurity) {
+                    public void setPatientGroup(Map<String, Object> patientGroup) {
                         //First create a dummy Repo class object for customer.
-                        PatientSecurityRepository patientSecurityRepository = new PatientSecurityRepository();
-                        PatientSecurity patientSecurity1 = patientSecurityRepository.createObject(patientSecurity);
-                        setPatientSecurity(patientSecurity1);
+                        PatientGroupRepository patientGroupRepository = new PatientGroupRepository();
+                        PatientGroup patientGroup1 = patientGroupRepository.createObject(patientGroup);
+                        setPatientGroup(patientGroup1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setPatientGroup(HashMap<String, Object> patientGroup) {
+                        //First create a dummy Repo class object for customer.
+                        PatientGroupRepository patientGroupRepository = new PatientGroupRepository();
+                        PatientGroup patientGroup1 = patientGroupRepository.createObject(patientGroup);
+                        setPatientGroup(patientGroup1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(PatientSecurity patientSecurity) {
-                        that.setPatientSecurity(patientSecurity);
+                    public void addRelation(PatientGroup patientGroup) {
+                        that.setPatientGroup(patientGroup);
                     }
 
 
-                    //Fetch related data from local database if present a patientSecurityId identifier as property for belongsTo
-                    public PatientSecurity getPatientSecurity__db(RestAdapter restAdapter){
-                      if(patientSecurityId != null){
-                        PatientSecurityRepository patientSecurityRepository = restAdapter.createRepository(PatientSecurityRepository.class);
+                    //Fetch related data from local database if present a patientGroupId identifier as property for belongsTo
+                    public PatientGroup getPatientGroup__db(RestAdapter restAdapter){
+                      if(patientGroupId != null){
+                        PatientGroupRepository patientGroupRepository = restAdapter.createRepository(PatientGroupRepository.class);
                             try{
-                            PatientFlagRepository lowercaseFirstLetterRepository = (PatientFlagRepository) getRepository();
+                            ChatItemRepository lowercaseFirstLetterRepository = (ChatItemRepository) getRepository();
                                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                                if(patientSecurityRepository.getDb() == null ){
-                                                    patientSecurityRepository.addStorage(context);
+                                                if(patientGroupRepository.getDb() == null ){
+                                                    patientGroupRepository.addStorage(context);
                                                 }
 
-                                                if(context != null && patientSecurityRepository.getDb() != null){
-                                                    patientSecurityRepository.addStorage(context);
-                                                    PatientSecurity patientSecurity = (PatientSecurity) patientSecurityRepository.getDb().get__db(patientSecurityId);
-                                                    return patientSecurity;
+                                                if(context != null && patientGroupRepository.getDb() != null){
+                                                    patientGroupRepository.addStorage(context);
+                                                    PatientGroup patientGroup = (PatientGroup) patientGroupRepository.getDb().get__db(patientGroupId);
+                                                    return patientGroup;
                                                 }else{
                                                     return null;
                                                 }
@@ -548,12 +576,12 @@ public class PatientFlag extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__patientSecurity( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<PatientSecurity> callback) {
+                                    public void get__patientGroup( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<PatientGroup> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final PatientFlagRepository  patientFlagRepo = restAdapter.createRepository(PatientFlagRepository.class);
+                                        final ChatItemRepository  chatItemRepo = restAdapter.createRepository(ChatItemRepository.class);
                                         
                                         
                                         
@@ -562,13 +590,13 @@ public class PatientFlag extends Model {
 
 
 
-                                        patientFlagRepo.get__patientSecurity( (String)that.getId(), refresh,  new ObjectCallback<PatientSecurity> (){
+                                        chatItemRepo.get__patientGroup( (String)that.getId(), refresh,  new ObjectCallback<PatientGroup> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(PatientSecurity object) {
+                                                    public void onSuccess(PatientGroup object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);

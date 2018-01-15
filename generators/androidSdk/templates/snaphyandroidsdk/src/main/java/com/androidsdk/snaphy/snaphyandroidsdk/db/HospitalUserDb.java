@@ -73,20 +73,10 @@ public class HospitalUserDb{
     public ContentValues getContentValues(HospitalUser _modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String unique_numberData = "";
-                        if(_modelData.getUnique_number() != null){
-                          unique_numberData = _modelData.getUnique_number().toString();
-                          values.put("`unique_number`", unique_numberData);
-                        }
-                                  
-                                
-                                                            String profilePicData = "";
-                        if(_modelData.getProfilePic() != null){
-                          GsonBuilder gsonBuilder = new GsonBuilder();
-                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-                          Gson gson = gsonBuilder.create();
-                          profilePicData = gson.toJson(_modelData.getProfilePic(), HashMap.class);
-                          values.put("`profilePic`", profilePicData);
+                                                            String addedData = "";
+                        if(_modelData.getAdded() != null){
+                          addedData = _modelData.getAdded().toString();
+                          values.put("`added`", addedData);
                         }
                                   
                                 
@@ -104,13 +94,6 @@ public class HospitalUserDb{
                         }
                                   
                                 
-                                                            String genderData = "";
-                        if(_modelData.getGender() != null){
-                          genderData = _modelData.getGender().toString();
-                          values.put("`gender`", genderData);
-                        }
-                                  
-                                
                                                             String contactNumberData = "";
                         if(_modelData.getContactNumber() != null){
                           contactNumberData = _modelData.getContactNumber().toString();
@@ -122,6 +105,46 @@ public class HospitalUserDb{
                         if(_modelData.getDesignation() != null){
                           designationData = _modelData.getDesignation().toString();
                           values.put("`designation`", designationData);
+                        }
+                                  
+                                
+                                                            String genderData = "";
+                        if(_modelData.getGender() != null){
+                          genderData = _modelData.getGender().toString();
+                          values.put("`gender`", genderData);
+                        }
+                                  
+                                
+                                                            String updatedData = "";
+                        if(_modelData.getUpdated() != null){
+                          updatedData = _modelData.getUpdated().toString();
+                          values.put("`updated`", updatedData);
+                        }
+                                  
+                                
+                                                            int isDoctorData = 0;
+                        if(_modelData.getIsDoctor()){
+                          isDoctorData = 1;
+                        }else{
+                          isDoctorData = 0;
+                        }
+                        values.put("`isDoctor`", isDoctorData);
+                                  
+                                
+                                                            String unique_numberData = "";
+                        if(_modelData.getUnique_number() != null){
+                          unique_numberData = _modelData.getUnique_number().toString();
+                          values.put("`unique_number`", unique_numberData);
+                        }
+                                  
+                                
+                                                            String profilePicData = "";
+                        if(_modelData.getProfilePic() != null){
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                          profilePicData = gson.toJson(_modelData.getProfilePic(), HashMap.class);
+                          values.put("`profilePic`", profilePicData);
                         }
                                   
                                 
@@ -144,39 +167,6 @@ public class HospitalUserDb{
                         }
                                   
                                 
-                                                            double yearOfExperienceData;
-                        yearOfExperienceData = (double)_modelData.getYearOfExperience();
-                        values.put("`yearOfExperience`", yearOfExperienceData);
-                                  
-                                
-                                                            double yearOfBirthData;
-                        yearOfBirthData = (double)_modelData.getYearOfBirth();
-                        values.put("`yearOfBirth`", yearOfBirthData);
-                                  
-                                
-                                                            String addedData = "";
-                        if(_modelData.getAdded() != null){
-                          addedData = _modelData.getAdded().toString();
-                          values.put("`added`", addedData);
-                        }
-                                  
-                                
-                                                            String updatedData = "";
-                        if(_modelData.getUpdated() != null){
-                          updatedData = _modelData.getUpdated().toString();
-                          values.put("`updated`", updatedData);
-                        }
-                                  
-                                
-                                                            int isDoctorData = 0;
-                        if(_modelData.getIsDoctor()){
-                          isDoctorData = 1;
-                        }else{
-                          isDoctorData = 0;
-                        }
-                        values.put("`isDoctor`", isDoctorData);
-                                  
-                                
                                                             String imageData = "";
                         if(_modelData.getImage() != null){
                           GsonBuilder gsonBuilder = new GsonBuilder();
@@ -185,6 +175,16 @@ public class HospitalUserDb{
                           imageData = gson.toJson(_modelData.getImage(), HashMap.class);
                           values.put("`image`", imageData);
                         }
+                                  
+                                
+                                                            double yearOfExperienceData;
+                        yearOfExperienceData = (double)_modelData.getYearOfExperience();
+                        values.put("`yearOfExperience`", yearOfExperienceData);
+                                  
+                                
+                                                            double yearOfBirthData;
+                        yearOfBirthData = (double)_modelData.getYearOfBirth();
+                        values.put("`yearOfBirth`", yearOfBirthData);
                                   
                                 
                                                             String registeredStatusData = "";
@@ -522,32 +522,19 @@ public class HospitalUserDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            String unique_numberData = "";
+                                                            String addedData = "";
                         if(cursor.getString(0) != null){
-                          unique_numberData = cursor.getString(0);
-                          if(unique_numberData != null){
-                            unique_numberData = (String)unique_numberData;
-                            hashMap.put("unique_number", unique_numberData);
-                          }
-                        }
-                                                
-                                
-                                                            Map<String, Object> profilePicData = new HashMap<>();
-                        if(cursor.getString(1) != null){
-                          GsonBuilder gsonBuilder = new GsonBuilder();
-                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-                          Gson gson = gsonBuilder.create();
-                           profilePicData = gson.fromJson(cursor.getString(1), Map.class);
-                          if(profilePicData != null){
-                            profilePicData = (Map<String, Object>)profilePicData;
-                            hashMap.put("profilePic", profilePicData);
+                          addedData = cursor.getString(0);
+                          if(addedData != null){
+                            addedData = (String)addedData;
+                            hashMap.put("added", addedData);
                           }
                         }
                                                 
                                 
                                                             String firstNameData = "";
-                        if(cursor.getString(2) != null){
-                          firstNameData = cursor.getString(2);
+                        if(cursor.getString(1) != null){
+                          firstNameData = cursor.getString(1);
                           if(firstNameData != null){
                             firstNameData = (String)firstNameData;
                             hashMap.put("firstName", firstNameData);
@@ -556,8 +543,8 @@ public class HospitalUserDb{
                                                 
                                 
                                                             String lastNameData = "";
-                        if(cursor.getString(3) != null){
-                          lastNameData = cursor.getString(3);
+                        if(cursor.getString(2) != null){
+                          lastNameData = cursor.getString(2);
                           if(lastNameData != null){
                             lastNameData = (String)lastNameData;
                             hashMap.put("lastName", lastNameData);
@@ -565,19 +552,9 @@ public class HospitalUserDb{
                         }
                                                 
                                 
-                                                            String genderData = "";
-                        if(cursor.getString(4) != null){
-                          genderData = cursor.getString(4);
-                          if(genderData != null){
-                            genderData = (String)genderData;
-                            hashMap.put("gender", genderData);
-                          }
-                        }
-                                                
-                                
                                                             String contactNumberData = "";
-                        if(cursor.getString(5) != null){
-                          contactNumberData = cursor.getString(5);
+                        if(cursor.getString(3) != null){
+                          contactNumberData = cursor.getString(3);
                           if(contactNumberData != null){
                             contactNumberData = (String)contactNumberData;
                             hashMap.put("contactNumber", contactNumberData);
@@ -586,8 +563,8 @@ public class HospitalUserDb{
                                                 
                                 
                                                             String designationData = "";
-                        if(cursor.getString(6) != null){
-                          designationData = cursor.getString(6);
+                        if(cursor.getString(4) != null){
+                          designationData = cursor.getString(4);
                           if(designationData != null){
                             designationData = (String)designationData;
                             hashMap.put("designation", designationData);
@@ -595,63 +572,19 @@ public class HospitalUserDb{
                         }
                                                 
                                 
-                                                            String registrationNumberData = "";
-                        if(cursor.getString(7) != null){
-                          registrationNumberData = cursor.getString(7);
-                          if(registrationNumberData != null){
-                            registrationNumberData = (String)registrationNumberData;
-                            hashMap.put("registrationNumber", registrationNumberData);
-                          }
-                        }
-                                                
-                                
-                                                            double registrationYearData = (double)0;
-                          registrationYearData = cursor.getInt(8);
-                          registrationYearData = (double)registrationYearData;
-                          hashMap.put("registrationYear", registrationYearData);
-
-
-                                                
-                                
-                                                            String emailData = "";
-                        if(cursor.getString(9) != null){
-                          emailData = cursor.getString(9);
-                          if(emailData != null){
-                            emailData = (String)emailData;
-                            hashMap.put("email", emailData);
-                          }
-                        }
-                                                
-                                
-                                                            double yearOfExperienceData = (double)0;
-                          yearOfExperienceData = cursor.getInt(10);
-                          yearOfExperienceData = (double)yearOfExperienceData;
-                          hashMap.put("yearOfExperience", yearOfExperienceData);
-
-
-                                                
-                                
-                                                            double yearOfBirthData = (double)0;
-                          yearOfBirthData = cursor.getInt(11);
-                          yearOfBirthData = (double)yearOfBirthData;
-                          hashMap.put("yearOfBirth", yearOfBirthData);
-
-
-                                                
-                                
-                                                            String addedData = "";
-                        if(cursor.getString(12) != null){
-                          addedData = cursor.getString(12);
-                          if(addedData != null){
-                            addedData = (String)addedData;
-                            hashMap.put("added", addedData);
+                                                            String genderData = "";
+                        if(cursor.getString(5) != null){
+                          genderData = cursor.getString(5);
+                          if(genderData != null){
+                            genderData = (String)genderData;
+                            hashMap.put("gender", genderData);
                           }
                         }
                                                 
                                 
                                                             String updatedData = "";
-                        if(cursor.getString(13) != null){
-                          updatedData = cursor.getString(13);
+                        if(cursor.getString(6) != null){
+                          updatedData = cursor.getString(6);
                           if(updatedData != null){
                             updatedData = (String)updatedData;
                             hashMap.put("updated", updatedData);
@@ -660,7 +593,7 @@ public class HospitalUserDb{
                                                 
                                 
                                                             boolean isDoctorData = false;
-                        int tempisDoctorData = cursor.getInt(14);
+                        int tempisDoctorData = cursor.getInt(7);
                         if( tempisDoctorData > 0){
                           isDoctorData = true;
                         }else{
@@ -669,17 +602,84 @@ public class HospitalUserDb{
                         hashMap.put("isDoctor", isDoctorData);
                                                 
                                 
-                                                            Map<String, Object> imageData = new HashMap<>();
-                        if(cursor.getString(15) != null){
+                                                            String unique_numberData = "";
+                        if(cursor.getString(8) != null){
+                          unique_numberData = cursor.getString(8);
+                          if(unique_numberData != null){
+                            unique_numberData = (String)unique_numberData;
+                            hashMap.put("unique_number", unique_numberData);
+                          }
+                        }
+                                                
+                                
+                                                            Map<String, Object> profilePicData = new HashMap<>();
+                        if(cursor.getString(9) != null){
                           GsonBuilder gsonBuilder = new GsonBuilder();
                           gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                           Gson gson = gsonBuilder.create();
-                           imageData = gson.fromJson(cursor.getString(15), Map.class);
+                           profilePicData = gson.fromJson(cursor.getString(9), Map.class);
+                          if(profilePicData != null){
+                            profilePicData = (Map<String, Object>)profilePicData;
+                            hashMap.put("profilePic", profilePicData);
+                          }
+                        }
+                                                
+                                
+                                                            String registrationNumberData = "";
+                        if(cursor.getString(10) != null){
+                          registrationNumberData = cursor.getString(10);
+                          if(registrationNumberData != null){
+                            registrationNumberData = (String)registrationNumberData;
+                            hashMap.put("registrationNumber", registrationNumberData);
+                          }
+                        }
+                                                
+                                
+                                                            double registrationYearData = (double)0;
+                          registrationYearData = cursor.getInt(11);
+                          registrationYearData = (double)registrationYearData;
+                          hashMap.put("registrationYear", registrationYearData);
+
+
+                                                
+                                
+                                                            String emailData = "";
+                        if(cursor.getString(12) != null){
+                          emailData = cursor.getString(12);
+                          if(emailData != null){
+                            emailData = (String)emailData;
+                            hashMap.put("email", emailData);
+                          }
+                        }
+                                                
+                                
+                                                            Map<String, Object> imageData = new HashMap<>();
+                        if(cursor.getString(13) != null){
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                           imageData = gson.fromJson(cursor.getString(13), Map.class);
                           if(imageData != null){
                             imageData = (Map<String, Object>)imageData;
                             hashMap.put("image", imageData);
                           }
                         }
+                                                
+                                
+                                                            double yearOfExperienceData = (double)0;
+                          yearOfExperienceData = cursor.getInt(14);
+                          yearOfExperienceData = (double)yearOfExperienceData;
+                          hashMap.put("yearOfExperience", yearOfExperienceData);
+
+
+                                                
+                                
+                                                            double yearOfBirthData = (double)0;
+                          yearOfBirthData = cursor.getInt(15);
+                          yearOfBirthData = (double)yearOfBirthData;
+                          hashMap.put("yearOfBirth", yearOfBirthData);
+
+
                                                 
                                 
                                                             String registeredStatusData = "";
@@ -1026,14 +1026,14 @@ public class HospitalUserDb{
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = selectQuery +  " " + " OFFSET " + skip;
+                selectQuery = selectQuery +  " " + " LIMIT -1 OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 selectQuery = "SELECT  * FROM HospitalUser " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM HospitalUser " + whereQuery  + " OFFSET " + skip;
+                selectQuery = "SELECT  * FROM HospitalUser " + whereQuery  + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -1092,14 +1092,14 @@ public class HospitalUserDb{
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = countQuery +  " " + " OFFSET " + skip;
+                countQuery = countQuery + " LIMIT -1  OFFSET " + skip;
             }
         }else{
             if(limit != 0){
                 // Select All Query
                 countQuery = "SELECT  * FROM `HospitalUser` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `HospitalUser` " + whereQuery + " OFFSET " + skip;
+                countQuery = "SELECT  * FROM `HospitalUser` " + whereQuery + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -1125,7 +1125,7 @@ public class HospitalUserDb{
         if(limit != 0){
             countQuery = "SELECT  * FROM `HospitalUser` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `HospitalUser` " + whereQuery + " OFFSET " + skip;
+            countQuery = "SELECT  * FROM `HospitalUser` " + whereQuery + " LIMIT -1 OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();

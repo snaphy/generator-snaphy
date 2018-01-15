@@ -31,7 +31,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.HospitalUserEducationRe
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.DegreeRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.HospitalUserRepository;
             
 
         
@@ -45,7 +45,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.HospitalUserEducationRe
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.HospitalUserRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.DegreeRepository;
             
 
         
@@ -126,17 +126,17 @@ public class HospitalUserEducation extends Model {
             
 
             
-                private double yearOfGraduation;
+                private String collegeName;
                 /* Adding Getter and Setter methods */
-                public double getYearOfGraduation(){
-                    return yearOfGraduation;
+                public String getCollegeName(){
+                    return collegeName;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setYearOfGraduation(double yearOfGraduation){
-                    this.yearOfGraduation = yearOfGraduation;
+                public void setCollegeName(String collegeName){
+                    this.collegeName = collegeName;
                     //Update hashMap value..
-                    hashMap.put("yearOfGraduation", yearOfGraduation);
+                    hashMap.put("collegeName", collegeName);
                 }
 
             
@@ -168,17 +168,17 @@ public class HospitalUserEducation extends Model {
             
 
             
-                private String collegeName;
+                private double yearOfGraduation;
                 /* Adding Getter and Setter methods */
-                public String getCollegeName(){
-                    return collegeName;
+                public double getYearOfGraduation(){
+                    return yearOfGraduation;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setCollegeName(String collegeName){
-                    this.collegeName = collegeName;
+                public void setYearOfGraduation(double yearOfGraduation){
+                    this.yearOfGraduation = yearOfGraduation;
                     //Update hashMap value..
-                    hashMap.put("collegeName", collegeName);
+                    hashMap.put("yearOfGraduation", yearOfGraduation);
                 }
 
             
@@ -287,80 +287,80 @@ public class HospitalUserEducation extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient Degree  degree ;
-                    private String degreeId;
+                    private transient HospitalUser  hospitalUser ;
+                    private String hospitalUserId;
 
-                    public String getDegreeId(){
-                         return degreeId;
+                    public String getHospitalUserId(){
+                         return hospitalUserId;
                     }
 
-                    public void setDegreeId(Object degreeId){
-                        if(degreeId != null){
-                          this.degreeId = degreeId.toString();
+                    public void setHospitalUserId(Object hospitalUserId){
+                        if(hospitalUserId != null){
+                          this.hospitalUserId = hospitalUserId.toString();
                         }
                     }
 
-                    public Degree getDegree() {
+                    public HospitalUser getHospitalUser() {
                         try{
                           //Adding database method for fetching from relation if not present..
-                                      if(degree == null){
+                                      if(hospitalUser == null){
                                         HospitalUserEducationRepository hospitalUserEducationRepository = (HospitalUserEducationRepository) getRepository();
 
                                         RestAdapter restAdapter = hospitalUserEducationRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
-                                          degree = getDegree__db(restAdapter);
+                                          hospitalUser = getHospitalUser__db(restAdapter);
                                         }
                                       }
                         }catch(Exception e){
                           //Ignore
                         }
 
-                        return degree;
+                        return hospitalUser;
                     }
 
-                    public void setDegree(Degree degree) {
-                        this.degree = degree;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setDegree(Map<String, Object> degree) {
-                        //First create a dummy Repo class object for customer.
-                        DegreeRepository degreeRepository = new DegreeRepository();
-                        Degree degree1 = degreeRepository.createObject(degree);
-                        setDegree(degree1);
+                    public void setHospitalUser(HospitalUser hospitalUser) {
+                        this.hospitalUser = hospitalUser;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setDegree(HashMap<String, Object> degree) {
+                    public void setHospitalUser(Map<String, Object> hospitalUser) {
                         //First create a dummy Repo class object for customer.
-                        DegreeRepository degreeRepository = new DegreeRepository();
-                        Degree degree1 = degreeRepository.createObject(degree);
-                        setDegree(degree1);
+                        HospitalUserRepository hospitalUserRepository = new HospitalUserRepository();
+                        HospitalUser hospitalUser1 = hospitalUserRepository.createObject(hospitalUser);
+                        setHospitalUser(hospitalUser1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setHospitalUser(HashMap<String, Object> hospitalUser) {
+                        //First create a dummy Repo class object for customer.
+                        HospitalUserRepository hospitalUserRepository = new HospitalUserRepository();
+                        HospitalUser hospitalUser1 = hospitalUserRepository.createObject(hospitalUser);
+                        setHospitalUser(hospitalUser1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Degree degree) {
-                        that.setDegree(degree);
+                    public void addRelation(HospitalUser hospitalUser) {
+                        that.setHospitalUser(hospitalUser);
                     }
 
 
-                    //Fetch related data from local database if present a degreeId identifier as property for belongsTo
-                    public Degree getDegree__db(RestAdapter restAdapter){
-                      if(degreeId != null){
-                        DegreeRepository degreeRepository = restAdapter.createRepository(DegreeRepository.class);
+                    //Fetch related data from local database if present a hospitalUserId identifier as property for belongsTo
+                    public HospitalUser getHospitalUser__db(RestAdapter restAdapter){
+                      if(hospitalUserId != null){
+                        HospitalUserRepository hospitalUserRepository = restAdapter.createRepository(HospitalUserRepository.class);
                             try{
                             HospitalUserEducationRepository lowercaseFirstLetterRepository = (HospitalUserEducationRepository) getRepository();
                                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                                if(degreeRepository.getDb() == null ){
-                                                    degreeRepository.addStorage(context);
+                                                if(hospitalUserRepository.getDb() == null ){
+                                                    hospitalUserRepository.addStorage(context);
                                                 }
 
-                                                if(context != null && degreeRepository.getDb() != null){
-                                                    degreeRepository.addStorage(context);
-                                                    Degree degree = (Degree) degreeRepository.getDb().get__db(degreeId);
-                                                    return degree;
+                                                if(context != null && hospitalUserRepository.getDb() != null){
+                                                    hospitalUserRepository.addStorage(context);
+                                                    HospitalUser hospitalUser = (HospitalUser) hospitalUserRepository.getDb().get__db(hospitalUserId);
+                                                    return hospitalUser;
                                                 }else{
                                                     return null;
                                                 }
@@ -390,14 +390,10 @@ public class HospitalUserEducation extends Model {
                     //Now add instance methods to fetch the related belongsTo Model..
                     
 
-                     
-                            
-                         
-                            
-                        
+                    
 
                                     //Write the method here..
-                                    public void get__degree( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Degree> callback) {
+                                    public void get__hospitalUser( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -411,13 +407,13 @@ public class HospitalUserEducation extends Model {
 
 
 
-                                        hospitalUserEducationRepo.get__degree( (String)that.getId(), refresh,  new ObjectCallback<Degree> (){
+                                        hospitalUserEducationRepo.get__hospitalUser( (String)that.getId(), refresh,  new ObjectCallback<HospitalUser> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Degree object) {
+                                                    public void onSuccess(HospitalUser object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -450,6 +446,10 @@ public class HospitalUserEducation extends Model {
                                         });
                                     } //method def ends here.
                                  
+                            
+                         
+                            
+                         
                             
                         
                         
@@ -725,80 +725,80 @@ public class HospitalUserEducation extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient HospitalUser  hospitalUser ;
-                    private String hospitalUserId;
+                    private transient Degree  degree ;
+                    private String degreeId;
 
-                    public String getHospitalUserId(){
-                         return hospitalUserId;
+                    public String getDegreeId(){
+                         return degreeId;
                     }
 
-                    public void setHospitalUserId(Object hospitalUserId){
-                        if(hospitalUserId != null){
-                          this.hospitalUserId = hospitalUserId.toString();
+                    public void setDegreeId(Object degreeId){
+                        if(degreeId != null){
+                          this.degreeId = degreeId.toString();
                         }
                     }
 
-                    public HospitalUser getHospitalUser() {
+                    public Degree getDegree() {
                         try{
                           //Adding database method for fetching from relation if not present..
-                                      if(hospitalUser == null){
+                                      if(degree == null){
                                         HospitalUserEducationRepository hospitalUserEducationRepository = (HospitalUserEducationRepository) getRepository();
 
                                         RestAdapter restAdapter = hospitalUserEducationRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
-                                          hospitalUser = getHospitalUser__db(restAdapter);
+                                          degree = getDegree__db(restAdapter);
                                         }
                                       }
                         }catch(Exception e){
                           //Ignore
                         }
 
-                        return hospitalUser;
+                        return degree;
                     }
 
-                    public void setHospitalUser(HospitalUser hospitalUser) {
-                        this.hospitalUser = hospitalUser;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setHospitalUser(Map<String, Object> hospitalUser) {
-                        //First create a dummy Repo class object for customer.
-                        HospitalUserRepository hospitalUserRepository = new HospitalUserRepository();
-                        HospitalUser hospitalUser1 = hospitalUserRepository.createObject(hospitalUser);
-                        setHospitalUser(hospitalUser1);
+                    public void setDegree(Degree degree) {
+                        this.degree = degree;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setHospitalUser(HashMap<String, Object> hospitalUser) {
+                    public void setDegree(Map<String, Object> degree) {
                         //First create a dummy Repo class object for customer.
-                        HospitalUserRepository hospitalUserRepository = new HospitalUserRepository();
-                        HospitalUser hospitalUser1 = hospitalUserRepository.createObject(hospitalUser);
-                        setHospitalUser(hospitalUser1);
+                        DegreeRepository degreeRepository = new DegreeRepository();
+                        Degree degree1 = degreeRepository.createObject(degree);
+                        setDegree(degree1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setDegree(HashMap<String, Object> degree) {
+                        //First create a dummy Repo class object for customer.
+                        DegreeRepository degreeRepository = new DegreeRepository();
+                        Degree degree1 = degreeRepository.createObject(degree);
+                        setDegree(degree1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(HospitalUser hospitalUser) {
-                        that.setHospitalUser(hospitalUser);
+                    public void addRelation(Degree degree) {
+                        that.setDegree(degree);
                     }
 
 
-                    //Fetch related data from local database if present a hospitalUserId identifier as property for belongsTo
-                    public HospitalUser getHospitalUser__db(RestAdapter restAdapter){
-                      if(hospitalUserId != null){
-                        HospitalUserRepository hospitalUserRepository = restAdapter.createRepository(HospitalUserRepository.class);
+                    //Fetch related data from local database if present a degreeId identifier as property for belongsTo
+                    public Degree getDegree__db(RestAdapter restAdapter){
+                      if(degreeId != null){
+                        DegreeRepository degreeRepository = restAdapter.createRepository(DegreeRepository.class);
                             try{
                             HospitalUserEducationRepository lowercaseFirstLetterRepository = (HospitalUserEducationRepository) getRepository();
                                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                                if(hospitalUserRepository.getDb() == null ){
-                                                    hospitalUserRepository.addStorage(context);
+                                                if(degreeRepository.getDb() == null ){
+                                                    degreeRepository.addStorage(context);
                                                 }
 
-                                                if(context != null && hospitalUserRepository.getDb() != null){
-                                                    hospitalUserRepository.addStorage(context);
-                                                    HospitalUser hospitalUser = (HospitalUser) hospitalUserRepository.getDb().get__db(hospitalUserId);
-                                                    return hospitalUser;
+                                                if(context != null && degreeRepository.getDb() != null){
+                                                    degreeRepository.addStorage(context);
+                                                    Degree degree = (Degree) degreeRepository.getDb().get__db(degreeId);
+                                                    return degree;
                                                 }else{
                                                     return null;
                                                 }
@@ -828,10 +828,14 @@ public class HospitalUserEducation extends Model {
                     //Now add instance methods to fetch the related belongsTo Model..
                     
 
-                    
+                     
+                            
+                         
+                            
+                        
 
                                     //Write the method here..
-                                    public void get__hospitalUser( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
+                                    public void get__degree( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Degree> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -845,13 +849,13 @@ public class HospitalUserEducation extends Model {
 
 
 
-                                        hospitalUserEducationRepo.get__hospitalUser( (String)that.getId(), refresh,  new ObjectCallback<HospitalUser> (){
+                                        hospitalUserEducationRepo.get__degree( (String)that.getId(), refresh,  new ObjectCallback<Degree> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(HospitalUser object) {
+                                                    public void onSuccess(Degree object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -884,10 +888,6 @@ public class HospitalUserEducation extends Model {
                                         });
                                     } //method def ends here.
                                  
-                            
-                         
-                            
-                         
                             
                         
                         

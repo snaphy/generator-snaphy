@@ -48,8 +48,8 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.HospitalUserEducationDb;
 //Now import model of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Degree;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.DegreeRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.HospitalUser;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.HospitalUserRepository;
             
         
     
@@ -62,8 +62,8 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.HospitalUserEducationDb;
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.HospitalUser;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.HospitalUserRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Degree;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.DegreeRepository;
             
         
     
