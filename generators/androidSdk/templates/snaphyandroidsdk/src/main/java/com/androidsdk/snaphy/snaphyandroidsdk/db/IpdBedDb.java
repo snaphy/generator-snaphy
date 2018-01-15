@@ -53,17 +53,20 @@ public class IpdBedDb{
 
 
     public void insert__db (final String id, final IpdBed _modelData) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-                // Inserting Row
-                ContentValues values = getContentValues(_modelData);
-                db.insert("`IpdBed`", null, values);
-                //db.close(); // Closing database connection
-            }
-        }).start();
-
+        // new Thread(new Runnable() {
+        //      @Override
+        //      public void run() {
+                    
+                    SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+                    db.beginTransaction();
+                    // Inserting Row
+                    ContentValues values = getContentValues(_modelData);
+                    db.insert("`IpdBed`", null, values);
+                    //db.close(); // Closing database connection
+                    db.setTransactionSuccessful();
+                    db.endTransaction();
+        //      }
+        // }).start();
     }
 
 
@@ -558,9 +561,9 @@ public class IpdBedDb{
 
     // Updating updated data property to new contact with where clause..
     public void checkOldData__db(final HashMap<String, Object> whereKeyValue) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+        // new Thread(new Runnable() {
+        //     @Override
+        //     public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
                 db.beginTransaction();
@@ -572,17 +575,16 @@ public class IpdBedDb{
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
-            }
-        }).start();
-
+        //     }
+        // }).start();
     }
 
 
     // Delete Old data with where clause
     public void deleteOldData__db(final HashMap<String, Object> whereKeyValue) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+        // new Thread(new Runnable() {
+        //     @Override
+        //     public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
@@ -590,8 +592,8 @@ public class IpdBedDb{
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
-            }
-        }).start();
+        //     }
+        // }).start();
 
     }
 
@@ -601,17 +603,17 @@ public class IpdBedDb{
 
     // Deleting by whereKeyValue filter data present..
     public void delete__db(final HashMap<String, Object> whereKeyValue) {
-      new Thread(new Runnable() {
-            @Override
-            public void run() {
+    //   new Thread(new Runnable() {
+    //         @Override
+    //         public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
                 db.delete("`IpdBed`", where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-            }
-        }).start();
+        //     }
+        // }).start();
     }
 
 
@@ -674,9 +676,9 @@ public class IpdBedDb{
 
     // Updating updated data property to new contact with where clause..
     public void checkOldData__db(final String whereKey, final String whereKeyValue) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+        // new Thread(new Runnable() {
+        //     @Override
+        //     public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
                 db.beginTransaction();
@@ -687,33 +689,33 @@ public class IpdBedDb{
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
-            }
-        }).start();
+        //     }
+        // }).start();
     }
 
 
     // Delete Old data with where clause
     public void deleteOldData__db(final String whereKey, final String whereKeyValue) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+        // new Thread(new Runnable() {
+        //     @Override
+        //     public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 db.delete("`IpdBed`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
-            }
-        }).start();
+        //     }
+        // }).start();
 
     }
 
 
     //Update multiple data at once..
     public void updateAll__db(final HashMap<String, Object> whereKeyValue, final IpdBed _modelData ){
-      new Thread(new Runnable(){
-        @Override
-        public void run(){
+    //   new Thread(new Runnable(){
+    //     @Override
+    //     public void run(){
           SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
           db.beginTransaction();
           ContentValues values = getContentValues(_modelData);
@@ -722,9 +724,9 @@ public class IpdBedDb{
           db.setTransactionSuccessful();
           db.endTransaction();
           //db.close();
-        }
+    //     }
 
-      }).start();
+    //   }).start();
     }
 
 
@@ -732,26 +734,26 @@ public class IpdBedDb{
 
     // Deleting by whereKey and whereKeyValue
     public void delete__db(final String whereKey, final String whereKeyValue) {
-      new Thread(new Runnable() {
-            @Override
-            public void run() {
+    //   new Thread(new Runnable() {
+    //         @Override
+    //         public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 db.delete(TABLE, whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
-            }
-        }).start();
+        //     }
+        // }).start();
     }
 
 
 
     // Updating single contact
     public void update__db(final String id,   final IpdBed _modelData) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+        // new Thread(new Runnable() {
+        //     @Override
+        //     public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 ContentValues values = getContentValues(_modelData);
@@ -761,17 +763,17 @@ public class IpdBedDb{
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
-            }
-        }).start();
+        //     }
+        // }).start();
 
     }
 
 
     // Updating updated data property to new contact
     public void checkOldData__db() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+        // new Thread(new Runnable() {
+        //     @Override
+        //     public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 ContentValues values = new ContentValues();
@@ -781,25 +783,25 @@ public class IpdBedDb{
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
-            }
-        }).start();
+        //     }
+        // }).start();
 
     }
 
 
     // Delete Old data
     public void deleteOldData__db() {
-      new Thread(new Runnable() {
-            @Override
-            public void run() {
+    //   new Thread(new Runnable() {
+    //         @Override
+    //         public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 db.delete("`IpdBed`", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
-            }
-        }).start();
+        //     }
+        // }).start();
 
     }
 
@@ -835,9 +837,9 @@ public class IpdBedDb{
 
     // Deleting by id
     public void delete__db(final String id) {
-      new Thread(new Runnable() {
-            @Override
-            public void run() {
+    //   new Thread(new Runnable() {
+    //         @Override
+    //         public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 db.delete(TABLE, KEY_ID + " = ?",
@@ -845,22 +847,22 @@ public class IpdBedDb{
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
-            }
-        }).start();
+        //     }
+        // }).start();
     }
 
     public void reset__db(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+        // new Thread(new Runnable() {
+        //     @Override
+        //     public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 db.delete(TABLE,null,null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
-            }
-        }).start();
+        //     }
+        // }).start();
 
     }
 

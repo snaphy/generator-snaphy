@@ -53,17 +53,20 @@ public class PatientGroupDb{
 
 
     public void insert__db (final String id, final PatientGroup _modelData) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-                // Inserting Row
-                ContentValues values = getContentValues(_modelData);
-                db.insert("`PatientGroup`", null, values);
-                //db.close(); // Closing database connection
-            }
-        }).start();
-
+        // new Thread(new Runnable() {
+        //      @Override
+        //      public void run() {
+                    
+                    SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+                    db.beginTransaction();
+                    // Inserting Row
+                    ContentValues values = getContentValues(_modelData);
+                    db.insert("`PatientGroup`", null, values);
+                    //db.close(); // Closing database connection
+                    db.setTransactionSuccessful();
+                    db.endTransaction();
+        //      }
+        // }).start();
     }
 
 
@@ -352,6 +355,13 @@ public class PatientGroupDb{
                         if(_modelData.getHashObject() != null){
                           hashObjectData = _modelData.getHashObject().toString();
                           values.put("`hashObject`", hashObjectData);
+                        }
+                                  
+                                
+                                                            String patientSecurityOfflineData = "";
+                        if(_modelData.getPatientSecurityOffline() != null){
+                          patientSecurityOfflineData = _modelData.getPatientSecurityOffline().toString();
+                          values.put("`patientSecurityOffline`", patientSecurityOfflineData);
                         }
                                   
                                 
@@ -987,9 +997,19 @@ public class PatientGroupDb{
                         }
                                                 
                                 
-                                                            String idData = "";
+                                                            String patientSecurityOfflineData = "";
                         if(cursor.getString(36) != null){
-                          idData = cursor.getString(36);
+                          patientSecurityOfflineData = cursor.getString(36);
+                          if(patientSecurityOfflineData != null){
+                            patientSecurityOfflineData = (String)patientSecurityOfflineData;
+                            hashMap.put("patientSecurityOffline", patientSecurityOfflineData);
+                          }
+                        }
+                                                
+                                
+                                                            String idData = "";
+                        if(cursor.getString(37) != null){
+                          idData = cursor.getString(37);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -998,8 +1018,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String patientIdData = "";
-                        if(cursor.getString(37) != null){
-                          patientIdData = cursor.getString(37);
+                        if(cursor.getString(38) != null){
+                          patientIdData = cursor.getString(38);
                           if(patientIdData != null){
                             patientIdData = patientIdData.toString();
                             hashMap.put("patientId", patientIdData);
@@ -1008,8 +1028,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String aadharIdData = "";
-                        if(cursor.getString(38) != null){
-                          aadharIdData = cursor.getString(38);
+                        if(cursor.getString(39) != null){
+                          aadharIdData = cursor.getString(39);
                           if(aadharIdData != null){
                             aadharIdData = aadharIdData.toString();
                             hashMap.put("aadharId", aadharIdData);
@@ -1018,8 +1038,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String hospitalIdData = "";
-                        if(cursor.getString(39) != null){
-                          hospitalIdData = cursor.getString(39);
+                        if(cursor.getString(40) != null){
+                          hospitalIdData = cursor.getString(40);
                           if(hospitalIdData != null){
                             hospitalIdData = hospitalIdData.toString();
                             hashMap.put("hospitalId", hospitalIdData);
@@ -1028,8 +1048,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String ipdBedLogIdData = "";
-                        if(cursor.getString(40) != null){
-                          ipdBedLogIdData = cursor.getString(40);
+                        if(cursor.getString(41) != null){
+                          ipdBedLogIdData = cursor.getString(41);
                           if(ipdBedLogIdData != null){
                             ipdBedLogIdData = ipdBedLogIdData.toString();
                             hashMap.put("ipdBedLogId", ipdBedLogIdData);
@@ -1038,8 +1058,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String ipdBedIdData = "";
-                        if(cursor.getString(41) != null){
-                          ipdBedIdData = cursor.getString(41);
+                        if(cursor.getString(42) != null){
+                          ipdBedIdData = cursor.getString(42);
                           if(ipdBedIdData != null){
                             ipdBedIdData = ipdBedIdData.toString();
                             hashMap.put("ipdBedId", ipdBedIdData);
@@ -1048,8 +1068,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String opdTokenLogIdData = "";
-                        if(cursor.getString(42) != null){
-                          opdTokenLogIdData = cursor.getString(42);
+                        if(cursor.getString(43) != null){
+                          opdTokenLogIdData = cursor.getString(43);
                           if(opdTokenLogIdData != null){
                             opdTokenLogIdData = opdTokenLogIdData.toString();
                             hashMap.put("opdTokenLogId", opdTokenLogIdData);
@@ -1058,8 +1078,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String patientSecurityIdData = "";
-                        if(cursor.getString(43) != null){
-                          patientSecurityIdData = cursor.getString(43);
+                        if(cursor.getString(44) != null){
+                          patientSecurityIdData = cursor.getString(44);
                           if(patientSecurityIdData != null){
                             patientSecurityIdData = patientSecurityIdData.toString();
                             hashMap.put("patientSecurityId", patientSecurityIdData);
@@ -1068,8 +1088,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String hospitalUserIdData = "";
-                        if(cursor.getString(44) != null){
-                          hospitalUserIdData = cursor.getString(44);
+                        if(cursor.getString(45) != null){
+                          hospitalUserIdData = cursor.getString(45);
                           if(hospitalUserIdData != null){
                             hospitalUserIdData = hospitalUserIdData.toString();
                             hashMap.put("hospitalUserId", hospitalUserIdData);
@@ -1078,8 +1098,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String stateIdData = "";
-                        if(cursor.getString(45) != null){
-                          stateIdData = cursor.getString(45);
+                        if(cursor.getString(46) != null){
+                          stateIdData = cursor.getString(46);
                           if(stateIdData != null){
                             stateIdData = stateIdData.toString();
                             hashMap.put("stateId", stateIdData);
@@ -1088,8 +1108,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String pincodeIdData = "";
-                        if(cursor.getString(46) != null){
-                          pincodeIdData = cursor.getString(46);
+                        if(cursor.getString(47) != null){
+                          pincodeIdData = cursor.getString(47);
                           if(pincodeIdData != null){
                             pincodeIdData = pincodeIdData.toString();
                             hashMap.put("pincodeId", pincodeIdData);
@@ -1098,8 +1118,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String talukIdData = "";
-                        if(cursor.getString(47) != null){
-                          talukIdData = cursor.getString(47);
+                        if(cursor.getString(48) != null){
+                          talukIdData = cursor.getString(48);
                           if(talukIdData != null){
                             talukIdData = talukIdData.toString();
                             hashMap.put("talukId", talukIdData);
@@ -1108,8 +1128,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String districtIdData = "";
-                        if(cursor.getString(48) != null){
-                          districtIdData = cursor.getString(48);
+                        if(cursor.getString(49) != null){
+                          districtIdData = cursor.getString(49);
                           if(districtIdData != null){
                             districtIdData = districtIdData.toString();
                             hashMap.put("districtId", districtIdData);
@@ -1403,9 +1423,9 @@ public class PatientGroupDb{
 
     // Updating updated data property to new contact with where clause..
     public void checkOldData__db(final HashMap<String, Object> whereKeyValue) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+        // new Thread(new Runnable() {
+        //     @Override
+        //     public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
                 db.beginTransaction();
@@ -1417,17 +1437,16 @@ public class PatientGroupDb{
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
-            }
-        }).start();
-
+        //     }
+        // }).start();
     }
 
 
     // Delete Old data with where clause
     public void deleteOldData__db(final HashMap<String, Object> whereKeyValue) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+        // new Thread(new Runnable() {
+        //     @Override
+        //     public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
@@ -1435,8 +1454,8 @@ public class PatientGroupDb{
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
-            }
-        }).start();
+        //     }
+        // }).start();
 
     }
 
@@ -1446,17 +1465,17 @@ public class PatientGroupDb{
 
     // Deleting by whereKeyValue filter data present..
     public void delete__db(final HashMap<String, Object> whereKeyValue) {
-      new Thread(new Runnable() {
-            @Override
-            public void run() {
+    //   new Thread(new Runnable() {
+    //         @Override
+    //         public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
                 db.delete("`PatientGroup`", where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
-            }
-        }).start();
+        //     }
+        // }).start();
     }
 
 
@@ -1519,9 +1538,9 @@ public class PatientGroupDb{
 
     // Updating updated data property to new contact with where clause..
     public void checkOldData__db(final String whereKey, final String whereKeyValue) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+        // new Thread(new Runnable() {
+        //     @Override
+        //     public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
                 db.beginTransaction();
@@ -1532,33 +1551,33 @@ public class PatientGroupDb{
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
-            }
-        }).start();
+        //     }
+        // }).start();
     }
 
 
     // Delete Old data with where clause
     public void deleteOldData__db(final String whereKey, final String whereKeyValue) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+        // new Thread(new Runnable() {
+        //     @Override
+        //     public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 db.delete("`PatientGroup`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
-            }
-        }).start();
+        //     }
+        // }).start();
 
     }
 
 
     //Update multiple data at once..
     public void updateAll__db(final HashMap<String, Object> whereKeyValue, final PatientGroup _modelData ){
-      new Thread(new Runnable(){
-        @Override
-        public void run(){
+    //   new Thread(new Runnable(){
+    //     @Override
+    //     public void run(){
           SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
           db.beginTransaction();
           ContentValues values = getContentValues(_modelData);
@@ -1567,9 +1586,9 @@ public class PatientGroupDb{
           db.setTransactionSuccessful();
           db.endTransaction();
           //db.close();
-        }
+    //     }
 
-      }).start();
+    //   }).start();
     }
 
 
@@ -1577,26 +1596,26 @@ public class PatientGroupDb{
 
     // Deleting by whereKey and whereKeyValue
     public void delete__db(final String whereKey, final String whereKeyValue) {
-      new Thread(new Runnable() {
-            @Override
-            public void run() {
+    //   new Thread(new Runnable() {
+    //         @Override
+    //         public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 db.delete(TABLE, whereKey + " = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
-            }
-        }).start();
+        //     }
+        // }).start();
     }
 
 
 
     // Updating single contact
     public void update__db(final String id,   final PatientGroup _modelData) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+        // new Thread(new Runnable() {
+        //     @Override
+        //     public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 ContentValues values = getContentValues(_modelData);
@@ -1606,17 +1625,17 @@ public class PatientGroupDb{
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
-            }
-        }).start();
+        //     }
+        // }).start();
 
     }
 
 
     // Updating updated data property to new contact
     public void checkOldData__db() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+        // new Thread(new Runnable() {
+        //     @Override
+        //     public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 ContentValues values = new ContentValues();
@@ -1626,25 +1645,25 @@ public class PatientGroupDb{
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
-            }
-        }).start();
+        //     }
+        // }).start();
 
     }
 
 
     // Delete Old data
     public void deleteOldData__db() {
-      new Thread(new Runnable() {
-            @Override
-            public void run() {
+    //   new Thread(new Runnable() {
+    //         @Override
+    //         public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 db.delete("`PatientGroup`", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
-            }
-        }).start();
+        //     }
+        // }).start();
 
     }
 
@@ -1680,9 +1699,9 @@ public class PatientGroupDb{
 
     // Deleting by id
     public void delete__db(final String id) {
-      new Thread(new Runnable() {
-            @Override
-            public void run() {
+    //   new Thread(new Runnable() {
+    //         @Override
+    //         public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 db.delete(TABLE, KEY_ID + " = ?",
@@ -1690,22 +1709,22 @@ public class PatientGroupDb{
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
-            }
-        }).start();
+        //     }
+        // }).start();
     }
 
     public void reset__db(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
+        // new Thread(new Runnable() {
+        //     @Override
+        //     public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 db.delete(TABLE,null,null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
-            }
-        }).start();
+        //     }
+        // }).start();
 
     }
 

@@ -41,25 +41,11 @@ import org.json.JSONObject;
 
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Bill;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.MedicalRecord;
 import android.content.Context;
-import com.androidsdk.snaphy.snaphyandroidsdk.db.BillDb;
+import com.androidsdk.snaphy.snaphyandroidsdk.db.MedicalRecordDb;
 
 //Now import model of related models..
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.BillCategory;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BillCategoryRepository;
-            
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.SubBillCategory;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.SubBillCategoryRepository;
-            
-        
-    
 
     
             import com.androidsdk.snaphy.snaphyandroidsdk.models.PatientGroup;
@@ -69,8 +55,8 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.BillDb;
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Patient;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PatientRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Hospital;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.HospitalRepository;
             
         
     
@@ -79,15 +65,15 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.BillDb;
 
 
 
-public class BillRepository extends ModelRepository<Bill> {
+public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
 
 
     private Context context;
     private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
     private static String DATABASE_NAME;
 
-    public BillRepository(){
-        super("Bill", null, Bill.class);
+    public MedicalRecordRepository(){
+        super("MedicalRecord", null, MedicalRecord.class);
 
     }
 
@@ -105,15 +91,15 @@ public class BillRepository extends ModelRepository<Bill> {
 
 
 
-    public BillDb getDb() {
-      return billDb;
+    public MedicalRecordDb getDb() {
+      return medicalRecordDb;
     }
 
-    public void setBillDb(BillDb billDb) {
-      this.billDb = billDb;
+    public void setMedicalRecordDb(MedicalRecordDb medicalRecordDb) {
+      this.medicalRecordDb = medicalRecordDb;
     }
 
-    private BillDb billDb;
+    private MedicalRecordDb medicalRecordDb;
 
 
 
@@ -147,7 +133,7 @@ public class BillRepository extends ModelRepository<Bill> {
          catch (Exception e){
             Log.e("Snaphy", e.toString());
          }
-         setBillDb(new BillDb(context, DATABASE_NAME, getRestAdapter()));
+         setMedicalRecordDb(new MedicalRecordDb(context, DATABASE_NAME, getRestAdapter()));
          //allow data storage locally..
          persistData(true);
          this.context = context;
@@ -161,7 +147,7 @@ public class BillRepository extends ModelRepository<Bill> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:billId/patientGroup", "GET"), "Bill.prototype.__get__patientGroup");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:medicalRecordId/patientGroup", "GET"), "MedicalRecord.prototype.__get__patientGroup");
     
 
     
@@ -170,7 +156,7 @@ public class BillRepository extends ModelRepository<Bill> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:billId/patient", "GET"), "Bill.prototype.__get__patient");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:medicalRecordId/hospital", "GET"), "MedicalRecord.prototype.__get__hospital");
     
 
     
@@ -179,7 +165,7 @@ public class BillRepository extends ModelRepository<Bill> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:billId/billCategory", "GET"), "Bill.prototype.__get__billCategory");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "MedicalRecord.create");
     
 
     
@@ -188,7 +174,7 @@ public class BillRepository extends ModelRepository<Bill> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:billId/subBillCategory", "GET"), "Bill.prototype.__get__subBillCategory");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "MedicalRecord.create");
     
 
     
@@ -197,7 +183,7 @@ public class BillRepository extends ModelRepository<Bill> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Bill.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "MedicalRecord.upsert");
     
 
     
@@ -206,7 +192,7 @@ public class BillRepository extends ModelRepository<Bill> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Bill.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "MedicalRecord.exists");
     
 
     
@@ -215,7 +201,7 @@ public class BillRepository extends ModelRepository<Bill> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Bill.upsert");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "MedicalRecord.findById");
     
 
     
@@ -224,7 +210,7 @@ public class BillRepository extends ModelRepository<Bill> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Bill.exists");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "MedicalRecord.find");
     
 
     
@@ -233,7 +219,7 @@ public class BillRepository extends ModelRepository<Bill> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Bill.findById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "MedicalRecord.findOne");
     
 
     
@@ -242,7 +228,7 @@ public class BillRepository extends ModelRepository<Bill> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Bill.find");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "MedicalRecord.updateAll");
     
 
     
@@ -251,7 +237,7 @@ public class BillRepository extends ModelRepository<Bill> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Bill.findOne");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "MedicalRecord.deleteById");
     
 
     
@@ -260,7 +246,7 @@ public class BillRepository extends ModelRepository<Bill> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Bill.updateAll");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "MedicalRecord.count");
     
 
     
@@ -269,175 +255,28 @@ public class BillRepository extends ModelRepository<Bill> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Bill.deleteById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:medicalRecordId", "PUT"), "MedicalRecord.prototype.updateAttributes");
     
 
     
     
 
     
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Bill.count");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:billId", "PUT"), "Bill.prototype.updateAttributes");
-    
-
-    
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Bill.getSchema");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Bill.getAbsoluteSchema");
-    
-
-    
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "Bill.getDetailSchema");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "Bill.getModelRelationSchema");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/addBill", "POST"), "Bill.addBill");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/calculateBill", "POST"), "Bill.calculateBill");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchBillHistory", "POST"), "Bill.fetchBillHistory");
     
 
     
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchBillSummary", "POST"), "Bill.fetchBillSummary");
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "MedicalRecord.getSchema");
     
 
     
     
 
     
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
-
-    
-    
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "MedicalRecord.getAbsoluteSchema");
     
 
     
@@ -447,21 +286,18 @@ public class BillRepository extends ModelRepository<Bill> {
     
 
     
-    
-
-    
-    
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "MedicalRecord.getDetailSchema");
     
 
     
     
 
-    
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "MedicalRecord.getModelRelationSchema");
     
 
     
@@ -489,7 +325,7 @@ public class BillRepository extends ModelRepository<Bill> {
     
         
             //Method get__patientGroup definition
-            public void get__patientGroup(  String billId,  Boolean refresh, final ObjectCallback<PatientGroup> callback){
+            public void get__patientGroup(  String medicalRecordId,  Boolean refresh, final ObjectCallback<PatientGroup> callback){
 
                 /**
                 Call the onBefore event
@@ -501,7 +337,7 @@ public class BillRepository extends ModelRepository<Bill> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("billId", billId);
+                        hashMapObject.put("medicalRecordId", medicalRecordId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -573,8 +409,8 @@ public class BillRepository extends ModelRepository<Bill> {
         
     
         
-            //Method get__patient definition
-            public void get__patient(  String billId,  Boolean refresh, final ObjectCallback<Patient> callback){
+            //Method get__hospital definition
+            public void get__hospital(  String medicalRecordId,  Boolean refresh, final ObjectCallback<Hospital> callback){
 
                 /**
                 Call the onBefore event
@@ -586,7 +422,7 @@ public class BillRepository extends ModelRepository<Bill> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("billId", billId);
+                        hashMapObject.put("medicalRecordId", medicalRecordId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -597,7 +433,7 @@ public class BillRepository extends ModelRepository<Bill> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__patient", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__hospital", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -610,27 +446,27 @@ public class BillRepository extends ModelRepository<Bill> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    PatientRepository patientRepo = getRestAdapter().createRepository(PatientRepository.class);
+                                    HospitalRepository hospitalRepo = getRestAdapter().createRepository(HospitalRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = patientRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(patientRepo, context);
+                                            Method method = hospitalRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hospitalRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //patientRepo.addStorage(context);
+                                        //hospitalRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Patient patient = patientRepo.createObject(result);
+                                    Hospital hospital = hospitalRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = patient.getClass().getMethod("save__db");
-                                                    method.invoke(patient);
+                                                    Method method = hospital.getClass().getMethod("save__db");
+                                                    method.invoke(hospital);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -638,7 +474,7 @@ public class BillRepository extends ModelRepository<Bill> {
 
                                       }
 
-                                    callback.onSuccess(patient);
+                                    callback.onSuccess(hospital);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -651,177 +487,7 @@ public class BillRepository extends ModelRepository<Bill> {
 
                 
 
-            }//Method get__patient definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__billCategory definition
-            public void get__billCategory(  String billId,  Boolean refresh, final ObjectCallback<BillCategory> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("billId", billId);
-                
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__billCategory", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    BillCategoryRepository billCategoryRepo = getRestAdapter().createRepository(BillCategoryRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = billCategoryRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(billCategoryRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //billCategoryRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    BillCategory billCategory = billCategoryRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = billCategory.getClass().getMethod("save__db");
-                                                    method.invoke(billCategory);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(billCategory);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method get__billCategory definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__subBillCategory definition
-            public void get__subBillCategory(  String billId,  Boolean refresh, final ObjectCallback<SubBillCategory> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("billId", billId);
-                
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__subBillCategory", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    SubBillCategoryRepository subBillCategoryRepo = getRestAdapter().createRepository(SubBillCategoryRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = subBillCategoryRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(subBillCategoryRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //subBillCategoryRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    SubBillCategory subBillCategory = subBillCategoryRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = subBillCategory.getClass().getMethod("save__db");
-                                                    method.invoke(subBillCategory);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(subBillCategory);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method get__subBillCategory definition ends here..
+            }//Method get__hospital definition ends here..
 
             
 
@@ -829,7 +495,7 @@ public class BillRepository extends ModelRepository<Bill> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Bill> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<MedicalRecord> callback){
 
                 /**
                 Call the onBefore event
@@ -863,27 +529,27 @@ public class BillRepository extends ModelRepository<Bill> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BillRepository billRepo = getRestAdapter().createRepository(BillRepository.class);
+                                    MedicalRecordRepository medicalRecordRepo = getRestAdapter().createRepository(MedicalRecordRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = billRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(billRepo, context);
+                                            Method method = medicalRecordRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(medicalRecordRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //billRepo.addStorage(context);
+                                        //medicalRecordRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Bill bill = billRepo.createObject(result);
+                                    MedicalRecord medicalRecord = medicalRecordRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = bill.getClass().getMethod("save__db");
-                                                    method.invoke(bill);
+                                                    Method method = medicalRecord.getClass().getMethod("save__db");
+                                                    method.invoke(medicalRecord);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -891,7 +557,7 @@ public class BillRepository extends ModelRepository<Bill> {
 
                                       }
 
-                                    callback.onSuccess(bill);
+                                    callback.onSuccess(medicalRecord);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -913,7 +579,7 @@ public class BillRepository extends ModelRepository<Bill> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Bill> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<MedicalRecord> callback){
 
                 /**
                 Call the onBefore event
@@ -947,27 +613,27 @@ public class BillRepository extends ModelRepository<Bill> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BillRepository billRepo = getRestAdapter().createRepository(BillRepository.class);
+                                    MedicalRecordRepository medicalRecordRepo = getRestAdapter().createRepository(MedicalRecordRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = billRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(billRepo, context);
+                                            Method method = medicalRecordRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(medicalRecordRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //billRepo.addStorage(context);
+                                        //medicalRecordRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Bill bill = billRepo.createObject(result);
+                                    MedicalRecord medicalRecord = medicalRecordRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = bill.getClass().getMethod("save__db");
-                                                    method.invoke(bill);
+                                                    Method method = medicalRecord.getClass().getMethod("save__db");
+                                                    method.invoke(medicalRecord);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -975,7 +641,7 @@ public class BillRepository extends ModelRepository<Bill> {
 
                                       }
 
-                                    callback.onSuccess(bill);
+                                    callback.onSuccess(medicalRecord);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1047,7 +713,7 @@ public class BillRepository extends ModelRepository<Bill> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Bill> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<MedicalRecord> callback){
 
                 /**
                 Call the onBefore event
@@ -1083,27 +749,27 @@ public class BillRepository extends ModelRepository<Bill> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BillRepository billRepo = getRestAdapter().createRepository(BillRepository.class);
+                                    MedicalRecordRepository medicalRecordRepo = getRestAdapter().createRepository(MedicalRecordRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = billRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(billRepo, context);
+                                            Method method = medicalRecordRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(medicalRecordRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //billRepo.addStorage(context);
+                                        //medicalRecordRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Bill bill = billRepo.createObject(result);
+                                    MedicalRecord medicalRecord = medicalRecordRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = bill.getClass().getMethod("save__db");
-                                                    method.invoke(bill);
+                                                    Method method = medicalRecord.getClass().getMethod("save__db");
+                                                    method.invoke(medicalRecord);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1111,7 +777,7 @@ public class BillRepository extends ModelRepository<Bill> {
 
                                       }
 
-                                    callback.onSuccess(bill);
+                                    callback.onSuccess(medicalRecord);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1132,7 +798,7 @@ public class BillRepository extends ModelRepository<Bill> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Bill> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<MedicalRecord> callback){
 
                 /**
                 Call the onBefore event
@@ -1167,12 +833,12 @@ public class BillRepository extends ModelRepository<Bill> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<Bill> billList = new DataList<Bill>();
-                                    BillRepository billRepo = getRestAdapter().createRepository(BillRepository.class);
+                                    DataList<MedicalRecord> medicalRecordList = new DataList<MedicalRecord>();
+                                    MedicalRecordRepository medicalRecordRepo = getRestAdapter().createRepository(MedicalRecordRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = billRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(billRepo, context);
+                                            Method method = medicalRecordRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(medicalRecordRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1180,23 +846,23 @@ public class BillRepository extends ModelRepository<Bill> {
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        Bill bill = billRepo.createObject(obj);
+                                        MedicalRecord medicalRecord = medicalRecordRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = bill.getClass().getMethod("save__db");
-                                                      method.invoke(bill);
+                                                      Method method = medicalRecord.getClass().getMethod("save__db");
+                                                      method.invoke(medicalRecord);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        billList.add(bill);
+                                        medicalRecordList.add(medicalRecord);
                                     }
-                                    callback.onSuccess(billList);
+                                    callback.onSuccess(medicalRecordList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1215,7 +881,7 @@ public class BillRepository extends ModelRepository<Bill> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Bill> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<MedicalRecord> callback){
 
                 /**
                 Call the onBefore event
@@ -1249,27 +915,27 @@ public class BillRepository extends ModelRepository<Bill> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BillRepository billRepo = getRestAdapter().createRepository(BillRepository.class);
+                                    MedicalRecordRepository medicalRecordRepo = getRestAdapter().createRepository(MedicalRecordRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = billRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(billRepo, context);
+                                            Method method = medicalRecordRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(medicalRecordRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //billRepo.addStorage(context);
+                                        //medicalRecordRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Bill bill = billRepo.createObject(result);
+                                    MedicalRecord medicalRecord = medicalRecordRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = bill.getClass().getMethod("save__db");
-                                                    method.invoke(bill);
+                                                    Method method = medicalRecord.getClass().getMethod("save__db");
+                                                    method.invoke(medicalRecord);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1277,7 +943,7 @@ public class BillRepository extends ModelRepository<Bill> {
 
                                       }
 
-                                    callback.onSuccess(bill);
+                                    callback.onSuccess(medicalRecord);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1453,7 +1119,7 @@ public class BillRepository extends ModelRepository<Bill> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String billId,  Map<String,  ? extends Object> data, final ObjectCallback<Bill> callback){
+            public void updateAttributes(  String medicalRecordId,  Map<String,  ? extends Object> data, final ObjectCallback<MedicalRecord> callback){
 
                 /**
                 Call the onBefore event
@@ -1465,7 +1131,7 @@ public class BillRepository extends ModelRepository<Bill> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("billId", billId);
+                        hashMapObject.put("medicalRecordId", medicalRecordId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1489,27 +1155,27 @@ public class BillRepository extends ModelRepository<Bill> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    BillRepository billRepo = getRestAdapter().createRepository(BillRepository.class);
+                                    MedicalRecordRepository medicalRecordRepo = getRestAdapter().createRepository(MedicalRecordRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = billRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(billRepo, context);
+                                            Method method = medicalRecordRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(medicalRecordRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //billRepo.addStorage(context);
+                                        //medicalRecordRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Bill bill = billRepo.createObject(result);
+                                    MedicalRecord medicalRecord = medicalRecordRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = bill.getClass().getMethod("save__db");
-                                                    method.invoke(bill);
+                                                    Method method = medicalRecord.getClass().getMethod("save__db");
+                                                    method.invoke(medicalRecord);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1517,7 +1183,7 @@ public class BillRepository extends ModelRepository<Bill> {
 
                                       }
 
-                                    callback.onSuccess(bill);
+                                    callback.onSuccess(medicalRecord);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1734,324 +1400,6 @@ public class BillRepository extends ModelRepository<Bill> {
 
             
 
-        
-    
-        
-            //Method addBill definition
-            public void addBill(  Map<String,  ? extends Object> ctx,  Map<String,  ? extends Object> billObj, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("ctx", ctx);
-                
-                        hashMapObject.put("billObj", billObj);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("addBill", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method addBill definition ends here..
-
-            
-
-        
-    
-        
-            //Method calculateBill definition
-            public void calculateBill(  Map<String,  ? extends Object> ctx,  String patientGroupId, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("ctx", ctx);
-                
-                        hashMapObject.put("patientGroupId", patientGroupId);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("calculateBill", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method calculateBill definition ends here..
-
-            
-
-        
-    
-        
-            //Method fetchBillHistory definition
-            public void fetchBillHistory(  Map<String,  ? extends Object> ctx,  String patientGroupId,  String type,  double skip,  double limit, final DataListCallback<Bill> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("ctx", ctx);
-                
-                        hashMapObject.put("patientGroupId", patientGroupId);
-                
-                        hashMapObject.put("type", type);
-                
-                        hashMapObject.put("skip", skip);
-                
-                        hashMapObject.put("limit", limit);
-                
-
-                
-
-
-                
-
-                
-                    invokeStaticMethod("fetchBillHistory", hashMapObject, new Adapter.JsonArrayCallback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONArray response) {
-                            
-                                if(response != null){
-                                    //Now converting jsonObject to list
-                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<Bill> billList = new DataList<Bill>();
-                                    BillRepository billRepo = getRestAdapter().createRepository(BillRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = billRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(billRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-                                    }
-                                    for (Map<String, Object> obj : result) {
-
-                                        Bill bill = billRepo.createObject(obj);
-
-                                        //Add to database if persistent storage required..
-                                        if(isSTORE_LOCALLY()){
-                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                            try {
-                                                      Method method = bill.getClass().getMethod("save__db");
-                                                      method.invoke(bill);
-
-                                            } catch (Exception e) {
-                                                Log.e("Database Error", e.toString());
-                                            }
-                                        }
-
-                                        billList.add(bill);
-                                    }
-                                    callback.onSuccess(billList);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-            }//Method fetchBillHistory definition ends here..
-
-            
-
-        
-    
-        
-            //Method fetchBillSummary definition
-            public void fetchBillSummary(  Map<String,  ? extends Object> ctx,  String patientGroupId,  double skip,  double limit, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("ctx", ctx);
-                
-                        hashMapObject.put("patientGroupId", patientGroupId);
-                
-                        hashMapObject.put("skip", skip);
-                
-                        hashMapObject.put("limit", limit);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("fetchBillSummary", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method fetchBillSummary definition ends here..
-
-            
-
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
         
     
 
