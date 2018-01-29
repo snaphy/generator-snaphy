@@ -90,6 +90,13 @@ public class PatientDb{
                         }
                                   
                                 
+                                                            String fatherNameData = "";
+                        if(_modelData.getFatherName() != null){
+                          fatherNameData = _modelData.getFatherName().toString();
+                          values.put("`fatherName`", fatherNameData);
+                        }
+                                  
+                                
                                                             String profilePicData = "";
                         if(_modelData.getProfilePic() != null){
                           GsonBuilder gsonBuilder = new GsonBuilder();
@@ -107,13 +114,6 @@ public class PatientDb{
                           Gson gson = gsonBuilder.create();
                           idProofData = gson.toJson(_modelData.getIdProof(), HashMap.class);
                           values.put("`idProof`", idProofData);
-                        }
-                                  
-                                
-                                                            String fatherNameData = "";
-                        if(_modelData.getFatherName() != null){
-                          fatherNameData = _modelData.getFatherName().toString();
-                          values.put("`fatherName`", fatherNameData);
                         }
                                   
                                 
@@ -593,12 +593,22 @@ public class PatientDb{
                         }
                                                 
                                 
-                                                            Map<String, Object> profilePicData = new HashMap<>();
+                                                            String fatherNameData = "";
                         if(cursor.getString(2) != null){
+                          fatherNameData = cursor.getString(2);
+                          if(fatherNameData != null){
+                            fatherNameData = (String)fatherNameData;
+                            hashMap.put("fatherName", fatherNameData);
+                          }
+                        }
+                                                
+                                
+                                                            Map<String, Object> profilePicData = new HashMap<>();
+                        if(cursor.getString(3) != null){
                           GsonBuilder gsonBuilder = new GsonBuilder();
                           gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                           Gson gson = gsonBuilder.create();
-                           profilePicData = gson.fromJson(cursor.getString(2), Map.class);
+                           profilePicData = gson.fromJson(cursor.getString(3), Map.class);
                           if(profilePicData != null){
                             profilePicData = (Map<String, Object>)profilePicData;
                             hashMap.put("profilePic", profilePicData);
@@ -607,24 +617,14 @@ public class PatientDb{
                                                 
                                 
                                                             Map<String, Object> idProofData = new HashMap<>();
-                        if(cursor.getString(3) != null){
+                        if(cursor.getString(4) != null){
                           GsonBuilder gsonBuilder = new GsonBuilder();
                           gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                           Gson gson = gsonBuilder.create();
-                           idProofData = gson.fromJson(cursor.getString(3), Map.class);
+                           idProofData = gson.fromJson(cursor.getString(4), Map.class);
                           if(idProofData != null){
                             idProofData = (Map<String, Object>)idProofData;
                             hashMap.put("idProof", idProofData);
-                          }
-                        }
-                                                
-                                
-                                                            String fatherNameData = "";
-                        if(cursor.getString(4) != null){
-                          fatherNameData = cursor.getString(4);
-                          if(fatherNameData != null){
-                            fatherNameData = (String)fatherNameData;
-                            hashMap.put("fatherName", fatherNameData);
                           }
                         }
                                                 

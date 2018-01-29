@@ -41,22 +41,15 @@ import org.json.JSONObject;
 
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.MedicalRecord;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Team;
 import android.content.Context;
-import com.androidsdk.snaphy.snaphyandroidsdk.db.MedicalRecordDb;
+import com.androidsdk.snaphy.snaphyandroidsdk.db.TeamDb;
 
 //Now import model of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.PatientGroup;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PatientGroupRepository;
-            
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Hospital;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.HospitalRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Zone;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ZoneRepository;
             
         
     
@@ -65,15 +58,15 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.MedicalRecordDb;
 
 
 
-public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
+public class TeamRepository extends ModelRepository<Team> {
 
 
     private Context context;
     private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
     private static String DATABASE_NAME;
 
-    public MedicalRecordRepository(){
-        super("MedicalRecord", null, MedicalRecord.class);
+    public TeamRepository(){
+        super("Team", null, Team.class);
 
     }
 
@@ -91,15 +84,15 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
 
 
 
-    public MedicalRecordDb getDb() {
-      return medicalRecordDb;
+    public TeamDb getDb() {
+      return teamDb;
     }
 
-    public void setMedicalRecordDb(MedicalRecordDb medicalRecordDb) {
-      this.medicalRecordDb = medicalRecordDb;
+    public void setTeamDb(TeamDb teamDb) {
+      this.teamDb = teamDb;
     }
 
-    private MedicalRecordDb medicalRecordDb;
+    private TeamDb teamDb;
 
 
 
@@ -133,7 +126,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
          catch (Exception e){
             Log.e("Snaphy", e.toString());
          }
-         setMedicalRecordDb(new MedicalRecordDb(context, DATABASE_NAME, getRestAdapter()));
+         setTeamDb(new TeamDb(context, DATABASE_NAME, getRestAdapter()));
          //allow data storage locally..
          persistData(true);
          this.context = context;
@@ -147,7 +140,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:medicalRecordId/patientGroup", "GET"), "MedicalRecord.prototype.__get__patientGroup");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:teamId/zone", "GET"), "Team.prototype.__get__zone");
     
 
     
@@ -156,7 +149,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:medicalRecordId/hospital", "GET"), "MedicalRecord.prototype.__get__hospital");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Team.create");
     
 
     
@@ -165,7 +158,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "MedicalRecord.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Team.create");
     
 
     
@@ -174,7 +167,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "MedicalRecord.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Team.upsert");
     
 
     
@@ -183,7 +176,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "MedicalRecord.upsert");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Team.exists");
     
 
     
@@ -192,7 +185,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "MedicalRecord.exists");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Team.findById");
     
 
     
@@ -201,7 +194,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "MedicalRecord.findById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Team.find");
     
 
     
@@ -210,7 +203,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "MedicalRecord.find");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Team.findOne");
     
 
     
@@ -219,7 +212,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "MedicalRecord.findOne");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Team.updateAll");
     
 
     
@@ -228,7 +221,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "MedicalRecord.updateAll");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Team.deleteById");
     
 
     
@@ -237,7 +230,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "MedicalRecord.deleteById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Team.count");
     
 
     
@@ -246,16 +239,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "MedicalRecord.count");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:medicalRecordId", "PUT"), "MedicalRecord.prototype.updateAttributes");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:teamId", "PUT"), "Team.prototype.updateAttributes");
     
 
     
@@ -267,7 +251,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "MedicalRecord.getSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Team.getSchema");
     
 
     
@@ -276,7 +260,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "MedicalRecord.getAbsoluteSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Team.getAbsoluteSchema");
     
 
     
@@ -288,7 +272,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "MedicalRecord.getDetailSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "Team.getDetailSchema");
     
 
     
@@ -297,16 +281,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "MedicalRecord.getModelRelationSchema");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/addMedicalRecord", "POST"), "MedicalRecord.addMedicalRecord");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "Team.getModelRelationSchema");
     
 
     
@@ -333,8 +308,8 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
 
     
         
-            //Method get__patientGroup definition
-            public void get__patientGroup(  String medicalRecordId,  Boolean refresh, final ObjectCallback<PatientGroup> callback){
+            //Method get__zone definition
+            public void get__zone(  String teamId,  Boolean refresh, final ObjectCallback<Zone> callback){
 
                 /**
                 Call the onBefore event
@@ -346,7 +321,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("medicalRecordId", medicalRecordId);
+                        hashMapObject.put("teamId", teamId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -357,7 +332,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__patientGroup", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__zone", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -370,27 +345,27 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    PatientGroupRepository patientGroupRepo = getRestAdapter().createRepository(PatientGroupRepository.class);
+                                    ZoneRepository zoneRepo = getRestAdapter().createRepository(ZoneRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = patientGroupRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(patientGroupRepo, context);
+                                            Method method = zoneRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(zoneRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //patientGroupRepo.addStorage(context);
+                                        //zoneRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    PatientGroup patientGroup = patientGroupRepo.createObject(result);
+                                    Zone zone = zoneRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = patientGroup.getClass().getMethod("save__db");
-                                                    method.invoke(patientGroup);
+                                                    Method method = zone.getClass().getMethod("save__db");
+                                                    method.invoke(zone);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -398,7 +373,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
 
                                       }
 
-                                    callback.onSuccess(patientGroup);
+                                    callback.onSuccess(zone);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -411,92 +386,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
 
                 
 
-            }//Method get__patientGroup definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__hospital definition
-            public void get__hospital(  String medicalRecordId,  Boolean refresh, final ObjectCallback<Hospital> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("medicalRecordId", medicalRecordId);
-                
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__hospital", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    HospitalRepository hospitalRepo = getRestAdapter().createRepository(HospitalRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = hospitalRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(hospitalRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //hospitalRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    Hospital hospital = hospitalRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = hospital.getClass().getMethod("save__db");
-                                                    method.invoke(hospital);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(hospital);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method get__hospital definition ends here..
+            }//Method get__zone definition ends here..
 
             
 
@@ -504,7 +394,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<MedicalRecord> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Team> callback){
 
                 /**
                 Call the onBefore event
@@ -538,27 +428,27 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    MedicalRecordRepository medicalRecordRepo = getRestAdapter().createRepository(MedicalRecordRepository.class);
+                                    TeamRepository teamRepo = getRestAdapter().createRepository(TeamRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = medicalRecordRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(medicalRecordRepo, context);
+                                            Method method = teamRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(teamRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //medicalRecordRepo.addStorage(context);
+                                        //teamRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    MedicalRecord medicalRecord = medicalRecordRepo.createObject(result);
+                                    Team team = teamRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = medicalRecord.getClass().getMethod("save__db");
-                                                    method.invoke(medicalRecord);
+                                                    Method method = team.getClass().getMethod("save__db");
+                                                    method.invoke(team);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -566,7 +456,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
 
                                       }
 
-                                    callback.onSuccess(medicalRecord);
+                                    callback.onSuccess(team);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -588,7 +478,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<MedicalRecord> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Team> callback){
 
                 /**
                 Call the onBefore event
@@ -622,27 +512,27 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    MedicalRecordRepository medicalRecordRepo = getRestAdapter().createRepository(MedicalRecordRepository.class);
+                                    TeamRepository teamRepo = getRestAdapter().createRepository(TeamRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = medicalRecordRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(medicalRecordRepo, context);
+                                            Method method = teamRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(teamRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //medicalRecordRepo.addStorage(context);
+                                        //teamRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    MedicalRecord medicalRecord = medicalRecordRepo.createObject(result);
+                                    Team team = teamRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = medicalRecord.getClass().getMethod("save__db");
-                                                    method.invoke(medicalRecord);
+                                                    Method method = team.getClass().getMethod("save__db");
+                                                    method.invoke(team);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -650,7 +540,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
 
                                       }
 
-                                    callback.onSuccess(medicalRecord);
+                                    callback.onSuccess(team);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -722,7 +612,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<MedicalRecord> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Team> callback){
 
                 /**
                 Call the onBefore event
@@ -758,27 +648,27 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    MedicalRecordRepository medicalRecordRepo = getRestAdapter().createRepository(MedicalRecordRepository.class);
+                                    TeamRepository teamRepo = getRestAdapter().createRepository(TeamRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = medicalRecordRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(medicalRecordRepo, context);
+                                            Method method = teamRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(teamRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //medicalRecordRepo.addStorage(context);
+                                        //teamRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    MedicalRecord medicalRecord = medicalRecordRepo.createObject(result);
+                                    Team team = teamRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = medicalRecord.getClass().getMethod("save__db");
-                                                    method.invoke(medicalRecord);
+                                                    Method method = team.getClass().getMethod("save__db");
+                                                    method.invoke(team);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -786,7 +676,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
 
                                       }
 
-                                    callback.onSuccess(medicalRecord);
+                                    callback.onSuccess(team);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -807,7 +697,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<MedicalRecord> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Team> callback){
 
                 /**
                 Call the onBefore event
@@ -842,12 +732,12 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<MedicalRecord> medicalRecordList = new DataList<MedicalRecord>();
-                                    MedicalRecordRepository medicalRecordRepo = getRestAdapter().createRepository(MedicalRecordRepository.class);
+                                    DataList<Team> teamList = new DataList<Team>();
+                                    TeamRepository teamRepo = getRestAdapter().createRepository(TeamRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = medicalRecordRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(medicalRecordRepo, context);
+                                            Method method = teamRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(teamRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -855,23 +745,23 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        MedicalRecord medicalRecord = medicalRecordRepo.createObject(obj);
+                                        Team team = teamRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = medicalRecord.getClass().getMethod("save__db");
-                                                      method.invoke(medicalRecord);
+                                                      Method method = team.getClass().getMethod("save__db");
+                                                      method.invoke(team);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        medicalRecordList.add(medicalRecord);
+                                        teamList.add(team);
                                     }
-                                    callback.onSuccess(medicalRecordList);
+                                    callback.onSuccess(teamList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -890,7 +780,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<MedicalRecord> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Team> callback){
 
                 /**
                 Call the onBefore event
@@ -924,27 +814,27 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    MedicalRecordRepository medicalRecordRepo = getRestAdapter().createRepository(MedicalRecordRepository.class);
+                                    TeamRepository teamRepo = getRestAdapter().createRepository(TeamRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = medicalRecordRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(medicalRecordRepo, context);
+                                            Method method = teamRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(teamRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //medicalRecordRepo.addStorage(context);
+                                        //teamRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    MedicalRecord medicalRecord = medicalRecordRepo.createObject(result);
+                                    Team team = teamRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = medicalRecord.getClass().getMethod("save__db");
-                                                    method.invoke(medicalRecord);
+                                                    Method method = team.getClass().getMethod("save__db");
+                                                    method.invoke(team);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -952,7 +842,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
 
                                       }
 
-                                    callback.onSuccess(medicalRecord);
+                                    callback.onSuccess(team);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1128,7 +1018,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String medicalRecordId,  Map<String,  ? extends Object> data, final ObjectCallback<MedicalRecord> callback){
+            public void updateAttributes(  String teamId,  Map<String,  ? extends Object> data, final ObjectCallback<Team> callback){
 
                 /**
                 Call the onBefore event
@@ -1140,7 +1030,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("medicalRecordId", medicalRecordId);
+                        hashMapObject.put("teamId", teamId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1164,27 +1054,27 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    MedicalRecordRepository medicalRecordRepo = getRestAdapter().createRepository(MedicalRecordRepository.class);
+                                    TeamRepository teamRepo = getRestAdapter().createRepository(TeamRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = medicalRecordRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(medicalRecordRepo, context);
+                                            Method method = teamRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(teamRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //medicalRecordRepo.addStorage(context);
+                                        //teamRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    MedicalRecord medicalRecord = medicalRecordRepo.createObject(result);
+                                    Team team = teamRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = medicalRecord.getClass().getMethod("save__db");
-                                                    method.invoke(medicalRecord);
+                                                    Method method = team.getClass().getMethod("save__db");
+                                                    method.invoke(team);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1192,7 +1082,7 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
 
                                       }
 
-                                    callback.onSuccess(medicalRecord);
+                                    callback.onSuccess(team);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1406,65 +1296,6 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
                 
 
             }//Method getModelRelationSchema definition ends here..
-
-            
-
-        
-    
-        
-            //Method addMedicalRecord definition
-            public void addMedicalRecord(  Map<String,  ? extends Object> ctx,  String patientGroupId,  String hospitalId,  String type,  DataList<Map<String,  ? extends Object>> records, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("ctx", ctx);
-                
-                        hashMapObject.put("patientGroupId", patientGroupId);
-                
-                        hashMapObject.put("hospitalId", hospitalId);
-                
-                        hashMapObject.put("type", type);
-                
-                        hashMapObject.put("records", records);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("addMedicalRecord", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method addMedicalRecord definition ends here..
 
             
 

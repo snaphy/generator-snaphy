@@ -26,19 +26,12 @@ import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.VoidCallback;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.IpdCategoryRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.SecurityAreaRepository;
 
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.IpdBedRepository;
-            
-
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.HospitalRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ZoneRepository;
             
 
         
@@ -51,7 +44,7 @@ import java.util.Map;
 
 
 
-public class IpdCategory extends Model {
+public class SecurityArea extends Model {
 
 
     //For converting all model values to hashMap
@@ -66,9 +59,9 @@ public class IpdCategory extends Model {
         }
     }
 
-    private IpdCategory that ;
+    private SecurityArea that ;
 
-    public IpdCategory (){
+    public SecurityArea (){
         that = this;
     }
 
@@ -140,6 +133,20 @@ public class IpdCategory extends Model {
             
 
             
+                private String unique_number;
+                /* Adding Getter and Setter methods */
+                public String getUnique_number(){
+                    return unique_number;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setUnique_number(String unique_number){
+                    this.unique_number = unique_number;
+                    //Update hashMap value..
+                    hashMap.put("unique_number", unique_number);
+                }
+
+            
             
         
     
@@ -163,7 +170,7 @@ public class IpdCategory extends Model {
     }
 
     public void destroy(final com.strongloop.android.loopback.callbacks.VoidCallback callback){
-      IpdCategoryRepository lowercaseFirstLetterRepository = (IpdCategoryRepository) getRepository();
+      SecurityAreaRepository lowercaseFirstLetterRepository = (SecurityAreaRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
           //Delete from database..
           String id = getId().toString();
@@ -178,7 +185,7 @@ public class IpdCategory extends Model {
 
 
     public void save__db(String id){
-      IpdCategoryRepository lowercaseFirstLetterRepository = (IpdCategoryRepository) getRepository();
+      SecurityAreaRepository lowercaseFirstLetterRepository = (SecurityAreaRepository) getRepository();
 
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
         if(id != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -189,7 +196,7 @@ public class IpdCategory extends Model {
 
 
     public void delete__db(){
-      IpdCategoryRepository lowercaseFirstLetterRepository = (IpdCategoryRepository) getRepository();
+      SecurityAreaRepository lowercaseFirstLetterRepository = (SecurityAreaRepository) getRepository();
       if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
 
         if(getId() != null && lowercaseFirstLetterRepository.getDb() != null){
@@ -227,33 +234,33 @@ public class IpdCategory extends Model {
                 
                     
                     //Define hasMany relation method here..
-                    private transient DataList<IpdBed>  ipdBeds ;
+                    private transient DataList<Zone>  zones ;
 
-                    public DataList< IpdBed > getIpdBeds() {
+                    public DataList< Zone > getZones() {
                         //Check for pure case of hasMany
                                                     //TODO: Modify foreign key name..
                           try{
-                            IpdBedRepository ipdBedRepository = (IpdBedRepository) getRepository();
+                            ZoneRepository zoneRepository = (ZoneRepository) getRepository();
 
-                            if(that.getId() != null && ipdBedRepository.getDb() != null){
+                            if(that.getId() != null && zoneRepository.getDb() != null){
 
                                  //Fetch locally from db
-                                 //ipdBeds = getIpdBeds__db(restAdapter);
+                                 //zones = getZones__db(restAdapter);
                                  // Getting single cont
-                                 ipdBeds = ipdBedRepository.getDb().getAll__db("ipdCategoryId", that.getId().toString());
+                                 zones = zoneRepository.getDb().getAll__db("securityAreaId", that.getId().toString());
 
                                  //lowercaseFirstLetter(modelName)
                             }
                           }catch(Exception e){
                                 //Ignore
                           }
-                                                return ipdBeds;
+                                                return zones;
                     }
 
-                    public void setIpdBeds(DataList<IpdBed> ipdBeds) {
+                    public void setZones(DataList<Zone> zones) {
                         boolean hashType = false;
                         DataList<HashMap<String, Object>> hashMaps = new DataList<>();
-                        for(Object o: ipdBeds){
+                        for(Object o: zones){
                             if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
@@ -262,11 +269,11 @@ public class IpdCategory extends Model {
                         }
 
                         if(hashType){
-                            setIpdBeds1(hashMaps);
+                            setZones1(hashMaps);
                         }else{
-                            this.ipdBeds = ipdBeds;
+                            this.zones = zones;
                             //TODO: Warning move this to new thread
-                            for(IpdBed data: ipdBeds){
+                            for(Zone data: zones){
                               try{
                                 data.save__db();
                               } catch (NoSuchMethodError e) {
@@ -277,63 +284,63 @@ public class IpdCategory extends Model {
                     }
 
                 /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setIpdBeds1(List<Map<String, Object>> ipdBeds) {
+                    public void setZones1(List<Map<String, Object>> zones) {
                         //First create a dummy Repo class object for ..
-                        IpdBedRepository ipdBedsRepository = new IpdBedRepository();
-                        List<IpdBed> result = new ArrayList<>();
-                        for (Map<String, Object> obj : ipdBeds) {
+                        ZoneRepository zonesRepository = new ZoneRepository();
+                        List<Zone> result = new ArrayList<>();
+                        for (Map<String, Object> obj : zones) {
                             //Also add relation to child type for two way communication..
-                            IpdBed obj1 = ipdBedsRepository.createObject(obj);
+                            Zone obj1 = zonesRepository.createObject(obj);
                             result.add(obj1);
 
                         }
-                        setIpdBeds(result);
+                        setZones(result);
 
                     }
 
                 */
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setIpdBeds1(DataList<HashMap<String, Object>> ipdBeds) {
+                    public void setZones1(DataList<HashMap<String, Object>> zones) {
                         //First create a dummy Repo class object for ..
-                        IpdBedRepository ipdBedsRepository = new IpdBedRepository();
-                        DataList<IpdBed> result = new DataList<>();
-                        for (HashMap<String, Object> obj : ipdBeds) {
+                        ZoneRepository zonesRepository = new ZoneRepository();
+                        DataList<Zone> result = new DataList<>();
+                        for (HashMap<String, Object> obj : zones) {
                             //Also add relation to child type for two way communication..
-                            IpdBed obj1 = ipdBedsRepository.createObject(obj);
+                            Zone obj1 = zonesRepository.createObject(obj);
                             result.add(obj1);
 
                         }
-                        setIpdBeds(result);
+                        setZones(result);
 
                     }
 
 
                     //Adding relation method..
                     //Add a dummy class Name object to seperate data..
-                    public void addRelation(DataList<IpdBed> ipdBeds, IpdBed dummyClassInstance) {
-                        that.setIpdBeds(ipdBeds);
+                    public void addRelation(DataList<Zone> zones, Zone dummyClassInstance) {
+                        that.setZones(zones);
 
                     }
 
                     //Adding relation method..
                     //This will add a new data to the list relation object..
-                    public void addRelation(IpdBed ipdBeds) {
+                    public void addRelation(Zone zones) {
                         try{
                             try{
 
                                   //Save to database..
-                                  ipdBeds.save__db();
+                                  zones.save__db();
                             }catch (NoSuchMethodError e) {
                               // ignore
                             }
-                            that.getIpdBeds().add(ipdBeds);
+                            that.getZones().add(zones);
                         }catch(Exception e){
-                            DataList< IpdBed> ipdBeds1 = new DataList();
+                            DataList< Zone> zones1 = new DataList();
                             //Now add this item to list..
-                            ipdBeds1.add(ipdBeds);
+                            zones1.add(zones);
                             //Now set data....
-                            that.setIpdBeds(ipdBeds1);
+                            that.setZones(zones1);
                         }
                     }
 
@@ -359,12 +366,12 @@ public class IpdCategory extends Model {
                     
 
                                     //Write the method here..
-                                    public void findById__ipdBeds( String fk,  RestAdapter restAdapter, final ObjectCallback<IpdBed> callback) {
+                                    public void findById__zones( String fk,  RestAdapter restAdapter, final ObjectCallback<Zone> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final IpdCategoryRepository  ipdCategoryRepo = restAdapter.createRepository(IpdCategoryRepository.class);
+                                        final SecurityAreaRepository  securityAreaRepo = restAdapter.createRepository(SecurityAreaRepository.class);
                                         
                                         
                                         
@@ -373,13 +380,13 @@ public class IpdCategory extends Model {
 
 
 
-                                        ipdCategoryRepo.findById__ipdBeds( (String)that.getId(), fk,  new ObjectCallback<IpdBed> (){
+                                        securityAreaRepo.findById__zones( (String)that.getId(), fk,  new ObjectCallback<Zone> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(IpdBed object) {
+                                                    public void onSuccess(Zone object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -416,12 +423,12 @@ public class IpdCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__ipdBeds( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__zones( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final IpdCategoryRepository  ipdCategoryRepo = restAdapter.createRepository(IpdCategoryRepository.class);
+                                        final SecurityAreaRepository  securityAreaRepo = restAdapter.createRepository(SecurityAreaRepository.class);
                                         
                                         
                                         
@@ -430,7 +437,7 @@ public class IpdCategory extends Model {
 
 
 
-                                        ipdCategoryRepo.destroyById__ipdBeds( (String)that.getId(), fk,  new VoidCallback (){
+                                        securityAreaRepo.destroyById__zones( (String)that.getId(), fk,  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -460,12 +467,12 @@ public class IpdCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__ipdBeds( String fk,  IpdBed data,  RestAdapter restAdapter, final ObjectCallback<IpdBed> callback) {
+                                    public void updateById__zones( String fk,  Zone data,  RestAdapter restAdapter, final ObjectCallback<Zone> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final IpdCategoryRepository  ipdCategoryRepo = restAdapter.createRepository(IpdCategoryRepository.class);
+                                        final SecurityAreaRepository  securityAreaRepo = restAdapter.createRepository(SecurityAreaRepository.class);
                                         
                                         
                                         
@@ -477,13 +484,13 @@ public class IpdCategory extends Model {
 
 
 
-                                        ipdCategoryRepo.updateById__ipdBeds( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<IpdBed> (){
+                                        securityAreaRepo.updateById__zones( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Zone> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(IpdBed object) {
+                                                    public void onSuccess(Zone object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -517,17 +524,15 @@ public class IpdCategory extends Model {
                                     } //method def ends here.
                                  
                             
-                         
-                            
                         
 
                                     //Write the method here..
-                                    public void get__ipdBeds( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<IpdBed> callback) {
+                                    public void get__zones( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Zone> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final IpdCategoryRepository  ipdCategoryRepo = restAdapter.createRepository(IpdCategoryRepository.class);
+                                        final SecurityAreaRepository  securityAreaRepo = restAdapter.createRepository(SecurityAreaRepository.class);
                                         
                                         
                                         
@@ -536,7 +541,7 @@ public class IpdCategory extends Model {
 
 
 
-                                        ipdCategoryRepo.get__ipdBeds( (String)that.getId(), filter,  new DataListCallback<IpdBed> (){
+                                        securityAreaRepo.get__zones( (String)that.getId(), filter,  new DataListCallback<Zone> (){
                                             
 
                                             
@@ -545,13 +550,13 @@ public class IpdCategory extends Model {
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(DataList<IpdBed> object) {
+                                                    public void onSuccess(DataList<Zone> object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
-                                                            IpdBed obj = new IpdBed();
+                                                            Zone obj = new Zone();
                                                             addRelation(object, obj);
                                                             //Disabling two way communication for cyclic error..
-                                                            /*for (IpdBed obj : object) {
+                                                            /*for (Zone obj : object) {
                                                                 //Also add relation to child type for two way communication..
                                                                 obj.addRelation(that);
                                                             }*/
@@ -584,12 +589,12 @@ public class IpdCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__ipdBeds( IpdBed data,  RestAdapter restAdapter, final ObjectCallback<IpdBed> callback) {
+                                    public void create__zones( Zone data,  RestAdapter restAdapter, final ObjectCallback<Zone> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final IpdCategoryRepository  ipdCategoryRepo = restAdapter.createRepository(IpdCategoryRepository.class);
+                                        final SecurityAreaRepository  securityAreaRepo = restAdapter.createRepository(SecurityAreaRepository.class);
                                         
                                         
                                         
@@ -598,13 +603,13 @@ public class IpdCategory extends Model {
 
 
 
-                                        ipdCategoryRepo.create__ipdBeds( (String)that.getId(), data.convertMap(),  new ObjectCallback<IpdBed> (){
+                                        securityAreaRepo.create__zones( (String)that.getId(), data.convertMap(),  new ObjectCallback<Zone> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(IpdBed object) {
+                                                    public void onSuccess(Zone object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -641,18 +646,18 @@ public class IpdCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__ipdBeds( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__zones( RestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final IpdCategoryRepository  ipdCategoryRepo = restAdapter.createRepository(IpdCategoryRepository.class);
+                                        final SecurityAreaRepository  securityAreaRepo = restAdapter.createRepository(SecurityAreaRepository.class);
                                         
                                         
 
 
 
-                                        ipdCategoryRepo.delete__ipdBeds( (String)that.getId(),  new VoidCallback (){
+                                        securityAreaRepo.delete__zones( (String)that.getId(),  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -682,12 +687,12 @@ public class IpdCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__ipdBeds( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__zones( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
                                         //Define methods here..
-                                        final IpdCategoryRepository  ipdCategoryRepo = restAdapter.createRepository(IpdCategoryRepository.class);
+                                        final SecurityAreaRepository  securityAreaRepo = restAdapter.createRepository(SecurityAreaRepository.class);
                                         
                                         
                                         
@@ -696,7 +701,7 @@ public class IpdCategory extends Model {
 
 
 
-                                        ipdCategoryRepo.count__ipdBeds( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
+                                        securityAreaRepo.count__zones( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
@@ -744,234 +749,12 @@ public class IpdCategory extends Model {
                         
                         
                         
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
                     
 
                 
 
                 
                     //Define hasMany, hasManyThrough method here..
-
-                 
-                 
-             
-          
-    
-        
-        
-                
-                    //Define belongsTo relation method here..
-                    private transient Hospital  hospital ;
-                    private String hospitalId;
-
-                    public String getHospitalId(){
-                         return hospitalId;
-                    }
-
-                    public void setHospitalId(Object hospitalId){
-                        if(hospitalId != null){
-                          this.hospitalId = hospitalId.toString();
-                        }
-                    }
-
-                    public Hospital getHospital() {
-                        try{
-                          //Adding database method for fetching from relation if not present..
-                                      if(hospital == null){
-                                        IpdCategoryRepository ipdCategoryRepository = (IpdCategoryRepository) getRepository();
-
-                                        RestAdapter restAdapter = ipdCategoryRepository.getRestAdapter();
-                                        if(restAdapter != null){
-                                          //Fetch locally from db
-                                          hospital = getHospital__db(restAdapter);
-                                        }
-                                      }
-                        }catch(Exception e){
-                          //Ignore
-                        }
-
-                        return hospital;
-                    }
-
-                    public void setHospital(Hospital hospital) {
-                        this.hospital = hospital;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setHospital(Map<String, Object> hospital) {
-                        //First create a dummy Repo class object for customer.
-                        HospitalRepository hospitalRepository = new HospitalRepository();
-                        Hospital hospital1 = hospitalRepository.createObject(hospital);
-                        setHospital(hospital1);
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setHospital(HashMap<String, Object> hospital) {
-                        //First create a dummy Repo class object for customer.
-                        HospitalRepository hospitalRepository = new HospitalRepository();
-                        Hospital hospital1 = hospitalRepository.createObject(hospital);
-                        setHospital(hospital1);
-                    }
-
-                    //Adding relation method..
-                    public void addRelation(Hospital hospital) {
-                        that.setHospital(hospital);
-                    }
-
-
-                    //Fetch related data from local database if present a hospitalId identifier as property for belongsTo
-                    public Hospital getHospital__db(RestAdapter restAdapter){
-                      if(hospitalId != null){
-                        HospitalRepository hospitalRepository = restAdapter.createRepository(HospitalRepository.class);
-                            try{
-                            IpdCategoryRepository lowercaseFirstLetterRepository = (IpdCategoryRepository) getRepository();
-                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
-                                                Context context = lowercaseFirstLetterRepository.getContext();
-                                                if(hospitalRepository.getDb() == null ){
-                                                    hospitalRepository.addStorage(context);
-                                                }
-
-                                                if(context != null && hospitalRepository.getDb() != null){
-                                                    hospitalRepository.addStorage(context);
-                                                    Hospital hospital = (Hospital) hospitalRepository.getDb().get__db(hospitalId);
-                                                    return hospital;
-                                                }else{
-                                                    return null;
-                                                }
-                                          }else{
-                                            return null;
-                                          }
-                            }catch(Exception e){
-                            //Ignore exception..
-                            return null;
-                            }
-
-                        }else{
-                          return null;
-                      }
-                    }
-                
-
-                
-                
-
-
-
-
-
-
-
-                    //Now add instance methods to fetch the related belongsTo Model..
-                    
-
-                     
-                            
-                         
-                            
-                         
-                            
-                        
-
-                                    //Write the method here..
-                                    public void get__hospital( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
-                                        //Call the onBefore callback method..
-                                        callback.onBefore();
-
-                                        //Define methods here..
-                                        final IpdCategoryRepository  ipdCategoryRepo = restAdapter.createRepository(IpdCategoryRepository.class);
-                                        
-                                        
-                                        
-                                        
-                                        
-
-
-
-                                        ipdCategoryRepo.get__hospital( (String)that.getId(), refresh,  new ObjectCallback<Hospital> (){
-                                            
-
-                                            
-                                                @Override
-                                                
-                                                    public void onSuccess(Hospital object) {
-                                                        if(object != null){
-                                                            //now add relation to this recipe.
-                                                            addRelation(object);
-                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
-                                                            //object.addRelation(that);
-                                                            callback.onSuccess(object);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }else{
-                                                            callback.onSuccess(null);
-                                                            //Calling the finally..callback
-                                                            callback.onFinally();
-                                                        }
-
-                                                    }
-                                                
-                                            
-
-
-                                            
-
-                                            @Override
-                                            public void onError(Throwable t) {
-                                                //Now calling the callback
-                                                callback.onError(t);
-                                                //Calling the finally..callback
-                                                callback.onFinally();
-                                            }
-
-                                        });
-                                    } //method def ends here.
-                                 
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                         
-                            
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    
-
-                
 
                  
                  

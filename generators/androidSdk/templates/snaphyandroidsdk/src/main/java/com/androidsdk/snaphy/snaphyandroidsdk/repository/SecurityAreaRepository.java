@@ -41,22 +41,15 @@ import org.json.JSONObject;
 
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.IpdBed;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.SecurityArea;
 import android.content.Context;
-import com.androidsdk.snaphy.snaphyandroidsdk.db.IpdBedDb;
+import com.androidsdk.snaphy.snaphyandroidsdk.db.SecurityAreaDb;
 
 //Now import model of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.IpdBedLog;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.IpdBedLogRepository;
-            
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Hospital;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.HospitalRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Zone;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ZoneRepository;
             
         
     
@@ -65,15 +58,15 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.IpdBedDb;
 
 
 
-public class IpdBedRepository extends ModelRepository<IpdBed> {
+public class SecurityAreaRepository extends ModelRepository<SecurityArea> {
 
 
     private Context context;
     private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
     private static String DATABASE_NAME;
 
-    public IpdBedRepository(){
-        super("IpdBed", null, IpdBed.class);
+    public SecurityAreaRepository(){
+        super("SecurityArea", null, SecurityArea.class);
 
     }
 
@@ -91,15 +84,15 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
 
 
-    public IpdBedDb getDb() {
-      return ipdBedDb;
+    public SecurityAreaDb getDb() {
+      return securityAreaDb;
     }
 
-    public void setIpdBedDb(IpdBedDb ipdBedDb) {
-      this.ipdBedDb = ipdBedDb;
+    public void setSecurityAreaDb(SecurityAreaDb securityAreaDb) {
+      this.securityAreaDb = securityAreaDb;
     }
 
-    private IpdBedDb ipdBedDb;
+    private SecurityAreaDb securityAreaDb;
 
 
 
@@ -133,7 +126,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
          catch (Exception e){
             Log.e("Snaphy", e.toString());
          }
-         setIpdBedDb(new IpdBedDb(context, DATABASE_NAME, getRestAdapter()));
+         setSecurityAreaDb(new SecurityAreaDb(context, DATABASE_NAME, getRestAdapter()));
          //allow data storage locally..
          persistData(true);
          this.context = context;
@@ -147,7 +140,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ipdBedId/ipdBedLogs/:fk", "GET"), "IpdBed.prototype.__findById__ipdBedLogs");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:securityAreaId/zones/:fk", "GET"), "SecurityArea.prototype.__findById__zones");
     
 
     
@@ -156,7 +149,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ipdBedId/ipdBedLogs/:fk", "DELETE"), "IpdBed.prototype.__destroyById__ipdBedLogs");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:securityAreaId/zones/:fk", "DELETE"), "SecurityArea.prototype.__destroyById__zones");
     
 
     
@@ -165,7 +158,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ipdBedId/ipdBedLogs/:fk", "PUT"), "IpdBed.prototype.__updateById__ipdBedLogs");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:securityAreaId/zones/:fk", "PUT"), "SecurityArea.prototype.__updateById__zones");
     
 
     
@@ -174,7 +167,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ipdBedId/hospital", "GET"), "IpdBed.prototype.__get__hospital");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:securityAreaId/zones", "GET"), "SecurityArea.prototype.__get__zones");
     
 
     
@@ -183,7 +176,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ipdBedId/ipdBedLogs", "GET"), "IpdBed.prototype.__get__ipdBedLogs");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:securityAreaId/zones", "POST"), "SecurityArea.prototype.__create__zones");
     
 
     
@@ -192,7 +185,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ipdBedId/ipdBedLogs", "POST"), "IpdBed.prototype.__create__ipdBedLogs");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:securityAreaId/zones", "DELETE"), "SecurityArea.prototype.__delete__zones");
     
 
     
@@ -201,7 +194,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ipdBedId/ipdBedLogs", "DELETE"), "IpdBed.prototype.__delete__ipdBedLogs");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:securityAreaId/zones/count", "GET"), "SecurityArea.prototype.__count__zones");
     
 
     
@@ -210,7 +203,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ipdBedId/ipdBedLogs/count", "GET"), "IpdBed.prototype.__count__ipdBedLogs");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "SecurityArea.create");
     
 
     
@@ -219,7 +212,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "IpdBed.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "SecurityArea.create");
     
 
     
@@ -228,7 +221,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "IpdBed.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "SecurityArea.upsert");
     
 
     
@@ -237,7 +230,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "IpdBed.upsert");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "SecurityArea.exists");
     
 
     
@@ -246,7 +239,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "IpdBed.exists");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "SecurityArea.findById");
     
 
     
@@ -255,7 +248,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "IpdBed.findById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "SecurityArea.find");
     
 
     
@@ -264,7 +257,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "IpdBed.find");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "SecurityArea.findOne");
     
 
     
@@ -273,7 +266,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "IpdBed.findOne");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "SecurityArea.updateAll");
     
 
     
@@ -282,7 +275,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "IpdBed.updateAll");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "SecurityArea.deleteById");
     
 
     
@@ -291,7 +284,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "IpdBed.deleteById");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "SecurityArea.count");
     
 
     
@@ -300,76 +293,19 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "IpdBed.count");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:securityAreaId", "PUT"), "SecurityArea.prototype.updateAttributes");
     
 
     
     
 
     
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ipdBedId", "PUT"), "IpdBed.prototype.updateAttributes");
-    
-
-    
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "IpdBed.getSchema");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "IpdBed.getAbsoluteSchema");
-    
-
-    
-    
-
-    
-    
-
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "IpdBed.getDetailSchema");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "IpdBed.getModelRelationSchema");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findAvailableBeds", "POST"), "IpdBed.findAvailableBeds");
-    
-
-    
-    
-
-    
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/addBed", "POST"), "IpdBed.addBed");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "SecurityArea.getSchema");
     
 
     
@@ -378,7 +314,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findAvailableBedDetails", "POST"), "IpdBed.findAvailableBedDetails");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "SecurityArea.getAbsoluteSchema");
     
 
     
@@ -388,24 +324,18 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
 
     
-    
-
-    
-    
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "SecurityArea.getDetailSchema");
     
 
     
     
 
-    
-    
-
-    
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "SecurityArea.getModelRelationSchema");
     
 
     
@@ -435,8 +365,8 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
     
         
-            //Method findById__ipdBedLogs definition
-            public void findById__ipdBedLogs(  String ipdBedId,  String fk, final ObjectCallback<IpdBedLog> callback){
+            //Method findById__zones definition
+            public void findById__zones(  String securityAreaId,  String fk, final ObjectCallback<Zone> callback){
 
                 /**
                 Call the onBefore event
@@ -448,7 +378,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("ipdBedId", ipdBedId);
+                        hashMapObject.put("securityAreaId", securityAreaId);
                 
                         hashMapObject.put("fk", fk);
                 
@@ -459,7 +389,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__ipdBedLogs", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__zones", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -472,27 +402,27 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    IpdBedLogRepository ipdBedLogRepo = getRestAdapter().createRepository(IpdBedLogRepository.class);
+                                    ZoneRepository zoneRepo = getRestAdapter().createRepository(ZoneRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = ipdBedLogRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(ipdBedLogRepo, context);
+                                            Method method = zoneRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(zoneRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //ipdBedLogRepo.addStorage(context);
+                                        //zoneRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    IpdBedLog ipdBedLog = ipdBedLogRepo.createObject(result);
+                                    Zone zone = zoneRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = ipdBedLog.getClass().getMethod("save__db");
-                                                    method.invoke(ipdBedLog);
+                                                    Method method = zone.getClass().getMethod("save__db");
+                                                    method.invoke(zone);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -500,7 +430,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
                                       }
 
-                                    callback.onSuccess(ipdBedLog);
+                                    callback.onSuccess(zone);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -513,15 +443,15 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
                 
 
-            }//Method findById__ipdBedLogs definition ends here..
+            }//Method findById__zones definition ends here..
 
             
 
         
     
         
-            //Method destroyById__ipdBedLogs definition
-            public void destroyById__ipdBedLogs(  String ipdBedId,  String fk, final VoidCallback callback){
+            //Method destroyById__zones definition
+            public void destroyById__zones(  String securityAreaId,  String fk, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -533,13 +463,13 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("ipdBedId", ipdBedId);
+                        hashMapObject.put("securityAreaId", securityAreaId);
                 
                         hashMapObject.put("fk", fk);
                 
 
                 
-                    invokeStaticMethod("prototype.__destroyById__ipdBedLogs", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroyById__zones", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -561,15 +491,15 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
                 
 
-            }//Method destroyById__ipdBedLogs definition ends here..
+            }//Method destroyById__zones definition ends here..
 
             
 
         
     
         
-            //Method updateById__ipdBedLogs definition
-            public void updateById__ipdBedLogs(  String ipdBedId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<IpdBedLog> callback){
+            //Method updateById__zones definition
+            public void updateById__zones(  String securityAreaId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Zone> callback){
 
                 /**
                 Call the onBefore event
@@ -581,7 +511,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("ipdBedId", ipdBedId);
+                        hashMapObject.put("securityAreaId", securityAreaId);
                 
                         hashMapObject.put("fk", fk);
                 
@@ -594,7 +524,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__ipdBedLogs", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__zones", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -607,27 +537,27 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    IpdBedLogRepository ipdBedLogRepo = getRestAdapter().createRepository(IpdBedLogRepository.class);
+                                    ZoneRepository zoneRepo = getRestAdapter().createRepository(ZoneRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = ipdBedLogRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(ipdBedLogRepo, context);
+                                            Method method = zoneRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(zoneRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //ipdBedLogRepo.addStorage(context);
+                                        //zoneRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    IpdBedLog ipdBedLog = ipdBedLogRepo.createObject(result);
+                                    Zone zone = zoneRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = ipdBedLog.getClass().getMethod("save__db");
-                                                    method.invoke(ipdBedLog);
+                                                    Method method = zone.getClass().getMethod("save__db");
+                                                    method.invoke(zone);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -635,7 +565,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
                                       }
 
-                                    callback.onSuccess(ipdBedLog);
+                                    callback.onSuccess(zone);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -648,15 +578,15 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
                 
 
-            }//Method updateById__ipdBedLogs definition ends here..
+            }//Method updateById__zones definition ends here..
 
             
 
         
     
         
-            //Method get__hospital definition
-            public void get__hospital(  String ipdBedId,  Boolean refresh, final ObjectCallback<Hospital> callback){
+            //Method get__zones definition
+            public void get__zones(  String securityAreaId,  Map<String,  ? extends Object> filter, final DataListCallback<Zone> callback){
 
                 /**
                 Call the onBefore event
@@ -668,92 +598,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("ipdBedId", ipdBedId);
-                
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__hospital", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    HospitalRepository hospitalRepo = getRestAdapter().createRepository(HospitalRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = hospitalRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(hospitalRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //hospitalRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    Hospital hospital = hospitalRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = hospital.getClass().getMethod("save__db");
-                                                    method.invoke(hospital);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(hospital);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method get__hospital definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__ipdBedLogs definition
-            public void get__ipdBedLogs(  String ipdBedId,  Map<String,  ? extends Object> filter, final DataListCallback<IpdBedLog> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("ipdBedId", ipdBedId);
+                        hashMapObject.put("securityAreaId", securityAreaId);
                 
                         hashMapObject.put("filter", filter);
                 
@@ -764,7 +609,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                 
 
                 
-                    invokeStaticMethod("prototype.__get__ipdBedLogs", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__zones", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -778,12 +623,12 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<IpdBedLog> ipdBedLogList = new DataList<IpdBedLog>();
-                                    IpdBedLogRepository ipdBedLogRepo = getRestAdapter().createRepository(IpdBedLogRepository.class);
+                                    DataList<Zone> zoneList = new DataList<Zone>();
+                                    ZoneRepository zoneRepo = getRestAdapter().createRepository(ZoneRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = ipdBedLogRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(ipdBedLogRepo, context);
+                                            Method method = zoneRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(zoneRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -791,23 +636,23 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        IpdBedLog ipdBedLog = ipdBedLogRepo.createObject(obj);
+                                        Zone zone = zoneRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = ipdBedLog.getClass().getMethod("save__db");
-                                                      method.invoke(ipdBedLog);
+                                                      Method method = zone.getClass().getMethod("save__db");
+                                                      method.invoke(zone);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        ipdBedLogList.add(ipdBedLog);
+                                        zoneList.add(zone);
                                     }
-                                    callback.onSuccess(ipdBedLogList);
+                                    callback.onSuccess(zoneList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -818,15 +663,15 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                     });
                 
 
-            }//Method get__ipdBedLogs definition ends here..
+            }//Method get__zones definition ends here..
 
             
 
         
     
         
-            //Method create__ipdBedLogs definition
-            public void create__ipdBedLogs(  String ipdBedId,  Map<String,  ? extends Object> data, final ObjectCallback<IpdBedLog> callback){
+            //Method create__zones definition
+            public void create__zones(  String securityAreaId,  Map<String,  ? extends Object> data, final ObjectCallback<Zone> callback){
 
                 /**
                 Call the onBefore event
@@ -838,7 +683,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("ipdBedId", ipdBedId);
+                        hashMapObject.put("securityAreaId", securityAreaId);
                 
                         hashMapObject.putAll(data);
                 
@@ -849,7 +694,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__ipdBedLogs", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__zones", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -862,27 +707,27 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    IpdBedLogRepository ipdBedLogRepo = getRestAdapter().createRepository(IpdBedLogRepository.class);
+                                    ZoneRepository zoneRepo = getRestAdapter().createRepository(ZoneRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = ipdBedLogRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(ipdBedLogRepo, context);
+                                            Method method = zoneRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(zoneRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //ipdBedLogRepo.addStorage(context);
+                                        //zoneRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    IpdBedLog ipdBedLog = ipdBedLogRepo.createObject(result);
+                                    Zone zone = zoneRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = ipdBedLog.getClass().getMethod("save__db");
-                                                    method.invoke(ipdBedLog);
+                                                    Method method = zone.getClass().getMethod("save__db");
+                                                    method.invoke(zone);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -890,7 +735,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
                                       }
 
-                                    callback.onSuccess(ipdBedLog);
+                                    callback.onSuccess(zone);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -903,15 +748,15 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
                 
 
-            }//Method create__ipdBedLogs definition ends here..
+            }//Method create__zones definition ends here..
 
             
 
         
     
         
-            //Method delete__ipdBedLogs definition
-            public void delete__ipdBedLogs(  String ipdBedId, final VoidCallback callback){
+            //Method delete__zones definition
+            public void delete__zones(  String securityAreaId, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -923,11 +768,11 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("ipdBedId", ipdBedId);
+                        hashMapObject.put("securityAreaId", securityAreaId);
                 
 
                 
-                    invokeStaticMethod("prototype.__delete__ipdBedLogs", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__delete__zones", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -949,15 +794,15 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
                 
 
-            }//Method delete__ipdBedLogs definition ends here..
+            }//Method delete__zones definition ends here..
 
             
 
         
     
         
-            //Method count__ipdBedLogs definition
-            public void count__ipdBedLogs(  String ipdBedId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+            //Method count__zones definition
+            public void count__zones(  String securityAreaId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -969,7 +814,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("ipdBedId", ipdBedId);
+                        hashMapObject.put("securityAreaId", securityAreaId);
                 
                         hashMapObject.put("where", where);
                 
@@ -979,7 +824,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
                 
                     
-                    invokeStaticMethod("prototype.__count__ipdBedLogs", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__zones", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -1002,7 +847,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
                 
 
-            }//Method count__ipdBedLogs definition ends here..
+            }//Method count__zones definition ends here..
 
             
 
@@ -1010,7 +855,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<IpdBed> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<SecurityArea> callback){
 
                 /**
                 Call the onBefore event
@@ -1044,27 +889,27 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    IpdBedRepository ipdBedRepo = getRestAdapter().createRepository(IpdBedRepository.class);
+                                    SecurityAreaRepository securityAreaRepo = getRestAdapter().createRepository(SecurityAreaRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = ipdBedRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(ipdBedRepo, context);
+                                            Method method = securityAreaRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(securityAreaRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //ipdBedRepo.addStorage(context);
+                                        //securityAreaRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    IpdBed ipdBed = ipdBedRepo.createObject(result);
+                                    SecurityArea securityArea = securityAreaRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = ipdBed.getClass().getMethod("save__db");
-                                                    method.invoke(ipdBed);
+                                                    Method method = securityArea.getClass().getMethod("save__db");
+                                                    method.invoke(securityArea);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1072,7 +917,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
                                       }
 
-                                    callback.onSuccess(ipdBed);
+                                    callback.onSuccess(securityArea);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1094,7 +939,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<IpdBed> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<SecurityArea> callback){
 
                 /**
                 Call the onBefore event
@@ -1128,27 +973,27 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    IpdBedRepository ipdBedRepo = getRestAdapter().createRepository(IpdBedRepository.class);
+                                    SecurityAreaRepository securityAreaRepo = getRestAdapter().createRepository(SecurityAreaRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = ipdBedRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(ipdBedRepo, context);
+                                            Method method = securityAreaRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(securityAreaRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //ipdBedRepo.addStorage(context);
+                                        //securityAreaRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    IpdBed ipdBed = ipdBedRepo.createObject(result);
+                                    SecurityArea securityArea = securityAreaRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = ipdBed.getClass().getMethod("save__db");
-                                                    method.invoke(ipdBed);
+                                                    Method method = securityArea.getClass().getMethod("save__db");
+                                                    method.invoke(securityArea);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1156,7 +1001,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
                                       }
 
-                                    callback.onSuccess(ipdBed);
+                                    callback.onSuccess(securityArea);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1228,7 +1073,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<IpdBed> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<SecurityArea> callback){
 
                 /**
                 Call the onBefore event
@@ -1264,27 +1109,27 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    IpdBedRepository ipdBedRepo = getRestAdapter().createRepository(IpdBedRepository.class);
+                                    SecurityAreaRepository securityAreaRepo = getRestAdapter().createRepository(SecurityAreaRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = ipdBedRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(ipdBedRepo, context);
+                                            Method method = securityAreaRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(securityAreaRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //ipdBedRepo.addStorage(context);
+                                        //securityAreaRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    IpdBed ipdBed = ipdBedRepo.createObject(result);
+                                    SecurityArea securityArea = securityAreaRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = ipdBed.getClass().getMethod("save__db");
-                                                    method.invoke(ipdBed);
+                                                    Method method = securityArea.getClass().getMethod("save__db");
+                                                    method.invoke(securityArea);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1292,7 +1137,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
                                       }
 
-                                    callback.onSuccess(ipdBed);
+                                    callback.onSuccess(securityArea);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1313,7 +1158,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<IpdBed> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<SecurityArea> callback){
 
                 /**
                 Call the onBefore event
@@ -1348,12 +1193,12 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<IpdBed> ipdBedList = new DataList<IpdBed>();
-                                    IpdBedRepository ipdBedRepo = getRestAdapter().createRepository(IpdBedRepository.class);
+                                    DataList<SecurityArea> securityAreaList = new DataList<SecurityArea>();
+                                    SecurityAreaRepository securityAreaRepo = getRestAdapter().createRepository(SecurityAreaRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = ipdBedRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(ipdBedRepo, context);
+                                            Method method = securityAreaRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(securityAreaRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1361,23 +1206,23 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        IpdBed ipdBed = ipdBedRepo.createObject(obj);
+                                        SecurityArea securityArea = securityAreaRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = ipdBed.getClass().getMethod("save__db");
-                                                      method.invoke(ipdBed);
+                                                      Method method = securityArea.getClass().getMethod("save__db");
+                                                      method.invoke(securityArea);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        ipdBedList.add(ipdBed);
+                                        securityAreaList.add(securityArea);
                                     }
-                                    callback.onSuccess(ipdBedList);
+                                    callback.onSuccess(securityAreaList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1396,7 +1241,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<IpdBed> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<SecurityArea> callback){
 
                 /**
                 Call the onBefore event
@@ -1430,27 +1275,27 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    IpdBedRepository ipdBedRepo = getRestAdapter().createRepository(IpdBedRepository.class);
+                                    SecurityAreaRepository securityAreaRepo = getRestAdapter().createRepository(SecurityAreaRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = ipdBedRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(ipdBedRepo, context);
+                                            Method method = securityAreaRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(securityAreaRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //ipdBedRepo.addStorage(context);
+                                        //securityAreaRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    IpdBed ipdBed = ipdBedRepo.createObject(result);
+                                    SecurityArea securityArea = securityAreaRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = ipdBed.getClass().getMethod("save__db");
-                                                    method.invoke(ipdBed);
+                                                    Method method = securityArea.getClass().getMethod("save__db");
+                                                    method.invoke(securityArea);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1458,7 +1303,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
                                       }
 
-                                    callback.onSuccess(ipdBed);
+                                    callback.onSuccess(securityArea);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1634,7 +1479,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String ipdBedId,  Map<String,  ? extends Object> data, final ObjectCallback<IpdBed> callback){
+            public void updateAttributes(  String securityAreaId,  Map<String,  ? extends Object> data, final ObjectCallback<SecurityArea> callback){
 
                 /**
                 Call the onBefore event
@@ -1646,7 +1491,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("ipdBedId", ipdBedId);
+                        hashMapObject.put("securityAreaId", securityAreaId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1670,27 +1515,27 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    IpdBedRepository ipdBedRepo = getRestAdapter().createRepository(IpdBedRepository.class);
+                                    SecurityAreaRepository securityAreaRepo = getRestAdapter().createRepository(SecurityAreaRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = ipdBedRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(ipdBedRepo, context);
+                                            Method method = securityAreaRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(securityAreaRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //ipdBedRepo.addStorage(context);
+                                        //securityAreaRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    IpdBed ipdBed = ipdBedRepo.createObject(result);
+                                    SecurityArea securityArea = securityAreaRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = ipdBed.getClass().getMethod("save__db");
-                                                    method.invoke(ipdBed);
+                                                    Method method = securityArea.getClass().getMethod("save__db");
+                                                    method.invoke(securityArea);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1698,7 +1543,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
                                       }
 
-                                    callback.onSuccess(ipdBed);
+                                    callback.onSuccess(securityArea);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1915,185 +1760,6 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
             
 
-        
-    
-        
-            //Method findAvailableBeds definition
-            public void findAvailableBeds(  Map<String,  ? extends Object> ctx,  String hospitalId, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("ctx", ctx);
-                
-                        hashMapObject.put("hospitalId", hospitalId);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("findAvailableBeds", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method findAvailableBeds definition ends here..
-
-            
-
-        
-    
-        
-            //Method addBed definition
-            public void addBed(  String ipdCategoryId,  DataList<String> bedNumberList, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("ipdCategoryId", ipdCategoryId);
-                
-                        hashMapObject.put("bedNumberList", bedNumberList);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("addBed", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method addBed definition ends here..
-
-            
-
-        
-    
-        
-            //Method findAvailableBedDetails definition
-            public void findAvailableBedDetails(  Map<String,  ? extends Object> ctx,  String hospitalId,  String ipdCategoryId, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("ctx", ctx);
-                
-                        hashMapObject.put("hospitalId", hospitalId);
-                
-                        hashMapObject.put("ipdCategoryId", ipdCategoryId);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("findAvailableBedDetails", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method findAvailableBedDetails definition ends here..
-
-            
-
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
         
     
         

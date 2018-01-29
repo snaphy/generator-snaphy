@@ -38,7 +38,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.IpdBedRepository;
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.IpdCategoryRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.HospitalRepository;
             
 
         
@@ -152,6 +152,13 @@ public class IpdBed extends Model {
                     //Update hashMap value..
                     hashMap.put("type", type);
                 }
+
+            
+            
+        
+    
+        
+            
 
             
             
@@ -793,80 +800,80 @@ public class IpdBed extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient IpdCategory  ipdCategory ;
-                    private String ipdCategoryId;
+                    private transient Hospital  hospital ;
+                    private String hospitalId;
 
-                    public String getIpdCategoryId(){
-                         return ipdCategoryId;
+                    public String getHospitalId(){
+                         return hospitalId;
                     }
 
-                    public void setIpdCategoryId(Object ipdCategoryId){
-                        if(ipdCategoryId != null){
-                          this.ipdCategoryId = ipdCategoryId.toString();
+                    public void setHospitalId(Object hospitalId){
+                        if(hospitalId != null){
+                          this.hospitalId = hospitalId.toString();
                         }
                     }
 
-                    public IpdCategory getIpdCategory() {
+                    public Hospital getHospital() {
                         try{
                           //Adding database method for fetching from relation if not present..
-                                      if(ipdCategory == null){
+                                      if(hospital == null){
                                         IpdBedRepository ipdBedRepository = (IpdBedRepository) getRepository();
 
                                         RestAdapter restAdapter = ipdBedRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
-                                          ipdCategory = getIpdCategory__db(restAdapter);
+                                          hospital = getHospital__db(restAdapter);
                                         }
                                       }
                         }catch(Exception e){
                           //Ignore
                         }
 
-                        return ipdCategory;
+                        return hospital;
                     }
 
-                    public void setIpdCategory(IpdCategory ipdCategory) {
-                        this.ipdCategory = ipdCategory;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setIpdCategory(Map<String, Object> ipdCategory) {
-                        //First create a dummy Repo class object for customer.
-                        IpdCategoryRepository ipdCategoryRepository = new IpdCategoryRepository();
-                        IpdCategory ipdCategory1 = ipdCategoryRepository.createObject(ipdCategory);
-                        setIpdCategory(ipdCategory1);
+                    public void setHospital(Hospital hospital) {
+                        this.hospital = hospital;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setIpdCategory(HashMap<String, Object> ipdCategory) {
+                    public void setHospital(Map<String, Object> hospital) {
                         //First create a dummy Repo class object for customer.
-                        IpdCategoryRepository ipdCategoryRepository = new IpdCategoryRepository();
-                        IpdCategory ipdCategory1 = ipdCategoryRepository.createObject(ipdCategory);
-                        setIpdCategory(ipdCategory1);
+                        HospitalRepository hospitalRepository = new HospitalRepository();
+                        Hospital hospital1 = hospitalRepository.createObject(hospital);
+                        setHospital(hospital1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setHospital(HashMap<String, Object> hospital) {
+                        //First create a dummy Repo class object for customer.
+                        HospitalRepository hospitalRepository = new HospitalRepository();
+                        Hospital hospital1 = hospitalRepository.createObject(hospital);
+                        setHospital(hospital1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(IpdCategory ipdCategory) {
-                        that.setIpdCategory(ipdCategory);
+                    public void addRelation(Hospital hospital) {
+                        that.setHospital(hospital);
                     }
 
 
-                    //Fetch related data from local database if present a ipdCategoryId identifier as property for belongsTo
-                    public IpdCategory getIpdCategory__db(RestAdapter restAdapter){
-                      if(ipdCategoryId != null){
-                        IpdCategoryRepository ipdCategoryRepository = restAdapter.createRepository(IpdCategoryRepository.class);
+                    //Fetch related data from local database if present a hospitalId identifier as property for belongsTo
+                    public Hospital getHospital__db(RestAdapter restAdapter){
+                      if(hospitalId != null){
+                        HospitalRepository hospitalRepository = restAdapter.createRepository(HospitalRepository.class);
                             try{
                             IpdBedRepository lowercaseFirstLetterRepository = (IpdBedRepository) getRepository();
                                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                                if(ipdCategoryRepository.getDb() == null ){
-                                                    ipdCategoryRepository.addStorage(context);
+                                                if(hospitalRepository.getDb() == null ){
+                                                    hospitalRepository.addStorage(context);
                                                 }
 
-                                                if(context != null && ipdCategoryRepository.getDb() != null){
-                                                    ipdCategoryRepository.addStorage(context);
-                                                    IpdCategory ipdCategory = (IpdCategory) ipdCategoryRepository.getDb().get__db(ipdCategoryId);
-                                                    return ipdCategory;
+                                                if(context != null && hospitalRepository.getDb() != null){
+                                                    hospitalRepository.addStorage(context);
+                                                    Hospital hospital = (Hospital) hospitalRepository.getDb().get__db(hospitalId);
+                                                    return hospital;
                                                 }else{
                                                     return null;
                                                 }
@@ -905,7 +912,7 @@ public class IpdBed extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__ipdCategory( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<IpdCategory> callback) {
+                                    public void get__hospital( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -919,13 +926,13 @@ public class IpdBed extends Model {
 
 
 
-                                        ipdBedRepo.get__ipdCategory( (String)that.getId(), refresh,  new ObjectCallback<IpdCategory> (){
+                                        ipdBedRepo.get__hospital( (String)that.getId(), refresh,  new ObjectCallback<Hospital> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(IpdCategory object) {
+                                                    public void onSuccess(Hospital object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);

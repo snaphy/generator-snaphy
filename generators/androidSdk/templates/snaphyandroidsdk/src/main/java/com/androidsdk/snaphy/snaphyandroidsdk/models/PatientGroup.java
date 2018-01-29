@@ -905,16 +905,16 @@ public class PatientGroup extends Model {
             
 
             
-                private String patientSecurityOffline;
+                private Map<String, Object> patientSecurityOffline;
                 /* Adding Getter and Setter methods */
-                public String getPatientSecurityOffline(){
+                public Map<String, Object> getPatientSecurityOffline(){
                     return patientSecurityOffline;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setPatientSecurityOffline(String patientSecurityOffline){
+                public void setPatientSecurityOffline(Map<String, Object> patientSecurityOffline){
                     this.patientSecurityOffline = patientSecurityOffline;
-                    //Update hashMap value..
+                    //Update Map value..
                     hashMap.put("patientSecurityOffline", patientSecurityOffline);
                 }
 

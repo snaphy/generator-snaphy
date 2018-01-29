@@ -241,6 +241,21 @@ public class HospitalDb{
                         }
 
                                   
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String zoneIdData = "";
+                        try {
+                              Method method = _modelData.getClass().getMethod("getZoneId");
+                              if(method.invoke(_modelData) != null){
+                                //zoneIdData = _modelData.getZoneId().toString();
+                                zoneIdData = (String) method.invoke(_modelData);
+                                values.put("`zoneId`", zoneIdData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                  
                   
         
           
@@ -485,6 +500,16 @@ public class HospitalDb{
                           if(districtIdData != null){
                             districtIdData = districtIdData.toString();
                             hashMap.put("districtId", districtIdData);
+                          }
+                        }
+                                                
+                                
+                                                            String zoneIdData = "";
+                        if(cursor.getString(16) != null){
+                          zoneIdData = cursor.getString(16);
+                          if(zoneIdData != null){
+                            zoneIdData = zoneIdData.toString();
+                            hashMap.put("zoneId", zoneIdData);
                           }
                         }
                                                 

@@ -17,16 +17,16 @@ import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.IpdBed;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.Team;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.IpdBedRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.TeamRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
 
-public class IpdBedDb{
+public class TeamDb{
 
     // All Static variables
     RestAdapter restAdapter;
@@ -41,18 +41,18 @@ public class IpdBedDb{
     // Contacts table name
     private static String TABLE;
 
-  public IpdBedDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+  public TeamDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     //super(context, DATABASE_NAME, null, DATABASE_VERSION);
     this.context = context;
     this.restAdapter = restAdapter;
-    TABLE = "IpdBed";
+    TABLE = "Team";
     this.DATABASE_NAME = DATABASE_NAME;
     SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
 
-    public void insert__db (final String id, final IpdBed _modelData) {
+    public void insert__db (final String id, final Team _modelData) {
         // new Thread(new Runnable() {
         //      @Override
         //      public void run() {
@@ -61,7 +61,7 @@ public class IpdBedDb{
                     db.beginTransaction();
                     // Inserting Row
                     ContentValues values = getContentValues(_modelData);
-                    db.insert("`IpdBed`", null, values);
+                    db.insert("`Team`", null, values);
                     //db.close(); // Closing database connection
                     db.setTransactionSuccessful();
                     db.endTransaction();
@@ -73,16 +73,9 @@ public class IpdBedDb{
 
 
 
-    public ContentValues getContentValues(IpdBed _modelData){
+    public ContentValues getContentValues(Team _modelData){
       ContentValues values = new ContentValues();
                        
-                                                            String bedNumberData = "";
-                        if(_modelData.getBedNumber() != null){
-                          bedNumberData = _modelData.getBedNumber().toString();
-                          values.put("`bedNumber`", bedNumberData);
-                        }
-                                  
-                                
                                                             String addedData = "";
                         if(_modelData.getAdded() != null){
                           addedData = _modelData.getAdded().toString();
@@ -97,10 +90,24 @@ public class IpdBedDb{
                         }
                                   
                                 
-                                                            String typeData = "";
-                        if(_modelData.getType() != null){
-                          typeData = _modelData.getType().toString();
-                          values.put("`type`", typeData);
+                                                            String nameData = "";
+                        if(_modelData.getName() != null){
+                          nameData = _modelData.getName().toString();
+                          values.put("`name`", nameData);
+                        }
+                                  
+                                
+                                                            String contactNumberData = "";
+                        if(_modelData.getContactNumber() != null){
+                          contactNumberData = _modelData.getContactNumber().toString();
+                          values.put("`contactNumber`", contactNumberData);
+                        }
+                                  
+                                
+                                                            String unique_numberData = "";
+                        if(_modelData.getUnique_number() != null){
+                          unique_numberData = _modelData.getUnique_number().toString();
+                          values.put("`unique_number`", unique_numberData);
                         }
                                   
                                 
@@ -120,28 +127,13 @@ public class IpdBedDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String hospitalIdData = "";
+                        String zoneIdData = "";
                         try {
-                              Method method = _modelData.getClass().getMethod("getHospitalId");
+                              Method method = _modelData.getClass().getMethod("getZoneId");
                               if(method.invoke(_modelData) != null){
-                                //hospitalIdData = _modelData.getHospitalId().toString();
-                                hospitalIdData = (String) method.invoke(_modelData);
-                                values.put("`hospitalId`", hospitalIdData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String ipdCategoryIdData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getIpdCategoryId");
-                              if(method.invoke(_modelData) != null){
-                                //ipdCategoryIdData = _modelData.getIpdCategoryId().toString();
-                                ipdCategoryIdData = (String) method.invoke(_modelData);
-                                values.put("`ipdCategoryId`", ipdCategoryIdData);
+                                //zoneIdData = _modelData.getZoneId().toString();
+                                zoneIdData = (String) method.invoke(_modelData);
+                                values.put("`zoneId`", zoneIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -159,10 +151,10 @@ public class IpdBedDb{
 
 
     // Getting single c
-    public   IpdBed get__db(String id) {
+    public   Team get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("IpdBed", null, "id=?", new String[]{id}, null, null, null, null);
+            Cursor cursor = db.query("Team", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -171,9 +163,9 @@ public class IpdBedDb{
                     cursor.close();
                     //db.close(); // Closing database connection
                     if (hashMap != null) {
-                        IpdBedRepository repo = restAdapter.createRepository(IpdBedRepository.class);
+                        TeamRepository repo = restAdapter.createRepository(TeamRepository.class);
                         repo.addStorage(context);
-                        return (IpdBed)repo.createObject(hashMap);
+                        return (Team)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -192,10 +184,10 @@ public class IpdBedDb{
 
 
     // Getting single cont
-    public   IpdBed get__db(String whereKey, String whereKeyValue) {
+    public   Team get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("`IpdBed`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`Team`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -206,9 +198,9 @@ public class IpdBedDb{
                     //db.close(); // Closing database connection
 
                     if (hashMap != null) {
-                        IpdBedRepository repo = restAdapter.createRepository(IpdBedRepository.class);
+                        TeamRepository repo = restAdapter.createRepository(TeamRepository.class);
                         repo.addStorage(context);
-                        return (IpdBed)repo.createObject(hashMap);
+                        return (Team)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -230,19 +222,9 @@ public class IpdBedDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            String bedNumberData = "";
-                        if(cursor.getString(0) != null){
-                          bedNumberData = cursor.getString(0);
-                          if(bedNumberData != null){
-                            bedNumberData = (String)bedNumberData;
-                            hashMap.put("bedNumber", bedNumberData);
-                          }
-                        }
-                                                
-                                
                                                             String addedData = "";
-                        if(cursor.getString(1) != null){
-                          addedData = cursor.getString(1);
+                        if(cursor.getString(0) != null){
+                          addedData = cursor.getString(0);
                           if(addedData != null){
                             addedData = (String)addedData;
                             hashMap.put("added", addedData);
@@ -251,8 +233,8 @@ public class IpdBedDb{
                                                 
                                 
                                                             String updatedData = "";
-                        if(cursor.getString(2) != null){
-                          updatedData = cursor.getString(2);
+                        if(cursor.getString(1) != null){
+                          updatedData = cursor.getString(1);
                           if(updatedData != null){
                             updatedData = (String)updatedData;
                             hashMap.put("updated", updatedData);
@@ -260,19 +242,39 @@ public class IpdBedDb{
                         }
                                                 
                                 
-                                                            String typeData = "";
+                                                            String nameData = "";
+                        if(cursor.getString(2) != null){
+                          nameData = cursor.getString(2);
+                          if(nameData != null){
+                            nameData = (String)nameData;
+                            hashMap.put("name", nameData);
+                          }
+                        }
+                                                
+                                
+                                                            String contactNumberData = "";
                         if(cursor.getString(3) != null){
-                          typeData = cursor.getString(3);
-                          if(typeData != null){
-                            typeData = (String)typeData;
-                            hashMap.put("type", typeData);
+                          contactNumberData = cursor.getString(3);
+                          if(contactNumberData != null){
+                            contactNumberData = (String)contactNumberData;
+                            hashMap.put("contactNumber", contactNumberData);
+                          }
+                        }
+                                                
+                                
+                                                            String unique_numberData = "";
+                        if(cursor.getString(4) != null){
+                          unique_numberData = cursor.getString(4);
+                          if(unique_numberData != null){
+                            unique_numberData = (String)unique_numberData;
+                            hashMap.put("unique_number", unique_numberData);
                           }
                         }
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(4) != null){
-                          idData = cursor.getString(4);
+                        if(cursor.getString(5) != null){
+                          idData = cursor.getString(5);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -280,22 +282,12 @@ public class IpdBedDb{
                         }
                                                 
                                 
-                                                            String hospitalIdData = "";
-                        if(cursor.getString(5) != null){
-                          hospitalIdData = cursor.getString(5);
-                          if(hospitalIdData != null){
-                            hospitalIdData = hospitalIdData.toString();
-                            hashMap.put("hospitalId", hospitalIdData);
-                          }
-                        }
-                                                
-                                
-                                                            String ipdCategoryIdData = "";
+                                                            String zoneIdData = "";
                         if(cursor.getString(6) != null){
-                          ipdCategoryIdData = cursor.getString(6);
-                          if(ipdCategoryIdData != null){
-                            ipdCategoryIdData = ipdCategoryIdData.toString();
-                            hashMap.put("ipdCategoryId", ipdCategoryIdData);
+                          zoneIdData = cursor.getString(6);
+                          if(zoneIdData != null){
+                            zoneIdData = zoneIdData.toString();
+                            hashMap.put("zoneId", zoneIdData);
                           }
                         }
                                                 
@@ -308,7 +300,7 @@ public class IpdBedDb{
 
 
 
-    public void upsert__db(String id, IpdBed model){
+    public void upsert__db(String id, Team model){
         if(count__db(id) != 0){
             update__db(id, model);
         }else{
@@ -319,25 +311,25 @@ public class IpdBedDb{
 
 
     // Getting All Contacts
-    public DataList<IpdBed>  getAll__db() {
-        DataList<IpdBed> modelList = new DataList<IpdBed>();
+    public DataList<Team>  getAll__db() {
+        DataList<Team> modelList = new DataList<Team>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `IpdBed`";
+        String selectQuery = "SELECT  * FROM `Team`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<IpdBed>) modelList;
+            return (DataList<Team>) modelList;
         }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    IpdBedRepository repo = restAdapter.createRepository(IpdBedRepository.class);
+                    TeamRepository repo = restAdapter.createRepository(TeamRepository.class);
                     repo.addStorage(context);
-                    modelList.add((IpdBed)repo.createObject(hashMap));
+                    modelList.add((Team)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }
@@ -346,7 +338,7 @@ public class IpdBedDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<IpdBed>) modelList;
+        return (DataList<Team>) modelList;
     }
 
 
@@ -447,19 +439,19 @@ public class IpdBedDb{
 
 
     // Getting All Data where
-    public DataList<IpdBed>  getAll__db(HashMap<String, Object> whereKeyValue) {
+    public DataList<Team>  getAll__db(HashMap<String, Object> whereKeyValue) {
         return getAll__db(whereKeyValue, null, 0, 0);
     }
 
 
 
     // Getting All Data where and sort column according to date wise..
-    public DataList<IpdBed>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip) {
-        DataList<IpdBed> modelList = new DataList<IpdBed>();
+    public DataList<Team>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip) {
+        DataList<Team> modelList = new DataList<Team>();
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM `IpdBed` " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `Team` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
@@ -469,9 +461,9 @@ public class IpdBedDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                selectQuery = "SELECT  * FROM IpdBed " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
+                selectQuery = "SELECT  * FROM Team " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM IpdBed " + whereQuery  + " LIMIT -1 OFFSET " + skip;
+                selectQuery = "SELECT  * FROM Team " + whereQuery  + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -482,15 +474,15 @@ public class IpdBedDb{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<IpdBed>) modelList;
+            return (DataList<Team>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    IpdBedRepository repo = restAdapter.createRepository(IpdBedRepository.class);
+                    TeamRepository repo = restAdapter.createRepository(TeamRepository.class);
                     repo.addStorage(context);
-                    modelList.add((IpdBed)repo.createObject(hashMap));
+                    modelList.add((Team)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
@@ -500,13 +492,13 @@ public class IpdBedDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<IpdBed>) modelList;
+        return (DataList<Team>) modelList;
     }
 
 
 
     // Getting All Data where
-    public DataList<IpdBed>  getAll__db(HashMap<String, Object> whereKeyValue, int limit, int skip) {
+    public DataList<Team>  getAll__db(HashMap<String, Object> whereKeyValue, int limit, int skip) {
         return getAll__db(whereKeyValue, null,  limit, skip);
     }
 
@@ -525,7 +517,7 @@ public class IpdBedDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM `IpdBed` " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `Team` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
@@ -535,9 +527,9 @@ public class IpdBedDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM `IpdBed` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
+                countQuery = "SELECT  * FROM `Team` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `IpdBed` " + whereQuery + " LIMIT -1 OFFSET " + skip;
+                countQuery = "SELECT  * FROM `Team` " + whereQuery + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -561,9 +553,9 @@ public class IpdBedDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM `IpdBed` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
+            countQuery = "SELECT  * FROM `Team` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `IpdBed` " + whereQuery + " LIMIT -1 OFFSET " + skip;
+            countQuery = "SELECT  * FROM `Team` " + whereQuery + " LIMIT -1 OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -596,7 +588,7 @@ public class IpdBedDb{
                 values.put("_DATA_UPDATED", 0);
                 String where = getWhere(whereKeyValue);
                 // updating row
-                db.update("`IpdBed`", values, "_DATA_UPDATED = 1 AND " + where, null);
+                db.update("`Team`", values, "_DATA_UPDATED = 1 AND " + where, null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -613,7 +605,7 @@ public class IpdBedDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("`IpdBed`", "_DATA_UPDATED = 0 AND " + where , null);
+                db.delete("`Team`", "_DATA_UPDATED = 0 AND " + where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -634,7 +626,7 @@ public class IpdBedDb{
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
                 String where = getWhere(whereKeyValue);
-                db.delete("`IpdBed`", where , null);
+                db.delete("`Team`", where , null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
         //     }
@@ -648,10 +640,10 @@ public class IpdBedDb{
 
 
     // Getting All Data where
-    public DataList<IpdBed>  getAll__db(String whereKey, String whereKeyValue) {
-        DataList<IpdBed> modelList = new DataList<IpdBed>();
+    public DataList<Team>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<Team> modelList = new DataList<Team>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `IpdBed` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String selectQuery = "SELECT  * FROM `Team` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
@@ -660,15 +652,15 @@ public class IpdBedDb{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<IpdBed>) modelList;
+            return (DataList<Team>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    IpdBedRepository repo = restAdapter.createRepository(IpdBedRepository.class);
+                    TeamRepository repo = restAdapter.createRepository(TeamRepository.class);
                     repo.addStorage(context);
-                    modelList.add((IpdBed)repo.createObject(hashMap));
+                    modelList.add((Team)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
@@ -678,7 +670,7 @@ public class IpdBedDb{
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<IpdBed>) modelList;
+        return (DataList<Team>) modelList;
     }
 
 
@@ -690,7 +682,7 @@ public class IpdBedDb{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-        String countQuery = "SELECT  * FROM `IpdBed` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String countQuery = "SELECT  * FROM `Team` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int count = cursor.getCount();
@@ -710,7 +702,7 @@ public class IpdBedDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("`IpdBed`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.update("`Team`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -726,7 +718,7 @@ public class IpdBedDb{
         //     public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("`IpdBed`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+                db.delete("`Team`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -737,7 +729,7 @@ public class IpdBedDb{
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final IpdBed _modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final Team _modelData ){
     //   new Thread(new Runnable(){
     //     @Override
     //     public void run(){
@@ -745,7 +737,7 @@ public class IpdBedDb{
           db.beginTransaction();
           ContentValues values = getContentValues(_modelData);
           String where = getWhere(whereKeyValue);
-          db.update("`IpdBed`", values, where, null);
+          db.update("`Team`", values, where, null);
           db.setTransactionSuccessful();
           db.endTransaction();
           //db.close();
@@ -775,7 +767,7 @@ public class IpdBedDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final IpdBed _modelData) {
+    public void update__db(final String id,   final Team _modelData) {
         // new Thread(new Runnable() {
         //     @Override
         //     public void run() {
@@ -783,7 +775,7 @@ public class IpdBedDb{
                 db.beginTransaction();
                 ContentValues values = getContentValues(_modelData);
                 // updating row
-                db.update("`IpdBed`", values, "id = ?",
+                db.update("`Team`", values, "id = ?",
                         new String[] { id });
                 db.setTransactionSuccessful();
                 db.endTransaction();
@@ -804,7 +796,7 @@ public class IpdBedDb{
                 ContentValues values = new ContentValues();
                 values.put("_DATA_UPDATED", 0);
                 // updating row
-                db.update("`IpdBed`", values, "_DATA_UPDATED = 1", null);
+                db.update("`Team`", values, "_DATA_UPDATED = 1", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();
@@ -821,7 +813,7 @@ public class IpdBedDb{
     //         public void run() {
                 SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
                 db.beginTransaction();
-                db.delete("`IpdBed`", "_DATA_UPDATED = 0", null);
+                db.delete("`Team`", "_DATA_UPDATED = 0", null);
                 db.setTransactionSuccessful();
                 db.endTransaction();
                 //db.close();

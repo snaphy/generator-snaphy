@@ -118,29 +118,6 @@ public class MedicalRecord extends Model {
         
             
 
-                private DataList<Map<String, Object>> record;
-                /* Adding Getter and Setter methods */
-                public DataList<Map<String, Object>> getRecord(){
-                    return record;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setRecord(DataList<Map<String, Object>> record){
-                    this.record = record;
-
-                    //TODO change this to custom array with double quotes escaped if error occured when sending to server..
-                    hashMap.put("record", record);
-                }
-
-            
-
-            
-            
-        
-    
-        
-            
-
             
                 private String type;
                 /* Adding Getter and Setter methods */
@@ -154,6 +131,29 @@ public class MedicalRecord extends Model {
                     //Update hashMap value..
                     hashMap.put("type", type);
                 }
+
+            
+            
+        
+    
+        
+            
+
+                private DataList<Map<String, Object>> records;
+                /* Adding Getter and Setter methods */
+                public DataList<Map<String, Object>> getRecords(){
+                    return records;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setRecords(DataList<Map<String, Object>> records){
+                    this.records = records;
+
+                    //TODO change this to custom array with double quotes escaped if error occured when sending to server..
+                    hashMap.put("records", records);
+                }
+
+            
 
             
             
@@ -434,6 +434,7 @@ public class MedicalRecord extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -609,6 +610,7 @@ public class MedicalRecord extends Model {
                                     } //method def ends here.
                                  
                             
+                        
                         
                         
                         

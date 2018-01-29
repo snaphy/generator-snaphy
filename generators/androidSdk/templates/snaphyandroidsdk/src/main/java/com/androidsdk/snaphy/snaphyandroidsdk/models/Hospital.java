@@ -114,6 +114,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.HospitalRepository;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ZoneRepository;
+            
+
+        
+    
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -348,6 +355,13 @@ public class Hospital extends Model {
                     //Update Map value..
                     hashMap.put("address", address);
                 }
+
+            
+            
+        
+    
+        
+            
 
             
             
@@ -808,6 +822,8 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
                         
 
                                     //Write the method here..
@@ -1062,6 +1078,16 @@ public class Hospital extends Model {
                             
                          
                             
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -1503,6 +1529,8 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
                         
 
                                     //Write the method here..
@@ -1733,6 +1761,16 @@ public class Hospital extends Model {
                             
                          
                             
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -2158,6 +2196,8 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
                         
 
                                     //Write the method here..
@@ -2404,6 +2444,16 @@ public class Hospital extends Model {
                             
                          
                             
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -2748,6 +2798,18 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -3089,6 +3151,18 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -3430,6 +3504,18 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -3771,6 +3857,18 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -4112,6 +4210,18 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -4542,6 +4652,8 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
                         
 
                                     //Write the method here..
@@ -4842,6 +4954,16 @@ public class Hospital extends Model {
                         
                         
                         
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                     
 
                 
@@ -4861,9 +4983,9 @@ public class Hospital extends Model {
                 
                     
                     //Define hasMany relation method here..
-                    private transient DataList<IpdCategory>  ipdCategories ;
+                    private transient DataList<IpdCategory>  ipdBeds ;
 
-                    public DataList< IpdCategory > getIpdCategories() {
+                    public DataList< IpdCategory > getIpdBeds() {
                         //Check for pure case of hasMany
                                                     //TODO: Modify foreign key name..
                           try{
@@ -4872,22 +4994,22 @@ public class Hospital extends Model {
                             if(that.getId() != null && ipdCategoryRepository.getDb() != null){
 
                                  //Fetch locally from db
-                                 //ipdCategories = getIpdCategories__db(restAdapter);
+                                 //ipdBeds = getIpdBeds__db(restAdapter);
                                  // Getting single cont
-                                 ipdCategories = ipdCategoryRepository.getDb().getAll__db("hospitalId", that.getId().toString());
+                                 ipdBeds = ipdCategoryRepository.getDb().getAll__db("hospitalId", that.getId().toString());
 
                                  //lowercaseFirstLetter(modelName)
                             }
                           }catch(Exception e){
                                 //Ignore
                           }
-                                                return ipdCategories;
+                                                return ipdBeds;
                     }
 
-                    public void setIpdCategories(DataList<IpdCategory> ipdCategories) {
+                    public void setIpdBeds(DataList<IpdCategory> ipdBeds) {
                         boolean hashType = false;
                         DataList<HashMap<String, Object>> hashMaps = new DataList<>();
-                        for(Object o: ipdCategories){
+                        for(Object o: ipdBeds){
                             if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
@@ -4896,11 +5018,11 @@ public class Hospital extends Model {
                         }
 
                         if(hashType){
-                            setIpdCategories1(hashMaps);
+                            setIpdBeds1(hashMaps);
                         }else{
-                            this.ipdCategories = ipdCategories;
+                            this.ipdBeds = ipdBeds;
                             //TODO: Warning move this to new thread
-                            for(IpdCategory data: ipdCategories){
+                            for(IpdCategory data: ipdBeds){
                               try{
                                 data.save__db();
                               } catch (NoSuchMethodError e) {
@@ -4911,63 +5033,63 @@ public class Hospital extends Model {
                     }
 
                 /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setIpdCategories1(List<Map<String, Object>> ipdCategories) {
+                    public void setIpdBeds1(List<Map<String, Object>> ipdBeds) {
                         //First create a dummy Repo class object for ..
-                        IpdCategoryRepository ipdCategoriesRepository = new IpdCategoryRepository();
+                        IpdCategoryRepository ipdBedsRepository = new IpdCategoryRepository();
                         List<IpdCategory> result = new ArrayList<>();
-                        for (Map<String, Object> obj : ipdCategories) {
+                        for (Map<String, Object> obj : ipdBeds) {
                             //Also add relation to child type for two way communication..
-                            IpdCategory obj1 = ipdCategoriesRepository.createObject(obj);
+                            IpdCategory obj1 = ipdBedsRepository.createObject(obj);
                             result.add(obj1);
 
                         }
-                        setIpdCategories(result);
+                        setIpdBeds(result);
 
                     }
 
                 */
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setIpdCategories1(DataList<HashMap<String, Object>> ipdCategories) {
+                    public void setIpdBeds1(DataList<HashMap<String, Object>> ipdBeds) {
                         //First create a dummy Repo class object for ..
-                        IpdCategoryRepository ipdCategoriesRepository = new IpdCategoryRepository();
+                        IpdCategoryRepository ipdBedsRepository = new IpdCategoryRepository();
                         DataList<IpdCategory> result = new DataList<>();
-                        for (HashMap<String, Object> obj : ipdCategories) {
+                        for (HashMap<String, Object> obj : ipdBeds) {
                             //Also add relation to child type for two way communication..
-                            IpdCategory obj1 = ipdCategoriesRepository.createObject(obj);
+                            IpdCategory obj1 = ipdBedsRepository.createObject(obj);
                             result.add(obj1);
 
                         }
-                        setIpdCategories(result);
+                        setIpdBeds(result);
 
                     }
 
 
                     //Adding relation method..
                     //Add a dummy class Name object to seperate data..
-                    public void addRelation(DataList<IpdCategory> ipdCategories, IpdCategory dummyClassInstance) {
-                        that.setIpdCategories(ipdCategories);
+                    public void addRelation(DataList<IpdCategory> ipdBeds, IpdCategory dummyClassInstance) {
+                        that.setIpdBeds(ipdBeds);
 
                     }
 
                     //Adding relation method..
                     //This will add a new data to the list relation object..
-                    public void addRelation(IpdCategory ipdCategories) {
+                    public void addRelation(IpdCategory ipdBeds) {
                         try{
                             try{
 
                                   //Save to database..
-                                  ipdCategories.save__db();
+                                  ipdBeds.save__db();
                             }catch (NoSuchMethodError e) {
                               // ignore
                             }
-                            that.getIpdCategories().add(ipdCategories);
+                            that.getIpdBeds().add(ipdBeds);
                         }catch(Exception e){
-                            DataList< IpdCategory> ipdCategories1 = new DataList();
+                            DataList< IpdCategory> ipdBeds1 = new DataList();
                             //Now add this item to list..
-                            ipdCategories1.add(ipdCategories);
+                            ipdBeds1.add(ipdBeds);
                             //Now set data....
-                            that.setIpdCategories(ipdCategories1);
+                            that.setIpdBeds(ipdBeds1);
                         }
                     }
 
@@ -5039,7 +5161,7 @@ public class Hospital extends Model {
                         
 
                                     //Write the method here..
-                                    public void findById__ipdCategories( String fk,  RestAdapter restAdapter, final ObjectCallback<IpdCategory> callback) {
+                                    public void findById__ipdBeds( String fk,  RestAdapter restAdapter, final ObjectCallback<IpdCategory> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5053,7 +5175,7 @@ public class Hospital extends Model {
 
 
 
-                                        hospitalRepo.findById__ipdCategories( (String)that.getId(), fk,  new ObjectCallback<IpdCategory> (){
+                                        hospitalRepo.findById__ipdBeds( (String)that.getId(), fk,  new ObjectCallback<IpdCategory> (){
                                             
 
                                             
@@ -5096,7 +5218,7 @@ public class Hospital extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__ipdCategories( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__ipdBeds( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5110,7 +5232,7 @@ public class Hospital extends Model {
 
 
 
-                                        hospitalRepo.destroyById__ipdCategories( (String)that.getId(), fk,  new VoidCallback (){
+                                        hospitalRepo.destroyById__ipdBeds( (String)that.getId(), fk,  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -5140,7 +5262,7 @@ public class Hospital extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__ipdCategories( String fk,  IpdCategory data,  RestAdapter restAdapter, final ObjectCallback<IpdCategory> callback) {
+                                    public void updateById__ipdBeds( String fk,  IpdCategory data,  RestAdapter restAdapter, final ObjectCallback<IpdCategory> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5157,7 +5279,7 @@ public class Hospital extends Model {
 
 
 
-                                        hospitalRepo.updateById__ipdCategories( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<IpdCategory> (){
+                                        hospitalRepo.updateById__ipdBeds( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<IpdCategory> (){
                                             
 
                                             
@@ -5245,10 +5367,12 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
                         
 
                                     //Write the method here..
-                                    public void get__ipdCategories( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<IpdCategory> callback) {
+                                    public void get__ipdBeds( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<IpdCategory> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5262,7 +5386,7 @@ public class Hospital extends Model {
 
 
 
-                                        hospitalRepo.get__ipdCategories( (String)that.getId(), filter,  new DataListCallback<IpdCategory> (){
+                                        hospitalRepo.get__ipdBeds( (String)that.getId(), filter,  new DataListCallback<IpdCategory> (){
                                             
 
                                             
@@ -5310,7 +5434,7 @@ public class Hospital extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__ipdCategories( IpdCategory data,  RestAdapter restAdapter, final ObjectCallback<IpdCategory> callback) {
+                                    public void create__ipdBeds( IpdCategory data,  RestAdapter restAdapter, final ObjectCallback<IpdCategory> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5324,7 +5448,7 @@ public class Hospital extends Model {
 
 
 
-                                        hospitalRepo.create__ipdCategories( (String)that.getId(), data.convertMap(),  new ObjectCallback<IpdCategory> (){
+                                        hospitalRepo.create__ipdBeds( (String)that.getId(), data.convertMap(),  new ObjectCallback<IpdCategory> (){
                                             
 
                                             
@@ -5367,7 +5491,7 @@ public class Hospital extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__ipdCategories( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__ipdBeds( RestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5378,7 +5502,7 @@ public class Hospital extends Model {
 
 
 
-                                        hospitalRepo.delete__ipdCategories( (String)that.getId(),  new VoidCallback (){
+                                        hospitalRepo.delete__ipdBeds( (String)that.getId(),  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -5408,7 +5532,7 @@ public class Hospital extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__ipdCategories( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__ipdBeds( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5422,7 +5546,7 @@ public class Hospital extends Model {
 
 
 
-                                        hospitalRepo.count__ipdCategories( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
+                                        hospitalRepo.count__ipdBeds( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
@@ -5451,6 +5575,16 @@ public class Hospital extends Model {
                                     } //method def ends here.
                                  
                             
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -5908,6 +6042,8 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
                         
 
                                     //Write the method here..
@@ -6122,6 +6258,16 @@ public class Hospital extends Model {
                             
                          
                             
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         
                         
@@ -6571,6 +6717,8 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
                         
 
                                     //Write the method here..
@@ -6855,12 +7003,375 @@ public class Hospital extends Model {
                         
                         
                         
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                     
 
                 
 
                 
                     //Define hasMany, hasManyThrough method here..
+
+                 
+                 
+             
+          
+    
+        
+        
+                
+                    //Define belongsTo relation method here..
+                    private transient Zone  zone ;
+                    private String zoneId;
+
+                    public String getZoneId(){
+                         return zoneId;
+                    }
+
+                    public void setZoneId(Object zoneId){
+                        if(zoneId != null){
+                          this.zoneId = zoneId.toString();
+                        }
+                    }
+
+                    public Zone getZone() {
+                        try{
+                          //Adding database method for fetching from relation if not present..
+                                      if(zone == null){
+                                        HospitalRepository hospitalRepository = (HospitalRepository) getRepository();
+
+                                        RestAdapter restAdapter = hospitalRepository.getRestAdapter();
+                                        if(restAdapter != null){
+                                          //Fetch locally from db
+                                          zone = getZone__db(restAdapter);
+                                        }
+                                      }
+                        }catch(Exception e){
+                          //Ignore
+                        }
+
+                        return zone;
+                    }
+
+                    public void setZone(Zone zone) {
+                        this.zone = zone;
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setZone(Map<String, Object> zone) {
+                        //First create a dummy Repo class object for customer.
+                        ZoneRepository zoneRepository = new ZoneRepository();
+                        Zone zone1 = zoneRepository.createObject(zone);
+                        setZone(zone1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setZone(HashMap<String, Object> zone) {
+                        //First create a dummy Repo class object for customer.
+                        ZoneRepository zoneRepository = new ZoneRepository();
+                        Zone zone1 = zoneRepository.createObject(zone);
+                        setZone(zone1);
+                    }
+
+                    //Adding relation method..
+                    public void addRelation(Zone zone) {
+                        that.setZone(zone);
+                    }
+
+
+                    //Fetch related data from local database if present a zoneId identifier as property for belongsTo
+                    public Zone getZone__db(RestAdapter restAdapter){
+                      if(zoneId != null){
+                        ZoneRepository zoneRepository = restAdapter.createRepository(ZoneRepository.class);
+                            try{
+                            HospitalRepository lowercaseFirstLetterRepository = (HospitalRepository) getRepository();
+                                          if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
+                                                Context context = lowercaseFirstLetterRepository.getContext();
+                                                if(zoneRepository.getDb() == null ){
+                                                    zoneRepository.addStorage(context);
+                                                }
+
+                                                if(context != null && zoneRepository.getDb() != null){
+                                                    zoneRepository.addStorage(context);
+                                                    Zone zone = (Zone) zoneRepository.getDb().get__db(zoneId);
+                                                    return zone;
+                                                }else{
+                                                    return null;
+                                                }
+                                          }else{
+                                            return null;
+                                          }
+                            }catch(Exception e){
+                            //Ignore exception..
+                            return null;
+                            }
+
+                        }else{
+                          return null;
+                      }
+                    }
+                
+
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__zone( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Zone> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final HospitalRepository  hospitalRepo = restAdapter.createRepository(HospitalRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        hospitalRepo.get__zone( (String)that.getId(), refresh,  new ObjectCallback<Zone> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Zone object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
 
                  
                  

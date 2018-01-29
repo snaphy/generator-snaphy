@@ -178,6 +178,27 @@ public class Patient extends User {
             
 
             
+                private String fatherName;
+                /* Adding Getter and Setter methods */
+                public String getFatherName(){
+                    return fatherName;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setFatherName(String fatherName){
+                    this.fatherName = fatherName;
+                    //Update hashMap value..
+                    hashMap.put("fatherName", fatherName);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
                 private Map<String, Object> profilePic;
                 /* Adding Getter and Setter methods */
                 public Map<String, Object> getProfilePic(){
@@ -210,27 +231,6 @@ public class Patient extends User {
                     this.idProof = idProof;
                     //Update Map value..
                     hashMap.put("idProof", idProof);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private String fatherName;
-                /* Adding Getter and Setter methods */
-                public String getFatherName(){
-                    return fatherName;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setFatherName(String fatherName){
-                    this.fatherName = fatherName;
-                    //Update hashMap value..
-                    hashMap.put("fatherName", fatherName);
                 }
 
             

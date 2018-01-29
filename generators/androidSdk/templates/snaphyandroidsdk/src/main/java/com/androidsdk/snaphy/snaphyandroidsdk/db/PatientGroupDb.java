@@ -360,7 +360,10 @@ public class PatientGroupDb{
                                 
                                                             String patientSecurityOfflineData = "";
                         if(_modelData.getPatientSecurityOffline() != null){
-                          patientSecurityOfflineData = _modelData.getPatientSecurityOffline().toString();
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                          patientSecurityOfflineData = gson.toJson(_modelData.getPatientSecurityOffline(), HashMap.class);
                           values.put("`patientSecurityOffline`", patientSecurityOfflineData);
                         }
                                   
@@ -997,11 +1000,14 @@ public class PatientGroupDb{
                         }
                                                 
                                 
-                                                            String patientSecurityOfflineData = "";
+                                                            Map<String, Object> patientSecurityOfflineData = new HashMap<>();
                         if(cursor.getString(36) != null){
-                          patientSecurityOfflineData = cursor.getString(36);
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                           patientSecurityOfflineData = gson.fromJson(cursor.getString(36), Map.class);
                           if(patientSecurityOfflineData != null){
-                            patientSecurityOfflineData = (String)patientSecurityOfflineData;
+                            patientSecurityOfflineData = (Map<String, Object>)patientSecurityOfflineData;
                             hashMap.put("patientSecurityOffline", patientSecurityOfflineData);
                           }
                         }
