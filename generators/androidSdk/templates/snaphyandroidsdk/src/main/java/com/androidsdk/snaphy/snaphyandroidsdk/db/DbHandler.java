@@ -203,11 +203,11 @@ public class DbHandler extends SQLiteOpenHelper {
                         db.execSQL(CREATE_IpdBedLog_TABLE_31);
 
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                         
 
                         
-                        String CREATE_IpdBed_TABLE_32 = "CREATE TABLE IF NOT EXISTS `IpdBed` (  `bedNumber` TEXT, `added` TEXT, `updated` TEXT, `type` TEXT, `id` TEXT PRIMARY KEY, `hospitalId` TEXT, `ipdCategoryId` TEXT, _DATA_UPDATED NUMBER )";
+                        String CREATE_IpdBed_TABLE_32 = "CREATE TABLE IF NOT EXISTS `IpdBed` (  `bedNumber` TEXT, `added` TEXT, `updated` TEXT, `type` TEXT, `id` TEXT PRIMARY KEY, `ipdCategoryId` TEXT, _DATA_UPDATED NUMBER )";
                         db.execSQL(CREATE_IpdBed_TABLE_32);
 
 
@@ -499,6 +499,14 @@ public class DbHandler extends SQLiteOpenHelper {
                         db.execSQL(CREATE_Team_TABLE_68);
 
 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                        
+
+                        
+                        String CREATE_TeamMember_TABLE_69 = "CREATE TABLE IF NOT EXISTS `TeamMember` (  `added` TEXT, `updated` TEXT, `name` TEXT, `contactNumber` TEXT, `unique_number` TEXT, `status` TEXT, `id` TEXT PRIMARY KEY, `teamId` TEXT, _DATA_UPDATED NUMBER )";
+                        db.execSQL(CREATE_TeamMember_TABLE_69);
+
+
             
         }
 
@@ -712,6 +720,9 @@ public class DbHandler extends SQLiteOpenHelper {
             
                 // Drop older table if existed
                 db.execSQL("DROP TABLE IF EXISTS `Team`");
+            
+                // Drop older table if existed
+                db.execSQL("DROP TABLE IF EXISTS `TeamMember`");
             
 
             // Create tables again

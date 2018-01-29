@@ -367,6 +367,18 @@ public class IpdCategoryRepository extends ModelRepository<IpdCategory> {
     
 
     
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findAvailableBedDetails", "POST"), "IpdCategory.findAvailableBedDetails");
+    
+
+    
+    
+
+    
+    
+
+    
     
 
     
@@ -1974,6 +1986,93 @@ public class IpdCategoryRepository extends ModelRepository<IpdCategory> {
 
             
 
+        
+    
+        
+            //Method findAvailableBedDetails definition
+            public void findAvailableBedDetails(  Map<String,  ? extends Object> ctx,  String hospitalId, final DataListCallback<IpdCategory> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("ctx", ctx);
+                
+                        hashMapObject.put("hospitalId", hospitalId);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("findAvailableBedDetails", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<IpdCategory> ipdCategoryList = new DataList<IpdCategory>();
+                                    IpdCategoryRepository ipdCategoryRepo = getRestAdapter().createRepository(IpdCategoryRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = ipdCategoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(ipdCategoryRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        IpdCategory ipdCategory = ipdCategoryRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = ipdCategory.getClass().getMethod("save__db");
+                                                      method.invoke(ipdCategory);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        ipdCategoryList.add(ipdCategory);
+                                    }
+                                    callback.onSuccess(ipdCategoryList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method findAvailableBedDetails definition ends here..
+
+            
+
+        
+    
         
     
         

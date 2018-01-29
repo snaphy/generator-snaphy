@@ -55,8 +55,8 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.IpdBedDb;
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Hospital;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.HospitalRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.IpdCategory;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.IpdCategoryRepository;
             
         
     
@@ -174,7 +174,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ipdBedId/hospital", "GET"), "IpdBed.prototype.__get__hospital");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ipdBedId/ipdCategory", "GET"), "IpdBed.prototype.__get__ipdCategory");
     
 
     
@@ -370,15 +370,6 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/addBed", "POST"), "IpdBed.addBed");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findAvailableBedDetails", "POST"), "IpdBed.findAvailableBedDetails");
     
 
     
@@ -655,8 +646,8 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
         
     
         
-            //Method get__hospital definition
-            public void get__hospital(  String ipdBedId,  Boolean refresh, final ObjectCallback<Hospital> callback){
+            //Method get__ipdCategory definition
+            public void get__ipdCategory(  String ipdBedId,  Boolean refresh, final ObjectCallback<IpdCategory> callback){
 
                 /**
                 Call the onBefore event
@@ -679,7 +670,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__hospital", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__ipdCategory", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -692,27 +683,27 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    HospitalRepository hospitalRepo = getRestAdapter().createRepository(HospitalRepository.class);
+                                    IpdCategoryRepository ipdCategoryRepo = getRestAdapter().createRepository(IpdCategoryRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = hospitalRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(hospitalRepo, context);
+                                            Method method = ipdCategoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(ipdCategoryRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //hospitalRepo.addStorage(context);
+                                        //ipdCategoryRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Hospital hospital = hospitalRepo.createObject(result);
+                                    IpdCategory ipdCategory = ipdCategoryRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = hospital.getClass().getMethod("save__db");
-                                                    method.invoke(hospital);
+                                                    Method method = ipdCategory.getClass().getMethod("save__db");
+                                                    method.invoke(ipdCategory);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -720,7 +711,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
                                       }
 
-                                    callback.onSuccess(hospital);
+                                    callback.onSuccess(ipdCategory);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -733,7 +724,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
                 
 
-            }//Method get__hospital definition ends here..
+            }//Method get__ipdCategory definition ends here..
 
             
 
@@ -2018,61 +2009,6 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                 
 
             }//Method addBed definition ends here..
-
-            
-
-        
-    
-        
-            //Method findAvailableBedDetails definition
-            public void findAvailableBedDetails(  Map<String,  ? extends Object> ctx,  String hospitalId,  String ipdCategoryId, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("ctx", ctx);
-                
-                        hashMapObject.put("hospitalId", hospitalId);
-                
-                        hashMapObject.put("ipdCategoryId", ipdCategoryId);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("findAvailableBedDetails", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method findAvailableBedDetails definition ends here..
 
             
 

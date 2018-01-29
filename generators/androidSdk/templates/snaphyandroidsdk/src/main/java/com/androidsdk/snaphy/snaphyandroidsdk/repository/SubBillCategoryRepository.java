@@ -1898,7 +1898,7 @@ public class SubBillCategoryRepository extends ModelRepository<SubBillCategory> 
     
         
             //Method addSubBillCategory definition
-            public void addSubBillCategory(  Map<String,  ? extends Object> subBillCategoryObj, final ObjectCallback<JSONObject>  callback ){
+            public void addSubBillCategory(  Map<String,  ? extends Object> subBillCategoryObj, final ObjectCallback<SubBillCategory> callback){
 
                 /**
                 Call the onBefore event
@@ -1918,8 +1918,8 @@ public class SubBillCategoryRepository extends ModelRepository<SubBillCategory> 
 
                 
                     
-                    invokeStaticMethod("addSubBillCategory", hashMapObject, new Adapter.JsonObjectCallback() {
                     
+                    invokeStaticMethod("addSubBillCategory", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -1931,7 +1931,39 @@ public class SubBillCategoryRepository extends ModelRepository<SubBillCategory> 
                         @Override
                         public void onSuccess(JSONObject response) {
                             
-                                callback.onSuccess(response);
+                                if(response != null){
+                                    SubBillCategoryRepository subBillCategoryRepo = getRestAdapter().createRepository(SubBillCategoryRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = subBillCategoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(subBillCategoryRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //subBillCategoryRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    SubBillCategory subBillCategory = subBillCategoryRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = subBillCategory.getClass().getMethod("save__db");
+                                                    method.invoke(subBillCategory);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(subBillCategory);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
                             
                             //Call the finally method..
                             callback.onFinally();

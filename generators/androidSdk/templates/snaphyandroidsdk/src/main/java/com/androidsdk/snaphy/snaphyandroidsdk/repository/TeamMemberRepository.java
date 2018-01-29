@@ -41,22 +41,15 @@ import org.json.JSONObject;
 
 
 //Import its models too.
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Team;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.TeamMember;
 import android.content.Context;
-import com.androidsdk.snaphy.snaphyandroidsdk.db.TeamDb;
+import com.androidsdk.snaphy.snaphyandroidsdk.db.TeamMemberDb;
 
 //Now import model of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Zone;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.ZoneRepository;
-            
-        
-    
-
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.TeamMember;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.TeamMemberRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Team;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.TeamRepository;
             
         
     
@@ -65,15 +58,15 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.TeamDb;
 
 
 
-public class TeamRepository extends ModelRepository<Team> {
+public class TeamMemberRepository extends ModelRepository<TeamMember> {
 
 
     private Context context;
     private String METADATA_DATABASE_NAME_KEY = "snaphy.database.name";
     private static String DATABASE_NAME;
 
-    public TeamRepository(){
-        super("Team", null, Team.class);
+    public TeamMemberRepository(){
+        super("TeamMember", null, TeamMember.class);
 
     }
 
@@ -91,15 +84,15 @@ public class TeamRepository extends ModelRepository<Team> {
 
 
 
-    public TeamDb getDb() {
-      return teamDb;
+    public TeamMemberDb getDb() {
+      return teamMemberDb;
     }
 
-    public void setTeamDb(TeamDb teamDb) {
-      this.teamDb = teamDb;
+    public void setTeamMemberDb(TeamMemberDb teamMemberDb) {
+      this.teamMemberDb = teamMemberDb;
     }
 
-    private TeamDb teamDb;
+    private TeamMemberDb teamMemberDb;
 
 
 
@@ -133,7 +126,7 @@ public class TeamRepository extends ModelRepository<Team> {
          catch (Exception e){
             Log.e("Snaphy", e.toString());
          }
-         setTeamDb(new TeamDb(context, DATABASE_NAME, getRestAdapter()));
+         setTeamMemberDb(new TeamMemberDb(context, DATABASE_NAME, getRestAdapter()));
          //allow data storage locally..
          persistData(true);
          this.context = context;
@@ -147,7 +140,7 @@ public class TeamRepository extends ModelRepository<Team> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:teamId/zone", "GET"), "Team.prototype.__get__zone");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:teamMemberId/team", "GET"), "TeamMember.prototype.__get__team");
     
 
     
@@ -156,7 +149,7 @@ public class TeamRepository extends ModelRepository<Team> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:teamId/teamMembers/:fk", "GET"), "Team.prototype.__findById__teamMembers");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "TeamMember.create");
     
 
     
@@ -165,7 +158,7 @@ public class TeamRepository extends ModelRepository<Team> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:teamId/teamMembers/:fk", "DELETE"), "Team.prototype.__destroyById__teamMembers");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "TeamMember.create");
     
 
     
@@ -174,7 +167,7 @@ public class TeamRepository extends ModelRepository<Team> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:teamId/teamMembers/:fk", "PUT"), "Team.prototype.__updateById__teamMembers");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "TeamMember.upsert");
     
 
     
@@ -183,7 +176,7 @@ public class TeamRepository extends ModelRepository<Team> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:teamId/teamMembers", "GET"), "Team.prototype.__get__teamMembers");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "TeamMember.exists");
     
 
     
@@ -192,7 +185,7 @@ public class TeamRepository extends ModelRepository<Team> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:teamId/teamMembers", "POST"), "Team.prototype.__create__teamMembers");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "TeamMember.findById");
     
 
     
@@ -201,7 +194,7 @@ public class TeamRepository extends ModelRepository<Team> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:teamId/teamMembers", "DELETE"), "Team.prototype.__delete__teamMembers");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "TeamMember.find");
     
 
     
@@ -210,7 +203,7 @@ public class TeamRepository extends ModelRepository<Team> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:teamId/teamMembers/count", "GET"), "Team.prototype.__count__teamMembers");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "TeamMember.findOne");
     
 
     
@@ -219,7 +212,7 @@ public class TeamRepository extends ModelRepository<Team> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Team.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "TeamMember.updateAll");
     
 
     
@@ -228,7 +221,7 @@ public class TeamRepository extends ModelRepository<Team> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "POST"), "Team.create");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "TeamMember.deleteById");
     
 
     
@@ -237,7 +230,7 @@ public class TeamRepository extends ModelRepository<Team> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "PUT"), "Team.upsert");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "TeamMember.count");
     
 
     
@@ -246,43 +239,19 @@ public class TeamRepository extends ModelRepository<Team> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id/exists", "GET"), "Team.exists");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:teamMemberId", "PUT"), "TeamMember.prototype.updateAttributes");
     
 
     
     
 
     
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "GET"), "Team.findById");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/", "GET"), "Team.find");
-    
-
-    
-    
-
-    
-
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findOne", "GET"), "Team.findOne");
-    
-
-    
-    
 
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/update", "POST"), "Team.updateAll");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "TeamMember.getSchema");
     
 
     
@@ -291,16 +260,10 @@ public class TeamRepository extends ModelRepository<Team> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:id", "DELETE"), "Team.deleteById");
-    
-
-    
-    
-
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "TeamMember.getAbsoluteSchema");
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/count", "GET"), "Team.count");
     
 
     
@@ -309,49 +272,37 @@ public class TeamRepository extends ModelRepository<Team> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:teamId", "PUT"), "Team.prototype.updateAttributes");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "TeamMember.getDetailSchema");
     
 
     
     
 
     
-    
-
-    
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSchema", "POST"), "Team.getSchema");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "TeamMember.getModelRelationSchema");
     
 
-    
     
-
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getAbsoluteSchema", "POST"), "Team.getAbsoluteSchema");
     
 
     
     
 
-    
     
-
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getDetailSchema", "POST"), "Team.getDetailSchema");
     
 
     
-    
-
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "Team.getModelRelationSchema");
     
 
     
@@ -381,8 +332,8 @@ public class TeamRepository extends ModelRepository<Team> {
 
     
         
-            //Method get__zone definition
-            public void get__zone(  String teamId,  Boolean refresh, final ObjectCallback<Zone> callback){
+            //Method get__team definition
+            public void get__team(  String teamMemberId,  Boolean refresh, final ObjectCallback<Team> callback){
 
                 /**
                 Call the onBefore event
@@ -394,7 +345,7 @@ public class TeamRepository extends ModelRepository<Team> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("teamId", teamId);
+                        hashMapObject.put("teamMemberId", teamMemberId);
                 
                         hashMapObject.put("refresh", refresh);
                 
@@ -405,7 +356,7 @@ public class TeamRepository extends ModelRepository<Team> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__zone", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__team", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -418,27 +369,27 @@ public class TeamRepository extends ModelRepository<Team> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    ZoneRepository zoneRepo = getRestAdapter().createRepository(ZoneRepository.class);
+                                    TeamRepository teamRepo = getRestAdapter().createRepository(TeamRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = zoneRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(zoneRepo, context);
+                                            Method method = teamRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(teamRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //zoneRepo.addStorage(context);
+                                        //teamRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Zone zone = zoneRepo.createObject(result);
+                                    Team team = teamRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = zone.getClass().getMethod("save__db");
-                                                    method.invoke(zone);
+                                                    Method method = team.getClass().getMethod("save__db");
+                                                    method.invoke(team);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -446,7 +397,7 @@ public class TeamRepository extends ModelRepository<Team> {
 
                                       }
 
-                                    callback.onSuccess(zone);
+                                    callback.onSuccess(team);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -459,496 +410,7 @@ public class TeamRepository extends ModelRepository<Team> {
 
                 
 
-            }//Method get__zone definition ends here..
-
-            
-
-        
-    
-        
-            //Method findById__teamMembers definition
-            public void findById__teamMembers(  String teamId,  String fk, final ObjectCallback<TeamMember> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("teamId", teamId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__findById__teamMembers", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    TeamMemberRepository teamMemberRepo = getRestAdapter().createRepository(TeamMemberRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = teamMemberRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(teamMemberRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //teamMemberRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    TeamMember teamMember = teamMemberRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = teamMember.getClass().getMethod("save__db");
-                                                    method.invoke(teamMember);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(teamMember);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method findById__teamMembers definition ends here..
-
-            
-
-        
-    
-        
-            //Method destroyById__teamMembers definition
-            public void destroyById__teamMembers(  String teamId,  String fk, final VoidCallback callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("teamId", teamId);
-                
-                        hashMapObject.put("fk", fk);
-                
-
-                
-                    invokeStaticMethod("prototype.__destroyById__teamMembers", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                                callback.onError(t);
-                                //Call the finally method..
-                                callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method destroyById__teamMembers definition ends here..
-
-            
-
-        
-    
-        
-            //Method updateById__teamMembers definition
-            public void updateById__teamMembers(  String teamId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<TeamMember> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("teamId", teamId);
-                
-                        hashMapObject.put("fk", fk);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__updateById__teamMembers", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    TeamMemberRepository teamMemberRepo = getRestAdapter().createRepository(TeamMemberRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = teamMemberRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(teamMemberRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //teamMemberRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    TeamMember teamMember = teamMemberRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = teamMember.getClass().getMethod("save__db");
-                                                    method.invoke(teamMember);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(teamMember);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method updateById__teamMembers definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__teamMembers definition
-            public void get__teamMembers(  String teamId,  Map<String,  ? extends Object> filter, final DataListCallback<TeamMember> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("teamId", teamId);
-                
-                        hashMapObject.put("filter", filter);
-                
-
-                
-
-
-                
-
-                
-                    invokeStaticMethod("prototype.__get__teamMembers", hashMapObject, new Adapter.JsonArrayCallback() {
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONArray response) {
-                            
-                                if(response != null){
-                                    //Now converting jsonObject to list
-                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<TeamMember> teamMemberList = new DataList<TeamMember>();
-                                    TeamMemberRepository teamMemberRepo = getRestAdapter().createRepository(TeamMemberRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = teamMemberRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(teamMemberRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-                                    }
-                                    for (Map<String, Object> obj : result) {
-
-                                        TeamMember teamMember = teamMemberRepo.createObject(obj);
-
-                                        //Add to database if persistent storage required..
-                                        if(isSTORE_LOCALLY()){
-                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                            try {
-                                                      Method method = teamMember.getClass().getMethod("save__db");
-                                                      method.invoke(teamMember);
-
-                                            } catch (Exception e) {
-                                                Log.e("Database Error", e.toString());
-                                            }
-                                        }
-
-                                        teamMemberList.add(teamMember);
-                                    }
-                                    callback.onSuccess(teamMemberList);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-            }//Method get__teamMembers definition ends here..
-
-            
-
-        
-    
-        
-            //Method create__teamMembers definition
-            public void create__teamMembers(  String teamId,  Map<String,  ? extends Object> data, final ObjectCallback<TeamMember> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("teamId", teamId);
-                
-                        hashMapObject.putAll(data);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__create__teamMembers", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    TeamMemberRepository teamMemberRepo = getRestAdapter().createRepository(TeamMemberRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = teamMemberRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(teamMemberRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //teamMemberRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    TeamMember teamMember = teamMemberRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = teamMember.getClass().getMethod("save__db");
-                                                    method.invoke(teamMember);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(teamMember);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method create__teamMembers definition ends here..
-
-            
-
-        
-    
-        
-            //Method delete__teamMembers definition
-            public void delete__teamMembers(  String teamId, final VoidCallback callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("teamId", teamId);
-                
-
-                
-                    invokeStaticMethod("prototype.__delete__teamMembers", hashMapObject, new Adapter.Callback() {
-                        @Override
-                        public void onError(Throwable t) {
-                                callback.onError(t);
-                                //Call the finally method..
-                                callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(String response) {
-                            callback.onSuccess();
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-
-                
-
-                
-
-            }//Method delete__teamMembers definition ends here..
-
-            
-
-        
-    
-        
-            //Method count__teamMembers definition
-            public void count__teamMembers(  String teamId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("teamId", teamId);
-                
-                        hashMapObject.put("where", where);
-                
-
-                
-
-
-                
-                    
-                    invokeStaticMethod("prototype.__count__teamMembers", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                callback.onSuccess(response);
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method count__teamMembers definition ends here..
+            }//Method get__team definition ends here..
 
             
 
@@ -956,7 +418,7 @@ public class TeamRepository extends ModelRepository<Team> {
     
         
             //Method create definition
-            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<Team> callback){
+            public void create(  Map<String,  ? extends Object> data, final ObjectCallback<TeamMember> callback){
 
                 /**
                 Call the onBefore event
@@ -990,27 +452,27 @@ public class TeamRepository extends ModelRepository<Team> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    TeamRepository teamRepo = getRestAdapter().createRepository(TeamRepository.class);
+                                    TeamMemberRepository teamMemberRepo = getRestAdapter().createRepository(TeamMemberRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = teamRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(teamRepo, context);
+                                            Method method = teamMemberRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(teamMemberRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //teamRepo.addStorage(context);
+                                        //teamMemberRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Team team = teamRepo.createObject(result);
+                                    TeamMember teamMember = teamMemberRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = team.getClass().getMethod("save__db");
-                                                    method.invoke(team);
+                                                    Method method = teamMember.getClass().getMethod("save__db");
+                                                    method.invoke(teamMember);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1018,7 +480,7 @@ public class TeamRepository extends ModelRepository<Team> {
 
                                       }
 
-                                    callback.onSuccess(team);
+                                    callback.onSuccess(teamMember);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1040,7 +502,7 @@ public class TeamRepository extends ModelRepository<Team> {
         
         
             //Method upsert definition
-            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<Team> callback){
+            public void upsert(  Map<String,  ? extends Object> data, final ObjectCallback<TeamMember> callback){
 
                 /**
                 Call the onBefore event
@@ -1074,27 +536,27 @@ public class TeamRepository extends ModelRepository<Team> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    TeamRepository teamRepo = getRestAdapter().createRepository(TeamRepository.class);
+                                    TeamMemberRepository teamMemberRepo = getRestAdapter().createRepository(TeamMemberRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = teamRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(teamRepo, context);
+                                            Method method = teamMemberRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(teamMemberRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //teamRepo.addStorage(context);
+                                        //teamMemberRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Team team = teamRepo.createObject(result);
+                                    TeamMember teamMember = teamMemberRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = team.getClass().getMethod("save__db");
-                                                    method.invoke(team);
+                                                    Method method = teamMember.getClass().getMethod("save__db");
+                                                    method.invoke(teamMember);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1102,7 +564,7 @@ public class TeamRepository extends ModelRepository<Team> {
 
                                       }
 
-                                    callback.onSuccess(team);
+                                    callback.onSuccess(teamMember);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1174,7 +636,7 @@ public class TeamRepository extends ModelRepository<Team> {
     
         
             //Method findById definition
-            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<Team> callback){
+            public void findById(  String id,  Map<String,  ? extends Object> filter, final ObjectCallback<TeamMember> callback){
 
                 /**
                 Call the onBefore event
@@ -1210,27 +672,27 @@ public class TeamRepository extends ModelRepository<Team> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    TeamRepository teamRepo = getRestAdapter().createRepository(TeamRepository.class);
+                                    TeamMemberRepository teamMemberRepo = getRestAdapter().createRepository(TeamMemberRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = teamRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(teamRepo, context);
+                                            Method method = teamMemberRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(teamMemberRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //teamRepo.addStorage(context);
+                                        //teamMemberRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Team team = teamRepo.createObject(result);
+                                    TeamMember teamMember = teamMemberRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = team.getClass().getMethod("save__db");
-                                                    method.invoke(team);
+                                                    Method method = teamMember.getClass().getMethod("save__db");
+                                                    method.invoke(teamMember);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1238,7 +700,7 @@ public class TeamRepository extends ModelRepository<Team> {
 
                                       }
 
-                                    callback.onSuccess(team);
+                                    callback.onSuccess(teamMember);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1259,7 +721,7 @@ public class TeamRepository extends ModelRepository<Team> {
     
         
             //Method find definition
-            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<Team> callback){
+            public void find(  Map<String,  ? extends Object> filter, final DataListCallback<TeamMember> callback){
 
                 /**
                 Call the onBefore event
@@ -1294,12 +756,12 @@ public class TeamRepository extends ModelRepository<Team> {
                                 if(response != null){
                                     //Now converting jsonObject to list
                                     DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
-                                    DataList<Team> teamList = new DataList<Team>();
-                                    TeamRepository teamRepo = getRestAdapter().createRepository(TeamRepository.class);
+                                    DataList<TeamMember> teamMemberList = new DataList<TeamMember>();
+                                    TeamMemberRepository teamMemberRepo = getRestAdapter().createRepository(TeamMemberRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = teamRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(teamRepo, context);
+                                            Method method = teamMemberRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(teamMemberRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1307,23 +769,23 @@ public class TeamRepository extends ModelRepository<Team> {
                                     }
                                     for (Map<String, Object> obj : result) {
 
-                                        Team team = teamRepo.createObject(obj);
+                                        TeamMember teamMember = teamMemberRepo.createObject(obj);
 
                                         //Add to database if persistent storage required..
                                         if(isSTORE_LOCALLY()){
                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                             try {
-                                                      Method method = team.getClass().getMethod("save__db");
-                                                      method.invoke(team);
+                                                      Method method = teamMember.getClass().getMethod("save__db");
+                                                      method.invoke(teamMember);
 
                                             } catch (Exception e) {
                                                 Log.e("Database Error", e.toString());
                                             }
                                         }
 
-                                        teamList.add(team);
+                                        teamMemberList.add(teamMember);
                                     }
-                                    callback.onSuccess(teamList);
+                                    callback.onSuccess(teamMemberList);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1342,7 +804,7 @@ public class TeamRepository extends ModelRepository<Team> {
     
         
             //Method findOne definition
-            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<Team> callback){
+            public void findOne(  Map<String,  ? extends Object> filter, final ObjectCallback<TeamMember> callback){
 
                 /**
                 Call the onBefore event
@@ -1376,27 +838,27 @@ public class TeamRepository extends ModelRepository<Team> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    TeamRepository teamRepo = getRestAdapter().createRepository(TeamRepository.class);
+                                    TeamMemberRepository teamMemberRepo = getRestAdapter().createRepository(TeamMemberRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = teamRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(teamRepo, context);
+                                            Method method = teamMemberRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(teamMemberRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //teamRepo.addStorage(context);
+                                        //teamMemberRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Team team = teamRepo.createObject(result);
+                                    TeamMember teamMember = teamMemberRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = team.getClass().getMethod("save__db");
-                                                    method.invoke(team);
+                                                    Method method = teamMember.getClass().getMethod("save__db");
+                                                    method.invoke(teamMember);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1404,7 +866,7 @@ public class TeamRepository extends ModelRepository<Team> {
 
                                       }
 
-                                    callback.onSuccess(team);
+                                    callback.onSuccess(teamMember);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1580,7 +1042,7 @@ public class TeamRepository extends ModelRepository<Team> {
     
         
             //Method updateAttributes definition
-            public void updateAttributes(  String teamId,  Map<String,  ? extends Object> data, final ObjectCallback<Team> callback){
+            public void updateAttributes(  String teamMemberId,  Map<String,  ? extends Object> data, final ObjectCallback<TeamMember> callback){
 
                 /**
                 Call the onBefore event
@@ -1592,7 +1054,7 @@ public class TeamRepository extends ModelRepository<Team> {
                 Map<String, Object> hashMapObject = new HashMap<>();
                 //Now add the arguments...
                 
-                        hashMapObject.put("teamId", teamId);
+                        hashMapObject.put("teamMemberId", teamMemberId);
                 
                         hashMapObject.putAll(data);
                 
@@ -1616,27 +1078,27 @@ public class TeamRepository extends ModelRepository<Team> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    TeamRepository teamRepo = getRestAdapter().createRepository(TeamRepository.class);
+                                    TeamMemberRepository teamMemberRepo = getRestAdapter().createRepository(TeamMemberRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = teamRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(teamRepo, context);
+                                            Method method = teamMemberRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(teamMemberRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //teamRepo.addStorage(context);
+                                        //teamMemberRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    Team team = teamRepo.createObject(result);
+                                    TeamMember teamMember = teamMemberRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = team.getClass().getMethod("save__db");
-                                                    method.invoke(team);
+                                                    Method method = teamMember.getClass().getMethod("save__db");
+                                                    method.invoke(teamMember);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -1644,7 +1106,7 @@ public class TeamRepository extends ModelRepository<Team> {
 
                                       }
 
-                                    callback.onSuccess(team);
+                                    callback.onSuccess(teamMember);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -1861,6 +1323,20 @@ public class TeamRepository extends ModelRepository<Team> {
 
             
 
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
         

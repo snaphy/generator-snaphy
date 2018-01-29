@@ -53,20 +53,10 @@ public class FlagDb{
 
 
     public void insert__db (final String id, final Flag _modelData) {
-        // new Thread(new Runnable() {
-        //      @Override
-        //      public void run() {
-                    
-                    SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-                    db.beginTransaction();
-                    // Inserting Row
-                    ContentValues values = getContentValues(_modelData);
-                    db.insert("`Flag`", null, values);
-                    //db.close(); // Closing database connection
-                    db.setTransactionSuccessful();
-                    db.endTransaction();
-        //      }
-        // }).start();
+      SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+      // Inserting Row
+      ContentValues values = getContentValues(_modelData);
+      db.insert("`Flag`", null, values);
     }
 
 
@@ -306,7 +296,6 @@ public class FlagDb{
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
-        db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (!cursor.moveToFirst() || cursor.getCount() == 0){
             return (DataList<Flag>) modelList;
@@ -321,8 +310,6 @@ public class FlagDb{
                 }
             } while (cursor.moveToNext());
         }
-        db.setTransactionSuccessful();
-        db.endTransaction();
         cursor.close();
         //db.close();
         // return contact list
@@ -457,7 +444,6 @@ public class FlagDb{
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
-        db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
@@ -474,11 +460,7 @@ public class FlagDb{
                 }
             } while (cursor.moveToNext());
          }
-
-        db.setTransactionSuccessful();
-        db.endTransaction();
         cursor.close();
-        //db.close();
         // return contact list
         return (DataList<Flag>) modelList;
     }
@@ -564,42 +546,24 @@ public class FlagDb{
     }
 
 
+
     // Updating updated data property to new contact with where clause..
     public void checkOldData__db(final HashMap<String, Object> whereKeyValue) {
-        // new Thread(new Runnable() {
-        //     @Override
-        //     public void run() {
-                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-                //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
-                db.beginTransaction();
-                ContentValues values = new ContentValues();
-                values.put("_DATA_UPDATED", 0);
-                String where = getWhere(whereKeyValue);
-                // updating row
-                db.update("`Flag`", values, "_DATA_UPDATED = 1 AND " + where, null);
-                db.setTransactionSuccessful();
-                db.endTransaction();
-                //db.close();
-        //     }
-        // }).start();
+            SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+            //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
+            ContentValues values = new ContentValues();
+            values.put("_DATA_UPDATED", 0);
+            String where = getWhere(whereKeyValue);
+            // updating row
+            db.update("`Flag`", values, "_DATA_UPDATED = 1 AND " + where, null);
     }
 
 
     // Delete Old data with where clause
     public void deleteOldData__db(final HashMap<String, Object> whereKeyValue) {
-        // new Thread(new Runnable() {
-        //     @Override
-        //     public void run() {
-                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-                db.beginTransaction();
-                String where = getWhere(whereKeyValue);
-                db.delete("`Flag`", "_DATA_UPDATED = 0 AND " + where , null);
-                db.setTransactionSuccessful();
-                db.endTransaction();
-                //db.close();
-        //     }
-        // }).start();
-
+      SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+      String where = getWhere(whereKeyValue);
+      db.delete("`Flag`", "_DATA_UPDATED = 0 AND " + where , null);
     }
 
 
@@ -608,17 +572,9 @@ public class FlagDb{
 
     // Deleting by whereKeyValue filter data present..
     public void delete__db(final HashMap<String, Object> whereKeyValue) {
-    //   new Thread(new Runnable() {
-    //         @Override
-    //         public void run() {
-                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-                db.beginTransaction();
-                String where = getWhere(whereKeyValue);
-                db.delete("`Flag`", where , null);
-                db.setTransactionSuccessful();
-                db.endTransaction();
-        //     }
-        // }).start();
+      SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+      String where = getWhere(whereKeyValue);
+      db.delete("`Flag`", where , null);
     }
 
 
@@ -634,8 +590,6 @@ public class FlagDb{
         String selectQuery = "SELECT  * FROM `Flag` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-        //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
-        db.beginTransaction();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
@@ -652,12 +606,7 @@ public class FlagDb{
                 }
             } while (cursor.moveToNext());
          }
-
-        db.setTransactionSuccessful();
-        db.endTransaction();
         cursor.close();
-        //db.close();
-        // return contact list
         return (DataList<Flag>) modelList;
     }
 
@@ -670,68 +619,38 @@ public class FlagDb{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-        String countQuery = "SELECT  * FROM `Flag` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
-        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-        Cursor cursor = db.rawQuery(countQuery, null);
-        int count = cursor.getCount();
-        cursor.close();
-        return count;
+      String countQuery = "SELECT  * FROM `Flag` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+      SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
+      Cursor cursor = db.rawQuery(countQuery, null);
+      int count = cursor.getCount();
+      cursor.close();
+      return count;
     }
 
 
     // Updating updated data property to new contact with where clause..
     public void checkOldData__db(final String whereKey, final String whereKeyValue) {
-        // new Thread(new Runnable() {
-        //     @Override
-        //     public void run() {
-                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-                //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
-                db.beginTransaction();
-                ContentValues values = new ContentValues();
-                values.put("_DATA_UPDATED", 0);
-                // updating row
-                db.update("`Flag`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
-                db.setTransactionSuccessful();
-                db.endTransaction();
-                //db.close();
-        //     }
-        // }).start();
+      SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+      ContentValues values = new ContentValues();
+      values.put("_DATA_UPDATED", 0);
+      // updating row
+      db.update("`Flag`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
     }
 
 
     // Delete Old data with where clause
     public void deleteOldData__db(final String whereKey, final String whereKeyValue) {
-        // new Thread(new Runnable() {
-        //     @Override
-        //     public void run() {
-                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-                db.beginTransaction();
-                db.delete("`Flag`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
-                db.setTransactionSuccessful();
-                db.endTransaction();
-                //db.close();
-        //     }
-        // }).start();
-
+      SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+      db.delete("`Flag`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
     }
 
 
     //Update multiple data at once..
     public void updateAll__db(final HashMap<String, Object> whereKeyValue, final Flag _modelData ){
-    //   new Thread(new Runnable(){
-    //     @Override
-    //     public void run(){
-          SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-          db.beginTransaction();
-          ContentValues values = getContentValues(_modelData);
-          String where = getWhere(whereKeyValue);
-          db.update("`Flag`", values, where, null);
-          db.setTransactionSuccessful();
-          db.endTransaction();
-          //db.close();
-    //     }
-
-    //   }).start();
+      SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+      ContentValues values = getContentValues(_modelData);
+      String where = getWhere(whereKeyValue);
+      db.update("`Flag`", values, where, null);
     }
 
 
@@ -739,75 +658,35 @@ public class FlagDb{
 
     // Deleting by whereKey and whereKeyValue
     public void delete__db(final String whereKey, final String whereKeyValue) {
-    //   new Thread(new Runnable() {
-    //         @Override
-    //         public void run() {
-                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-                db.beginTransaction();
-                db.delete(TABLE, whereKey + " = ?", new String[]{whereKeyValue});
-                db.setTransactionSuccessful();
-                db.endTransaction();
-                //db.close();
-        //     }
-        // }).start();
+      SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+      db.delete(TABLE, whereKey + " = ?", new String[]{whereKeyValue});
     }
 
 
 
     // Updating single contact
     public void update__db(final String id,   final Flag _modelData) {
-        // new Thread(new Runnable() {
-        //     @Override
-        //     public void run() {
-                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-                db.beginTransaction();
-                ContentValues values = getContentValues(_modelData);
-                // updating row
-                db.update("`Flag`", values, "id = ?",
-                        new String[] { id });
-                db.setTransactionSuccessful();
-                db.endTransaction();
-                //db.close();
-        //     }
-        // }).start();
-
+      SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+      ContentValues values = getContentValues(_modelData);
+      // updating row
+      db.update("`Flag`", values, "id = ?", new String[] { id });
     }
 
 
     // Updating updated data property to new contact
     public void checkOldData__db() {
-        // new Thread(new Runnable() {
-        //     @Override
-        //     public void run() {
-                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-                db.beginTransaction();
-                ContentValues values = new ContentValues();
-                values.put("_DATA_UPDATED", 0);
-                // updating row
-                db.update("`Flag`", values, "_DATA_UPDATED = 1", null);
-                db.setTransactionSuccessful();
-                db.endTransaction();
-                //db.close();
-        //     }
-        // }).start();
-
+      SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+      ContentValues values = new ContentValues();
+      values.put("_DATA_UPDATED", 0);
+      // updating row
+      db.update("`Flag`", values, "_DATA_UPDATED = 1", null);
     }
 
 
     // Delete Old data
     public void deleteOldData__db() {
-    //   new Thread(new Runnable() {
-    //         @Override
-    //         public void run() {
-                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-                db.beginTransaction();
-                db.delete("`Flag`", "_DATA_UPDATED = 0", null);
-                db.setTransactionSuccessful();
-                db.endTransaction();
-                //db.close();
-        //     }
-        // }).start();
-
+      SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+      db.delete("`Flag`", "_DATA_UPDATED = 0", null);
     }
 
 
@@ -842,33 +721,14 @@ public class FlagDb{
 
     // Deleting by id
     public void delete__db(final String id) {
-    //   new Thread(new Runnable() {
-    //         @Override
-    //         public void run() {
-                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-                db.beginTransaction();
-                db.delete(TABLE, KEY_ID + " = ?",
-                new String[] { id });
-                db.setTransactionSuccessful();
-                db.endTransaction();
-                //db.close();
-        //     }
-        // }).start();
+      SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+      db.delete(TABLE, KEY_ID + " = ?",
+      new String[] { id });
     }
 
     public void reset__db(){
-        // new Thread(new Runnable() {
-        //     @Override
-        //     public void run() {
-                SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-                db.beginTransaction();
-                db.delete(TABLE,null,null);
-                db.setTransactionSuccessful();
-                db.endTransaction();
-                //db.close();
-        //     }
-        // }).start();
-
+      SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+      db.delete(TABLE,null,null);
     }
 
 }

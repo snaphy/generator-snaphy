@@ -435,6 +435,7 @@ public class MedicalRecord extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -610,6 +611,7 @@ public class MedicalRecord extends Model {
                                     } //method def ends here.
                                  
                             
+                        
                         
                         
                         

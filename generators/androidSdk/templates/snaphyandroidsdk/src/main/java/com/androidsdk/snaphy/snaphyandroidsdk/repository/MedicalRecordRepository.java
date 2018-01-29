@@ -311,6 +311,15 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
 
     
     
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchMedicalRecords", "POST"), "MedicalRecord.fetchMedicalRecords");
+    
+
+    
+    
     return contract;
     }
 
@@ -1465,6 +1474,93 @@ public class MedicalRecordRepository extends ModelRepository<MedicalRecord> {
                 
 
             }//Method addMedicalRecord definition ends here..
+
+            
+
+        
+    
+        
+            //Method fetchMedicalRecords definition
+            public void fetchMedicalRecords(  Map<String,  ? extends Object> ctx,  String patientGroupId,  String hospitalId, final DataListCallback<MedicalRecord> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("ctx", ctx);
+                
+                        hashMapObject.put("patientGroupId", patientGroupId);
+                
+                        hashMapObject.put("hospitalId", hospitalId);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("fetchMedicalRecords", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<MedicalRecord> medicalRecordList = new DataList<MedicalRecord>();
+                                    MedicalRecordRepository medicalRecordRepo = getRestAdapter().createRepository(MedicalRecordRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = medicalRecordRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(medicalRecordRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        MedicalRecord medicalRecord = medicalRecordRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = medicalRecord.getClass().getMethod("save__db");
+                                                      method.invoke(medicalRecord);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        medicalRecordList.add(medicalRecord);
+                                    }
+                                    callback.onSuccess(medicalRecordList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method fetchMedicalRecords definition ends here..
 
             
 
