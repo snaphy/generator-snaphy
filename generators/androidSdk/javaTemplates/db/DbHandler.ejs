@@ -25,7 +25,7 @@ public class DbHandler extends SQLiteOpenHelper {
 
         // Creating Tables
         @Override
-        public void onCreate(SQLiteDatabase db) {
+        public void onCreate(final SQLiteDatabase db) {
             new Thread(new Runnable() {
               @Override
               public void run() {
