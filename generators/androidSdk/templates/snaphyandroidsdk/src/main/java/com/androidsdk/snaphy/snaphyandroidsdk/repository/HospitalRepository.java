@@ -858,6 +858,15 @@ public class HospitalRepository extends ModelRepository<Hospital> {
     
 
     
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/sendScurityAlertMessage", "POST"), "Hospital.sendScurityAlertMessage");
+    
+
+    
+    
+
+    
     
 
     
@@ -5870,6 +5879,59 @@ public class HospitalRepository extends ModelRepository<Hospital> {
                 
 
             }//Method getModelRelationSchema definition ends here..
+
+            
+
+        
+    
+        
+            //Method sendScurityAlertMessage definition
+            public void sendScurityAlertMessage(  Map<String,  ? extends Object> ctx,  String hospitalId, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("ctx", ctx);
+                
+                        hashMapObject.put("hospitalId", hospitalId);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("sendScurityAlertMessage", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method sendScurityAlertMessage definition ends here..
 
             
 
