@@ -26,88 +26,92 @@ public class DbHandler extends SQLiteOpenHelper {
         // Creating Tables
         @Override
         public void onCreate(SQLiteDatabase db) {
+            new Thread(new Runnable() {
+              @Override
+              public void run() {
+                <%
+                    var index=0;
+                    var app = model.app;
+                    var modelsRestDefinition = model.modelsRestDefinition;
+                    var dbMethods = model.dbMethods;
+                for(var modelName in app.models){
+                    if(app.models.hasOwnProperty(modelName)){
+                        var modelObj = app.models[modelName];
+                        var modelProperties = modelObj.definition.rawProperties;
+                        //TODO: THIS LATER FOR EXCLUDING USER FROM LIST
+                        if(modelsRestDefinition[modelName] !== undefined && modelName !== "User"){
+                            var model_ = {
+                                name : modelName,
+                                properties: modelProperties,
+                                base: modelObj.definition.settings.base,
+                                relations: modelObj.definition.settings.relations,
+                                allModels: app.models,
+                                restDefinition: modelsRestDefinition,
+                                methods: dbMethods.methods
+                            };
+                            //console.log(modelsRestDefinition);
 
-            <%
-                var index=0;
-                var app = model.app;
-                var modelsRestDefinition = model.modelsRestDefinition;
-                var dbMethods = model.dbMethods;
-            for(var modelName in app.models){
-                if(app.models.hasOwnProperty(modelName)){
-                    var modelObj = app.models[modelName];
-                    var modelProperties = modelObj.definition.rawProperties;
-                    //TODO: THIS LATER FOR EXCLUDING USER FROM LIST
-                    if(modelsRestDefinition[modelName] !== undefined && modelName !== "User"){
-                        var model_ = {
-                            name : modelName,
-                            properties: modelProperties,
-                            base: modelObj.definition.settings.base,
-                            relations: modelObj.definition.settings.relations,
-                            allModels: app.models,
-                            restDefinition: modelsRestDefinition,
-                            methods: dbMethods.methods
-                        };
-                        //console.log(modelsRestDefinition);
-
-                        //compileAndWrite(model, ModelDBTemplatePath, AndroidModelPath, helper.capitalizeFirstLetter(modelName) +"Db.java");
-            -%>
-                        <%
-                            var tableQuery = `CREATE TABLE IF NOT EXISTS \`${modelName}\` ( `;
-                            var i=0;
-                            for( let property in model_.properties) {
-                        -%>
-                                <% if(model_.properties.hasOwnProperty(property)){
-                                    let isArray = model_.properties[property].type instanceof Array;
-                                    if(i==0){
-                                        if(property === "id"){
-                                          tableQuery = `${tableQuery} ${model_.methods.createTableTypeQuery(property, model_.properties[property].type, isArray)} PRIMARY KEY`;
+                            //compileAndWrite(model, ModelDBTemplatePath, AndroidModelPath, helper.capitalizeFirstLetter(modelName) +"Db.java");
+                -%>
+                            <%
+                                var tableQuery = `CREATE TABLE IF NOT EXISTS \`${modelName}\` ( `;
+                                var i=0;
+                                for( let property in model_.properties) {
+                            -%>
+                                    <% if(model_.properties.hasOwnProperty(property)){
+                                        let isArray = model_.properties[property].type instanceof Array;
+                                        if(i==0){
+                                            if(property === "id"){
+                                              tableQuery = `${tableQuery} ${model_.methods.createTableTypeQuery(property, model_.properties[property].type, isArray)} PRIMARY KEY`;
+                                            }else{
+                                              tableQuery = `${tableQuery} ${model_.methods.createTableTypeQuery(property, model_.properties[property].type, isArray)}`;
+                                            }
                                         }else{
-                                          tableQuery = `${tableQuery} ${model_.methods.createTableTypeQuery(property, model_.properties[property].type, isArray)}`;
+                                          if(property === "id"){
+                                            tableQuery = `${tableQuery}, ${model_.methods.createTableTypeQuery(property, model_.properties[property].type, isArray)} PRIMARY KEY`;
+                                          }else{
+                                            tableQuery = `${tableQuery}, ${model_.methods.createTableTypeQuery(property, model_.properties[property].type, isArray)}`;
+                                          }
                                         }
-                                    }else{
-                                      if(property === "id"){
-                                        tableQuery = `${tableQuery}, ${model_.methods.createTableTypeQuery(property, model_.properties[property].type, isArray)} PRIMARY KEY`;
-                                      }else{
-                                        tableQuery = `${tableQuery}, ${model_.methods.createTableTypeQuery(property, model_.properties[property].type, isArray)}`;
-                                      }
-                                    }
-                                -%>
+                                    -%>
+                                <%} -%>
+                                <% i++; -%>
                             <%} -%>
-                            <% i++; -%>
-                        <%} -%>
 
-                        <%
-                          //Prepare method for get foreign key..
-                          var getForeignKeyName = function (model, relation) {
-                            var foreignKey = model.relations[relation].foreignKey;
-                            if (!foreignKey) {
-                              foreignKey = model_.methods.lowercaseFirstLetter(model.relations[relation].model) + "Id";
-                            }
-                            return foreignKey;
-                          };
-                          for(var relation in model_.relations) {
-                              if(model_.relations.hasOwnProperty(relation)) {
-                                if (model_.relations[relation].type === "hasOne") {
-                                  tableQuery = `${tableQuery}, ${getForeignKeyName(model_, relation)} TEXT `;
+                            <%
+                              //Prepare method for get foreign key..
+                              var getForeignKeyName = function (model, relation) {
+                                var foreignKey = model.relations[relation].foreignKey;
+                                if (!foreignKey) {
+                                  foreignKey = model_.methods.lowercaseFirstLetter(model.relations[relation].model) + "Id";
                                 }
+                                return foreignKey;
+                              };
+                              for(var relation in model_.relations) {
+                                  if(model_.relations.hasOwnProperty(relation)) {
+                                    if (model_.relations[relation].type === "hasOne") {
+                                      tableQuery = `${tableQuery}, ${getForeignKeyName(model_, relation)} TEXT`;
+                                    }
+                                  }
                               }
-                          }
-                        %>
+                            %>
 
-                        <%
-                        //On insert always update the update data value to be 1 and on fetch change to 0
-                                tableQuery = tableQuery + `, ${model_.methods.updateDataProperty} NUMBER ` + ")"; %>
-                        String CREATE_<%- modelName %>_TABLE_<%- index %> = "<%- tableQuery %>";
-                        db.execSQL(CREATE_<%- modelName %>_TABLE_<%- index %>);
+                            <%
+                            //On insert always update the update data value to be 1 and on fetch change to 0
+                                    tableQuery = tableQuery + `, ${model_.methods.updateDataProperty} NUMBER ` + ")"; %>
+                            String CREATE_<%- modelName %>_TABLE_<%- index %> = "<%- tableQuery %>";
+                            db.execSQL(CREATE_<%- modelName %>_TABLE_<%- index %>);
 
 
-            <%
+                <%
+                        }
                     }
+                    index++;
                 }
-                index++;
-            }
-            -%>
+                -%>
 
+              }
+          }).start();
         }
 
         // Upgrading database
