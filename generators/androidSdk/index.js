@@ -210,6 +210,27 @@ var generatePresenter = function(app, modelsRestDefinition){
 
 
 
+
+
+/**
+ * Add Snaphy Rest Adapter
+ * @param app
+ * @param modelsRestDefinition
+ */
+var generateAdapter = function(app, modelsRestDefinition){
+    //Compile the EJS template..
+    var PresenterTemplatePath = path.join(__dirname, constants.javaTemplates, "adapter", "SnaphyRestAdapter.ejs");
+    //List path for adding list and subscribers..
+    var AndroidBaseModelPath = path.join(__dirname, constants.androidMainPath, "adapter");
+    //Create folder if not present..
+    mkdirp.sync(AndroidBaseModelPath);
+    //Now write Model.java to the file..
+    compileAndWrite({}, PresenterTemplatePath, AndroidBaseModelPath, helper.capitalizeFirstLetter("SnaphyRestAdapter") +".java");
+};
+
+
+
+
 /*Generate the preenter file.*/
 var generateSocket = function(app, modelsRestDefinition){
     //Compile the EJS template..
@@ -398,6 +419,8 @@ var init  = function(){
     //Generate Presenter..
     generatePresenter(app, modelsRestDefinition);
     generateSocket(app, modelsRestDefinition);
+    //WIll generate presenter..
+    generateAdapter(app, modelsRestDefinition);
     //Generate database..Db Handler always call this method after  generateDbModel
     generateDatabase(app, modelsRestDefinition);
     //Generate Image model and Repository..
