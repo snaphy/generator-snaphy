@@ -130,6 +130,21 @@ public class BillDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String hospitalUserIdData = "";
+                        try {
+                              Method method = _modelData.getClass().getMethod("getHospitalUserId");
+                              if(method.invoke(_modelData) != null){
+                                //hospitalUserIdData = _modelData.getHospitalUserId().toString();
+                                hospitalUserIdData = (String) method.invoke(_modelData);
+                                values.put("`hospitalUserId`", hospitalUserIdData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String patientIdData = "";
                         try {
                               Method method = _modelData.getClass().getMethod("getPatientId");
@@ -323,9 +338,19 @@ public class BillDb{
                         }
                                                 
                                 
-                                                            String patientIdData = "";
+                                                            String hospitalUserIdData = "";
                         if(cursor.getString(7) != null){
-                          patientIdData = cursor.getString(7);
+                          hospitalUserIdData = cursor.getString(7);
+                          if(hospitalUserIdData != null){
+                            hospitalUserIdData = hospitalUserIdData.toString();
+                            hashMap.put("hospitalUserId", hospitalUserIdData);
+                          }
+                        }
+                                                
+                                
+                                                            String patientIdData = "";
+                        if(cursor.getString(8) != null){
+                          patientIdData = cursor.getString(8);
                           if(patientIdData != null){
                             patientIdData = patientIdData.toString();
                             hashMap.put("patientId", patientIdData);
@@ -334,8 +359,8 @@ public class BillDb{
                                                 
                                 
                                                             String billCategoryIdData = "";
-                        if(cursor.getString(8) != null){
-                          billCategoryIdData = cursor.getString(8);
+                        if(cursor.getString(9) != null){
+                          billCategoryIdData = cursor.getString(9);
                           if(billCategoryIdData != null){
                             billCategoryIdData = billCategoryIdData.toString();
                             hashMap.put("billCategoryId", billCategoryIdData);
@@ -344,8 +369,8 @@ public class BillDb{
                                                 
                                 
                                                             String subBillCategoryIdData = "";
-                        if(cursor.getString(9) != null){
-                          subBillCategoryIdData = cursor.getString(9);
+                        if(cursor.getString(10) != null){
+                          subBillCategoryIdData = cursor.getString(10);
                           if(subBillCategoryIdData != null){
                             subBillCategoryIdData = subBillCategoryIdData.toString();
                             hashMap.put("subBillCategoryId", subBillCategoryIdData);

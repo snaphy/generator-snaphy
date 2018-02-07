@@ -66,6 +66,27 @@ public class BillCategoryDb{
     public ContentValues getContentValues(BillCategory _modelData){
       ContentValues values = new ContentValues();
                        
+                                                            String nameData = "";
+                        if(_modelData.getName() != null){
+                          nameData = _modelData.getName().toString();
+                          values.put("`name`", nameData);
+                        }
+                                  
+                                
+                                                            String typeData = "";
+                        if(_modelData.getType() != null){
+                          typeData = _modelData.getType().toString();
+                          values.put("`type`", typeData);
+                        }
+                                  
+                                
+                                                            String facilityData = "";
+                        if(_modelData.getFacility() != null){
+                          facilityData = _modelData.getFacility().toString();
+                          values.put("`facility`", facilityData);
+                        }
+                                  
+                                
                                                             String addedData = "";
                         if(_modelData.getAdded() != null){
                           addedData = _modelData.getAdded().toString();
@@ -80,10 +101,10 @@ public class BillCategoryDb{
                         }
                                   
                                 
-                                                            String nameData = "";
-                        if(_modelData.getName() != null){
-                          nameData = _modelData.getName().toString();
-                          values.put("`name`", nameData);
+                                                            String uniqueNumberData = "";
+                        if(_modelData.getUniqueNumber() != null){
+                          uniqueNumberData = _modelData.getUniqueNumber().toString();
+                          values.put("`uniqueNumber`", uniqueNumberData);
                         }
                                   
                                 
@@ -198,9 +219,39 @@ public class BillCategoryDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            String addedData = "";
+                                                            String nameData = "";
                         if(cursor.getString(0) != null){
-                          addedData = cursor.getString(0);
+                          nameData = cursor.getString(0);
+                          if(nameData != null){
+                            nameData = (String)nameData;
+                            hashMap.put("name", nameData);
+                          }
+                        }
+                                                
+                                
+                                                            String typeData = "";
+                        if(cursor.getString(1) != null){
+                          typeData = cursor.getString(1);
+                          if(typeData != null){
+                            typeData = (String)typeData;
+                            hashMap.put("type", typeData);
+                          }
+                        }
+                                                
+                                
+                                                            String facilityData = "";
+                        if(cursor.getString(2) != null){
+                          facilityData = cursor.getString(2);
+                          if(facilityData != null){
+                            facilityData = (String)facilityData;
+                            hashMap.put("facility", facilityData);
+                          }
+                        }
+                                                
+                                
+                                                            String addedData = "";
+                        if(cursor.getString(3) != null){
+                          addedData = cursor.getString(3);
                           if(addedData != null){
                             addedData = (String)addedData;
                             hashMap.put("added", addedData);
@@ -209,8 +260,8 @@ public class BillCategoryDb{
                                                 
                                 
                                                             String updatedData = "";
-                        if(cursor.getString(1) != null){
-                          updatedData = cursor.getString(1);
+                        if(cursor.getString(4) != null){
+                          updatedData = cursor.getString(4);
                           if(updatedData != null){
                             updatedData = (String)updatedData;
                             hashMap.put("updated", updatedData);
@@ -218,19 +269,19 @@ public class BillCategoryDb{
                         }
                                                 
                                 
-                                                            String nameData = "";
-                        if(cursor.getString(2) != null){
-                          nameData = cursor.getString(2);
-                          if(nameData != null){
-                            nameData = (String)nameData;
-                            hashMap.put("name", nameData);
+                                                            String uniqueNumberData = "";
+                        if(cursor.getString(5) != null){
+                          uniqueNumberData = cursor.getString(5);
+                          if(uniqueNumberData != null){
+                            uniqueNumberData = (String)uniqueNumberData;
+                            hashMap.put("uniqueNumber", uniqueNumberData);
                           }
                         }
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(3) != null){
-                          idData = cursor.getString(3);
+                        if(cursor.getString(6) != null){
+                          idData = cursor.getString(6);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -239,8 +290,8 @@ public class BillCategoryDb{
                                                 
                                 
                                                             String hospitalIdData = "";
-                        if(cursor.getString(4) != null){
-                          hospitalIdData = cursor.getString(4);
+                        if(cursor.getString(7) != null){
+                          hospitalIdData = cursor.getString(7);
                           if(hospitalIdData != null){
                             hospitalIdData = hospitalIdData.toString();
                             hashMap.put("hospitalId", hospitalIdData);

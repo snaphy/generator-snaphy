@@ -227,6 +227,27 @@ public class HospitalUser extends User {
             
 
             
+                private Map<String, Object> profilePic;
+                /* Adding Getter and Setter methods */
+                public Map<String, Object> getProfilePic(){
+                    return profilePic;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setProfilePic(Map<String, Object> profilePic){
+                    this.profilePic = profilePic;
+                    //Update Map value..
+                    hashMap.put("profilePic", profilePic);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
                 private String contactNumber;
                 /* Adding Getter and Setter methods */
                 public String getContactNumber(){
@@ -343,27 +364,6 @@ public class HospitalUser extends User {
                     this.unique_number = unique_number;
                     //Update hashMap value..
                     hashMap.put("unique_number", unique_number);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private Map<String, Object> profilePic;
-                /* Adding Getter and Setter methods */
-                public Map<String, Object> getProfilePic(){
-                    return profilePic;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setProfilePic(Map<String, Object> profilePic){
-                    this.profilePic = profilePic;
-                    //Update Map value..
-                    hashMap.put("profilePic", profilePic);
                 }
 
             
@@ -1423,6 +1423,7 @@ public class HospitalUser extends User {
                         
                         
                         
+                        
                     
 
                 
@@ -2074,6 +2075,7 @@ public class HospitalUser extends User {
                             
                          
                             
+                        
                         
                         
                         
@@ -2847,6 +2849,7 @@ public class HospitalUser extends User {
                         
                         
                         
+                        
                     
 
                 
@@ -3171,6 +3174,7 @@ public class HospitalUser extends User {
                             
                          
                             
+                        
                         
                         
                         
@@ -3880,6 +3884,7 @@ public class HospitalUser extends User {
                             
                          
                             
+                        
                         
                         
                         
@@ -4653,6 +4658,7 @@ public class HospitalUser extends User {
                         
                         
                         
+                        
                     
 
                 
@@ -5304,6 +5310,7 @@ public class HospitalUser extends User {
                             
                          
                             
+                        
                         
                         
                         
@@ -6077,6 +6084,7 @@ public class HospitalUser extends User {
                         
                         
                         
+                        
                     
 
                 
@@ -6401,6 +6409,7 @@ public class HospitalUser extends User {
                             
                          
                             
+                        
                         
                         
                         
@@ -6844,6 +6853,7 @@ public class HospitalUser extends User {
                         
                         
                         
+                        
                     
 
                 
@@ -7226,6 +7236,7 @@ public class HospitalUser extends User {
                         
                         
                         
+                        
                     
 
                 
@@ -7547,6 +7558,7 @@ public class HospitalUser extends User {
                             
                          
                             
+                        
                         
                         
                         
@@ -8317,6 +8329,7 @@ public class HospitalUser extends User {
                         
                         
                         
+                        
                     
 
                 
@@ -8968,6 +8981,7 @@ public class HospitalUser extends User {
                                     } //method def ends here.
                                  
                             
+                        
                         
                         
                         

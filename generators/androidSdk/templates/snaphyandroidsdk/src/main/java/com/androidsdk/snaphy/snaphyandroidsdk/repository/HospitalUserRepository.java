@@ -1345,6 +1345,9 @@ public class HospitalUserRepository extends UserRepository<HospitalUser> {
 
     
     
+
+    
+    
     return contract;
     }
 
@@ -8267,6 +8270,8 @@ public class HospitalUserRepository extends UserRepository<HospitalUser> {
 
             
 
+        
+    
         
     
         

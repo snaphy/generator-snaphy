@@ -80,6 +80,16 @@ public class HospitalDb{
                         }
                                   
                                 
+                                                            String imageData = "";
+                        if(_modelData.getImage() != null){
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                          imageData = gson.toJson(_modelData.getImage(), HashMap.class);
+                          values.put("`image`", imageData);
+                        }
+                                  
+                                
                                                             String contactNumberData = "";
                         if(_modelData.getContactNumber() != null){
                           contactNumberData = _modelData.getContactNumber().toString();
@@ -98,16 +108,6 @@ public class HospitalDb{
                         if(_modelData.getStatus() != null){
                           statusData = _modelData.getStatus().toString();
                           values.put("`status`", statusData);
-                        }
-                                  
-                                
-                                                            String imageData = "";
-                        if(_modelData.getImage() != null){
-                          GsonBuilder gsonBuilder = new GsonBuilder();
-                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-                          Gson gson = gsonBuilder.create();
-                          imageData = gson.toJson(_modelData.getImage(), HashMap.class);
-                          values.put("`image`", imageData);
                         }
                                   
                                 
@@ -348,9 +348,22 @@ public class HospitalDb{
                         }
                                                 
                                 
-                                                            String contactNumberData = "";
+                                                            Map<String, Object> imageData = new HashMap<>();
                         if(cursor.getString(2) != null){
-                          contactNumberData = cursor.getString(2);
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                           imageData = gson.fromJson(cursor.getString(2), Map.class);
+                          if(imageData != null){
+                            imageData = (Map<String, Object>)imageData;
+                            hashMap.put("image", imageData);
+                          }
+                        }
+                                                
+                                
+                                                            String contactNumberData = "";
+                        if(cursor.getString(3) != null){
+                          contactNumberData = cursor.getString(3);
                           if(contactNumberData != null){
                             contactNumberData = (String)contactNumberData;
                             hashMap.put("contactNumber", contactNumberData);
@@ -359,8 +372,8 @@ public class HospitalDb{
                                                 
                                 
                                                             String typeOfFacilityData = "";
-                        if(cursor.getString(3) != null){
-                          typeOfFacilityData = cursor.getString(3);
+                        if(cursor.getString(4) != null){
+                          typeOfFacilityData = cursor.getString(4);
                           if(typeOfFacilityData != null){
                             typeOfFacilityData = (String)typeOfFacilityData;
                             hashMap.put("typeOfFacility", typeOfFacilityData);
@@ -369,24 +382,11 @@ public class HospitalDb{
                                                 
                                 
                                                             String statusData = "";
-                        if(cursor.getString(4) != null){
-                          statusData = cursor.getString(4);
+                        if(cursor.getString(5) != null){
+                          statusData = cursor.getString(5);
                           if(statusData != null){
                             statusData = (String)statusData;
                             hashMap.put("status", statusData);
-                          }
-                        }
-                                                
-                                
-                                                            Map<String, Object> imageData = new HashMap<>();
-                        if(cursor.getString(5) != null){
-                          GsonBuilder gsonBuilder = new GsonBuilder();
-                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-                          Gson gson = gsonBuilder.create();
-                           imageData = gson.fromJson(cursor.getString(5), Map.class);
-                          if(imageData != null){
-                            imageData = (Map<String, Object>)imageData;
-                            hashMap.put("image", imageData);
                           }
                         }
                                                 

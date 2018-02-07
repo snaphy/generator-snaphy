@@ -112,6 +112,11 @@ public class PatientDb{
                         values.put("`yearOfBirth`", yearOfBirthData);
                                   
                                 
+                                                            double uHIdData;
+                        uHIdData = (double)_modelData.getUHId();
+                        values.put("`uHId`", uHIdData);
+                                  
+                                
                                                             String aadharLastNumberData = "";
                         if(_modelData.getAadharLastNumber() != null){
                           aadharLastNumberData = _modelData.getAadharLastNumber().toString();
@@ -627,9 +632,17 @@ public class PatientDb{
 
                                                 
                                 
+                                                            double uHIdData = (double)0;
+                          uHIdData = cursor.getInt(6);
+                          uHIdData = (double)uHIdData;
+                          hashMap.put("uHId", uHIdData);
+
+
+                                                
+                                
                                                             String aadharLastNumberData = "";
-                        if(cursor.getString(6) != null){
-                          aadharLastNumberData = cursor.getString(6);
+                        if(cursor.getString(7) != null){
+                          aadharLastNumberData = cursor.getString(7);
                           if(aadharLastNumberData != null){
                             aadharLastNumberData = (String)aadharLastNumberData;
                             hashMap.put("aadharLastNumber", aadharLastNumberData);
@@ -638,8 +651,8 @@ public class PatientDb{
                                                 
                                 
                                                             String patientContactNumberData = "";
-                        if(cursor.getString(7) != null){
-                          patientContactNumberData = cursor.getString(7);
+                        if(cursor.getString(8) != null){
+                          patientContactNumberData = cursor.getString(8);
                           if(patientContactNumberData != null){
                             patientContactNumberData = (String)patientContactNumberData;
                             hashMap.put("patientContactNumber", patientContactNumberData);
@@ -648,8 +661,8 @@ public class PatientDb{
                                                 
                                 
                                                             String emailData = "";
-                        if(cursor.getString(8) != null){
-                          emailData = cursor.getString(8);
+                        if(cursor.getString(9) != null){
+                          emailData = cursor.getString(9);
                           if(emailData != null){
                             emailData = (String)emailData;
                             hashMap.put("email", emailData);
@@ -658,11 +671,11 @@ public class PatientDb{
                                                 
                                 
                                   DataList<Map<String, Object>> patientOtherAddressData = new DataList<>();
-                  if(cursor.getString(9) != null){
+                  if(cursor.getString(10) != null){
                     GsonBuilder gsonBuilder = new GsonBuilder();
                     gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                     Gson gson = gsonBuilder.create();
-                    patientOtherAddressData = gson.fromJson(cursor.getString(9), DataList.class);
+                    patientOtherAddressData = gson.fromJson(cursor.getString(10), DataList.class);
                     if(patientOtherAddressData != null){
                       patientOtherAddressData = (DataList<Map<String, Object>>)patientOtherAddressData;
                       hashMap.put("patientOtherAddress", patientOtherAddressData);
@@ -671,11 +684,11 @@ public class PatientDb{
                             
                                 
                                   DataList<Map<String, Object>> patientOtherContactNumberData = new DataList<>();
-                  if(cursor.getString(10) != null){
+                  if(cursor.getString(11) != null){
                     GsonBuilder gsonBuilder = new GsonBuilder();
                     gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                     Gson gson = gsonBuilder.create();
-                    patientOtherContactNumberData = gson.fromJson(cursor.getString(10), DataList.class);
+                    patientOtherContactNumberData = gson.fromJson(cursor.getString(11), DataList.class);
                     if(patientOtherContactNumberData != null){
                       patientOtherContactNumberData = (DataList<Map<String, Object>>)patientOtherContactNumberData;
                       hashMap.put("patientOtherContactNumber", patientOtherContactNumberData);
@@ -684,11 +697,11 @@ public class PatientDb{
                             
                                 
                                   DataList<Map<String, Object>> otherEmailData = new DataList<>();
-                  if(cursor.getString(11) != null){
+                  if(cursor.getString(12) != null){
                     GsonBuilder gsonBuilder = new GsonBuilder();
                     gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                     Gson gson = gsonBuilder.create();
-                    otherEmailData = gson.fromJson(cursor.getString(11), DataList.class);
+                    otherEmailData = gson.fromJson(cursor.getString(12), DataList.class);
                     if(otherEmailData != null){
                       otherEmailData = (DataList<Map<String, Object>>)otherEmailData;
                       hashMap.put("otherEmail", otherEmailData);
@@ -697,8 +710,8 @@ public class PatientDb{
                             
                                 
                                                             String genderData = "";
-                        if(cursor.getString(12) != null){
-                          genderData = cursor.getString(12);
+                        if(cursor.getString(13) != null){
+                          genderData = cursor.getString(13);
                           if(genderData != null){
                             genderData = (String)genderData;
                             hashMap.put("gender", genderData);
@@ -707,11 +720,11 @@ public class PatientDb{
                                                 
                                 
                                                             Map<String, Object> relationLogsData = new HashMap<>();
-                        if(cursor.getString(13) != null){
+                        if(cursor.getString(14) != null){
                           GsonBuilder gsonBuilder = new GsonBuilder();
                           gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                           Gson gson = gsonBuilder.create();
-                           relationLogsData = gson.fromJson(cursor.getString(13), Map.class);
+                           relationLogsData = gson.fromJson(cursor.getString(14), Map.class);
                           if(relationLogsData != null){
                             relationLogsData = (Map<String, Object>)relationLogsData;
                             hashMap.put("relationLogs", relationLogsData);
@@ -720,8 +733,8 @@ public class PatientDb{
                                                 
                                 
                                                             String statusData = "";
-                        if(cursor.getString(14) != null){
-                          statusData = cursor.getString(14);
+                        if(cursor.getString(15) != null){
+                          statusData = cursor.getString(15);
                           if(statusData != null){
                             statusData = (String)statusData;
                             hashMap.put("status", statusData);
@@ -730,8 +743,8 @@ public class PatientDb{
                                                 
                                 
                                                             String addedData = "";
-                        if(cursor.getString(15) != null){
-                          addedData = cursor.getString(15);
+                        if(cursor.getString(16) != null){
+                          addedData = cursor.getString(16);
                           if(addedData != null){
                             addedData = (String)addedData;
                             hashMap.put("added", addedData);
@@ -740,8 +753,8 @@ public class PatientDb{
                                                 
                                 
                                                             String updatedData = "";
-                        if(cursor.getString(16) != null){
-                          updatedData = cursor.getString(16);
+                        if(cursor.getString(17) != null){
+                          updatedData = cursor.getString(17);
                           if(updatedData != null){
                             updatedData = (String)updatedData;
                             hashMap.put("updated", updatedData);
@@ -750,8 +763,8 @@ public class PatientDb{
                                                 
                                 
                                                             String ageData = "";
-                        if(cursor.getString(17) != null){
-                          ageData = cursor.getString(17);
+                        if(cursor.getString(18) != null){
+                          ageData = cursor.getString(18);
                           if(ageData != null){
                             ageData = (String)ageData;
                             hashMap.put("age", ageData);
@@ -760,11 +773,11 @@ public class PatientDb{
                                                 
                                 
                                   DataList<Object> relatedPatientsData = new DataList<>();
-                  if(cursor.getString(18) != null){
+                  if(cursor.getString(19) != null){
                     GsonBuilder gsonBuilder = new GsonBuilder();
                     gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                     Gson gson = gsonBuilder.create();
-                    relatedPatientsData = gson.fromJson(cursor.getString(18), DataList.class);
+                    relatedPatientsData = gson.fromJson(cursor.getString(19), DataList.class);
                     if(relatedPatientsData != null){
                       relatedPatientsData = (DataList<Object>)relatedPatientsData;
                       hashMap.put("relatedPatients", relatedPatientsData);
@@ -773,8 +786,8 @@ public class PatientDb{
                             
                                 
                                                             String addressData = "";
-                        if(cursor.getString(19) != null){
-                          addressData = cursor.getString(19);
+                        if(cursor.getString(20) != null){
+                          addressData = cursor.getString(20);
                           if(addressData != null){
                             addressData = (String)addressData;
                             hashMap.put("address", addressData);
@@ -783,11 +796,11 @@ public class PatientDb{
                                                 
                                 
                                   DataList<Map<String, Object>> otherAddressData = new DataList<>();
-                  if(cursor.getString(20) != null){
+                  if(cursor.getString(21) != null){
                     GsonBuilder gsonBuilder = new GsonBuilder();
                     gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
                     Gson gson = gsonBuilder.create();
-                    otherAddressData = gson.fromJson(cursor.getString(20), DataList.class);
+                    otherAddressData = gson.fromJson(cursor.getString(21), DataList.class);
                     if(otherAddressData != null){
                       otherAddressData = (DataList<Map<String, Object>>)otherAddressData;
                       hashMap.put("otherAddress", otherAddressData);
@@ -796,8 +809,8 @@ public class PatientDb{
                             
                                 
                                                             String pincodeNumberData = "";
-                        if(cursor.getString(21) != null){
-                          pincodeNumberData = cursor.getString(21);
+                        if(cursor.getString(22) != null){
+                          pincodeNumberData = cursor.getString(22);
                           if(pincodeNumberData != null){
                             pincodeNumberData = (String)pincodeNumberData;
                             hashMap.put("pincodeNumber", pincodeNumberData);
@@ -806,8 +819,8 @@ public class PatientDb{
                                                 
                                 
                                                             String realmData = "";
-                        if(cursor.getString(22) != null){
-                          realmData = cursor.getString(22);
+                        if(cursor.getString(23) != null){
+                          realmData = cursor.getString(23);
                           if(realmData != null){
                             realmData = realmData.toString();
                             hashMap.put("realm", realmData);
@@ -816,8 +829,8 @@ public class PatientDb{
                                                 
                                 
                                                             String usernameData = "";
-                        if(cursor.getString(23) != null){
-                          usernameData = cursor.getString(23);
+                        if(cursor.getString(24) != null){
+                          usernameData = cursor.getString(24);
                           if(usernameData != null){
                             usernameData = usernameData.toString();
                             hashMap.put("username", usernameData);
@@ -826,8 +839,8 @@ public class PatientDb{
                                                 
                                 
                                                             String passwordData = "";
-                        if(cursor.getString(24) != null){
-                          passwordData = cursor.getString(24);
+                        if(cursor.getString(25) != null){
+                          passwordData = cursor.getString(25);
                           if(passwordData != null){
                             passwordData = passwordData.toString();
                             hashMap.put("password", passwordData);
@@ -836,8 +849,8 @@ public class PatientDb{
                                                 
                                 
                                                             String credentialsData = "";
-                        if(cursor.getString(25) != null){
-                          credentialsData = cursor.getString(25);
+                        if(cursor.getString(26) != null){
+                          credentialsData = cursor.getString(26);
                           if(credentialsData != null){
                             credentialsData = credentialsData.toString();
                             hashMap.put("credentials", credentialsData);
@@ -846,8 +859,8 @@ public class PatientDb{
                                                 
                                 
                                                             String challengesData = "";
-                        if(cursor.getString(26) != null){
-                          challengesData = cursor.getString(26);
+                        if(cursor.getString(27) != null){
+                          challengesData = cursor.getString(27);
                           if(challengesData != null){
                             challengesData = challengesData.toString();
                             hashMap.put("challenges", challengesData);
@@ -856,8 +869,8 @@ public class PatientDb{
                                                 
                                 
                                                             String emailVerifiedData = "";
-                        if(cursor.getString(27) != null){
-                          emailVerifiedData = cursor.getString(27);
+                        if(cursor.getString(28) != null){
+                          emailVerifiedData = cursor.getString(28);
                           if(emailVerifiedData != null){
                             emailVerifiedData = emailVerifiedData.toString();
                             hashMap.put("emailVerified", emailVerifiedData);
@@ -866,8 +879,8 @@ public class PatientDb{
                                                 
                                 
                                                             String verificationTokenData = "";
-                        if(cursor.getString(28) != null){
-                          verificationTokenData = cursor.getString(28);
+                        if(cursor.getString(29) != null){
+                          verificationTokenData = cursor.getString(29);
                           if(verificationTokenData != null){
                             verificationTokenData = verificationTokenData.toString();
                             hashMap.put("verificationToken", verificationTokenData);
@@ -876,8 +889,8 @@ public class PatientDb{
                                                 
                                 
                                                             String createdData = "";
-                        if(cursor.getString(29) != null){
-                          createdData = cursor.getString(29);
+                        if(cursor.getString(30) != null){
+                          createdData = cursor.getString(30);
                           if(createdData != null){
                             createdData = createdData.toString();
                             hashMap.put("created", createdData);
@@ -886,8 +899,8 @@ public class PatientDb{
                                                 
                                 
                                                             String lastUpdatedData = "";
-                        if(cursor.getString(30) != null){
-                          lastUpdatedData = cursor.getString(30);
+                        if(cursor.getString(31) != null){
+                          lastUpdatedData = cursor.getString(31);
                           if(lastUpdatedData != null){
                             lastUpdatedData = lastUpdatedData.toString();
                             hashMap.put("lastUpdated", lastUpdatedData);
@@ -896,8 +909,8 @@ public class PatientDb{
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(31) != null){
-                          idData = cursor.getString(31);
+                        if(cursor.getString(32) != null){
+                          idData = cursor.getString(32);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -906,8 +919,8 @@ public class PatientDb{
                                                 
                                 
                                                             String mergedWithIdData = "";
-                        if(cursor.getString(32) != null){
-                          mergedWithIdData = cursor.getString(32);
+                        if(cursor.getString(33) != null){
+                          mergedWithIdData = cursor.getString(33);
                           if(mergedWithIdData != null){
                             mergedWithIdData = mergedWithIdData.toString();
                             hashMap.put("mergedWithId", mergedWithIdData);
@@ -916,8 +929,8 @@ public class PatientDb{
                                                 
                                 
                                                             String aadharIdData = "";
-                        if(cursor.getString(33) != null){
-                          aadharIdData = cursor.getString(33);
+                        if(cursor.getString(34) != null){
+                          aadharIdData = cursor.getString(34);
                           if(aadharIdData != null){
                             aadharIdData = aadharIdData.toString();
                             hashMap.put("aadharId", aadharIdData);
@@ -926,8 +939,8 @@ public class PatientDb{
                                                 
                                 
                                                             String stateIdData = "";
-                        if(cursor.getString(34) != null){
-                          stateIdData = cursor.getString(34);
+                        if(cursor.getString(35) != null){
+                          stateIdData = cursor.getString(35);
                           if(stateIdData != null){
                             stateIdData = stateIdData.toString();
                             hashMap.put("stateId", stateIdData);
@@ -936,8 +949,8 @@ public class PatientDb{
                                                 
                                 
                                                             String pincodeIdData = "";
-                        if(cursor.getString(35) != null){
-                          pincodeIdData = cursor.getString(35);
+                        if(cursor.getString(36) != null){
+                          pincodeIdData = cursor.getString(36);
                           if(pincodeIdData != null){
                             pincodeIdData = pincodeIdData.toString();
                             hashMap.put("pincodeId", pincodeIdData);
@@ -946,8 +959,8 @@ public class PatientDb{
                                                 
                                 
                                                             String talukIdData = "";
-                        if(cursor.getString(36) != null){
-                          talukIdData = cursor.getString(36);
+                        if(cursor.getString(37) != null){
+                          talukIdData = cursor.getString(37);
                           if(talukIdData != null){
                             talukIdData = talukIdData.toString();
                             hashMap.put("talukId", talukIdData);
@@ -956,8 +969,8 @@ public class PatientDb{
                                                 
                                 
                                                             String districtIdData = "";
-                        if(cursor.getString(37) != null){
-                          districtIdData = cursor.getString(37);
+                        if(cursor.getString(38) != null){
+                          districtIdData = cursor.getString(38);
                           if(districtIdData != null){
                             districtIdData = districtIdData.toString();
                             hashMap.put("districtId", districtIdData);

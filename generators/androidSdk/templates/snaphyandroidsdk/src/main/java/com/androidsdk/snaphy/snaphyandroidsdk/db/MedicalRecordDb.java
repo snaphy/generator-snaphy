@@ -113,13 +113,13 @@ public class MedicalRecordDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String patientGroupIdData = "";
+                        String patientIdData = "";
                         try {
-                              Method method = _modelData.getClass().getMethod("getPatientGroupId");
+                              Method method = _modelData.getClass().getMethod("getPatientId");
                               if(method.invoke(_modelData) != null){
-                                //patientGroupIdData = _modelData.getPatientGroupId().toString();
-                                patientGroupIdData = (String) method.invoke(_modelData);
-                                values.put("`patientGroupId`", patientGroupIdData);
+                                //patientIdData = _modelData.getPatientId().toString();
+                                patientIdData = (String) method.invoke(_modelData);
+                                values.put("`patientId`", patientIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -276,12 +276,12 @@ public class MedicalRecordDb{
                         }
                                                 
                                 
-                                                            String patientGroupIdData = "";
+                                                            String patientIdData = "";
                         if(cursor.getString(5) != null){
-                          patientGroupIdData = cursor.getString(5);
-                          if(patientGroupIdData != null){
-                            patientGroupIdData = patientGroupIdData.toString();
-                            hashMap.put("patientGroupId", patientGroupIdData);
+                          patientIdData = cursor.getString(5);
+                          if(patientIdData != null){
+                            patientIdData = patientIdData.toString();
+                            hashMap.put("patientId", patientIdData);
                           }
                         }
                                                 

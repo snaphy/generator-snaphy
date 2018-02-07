@@ -61,13 +61,6 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.BillCategoryDb;
         
     
 
-    
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.Hospital;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.HospitalRepository;
-            
-        
-    
-
 
 
 
@@ -173,15 +166,6 @@ public class BillCategoryRepository extends ModelRepository<BillCategory> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:billCategoryId/bills/:fk", "PUT"), "BillCategory.prototype.__updateById__bills");
-    
-
-    
-    
-
-    
-
-    
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:billCategoryId/hospital", "GET"), "BillCategory.prototype.__get__hospital");
     
 
     
@@ -422,6 +406,15 @@ public class BillCategoryRepository extends ModelRepository<BillCategory> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "BillCategory.getModelRelationSchema");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchBillCategories", "POST"), "BillCategory.fetchBillCategories");
     
 
     
@@ -701,91 +694,6 @@ public class BillCategoryRepository extends ModelRepository<BillCategory> {
                 
 
             }//Method updateById__bills definition ends here..
-
-            
-
-        
-    
-        
-            //Method get__hospital definition
-            public void get__hospital(  String billCategoryId,  Boolean refresh, final ObjectCallback<Hospital> callback){
-
-                /**
-                Call the onBefore event
-                */
-                callback.onBefore();
-
-
-                //Definging hashMap for data conversion
-                Map<String, Object> hashMapObject = new HashMap<>();
-                //Now add the arguments...
-                
-                        hashMapObject.put("billCategoryId", billCategoryId);
-                
-                        hashMapObject.put("refresh", refresh);
-                
-
-                
-
-
-                
-                    
-                    
-                    invokeStaticMethod("prototype.__get__hospital", hashMapObject, new Adapter.JsonObjectCallback() {
-                    
-                        @Override
-                        public void onError(Throwable t) {
-                            callback.onError(t);
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-
-                        @Override
-                        public void onSuccess(JSONObject response) {
-                            
-                                if(response != null){
-                                    HospitalRepository hospitalRepo = getRestAdapter().createRepository(HospitalRepository.class);
-                                    if(context != null){
-                                        try {
-                                            Method method = hospitalRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(hospitalRepo, context);
-
-                                        } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                        }
-
-                                        //hospitalRepo.addStorage(context);
-                                    }
-                                    Map<String, Object> result = Util.fromJson(response);
-                                    Hospital hospital = hospitalRepo.createObject(result);
-
-                                      //Add to database if persistent storage required..
-                                      if(isSTORE_LOCALLY()){
-                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                                          try {
-                                                    Method method = hospital.getClass().getMethod("save__db");
-                                                    method.invoke(hospital);
-
-                                          } catch (Exception e) {
-                                            Log.e("Database Error", e.toString());
-                                          }
-
-                                      }
-
-                                    callback.onSuccess(hospital);
-                                }else{
-                                    callback.onSuccess(null);
-                                }
-                            
-                            //Call the finally method..
-                            callback.onFinally();
-                        }
-                    });
-                
-
-                
-
-            }//Method get__hospital definition ends here..
 
             
 
@@ -2453,6 +2361,91 @@ public class BillCategoryRepository extends ModelRepository<BillCategory> {
                 
 
             }//Method getModelRelationSchema definition ends here..
+
+            
+
+        
+    
+        
+            //Method fetchBillCategories definition
+            public void fetchBillCategories(  String type,  String facility, final DataListCallback<BillCategory> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("type", type);
+                
+                        hashMapObject.put("facility", facility);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("fetchBillCategories", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<BillCategory> billCategoryList = new DataList<BillCategory>();
+                                    BillCategoryRepository billCategoryRepo = getRestAdapter().createRepository(BillCategoryRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = billCategoryRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(billCategoryRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        BillCategory billCategory = billCategoryRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = billCategory.getClass().getMethod("save__db");
+                                                      method.invoke(billCategory);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        billCategoryList.add(billCategory);
+                                    }
+                                    callback.onSuccess(billCategoryList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method fetchBillCategories definition ends here..
 
             
 

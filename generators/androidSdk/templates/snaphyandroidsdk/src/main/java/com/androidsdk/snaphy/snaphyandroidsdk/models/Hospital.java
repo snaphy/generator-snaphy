@@ -196,6 +196,27 @@ public class Hospital extends Model {
             
 
             
+                private Map<String, Object> image;
+                /* Adding Getter and Setter methods */
+                public Map<String, Object> getImage(){
+                    return image;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setImage(Map<String, Object> image){
+                    this.image = image;
+                    //Update Map value..
+                    hashMap.put("image", image);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
                 private String contactNumber;
                 /* Adding Getter and Setter methods */
                 public String getContactNumber(){
@@ -249,27 +270,6 @@ public class Hospital extends Model {
                     this.status = status;
                     //Update hashMap value..
                     hashMap.put("status", status);
-                }
-
-            
-            
-        
-    
-        
-            
-
-            
-                private Map<String, Object> image;
-                /* Adding Getter and Setter methods */
-                public Map<String, Object> getImage(){
-                    return image;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setImage(Map<String, Object> image){
-                    this.image = image;
-                    //Update Map value..
-                    hashMap.put("image", image);
                 }
 
             
@@ -1149,6 +1149,7 @@ public class Hospital extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -1760,6 +1761,7 @@ public class Hospital extends Model {
                             
                          
                             
+                        
                         
                         
                         
@@ -2513,6 +2515,7 @@ public class Hospital extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -2797,6 +2800,7 @@ public class Hospital extends Model {
                             
                          
                             
+                        
                         
                         
                         
@@ -3220,6 +3224,7 @@ public class Hospital extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -3501,6 +3506,7 @@ public class Hospital extends Model {
                             
                          
                             
+                        
                         
                         
                         
@@ -3924,6 +3930,7 @@ public class Hospital extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -4205,6 +4212,7 @@ public class Hospital extends Model {
                             
                          
                             
+                        
                         
                         
                         
@@ -4884,6 +4892,7 @@ public class Hospital extends Model {
                             
                          
                             
+                        
                         
                         
                         
@@ -5637,6 +5646,7 @@ public class Hospital extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -6248,6 +6258,7 @@ public class Hospital extends Model {
                             
                          
                             
+                        
                         
                         
                         
@@ -7001,6 +7012,7 @@ public class Hospital extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -7285,6 +7297,7 @@ public class Hospital extends Model {
                             
                          
                             
+                        
                         
                         
                         

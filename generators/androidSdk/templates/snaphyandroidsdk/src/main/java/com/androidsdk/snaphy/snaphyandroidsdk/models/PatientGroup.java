@@ -1415,7 +1415,6 @@ public class PatientGroup extends Model {
                         
                         
                         
-                        
                     
 
                 
@@ -1667,7 +1666,6 @@ public class PatientGroup extends Model {
                             
                          
                             
-                        
                         
                         
                         
@@ -2099,7 +2097,6 @@ public class PatientGroup extends Model {
                         
                         
                         
-                        
                     
 
                 
@@ -2351,7 +2348,6 @@ public class PatientGroup extends Model {
                             
                          
                             
-                        
                         
                         
                         
@@ -2783,7 +2779,6 @@ public class PatientGroup extends Model {
                         
                         
                         
-                        
                     
 
                 
@@ -3035,7 +3030,6 @@ public class PatientGroup extends Model {
                             
                          
                             
-                        
                         
                         
                         
@@ -3467,7 +3461,6 @@ public class PatientGroup extends Model {
                         
                         
                         
-                        
                     
 
                 
@@ -3809,7 +3802,6 @@ public class PatientGroup extends Model {
                         
                         
                         
-                        
                     
 
                 
@@ -4061,7 +4053,6 @@ public class PatientGroup extends Model {
                             
                          
                             
-                        
                         
                         
                         
@@ -4730,7 +4721,6 @@ public class PatientGroup extends Model {
                             
                          
                             
-                        
                         
                         
                         
@@ -5492,7 +5482,6 @@ public class PatientGroup extends Model {
                         
                         
                         
-                        
                     
 
                 
@@ -5747,7 +5736,6 @@ public class PatientGroup extends Model {
                             
                          
                             
-                        
                         
                         
                         
@@ -6179,7 +6167,6 @@ public class PatientGroup extends Model {
                         
                         
                         
-                        
                     
 
                 
@@ -6431,7 +6418,6 @@ public class PatientGroup extends Model {
                             
                          
                             
-                        
                         
                         
                         
@@ -7190,7 +7176,6 @@ public class PatientGroup extends Model {
                         
                         
                         
-                        
                     
 
                 
@@ -7772,7 +7757,6 @@ public class PatientGroup extends Model {
                                     } //method def ends here.
                                  
                             
-                        
                         
                         
                         

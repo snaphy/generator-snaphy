@@ -66,6 +66,20 @@ public class SubBillCategoryDb{
     public ContentValues getContentValues(SubBillCategory _modelData){
       ContentValues values = new ContentValues();
                        
+                                                            String nameData = "";
+                        if(_modelData.getName() != null){
+                          nameData = _modelData.getName().toString();
+                          values.put("`name`", nameData);
+                        }
+                                  
+                                
+                                                            String typeData = "";
+                        if(_modelData.getType() != null){
+                          typeData = _modelData.getType().toString();
+                          values.put("`type`", typeData);
+                        }
+                                  
+                                
                                                             String addedData = "";
                         if(_modelData.getAdded() != null){
                           addedData = _modelData.getAdded().toString();
@@ -77,13 +91,6 @@ public class SubBillCategoryDb{
                         if(_modelData.getUpdated() != null){
                           updatedData = _modelData.getUpdated().toString();
                           values.put("`updated`", updatedData);
-                        }
-                                  
-                                
-                                                            String nameData = "";
-                        if(_modelData.getName() != null){
-                          nameData = _modelData.getName().toString();
-                          values.put("`name`", nameData);
                         }
                                   
                                 
@@ -110,6 +117,21 @@ public class SubBillCategoryDb{
                                 //billCategoryIdData = _modelData.getBillCategoryId().toString();
                                 billCategoryIdData = (String) method.invoke(_modelData);
                                 values.put("`billCategoryId`", billCategoryIdData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String hospitalIdData = "";
+                        try {
+                              Method method = _modelData.getClass().getMethod("getHospitalId");
+                              if(method.invoke(_modelData) != null){
+                                //hospitalIdData = _modelData.getHospitalId().toString();
+                                hospitalIdData = (String) method.invoke(_modelData);
+                                values.put("`hospitalId`", hospitalIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -198,9 +220,29 @@ public class SubBillCategoryDb{
       HashMap<String, Object> hashMap = new HashMap<>();
 
                       
-                                                            String addedData = "";
+                                                            String nameData = "";
                         if(cursor.getString(0) != null){
-                          addedData = cursor.getString(0);
+                          nameData = cursor.getString(0);
+                          if(nameData != null){
+                            nameData = (String)nameData;
+                            hashMap.put("name", nameData);
+                          }
+                        }
+                                                
+                                
+                                                            String typeData = "";
+                        if(cursor.getString(1) != null){
+                          typeData = cursor.getString(1);
+                          if(typeData != null){
+                            typeData = (String)typeData;
+                            hashMap.put("type", typeData);
+                          }
+                        }
+                                                
+                                
+                                                            String addedData = "";
+                        if(cursor.getString(2) != null){
+                          addedData = cursor.getString(2);
                           if(addedData != null){
                             addedData = (String)addedData;
                             hashMap.put("added", addedData);
@@ -209,8 +251,8 @@ public class SubBillCategoryDb{
                                                 
                                 
                                                             String updatedData = "";
-                        if(cursor.getString(1) != null){
-                          updatedData = cursor.getString(1);
+                        if(cursor.getString(3) != null){
+                          updatedData = cursor.getString(3);
                           if(updatedData != null){
                             updatedData = (String)updatedData;
                             hashMap.put("updated", updatedData);
@@ -218,19 +260,9 @@ public class SubBillCategoryDb{
                         }
                                                 
                                 
-                                                            String nameData = "";
-                        if(cursor.getString(2) != null){
-                          nameData = cursor.getString(2);
-                          if(nameData != null){
-                            nameData = (String)nameData;
-                            hashMap.put("name", nameData);
-                          }
-                        }
-                                                
-                                
                                                             String idData = "";
-                        if(cursor.getString(3) != null){
-                          idData = cursor.getString(3);
+                        if(cursor.getString(4) != null){
+                          idData = cursor.getString(4);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -239,11 +271,21 @@ public class SubBillCategoryDb{
                                                 
                                 
                                                             String billCategoryIdData = "";
-                        if(cursor.getString(4) != null){
-                          billCategoryIdData = cursor.getString(4);
+                        if(cursor.getString(5) != null){
+                          billCategoryIdData = cursor.getString(5);
                           if(billCategoryIdData != null){
                             billCategoryIdData = billCategoryIdData.toString();
                             hashMap.put("billCategoryId", billCategoryIdData);
+                          }
+                        }
+                                                
+                                
+                                                            String hospitalIdData = "";
+                        if(cursor.getString(6) != null){
+                          hospitalIdData = cursor.getString(6);
+                          if(hospitalIdData != null){
+                            hospitalIdData = hospitalIdData.toString();
+                            hashMap.put("hospitalId", hospitalIdData);
                           }
                         }
                                                 

@@ -52,7 +52,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.BillRepository;
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PatientRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.HospitalUserRepository;
             
 
         
@@ -187,6 +187,13 @@ public class Bill extends Model {
                     //Update hashMap value..
                     hashMap.put("description", description);
                 }
+
+            
+            
+        
+    
+        
+            
 
             
             
@@ -521,6 +528,9 @@ public class Bill extends Model {
                         
                         
                         
+                        
+                        
+                        
                     
 
                 
@@ -700,6 +710,9 @@ public class Bill extends Model {
                                     } //method def ends here.
                                  
                             
+                        
+                        
+                        
                         
                         
                         
@@ -987,6 +1000,9 @@ public class Bill extends Model {
                         
                         
                         
+                        
+                        
+                        
                     
 
                 
@@ -1000,80 +1016,80 @@ public class Bill extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient Patient  patient ;
-                    private String patientId;
+                    private transient HospitalUser  hospitalUser ;
+                    private String hospitalUserId;
 
-                    public String getPatientId(){
-                         return patientId;
+                    public String getHospitalUserId(){
+                         return hospitalUserId;
                     }
 
-                    public void setPatientId(Object patientId){
-                        if(patientId != null){
-                          this.patientId = patientId.toString();
+                    public void setHospitalUserId(Object hospitalUserId){
+                        if(hospitalUserId != null){
+                          this.hospitalUserId = hospitalUserId.toString();
                         }
                     }
 
-                    public Patient getPatient() {
+                    public HospitalUser getHospitalUser() {
                         try{
                           //Adding database method for fetching from relation if not present..
-                                      if(patient == null){
+                                      if(hospitalUser == null){
                                         BillRepository billRepository = (BillRepository) getRepository();
 
                                         RestAdapter restAdapter = billRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
-                                          patient = getPatient__db(restAdapter);
+                                          hospitalUser = getHospitalUser__db(restAdapter);
                                         }
                                       }
                         }catch(Exception e){
                           //Ignore
                         }
 
-                        return patient;
+                        return hospitalUser;
                     }
 
-                    public void setPatient(Patient patient) {
-                        this.patient = patient;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setPatient(Map<String, Object> patient) {
-                        //First create a dummy Repo class object for customer.
-                        PatientRepository patientRepository = new PatientRepository();
-                        Patient patient1 = patientRepository.createObject(patient);
-                        setPatient(patient1);
+                    public void setHospitalUser(HospitalUser hospitalUser) {
+                        this.hospitalUser = hospitalUser;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setPatient(HashMap<String, Object> patient) {
+                    public void setHospitalUser(Map<String, Object> hospitalUser) {
                         //First create a dummy Repo class object for customer.
-                        PatientRepository patientRepository = new PatientRepository();
-                        Patient patient1 = patientRepository.createObject(patient);
-                        setPatient(patient1);
+                        HospitalUserRepository hospitalUserRepository = new HospitalUserRepository();
+                        HospitalUser hospitalUser1 = hospitalUserRepository.createObject(hospitalUser);
+                        setHospitalUser(hospitalUser1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setHospitalUser(HashMap<String, Object> hospitalUser) {
+                        //First create a dummy Repo class object for customer.
+                        HospitalUserRepository hospitalUserRepository = new HospitalUserRepository();
+                        HospitalUser hospitalUser1 = hospitalUserRepository.createObject(hospitalUser);
+                        setHospitalUser(hospitalUser1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(Patient patient) {
-                        that.setPatient(patient);
+                    public void addRelation(HospitalUser hospitalUser) {
+                        that.setHospitalUser(hospitalUser);
                     }
 
 
-                    //Fetch related data from local database if present a patientId identifier as property for belongsTo
-                    public Patient getPatient__db(RestAdapter restAdapter){
-                      if(patientId != null){
-                        PatientRepository patientRepository = restAdapter.createRepository(PatientRepository.class);
+                    //Fetch related data from local database if present a hospitalUserId identifier as property for belongsTo
+                    public HospitalUser getHospitalUser__db(RestAdapter restAdapter){
+                      if(hospitalUserId != null){
+                        HospitalUserRepository hospitalUserRepository = restAdapter.createRepository(HospitalUserRepository.class);
                             try{
                             BillRepository lowercaseFirstLetterRepository = (BillRepository) getRepository();
                                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                                if(patientRepository.getDb() == null ){
-                                                    patientRepository.addStorage(context);
+                                                if(hospitalUserRepository.getDb() == null ){
+                                                    hospitalUserRepository.addStorage(context);
                                                 }
 
-                                                if(context != null && patientRepository.getDb() != null){
-                                                    patientRepository.addStorage(context);
-                                                    Patient patient = (Patient) patientRepository.getDb().get__db(patientId);
-                                                    return patient;
+                                                if(context != null && hospitalUserRepository.getDb() != null){
+                                                    hospitalUserRepository.addStorage(context);
+                                                    HospitalUser hospitalUser = (HospitalUser) hospitalUserRepository.getDb().get__db(hospitalUserId);
+                                                    return hospitalUser;
                                                 }else{
                                                     return null;
                                                 }
@@ -1108,7 +1124,7 @@ public class Bill extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__patient( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Patient> callback) {
+                                    public void get__hospitalUser( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1122,13 +1138,13 @@ public class Bill extends Model {
 
 
 
-                                        billRepo.get__patient( (String)that.getId(), refresh,  new ObjectCallback<Patient> (){
+                                        billRepo.get__hospitalUser( (String)that.getId(), refresh,  new ObjectCallback<HospitalUser> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(Patient object) {
+                                                    public void onSuccess(HospitalUser object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
@@ -1166,6 +1182,9 @@ public class Bill extends Model {
                             
                          
                             
+                        
+                        
+                        
                         
                         
                         

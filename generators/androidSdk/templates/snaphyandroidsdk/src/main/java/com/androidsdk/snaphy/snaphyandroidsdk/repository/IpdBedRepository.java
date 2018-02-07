@@ -55,8 +55,8 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.IpdBedDb;
     
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.models.IpdCategory;
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.IpdCategoryRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Hospital;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.HospitalRepository;
             
         
     
@@ -174,7 +174,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ipdBedId/ipdCategory", "GET"), "IpdBed.prototype.__get__ipdCategory");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:ipdBedId/hospital", "GET"), "IpdBed.prototype.__get__hospital");
     
 
     
@@ -646,8 +646,8 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
         
     
         
-            //Method get__ipdCategory definition
-            public void get__ipdCategory(  String ipdBedId,  Boolean refresh, final ObjectCallback<IpdCategory> callback){
+            //Method get__hospital definition
+            public void get__hospital(  String ipdBedId,  Boolean refresh, final ObjectCallback<Hospital> callback){
 
                 /**
                 Call the onBefore event
@@ -670,7 +670,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__get__ipdCategory", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__get__hospital", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -683,27 +683,27 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
                         public void onSuccess(JSONObject response) {
                             
                                 if(response != null){
-                                    IpdCategoryRepository ipdCategoryRepo = getRestAdapter().createRepository(IpdCategoryRepository.class);
+                                    HospitalRepository hospitalRepo = getRestAdapter().createRepository(HospitalRepository.class);
                                     if(context != null){
                                         try {
-                                            Method method = ipdCategoryRepo.getClass().getMethod("addStorage", Context.class);
-                                            method.invoke(ipdCategoryRepo, context);
+                                            Method method = hospitalRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hospitalRepo, context);
 
                                         } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
                                         }
 
-                                        //ipdCategoryRepo.addStorage(context);
+                                        //hospitalRepo.addStorage(context);
                                     }
                                     Map<String, Object> result = Util.fromJson(response);
-                                    IpdCategory ipdCategory = ipdCategoryRepo.createObject(result);
+                                    Hospital hospital = hospitalRepo.createObject(result);
 
                                       //Add to database if persistent storage required..
                                       if(isSTORE_LOCALLY()){
                                           //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                                           try {
-                                                    Method method = ipdCategory.getClass().getMethod("save__db");
-                                                    method.invoke(ipdCategory);
+                                                    Method method = hospital.getClass().getMethod("save__db");
+                                                    method.invoke(hospital);
 
                                           } catch (Exception e) {
                                             Log.e("Database Error", e.toString());
@@ -711,7 +711,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
                                       }
 
-                                    callback.onSuccess(ipdCategory);
+                                    callback.onSuccess(hospital);
                                 }else{
                                     callback.onSuccess(null);
                                 }
@@ -724,7 +724,7 @@ public class IpdBedRepository extends ModelRepository<IpdBed> {
 
                 
 
-            }//Method get__ipdCategory definition ends here..
+            }//Method get__hospital definition ends here..
 
             
 

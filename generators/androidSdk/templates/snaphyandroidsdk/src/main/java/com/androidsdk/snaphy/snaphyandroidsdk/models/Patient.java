@@ -262,6 +262,27 @@ public class Patient extends User {
             
 
             
+                private double uHId;
+                /* Adding Getter and Setter methods */
+                public double getUHId(){
+                    return uHId;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setUHId(double uHId){
+                    this.uHId = uHId;
+                    //Update hashMap value..
+                    hashMap.put("uHId", uHId);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
                 private String aadharLastNumber;
                 /* Adding Getter and Setter methods */
                 public String getAadharLastNumber(){

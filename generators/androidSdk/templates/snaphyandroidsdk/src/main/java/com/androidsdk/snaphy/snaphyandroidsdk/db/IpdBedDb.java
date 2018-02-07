@@ -110,6 +110,21 @@ public class IpdBedDb{
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                        String hospitalIdData = "";
+                        try {
+                              Method method = _modelData.getClass().getMethod("getHospitalId");
+                              if(method.invoke(_modelData) != null){
+                                //hospitalIdData = _modelData.getHospitalId().toString();
+                                hospitalIdData = (String) method.invoke(_modelData);
+                                values.put("`hospitalId`", hospitalIdData);
+                              }
+                        } catch (Exception e) {
+                          Log.e("Database Error", e.toString());
+                        }
+
+                                  
+                                
+                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String ipdCategoryIdData = "";
                         try {
                               Method method = _modelData.getClass().getMethod("getIpdCategoryId");
@@ -255,9 +270,19 @@ public class IpdBedDb{
                         }
                                                 
                                 
-                                                            String ipdCategoryIdData = "";
+                                                            String hospitalIdData = "";
                         if(cursor.getString(5) != null){
-                          ipdCategoryIdData = cursor.getString(5);
+                          hospitalIdData = cursor.getString(5);
+                          if(hospitalIdData != null){
+                            hospitalIdData = hospitalIdData.toString();
+                            hashMap.put("hospitalId", hospitalIdData);
+                          }
+                        }
+                                                
+                                
+                                                            String ipdCategoryIdData = "";
+                        if(cursor.getString(6) != null){
+                          ipdCategoryIdData = cursor.getString(6);
                           if(ipdCategoryIdData != null){
                             ipdCategoryIdData = ipdCategoryIdData.toString();
                             hashMap.put("ipdCategoryId", ipdCategoryIdData);

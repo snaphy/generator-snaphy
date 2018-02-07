@@ -31,7 +31,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.MedicalRecordRepository
 //Now import repository of related models..
 
     
-            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PatientGroupRepository;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.PatientRepository;
             
 
         
@@ -254,80 +254,80 @@ public class MedicalRecord extends Model {
         
                 
                     //Define belongsTo relation method here..
-                    private transient PatientGroup  patientGroup ;
-                    private String patientGroupId;
+                    private transient Patient  patient ;
+                    private String patientId;
 
-                    public String getPatientGroupId(){
-                         return patientGroupId;
+                    public String getPatientId(){
+                         return patientId;
                     }
 
-                    public void setPatientGroupId(Object patientGroupId){
-                        if(patientGroupId != null){
-                          this.patientGroupId = patientGroupId.toString();
+                    public void setPatientId(Object patientId){
+                        if(patientId != null){
+                          this.patientId = patientId.toString();
                         }
                     }
 
-                    public PatientGroup getPatientGroup() {
+                    public Patient getPatient() {
                         try{
                           //Adding database method for fetching from relation if not present..
-                                      if(patientGroup == null){
+                                      if(patient == null){
                                         MedicalRecordRepository medicalRecordRepository = (MedicalRecordRepository) getRepository();
 
                                         RestAdapter restAdapter = medicalRecordRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
-                                          patientGroup = getPatientGroup__db(restAdapter);
+                                          patient = getPatient__db(restAdapter);
                                         }
                                       }
                         }catch(Exception e){
                           //Ignore
                         }
 
-                        return patientGroup;
+                        return patient;
                     }
 
-                    public void setPatientGroup(PatientGroup patientGroup) {
-                        this.patientGroup = patientGroup;
-                    }
-
-                    //Adding related model automatically in case of include statement from server..
-                    public void setPatientGroup(Map<String, Object> patientGroup) {
-                        //First create a dummy Repo class object for customer.
-                        PatientGroupRepository patientGroupRepository = new PatientGroupRepository();
-                        PatientGroup patientGroup1 = patientGroupRepository.createObject(patientGroup);
-                        setPatientGroup(patientGroup1);
+                    public void setPatient(Patient patient) {
+                        this.patient = patient;
                     }
 
                     //Adding related model automatically in case of include statement from server..
-                    public void setPatientGroup(HashMap<String, Object> patientGroup) {
+                    public void setPatient(Map<String, Object> patient) {
                         //First create a dummy Repo class object for customer.
-                        PatientGroupRepository patientGroupRepository = new PatientGroupRepository();
-                        PatientGroup patientGroup1 = patientGroupRepository.createObject(patientGroup);
-                        setPatientGroup(patientGroup1);
+                        PatientRepository patientRepository = new PatientRepository();
+                        Patient patient1 = patientRepository.createObject(patient);
+                        setPatient(patient1);
+                    }
+
+                    //Adding related model automatically in case of include statement from server..
+                    public void setPatient(HashMap<String, Object> patient) {
+                        //First create a dummy Repo class object for customer.
+                        PatientRepository patientRepository = new PatientRepository();
+                        Patient patient1 = patientRepository.createObject(patient);
+                        setPatient(patient1);
                     }
 
                     //Adding relation method..
-                    public void addRelation(PatientGroup patientGroup) {
-                        that.setPatientGroup(patientGroup);
+                    public void addRelation(Patient patient) {
+                        that.setPatient(patient);
                     }
 
 
-                    //Fetch related data from local database if present a patientGroupId identifier as property for belongsTo
-                    public PatientGroup getPatientGroup__db(RestAdapter restAdapter){
-                      if(patientGroupId != null){
-                        PatientGroupRepository patientGroupRepository = restAdapter.createRepository(PatientGroupRepository.class);
+                    //Fetch related data from local database if present a patientId identifier as property for belongsTo
+                    public Patient getPatient__db(RestAdapter restAdapter){
+                      if(patientId != null){
+                        PatientRepository patientRepository = restAdapter.createRepository(PatientRepository.class);
                             try{
                             MedicalRecordRepository lowercaseFirstLetterRepository = (MedicalRecordRepository) getRepository();
                                           if(lowercaseFirstLetterRepository.isSTORE_LOCALLY()){
                                                 Context context = lowercaseFirstLetterRepository.getContext();
-                                                if(patientGroupRepository.getDb() == null ){
-                                                    patientGroupRepository.addStorage(context);
+                                                if(patientRepository.getDb() == null ){
+                                                    patientRepository.addStorage(context);
                                                 }
 
-                                                if(context != null && patientGroupRepository.getDb() != null){
-                                                    patientGroupRepository.addStorage(context);
-                                                    PatientGroup patientGroup = (PatientGroup) patientGroupRepository.getDb().get__db(patientGroupId);
-                                                    return patientGroup;
+                                                if(context != null && patientRepository.getDb() != null){
+                                                    patientRepository.addStorage(context);
+                                                    Patient patient = (Patient) patientRepository.getDb().get__db(patientId);
+                                                    return patient;
                                                 }else{
                                                     return null;
                                                 }
@@ -360,7 +360,7 @@ public class MedicalRecord extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__patientGroup( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<PatientGroup> callback) {
+                                    public void get__patient( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Patient> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -374,13 +374,13 @@ public class MedicalRecord extends Model {
 
 
 
-                                        medicalRecordRepo.get__patientGroup( (String)that.getId(), refresh,  new ObjectCallback<PatientGroup> (){
+                                        medicalRecordRepo.get__patient( (String)that.getId(), refresh,  new ObjectCallback<Patient> (){
                                             
 
                                             
                                                 @Override
                                                 
-                                                    public void onSuccess(PatientGroup object) {
+                                                    public void onSuccess(Patient object) {
                                                         if(object != null){
                                                             //now add relation to this recipe.
                                                             addRelation(object);
