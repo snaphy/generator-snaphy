@@ -364,6 +364,36 @@ public class AmazonImageDb{
 
 
 
+    public AmazonImage get__db(String id, OnParseCursor onParseCursor){
+        if (id != null) {
+            SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
+            Cursor cursor = db.query("AmazonImage", null, "id=?", new String[]{id}, null, null, null, null);
+            if (cursor != null) {
+                if (!cursor.moveToFirst() || cursor.getCount() == 0){
+                    return null;
+                }else{
+                    HashMap<String, Object> hashMap = onParseCursor.parseCursor(cursor);
+                    cursor.close();
+                    //db.close(); // Closing database connection
+                    if (hashMap != null) {
+                        AmazonImageRepository repo = restAdapter.createRepository(AmazonImageRepository.class);
+                        repo.addStorage(context);
+                        return (AmazonImage)repo.createObject(hashMap);
+                    } else {
+                        return null;
+                    }
+                }
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+
+
+
     public String getWhereQuery(HashMap<String, Object> whereKeyValue){
         //Prepare where key value
         String where = "";

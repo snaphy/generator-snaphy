@@ -400,6 +400,36 @@ public class TeamDb{
 
 
 
+    public Team get__db(String id, OnParseCursor onParseCursor){
+        if (id != null) {
+            SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
+            Cursor cursor = db.query("Team", null, "id=?", new String[]{id}, null, null, null, null);
+            if (cursor != null) {
+                if (!cursor.moveToFirst() || cursor.getCount() == 0){
+                    return null;
+                }else{
+                    HashMap<String, Object> hashMap = onParseCursor.parseCursor(cursor);
+                    cursor.close();
+                    //db.close(); // Closing database connection
+                    if (hashMap != null) {
+                        TeamRepository repo = restAdapter.createRepository(TeamRepository.class);
+                        repo.addStorage(context);
+                        return (Team)repo.createObject(hashMap);
+                    } else {
+                        return null;
+                    }
+                }
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+
+
+
     public String getWhereQuery(HashMap<String, Object> whereKeyValue){
         //Prepare where key value
         String where = "";
