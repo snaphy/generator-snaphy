@@ -121,6 +121,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.repository.HospitalRepository;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BillRepository;
+            
+
+        
+    
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -824,6 +831,12 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -1078,6 +1091,16 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -1531,6 +1554,12 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -1761,6 +1790,16 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -2198,6 +2237,12 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -2444,6 +2489,16 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -2800,6 +2855,22 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -3153,6 +3224,22 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -3506,6 +3593,22 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -3859,6 +3962,22 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -4212,6 +4331,22 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -4654,6 +4789,12 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -4892,6 +5033,16 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -4983,9 +5134,9 @@ public class Hospital extends Model {
                 
                     
                     //Define hasMany relation method here..
-                    private transient DataList<IpdCategory>  ipdBeds ;
+                    private transient DataList<IpdCategory>  ipdCategories ;
 
-                    public DataList< IpdCategory > getIpdBeds() {
+                    public DataList< IpdCategory > getIpdCategories() {
                         //Check for pure case of hasMany
                                                     //TODO: Modify foreign key name..
                           try{
@@ -4994,22 +5145,22 @@ public class Hospital extends Model {
                             if(that.getId() != null && ipdCategoryRepository.getDb() != null){
 
                                  //Fetch locally from db
-                                 //ipdBeds = getIpdBeds__db(restAdapter);
+                                 //ipdCategories = getIpdCategories__db(restAdapter);
                                  // Getting single cont
-                                 ipdBeds = ipdCategoryRepository.getDb().getAll__db("hospitalId", that.getId().toString());
+                                 ipdCategories = ipdCategoryRepository.getDb().getAll__db("hospitalId", that.getId().toString());
 
                                  //lowercaseFirstLetter(modelName)
                             }
                           }catch(Exception e){
                                 //Ignore
                           }
-                                                return ipdBeds;
+                                                return ipdCategories;
                     }
 
-                    public void setIpdBeds(DataList<IpdCategory> ipdBeds) {
+                    public void setIpdCategories(DataList<IpdCategory> ipdCategories) {
                         boolean hashType = false;
                         DataList<HashMap<String, Object>> hashMaps = new DataList<>();
-                        for(Object o: ipdBeds){
+                        for(Object o: ipdCategories){
                             if(o.getClass().equals(HashMap.class)){
                                 hashType = true;
                                 HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
@@ -5018,11 +5169,11 @@ public class Hospital extends Model {
                         }
 
                         if(hashType){
-                            setIpdBeds1(hashMaps);
+                            setIpdCategories1(hashMaps);
                         }else{
-                            this.ipdBeds = ipdBeds;
+                            this.ipdCategories = ipdCategories;
                             //TODO: Warning move this to new thread
-                            for(IpdCategory data: ipdBeds){
+                            for(IpdCategory data: ipdCategories){
                               try{
                                 data.save__db();
                               } catch (NoSuchMethodError e) {
@@ -5033,63 +5184,63 @@ public class Hospital extends Model {
                     }
 
                 /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setIpdBeds1(List<Map<String, Object>> ipdBeds) {
+                    public void setIpdCategories1(List<Map<String, Object>> ipdCategories) {
                         //First create a dummy Repo class object for ..
-                        IpdCategoryRepository ipdBedsRepository = new IpdCategoryRepository();
+                        IpdCategoryRepository ipdCategoriesRepository = new IpdCategoryRepository();
                         List<IpdCategory> result = new ArrayList<>();
-                        for (Map<String, Object> obj : ipdBeds) {
+                        for (Map<String, Object> obj : ipdCategories) {
                             //Also add relation to child type for two way communication..
-                            IpdCategory obj1 = ipdBedsRepository.createObject(obj);
+                            IpdCategory obj1 = ipdCategoriesRepository.createObject(obj);
                             result.add(obj1);
 
                         }
-                        setIpdBeds(result);
+                        setIpdCategories(result);
 
                     }
 
                 */
 
                     //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
-                    public void setIpdBeds1(DataList<HashMap<String, Object>> ipdBeds) {
+                    public void setIpdCategories1(DataList<HashMap<String, Object>> ipdCategories) {
                         //First create a dummy Repo class object for ..
-                        IpdCategoryRepository ipdBedsRepository = new IpdCategoryRepository();
+                        IpdCategoryRepository ipdCategoriesRepository = new IpdCategoryRepository();
                         DataList<IpdCategory> result = new DataList<>();
-                        for (HashMap<String, Object> obj : ipdBeds) {
+                        for (HashMap<String, Object> obj : ipdCategories) {
                             //Also add relation to child type for two way communication..
-                            IpdCategory obj1 = ipdBedsRepository.createObject(obj);
+                            IpdCategory obj1 = ipdCategoriesRepository.createObject(obj);
                             result.add(obj1);
 
                         }
-                        setIpdBeds(result);
+                        setIpdCategories(result);
 
                     }
 
 
                     //Adding relation method..
                     //Add a dummy class Name object to seperate data..
-                    public void addRelation(DataList<IpdCategory> ipdBeds, IpdCategory dummyClassInstance) {
-                        that.setIpdBeds(ipdBeds);
+                    public void addRelation(DataList<IpdCategory> ipdCategories, IpdCategory dummyClassInstance) {
+                        that.setIpdCategories(ipdCategories);
 
                     }
 
                     //Adding relation method..
                     //This will add a new data to the list relation object..
-                    public void addRelation(IpdCategory ipdBeds) {
+                    public void addRelation(IpdCategory ipdCategories) {
                         try{
                             try{
 
                                   //Save to database..
-                                  ipdBeds.save__db();
+                                  ipdCategories.save__db();
                             }catch (NoSuchMethodError e) {
                               // ignore
                             }
-                            that.getIpdBeds().add(ipdBeds);
+                            that.getIpdCategories().add(ipdCategories);
                         }catch(Exception e){
-                            DataList< IpdCategory> ipdBeds1 = new DataList();
+                            DataList< IpdCategory> ipdCategories1 = new DataList();
                             //Now add this item to list..
-                            ipdBeds1.add(ipdBeds);
+                            ipdCategories1.add(ipdCategories);
                             //Now set data....
-                            that.setIpdBeds(ipdBeds1);
+                            that.setIpdCategories(ipdCategories1);
                         }
                     }
 
@@ -5158,10 +5309,16 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
-                                    public void findById__ipdBeds( String fk,  RestAdapter restAdapter, final ObjectCallback<IpdCategory> callback) {
+                                    public void findById__ipdCategories( String fk,  RestAdapter restAdapter, final ObjectCallback<IpdCategory> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5175,7 +5332,7 @@ public class Hospital extends Model {
 
 
 
-                                        hospitalRepo.findById__ipdBeds( (String)that.getId(), fk,  new ObjectCallback<IpdCategory> (){
+                                        hospitalRepo.findById__ipdCategories( (String)that.getId(), fk,  new ObjectCallback<IpdCategory> (){
                                             
 
                                             
@@ -5218,7 +5375,7 @@ public class Hospital extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__ipdBeds( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__ipdCategories( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5232,7 +5389,7 @@ public class Hospital extends Model {
 
 
 
-                                        hospitalRepo.destroyById__ipdBeds( (String)that.getId(), fk,  new VoidCallback (){
+                                        hospitalRepo.destroyById__ipdCategories( (String)that.getId(), fk,  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -5262,7 +5419,7 @@ public class Hospital extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__ipdBeds( String fk,  IpdCategory data,  RestAdapter restAdapter, final ObjectCallback<IpdCategory> callback) {
+                                    public void updateById__ipdCategories( String fk,  IpdCategory data,  RestAdapter restAdapter, final ObjectCallback<IpdCategory> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5279,7 +5436,7 @@ public class Hospital extends Model {
 
 
 
-                                        hospitalRepo.updateById__ipdBeds( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<IpdCategory> (){
+                                        hospitalRepo.updateById__ipdCategories( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<IpdCategory> (){
                                             
 
                                             
@@ -5369,10 +5526,18 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
-                                    public void get__ipdBeds( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<IpdCategory> callback) {
+                                    public void get__ipdCategories( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<IpdCategory> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5386,7 +5551,7 @@ public class Hospital extends Model {
 
 
 
-                                        hospitalRepo.get__ipdBeds( (String)that.getId(), filter,  new DataListCallback<IpdCategory> (){
+                                        hospitalRepo.get__ipdCategories( (String)that.getId(), filter,  new DataListCallback<IpdCategory> (){
                                             
 
                                             
@@ -5434,7 +5599,7 @@ public class Hospital extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__ipdBeds( IpdCategory data,  RestAdapter restAdapter, final ObjectCallback<IpdCategory> callback) {
+                                    public void create__ipdCategories( IpdCategory data,  RestAdapter restAdapter, final ObjectCallback<IpdCategory> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5448,7 +5613,7 @@ public class Hospital extends Model {
 
 
 
-                                        hospitalRepo.create__ipdBeds( (String)that.getId(), data.convertMap(),  new ObjectCallback<IpdCategory> (){
+                                        hospitalRepo.create__ipdCategories( (String)that.getId(), data.convertMap(),  new ObjectCallback<IpdCategory> (){
                                             
 
                                             
@@ -5491,7 +5656,7 @@ public class Hospital extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__ipdBeds( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__ipdCategories( RestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5502,7 +5667,7 @@ public class Hospital extends Model {
 
 
 
-                                        hospitalRepo.delete__ipdBeds( (String)that.getId(),  new VoidCallback (){
+                                        hospitalRepo.delete__ipdCategories( (String)that.getId(),  new VoidCallback (){
                                             
                                                 @Override
                                                 public void onSuccess() {
@@ -5532,7 +5697,7 @@ public class Hospital extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__ipdBeds( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__ipdCategories( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5546,7 +5711,7 @@ public class Hospital extends Model {
 
 
 
-                                        hospitalRepo.count__ipdBeds( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
+                                        hospitalRepo.count__ipdCategories( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
                                             
 
                                             
@@ -5575,6 +5740,8 @@ public class Hospital extends Model {
                                     } //method def ends here.
                                  
                             
+                        
+                        
                         
                         
                         
@@ -5835,6 +6002,12 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -5995,6 +6168,14 @@ public class Hospital extends Model {
                                         });
                                     } //method def ends here.
                                  
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
                             
                          
                             
@@ -6258,6 +6439,8 @@ public class Hospital extends Model {
                             
                          
                             
+                        
+                        
                         
                         
                         
@@ -6719,6 +6902,12 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -6941,6 +7130,16 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -7184,6 +7383,12 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
                         
 
                                     //Write the method here..
@@ -7297,6 +7502,16 @@ public class Hospital extends Model {
                             
                          
                             
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
                         
                         
                         
@@ -7372,6 +7587,705 @@ public class Hospital extends Model {
                     
 
                 
+
+                 
+                 
+             
+          
+    
+        
+        
+                
+
+                
+                    
+                    //Define hasMany relation method here..
+                    private transient DataList<Bill>  bills ;
+
+                    public DataList< Bill > getBills() {
+                        //Check for pure case of hasMany
+                                                    //TODO: Modify foreign key name..
+                          try{
+                            BillRepository billRepository = (BillRepository) getRepository();
+
+                            if(that.getId() != null && billRepository.getDb() != null){
+
+                                 //Fetch locally from db
+                                 //bills = getBills__db(restAdapter);
+                                 // Getting single cont
+                                 bills = billRepository.getDb().getAll__db("hospitalId", that.getId().toString());
+
+                                 //lowercaseFirstLetter(modelName)
+                            }
+                          }catch(Exception e){
+                                //Ignore
+                          }
+                                                return bills;
+                    }
+
+                    public void setBills(DataList<Bill> bills) {
+                        boolean hashType = false;
+                        DataList<HashMap<String, Object>> hashMaps = new DataList<>();
+                        for(Object o: bills){
+                            if(o.getClass().equals(HashMap.class)){
+                                hashType = true;
+                                HashMap<String, Object> dataObj = (HashMap<String, Object>)o;
+                                hashMaps.add(dataObj);
+                            }
+                        }
+
+                        if(hashType){
+                            setBills1(hashMaps);
+                        }else{
+                            this.bills = bills;
+                            //TODO: Warning move this to new thread
+                            for(Bill data: bills){
+                              try{
+                                data.save__db();
+                              } catch (NoSuchMethodError e) {
+                                // ignore
+                              }
+                            }
+                        }
+                    }
+
+                /*    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setBills1(List<Map<String, Object>> bills) {
+                        //First create a dummy Repo class object for ..
+                        BillRepository billsRepository = new BillRepository();
+                        List<Bill> result = new ArrayList<>();
+                        for (Map<String, Object> obj : bills) {
+                            //Also add relation to child type for two way communication..
+                            Bill obj1 = billsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setBills(result);
+
+                    }
+
+                */
+
+                    //Adding related model automatically in case of include statement from server.. Adding 1 for removing same name error..
+                    public void setBills1(DataList<HashMap<String, Object>> bills) {
+                        //First create a dummy Repo class object for ..
+                        BillRepository billsRepository = new BillRepository();
+                        DataList<Bill> result = new DataList<>();
+                        for (HashMap<String, Object> obj : bills) {
+                            //Also add relation to child type for two way communication..
+                            Bill obj1 = billsRepository.createObject(obj);
+                            result.add(obj1);
+
+                        }
+                        setBills(result);
+
+                    }
+
+
+                    //Adding relation method..
+                    //Add a dummy class Name object to seperate data..
+                    public void addRelation(DataList<Bill> bills, Bill dummyClassInstance) {
+                        that.setBills(bills);
+
+                    }
+
+                    //Adding relation method..
+                    //This will add a new data to the list relation object..
+                    public void addRelation(Bill bills) {
+                        try{
+                            try{
+
+                                  //Save to database..
+                                  bills.save__db();
+                            }catch (NoSuchMethodError e) {
+                              // ignore
+                            }
+                            that.getBills().add(bills);
+                        }catch(Exception e){
+                            DataList< Bill> bills1 = new DataList();
+                            //Now add this item to list..
+                            bills1.add(bills);
+                            //Now set data....
+                            that.setBills(bills1);
+                        }
+                    }
+
+
+
+
+                    
+                        //Implement logic for pure hasMany methods here....
+
+                    
+                
+                
+
+
+
+
+
+
+
+                    //Now add instance methods to fetch the related belongsTo Model..
+                    
+
+                     
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void findById__bills( String fk,  RestAdapter restAdapter, final ObjectCallback<Bill> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final HospitalRepository  hospitalRepo = restAdapter.createRepository(HospitalRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        hospitalRepo.findById__bills( (String)that.getId(), fk,  new ObjectCallback<Bill> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Bill object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void destroyById__bills( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final HospitalRepository  hospitalRepo = restAdapter.createRepository(HospitalRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        hospitalRepo.destroyById__bills( (String)that.getId(), fk,  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void updateById__bills( String fk,  Bill data,  RestAdapter restAdapter, final ObjectCallback<Bill> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final HospitalRepository  hospitalRepo = restAdapter.createRepository(HospitalRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        hospitalRepo.updateById__bills( (String)that.getId(), fk, data.convertMap(),  new ObjectCallback<Bill> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Bill object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+
+                                    //Write the method here..
+                                    public void get__bills( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Bill> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final HospitalRepository  hospitalRepo = restAdapter.createRepository(HospitalRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        hospitalRepo.get__bills( (String)that.getId(), filter,  new DataListCallback<Bill> (){
+                                            
+
+                                            
+
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(DataList<Bill> object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            Bill obj = new Bill();
+                                                            addRelation(object, obj);
+                                                            //Disabling two way communication for cyclic error..
+                                                            /*for (Bill obj : object) {
+                                                                //Also add relation to child type for two way communication..
+                                                                obj.addRelation(that);
+                                                            }*/
+
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void create__bills( Bill data,  RestAdapter restAdapter, final ObjectCallback<Bill> callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final HospitalRepository  hospitalRepo = restAdapter.createRepository(HospitalRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        hospitalRepo.create__bills( (String)that.getId(), data.convertMap(),  new ObjectCallback<Bill> (){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(Bill object) {
+                                                        if(object != null){
+                                                            //now add relation to this recipe.
+                                                            addRelation(object);
+                                                            //Also add relation to child type for two way communication..Removing two way communication for cyclic error
+                                                            //object.addRelation(that);
+                                                            callback.onSuccess(object);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }else{
+                                                            callback.onSuccess(null);
+                                                            //Calling the finally..callback
+                                                            callback.onFinally();
+                                                        }
+
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void delete__bills( RestAdapter restAdapter, final VoidCallback callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final HospitalRepository  hospitalRepo = restAdapter.createRepository(HospitalRepository.class);
+                                        
+                                        
+
+
+
+                                        hospitalRepo.delete__bills( (String)that.getId(),  new VoidCallback (){
+                                            
+                                                @Override
+                                                public void onSuccess() {
+                                                    callback.onSuccess();
+                                                    //Calling the finally..callback
+                                                    callback.onFinally();
+                                                }
+                                            
+
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                        
+
+                                    //Write the method here..
+                                    public void count__bills( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                        //Call the onBefore callback method..
+                                        callback.onBefore();
+
+                                        //Define methods here..
+                                        final HospitalRepository  hospitalRepo = restAdapter.createRepository(HospitalRepository.class);
+                                        
+                                        
+                                        
+                                        
+                                        
+
+
+
+                                        hospitalRepo.count__bills( (String)that.getId(), where,  new ObjectCallback<JSONObject>(){
+                                            
+
+                                            
+                                                @Override
+                                                
+                                                    public void onSuccess(JSONObject object) {
+                                                        callback.onSuccess(object);
+                                                        //Calling the finally..callback
+                                                        callback.onFinally();
+                                                    }
+                                                
+                                            
+
+
+                                            
+
+                                            @Override
+                                            public void onError(Throwable t) {
+                                                //Now calling the callback
+                                                callback.onError(t);
+                                                //Calling the finally..callback
+                                                callback.onFinally();
+                                            }
+
+                                        });
+                                    } //method def ends here.
+                                 
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                         
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+
+                
+
+                
+                    //Define hasMany, hasManyThrough method here..
 
                  
                  

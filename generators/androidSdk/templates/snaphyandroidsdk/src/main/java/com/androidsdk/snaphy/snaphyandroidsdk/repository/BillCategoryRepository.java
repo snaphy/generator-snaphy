@@ -2368,7 +2368,7 @@ public class BillCategoryRepository extends ModelRepository<BillCategory> {
     
         
             //Method fetchBillCategories definition
-            public void fetchBillCategories(  String type,  String facility, final DataListCallback<BillCategory> callback){
+            public void fetchBillCategories(  String type,  String facility,  String hospitalId, final DataListCallback<BillCategory> callback){
 
                 /**
                 Call the onBefore event
@@ -2383,6 +2383,8 @@ public class BillCategoryRepository extends ModelRepository<BillCategory> {
                         hashMapObject.put("type", type);
                 
                         hashMapObject.put("facility", facility);
+                
+                        hashMapObject.put("hospitalId", hospitalId);
                 
 
                 

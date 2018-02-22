@@ -138,6 +138,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.HospitalDb;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Bill;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.BillRepository;
+            
+        
+    
+
 
 
 
@@ -404,6 +411,33 @@ public class HospitalRepository extends ModelRepository<Hospital> {
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/bills/:fk", "GET"), "Hospital.prototype.__findById__bills");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/bills/:fk", "DELETE"), "Hospital.prototype.__destroyById__bills");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/bills/:fk", "PUT"), "Hospital.prototype.__updateById__bills");
+    
+
+    
+    
+
+    
+
+    
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/billCategories/:fk", "GET"), "Hospital.prototype.__findById__billCategories");
     
 
@@ -431,7 +465,7 @@ public class HospitalRepository extends ModelRepository<Hospital> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/ipdBeds/:fk", "GET"), "Hospital.prototype.__findById__ipdBeds");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/ipdCategories/:fk", "GET"), "Hospital.prototype.__findById__ipdCategories");
     
 
     
@@ -440,7 +474,7 @@ public class HospitalRepository extends ModelRepository<Hospital> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/ipdBeds/:fk", "DELETE"), "Hospital.prototype.__destroyById__ipdBeds");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/ipdCategories/:fk", "DELETE"), "Hospital.prototype.__destroyById__ipdCategories");
     
 
     
@@ -449,7 +483,7 @@ public class HospitalRepository extends ModelRepository<Hospital> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/ipdBeds/:fk", "PUT"), "Hospital.prototype.__updateById__ipdBeds");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/ipdCategories/:fk", "PUT"), "Hospital.prototype.__updateById__ipdCategories");
     
 
     
@@ -647,6 +681,42 @@ public class HospitalRepository extends ModelRepository<Hospital> {
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/bills", "GET"), "Hospital.prototype.__get__bills");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/bills", "POST"), "Hospital.prototype.__create__bills");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/bills", "DELETE"), "Hospital.prototype.__delete__bills");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/bills/count", "GET"), "Hospital.prototype.__count__bills");
+    
+
+    
+    
+
+    
+
+    
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/billCategories", "GET"), "Hospital.prototype.__get__billCategories");
     
 
@@ -683,7 +753,7 @@ public class HospitalRepository extends ModelRepository<Hospital> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/ipdBeds", "GET"), "Hospital.prototype.__get__ipdBeds");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/ipdCategories", "GET"), "Hospital.prototype.__get__ipdCategories");
     
 
     
@@ -692,7 +762,7 @@ public class HospitalRepository extends ModelRepository<Hospital> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/ipdBeds", "POST"), "Hospital.prototype.__create__ipdBeds");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/ipdCategories", "POST"), "Hospital.prototype.__create__ipdCategories");
     
 
     
@@ -701,7 +771,7 @@ public class HospitalRepository extends ModelRepository<Hospital> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/ipdBeds", "DELETE"), "Hospital.prototype.__delete__ipdBeds");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/ipdCategories", "DELETE"), "Hospital.prototype.__delete__ipdCategories");
     
 
     
@@ -710,7 +780,7 @@ public class HospitalRepository extends ModelRepository<Hospital> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/ipdBeds/count", "GET"), "Hospital.prototype.__count__ipdBeds");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:hospitalId/ipdCategories/count", "GET"), "Hospital.prototype.__count__ipdCategories");
     
 
     
@@ -852,6 +922,24 @@ public class HospitalRepository extends ModelRepository<Hospital> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getModelRelationSchema", "POST"), "Hospital.getModelRelationSchema");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchHospitalProfile", "POST"), "Hospital.fetchHospitalProfile");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/updateHospitalProfile", "POST"), "Hospital.updateHospitalProfile");
     
 
     
@@ -2571,6 +2659,226 @@ public class HospitalRepository extends ModelRepository<Hospital> {
         
     
         
+            //Method findById__bills definition
+            public void findById__bills(  String hospitalId,  String fk, final ObjectCallback<Bill> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("hospitalId", hospitalId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__findById__bills", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    BillRepository billRepo = getRestAdapter().createRepository(BillRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = billRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(billRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //billRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Bill bill = billRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = bill.getClass().getMethod("save__db");
+                                                    method.invoke(bill);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(bill);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method findById__bills definition ends here..
+
+            
+
+        
+    
+        
+            //Method destroyById__bills definition
+            public void destroyById__bills(  String hospitalId,  String fk, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("hospitalId", hospitalId);
+                
+                        hashMapObject.put("fk", fk);
+                
+
+                
+                    invokeStaticMethod("prototype.__destroyById__bills", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method destroyById__bills definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateById__bills definition
+            public void updateById__bills(  String hospitalId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<Bill> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("hospitalId", hospitalId);
+                
+                        hashMapObject.put("fk", fk);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__updateById__bills", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    BillRepository billRepo = getRestAdapter().createRepository(BillRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = billRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(billRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //billRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Bill bill = billRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = bill.getClass().getMethod("save__db");
+                                                    method.invoke(bill);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(bill);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method updateById__bills definition ends here..
+
+            
+
+        
+    
+        
             //Method findById__billCategories definition
             public void findById__billCategories(  String hospitalId,  String fk, final ObjectCallback<BillCategory> callback){
 
@@ -2791,8 +3099,8 @@ public class HospitalRepository extends ModelRepository<Hospital> {
         
     
         
-            //Method findById__ipdBeds definition
-            public void findById__ipdBeds(  String hospitalId,  String fk, final ObjectCallback<IpdCategory> callback){
+            //Method findById__ipdCategories definition
+            public void findById__ipdCategories(  String hospitalId,  String fk, final ObjectCallback<IpdCategory> callback){
 
                 /**
                 Call the onBefore event
@@ -2815,7 +3123,7 @@ public class HospitalRepository extends ModelRepository<Hospital> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__findById__ipdBeds", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__findById__ipdCategories", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -2869,15 +3177,15 @@ public class HospitalRepository extends ModelRepository<Hospital> {
 
                 
 
-            }//Method findById__ipdBeds definition ends here..
+            }//Method findById__ipdCategories definition ends here..
 
             
 
         
     
         
-            //Method destroyById__ipdBeds definition
-            public void destroyById__ipdBeds(  String hospitalId,  String fk, final VoidCallback callback){
+            //Method destroyById__ipdCategories definition
+            public void destroyById__ipdCategories(  String hospitalId,  String fk, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -2895,7 +3203,7 @@ public class HospitalRepository extends ModelRepository<Hospital> {
                 
 
                 
-                    invokeStaticMethod("prototype.__destroyById__ipdBeds", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__destroyById__ipdCategories", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -2917,15 +3225,15 @@ public class HospitalRepository extends ModelRepository<Hospital> {
 
                 
 
-            }//Method destroyById__ipdBeds definition ends here..
+            }//Method destroyById__ipdCategories definition ends here..
 
             
 
         
     
         
-            //Method updateById__ipdBeds definition
-            public void updateById__ipdBeds(  String hospitalId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<IpdCategory> callback){
+            //Method updateById__ipdCategories definition
+            public void updateById__ipdCategories(  String hospitalId,  String fk,  Map<String,  ? extends Object> data, final ObjectCallback<IpdCategory> callback){
 
                 /**
                 Call the onBefore event
@@ -2950,7 +3258,7 @@ public class HospitalRepository extends ModelRepository<Hospital> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__updateById__ipdBeds", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__updateById__ipdCategories", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -3004,7 +3312,7 @@ public class HospitalRepository extends ModelRepository<Hospital> {
 
                 
 
-            }//Method updateById__ipdBeds definition ends here..
+            }//Method updateById__ipdCategories definition ends here..
 
             
 
@@ -4441,6 +4749,275 @@ public class HospitalRepository extends ModelRepository<Hospital> {
         
     
         
+            //Method get__bills definition
+            public void get__bills(  String hospitalId,  Map<String,  ? extends Object> filter, final DataListCallback<Bill> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("hospitalId", hospitalId);
+                
+                        hashMapObject.put("filter", filter);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("prototype.__get__bills", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<Bill> billList = new DataList<Bill>();
+                                    BillRepository billRepo = getRestAdapter().createRepository(BillRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = billRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(billRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        Bill bill = billRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = bill.getClass().getMethod("save__db");
+                                                      method.invoke(bill);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        billList.add(bill);
+                                    }
+                                    callback.onSuccess(billList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method get__bills definition ends here..
+
+            
+
+        
+    
+        
+            //Method create__bills definition
+            public void create__bills(  String hospitalId,  Map<String,  ? extends Object> data, final ObjectCallback<Bill> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("hospitalId", hospitalId);
+                
+                        hashMapObject.putAll(data);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__create__bills", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    BillRepository billRepo = getRestAdapter().createRepository(BillRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = billRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(billRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //billRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Bill bill = billRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = bill.getClass().getMethod("save__db");
+                                                    method.invoke(bill);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(bill);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method create__bills definition ends here..
+
+            
+
+        
+    
+        
+            //Method delete__bills definition
+            public void delete__bills(  String hospitalId, final VoidCallback callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("hospitalId", hospitalId);
+                
+
+                
+                    invokeStaticMethod("prototype.__delete__bills", hashMapObject, new Adapter.Callback() {
+                        @Override
+                        public void onError(Throwable t) {
+                                callback.onError(t);
+                                //Call the finally method..
+                                callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(String response) {
+                            callback.onSuccess();
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+
+                
+
+                
+
+            }//Method delete__bills definition ends here..
+
+            
+
+        
+    
+        
+            //Method count__bills definition
+            public void count__bills(  String hospitalId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("hospitalId", hospitalId);
+                
+                        hashMapObject.put("where", where);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("prototype.__count__bills", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method count__bills definition ends here..
+
+            
+
+        
+    
+        
             //Method get__billCategories definition
             public void get__billCategories(  String hospitalId,  Map<String,  ? extends Object> filter, final DataListCallback<BillCategory> callback){
 
@@ -4710,8 +5287,8 @@ public class HospitalRepository extends ModelRepository<Hospital> {
         
     
         
-            //Method get__ipdBeds definition
-            public void get__ipdBeds(  String hospitalId,  Map<String,  ? extends Object> filter, final DataListCallback<IpdCategory> callback){
+            //Method get__ipdCategories definition
+            public void get__ipdCategories(  String hospitalId,  Map<String,  ? extends Object> filter, final DataListCallback<IpdCategory> callback){
 
                 /**
                 Call the onBefore event
@@ -4734,7 +5311,7 @@ public class HospitalRepository extends ModelRepository<Hospital> {
                 
 
                 
-                    invokeStaticMethod("prototype.__get__ipdBeds", hashMapObject, new Adapter.JsonArrayCallback() {
+                    invokeStaticMethod("prototype.__get__ipdCategories", hashMapObject, new Adapter.JsonArrayCallback() {
                         @Override
                         public void onError(Throwable t) {
                             callback.onError(t);
@@ -4788,15 +5365,15 @@ public class HospitalRepository extends ModelRepository<Hospital> {
                     });
                 
 
-            }//Method get__ipdBeds definition ends here..
+            }//Method get__ipdCategories definition ends here..
 
             
 
         
     
         
-            //Method create__ipdBeds definition
-            public void create__ipdBeds(  String hospitalId,  Map<String,  ? extends Object> data, final ObjectCallback<IpdCategory> callback){
+            //Method create__ipdCategories definition
+            public void create__ipdCategories(  String hospitalId,  Map<String,  ? extends Object> data, final ObjectCallback<IpdCategory> callback){
 
                 /**
                 Call the onBefore event
@@ -4819,7 +5396,7 @@ public class HospitalRepository extends ModelRepository<Hospital> {
                 
                     
                     
-                    invokeStaticMethod("prototype.__create__ipdBeds", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__create__ipdCategories", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                         @Override
                         public void onError(Throwable t) {
@@ -4873,15 +5450,15 @@ public class HospitalRepository extends ModelRepository<Hospital> {
 
                 
 
-            }//Method create__ipdBeds definition ends here..
+            }//Method create__ipdCategories definition ends here..
 
             
 
         
     
         
-            //Method delete__ipdBeds definition
-            public void delete__ipdBeds(  String hospitalId, final VoidCallback callback){
+            //Method delete__ipdCategories definition
+            public void delete__ipdCategories(  String hospitalId, final VoidCallback callback){
 
                 /**
                 Call the onBefore event
@@ -4897,7 +5474,7 @@ public class HospitalRepository extends ModelRepository<Hospital> {
                 
 
                 
-                    invokeStaticMethod("prototype.__delete__ipdBeds", hashMapObject, new Adapter.Callback() {
+                    invokeStaticMethod("prototype.__delete__ipdCategories", hashMapObject, new Adapter.Callback() {
                         @Override
                         public void onError(Throwable t) {
                                 callback.onError(t);
@@ -4919,15 +5496,15 @@ public class HospitalRepository extends ModelRepository<Hospital> {
 
                 
 
-            }//Method delete__ipdBeds definition ends here..
+            }//Method delete__ipdCategories definition ends here..
 
             
 
         
     
         
-            //Method count__ipdBeds definition
-            public void count__ipdBeds(  String hospitalId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
+            //Method count__ipdCategories definition
+            public void count__ipdCategories(  String hospitalId,  Map<String,  ? extends Object> where, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -4949,7 +5526,7 @@ public class HospitalRepository extends ModelRepository<Hospital> {
 
                 
                     
-                    invokeStaticMethod("prototype.__count__ipdBeds", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("prototype.__count__ipdCategories", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -4972,7 +5549,7 @@ public class HospitalRepository extends ModelRepository<Hospital> {
 
                 
 
-            }//Method count__ipdBeds definition ends here..
+            }//Method count__ipdCategories definition ends here..
 
             
 
@@ -5882,6 +6459,142 @@ public class HospitalRepository extends ModelRepository<Hospital> {
                 
 
             }//Method getModelRelationSchema definition ends here..
+
+            
+
+        
+    
+        
+            //Method fetchHospitalProfile definition
+            public void fetchHospitalProfile(  Map<String,  ? extends Object> ctx,  String hospitalId, final ObjectCallback<Hospital> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("ctx", ctx);
+                
+                        hashMapObject.put("hospitalId", hospitalId);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("fetchHospitalProfile", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    HospitalRepository hospitalRepo = getRestAdapter().createRepository(HospitalRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = hospitalRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hospitalRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //hospitalRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Hospital hospital = hospitalRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = hospital.getClass().getMethod("save__db");
+                                                    method.invoke(hospital);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(hospital);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method fetchHospitalProfile definition ends here..
+
+            
+
+        
+    
+        
+            //Method updateHospitalProfile definition
+            public void updateHospitalProfile(  Map<String,  ? extends Object> hospitalObj, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("hospitalObj", hospitalObj);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("updateHospitalProfile", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method updateHospitalProfile definition ends here..
 
             
 

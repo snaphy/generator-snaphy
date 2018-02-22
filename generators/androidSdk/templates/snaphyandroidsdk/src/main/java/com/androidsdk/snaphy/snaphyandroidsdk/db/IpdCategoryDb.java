@@ -87,6 +87,13 @@ public class IpdCategoryDb{
                         }
                                   
                                 
+                                                            String hospitalNameData = "";
+                        if(_modelData.getHospitalName() != null){
+                          hospitalNameData = _modelData.getHospitalName().toString();
+                          values.put("`hospitalName`", hospitalNameData);
+                        }
+                                  
+                                
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
@@ -228,9 +235,19 @@ public class IpdCategoryDb{
                         }
                                                 
                                 
-                                                            String idData = "";
+                                                            String hospitalNameData = "";
                         if(cursor.getString(3) != null){
-                          idData = cursor.getString(3);
+                          hospitalNameData = cursor.getString(3);
+                          if(hospitalNameData != null){
+                            hospitalNameData = (String)hospitalNameData;
+                            hashMap.put("hospitalName", hospitalNameData);
+                          }
+                        }
+                                                
+                                
+                                                            String idData = "";
+                        if(cursor.getString(4) != null){
+                          idData = cursor.getString(4);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -239,8 +256,8 @@ public class IpdCategoryDb{
                                                 
                                 
                                                             String hospitalIdData = "";
-                        if(cursor.getString(4) != null){
-                          hospitalIdData = cursor.getString(4);
+                        if(cursor.getString(5) != null){
+                          hospitalIdData = cursor.getString(5);
                           if(hospitalIdData != null){
                             hospitalIdData = hospitalIdData.toString();
                             hashMap.put("hospitalId", hospitalIdData);

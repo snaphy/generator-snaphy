@@ -358,6 +358,56 @@ public class PatientGroupDb{
                         }
                                   
                                 
+                                                            String lineOneData = "";
+                        if(_modelData.getLineOne() != null){
+                          lineOneData = _modelData.getLineOne().toString();
+                          values.put("`lineOne`", lineOneData);
+                        }
+                                  
+                                
+                                                            String lineTwoData = "";
+                        if(_modelData.getLineTwo() != null){
+                          lineTwoData = _modelData.getLineTwo().toString();
+                          values.put("`lineTwo`", lineTwoData);
+                        }
+                                  
+                                
+                                                            String flagTypeData = "";
+                        if(_modelData.getFlagType() != null){
+                          flagTypeData = _modelData.getFlagType().toString();
+                          values.put("`flagType`", flagTypeData);
+                        }
+                                  
+                                
+                                                            double ageData;
+                        ageData = (double)_modelData.getAge();
+                        values.put("`age`", ageData);
+                                  
+                                
+                                                            String genderData = "";
+                        if(_modelData.getGender() != null){
+                          genderData = _modelData.getGender().toString();
+                          values.put("`gender`", genderData);
+                        }
+                                  
+                                
+                                                            String profilePicData = "";
+                        if(_modelData.getProfilePic() != null){
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                          profilePicData = gson.toJson(_modelData.getProfilePic(), HashMap.class);
+                          values.put("`profilePic`", profilePicData);
+                        }
+                                  
+                                
+                                                            String uhidData = "";
+                        if(_modelData.getUhid() != null){
+                          uhidData = _modelData.getUhid().toString();
+                          values.put("`uhid`", uhidData);
+                        }
+                                  
+                                
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
@@ -1003,9 +1053,80 @@ public class PatientGroupDb{
                         }
                                                 
                                 
-                                                            String idData = "";
+                                                            String lineOneData = "";
                         if(cursor.getString(37) != null){
-                          idData = cursor.getString(37);
+                          lineOneData = cursor.getString(37);
+                          if(lineOneData != null){
+                            lineOneData = (String)lineOneData;
+                            hashMap.put("lineOne", lineOneData);
+                          }
+                        }
+                                                
+                                
+                                                            String lineTwoData = "";
+                        if(cursor.getString(38) != null){
+                          lineTwoData = cursor.getString(38);
+                          if(lineTwoData != null){
+                            lineTwoData = (String)lineTwoData;
+                            hashMap.put("lineTwo", lineTwoData);
+                          }
+                        }
+                                                
+                                
+                                                            String flagTypeData = "";
+                        if(cursor.getString(39) != null){
+                          flagTypeData = cursor.getString(39);
+                          if(flagTypeData != null){
+                            flagTypeData = (String)flagTypeData;
+                            hashMap.put("flagType", flagTypeData);
+                          }
+                        }
+                                                
+                                
+                                                            double ageData = (double)0;
+                          ageData = cursor.getInt(40);
+                          ageData = (double)ageData;
+                          hashMap.put("age", ageData);
+
+
+                                                
+                                
+                                                            String genderData = "";
+                        if(cursor.getString(41) != null){
+                          genderData = cursor.getString(41);
+                          if(genderData != null){
+                            genderData = (String)genderData;
+                            hashMap.put("gender", genderData);
+                          }
+                        }
+                                                
+                                
+                                                            Map<String, Object> profilePicData = new HashMap<>();
+                        if(cursor.getString(42) != null){
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                           profilePicData = gson.fromJson(cursor.getString(42), Map.class);
+                          if(profilePicData != null){
+                            profilePicData = (Map<String, Object>)profilePicData;
+                            hashMap.put("profilePic", profilePicData);
+                          }
+                        }
+                                                
+                                
+                                                            String uhidData = "";
+                        if(cursor.getString(43) != null){
+                          uhidData = cursor.getString(43);
+                          if(uhidData != null){
+                            uhidData = (String)uhidData;
+                            hashMap.put("uhid", uhidData);
+                          }
+                        }
+                                                
+                                
+                                                            String idData = "";
+                        if(cursor.getString(44) != null){
+                          idData = cursor.getString(44);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -1014,8 +1135,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String patientIdData = "";
-                        if(cursor.getString(38) != null){
-                          patientIdData = cursor.getString(38);
+                        if(cursor.getString(45) != null){
+                          patientIdData = cursor.getString(45);
                           if(patientIdData != null){
                             patientIdData = patientIdData.toString();
                             hashMap.put("patientId", patientIdData);
@@ -1024,8 +1145,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String aadharIdData = "";
-                        if(cursor.getString(39) != null){
-                          aadharIdData = cursor.getString(39);
+                        if(cursor.getString(46) != null){
+                          aadharIdData = cursor.getString(46);
                           if(aadharIdData != null){
                             aadharIdData = aadharIdData.toString();
                             hashMap.put("aadharId", aadharIdData);
@@ -1034,8 +1155,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String hospitalIdData = "";
-                        if(cursor.getString(40) != null){
-                          hospitalIdData = cursor.getString(40);
+                        if(cursor.getString(47) != null){
+                          hospitalIdData = cursor.getString(47);
                           if(hospitalIdData != null){
                             hospitalIdData = hospitalIdData.toString();
                             hashMap.put("hospitalId", hospitalIdData);
@@ -1044,8 +1165,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String ipdBedLogIdData = "";
-                        if(cursor.getString(41) != null){
-                          ipdBedLogIdData = cursor.getString(41);
+                        if(cursor.getString(48) != null){
+                          ipdBedLogIdData = cursor.getString(48);
                           if(ipdBedLogIdData != null){
                             ipdBedLogIdData = ipdBedLogIdData.toString();
                             hashMap.put("ipdBedLogId", ipdBedLogIdData);
@@ -1054,8 +1175,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String ipdBedIdData = "";
-                        if(cursor.getString(42) != null){
-                          ipdBedIdData = cursor.getString(42);
+                        if(cursor.getString(49) != null){
+                          ipdBedIdData = cursor.getString(49);
                           if(ipdBedIdData != null){
                             ipdBedIdData = ipdBedIdData.toString();
                             hashMap.put("ipdBedId", ipdBedIdData);
@@ -1064,8 +1185,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String opdTokenLogIdData = "";
-                        if(cursor.getString(43) != null){
-                          opdTokenLogIdData = cursor.getString(43);
+                        if(cursor.getString(50) != null){
+                          opdTokenLogIdData = cursor.getString(50);
                           if(opdTokenLogIdData != null){
                             opdTokenLogIdData = opdTokenLogIdData.toString();
                             hashMap.put("opdTokenLogId", opdTokenLogIdData);
@@ -1074,8 +1195,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String patientSecurityIdData = "";
-                        if(cursor.getString(44) != null){
-                          patientSecurityIdData = cursor.getString(44);
+                        if(cursor.getString(51) != null){
+                          patientSecurityIdData = cursor.getString(51);
                           if(patientSecurityIdData != null){
                             patientSecurityIdData = patientSecurityIdData.toString();
                             hashMap.put("patientSecurityId", patientSecurityIdData);
@@ -1084,8 +1205,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String hospitalUserIdData = "";
-                        if(cursor.getString(45) != null){
-                          hospitalUserIdData = cursor.getString(45);
+                        if(cursor.getString(52) != null){
+                          hospitalUserIdData = cursor.getString(52);
                           if(hospitalUserIdData != null){
                             hospitalUserIdData = hospitalUserIdData.toString();
                             hashMap.put("hospitalUserId", hospitalUserIdData);
@@ -1094,8 +1215,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String stateIdData = "";
-                        if(cursor.getString(46) != null){
-                          stateIdData = cursor.getString(46);
+                        if(cursor.getString(53) != null){
+                          stateIdData = cursor.getString(53);
                           if(stateIdData != null){
                             stateIdData = stateIdData.toString();
                             hashMap.put("stateId", stateIdData);
@@ -1104,8 +1225,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String pincodeIdData = "";
-                        if(cursor.getString(47) != null){
-                          pincodeIdData = cursor.getString(47);
+                        if(cursor.getString(54) != null){
+                          pincodeIdData = cursor.getString(54);
                           if(pincodeIdData != null){
                             pincodeIdData = pincodeIdData.toString();
                             hashMap.put("pincodeId", pincodeIdData);
@@ -1114,8 +1235,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String talukIdData = "";
-                        if(cursor.getString(48) != null){
-                          talukIdData = cursor.getString(48);
+                        if(cursor.getString(55) != null){
+                          talukIdData = cursor.getString(55);
                           if(talukIdData != null){
                             talukIdData = talukIdData.toString();
                             hashMap.put("talukId", talukIdData);
@@ -1124,8 +1245,8 @@ public class PatientGroupDb{
                                                 
                                 
                                                             String districtIdData = "";
-                        if(cursor.getString(49) != null){
-                          districtIdData = cursor.getString(49);
+                        if(cursor.getString(56) != null){
+                          districtIdData = cursor.getString(56);
                           if(districtIdData != null){
                             districtIdData = districtIdData.toString();
                             hashMap.put("districtId", districtIdData);

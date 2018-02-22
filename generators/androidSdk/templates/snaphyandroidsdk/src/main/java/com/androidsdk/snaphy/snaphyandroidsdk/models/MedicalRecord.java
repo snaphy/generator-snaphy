@@ -119,6 +119,27 @@ public class MedicalRecord extends Model {
             
 
             
+                private double recordNumber;
+                /* Adding Getter and Setter methods */
+                public double getRecordNumber(){
+                    return recordNumber;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setRecordNumber(double recordNumber){
+                    this.recordNumber = recordNumber;
+                    //Update hashMap value..
+                    hashMap.put("recordNumber", recordNumber);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
                 private String type;
                 /* Adding Getter and Setter methods */
                 public String getType(){
@@ -139,21 +160,19 @@ public class MedicalRecord extends Model {
         
             
 
-                private DataList<Map<String, Object>> records;
-                /* Adding Getter and Setter methods */
-                public DataList<Map<String, Object>> getRecords(){
-                    return records;
-                }
-
-                /* Adding Getter and Setter methods */
-                public void setRecords(DataList<Map<String, Object>> records){
-                    this.records = records;
-
-                    //TODO change this to custom array with double quotes escaped if error occured when sending to server..
-                    hashMap.put("records", records);
-                }
-
             
+                private Map<String, Object> record;
+                /* Adding Getter and Setter methods */
+                public Map<String, Object> getRecord(){
+                    return record;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setRecord(Map<String, Object> record){
+                    this.record = record;
+                    //Update Map value..
+                    hashMap.put("record", record);
+                }
 
             
             

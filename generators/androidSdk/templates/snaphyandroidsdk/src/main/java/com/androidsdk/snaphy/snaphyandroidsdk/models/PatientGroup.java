@@ -926,6 +926,153 @@ public class PatientGroup extends Model {
             
 
             
+                private String lineOne;
+                /* Adding Getter and Setter methods */
+                public String getLineOne(){
+                    return lineOne;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setLineOne(String lineOne){
+                    this.lineOne = lineOne;
+                    //Update hashMap value..
+                    hashMap.put("lineOne", lineOne);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String lineTwo;
+                /* Adding Getter and Setter methods */
+                public String getLineTwo(){
+                    return lineTwo;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setLineTwo(String lineTwo){
+                    this.lineTwo = lineTwo;
+                    //Update hashMap value..
+                    hashMap.put("lineTwo", lineTwo);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String flagType;
+                /* Adding Getter and Setter methods */
+                public String getFlagType(){
+                    return flagType;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setFlagType(String flagType){
+                    this.flagType = flagType;
+                    //Update hashMap value..
+                    hashMap.put("flagType", flagType);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private double age;
+                /* Adding Getter and Setter methods */
+                public double getAge(){
+                    return age;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setAge(double age){
+                    this.age = age;
+                    //Update hashMap value..
+                    hashMap.put("age", age);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String gender;
+                /* Adding Getter and Setter methods */
+                public String getGender(){
+                    return gender;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setGender(String gender){
+                    this.gender = gender;
+                    //Update hashMap value..
+                    hashMap.put("gender", gender);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private Map<String, Object> profilePic;
+                /* Adding Getter and Setter methods */
+                public Map<String, Object> getProfilePic(){
+                    return profilePic;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setProfilePic(Map<String, Object> profilePic){
+                    this.profilePic = profilePic;
+                    //Update Map value..
+                    hashMap.put("profilePic", profilePic);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String uhid;
+                /* Adding Getter and Setter methods */
+                public String getUhid(){
+                    return uhid;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setUhid(String uhid){
+                    this.uhid = uhid;
+                    //Update hashMap value..
+                    hashMap.put("uhid", uhid);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
             
         
     
@@ -1415,6 +1562,9 @@ public class PatientGroup extends Model {
                         
                         
                         
+                        
+                        
+                        
                     
 
                 
@@ -1666,6 +1816,9 @@ public class PatientGroup extends Model {
                             
                          
                             
+                        
+                        
+                        
                         
                         
                         
@@ -2097,6 +2250,9 @@ public class PatientGroup extends Model {
                         
                         
                         
+                        
+                        
+                        
                     
 
                 
@@ -2348,6 +2504,9 @@ public class PatientGroup extends Model {
                             
                          
                             
+                        
+                        
+                        
                         
                         
                         
@@ -2779,6 +2938,9 @@ public class PatientGroup extends Model {
                         
                         
                         
+                        
+                        
+                        
                     
 
                 
@@ -3030,6 +3192,9 @@ public class PatientGroup extends Model {
                             
                          
                             
+                        
+                        
+                        
                         
                         
                         
@@ -3461,6 +3626,9 @@ public class PatientGroup extends Model {
                         
                         
                         
+                        
+                        
+                        
                     
 
                 
@@ -3802,6 +3970,9 @@ public class PatientGroup extends Model {
                         
                         
                         
+                        
+                        
+                        
                     
 
                 
@@ -4053,6 +4224,9 @@ public class PatientGroup extends Model {
                             
                          
                             
+                        
+                        
+                        
                         
                         
                         
@@ -4721,6 +4895,9 @@ public class PatientGroup extends Model {
                             
                          
                             
+                        
+                        
+                        
                         
                         
                         
@@ -5482,6 +5659,9 @@ public class PatientGroup extends Model {
                         
                         
                         
+                        
+                        
+                        
                     
 
                 
@@ -5736,6 +5916,9 @@ public class PatientGroup extends Model {
                             
                          
                             
+                        
+                        
+                        
                         
                         
                         
@@ -6167,6 +6350,9 @@ public class PatientGroup extends Model {
                         
                         
                         
+                        
+                        
+                        
                     
 
                 
@@ -6418,6 +6604,9 @@ public class PatientGroup extends Model {
                             
                          
                             
+                        
+                        
+                        
                         
                         
                         
@@ -7176,6 +7365,9 @@ public class PatientGroup extends Model {
                         
                         
                         
+                        
+                        
+                        
                     
 
                 
@@ -7757,6 +7949,9 @@ public class PatientGroup extends Model {
                                     } //method def ends here.
                                  
                             
+                        
+                        
+                        
                         
                         
                         

@@ -17,16 +17,16 @@ import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
-import com.androidsdk.snaphy.snaphyandroidsdk.models.Bill;
+import com.androidsdk.snaphy.snaphyandroidsdk.models.HospitalBill;
 //Import self repository..
-import com.androidsdk.snaphy.snaphyandroidsdk.repository.BillRepository;
+import com.androidsdk.snaphy.snaphyandroidsdk.repository.HospitalBillRepository;
 import com.strongloop.android.loopback.RestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
 */
 
-public class BillDb{
+public class HospitalBillDb{
 
     // All Static variables
     RestAdapter restAdapter;
@@ -41,29 +41,29 @@ public class BillDb{
     // Contacts table name
     private static String TABLE;
 
-  public BillDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+  public HospitalBillDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     //super(context, DATABASE_NAME, null, DATABASE_VERSION);
     this.context = context;
     this.restAdapter = restAdapter;
-    TABLE = "Bill";
+    TABLE = "HospitalBill";
     this.DATABASE_NAME = DATABASE_NAME;
     SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
     DbHandler.getInstance(context, DATABASE_NAME).onCreate(db);
   }
 
 
-    public void insert__db (final String id, final Bill _modelData) {
+    public void insert__db (final String id, final HospitalBill _modelData) {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
       // Inserting Row
       ContentValues values = getContentValues(_modelData);
-      db.insert("`Bill`", null, values);
+      db.insert("`HospitalBill`", null, values);
     }
 
 
 
 
 
-    public ContentValues getContentValues(Bill _modelData){
+    public ContentValues getContentValues(HospitalBill _modelData){
       ContentValues values = new ContentValues();
                        
                                                             String addedData = "";
@@ -80,37 +80,24 @@ public class BillDb{
                         }
                                   
                                 
-                                                            String typeData = "";
-                        if(_modelData.getType() != null){
-                          typeData = _modelData.getType().toString();
-                          values.put("`type`", typeData);
-                        }
+                                                            double totalPaymentData;
+                        totalPaymentData = (double)_modelData.getTotalPayment();
+                        values.put("`totalPayment`", totalPaymentData);
                                   
                                 
-                                                            String subBillCategoryNameData = "";
-                        if(_modelData.getSubBillCategoryName() != null){
-                          subBillCategoryNameData = _modelData.getSubBillCategoryName().toString();
-                          values.put("`subBillCategoryName`", subBillCategoryNameData);
-                        }
+                                                            double totalChargeData;
+                        totalChargeData = (double)_modelData.getTotalCharge();
+                        values.put("`totalCharge`", totalChargeData);
                                   
                                 
-                                                            String facilityData = "";
-                        if(_modelData.getFacility() != null){
-                          facilityData = _modelData.getFacility().toString();
-                          values.put("`facility`", facilityData);
-                        }
+                                                            double totalDiscountData;
+                        totalDiscountData = (double)_modelData.getTotalDiscount();
+                        values.put("`totalDiscount`", totalDiscountData);
                                   
                                 
-                                                            double amountData;
-                        amountData = (double)_modelData.getAmount();
-                        values.put("`amount`", amountData);
-                                  
-                                
-                                                            String descriptionData = "";
-                        if(_modelData.getDescription() != null){
-                          descriptionData = _modelData.getDescription().toString();
-                          values.put("`description`", descriptionData);
-                        }
+                                                            double totalOutstandingBalanceData;
+                        totalOutstandingBalanceData = (double)_modelData.getTotalOutstandingBalance();
+                        values.put("`totalOutstandingBalance`", totalOutstandingBalanceData);
                                   
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
@@ -121,96 +108,6 @@ public class BillDb{
                                 //idData = _modelData.getId().toString();
                                 idData = (String) method.invoke(_modelData);
                                 values.put("`id`", idData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String patientGroupIdData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getPatientGroupId");
-                              if(method.invoke(_modelData) != null){
-                                //patientGroupIdData = _modelData.getPatientGroupId().toString();
-                                patientGroupIdData = (String) method.invoke(_modelData);
-                                values.put("`patientGroupId`", patientGroupIdData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String hospitalUserIdData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getHospitalUserId");
-                              if(method.invoke(_modelData) != null){
-                                //hospitalUserIdData = _modelData.getHospitalUserId().toString();
-                                hospitalUserIdData = (String) method.invoke(_modelData);
-                                values.put("`hospitalUserId`", hospitalUserIdData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String hospitalIdData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getHospitalId");
-                              if(method.invoke(_modelData) != null){
-                                //hospitalIdData = _modelData.getHospitalId().toString();
-                                hospitalIdData = (String) method.invoke(_modelData);
-                                values.put("`hospitalId`", hospitalIdData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String patientIdData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getPatientId");
-                              if(method.invoke(_modelData) != null){
-                                //patientIdData = _modelData.getPatientId().toString();
-                                patientIdData = (String) method.invoke(_modelData);
-                                values.put("`patientId`", patientIdData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String billCategoryIdData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getBillCategoryId");
-                              if(method.invoke(_modelData) != null){
-                                //billCategoryIdData = _modelData.getBillCategoryId().toString();
-                                billCategoryIdData = (String) method.invoke(_modelData);
-                                values.put("`billCategoryId`", billCategoryIdData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String subBillCategoryIdData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getSubBillCategoryId");
-                              if(method.invoke(_modelData) != null){
-                                //subBillCategoryIdData = _modelData.getSubBillCategoryId().toString();
-                                subBillCategoryIdData = (String) method.invoke(_modelData);
-                                values.put("`subBillCategoryId`", subBillCategoryIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -228,10 +125,10 @@ public class BillDb{
 
 
     // Getting single c
-    public   Bill get__db(String id) {
+    public   HospitalBill get__db(String id) {
         if (id != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("Bill", null, "id=?", new String[]{id}, null, null, null, null);
+            Cursor cursor = db.query("HospitalBill", null, "id=?", new String[]{id}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -240,9 +137,9 @@ public class BillDb{
                     cursor.close();
                     //db.close(); // Closing database connection
                     if (hashMap != null) {
-                        BillRepository repo = restAdapter.createRepository(BillRepository.class);
+                        HospitalBillRepository repo = restAdapter.createRepository(HospitalBillRepository.class);
                         repo.addStorage(context);
-                        return (Bill)repo.createObject(hashMap);
+                        return (HospitalBill)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -261,10 +158,10 @@ public class BillDb{
 
 
     // Getting single cont
-    public   Bill get__db(String whereKey, String whereKeyValue) {
+    public   HospitalBill get__db(String whereKey, String whereKeyValue) {
         if (whereKeyValue != null) {
             SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
-            Cursor cursor = db.query("`Bill`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
+            Cursor cursor = db.query("`HospitalBill`", null, "`" + whereKey + "` =?", new String[]{whereKeyValue}, null, null, null, null);
             if (cursor != null) {
                 if (!cursor.moveToFirst() || cursor.getCount() == 0){
                     return null;
@@ -275,9 +172,9 @@ public class BillDb{
                     //db.close(); // Closing database connection
 
                     if (hashMap != null) {
-                        BillRepository repo = restAdapter.createRepository(BillRepository.class);
+                        HospitalBillRepository repo = restAdapter.createRepository(HospitalBillRepository.class);
                         repo.addStorage(context);
-                        return (Bill)repo.createObject(hashMap);
+                        return (HospitalBill)repo.createObject(hashMap);
                     } else {
                         return null;
                     }
@@ -319,120 +216,44 @@ public class BillDb{
                         }
                                                 
                                 
-                                                            String typeData = "";
-                        if(cursor.getString(2) != null){
-                          typeData = cursor.getString(2);
-                          if(typeData != null){
-                            typeData = (String)typeData;
-                            hashMap.put("type", typeData);
-                          }
-                        }
-                                                
-                                
-                                                            String subBillCategoryNameData = "";
-                        if(cursor.getString(3) != null){
-                          subBillCategoryNameData = cursor.getString(3);
-                          if(subBillCategoryNameData != null){
-                            subBillCategoryNameData = (String)subBillCategoryNameData;
-                            hashMap.put("subBillCategoryName", subBillCategoryNameData);
-                          }
-                        }
-                                                
-                                
-                                                            String facilityData = "";
-                        if(cursor.getString(4) != null){
-                          facilityData = cursor.getString(4);
-                          if(facilityData != null){
-                            facilityData = (String)facilityData;
-                            hashMap.put("facility", facilityData);
-                          }
-                        }
-                                                
-                                
-                                                            double amountData = (double)0;
-                          amountData = cursor.getInt(5);
-                          amountData = (double)amountData;
-                          hashMap.put("amount", amountData);
+                                                            double totalPaymentData = (double)0;
+                          totalPaymentData = cursor.getInt(2);
+                          totalPaymentData = (double)totalPaymentData;
+                          hashMap.put("totalPayment", totalPaymentData);
 
 
                                                 
                                 
-                                                            String descriptionData = "";
-                        if(cursor.getString(6) != null){
-                          descriptionData = cursor.getString(6);
-                          if(descriptionData != null){
-                            descriptionData = (String)descriptionData;
-                            hashMap.put("description", descriptionData);
-                          }
-                        }
+                                                            double totalChargeData = (double)0;
+                          totalChargeData = cursor.getInt(3);
+                          totalChargeData = (double)totalChargeData;
+                          hashMap.put("totalCharge", totalChargeData);
+
+
+                                                
+                                
+                                                            double totalDiscountData = (double)0;
+                          totalDiscountData = cursor.getInt(4);
+                          totalDiscountData = (double)totalDiscountData;
+                          hashMap.put("totalDiscount", totalDiscountData);
+
+
+                                                
+                                
+                                                            double totalOutstandingBalanceData = (double)0;
+                          totalOutstandingBalanceData = cursor.getInt(5);
+                          totalOutstandingBalanceData = (double)totalOutstandingBalanceData;
+                          hashMap.put("totalOutstandingBalance", totalOutstandingBalanceData);
+
+
                                                 
                                 
                                                             String idData = "";
-                        if(cursor.getString(7) != null){
-                          idData = cursor.getString(7);
+                        if(cursor.getString(6) != null){
+                          idData = cursor.getString(6);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
-                          }
-                        }
-                                                
-                                
-                                                            String patientGroupIdData = "";
-                        if(cursor.getString(8) != null){
-                          patientGroupIdData = cursor.getString(8);
-                          if(patientGroupIdData != null){
-                            patientGroupIdData = patientGroupIdData.toString();
-                            hashMap.put("patientGroupId", patientGroupIdData);
-                          }
-                        }
-                                                
-                                
-                                                            String hospitalUserIdData = "";
-                        if(cursor.getString(9) != null){
-                          hospitalUserIdData = cursor.getString(9);
-                          if(hospitalUserIdData != null){
-                            hospitalUserIdData = hospitalUserIdData.toString();
-                            hashMap.put("hospitalUserId", hospitalUserIdData);
-                          }
-                        }
-                                                
-                                
-                                                            String hospitalIdData = "";
-                        if(cursor.getString(10) != null){
-                          hospitalIdData = cursor.getString(10);
-                          if(hospitalIdData != null){
-                            hospitalIdData = hospitalIdData.toString();
-                            hashMap.put("hospitalId", hospitalIdData);
-                          }
-                        }
-                                                
-                                
-                                                            String patientIdData = "";
-                        if(cursor.getString(11) != null){
-                          patientIdData = cursor.getString(11);
-                          if(patientIdData != null){
-                            patientIdData = patientIdData.toString();
-                            hashMap.put("patientId", patientIdData);
-                          }
-                        }
-                                                
-                                
-                                                            String billCategoryIdData = "";
-                        if(cursor.getString(12) != null){
-                          billCategoryIdData = cursor.getString(12);
-                          if(billCategoryIdData != null){
-                            billCategoryIdData = billCategoryIdData.toString();
-                            hashMap.put("billCategoryId", billCategoryIdData);
-                          }
-                        }
-                                                
-                                
-                                                            String subBillCategoryIdData = "";
-                        if(cursor.getString(13) != null){
-                          subBillCategoryIdData = cursor.getString(13);
-                          if(subBillCategoryIdData != null){
-                            subBillCategoryIdData = subBillCategoryIdData.toString();
-                            hashMap.put("subBillCategoryId", subBillCategoryIdData);
                           }
                         }
                                                 
@@ -445,7 +266,7 @@ public class BillDb{
 
 
 
-    public void upsert__db(String id, Bill model){
+    public void upsert__db(String id, HospitalBill model){
         if(count__db(id) != 0){
             update__db(id, model);
         }else{
@@ -456,31 +277,31 @@ public class BillDb{
 
 
     // Getting All Contacts
-    public DataList<Bill>  getAll__db() {
-        DataList<Bill> modelList = new DataList<Bill>();
+    public DataList<HospitalBill>  getAll__db() {
+        DataList<HospitalBill> modelList = new DataList<HospitalBill>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `Bill`";
+        String selectQuery = "SELECT  * FROM `HospitalBill`";
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<Bill>) modelList;
+            return (DataList<HospitalBill>) modelList;
         }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    BillRepository repo = restAdapter.createRepository(BillRepository.class);
+                    HospitalBillRepository repo = restAdapter.createRepository(HospitalBillRepository.class);
                     repo.addStorage(context);
-                    modelList.add((Bill)repo.createObject(hashMap));
+                    modelList.add((HospitalBill)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
         }
         cursor.close();
         //db.close();
         // return contact list
-        return (DataList<Bill>) modelList;
+        return (DataList<HospitalBill>) modelList;
     }
 
 
@@ -581,19 +402,19 @@ public class BillDb{
 
 
     // Getting All Data where
-    public DataList<Bill>  getAll__db(HashMap<String, Object> whereKeyValue) {
+    public DataList<HospitalBill>  getAll__db(HashMap<String, Object> whereKeyValue) {
         return getAll__db(whereKeyValue, null, 0, 0);
     }
 
 
 
     // Getting All Data where and sort column according to date wise..
-    public DataList<Bill>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip) {
-        DataList<Bill> modelList = new DataList<Bill>();
+    public DataList<HospitalBill>  getAll__db(HashMap<String, Object> whereKeyValue, String orderBy, int limit, int skip) {
+        DataList<HospitalBill> modelList = new DataList<HospitalBill>();
         String whereQuery = getWhereQuery(whereKeyValue);
         String selectQuery;
         if(orderBy != null){
-            selectQuery = "SELECT  * FROM `Bill` " + whereQuery  + " ORDER BY " + orderBy ;
+            selectQuery = "SELECT  * FROM `HospitalBill` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
@@ -603,9 +424,9 @@ public class BillDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                selectQuery = "SELECT  * FROM Bill " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
+                selectQuery = "SELECT  * FROM HospitalBill " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                selectQuery = "SELECT  * FROM Bill " + whereQuery  + " LIMIT -1 OFFSET " + skip;
+                selectQuery = "SELECT  * FROM HospitalBill " + whereQuery  + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -615,27 +436,27 @@ public class BillDb{
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<Bill>) modelList;
+            return (DataList<HospitalBill>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    BillRepository repo = restAdapter.createRepository(BillRepository.class);
+                    HospitalBillRepository repo = restAdapter.createRepository(HospitalBillRepository.class);
                     repo.addStorage(context);
-                    modelList.add((Bill)repo.createObject(hashMap));
+                    modelList.add((HospitalBill)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
         cursor.close();
         // return contact list
-        return (DataList<Bill>) modelList;
+        return (DataList<HospitalBill>) modelList;
     }
 
 
 
     // Getting All Data where
-    public DataList<Bill>  getAll__db(HashMap<String, Object> whereKeyValue, int limit, int skip) {
+    public DataList<HospitalBill>  getAll__db(HashMap<String, Object> whereKeyValue, int limit, int skip) {
         return getAll__db(whereKeyValue, null,  limit, skip);
     }
 
@@ -654,7 +475,7 @@ public class BillDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(orderBy != null){
-            countQuery = "SELECT  * FROM `Bill` " + whereQuery  + " ORDER BY " + orderBy ;
+            countQuery = "SELECT  * FROM `HospitalBill` " + whereQuery  + " ORDER BY " + orderBy ;
             if(limit != 0){
                 // Select All Query
                 countQuery = countQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
@@ -664,9 +485,9 @@ public class BillDb{
         }else{
             if(limit != 0){
                 // Select All Query
-                countQuery = "SELECT  * FROM `Bill` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
+                countQuery = "SELECT  * FROM `HospitalBill` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
             }else{
-                countQuery = "SELECT  * FROM `Bill` " + whereQuery + " LIMIT -1 OFFSET " + skip;
+                countQuery = "SELECT  * FROM `HospitalBill` " + whereQuery + " LIMIT -1 OFFSET " + skip;
             }
         }
 
@@ -690,9 +511,9 @@ public class BillDb{
         String whereQuery = getWhereQuery(whereKeyValue);
         String countQuery;
         if(limit != 0){
-            countQuery = "SELECT  * FROM `Bill` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
+            countQuery = "SELECT  * FROM `HospitalBill` " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
         }else{
-            countQuery = "SELECT  * FROM `Bill` " + whereQuery + " LIMIT -1 OFFSET " + skip;
+            countQuery = "SELECT  * FROM `HospitalBill` " + whereQuery + " LIMIT -1 OFFSET " + skip;
         }
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
@@ -722,7 +543,7 @@ public class BillDb{
             values.put("_DATA_UPDATED", 0);
             String where = getWhere(whereKeyValue);
             // updating row
-            db.update("`Bill`", values, "_DATA_UPDATED = 1 AND " + where, null);
+            db.update("`HospitalBill`", values, "_DATA_UPDATED = 1 AND " + where, null);
     }
 
 
@@ -730,7 +551,7 @@ public class BillDb{
     public void deleteOldData__db(final HashMap<String, Object> whereKeyValue) {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
       String where = getWhere(whereKeyValue);
-      db.delete("`Bill`", "_DATA_UPDATED = 0 AND " + where , null);
+      db.delete("`HospitalBill`", "_DATA_UPDATED = 0 AND " + where , null);
     }
 
 
@@ -741,7 +562,7 @@ public class BillDb{
     public void delete__db(final HashMap<String, Object> whereKeyValue) {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
       String where = getWhere(whereKeyValue);
-      db.delete("`Bill`", where , null);
+      db.delete("`HospitalBill`", where , null);
     }
 
 
@@ -751,30 +572,30 @@ public class BillDb{
 
 
     // Getting All Data where
-    public DataList<Bill>  getAll__db(String whereKey, String whereKeyValue) {
-        DataList<Bill> modelList = new DataList<Bill>();
+    public DataList<HospitalBill>  getAll__db(String whereKey, String whereKeyValue) {
+        DataList<HospitalBill> modelList = new DataList<HospitalBill>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM `Bill` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+        String selectQuery = "SELECT  * FROM `HospitalBill` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
 
         SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         // looping through all rows and adding to list
          if (!cursor.moveToFirst() || cursor.getCount() == 0){
-            return (DataList<Bill>) modelList;
+            return (DataList<HospitalBill>) modelList;
          }else{
             do {
 
                 HashMap<String, Object> hashMap = parseCursor(cursor);
                 if(hashMap != null){
-                    BillRepository repo = restAdapter.createRepository(BillRepository.class);
+                    HospitalBillRepository repo = restAdapter.createRepository(HospitalBillRepository.class);
                     repo.addStorage(context);
-                    modelList.add((Bill)repo.createObject(hashMap));
+                    modelList.add((HospitalBill)repo.createObject(hashMap));
                 }
             } while (cursor.moveToNext());
          }
         cursor.close();
-        return (DataList<Bill>) modelList;
+        return (DataList<HospitalBill>) modelList;
     }
 
 
@@ -786,7 +607,7 @@ public class BillDb{
      * @return
      */
     public int count__db(String whereKey, String whereKeyValue){
-      String countQuery = "SELECT  * FROM `Bill` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
+      String countQuery = "SELECT  * FROM `HospitalBill` WHERE `" + whereKey +"` ='"+ whereKeyValue + "'" ;
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
       Cursor cursor = db.rawQuery(countQuery, null);
       int count = cursor.getCount();
@@ -801,23 +622,23 @@ public class BillDb{
       ContentValues values = new ContentValues();
       values.put("_DATA_UPDATED", 0);
       // updating row
-      db.update("`Bill`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+      db.update("`HospitalBill`", values, "_DATA_UPDATED = 1 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
     }
 
 
     // Delete Old data with where clause
     public void deleteOldData__db(final String whereKey, final String whereKeyValue) {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-      db.delete("`Bill`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
+      db.delete("`HospitalBill`", "_DATA_UPDATED = 0 AND `" + whereKey + "` = ?", new String[]{whereKeyValue});
     }
 
 
     //Update multiple data at once..
-    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final Bill _modelData ){
+    public void updateAll__db(final HashMap<String, Object> whereKeyValue, final HospitalBill _modelData ){
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
       ContentValues values = getContentValues(_modelData);
       String where = getWhere(whereKeyValue);
-      db.update("`Bill`", values, where, null);
+      db.update("`HospitalBill`", values, where, null);
     }
 
 
@@ -832,11 +653,11 @@ public class BillDb{
 
 
     // Updating single contact
-    public void update__db(final String id,   final Bill _modelData) {
+    public void update__db(final String id,   final HospitalBill _modelData) {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
       ContentValues values = getContentValues(_modelData);
       // updating row
-      db.update("`Bill`", values, "id = ?", new String[] { id });
+      db.update("`HospitalBill`", values, "id = ?", new String[] { id });
     }
 
 
@@ -846,14 +667,14 @@ public class BillDb{
       ContentValues values = new ContentValues();
       values.put("_DATA_UPDATED", 0);
       // updating row
-      db.update("`Bill`", values, "_DATA_UPDATED = 1", null);
+      db.update("`HospitalBill`", values, "_DATA_UPDATED = 1", null);
     }
 
 
     // Delete Old data
     public void deleteOldData__db() {
       SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
-      db.delete("`Bill`", "_DATA_UPDATED = 0", null);
+      db.delete("`HospitalBill`", "_DATA_UPDATED = 0", null);
     }
 
 

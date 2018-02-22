@@ -863,7 +863,25 @@ public class PatientGroupRepository extends ModelRepository<PatientGroup> {
     
 
     
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getRecentlyAddedPatient_", "POST"), "PatientGroup.getRecentlyAddedPatient_");
+    
+
+    
+    
+
+    
+
+    
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/changeBedNumber", "POST"), "PatientGroup.changeBedNumber");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/findAdmittedPatientsOfflineFinal", "POST"), "PatientGroup.findAdmittedPatientsOfflineFinal");
     
 
     
@@ -882,6 +900,15 @@ public class PatientGroupRepository extends ModelRepository<PatientGroup> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchPatientByIdOffline", "POST"), "PatientGroup.fetchPatientByIdOffline");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchPatientByIdFinalOffline", "POST"), "PatientGroup.fetchPatientByIdFinalOffline");
     
 
     
@@ -5831,6 +5858,61 @@ public class PatientGroupRepository extends ModelRepository<PatientGroup> {
         
     
         
+            //Method getRecentlyAddedPatient_ definition
+            public void getRecentlyAddedPatient_(  Map<String,  ? extends Object> ctx,  String hospitalId,  String facility, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("ctx", ctx);
+                
+                        hashMapObject.put("hospitalId", hospitalId);
+                
+                        hashMapObject.put("facility", facility);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getRecentlyAddedPatient_", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method getRecentlyAddedPatient_ definition ends here..
+
+            
+
+        
+    
+        
             //Method changeBedNumber definition
             public void changeBedNumber(  Map<String,  ? extends Object> ctx,  String patientGroupId,  String ipdBedId,  String oldIpdBedId,  String hospitalId, final ObjectCallback<PatientGroup> callback){
 
@@ -5916,6 +5998,103 @@ public class PatientGroupRepository extends ModelRepository<PatientGroup> {
                 
 
             }//Method changeBedNumber definition ends here..
+
+            
+
+        
+    
+        
+            //Method findAdmittedPatientsOfflineFinal definition
+            public void findAdmittedPatientsOfflineFinal(  String hospitalId,  String hospitalUserId,  String facility,  String searchQuery,  double skip,  double limit,  String filterType,  String lastSyncDate, final DataListCallback<PatientGroup> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("hospitalId", hospitalId);
+                
+                        hashMapObject.put("hospitalUserId", hospitalUserId);
+                
+                        hashMapObject.put("facility", facility);
+                
+                        hashMapObject.put("searchQuery", searchQuery);
+                
+                        hashMapObject.put("skip", skip);
+                
+                        hashMapObject.put("limit", limit);
+                
+                        hashMapObject.put("filterType", filterType);
+                
+                        hashMapObject.put("lastSyncDate", lastSyncDate);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("findAdmittedPatientsOfflineFinal", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<PatientGroup> patientGroupList = new DataList<PatientGroup>();
+                                    PatientGroupRepository patientGroupRepo = getRestAdapter().createRepository(PatientGroupRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = patientGroupRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(patientGroupRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        PatientGroup patientGroup = patientGroupRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = patientGroup.getClass().getMethod("save__db");
+                                                      method.invoke(patientGroup);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        patientGroupList.add(patientGroup);
+                                    }
+                                    callback.onSuccess(patientGroupList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method findAdmittedPatientsOfflineFinal definition ends here..
 
             
 
@@ -6034,6 +6213,89 @@ public class PatientGroupRepository extends ModelRepository<PatientGroup> {
                 
 
             }//Method fetchPatientByIdOffline definition ends here..
+
+            
+
+        
+    
+        
+            //Method fetchPatientByIdFinalOffline definition
+            public void fetchPatientByIdFinalOffline(  String patientGroupId, final ObjectCallback<PatientGroup> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("patientGroupId", patientGroupId);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("fetchPatientByIdFinalOffline", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    PatientGroupRepository patientGroupRepo = getRestAdapter().createRepository(PatientGroupRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = patientGroupRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(patientGroupRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //patientGroupRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    PatientGroup patientGroup = patientGroupRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = patientGroup.getClass().getMethod("save__db");
+                                                    method.invoke(patientGroup);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(patientGroup);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method fetchPatientByIdFinalOffline definition ends here..
 
             
 

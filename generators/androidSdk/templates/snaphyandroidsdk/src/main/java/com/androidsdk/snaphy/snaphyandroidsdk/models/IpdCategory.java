@@ -140,6 +140,27 @@ public class IpdCategory extends Model {
             
 
             
+                private String hospitalName;
+                /* Adding Getter and Setter methods */
+                public String getHospitalName(){
+                    return hospitalName;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setHospitalName(String hospitalName){
+                    this.hospitalName = hospitalName;
+                    //Update hashMap value..
+                    hashMap.put("hospitalName", hospitalName);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
             
         
     
@@ -753,6 +774,7 @@ public class IpdCategory extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -943,6 +965,7 @@ public class IpdCategory extends Model {
                             
                          
                             
+                        
                         
                         
                         

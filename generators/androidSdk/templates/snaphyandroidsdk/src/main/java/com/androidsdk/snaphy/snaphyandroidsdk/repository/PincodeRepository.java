@@ -539,6 +539,15 @@ public class PincodeRepository extends ModelRepository<Pincode> {
     
 
     
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchDataUsingDistrict", "POST"), "Pincode.fetchDataUsingDistrict");
+    
+
+    
+    
+
+    
     
 
     
@@ -3355,6 +3364,93 @@ public class PincodeRepository extends ModelRepository<Pincode> {
                 
 
             }//Method searchByDistrictOrPincode definition ends here..
+
+            
+
+        
+    
+        
+            //Method fetchDataUsingDistrict definition
+            public void fetchDataUsingDistrict(  String hospitalId,  double skip,  double limit, final DataListCallback<Pincode> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("hospitalId", hospitalId);
+                
+                        hashMapObject.put("skip", skip);
+                
+                        hashMapObject.put("limit", limit);
+                
+
+                
+
+
+                
+
+                
+                    invokeStaticMethod("fetchDataUsingDistrict", hashMapObject, new Adapter.JsonArrayCallback() {
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONArray response) {
+                            
+                                if(response != null){
+                                    //Now converting jsonObject to list
+                                    DataList<Map<String, Object>> result = (DataList) Util.fromJson(response);
+                                    DataList<Pincode> pincodeList = new DataList<Pincode>();
+                                    PincodeRepository pincodeRepo = getRestAdapter().createRepository(PincodeRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = pincodeRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(pincodeRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+                                    }
+                                    for (Map<String, Object> obj : result) {
+
+                                        Pincode pincode = pincodeRepo.createObject(obj);
+
+                                        //Add to database if persistent storage required..
+                                        if(isSTORE_LOCALLY()){
+                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                            try {
+                                                      Method method = pincode.getClass().getMethod("save__db");
+                                                      method.invoke(pincode);
+
+                                            } catch (Exception e) {
+                                                Log.e("Database Error", e.toString());
+                                            }
+                                        }
+
+                                        pincodeList.add(pincode);
+                                    }
+                                    callback.onSuccess(pincodeList);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+            }//Method fetchDataUsingDistrict definition ends here..
 
             
 

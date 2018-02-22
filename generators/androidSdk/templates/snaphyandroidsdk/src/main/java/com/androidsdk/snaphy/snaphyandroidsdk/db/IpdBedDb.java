@@ -94,6 +94,15 @@ public class IpdBedDb{
                         }
                                   
                                 
+                                                            int isBedOccupiedData = 0;
+                        if(_modelData.getIsBedOccupied()){
+                          isBedOccupiedData = 1;
+                        }else{
+                          isBedOccupiedData = 0;
+                        }
+                        values.put("`isBedOccupied`", isBedOccupiedData);
+                                  
+                                
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
@@ -102,21 +111,6 @@ public class IpdBedDb{
                                 //idData = _modelData.getId().toString();
                                 idData = (String) method.invoke(_modelData);
                                 values.put("`id`", idData);
-                              }
-                        } catch (Exception e) {
-                          Log.e("Database Error", e.toString());
-                        }
-
-                                  
-                                
-                                                            //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
-                        String hospitalIdData = "";
-                        try {
-                              Method method = _modelData.getClass().getMethod("getHospitalId");
-                              if(method.invoke(_modelData) != null){
-                                //hospitalIdData = _modelData.getHospitalId().toString();
-                                hospitalIdData = (String) method.invoke(_modelData);
-                                values.put("`hospitalId`", hospitalIdData);
                               }
                         } catch (Exception e) {
                           Log.e("Database Error", e.toString());
@@ -260,22 +254,22 @@ public class IpdBedDb{
                         }
                                                 
                                 
+                                                            boolean isBedOccupiedData = false;
+                        int tempisBedOccupiedData = cursor.getInt(4);
+                        if( tempisBedOccupiedData > 0){
+                          isBedOccupiedData = true;
+                        }else{
+                          isBedOccupiedData = false;
+                        }
+                        hashMap.put("isBedOccupied", isBedOccupiedData);
+                                                
+                                
                                                             String idData = "";
-                        if(cursor.getString(4) != null){
-                          idData = cursor.getString(4);
+                        if(cursor.getString(5) != null){
+                          idData = cursor.getString(5);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
-                          }
-                        }
-                                                
-                                
-                                                            String hospitalIdData = "";
-                        if(cursor.getString(5) != null){
-                          hospitalIdData = cursor.getString(5);
-                          if(hospitalIdData != null){
-                            hospitalIdData = hospitalIdData.toString();
-                            hashMap.put("hospitalId", hospitalIdData);
                           }
                         }
                                                 

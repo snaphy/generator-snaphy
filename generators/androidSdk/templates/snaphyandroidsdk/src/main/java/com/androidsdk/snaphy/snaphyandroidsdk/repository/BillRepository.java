@@ -75,6 +75,13 @@ import com.androidsdk.snaphy.snaphyandroidsdk.db.BillDb;
         
     
 
+    
+            import com.androidsdk.snaphy.snaphyandroidsdk.models.Hospital;
+            import com.androidsdk.snaphy.snaphyandroidsdk.repository.HospitalRepository;
+            
+        
+    
+
 
 
 
@@ -171,6 +178,15 @@ public class BillRepository extends ModelRepository<Bill> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:billId/hospitalUser", "GET"), "Bill.prototype.__get__hospitalUser");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/:billId/hospital", "GET"), "Bill.prototype.__get__hospital");
     
 
     
@@ -374,7 +390,7 @@ public class BillRepository extends ModelRepository<Bill> {
     
 
     
-    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/calculateBill", "POST"), "Bill.calculateBill");
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/calculateBillDetail", "POST"), "Bill.calculateBillDetail");
     
 
     
@@ -393,6 +409,39 @@ public class BillRepository extends ModelRepository<Bill> {
 
     
     contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchBillSummary", "POST"), "Bill.fetchBillSummary");
+    
+
+    
+    
+
+    
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/fetchBillDetail", "POST"), "Bill.fetchBillDetail");
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
     
 
     
@@ -679,6 +728,91 @@ public class BillRepository extends ModelRepository<Bill> {
                 
 
             }//Method get__hospitalUser definition ends here..
+
+            
+
+        
+    
+        
+            //Method get__hospital definition
+            public void get__hospital(  String billId,  Boolean refresh, final ObjectCallback<Hospital> callback){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("billId", billId);
+                
+                        hashMapObject.put("refresh", refresh);
+                
+
+                
+
+
+                
+                    
+                    
+                    invokeStaticMethod("prototype.__get__hospital", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                if(response != null){
+                                    HospitalRepository hospitalRepo = getRestAdapter().createRepository(HospitalRepository.class);
+                                    if(context != null){
+                                        try {
+                                            Method method = hospitalRepo.getClass().getMethod("addStorage", Context.class);
+                                            method.invoke(hospitalRepo, context);
+
+                                        } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                        }
+
+                                        //hospitalRepo.addStorage(context);
+                                    }
+                                    Map<String, Object> result = Util.fromJson(response);
+                                    Hospital hospital = hospitalRepo.createObject(result);
+
+                                      //Add to database if persistent storage required..
+                                      if(isSTORE_LOCALLY()){
+                                          //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
+                                          try {
+                                                    Method method = hospital.getClass().getMethod("save__db");
+                                                    method.invoke(hospital);
+
+                                          } catch (Exception e) {
+                                            Log.e("Database Error", e.toString());
+                                          }
+
+                                      }
+
+                                    callback.onSuccess(hospital);
+                                }else{
+                                    callback.onSuccess(null);
+                                }
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method get__hospital definition ends here..
 
             
 
@@ -2040,8 +2174,8 @@ public class BillRepository extends ModelRepository<Bill> {
         
     
         
-            //Method calculateBill definition
-            public void calculateBill(  Map<String,  ? extends Object> ctx,  String patientGroupId, final ObjectCallback<JSONObject>  callback ){
+            //Method calculateBillDetail definition
+            public void calculateBillDetail(  Map<String,  ? extends Object> ctx,  String patientGroupId, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -2063,7 +2197,7 @@ public class BillRepository extends ModelRepository<Bill> {
 
                 
                     
-                    invokeStaticMethod("calculateBill", hashMapObject, new Adapter.JsonObjectCallback() {
+                    invokeStaticMethod("calculateBillDetail", hashMapObject, new Adapter.JsonObjectCallback() {
                     
                     
                         @Override
@@ -2086,7 +2220,7 @@ public class BillRepository extends ModelRepository<Bill> {
 
                 
 
-            }//Method calculateBill definition ends here..
+            }//Method calculateBillDetail definition ends here..
 
             
 
@@ -2185,7 +2319,7 @@ public class BillRepository extends ModelRepository<Bill> {
     
         
             //Method fetchBillSummary definition
-            public void fetchBillSummary(  Map<String,  ? extends Object> ctx,  String patientGroupId,  double skip,  double limit, final ObjectCallback<JSONObject>  callback ){
+            public void fetchBillSummary(  Map<String,  ? extends Object> ctx,  String patientGroupId, final ObjectCallback<JSONObject>  callback ){
 
                 /**
                 Call the onBefore event
@@ -2200,10 +2334,6 @@ public class BillRepository extends ModelRepository<Bill> {
                         hashMapObject.put("ctx", ctx);
                 
                         hashMapObject.put("patientGroupId", patientGroupId);
-                
-                        hashMapObject.put("skip", skip);
-                
-                        hashMapObject.put("limit", limit);
                 
 
                 
@@ -2238,6 +2368,79 @@ public class BillRepository extends ModelRepository<Bill> {
 
             
 
+        
+    
+        
+            //Method fetchBillDetail definition
+            public void fetchBillDetail(  Map<String,  ? extends Object> ctx,  String hospitalId,  String date,  String hospitalUserId, final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+                        hashMapObject.put("ctx", ctx);
+                
+                        hashMapObject.put("hospitalId", hospitalId);
+                
+                        hashMapObject.put("date", date);
+                
+                        hashMapObject.put("hospitalUserId", hospitalUserId);
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("fetchBillDetail", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method fetchBillDetail definition ends here..
+
+            
+
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
         

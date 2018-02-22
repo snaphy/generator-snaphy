@@ -44,6 +44,13 @@ public class <%- modelName %>Db{
     // Contacts table name
     private static String TABLE;
 
+
+
+    public SQLiteDatabase getInstance(){
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+        return db;
+    }
+
   public <%- modelName %>Db(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     //super(context, DATABASE_NAME, null, DATABASE_VERSION);
     this.context = context;
@@ -399,6 +406,63 @@ public class <%- modelName %>Db{
         // return contact list
         return (DataList<<%- modelName %>>) modelList;
     }
+
+
+    //https://dmytrodanylyk.com/articles/lazy-sqlite/
+    // Getting All Data where and sort column according to date wise..
+    /**
+     * Fetch the patient group by lazy data..
+     * @param limit
+     * @param skip
+     * @return
+     */
+    public LazyList<<%- modelName %>> getAll__lazy(final int limit, final int skip, ObjectCallback<<%- modelName %>> callback, final GetUpdatedQuery getUpdatedQuery, final OnParseCursor onParseCursor) {
+
+
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
+
+        final <%- modelName %>Repository repo = restAdapter.createRepository(<%- modelName %>Repository.class);
+        repo.addStorage(context);
+        return new LazyList<>(db, new LazyList.ItemFactory<<%- modelName %>>() {
+            @Override
+            public <%- modelName %> create(Cursor cursor, int index) {
+                <%- modelName %> data;
+                cursor.moveToPosition(index);
+                HashMap<String, Object> hashMap = onParseCursor.parseCursor(cursor);
+                data = (<%- modelName %>)repo.createObject(hashMap);
+                return data;
+            }
+        }, callback, new LazyList.OnQueryChange(){
+            @Override
+            public String getUpdateQuery() {
+                String orderBy = getUpdatedQuery.onOrderByChange();
+                //Get Where Key Value..
+                HashMap<String, Object> getWhereKeyValue = getUpdatedQuery.onQueryChange();
+
+                String whereQuery = getWhereQuery(getWhereKeyValue);
+                String selectQuery;
+                if(orderBy != null){
+                    selectQuery = "SELECT  * FROM `<%- modelName %>` " + whereQuery  + " ORDER BY " + orderBy ;
+                    if(limit != 0){
+                        // Select All Query
+                        selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
+                    }else{
+                        selectQuery = selectQuery +  " " + " LIMIT -1 OFFSET " + skip;
+                    }
+                }else{
+                    if(limit != 0){
+                        // Select All Query
+                        selectQuery = "SELECT  * FROM <%- modelName %> " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
+                    }else{
+                        selectQuery = "SELECT  * FROM <%- modelName %> " + whereQuery  + " LIMIT -1 OFFSET " + skip;
+                    }
+                }
+
+                return selectQuery;
+            }
+        });
+    }
+
 
 
 

@@ -262,14 +262,14 @@ public class Patient extends User {
             
 
             
-                private double uHId;
+                private String uHId;
                 /* Adding Getter and Setter methods */
-                public double getUHId(){
+                public String getUHId(){
                     return uHId;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setUHId(double uHId){
+                public void setUHId(String uHId){
                     this.uHId = uHId;
                     //Update hashMap value..
                     hashMap.put("uHId", uHId);
@@ -575,6 +575,27 @@ public class Patient extends User {
                     this.address = address;
                     //Update hashMap value..
                     hashMap.put("address", address);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String aadharData;
+                /* Adding Getter and Setter methods */
+                public String getAadharData(){
+                    return aadharData;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setAadharData(String aadharData){
+                    this.aadharData = aadharData;
+                    //Update hashMap value..
+                    hashMap.put("aadharData", aadharData);
                 }
 
             

@@ -138,10 +138,11 @@ var generateModels = function(app, modelsRestDefinition){
 var generateDataList = function(app, modelsRestDefinition){
     //Compile the EJS template..
     var ListTemplatePath        = path.join(__dirname, constants.javaTemplates, "DataListTemplate.ejs");
+    var LazyListTemplatePath    = path.join(__dirname, constants.javaTemplates, "LazyListTemplate.ejs");
     var ListenTemplatePath      = path.join(__dirname, constants.javaTemplates, "ListenTemplate.ejs");
-    var UtilTemplatePath      = path.join(__dirname, constants.javaTemplates, "Util.ejs");
+    var UtilTemplatePath        = path.join(__dirname, constants.javaTemplates, "Util.ejs");
     //List path for adding list and subscribers..
-    var AndroidListPath       = path.join(__dirname, constants.androidMainPath, "list");
+    var AndroidListPath         = path.join(__dirname, constants.androidMainPath, "list");
     //Clean model folder and add new dir.
     rimraf.sync(AndroidListPath);
     mkdirp.sync(AndroidListPath);
@@ -150,6 +151,7 @@ var generateDataList = function(app, modelsRestDefinition){
     //Add the listen template..
     compileAndWrite({}, ListenTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("Listen") +".java");
     compileAndWrite({}, UtilTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("Util") +".java");
+    compileAndWrite({}, LazyListTemplatePath, AndroidListPath, helper.capitalizeFirstLetter("LazyList") +".java");
 
 };
 
@@ -330,7 +332,17 @@ var generateImagePresenter = function(app, modelsRestDefinition){
     var JsonObjectParser = path.join(__dirname, constants.javaTemplates, "callbacks", "JsonObjectParser.ejs");
     //Now write Model.java to the file..
     compileAndWrite({}, JsonObjectParser, callbacks, helper.capitalizeFirstLetter("JsonObjectParser") +".java");
-}
+
+    //Compile the EJS template..
+    var GetUpdatedQuery = path.join(__dirname, constants.javaTemplates, "callbacks", "GetUpdatedQuery.ejs");
+    //Now write Model.java to the file..
+    compileAndWrite({}, GetUpdatedQuery, callbacks, helper.capitalizeFirstLetter("GetUpdatedQuery") +".java");
+
+    //Compile the EJS template..
+    var OnParseCursor = path.join(__dirname, constants.javaTemplates, "callbacks", "OnParseCursor.ejs");
+    //Now write Model.java to the file..
+    compileAndWrite({}, OnParseCursor, callbacks, helper.capitalizeFirstLetter("OnParseCursor") +".java");
+};
 
 
 

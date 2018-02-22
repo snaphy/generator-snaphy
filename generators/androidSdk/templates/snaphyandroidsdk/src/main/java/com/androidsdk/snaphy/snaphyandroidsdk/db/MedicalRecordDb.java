@@ -80,6 +80,11 @@ public class MedicalRecordDb{
                         }
                                   
                                 
+                                                            double recordNumberData;
+                        recordNumberData = (double)_modelData.getRecordNumber();
+                        values.put("`recordNumber`", recordNumberData);
+                                  
+                                
                                                             String typeData = "";
                         if(_modelData.getType() != null){
                           typeData = _modelData.getType().toString();
@@ -87,15 +92,15 @@ public class MedicalRecordDb{
                         }
                                   
                                 
-                                  String recordsData = "";
-                  if(_modelData.getRecords() != null){
-                    GsonBuilder gsonBuilder = new GsonBuilder();
-                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-                    Gson gson = gsonBuilder.create();
-                    recordsData = gson.toJson(_modelData.getRecords(), DataList.class);
-                    values.put("`records`", recordsData);
-                  }
-              
+                                                            String recordData = "";
+                        if(_modelData.getRecord() != null){
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                          recordData = gson.toJson(_modelData.getRecord(), HashMap.class);
+                          values.put("`record`", recordData);
+                        }
+                                  
                                 
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
@@ -243,9 +248,17 @@ public class MedicalRecordDb{
                         }
                                                 
                                 
+                                                            double recordNumberData = (double)0;
+                          recordNumberData = cursor.getInt(2);
+                          recordNumberData = (double)recordNumberData;
+                          hashMap.put("recordNumber", recordNumberData);
+
+
+                                                
+                                
                                                             String typeData = "";
-                        if(cursor.getString(2) != null){
-                          typeData = cursor.getString(2);
+                        if(cursor.getString(3) != null){
+                          typeData = cursor.getString(3);
                           if(typeData != null){
                             typeData = (String)typeData;
                             hashMap.put("type", typeData);
@@ -253,22 +266,22 @@ public class MedicalRecordDb{
                         }
                                                 
                                 
-                                  DataList<Map<String, Object>> recordsData = new DataList<>();
-                  if(cursor.getString(3) != null){
-                    GsonBuilder gsonBuilder = new GsonBuilder();
-                    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-                    Gson gson = gsonBuilder.create();
-                    recordsData = gson.fromJson(cursor.getString(3), DataList.class);
-                    if(recordsData != null){
-                      recordsData = (DataList<Map<String, Object>>)recordsData;
-                      hashMap.put("records", recordsData);
-                    }
-                  }
-                            
+                                                            Map<String, Object> recordData = new HashMap<>();
+                        if(cursor.getString(4) != null){
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                           recordData = gson.fromJson(cursor.getString(4), Map.class);
+                          if(recordData != null){
+                            recordData = (Map<String, Object>)recordData;
+                            hashMap.put("record", recordData);
+                          }
+                        }
+                                                
                                 
                                                             String idData = "";
-                        if(cursor.getString(4) != null){
-                          idData = cursor.getString(4);
+                        if(cursor.getString(5) != null){
+                          idData = cursor.getString(5);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -277,8 +290,8 @@ public class MedicalRecordDb{
                                                 
                                 
                                                             String patientIdData = "";
-                        if(cursor.getString(5) != null){
-                          patientIdData = cursor.getString(5);
+                        if(cursor.getString(6) != null){
+                          patientIdData = cursor.getString(6);
                           if(patientIdData != null){
                             patientIdData = patientIdData.toString();
                             hashMap.put("patientId", patientIdData);
@@ -287,8 +300,8 @@ public class MedicalRecordDb{
                                                 
                                 
                                                             String hospitalIdData = "";
-                        if(cursor.getString(6) != null){
-                          hospitalIdData = cursor.getString(6);
+                        if(cursor.getString(7) != null){
+                          hospitalIdData = cursor.getString(7);
                           if(hospitalIdData != null){
                             hospitalIdData = hospitalIdData.toString();
                             hashMap.put("hospitalId", hospitalIdData);
