@@ -17,6 +17,12 @@ import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
+
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.GetUpdatedQuery;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.OnParseCursor;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.LazyList;
+
 import com.androidsdk.snaphy.snaphyandroidsdk.models.IpdBed;
 //Import self repository..
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.IpdBedRepository;
@@ -40,6 +46,13 @@ public class IpdBedDb{
 
     // Contacts table name
     private static String TABLE;
+
+
+
+    public SQLiteDatabase getInstance(){
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+        return db;
+    }
 
   public IpdBedDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     //super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -329,6 +342,63 @@ public class IpdBedDb{
         // return contact list
         return (DataList<IpdBed>) modelList;
     }
+
+
+    //https://dmytrodanylyk.com/articles/lazy-sqlite/
+    // Getting All Data where and sort column according to date wise..
+    /**
+     * Fetch the patient group by lazy data..
+     * @param limit
+     * @param skip
+     * @return
+     */
+    public LazyList<IpdBed> getAll__lazy(final int limit, final int skip, ObjectCallback<IpdBed> callback, final GetUpdatedQuery getUpdatedQuery, final OnParseCursor onParseCursor) {
+
+
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
+
+        final IpdBedRepository repo = restAdapter.createRepository(IpdBedRepository.class);
+        repo.addStorage(context);
+        return new LazyList<>(db, new LazyList.ItemFactory<IpdBed>() {
+            @Override
+            public IpdBed create(Cursor cursor, int index) {
+                IpdBed data;
+                cursor.moveToPosition(index);
+                HashMap<String, Object> hashMap = onParseCursor.parseCursor(cursor);
+                data = (IpdBed)repo.createObject(hashMap);
+                return data;
+            }
+        }, callback, new LazyList.OnQueryChange(){
+            @Override
+            public String getUpdateQuery() {
+                String orderBy = getUpdatedQuery.onOrderByChange();
+                //Get Where Key Value..
+                HashMap<String, Object> getWhereKeyValue = getUpdatedQuery.onQueryChange();
+
+                String whereQuery = getWhereQuery(getWhereKeyValue);
+                String selectQuery;
+                if(orderBy != null){
+                    selectQuery = "SELECT  * FROM `IpdBed` " + whereQuery  + " ORDER BY " + orderBy ;
+                    if(limit != 0){
+                        // Select All Query
+                        selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
+                    }else{
+                        selectQuery = selectQuery +  " " + " LIMIT -1 OFFSET " + skip;
+                    }
+                }else{
+                    if(limit != 0){
+                        // Select All Query
+                        selectQuery = "SELECT  * FROM IpdBed " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
+                    }else{
+                        selectQuery = "SELECT  * FROM IpdBed " + whereQuery  + " LIMIT -1 OFFSET " + skip;
+                    }
+                }
+
+                return selectQuery;
+            }
+        });
+    }
+
 
 
 

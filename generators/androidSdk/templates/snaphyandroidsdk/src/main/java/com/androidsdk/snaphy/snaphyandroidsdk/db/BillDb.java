@@ -17,6 +17,12 @@ import android.util.Log;
 import java.util.Map;
 import com.androidsdk.snaphy.snaphyandroidsdk.list.DataList;
 
+
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.GetUpdatedQuery;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
+import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.OnParseCursor;
+import com.androidsdk.snaphy.snaphyandroidsdk.list.LazyList;
+
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Bill;
 //Import self repository..
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.BillRepository;
@@ -40,6 +46,13 @@ public class BillDb{
 
     // Contacts table name
     private static String TABLE;
+
+
+
+    public SQLiteDatabase getInstance(){
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getWritableDatabase();
+        return db;
+    }
 
   public BillDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
     //super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -482,6 +495,63 @@ public class BillDb{
         // return contact list
         return (DataList<Bill>) modelList;
     }
+
+
+    //https://dmytrodanylyk.com/articles/lazy-sqlite/
+    // Getting All Data where and sort column according to date wise..
+    /**
+     * Fetch the patient group by lazy data..
+     * @param limit
+     * @param skip
+     * @return
+     */
+    public LazyList<Bill> getAll__lazy(final int limit, final int skip, ObjectCallback<Bill> callback, final GetUpdatedQuery getUpdatedQuery, final OnParseCursor onParseCursor) {
+
+
+        SQLiteDatabase db = DbHandler.getInstance(context, DATABASE_NAME).getReadableDatabase();
+
+        final BillRepository repo = restAdapter.createRepository(BillRepository.class);
+        repo.addStorage(context);
+        return new LazyList<>(db, new LazyList.ItemFactory<Bill>() {
+            @Override
+            public Bill create(Cursor cursor, int index) {
+                Bill data;
+                cursor.moveToPosition(index);
+                HashMap<String, Object> hashMap = onParseCursor.parseCursor(cursor);
+                data = (Bill)repo.createObject(hashMap);
+                return data;
+            }
+        }, callback, new LazyList.OnQueryChange(){
+            @Override
+            public String getUpdateQuery() {
+                String orderBy = getUpdatedQuery.onOrderByChange();
+                //Get Where Key Value..
+                HashMap<String, Object> getWhereKeyValue = getUpdatedQuery.onQueryChange();
+
+                String whereQuery = getWhereQuery(getWhereKeyValue);
+                String selectQuery;
+                if(orderBy != null){
+                    selectQuery = "SELECT  * FROM `Bill` " + whereQuery  + " ORDER BY " + orderBy ;
+                    if(limit != 0){
+                        // Select All Query
+                        selectQuery = selectQuery +  " " + " LIMIT " + limit + " OFFSET " + skip;
+                    }else{
+                        selectQuery = selectQuery +  " " + " LIMIT -1 OFFSET " + skip;
+                    }
+                }else{
+                    if(limit != 0){
+                        // Select All Query
+                        selectQuery = "SELECT  * FROM Bill " + whereQuery + " LIMIT " + limit + " OFFSET " + skip;
+                    }else{
+                        selectQuery = "SELECT  * FROM Bill " + whereQuery  + " LIMIT -1 OFFSET " + skip;
+                    }
+                }
+
+                return selectQuery;
+            }
+        });
+    }
+
 
 
 
