@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -285,7 +285,7 @@ public class IpdBedLog extends Model {
                                       if(ipdBed == null){
                                         IpdBedLogRepository ipdBedLogRepository = (IpdBedLogRepository) getRepository();
 
-                                        RestAdapter restAdapter = ipdBedLogRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = ipdBedLogRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           ipdBed = getIpdBed__db(restAdapter);
@@ -325,7 +325,7 @@ public class IpdBedLog extends Model {
 
 
                     //Fetch related data from local database if present a ipdBedId identifier as property for belongsTo
-                    public IpdBed getIpdBed__db(RestAdapter restAdapter){
+                    public IpdBed getIpdBed__db(SnaphyRestAdapter restAdapter){
                       if(ipdBedId != null){
                         IpdBedRepository ipdBedRepository = restAdapter.createRepository(IpdBedRepository.class);
                             try{
@@ -376,7 +376,7 @@ public class IpdBedLog extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__ipdBed( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<IpdBed> callback) {
+                                    public void get__ipdBed( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<IpdBed> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -489,7 +489,7 @@ public class IpdBedLog extends Model {
                                       if(patientGroup == null){
                                         IpdBedLogRepository ipdBedLogRepository = (IpdBedLogRepository) getRepository();
 
-                                        RestAdapter restAdapter = ipdBedLogRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = ipdBedLogRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           patientGroup = getPatientGroup__db(restAdapter);
@@ -529,7 +529,7 @@ public class IpdBedLog extends Model {
 
 
                     //Fetch related data from local database if present a patientGroupId identifier as property for belongsTo
-                    public PatientGroup getPatientGroup__db(RestAdapter restAdapter){
+                    public PatientGroup getPatientGroup__db(SnaphyRestAdapter restAdapter){
                       if(patientGroupId != null){
                         PatientGroupRepository patientGroupRepository = restAdapter.createRepository(PatientGroupRepository.class);
                             try{
@@ -576,7 +576,7 @@ public class IpdBedLog extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__patientGroup( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<PatientGroup> callback) {
+                                    public void get__patientGroup( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientGroup> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -693,7 +693,7 @@ public class IpdBedLog extends Model {
                                       if(hospital == null){
                                         IpdBedLogRepository ipdBedLogRepository = (IpdBedLogRepository) getRepository();
 
-                                        RestAdapter restAdapter = ipdBedLogRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = ipdBedLogRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           hospital = getHospital__db(restAdapter);
@@ -733,7 +733,7 @@ public class IpdBedLog extends Model {
 
 
                     //Fetch related data from local database if present a hospitalId identifier as property for belongsTo
-                    public Hospital getHospital__db(RestAdapter restAdapter){
+                    public Hospital getHospital__db(SnaphyRestAdapter restAdapter){
                       if(hospitalId != null){
                         HospitalRepository hospitalRepository = restAdapter.createRepository(HospitalRepository.class);
                             try{
@@ -782,7 +782,7 @@ public class IpdBedLog extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__hospital( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
+                                    public void get__hospital( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

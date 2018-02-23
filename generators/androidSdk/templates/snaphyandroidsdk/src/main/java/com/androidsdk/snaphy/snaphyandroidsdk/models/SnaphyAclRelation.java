@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -236,7 +236,7 @@ public class SnaphyAclRelation extends Model {
                                       if(snaphyAcl == null){
                                         SnaphyAclRelationRepository snaphyAclRelationRepository = (SnaphyAclRelationRepository) getRepository();
 
-                                        RestAdapter restAdapter = snaphyAclRelationRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = snaphyAclRelationRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           snaphyAcl = getSnaphyAcl__db(restAdapter);
@@ -276,7 +276,7 @@ public class SnaphyAclRelation extends Model {
 
 
                     //Fetch related data from local database if present a snaphyAclId identifier as property for belongsTo
-                    public SnaphyAcl getSnaphyAcl__db(RestAdapter restAdapter){
+                    public SnaphyAcl getSnaphyAcl__db(SnaphyRestAdapter restAdapter){
                       if(snaphyAclId != null){
                         SnaphyAclRepository snaphyAclRepository = restAdapter.createRepository(SnaphyAclRepository.class);
                             try{
@@ -323,7 +323,7 @@ public class SnaphyAclRelation extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__snaphyAcl( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<SnaphyAcl> callback) {
+                                    public void get__snaphyAcl( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<SnaphyAcl> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -380,7 +380,7 @@ public class IpdCategory extends Model {
                     
 
                                     //Write the method here..
-                                    public void findById__ipdBeds( String fk,  RestAdapter restAdapter, final ObjectCallback<IpdBed> callback) {
+                                    public void findById__ipdBeds( String fk,  SnaphyRestAdapter restAdapter, final ObjectCallback<IpdBed> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -437,7 +437,7 @@ public class IpdCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__ipdBeds( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__ipdBeds( String fk,  SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -481,7 +481,7 @@ public class IpdCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__ipdBeds( String fk,  IpdBed data,  RestAdapter restAdapter, final ObjectCallback<IpdBed> callback) {
+                                    public void updateById__ipdBeds( String fk,  IpdBed data,  SnaphyRestAdapter restAdapter, final ObjectCallback<IpdBed> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -543,7 +543,7 @@ public class IpdCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__ipdBeds( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<IpdBed> callback) {
+                                    public void get__ipdBeds( Map<String,  ? extends Object> filter,  SnaphyRestAdapter restAdapter, final DataListCallback<IpdBed> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -605,7 +605,7 @@ public class IpdCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__ipdBeds( IpdBed data,  RestAdapter restAdapter, final ObjectCallback<IpdBed> callback) {
+                                    public void create__ipdBeds( IpdBed data,  SnaphyRestAdapter restAdapter, final ObjectCallback<IpdBed> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -662,7 +662,7 @@ public class IpdCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__ipdBeds( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__ipdBeds( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -703,7 +703,7 @@ public class IpdCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__ipdBeds( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__ipdBeds( Map<String,  ? extends Object> where,  SnaphyRestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -810,7 +810,7 @@ public class IpdCategory extends Model {
                                       if(hospital == null){
                                         IpdCategoryRepository ipdCategoryRepository = (IpdCategoryRepository) getRepository();
 
-                                        RestAdapter restAdapter = ipdCategoryRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = ipdCategoryRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           hospital = getHospital__db(restAdapter);
@@ -850,7 +850,7 @@ public class IpdCategory extends Model {
 
 
                     //Fetch related data from local database if present a hospitalId identifier as property for belongsTo
-                    public Hospital getHospital__db(RestAdapter restAdapter){
+                    public Hospital getHospital__db(SnaphyRestAdapter restAdapter){
                       if(hospitalId != null){
                         HospitalRepository hospitalRepository = restAdapter.createRepository(HospitalRepository.class);
                             try{
@@ -903,7 +903,7 @@ public class IpdCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__hospital( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
+                                    public void get__hospital( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -250,7 +250,7 @@ public class PatientFlag extends Model {
                                       if(flag == null){
                                         PatientFlagRepository patientFlagRepository = (PatientFlagRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientFlagRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = patientFlagRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           flag = getFlag__db(restAdapter);
@@ -290,7 +290,7 @@ public class PatientFlag extends Model {
 
 
                     //Fetch related data from local database if present a flagId identifier as property for belongsTo
-                    public Flag getFlag__db(RestAdapter restAdapter){
+                    public Flag getFlag__db(SnaphyRestAdapter restAdapter){
                       if(flagId != null){
                         FlagRepository flagRepository = restAdapter.createRepository(FlagRepository.class);
                             try{
@@ -337,7 +337,7 @@ public class PatientFlag extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__flag( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Flag> callback) {
+                                    public void get__flag( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Flag> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -459,7 +459,7 @@ public class PatientFlag extends Model {
                                       if(patientSecurity == null){
                                         PatientFlagRepository patientFlagRepository = (PatientFlagRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientFlagRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = patientFlagRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           patientSecurity = getPatientSecurity__db(restAdapter);
@@ -499,7 +499,7 @@ public class PatientFlag extends Model {
 
 
                     //Fetch related data from local database if present a patientSecurityId identifier as property for belongsTo
-                    public PatientSecurity getPatientSecurity__db(RestAdapter restAdapter){
+                    public PatientSecurity getPatientSecurity__db(SnaphyRestAdapter restAdapter){
                       if(patientSecurityId != null){
                         PatientSecurityRepository patientSecurityRepository = restAdapter.createRepository(PatientSecurityRepository.class);
                             try{
@@ -548,7 +548,7 @@ public class PatientFlag extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__patientSecurity( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<PatientSecurity> callback) {
+                                    public void get__patientSecurity( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientSecurity> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

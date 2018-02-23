@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -285,7 +285,7 @@ public class Team extends Model {
                                       if(zone == null){
                                         TeamRepository teamRepository = (TeamRepository) getRepository();
 
-                                        RestAdapter restAdapter = teamRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = teamRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           zone = getZone__db(restAdapter);
@@ -325,7 +325,7 @@ public class Team extends Model {
 
 
                     //Fetch related data from local database if present a zoneId identifier as property for belongsTo
-                    public Zone getZone__db(RestAdapter restAdapter){
+                    public Zone getZone__db(SnaphyRestAdapter restAdapter){
                       if(zoneId != null){
                         ZoneRepository zoneRepository = restAdapter.createRepository(ZoneRepository.class);
                             try{
@@ -372,7 +372,7 @@ public class Team extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__zone( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Zone> callback) {
+                                    public void get__zone( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Zone> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -609,7 +609,7 @@ public class Team extends Model {
                         
 
                                     //Write the method here..
-                                    public void findById__teamMembers( String fk,  RestAdapter restAdapter, final ObjectCallback<TeamMember> callback) {
+                                    public void findById__teamMembers( String fk,  SnaphyRestAdapter restAdapter, final ObjectCallback<TeamMember> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -666,7 +666,7 @@ public class Team extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__teamMembers( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__teamMembers( String fk,  SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -710,7 +710,7 @@ public class Team extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__teamMembers( String fk,  TeamMember data,  RestAdapter restAdapter, final ObjectCallback<TeamMember> callback) {
+                                    public void updateById__teamMembers( String fk,  TeamMember data,  SnaphyRestAdapter restAdapter, final ObjectCallback<TeamMember> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -770,7 +770,7 @@ public class Team extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__teamMembers( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<TeamMember> callback) {
+                                    public void get__teamMembers( Map<String,  ? extends Object> filter,  SnaphyRestAdapter restAdapter, final DataListCallback<TeamMember> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -832,7 +832,7 @@ public class Team extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__teamMembers( TeamMember data,  RestAdapter restAdapter, final ObjectCallback<TeamMember> callback) {
+                                    public void create__teamMembers( TeamMember data,  SnaphyRestAdapter restAdapter, final ObjectCallback<TeamMember> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -889,7 +889,7 @@ public class Team extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__teamMembers( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__teamMembers( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -930,7 +930,7 @@ public class Team extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__teamMembers( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__teamMembers( Map<String,  ? extends Object> where,  SnaphyRestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

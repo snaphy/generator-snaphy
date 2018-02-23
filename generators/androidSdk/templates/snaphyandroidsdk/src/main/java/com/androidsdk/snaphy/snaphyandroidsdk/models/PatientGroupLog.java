@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -404,7 +404,7 @@ public class PatientGroupLog extends Model {
                                       if(patientGroup == null){
                                         PatientGroupLogRepository patientGroupLogRepository = (PatientGroupLogRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientGroupLogRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = patientGroupLogRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           patientGroup = getPatientGroup__db(restAdapter);
@@ -444,7 +444,7 @@ public class PatientGroupLog extends Model {
 
 
                     //Fetch related data from local database if present a patientGroupId identifier as property for belongsTo
-                    public PatientGroup getPatientGroup__db(RestAdapter restAdapter){
+                    public PatientGroup getPatientGroup__db(SnaphyRestAdapter restAdapter){
                       if(patientGroupId != null){
                         PatientGroupRepository patientGroupRepository = restAdapter.createRepository(PatientGroupRepository.class);
                             try{
@@ -491,7 +491,7 @@ public class PatientGroupLog extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__patientGroup( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<PatientGroup> callback) {
+                                    public void get__patientGroup( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientGroup> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

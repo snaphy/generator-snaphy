@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -306,7 +306,7 @@ public class HospitalUserEducation extends Model {
                                       if(hospitalUser == null){
                                         HospitalUserEducationRepository hospitalUserEducationRepository = (HospitalUserEducationRepository) getRepository();
 
-                                        RestAdapter restAdapter = hospitalUserEducationRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = hospitalUserEducationRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           hospitalUser = getHospitalUser__db(restAdapter);
@@ -346,7 +346,7 @@ public class HospitalUserEducation extends Model {
 
 
                     //Fetch related data from local database if present a hospitalUserId identifier as property for belongsTo
-                    public HospitalUser getHospitalUser__db(RestAdapter restAdapter){
+                    public HospitalUser getHospitalUser__db(SnaphyRestAdapter restAdapter){
                       if(hospitalUserId != null){
                         HospitalUserRepository hospitalUserRepository = restAdapter.createRepository(HospitalUserRepository.class);
                             try{
@@ -393,7 +393,7 @@ public class HospitalUserEducation extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__hospitalUser( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
+                                    public void get__hospitalUser( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -525,7 +525,7 @@ public class HospitalUserEducation extends Model {
                                       if(college == null){
                                         HospitalUserEducationRepository hospitalUserEducationRepository = (HospitalUserEducationRepository) getRepository();
 
-                                        RestAdapter restAdapter = hospitalUserEducationRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = hospitalUserEducationRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           college = getCollege__db(restAdapter);
@@ -565,7 +565,7 @@ public class HospitalUserEducation extends Model {
 
 
                     //Fetch related data from local database if present a collegeId identifier as property for belongsTo
-                    public College getCollege__db(RestAdapter restAdapter){
+                    public College getCollege__db(SnaphyRestAdapter restAdapter){
                       if(collegeId != null){
                         CollegeRepository collegeRepository = restAdapter.createRepository(CollegeRepository.class);
                             try{
@@ -614,7 +614,7 @@ public class HospitalUserEducation extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__college( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<College> callback) {
+                                    public void get__college( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<College> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -744,7 +744,7 @@ public class HospitalUserEducation extends Model {
                                       if(degree == null){
                                         HospitalUserEducationRepository hospitalUserEducationRepository = (HospitalUserEducationRepository) getRepository();
 
-                                        RestAdapter restAdapter = hospitalUserEducationRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = hospitalUserEducationRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           degree = getDegree__db(restAdapter);
@@ -784,7 +784,7 @@ public class HospitalUserEducation extends Model {
 
 
                     //Fetch related data from local database if present a degreeId identifier as property for belongsTo
-                    public Degree getDegree__db(RestAdapter restAdapter){
+                    public Degree getDegree__db(SnaphyRestAdapter restAdapter){
                       if(degreeId != null){
                         DegreeRepository degreeRepository = restAdapter.createRepository(DegreeRepository.class);
                             try{
@@ -835,7 +835,7 @@ public class HospitalUserEducation extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__degree( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Degree> callback) {
+                                    public void get__degree( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Degree> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

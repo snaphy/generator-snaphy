@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -201,7 +201,7 @@ public class RoleMapping extends Model {
                                       if(role == null){
                                         RoleMappingRepository roleMappingRepository = (RoleMappingRepository) getRepository();
 
-                                        RestAdapter restAdapter = roleMappingRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = roleMappingRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           role = getRole__db(restAdapter);
@@ -241,7 +241,7 @@ public class RoleMapping extends Model {
 
 
                     //Fetch related data from local database if present a roleId identifier as property for belongsTo
-                    public Role getRole__db(RestAdapter restAdapter){
+                    public Role getRole__db(SnaphyRestAdapter restAdapter){
                       if(roleId != null){
                         RoleRepository roleRepository = restAdapter.createRepository(RoleRepository.class);
                             try{
@@ -288,7 +288,7 @@ public class RoleMapping extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__role( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Role> callback) {
+                                    public void get__role( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Role> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

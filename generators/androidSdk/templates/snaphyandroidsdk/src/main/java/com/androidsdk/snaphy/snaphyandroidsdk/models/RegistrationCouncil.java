@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -345,7 +345,7 @@ public class RegistrationCouncil extends Model {
                     
 
                                     //Write the method here..
-                                    public void findById__hospitalUsers( String fk,  RestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
+                                    public void findById__hospitalUsers( String fk,  SnaphyRestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -402,7 +402,7 @@ public class RegistrationCouncil extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__hospitalUsers( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__hospitalUsers( String fk,  SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -446,7 +446,7 @@ public class RegistrationCouncil extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__hospitalUsers( String fk,  HospitalUser data,  RestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
+                                    public void updateById__hospitalUsers( String fk,  HospitalUser data,  SnaphyRestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -506,7 +506,7 @@ public class RegistrationCouncil extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__hospitalUsers( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<HospitalUser> callback) {
+                                    public void get__hospitalUsers( Map<String,  ? extends Object> filter,  SnaphyRestAdapter restAdapter, final DataListCallback<HospitalUser> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -568,7 +568,7 @@ public class RegistrationCouncil extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__hospitalUsers( HospitalUser data,  RestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
+                                    public void create__hospitalUsers( HospitalUser data,  SnaphyRestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -625,7 +625,7 @@ public class RegistrationCouncil extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__hospitalUsers( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__hospitalUsers( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -666,7 +666,7 @@ public class RegistrationCouncil extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__hospitalUsers( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__hospitalUsers( Map<String,  ? extends Object> where,  SnaphyRestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

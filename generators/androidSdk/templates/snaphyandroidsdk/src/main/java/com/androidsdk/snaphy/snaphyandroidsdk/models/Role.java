@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -324,7 +324,7 @@ public class Role extends Model {
                     
 
                                     //Write the method here..
-                                    public void findById__principals( String fk,  RestAdapter restAdapter, final ObjectCallback<RoleMapping> callback) {
+                                    public void findById__principals( String fk,  SnaphyRestAdapter restAdapter, final ObjectCallback<RoleMapping> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -381,7 +381,7 @@ public class Role extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__principals( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__principals( String fk,  SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -425,7 +425,7 @@ public class Role extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__principals( String fk,  RoleMapping data,  RestAdapter restAdapter, final ObjectCallback<RoleMapping> callback) {
+                                    public void updateById__principals( String fk,  RoleMapping data,  SnaphyRestAdapter restAdapter, final ObjectCallback<RoleMapping> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -485,7 +485,7 @@ public class Role extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__principals( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<RoleMapping> callback) {
+                                    public void get__principals( Map<String,  ? extends Object> filter,  SnaphyRestAdapter restAdapter, final DataListCallback<RoleMapping> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -547,7 +547,7 @@ public class Role extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__principals( RoleMapping data,  RestAdapter restAdapter, final ObjectCallback<RoleMapping> callback) {
+                                    public void create__principals( RoleMapping data,  SnaphyRestAdapter restAdapter, final ObjectCallback<RoleMapping> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -604,7 +604,7 @@ public class Role extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__principals( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__principals( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -645,7 +645,7 @@ public class Role extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__principals( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__principals( Map<String,  ? extends Object> where,  SnaphyRestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

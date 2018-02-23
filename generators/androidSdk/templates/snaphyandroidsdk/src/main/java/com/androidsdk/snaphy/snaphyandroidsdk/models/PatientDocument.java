@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -306,7 +306,7 @@ public class PatientDocument extends Model {
                                       if(patient == null){
                                         PatientDocumentRepository patientDocumentRepository = (PatientDocumentRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientDocumentRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = patientDocumentRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           patient = getPatient__db(restAdapter);
@@ -346,7 +346,7 @@ public class PatientDocument extends Model {
 
 
                     //Fetch related data from local database if present a patientId identifier as property for belongsTo
-                    public Patient getPatient__db(RestAdapter restAdapter){
+                    public Patient getPatient__db(SnaphyRestAdapter restAdapter){
                       if(patientId != null){
                         PatientRepository patientRepository = restAdapter.createRepository(PatientRepository.class);
                             try{
@@ -393,7 +393,7 @@ public class PatientDocument extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__patient( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Patient> callback) {
+                                    public void get__patient( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Patient> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -525,7 +525,7 @@ public class PatientDocument extends Model {
                                       if(patientGroup == null){
                                         PatientDocumentRepository patientDocumentRepository = (PatientDocumentRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientDocumentRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = patientDocumentRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           patientGroup = getPatientGroup__db(restAdapter);
@@ -565,7 +565,7 @@ public class PatientDocument extends Model {
 
 
                     //Fetch related data from local database if present a patientGroupId identifier as property for belongsTo
-                    public PatientGroup getPatientGroup__db(RestAdapter restAdapter){
+                    public PatientGroup getPatientGroup__db(SnaphyRestAdapter restAdapter){
                       if(patientGroupId != null){
                         PatientGroupRepository patientGroupRepository = restAdapter.createRepository(PatientGroupRepository.class);
                             try{
@@ -614,7 +614,7 @@ public class PatientDocument extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__patientGroup( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<PatientGroup> callback) {
+                                    public void get__patientGroup( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientGroup> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -744,7 +744,7 @@ public class PatientDocument extends Model {
                                       if(hospital == null){
                                         PatientDocumentRepository patientDocumentRepository = (PatientDocumentRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientDocumentRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = patientDocumentRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           hospital = getHospital__db(restAdapter);
@@ -784,7 +784,7 @@ public class PatientDocument extends Model {
 
 
                     //Fetch related data from local database if present a hospitalId identifier as property for belongsTo
-                    public Hospital getHospital__db(RestAdapter restAdapter){
+                    public Hospital getHospital__db(SnaphyRestAdapter restAdapter){
                       if(hospitalId != null){
                         HospitalRepository hospitalRepository = restAdapter.createRepository(HospitalRepository.class);
                             try{
@@ -835,7 +835,7 @@ public class PatientDocument extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__hospital( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
+                                    public void get__hospital( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

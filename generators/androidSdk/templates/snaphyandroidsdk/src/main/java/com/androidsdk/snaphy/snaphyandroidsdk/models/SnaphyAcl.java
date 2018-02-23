@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -464,7 +464,7 @@ public class SnaphyAcl extends Model {
                     
 
                                     //Write the method here..
-                                    public void findById__snaphyAclProps( String fk,  RestAdapter restAdapter, final ObjectCallback<SnaphyAclProp> callback) {
+                                    public void findById__snaphyAclProps( String fk,  SnaphyRestAdapter restAdapter, final ObjectCallback<SnaphyAclProp> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -521,7 +521,7 @@ public class SnaphyAcl extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__snaphyAclProps( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__snaphyAclProps( String fk,  SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -565,7 +565,7 @@ public class SnaphyAcl extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__snaphyAclProps( String fk,  SnaphyAclProp data,  RestAdapter restAdapter, final ObjectCallback<SnaphyAclProp> callback) {
+                                    public void updateById__snaphyAclProps( String fk,  SnaphyAclProp data,  SnaphyRestAdapter restAdapter, final ObjectCallback<SnaphyAclProp> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -631,7 +631,7 @@ public class SnaphyAcl extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__snaphyAclProps( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<SnaphyAclProp> callback) {
+                                    public void get__snaphyAclProps( Map<String,  ? extends Object> filter,  SnaphyRestAdapter restAdapter, final DataListCallback<SnaphyAclProp> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -693,7 +693,7 @@ public class SnaphyAcl extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__snaphyAclProps( SnaphyAclProp data,  RestAdapter restAdapter, final ObjectCallback<SnaphyAclProp> callback) {
+                                    public void create__snaphyAclProps( SnaphyAclProp data,  SnaphyRestAdapter restAdapter, final ObjectCallback<SnaphyAclProp> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -750,7 +750,7 @@ public class SnaphyAcl extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__snaphyAclProps( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__snaphyAclProps( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -791,7 +791,7 @@ public class SnaphyAcl extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__snaphyAclProps( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__snaphyAclProps( Map<String,  ? extends Object> where,  SnaphyRestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1019,7 +1019,7 @@ public class SnaphyAcl extends Model {
                         
 
                                     //Write the method here..
-                                    public void findById__snaphyAclRelations( String fk,  RestAdapter restAdapter, final ObjectCallback<SnaphyAclRelation> callback) {
+                                    public void findById__snaphyAclRelations( String fk,  SnaphyRestAdapter restAdapter, final ObjectCallback<SnaphyAclRelation> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1076,7 +1076,7 @@ public class SnaphyAcl extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__snaphyAclRelations( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__snaphyAclRelations( String fk,  SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1120,7 +1120,7 @@ public class SnaphyAcl extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__snaphyAclRelations( String fk,  SnaphyAclRelation data,  RestAdapter restAdapter, final ObjectCallback<SnaphyAclRelation> callback) {
+                                    public void updateById__snaphyAclRelations( String fk,  SnaphyAclRelation data,  SnaphyRestAdapter restAdapter, final ObjectCallback<SnaphyAclRelation> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1188,7 +1188,7 @@ public class SnaphyAcl extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__snaphyAclRelations( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<SnaphyAclRelation> callback) {
+                                    public void get__snaphyAclRelations( Map<String,  ? extends Object> filter,  SnaphyRestAdapter restAdapter, final DataListCallback<SnaphyAclRelation> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1250,7 +1250,7 @@ public class SnaphyAcl extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__snaphyAclRelations( SnaphyAclRelation data,  RestAdapter restAdapter, final ObjectCallback<SnaphyAclRelation> callback) {
+                                    public void create__snaphyAclRelations( SnaphyAclRelation data,  SnaphyRestAdapter restAdapter, final ObjectCallback<SnaphyAclRelation> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1307,7 +1307,7 @@ public class SnaphyAcl extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__snaphyAclRelations( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__snaphyAclRelations( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1348,7 +1348,7 @@ public class SnaphyAcl extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__snaphyAclRelations( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__snaphyAclRelations( Map<String,  ? extends Object> where,  SnaphyRestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

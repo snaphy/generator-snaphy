@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -278,7 +278,7 @@ public class ChatItem extends Model {
                                       if(hospitalUser == null){
                                         ChatItemRepository chatItemRepository = (ChatItemRepository) getRepository();
 
-                                        RestAdapter restAdapter = chatItemRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = chatItemRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           hospitalUser = getHospitalUser__db(restAdapter);
@@ -318,7 +318,7 @@ public class ChatItem extends Model {
 
 
                     //Fetch related data from local database if present a hospitalUserId identifier as property for belongsTo
-                    public HospitalUser getHospitalUser__db(RestAdapter restAdapter){
+                    public HospitalUser getHospitalUser__db(SnaphyRestAdapter restAdapter){
                       if(hospitalUserId != null){
                         HospitalUserRepository hospitalUserRepository = restAdapter.createRepository(HospitalUserRepository.class);
                             try{
@@ -365,7 +365,7 @@ public class ChatItem extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__hospitalUser( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
+                                    public void get__hospitalUser( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -487,7 +487,7 @@ public class ChatItem extends Model {
                                       if(patientGroup == null){
                                         ChatItemRepository chatItemRepository = (ChatItemRepository) getRepository();
 
-                                        RestAdapter restAdapter = chatItemRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = chatItemRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           patientGroup = getPatientGroup__db(restAdapter);
@@ -527,7 +527,7 @@ public class ChatItem extends Model {
 
 
                     //Fetch related data from local database if present a patientGroupId identifier as property for belongsTo
-                    public PatientGroup getPatientGroup__db(RestAdapter restAdapter){
+                    public PatientGroup getPatientGroup__db(SnaphyRestAdapter restAdapter){
                       if(patientGroupId != null){
                         PatientGroupRepository patientGroupRepository = restAdapter.createRepository(PatientGroupRepository.class);
                             try{
@@ -576,7 +576,7 @@ public class ChatItem extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__patientGroup( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<PatientGroup> callback) {
+                                    public void get__patientGroup( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientGroup> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

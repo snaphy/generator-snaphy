@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -408,7 +408,7 @@ public class Flag extends Model {
                     
 
                                     //Write the method here..
-                                    public void findById__patientFlags( String fk,  RestAdapter restAdapter, final ObjectCallback<PatientFlag> callback) {
+                                    public void findById__patientFlags( String fk,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientFlag> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -465,7 +465,7 @@ public class Flag extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__patientFlags( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__patientFlags( String fk,  SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -509,7 +509,7 @@ public class Flag extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__patientFlags( String fk,  PatientFlag data,  RestAdapter restAdapter, final ObjectCallback<PatientFlag> callback) {
+                                    public void updateById__patientFlags( String fk,  PatientFlag data,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientFlag> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -569,7 +569,7 @@ public class Flag extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__patientFlags( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<PatientFlag> callback) {
+                                    public void get__patientFlags( Map<String,  ? extends Object> filter,  SnaphyRestAdapter restAdapter, final DataListCallback<PatientFlag> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -631,7 +631,7 @@ public class Flag extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__patientFlags( PatientFlag data,  RestAdapter restAdapter, final ObjectCallback<PatientFlag> callback) {
+                                    public void create__patientFlags( PatientFlag data,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientFlag> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -688,7 +688,7 @@ public class Flag extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__patientFlags( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__patientFlags( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -729,7 +729,7 @@ public class Flag extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__patientFlags( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__patientFlags( Map<String,  ? extends Object> where,  SnaphyRestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

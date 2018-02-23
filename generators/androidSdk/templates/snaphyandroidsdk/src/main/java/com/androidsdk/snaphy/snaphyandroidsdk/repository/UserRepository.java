@@ -11,7 +11,7 @@ import android.util.Log;
 import com.androidsdk.snaphy.snaphyandroidsdk.models.User;
 import com.strongloop.android.loopback.AccessToken;
 import com.strongloop.android.loopback.AccessTokenRepository;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 
 import com.androidsdk.snaphy.snaphyandroidsdk.callbacks.ObjectCallback;
 
@@ -61,7 +61,7 @@ import java.util.Map;
  */
 public class UserRepository<U extends User> extends ModelRepository<U> {
     public static final String SHARED_PREFERENCES_NAME =
-            RestAdapter.class.getCanonicalName();
+            SnaphyRestAdapter.class.getCanonicalName();
     public static final String PROPERTY_CURRENT_USER_ID = "currentUserId";
 
     private AccessTokenRepository accessTokenRepository;
@@ -290,7 +290,7 @@ public class UserRepository<U extends User> extends ModelRepository<U> {
 
                     @Override
                     public void onSuccess(String response) {
-                        RestAdapter radapter = getRestAdapter();
+                        SnaphyRestAdapter radapter = getRestAdapter();
                         radapter.clearAccessToken();
                         setCurrentUserId(null);
                         callback.onSuccess();

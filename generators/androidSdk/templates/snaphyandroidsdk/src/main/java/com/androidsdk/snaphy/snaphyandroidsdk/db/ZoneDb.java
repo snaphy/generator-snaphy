@@ -26,7 +26,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.list.LazyList;
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Zone;
 //Import self repository..
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.ZoneRepository;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
@@ -35,7 +35,7 @@ import com.strongloop.android.loopback.RestAdapter;
 public class ZoneDb{
 
     // All Static variables
-    RestAdapter restAdapter;
+    SnaphyRestAdapter restAdapter;
 
     private String TAG = "snaphy";
     private String KEY_ID = "ID";
@@ -54,7 +54,7 @@ public class ZoneDb{
         return db;
     }
 
-  public ZoneDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+  public ZoneDb(Context context, String DATABASE_NAME, SnaphyRestAdapter restAdapter){
     //super(context, DATABASE_NAME, null, DATABASE_VERSION);
     this.context = context;
     this.restAdapter = restAdapter;

@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -366,7 +366,7 @@ public class SecurityArea extends Model {
                     
 
                                     //Write the method here..
-                                    public void findById__zones( String fk,  RestAdapter restAdapter, final ObjectCallback<Zone> callback) {
+                                    public void findById__zones( String fk,  SnaphyRestAdapter restAdapter, final ObjectCallback<Zone> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -423,7 +423,7 @@ public class SecurityArea extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__zones( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__zones( String fk,  SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -467,7 +467,7 @@ public class SecurityArea extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__zones( String fk,  Zone data,  RestAdapter restAdapter, final ObjectCallback<Zone> callback) {
+                                    public void updateById__zones( String fk,  Zone data,  SnaphyRestAdapter restAdapter, final ObjectCallback<Zone> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -527,7 +527,7 @@ public class SecurityArea extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__zones( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Zone> callback) {
+                                    public void get__zones( Map<String,  ? extends Object> filter,  SnaphyRestAdapter restAdapter, final DataListCallback<Zone> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -589,7 +589,7 @@ public class SecurityArea extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__zones( Zone data,  RestAdapter restAdapter, final ObjectCallback<Zone> callback) {
+                                    public void create__zones( Zone data,  SnaphyRestAdapter restAdapter, final ObjectCallback<Zone> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -646,7 +646,7 @@ public class SecurityArea extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__zones( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__zones( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -687,7 +687,7 @@ public class SecurityArea extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__zones( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__zones( Map<String,  ? extends Object> where,  SnaphyRestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

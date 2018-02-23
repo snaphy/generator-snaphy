@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -1253,7 +1253,7 @@ public class PatientGroup extends Model {
                                       if(hospital == null){
                                         PatientGroupRepository patientGroupRepository = (PatientGroupRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientGroupRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = patientGroupRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           hospital = getHospital__db(restAdapter);
@@ -1293,7 +1293,7 @@ public class PatientGroup extends Model {
 
 
                     //Fetch related data from local database if present a hospitalId identifier as property for belongsTo
-                    public Hospital getHospital__db(RestAdapter restAdapter){
+                    public Hospital getHospital__db(SnaphyRestAdapter restAdapter){
                       if(hospitalId != null){
                         HospitalRepository hospitalRepository = restAdapter.createRepository(HospitalRepository.class);
                             try{
@@ -1344,7 +1344,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__hospital( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
+                                    public void get__hospital( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1598,7 +1598,7 @@ public class PatientGroup extends Model {
                                       if(pincode == null){
                                         PatientGroupRepository patientGroupRepository = (PatientGroupRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientGroupRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = patientGroupRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           pincode = getPincode__db(restAdapter);
@@ -1638,7 +1638,7 @@ public class PatientGroup extends Model {
 
 
                     //Fetch related data from local database if present a pincodeId identifier as property for belongsTo
-                    public Pincode getPincode__db(RestAdapter restAdapter){
+                    public Pincode getPincode__db(SnaphyRestAdapter restAdapter){
                       if(pincodeId != null){
                         PincodeRepository pincodeRepository = restAdapter.createRepository(PincodeRepository.class);
                             try{
@@ -1715,7 +1715,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__pincode( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Pincode> callback) {
+                                    public void get__pincode( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Pincode> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1943,7 +1943,7 @@ public class PatientGroup extends Model {
                                       if(district == null){
                                         PatientGroupRepository patientGroupRepository = (PatientGroupRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientGroupRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = patientGroupRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           district = getDistrict__db(restAdapter);
@@ -1983,7 +1983,7 @@ public class PatientGroup extends Model {
 
 
                     //Fetch related data from local database if present a districtId identifier as property for belongsTo
-                    public District getDistrict__db(RestAdapter restAdapter){
+                    public District getDistrict__db(SnaphyRestAdapter restAdapter){
                       if(districtId != null){
                         DistrictRepository districtRepository = restAdapter.createRepository(DistrictRepository.class);
                             try{
@@ -2064,7 +2064,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__district( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<District> callback) {
+                                    public void get__district( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<District> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2288,7 +2288,7 @@ public class PatientGroup extends Model {
                                       if(state == null){
                                         PatientGroupRepository patientGroupRepository = (PatientGroupRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientGroupRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = patientGroupRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           state = getState__db(restAdapter);
@@ -2328,7 +2328,7 @@ public class PatientGroup extends Model {
 
 
                     //Fetch related data from local database if present a stateId identifier as property for belongsTo
-                    public State getState__db(RestAdapter restAdapter){
+                    public State getState__db(SnaphyRestAdapter restAdapter){
                       if(stateId != null){
                         StateRepository stateRepository = restAdapter.createRepository(StateRepository.class);
                             try{
@@ -2397,7 +2397,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__state( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<State> callback) {
+                                    public void get__state( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<State> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2633,7 +2633,7 @@ public class PatientGroup extends Model {
                                       if(taluk == null){
                                         PatientGroupRepository patientGroupRepository = (PatientGroupRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientGroupRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = patientGroupRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           taluk = getTaluk__db(restAdapter);
@@ -2673,7 +2673,7 @@ public class PatientGroup extends Model {
 
 
                     //Fetch related data from local database if present a talukId identifier as property for belongsTo
-                    public Taluk getTaluk__db(RestAdapter restAdapter){
+                    public Taluk getTaluk__db(SnaphyRestAdapter restAdapter){
                       if(talukId != null){
                         TalukRepository talukRepository = restAdapter.createRepository(TalukRepository.class);
                             try{
@@ -2752,7 +2752,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__taluk( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Taluk> callback) {
+                                    public void get__taluk( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Taluk> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2978,7 +2978,7 @@ public class PatientGroup extends Model {
                                       if(patient == null){
                                         PatientGroupRepository patientGroupRepository = (PatientGroupRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientGroupRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = patientGroupRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           patient = getPatient__db(restAdapter);
@@ -3018,7 +3018,7 @@ public class PatientGroup extends Model {
 
 
                     //Fetch related data from local database if present a patientId identifier as property for belongsTo
-                    public Patient getPatient__db(RestAdapter restAdapter){
+                    public Patient getPatient__db(SnaphyRestAdapter restAdapter){
                       if(patientId != null){
                         PatientRepository patientRepository = restAdapter.createRepository(PatientRepository.class);
                             try{
@@ -3065,7 +3065,7 @@ public class PatientGroup extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__patient( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Patient> callback) {
+                                    public void get__patient( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Patient> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -3323,7 +3323,7 @@ public class PatientGroup extends Model {
                                       if(ipdBed == null){
                                         PatientGroupRepository patientGroupRepository = (PatientGroupRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientGroupRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = patientGroupRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           ipdBed = getIpdBed__db(restAdapter);
@@ -3363,7 +3363,7 @@ public class PatientGroup extends Model {
 
 
                     //Fetch related data from local database if present a ipdBedId identifier as property for belongsTo
-                    public IpdBed getIpdBed__db(RestAdapter restAdapter){
+                    public IpdBed getIpdBed__db(SnaphyRestAdapter restAdapter){
                       if(ipdBedId != null){
                         IpdBedRepository ipdBedRepository = restAdapter.createRepository(IpdBedRepository.class);
                             try{
@@ -3418,7 +3418,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__ipdBed( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<IpdBed> callback) {
+                                    public void get__ipdBed( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<IpdBed> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -3668,7 +3668,7 @@ public class PatientGroup extends Model {
                                       if(hospitalUser == null){
                                         PatientGroupRepository patientGroupRepository = (PatientGroupRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientGroupRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = patientGroupRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           hospitalUser = getHospitalUser__db(restAdapter);
@@ -3708,7 +3708,7 @@ public class PatientGroup extends Model {
 
 
                     //Fetch related data from local database if present a hospitalUserId identifier as property for belongsTo
-                    public HospitalUser getHospitalUser__db(RestAdapter restAdapter){
+                    public HospitalUser getHospitalUser__db(SnaphyRestAdapter restAdapter){
                       if(hospitalUserId != null){
                         HospitalUserRepository hospitalUserRepository = restAdapter.createRepository(HospitalUserRepository.class);
                             try{
@@ -3775,7 +3775,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__hospitalUser( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
+                                    public void get__hospitalUser( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -4013,7 +4013,7 @@ public class PatientGroup extends Model {
                                       if(aadhar == null){
                                         PatientGroupRepository patientGroupRepository = (PatientGroupRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientGroupRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = patientGroupRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           aadhar = getAadhar__db(restAdapter);
@@ -4053,7 +4053,7 @@ public class PatientGroup extends Model {
 
 
                     //Fetch related data from local database if present a aadharId identifier as property for belongsTo
-                    public Aadhar getAadhar__db(RestAdapter restAdapter){
+                    public Aadhar getAadhar__db(SnaphyRestAdapter restAdapter){
                       if(aadharId != null){
                         AadharRepository aadharRepository = restAdapter.createRepository(AadharRepository.class);
                             try{
@@ -4102,7 +4102,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__aadhar( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Aadhar> callback) {
+                                    public void get__aadhar( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Aadhar> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -4488,7 +4488,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void findById__patientDocuments( String fk,  RestAdapter restAdapter, final ObjectCallback<PatientDocument> callback) {
+                                    public void findById__patientDocuments( String fk,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientDocument> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -4545,7 +4545,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__patientDocuments( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__patientDocuments( String fk,  SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -4589,7 +4589,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__patientDocuments( String fk,  PatientDocument data,  RestAdapter restAdapter, final ObjectCallback<PatientDocument> callback) {
+                                    public void updateById__patientDocuments( String fk,  PatientDocument data,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientDocument> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -4677,7 +4677,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__patientDocuments( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<PatientDocument> callback) {
+                                    public void get__patientDocuments( Map<String,  ? extends Object> filter,  SnaphyRestAdapter restAdapter, final DataListCallback<PatientDocument> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -4739,7 +4739,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__patientDocuments( PatientDocument data,  RestAdapter restAdapter, final ObjectCallback<PatientDocument> callback) {
+                                    public void create__patientDocuments( PatientDocument data,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientDocument> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -4796,7 +4796,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__patientDocuments( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__patientDocuments( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -4837,7 +4837,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__patientDocuments( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__patientDocuments( Map<String,  ? extends Object> where,  SnaphyRestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5173,7 +5173,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void findById__patientGroupLogs( String fk,  RestAdapter restAdapter, final ObjectCallback<PatientGroupLog> callback) {
+                                    public void findById__patientGroupLogs( String fk,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientGroupLog> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5230,7 +5230,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__patientGroupLogs( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__patientGroupLogs( String fk,  SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5274,7 +5274,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__patientGroupLogs( String fk,  PatientGroupLog data,  RestAdapter restAdapter, final ObjectCallback<PatientGroupLog> callback) {
+                                    public void updateById__patientGroupLogs( String fk,  PatientGroupLog data,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientGroupLog> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5360,7 +5360,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__patientGroupLogs( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<PatientGroupLog> callback) {
+                                    public void get__patientGroupLogs( Map<String,  ? extends Object> filter,  SnaphyRestAdapter restAdapter, final DataListCallback<PatientGroupLog> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5422,7 +5422,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__patientGroupLogs( PatientGroupLog data,  RestAdapter restAdapter, final ObjectCallback<PatientGroupLog> callback) {
+                                    public void create__patientGroupLogs( PatientGroupLog data,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientGroupLog> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5479,7 +5479,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__patientGroupLogs( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__patientGroupLogs( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5520,7 +5520,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__patientGroupLogs( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__patientGroupLogs( Map<String,  ? extends Object> where,  SnaphyRestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -5708,7 +5708,7 @@ public class PatientGroup extends Model {
                                       if(opdTokenLog == null){
                                         PatientGroupRepository patientGroupRepository = (PatientGroupRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientGroupRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = patientGroupRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           opdTokenLog = getOpdTokenLog__db(restAdapter);
@@ -5748,7 +5748,7 @@ public class PatientGroup extends Model {
 
 
                     //Fetch related data from local database if present a opdTokenLogId identifier as property for belongsTo
-                    public OpdTokenLog getOpdTokenLog__db(RestAdapter restAdapter){
+                    public OpdTokenLog getOpdTokenLog__db(SnaphyRestAdapter restAdapter){
                       if(opdTokenLogId != null){
                         OpdTokenLogRepository opdTokenLogRepository = restAdapter.createRepository(OpdTokenLogRepository.class);
                             try{
@@ -5805,7 +5805,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__opdTokenLog( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<OpdTokenLog> callback) {
+                                    public void get__opdTokenLog( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<OpdTokenLog> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -6053,7 +6053,7 @@ public class PatientGroup extends Model {
                                       if(ipdBedLog == null){
                                         PatientGroupRepository patientGroupRepository = (PatientGroupRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientGroupRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = patientGroupRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           ipdBedLog = getIpdBedLog__db(restAdapter);
@@ -6093,7 +6093,7 @@ public class PatientGroup extends Model {
 
 
                     //Fetch related data from local database if present a ipdBedLogId identifier as property for belongsTo
-                    public IpdBedLog getIpdBedLog__db(RestAdapter restAdapter){
+                    public IpdBedLog getIpdBedLog__db(SnaphyRestAdapter restAdapter){
                       if(ipdBedLogId != null){
                         IpdBedLogRepository ipdBedLogRepository = restAdapter.createRepository(IpdBedLogRepository.class);
                             try{
@@ -6146,7 +6146,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__ipdBedLog( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<IpdBedLog> callback) {
+                                    public void get__ipdBedLog( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<IpdBedLog> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -6398,7 +6398,7 @@ public class PatientGroup extends Model {
                                       if(patientSecurity == null){
                                         PatientGroupRepository patientGroupRepository = (PatientGroupRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientGroupRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = patientGroupRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           patientSecurity = getPatientSecurity__db(restAdapter);
@@ -6438,7 +6438,7 @@ public class PatientGroup extends Model {
 
 
                     //Fetch related data from local database if present a patientSecurityId identifier as property for belongsTo
-                    public PatientSecurity getPatientSecurity__db(RestAdapter restAdapter){
+                    public PatientSecurity getPatientSecurity__db(SnaphyRestAdapter restAdapter){
                       if(patientSecurityId != null){
                         PatientSecurityRepository patientSecurityRepository = restAdapter.createRepository(PatientSecurityRepository.class);
                             try{
@@ -6497,7 +6497,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__patientSecurity( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<PatientSecurity> callback) {
+                                    public void get__patientSecurity( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientSecurity> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -6895,7 +6895,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void findById__bills( String fk,  RestAdapter restAdapter, final ObjectCallback<Bill> callback) {
+                                    public void findById__bills( String fk,  SnaphyRestAdapter restAdapter, final ObjectCallback<Bill> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -6952,7 +6952,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__bills( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__bills( String fk,  SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -6996,7 +6996,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__bills( String fk,  Bill data,  RestAdapter restAdapter, final ObjectCallback<Bill> callback) {
+                                    public void updateById__bills( String fk,  Bill data,  SnaphyRestAdapter restAdapter, final ObjectCallback<Bill> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -7078,7 +7078,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__bills( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Bill> callback) {
+                                    public void get__bills( Map<String,  ? extends Object> filter,  SnaphyRestAdapter restAdapter, final DataListCallback<Bill> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -7140,7 +7140,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__bills( Bill data,  RestAdapter restAdapter, final ObjectCallback<Bill> callback) {
+                                    public void create__bills( Bill data,  SnaphyRestAdapter restAdapter, final ObjectCallback<Bill> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -7197,7 +7197,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__bills( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__bills( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -7238,7 +7238,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__bills( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__bills( Map<String,  ? extends Object> where,  SnaphyRestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -7576,7 +7576,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void findById__chatItems( String fk,  RestAdapter restAdapter, final ObjectCallback<ChatItem> callback) {
+                                    public void findById__chatItems( String fk,  SnaphyRestAdapter restAdapter, final ObjectCallback<ChatItem> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -7633,7 +7633,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__chatItems( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__chatItems( String fk,  SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -7677,7 +7677,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__chatItems( String fk,  ChatItem data,  RestAdapter restAdapter, final ObjectCallback<ChatItem> callback) {
+                                    public void updateById__chatItems( String fk,  ChatItem data,  SnaphyRestAdapter restAdapter, final ObjectCallback<ChatItem> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -7761,7 +7761,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__chatItems( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<ChatItem> callback) {
+                                    public void get__chatItems( Map<String,  ? extends Object> filter,  SnaphyRestAdapter restAdapter, final DataListCallback<ChatItem> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -7823,7 +7823,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__chatItems( ChatItem data,  RestAdapter restAdapter, final ObjectCallback<ChatItem> callback) {
+                                    public void create__chatItems( ChatItem data,  SnaphyRestAdapter restAdapter, final ObjectCallback<ChatItem> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -7880,7 +7880,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__chatItems( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__chatItems( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -7921,7 +7921,7 @@ public class PatientGroup extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__chatItems( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__chatItems( Map<String,  ? extends Object> where,  SnaphyRestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

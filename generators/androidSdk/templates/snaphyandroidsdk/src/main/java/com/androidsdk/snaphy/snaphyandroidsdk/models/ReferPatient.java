@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -427,7 +427,7 @@ public class ReferPatient extends Model {
                                       if(patientGroup == null){
                                         ReferPatientRepository referPatientRepository = (ReferPatientRepository) getRepository();
 
-                                        RestAdapter restAdapter = referPatientRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = referPatientRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           patientGroup = getPatientGroup__db(restAdapter);
@@ -467,7 +467,7 @@ public class ReferPatient extends Model {
 
 
                     //Fetch related data from local database if present a patientGroupId identifier as property for belongsTo
-                    public PatientGroup getPatientGroup__db(RestAdapter restAdapter){
+                    public PatientGroup getPatientGroup__db(SnaphyRestAdapter restAdapter){
                       if(patientGroupId != null){
                         PatientGroupRepository patientGroupRepository = restAdapter.createRepository(PatientGroupRepository.class);
                             try{
@@ -514,7 +514,7 @@ public class ReferPatient extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__patientGroup( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<PatientGroup> callback) {
+                                    public void get__patientGroup( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientGroup> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -647,7 +647,7 @@ public class ReferPatient extends Model {
                                       if(patient == null){
                                         ReferPatientRepository referPatientRepository = (ReferPatientRepository) getRepository();
 
-                                        RestAdapter restAdapter = referPatientRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = referPatientRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           patient = getPatient__db(restAdapter);
@@ -687,7 +687,7 @@ public class ReferPatient extends Model {
 
 
                     //Fetch related data from local database if present a patientId identifier as property for belongsTo
-                    public Patient getPatient__db(RestAdapter restAdapter){
+                    public Patient getPatient__db(SnaphyRestAdapter restAdapter){
                       if(patientId != null){
                         PatientRepository patientRepository = restAdapter.createRepository(PatientRepository.class);
                             try{
@@ -736,7 +736,7 @@ public class ReferPatient extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__patient( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Patient> callback) {
+                                    public void get__patient( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Patient> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -867,7 +867,7 @@ public class ReferPatient extends Model {
                                       if(hospitalReferBy == null){
                                         ReferPatientRepository referPatientRepository = (ReferPatientRepository) getRepository();
 
-                                        RestAdapter restAdapter = referPatientRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = referPatientRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           hospitalReferBy = getHospitalReferBy__db(restAdapter);
@@ -907,7 +907,7 @@ public class ReferPatient extends Model {
 
 
                     //Fetch related data from local database if present a hospitalId identifier as property for belongsTo
-                    public Hospital getHospitalReferBy__db(RestAdapter restAdapter){
+                    public Hospital getHospitalReferBy__db(SnaphyRestAdapter restAdapter){
                       if(hospitalId != null){
                         HospitalRepository hospitalReferByRepository = restAdapter.createRepository(HospitalRepository.class);
                             try{
@@ -958,7 +958,7 @@ public class ReferPatient extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__hospitalReferBy( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
+                                    public void get__hospitalReferBy( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1087,7 +1087,7 @@ public class ReferPatient extends Model {
                                       if(hospitalUserReferBy == null){
                                         ReferPatientRepository referPatientRepository = (ReferPatientRepository) getRepository();
 
-                                        RestAdapter restAdapter = referPatientRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = referPatientRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           hospitalUserReferBy = getHospitalUserReferBy__db(restAdapter);
@@ -1127,7 +1127,7 @@ public class ReferPatient extends Model {
 
 
                     //Fetch related data from local database if present a hospitalUserId identifier as property for belongsTo
-                    public HospitalUser getHospitalUserReferBy__db(RestAdapter restAdapter){
+                    public HospitalUser getHospitalUserReferBy__db(SnaphyRestAdapter restAdapter){
                       if(hospitalUserId != null){
                         HospitalUserRepository hospitalUserReferByRepository = restAdapter.createRepository(HospitalUserRepository.class);
                             try{
@@ -1180,7 +1180,7 @@ public class ReferPatient extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__hospitalUserReferBy( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
+                                    public void get__hospitalUserReferBy( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1307,7 +1307,7 @@ public class ReferPatient extends Model {
                                       if(hospitalReferTo == null){
                                         ReferPatientRepository referPatientRepository = (ReferPatientRepository) getRepository();
 
-                                        RestAdapter restAdapter = referPatientRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = referPatientRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           hospitalReferTo = getHospitalReferTo__db(restAdapter);
@@ -1347,7 +1347,7 @@ public class ReferPatient extends Model {
 
 
                     //Fetch related data from local database if present a hospitalId identifier as property for belongsTo
-                    public Hospital getHospitalReferTo__db(RestAdapter restAdapter){
+                    public Hospital getHospitalReferTo__db(SnaphyRestAdapter restAdapter){
                       if(hospitalId != null){
                         HospitalRepository hospitalReferToRepository = restAdapter.createRepository(HospitalRepository.class);
                             try{
@@ -1402,7 +1402,7 @@ public class ReferPatient extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__hospitalReferTo( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
+                                    public void get__hospitalReferTo( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1527,7 +1527,7 @@ public class ReferPatient extends Model {
                                       if(hospitalUserReferTo == null){
                                         ReferPatientRepository referPatientRepository = (ReferPatientRepository) getRepository();
 
-                                        RestAdapter restAdapter = referPatientRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = referPatientRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           hospitalUserReferTo = getHospitalUserReferTo__db(restAdapter);
@@ -1567,7 +1567,7 @@ public class ReferPatient extends Model {
 
 
                     //Fetch related data from local database if present a hospitalUserId identifier as property for belongsTo
-                    public HospitalUser getHospitalUserReferTo__db(RestAdapter restAdapter){
+                    public HospitalUser getHospitalUserReferTo__db(SnaphyRestAdapter restAdapter){
                       if(hospitalUserId != null){
                         HospitalUserRepository hospitalUserReferToRepository = restAdapter.createRepository(HospitalUserRepository.class);
                             try{
@@ -1624,7 +1624,7 @@ public class ReferPatient extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__hospitalUserReferTo( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
+                                    public void get__hospitalUserReferTo( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

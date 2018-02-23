@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -327,7 +327,7 @@ public class Pincode extends Model {
                                       if(state == null){
                                         PincodeRepository pincodeRepository = (PincodeRepository) getRepository();
 
-                                        RestAdapter restAdapter = pincodeRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = pincodeRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           state = getState__db(restAdapter);
@@ -367,7 +367,7 @@ public class Pincode extends Model {
 
 
                     //Fetch related data from local database if present a stateId identifier as property for belongsTo
-                    public State getState__db(RestAdapter restAdapter){
+                    public State getState__db(SnaphyRestAdapter restAdapter){
                       if(stateId != null){
                         StateRepository stateRepository = restAdapter.createRepository(StateRepository.class);
                             try{
@@ -414,7 +414,7 @@ public class Pincode extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__state( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<State> callback) {
+                                    public void get__state( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<State> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -594,7 +594,7 @@ public class Pincode extends Model {
                                       if(taluk == null){
                                         PincodeRepository pincodeRepository = (PincodeRepository) getRepository();
 
-                                        RestAdapter restAdapter = pincodeRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = pincodeRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           taluk = getTaluk__db(restAdapter);
@@ -634,7 +634,7 @@ public class Pincode extends Model {
 
 
                     //Fetch related data from local database if present a talukId identifier as property for belongsTo
-                    public Taluk getTaluk__db(RestAdapter restAdapter){
+                    public Taluk getTaluk__db(SnaphyRestAdapter restAdapter){
                       if(talukId != null){
                         TalukRepository talukRepository = restAdapter.createRepository(TalukRepository.class);
                             try{
@@ -701,7 +701,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__taluk( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Taluk> callback) {
+                                    public void get__taluk( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Taluk> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -979,7 +979,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void findById__patients( String fk,  RestAdapter restAdapter, final ObjectCallback<Patient> callback) {
+                                    public void findById__patients( String fk,  SnaphyRestAdapter restAdapter, final ObjectCallback<Patient> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1036,7 +1036,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__patients( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__patients( String fk,  SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1080,7 +1080,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__patients( String fk,  Patient data,  RestAdapter restAdapter, final ObjectCallback<Patient> callback) {
+                                    public void updateById__patients( String fk,  Patient data,  SnaphyRestAdapter restAdapter, final ObjectCallback<Patient> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1156,7 +1156,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__patients( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Patient> callback) {
+                                    public void get__patients( Map<String,  ? extends Object> filter,  SnaphyRestAdapter restAdapter, final DataListCallback<Patient> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1218,7 +1218,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__patients( Patient data,  RestAdapter restAdapter, final ObjectCallback<Patient> callback) {
+                                    public void create__patients( Patient data,  SnaphyRestAdapter restAdapter, final ObjectCallback<Patient> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1275,7 +1275,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__patients( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__patients( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1316,7 +1316,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__patients( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__patients( Map<String,  ? extends Object> where,  SnaphyRestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1582,7 +1582,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void findById__patientGroups( String fk,  RestAdapter restAdapter, final ObjectCallback<PatientGroup> callback) {
+                                    public void findById__patientGroups( String fk,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientGroup> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1639,7 +1639,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__patientGroups( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__patientGroups( String fk,  SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1683,7 +1683,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__patientGroups( String fk,  PatientGroup data,  RestAdapter restAdapter, final ObjectCallback<PatientGroup> callback) {
+                                    public void updateById__patientGroups( String fk,  PatientGroup data,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientGroup> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1761,7 +1761,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__patientGroups( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<PatientGroup> callback) {
+                                    public void get__patientGroups( Map<String,  ? extends Object> filter,  SnaphyRestAdapter restAdapter, final DataListCallback<PatientGroup> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1823,7 +1823,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__patientGroups( PatientGroup data,  RestAdapter restAdapter, final ObjectCallback<PatientGroup> callback) {
+                                    public void create__patientGroups( PatientGroup data,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientGroup> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1880,7 +1880,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__patientGroups( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__patientGroups( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1921,7 +1921,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__patientGroups( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__patientGroups( Map<String,  ? extends Object> where,  SnaphyRestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2055,7 +2055,7 @@ public class Pincode extends Model {
                                       if(district == null){
                                         PincodeRepository pincodeRepository = (PincodeRepository) getRepository();
 
-                                        RestAdapter restAdapter = pincodeRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = pincodeRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           district = getDistrict__db(restAdapter);
@@ -2095,7 +2095,7 @@ public class Pincode extends Model {
 
 
                     //Fetch related data from local database if present a districtId identifier as property for belongsTo
-                    public District getDistrict__db(RestAdapter restAdapter){
+                    public District getDistrict__db(SnaphyRestAdapter restAdapter){
                       if(districtId != null){
                         DistrictRepository districtRepository = restAdapter.createRepository(DistrictRepository.class);
                             try{
@@ -2164,7 +2164,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__district( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<District> callback) {
+                                    public void get__district( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<District> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2452,7 +2452,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void findById__feeds( String fk,  RestAdapter restAdapter, final ObjectCallback<Feed> callback) {
+                                    public void findById__feeds( String fk,  SnaphyRestAdapter restAdapter, final ObjectCallback<Feed> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2509,7 +2509,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__feeds( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__feeds( String fk,  SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2553,7 +2553,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__feeds( String fk,  Feed data,  RestAdapter restAdapter, final ObjectCallback<Feed> callback) {
+                                    public void updateById__feeds( String fk,  Feed data,  SnaphyRestAdapter restAdapter, final ObjectCallback<Feed> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2633,7 +2633,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__feeds( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Feed> callback) {
+                                    public void get__feeds( Map<String,  ? extends Object> filter,  SnaphyRestAdapter restAdapter, final DataListCallback<Feed> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2695,7 +2695,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__feeds( Feed data,  RestAdapter restAdapter, final ObjectCallback<Feed> callback) {
+                                    public void create__feeds( Feed data,  SnaphyRestAdapter restAdapter, final ObjectCallback<Feed> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2752,7 +2752,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__feeds( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__feeds( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2793,7 +2793,7 @@ public class Pincode extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__feeds( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__feeds( Map<String,  ? extends Object> where,  SnaphyRestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

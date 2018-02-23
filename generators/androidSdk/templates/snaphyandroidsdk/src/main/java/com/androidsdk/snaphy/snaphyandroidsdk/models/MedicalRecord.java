@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -292,7 +292,7 @@ public class MedicalRecord extends Model {
                                       if(patient == null){
                                         MedicalRecordRepository medicalRecordRepository = (MedicalRecordRepository) getRepository();
 
-                                        RestAdapter restAdapter = medicalRecordRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = medicalRecordRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           patient = getPatient__db(restAdapter);
@@ -332,7 +332,7 @@ public class MedicalRecord extends Model {
 
 
                     //Fetch related data from local database if present a patientId identifier as property for belongsTo
-                    public Patient getPatient__db(RestAdapter restAdapter){
+                    public Patient getPatient__db(SnaphyRestAdapter restAdapter){
                       if(patientId != null){
                         PatientRepository patientRepository = restAdapter.createRepository(PatientRepository.class);
                             try{
@@ -379,7 +379,7 @@ public class MedicalRecord extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__patient( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Patient> callback) {
+                                    public void get__patient( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Patient> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -487,7 +487,7 @@ public class MedicalRecord extends Model {
                                       if(hospital == null){
                                         MedicalRecordRepository medicalRecordRepository = (MedicalRecordRepository) getRepository();
 
-                                        RestAdapter restAdapter = medicalRecordRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = medicalRecordRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           hospital = getHospital__db(restAdapter);
@@ -527,7 +527,7 @@ public class MedicalRecord extends Model {
 
 
                     //Fetch related data from local database if present a hospitalId identifier as property for belongsTo
-                    public Hospital getHospital__db(RestAdapter restAdapter){
+                    public Hospital getHospital__db(SnaphyRestAdapter restAdapter){
                       if(hospitalId != null){
                         HospitalRepository hospitalRepository = restAdapter.createRepository(HospitalRepository.class);
                             try{
@@ -576,7 +576,7 @@ public class MedicalRecord extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__hospital( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
+                                    public void get__hospital( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

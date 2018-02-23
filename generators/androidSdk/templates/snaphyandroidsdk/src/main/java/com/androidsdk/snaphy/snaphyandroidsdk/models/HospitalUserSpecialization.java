@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -229,7 +229,7 @@ public class HospitalUserSpecialization extends Model {
                                       if(hospitalUser == null){
                                         HospitalUserSpecializationRepository hospitalUserSpecializationRepository = (HospitalUserSpecializationRepository) getRepository();
 
-                                        RestAdapter restAdapter = hospitalUserSpecializationRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = hospitalUserSpecializationRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           hospitalUser = getHospitalUser__db(restAdapter);
@@ -269,7 +269,7 @@ public class HospitalUserSpecialization extends Model {
 
 
                     //Fetch related data from local database if present a hospitalUserId identifier as property for belongsTo
-                    public HospitalUser getHospitalUser__db(RestAdapter restAdapter){
+                    public HospitalUser getHospitalUser__db(SnaphyRestAdapter restAdapter){
                       if(hospitalUserId != null){
                         HospitalUserRepository hospitalUserRepository = restAdapter.createRepository(HospitalUserRepository.class);
                             try{
@@ -316,7 +316,7 @@ public class HospitalUserSpecialization extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__hospitalUser( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
+                                    public void get__hospitalUser( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -439,7 +439,7 @@ public class HospitalUserSpecialization extends Model {
                                       if(specialization == null){
                                         HospitalUserSpecializationRepository hospitalUserSpecializationRepository = (HospitalUserSpecializationRepository) getRepository();
 
-                                        RestAdapter restAdapter = hospitalUserSpecializationRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = hospitalUserSpecializationRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           specialization = getSpecialization__db(restAdapter);
@@ -479,7 +479,7 @@ public class HospitalUserSpecialization extends Model {
 
 
                     //Fetch related data from local database if present a specializationId identifier as property for belongsTo
-                    public Specialization getSpecialization__db(RestAdapter restAdapter){
+                    public Specialization getSpecialization__db(SnaphyRestAdapter restAdapter){
                       if(specializationId != null){
                         SpecializationRepository specializationRepository = restAdapter.createRepository(SpecializationRepository.class);
                             try{
@@ -528,7 +528,7 @@ public class HospitalUserSpecialization extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__specialization( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Specialization> callback) {
+                                    public void get__specialization( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Specialization> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -299,7 +299,7 @@ public class TeamMember extends Model {
                                       if(team == null){
                                         TeamMemberRepository teamMemberRepository = (TeamMemberRepository) getRepository();
 
-                                        RestAdapter restAdapter = teamMemberRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = teamMemberRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           team = getTeam__db(restAdapter);
@@ -339,7 +339,7 @@ public class TeamMember extends Model {
 
 
                     //Fetch related data from local database if present a teamId identifier as property for belongsTo
-                    public Team getTeam__db(RestAdapter restAdapter){
+                    public Team getTeam__db(SnaphyRestAdapter restAdapter){
                       if(teamId != null){
                         TeamRepository teamRepository = restAdapter.createRepository(TeamRepository.class);
                             try{
@@ -386,7 +386,7 @@ public class TeamMember extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__team( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Team> callback) {
+                                    public void get__team( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Team> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

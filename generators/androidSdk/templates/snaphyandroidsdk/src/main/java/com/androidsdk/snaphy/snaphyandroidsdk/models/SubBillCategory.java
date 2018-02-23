@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -394,7 +394,7 @@ public class SubBillCategory extends Model {
                     
 
                                     //Write the method here..
-                                    public void findById__bills( String fk,  RestAdapter restAdapter, final ObjectCallback<Bill> callback) {
+                                    public void findById__bills( String fk,  SnaphyRestAdapter restAdapter, final ObjectCallback<Bill> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -451,7 +451,7 @@ public class SubBillCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__bills( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__bills( String fk,  SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -495,7 +495,7 @@ public class SubBillCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__bills( String fk,  Bill data,  RestAdapter restAdapter, final ObjectCallback<Bill> callback) {
+                                    public void updateById__bills( String fk,  Bill data,  SnaphyRestAdapter restAdapter, final ObjectCallback<Bill> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -559,7 +559,7 @@ public class SubBillCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__bills( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<Bill> callback) {
+                                    public void get__bills( Map<String,  ? extends Object> filter,  SnaphyRestAdapter restAdapter, final DataListCallback<Bill> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -621,7 +621,7 @@ public class SubBillCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__bills( Bill data,  RestAdapter restAdapter, final ObjectCallback<Bill> callback) {
+                                    public void create__bills( Bill data,  SnaphyRestAdapter restAdapter, final ObjectCallback<Bill> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -678,7 +678,7 @@ public class SubBillCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__bills( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__bills( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -719,7 +719,7 @@ public class SubBillCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__bills( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__bills( Map<String,  ? extends Object> where,  SnaphyRestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -828,7 +828,7 @@ public class SubBillCategory extends Model {
                                       if(billCategory == null){
                                         SubBillCategoryRepository subBillCategoryRepository = (SubBillCategoryRepository) getRepository();
 
-                                        RestAdapter restAdapter = subBillCategoryRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = subBillCategoryRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           billCategory = getBillCategory__db(restAdapter);
@@ -868,7 +868,7 @@ public class SubBillCategory extends Model {
 
 
                     //Fetch related data from local database if present a billCategoryId identifier as property for belongsTo
-                    public BillCategory getBillCategory__db(RestAdapter restAdapter){
+                    public BillCategory getBillCategory__db(SnaphyRestAdapter restAdapter){
                       if(billCategoryId != null){
                         BillCategoryRepository billCategoryRepository = restAdapter.createRepository(BillCategoryRepository.class);
                             try{
@@ -921,7 +921,7 @@ public class SubBillCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__billCategory( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<BillCategory> callback) {
+                                    public void get__billCategory( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<BillCategory> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1048,7 +1048,7 @@ public class SubBillCategory extends Model {
                                       if(hospital == null){
                                         SubBillCategoryRepository subBillCategoryRepository = (SubBillCategoryRepository) getRepository();
 
-                                        RestAdapter restAdapter = subBillCategoryRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = subBillCategoryRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           hospital = getHospital__db(restAdapter);
@@ -1088,7 +1088,7 @@ public class SubBillCategory extends Model {
 
 
                     //Fetch related data from local database if present a hospitalId identifier as property for belongsTo
-                    public Hospital getHospital__db(RestAdapter restAdapter){
+                    public Hospital getHospital__db(SnaphyRestAdapter restAdapter){
                       if(hospitalId != null){
                         HospitalRepository hospitalRepository = restAdapter.createRepository(HospitalRepository.class);
                             try{
@@ -1143,7 +1143,7 @@ public class SubBillCategory extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__hospital( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
+                                    public void get__hospital( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

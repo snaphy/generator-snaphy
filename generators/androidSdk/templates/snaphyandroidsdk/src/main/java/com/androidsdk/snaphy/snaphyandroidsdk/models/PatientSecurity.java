@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -436,7 +436,7 @@ public class PatientSecurity extends Model {
                                       if(feeds == null){
                                         PatientSecurityRepository patientSecurityRepository = (PatientSecurityRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientSecurityRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = patientSecurityRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           feeds = getFeeds__db(restAdapter);
@@ -476,7 +476,7 @@ public class PatientSecurity extends Model {
 
 
                     //Fetch related data from local database if present a feedId identifier as property for belongsTo
-                    public Feed getFeeds__db(RestAdapter restAdapter){
+                    public Feed getFeeds__db(SnaphyRestAdapter restAdapter){
                       if(feedId != null){
                         FeedRepository feedsRepository = restAdapter.createRepository(FeedRepository.class);
                             try{
@@ -523,7 +523,7 @@ public class PatientSecurity extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__feeds( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Feed> callback) {
+                                    public void get__feeds( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Feed> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -580,7 +580,7 @@ public class PatientSecurity extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__feeds( Feed data,  RestAdapter restAdapter, final ObjectCallback<Feed> callback) {
+                                    public void create__feeds( Feed data,  SnaphyRestAdapter restAdapter, final ObjectCallback<Feed> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -637,7 +637,7 @@ public class PatientSecurity extends Model {
                         
 
                                     //Write the method here..
-                                    public void update__feeds( Feed data,  RestAdapter restAdapter, final ObjectCallback<Feed> callback) {
+                                    public void update__feeds( Feed data,  SnaphyRestAdapter restAdapter, final ObjectCallback<Feed> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -694,7 +694,7 @@ public class PatientSecurity extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroy__feeds( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroy__feeds( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -833,7 +833,7 @@ public class PatientSecurity extends Model {
                                       if(hospitalUser == null){
                                         PatientSecurityRepository patientSecurityRepository = (PatientSecurityRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientSecurityRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = patientSecurityRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           hospitalUser = getHospitalUser__db(restAdapter);
@@ -873,7 +873,7 @@ public class PatientSecurity extends Model {
 
 
                     //Fetch related data from local database if present a hospitalUserId identifier as property for belongsTo
-                    public HospitalUser getHospitalUser__db(RestAdapter restAdapter){
+                    public HospitalUser getHospitalUser__db(SnaphyRestAdapter restAdapter){
                       if(hospitalUserId != null){
                         HospitalUserRepository hospitalUserRepository = restAdapter.createRepository(HospitalUserRepository.class);
                             try{
@@ -938,7 +938,7 @@ public class PatientSecurity extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__hospitalUser( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
+                                    public void get__hospitalUser( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1081,7 +1081,7 @@ public class PatientSecurity extends Model {
                                       if(patientGroup == null){
                                         PatientSecurityRepository patientSecurityRepository = (PatientSecurityRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientSecurityRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = patientSecurityRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           patientGroup = getPatientGroup__db(restAdapter);
@@ -1121,7 +1121,7 @@ public class PatientSecurity extends Model {
 
 
                     //Fetch related data from local database if present a patientGroupId identifier as property for belongsTo
-                    public PatientGroup getPatientGroup__db(RestAdapter restAdapter){
+                    public PatientGroup getPatientGroup__db(SnaphyRestAdapter restAdapter){
                       if(patientGroupId != null){
                         PatientGroupRepository patientGroupRepository = restAdapter.createRepository(PatientGroupRepository.class);
                             try{
@@ -1176,7 +1176,7 @@ public class PatientSecurity extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__patientGroup( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<PatientGroup> callback) {
+                                    public void get__patientGroup( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientGroup> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1329,7 +1329,7 @@ public class PatientSecurity extends Model {
                                       if(hospital == null){
                                         PatientSecurityRepository patientSecurityRepository = (PatientSecurityRepository) getRepository();
 
-                                        RestAdapter restAdapter = patientSecurityRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = patientSecurityRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           hospital = getHospital__db(restAdapter);
@@ -1369,7 +1369,7 @@ public class PatientSecurity extends Model {
 
 
                     //Fetch related data from local database if present a hospitalId identifier as property for belongsTo
-                    public Hospital getHospital__db(RestAdapter restAdapter){
+                    public Hospital getHospital__db(SnaphyRestAdapter restAdapter){
                       if(hospitalId != null){
                         HospitalRepository hospitalRepository = restAdapter.createRepository(HospitalRepository.class);
                             try{
@@ -1426,7 +1426,7 @@ public class PatientSecurity extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__hospital( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
+                                    public void get__hospital( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1705,7 +1705,7 @@ public class PatientSecurity extends Model {
                         
 
                                     //Write the method here..
-                                    public void findById__patientFlags( String fk,  RestAdapter restAdapter, final ObjectCallback<PatientFlag> callback) {
+                                    public void findById__patientFlags( String fk,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientFlag> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1762,7 +1762,7 @@ public class PatientSecurity extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__patientFlags( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__patientFlags( String fk,  SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1806,7 +1806,7 @@ public class PatientSecurity extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__patientFlags( String fk,  PatientFlag data,  RestAdapter restAdapter, final ObjectCallback<PatientFlag> callback) {
+                                    public void updateById__patientFlags( String fk,  PatientFlag data,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientFlag> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1868,7 +1868,7 @@ public class PatientSecurity extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__patientFlags( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<PatientFlag> callback) {
+                                    public void get__patientFlags( Map<String,  ? extends Object> filter,  SnaphyRestAdapter restAdapter, final DataListCallback<PatientFlag> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1930,7 +1930,7 @@ public class PatientSecurity extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__patientFlags( PatientFlag data,  RestAdapter restAdapter, final ObjectCallback<PatientFlag> callback) {
+                                    public void create__patientFlags( PatientFlag data,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientFlag> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1987,7 +1987,7 @@ public class PatientSecurity extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__patientFlags( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__patientFlags( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -2028,7 +2028,7 @@ public class PatientSecurity extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__patientFlags( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__patientFlags( Map<String,  ? extends Object> where,  SnaphyRestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

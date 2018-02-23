@@ -26,7 +26,7 @@ import com.androidsdk.snaphy.snaphyandroidsdk.list.LazyList;
 import com.androidsdk.snaphy.snaphyandroidsdk.models.SnaphyNotification;
 //Import self repository..
 import com.androidsdk.snaphy.snaphyandroidsdk.repository.SnaphyNotificationRepository;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 
 /**
 * Created by snaphy on 1/2/2017.
@@ -35,7 +35,7 @@ import com.strongloop.android.loopback.RestAdapter;
 public class SnaphyNotificationDb{
 
     // All Static variables
-    RestAdapter restAdapter;
+    SnaphyRestAdapter restAdapter;
 
     private String TAG = "snaphy";
     private String KEY_ID = "ID";
@@ -54,7 +54,7 @@ public class SnaphyNotificationDb{
         return db;
     }
 
-  public SnaphyNotificationDb(Context context, String DATABASE_NAME, RestAdapter restAdapter){
+  public SnaphyNotificationDb(Context context, String DATABASE_NAME, SnaphyRestAdapter restAdapter){
     //super(context, DATABASE_NAME, null, DATABASE_VERSION);
     this.context = context;
     this.restAdapter = restAdapter;

@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -345,7 +345,7 @@ public class Degree extends Model {
                     
 
                                     //Write the method here..
-                                    public void findById__hospitalUserEducations( String fk,  RestAdapter restAdapter, final ObjectCallback<HospitalUserEducation> callback) {
+                                    public void findById__hospitalUserEducations( String fk,  SnaphyRestAdapter restAdapter, final ObjectCallback<HospitalUserEducation> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -402,7 +402,7 @@ public class Degree extends Model {
                         
 
                                     //Write the method here..
-                                    public void destroyById__hospitalUserEducations( String fk,  RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void destroyById__hospitalUserEducations( String fk,  SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -446,7 +446,7 @@ public class Degree extends Model {
                         
 
                                     //Write the method here..
-                                    public void updateById__hospitalUserEducations( String fk,  HospitalUserEducation data,  RestAdapter restAdapter, final ObjectCallback<HospitalUserEducation> callback) {
+                                    public void updateById__hospitalUserEducations( String fk,  HospitalUserEducation data,  SnaphyRestAdapter restAdapter, final ObjectCallback<HospitalUserEducation> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -506,7 +506,7 @@ public class Degree extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__hospitalUserEducations( Map<String,  ? extends Object> filter,  RestAdapter restAdapter, final DataListCallback<HospitalUserEducation> callback) {
+                                    public void get__hospitalUserEducations( Map<String,  ? extends Object> filter,  SnaphyRestAdapter restAdapter, final DataListCallback<HospitalUserEducation> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -568,7 +568,7 @@ public class Degree extends Model {
                         
 
                                     //Write the method here..
-                                    public void create__hospitalUserEducations( HospitalUserEducation data,  RestAdapter restAdapter, final ObjectCallback<HospitalUserEducation> callback) {
+                                    public void create__hospitalUserEducations( HospitalUserEducation data,  SnaphyRestAdapter restAdapter, final ObjectCallback<HospitalUserEducation> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -625,7 +625,7 @@ public class Degree extends Model {
                         
 
                                     //Write the method here..
-                                    public void delete__hospitalUserEducations( RestAdapter restAdapter, final VoidCallback callback) {
+                                    public void delete__hospitalUserEducations( SnaphyRestAdapter restAdapter, final VoidCallback callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -666,7 +666,7 @@ public class Degree extends Model {
                         
 
                                     //Write the method here..
-                                    public void count__hospitalUserEducations( Map<String,  ? extends Object> where,  RestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
+                                    public void count__hospitalUserEducations( Map<String,  ? extends Object> where,  SnaphyRestAdapter restAdapter, final ObjectCallback<JSONObject>  callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

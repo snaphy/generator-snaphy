@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -560,7 +560,7 @@ public class Feed extends Model {
                                       if(patientSecurity == null){
                                         FeedRepository feedRepository = (FeedRepository) getRepository();
 
-                                        RestAdapter restAdapter = feedRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = feedRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           patientSecurity = getPatientSecurity__db(restAdapter);
@@ -600,7 +600,7 @@ public class Feed extends Model {
 
 
                     //Fetch related data from local database if present a patientSecurityId identifier as property for belongsTo
-                    public PatientSecurity getPatientSecurity__db(RestAdapter restAdapter){
+                    public PatientSecurity getPatientSecurity__db(SnaphyRestAdapter restAdapter){
                       if(patientSecurityId != null){
                         PatientSecurityRepository patientSecurityRepository = restAdapter.createRepository(PatientSecurityRepository.class);
                             try{
@@ -647,7 +647,7 @@ public class Feed extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__patientSecurity( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<PatientSecurity> callback) {
+                                    public void get__patientSecurity( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientSecurity> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -789,7 +789,7 @@ public class Feed extends Model {
                                       if(state == null){
                                         FeedRepository feedRepository = (FeedRepository) getRepository();
 
-                                        RestAdapter restAdapter = feedRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = feedRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           state = getState__db(restAdapter);
@@ -829,7 +829,7 @@ public class Feed extends Model {
 
 
                     //Fetch related data from local database if present a stateId identifier as property for belongsTo
-                    public State getState__db(RestAdapter restAdapter){
+                    public State getState__db(SnaphyRestAdapter restAdapter){
                       if(stateId != null){
                         StateRepository stateRepository = restAdapter.createRepository(StateRepository.class);
                             try{
@@ -878,7 +878,7 @@ public class Feed extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__state( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<State> callback) {
+                                    public void get__state( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<State> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1018,7 +1018,7 @@ public class Feed extends Model {
                                       if(company == null){
                                         FeedRepository feedRepository = (FeedRepository) getRepository();
 
-                                        RestAdapter restAdapter = feedRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = feedRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           company = getCompany__db(restAdapter);
@@ -1058,7 +1058,7 @@ public class Feed extends Model {
 
 
                     //Fetch related data from local database if present a companyId identifier as property for belongsTo
-                    public Company getCompany__db(RestAdapter restAdapter){
+                    public Company getCompany__db(SnaphyRestAdapter restAdapter){
                       if(companyId != null){
                         CompanyRepository companyRepository = restAdapter.createRepository(CompanyRepository.class);
                             try{
@@ -1109,7 +1109,7 @@ public class Feed extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__company( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Company> callback) {
+                                    public void get__company( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Company> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1247,7 +1247,7 @@ public class Feed extends Model {
                                       if(district == null){
                                         FeedRepository feedRepository = (FeedRepository) getRepository();
 
-                                        RestAdapter restAdapter = feedRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = feedRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           district = getDistrict__db(restAdapter);
@@ -1287,7 +1287,7 @@ public class Feed extends Model {
 
 
                     //Fetch related data from local database if present a districtId identifier as property for belongsTo
-                    public District getDistrict__db(RestAdapter restAdapter){
+                    public District getDistrict__db(SnaphyRestAdapter restAdapter){
                       if(districtId != null){
                         DistrictRepository districtRepository = restAdapter.createRepository(DistrictRepository.class);
                             try{
@@ -1340,7 +1340,7 @@ public class Feed extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__district( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<District> callback) {
+                                    public void get__district( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<District> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 

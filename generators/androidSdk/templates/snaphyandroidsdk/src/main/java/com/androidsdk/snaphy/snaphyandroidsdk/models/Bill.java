@@ -10,7 +10,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -446,7 +446,7 @@ public class Bill extends Model {
                                       if(billCategory == null){
                                         BillRepository billRepository = (BillRepository) getRepository();
 
-                                        RestAdapter restAdapter = billRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = billRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           billCategory = getBillCategory__db(restAdapter);
@@ -486,7 +486,7 @@ public class Bill extends Model {
 
 
                     //Fetch related data from local database if present a billCategoryId identifier as property for belongsTo
-                    public BillCategory getBillCategory__db(RestAdapter restAdapter){
+                    public BillCategory getBillCategory__db(SnaphyRestAdapter restAdapter){
                       if(billCategoryId != null){
                         BillCategoryRepository billCategoryRepository = restAdapter.createRepository(BillCategoryRepository.class);
                             try{
@@ -539,7 +539,7 @@ public class Bill extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__billCategory( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<BillCategory> callback) {
+                                    public void get__billCategory( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<BillCategory> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -693,7 +693,7 @@ public class Bill extends Model {
                                       if(subBillCategory == null){
                                         BillRepository billRepository = (BillRepository) getRepository();
 
-                                        RestAdapter restAdapter = billRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = billRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           subBillCategory = getSubBillCategory__db(restAdapter);
@@ -733,7 +733,7 @@ public class Bill extends Model {
 
 
                     //Fetch related data from local database if present a subBillCategoryId identifier as property for belongsTo
-                    public SubBillCategory getSubBillCategory__db(RestAdapter restAdapter){
+                    public SubBillCategory getSubBillCategory__db(SnaphyRestAdapter restAdapter){
                       if(subBillCategoryId != null){
                         SubBillCategoryRepository subBillCategoryRepository = restAdapter.createRepository(SubBillCategoryRepository.class);
                             try{
@@ -788,7 +788,7 @@ public class Bill extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__subBillCategory( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<SubBillCategory> callback) {
+                                    public void get__subBillCategory( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<SubBillCategory> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -940,7 +940,7 @@ public class Bill extends Model {
                                       if(patientGroup == null){
                                         BillRepository billRepository = (BillRepository) getRepository();
 
-                                        RestAdapter restAdapter = billRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = billRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           patientGroup = getPatientGroup__db(restAdapter);
@@ -980,7 +980,7 @@ public class Bill extends Model {
 
 
                     //Fetch related data from local database if present a patientGroupId identifier as property for belongsTo
-                    public PatientGroup getPatientGroup__db(RestAdapter restAdapter){
+                    public PatientGroup getPatientGroup__db(SnaphyRestAdapter restAdapter){
                       if(patientGroupId != null){
                         PatientGroupRepository patientGroupRepository = restAdapter.createRepository(PatientGroupRepository.class);
                             try{
@@ -1027,7 +1027,7 @@ public class Bill extends Model {
                     
 
                                     //Write the method here..
-                                    public void get__patientGroup( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<PatientGroup> callback) {
+                                    public void get__patientGroup( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<PatientGroup> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1187,7 +1187,7 @@ public class Bill extends Model {
                                       if(hospitalUser == null){
                                         BillRepository billRepository = (BillRepository) getRepository();
 
-                                        RestAdapter restAdapter = billRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = billRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           hospitalUser = getHospitalUser__db(restAdapter);
@@ -1227,7 +1227,7 @@ public class Bill extends Model {
 
 
                     //Fetch related data from local database if present a hospitalUserId identifier as property for belongsTo
-                    public HospitalUser getHospitalUser__db(RestAdapter restAdapter){
+                    public HospitalUser getHospitalUser__db(SnaphyRestAdapter restAdapter){
                       if(hospitalUserId != null){
                         HospitalUserRepository hospitalUserRepository = restAdapter.createRepository(HospitalUserRepository.class);
                             try{
@@ -1276,7 +1276,7 @@ public class Bill extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__hospitalUser( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
+                                    public void get__hospitalUser( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<HospitalUser> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
@@ -1434,7 +1434,7 @@ public class Bill extends Model {
                                       if(hospital == null){
                                         BillRepository billRepository = (BillRepository) getRepository();
 
-                                        RestAdapter restAdapter = billRepository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = billRepository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           hospital = getHospital__db(restAdapter);
@@ -1474,7 +1474,7 @@ public class Bill extends Model {
 
 
                     //Fetch related data from local database if present a hospitalId identifier as property for belongsTo
-                    public Hospital getHospital__db(RestAdapter restAdapter){
+                    public Hospital getHospital__db(SnaphyRestAdapter restAdapter){
                       if(hospitalId != null){
                         HospitalRepository hospitalRepository = restAdapter.createRepository(HospitalRepository.class);
                             try{
@@ -1525,7 +1525,7 @@ public class Bill extends Model {
                         
 
                                     //Write the method here..
-                                    public void get__hospital( Boolean refresh,  RestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
+                                    public void get__hospital( Boolean refresh,  SnaphyRestAdapter restAdapter, final ObjectCallback<Hospital> callback) {
                                         //Call the onBefore callback method..
                                         callback.onBefore();
 
