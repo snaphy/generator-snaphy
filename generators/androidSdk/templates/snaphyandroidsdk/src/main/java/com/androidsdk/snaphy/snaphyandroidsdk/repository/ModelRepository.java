@@ -6,7 +6,6 @@ package com.androidsdk.snaphy.snaphyandroidsdk.repository;
 
 
 import com.androidsdk.snaphy.snaphyandroidsdk.models.Model;
-import com.strongloop.android.loopback.RestRepository;
 import com.strongloop.android.remoting.adapters.Adapter;
 import com.strongloop.android.remoting.adapters.RestContract;
 import com.strongloop.android.remoting.adapters.RestContractItem;
@@ -21,7 +20,7 @@ import java.util.Map;
  * the name of the model type for easy {@link Model} creation, discovery, and
  * management.
  */
-public class ModelRepository<T extends Model> extends RestRepository<T> {
+public class ModelRepository<T extends Model> extends SnaphyRestRepository<T> {
 
 
 
