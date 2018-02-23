@@ -46,7 +46,7 @@ public class LazyList<T> extends ArrayList<T> {
         int newSize = 0;
         Cursor oldCursor = mCursor;
         try{
-            super.clear();
+            clear();
         }catch (Exception e){
             Log.e("LazyLoading", e.toString());
         }
@@ -138,6 +138,13 @@ public class LazyList<T> extends ArrayList<T> {
             //Closing the cursor for safe data..preventing memory leakage..
             closeCursor();
         }
+        if(mCursor != null){
+            if(mCursor.getCount() > 0){
+                T item = mCreator.create(mCursor, 0);
+                Log.i("lazy", item.toString());
+            }
+        }
+
     }
 
 
@@ -154,7 +161,11 @@ public class LazyList<T> extends ArrayList<T> {
     @Override
     public T get(int index) {
         try{
-            int size = super.size();
+            T item = mCreator.create(mCursor, index);
+            //Now call callback on data add..
+            mCallback.onSuccess(item);
+            return item;
+            /*int size = super.size();
             if (index < size) {
                 // find item in the collection
                 T item = super.get(index);
@@ -176,7 +187,7 @@ public class LazyList<T> extends ArrayList<T> {
                 mCallback.onSuccess(item);
                 add(item);
                 return item;
-            }
+            }*/
         }catch (Exception e){
             //attempt to re-open an already-closed object
             //Cursor closed ignore..
