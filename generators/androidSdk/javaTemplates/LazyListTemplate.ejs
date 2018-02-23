@@ -138,13 +138,6 @@ public class LazyList<T> extends ArrayList<T> {
             //Closing the cursor for safe data..preventing memory leakage..
             closeCursor();
         }
-        if(mCursor != null){
-            if(mCursor.getCount() > 0){
-                T item = mCreator.create(mCursor, 0);
-                Log.i("lazy", item.toString());
-            }
-        }
-
     }
 
 
