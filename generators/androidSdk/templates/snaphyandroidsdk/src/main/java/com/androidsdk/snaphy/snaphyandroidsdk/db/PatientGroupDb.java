@@ -392,9 +392,11 @@ public class PatientGroupDb{
                         }
                                   
                                 
-                                                            double ageData;
-                        ageData = (double)_modelData.getAge();
-                        values.put("`age`", ageData);
+                                                            String ageData = "";
+                        if(_modelData.getAge() != null){
+                          ageData = _modelData.getAge().toString();
+                          values.put("`age`", ageData);
+                        }
                                   
                                 
                                                             String genderData = "";
@@ -1096,12 +1098,14 @@ public class PatientGroupDb{
                         }
                                                 
                                 
-                                                            double ageData = (double)0;
-                          ageData = cursor.getInt(40);
-                          ageData = (double)ageData;
-                          hashMap.put("age", ageData);
-
-
+                                                            String ageData = "";
+                        if(cursor.getString(40) != null){
+                          ageData = cursor.getString(40);
+                          if(ageData != null){
+                            ageData = (String)ageData;
+                            hashMap.put("age", ageData);
+                          }
+                        }
                                                 
                                 
                                                             String genderData = "";

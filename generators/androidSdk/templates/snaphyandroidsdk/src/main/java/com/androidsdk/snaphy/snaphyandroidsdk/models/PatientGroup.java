@@ -989,14 +989,14 @@ public class PatientGroup extends Model {
             
 
             
-                private double age;
+                private String age;
                 /* Adding Getter and Setter methods */
-                public double getAge(){
+                public String getAge(){
                     return age;
                 }
 
                 /* Adding Getter and Setter methods */
-                public void setAge(double age){
+                public void setAge(String age){
                     this.age = age;
                     //Update hashMap value..
                     hashMap.put("age", age);
@@ -1565,6 +1565,7 @@ public class PatientGroup extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -1816,6 +1817,7 @@ public class PatientGroup extends Model {
                             
                          
                             
+                        
                         
                         
                         
@@ -2253,6 +2255,7 @@ public class PatientGroup extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -2504,6 +2507,7 @@ public class PatientGroup extends Model {
                             
                          
                             
+                        
                         
                         
                         
@@ -2941,6 +2945,7 @@ public class PatientGroup extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -3192,6 +3197,7 @@ public class PatientGroup extends Model {
                             
                          
                             
+                        
                         
                         
                         
@@ -3629,6 +3635,7 @@ public class PatientGroup extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -3973,6 +3980,7 @@ public class PatientGroup extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -4224,6 +4232,7 @@ public class PatientGroup extends Model {
                             
                          
                             
+                        
                         
                         
                         
@@ -4895,6 +4904,7 @@ public class PatientGroup extends Model {
                             
                          
                             
+                        
                         
                         
                         
@@ -5662,6 +5672,7 @@ public class PatientGroup extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -5916,6 +5927,7 @@ public class PatientGroup extends Model {
                             
                          
                             
+                        
                         
                         
                         
@@ -6353,6 +6365,7 @@ public class PatientGroup extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -6604,6 +6617,7 @@ public class PatientGroup extends Model {
                             
                          
                             
+                        
                         
                         
                         
@@ -7368,6 +7382,7 @@ public class PatientGroup extends Model {
                         
                         
                         
+                        
                     
 
                 
@@ -7949,6 +7964,7 @@ public class PatientGroup extends Model {
                                     } //method def ends here.
                                  
                             
+                        
                         
                         
                         

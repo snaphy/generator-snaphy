@@ -126,6 +126,30 @@ public class BillDb{
                         }
                                   
                                 
+                                                            String loggedInUserData = "";
+                        if(_modelData.getLoggedInUser() != null){
+                          loggedInUserData = _modelData.getLoggedInUser().toString();
+                          values.put("`loggedInUser`", loggedInUserData);
+                        }
+                                  
+                                
+                                                            String loggedInUserNameData = "";
+                        if(_modelData.getLoggedInUserName() != null){
+                          loggedInUserNameData = _modelData.getLoggedInUserName().toString();
+                          values.put("`loggedInUserName`", loggedInUserNameData);
+                        }
+                                  
+                                
+                                                            String loggedInUserProfilePicData = "";
+                        if(_modelData.getLoggedInUserProfilePic() != null){
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                          loggedInUserProfilePicData = gson.toJson(_modelData.getLoggedInUserProfilePic(), HashMap.class);
+                          values.put("`loggedInUserProfilePic`", loggedInUserProfilePicData);
+                        }
+                                  
+                                
                                                             //http://stackoverflow.com/questions/160970/how-do-i-invoke-a-java-method-when-given-the-method-name-as-a-string
                         String idData = "";
                         try {
@@ -380,9 +404,42 @@ public class BillDb{
                         }
                                                 
                                 
-                                                            String idData = "";
+                                                            String loggedInUserData = "";
                         if(cursor.getString(7) != null){
-                          idData = cursor.getString(7);
+                          loggedInUserData = cursor.getString(7);
+                          if(loggedInUserData != null){
+                            loggedInUserData = (String)loggedInUserData;
+                            hashMap.put("loggedInUser", loggedInUserData);
+                          }
+                        }
+                                                
+                                
+                                                            String loggedInUserNameData = "";
+                        if(cursor.getString(8) != null){
+                          loggedInUserNameData = cursor.getString(8);
+                          if(loggedInUserNameData != null){
+                            loggedInUserNameData = (String)loggedInUserNameData;
+                            hashMap.put("loggedInUserName", loggedInUserNameData);
+                          }
+                        }
+                                                
+                                
+                                                            Map<String, Object> loggedInUserProfilePicData = new HashMap<>();
+                        if(cursor.getString(9) != null){
+                          GsonBuilder gsonBuilder = new GsonBuilder();
+                          gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+                          Gson gson = gsonBuilder.create();
+                           loggedInUserProfilePicData = gson.fromJson(cursor.getString(9), Map.class);
+                          if(loggedInUserProfilePicData != null){
+                            loggedInUserProfilePicData = (Map<String, Object>)loggedInUserProfilePicData;
+                            hashMap.put("loggedInUserProfilePic", loggedInUserProfilePicData);
+                          }
+                        }
+                                                
+                                
+                                                            String idData = "";
+                        if(cursor.getString(10) != null){
+                          idData = cursor.getString(10);
                           if(idData != null){
                             idData = idData.toString();
                             hashMap.put("id", idData);
@@ -391,8 +448,8 @@ public class BillDb{
                                                 
                                 
                                                             String patientGroupIdData = "";
-                        if(cursor.getString(8) != null){
-                          patientGroupIdData = cursor.getString(8);
+                        if(cursor.getString(11) != null){
+                          patientGroupIdData = cursor.getString(11);
                           if(patientGroupIdData != null){
                             patientGroupIdData = patientGroupIdData.toString();
                             hashMap.put("patientGroupId", patientGroupIdData);
@@ -401,8 +458,8 @@ public class BillDb{
                                                 
                                 
                                                             String hospitalUserIdData = "";
-                        if(cursor.getString(9) != null){
-                          hospitalUserIdData = cursor.getString(9);
+                        if(cursor.getString(12) != null){
+                          hospitalUserIdData = cursor.getString(12);
                           if(hospitalUserIdData != null){
                             hospitalUserIdData = hospitalUserIdData.toString();
                             hashMap.put("hospitalUserId", hospitalUserIdData);
@@ -411,8 +468,8 @@ public class BillDb{
                                                 
                                 
                                                             String hospitalIdData = "";
-                        if(cursor.getString(10) != null){
-                          hospitalIdData = cursor.getString(10);
+                        if(cursor.getString(13) != null){
+                          hospitalIdData = cursor.getString(13);
                           if(hospitalIdData != null){
                             hospitalIdData = hospitalIdData.toString();
                             hashMap.put("hospitalId", hospitalIdData);
@@ -421,8 +478,8 @@ public class BillDb{
                                                 
                                 
                                                             String patientIdData = "";
-                        if(cursor.getString(11) != null){
-                          patientIdData = cursor.getString(11);
+                        if(cursor.getString(14) != null){
+                          patientIdData = cursor.getString(14);
                           if(patientIdData != null){
                             patientIdData = patientIdData.toString();
                             hashMap.put("patientId", patientIdData);
@@ -431,8 +488,8 @@ public class BillDb{
                                                 
                                 
                                                             String billCategoryIdData = "";
-                        if(cursor.getString(12) != null){
-                          billCategoryIdData = cursor.getString(12);
+                        if(cursor.getString(15) != null){
+                          billCategoryIdData = cursor.getString(15);
                           if(billCategoryIdData != null){
                             billCategoryIdData = billCategoryIdData.toString();
                             hashMap.put("billCategoryId", billCategoryIdData);
@@ -441,8 +498,8 @@ public class BillDb{
                                                 
                                 
                                                             String subBillCategoryIdData = "";
-                        if(cursor.getString(13) != null){
-                          subBillCategoryIdData = cursor.getString(13);
+                        if(cursor.getString(16) != null){
+                          subBillCategoryIdData = cursor.getString(16);
                           if(subBillCategoryIdData != null){
                             subBillCategoryIdData = subBillCategoryIdData.toString();
                             hashMap.put("subBillCategoryId", subBillCategoryIdData);

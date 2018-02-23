@@ -915,6 +915,15 @@ public class PatientGroupRepository extends ModelRepository<PatientGroup> {
     
 
     
+
+    
+    contract.addItem(new RestContractItem("/" + getNameForRestUrl() + "/getSystemDateTime", "POST"), "PatientGroup.getSystemDateTime");
+    
+
+    
+    
+
+    
     
 
     
@@ -6296,6 +6305,55 @@ public class PatientGroupRepository extends ModelRepository<PatientGroup> {
                 
 
             }//Method fetchPatientByIdFinalOffline definition ends here..
+
+            
+
+        
+    
+        
+            //Method getSystemDateTime definition
+            public void getSystemDateTime( final ObjectCallback<JSONObject>  callback ){
+
+                /**
+                Call the onBefore event
+                */
+                callback.onBefore();
+
+
+                //Definging hashMap for data conversion
+                Map<String, Object> hashMapObject = new HashMap<>();
+                //Now add the arguments...
+                
+
+                
+
+
+                
+                    
+                    invokeStaticMethod("getSystemDateTime", hashMapObject, new Adapter.JsonObjectCallback() {
+                    
+                    
+                        @Override
+                        public void onError(Throwable t) {
+                            callback.onError(t);
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+
+                        @Override
+                        public void onSuccess(JSONObject response) {
+                            
+                                callback.onSuccess(response);
+                            
+                            //Call the finally method..
+                            callback.onFinally();
+                        }
+                    });
+                
+
+                
+
+            }//Method getSystemDateTime definition ends here..
 
             
 

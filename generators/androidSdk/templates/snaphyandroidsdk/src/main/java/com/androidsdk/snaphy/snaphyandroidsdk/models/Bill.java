@@ -245,6 +245,69 @@ public class Bill extends Model {
             
 
             
+                private String loggedInUser;
+                /* Adding Getter and Setter methods */
+                public String getLoggedInUser(){
+                    return loggedInUser;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setLoggedInUser(String loggedInUser){
+                    this.loggedInUser = loggedInUser;
+                    //Update hashMap value..
+                    hashMap.put("loggedInUser", loggedInUser);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private String loggedInUserName;
+                /* Adding Getter and Setter methods */
+                public String getLoggedInUserName(){
+                    return loggedInUserName;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setLoggedInUserName(String loggedInUserName){
+                    this.loggedInUserName = loggedInUserName;
+                    //Update hashMap value..
+                    hashMap.put("loggedInUserName", loggedInUserName);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
+                private Map<String, Object> loggedInUserProfilePic;
+                /* Adding Getter and Setter methods */
+                public Map<String, Object> getLoggedInUserProfilePic(){
+                    return loggedInUserProfilePic;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setLoggedInUserProfilePic(Map<String, Object> loggedInUserProfilePic){
+                    this.loggedInUserProfilePic = loggedInUserProfilePic;
+                    //Update Map value..
+                    hashMap.put("loggedInUserProfilePic", loggedInUserProfilePic);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
             
         
     

@@ -148,7 +148,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.List;
-import com.strongloop.android.loopback.RestAdapter;
+import com.androidsdk.snaphy.snaphyandroidsdk.adapter.SnaphyRestAdapter;
 import com.strongloop.android.remoting.adapters.Adapter;
 import android.content.Context;
 
@@ -528,7 +528,7 @@ public class <%- modelName %> extends Model {
                                       if(<%- relation %> == null){
                                         <%- modelName %>Repository <%- lowercaseFirstLetter(modelName) %>Repository = (<%- modelName %>Repository) getRepository();
 
-                                        RestAdapter restAdapter = <%- lowercaseFirstLetter(modelName) %>Repository.getRestAdapter();
+                                        SnaphyRestAdapter restAdapter = <%- lowercaseFirstLetter(modelName) %>Repository.getRestAdapter();
                                         if(restAdapter != null){
                                           //Fetch locally from db
                                           <%- relation %> = get<%- capitalcaseRelationName %>__db(restAdapter);
@@ -568,7 +568,7 @@ public class <%- modelName %> extends Model {
 
 
                     //Fetch related data from local database if present a <%- getForeignKeyName() %> identifier as property for belongsTo
-                    public <%- capitalcaseRelatedModelName %> get<%- capitalcaseRelationName %>__db(RestAdapter restAdapter){
+                    public <%- capitalcaseRelatedModelName %> get<%- capitalcaseRelationName %>__db(SnaphyRestAdapter restAdapter){
                       if(<%- getForeignKeyName() %> != null){
                         <%- capitalcaseRelatedModelName %>Repository <%- relation %>Repository = restAdapter.createRepository(<%- capitalcaseRelatedModelName %>Repository.class);
                             try{
@@ -979,13 +979,13 @@ public class <%- modelName %> extends Model {
                                                 type = convertType(method.returns[0].type[0], model);
                                                 if(model.allModels[type] !== undefined){
                                                     returnType = "DataList<" + type + ">";
-                                                    methodString = methodString + " " + "RestAdapter restAdapter" + ", " +  "final DataListCallback<" + type + "> callback)";
+                                                    methodString = methodString + " " + "SnaphyRestAdapter restAdapter" + ", " +  "final DataListCallback<" + type + "> callback)";
                                                     callback = "DataListCallback<" + type + "> ";
                                                     callbackType = "DataListCallback";
                                                 }else{
                                                     returnType = type;
-                                                    //methodString = methodString  + " " + " RestAdapter restAdapter" + ", " +  "final Adapter.JsonArrayCallback callback)";
-                                                    methodString = methodString  + " " + " RestAdapter restAdapter" + ", " +  "final ObjectCallback<JSONArray>  callback)";
+                                                    //methodString = methodString  + " " + " SnaphyRestAdapter restAdapter" + ", " +  "final Adapter.JsonArrayCallback callback)";
+                                                    methodString = methodString  + " " + " SnaphyRestAdapter restAdapter" + ", " +  "final ObjectCallback<JSONArray>  callback)";
                                                     //callback = "Adapter.JsonArrayCallback";
                                                     callback = "ObjectCallback<JSONArray>";
                                                     callbackType = "DataListCallback";
@@ -996,13 +996,13 @@ public class <%- modelName %> extends Model {
 
                                                 if(model.allModels[type] !== undefined){
                                                     returnType = type;
-                                                    methodString = methodString + " " + "RestAdapter restAdapter" + ", " +  "final ObjectCallback<" + type + "> callback)";
+                                                    methodString = methodString + " " + "SnaphyRestAdapter restAdapter" + ", " +  "final ObjectCallback<" + type + "> callback)";
                                                     callback = "ObjectCallback<" + type + "> ";
                                                     callbackType = "ObjectCallback";
                                                 }else{
                                                     returnType = type;
-                                                    //methodString = methodString + " RestAdapter restAdapter" + ", " + "final Adapter.JsonObjectCallback  callback )";
-                                                    methodString = methodString + " RestAdapter restAdapter" + ", " + "final ObjectCallback<JSONObject>  callback)";
+                                                    //methodString = methodString + " SnaphyRestAdapter restAdapter" + ", " + "final Adapter.JsonObjectCallback  callback )";
+                                                    methodString = methodString + " SnaphyRestAdapter restAdapter" + ", " + "final ObjectCallback<JSONObject>  callback)";
 
                                                     //callback = "Adapter.JsonObjectCallback";
                                                     callback = "ObjectCallback<JSONObject>";
@@ -1010,7 +1010,7 @@ public class <%- modelName %> extends Model {
                                                 }
                                             }
                                         }else{
-                                            methodString = methodString + " " + "RestAdapter restAdapter" + ", " +  "final VoidCallback callback)";
+                                            methodString = methodString + " " + "SnaphyRestAdapter restAdapter" + ", " +  "final VoidCallback callback)";
                                             callback = "VoidCallback ";
                                             //returnType = type;
                                             callbackType = "VoidCallback";
