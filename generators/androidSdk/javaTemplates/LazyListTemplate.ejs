@@ -63,8 +63,7 @@ public class LazyList<T> extends ArrayList<T> {
                 if(!mQuery.isEmpty()){
                     <% 
                     //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
-
-                    *>
+                    %>
                     Cursor cursor = mDb.rawQuery(mQuery, null);
                     setCursor(cursor, mCreator, mCallback);
                     if(cursor != null){

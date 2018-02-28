@@ -23,6 +23,8 @@ public class LazyList<T> extends ArrayList<T> {
     private SQLiteDatabase mDb;
     private String mQuery;
     private OnQueryChange mQueryChange;
+    private int count = 0;
+
 
     /**
      * Initialize the lazy list..
@@ -44,40 +46,54 @@ public class LazyList<T> extends ArrayList<T> {
     public void updateCursor(){
         int oldSize = 0;
         int newSize = 0;
-        Cursor oldCursor = mCursor;
         try{
-            super.clear();
+            Cursor oldCursor = mCursor;
+            try{
+                clear();
+            }catch (Exception e){
+                Log.e("LazyLoading", e.toString());
+            }
+
+            if(mQueryChange != null){
+                //Fetch the updated Query data..
+                mQuery = mQueryChange.getUpdateQuery();
+            }
+
+            if(mQuery != null){
+                if(!mQuery.isEmpty()){
+                    
+                    Cursor cursor = mDb.rawQuery(mQuery, null);
+                    setCursor(cursor, mCreator, mCallback);
+                    if(cursor != null){
+                        newSize = cursor.getCount();
+                    }
+
+
+                    count = newSize;
+
+                }
+            }
+
+            //Close the old cursor first..
+            //Prevent the memory leak
+            try{
+                if(oldCursor != null){
+                    oldSize = oldCursor.getCount();
+                    oldCursor.close();
+                    oldCursor = null;
+                }
+            } catch (Exception e){
+                Log.e("LazyList", e.toString());
+            }
         }catch (Exception e){
-            Log.e("LazyLoading", e.toString());
+            Log.e("LazyList", e.getMessage());
+        }finally {
+            count = newSize;
+            //Now publish the change the subscriber list..
+            publishChange(oldSize, newSize);
         }
 
-        if(mQueryChange != null){
-            //Fetch the updated Query data..
-            mQuery = mQueryChange.getUpdateQuery();
-        }
 
-        if(mQuery != null){
-            if(!mQuery.isEmpty()){
-                //http://www.tothenew.com/blog/sqlite-locking-and-transaction-handling-in-android/
-                Cursor cursor = mDb.rawQuery(mQuery, null);
-                newSize = cursor.getCount();
-                setCursor(cursor, mCreator, mCallback);
-            }
-        }
-
-        //Close the old cursor first..
-        //Prevent the memory leak
-        try{
-            oldSize = oldCursor.getCount();
-            if(oldCursor != null){
-                oldCursor.close();
-                oldCursor = null;
-            }
-        } catch (Exception e){
-            Log.e("LazyList", e.toString());
-        }
-        //Now publish the change the subscriber list..
-        publishChange(oldSize, newSize);
     }
 
 
@@ -138,6 +154,7 @@ public class LazyList<T> extends ArrayList<T> {
             //Closing the cursor for safe data..preventing memory leakage..
             closeCursor();
         }
+
     }
 
 
@@ -154,6 +171,12 @@ public class LazyList<T> extends ArrayList<T> {
     @Override
     public T get(int index) {
         try{
+            /*T item = mCreator.create(mCursor, index);
+            //Now call callback on data add..
+            mCallback.onSuccess(item);
+            return item;*/
+
+
             int size = super.size();
             if (index < size) {
                 // find item in the collection
@@ -195,6 +218,7 @@ public class LazyList<T> extends ArrayList<T> {
         }catch (IllegalStateException e){
 
         }
+        count = 0;
         super.clear();
     }
 
@@ -203,16 +227,17 @@ public class LazyList<T> extends ArrayList<T> {
     @Override
     public int size() {
         try{
-            if(mCursor == null){
+            /*if(mCursor == null){
                 return 0;
             }
-            return mCursor.getCount();
+            return mCursor.getCount();*/
+            return count;
         }catch (IllegalStateException e){
             //Cursor got closed
             return 0;
         }
-
     }
+
 
     public void closeCursor() {
         try{
