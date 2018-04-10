@@ -110,9 +110,18 @@ public class SnaphySocket<M extends Model, R extends ModelRepository<M>> {
     public void leave(){
         //socket.emit('leave', this.room);
         socket.emit("leave", room);
+
+        //Turn off the socket listener..
+        try{
+            if(socket != null){
+                socket.off();
+            }
+        }
+        catch(Exception e){
+            //Caught
+            Log.e("SnaphySocket", e.toString());
+        }
     }
-
-
 
     /**
      * Subscriber fires when a new data is to be Updated.

@@ -650,6 +650,27 @@ public class Patient extends User {
             
 
             
+                private String assignedFlagColor;
+                /* Adding Getter and Setter methods */
+                public String getAssignedFlagColor(){
+                    return assignedFlagColor;
+                }
+
+                /* Adding Getter and Setter methods */
+                public void setAssignedFlagColor(String assignedFlagColor){
+                    this.assignedFlagColor = assignedFlagColor;
+                    //Update hashMap value..
+                    hashMap.put("assignedFlagColor", assignedFlagColor);
+                }
+
+            
+            
+        
+    
+        
+            
+
+            
             
         
     
